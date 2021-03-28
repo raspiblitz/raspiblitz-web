@@ -1,7 +1,12 @@
 {
   "name": "raspiblitz-web",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Christoph Stenglein",
+    "email": "christoph@cstenglein.com",
+    "url": "https://cstenglein.com/"
+  },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
