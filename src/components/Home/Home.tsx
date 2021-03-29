@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class Dashboard extends Component {
+export class Home extends Component {
   render(): JSX.Element {
     return (
       <React.Fragment>
@@ -10,4 +10,4 @@ export class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default Home;

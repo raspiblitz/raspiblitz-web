@@ -1,19 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../../../assets/RaspiBlitz_Logo_Icon.svg';
+import { ReactComponent as RaspiBlitzLogo } from '../../../assets/RaspiBlitz_Logo_Icon.svg';
+import { ReactComponent as MoonIcon } from '../../../assets/moon.svg';
 
-export class Header extends Component {
-  render(): JSX.Element {
-    return (
-      <React.Fragment>
-        <header className='container flex items-center justify-between h-16 px-6 mx-auto'>
-          <NavLink to='/'>
-            <img src={logo} alt='RaspiBlitz Logo' style={{ width: 50, height: 50 }} />
-          </NavLink>
-        </header>
-      </React.Fragment>
-    );
+const toggleDarkModeHandler = () => {
+  const documentEl = document.documentElement.classList;
+  if (documentEl.contains('dark')) {
+    documentEl.remove('dark');
+  } else {
+    documentEl.add('dark');
   }
-}
+};
+
+const Header = () => (
+  <React.Fragment>
+    <header className='flex items-center justify-between h-16 mx-auto px-8 w-full shadow-xl dark:bg-gray-800 dark:text-gray-300'>
+      <NavLink to='/'>
+        <RaspiBlitzLogo className='h-8 w-8' />
+      </NavLink>
+      <div className='font-bold text-xl'>Raspiblitz</div>
+      <MoonIcon className='w-8 h-8' onClick={toggleDarkModeHandler} />
+    </header>
+  </React.Fragment>
+);
 
 export default Header;
