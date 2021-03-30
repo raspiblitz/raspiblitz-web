@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-import BitcoinIcon from '../../../assets/bitcoin-circle.svg';
+import { ReactComponent as BitcoinIcon } from '../../../assets/bitcoin-circle.svg';
 import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as LightningIcon } from '../../../assets/lightning.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
@@ -14,8 +13,8 @@ const BottomNav = () => (
         <div className='text-center mx-1'>Home</div>
       </NavLink>
       <NavLink to='bitcoin' activeClassName='text-blue-700 dark:text-yellow-500' className='dark:text-gray-300'>
-        {/* Workaround since Bitcoin Icon doesn't like to be imported twice - weird behavior mobile only in BottomNav*/}
-        <img src={BitcoinIcon} className='w-8 h-8 mx-auto' alt='Bitcoin icon' />
+        {/* TODO: Change Bitcoin icon; doesn't like to be imported twice somehow & thus is ugly here */}
+        <BitcoinIcon className='w-8 h-8 mx-auto' />
         <div className='text-center mx-1'>Bitcoin</div>
       </NavLink>
       <NavLink to='lightning' activeClassName='text-blue-700 dark:text-yellow-500' className='dark:text-gray-300'>

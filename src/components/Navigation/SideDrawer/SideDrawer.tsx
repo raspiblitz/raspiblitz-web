@@ -8,7 +8,7 @@ import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 export class SideDrawer extends Component {
   render(): JSX.Element {
     return (
-      <nav className='hidden md:inline-block content-container md:w-3/12 xl:w-2/12 bg-gray-200 px-2 text-center pt-8 shadow-lg'>
+      <nav className='hidden md:inline-block content-container md:w-3/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 border-t-2'>
         <NavLink
           to='/'
           exact
