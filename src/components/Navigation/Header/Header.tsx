@@ -19,7 +19,7 @@ const Header = () => (
         <RaspiBlitzLogo className='h-8 w-8 text-black dark:text-white' />
       </NavLink>
       <div className='font-bold text-xl'>Raspiblitz</div>
-      <MoonIcon className='w-8 h-8' onClick={toggleDarkModeHandler} />
+      <MoonIcon className='w-8 h-8 dark:text-yellow-500' onClick={toggleDarkModeHandler} />
     </header>
   </React.Fragment>
 );
