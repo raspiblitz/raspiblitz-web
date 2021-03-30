@@ -15,24 +15,26 @@ function App() {
     <div className='App'>
       <BrowserRouter>
         <Header></Header>
-        <SideDrawer></SideDrawer>
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/bitcoin'>
-            <Bitcoin />
-          </Route>
-          <Route path='/lightning'>
-            <Lightning />
-          </Route>
-          <Route path='/services'>
-            <Services />
-          </Route>
-          <Route path='/settings'>
-            <Settings />
-          </Route>
-        </Switch>
+        <div className='flex'>
+          <SideDrawer></SideDrawer>
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route path='/bitcoin'>
+              <Bitcoin />
+            </Route>
+            <Route path='/lightning'>
+              <Lightning />
+            </Route>
+            <Route path='/services'>
+              <Services />
+            </Route>
+            <Route path='/settings'>
+              <Settings />
+            </Route>
+          </Switch>
+        </div>
         <BottomNav></BottomNav>
       </BrowserRouter>
     </div>
