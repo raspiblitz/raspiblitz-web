@@ -8,7 +8,7 @@ import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 const BottomNav = () => (
   <React.Fragment>
-    <footer className='md:hidden flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 bg-gray-200 dark:bg-gray-800'>
+    <footer className='md:hidden z-10 flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 dark:bg-gray-800'>
       <NavLink to='/' exact activeClassName='text-blue-700 dark:text-yellow-500' className='dark:text-gray-300'>
         <HomeLogo className='w-8 h-8 mx-auto' />
         <div className='text-center mx-1'>Home</div>

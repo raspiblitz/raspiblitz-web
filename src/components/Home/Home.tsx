@@ -4,7 +4,7 @@ export class Home extends Component {
   render(): JSX.Element {
     return (
       <React.Fragment>
-        <div>Dashboard</div>
+        <div className='h-full bg-gray-300 dark:bg-gray-600 dark:text-white'>Dashboard</div>
       </React.Fragment>
     );
   }
