@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as BitcoinIcon } from '../../../assets/bitcoin-circle.svg';
+import { ReactComponent as BitcoinIcon } from '../../../assets/circle.svg';
 import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as LightningIcon } from '../../../assets/lightning.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
@@ -8,7 +8,7 @@ import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 export class SideDrawer extends Component {
   render(): JSX.Element {
     return (
-      <nav className='hidden md:inline-block content-container md:w-3/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 border-t-2'>
+      <nav className='hidden md:inline-block content-container md:w-3/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 transition-colors border-t-2'>
         <NavLink
           to='/'
           exact
