@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as BitcoinIcon } from '../../../assets/circle.svg';
+import { ReactComponent as BitcoinIcon } from '../../../assets/bitcoin-circle.svg';
 import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as LightningIcon } from '../../../assets/lightning.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
