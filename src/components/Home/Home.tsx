@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
-import BitcoinBox from '../Shared/BitcoinBox/BitcoinBox';
+import DashboardBox from '../Shared/DashboardBox/DashboardBox';
 import StatusBox from './StatusBox/StatusBox';
+import { ReactComponent as BitcoinLogo } from '../../assets/bitcoin-circle.svg';
+import { ReactComponent as LightningLogo } from '../../assets/lightning.svg';
 
 export class Home extends Component {
+  sendBtcHandler = () => {
+    console.log('sendBtcHandler');
+  };
+
+  receiveBtcHandler = () => {
+    console.log('receiveBtcHandler');
+  };
+
+  sendLightningHandler = () => {
+    console.log('sendLightningHandler');
+  };
+
+  receiveLightningHandler = () => {
+    console.log('receiveLightningHandler');
+  };
+
   render(): JSX.Element {
     return (
       <React.Fragment>
@@ -14,9 +32,21 @@ export class Home extends Component {
               <StatusBox>Tor</StatusBox>
             </div>
             <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap w-full items-start'>
-              <BitcoinBox></BitcoinBox>
-              <BitcoinBox></BitcoinBox>
-              <BitcoinBox></BitcoinBox>
+              <DashboardBox
+                name='Bitcoin Core'
+                icon={<BitcoinLogo className='w-10 h-10' />}
+                transactionBox
+                send={this.sendBtcHandler}
+                receive={this.receiveBtcHandler}
+              ></DashboardBox>
+              <DashboardBox
+                name='Lightning'
+                icon={<LightningLogo className='w-10 h-10' />}
+                transactionBox
+                send={this.sendLightningHandler}
+                receive={this.receiveLightningHandler}
+              ></DashboardBox>
+              <DashboardBox name='Services'></DashboardBox>
             </div>
           </div>
         </div>
