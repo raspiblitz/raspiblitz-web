@@ -12,11 +12,12 @@ const DashboardBox = (props: Partial<DashboardBoxProps>) => {
           <div className='font-bold flex px-5'>
             <div className='w-1/2'>
               <div className='text-gray-400'>{props.name}</div>
-              {props.syncStatus ? props.syncStatus : null}
+              {props.syncStatus ? props.syncStatus + ' % Synchronized' : "Checking Sync ..."}
             </div>
             <div className='w-1/2 h-full flex justify-end'>{props.icon}</div>
           </div>
           {/* Body */}
+          <div className='py-3 px-5'>{props.balance ? props.balance : "Loading ..."}</div>
           {props.transactionBox ? <div className='py-3 px-5'>Transactions</div> : null}
           {props.transactions?.map((transaction) => (
             <div>{transaction}</div>
