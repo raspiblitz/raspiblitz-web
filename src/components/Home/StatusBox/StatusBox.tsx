@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactComponent as OfflineIcon } from '../../../assets/offline.svg';
 import { ReactComponent as OnlineIcon } from '../../../assets/online.svg';
 
@@ -16,7 +15,9 @@ const StatusBox = (props: any) => {
           &nbsp;<div>Offline</div>
         </div>
       )}
-      <span className='w-32 text-left font-bold text-md lg:text-lg lg:text-center dark:text-gray-300'>{props.children}</span>
+      <span className='w-32 text-left font-bold text-md lg:text-lg lg:text-center dark:text-gray-300'>
+        {props.children}
+      </span>
     </div>
   );
 };
