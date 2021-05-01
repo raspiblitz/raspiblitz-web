@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ReactComponent as BitcoinLogo } from '../../assets/bitcoin-circle.svg';
 import BitcoinBox from '../Shared/BitcoinBox/BitcoinBox';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
 
@@ -13,6 +12,8 @@ export const Home = () => {
     showReceiveModal: false,
     receiveAddr: undefined
   });
+
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     axios
@@ -27,6 +28,13 @@ export const Home = () => {
             maxBlocks: res.data.maxBlocks
           };
         });
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get('http://localhost:4000/getbtctransactions')
+      .then((res) => {
+        setTransactions(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -68,9 +76,8 @@ export const Home = () => {
           <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap w-full items-start'>
             <BitcoinBox
               name='Bitcoin Core'
-              icon={<BitcoinLogo className='w-10 h-10' />}
-              transactionBox
               balance={balance}
+              transactions={transactions}
               syncStatus={homeState.syncStatus}
               send={sendBtcHandler}
               receive={receiveBtcHandler}
