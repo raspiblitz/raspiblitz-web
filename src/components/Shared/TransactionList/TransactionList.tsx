@@ -7,10 +7,10 @@ export const TransactionList = (props: TransactionListProps) => {
 
   return (
     <div className='max-h-48 overflow-x-scroll'>
-      {props.transactions.map((transaction) => {
+      {props.transactions.map((transaction, index) => {
         return (
           <Transaction
-            key={transaction.txid}
+            key={index}
             amount={transaction.amount}
             time={transaction.time}
             category={transaction.category}

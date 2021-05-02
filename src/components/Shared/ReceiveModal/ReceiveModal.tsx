@@ -1,12 +1,18 @@
 import QRCode from 'qrcode.react';
+import { useState } from 'react';
 import { ReactComponent as XIcon } from '../../../assets/X.svg';
 import ModalBackground from '../../../container/ModalBackground/ModalBackground';
 
 const ReceiveModal = (props: any) => {
-  let buttonText = 'Copy';
+  const [buttonText, setButtonText] = useState('Copy');
 
   const copyToClipboardHandler = () => {
     navigator.clipboard.writeText(props.address);
+    setButtonText('✔️ Copied to Clipboard');
+
+    setTimeout(() => {
+      setButtonText('Copy');
+    }, 2000);
   };
 
   return (

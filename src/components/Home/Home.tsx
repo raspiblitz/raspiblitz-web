@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import BitcoinBox from '../Shared/BitcoinBox/BitcoinBox';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
+import SendModal from '../Shared/SendModal/SendModal';
 
 export const Home = () => {
   const [homeState, setHomeState] = useState({
@@ -10,6 +11,7 @@ export const Home = () => {
     currBlocks: undefined,
     maxBlocks: undefined,
     showReceiveModal: false,
+    showSendModal: false,
     receiveAddr: undefined
   });
 
@@ -40,7 +42,9 @@ export const Home = () => {
   }, []);
 
   const sendBtcHandler = () => {
-    console.log('sendBtcHandler');
+    setHomeState((prevState: any) => {
+      return { ...prevState, showSendModal: true };
+    });
   };
 
   const receiveBtcHandler = () => {
@@ -56,21 +60,29 @@ export const Home = () => {
   };
 
   const closeReceiveModalHandler = () => {
-    console.log('closeModal');
     setHomeState((prevState: any) => {
       return { ...prevState, showReceiveModal: false };
     });
   };
 
-  const modal = homeState.showReceiveModal && (
-    <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr} />
-  );
+  const closeSendModalHandler = () => {
+    setHomeState((prevState: any) => {
+      return { ...prevState, showSendModal: false };
+    });
+  };
 
   const balance = homeState.btcBalance || homeState.btcBalance === 0 ? homeState.btcBalance + ' BTC' : undefined;
 
+  const receiveModal = homeState.showReceiveModal && (
+    <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr} />
+  );
+
+  const sendModal = homeState.showSendModal && <SendModal balance={balance} close={closeSendModalHandler} />;
+
   return (
     <>
-      {modal}
+      {receiveModal}
+      {sendModal}
       <div className='content-container w-full bg-gray-300 dark:bg-gray-600 dark:text-white transition-colors'>
         <div className='py-8'>
           <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap w-full items-start'>

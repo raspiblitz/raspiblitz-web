@@ -4,7 +4,7 @@ export const Transaction = (props: TransactionProps) => {
   const color = sendingTx ? 'text-red-400' : 'text-green-400';
 
   return (
-    <div className='text-center px-5 py-3'>
+    <div className='text-center px-4 py-3'>
       <div className='flex justify-center items-center'>
         <div className='w-6/12 italic'>{props.comment || 'Transaction'}</div>
         <div className={`w-6/12 ${color}`}>{amount} BTC</div>
