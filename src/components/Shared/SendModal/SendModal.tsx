@@ -51,7 +51,7 @@ const SendModal = (props: any) => {
             <label>Address</label>
             <input
               type='text'
-              className='border border-gray-400 rounded-sm w-10/12'
+              className='border border-gray-400 rounded-sm w-10/12 dark:text-black'
               value={address}
               onChange={changeAddressHandler}
             />
@@ -61,7 +61,7 @@ const SendModal = (props: any) => {
                 type='number'
                 style={styles}
                 min={minAmount}
-                className='w-10/12 text-right'
+                className='w-10/12 text-right dark:text-black'
                 value={amount}
                 onChange={changeAmountHandler}
               />
@@ -70,7 +70,7 @@ const SendModal = (props: any) => {
             <label>Comment</label>
             <input
               type='text'
-              className='border border-gray-400 rounded-sm w-10/12'
+              className='border border-gray-400 rounded-sm w-10/12 dark:text-black'
               value={comment}
               onChange={changeCommentHandler}
             />
