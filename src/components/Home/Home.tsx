@@ -25,6 +25,7 @@ export const Home = (props: any) => {
         const message = JSON.parse(msg.data);
 
         switch (message.id) {
+          // syncstatus
           case 1:
             setHomeState((prev: any) => {
               return {
@@ -36,9 +37,11 @@ export const Home = (props: any) => {
               };
             });
             break;
+          // bitcoin transactions
           case 2:
             setBtcTx(message.transactions);
             break;
+          // bitcoin receive payment
           case 4:
             setHomeState((prevState: any) => {
               return { ...prevState, receiveAddr: message.address, showReceiveModal: true };
