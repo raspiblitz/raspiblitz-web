@@ -8,6 +8,8 @@ Built with React & Tailwind CSS.
 
 Run `yarn install` & then `yarn start` to start the development server.
 
+To run the mock backend open another terminal, `cd` into [backend-mock](./backend-mock) and run `yarn install` then `yarn start` in that folder.
+
 ## Credits
 
 - RaspiBlitz Icon from [RaspiBlitz](https://github.com/rootzoll/raspiblitz)

@@ -1,45 +1,61 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import BitcoinBox from '../Shared/BitcoinBox/BitcoinBox';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../Shared/SendModal/SendModal';
 
-export const Home = () => {
+export const Home = (props: any) => {
   const [homeState, setHomeState] = useState({
-    syncStatus: undefined,
+    btcSync: undefined,
     btcBalance: undefined,
-    currBlocks: undefined,
+    currBlock: undefined,
     maxBlocks: undefined,
     showReceiveModal: false,
     showSendModal: false,
     receiveAddr: undefined
   });
 
-  const [transactions, setTransactions] = useState([]);
+  const [btcTx, setBtcTx] = useState([]);
+
+  const { ws } = props;
 
   useEffect(() => {
-    axios
-      .get('http://localhost:4000/syncstatus')
-      .then((res) => {
-        setHomeState((prevState: any) => {
-          return {
-            ...prevState,
-            syncStatus: res.data.btcProgress,
-            btcBalance: res.data.btcBalance,
-            currBlocks: res.data.currentBlocks,
-            maxBlocks: res.data.maxBlocks
-          };
-        });
-      })
-      .catch((err) => console.log(err));
+    if (ws) {
+      ws.onmessage = (msg: any) => {
+        console.log(msg);
+        const message = JSON.parse(msg.data);
 
-    axios
-      .get('http://localhost:4000/getbtctransactions')
-      .then((res) => {
-        setTransactions(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+        switch (message.id) {
+          case 1:
+            setHomeState((prev: any) => {
+              return {
+                ...prev,
+                btcSync: message.btcSync,
+                btcBalance: message.btcBalance,
+                currBlock: message.currBlock,
+                maxBlocks: message.maxBlocks
+              };
+            });
+            break;
+          case 2:
+            setBtcTx(message.transactions);
+            break;
+          case 4:
+            setHomeState((prevState: any) => {
+              return { ...prevState, receiveAddr: message.address, showReceiveModal: true };
+            });
+            break;
+          case 5:
+            console.log('received random state');
+            break;
+          default:
+            return;
+        }
+      };
+
+      ws.send(JSON.stringify({ id: 1 }));
+      ws.send(JSON.stringify({ id: 2 }));
+    }
+  }, [ws]);
 
   const sendBtcHandler = () => {
     setHomeState((prevState: any) => {
@@ -48,15 +64,7 @@ export const Home = () => {
   };
 
   const receiveBtcHandler = () => {
-    console.log('receiveBtcHandler');
-    axios
-      .get('http://localhost:4000/receivepayment')
-      .then((res) =>
-        setHomeState((prevState: any) => {
-          return { ...prevState, receiveAddr: res.data, showReceiveModal: true };
-        })
-      )
-      .catch((err: any) => console.log(err));
+    ws.send(JSON.stringify({ id: 4 }));
   };
 
   const closeReceiveModalHandler = () => {
@@ -77,7 +85,7 @@ export const Home = () => {
     <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr} />
   );
 
-  const sendModal = homeState.showSendModal && <SendModal balance={balance} close={closeSendModalHandler} />;
+  const sendModal = homeState.showSendModal && <SendModal balance={balance} close={closeSendModalHandler} ws={ws} />;
 
   return (
     <>
@@ -89,8 +97,8 @@ export const Home = () => {
             <BitcoinBox
               name='Bitcoin Core'
               balance={balance}
-              transactions={transactions}
-              syncStatus={homeState.syncStatus}
+              transactions={btcTx}
+              syncStatus={homeState.btcSync}
               send={sendBtcHandler}
               receive={receiveBtcHandler}
             ></BitcoinBox>

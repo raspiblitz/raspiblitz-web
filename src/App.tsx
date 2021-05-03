@@ -1,13 +1,24 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Apps from './components/Apps/Apps';
 import Home from './components/Home/Home';
 import BottomNav from './components/Navigation/BottomNav/BottomNav';
 import Header from './components/Navigation/Header/Header';
 import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
-import Services from './components/Services/Services';
 import Settings from './components/Settings/Settings';
 
-function App() {
+const App = () => {
+  const [ws, setWs] = useState<WebSocket | undefined>();
+
+  useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:8080');
+
+    webSocket.onopen = () => {
+      setWs(webSocket);
+    };
+  }, []);
+
   return (
     <div className='App'>
       <BrowserRouter>
@@ -16,16 +27,10 @@ function App() {
           <SideDrawer></SideDrawer>
           <Switch>
             <Route exact path='/'>
-              <Home />
+              <Home ws={ws} />
             </Route>
-            {/* <Route path='/bitcoin'>
-              <Bitcoin />
-            </Route>
-            <Route path='/lightning'>
-              <Lightning />
-            </Route> */}
-            <Route path='/services'>
-              <Services />
+            <Route path='/apps'>
+              <Apps />
             </Route>
             <Route path='/settings'>
               <Settings />
@@ -36,6 +41,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

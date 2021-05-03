@@ -13,17 +13,9 @@ const BottomNav = () => {
         <HomeLogo className='w-8 h-8 mx-auto' />
         <div className='text-center mx-1'>Home</div>
       </NavLink>
-      {/* <NavLink to='bitcoin' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-      <BitcoinIcon className='w-8 h-8 mx-auto' />
-      <div className='text-center mx-1'>Bitcoin</div>
-    </NavLink> */}
-      {/* <NavLink to='lightning' className={navLinkClasses} activeClassName={navLinkActiveClasses}'>
-      <LightningIcon className='w-8 h-8 mx-auto' />
-      <div className='text-center mx-1'>Lightning</div>
-    </NavLink> */}
-      <NavLink to='services' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+      <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <ServicesIcon className='w-8 h-8 mx-auto' />
-        <div className='text-center mx-1'>Services</div>
+        <div className='text-center mx-1'>Apps</div>
       </NavLink>
       <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <SettingsIcon className='w-8 h-8 mx-auto' />

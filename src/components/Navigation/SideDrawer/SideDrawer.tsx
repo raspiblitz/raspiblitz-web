@@ -13,17 +13,9 @@ export const SideDrawer = () => {
         <HomeLogo className='inline-block w-8 h-8 mx-auto' />
         <div className='inline-block text-center mx-1'>Home</div>
       </NavLink>
-      {/* <NavLink to='bitcoin' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <BitcoinIcon className='inline-block w-8 h-8 mx-auto' />
-        <div className='inline-block text-center mx-1'>Bitcoin</div>
-      </NavLink> */}
-      {/* <NavLink to='lightning' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <LightningIcon className='inline-block w-8 h-8 mx-auto' />
-        <div className='inline-block text-center mx-1'>Lightning</div>
-      </NavLink> */}
-      <NavLink to='services' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+      <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <ServicesIcon className='inline-block w-8 h-8 mx-auto' />
-        <div className='inline-block text-center mx-1'>Services</div>
+        <div className='inline-block text-center mx-1'>Apps</div>
       </NavLink>
       <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <SettingsIcon className='inline-block w-8 h-8 mx-auto' />

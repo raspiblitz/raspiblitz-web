@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { ReactComponent as XIcon } from '../../../assets/X.svg';
 import ModalBackground from '../../../container/ModalBackground/ModalBackground';
 import styles from './SendModal.module.css';
@@ -10,19 +9,35 @@ const SendModal = (props: any) => {
   const [comment, setComment] = useState('');
   const minAmount = 0.0000546; // 5460 sats
 
+  const { ws } = props;
+
+  useEffect(() => {
+    if (ws) {
+      ws.onmessage = (msg: any) => {
+        console.log(msg);
+        const message = JSON.parse(msg.data);
+
+        switch (message.id) {
+          case 5:
+            console.log(message.status);
+            break;
+          default:
+            return;
+        }
+      };
+    }
+  }, [ws]);
+
   const sendTransactionHandler = () => {
-    axios
-      .post('http://localhost:4000/sendpayment', {
-        address,
+    console.log(ws)
+    ws.send(
+      JSON.stringify({
+        id: 5,
         amount,
+        address,
         comment
       })
-      .then((resp) => {
-        console.log(resp);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    );
   };
 
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {

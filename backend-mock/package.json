@@ -1,0 +1,15 @@
+{
+  "name": "backend-mock",
+  "version": "1.0.0",
+  "description": "A Mock backend for raspiblitz-web",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^7.4.5"
+  }
+}
