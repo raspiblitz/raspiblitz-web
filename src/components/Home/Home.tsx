@@ -44,9 +44,6 @@ export const Home = (props: any) => {
               return { ...prevState, receiveAddr: message.address, showReceiveModal: true };
             });
             break;
-          case 5:
-            console.log('received random state');
-            break;
           default:
             return;
         }
