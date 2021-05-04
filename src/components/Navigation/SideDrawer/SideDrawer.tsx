@@ -8,7 +8,7 @@ export const SideDrawer = () => {
   const navLinkActiveClasses = 'text-blue-700 dark:text-yellow-500';
 
   return (
-    <nav className='hidden md:inline-block content-container md:w-3/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 transition-colors border-t-2'>
+    <nav className='hidden md:inline-block content-container md:w-2/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 transition-colors border-t-2'>
       <NavLink to='/' exact className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <HomeLogo className='inline-block w-8 h-8 mx-auto' />
         <div className='inline-block text-center mx-1'>Home</div>

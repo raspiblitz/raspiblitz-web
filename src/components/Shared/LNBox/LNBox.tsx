@@ -1,12 +1,12 @@
-import { ReactComponent as BitcoinLogo } from '../../../assets/bitcoin-circle.svg';
+import { ReactComponent as LightningLogo } from '../../../assets/lightning.svg';
 import DashboardBox from '../../../container/DashboardBox/DashboardBox';
 import SendRecvBtn from '../../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
 import TransactionList from '../TransactionList/TransactionList';
 
-const BitcoinBox = (props: any) => {
+const LNBox = (props: any) => {
   const syncStatus = props.syncStatus ? props.syncStatus + ' % Synchronized' : 'Checking Sync ...';
   const balance = props.balance ? props.balance : 'Loading ...';
-  const logo = <BitcoinLogo className='w-10 h-10' />;
+  const logo = <LightningLogo className='w-10 h-10' />;
 
   return (
     <DashboardBox name={props.name} sync={syncStatus} logo={logo}>
@@ -18,4 +18,4 @@ const BitcoinBox = (props: any) => {
   );
 };
 
-export default BitcoinBox;
+export default LNBox;

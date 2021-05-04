@@ -12,7 +12,7 @@ const ReceiveModal = (props: any) => {
 
     setTimeout(() => {
       setButtonText('Copy');
-    }, 2000);
+    }, 3000);
   };
 
   return (

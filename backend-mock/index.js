@@ -1,4 +1,5 @@
 const WebSocket = require('ws');
+const sync = require('./sync');
 const bitcoin = require('./bitcoin');
 
 const port = 8080;
@@ -23,8 +24,8 @@ const onMessage = (ws, message) => {
     ws.send(JSON.stringify({ error: 'error while parsing' }));
   }
   switch (parsedMsg.id) {
-    case 1:
-      bitcoin.syncStatus(ws);
+    case 'syncstatus':
+      sync.syncStatus(ws);
       break;
     case 2:
       bitcoin.transactions(ws);

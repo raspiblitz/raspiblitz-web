@@ -14,13 +14,13 @@ The messages to the WebSocket should look like this:
 
 ```json
 {
-  "id": 1 // identifier to request data
+  "id": '<someid>' // identifier to request data
 }
 ```
 
 Currently the ID requests the following:
 
-- 1: syncstatus
+- 'syncstatus': syncstatus of bitcoind and lnd
 - 2: bitcoin transactions
 - 3: lightning transactions
 - 4: bitcoin receive payment

@@ -20,7 +20,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className='App'>
+    <div className='App bg-gray-300 dark:bg-gray-600'>
       <BrowserRouter>
         <Header></Header>
         <div className='flex'>
