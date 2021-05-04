@@ -3,6 +3,7 @@ import BitcoinBox from '../Shared/BitcoinBox/BitcoinBox';
 import LNBox from '../Shared/LNBox/LNBox';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../Shared/SendModal/SendModal';
+import ServiceBox from '../Shared/ServiceBox/ServiceBox';
 
 export const Home = (props: any) => {
   const [homeState, setHomeState] = useState({
@@ -126,6 +127,7 @@ export const Home = (props: any) => {
               send={sendLnHandler}
               receive={receiveLnHandler}
             ></LNBox>
+            <ServiceBox></ServiceBox>
           </div>
         </div>
       </div>
