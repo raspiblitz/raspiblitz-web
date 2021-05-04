@@ -3,7 +3,7 @@ const DashboardBox = (props: any) => {
     <>
       {/* Header */}
       <div className='content-container h-full w-full dark:text-white transition-colors'>
-        <div className='bg-white dark:bg-gray-800 pt-5 m-10 rounded-xl shadow-md'>
+        <div className='bg-white dark:bg-gray-800 pt-5 mx-5 my-3 rounded-xl shadow-md'>
           <div className='font-bold flex px-5'>
             <div className='w-2/3'>
               <div>{props.name}</div>

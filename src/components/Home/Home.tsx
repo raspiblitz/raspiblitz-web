@@ -110,7 +110,7 @@ export const Home = (props: any) => {
       {sendModal}
       <div className='content-container w-full h-full bg-gray-300 dark:bg-gray-600 dark:text-white transition-colors'>
         <div className='py-8'>
-          <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap w-full items-start'>
+          <div className='grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1'>
             <BitcoinBox
               name='Bitcoin Core'
               balance={btcBalance}
