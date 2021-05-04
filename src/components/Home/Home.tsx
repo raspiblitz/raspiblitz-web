@@ -42,24 +42,25 @@ export const Home = (props: any) => {
               };
             });
             break;
-          // bitcoin transactions
-          case 2:
+          case 'btc_transactions':
             setBtcTx(message.transactions);
             break;
-          // bitcoin receive payment
-          case 4:
+          case 'btc_receive_payment':
             setHomeState((prevState: any) => {
               return { ...prevState, receiveAddr: message.address, showReceiveModal: true };
             });
             break;
           case 'ln_transactions':
+            setLnTx(message.transactions);
+            break;
           default:
             return;
         }
       };
 
       ws.send(JSON.stringify({ id: 'syncstatus' }));
-      ws.send(JSON.stringify({ id: 2 }));
+      ws.send(JSON.stringify({ id: 'btc_transactions' }));
+      ws.send(JSON.stringify({ id: 'ln_transactions' }));
     }
   }, [ws]);
 
@@ -71,6 +72,14 @@ export const Home = (props: any) => {
 
   const receiveBtcHandler = () => {
     ws.send(JSON.stringify({ id: 4 }));
+  };
+
+  const sendLnHandler = () => {
+    console.log('sendLnHandler');
+  };
+
+  const receiveLnHandler = () => {
+    console.log('receiveLnHandler');
   };
 
   const closeReceiveModalHandler = () => {
@@ -114,8 +123,8 @@ export const Home = (props: any) => {
               balance={lnBalance}
               transactions={lnTx}
               syncStatus={homeState.lnSync}
-              send={sendBtcHandler}
-              receive={receiveBtcHandler}
+              send={sendLnHandler}
+              receive={receiveLnHandler}
             ></LNBox>
           </div>
         </div>

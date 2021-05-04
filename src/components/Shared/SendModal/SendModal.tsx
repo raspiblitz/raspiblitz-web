@@ -29,10 +29,10 @@ const SendModal = (props: any) => {
   }, [ws]);
 
   const sendTransactionHandler = () => {
-    console.log(ws)
+    console.log(ws);
     ws.send(
       JSON.stringify({
-        id: 5,
+        id: 'btc_send_payment',
         amount,
         address,
         comment

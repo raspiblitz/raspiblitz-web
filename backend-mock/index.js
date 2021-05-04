@@ -1,6 +1,7 @@
 const WebSocket = require('ws');
 const sync = require('./sync');
 const bitcoin = require('./bitcoin');
+const ln = require('./ln');
 
 const port = 8080;
 
@@ -27,14 +28,17 @@ const onMessage = (ws, message) => {
     case 'syncstatus':
       sync.syncStatus(ws);
       break;
-    case 2:
+    case 'btc_transactions':
       bitcoin.transactions(ws);
       break;
-    case 4:
+    case 'btc_receive_payment':
       bitcoin.receivePayment(ws);
       break;
-    case 5:
+    case 'btc_send_payment':
       bitcoin.sendPayment(ws);
+      break;
+    case 'ln_transactions':
+      ln.transactions(ws);
       break;
     default:
       ws.send(JSON.stringify({ error: 'id not specified' }));

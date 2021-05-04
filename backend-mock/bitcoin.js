@@ -1,35 +1,8 @@
-const syncStatus = (ws) => {
-  console.log('call to syncStatus');
-  ws.send(
-    JSON.stringify({
-      id: 1,
-      btcSync: 20.2,
-      btcBalance: 1.00000001,
-      currBlock: 202020,
-      maxBlocks: 500000
-    })
-  );
-
-  // check if Websockets really work
-  // P.S.: They do. Awesome!
-  setTimeout(() => {
-    ws.send(
-      JSON.stringify({
-        id: 1,
-        btcSync: 25.2,
-        btcBalance: 2.00000001,
-        currBlock: 202021,
-        maxBlocks: 500000
-      })
-    );
-  }, 3000);
-};
-
 const transactions = (ws) => {
-  console.log('call to transactions');
+  console.log('call to btc_transactions');
   ws.send(
     JSON.stringify({
-      id: 2,
+      id: 'btc_transactions',
       transactions: [
         {
           category: 'send',
@@ -55,23 +28,23 @@ const transactions = (ws) => {
 };
 
 const receivePayment = (ws) => {
-  console.log('call to receivePayment');
+  console.log('call to btc_receive_payment');
   ws.send(
     JSON.stringify({
-      id: 4,
+      id: 'btc_receive_payment',
       address: 'bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz'
     })
   );
 };
 
 const sendPayment = (ws) => {
-  console.log('call to sendPayment');
+  console.log('call to btc_send_payment');
   ws.send(
     JSON.stringify({
-      id: 5,
+      id: 'btc_receive_payment',
       status: 'successful'
     })
   );
 };
 
-module.exports = { syncStatus, transactions, receivePayment, sendPayment };
+module.exports = { transactions, receivePayment, sendPayment };
