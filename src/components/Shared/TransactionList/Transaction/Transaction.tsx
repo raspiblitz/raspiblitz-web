@@ -1,17 +1,24 @@
+import React from 'react';
+import { ReactComponent as SendIcon } from '../../../../assets/arrow-up.svg';
+import { ReactComponent as ReceiveIcon } from '../../../../assets/arrow-down.svg';
+
 export const Transaction = (props: TransactionProps) => {
   const sendingTx = props.category === 'send';
   const amount = sendingTx ? props.amount : `+${props.amount}`;
   const color = sendingTx ? 'text-red-400' : 'text-green-400';
 
+  const icon = sendingTx ? <SendIcon className='h-5 w-2/12' /> : <ReceiveIcon className='h-5 w-2/12' />;
+
   return (
-    <div className='text-center px-4 py-3'>
+    <li className='text-center px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-600'>
       <div className='flex justify-center items-center'>
-        <div className='w-6/12 italic'>{props.comment || 'Transaction'}</div>
+        {icon}
+        <div className='w-4/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap'>{props.comment || 'Transaction'}</div>
         <div className={`w-6/12 ${color}`}>{amount} BTC</div>
       </div>
 
       <div className='text-sm'>{new Date(props.time * 1000).toLocaleString()}</div>
-    </div>
+    </li>
   );
 };
 

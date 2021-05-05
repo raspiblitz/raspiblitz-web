@@ -6,7 +6,7 @@ export const TransactionList = (props: TransactionListProps) => {
   }
 
   return (
-    <div className='max-h-48 overflow-y-scroll'>
+    <ul className='max-h-48 overflow-y-scroll'>
       {props.transactions.map((transaction, index) => {
         return (
           <Transaction
@@ -18,7 +18,7 @@ export const TransactionList = (props: TransactionListProps) => {
           />
         );
       })}
-    </div>
+    </ul>
   );
 };
 
