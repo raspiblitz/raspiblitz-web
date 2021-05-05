@@ -1,7 +1,7 @@
 import { ReactComponent as LightningLogo } from '../../../assets/lightning.svg';
 import DashboardBox from '../../../container/DashboardBox/DashboardBox';
 import SendRecvBtn from '../../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
-import TransactionList from '../TransactionList/TransactionList';
+import TransactionList from '../../Shared/TransactionList/TransactionList';
 
 const LNBox = (props: any) => {
   const syncStatus = props.syncStatus ? props.syncStatus + ' % Synchronized' : 'Checking Sync ...';

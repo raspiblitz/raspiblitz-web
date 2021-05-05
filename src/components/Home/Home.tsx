@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import BitcoinBox from '../Shared/BitcoinBox/BitcoinBox';
-import LNBox from '../Shared/LNBox/LNBox';
+import BitcoinBox from './BitcoinBox/BitcoinBox';
+import LNBox from './LNBox/LNBox';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../Shared/SendModal/SendModal';
 import ServiceBox from '../Shared/ServiceBox/ServiceBox';
@@ -108,7 +108,7 @@ export const Home = (props: any) => {
     <>
       {receiveModal}
       {sendModal}
-      <div className='content-container w-full dark:text-white transition-colors'>
+      <div className='h-auto w-full dark:text-white transition-colors'>
         <div className='pt-4 h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1'>
           <BitcoinBox
             name='Bitcoin Core'
