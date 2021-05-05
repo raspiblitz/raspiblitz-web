@@ -72,7 +72,7 @@ export const Home = (props: any) => {
   };
 
   const receiveBtcHandler = () => {
-    ws.send(JSON.stringify({ id: 4 }));
+    ws.send(JSON.stringify({ id: 'btc_receive_payment' }));
   };
 
   const sendLnHandler = () => {

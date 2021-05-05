@@ -21,6 +21,102 @@ const transactions = (ws) => {
           amount: -4.001234,
           time: 1620222506,
           comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
+        },
+        {
+          category: 'send',
+          amount: -4.001234,
+          time: 1620222506,
+          comment: "LNsend 2"
         }
       ]
     })
