@@ -10,10 +10,12 @@ const BitcoinBox = (props: any) => {
 
   return (
     <DashboardBox name={props.name} sync={syncStatus} logo={logo}>
-      <div className='py-3 px-5'>{balance}</div>
-      <TransactionList transactions={props.transactions} />
-      {/* Buttons on Bottom (Send / Receive) */}
-      <SendRecvBtn send={props.send} receive={props.receive} />
+      <div className='flex flex-col'>
+        <div className='py-3 px-5'>{balance}</div>
+        <TransactionList transactions={props.transactions} />
+        {/* Buttons on Bottom (Send / Receive) */}
+        <SendRecvBtn send={props.send} receive={props.receive} />
+      </div>
     </DashboardBox>
   );
 };
