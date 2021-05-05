@@ -108,27 +108,25 @@ export const Home = (props: any) => {
     <>
       {receiveModal}
       {sendModal}
-      <div className='content-container w-full h-full bg-gray-300 dark:bg-gray-600 dark:text-white transition-colors'>
-        <div className='py-8'>
-          <div className='grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1'>
-            <BitcoinBox
-              name='Bitcoin Core'
-              balance={btcBalance}
-              transactions={btcTx}
-              syncStatus={homeState.btcSync}
-              send={sendBtcHandler}
-              receive={receiveBtcHandler}
-            ></BitcoinBox>
-            <LNBox
-              name='Lightning'
-              balance={lnBalance}
-              transactions={lnTx}
-              syncStatus={homeState.lnSync}
-              send={sendLnHandler}
-              receive={receiveLnHandler}
-            ></LNBox>
-            <ServiceBox></ServiceBox>
-          </div>
+      <div className='content-container w-full dark:text-white transition-colors'>
+        <div className='pt-4 h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1'>
+          <BitcoinBox
+            name='Bitcoin Core'
+            balance={btcBalance}
+            transactions={btcTx}
+            syncStatus={homeState.btcSync}
+            send={sendBtcHandler}
+            receive={receiveBtcHandler}
+          ></BitcoinBox>
+          <LNBox
+            name='Lightning'
+            balance={lnBalance}
+            transactions={lnTx}
+            syncStatus={homeState.lnSync}
+            send={sendLnHandler}
+            receive={receiveLnHandler}
+          ></LNBox>
+          <ServiceBox></ServiceBox>
         </div>
       </div>
     </>
