@@ -22,6 +22,7 @@ Currently the ID requests the following:
 
 - `syncstatus`: syncstatus of bitcoind and lnd
 - `btc_transactions`: bitcoin transactions
-- `ln_transactions`: lightning transactions
 - `btc_receive_payment`: bitcoin receive payment
 - `btc_send_payment`: bitcoin send payment
+- `ln_transactions`: lightning transactions
+- `app_status`: online / offline status of the installed apps

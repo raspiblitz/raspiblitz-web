@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
-import { ReactComponent as ServicesIcon } from '../../../assets/services.svg';
+import { ReactComponent as AppIcon } from '../../../assets/apps.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 export const SideDrawer = () => {
@@ -17,7 +17,7 @@ export const SideDrawer = () => {
       </NavLink>
       <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <div className='w-1/2 flex justify-end'>
-          <ServicesIcon className='inline-block w-8 h-8' />
+          <AppIcon className='inline-block w-8 h-8' />
         </div>
         <div className='w-1/2 flex jusify-start text-center mx-1'>Apps</div>
       </NavLink>

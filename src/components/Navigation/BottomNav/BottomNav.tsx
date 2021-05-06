@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
-import { ReactComponent as ServicesIcon } from '../../../assets/services.svg';
+import { ReactComponent as AppIcon } from '../../../assets/apps.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 const BottomNav = () => {
@@ -8,20 +8,23 @@ const BottomNav = () => {
   const navLinkActiveClasses = 'text-blue-700 dark:text-yellow-500';
 
   return (
-    <footer className='md:hidden z-10 flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 bg-white dark:bg-gray-800 transition-colors'>
-      <NavLink to='/' exact className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <HomeLogo className='w-8 h-8 mx-auto' />
-        <div className='text-center mx-1'>Home</div>
-      </NavLink>
-      <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <ServicesIcon className='w-8 h-8 mx-auto' />
-        <div className='text-center mx-1'>Apps</div>
-      </NavLink>
-      <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <SettingsIcon className='w-8 h-8 mx-auto' />
-        <div className='text-center mx-1'>Settings</div>
-      </NavLink>
-    </footer>
+    <>
+      <div className='md:hidden h-16 invisible'></div>
+      <footer className='md:hidden z-10 flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 bg-white dark:bg-gray-800 transition-colors'>
+        <NavLink to='/' exact className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+          <HomeLogo className='w-8 h-8 mx-auto' />
+          <div className='text-center mx-1'>Home</div>
+        </NavLink>
+        <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+          <AppIcon className='w-8 h-8 mx-auto' />
+          <div className='text-center mx-1'>Apps</div>
+        </NavLink>
+        <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+          <SettingsIcon className='w-8 h-8 mx-auto' />
+          <div className='text-center mx-1'>Settings</div>
+        </NavLink>
+      </footer>
+    </>
   );
 };
 

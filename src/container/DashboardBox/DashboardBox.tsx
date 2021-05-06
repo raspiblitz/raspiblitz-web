@@ -7,7 +7,7 @@ const DashboardBox = (props: any) => {
           <div className='font-bold flex px-5'>
             <div className='w-2/3'>
               <div>{props.name}</div>
-              <div className='text-gray-400'>{props.sync}</div>
+              <div className='text-gray-400'>{props.addText}</div>
             </div>
             <div className='w-1/3 h-full flex justify-end'>{props.logo}</div>
           </div>

@@ -3,7 +3,7 @@ import BitcoinBox from './BitcoinBox/BitcoinBox';
 import LNBox from './LNBox/LNBox';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../Shared/SendModal/SendModal';
-import ServiceBox from '../Shared/ServiceBox/ServiceBox';
+import AppBox from './AppBox/AppBox';
 
 export const Home = (props: any) => {
   const [homeState, setHomeState] = useState({
@@ -17,6 +17,8 @@ export const Home = (props: any) => {
     showSendModal: false,
     receiveAddr: undefined
   });
+
+  const [appStatus, setAppStatus] = useState<any[]>([]);
 
   const [btcTx, setBtcTx] = useState([]);
   const [lnTx, setLnTx] = useState([]);
@@ -54,6 +56,9 @@ export const Home = (props: any) => {
           case 'ln_transactions':
             setLnTx(message.transactions);
             break;
+          case 'app_status':
+            setAppStatus(message.apps);
+            break;
           default:
             return;
         }
@@ -62,6 +67,7 @@ export const Home = (props: any) => {
       ws.send(JSON.stringify({ id: 'syncstatus' }));
       ws.send(JSON.stringify({ id: 'btc_transactions' }));
       ws.send(JSON.stringify({ id: 'ln_transactions' }));
+      ws.send(JSON.stringify({ id: 'app_status' }));
     }
   }, [ws]);
 
@@ -126,7 +132,7 @@ export const Home = (props: any) => {
             send={sendLnHandler}
             receive={receiveLnHandler}
           ></LNBox>
-          <ServiceBox></ServiceBox>
+          <AppBox apps={appStatus}></AppBox>
         </div>
       </div>
     </>

@@ -9,7 +9,7 @@ const BitcoinBox = (props: any) => {
   const logo = <BitcoinLogo className='w-10 h-10' />;
 
   return (
-    <DashboardBox name={props.name} sync={syncStatus} logo={logo}>
+    <DashboardBox name={props.name} addText={syncStatus} logo={logo}>
       <div className='flex flex-col'>
         <div className='py-3 px-5'>{balance}</div>
         <TransactionList transactions={props.transactions} />

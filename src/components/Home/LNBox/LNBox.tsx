@@ -9,7 +9,7 @@ const LNBox = (props: any) => {
   const logo = <LightningLogo className='w-10 h-10' />;
 
   return (
-    <DashboardBox name={props.name} sync={syncStatus} logo={logo}>
+    <DashboardBox name={props.name} addText={syncStatus} logo={logo}>
       <div className='py-3 px-5'>{balance}</div>
       <TransactionList transactions={props.transactions} />
       {/* Buttons on Bottom (Send / Receive) */}
