@@ -6,7 +6,7 @@ export const TransactionList = (props: TransactionListProps) => {
   }
 
   return (
-    <ul className='max-h-48 overflow-y-scroll'>
+    <ul className='max-h-48 xl:max-h-96 overflow-y-auto'>
       {props.transactions.map((transaction, index) => {
         return (
           <Transaction

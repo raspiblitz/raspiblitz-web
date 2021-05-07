@@ -4,7 +4,7 @@ import { ReactComponent as SendIcon } from '../../../assets/send.svg';
 const SendRecvBtn = (props: any) => {
   return (
     <>
-      <div className='flex mt-auto text-white'>
+      <div className='absolute bottom-0 w-full text-white rounded-xl shadow-xl'>
         <button
           className='w-1/2 h-10 font-medium bg-green-700 hover:bg-green-500 dark:bg-green-500 dark:hover:bg-green-700 border border-black rounded-bl-xl'
           onClick={props.receive}

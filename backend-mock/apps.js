@@ -52,6 +52,30 @@ const appStatus = (ws) => {
           {
             name: 'Balance of Satoshis',
             status: 'offline'
+          },
+          {
+            name: 'Balance of Satoshis',
+            status: 'offline'
+          },
+          {
+            name: 'Balance of Satoshis',
+            status: 'offline'
+          },
+          {
+            name: 'Balance of Satoshis',
+            status: 'offline'
+          },
+          {
+            name: 'Balance of Satoshis',
+            status: 'offline'
+          },
+          {
+            name: 'Balance of Satoshis',
+            status: 'offline'
+          },
+          {
+            name: 'Balance of Satoshis',
+            status: 'offline'
           }
         ]
       })
