@@ -10,8 +10,9 @@ Run `yarn install` & then `yarn start` to start the development server.
 
 To run the mock backend open another terminal, `cd` into [backend-mock](./backend-mock) and run `yarn install` then `yarn start` in that folder.
 
-## Credits
+## Credits & License Notices
 
-- RaspiBlitz Icon from [RaspiBlitz](https://github.com/rootzoll/raspiblitz)
-- Bitcoin, Send & Wallet Icon from [BitcoinDesign](https://github.com/bitcoindesign/bitcoin-icons)
-- Other icons from [Hero Icons](https://heroicons.com/)
+- RaspiBlitz Icon from [RaspiBlitz](https://github.com/rootzoll/raspiblitz) [MIT License](https://github.com/rootzoll/raspiblitz/blob/v1.7/LICENSE)
+- Bitcoin, Send & Wallet Icon from [BitcoinDesign](https://github.com/bitcoindesign/bitcoin-icons) [MIT License](https://github.com/BitcoinDesign/Bitcoin-Icons/blob/main/LICENSE)
+- Other icons from [Hero Icons](https://heroicons.com/) [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE)
+- `qrcode.react` to display QR Codes [ISC License](https://github.com/zpao/qrcode.react/blob/master/LICENSE)
