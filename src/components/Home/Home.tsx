@@ -115,7 +115,7 @@ export const Home = (props: any) => {
       {receiveModal}
       {sendModal}
       <div className='h-auto w-full dark:text-white transition-colors'>
-        <div className='pt-4 h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1'>
+        <div className='h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1'>
           <BitcoinBox
             name='Bitcoin Core'
             balance={btcBalance}

@@ -1,8 +1,8 @@
 const DashboardBox = (props: Partial<DashboardBoxProps>) => {
   return (
     <>
-      <div className='h-full w-full dark:text-white transition-colors'>
-        <div className='bg-white dark:bg-gray-800 pt-5 mx-5 my-3 rounded-xl shadow-md'>
+      <div className='dark:text-white transition-colors box-border p-5'>
+        <div className='h-full w-full bg-white dark:bg-gray-800 pt-5 rounded-xl shadow-md'>
           {/* Header */}
           <div className='font-bold flex px-5'>
             <div className='w-2/3'>
