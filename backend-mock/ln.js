@@ -8,7 +8,7 @@ const transactions = (ws) => {
           category: 'send',
           amount: -1.00232,
           time: 1610329986,
-          comment: "Lightning 1"
+          comment: "Lightning 123455555555555"
         },
         {
           category: 'receive',
