@@ -1,4 +1,6 @@
-const DashboardBox = (props: Partial<DashboardBoxProps>) => {
+import { FC } from 'react';
+
+const DashboardBox: FC<DashboardBoxProps> = (props) => {
   return (
     <>
       <div className='dark:text-white transition-colors box-border p-5 xl:row-span-2'>
@@ -25,5 +27,4 @@ export interface DashboardBoxProps {
   name: string;
   addText: string;
   logo: JSX.Element;
-  children: React.ReactNode;
 }
