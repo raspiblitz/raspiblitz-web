@@ -1,10 +1,13 @@
-import React from 'react';
+import { useContext } from 'react';
 import { ReactComponent as SendIcon } from '../../../../assets/arrow-up.svg';
 import { ReactComponent as ReceiveIcon } from '../../../../assets/arrow-down.svg';
+import { AppContext } from '../../../../store/app-context';
 
 export const Transaction = (props: TransactionProps) => {
+  const appCtx = useContext(AppContext);
   const sendingTx = props.category === 'send';
-  const amount = sendingTx ? props.amount : `+${props.amount}`;
+  const sign = sendingTx ? '' : '+';
+  const amount = appCtx.unit === 'BTC' ? props.amount : Math.round(props.amount * 100_000_000);
   const color = sendingTx ? 'text-red-400' : 'text-green-400';
 
   const icon = sendingTx ? (
@@ -20,7 +23,10 @@ export const Transaction = (props: TransactionProps) => {
         <div className='w-4/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap'>
           {props.comment || 'Transaction'}
         </div>
-        <div className={`w-6/12 ${color}`}>{amount} BTC</div>
+        <div className={`w-6/12 ${color}`}>
+          {sign}
+          {amount} {appCtx.unit}
+        </div>
       </div>
 
       <div className='text-sm'>{new Date(props.time * 1000).toLocaleString()}</div>

@@ -1,9 +1,11 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
 import { ReactComponent as XIcon } from '../../../assets/X.svg';
 import ModalBackground from '../../../container/ModalBackground/ModalBackground';
+import { AppContext } from '../../../store/app-context';
 import styles from './SendModal.module.css';
 
 const SendModal: FC<SendModalProps> = (props) => {
+  const appCtx = useContext(AppContext);
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState(0);
   const [comment, setComment] = useState('');
@@ -61,7 +63,9 @@ const SendModal: FC<SendModalProps> = (props) => {
         </div>
         <div className='px-5'>
           <div className='text-xl font-bold'>Send Funds</div>
-          <div className='my-5'>Balance: {props.balance}</div>
+          <div className='my-5'>
+            Balance: {props.balance} {appCtx.unit}
+          </div>
           <div className='m-5 flex flex-col justify-center text-center items-center'>
             <label>Address</label>
             <input
@@ -105,6 +109,6 @@ export default SendModal;
 
 export interface SendModalProps {
   ws: WebSocket;
-  balance: string;
+  balance: number;
   close: () => void;
 }

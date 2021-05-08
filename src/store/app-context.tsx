@@ -9,24 +9,24 @@ interface AppContextType {
   setAuthenticated: Dispatch<boolean>;
 }
 
-type Unit = 'Btc' | 'Sat';
+type Unit = 'BTC' | 'Sat';
 
 export const AppContext = createContext<AppContextType>({
   authenticated: false,
   darkMode: false,
-  unit: 'Btc',
+  unit: 'BTC',
   toggleUnit: () => {},
   setAuthenticated: () => {},
   toggleDarkMode: () => {}
 });
 
 const AppContextProvider: FC = (props) => {
-  const [unit, setUnit] = useState<Unit>('Btc');
+  const [unit, setUnit] = useState<Unit>('BTC');
   const [authenticated, setAuthenticated] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleUnitHandler = () => {
-    setUnit((prevUnit) => (prevUnit === 'Btc' ? 'Sat' : 'Btc'));
+    setUnit((prevUnit) => (prevUnit === 'BTC' ? 'Sat' : 'BTC'));
   };
 
   const toggleDarkModeHandler = () => {

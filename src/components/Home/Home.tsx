@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
+import { AppContext } from '../../store/app-context';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../Shared/SendModal/SendModal';
 import AppBox from './AppBox/AppBox';
@@ -6,13 +7,14 @@ import BitcoinBox from './BitcoinBox/BitcoinBox';
 import LNBox from './LNBox/LNBox';
 
 export const Home: FC<{ ws: WebSocket }> = (props) => {
+  const appCtx = useContext(AppContext);
   const [homeState, setHomeState] = useState<HomeState>({
-    btcSync: null,
-    lnSync: null,
-    btcBalance: null,
-    lnBalance: null,
-    currBlock: null,
-    maxBlocks: null,
+    btcSync: 0,
+    lnSync: 0,
+    btcBalance: 0,
+    lnBalance: 0,
+    currBlock: 0,
+    maxBlocks: 0,
     showReceiveModal: false,
     showSendModal: false,
     receiveAddr: null
@@ -101,16 +103,15 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     });
   };
 
-  const btcBalance = homeState?.btcBalance === 0 ? homeState.btcBalance + ' BTC' : null;
-  const lnBalance = homeState?.lnBalance === 0 ? homeState.lnBalance + ' BTC' : null;
+  const btcBalance = appCtx.unit === 'BTC' ? homeState.btcBalance : Math.round(homeState.btcBalance * 100_000_000);
+
+  const lnBalance = appCtx.unit === 'BTC' ? homeState.lnBalance : Math.round(homeState.lnBalance * 100_000_000);
 
   const receiveModal = homeState.showReceiveModal && (
     <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr || ''} />
   );
 
-  const sendModal = homeState.showSendModal && (
-    <SendModal balance={btcBalance || ''} close={closeSendModalHandler} ws={ws} />
-  );
+  const sendModal = homeState.showSendModal && <SendModal balance={btcBalance} close={closeSendModalHandler} ws={ws} />;
 
   return (
     <>
@@ -144,12 +145,12 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
 export default Home;
 
 export interface HomeState {
-  btcSync: number | null;
-  lnSync: number | null;
-  btcBalance: number | null;
-  lnBalance: number | null;
-  currBlock: number | null;
-  maxBlocks: number | null;
+  btcSync: number;
+  lnSync: number;
+  btcBalance: number;
+  lnBalance: number;
+  currBlock: number;
+  maxBlocks: number;
   showReceiveModal: boolean;
   showSendModal: boolean;
   receiveAddr: string | null;

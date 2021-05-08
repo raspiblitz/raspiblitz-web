@@ -13,7 +13,8 @@ const Header: FC = () => {
         <RaspiBlitzLogo className='h-8 w-8 text-black dark:text-white' />
       </NavLink>
       <div className='font-bold text-xl'>Raspiblitz</div>
-      <div>
+      <div className='flex'>
+        <button onClick={appCtx.toggleUnit}>Toggle Unit</button>
         <MoonIcon className='w-8 h-8 dark:text-yellow-500' onClick={appCtx.toggleDarkMode} />
       </div>
     </header>
