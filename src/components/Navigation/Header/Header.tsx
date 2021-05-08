@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as MoonIcon } from '../../../assets/moon.svg';
 import { ReactComponent as RaspiBlitzLogo } from '../../../assets/RaspiBlitz_Logo_Icon.svg';
 
-const Header = () => {
+const Header: FC = () => {
   const toggleDarkModeHandler = useCallback(() => {
     const documentEl = document.documentElement.classList;
     if (documentEl.contains('dark')) {

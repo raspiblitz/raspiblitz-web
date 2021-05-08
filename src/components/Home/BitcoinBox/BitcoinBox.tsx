@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import { ReactComponent as BitcoinLogo } from '../../../assets/bitcoin-circle.svg';
 import DashboardBox from '../../../container/DashboardBox/DashboardBox';
 import SendRecvBtn from '../../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
 import TransactionList from '../../Shared/TransactionList/TransactionList';
 
-const BitcoinBox = (props: any) => {
+const BitcoinBox: FC<BitcoinBoxProps> = (props) => {
   const syncStatus = props.syncStatus ? props.syncStatus + ' % Synchronized' : 'Checking Sync ...';
   const balance = props.balance ? props.balance : 'Loading ...';
   const logo = <BitcoinLogo className='w-10 h-10' />;
@@ -19,3 +20,12 @@ const BitcoinBox = (props: any) => {
 };
 
 export default BitcoinBox;
+
+export interface BitcoinBoxProps {
+  syncStatus: number | null;
+  balance: string | null;
+  name: string;
+  transactions: any[];
+  send: () => void;
+  receive: () => void;
+}

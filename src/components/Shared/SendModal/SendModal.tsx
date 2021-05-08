@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { ReactComponent as XIcon } from '../../../assets/X.svg';
 import ModalBackground from '../../../container/ModalBackground/ModalBackground';
 import styles from './SendModal.module.css';
 
-const SendModal = (props: any) => {
+const SendModal: FC<SendModalProps> = (props) => {
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState(0);
   const [comment, setComment] = useState('');
@@ -13,7 +13,7 @@ const SendModal = (props: any) => {
 
   useEffect(() => {
     if (ws) {
-      ws.onmessage = (msg: any) => {
+      ws.onmessage = (msg) => {
         console.log(msg);
         const message = JSON.parse(msg.data);
 
@@ -102,3 +102,9 @@ const SendModal = (props: any) => {
 };
 
 export default SendModal;
+
+export interface SendModalProps {
+  ws: WebSocket;
+  balance: string;
+  close: () => void;
+}

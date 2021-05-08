@@ -1,9 +1,9 @@
 import QRCode from 'qrcode.react';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { ReactComponent as XIcon } from '../../../assets/X.svg';
 import ModalBackground from '../../../container/ModalBackground/ModalBackground';
 
-const ReceiveModal = (props: any) => {
+const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const [buttonText, setButtonText] = useState('Copy');
 
   const copyToClipboardHandler = () => {
@@ -47,3 +47,8 @@ const ReceiveModal = (props: any) => {
 };
 
 export default ReceiveModal;
+
+export interface ReceiveModalProps {
+  address: string;
+  close: () => void;
+}

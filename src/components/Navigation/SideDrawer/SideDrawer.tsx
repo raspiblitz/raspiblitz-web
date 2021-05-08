@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as AppIcon } from '../../../assets/apps.svg';
+import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
-export const SideDrawer = () => {
+export const SideDrawer: FC = () => {
   const navLinkClasses = 'inline-block py-4 w-full dark:text-gray-300 flex items-center justify-center';
   const navLinkActiveClasses = 'text-blue-700 dark:text-yellow-500';
 

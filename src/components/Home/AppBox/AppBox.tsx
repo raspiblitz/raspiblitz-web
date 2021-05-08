@@ -1,7 +1,8 @@
-import DashboardBox from '../../../container/DashboardBox/DashboardBox';
+import { FC } from 'react';
 import { ReactComponent as AppLogo } from '../../../assets/apps.svg';
+import DashboardBox from '../../../container/DashboardBox/DashboardBox';
 
-const AppBox = (props: AppList) => {
+const AppBox: FC<AppList> = (props) => {
   const appCount = props.apps.length;
   const onlineAppCount = props.apps.filter((s) => s.status === 'online').length;
   const logo = <AppLogo className='w-10 h-10' />;

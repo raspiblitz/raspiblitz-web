@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
-import BitcoinBox from './BitcoinBox/BitcoinBox';
-import LNBox from './LNBox/LNBox';
+import { FC, useEffect, useState } from 'react';
 import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../Shared/SendModal/SendModal';
 import AppBox from './AppBox/AppBox';
+import BitcoinBox from './BitcoinBox/BitcoinBox';
+import LNBox from './LNBox/LNBox';
 
-export const Home = (props: any) => {
-  const [homeState, setHomeState] = useState({
-    btcSync: undefined,
-    lnSync: undefined,
-    btcBalance: undefined,
-    lnBalance: undefined,
-    currBlock: undefined,
-    maxBlocks: undefined,
+export const Home: FC<{ ws: WebSocket }> = (props) => {
+  const [homeState, setHomeState] = useState<HomeState>({
+    btcSync: null,
+    lnSync: null,
+    btcBalance: null,
+    lnBalance: null,
+    currBlock: null,
+    maxBlocks: null,
     showReceiveModal: false,
     showSendModal: false,
-    receiveAddr: undefined
+    receiveAddr: null
   });
 
   const [appStatus, setAppStatus] = useState<any[]>([]);
@@ -25,9 +25,10 @@ export const Home = (props: any) => {
 
   const { ws } = props;
 
+  // TODO: move out to extra hook
   useEffect(() => {
     if (ws) {
-      ws.onmessage = (msg: any) => {
+      ws.onmessage = (msg) => {
         console.log(msg);
         const message = JSON.parse(msg.data);
 
@@ -38,8 +39,8 @@ export const Home = (props: any) => {
                 ...prev,
                 btcSync: message.btcSync,
                 lnSync: message.lnSync,
-                btcBalance: message.btcBalance,
-                lnBalance: message.lnBalance,
+                btcBalance: +message.btcBalance,
+                lnBalance: +message.lnBalance,
                 currBlock: message.currBlock,
                 maxBlocks: message.maxBlocks
               };
@@ -49,7 +50,7 @@ export const Home = (props: any) => {
             setBtcTx(message.transactions);
             break;
           case 'btc_receive_payment':
-            setHomeState((prevState: any) => {
+            setHomeState((prevState) => {
               return { ...prevState, receiveAddr: message.address, showReceiveModal: true };
             });
             break;
@@ -72,7 +73,7 @@ export const Home = (props: any) => {
   }, [ws]);
 
   const sendBtcHandler = () => {
-    setHomeState((prevState: any) => {
+    setHomeState((prevState) => {
       return { ...prevState, showSendModal: true };
     });
   };
@@ -90,25 +91,25 @@ export const Home = (props: any) => {
   };
 
   const closeReceiveModalHandler = () => {
-    setHomeState((prevState: any) => {
+    setHomeState((prevState) => {
       return { ...prevState, showReceiveModal: false };
     });
   };
 
   const closeSendModalHandler = () => {
-    setHomeState((prevState: any) => {
+    setHomeState((prevState) => {
       return { ...prevState, showSendModal: false };
     });
   };
 
-  const btcBalance = homeState.btcBalance || homeState.btcBalance === 0 ? homeState.btcBalance + ' BTC' : undefined;
-  const lnBalance = homeState.lnBalance || homeState.lnBalance === 0 ? homeState.lnBalance + ' BTC' : undefined;
+  const btcBalance = homeState?.btcBalance === 0 ? homeState.btcBalance + ' BTC' : null;
+  const lnBalance = homeState?.lnBalance === 0 ? homeState.lnBalance + ' BTC' : null;
 
   const receiveModal = homeState.showReceiveModal && (
-    <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr} />
+    <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr || ''} />
   );
 
-  const sendModal = homeState.showSendModal && <SendModal balance={btcBalance} close={closeSendModalHandler} ws={ws} />;
+  const sendModal = homeState.showSendModal && <SendModal balance={btcBalance || ''} close={closeSendModalHandler} ws={ws} />;
 
   return (
     <>
@@ -140,3 +141,15 @@ export const Home = (props: any) => {
 };
 
 export default Home;
+
+export interface HomeState {
+  btcSync: number | null;
+  lnSync: number | null;
+  btcBalance: number | null;
+  lnBalance: number | null;
+  currBlock: number | null;
+  maxBlocks: number | null;
+  showReceiveModal: boolean;
+  showSendModal: boolean;
+  receiveAddr: string | null;
+}

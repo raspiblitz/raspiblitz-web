@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ReactComponent as ReceiveIcon } from '../../../assets/receive.svg';
 import { ReactComponent as SendIcon } from '../../../assets/send.svg';
 
-const SendRecvBtn: FC<{ send: () => void; receive: () => void }> = (props) => {
+const SendRecvBtn: FC<SendRecvBtnProps> = (props) => {
   return (
     <>
       <div className='absolute bottom-0 w-full text-white rounded-xl shadow-xl'>
@@ -30,3 +30,8 @@ const SendRecvBtn: FC<{ send: () => void; receive: () => void }> = (props) => {
 };
 
 export default SendRecvBtn;
+
+export interface SendRecvBtnProps {
+  send: () => void;
+  receive: () => void;
+}

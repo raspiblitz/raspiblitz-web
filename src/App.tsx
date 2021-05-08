@@ -9,7 +9,7 @@ import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
 import Settings from './components/Settings/Settings';
 
 const App = () => {
-  const [ws, setWs] = useState<WebSocket | undefined>();
+  const [ws, setWs] = useState<WebSocket>();
 
   useEffect(() => {
     const webSocket = new WebSocket('ws://localhost:8080');
@@ -20,14 +20,14 @@ const App = () => {
   }, []);
 
   return (
-    <div className='App bg-gray-200 dark:bg-gray-600'>
+    <div className='bg-gray-200 dark:bg-gray-600'>
       <BrowserRouter>
         <Header></Header>
         <div className='flex'>
           <SideDrawer></SideDrawer>
           <Switch>
             <Route exact path='/'>
-              <Home ws={ws} />
+              <Home ws={ws!} />
             </Route>
             <Route path='/apps'>
               <Apps />
