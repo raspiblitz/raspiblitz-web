@@ -7,6 +7,7 @@ import BottomNav from './components/Navigation/BottomNav/BottomNav';
 import Header from './components/Navigation/Header/Header';
 import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
 import Settings from './components/Settings/Settings';
+import AppContextProvider from './store/app-context';
 
 const App = () => {
   const [ws, setWs] = useState<WebSocket>();
@@ -20,26 +21,28 @@ const App = () => {
   }, []);
 
   return (
-    <div className='bg-gray-200 dark:bg-gray-600'>
-      <BrowserRouter>
-        <Header></Header>
-        <div className='flex'>
-          <SideDrawer></SideDrawer>
-          <Switch>
-            <Route exact path='/'>
-              <Home ws={ws!} />
-            </Route>
-            <Route path='/apps'>
-              <Apps />
-            </Route>
-            <Route path='/settings'>
-              <Settings />
-            </Route>
-          </Switch>
-        </div>
-        <BottomNav></BottomNav>
-      </BrowserRouter>
-    </div>
+    <AppContextProvider>
+      <div className='bg-gray-200 dark:bg-gray-600'>
+        <BrowserRouter>
+          <Header></Header>
+          <div className='flex'>
+            <SideDrawer></SideDrawer>
+            <Switch>
+              <Route exact path='/'>
+                <Home ws={ws!} />
+              </Route>
+              <Route path='/apps'>
+                <Apps />
+              </Route>
+              <Route path='/settings'>
+                <Settings />
+              </Route>
+            </Switch>
+          </div>
+          <BottomNav></BottomNav>
+        </BrowserRouter>
+      </div>
+    </AppContextProvider>
   );
 };
 

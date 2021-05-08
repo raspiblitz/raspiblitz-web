@@ -29,7 +29,6 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
   useEffect(() => {
     if (ws) {
       ws.onmessage = (msg) => {
-        console.log(msg);
         const message = JSON.parse(msg.data);
 
         switch (message.id) {
@@ -109,7 +108,9 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr || ''} />
   );
 
-  const sendModal = homeState.showSendModal && <SendModal balance={btcBalance || ''} close={closeSendModalHandler} ws={ws} />;
+  const sendModal = homeState.showSendModal && (
+    <SendModal balance={btcBalance || ''} close={closeSendModalHandler} ws={ws} />
+  );
 
   return (
     <>

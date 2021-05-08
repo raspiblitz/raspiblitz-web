@@ -7,13 +7,19 @@ export const Transaction = (props: TransactionProps) => {
   const amount = sendingTx ? props.amount : `+${props.amount}`;
   const color = sendingTx ? 'text-red-400' : 'text-green-400';
 
-  const icon = sendingTx ? <SendIcon className='h-5 w-2/12' /> : <ReceiveIcon className='h-5 w-2/12' />;
+  const icon = sendingTx ? (
+    <SendIcon className='h-5 w-2/12 transform rotate-45' />
+  ) : (
+    <ReceiveIcon className='h-5 w-2/12 transform rotate-45' />
+  );
 
   return (
     <li className='text-center px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-600'>
       <div className='flex justify-center items-center'>
         {icon}
-        <div className='w-4/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap'>{props.comment || 'Transaction'}</div>
+        <div className='w-4/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap'>
+          {props.comment || 'Transaction'}
+        </div>
         <div className={`w-6/12 ${color}`}>{amount} BTC</div>
       </div>
 
