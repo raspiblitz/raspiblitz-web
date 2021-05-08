@@ -13,7 +13,7 @@ export const Transaction = (props: TransactionProps) => {
   const icon = sendingTx ? (
     <SendIcon className='h-5 w-2/12 transform rotate-45' />
   ) : (
-    <ReceiveIcon className='h-5 w-2/12 transform rotate-45' />
+    <ReceiveIcon className='h-5 w-2/12' />
   );
 
   return (
