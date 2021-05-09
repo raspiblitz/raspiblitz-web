@@ -1,10 +1,10 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../store/app-context';
-import ReceiveModal from '../Shared/ReceiveModal/ReceiveModal';
-import SendModal from '../Shared/SendModal/SendModal';
-import AppBox from './AppBox/AppBox';
-import BitcoinBox from './BitcoinBox/BitcoinBox';
-import LNBox from './LNBox/LNBox';
+import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
+import SendModal from '../../components/Shared/SendModal/SendModal';
+import AppBox from '../../components/AppBox/AppBox';
+import BitcoinBox from '../../components/BitcoinBox/BitcoinBox';
+import LNBox from '../../components/LNBox/LNBox';
 
 export const Home: FC<{ ws: WebSocket }> = (props) => {
   const appCtx = useContext(AppContext);

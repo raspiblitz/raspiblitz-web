@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { ReactComponent as AppLogo } from '../../../assets/apps.svg';
-import DashboardBox from '../../../container/DashboardBox/DashboardBox';
+import { ReactComponent as AppLogo } from '../../assets/apps.svg';
+import DashboardBox from '../../container/DashboardBox/DashboardBox';
 
 const AppBox: FC<AppList> = (props) => {
   const appCount = props.apps.length;

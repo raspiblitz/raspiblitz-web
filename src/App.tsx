@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Apps from './components/Apps/Apps';
-import Home from './components/Home/Home';
+import Apps from './pages/Apps/Apps';
+import Home from './pages/Home/Home';
 import BottomNav from './components/Navigation/BottomNav/BottomNav';
 import Header from './components/Navigation/Header/Header';
 import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
-import Settings from './components/Settings/Settings';
+import Settings from './pages/Settings/Settings';
 import AppContextProvider from './store/app-context';
 
 const App = () => {

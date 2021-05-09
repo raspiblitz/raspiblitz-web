@@ -1,9 +1,9 @@
 import { FC, useContext } from 'react';
-import { ReactComponent as LightningLogo } from '../../../assets/lightning.svg';
-import DashboardBox from '../../../container/DashboardBox/DashboardBox';
-import SendRecvBtn from '../../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
-import { AppContext } from '../../../store/app-context';
-import TransactionList from '../../Shared/TransactionList/TransactionList';
+import { ReactComponent as LightningLogo } from '../../assets/lightning.svg';
+import DashboardBox from '../../container/DashboardBox/DashboardBox';
+import SendRecvBtn from '../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
+import { AppContext } from '../../store/app-context';
+import TransactionList from '../Shared/TransactionList/TransactionList';
 
 const LNBox: FC<LNBoxProps> = (props) => {
   const appCtx = useContext(AppContext);
