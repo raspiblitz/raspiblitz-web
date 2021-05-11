@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import AppBox from '../../components/AppBox/AppBox';
-import WalletBox from '../../components/WalletBox/WalletBox';
+import Wallet from '../../components/Wallet/Wallet';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
-import StatusBox from '../../components/StatusBox/StatusBox';
+import Statistics from '../../components/Statistics/Statistics';
 
 export const Home: FC<{ ws: WebSocket }> = (props) => {
   const [homeState, setHomeState] = useState<HomeState>({
@@ -15,8 +15,7 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     channelOnline: 0,
     channelTotal: 0,
     showReceiveModal: false,
-    showSendModal: false,
-    receiveAddr: null
+    showSendModal: false
   });
 
   const [appStatus, setAppStatus] = useState<any[]>([]);
@@ -62,18 +61,15 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     }
   }, [ws]);
 
-  const sendHandler = async () => {
+  const sendHandler = () => {
     setHomeState((prevState) => {
       return { ...prevState, showSendModal: true };
     });
   };
 
-  const receiveHandler = async () => {
-    const resp = await fetch('http://localhost:8081/receive');
-    const body = await resp.json();
-
+  const receiveHandler = () => {
     setHomeState((prevState) => {
-      return { ...prevState, receiveAddr: body.address, showReceiveModal: true };
+      return { ...prevState, showReceiveModal: true };
     });
   };
 
@@ -89,9 +85,7 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     });
   };
 
-  const receiveModal = homeState.showReceiveModal && (
-    <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr || ''} />
-  );
+  const receiveModal = homeState.showReceiveModal && <ReceiveModal close={closeReceiveModalHandler} />;
 
   const sendModal = homeState.showSendModal && (
     <SendModal
@@ -107,15 +101,15 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
       {sendModal}
       <div className='h-auto w-full dark:text-white transition-colors'>
         <div className='h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3'>
-          <WalletBox
+          <Wallet
             onchainBalance={homeState.onchainBalance}
             lnBalance={homeState.lnBalance}
             transactions={transactions}
             syncStatus={homeState.syncStatus}
             send={sendHandler}
             receive={receiveHandler}
-          ></WalletBox>
-          <StatusBox></StatusBox>
+          ></Wallet>
+          <Statistics></Statistics>
           <AppBox apps={appStatus}></AppBox>
         </div>
       </div>
@@ -133,7 +127,6 @@ export interface HomeState {
   maxBlock: number;
   showReceiveModal: boolean;
   showSendModal: boolean;
-  receiveAddr: string | null;
   channelOnline: number;
   channelTotal: number;
 }

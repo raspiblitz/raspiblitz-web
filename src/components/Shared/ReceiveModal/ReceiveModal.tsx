@@ -5,9 +5,14 @@ import ModalBackground from '../../../container/ModalBackground/ModalBackground'
 
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const [buttonText, setButtonText] = useState('Copy');
+  const [address, setAddress] = useState('');
+
+  const generateAddressHandler = () => {
+    // Get LN Invoice or on-chain address
+  };
 
   const copyToClipboardHandler = () => {
-    navigator.clipboard.writeText(props.address);
+    navigator.clipboard.writeText(address);
     setButtonText('✅ Copied to Clipboard');
 
     setTimeout(() => {
@@ -26,11 +31,9 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
         <div className='px-5'>
           <div className='text-xl font-bold'>Receive Funds</div>
           <div className='my-5'>Scan this QR Code or copy the below address to receive funds</div>
-          <div className='my-5 flex justify-center'>
-            <QRCode value={props.address} />
-          </div>
+          <div className='my-5 flex justify-center'>{address && <QRCode value={address} />}</div>
           <div className='flex flex-col items-center'>
-            <div className='w-full overflow-x-auto my-2'>{props.address ? props.address : 'Loading address ...'}</div>
+            <div className='w-full overflow-x-auto my-2'>{address}</div>
             <div className='w-4/5 mb-5'>
               <button
                 onClick={copyToClipboardHandler}
@@ -49,6 +52,5 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 export default ReceiveModal;
 
 export interface ReceiveModalProps {
-  address: string;
   close: () => void;
 }

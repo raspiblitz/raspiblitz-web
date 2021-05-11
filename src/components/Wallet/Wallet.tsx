@@ -5,7 +5,7 @@ import SendRecvBtn from '../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
 import { AppContext } from '../../store/app-context';
 import TransactionList from '../Shared/TransactionList/TransactionList';
 
-const WalletBox: FC<WalletBoxProps> = (props) => {
+const Wallet: FC<WalletProps> = (props) => {
   const appCtx = useContext(AppContext);
   const syncStatus = props.syncStatus ? props.syncStatus + ' % Synchronized' : 'Checking Sync ...';
   const logo = <BitcoinLogo className='w-10 h-10' />;
@@ -31,9 +31,9 @@ const WalletBox: FC<WalletBoxProps> = (props) => {
   );
 };
 
-export default WalletBox;
+export default Wallet;
 
-export interface WalletBoxProps {
+export interface WalletProps {
   syncStatus: number | null;
   onchainBalance: number;
   lnBalance: number;
