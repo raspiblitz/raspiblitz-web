@@ -129,7 +129,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
               )}
 
               {address && (
-                <button onClick={copyToClipboardHandler} className={btnClasses}>
+                <button type='button' onClick={copyToClipboardHandler} className={btnClasses}>
                   {buttonText}
                 </button>
               )}
