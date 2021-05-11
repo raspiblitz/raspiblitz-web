@@ -52,12 +52,8 @@ app.listen(restPort, () => {
 });
 
 app.post('/receive', (req, res) => {
-  if (req.body.type === 'ln') {
-    if (!req.body.amount) {
-      res.send({ error: 'Amount for invoice not defined' });
-      return;
-    }
-    // include comment as well ...
+  if (req.body.type === 'lightning') {
+    // include comment & amount for real req ..
     res.send({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' });
     return;
   }

@@ -27,7 +27,7 @@ Currently the ID requests the following:
 REST API:
 
 - `/receive` - returns an address for receiving payment
-  - expects: `type`: 'ln' for ln invoice or 'onchain' for onchain address
-  - expects: `amount`: amount for the invoice (only 'ln' type)
-  - expects: `comment` comment for the invoice (only 'ln' type)
+  - expects: `type`: 'lightning' for ln invoice or 'onchain' for onchain address
+  - expects: `amount`: amount for the invoice (only 'lightning' type)
+  - expects: `comment` comment for the invoice (only 'lightning' type)
 - `/send` - send payment
