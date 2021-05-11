@@ -1,12 +1,17 @@
 const WebSocket = require('ws');
 const sync = require('./sync');
-const bitcoin = require('./bitcoin');
-const ln = require('./ln');
+const transactions = require('./transactions');
 const apps = require('./apps');
+const cors = require('cors');
+const express = require('express');
 
-const port = 8080;
+const wsPort = 8080;
+const restPort = 8081;
 
-const wss = new WebSocket.Server({ port });
+const app = express();
+app.use(cors());
+
+const wss = new WebSocket.Server({ port: wsPort });
 
 wss.on('connection', (ws) => {
   console.log('connected');
@@ -29,19 +34,10 @@ const onMessage = (ws, message) => {
     case 'syncstatus':
       sync.syncStatus(ws);
       break;
-    case 'btc_transactions':
-      bitcoin.transactions(ws);
+    case 'transactions':
+      transactions.listTransactions(ws);
       break;
-    case 'btc_receive_payment':
-      bitcoin.receivePayment(ws);
-      break;
-    case 'btc_send_payment':
-      bitcoin.sendPayment(ws);
-      break;
-    case 'ln_transactions':
-      ln.transactions(ws);
-      break;
-    case 'app_status':
+    case 'appstatus':
       apps.appStatus(ws);
       break;
     default:
@@ -49,4 +45,16 @@ const onMessage = (ws, message) => {
   }
 };
 
-console.log(`Started WebSocket Backend on port ${port}`);
+console.log(`Started WebSocket Backend on port ${wsPort}`);
+
+app.listen(restPort, () => {
+  console.log(`Example app listening at http://localhost:${restPort}`);
+});
+
+app.get('/receive', (req, res) => {
+  res.send({ address: 'bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz' });
+});
+
+app.post('/send', (req, res) => {
+  res.send('success');
+});

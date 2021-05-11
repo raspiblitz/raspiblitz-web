@@ -1,8 +1,8 @@
 const appStatus = (ws) => {
-  console.log('call to app_status');
+  console.log('call to appstatus');
   ws.send(
     JSON.stringify({
-      id: 'app_status',
+      id: 'appstatus',
       apps: [
         {
           name: 'Mempool Space',
@@ -31,7 +31,7 @@ const appStatus = (ws) => {
   setTimeout(() => {
     ws.send(
       JSON.stringify({
-        id: 'app_status',
+        id: 'appstatus',
         apps: [
           {
             name: 'Mempool Space',

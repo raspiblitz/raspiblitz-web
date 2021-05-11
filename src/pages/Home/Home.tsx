@@ -1,20 +1,19 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../store/app-context';
+import { FC, useEffect, useState } from 'react';
+import AppBox from '../../components/AppBox/AppBox';
+import WalletBox from '../../components/WalletBox/WalletBox';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
-import AppBox from '../../components/AppBox/AppBox';
-import BitcoinBox from '../../components/BitcoinBox/BitcoinBox';
-import LNBox from '../../components/LNBox/LNBox';
+import StatusBox from '../../components/StatusBox/StatusBox';
 
 export const Home: FC<{ ws: WebSocket }> = (props) => {
-  const appCtx = useContext(AppContext);
   const [homeState, setHomeState] = useState<HomeState>({
-    btcSync: 0,
-    lnSync: 0,
-    btcBalance: 0,
+    syncStatus: 0,
+    onchainBalance: 0,
     lnBalance: 0,
     currBlock: 0,
-    maxBlocks: 0,
+    maxBlock: 0,
+    channelOnline: 0,
+    channelTotal: 0,
     showReceiveModal: false,
     showSendModal: false,
     receiveAddr: null
@@ -22,12 +21,10 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
 
   const [appStatus, setAppStatus] = useState<any[]>([]);
 
-  const [btcTx, setBtcTx] = useState([]);
-  const [lnTx, setLnTx] = useState([]);
+  const [transactions, setTransactions] = useState([]);
 
   const { ws } = props;
 
-  // TODO: move out to extra hook
   useEffect(() => {
     if (ws) {
       ws.onmessage = (msg) => {
@@ -35,30 +32,23 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
 
         switch (message.id) {
           case 'syncstatus':
-            setHomeState((prev: any) => {
+            setHomeState((prev) => {
               return {
                 ...prev,
-                btcSync: message.btcSync,
-                lnSync: message.lnSync,
-                btcBalance: +message.btcBalance,
-                lnBalance: +message.lnBalance,
+                syncStatus: message.syncStatus,
+                onchainBalance: message.onchainBalance.toFixed(8),
+                lnBalance: message.lnBalance.toFixed(8),
                 currBlock: message.currBlock,
-                maxBlocks: message.maxBlocks
+                maxBlock: message.currBlock,
+                channelOnline: message.channelOnline,
+                channelTotal: message.channelTotal
               };
             });
             break;
-          case 'btc_transactions':
-            setBtcTx(message.transactions);
+          case 'transactions':
+            setTransactions(message.transactions);
             break;
-          case 'btc_receive_payment':
-            setHomeState((prevState) => {
-              return { ...prevState, receiveAddr: message.address, showReceiveModal: true };
-            });
-            break;
-          case 'ln_transactions':
-            setLnTx(message.transactions);
-            break;
-          case 'app_status':
+          case 'appstatus':
             setAppStatus(message.apps);
             break;
           default:
@@ -67,28 +57,24 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
       };
 
       ws.send(JSON.stringify({ id: 'syncstatus' }));
-      ws.send(JSON.stringify({ id: 'btc_transactions' }));
-      ws.send(JSON.stringify({ id: 'ln_transactions' }));
-      ws.send(JSON.stringify({ id: 'app_status' }));
+      ws.send(JSON.stringify({ id: 'transactions' }));
+      ws.send(JSON.stringify({ id: 'appstatus' }));
     }
   }, [ws]);
 
-  const sendBtcHandler = () => {
+  const sendHandler = async () => {
     setHomeState((prevState) => {
       return { ...prevState, showSendModal: true };
     });
   };
 
-  const receiveBtcHandler = () => {
-    ws.send(JSON.stringify({ id: 'btc_receive_payment' }));
-  };
+  const receiveHandler = async () => {
+    const resp = await fetch('http://localhost:8081/receive');
+    const body = await resp.json();
 
-  const sendLnHandler = () => {
-    console.log('sendLnHandler');
-  };
-
-  const receiveLnHandler = () => {
-    console.log('receiveLnHandler');
+    setHomeState((prevState) => {
+      return { ...prevState, receiveAddr: body.address, showReceiveModal: true };
+    });
   };
 
   const closeReceiveModalHandler = () => {
@@ -103,15 +89,17 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     });
   };
 
-  const btcBalance = appCtx.unit === 'BTC' ? homeState.btcBalance : Math.round(homeState.btcBalance * 100_000_000);
-
-  const lnBalance = appCtx.unit === 'BTC' ? homeState.lnBalance : Math.round(homeState.lnBalance * 100_000_000);
-
   const receiveModal = homeState.showReceiveModal && (
     <ReceiveModal close={closeReceiveModalHandler} address={homeState.receiveAddr || ''} />
   );
 
-  const sendModal = homeState.showSendModal && <SendModal balance={btcBalance} close={closeSendModalHandler} ws={ws} />;
+  const sendModal = homeState.showSendModal && (
+    <SendModal
+      onchainBalance={homeState.onchainBalance}
+      lnBalance={homeState.lnBalance}
+      close={closeSendModalHandler}
+    />
+  );
 
   return (
     <>
@@ -119,22 +107,15 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
       {sendModal}
       <div className='h-auto w-full dark:text-white transition-colors'>
         <div className='h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3'>
-          <BitcoinBox
-            name='Bitcoin Core'
-            balance={btcBalance}
-            transactions={btcTx}
-            syncStatus={homeState.btcSync}
-            send={sendBtcHandler}
-            receive={receiveBtcHandler}
-          ></BitcoinBox>
-          <LNBox
-            name='Lightning'
-            balance={lnBalance}
-            transactions={lnTx}
-            syncStatus={homeState.lnSync}
-            send={sendLnHandler}
-            receive={receiveLnHandler}
-          ></LNBox>
+          <WalletBox
+            onchainBalance={homeState.onchainBalance}
+            lnBalance={homeState.lnBalance}
+            transactions={transactions}
+            syncStatus={homeState.syncStatus}
+            send={sendHandler}
+            receive={receiveHandler}
+          ></WalletBox>
+          <StatusBox></StatusBox>
           <AppBox apps={appStatus}></AppBox>
         </div>
       </div>
@@ -145,13 +126,14 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
 export default Home;
 
 export interface HomeState {
-  btcSync: number;
-  lnSync: number;
-  btcBalance: number;
+  syncStatus: number;
+  onchainBalance: number;
   lnBalance: number;
   currBlock: number;
-  maxBlocks: number;
+  maxBlock: number;
   showReceiveModal: boolean;
   showSendModal: boolean;
   receiveAddr: string | null;
+  channelOnline: number;
+  channelTotal: number;
 }

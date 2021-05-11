@@ -5,16 +5,24 @@ import SendRecvBtn from '../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
 import { AppContext } from '../../store/app-context';
 import TransactionList from '../Shared/TransactionList/TransactionList';
 
-const BitcoinBox: FC<BitcoinBoxProps> = (props) => {
+const WalletBox: FC<WalletBoxProps> = (props) => {
   const appCtx = useContext(AppContext);
   const syncStatus = props.syncStatus ? props.syncStatus + ' % Synchronized' : 'Checking Sync ...';
-  const balance = props.balance ? props.balance : 'Loading ...';
   const logo = <BitcoinLogo className='w-10 h-10' />;
+  const onchainBalance = appCtx.unit === 'BTC' ? props.onchainBalance : Math.round(props.onchainBalance * 100_000_000);
+  const lnBalance = appCtx.unit === 'BTC' ? props.lnBalance : Math.round(props.lnBalance * 100_000_000);
 
   return (
-    <DashboardBox name={props.name} addText={syncStatus} logo={logo}>
+    <DashboardBox name={'Wallet'} addText={syncStatus} logo={logo}>
       <div className='py-3 px-5'>
-        {balance} {appCtx.unit}
+        <div className='flex flex-col'>
+          <div>
+            on-chain: {onchainBalance} {appCtx.unit}
+          </div>
+          <div>
+            lightning: {lnBalance} {appCtx.unit}
+          </div>
+        </div>
       </div>
       <TransactionList transactions={props.transactions} />
       {/* Buttons on Bottom (Send / Receive) */}
@@ -23,12 +31,12 @@ const BitcoinBox: FC<BitcoinBoxProps> = (props) => {
   );
 };
 
-export default BitcoinBox;
+export default WalletBox;
 
-export interface BitcoinBoxProps {
+export interface WalletBoxProps {
   syncStatus: number | null;
-  balance: number;
-  name: string;
+  onchainBalance: number;
+  lnBalance: number;
   transactions: any[];
   send: () => void;
   receive: () => void;

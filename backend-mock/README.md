@@ -4,9 +4,9 @@ This is a mock backend for raspiblitz web to make interaction with the frontend 
 
 ## Usage
 
-Install dependencies (just `ws` for node WebSocket support) with `yarn install` then run with `yarn start`.
+Install dependencies with `yarn install` then run with `yarn start`.
 
-This exposes a WebSocket to `localhost:8080`;
+This exposes a WebSocket to `localhost:8080` and a REST endpoint on `localhost:8081`.
 
 ## API
 
@@ -20,9 +20,11 @@ The messages to the WebSocket should look like this:
 
 Currently the ID requests the following:
 
-- `syncstatus`: syncstatus of bitcoind and lnd
-- `btc_transactions`: bitcoin transactions
-- `btc_receive_payment`: bitcoin receive payment
-- `btc_send_payment`: bitcoin send payment
-- `ln_transactions`: lightning transactions
-- `app_status`: online / offline status of the installed apps
+- `syncstatus`: syncstatus of blockchain & sync stats like open channels etc
+- `transactions`: transactions (on-chain & lightning)
+- `appstatus`: online / offline status of the installed apps
+
+REST API:
+
+- `/receive` - returns an address for receiving paymen
+- `/send` - send payment
