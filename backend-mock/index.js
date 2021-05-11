@@ -9,7 +9,7 @@ const wsPort = 8080;
 const restPort = 8081;
 
 const app = express();
-app.use(cors());
+app.use(cors(), express.json());
 
 const wss = new WebSocket.Server({ port: wsPort });
 
@@ -51,7 +51,16 @@ app.listen(restPort, () => {
   console.log(`Example app listening at http://localhost:${restPort}`);
 });
 
-app.get('/receive', (req, res) => {
+app.post('/receive', (req, res) => {
+  if (req.body.type === 'ln') {
+    if (!req.body.amount) {
+      res.send({ error: 'Amount for invoice not defined' });
+      return;
+    }
+    // include comment as well ...
+    res.send({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' });
+    return;
+  }
   res.send({ address: 'bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz' });
 });
 
