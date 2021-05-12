@@ -2,6 +2,7 @@ import QRCode from 'qrcode.react';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { ReactComponent as XIcon } from '../../../assets/X.svg';
 import ModalBackground from '../../../container/ModalBackground/ModalBackground';
+import AmountInput from '../AmountInput/AmountInput';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
@@ -17,8 +18,8 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const btnClasses =
     'text-center h-10 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg w-full text-white';
 
-  const invoiceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setInvoiceType(event.target.value);
+  const invoiceChangeHandler = (type: 'lightning' | 'onchain') => {
+    setInvoiceType(type);
     setAddress('');
     setAmount(0);
     setComment('');
@@ -72,12 +73,23 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           </button>
         </div>
         <div className='px-5'>
-          <div className='text-xl font-bold'>Create a Receive Address</div>
-          <div onChange={invoiceChangeHandler}>
-            <input type='radio' id='ln' name='invoiceType' defaultChecked value='lightning' />
-            <label htmlFor='ln'>Lightning</label>
-            <input type='radio' id='onchain' name='invoiceType' value='onchain' />
-            <label htmlFor='onchain'>On-Chain</label>
+          {showLnInvoice && <div className='text-xl font-bold'>Create a Lightning Invoice</div>}
+          {!showLnInvoice && <div className='text-xl font-bold'>Fund your Wallet</div>}
+          <div className='flex flex-col lg:flex-row text-white items-center'>
+            <button
+              type='button'
+              className=' w-1/2 rounded-lg bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 mx-10 my-2 py-1'
+              onClick={() => invoiceChangeHandler('lightning')}
+            >
+              Lightning
+            </button>
+            <button
+              type='button'
+              className=' w-1/2 rounded-lg bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 mx-10 my-2 py-1'
+              onClick={() => invoiceChangeHandler('onchain')}
+            >
+              Wallet
+            </button>
           </div>
           {address && <div className='my-5'>Scan this QR Code or copy the below address to receive funds</div>}
           {address && (
@@ -94,29 +106,16 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
                 </div>
               )}
               {showLnInvoice && (
-                <div className='flex flex-col py-5'>
-                  <div className='flex justify-center'>
-                    <label htmlFor='amount' className='w-1/2'>
-                      Amount
-                    </label>
-                    <input
-                      id='amount'
-                      type='number'
-                      value={amount}
-                      onChange={amountChangeHandler}
-                      className='border border-gray-400 outline-none rounded-lg'
-                    />
-                  </div>
-                  <div className='flex justify-center py-5'>
-                    <label htmlFor='comment' className='w-1/2'>
-                      Comment
-                    </label>
+                <div className='flex flex-col py-5 justify-center text-center'>
+                  <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
+                  <div className='flex flex-col justify-center'>
+                    <label htmlFor='comment'>Comment</label>
                     <input
                       id='comment'
                       type='text'
                       value={comment}
                       onChange={commentChangeHandler}
-                      className='border border-gray-400 outline-none rounded-lg'
+                      className='border border-gray-400 outline-none dark:text-black'
                     />
                   </div>
                 </div>
