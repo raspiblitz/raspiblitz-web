@@ -38,7 +38,10 @@ const SendModal: FC<SendModalProps> = (props) => {
     setComment(event.target.value);
   };
 
-  const balance = appCtx.unit === 'BTC' ? props.onchainBalance : props.onchainBalance * 100_000_000;
+  const balance =
+    appCtx.unit === 'BTC'
+      ? props.onchainBalance.toLocaleString()
+      : (props.onchainBalance * 100_000_000).toLocaleString();
 
   return (
     <ModalBackground>

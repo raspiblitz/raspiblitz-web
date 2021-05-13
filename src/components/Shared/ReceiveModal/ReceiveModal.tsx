@@ -18,8 +18,8 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const btnClasses =
     'text-center h-10 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg w-full text-white';
 
-  const invoiceChangeHandler = (type: 'lightning' | 'onchain') => {
-    setInvoiceType(type);
+  const invoiceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setInvoiceType(event.target.value);
     setAddress('');
     setAmount(0);
     setComment('');
@@ -64,6 +64,11 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
   const showLnInvoice = lnInvoice && !isLoading && !address;
 
+  const radioStyles =
+    'px-3 py-2 border rounded-lg border-gray-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:text-white';
+  const lnStyle = invoiceType === 'lightning' ? 'bg-blue-500 text-white' : '';
+  const walletStyle = invoiceType === 'onchain' ? 'bg-blue-500 text-white' : '';
+
   return (
     <ModalBackground>
       <div className='w-4/5 h-auto lg:w-1/2 xl:w-2/5 xl:max-w-screen-sm bg-white text-center rounded-lg flex flex-col mx-5 dark:bg-gray-800 dark:text-white'>
@@ -75,21 +80,33 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
         <div className='px-5'>
           {showLnInvoice && <div className='text-xl font-bold'>Create a Lightning Invoice</div>}
           {!showLnInvoice && <div className='text-xl font-bold'>Fund your Wallet</div>}
-          <div className='flex flex-col lg:flex-row text-white items-center'>
-            <button
-              type='button'
-              className=' w-1/2 rounded-lg bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 mx-10 my-2 py-1'
-              onClick={() => invoiceChangeHandler('lightning')}
-            >
-              Lightning
-            </button>
-            <button
-              type='button'
-              className=' w-1/2 rounded-lg bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 mx-10 my-2 py-1'
-              onClick={() => invoiceChangeHandler('onchain')}
-            >
-              Wallet
-            </button>
+          <div className='pt-5 pb-1 flex justify-center'>
+            <div className='px-2'>
+              <label htmlFor='lightning' className={`${radioStyles} ${lnStyle}`}>
+                Lightning
+              </label>
+              <input
+                id='lightning'
+                type='radio'
+                className='hidden checked:border-green-500 checked:block'
+                name='invoiceType'
+                value='lightning'
+                onChange={invoiceChangeHandler}
+              />
+            </div>
+            <div className='px-2'>
+              <label htmlFor='onchain' className={`${radioStyles} ${walletStyle}`}>
+                Fund Wallet
+              </label>
+              <input
+                id='onchain'
+                type='radio'
+                className='hidden'
+                name='invoiceType'
+                value='onchain'
+                onChange={invoiceChangeHandler}
+              />
+            </div>
           </div>
           {address && <div className='my-5'>Scan this QR Code or copy the below address to receive funds</div>}
           {address && (
@@ -98,7 +115,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
             </div>
           )}
           <form className='flex flex-col items-center' onSubmit={generateAddressHandler}>
-            <div className='w-full overflow-x-auto my-2'>{address}</div>
+            <div className='w-full overflow-x-auto m-2'>{address}</div>
             <div className='w-4/5 mb-5'>
               {isLoading && (
                 <div className='p-5'>
@@ -106,7 +123,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
                 </div>
               )}
               {showLnInvoice && (
-                <div className='flex flex-col py-5 justify-center text-center'>
+                <div className='flex flex-col pb-5 justify-center text-center'>
                   <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
                   <div className='flex flex-col justify-center'>
                     <label htmlFor='comment'>Comment</label>
