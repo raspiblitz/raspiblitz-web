@@ -7,7 +7,8 @@ export const Transaction = (props: TransactionProps) => {
   const appCtx = useContext(AppContext);
   const sendingTx = props.category === 'send';
   const sign = sendingTx ? '' : '+';
-  const amount = appCtx.unit === 'BTC' ? props.amount : Math.round(props.amount * 100_000_000);
+  const amount =
+    appCtx.unit === 'BTC' ? props.amount.toLocaleString() : Math.round(props.amount * 100_000_000).toLocaleString();
   const color = sendingTx ? 'text-red-400' : 'text-green-400';
 
   const icon = sendingTx ? (

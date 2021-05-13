@@ -9,8 +9,14 @@ const Wallet: FC<WalletProps> = (props) => {
   const appCtx = useContext(AppContext);
   const syncStatus = props.syncStatus ? props.syncStatus + ' % Synchronized' : 'Checking Sync ...';
   const logo = <BitcoinLogo className='w-10 h-10' />;
-  const onchainBalance = appCtx.unit === 'BTC' ? props.onchainBalance : Math.round(props.onchainBalance * 100_000_000);
-  const lnBalance = appCtx.unit === 'BTC' ? props.lnBalance : Math.round(props.lnBalance * 100_000_000);
+  const onchainBalance =
+    appCtx.unit === 'BTC'
+      ? props.onchainBalance.toLocaleString()
+      : Math.round(props.onchainBalance * 100_000_000).toLocaleString();
+  const lnBalance =
+    appCtx.unit === 'BTC'
+      ? props.lnBalance.toLocaleString()
+      : Math.round(props.lnBalance * 100_000_000).toLocaleString();
 
   return (
     <DashboardBox name={'Wallet'} addText={syncStatus} logo={logo}>
