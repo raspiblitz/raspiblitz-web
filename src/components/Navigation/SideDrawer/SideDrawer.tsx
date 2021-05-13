@@ -10,7 +10,7 @@ export const SideDrawer: FC = () => {
 
   return (
     <nav className='hidden md:inline-block content-container md:w-2/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 transition-colors border-t-2'>
-      <NavLink to='/' exact className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+      <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <div className='w-1/2 flex justify-end'>
           <HomeLogo className='inline-block w-8 h-8' />
         </div>

@@ -13,7 +13,7 @@ const BottomNav = () => {
     <>
       <div className='md:hidden h-16 invisible'></div>
       <footer className='md:hidden z-10 flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 bg-white dark:bg-gray-800 transition-colors'>
-        <NavLink to='/' exact className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+        <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
           <HomeLogo className={iconClasses} />
           <div className={divClasses}>Home</div>
         </NavLink>
