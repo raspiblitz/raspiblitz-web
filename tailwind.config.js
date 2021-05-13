@@ -5,6 +5,7 @@ module.exports = {
   theme: {
     extend: {
       maxHeight: {
+        88: '22rem',
         112: '28rem'
       }
     }

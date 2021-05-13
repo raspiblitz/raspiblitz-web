@@ -9,7 +9,7 @@ const AppBox: FC<AppList> = (props) => {
 
   return (
     <DashboardBox name={'Apps'} addText={`${onlineAppCount} / ${appCount} Apps online`} logo={logo}>
-      <ul className='px-4 pt-5 max-h-60 md:max-h-80 xl:max-h-112 overflow-y-auto transform'>
+      <ul className='px-4 pt-5 max-h-72 xl:max-h-112 overflow-y-auto transform'>
         {!props.apps.length && <div className='flex justify-center items-center'>No Apps installed!</div>}
         {props.apps.map((service: App, index: number) => {
           return (

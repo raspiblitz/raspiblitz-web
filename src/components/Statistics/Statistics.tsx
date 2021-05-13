@@ -11,7 +11,7 @@ const Statistics: FC = () => {
   return (
     <DashboardBox name={'Info'} addText={'Raspiblitz Stats'} logo={logo}>
       <div className='pt-5' />
-      <div className='max-h-60 md:max-h-80 xl:max-h-112 overflow-y-auto transform'>
+      <div className='max-h-72 xl:max-h-112 overflow-y-auto transform'>
         {/* Connect Stats */}
         <div className={categoryClasses}>Connect</div>
         <ul>
