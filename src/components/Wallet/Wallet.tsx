@@ -3,7 +3,7 @@ import { ReactComponent as BitcoinLogo } from '../../assets/bitcoin-circle.svg';
 import DashboardBox from '../../container/DashboardBox/DashboardBox';
 import SendRecvBtn from '../../container/DashboardBox/SendRecvBtn/SendRecvBtn';
 import { AppContext } from '../../store/app-context';
-import TransactionList from '../Shared/TransactionList/TransactionList';
+import TransactionList from './TransactionList/TransactionList';
 
 const Wallet: FC<WalletProps> = (props) => {
   const appCtx = useContext(AppContext);
