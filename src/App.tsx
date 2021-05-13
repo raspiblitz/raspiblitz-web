@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Apps from './pages/Apps/Apps';
 import Home from './pages/Home/Home';
@@ -29,6 +29,9 @@ const App = () => {
             <SideDrawer></SideDrawer>
             <Switch>
               <Route exact path='/'>
+                <Redirect to='/home' />
+              </Route>
+              <Route path='/home'>
                 <Home ws={ws!} />
               </Route>
               <Route path='/apps'>
