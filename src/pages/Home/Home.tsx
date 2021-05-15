@@ -19,39 +19,42 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
   });
 
   const [appStatus, setAppStatus] = useState<any[]>([]);
-
   const [transactions, setTransactions] = useState([]);
+  const [isCancelled, setIsCancelled] = useState(false);
 
   const { ws } = props;
 
   useEffect(() => {
+    setIsCancelled(false);
     if (ws) {
       ws.onmessage = (msg) => {
         const message = JSON.parse(msg.data);
 
-        switch (message.id) {
-          case 'syncstatus':
-            setHomeState((prev) => {
-              return {
-                ...prev,
-                syncStatus: message.syncStatus,
-                onchainBalance: message.onchainBalance.toFixed(8),
-                lnBalance: message.lnBalance.toFixed(8),
-                currBlock: message.currBlock,
-                maxBlock: message.currBlock,
-                channelOnline: message.channelOnline,
-                channelTotal: message.channelTotal
-              };
-            });
-            break;
-          case 'transactions':
-            setTransactions(message.transactions);
-            break;
-          case 'appstatus':
-            setAppStatus(message.apps);
-            break;
-          default:
-            return;
+        if (!isCancelled) {
+          switch (message.id) {
+            case 'syncstatus':
+              setHomeState((prev) => {
+                return {
+                  ...prev,
+                  syncStatus: message.syncStatus,
+                  onchainBalance: message.onchainBalance.toFixed(8),
+                  lnBalance: message.lnBalance.toFixed(8),
+                  currBlock: message.currBlock,
+                  maxBlock: message.currBlock,
+                  channelOnline: message.channelOnline,
+                  channelTotal: message.channelTotal
+                };
+              });
+              break;
+            case 'transactions':
+              setTransactions(message.transactions);
+              break;
+            case 'appstatus':
+              setAppStatus(message.apps);
+              break;
+            default:
+              return;
+          }
         }
       };
 
@@ -59,7 +62,11 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
       ws.send(JSON.stringify({ id: 'transactions' }));
       ws.send(JSON.stringify({ id: 'appstatus' }));
     }
-  }, [ws]);
+
+    return () => {
+      setIsCancelled(true);
+    };
+  }, [ws, isCancelled]);
 
   const sendHandler = () => {
     setHomeState((prevState) => {
@@ -85,13 +92,13 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     });
   };
 
-  const receiveModal = homeState.showReceiveModal && <ReceiveModal close={closeReceiveModalHandler} />;
+  const receiveModal = homeState.showReceiveModal && <ReceiveModal onClose={closeReceiveModalHandler} />;
 
   const sendModal = homeState.showSendModal && (
     <SendModal
       onchainBalance={homeState.onchainBalance}
       lnBalance={homeState.lnBalance}
-      close={closeSendModalHandler}
+      onClose={closeSendModalHandler}
     />
   );
 

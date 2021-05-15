@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
-import { ReactComponent as XIcon } from '../../../assets/X.svg';
-import ModalBackground from '../../../container/ModalBackground/ModalBackground';
+import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
 import AmountInput from '../AmountInput/AmountInput';
 
@@ -44,48 +43,51 @@ const SendModal: FC<SendModalProps> = (props) => {
       : (props.onchainBalance * 100_000_000).toLocaleString();
 
   return (
-    <ModalBackground>
-      <div className='w-4/5 h-auto lg:w-1/3 bg-white text-center rounded-lg flex flex-col mx-5 dark:bg-gray-800 dark:text-white'>
-        <div className='flex'>
-          <button onClick={props.close} className='flex items-end ml-auto color-black h-7 w-7 mt-1'>
-            <XIcon className='w-full h-full' />
-          </button>
+    <ModalDialog close={props.onClose}>
+      <form className='px-5' onSubmit={sendTransactionHandler}>
+        <div className='text-xl font-bold'>Send Funds</div>
+        <div className='my-5'>
+          Balance: {balance} {appCtx.unit}
         </div>
-        <form className='px-5' onSubmit={sendTransactionHandler}>
-          <div className='text-xl font-bold'>Send Funds</div>
-          <div className='my-5'>
-            Balance: {balance} {appCtx.unit}
-          </div>
-          <div className='m-5 flex flex-col justify-center text-center items-center'>
-            <label>Address</label>
+        <div className='my-5 flex flex-col justify-center text-center items-center'>
+          <div className='w-full md:w-10/12 py-1'>
+            <label htmlFor='address' className='block text-left text-gray-700 text-sm font-bold mb-2'>
+              Address
+            </label>
             <input
+              id='address'
               type='text'
-              className='border border-gray-400 rounded-sm w-10/12 dark:text-black outline-none'
+              className='w-full rounded dark:text-black'
               value={address}
               onChange={changeAddressHandler}
             />
-            <div className='w-10/12'>
-              <AmountInput amount={amount} onChangeAmount={changeAmountHandler} />
-            </div>
-            <label>Comment</label>
+          </div>
+          <div className='w-full md:w-10/12 py-1'>
+            <AmountInput amount={amount} onChangeAmount={changeAmountHandler} />
+          </div>
+          <div className='w-full md:w-10/12 py-1'>
+            <label htmlFor='comment' className='block text-left text-gray-700 text-sm font-bold mb-2'>
+              Comment
+            </label>
             <input
+              id='comment'
               type='text'
-              className='border border-gray-400 rounded-sm w-10/12 dark:text-black outline-none'
+              className='rounded w-full dark:text-black outline-none'
               value={comment}
               onChange={changeCommentHandler}
             />
           </div>
-          <div className='inline-block w-4/5 lg:w-3/12 align-top mb-5'>
-            <button
-              type='submit'
-              className='text-center h-10 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg w-full text-white w-full'
-            >
-              Send
-            </button>
-          </div>
-        </form>
-      </div>
-    </ModalBackground>
+        </div>
+        <div className='inline-block w-4/5 lg:w-3/12 align-top mb-5'>
+          <button
+            type='submit'
+            className='text-center h-10 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg text-white w-full'
+          >
+            Send
+          </button>
+        </div>
+      </form>
+    </ModalDialog>
   );
 };
 
@@ -94,5 +96,5 @@ export default SendModal;
 export interface SendModalProps {
   onchainBalance: number;
   lnBalance: number;
-  close: () => void;
+  onClose: () => void;
 }

@@ -14,7 +14,7 @@ To run the mock backend open another terminal, `cd` into [backend-mock](./backen
 
 - RaspiBlitz Icon from [RaspiBlitz](https://github.com/rootzoll/raspiblitz)
   - [MIT License](https://github.com/rootzoll/raspiblitz/blob/v1.7/LICENSE)
-- Bitcoin, Send & Wallet Icon from [BitcoinDesign](https://github.com/bitcoindesign/bitcoin-icons)
+- Bitcoin, Send & Flip vertical Icon from [BitcoinDesign](https://github.com/bitcoindesign/bitcoin-icons)
   - [MIT License](https://github.com/BitcoinDesign/Bitcoin-Icons/blob/main/LICENSE)
 - Other icons from [Hero Icons](https://heroicons.com/)
   - [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE)

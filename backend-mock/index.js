@@ -63,3 +63,18 @@ app.post('/receive', (req, res) => {
 app.post('/send', (req, res) => {
   res.send('success');
 });
+
+app.post('/changepw', (req, res) => {
+  console.log('call to /changepw with pw:', req.body.password);
+  res.send('success');
+});
+
+app.post('/reboot', (req, res) => {
+  console.log('call to /reboot');
+  res.send('success');
+});
+
+app.post('/shutdown', (req, res) => {
+  console.log('call to /shutdown');
+  res.send('success');
+});

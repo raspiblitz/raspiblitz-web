@@ -1,7 +1,6 @@
 import QRCode from 'qrcode.react';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { ReactComponent as XIcon } from '../../../assets/X.svg';
-import ModalBackground from '../../../container/ModalBackground/ModalBackground';
+import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import AmountInput from '../AmountInput/AmountInput';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
@@ -70,95 +69,86 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const walletStyle = invoiceType === 'onchain' ? 'bg-blue-500 text-white' : '';
 
   return (
-    <ModalBackground>
-      <div className='w-4/5 h-auto lg:w-1/2 xl:w-2/5 xl:max-w-screen-sm bg-white text-center rounded-lg flex flex-col mx-5 dark:bg-gray-800 dark:text-white'>
-        <div className='flex'>
-          <button onClick={props.close} className='flex items-end ml-auto h-7 w-7 mt-1'>
-            <XIcon className='w-full h-full' />
-          </button>
+    <ModalDialog close={props.onClose}>
+      {showLnInvoice && <div className='text-xl font-bold'>Create a Lightning Invoice</div>}
+      {!showLnInvoice && <div className='text-xl font-bold'>Fund your Wallet</div>}
+      <div className='pt-5 pb-1 flex justify-center'>
+        <div className='px-2'>
+          <label htmlFor='lightning' className={`${radioStyles} ${lnStyle}`}>
+            Lightning
+          </label>
+          <input
+            id='lightning'
+            type='radio'
+            className='hidden checked:border-green-500 checked:block'
+            name='invoiceType'
+            value='lightning'
+            onChange={invoiceChangeHandler}
+          />
         </div>
-        <div className='px-5'>
-          {showLnInvoice && <div className='text-xl font-bold'>Create a Lightning Invoice</div>}
-          {!showLnInvoice && <div className='text-xl font-bold'>Fund your Wallet</div>}
-          <div className='pt-5 pb-1 flex justify-center'>
-            <div className='px-2'>
-              <label htmlFor='lightning' className={`${radioStyles} ${lnStyle}`}>
-                Lightning
-              </label>
-              <input
-                id='lightning'
-                type='radio'
-                className='hidden checked:border-green-500 checked:block'
-                name='invoiceType'
-                value='lightning'
-                onChange={invoiceChangeHandler}
-              />
-            </div>
-            <div className='px-2'>
-              <label htmlFor='onchain' className={`${radioStyles} ${walletStyle}`}>
-                Fund Wallet
-              </label>
-              <input
-                id='onchain'
-                type='radio'
-                className='hidden'
-                name='invoiceType'
-                value='onchain'
-                onChange={invoiceChangeHandler}
-              />
-            </div>
-          </div>
-          {address && <div className='my-5'>Scan this QR Code or copy the below address to receive funds</div>}
-          {address && (
-            <div className='my-5 flex justify-center'>
-              <QRCode value={address} />
-            </div>
-          )}
-          <form className='flex flex-col items-center' onSubmit={generateAddressHandler}>
-            <div className='w-full overflow-x-auto m-2'>{address}</div>
-            <div className='w-4/5 mb-5'>
-              {isLoading && (
-                <div className='p-5'>
-                  <LoadingSpinner color='text-blue-500' />
-                </div>
-              )}
-              {showLnInvoice && (
-                <div className='flex flex-col pb-5 justify-center text-center'>
-                  <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
-                  <div className='flex flex-col justify-center'>
-                    <label htmlFor='comment'>Comment</label>
-                    <input
-                      id='comment'
-                      type='text'
-                      value={comment}
-                      onChange={commentChangeHandler}
-                      className='border border-gray-400 outline-none dark:text-black'
-                    />
-                  </div>
-                </div>
-              )}
-
-              {!address && (
-                <button type='submit' className={btnClasses}>
-                  Generate Address
-                </button>
-              )}
-
-              {address && (
-                <button type='button' onClick={copyToClipboardHandler} className={btnClasses}>
-                  {buttonText}
-                </button>
-              )}
-            </div>
-          </form>
+        <div className='px-2'>
+          <label htmlFor='onchain' className={`${radioStyles} ${walletStyle}`}>
+            Fund Wallet
+          </label>
+          <input
+            id='onchain'
+            type='radio'
+            className='hidden'
+            name='invoiceType'
+            value='onchain'
+            onChange={invoiceChangeHandler}
+          />
         </div>
       </div>
-    </ModalBackground>
+      {address && <div className='my-5'>Scan this QR Code or copy the below address to receive funds</div>}
+      {address && (
+        <div className='my-5 flex justify-center'>
+          <QRCode value={address} />
+        </div>
+      )}
+      <form className='flex flex-col items-center' onSubmit={generateAddressHandler}>
+        <div className='w-full overflow-x-auto m-2'>{address}</div>
+        <div className='w-4/5 mb-5'>
+          {isLoading && (
+            <div className='p-5'>
+              <LoadingSpinner color='text-blue-500' />
+            </div>
+          )}
+          {showLnInvoice && (
+            <div className='flex flex-col pb-5 justify-center text-center'>
+              <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
+              <div className='flex flex-col justify-center'>
+                <label htmlFor='comment'>Comment</label>
+                <input
+                  id='comment'
+                  type='text'
+                  value={comment}
+                  onChange={commentChangeHandler}
+                  className='rounded dark:text-black'
+                />
+              </div>
+            </div>
+          )}
+
+          {!address && (
+            <button type='submit' className={btnClasses}>
+              Generate Address
+            </button>
+          )}
+
+          {address && (
+            <button type='button' onClick={copyToClipboardHandler} className={btnClasses}>
+              {buttonText}
+            </button>
+          )}
+        </div>
+      </form>
+    </ModalDialog>
   );
 };
 
 export default ReceiveModal;
 
 export interface ReceiveModalProps {
-  close: () => void;
+  onClose: () => void;
 }

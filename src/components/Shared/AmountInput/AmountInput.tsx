@@ -1,24 +1,29 @@
 import styles from './AmountInput.module.css';
 import { ChangeEventHandler, FC, useContext } from 'react';
 import { AppContext } from '../../../store/app-context';
+import { ReactComponent as FlipIcon } from '../../../assets/flip-vertical.svg';
 
 const AmountInput: FC<AmountInputProps> = (props) => {
   const appCtx = useContext(AppContext);
 
   return (
     <>
-      <label htmlFor='amount'>Amount</label>
+      <label htmlFor='amount' className='block text-gray-700 text-sm font-bold mb-2 text-left'>Amount</label>
       <div className='flex flex-row'>
         <input
           id='amount'
           type='number'
           style={styles}
-          className='w-10/12 border border-gray-400 text-right dark:text-black outline-none pr-1'
+          className='w-8/12 rounded rounded-r-none text-right dark:text-black outline-none pr-1 rou'
           value={props.amount}
           onChange={props.onChangeAmount}
         />
-        <span className='w-2/12 border border-gray-400 border-l-0' onClick={appCtx.toggleUnit}>
+        <span
+          className='flex justify-center items-center w-4/12 rounded rounded-l-none border border-gray-500 border-l-0'
+          onClick={appCtx.toggleUnit}
+        >
           {appCtx.unit}
+          <FlipIcon className='h-5 w-5' />
         </span>
       </div>
     </>
