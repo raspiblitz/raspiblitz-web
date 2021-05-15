@@ -7,6 +7,7 @@ import TransactionDetailModal from '../../components/Wallet/TransactionList/Tran
 import Wallet from '../../components/Wallet/Wallet';
 
 export const Home: FC<{ ws: WebSocket }> = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [homeState, setHomeState] = useState<HomeState>({
     syncStatus: 0,
     onchainBalance: 0,
@@ -15,6 +16,7 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     maxBlock: 0,
     channelOnline: 0,
     channelTotal: 0,
+    txId: '',
     showReceiveModal: false,
     showSendModal: false,
     showDetailModal: false
@@ -29,12 +31,14 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
   useEffect(() => {
     setIsCancelled(false);
     if (ws) {
+      setIsLoading(true);
       ws.onmessage = (msg) => {
         const message = JSON.parse(msg.data);
 
         if (!isCancelled) {
           switch (message.id) {
             case 'syncstatus':
+              setIsLoading(false);
               setHomeState((prev) => {
                 return {
                   ...prev,
@@ -94,9 +98,9 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     });
   };
 
-  const showDetailHandler = () => {
+  const showDetailHandler = (id: string) => {
     setHomeState((prevState) => {
-      return { ...prevState, showDetailModal: true };
+      return { ...prevState, txId: id, showDetailModal: true };
     });
   };
 
@@ -116,7 +120,9 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     />
   );
 
-  const detailModal = homeState.showDetailModal && <TransactionDetailModal close={closeDetailHandler} />;
+  const detailModal = homeState.showDetailModal && (
+    <TransactionDetailModal id={homeState.txId} close={closeDetailHandler} />
+  );
 
   return (
     <>
@@ -126,6 +132,7 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
       <div className='h-auto w-full dark:text-white transition-colors'>
         <div className='h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3'>
           <Wallet
+            isLoading={isLoading}
             onchainBalance={homeState.onchainBalance}
             lnBalance={homeState.lnBalance}
             transactions={transactions}
@@ -150,6 +157,7 @@ export interface HomeState {
   lnBalance: number;
   currBlock: number;
   maxBlock: number;
+  txId: string;
   showReceiveModal: boolean;
   showSendModal: boolean;
   showDetailModal: boolean;

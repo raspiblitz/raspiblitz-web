@@ -3,7 +3,7 @@ import { FC } from 'react';
 const DashboardBox: FC<DashboardBoxProps> = (props) => {
   return (
     <div className='dark:text-white transition-colors box-border p-5 xl:row-span-2'>
-      <div className='h-full w-full relative bg-white dark:bg-gray-800 pt-5 rounded-xl shadow-xl'>
+      <div className='h-full w-full relative bg-white dark:bg-gray-800 pt-5 rounded-xl shadow-xl flex flex-col'>
         {/* Header */}
         <div className='font-bold flex px-5'>
           <div className='w-2/3'>
@@ -13,7 +13,7 @@ const DashboardBox: FC<DashboardBoxProps> = (props) => {
           <div className='w-1/3 h-full flex justify-end'>{props.logo}</div>
         </div>
         {/* Body */}
-        <div>{props.children}</div>
+        <div className='h-full'>{props.children}</div>
       </div>
     </div>
   );

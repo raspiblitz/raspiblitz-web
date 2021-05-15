@@ -11,7 +11,7 @@ export const TransactionList: FC<TransactionListProps> = (props) => {
       {props.transactions.map((transaction, index) => {
         return (
           <Transaction
-            onClick={props.showDetails}
+            onClick={props.showDetails.bind(null, transaction.id)}
             key={index}
             amount={transaction.amount}
             time={transaction.time}
@@ -28,5 +28,5 @@ export default TransactionList;
 
 export interface TransactionListProps {
   transactions: any[];
-  showDetails: () => void;
+  showDetails: (id: string) => void;
 }

@@ -47,6 +47,10 @@ const onMessage = (ws, message) => {
 
 console.log(`Started WebSocket Backend on port ${wsPort}`);
 
+/**
+ * REST API CALLS
+ */
+
 app.listen(restPort, () => {
   console.log(`Example app listening at http://localhost:${restPort}`);
 });
@@ -77,4 +81,34 @@ app.post('/reboot', (req, res) => {
 app.post('/shutdown', (req, res) => {
   console.log('call to /shutdown');
   res.send('success');
+});
+
+app.get('/tx/:id', (req, res) => {
+  console.log('call to /tx/' + req.params.id);
+  res.send(
+    JSON.stringify({
+      type: 'onchain', // or lightning
+      hash: '4073686402f35297e6f153bceda0fad51645b35243f21324760c1774f384fdf9',
+      confirmations: 2,
+      date: 1618501200, // epoch timestamp
+      block: 683738, // can be null if not confirmed
+      feeRate: 61.9, // sat/vByte
+      fee: 0.00158274,
+      description: 'hi!' // if available
+    })
+  );
+
+  /**
+   * Lightning:
+   * {
+   *  type: 'lightning',
+   *  hash: '1234',
+   *  request: 'LNBC5...',
+   *  description: 'hi!', // if available
+   *  status: 'SUCCEEDED',
+   *  date: '1618501200', // epoch timestamp
+   *  fee: 2, // (mSats)
+   *  value: 100000, // (mSats) => 100 sat
+   * }
+   */
 });
