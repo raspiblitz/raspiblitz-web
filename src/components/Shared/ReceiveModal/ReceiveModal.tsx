@@ -111,14 +111,19 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
         <div className='w-4/5 mb-5'>
           {isLoading && (
             <div className='p-5'>
-              <LoadingSpinner color='text-blue-500' />
+              <LoadingSpinner />
             </div>
           )}
           {showLnInvoice && (
             <div className='flex flex-col pb-5 justify-center text-center'>
               <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
               <div className='flex flex-col justify-center'>
-                <label htmlFor='comment'>Comment</label>
+                <label
+                  htmlFor='comment'
+                  className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'
+                >
+                  Comment
+                </label>
                 <input
                   id='comment'
                   type='text'

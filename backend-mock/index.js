@@ -65,7 +65,7 @@ app.post('/send', (req, res) => {
 });
 
 app.post('/changepw', (req, res) => {
-  console.log('call to /changepw with pw:', req.body.password);
+  console.log(`call to /changepw with old: ${req.body.oldPassword} & new: ${req.body.newPassword}`);
   res.send('success');
 });
 

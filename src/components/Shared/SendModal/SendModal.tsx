@@ -51,7 +51,10 @@ const SendModal: FC<SendModalProps> = (props) => {
         </div>
         <div className='my-5 flex flex-col justify-center text-center items-center'>
           <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='address' className='block text-left text-gray-700 text-sm font-bold mb-2'>
+            <label
+              htmlFor='address'
+              className='block text-left text-gray-700 dark:text-gray-300 text-sm font-bold mb-2'
+            >
               Address
             </label>
             <input
@@ -66,7 +69,10 @@ const SendModal: FC<SendModalProps> = (props) => {
             <AmountInput amount={amount} onChangeAmount={changeAmountHandler} />
           </div>
           <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='comment' className='block text-left text-gray-700 text-sm font-bold mb-2'>
+            <label
+              htmlFor='comment'
+              className='block text-left text-gray-700 dark:text-gray-300 text-sm font-bold mb-2'
+            >
               Comment
             </label>
             <input
