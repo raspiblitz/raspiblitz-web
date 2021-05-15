@@ -1,14 +1,28 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as MenuIcon } from '../../../assets/menu.svg';
 import { ReactComponent as RaspiBlitzLogo } from '../../../assets/RaspiBlitz_Logo_Icon.svg';
 import DropdownMenu from './DropdownMenu/DropdownMenu';
 
 const Header: FC = () => {
+  const dropdown = useRef<HTMLDivElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', clickOutsideHandler);
+    return () => {
+      document.removeEventListener('mousedown', clickOutsideHandler);
+    };
+  }, [dropdown]);
 
   const showDropdownHandler = () => {
     setShowDropdown((prev) => !prev);
+  };
+
+  const clickOutsideHandler = (event: MouseEvent) => {
+    if (dropdown.current && !dropdown.current.contains(event.target as Node)) {
+      setShowDropdown(false);
+    }
   };
 
   return (
@@ -19,7 +33,7 @@ const Header: FC = () => {
       <div className='font-bold text-xl'>Raspiblitz</div>
       <div className='relative'>
         <MenuIcon onClick={showDropdownHandler} className='w-8 h-8' />
-        {showDropdown && <DropdownMenu />}
+        {showDropdown && <DropdownMenu ref={dropdown} />}
       </div>
     </header>
   );
