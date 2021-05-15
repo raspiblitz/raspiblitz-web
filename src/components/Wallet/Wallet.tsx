@@ -30,7 +30,7 @@ const Wallet: FC<WalletProps> = (props) => {
           </div>
         </div>
       </div>
-      <TransactionList transactions={props.transactions} />
+      <TransactionList showDetails={props.showDetails} transactions={props.transactions} />
       {/* Buttons on Bottom (Send / Receive) */}
       <SendRecvBtn send={props.send} receive={props.receive} />
     </DashboardBox>
@@ -46,4 +46,5 @@ export interface WalletProps {
   transactions: any[];
   send: () => void;
   receive: () => void;
+  showDetails: () => void;
 }

@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { ReactComponent as SendIcon } from '../../../../assets/arrow-up.svg';
+import { FC, useContext } from 'react';
 import { ReactComponent as ReceiveIcon } from '../../../../assets/arrow-down.svg';
+import { ReactComponent as SendIcon } from '../../../../assets/arrow-up.svg';
 import { AppContext } from '../../../../store/app-context';
 
-export const Transaction = (props: TransactionProps) => {
+export const Transaction: FC<TransactionProps> = (props) => {
   const appCtx = useContext(AppContext);
   const sendingTx = props.category === 'send';
   const sign = sendingTx ? '' : '+';
@@ -18,7 +18,7 @@ export const Transaction = (props: TransactionProps) => {
   );
 
   return (
-    <li className='text-center px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-600'>
+    <li className='text-center px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-600' onClick={props.onClick}>
       <div className='flex justify-center items-center'>
         {icon}
         <div className='w-4/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap'>
@@ -42,4 +42,5 @@ export interface TransactionProps {
   time: number;
   category: 'send' | 'receive' | 'generate' | 'immature' | 'orphan';
   comment?: string;
+  onClick: () => void;
 }

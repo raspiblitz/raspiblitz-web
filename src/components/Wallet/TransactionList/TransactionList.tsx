@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import Transaction from './Transaction/Transaction';
 
-export const TransactionList = (props: TransactionListProps) => {
+export const TransactionList: FC<TransactionListProps> = (props) => {
   if (props.transactions.length === 0) {
     return <div className='text-center py-4'>No transactions available.</div>;
   }
@@ -10,6 +11,7 @@ export const TransactionList = (props: TransactionListProps) => {
       {props.transactions.map((transaction, index) => {
         return (
           <Transaction
+            onClick={props.showDetails}
             key={index}
             amount={transaction.amount}
             time={transaction.time}
@@ -26,4 +28,5 @@ export default TransactionList;
 
 export interface TransactionListProps {
   transactions: any[];
+  showDetails: () => void;
 }
