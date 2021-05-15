@@ -43,7 +43,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
         <div className='my-5 flex flex-col justify-center text-center items-center'>
           <div className='w-full md:w-10/12 py-1'>
             <label htmlFor='oldpw' className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>
-              Old Pw
+              Old Password
             </label>
             <input
               id='oldpw'
@@ -56,7 +56,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
           </div>
           <div className='w-full md:w-10/12 py-1'>
             <label htmlFor='newpw' className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>
-              New Pw
+              New Password
             </label>
             <input
               id='newpw'

@@ -1,8 +1,19 @@
 import ModalBackground from '../ModalBackground/ModalBackground';
 import { ReactComponent as XIcon } from '../../assets/X.svg';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 const ModalDialog: FC<ModalDialogProps> = (props) => {
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => {
+      // close on Esc
+      if (event.keyCode === 27) {
+        props.close();
+      }
+    };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, [props]);
+
   return (
     <ModalBackground>
       <div className='w-4/5 h-auto lg:w-1/2 xl:w-2/5 xl:max-w-screen-sm bg-white text-center rounded-lg flex flex-col mx-5 dark:bg-gray-800 dark:text-white'>
