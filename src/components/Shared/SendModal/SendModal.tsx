@@ -7,6 +7,7 @@ const SendModal: FC<SendModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState(0);
+  const [fee, setFee] = useState(0);
   const [comment, setComment] = useState('');
   // const minAmount = 0.0000546; // 5460 sats
 
@@ -20,6 +21,7 @@ const SendModal: FC<SendModalProps> = (props) => {
       body: JSON.stringify({
         amount,
         address,
+        fee,
         comment,
         unit: appCtx.unit
       })
@@ -37,6 +39,10 @@ const SendModal: FC<SendModalProps> = (props) => {
     setComment(event.target.value);
   };
 
+  const changeFeeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setFee(+event.target.value);
+  };
+
   const balance =
     appCtx.unit === 'BTC'
       ? props.onchainBalance.toLocaleString()
@@ -47,7 +53,8 @@ const SendModal: FC<SendModalProps> = (props) => {
       <form className='px-5' onSubmit={sendTransactionHandler}>
         <div className='text-xl font-bold'>Send Funds</div>
         <div className='my-5'>
-          Balance: {balance} {appCtx.unit}
+          <span className='font-bold'>Balance:&nbsp;</span>
+          {balance} {appCtx.unit}
         </div>
         <div className='my-5 flex flex-col justify-center text-center items-center'>
           <div className='w-full md:w-10/12 py-1'>
@@ -68,17 +75,29 @@ const SendModal: FC<SendModalProps> = (props) => {
           <div className='w-full md:w-10/12 py-1'>
             <AmountInput amount={amount} onChangeAmount={changeAmountHandler} />
           </div>
+
           <div className='w-full md:w-10/12 py-1'>
-            <label
-              htmlFor='comment'
-              className='block text-left text-gray-700 dark:text-gray-300 text-sm font-bold mb-2'
-            >
+            <label htmlFor='fee' className='block text-left text-gray-700 dark:text-gray-300 text-sm font-bold mb-2'>
+              Fee
+            </label>
+            <input
+              id='fee'
+              type='number'
+              className='w-full rounded dark:text-black'
+              value={fee}
+              onChange={changeFeeHandler}
+            />
+          </div>
+
+          <div className='w-full md:w-10/12 py-1'>
+            <label htmlFor='comment' className='block text-left text-gray-700 dark:text-gray-300'>
               Comment
             </label>
             <input
               id='comment'
               type='text'
-              className='rounded w-full dark:text-black outline-none'
+              placeholder='Optional'
+              className='input-underline'
               value={comment}
               onChange={changeCommentHandler}
             />

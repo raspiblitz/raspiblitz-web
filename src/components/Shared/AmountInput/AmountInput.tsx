@@ -16,7 +16,7 @@ const AmountInput: FC<AmountInputProps> = (props) => {
           id='amount'
           type='number'
           style={styles}
-          className='w-8/12 rounded rounded-r-none text-right dark:text-black outline-none pr-1 rou'
+          className='w-8/12 rounded rounded-r-none text-right dark:text-black outline-none pr-3'
           value={props.amount}
           onChange={props.onChangeAmount}
         />

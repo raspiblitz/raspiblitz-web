@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import ModalDialog from '../../../../container/ModalDialog/ModalDialog';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
+import OnchainDetails from './OnchainDetails/OnchainDetails';
 
 export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) => {
   const [txDetails, setTxDetails] = useState<any>({});
@@ -26,20 +27,17 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
     <ModalDialog close={props.close}>
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
-        <div className='flex'>
-          <div className='w-full'>
-            <div>TxID</div>
-            <a
-              className='text-blue-400 underline break-all'
-              target='_blank'
-              rel='noreferrer'
-              href='https://mempool.space/tx/e6f4d98fb6955bed65eda930797b30646cbfb0c6fed809f1cf2022a7d7c299ce'
-            >
-              {txDetails?.hash}
-
-              <p>{txDetails?.confirmations}</p>
-            </a>
-          </div>
+        <div className='flex flex-col'>
+          <div className='font-extrabold'>Transaction Details</div>
+          <a
+            className='text-blue-400 underline break-all'
+            target='_blank'
+            rel='noreferrer'
+            href='https://mempool.space/tx/e6f4d98fb6955bed65eda930797b30646cbfb0c6fed809f1cf2022a7d7c299ce'
+          >
+            View on Mempool
+          </a>
+          {txDetails.type === 'onchain' && <OnchainDetails details={txDetails} />}
         </div>
       )}
     </ModalDialog>
