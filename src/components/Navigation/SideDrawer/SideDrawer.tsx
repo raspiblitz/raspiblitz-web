@@ -6,7 +6,7 @@ import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 export const SideDrawer: FC = () => {
   const navLinkClasses = 'inline-block py-4 w-full dark:text-gray-300 flex items-center justify-center';
-  const navLinkActiveClasses = 'text-blue-700 dark:text-yellow-500';
+  const navLinkActiveClasses = 'text-blue-700 dark:text-blue-400';
 
   return (
     <nav className='hidden md:inline-block content-container md:w-2/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 transition-colors border-t-2'>

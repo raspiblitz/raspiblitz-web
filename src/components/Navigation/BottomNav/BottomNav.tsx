@@ -5,7 +5,7 @@ import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 const BottomNav = () => {
   const navLinkClasses = 'dark:text-gray-300';
-  const navLinkActiveClasses = 'text-blue-700 dark:text-yellow-500';
+  const navLinkActiveClasses = 'text-blue-700 dark:text-blue-400';
   const iconClasses = 'w-8 h-8 mx-auto';
   const divClasses = 'text-center mx-1';
 
