@@ -29,7 +29,7 @@ export const LNDetails: FC<LNDetailProps> = (props) => {
       </div>
       <div className={containerClasses}>
         <div className={keyClasses}>Fee</div>
-        <div className={valueClasses}>{details.fee}</div>
+        <div className={valueClasses}>{details.fee} mSat</div>
       </div>
       <div className={containerClasses}>
         <div className={keyClasses}>Value</div>
