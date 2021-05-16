@@ -6,7 +6,10 @@ const ActionBox: FC<ActionBoxProps> = (props) => {
       <div className='relative bg-white dark:bg-gray-800 p-5 rounded-xl shadow-xl'>
         <div className='flex justify-between'>
           <div className='font-bold w-2/3'>{props.name}</div>
-          <button className='w-1/3 border border-gray-300 px-2' onClick={props.action}>
+          <button
+            className='w-1/3 rounded border-2 border-blue-300 hover:border-blue-500 px-2 outline-none focus:outline-none'
+            onClick={props.action}
+          >
             {props.actionName}
           </button>
         </div>
