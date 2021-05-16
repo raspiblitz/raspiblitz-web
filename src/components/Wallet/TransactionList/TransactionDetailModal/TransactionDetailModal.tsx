@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import ModalDialog from '../../../../container/ModalDialog/ModalDialog';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
+import LNDetails from './LNDetails/LNDetails';
 import OnchainDetails from './OnchainDetails/OnchainDetails';
 
 export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) => {
@@ -30,7 +31,7 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
         <div className='flex flex-col'>
           <div className='font-extrabold'>Transaction Details</div>
           <a
-            className='text-blue-400 underline break-all'
+            className='text-blue-400 underline break-all py-2'
             target='_blank'
             rel='noreferrer'
             href='https://mempool.space/tx/e6f4d98fb6955bed65eda930797b30646cbfb0c6fed809f1cf2022a7d7c299ce'
@@ -38,6 +39,7 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
             View on Mempool
           </a>
           {txDetails.type === 'onchain' && <OnchainDetails details={txDetails} />}
+          {txDetails.type === 'lightning' && <LNDetails details={txDetails} />}
         </div>
       )}
     </ModalDialog>

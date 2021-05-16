@@ -85,30 +85,32 @@ app.post('/shutdown', (req, res) => {
 
 app.get('/tx/:id', (req, res) => {
   console.log('call to /tx/' + req.params.id);
-  res.send(
-    JSON.stringify({
-      type: 'onchain', // or lightning
-      hash: '4073686402f35297e6f153bceda0fad51645b35243f21324760c1774f384fdf9',
-      confirmations: 2,
-      date: 1618501200, // epoch timestamp
-      block: 683738, // can be null if not confirmed
-      feeRate: 61.9, // sat/vByte
-      fee: 0.00158274,
-      description: 'hi!' // if available
-    })
-  );
-
-  /**
-   * Lightning:
-   * {
-   *  type: 'lightning',
-   *  hash: '1234',
-   *  request: 'LNBC5...',
-   *  description: 'hi!', // if available
-   *  status: 'SUCCEEDED',
-   *  date: '1618501200', // epoch timestamp
-   *  fee: 2, // (mSats)
-   *  value: 100000, // (mSats) => 100 sat
-   * }
-   */
+  if (req.params.id === 'blablabla') {
+    res.send(
+      JSON.stringify({
+        type: 'onchain', // or lightning
+        hash: '4073686402f35297e6f153bceda0fad51645b35243f21324760c1774f384fdf9',
+        confirmations: 2,
+        date: 1618501200, // epoch timestamp
+        block: 683738, // can be null if not confirmed
+        feeRate: 61.9, // sat/vByte
+        fee: 0.00158274,
+        description: 'hi!' // if available
+      })
+    );
+  } else {
+    res.send(
+      JSON.stringify({
+        type: 'lightning',
+        hash: '1d4443dcad965200d01c0ee34332grfwqwe76j',
+        request:
+          'LNBC50509VKAVKAVKAVAKVAKVKAVKAVKBLABLABLABLSBLABLSABSLABSALAALBASLSBALBSGSDQ6XGSV89EQGF6KUERVV5S8QCTRDVCQZPGXQRRSSSP538GMWU7BYNZ5FKJG4PDUN2GGMDCJJV9MHJARKDR3CJS9QY9QSQ6UVDP99NYTD',
+        status: 'SUCCEEDED',
+        date: '1618501200', // epoch timestamp
+        fee: 2, // (mSats)
+        value: 100000, // (mSats) => 100 sat
+        description: 'hi!' // if available
+      })
+    );
+  }
 });

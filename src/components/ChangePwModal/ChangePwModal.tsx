@@ -67,7 +67,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
               required
             />
           </div>
-          <div className='flex w-2/3 pt-2'>
+          <div className='flex w-full md:w-2/3 pt-2'>
             <button className={btnClasses} onClick={props.onClose}>
               Cancel
             </button>

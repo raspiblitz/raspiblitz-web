@@ -3,33 +3,43 @@ import { FC } from 'react';
 export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
   const details = props.details;
 
+  const containerClasses = 'm-2 py-1 flex overflow-hidden border-gray-400 border-b-2 text-left';
+  const keyClasses = 'w-1/2 text-gray-500 dark:text-gray-200';
+  const valueClasses = 'w-1/2 overflow-hidden overflow-ellipsis overflow-x-auto';
+
+  const date = new Date(details.date * 1000).toLocaleString(); // epoch time => * 1000
+
   return (
-    <>
-      <div className='p-2'>
-        <div className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>TxID</div>
-        <div className='mt-0 block w-full overflow-x-auto break-normal border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'>
-          {details.hash}
-        </div>
+    <div className='flex flex-col p-3 my-4'>
+      <div className={containerClasses}>
+        <div className={keyClasses}>TxID</div>
+        <div className={valueClasses}>{details.hash}</div>
       </div>
-      <div className='p-2'>
-        <div className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>Confirmations</div>
-        <div className='mt-0 overflow-x-auto break-normal border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'>
-          {details.confirmations}
-        </div>
+      <div className={containerClasses}>
+        <div className={keyClasses}>Confirmations</div>
+        <div className={valueClasses}>{details.confirmations || 'Unconfirmed'}</div>
       </div>
-      <div className='p-2'>
-        <div className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>Date</div>
-        <div className='mt-0 overflow-x-auto break-normal border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'>
-          {details.date}
-        </div>
+      <div className={containerClasses}>
+        <div className={keyClasses}>Included in Block</div>
+        <div className={valueClasses}>{details.block || 'Unconfirmed'}</div>
       </div>
-      <div className='p-2'>
-        <div className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>Block</div>
-        <div className='mt-0 overflow-x-auto break-normal border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'>
-          {details.block}
-        </div>
+      <div className={containerClasses}>
+        <div className={keyClasses}>Date</div>
+        <div className={valueClasses}>{date}</div>
       </div>
-    </>
+      <div className={containerClasses}>
+        <div className={keyClasses}>Fee</div>
+        <div className={valueClasses}>{details.fee}</div>
+      </div>
+      <div className={containerClasses}>
+        <div className={keyClasses}>Fee Rate</div>
+        <div className={valueClasses}>{details.feeRate} sat/vByte</div>
+      </div>
+      <div className={containerClasses}>
+        <div className={keyClasses}>Description</div>
+        <div className={valueClasses}>{details.description}</div>
+      </div>
+    </div>
   );
 };
 
