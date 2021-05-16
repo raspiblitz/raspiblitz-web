@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { ReactComponent as ClipboardIcon } from '../../../../../assets/clipboard.svg';
 
 export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
   const details = props.details;
@@ -9,11 +10,18 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
 
   const date = new Date(details.date * 1000).toLocaleString(); // epoch time => * 1000
 
+  const copyClipboardHandler = () => {
+    navigator.clipboard.writeText(details.hash);
+  };
+
   return (
     <div className='flex flex-col p-3 my-4'>
       <div className={containerClasses}>
         <div className={keyClasses}>TxID</div>
         <div className={valueClasses}>{details.hash}</div>
+        <div>
+          <ClipboardIcon className='h-5 w-5 hover:text-blue-500' onClick={copyClipboardHandler} />
+        </div>
       </div>
       <div className={containerClasses}>
         <div className={keyClasses}>Confirmations</div>
