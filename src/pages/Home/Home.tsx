@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import AppBox from '../../components/AppBox/AppBox';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
@@ -110,19 +111,27 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     });
   };
 
-  const receiveModal = homeState.showReceiveModal && <ReceiveModal onClose={closeReceiveModalHandler} />;
+  const receiveModal =
+    homeState.showReceiveModal &&
+    createPortal(<ReceiveModal onClose={closeReceiveModalHandler} />, document.getElementById('modal-root')!);
 
-  const sendModal = homeState.showSendModal && (
-    <SendModal
-      onchainBalance={homeState.onchainBalance}
-      lnBalance={homeState.lnBalance}
-      onClose={closeSendModalHandler}
-    />
-  );
+  const sendModal =
+    homeState.showSendModal &&
+    createPortal(
+      <SendModal
+        onchainBalance={homeState.onchainBalance}
+        lnBalance={homeState.lnBalance}
+        onClose={closeSendModalHandler}
+      />,
+      document.getElementById('modal-root')!
+    );
 
-  const detailModal = homeState.showDetailModal && (
-    <TransactionDetailModal id={homeState.txId} close={closeDetailHandler} />
-  );
+  const detailModal =
+    homeState.showDetailModal &&
+    createPortal(
+      <TransactionDetailModal id={homeState.txId} close={closeDetailHandler} />,
+      document.getElementById('modal-root')!
+    );
 
   return (
     <>

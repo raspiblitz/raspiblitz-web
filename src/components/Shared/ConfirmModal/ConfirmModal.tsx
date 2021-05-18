@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { createPortal } from 'react-dom';
 import { useHistory } from 'react-router';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 
@@ -19,7 +20,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
     }
   };
 
-  return (
+  return createPortal(
     <ModalDialog close={props.onClose}>
       {props.confirmText}
       <div className='py-3 flex'>
@@ -30,7 +31,8 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
           Yes
         </button>
       </div>
-    </ModalDialog>
+    </ModalDialog>,
+    document.getElementById('modal-root')!
   );
 };
 

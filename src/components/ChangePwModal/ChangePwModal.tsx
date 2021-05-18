@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useState } from 'react';
+import { createPortal } from 'react-dom';
 import ModalDialog from '../../container/ModalDialog/ModalDialog';
 import LoadingSpinner from '../Shared/LoadingSpinner/LoadingSpinner';
 
@@ -35,7 +36,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
     setNewPassword(event.target.value);
   };
 
-  return (
+  return createPortal(
     <ModalDialog close={props.onClose}>
       <h3 className='font-bold'>Change Password</h3>
       {isLoading && <LoadingSpinner />}
@@ -77,7 +78,8 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
           </div>
         </div>
       )}
-    </ModalDialog>
+    </ModalDialog>,
+    document.getElementById('modal-root')!
   );
 };
 
