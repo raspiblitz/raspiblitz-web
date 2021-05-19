@@ -12,8 +12,6 @@ const syncStatus = () => {
     channelTotal: 4
   });
 
-  // check if Websockets really work
-  // P.S.: They do. Awesome!
   setTimeout(() => {
     util.sendSSE('syncstatus', {
       syncStatus: 100,
