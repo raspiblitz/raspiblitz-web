@@ -12,7 +12,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
 
   const changePasswordHandler = async () => {
     setIsLoading(true);
-    const respObj = fetch('http://localhost:8081/changepw', {
+    const respObj = fetch('http://localhost:8080/changepw', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

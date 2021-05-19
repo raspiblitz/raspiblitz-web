@@ -9,7 +9,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
     'text-center h-10 mx-2 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg w-1/2 text-white';
 
   const shutdownHandler = async () => {
-    const respObj = fetch('http://localhost:8081' + props.confirmEndpoint, {
+    const respObj = fetch('http://localhost:8080' + props.confirmEndpoint, {
       method: 'POST',
       body: JSON.stringify({})
     });

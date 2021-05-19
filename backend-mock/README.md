@@ -6,28 +6,26 @@ This is a mock backend for raspiblitz web to make interaction with the frontend 
 
 Install dependencies with `yarn install` then run with `yarn start`.
 
-This exposes a WebSocket to `localhost:8080` and a REST endpoint on `localhost:8081`.
+This exposes the web server on `localhost:8080`.
 
 ## API
-
-The messages to the WebSocket should look like this:
-
-```json
-{
-  "id": "<someid>" // identifier to request data
-}
-```
-
-Currently the ID requests the following:
-
-- `syncstatus`: syncstatus of blockchain & sync stats like open channels etc
-- `transactions`: transactions (on-chain & lightning)
-- `appstatus`: online / offline status of the installed apps
-
-REST API:
 
 - `/receive` - returns an address for receiving payment
   - expects: `type`: 'lightning' for ln invoice or 'onchain' for onchain address
   - expects: `amount`: amount for the invoice (only 'lightning' type)
   - expects: `comment` comment for the invoice (only 'lightning' type)
 - `/send` - send payment
+- `/tx/:id` - returns details for a specific transactionID
+- `/reboot` - for rebooting the system
+- `/changepw` - for changing the password
+- `/shutdown` - for shutting the system down
+- `/events` - registers client for SSE Events. Related Endpoints:
+  - `/transactions` - triggers SSE Event for transactions
+  - `/syncstatus` - triggers SSE Event for syncstatus
+  - `/appstatus` - triggers SSE Event for syncstatus
+
+### SSE Events
+
+- `syncstatus`
+- `appstatus`
+- `transactions`

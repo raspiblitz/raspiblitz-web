@@ -13,7 +13,7 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   const sendTransactionHandler = (event: FormEvent) => {
     event.preventDefault();
-    fetch('http://localhost:8081/send', {
+    fetch('http://localhost:8080/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

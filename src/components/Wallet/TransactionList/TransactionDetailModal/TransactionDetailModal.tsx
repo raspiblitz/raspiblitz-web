@@ -14,7 +14,7 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
     setIsLoading(true);
 
     const fetchData = async () => {
-      const req = await fetch('http://localhost:8081/tx/' + id);
+      const req = await fetch('http://localhost:8080/tx/' + id);
 
       const reqObj = await req.json();
       setIsLoading(false);

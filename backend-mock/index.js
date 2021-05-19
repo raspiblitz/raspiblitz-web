@@ -1,71 +1,62 @@
-const WebSocket = require('ws');
+const express = require('express');
+const cors = require('cors');
+const apps = require('./apps');
 const sync = require('./sync');
 const transactions = require('./transactions');
-const apps = require('./apps');
-const cors = require('cors');
-const express = require('express');
-
-const wsPort = 8080;
-const restPort = 8081;
+const util = require('./util');
 
 const app = express();
 app.use(cors(), express.json());
 
-const wss = new WebSocket.Server({ port: wsPort });
+const PORT = 8080;
 
-wss.on('connection', (ws) => {
-  console.log('connected');
-
-  ws.on('message', (message) => {
-    onMessage(ws, message);
-  });
+app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
-
-const onMessage = (ws, message) => {
-  console.log('new message received', message);
-  let parsedMsg;
-  try {
-    parsedMsg = JSON.parse(message.toString());
-  } catch (e) {
-    console.log(e);
-    ws.send(JSON.stringify({ error: 'error while parsing' }));
-  }
-  switch (parsedMsg.id) {
-    case 'syncstatus':
-      sync.syncStatus(ws);
-      break;
-    case 'transactions':
-      transactions.listTransactions(ws);
-      break;
-    case 'appstatus':
-      apps.appStatus(ws);
-      break;
-    default:
-      ws.send(JSON.stringify({ error: 'id not specified' }));
-  }
-};
-
-console.log(`Started WebSocket Backend on port ${wsPort}`);
 
 /**
- * REST API CALLS
+ * Main SSE Handler
  */
+const eventsHandler = (request, response) => {
+  const headers = {
+    'Content-Type': 'text/event-stream',
+    Connection: 'keep-alive',
+    'Cache-Control': 'no-cache'
+  };
+  response.writeHead(200, headers);
 
-app.listen(restPort, () => {
-  console.log(`Example app listening at http://localhost:${restPort}`);
-});
+  const data = `data: null\n\n`;
+
+  response.write(data);
+
+  const id = util.currClientId++;
+
+  util.clients.push({
+    id,
+    response
+  });
+
+  request.on('close', () => {
+    // do nothing
+  });
+};
+
+/**
+ * SSE Handler call
+ */
+app.get('/events', eventsHandler);
 
 app.post('/receive', (req, res) => {
   if (req.body.type === 'lightning') {
     // include comment & amount for real req ..
-    res.send({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' });
+    res.send(JSON.stringify({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' }));
     return;
   }
-  res.send({ address: 'bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz' });
+  res.send(JSON.stringify({ address: 'bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz' }));
 });
 
 app.post('/send', (req, res) => {
-  res.send('success');
+  res.send(JSON.stringify({ status: 'success' }));
 });
 
 app.post('/changepw', (req, res) => {
@@ -75,12 +66,27 @@ app.post('/changepw', (req, res) => {
 
 app.post('/reboot', (req, res) => {
   console.log('call to /reboot');
-  res.send('success');
+  res.send(JSON.stringify({ status: 'success' }));
 });
 
 app.post('/shutdown', (req, res) => {
   console.log('call to /shutdown');
-  res.send('success');
+  res.send(JSON.stringify({ status: 'success' }));
+});
+
+app.get('/syncstatus', (req, res) => {
+  sync.syncStatus();
+  res.send(JSON.stringify({ status: 'success' }));
+});
+
+app.get('/appstatus', (req, res) => {
+  apps.appStatus();
+  res.send(JSON.stringify({ status: 'success' }));
+});
+
+app.get('/transactions', (req, res) => {
+  transactions.listTransactions();
+  res.send(JSON.stringify({ status: 'success' }));
 });
 
 app.get('/tx/:id', (req, res) => {

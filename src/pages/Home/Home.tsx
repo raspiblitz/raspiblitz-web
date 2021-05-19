@@ -6,117 +6,59 @@ import SendModal from '../../components/Shared/SendModal/SendModal';
 import Statistics from '../../components/Statistics/Statistics';
 import TransactionDetailModal from '../../components/Wallet/TransactionList/TransactionDetailModal/TransactionDetailModal';
 import Wallet from '../../components/Wallet/Wallet';
+import useSSE from '../../hooks/use-sse';
 
-export const Home: FC<{ ws: WebSocket }> = (props) => {
+export const Home: FC = (props) => {
+  const { homeState, transactions, appStatus } = useSSE();
+
   const [isLoading, setIsLoading] = useState(false);
-  const [homeState, setHomeState] = useState<HomeState>({
-    syncStatus: 0,
-    onchainBalance: 0,
-    lnBalance: 0,
-    currBlock: 0,
-    maxBlock: 0,
-    channelOnline: 0,
-    channelTotal: 0,
-    txId: '',
-    showReceiveModal: false,
-    showSendModal: false,
-    showDetailModal: false
-  });
-
-  const [appStatus, setAppStatus] = useState<any[]>([]);
-  const [transactions, setTransactions] = useState([]);
-  const [isCancelled, setIsCancelled] = useState(false);
-
-  const { ws } = props;
+  const [showSendModal, setShowSendModal] = useState(false);
+  const [showReceiveModal, setShowReceiveModal] = useState(false);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [detailTxId, setDetailTxId] = useState('');
 
   useEffect(() => {
-    setIsCancelled(false);
-    if (ws) {
-      setIsLoading(true);
-      ws.onmessage = (msg) => {
-        const message = JSON.parse(msg.data);
-
-        if (!isCancelled) {
-          switch (message.id) {
-            case 'syncstatus':
-              setIsLoading(false);
-              setHomeState((prev) => {
-                return {
-                  ...prev,
-                  syncStatus: message.syncStatus,
-                  onchainBalance: message.onchainBalance.toFixed(8),
-                  lnBalance: message.lnBalance.toFixed(8),
-                  currBlock: message.currBlock,
-                  maxBlock: message.currBlock,
-                  channelOnline: message.channelOnline,
-                  channelTotal: message.channelTotal
-                };
-              });
-              break;
-            case 'transactions':
-              setTransactions(message.transactions);
-              break;
-            case 'appstatus':
-              setAppStatus(message.apps);
-              break;
-            default:
-              return;
-          }
-        }
-      };
-
-      ws.send(JSON.stringify({ id: 'syncstatus' }));
-      ws.send(JSON.stringify({ id: 'transactions' }));
-      ws.send(JSON.stringify({ id: 'appstatus' }));
-    }
-
-    return () => {
-      setIsCancelled(true);
-    };
-  }, [ws, isCancelled]);
-
-  const showSendHandler = () => {
-    setHomeState((prevState) => {
-      return { ...prevState, showSendModal: true };
+    setIsLoading(true);
+    Promise.allSettled([
+      fetch('http://localhost:8080/syncstatus'),
+      fetch('http://localhost:8080/transactions'),
+      fetch('http://localhost:8080/appstatus')
+    ]).then(() => {
+      setIsLoading(false);
     });
-  };
+  }, []);
 
-  const showReceiveHandler = () => {
-    setHomeState((prevState) => {
-      return { ...prevState, showReceiveModal: true };
-    });
-  };
-
-  const closeReceiveModalHandler = () => {
-    setHomeState((prevState) => {
-      return { ...prevState, showReceiveModal: false };
-    });
+  const showSendModalHandler = () => {
+    setShowSendModal(true);
   };
 
   const closeSendModalHandler = () => {
-    setHomeState((prevState) => {
-      return { ...prevState, showSendModal: false };
-    });
+    setShowSendModal(false);
+  };
+
+  const showReceiveHandler = () => {
+    setShowReceiveModal(true);
+  };
+
+  const closeReceiveModalHandler = () => {
+    setShowReceiveModal(false);
   };
 
   const showDetailHandler = (id: string) => {
-    setHomeState((prevState) => {
-      return { ...prevState, txId: id, showDetailModal: true };
-    });
+    setDetailTxId(id);
+    setShowDetailModal(true);
   };
 
   const closeDetailHandler = () => {
-    setHomeState((prevState) => {
-      return { ...prevState, showDetailModal: false };
-    });
+    setShowDetailModal(false);
   };
 
   const receiveModal =
-    homeState.showReceiveModal &&
+    showReceiveModal &&
     createPortal(<ReceiveModal onClose={closeReceiveModalHandler} />, document.getElementById('modal-root')!);
 
   const sendModal =
-    homeState.showSendModal &&
+    showSendModal &&
     createPortal(
       <SendModal
         onchainBalance={homeState.onchainBalance}
@@ -127,9 +69,9 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
     );
 
   const detailModal =
-    homeState.showDetailModal &&
+    showDetailModal &&
     createPortal(
-      <TransactionDetailModal id={homeState.txId} close={closeDetailHandler} />,
+      <TransactionDetailModal id={detailTxId} close={closeDetailHandler} />,
       document.getElementById('modal-root')!
     );
 
@@ -147,7 +89,7 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
             transactions={transactions}
             showDetails={showDetailHandler}
             syncStatus={homeState.syncStatus}
-            send={showSendHandler}
+            send={showSendModalHandler}
             receive={showReceiveHandler}
           ></Wallet>
           <Statistics></Statistics>
@@ -159,17 +101,3 @@ export const Home: FC<{ ws: WebSocket }> = (props) => {
 };
 
 export default Home;
-
-export interface HomeState {
-  syncStatus: number;
-  onchainBalance: number;
-  lnBalance: number;
-  currBlock: number;
-  maxBlock: number;
-  txId: string;
-  showReceiveModal: boolean;
-  showSendModal: boolean;
-  showDetailModal: boolean;
-  channelOnline: number;
-  channelTotal: number;
-}

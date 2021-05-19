@@ -40,7 +40,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       amount: lnInvoice ? amount : undefined,
       comment: lnInvoice ? comment : undefined
     };
-    const resp = await fetch('http://localhost:8081/receive', {
+    const resp = await fetch('http://localhost:8080/receive', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
