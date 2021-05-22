@@ -84,6 +84,11 @@ app.get('/appstatus', (req, res) => {
   res.send(JSON.stringify({ status: 'success' }));
 });
 
+app.get('/apps', (req, res) => {
+  apps.apps();
+  res.status(200).send();
+});
+
 app.get('/transactions', (req, res) => {
   transactions.listTransactions();
   res.send(JSON.stringify({ status: 'success' }));

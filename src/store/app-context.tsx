@@ -1,4 +1,4 @@
-import { createContext, Dispatch, FC, useEffect, useState } from 'react';
+import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 interface AppContextType {
   authenticated: boolean;
@@ -6,7 +6,9 @@ interface AppContextType {
   unit: Unit;
   toggleUnit: () => void;
   toggleDarkMode: () => void;
-  setAuthenticated: Dispatch<boolean>;
+  setAuthenticated: Dispatch<SetStateAction<boolean>>;
+  evtSource: EventSource | null;
+  setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
 }
 
 type Unit = 'BTC' | 'Sat';
@@ -17,13 +19,16 @@ export const AppContext = createContext<AppContextType>({
   unit: 'BTC',
   toggleUnit: () => {},
   setAuthenticated: () => {},
-  toggleDarkMode: () => {}
+  toggleDarkMode: () => {},
+  evtSource: null,
+  setEvtSource: () => {}
 });
 
 const AppContextProvider: FC = (props) => {
   const [unit, setUnit] = useState<Unit>('BTC');
   const [authenticated, setAuthenticated] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [evtSource, setEvtSource] = useState<EventSource | null>(null);
 
   const toggleUnitHandler = () => {
     setUnit((prevUnit) => (prevUnit === 'BTC' ? 'Sat' : 'BTC'));
@@ -55,7 +60,9 @@ const AppContextProvider: FC = (props) => {
     unit,
     toggleUnit: toggleUnitHandler,
     setAuthenticated,
-    toggleDarkMode: toggleDarkModeHandler
+    toggleDarkMode: toggleDarkModeHandler,
+    evtSource,
+    setEvtSource
   };
 
   return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>;

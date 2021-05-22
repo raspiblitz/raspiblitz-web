@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../store/app-context';
+
+const SSE_URL = 'http://localhost:8080/events';
 
 const useSSE = () => {
+  const appCtx = useContext(AppContext);
   const [homeState, setHomeState] = useState<HomeState>({
     syncStatus: 0,
     onchainBalance: 0,
@@ -12,40 +16,65 @@ const useSSE = () => {
   });
 
   const [appStatus, setAppStatus] = useState([]);
+  const [availableApps, setAvailableApps] = useState([]);
   const [transactions, setTransactions] = useState([]);
 
-  const url = 'http://localhost:8080/events';
+  const { evtSource, setEvtSource } = appCtx;
 
   useEffect(() => {
-    const evtSource = new EventSource(url);
-    evtSource.addEventListener('syncstatus', (event: any) => {
-      setHomeState((prev) => {
-        console.log(event);
-        const message = JSON.parse(event.data);
+    if (!evtSource) {
+      setEvtSource(new EventSource(SSE_URL));
+    } else {
+      evtSource.addEventListener('syncstatus', setSyncStatus);
 
-        return {
-          ...prev,
-          syncStatus: message.syncStatus,
-          onchainBalance: message.onchainBalance.toFixed(8),
-          lnBalance: message.lnBalance.toFixed(8),
-          currBlock: message.currBlock,
-          maxBlock: message.currBlock,
-          channelOnline: message.channelOnline,
-          channelTotal: message.channelTotal
-        };
-      });
+      evtSource.addEventListener('transactions', setTx);
+
+      evtSource.addEventListener('appstatus', setAppStat);
+
+      evtSource.addEventListener('apps', setApps);
+    }
+
+    return () => {
+      // cleanup
+      if (evtSource) {
+        evtSource.removeEventListener('syncstatus', setSyncStatus);
+        evtSource.removeEventListener('transactions', setTx);
+        evtSource.removeEventListener('appstatus', setAppStat);
+        evtSource.removeEventListener('apps', setApps);
+      }
+    };
+  }, [evtSource, setEvtSource]);
+
+  const setApps = (event: any) => {
+    setAvailableApps(JSON.parse(event.data));
+  };
+
+  const setAppStat = (event: any) => {
+    setAppStatus(JSON.parse(event.data));
+  };
+
+  const setTx = (event: any) => {
+    setTransactions(JSON.parse(event.data));
+  };
+
+  const setSyncStatus = (event: any) => {
+    setHomeState((prev) => {
+      const message = JSON.parse(event.data);
+
+      return {
+        ...prev,
+        syncStatus: message.syncStatus,
+        onchainBalance: message.onchainBalance.toFixed(8),
+        lnBalance: message.lnBalance.toFixed(8),
+        currBlock: message.currBlock,
+        maxBlock: message.currBlock,
+        channelOnline: message.channelOnline,
+        channelTotal: message.channelTotal
+      };
     });
+  };
 
-    evtSource.addEventListener('transactions', (event: any) => {
-      setTransactions(JSON.parse(event.data));
-    });
-
-    evtSource.addEventListener('appstatus', (event: any) => {
-      setAppStatus(JSON.parse(event.data));
-    });
-  }, []);
-
-  return { homeState, transactions, appStatus };
+  return { homeState, transactions, appStatus, availableApps };
 };
 
 export default useSSE;
