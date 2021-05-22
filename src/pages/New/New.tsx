@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { ReactComponent as SomeIcon } from '../../assets/home.svg';
-import AppCard from '../../components/BDesign/AppCard/AppCard';
+import AppCard from '../../components/BDesign/AppStatusCard/AppStatusCard';
 
 const New: FC = () => {
   const icon = <SomeIcon />;

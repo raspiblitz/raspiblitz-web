@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // TODO: Let it always take 1row / 1col in grid
-export const AppCard: FC<AppCardProps> = (props) => {
+export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
   const statusColor = props.status === 'Online' ? 'text-green-400' : 'text-red-500';
   return (
     <div className='border border-black box-border rounded-md bg-white flex justify-center px-6 py-4'>
@@ -19,9 +19,9 @@ export const AppCard: FC<AppCardProps> = (props) => {
   );
 };
 
-export default AppCard;
+export default AppStatusCard;
 
-export interface AppCardProps {
+export interface AppStatusCardProps {
   icon: JSX.Element;
   name: string;
   description: string;
