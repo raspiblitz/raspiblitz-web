@@ -6,6 +6,7 @@ import DropdownMenu from './DropdownMenu/DropdownMenu';
 
 const Header: FC = () => {
   const dropdown = useRef<HTMLDivElement>(null);
+  const menu = useRef<SVGSVGElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
@@ -20,7 +21,12 @@ const Header: FC = () => {
   };
 
   const clickOutsideHandler = (event: MouseEvent) => {
-    if (dropdown.current && !dropdown.current.contains(event.target as Node)) {
+    if (
+      menu.current &&
+      dropdown.current &&
+      !dropdown.current.contains(event.target as Node) &&
+      !menu.current.contains(event.target as Node)
+    ) {
       setShowDropdown(false);
     }
   };
@@ -32,7 +38,7 @@ const Header: FC = () => {
       </NavLink>
       <div className='font-bold text-xl'>Raspiblitz</div>
       <div className='relative'>
-        <MenuIcon onClick={showDropdownHandler} className='w-8 h-8' />
+        <MenuIcon ref={menu} onClick={showDropdownHandler} className='w-8 h-8' />
         {showDropdown && <DropdownMenu ref={dropdown} />}
       </div>
     </header>
