@@ -5,7 +5,9 @@ import useSSE from '../../hooks/use-sse';
 export const Apps = () => {
   const { availableApps } = useSSE();
 
-  const install = () => {};
+  const installHandler = (id: string) => {
+    fetch('http://localhost:8080/install/');
+  };
 
   // call to get available apps
   useEffect(() => {
@@ -13,16 +15,16 @@ export const Apps = () => {
   }, []);
 
   return (
-    <div className='content-container overflow-y-auto w-full dark:text-white transition-colors'>
+    <div className='mobile-container md:content-container overflow-y-auto w-full dark:text-white transition-colors'>
       <div className='h-full flex flex-wrap flex-initial'>
         {availableApps.map((app: any, index) => {
           return (
-            <div className='w-full md:w-1/3 p-3 h-auto inline-block' key={index}>
+            <div className='w-full lg:w-1/3 p-3 h-auto inline-block' key={index}>
               <AppInstallCard
                 id={app.id}
                 name={app.name}
                 description={app.description}
-                onInstall={install}
+                onInstall={installHandler.bind(null, app.id)}
                 installed={app.installed}
               />
             </div>

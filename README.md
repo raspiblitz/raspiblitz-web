@@ -26,3 +26,5 @@ To run the mock backend open another terminal, `cd` into [backend-mock](./backen
   - [CC0 License](https://loading.io/css/)
 - Sphinx Logo from [Sphinx Chat](https://sphinx.chat/)
   - [MIT License](https://github.com/stakwork/sphinx-relay/blob/master/LICENSE)
+- BTC RPC Logo from [Bitcoin Explorer](https://bitcoinexplorer.org)
+  - [MIT License](https://github.com/janoside/btc-rpc-explorer)
