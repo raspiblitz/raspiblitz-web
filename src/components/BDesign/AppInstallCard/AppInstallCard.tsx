@@ -19,7 +19,7 @@ export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
       <div className='flex flex-row my-2 items-center w-full'>
         {/* Icon */}
         <div className='w-1/4 flex justify-center items-center p-2'>
-          <img height='60px' src={image} alt={`${props.id} Logo`} />
+          <img className='max-h-16' src={image} alt={`${props.id} Logo`} />
         </div>
         {/* Content */}
         <div className='w-3/4 pl-5 justify-center items-start flex flex-col text-xl overflow-hidden'>
