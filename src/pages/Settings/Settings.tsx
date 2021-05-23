@@ -33,7 +33,7 @@ const Settings: FC = () => {
   };
 
   return (
-    <div className='content-container flex flex-col w-full dark:text-white'>
+    <div className='content-container overflow-y-auto flex flex-col w-full dark:text-white'>
       <ActionBox name='Change Password' actionName='Change' action={showPwModalHandler} />
       <ActionBox name='Reboot' actionName='Reboot' action={showRebootModalHandler} />
       <ActionBox name='Shutdown' actionName='Shutdown' action={showShutdownModalHandler} />

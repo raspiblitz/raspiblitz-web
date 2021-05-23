@@ -13,12 +13,18 @@ export const Apps = () => {
   }, []);
 
   return (
-    <div className='h-auto w-full dark:text-white transition-colors'>
+    <div className='content-container overflow-y-auto w-full dark:text-white transition-colors'>
       <div className='h-full flex flex-wrap flex-initial'>
         {availableApps.map((app: any, index) => {
           return (
             <div className='w-full md:w-1/3 p-3 h-auto inline-block' key={index}>
-              <AppInstallCard name={app.name} description={app.description} onInstall={install} installed={app.installed} />
+              <AppInstallCard
+                id={app.id}
+                name={app.name}
+                description={app.description}
+                onInstall={install}
+                installed={app.installed}
+              />
             </div>
           );
         })}

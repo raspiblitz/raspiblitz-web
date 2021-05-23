@@ -85,7 +85,7 @@ app.get('/appstatus', (req, res) => {
 });
 
 app.get('/apps', (req, res) => {
-  apps.apps();
+  apps.listApps();
   res.status(200).send();
 });
 

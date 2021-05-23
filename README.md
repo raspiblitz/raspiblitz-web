@@ -24,3 +24,5 @@ To run the mock backend open another terminal, `cd` into [backend-mock](./backen
   - [ISC License](https://github.com/zpao/qrcode.react/blob/master/LICENSE)
 - CSS Loading Spinner from [loading.io](https://loading.io/css/)
   - [CC0 License](https://loading.io/css/)
+- Sphinx Logo from [Sphinx Chat](https://sphinx.chat/)
+  - [MIT License](https://github.com/stakwork/sphinx-relay/blob/master/LICENSE)

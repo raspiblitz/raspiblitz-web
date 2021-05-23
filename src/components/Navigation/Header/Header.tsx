@@ -32,7 +32,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className='flex items-center justify-between h-16 mx-auto px-8 w-full shadow-xl bg-white dark:bg-gray-800 dark:text-gray-300 transition-colors'>
+    <header className='flex items-center justify-between border-b border-gray-300 h-16 mx-auto px-8 w-full shadow-md bg-white dark:bg-gray-800 dark:text-gray-300 transition-colors'>
       <NavLink to='/'>
         <RaspiBlitzLogo className='h-8 w-8 text-black dark:text-white' />
       </NavLink>
