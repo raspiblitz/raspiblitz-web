@@ -79,7 +79,7 @@ const listApps = () => {
   console.log('call to apps');
   util.sendSSE('apps', [
     { id: 'sphinx', name: 'Sphinx Chat', description: 'Chat over Lightning', installed: true },
-    { id: 'btc-rpc-explorer', name: 'BTC ', description: 'Bitcoin RPC Explorer', installed: false },
+    { id: 'btc-rpc-explorer', name: 'BTC RPC Explorer', description: 'Bitcoin RPC Explorer', installed: false },
     { id: 'sphinx', name: '1234567', description: 'djwbdhwbdhwbdbehjcbbhhhwbbcebhcebhcebhcebehbceh', installed: true },
     { id: 'sphinx', name: '9876541', description: 'BDJCBHJWBJCBWJBJWBJCBJCWBJ', installed: false },
     { id: 'sphinx', name: 'Sphinx Chat1', description: 'Chat', installed: false },

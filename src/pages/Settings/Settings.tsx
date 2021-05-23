@@ -33,12 +33,14 @@ const Settings: FC = () => {
   };
 
   return (
-    <div className='content-container overflow-y-auto flex flex-col w-full dark:text-white'>
+    <div className='mobile-container md:content-container overflow-y-auto flex flex-col w-full dark:text-white'>
       <ActionBox name='Change Password' actionName='Change' action={showPwModalHandler} />
       <ActionBox name='Reboot' actionName='Reboot' action={showRebootModalHandler} />
       <ActionBox name='Shutdown' actionName='Shutdown' action={showShutdownModalHandler} />
       {showPwModal && <ChangePwModal onClose={hidePwModalHandler} />}
-      {confirmReboot && <ConfirmModal confirmText='Reboot?' onClose={hideRebootModalHandler} confirmEndpoint='/reboot' />}
+      {confirmReboot && (
+        <ConfirmModal confirmText='Reboot?' onClose={hideRebootModalHandler} confirmEndpoint='/reboot' />
+      )}
       {confirmShutdown && (
         <ConfirmModal confirmText='Shutdown?' onClose={hideShutdownModalHandler} confirmEndpoint='/shutdown' />
       )}
