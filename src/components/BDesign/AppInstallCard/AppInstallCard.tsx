@@ -9,37 +9,42 @@ export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
   const { id } = props;
 
   useEffect(() => {
-    import(`../../../assets/apps/${id}.png`).then((image) => {
-      setImage(image.default);
-    });
+    import(`../../../assets/apps/${id}.png`)
+      .then((image) => {
+        setImage(image.default);
+      })
+      .catch((e) => {
+        // use fallback icon if image for id doesn't exist
+        import('../../../assets/cloud.svg').then((img) => setImage(img.default));
+      });
   }, [id]);
 
   return (
-    <div className='border border-black box-border rounded-md bg-white justify-center px-6 py-4 text-black dark:bg-gray-800 dark:text-white'>
-      <div className='flex flex-row my-2 items-center w-full'>
+    <div className='bd-card'>
+      <div className='h-4/6 flex flex-row mt-2 items-center w-full'>
         {/* Icon */}
         <div className='w-1/4 flex justify-center items-center p-2'>
           <img className='max-h-16' src={image} alt={`${props.id} Logo`} />
         </div>
         {/* Content */}
-        <div className='w-3/4 pl-5 justify-center items-start flex flex-col text-xl overflow-hidden'>
+        <div className='w-3/4 pl-5 justify-center items-start flex flex-col text-xl'>
           <div>{props.name}</div>
           <div className='text-gray-500 text-base overflow-ellipsis dark:text-gray-400'>{props.description}</div>
         </div>
       </div>
-      <div className='flex flex-row gap-2'>
+      <div className='h-2/6 py-2 flex flex-row gap-2'>
         <button className='w-1/2 border border-black flex justify-center items-center p-2 hover:bg-gray-300'>
           <InfoIcon />
           &nbsp; Info
         </button>
         {props.installed && (
-          <button className='w-1/2 border border-black flex justify-center items-center text-white p-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-400'>
+          <button className='w-1/2 border border-black flex justify-center items-center p-2 text-gray-700 bg-yellow-400 hover:bg-yellow-300'>
             <LinkIcon />
             &nbsp;Open
           </button>
         )}
         {!props.installed && (
-          <button className='w-1/2 border border-black flex justify-center items-center p-2 text-black bg-yellow-400 hover:bg-yellow-300'>
+          <button className='w-1/2 border border-black flex justify-center items-center p-2 text-gray-700 bg-yellow-400 hover:bg-yellow-300'>
             <PlusIcon />
             &nbsp;Install
           </button>

@@ -9,3 +9,7 @@
 .input-underline {
   @apply mt-0 block w-full px-0.5 border-0 border-b-2 bg-transparent border-gray-200 focus:ring-0 focus:border-blue-500;
 }
+
+.bd-card {
+  @apply h-full border border-black box-border rounded-md bg-white justify-center px-6 py-4 text-black dark:bg-gray-800 dark:text-white
+}

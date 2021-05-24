@@ -78,17 +78,63 @@ const appStatus = () => {
 const listApps = () => {
   console.log('call to apps');
   util.sendSSE('apps', [
-    { id: 'sphinx', name: 'Sphinx Chat', description: 'Chat over Lightning', installed: true },
+    { id: 'sphinx', name: 'Sphinx Chat', description: 'Chat and pay over the Lightning Network', installed: true },
     { id: 'btc-rpc-explorer', name: 'BTC RPC Explorer', description: 'Bitcoin RPC Explorer', installed: false },
-    { id: 'sphinx', name: '1234567', description: 'djwbdhwbdhwbdbehjcbbhhhwbbcebhcebhcebhcebehbceh', installed: true },
-    { id: 'sphinx', name: '9876541', description: 'BDJCBHJWBJCBWJBJWBJCBJCWBJ', installed: false },
-    { id: 'sphinx', name: 'Sphinx Chat1', description: 'Chat', installed: false },
-    { id: 'sphinx', name: 'Sphinx Chat2', description: 'Chat', installed: true },
-    { id: 'sphinx', name: 'Sphinx Chat3', description: 'Chat', installed: false },
-    { id: 'sphinx', name: 'Sphinx Chat4', description: 'Chat', installed: false },
-    { id: 'sphinx', name: 'Sphinx Chat5', description: 'Chat', installed: true },
-    { id: 'sphinx', name: 'Sphinx Chat6', description: 'Chat', installed: false },
-    { id: 'sphinx', name: 'Sphinx Chat7', description: 'Chat', installed: false }
+    {
+      id: 'rtl',
+      name: 'Ride the Lightning',
+      description: 'Ride The Lightning - A full function web browser app for LND, C-Lightning and Eclair ',
+      installed: true
+    },
+    {
+      id: 'specter',
+      name: 'Specter Desktop',
+      description: 'A desktop GUI for Bitcoin Core optimised to work with hardware wallets ',
+      installed: false
+    },
+    {
+      id: 'btc-pay',
+      name: 'BTCPay Server',
+      description: 'Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor.',
+      installed: false
+    },
+    {
+      id: 'electrs',
+      name: 'ElectRS',
+      description: 'An efficient re-implementation of Electrum Server in Rust',
+      installed: true
+    },
+    {
+      id: 'lndmanage',
+      name: 'lndmanage',
+      description: 'Channel management tool for lightning network daemon (LND) operators.',
+      installed: false
+    },
+    {
+      id: 'joinmarket',
+      name: 'Joinmarket',
+      description: 'CoinJoin implementation with incentive structure to convince people to take part',
+      installed: false
+    },
+    {
+      id: 'lnbits',
+      name: 'LNBits',
+      description: 'LNBits, free and open-source lightning-network wallet/accounts system.',
+      installed: false
+    },
+    {
+      id: 'mempool',
+      name: 'Mempool Space',
+      description:
+        ' An open-source explorer developed for the Bitcoin community, focusing on the emerging transaction fee market to help our transition into a multi-layer ecosystem.',
+      installed: true
+    },
+    {
+      id: 'bos',
+      name: 'Balance of Satoshis',
+      description: 'Tool for working with the balance of your satoshis on LND',
+      installed: false
+    }
   ]);
 };
 

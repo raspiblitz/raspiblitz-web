@@ -16,20 +16,22 @@ export const Apps = () => {
 
   return (
     <div className='mobile-container md:content-container overflow-y-auto w-full dark:text-white transition-colors'>
-      <div className='h-full flex flex-wrap flex-initial'>
-        {availableApps.map((app: any, index) => {
-          return (
-            <div className='w-full lg:w-1/3 p-3 h-auto inline-block' key={index}>
-              <AppInstallCard
-                id={app.id}
-                name={app.name}
-                description={app.description}
-                onInstall={installHandler.bind(null, app.id)}
-                installed={app.installed}
-              />
-            </div>
-          );
-        })}
+      <div className='h-full flex flex-wrap flex-1'>
+        {availableApps
+          .sort((app: any) => (app.installed ? -1 : 1))
+          .map((app: any, index) => {
+            return (
+              <div className='w-full lg:w-1/3 p-3 h-auto inline-block' key={index}>
+                <AppInstallCard
+                  id={app.id}
+                  name={app.name}
+                  description={app.description}
+                  onInstall={installHandler.bind(null, app.id)}
+                  installed={app.installed}
+                />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
