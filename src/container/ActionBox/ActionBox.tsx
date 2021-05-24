@@ -7,7 +7,7 @@ const ActionBox: FC<ActionBoxProps> = (props) => {
         <div className='flex justify-between'>
           <div className='font-bold w-1/2 xl:w-2/3'>{props.name}</div>
           <button
-            className='w-1/2 xl:w-1/3 rounded border-2 border-blue-300 hover:border-blue-500 px-2 outline-none focus:outline-none'
+            className='w-1/2 xl:w-1/3 rounded-md border hover:border-black  bg-bd-yellow-dark hover:bg-bd-yellow-light px-2 outline-none focus:outline-none'
             onClick={props.action}
           >
             {props.actionName}
