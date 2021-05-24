@@ -5,8 +5,8 @@ import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 export const SideDrawer: FC = () => {
-  const navLinkClasses = 'inline-block py-4 w-full dark:text-gray-300 flex items-center justify-center';
-  const navLinkActiveClasses = 'text-blue-700 dark:text-blue-400';
+  const navLinkClasses = 'inline-block py-4 w-full dark:text-gray-300 flex items-center justify-center opacity-50';
+  const navLinkActiveClasses = 'text-blue-700 dark:text-blue-400 opacity-100';
 
   return (
     <nav className='hidden md:inline-block content-container md:w-2/12 xl:w-2/12 px-2 text-center pt-8 shadow-lg bg-white dark:bg-gray-800 transition-colors'>

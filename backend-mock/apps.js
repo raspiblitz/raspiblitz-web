@@ -125,8 +125,7 @@ const listApps = () => {
     {
       id: 'mempool',
       name: 'Mempool Space',
-      description:
-        ' An open-source explorer developed for the Bitcoin community, focusing on the emerging transaction fee market to help our transition into a multi-layer ecosystem.',
+      description: 'An open-source explorer developed for the Bitcoin community.',
       installed: true
     },
     {

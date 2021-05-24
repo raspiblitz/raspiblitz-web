@@ -11,5 +11,5 @@
 }
 
 .bd-card {
-  @apply h-full border border-black box-border rounded-md bg-white justify-center px-6 py-4 text-black dark:bg-gray-800 dark:text-white
+  @apply h-full shadow-xl rounded-md bg-white justify-center px-6 py-4 text-black  dark:text-white
 }

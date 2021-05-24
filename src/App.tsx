@@ -12,7 +12,7 @@ import AppContextProvider from './store/app-context';
 const App = () => {
   return (
     <AppContextProvider>
-      <div className='bg-gray-200 dark:bg-gray-600'>
+      <div className='bg-gray-100 dark:bg-gray-700'>
         <BrowserRouter>
           <Header></Header>
           <div className='flex'>
