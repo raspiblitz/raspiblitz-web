@@ -5,7 +5,6 @@ import Header from './components/Navigation/Header/Header';
 import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
 import Apps from './pages/Apps/Apps';
 import Home from './pages/Home/Home';
-import New from './pages/New/New';
 import Settings from './pages/Settings/Settings';
 import AppContextProvider from './store/app-context';
 
@@ -29,9 +28,6 @@ const App = () => {
               </Route>
               <Route path='/settings'>
                 <Settings />
-              </Route>
-              <Route path='/new'>
-                <New />
               </Route>
             </Switch>
           </div>

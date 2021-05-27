@@ -15,14 +15,14 @@ export const Apps = () => {
   }, []);
 
   return (
-    <div className='mobile-container md:content-container overflow-y-auto w-full dark:text-white transition-colors'>
+    <div className='mobile-container md:content-container w-full dark:text-white overflow-y-auto transition-colors'>
       <div className='h-full flex flex-wrap flex-1'>
-        <div className='block w-full text-xl font-bold p-3 dark:text-gray-200'>Installed</div>
+        <div className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>Installed</div>
         {availableApps
           .filter((app: any) => app.installed)
           .map((app: any, index) => {
             return (
-              <div className='w-full lg:w-1/3 p-3 h-auto inline-block' key={index}>
+              <div className='w-full lg:w-1/3 p-3' key={index}>
                 <AppInstallCard
                   id={app.id}
                   name={app.name}
@@ -33,12 +33,12 @@ export const Apps = () => {
               </div>
             );
           })}
-        <div className='block w-full text-xl font-bold p-3 dark:text-gray-200'>Available Apps</div>
+        <div className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>Available Apps</div>
         {availableApps
           .filter((app: any) => !app.installed)
           .map((app: any, index) => {
             return (
-              <div className='w-full lg:w-1/3 p-3 h-auto inline-block' key={index}>
+              <div className='w-full lg:w-1/3 p-3' key={index}>
                 <AppInstallCard
                   id={app.id}
                   name={app.name}

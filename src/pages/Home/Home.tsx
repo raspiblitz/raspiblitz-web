@@ -91,9 +91,9 @@ export const Home: FC = (props) => {
             syncStatus={homeState.syncStatus}
             send={showSendModalHandler}
             receive={showReceiveHandler}
-          ></Wallet>
-          <Statistics></Statistics>
-          <AppBox apps={appStatus}></AppBox>
+          />
+          <Statistics />
+          <AppBox apps={appStatus} />
         </div>
       </div>
     </>
