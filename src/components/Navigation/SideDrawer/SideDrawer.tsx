@@ -12,15 +12,15 @@ export const SideDrawer: FC = () => {
     <nav className='hidden md:inline-block content-container md:w-2/12 xl:w-2/12 px-2 pt-8 shadow-lg bg-white dark:bg-gray-800 transition-colors'>
       <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <HomeLogo className='inline-block w-8 h-8' />
-        <div className='w-1/2 text-center mx-1'>Home</div>
+        <div className='w-1/2 mx-3'>Home</div>
       </NavLink>
       <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <AppIcon className='inline-block w-8 h-8' />
-        <div className='w-1/2 text-center mx-1'>Apps</div>
+        <div className='w-1/2 mx-3'>Apps</div>
       </NavLink>
       <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
         <SettingsIcon className='inline-block w-8 h-8' />
-        <div className='w-1/2 mx-1 text-center'>Settings</div>
+        <div className='w-1/2 mx-3'>Settings</div>
       </NavLink>
     </nav>
   );
