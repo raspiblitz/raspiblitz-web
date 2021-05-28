@@ -1,19 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import AppBox from '../../components/AppBox/AppBox';
+import BTCPay from '../../assets/apps/btc-pay.png';
 import AppStatusCard from '../../components/BDesign/AppStatusCard/AppStatusCard';
+import BitcoinCard from '../../components/BDesign/BitcoinCard/BitcoinCard';
 import ConnectionCard from '../../components/BDesign/ConnectionCard/ConnectionCard';
+import LightningCard from '../../components/BDesign/LightningCard/LightningCard';
 import TransactionCard from '../../components/BDesign/TransactionCard/TransactionCard';
 import WalletCard from '../../components/BDesign/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
-import Statistics from '../../components/Statistics/Statistics';
 import TransactionDetailModal from '../../components/Wallet/TransactionList/TransactionDetailModal/TransactionDetailModal';
-import Wallet from '../../components/Wallet/Wallet';
 import useSSE from '../../hooks/use-sse';
-import BTCPay from '../../assets/apps/btc-pay.png';
-import LightningCard from '../../components/BDesign/LightningCard/LightningCard';
-import BitcoinCard from '../../components/BDesign/BitcoinCard/BitcoinCard';
 
 export const Home: FC = (props) => {
   const { homeState, transactions, appStatus } = useSSE();
@@ -91,19 +88,19 @@ export const Home: FC = (props) => {
       {detailModal}
       <div className='mobile-container md:content-container overflow-y-auto w-full dark:text-white transition-colors'>
         <div className={`h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}>
-          <div className='col-span-2 row-span-2'>
+          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <WalletCard />
           </div>
-          <div className='col-span-2 row-span-4'>
-            <TransactionCard />
+          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
+            <TransactionCard transactions={transactions} showDetails={showDetailHandler} />
           </div>
-          <div className='col-span-2 row-span-2'>
+          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <ConnectionCard />
           </div>
-          <div className='col-span-2 row-span-2'>
+          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <BitcoinCard />
           </div>
-          <div className='col-span-2 row-span-2'>
+          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <LightningCard />
           </div>
           {appStatus.map((app: any, index: number) => {

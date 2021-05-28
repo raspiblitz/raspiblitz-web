@@ -121,7 +121,7 @@ const listTransactions = () => {
       amount: -4.001234,
       type: 'onchain',
       time: 1620222506,
-      comment: 'LNsend 2'
+      comment: 'LAST'
     }
   ]);
 };
