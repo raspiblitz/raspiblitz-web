@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import Transaction from '../../Wallet/TransactionList/Transaction/Transaction';
+import { ReactComponent as ArrowDownIcon } from '../../../assets/arrow-down.svg';
 
 export const TransactionCard: FC<TransactionCardProps> = (props) => {
   const MAX_ITEMS = 5;
@@ -17,7 +18,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
 
   return (
     <div className='p-5 h-full'>
-      <div className='bd-card'>
+      <div className='bd-card flex flex-col justify-center'>
         <div className='font-bold text-lg'>Transactions</div>
         <ul>
           {currentPage.map((transaction: any, index: number) => {
@@ -37,16 +38,16 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
           <button
             onClick={pageBackwardHandler}
             disabled={page === 0}
-            className='bg-black text-white p-2 rounded disabled:opacity-50'
+            className='bg-black text-white p-2 rounded flex disabled:opacity-50'
           >
-            Backward
+            <ArrowDownIcon className='h-6 w-6 transform rotate-90' />
           </button>
           <button
-            className='bg-black text-white p-2 rounded disabled:opacity-50'
+            className='bg-black text-white p-2 rounded flex disabled:opacity-50'
             onClick={pageForwardHandler}
             disabled={page * MAX_ITEMS + MAX_ITEMS >= props.transactions.length}
           >
-            Forward
+            <ArrowDownIcon className='h-6 w-6 transform -rotate-90' />
           </button>
         </div>
       </div>

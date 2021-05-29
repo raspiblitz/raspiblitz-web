@@ -105,9 +105,8 @@ export const Home: FC = (props) => {
           </div>
           {appStatus.map((app: any, index: number) => {
             return (
-              <div className='col-span-2 md:col-span-1 row-span-1'>
+              <div key={index} className='col-span-2 md:col-span-1 row-span-1'>
                 <AppStatusCard
-                  key={index}
                   name={app.name}
                   description='A desktop GUI for Bitcoin Core optimised to work with hardware wallets'
                   icon={BTCPay}
