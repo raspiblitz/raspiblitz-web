@@ -9,7 +9,7 @@ const listTransactions = () => {
       type: 'onchain',
       amount: -1.00232,
       time: 1610329986,
-      comment: 'Lightning 123455555555555'
+      comment: 'last Lightning 123455555555555'
     },
     {
       id: 'blablabla',
@@ -120,8 +120,8 @@ const listTransactions = () => {
       category: 'send',
       amount: -4.001234,
       type: 'onchain',
-      time: 1620222506,
-      comment: 'LAST'
+      time: 1622358195,
+      comment: 'FIRST'
     }
   ]);
 };

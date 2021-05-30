@@ -14,7 +14,8 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
     setPage((p) => p - 1);
   };
 
-  const currentPage = props.transactions.slice(page * MAX_ITEMS, page * MAX_ITEMS + MAX_ITEMS);
+  const currentPage = props.transactions
+    .slice(page * MAX_ITEMS, page * MAX_ITEMS + MAX_ITEMS);
 
   return (
     <div className='p-5 h-full'>

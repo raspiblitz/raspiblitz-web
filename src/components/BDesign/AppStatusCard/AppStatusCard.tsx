@@ -12,8 +12,8 @@ export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
           </div>
           {/* Content */}
           <div className='w-3/4 pl-5 justify-center items-start flex flex-col text-xl'>
-            <div>{props.name}</div>
-            <div className='text-gray-500 text-base'>{props.description}</div>
+            <div className='dark:text-white'>{props.name}</div>
+            <div className='text-gray-500 dark:text-gray-300 text-base'>{props.description}</div>
             <div className={`pt-3 ${statusColor}`}>{props.status}</div>
           </div>
         </div>

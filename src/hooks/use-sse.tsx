@@ -54,7 +54,8 @@ const useSSE = () => {
   };
 
   const setTx = (event: any) => {
-    setTransactions(JSON.parse(event.data));
+    const t = JSON.parse(event.data).sort((a: any, b: any) => b.time - a.time);
+    setTransactions(t);
   };
 
   const setSyncStatus = (event: any) => {
