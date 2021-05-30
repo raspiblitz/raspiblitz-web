@@ -91,16 +91,16 @@ export const Home: FC = (props) => {
           <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <WalletCard onReceive={showReceiveHandler} onSend={showSendModalHandler} />
           </div>
-          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
             <TransactionCard transactions={transactions} showDetails={showDetailHandler} />
           </div>
-          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <ConnectionCard />
           </div>
-          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <BitcoinCard />
           </div>
-          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <LightningCard />
           </div>
           {appStatus.map((app: any, index: number) => {
