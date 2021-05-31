@@ -8,9 +8,17 @@ Built with React & Tailwind CSS.
 
 ## Development
 
-Run `yarn install` & then `yarn start` to start the development server.
+### Run Frontend & mock backend
+
+Run `yarn install` & then `yarn start` to start the development server for the Frontend.
 
 To run the mock backend open another terminal, `cd` into [backend-mock](./backend-mock) and run `yarn install` then `yarn start` in that folder.
+
+### Run storybook
+
+If you haven't done so already, run `yarn install` to install the dependencies.
+
+Then, run `yarn storybook` to start storybook.
 
 ## Credits & Licenses
 
@@ -24,7 +32,18 @@ To run the mock backend open another terminal, `cd` into [backend-mock](./backen
   - [ISC License](https://github.com/zpao/qrcode.react/blob/master/LICENSE)
 - CSS Loading Spinner from [loading.io](https://loading.io/css/)
   - [CC0 License](https://loading.io/css/)
+
+### App logos
+
 - Sphinx Logo from [Sphinx Chat](https://sphinx.chat/)
   - [MIT License](https://github.com/stakwork/sphinx-relay/blob/master/LICENSE)
 - BTC RPC Logo from [Bitcoin Explorer](https://bitcoinexplorer.org)
   - [MIT License](https://github.com/janoside/btc-rpc-explorer)
+- BTCPay Logo from [btcpayserver](https://github.com/btcpayserver/btcpayserver)
+  - [MIT License](https://github.com/btcpayserver/btcpayserver/blob/master/LICENSE)
+- LNDManage Logo from [lndmanage](https://github.com/bitromortac/lndmanage)
+  - [MIT License](https://github.com/bitromortac/lndmanage/blob/master/LICENSE)
+- RTL Logo from [RTL](https://github.com/Ride-The-Lightning/RTL)
+  - [MIT License](https://github.com/Ride-The-Lightning/RTL/blob/master/LICENSE)
+- Specter Logo from [specter-desktop](https://github.com/cryptoadvance/specter-desktop)
+  - [MIT License](https://github.com/cryptoadvance/specter-desktop/blob/master/LICENSE)
