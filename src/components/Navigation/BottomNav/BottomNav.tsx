@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as AppIcon } from '../../../assets/apps.svg';
 import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
-const BottomNav = () => {
+const BottomNav: FC = () => {
   const navLinkClasses = 'dark:text-gray-300';
   const navLinkActiveClasses = 'text-yellow-500 dark:text-yellow-500';
   const iconClasses = 'w-8 h-8 mx-auto';

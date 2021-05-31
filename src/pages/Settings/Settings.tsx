@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import ChangePwModal from '../../components/ChangePwModal/ChangePwModal';
+import ChangePwModal from '../../components/SettingsComponents/ChangePwModal/ChangePwModal';
 import ConfirmModal from '../../components/Shared/ConfirmModal/ConfirmModal';
 import ActionBox from '../../container/ActionBox/ActionBox';
 

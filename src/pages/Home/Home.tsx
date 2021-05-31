@@ -1,11 +1,15 @@
 import { FC, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import AppBox from '../../components/AppBox/AppBox';
+import BTCPay from '../../assets/apps/btc-pay.png';
+import AppStatusCard from '../../components/HomeComponents/AppStatusCard/AppStatusCard';
+import BitcoinCard from '../../components/HomeComponents/BitcoinCard/BitcoinCard';
+import ConnectionCard from '../../components/HomeComponents/ConnectionCard/ConnectionCard';
+import LightningCard from '../../components/HomeComponents/LightningCard/LightningCard';
+import TransactionCard from '../../components/HomeComponents/TransactionCard/TransactionCard';
+import TransactionDetailModal from '../../components/HomeComponents/TransactionCard/TransactionDetailModal/TransactionDetailModal';
+import WalletCard from '../../components/HomeComponents/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
-import Statistics from '../../components/Statistics/Statistics';
-import TransactionDetailModal from '../../components/Wallet/TransactionList/TransactionDetailModal/TransactionDetailModal';
-import Wallet from '../../components/Wallet/Wallet';
 import useSSE from '../../hooks/use-sse';
 
 export const Home: FC = (props) => {
@@ -75,25 +79,42 @@ export const Home: FC = (props) => {
       document.getElementById('modal-root')!
     );
 
+  const gridRows = 6 + appStatus.length / 4;
+
   return (
     <>
       {receiveModal}
       {sendModal}
       {detailModal}
       <div className='mobile-container md:content-container overflow-y-auto w-full dark:text-white transition-colors'>
-        <div className='h-full grid gap-4 grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3'>
-          <Wallet
-            isLoading={isLoading}
-            onchainBalance={homeState.onchainBalance}
-            lnBalance={homeState.lnBalance}
-            transactions={transactions}
-            showDetails={showDetailHandler}
-            syncStatus={homeState.syncStatus}
-            send={showSendModalHandler}
-            receive={showReceiveHandler}
-          />
-          <Statistics />
-          <AppBox apps={appStatus} />
+        <div className={`h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}>
+          <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+            <WalletCard onReceive={showReceiveHandler} onSend={showSendModalHandler} />
+          </div>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
+            <TransactionCard transactions={transactions} showDetails={showDetailHandler} />
+          </div>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+            <ConnectionCard />
+          </div>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+            <BitcoinCard />
+          </div>
+          <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+            <LightningCard />
+          </div>
+          {appStatus.map((app: any, index: number) => {
+            return (
+              <div key={index} className='col-span-2 md:col-span-1 row-span-1'>
+                <AppStatusCard
+                  name={app.name}
+                  description='A desktop GUI for Bitcoin Core optimised to work with hardware wallets'
+                  icon={BTCPay}
+                  status={app.status}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

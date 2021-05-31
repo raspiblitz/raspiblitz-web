@@ -1,8 +1,22 @@
-const util = require('./util');
+import { Meta, Story } from '@storybook/react';
+import TransactionCard, { TransactionCardProps } from './TransactionCard';
 
-const listTransactions = () => {
-  console.log('call to transactions');
-  util.sendSSE('transactions', [
+export default {
+  title: 'HomeComponents/TransactionCard',
+  component: TransactionCard
+} as Meta;
+
+const Template: Story<TransactionCardProps> = (args) => <TransactionCard {...args} />;
+
+export const NoTransactions = Template.bind({});
+NoTransactions.args = {
+  transactions: [],
+  showDetails: () => {}
+};
+
+export const WithTransactions = Template.bind({});
+WithTransactions.args = {
+  transactions: [
     {
       id: '7163dd4888b617e7275d07c0094dd7c3e8caab6cae2e087be8d81929b083fcfa',
       category: 'send',
@@ -123,7 +137,6 @@ const listTransactions = () => {
       time: 1622358195,
       comment: 'FIRST'
     }
-  ]);
+  ],
+  showDetails: () => {}
 };
-
-module.exports = { listTransactions };

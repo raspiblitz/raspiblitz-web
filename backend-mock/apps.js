@@ -83,19 +83,19 @@ const listApps = () => {
     {
       id: 'rtl',
       name: 'Ride the Lightning',
-      description: 'Ride The Lightning - A full function web browser app for LND, C-Lightning and Eclair ',
+      description: 'Ride The Lightning - A full function web browser app for LND, C-Lightning and Eclair',
       installed: true
     },
     {
       id: 'specter',
       name: 'Specter Desktop',
-      description: 'A desktop GUI for Bitcoin Core optimised to work with hardware wallets ',
+      description: 'A desktop GUI for Bitcoin Core optimised to work with hardware wallets',
       installed: false
     },
     {
       id: 'btc-pay',
       name: 'BTCPay Server',
-      description: 'Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor.',
+      description: 'Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor',
       installed: false
     },
     {
@@ -107,7 +107,7 @@ const listApps = () => {
     {
       id: 'lndmanage',
       name: 'lndmanage',
-      description: 'Channel management tool for lightning network daemon (LND) operators.',
+      description: 'Channel management tool for lightning network daemon (LND) operators',
       installed: false
     },
     {
@@ -119,13 +119,13 @@ const listApps = () => {
     {
       id: 'lnbits',
       name: 'LNBits',
-      description: 'LNBits, free and open-source lightning-network wallet/accounts system.',
+      description: 'LNBits, free and open-source lightning-network wallet/accounts system',
       installed: false
     },
     {
       id: 'mempool',
       name: 'Mempool Space',
-      description: 'An open-source explorer developed for the Bitcoin community.',
+      description: 'An open-source explorer developed for the Bitcoin community',
       installed: true
     },
     {

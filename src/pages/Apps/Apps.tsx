@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import AppInstallCard from '../../components/BDesign/AppInstallCard/AppInstallCard';
+import AppInstallCard from '../../components/AppsComponents/AppInstallCard/AppInstallCard';
 import useSSE from '../../hooks/use-sse';
 
 export const Apps = () => {
