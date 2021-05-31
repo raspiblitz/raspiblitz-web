@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import RTL from '../../assets/apps/rtl.png';
+import RTL from '../../../assets/apps/rtl.png';
 import AppStatusCard, { AppStatusCardProps } from './AppStatusCard';
 
 export default {
