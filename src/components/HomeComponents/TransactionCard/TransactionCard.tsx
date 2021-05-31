@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { ReactComponent as ArrowDownIcon } from '../../../assets/arrow-down.svg';
-import Transaction from '../TransactionList/Transaction/Transaction';
+import Transaction from './Transaction/Transaction';
 
 export const TransactionCard: FC<TransactionCardProps> = (props) => {
   const MAX_ITEMS = 6;

@@ -6,7 +6,7 @@ import BitcoinCard from '../../components/HomeComponents/BitcoinCard/BitcoinCard
 import ConnectionCard from '../../components/HomeComponents/ConnectionCard/ConnectionCard';
 import LightningCard from '../../components/HomeComponents/LightningCard/LightningCard';
 import TransactionCard from '../../components/HomeComponents/TransactionCard/TransactionCard';
-import TransactionDetailModal from '../../components/HomeComponents/TransactionList/TransactionDetailModal/TransactionDetailModal';
+import TransactionDetailModal from '../../components/HomeComponents/TransactionCard/TransactionDetailModal/TransactionDetailModal';
 import WalletCard from '../../components/HomeComponents/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';

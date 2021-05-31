@@ -21,7 +21,7 @@ export const Transaction: FC<TransactionProps> = (props) => {
     <li className='text-center px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-600' onClick={props.onClick}>
       <div className='flex justify-center items-center'>
         {icon}
-        <div className='w-4/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap'>
+        <div className='w-4/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap text-left'>
           {props.comment || 'Transaction'}
         </div>
         <div className={`w-6/12 ${color}`}>
