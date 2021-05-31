@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import BTCPay from '../../assets/apps/btc-pay.png';
-import AppStatusCard from '../../components/BDesign/AppStatusCard/AppStatusCard';
-import BitcoinCard from '../../components/BDesign/BitcoinCard/BitcoinCard';
-import ConnectionCard from '../../components/BDesign/ConnectionCard/ConnectionCard';
-import LightningCard from '../../components/BDesign/LightningCard/LightningCard';
-import TransactionCard from '../../components/BDesign/TransactionCard/TransactionCard';
-import WalletCard from '../../components/BDesign/WalletCard/WalletCard';
+import AppStatusCard from '../../components/HomeComponents/AppStatusCard/AppStatusCard';
+import BitcoinCard from '../../components/HomeComponents/BitcoinCard/BitcoinCard';
+import ConnectionCard from '../../components/HomeComponents/ConnectionCard/ConnectionCard';
+import LightningCard from '../../components/HomeComponents/LightningCard/LightningCard';
+import TransactionCard from '../../components/HomeComponents/TransactionCard/TransactionCard';
+import TransactionDetailModal from '../../components/HomeComponents/TransactionList/TransactionDetailModal/TransactionDetailModal';
+import WalletCard from '../../components/HomeComponents/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
-import TransactionDetailModal from '../../components/Wallet/TransactionList/TransactionDetailModal/TransactionDetailModal';
 import useSSE from '../../hooks/use-sse';
 
 export const Home: FC = (props) => {

@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { createPortal } from 'react-dom';
-import ModalDialog from '../../container/ModalDialog/ModalDialog';
-import LoadingSpinner from '../Shared/LoadingSpinner/LoadingSpinner';
+import ModalDialog from '../../../container/ModalDialog/ModalDialog';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 const ChangePwModal: FC<ChangePwModalProps> = (props) => {
   const [oldPassword, setOldPassword] = useState('');
