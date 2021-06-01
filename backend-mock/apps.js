@@ -4,75 +4,31 @@ const appStatus = () => {
   console.log('call to appstatus');
   util.sendSSE('appstatus', [
     {
-      name: 'Mempool Space',
+      id: 'specter',
+      name: 'Specter Desktop',
       status: 'online'
     },
     {
-      name: 'ElectRS',
+      id: 'sphinx',
+      name: 'Sphinx Chat',
       status: 'online'
     },
     {
-      name: 'ThunderHub',
+      id: 'btc-pay',
+      name: 'BTCPay Server',
       status: 'offline'
     },
     {
-      name: 'LIT',
+      id: 'rtl',
+      name: 'Ride the Lightning',
       status: 'online'
     },
     {
+      id: 'bos',
       name: 'Balance of Satoshis',
-      status: 'online'
+      status: 'offline'
     }
   ]);
-
-  setTimeout(() => {
-    util.sendSSE('appstatus', [
-      {
-        name: 'Mempool Space',
-        status: 'online'
-      },
-      {
-        name: 'ElectRS',
-        status: 'online'
-      },
-      {
-        name: 'ThunderHub',
-        status: 'offline'
-      },
-      {
-        name: 'LIT',
-        status: 'offline'
-      },
-      {
-        name: 'Balance of Satoshis',
-        status: 'offline'
-      },
-      {
-        name: 'Balance of Satoshis',
-        status: 'offline'
-      },
-      {
-        name: 'Balance of Satoshis',
-        status: 'offline'
-      },
-      {
-        name: 'Balance of Satoshis',
-        status: 'offline'
-      },
-      {
-        name: 'Balance of Satoshis',
-        status: 'offline'
-      },
-      {
-        name: 'Balance of Satoshis',
-        status: 'offline'
-      },
-      {
-        name: 'Balance of Satoshis',
-        status: 'offline'
-      }
-    ]);
-  }, 5000);
 };
 
 const listApps = () => {

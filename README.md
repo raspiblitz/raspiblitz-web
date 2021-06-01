@@ -4,7 +4,7 @@ A mobile-first responsive Web UI for the [RaspiBlitz](https://github.com/rootzol
 
 In collaboration with [Bitcoin Design](https://bitcoin.design/).
 
-Built with React & Tailwind CSS.
+Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.com/).
 
 ## Development
 

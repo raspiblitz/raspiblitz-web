@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import BTCPay from '../../assets/apps/btc-pay.png';
 import AppStatusCard from '../../components/HomeComponents/AppStatusCard/AppStatusCard';
 import BitcoinCard from '../../components/HomeComponents/BitcoinCard/BitcoinCard';
 import ConnectionCard from '../../components/HomeComponents/ConnectionCard/ConnectionCard';
@@ -106,12 +105,7 @@ export const Home: FC = (props) => {
           {appStatus.map((app: any, index: number) => {
             return (
               <div key={index} className='col-span-2 md:col-span-1 row-span-1'>
-                <AppStatusCard
-                  name={app.name}
-                  description='A desktop GUI for Bitcoin Core optimised to work with hardware wallets'
-                  icon={BTCPay}
-                  status={app.status}
-                />
+                <AppStatusCard id={app.id} name={app.name} status={app.status} />
               </div>
             );
           })}

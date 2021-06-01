@@ -1,7 +1,9 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as MenuIcon } from '../../../assets/menu.svg';
-import { ReactComponent as RaspiBlitzLogo } from '../../../assets/RaspiBlitz_Logo_Icon.svg';
+import { ReactComponent as RaspiBlitzMobileLogo } from '../../../assets/RaspiBlitz_Logo_Icon.svg';
+import { ReactComponent as RaspiBlitzLogo } from '../../../assets/RaspiBlitz_Logo_Main.svg';
+import { ReactComponent as RaspiBlitzLogoDark } from '../../../assets/RaspiBlitz_Logo_Main_Negative.svg';
 import DropdownMenu from './DropdownMenu/DropdownMenu';
 
 const Header: FC = () => {
@@ -34,9 +36,11 @@ const Header: FC = () => {
   return (
     <header className='flex items-center justify-between border-b border-gray-300 h-16 mx-auto px-8 w-full shadow-md bg-white dark:bg-gray-800 dark:text-gray-300 transition-colors'>
       <NavLink to='/'>
-        <RaspiBlitzLogo className='h-8 w-8 text-black dark:text-white' />
+        <RaspiBlitzMobileLogo className='h-8 w-8 md:hidden text-black dark:text-white' />
+        <RaspiBlitzLogo className='h-8 hidden md:block md:dark:hidden' />
+        <RaspiBlitzLogoDark className='h-8 hidden md:dark:block' />
       </NavLink>
-      <div className='font-bold text-xl'>Raspiblitz</div>
+      <div className='font-bold text-xl'>myBlitz</div>
       <div className='relative'>
         <MenuIcon ref={menu} onClick={showDropdownHandler} className='w-8 h-8' />
         {showDropdown && <DropdownMenu ref={dropdown} />}

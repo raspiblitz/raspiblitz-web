@@ -34,18 +34,18 @@ export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
       </div>
       <div className='h-2/6 py-2 flex flex-row gap-2'>
         {props.installed && (
-          <button className='w-1/2 shadow-xl flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'>
+          <button className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'>
             <LinkIcon />
             &nbsp;Open
           </button>
         )}
         {!props.installed && (
-          <button className='w-1/2 shadow-xl flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'>
+          <button className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'>
             <PlusIcon />
             &nbsp;Install
           </button>
         )}
-        <button className='w-1/2 shadow-xl flex justify-center items-center p-2 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-300 dark:hover:text-black'>
+        <button className='w-1/2 shadow-md flex justify-center items-center p-2 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-300 dark:hover:text-black'>
           <InfoIcon />
           &nbsp; Info
         </button>

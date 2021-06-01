@@ -9,9 +9,9 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
     <div className='p-5 h-full'>
       <div className='bd-card h-full'>
         <div className='text-black flex flex-col lg:flex-row flex-wrap p-5'>
-          <div className='bg-yellow-300 w-full rounded-xl shadow-md p-4'>
+          <div className='bg-yellow-300 w-full rounded-xl p-4'>
             <div className='w-full flex flex-col'>
-              <span className='text-xl'>Wallet</span>
+              <span className='text-xl'>Wallet Balance</span>
               <span className='text-2xl font-bold'>1.21212121 BTC</span>
             </div>
             <div className='w-full flex flex-col'>
@@ -19,14 +19,14 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 <ChainIcon className='inline h-5 w-5' />
                 &nbsp;On-Chain
               </span>
-              <span className='text-lg font-bold'>1.21212121 BTC</span>
+              <span className='text-lg font-bold'>0.10101010 BTC</span>
             </div>
             <div className='w-full flex flex-col'>
               <span>
                 <LightningIcon className='inline h-5 w-5' />
                 &nbsp;Lightning
               </span>
-              <span className='text-lg font-bold'>1.21212121 BTC</span>
+              <span className='text-lg font-bold'>1.10101010 BTC</span>
             </div>
           </div>
         </div>
