@@ -20,7 +20,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
     <div className='p-5 h-full'>
       <div className='bd-card flex flex-col'>
         <div className='font-bold text-lg'>Transactions</div>
-        <ul>
+        <ul className='mt-auto'>
           {currentPage.map((transaction: any, index: number) => {
             return (
               <Transaction

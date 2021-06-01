@@ -31,6 +31,9 @@ export const Transaction: FC<TransactionProps> = (props) => {
       </div>
 
       <div className='text-sm'>{new Date(props.time * 1000).toLocaleString()}</div>
+      <div className='w-11/12 h-1 mx-auto'>
+        <div className='border border-b border-gray-200' />
+      </div>
     </li>
   );
 };
