@@ -1,6 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import { AppContext } from '../../../store/app-context';
 
-export const LightningCard: FC = () => {
+export const LightningCard: FC<LightningCardProps> = (props) => {
+  const appCtx = useContext(AppContext);
+
+  const balance = appCtx.unit === 'BTC' ? props.channelBalance : props.channelBalance * 100_000_000;
+
   return (
     <div className='p-5 h-full'>
       <div className='bd-card'>
@@ -8,21 +13,23 @@ export const LightningCard: FC = () => {
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
             <h4 className='text-sm text-gray-500'>Version</h4>
-            <div>LND 0.12.1-beta</div>
+            <div>{props.version}</div>
           </div>
           <div className='w-1/2'>
             <h4 className='text-sm text-gray-500'>Status</h4>
-            <div>Online</div>
+            <div>{props.status}</div>
           </div>
         </div>
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
             <h4 className='text-sm text-gray-500'>Channels</h4>
-            <div>10/11</div>
+            <div>{`${props.channelOnline} / ${props.channelTotal}`}</div>
           </div>
           <div className='w-1/2'>
             <h4 className='text-sm text-gray-500'>Channcel Balance</h4>
-            <div>2020202020 Sats</div>
+            <div>
+              {balance.toLocaleString()} {appCtx.unit}
+            </div>
           </div>
         </div>
       </div>
@@ -31,3 +38,11 @@ export const LightningCard: FC = () => {
 };
 
 export default LightningCard;
+
+export interface LightningCardProps {
+  version: string;
+  status: string;
+  channelOnline: number;
+  channelTotal: number;
+  channelBalance: number;
+}

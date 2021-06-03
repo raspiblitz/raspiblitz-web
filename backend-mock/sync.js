@@ -9,7 +9,14 @@ const syncStatus = () => {
     currBlock: 202020,
     maxBlock: 500000,
     channelOnline: 3,
-    channelTotal: 4
+    channelTotal: 4,
+    btcVersion: 'bitcoin v0.21.1',
+    btcStatus: 'Syncing',
+    btcNetwork: 'mainnet',
+    lnVersion: 'LND 0.12.1-beta',
+    lnStatus: 'online',
+    torAddress: 'pg6mmjiyjmcrsslvykfwnntlaru7p5svn6y2ymmju6nubxndf4pscryd.onion',
+    sshAddress: 'admin@192.168.0.1'
   });
 
   setTimeout(() => {

@@ -88,19 +88,36 @@ export const Home: FC = (props) => {
       <div className='mobile-container md:content-container overflow-y-auto w-full dark:text-white transition-colors'>
         <div className={`h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}>
           <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
-            <WalletCard onchainBalance={homeState.onchainBalance} lnBalance={homeState.lnBalance} onReceive={showReceiveHandler} onSend={showSendModalHandler} />
+            <WalletCard
+              onchainBalance={homeState.onchainBalance}
+              lnBalance={homeState.lnBalance}
+              onReceive={showReceiveHandler}
+              onSend={showSendModalHandler}
+            />
           </div>
           <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
             <TransactionCard transactions={transactions} showDetails={showDetailHandler} />
           </div>
           <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
-            <ConnectionCard />
+            <ConnectionCard torAddress={homeState.torAddress} sshAddress={homeState.sshAddress} />
           </div>
           <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
-            <BitcoinCard />
+            <BitcoinCard
+              version={homeState.btcVersion}
+              network={homeState.btcNetwork}
+              status={homeState.btcStatus}
+              currBlock={homeState.currBlock}
+              maxBlock={homeState.maxBlock}
+            />
           </div>
           <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
-            <LightningCard />
+            <LightningCard
+              version={homeState.lnVersion}
+              status={homeState.lnStatus}
+              channelOnline={homeState.channelOnline}
+              channelTotal={homeState.channelTotal}
+              channelBalance={homeState.lnBalance}
+            />
           </div>
           {appStatus.map((app: any, index: number) => {
             return (

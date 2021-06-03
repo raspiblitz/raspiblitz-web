@@ -12,7 +12,14 @@ const useSSE = () => {
     currBlock: 0,
     maxBlock: 0,
     channelOnline: 0,
-    channelTotal: 0
+    channelTotal: 0,
+    btcVersion: '',
+    btcStatus: '',
+    btcNetwork: '',
+    lnVersion: '',
+    lnStatus: '',
+    torAddress: '',
+    sshAddress: ''
   });
 
   const [appStatus, setAppStatus] = useState([]);
@@ -64,13 +71,7 @@ const useSSE = () => {
 
       return {
         ...prev,
-        syncStatus: message.syncStatus,
-        onchainBalance: +(message.onchainBalance.toFixed(8)),
-        lnBalance: +(message.lnBalance.toFixed(8)),
-        currBlock: message.currBlock,
-        maxBlock: message.currBlock,
-        channelOnline: message.channelOnline,
-        channelTotal: message.channelTotal
+        ...message
       };
     });
   };
@@ -88,4 +89,11 @@ export interface HomeState {
   maxBlock: number;
   channelOnline: number;
   channelTotal: number;
+  btcVersion: string;
+  btcStatus: string;
+  btcNetwork: string;
+  lnVersion: string;
+  lnStatus: string;
+  torAddress: string;
+  sshAddress: string;
 }
