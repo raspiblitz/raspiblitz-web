@@ -10,6 +10,8 @@ const Template: Story<WalletCardProps> = (args) => <WalletCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
+  onchainBalance: 1.00000001,
+  lnBalance: 1.00000001,
   onReceive: () => {},
   onSend: () => {}
 };

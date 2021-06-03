@@ -26,6 +26,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
               <Transaction
                 onClick={props.showDetails.bind(null, transaction.id)}
                 key={index}
+                type={transaction.type}
                 amount={transaction.amount}
                 time={transaction.time}
                 category={transaction.category}

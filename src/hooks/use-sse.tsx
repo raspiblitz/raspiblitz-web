@@ -65,8 +65,8 @@ const useSSE = () => {
       return {
         ...prev,
         syncStatus: message.syncStatus,
-        onchainBalance: message.onchainBalance.toFixed(8),
-        lnBalance: message.lnBalance.toFixed(8),
+        onchainBalance: +(message.onchainBalance.toFixed(8)),
+        lnBalance: +(message.lnBalance.toFixed(8)),
         currBlock: message.currBlock,
         maxBlock: message.currBlock,
         channelOnline: message.channelOnline,

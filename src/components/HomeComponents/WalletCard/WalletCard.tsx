@@ -1,10 +1,18 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { ReactComponent as ChainIcon } from '../../../assets/chain.svg';
 import { ReactComponent as LightningIcon } from '../../../assets/lightning.svg';
 import { ReactComponent as ReceiveIcon } from '../../../assets/receive.svg';
 import { ReactComponent as SendIcon } from '../../../assets/send.svg';
+import { AppContext } from '../../../store/app-context';
 
 export const WalletCard: FC<WalletCardProps> = (props) => {
+  const appCtx = useContext(AppContext);
+
+  const onchainBalance = appCtx.unit === 'BTC' ? props.onchainBalance : props.onchainBalance * 100_000_000;
+  const lnBalance = appCtx.unit === 'BTC' ? props.lnBalance : props.lnBalance * 100_000_000;
+
+  const totalBalance = appCtx.unit === 'BTC' ? +(onchainBalance + lnBalance).toFixed(8) : onchainBalance + lnBalance;
+
   return (
     <div className='p-5 h-full'>
       <div className='bd-card h-full'>
@@ -12,21 +20,27 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
           <div className='bg-yellow-300 w-full rounded-xl p-4'>
             <div className='w-full flex flex-col'>
               <span className='text-xl'>Wallet Balance</span>
-              <span className='text-2xl font-bold'>1.21212121 BTC</span>
+              <span className='text-2xl font-bold'>
+                {totalBalance.toLocaleString()} {appCtx.unit}
+              </span>
             </div>
             <div className='w-full flex flex-col'>
               <span>
                 <ChainIcon className='inline h-5 w-5' />
                 &nbsp;On-Chain
               </span>
-              <span className='text-lg font-bold'>0.10101010 BTC</span>
+              <span className='text-lg font-bold'>
+                {onchainBalance.toLocaleString()} {appCtx.unit}
+              </span>
             </div>
             <div className='w-full flex flex-col'>
               <span>
                 <LightningIcon className='inline h-5 w-5' />
                 &nbsp;Lightning
               </span>
-              <span className='text-lg font-bold'>1.10101010 BTC</span>
+              <span className='text-lg font-bold'>
+                {lnBalance.toLocaleString()} {appCtx.unit}
+              </span>
             </div>
           </div>
         </div>
@@ -54,6 +68,8 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
 export default WalletCard;
 
 export interface WalletCardProps {
+  onchainBalance: number;
+  lnBalance: number;
   onReceive: () => void;
   onSend: () => void;
 }
