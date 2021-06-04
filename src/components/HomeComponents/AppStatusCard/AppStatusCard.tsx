@@ -19,7 +19,7 @@ export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
   const statusColor = props.status === 'online' ? 'text-green-400' : 'text-red-500';
   return (
     <div className='p-5 h-auto'>
-      <div className='bd-card'>
+      <div className='bd-card transition-colors'>
         <div className='flex flex-row my-2 items-center w-full'>
           {/* Icon */}
           <div className='w-1/4 max-h-16 flex justify-center items-center p-2'>

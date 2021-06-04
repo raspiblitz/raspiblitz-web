@@ -15,7 +15,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
 
   return (
     <div className='p-5 h-full'>
-      <div className='bd-card h-full'>
+      <div className='bd-card h-full transition-colors'>
         <div className='text-black flex flex-col lg:flex-row flex-wrap p-5'>
           <div className='bg-yellow-300 w-full rounded-xl p-4'>
             <div className='w-full flex flex-col'>

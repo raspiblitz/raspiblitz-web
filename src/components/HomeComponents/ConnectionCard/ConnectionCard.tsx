@@ -3,7 +3,7 @@ import { FC } from 'react';
 export const ConnectionCard: FC<ConnectionCardProps> = (props) => {
   return (
     <div className='p-5 h-full'>
-      <div className='bd-card'>
+      <div className='bd-card transition-colors'>
         <div className='font-bold text-lg'>Connection Details</div>
         <div className='flex flex-col overflow-hidden py-4'>
           <div className='text-sm text-gray-500'>Tor</div>

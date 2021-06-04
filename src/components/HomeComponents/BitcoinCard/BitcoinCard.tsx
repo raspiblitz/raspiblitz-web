@@ -5,7 +5,7 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
 
   return (
     <div className='p-5 h-full'>
-      <div className='bd-card'>
+      <div className='bd-card transition-colors'>
         <h2 className='font-bold text-lg'>Bitcoin</h2>
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
