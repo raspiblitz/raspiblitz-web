@@ -16,14 +16,11 @@ const AmountInput: FC<AmountInputProps> = (props) => {
           id='amount'
           type='number'
           style={styles}
-          className='w-8/12 rounded rounded-r-none text-right dark:text-black outline-none pr-3'
+          className='w-8/12 text-right input-underline mr-3'
           value={props.amount}
           onChange={props.onChangeAmount}
         />
-        <span
-          className='flex justify-center items-center w-4/12 rounded rounded-l-none border border-gray-500 border-l-0'
-          onClick={appCtx.toggleUnit}
-        >
+        <span className='flex justify-center items-center w-4/12 p-1 rounded shadow-md' onClick={appCtx.toggleUnit}>
           {appCtx.unit}
           <FlipIcon className='h-5 w-5 text-black dark:text-white' />
         </span>

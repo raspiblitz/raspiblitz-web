@@ -14,8 +14,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
   const lnInvoice = invoiceType === 'lightning';
 
-  const btnClasses =
-    'text-center h-10 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg w-full text-white';
+  const btnClasses = 'text-center h-10 bg-yellow-500 hover:bg-yellow-400 rounded-lg w-full text-white';
 
   const invoiceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setInvoiceType(event.target.value);
@@ -64,9 +63,9 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const showLnInvoice = lnInvoice && !isLoading && !address;
 
   const radioStyles =
-    'px-3 py-2 border rounded-lg border-gray-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:text-white';
-  const lnStyle = invoiceType === 'lightning' ? 'bg-blue-500 text-white' : '';
-  const walletStyle = invoiceType === 'onchain' ? 'bg-blue-500 text-white' : '';
+    'px-3 py-2 shadow-md rounded-lg hover:text-white hover:bg-yellow-400 dark:hover:bg-yellow-400 dark:text-white dark:bg-gray-600';
+  const lnStyle = invoiceType === 'lightning' ? 'text-white bg-yellow-500 dark:bg-yellow-500' : '';
+  const walletStyle = invoiceType === 'onchain' ? 'text-white bg-yellow-500 dark:bg-yellow-500' : '';
 
   return (
     <ModalDialog close={props.onClose}>
@@ -80,7 +79,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           <input
             id='lightning'
             type='radio'
-            className='hidden checked:border-green-500 checked:block'
+            className='hidden'
             name='invoiceType'
             value='lightning'
             onChange={invoiceChangeHandler}
@@ -117,19 +116,17 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           {showLnInvoice && (
             <div className='flex flex-col pb-5 justify-center text-center'>
               <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
-              <div className='flex flex-col justify-center'>
-                <label
-                  htmlFor='comment'
-                  className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'
-                >
+              <div className='flex flex-col justify-center mt-2'>
+                <label htmlFor='comment' className='block text-gray-700 dark:text-gray-300 text-sm font-bold text-left'>
                   Comment
                 </label>
                 <input
                   id='comment'
                   type='text'
+                  placeholder='Optional comment'
                   value={comment}
                   onChange={commentChangeHandler}
-                  className='rounded dark:text-black'
+                  className='input-underline'
                 />
               </div>
             </div>
@@ -137,7 +134,8 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
           {!address && (
             <button type='submit' className={btnClasses}>
-              Generate Address
+              {showLnInvoice && 'Create Invoice'}
+              {!showLnInvoice && 'Generate Address'}
             </button>
           )}
 

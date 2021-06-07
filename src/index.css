@@ -7,7 +7,7 @@
 **/
 
 .input-underline {
-  @apply mt-0 block w-full px-0.5 border-0 border-b-2 bg-transparent border-gray-200 focus:ring-0 focus:border-blue-500;
+  @apply mt-0 block w-full px-0.5 border-0 border-b-2 bg-transparent border-gray-200 focus:ring-0 focus:border-yellow-500;
 }
 
 .bd-card {
