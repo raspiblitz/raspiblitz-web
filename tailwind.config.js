@@ -7,11 +7,10 @@ module.exports = {
       colors: {
         'bd-yellow-light': '#F2C94C',
         'bd-yellow-dark': '#F7CB47'
-      },
-      maxHeight: {
-        88: '22rem',
-        112: '28rem'
       }
+    },
+    minHeight: {
+      144: '36rem'
     }
   },
   variants: {
