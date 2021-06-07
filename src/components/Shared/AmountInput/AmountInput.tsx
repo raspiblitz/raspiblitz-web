@@ -8,7 +8,7 @@ const AmountInput: FC<AmountInputProps> = (props) => {
 
   return (
     <>
-      <label htmlFor='amount' className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>
+      <label htmlFor='amount' className='label-underline'>
         Amount
       </label>
       <div className='flex flex-row'>
@@ -16,11 +16,14 @@ const AmountInput: FC<AmountInputProps> = (props) => {
           id='amount'
           type='number'
           style={styles}
-          className='w-8/12 text-right input-underline mr-3'
+          className='w-8/12 text-right input-underline mr-3 pr-5'
           value={props.amount}
           onChange={props.onChangeAmount}
         />
-        <span className='flex justify-center items-center w-4/12 p-1 rounded shadow-md' onClick={appCtx.toggleUnit}>
+        <span
+          className='flex justify-center items-center w-4/12 p-1 rounded shadow-md dark:bg-gray-600'
+          onClick={appCtx.toggleUnit}
+        >
           {appCtx.unit}
           <FlipIcon className='h-5 w-5 text-black dark:text-white' />
         </span>

@@ -117,7 +117,10 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
             <div className='flex flex-col pb-5 justify-center text-center'>
               <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
               <div className='flex flex-col justify-center mt-2'>
-                <label htmlFor='comment' className='block text-gray-700 dark:text-gray-300 text-sm font-bold text-left'>
+                <label
+                  htmlFor='comment'
+                  className='block text-gray-700 dark:text-gray-300 text-sm mb-2 font-bold text-left'
+                >
                   Comment
                 </label>
                 <input

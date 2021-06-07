@@ -7,9 +7,8 @@ const SendModal: FC<SendModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState(0);
-  const [fee, setFee] = useState(0);
+  const [fee, setFee] = useState('');
   const [comment, setComment] = useState('');
-  // const minAmount = 0.0000546; // 5460 sats
 
   const sendTransactionHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -40,7 +39,7 @@ const SendModal: FC<SendModalProps> = (props) => {
   };
 
   const changeFeeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setFee(+event.target.value);
+    setFee(event.target.value);
   };
 
   const balance =
@@ -58,16 +57,13 @@ const SendModal: FC<SendModalProps> = (props) => {
         </div>
         <div className='my-5 flex flex-col justify-center text-center items-center'>
           <div className='w-full md:w-10/12 py-1'>
-            <label
-              htmlFor='address'
-              className='block text-left text-gray-700 dark:text-gray-300 text-sm font-bold mb-2'
-            >
+            <label htmlFor='address' className='label-underline'>
               Address
             </label>
             <input
               id='address'
               type='text'
-              className='w-full rounded dark:text-black'
+              className='w-full input-underline'
               value={address}
               onChange={changeAddressHandler}
             />
@@ -77,26 +73,29 @@ const SendModal: FC<SendModalProps> = (props) => {
           </div>
 
           <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='fee' className='block text-left text-gray-700 dark:text-gray-300 text-sm font-bold mb-2'>
+            <label htmlFor='fee' className='label-underline'>
               Fee
             </label>
-            <input
-              id='fee'
-              type='number'
-              className='w-full rounded dark:text-black'
-              value={fee}
-              onChange={changeFeeHandler}
-            />
+            <div className='flex'>
+              <input
+                id='fee'
+                type='number'
+                className='w-7/12 input-underline text-right'
+                value={fee}
+                onChange={changeFeeHandler}
+              />
+              <div className='w-5/12 text-sm break-words'>sat / vByte</div>
+            </div>
           </div>
 
           <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='comment' className='block text-left text-gray-700 dark:text-gray-300'>
+            <label htmlFor='comment' className='label-underline'>
               Comment
             </label>
             <input
               id='comment'
               type='text'
-              placeholder='Optional'
+              placeholder='Optional comment'
               className='input-underline'
               value={comment}
               onChange={changeCommentHandler}
@@ -106,7 +105,7 @@ const SendModal: FC<SendModalProps> = (props) => {
         <div className='inline-block w-4/5 lg:w-3/12 align-top mb-5'>
           <button
             type='submit'
-            className='text-center h-10 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg text-white w-full'
+            className='text-center h-10 bg-yellow-500 hover:bg-yellow-400 dark:hover:bg-yellow-400 rounded-lg text-white w-full'
           >
             Send
           </button>

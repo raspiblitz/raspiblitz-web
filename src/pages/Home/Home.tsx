@@ -14,21 +14,17 @@ import useSSE from '../../hooks/use-sse';
 export const Home: FC = (props) => {
   const { homeState, transactions, appStatus } = useSSE();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [detailTxId, setDetailTxId] = useState('');
 
   useEffect(() => {
-    setIsLoading(true);
     Promise.allSettled([
       fetch('http://localhost:8080/syncstatus'),
       fetch('http://localhost:8080/transactions'),
       fetch('http://localhost:8080/appstatus')
-    ]).then(() => {
-      setIsLoading(false);
-    });
+    ]).then(() => {});
   }, []);
 
   const showSendModalHandler = () => {
