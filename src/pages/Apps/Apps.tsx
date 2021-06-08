@@ -17,8 +17,6 @@ export const Apps = () => {
     fetch('http://localhost:8080/apps');
   }, []);
 
-  console.log(isInstalling);
-
   return (
     <div className='mobile-container md:content-container w-full dark:text-white overflow-y-auto transition-colors'>
       <div className='h-full flex flex-wrap flex-1'>
