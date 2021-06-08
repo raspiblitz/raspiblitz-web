@@ -20,15 +20,9 @@ const App = () => {
               <Route exact path='/'>
                 <Redirect to='/home' />
               </Route>
-              <Route path='/home'>
-                <Home />
-              </Route>
-              <Route path='/apps'>
-                <Apps />
-              </Route>
-              <Route path='/settings'>
-                <Settings />
-              </Route>
+              <Route path='/home' component={Home} />
+              <Route path='/apps' component={Apps} />
+              <Route path='/settings' component={Settings} />
             </Switch>
           </div>
           <BottomNav></BottomNav>

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const apps = require('./apps');
 const sync = require('./sync');
+const auth = require('./auth');
 const transactions = require('./transactions');
 const util = require('./util');
 
@@ -46,18 +47,39 @@ const eventsHandler = (request, response) => {
  */
 app.get('/events', eventsHandler);
 
-app.post('/receive', (req, res) => {
-  if (req.body.type === 'lightning') {
-    // include comment & amount for real req ..
-    res.send(JSON.stringify({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' }));
-    return;
+/***
+ * AUTH
+ */
+
+app.get('/login', (req, res) => {
+  console.log('call to /login');
+  if (
+    req.body.password === '6b3a55e0261b0304143f805a24924d0c1c44524821305f31d9277843b8a10f4e' // => 'password' in sha256
+  ) {
+    const token = auth.signToken();
+    res.status(200).send(token);
+  } else {
+    res.status(401).send();
   }
-  res.send(JSON.stringify({ address: 'bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz' }));
 });
 
-app.post('/send', (req, res) => {
-  res.send(JSON.stringify({ status: 'success' }));
+app.get('/logout', (req, res) => {
+  console.log('call to /logout');
+  res.status(200).send();
 });
+
+/***
+ * SYNC
+ */
+
+app.get('/syncstatus', (req, res) => {
+  sync.syncStatus();
+  res.status(200).send();
+});
+
+/**
+ * SETTINGS
+ */
 
 app.post('/changepw', (req, res) => {
   console.log(`call to /changepw with old: ${req.body.oldPassword} & new: ${req.body.newPassword}`);
@@ -74,6 +96,20 @@ app.post('/shutdown', (req, res) => {
   res.status(200).send();
 });
 
+/***
+ * APPS
+ */
+
+app.get('/appstatus', (req, res) => {
+  apps.appStatus();
+  res.status(200).send();
+});
+
+app.get('/apps', (req, res) => {
+  apps.listApps();
+  res.status(200).send();
+});
+
 app.post('/install', (req, res) => {
   console.log('call to /install');
   // send information that btc-pay is currently installing
@@ -84,18 +120,20 @@ app.post('/install', (req, res) => {
   res.status(200).send();
 });
 
-app.get('/syncstatus', (req, res) => {
-  sync.syncStatus();
-  res.status(200).send();
+/***
+ * TRANSACTIONS
+ */
+
+app.post('/receive', (req, res) => {
+  if (req.body.type === 'lightning') {
+    // include comment & amount for real req ..
+    res.send(JSON.stringify({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' }));
+    return;
+  }
+  res.send(JSON.stringify({ address: 'bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz' }));
 });
 
-app.get('/appstatus', (req, res) => {
-  apps.appStatus();
-  res.status(200).send();
-});
-
-app.get('/apps', (req, res) => {
-  apps.listApps();
+app.post('/send', (req, res) => {
   res.status(200).send();
 });
 
