@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, MouseEventHandler, useEffect, useState } from 'react';
 import { ReactComponent as InfoIcon } from '../../../assets/info.svg';
 import { ReactComponent as LinkIcon } from '../../../assets/link.svg';
 import { ReactComponent as PlusIcon } from '../../../assets/plus.svg';
@@ -33,14 +33,31 @@ export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
         </div>
       </div>
       <div className='h-2/6 py-2 flex flex-row gap-2'>
-        {props.installed && (
-          <button className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'>
+        {props.installed && props.address && (
+          <a
+            href={props.address}
+            target='_blank'
+            rel='noreferrer'
+            className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'
+          >
             <LinkIcon />
             &nbsp;Open
+          </a>
+        )}
+        {props.installed && !props.address && (
+          <button
+            disabled={true}
+            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white dark:text-black bg-gray-400'
+          >
+            &nbsp;No page available
           </button>
         )}
         {!props.installed && (
-          <button className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'>
+          <button
+            disabled={props.installing}
+            className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none'
+            onClick={props.onInstall.bind(id)}
+          >
             <PlusIcon />
             &nbsp;Install
           </button>
@@ -61,5 +78,7 @@ export interface AppInstallCardProps {
   name: string;
   description: string;
   installed: boolean;
-  onInstall: (id: string) => void;
+  installing: boolean;
+  address?: string;
+  onInstall: MouseEventHandler<HTMLButtonElement>;
 }

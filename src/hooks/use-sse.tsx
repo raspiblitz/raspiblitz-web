@@ -23,8 +23,9 @@ const useSSE = () => {
   });
 
   const [appStatus, setAppStatus] = useState([]);
-  const [availableApps, setAvailableApps] = useState([]);
+  const [availableApps, setAvailableApps] = useState<any[]>([]);
   const [transactions, setTransactions] = useState([]);
+  const [isInstalling, setIsInstalling] = useState<string | null>(null);
 
   const { evtSource, setEvtSource } = appCtx;
 
@@ -32,40 +33,54 @@ const useSSE = () => {
     if (!evtSource) {
       setEvtSource(new EventSource(SSE_URL));
     } else {
-      evtSource.addEventListener('syncstatus', setSyncStatus);
+      evtSource.addEventListener('syncstatus' as any, setSyncStatus);
 
-      evtSource.addEventListener('transactions', setTx);
+      evtSource.addEventListener('transactions' as any, setTx);
 
-      evtSource.addEventListener('appstatus', setAppStat);
+      evtSource.addEventListener('appstatus' as any, setAppStat);
 
-      evtSource.addEventListener('apps', setApps);
+      evtSource.addEventListener('apps' as any, setApps);
+
+      evtSource.addEventListener('install' as any, setInstall);
     }
 
     return () => {
       // cleanup
       if (evtSource) {
-        evtSource.removeEventListener('syncstatus', setSyncStatus);
-        evtSource.removeEventListener('transactions', setTx);
-        evtSource.removeEventListener('appstatus', setAppStat);
-        evtSource.removeEventListener('apps', setApps);
+        evtSource.removeEventListener('syncstatus' as any, setSyncStatus);
+        evtSource.removeEventListener('transactions' as any, setTx);
+        evtSource.removeEventListener('appstatus' as any, setAppStat);
+        evtSource.removeEventListener('apps' as any, setApps);
+        evtSource.removeEventListener('install' as any, setInstall);
       }
     };
   }, [evtSource, setEvtSource]);
 
-  const setApps = (event: any) => {
-    setAvailableApps(JSON.parse(event.data));
+  const setApps = (event: MessageEvent<string>) => {
+    setAvailableApps((prev: any[]) => {
+      const apps = JSON.parse(event.data);
+      if (prev.length === 0) {
+        return apps;
+      } else {
+        return prev.map((old) => apps.find((newApp: any) => old.id === newApp.id) || old);
+      }
+    });
   };
 
-  const setAppStat = (event: any) => {
+  const setAppStat = (event: MessageEvent<string>) => {
     setAppStatus(JSON.parse(event.data));
   };
 
-  const setTx = (event: any) => {
+  const setTx = (event: MessageEvent<string>) => {
     const t = JSON.parse(event.data).sort((a: any, b: any) => b.time - a.time);
     setTransactions(t);
   };
 
-  const setSyncStatus = (event: any) => {
+  const setInstall = (event: MessageEvent<string>) => {
+    setIsInstalling(JSON.parse(event.data).id);
+  };
+
+  const setSyncStatus = (event: MessageEvent<string>) => {
     setHomeState((prev) => {
       const message = JSON.parse(event.data);
 
@@ -76,7 +91,7 @@ const useSSE = () => {
     });
   };
 
-  return { homeState, transactions, appStatus, availableApps };
+  return { homeState, transactions, appStatus, availableApps, isInstalling };
 };
 
 export default useSSE;

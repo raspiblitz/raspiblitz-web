@@ -66,22 +66,32 @@ app.post('/changepw', (req, res) => {
 
 app.post('/reboot', (req, res) => {
   console.log('call to /reboot');
-  res.send(JSON.stringify({ status: 'success' }));
+  res.status(200).send();
 });
 
 app.post('/shutdown', (req, res) => {
   console.log('call to /shutdown');
-  res.send(JSON.stringify({ status: 'success' }));
+  res.status(200).send();
+});
+
+app.post('/install', (req, res) => {
+  console.log('call to /install');
+  // send information that btc-pay is currently installing
+  util.sendSSE('install', { id: 'btc-pay' });
+  setTimeout(() => {
+    apps.installApp();
+  }, 5000);
+  res.status(200).send();
 });
 
 app.get('/syncstatus', (req, res) => {
   sync.syncStatus();
-  res.send(JSON.stringify({ status: 'success' }));
+  res.status(200).send();
 });
 
 app.get('/appstatus', (req, res) => {
   apps.appStatus();
-  res.send(JSON.stringify({ status: 'success' }));
+  res.status(200).send();
 });
 
 app.get('/apps', (req, res) => {
@@ -91,7 +101,7 @@ app.get('/apps', (req, res) => {
 
 app.get('/transactions', (req, res) => {
   transactions.listTransactions();
-  res.send(JSON.stringify({ status: 'success' }));
+  res.status(200).send();
 });
 
 app.get('/tx/:id', (req, res) => {

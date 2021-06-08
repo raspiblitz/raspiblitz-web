@@ -34,13 +34,20 @@ const appStatus = () => {
 const listApps = () => {
   console.log('call to apps');
   util.sendSSE('apps', [
-    { id: 'sphinx', name: 'Sphinx Chat', description: 'Chat and pay over the Lightning Network', installed: true },
+    {
+      id: 'sphinx',
+      name: 'Sphinx Chat',
+      description: 'Chat and pay over the Lightning Network',
+      installed: true,
+      address: 'https://192.168.0.599:4081/'
+    },
     { id: 'btc-rpc-explorer', name: 'BTC RPC Explorer', description: 'Bitcoin RPC Explorer', installed: false },
     {
       id: 'rtl',
       name: 'Ride the Lightning',
       description: 'Ride The Lightning - A full function web browser app for LND, C-Lightning and Eclair',
-      installed: true
+      installed: true,
+      address: 'http://192.168.0.113:599/rtl/login'
     },
     {
       id: 'specter',
@@ -58,7 +65,8 @@ const listApps = () => {
       id: 'electrs',
       name: 'ElectRS',
       description: 'An efficient re-implementation of Electrum Server in Rust',
-      installed: true
+      installed: true,
+      address: null
     },
     {
       id: 'lndmanage',
@@ -82,7 +90,8 @@ const listApps = () => {
       id: 'mempool',
       name: 'Mempool Space',
       description: 'An open-source explorer developed for the Bitcoin community',
-      installed: true
+      installed: true,
+      address: 'https://192.168.0.599:4081/'
     },
     {
       id: 'bos',
@@ -93,4 +102,19 @@ const listApps = () => {
   ]);
 };
 
-module.exports = { appStatus, listApps };
+const installApp = () => {
+  console.log('call to installApp');
+  util.sendSSE('apps', [
+    {
+      id: 'btc-pay',
+      name: 'BTCPay Server',
+      description: 'Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor',
+      installed: true,
+      address: 'https://192.168.0.599:4081/'
+    }
+  ]);
+  // inform Frontend that no apps are installed anymore
+  util.sendSSE('install', { id: null });
+};
+
+module.exports = { appStatus, listApps, installApp };

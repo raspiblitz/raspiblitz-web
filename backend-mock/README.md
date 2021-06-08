@@ -24,6 +24,7 @@ This exposes the web server on `localhost:8080`.
   - `/syncstatus` - triggers SSE Event for syncstatus
   - `/appstatus` - triggers SSE Event for syncstatus
   - `/apps` - triggers SSE Event for apps (name, description, installed)
+  - `/install` - triggers SSE Event for apps & install
 
 ### SSE Events
 
@@ -31,3 +32,4 @@ This exposes the web server on `localhost:8080`.
 - `appstatus`
 - `transactions`
 - `apps`
+- `install`
