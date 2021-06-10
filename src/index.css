@@ -11,7 +11,7 @@
 }
 
 .input-underline {
-  @apply mt-0 block w-full px-0.5 border-0 border-b-2 bg-transparent outline-none border-gray-200 focus:ring-0 focus:border-yellow-500;
+  @apply mt-0 block w-full px-0.5 border-0 border-b-2 bg-transparent outline-none border-gray-200 focus:ring-0 focus:border-yellow-500 text-black dark:text-white;
 }
 
 .bd-card {

@@ -47,11 +47,9 @@ const AppContextProvider: FC = (props) => {
       documentEl.remove('dark');
     }
 
-    // // check authenticated
-    // const token = localStorage.getItem('accessToken');
-    // if (!token) {
-    //   setIsLoggedIn(false);
-    // }
+    // check authenticated
+    // const token = localStorage.getItem('access_token');
+    // setIsLoggedIn(!!token);
   }, [darkMode]);
 
   const contextValue: AppContextType = {

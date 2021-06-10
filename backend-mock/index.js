@@ -51,19 +51,19 @@ app.get('/events', eventsHandler);
  * AUTH
  */
 
-app.get('/login', (req, res) => {
+app.post('/login', (req, res) => {
   console.log('call to /login');
   if (
-    req.body.password === '6b3a55e0261b0304143f805a24924d0c1c44524821305f31d9277843b8a10f4e' // => 'password' in sha256
+    req.body.password === '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' // => 'password' in sha256
   ) {
     const token = auth.signToken();
-    res.status(200).send(token);
+    res.status(200).send(JSON.stringify({ token }));
   } else {
     res.status(401).send();
   }
 });
 
-app.get('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
   console.log('call to /logout');
   res.status(200).send();
 });
