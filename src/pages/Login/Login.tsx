@@ -40,9 +40,8 @@ const Login: FC = () => {
       <MoonLogo className='h-8 fixed right-4 top-4 text-dark dark:text-yellow-500' onClick={appCtx.toggleDarkMode} />
       <RaspiBlitzLogo className='h-10 my-2 block dark:hidden' />
       <RaspiBlitzLogoDark className='h-10 my-2 hidden dark:block' />
-      <div className='flex flex-col w-8/12'>
-        <label className='label-underline'>Enter Password A</label>
-        <input ref={passwordInput} type='password' placeholder='Password A' className='input-underline' />
+      <div className='flex flex-col py-5 w-8/12 md:w-96'>
+        <input ref={passwordInput} type='password' placeholder='Enter Password A' className='input-underline' />
       </div>
       <button onClick={loginHandler} className='bg-yellow-500 rounded px-4 py-2 m-4 text-white hover:bg-yellow-400'>
         Login
