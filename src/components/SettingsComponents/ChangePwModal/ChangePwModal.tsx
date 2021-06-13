@@ -7,8 +7,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const btnClasses =
-    'text-center h-12 m-2 bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400 rounded-lg w-1/2 text-white';
+  const btnClasses = 'text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded w-1/2 text-white';
 
   const changePasswordHandler = async () => {
     setIsLoading(true);
@@ -43,12 +42,12 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
       {!isLoading && (
         <div className='my-5 flex flex-col justify-center text-center items-center'>
           <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='oldpw' className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>
+            <label htmlFor='oldpw' className='label-underline'>
               Old Password
             </label>
             <input
               id='oldpw'
-              className='w-full rounded dark:text-black'
+              className='w-full input-underline'
               type='password'
               value={oldPassword}
               onChange={changeOldPasswordHandler}
@@ -56,12 +55,12 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
             />
           </div>
           <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='newpw' className='block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2 text-left'>
+            <label htmlFor='newpw' className='label-underline'>
               New Password
             </label>
             <input
               id='newpw'
-              className='w-full rounded dark:text-black'
+              className='w-full input-underline'
               type='password'
               value={newPassword}
               onChange={changeNewPasswordHandler}

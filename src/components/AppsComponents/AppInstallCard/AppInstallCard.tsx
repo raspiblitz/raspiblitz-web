@@ -47,7 +47,7 @@ export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
         {props.installed && !props.address && (
           <button
             disabled={true}
-            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white dark:text-black bg-gray-400'
+            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white dark:text-black bg-gray-400 cursor-default'
           >
             &nbsp;No page available
           </button>
