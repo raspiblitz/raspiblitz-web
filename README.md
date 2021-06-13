@@ -14,6 +14,10 @@ Run `yarn install` & then `yarn start` to start the development server for the F
 
 To run the mock backend open another terminal, `cd` into [backend-mock](./backend-mock) and run `yarn install` then `yarn start` in that folder.
 
+#### Notes on Login and auth
+
+- For the login screen, use the password `password`.
+
 ### Run storybook
 
 If you haven't done so already, run `yarn install` to install the dependencies.

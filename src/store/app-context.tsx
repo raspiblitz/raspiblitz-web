@@ -1,12 +1,12 @@
 import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 interface AppContextType {
-  authenticated: boolean;
+  isLoggedIn: boolean;
   darkMode: boolean;
   unit: Unit;
   toggleUnit: () => void;
   toggleDarkMode: () => void;
-  setAuthenticated: Dispatch<SetStateAction<boolean>>;
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   evtSource: EventSource | null;
   setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
 }
@@ -14,11 +14,11 @@ interface AppContextType {
 type Unit = 'BTC' | 'Sat';
 
 export const AppContext = createContext<AppContextType>({
-  authenticated: false,
+  isLoggedIn: false,
   darkMode: false,
   unit: 'BTC',
   toggleUnit: () => {},
-  setAuthenticated: () => {},
+  setIsLoggedIn: () => {},
   toggleDarkMode: () => {},
   evtSource: null,
   setEvtSource: () => {}
@@ -26,7 +26,7 @@ export const AppContext = createContext<AppContextType>({
 
 const AppContextProvider: FC = (props) => {
   const [unit, setUnit] = useState<Unit>('BTC');
-  const [authenticated, setAuthenticated] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);
 
@@ -48,18 +48,16 @@ const AppContextProvider: FC = (props) => {
     }
 
     // check authenticated
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
-      setAuthenticated(false);
-    }
+    // const token = localStorage.getItem('access_token');
+    // setIsLoggedIn(!!token);
   }, [darkMode]);
 
   const contextValue: AppContextType = {
-    authenticated,
+    isLoggedIn,
     darkMode,
     unit,
     toggleUnit: toggleUnitHandler,
-    setAuthenticated,
+    setIsLoggedIn,
     toggleDarkMode: toggleDarkModeHandler,
     evtSource,
     setEvtSource
