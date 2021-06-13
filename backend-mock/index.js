@@ -53,14 +53,16 @@ app.get('/events', eventsHandler);
 
 app.post('/login', (req, res) => {
   console.log('call to /login');
-  if (
-    req.body.password === '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' // => 'password' in sha256
-  ) {
-    const token = auth.signToken();
-    res.status(200).send(JSON.stringify({ token }));
-  } else {
-    res.status(401).send();
-  }
+  setTimeout(() => {
+    if (
+      req.body.password === '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' // => 'password' in sha256
+    ) {
+      const token = auth.signToken();
+      res.status(200).send(JSON.stringify({ token }));
+    } else {
+      res.status(401).send();
+    }
+  }, 2000);
 });
 
 app.post('/logout', (req, res) => {
