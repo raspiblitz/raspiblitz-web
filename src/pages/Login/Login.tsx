@@ -8,14 +8,16 @@ import { AppContext } from '../../store/app-context';
 
 const Login: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [showError, setShowError] = useState(false);
+  const [isUnauthorized, setIsUnauthorized] = useState(false);
+  const [isError, setIsError] = useState(false);
   const appCtx = useContext(AppContext);
   const history = useHistory();
   const passwordInput = useRef<HTMLInputElement>(null);
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
-    setShowError(false);
+    setIsUnauthorized(false);
+    setIsError(false);
     setIsLoading(true);
     // calculate SHA256 - see MDN
     const encoder = new TextEncoder();
@@ -32,15 +34,17 @@ const Login: FC = () => {
         password: hashHex
       })
     });
-    const resp = await respObj;
+    const resp = await respObj.catch(() => setIsError(true));
     setIsLoading(false);
-    if (resp.status === 200) {
+    if (resp && resp.status === 200) {
       const token = (await resp.json()).token;
       localStorage.setItem('access_token', token);
       appCtx.setIsLoggedIn(true);
       history.push('/home');
+    } else if (resp && resp.status === 401) {
+      setIsUnauthorized(true);
     } else {
-      setShowError(true);
+      setIsError(true);
     }
   };
 
@@ -67,7 +71,8 @@ const Login: FC = () => {
               Login
             </button>
           </form>
-          {showError && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>Invalid Password entered!</p>}
+          {isUnauthorized && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>Invalid Password</p>}
+          {isError && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>An error occured</p>}
         </>
       )}
     </div>
