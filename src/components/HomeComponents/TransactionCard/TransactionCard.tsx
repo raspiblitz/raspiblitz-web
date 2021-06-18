@@ -24,7 +24,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
           {currentPage.map((transaction: any, index: number) => {
             return (
               <Transaction
-                onClick={props.showDetails.bind(null, transaction.id)}
+                onClick={() => props.showDetails(transaction.id)}
                 key={index}
                 type={transaction.type}
                 amount={transaction.amount}

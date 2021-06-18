@@ -6,7 +6,7 @@ const ModalDialog: FC<ModalDialogProps> = (props) => {
   useEffect(() => {
     const close = (event: KeyboardEvent) => {
       // close on Esc
-      if (event.keyCode === 27) {
+      if (event.key === 'Escape') {
         props.close();
       }
     };

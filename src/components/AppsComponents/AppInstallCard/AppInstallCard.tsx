@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ReactComponent as InfoIcon } from '../../../assets/info.svg';
 import { ReactComponent as LinkIcon } from '../../../assets/link.svg';
 import { ReactComponent as PlusIcon } from '../../../assets/plus.svg';
@@ -56,13 +56,16 @@ export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
           <button
             disabled={props.installing}
             className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none'
-            onClick={props.onInstall.bind(id)}
+            onClick={() => props.onInstall(id)}
           >
             <PlusIcon />
             &nbsp;Install
           </button>
         )}
-        <button className='w-1/2 shadow-md flex justify-center items-center p-2 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-300 dark:hover:text-black'>
+        <button
+          className='w-1/2 shadow-md flex justify-center items-center p-2 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-300 dark:hover:text-black'
+          onClick={() => props.onOpenDetails(id)}
+        >
           <InfoIcon />
           &nbsp; Info
         </button>
@@ -80,5 +83,6 @@ export interface AppInstallCardProps {
   installed: boolean;
   installing: boolean;
   address?: string;
-  onInstall: MouseEventHandler<HTMLButtonElement>;
+  onInstall: (id: string) => void;
+  onOpenDetails: (id: string) => void;
 }
