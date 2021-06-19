@@ -19,19 +19,13 @@ const Login: FC = () => {
     setIsUnauthorized(false);
     setIsError(false);
     setIsLoading(true);
-    // calculate SHA256 - see MDN
-    const encoder = new TextEncoder();
-    const data = encoder.encode(passwordInput.current?.value);
-    const hash = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hash)); // convert buffer to byte array
-    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
     const respObj = fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        password: hashHex
+        password: passwordInput.current?.value
       })
     });
     const resp = await respObj.catch(() => setIsError(true));

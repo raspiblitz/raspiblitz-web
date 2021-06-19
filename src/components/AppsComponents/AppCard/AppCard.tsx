@@ -3,7 +3,7 @@ import { ReactComponent as InfoIcon } from '../../../assets/info.svg';
 import { ReactComponent as LinkIcon } from '../../../assets/link.svg';
 import { ReactComponent as PlusIcon } from '../../../assets/plus.svg';
 
-export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
+export const AppCard: FC<AppCardProps> = (props) => {
   const [image, setImage] = useState('');
 
   const { id } = props;
@@ -74,9 +74,9 @@ export const AppInstallCard: FC<AppInstallCardProps> = (props) => {
   );
 };
 
-export default AppInstallCard;
+export default AppCard;
 
-export interface AppInstallCardProps {
+export interface AppCardProps {
   id: string;
   name: string;
   description: string;

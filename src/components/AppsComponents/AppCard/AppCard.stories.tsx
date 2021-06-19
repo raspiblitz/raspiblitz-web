@@ -1,12 +1,12 @@
 import { Meta, Story } from '@storybook/react';
-import AppInstallCard, { AppInstallCardProps } from './AppInstallCard';
+import AppCard, { AppCardProps } from './AppCard';
 
 export default {
-  title: 'AppsComponents/AppInstallCard',
-  component: AppInstallCard
+  title: 'AppsComponents/AppCard',
+  component: AppCard
 } as Meta;
 
-const Template: Story<AppInstallCardProps> = (args) => <AppInstallCard {...args} />;
+const Template: Story<AppCardProps> = (args) => <AppCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

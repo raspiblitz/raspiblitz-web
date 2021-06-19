@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
 const apps = require('./apps');
 const sync = require('./sync');
 const auth = require('./auth');
@@ -54,15 +55,13 @@ app.get('/events', eventsHandler);
 app.post('/login', (req, res) => {
   console.log('call to /login');
   setTimeout(() => {
-    if (
-      req.body.password === '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' // => 'password' in sha256
-    ) {
+    if (req.body.password === 'password') {
       const token = auth.signToken();
       res.status(200).send(JSON.stringify({ token }));
     } else {
       res.status(401).send();
     }
-  }, 2000);
+  }, 100);
 });
 
 app.post('/logout', (req, res) => {
@@ -120,6 +119,26 @@ app.post('/install', (req, res) => {
     apps.installApp();
   }, 5000);
   res.status(200).send();
+});
+
+app.get('/appdetails/:id', (req, res) => {
+  console.log('call to appdetails with id: ' + req.params.id);
+  const img1 =
+    'data:image/png;base64,' + Buffer.from(fs.readFileSync('images/btc-rpc-1.png'), 'binary').toString('base64');
+  const img2 =
+    'data:image/png;base64,' + Buffer.from(fs.readFileSync('images/btc-rpc-2.png'), 'binary').toString('base64');
+  const img3 =
+    'data:image/png;base64,' + Buffer.from(fs.readFileSync('images/btc-rpc-3.png'), 'binary').toString('base64');
+  const details = {
+    id: req.params.id,
+    name: 'BTC RPC Explorer',
+    author: 'Dan Janosik',
+    description: 'This is some description',
+    repository: 'https://github.com/janoside/btc-rpc-explorer',
+    version: '1.2.3',
+    images: [img1, img2, img3]
+  };
+  res.send(details);
 });
 
 /***

@@ -39,7 +39,8 @@ const listApps = () => {
       name: 'Sphinx Chat',
       description: 'Chat and pay over the Lightning Network',
       installed: true,
-      address: 'https://192.168.0.599:4081/'
+      address: 'https://192.168.0.599:4081/',
+      hiddenService: 'blablablabla.onion'
     },
     { id: 'btc-rpc-explorer', name: 'BTC RPC Explorer', description: 'Bitcoin RPC Explorer', installed: false },
     {
@@ -47,7 +48,8 @@ const listApps = () => {
       name: 'Ride the Lightning',
       description: 'Ride The Lightning - A full function web browser app for LND, C-Lightning and Eclair',
       installed: true,
-      address: 'http://192.168.0.113:599/rtl/login'
+      address: 'http://192.168.0.113:599/rtl/login',
+      hiddenService: 'blablablabla.onion'
     },
     {
       id: 'specter',
@@ -66,7 +68,8 @@ const listApps = () => {
       name: 'ElectRS',
       description: 'An efficient re-implementation of Electrum Server in Rust',
       installed: true,
-      address: null
+      address: null,
+      hiddenService: null
     },
     {
       id: 'lndmanage',
@@ -91,7 +94,8 @@ const listApps = () => {
       name: 'Mempool Space',
       description: 'An open-source explorer developed for the Bitcoin community',
       installed: true,
-      address: 'https://192.168.0.599:4081/'
+      address: 'https://192.168.0.599:4081/',
+      hiddenService: 'blablablabla.onion'
     },
     {
       id: 'bos',
@@ -110,10 +114,11 @@ const installApp = () => {
       name: 'BTCPay Server',
       description: 'Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor',
       installed: true,
-      address: 'https://192.168.0.599:4081/'
+      address: 'https://192.168.0.599:4081/',
+      hiddenService: 'blablablabla.onion'
     }
   ]);
-  // inform Frontend that no apps are installed anymore
+  // inform Frontend that no apps are currently installing
   util.sendSSE('install', { id: null });
 };
 
