@@ -1,6 +1,7 @@
 import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
+import { createRequest } from '../../../util/util';
 import AmountInput from '../AmountInput/AmountInput';
 
 const SendModal: FC<SendModalProps> = (props) => {
@@ -12,19 +13,15 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   const sendTransactionHandler = (event: FormEvent) => {
     event.preventDefault();
-    fetch('http://localhost:8080/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        amount,
-        address,
-        fee,
-        comment,
-        unit: appCtx.unit
-      })
+    const body = JSON.stringify({
+      amount,
+      address,
+      fee,
+      comment,
+      unit: appCtx.unit
     });
+    const req = createRequest('send', 'POST', body);
+    fetch(req);
   };
 
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {

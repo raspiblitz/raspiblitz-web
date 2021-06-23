@@ -1,6 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
+import { createRequest } from '../../../util/util';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 const ChangePwModal: FC<ChangePwModalProps> = (props) => {
@@ -11,17 +12,9 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
 
   const changePasswordHandler = async () => {
     setIsLoading(true);
-    const respObj = fetch('http://localhost:8080/changepw', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        oldPassword: oldPassword,
-        newPassword: newPassword
-      })
-    });
-    const status = (await respObj).status;
+    const req = createRequest('changepw', 'POST', JSON.stringify({ oldPassword, newPassword }));
+    const resp = fetch(req);
+    const status = (await resp).status;
     setIsLoading(false);
     if (status === 200) {
     }

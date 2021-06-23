@@ -39,10 +39,10 @@ const Settings: FC = () => {
       <ActionBox name='Shutdown' actionName='Shutdown' action={showShutdownModalHandler} />
       {showPwModal && <ChangePwModal onClose={hidePwModalHandler} />}
       {confirmReboot && (
-        <ConfirmModal confirmText='Reboot?' onClose={hideRebootModalHandler} confirmEndpoint='/reboot' />
+        <ConfirmModal confirmText='Reboot?' onClose={hideRebootModalHandler} confirmEndpoint='reboot' />
       )}
       {confirmShutdown && (
-        <ConfirmModal confirmText='Shutdown?' onClose={hideShutdownModalHandler} confirmEndpoint='/shutdown' />
+        <ConfirmModal confirmText='Shutdown?' onClose={hideShutdownModalHandler} confirmEndpoint='shutdown' />
       )}
     </div>
   );

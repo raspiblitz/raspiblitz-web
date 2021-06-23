@@ -1,6 +1,7 @@
 import QRCode from 'qrcode.react';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
+import { createRequest } from '../../../util/util';
 import AmountInput from '../AmountInput/AmountInput';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
@@ -39,13 +40,8 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       amount: lnInvoice ? amount : undefined,
       comment: lnInvoice ? comment : undefined
     };
-    const resp = await fetch('http://localhost:8080/receive', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
+    const req = createRequest('receive', 'POST', JSON.stringify(body));
+    const resp = await fetch(req);
     const respObj = await resp.json();
     setIsLoading(false);
     setAddress(respObj.address);

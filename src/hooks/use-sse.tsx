@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../store/app-context';
 
-const SSE_URL = 'http://localhost:8080/events';
+const SSE_URL = window.location.hostname.includes('localhost') ? 'http://localhost:8080/events' : '/events';
 
 const useSSE = () => {
   const appCtx = useContext(AppContext);

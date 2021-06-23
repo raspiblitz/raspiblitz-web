@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import AppInfo from '../../components/AppsComponents/AppInfo/AppInfo';
 import AppCard from '../../components/AppsComponents/AppCard/AppCard';
 import useSSE from '../../hooks/use-sse';
+import { createRequest } from '../../util/util';
 
 export const Apps = () => {
   const { availableApps, isInstalling } = useSSE();
@@ -9,10 +10,8 @@ export const Apps = () => {
   const [id, setId] = useState<string | null>(null);
 
   const installHandler = (id: string) => {
-    fetch('http://localhost:8080/install/', {
-      method: 'POST',
-      body: JSON.stringify({ id })
-    });
+    const req = createRequest('install', 'POST', JSON.stringify({ id }));
+    fetch(req);
   };
 
   const openDetailsHandler = (id: string) => {
@@ -26,7 +25,7 @@ export const Apps = () => {
 
   // call to get available apps
   useEffect(() => {
-    fetch('http://localhost:8080/apps');
+    fetch(createRequest('apps', 'GET'));
   }, []);
 
   return (

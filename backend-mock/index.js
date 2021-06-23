@@ -20,6 +20,7 @@ app.listen(PORT, () => {
  * Main SSE Handler
  */
 const eventsHandler = (request, response) => {
+  console.log('call to /events');
   const headers = {
     'Content-Type': 'text/event-stream',
     Connection: 'keep-alive',

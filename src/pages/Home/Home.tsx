@@ -10,6 +10,7 @@ import WalletCard from '../../components/HomeComponents/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
 import useSSE from '../../hooks/use-sse';
+import { createRequest } from '../../util/util';
 
 export const Home: FC = (props) => {
   const { homeState, transactions, appStatus } = useSSE();
@@ -21,9 +22,9 @@ export const Home: FC = (props) => {
 
   useEffect(() => {
     Promise.allSettled([
-      fetch('http://localhost:8080/syncstatus'),
-      fetch('http://localhost:8080/transactions'),
-      fetch('http://localhost:8080/appstatus')
+      fetch(createRequest('syncstatus', 'GET')),
+      fetch(createRequest('transactions', 'GET')),
+      fetch(createRequest('appstatus', 'GET'))
     ]).then(() => {});
   }, []);
 

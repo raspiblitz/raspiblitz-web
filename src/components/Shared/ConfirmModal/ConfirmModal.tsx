@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useHistory } from 'react-router';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
+import { createRequest } from '../../../util/util';
 
 const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const appCtx = useContext(AppContext);
@@ -10,11 +11,9 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const btnClasses = 'text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded w-1/2 text-white';
 
   const shutdownHandler = async () => {
-    const respObj = fetch('http://localhost:8080' + props.confirmEndpoint, {
-      method: 'POST',
-      body: JSON.stringify({})
-    });
-    const status = await (await respObj).status;
+    const req = createRequest(props.confirmEndpoint, 'POST');
+    const resp = fetch(req);
+    const status = await (await resp).status;
     if (status === 200) {
       appCtx.setIsLoggedIn(false);
       history.push('/login');

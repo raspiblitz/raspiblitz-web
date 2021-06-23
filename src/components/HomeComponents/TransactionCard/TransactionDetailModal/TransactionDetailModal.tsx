@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import ModalDialog from '../../../../container/ModalDialog/ModalDialog';
+import { createRequest } from '../../../../util/util';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import LNDetails from './LNDetails/LNDetails';
 import OnchainDetails from './OnchainDetails/OnchainDetails';
@@ -14,11 +15,12 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
     setIsLoading(true);
 
     const fetchData = async () => {
-      const req = await fetch('http://localhost:8080/tx/' + id);
+      const req = createRequest(`tx/${id}`, 'GET');
+      const resp = await fetch(req);
 
-      const reqObj = await req.json();
+      const respObj = await resp.json();
       setIsLoading(false);
-      setTxDetails(reqObj);
+      setTxDetails(respObj);
     };
 
     fetchData();

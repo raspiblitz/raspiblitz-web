@@ -5,6 +5,7 @@ import { ReactComponent as RaspiBlitzLogo } from '../../assets/RaspiBlitz_Logo_M
 import { ReactComponent as RaspiBlitzLogoDark } from '../../assets/RaspiBlitz_Logo_Main_Negative.svg';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner/LoadingSpinner';
 import { AppContext } from '../../store/app-context';
+import { createRequest } from '../../util/util';
 
 const Login: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,15 +20,9 @@ const Login: FC = () => {
     setIsUnauthorized(false);
     setIsError(false);
     setIsLoading(true);
-    const respObj = fetch('http://localhost:8080/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        password: passwordInput.current?.value
-      })
-    });
+    const password = passwordInput.current?.value;
+    const req = createRequest('login', 'POST', JSON.stringify({ password }));
+    const respObj = fetch(req);
     const resp = await respObj.catch(() => setIsError(true));
     setIsLoading(false);
     if (resp && resp.status === 200) {
