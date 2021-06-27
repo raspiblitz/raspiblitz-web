@@ -137,7 +137,8 @@ const appDetails = (req) => {
     description: getDescription(),
     repository: 'https://github.com/janoside/btc-rpc-explorer',
     version: '1.2.3',
-    images: [img1, img2, img3]
+    images: [img1, img2, img3],
+    installed: true
   };
   return details;
 };
