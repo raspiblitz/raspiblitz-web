@@ -29,7 +29,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
         {/* Content */}
         <div className='w-3/4 justify-center items-start flex flex-col text-xl'>
           <div>{props.name}</div>
-          <div className='text-gray-500 text-base overflow-ellipsis dark:text-gray-400'>{props.description}</div>
+          <div className='text-gray-500 text-base overflow-ellipsis dark:text-gray-200'>{props.description}</div>
         </div>
       </div>
       <div className='h-2/6 py-2 flex flex-row gap-2'>
