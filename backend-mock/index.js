@@ -123,6 +123,22 @@ app.post('/install', (req, res) => {
   res.status(200).send();
 });
 
+app.post('/install', (req, res) => {
+  console.log('call to /install for app', req.body.id);
+  // send information that btc-pay is currently installing
+  util.sendSSE('install', { id: 'btc-pay' });
+  setTimeout(() => {
+    apps.installApp();
+  }, 5000);
+  res.status(200).send();
+});
+
+app.post('/uninstall', (req, res) => {
+  console.log('call to /uninstall for app', req.body.id);
+  // TODO
+  res.status(200).send();
+});
+
 app.get('/appdetails/:id', (req, res) => {
   console.log('call to appdetails with id: ' + req.params.id);
   const details = apps.appDetails(req);

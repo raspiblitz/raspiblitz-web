@@ -40,8 +40,8 @@ const Login: FC = () => {
   return (
     <div className='w-screen h-screen flex flex-col justify-center items-center'>
       <MoonLogo className='h-8 fixed right-4 top-4 text-dark dark:text-yellow-500' onClick={appCtx.toggleDarkMode} />
-      <RaspiBlitzLogo className='h-10 my-2 block dark:hidden' />
-      <RaspiBlitzLogoDark className='h-10 my-2 hidden dark:block' />
+      {!appCtx.darkMode && <RaspiBlitzLogo className='h-10 my-2 block' />}
+      {appCtx.darkMode && <RaspiBlitzLogoDark className='h-10 my-2 block' />}
       {isLoading && (
         <div className='py-5'>
           <LoadingSpinner color='text-yellow-500' />
@@ -49,11 +49,12 @@ const Login: FC = () => {
       )}
       {!isLoading && (
         <>
-          <form className='flex flex-col justify-center items-center py-5' onSubmit={loginHandler}>
+          <form className='flex flex-col justify-center items-left py-5' onSubmit={loginHandler}>
+            <label className='label-underline'>Enter Password A</label>
             <input
               ref={passwordInput}
               type='password'
-              placeholder='Enter Password A'
+              placeholder='Password A'
               className='input-underline my-5 w-8/12 md:w-96'
             />
             <button type='submit' className='bg-yellow-500 rounded px-4 py-2 m-4 text-white hover:bg-yellow-400'>
