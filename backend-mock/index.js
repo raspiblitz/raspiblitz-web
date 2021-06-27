@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const apps = require('./apps');
 const sync = require('./sync');
 const auth = require('./auth');
@@ -124,21 +123,7 @@ app.post('/install', (req, res) => {
 
 app.get('/appdetails/:id', (req, res) => {
   console.log('call to appdetails with id: ' + req.params.id);
-  const img1 =
-    'data:image/png;base64,' + Buffer.from(fs.readFileSync('images/btc-rpc-1.png'), 'binary').toString('base64');
-  const img2 =
-    'data:image/png;base64,' + Buffer.from(fs.readFileSync('images/btc-rpc-2.png'), 'binary').toString('base64');
-  const img3 =
-    'data:image/png;base64,' + Buffer.from(fs.readFileSync('images/btc-rpc-3.png'), 'binary').toString('base64');
-  const details = {
-    id: req.params.id,
-    name: 'BTC RPC Explorer',
-    author: 'Dan Janosik',
-    description: 'This is some description',
-    repository: 'https://github.com/janoside/btc-rpc-explorer',
-    version: '1.2.3',
-    images: [img1, img2, img3]
-  };
+  const details = apps.appDetails(req);
   res.send(details);
 });
 

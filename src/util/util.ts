@@ -10,6 +10,5 @@ export function createRequest(url: string, method: string, body?: any): Request 
     mode: 'cors',
     body: body || undefined
   } as RequestInit;
-  console.log(options);
   return new Request(fullUrl, options);
 }

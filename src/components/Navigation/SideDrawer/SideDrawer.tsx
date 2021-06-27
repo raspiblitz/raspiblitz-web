@@ -5,7 +5,7 @@ import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 export const SideDrawer: FC = () => {
-  const navLinkClasses = 'inline-block py-4 pl-6 w-full dark:text-gray-300 flex items-center opacity-60';
+  const navLinkClasses = 'flex items-center py-4 pl-6 w-full dark:text-gray-300 opacity-60';
   const navLinkActiveClasses = 'text-yellow-500 dark:text-yellow-500 opacity-100';
 
   return (
