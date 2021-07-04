@@ -1,10 +1,12 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as AppIcon } from '../../../assets/apps.svg';
 import { ReactComponent as HomeLogo } from '../../../assets/home.svg';
 import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 const BottomNav: FC = () => {
+  const { t } = useTranslation();
   const navLinkClasses = 'dark:text-gray-300';
   const navLinkActiveClasses = 'text-yellow-500 dark:text-yellow-500';
   const iconClasses = 'w-8 h-8 mx-auto';
@@ -16,15 +18,15 @@ const BottomNav: FC = () => {
       <footer className='md:hidden z-10 flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 bg-white dark:bg-gray-800 transition-colors'>
         <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
           <HomeLogo className={iconClasses} />
-          <div className={divClasses}>Home</div>
+          <div className={divClasses}>{t('navigation.home')}</div>
         </NavLink>
         <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
           <AppIcon className={iconClasses} />
-          <div className={divClasses}>Apps</div>
+          <div className={divClasses}>{t('navigation.apps')}</div>
         </NavLink>
         <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
           <SettingsIcon className={iconClasses} />
-          <div className={divClasses}>Settings</div>
+          <div className={divClasses}>{t('navigation.settings')}</div>
         </NavLink>
       </footer>
     </>

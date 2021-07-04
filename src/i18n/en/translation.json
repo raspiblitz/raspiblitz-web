@@ -1,11 +1,28 @@
 {
   "translation": {
+    "navigation": {
+      "home": "Home",
+      "apps": "Apps",
+      "settings": "Settings"
+    },
     "login": {
       "enter_pass": "Enter Password A",
       "enter_pass_placeholder": "Password A",
       "login": "Login",
       "invalid_pass": "Invalid Password",
       "error": "An error occured"
+    },
+    "home": {},
+    "apps": {},
+    "settings": {
+      "change_pw": "Change Password",
+      "old_pw": "Old Password",
+      "new_pw": "New Password",
+      "change": "Change",
+      "reboot": "Reboot",
+      "shutdown": "Shutdown",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
     }
   }
 }

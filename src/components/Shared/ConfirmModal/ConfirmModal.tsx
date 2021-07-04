@@ -1,11 +1,13 @@
 import { FC, useContext } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
 import { createRequest } from '../../../util/util';
 
 const ConfirmModal: FC<ConfirmModalProps> = (props) => {
+  const { t } = useTranslation();
   const appCtx = useContext(AppContext);
   const history = useHistory();
   const btnClasses = 'w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
@@ -25,10 +27,10 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
       {props.confirmText}
       <div className='py-3 flex flex-col xl:flex-row'>
         <button className={btnClasses} onClick={props.onClose}>
-          Cancel
+          {t('settings.cancel')}
         </button>
         <button className={btnClasses} onClick={shutdownHandler}>
-          Yes
+          {t('settings.confirm')}
         </button>
       </div>
     </ModalDialog>,
