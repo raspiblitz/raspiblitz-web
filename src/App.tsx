@@ -5,6 +5,7 @@ import BottomNav from './components/Navigation/BottomNav/BottomNav';
 import Header from './components/Navigation/Header/Header';
 import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
 import LoadingScreen from './container/LoadingScreen/LoadingScreen';
+import './i18n/config';
 import { AppContext } from './store/app-context';
 
 const Login = lazy(() => import('./pages/Login/Login'));

@@ -1,0 +1,11 @@
+{
+  "translation": {
+    "login": {
+      "enter_pass": "Enter Password A",
+      "enter_pass_placeholder": "Password A",
+      "login": "Login",
+      "invalid_pass": "Invalid Password",
+      "error": "An error occured"
+    }
+  }
+}

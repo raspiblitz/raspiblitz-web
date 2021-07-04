@@ -6,8 +6,10 @@ import { ReactComponent as RaspiBlitzLogoDark } from '../../assets/RaspiBlitz_Lo
 import LoadingSpinner from '../../components/Shared/LoadingSpinner/LoadingSpinner';
 import { AppContext } from '../../store/app-context';
 import { createRequest } from '../../util/util';
+import { useTranslation } from 'react-i18next';
 
 const Login: FC = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [isUnauthorized, setIsUnauthorized] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -50,19 +52,19 @@ const Login: FC = () => {
       {!isLoading && (
         <>
           <form className='flex flex-col justify-center items-left py-5' onSubmit={loginHandler}>
-            <label className='label-underline'>Enter Password A</label>
+            <label className='label-underline'>{t('login.enter_pass')}</label>
             <input
               ref={passwordInput}
               type='password'
-              placeholder='Password A'
+              placeholder={t('login.enter_pass_placeholder')}
               className='input-underline my-5 w-8/12 md:w-96'
             />
             <button type='submit' className='bg-yellow-500 rounded px-4 py-2 m-4 text-white hover:bg-yellow-400'>
-              Login
+              {t('login.login')}
             </button>
           </form>
-          {isUnauthorized && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>Invalid Password</p>}
-          {isError && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>An error occured</p>}
+          {isUnauthorized && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>{t('login.invalid_pass')}</p>}
+          {isError && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>{t('login.error')}</p>}
         </>
       )}
     </div>
