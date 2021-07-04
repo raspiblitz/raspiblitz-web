@@ -8,7 +8,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const btnClasses = 'text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded w-1/2 text-white';
+  const btnClasses = 'w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
 
   const changePasswordHandler = async () => {
     setIsLoading(true);
@@ -60,7 +60,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
               required
             />
           </div>
-          <div className='flex w-full md:w-2/3 pt-2'>
+          <div className='flex flex-col xl:flex-row w-full md:w-2/3 pt-2 text-white'>
             <button className={btnClasses} onClick={props.onClose}>
               Cancel
             </button>

@@ -38,7 +38,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
             href={props.address}
             target='_blank'
             rel='noreferrer'
-            className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300'
+            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400'
           >
             <LinkIcon />
             &nbsp;Open
@@ -47,15 +47,15 @@ export const AppCard: FC<AppCardProps> = (props) => {
         {props.installed && !props.address && (
           <button
             disabled={true}
-            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white dark:text-black bg-gray-400 cursor-default'
+            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-gray-400 cursor-default'
           >
-            &nbsp;No page available
+            No page available
           </button>
         )}
         {!props.installed && (
           <button
             disabled={props.installing}
-            className='w-1/2 shadow-md flex justify-center items-center p-2 text-gray-700 dark:text-black bg-yellow-400 hover:bg-yellow-300 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none'
+            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none'
             onClick={() => props.onInstall(id)}
           >
             <PlusIcon />

@@ -8,7 +8,7 @@ import { createRequest } from '../../../util/util';
 const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const history = useHistory();
-  const btnClasses = 'text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded w-1/2 text-white';
+  const btnClasses = 'w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
 
   const shutdownHandler = async () => {
     const req = createRequest(props.confirmEndpoint, 'POST');
@@ -23,7 +23,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   return createPortal(
     <ModalDialog close={props.onClose}>
       {props.confirmText}
-      <div className='py-3 flex'>
+      <div className='py-3 flex flex-col xl:flex-row'>
         <button className={btnClasses} onClick={props.onClose}>
           Cancel
         </button>
