@@ -3,7 +3,8 @@
     "navigation": {
       "home": "Home",
       "apps": "Apps",
-      "settings": "Settings"
+      "settings": "Settings",
+      "back": "Back"
     },
     "login": {
       "enter_pass": "Enter Password A",
@@ -13,7 +14,16 @@
       "error": "An error occured"
     },
     "home": {},
-    "apps": {},
+    "apps": {
+      "open": "Open",
+      "install": "Install",
+      "uninstall": "Uninstall",
+      "info": "Info",
+      "no_page": "No page available",
+      "about": "About",
+      "author": "Author",
+      "source": "Source Code"
+    },
     "settings": {
       "change_pw": "Change Password",
       "old_pw": "Old Password",

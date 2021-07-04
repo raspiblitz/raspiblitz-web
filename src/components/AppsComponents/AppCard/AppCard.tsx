@@ -1,9 +1,11 @@
 import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as InfoIcon } from '../../../assets/info.svg';
 import { ReactComponent as LinkIcon } from '../../../assets/link.svg';
 import { ReactComponent as PlusIcon } from '../../../assets/plus.svg';
 
 export const AppCard: FC<AppCardProps> = (props) => {
+  const { t } = useTranslation();
   const [image, setImage] = useState('');
 
   const { id } = props;
@@ -41,7 +43,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
             className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400'
           >
             <LinkIcon />
-            &nbsp;Open
+            &nbsp;{t('apps.open')}
           </a>
         )}
         {props.installed && !props.address && (
@@ -49,7 +51,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
             disabled={true}
             className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-gray-400 cursor-default'
           >
-            No page available
+            {t('apps.no_page')}
           </button>
         )}
         {!props.installed && (
@@ -59,7 +61,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
             onClick={() => props.onInstall(id)}
           >
             <PlusIcon />
-            &nbsp;Install
+            &nbsp;{t('apps.install')}
           </button>
         )}
         <button
@@ -67,7 +69,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
           onClick={() => props.onOpenDetails(id)}
         >
           <InfoIcon />
-          &nbsp; Info
+          &nbsp;{t('apps.info')}
         </button>
       </div>
     </div>

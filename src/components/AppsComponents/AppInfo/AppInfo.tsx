@@ -1,8 +1,10 @@
 import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as ChevronLeft } from '../../../assets/chevron-left.svg';
 import { createRequest } from '../../../util/util';
 
 export const AppInfo: FC<AppInfoProps> = (props) => {
+  const { t } = useTranslation();
   const [iconImg, setIconImg] = useState('');
   const [imgs, setImgs] = useState<string[]>([]);
   const [resp, setResp] = useState<any>({});
@@ -48,7 +50,8 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
     <div className='mobile-container md:content-container w-full'>
       <div className='w-full text-lg font-bold px-5 p-9 dark:text-gray-200'>
         <button onClick={props.onClose} className='flex items-center outline-none'>
-          <ChevronLeft className='h-5 w-5 inline-block' /> Back
+          <ChevronLeft className='h-5 w-5 inline-block' />
+          {t('navigation.back')}
         </button>
       </div>
 
@@ -58,12 +61,12 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
         <div className='text-2xl px-5 dark:text-white'>{resp.name}</div>
         {!resp.installed && (
           <button className={`bg-green-400 ${buttonClasses}`} onClick={installHandler}>
-            Install
+            {t('apps.install')}
           </button>
         )}
         {resp.installed && (
           <button className={`bg-red-500 text-white ${buttonClasses}`} onClick={uninstallHandler}>
-            Uninstall
+            {t('apps.uninstall')}
           </button>
         )}
       </div>
@@ -87,11 +90,11 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
           <div className='text-lg'>
             {resp.name} v{resp.version}
           </div>
-          <div className='my-2 text-gray-500 dark:text-gray-300'>About</div>
+          <div className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.about')}</div>
           <div>{resp.description}</div>
-          <div className='my-2 text-gray-500 dark:text-gray-300'>Author</div>
+          <div className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.author')}</div>
           <div>{resp.author}</div>
-          <div className='my-2 text-gray-500 dark:text-gray-300'>Source Code</div>
+          <div className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.source')}</div>
           <a href={resp.repository} className='text-blue-400 dark:text-blue-300 underline'>
             {resp.repository}
           </a>
