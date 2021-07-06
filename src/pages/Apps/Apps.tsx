@@ -3,8 +3,10 @@ import AppInfo from '../../components/AppsComponents/AppInfo/AppInfo';
 import AppCard from '../../components/AppsComponents/AppCard/AppCard';
 import useSSE from '../../hooks/use-sse';
 import { createRequest } from '../../util/util';
+import { useTranslation } from 'react-i18next';
 
 export const Apps = () => {
+  const {t} = useTranslation();
   const { availableApps, isInstalling } = useSSE();
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [id, setId] = useState<string | null>(null);
@@ -34,7 +36,7 @@ export const Apps = () => {
       {!isDetailsOpen && (
         <div className='mobile-container md:content-container w-full dark:text-white overflow-y-auto transition-colors'>
           <div className='h-full flex flex-wrap flex-1'>
-            <div className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>Installed</div>
+            <div className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>{t('apps.installed')}</div>
             {availableApps
               .filter((app: any) => app.installed)
               .map((app: any, index) => {
@@ -53,7 +55,7 @@ export const Apps = () => {
                   </div>
                 );
               })}
-            <div className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>Available Apps</div>
+            <div className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>{t('apps.available')}</div>
             {availableApps
               .filter((app: any) => !app.installed)
               .map((app: any, index) => {

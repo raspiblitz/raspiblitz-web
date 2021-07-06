@@ -1,15 +1,17 @@
 import { ChangeEventHandler, FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as FlipIcon } from '../../../assets/flip-vertical.svg';
 import { AppContext } from '../../../store/app-context';
 import styles from './AmountInput.module.css';
 
 const AmountInput: FC<AmountInputProps> = (props) => {
+  const { t } = useTranslation();
   const appCtx = useContext(AppContext);
 
   return (
     <>
       <label htmlFor='amount' className='label-underline'>
-        Amount
+        {t('wallet.amount')}
       </label>
       <div className='flex flex-row'>
         <input

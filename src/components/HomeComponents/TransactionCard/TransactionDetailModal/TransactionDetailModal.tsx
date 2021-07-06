@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../../container/ModalDialog/ModalDialog';
 import { createRequest } from '../../../../util/util';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
@@ -6,6 +7,7 @@ import LNDetails from './LNDetails/LNDetails';
 import OnchainDetails from './OnchainDetails/OnchainDetails';
 
 export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) => {
+  const { t } = useTranslation();
   const [txDetails, setTxDetails] = useState<any>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,7 +33,7 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
         <div className='flex flex-col'>
-          <div className='font-extrabold'>Transaction Details</div>
+          <div className='font-extrabold'>{t('tx.tx_details')}</div>
           {txDetails.type === 'onchain' && (
             <a
               className='text-blue-400 underline break-all py-2'
@@ -39,7 +41,7 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
               rel='noreferrer'
               href={`https://mempool.space/tx/${txDetails.hash}`}
             >
-              View on Mempool
+              {t('tx.mempool')}
             </a>
           )}
           {txDetails.type === 'onchain' && <OnchainDetails details={txDetails} />}

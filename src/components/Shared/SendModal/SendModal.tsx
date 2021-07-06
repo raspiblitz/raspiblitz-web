@@ -1,10 +1,12 @@
 import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
 import { createRequest } from '../../../util/util';
 import AmountInput from '../AmountInput/AmountInput';
 
 const SendModal: FC<SendModalProps> = (props) => {
+  const { t } = useTranslation();
   const appCtx = useContext(AppContext);
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState(0);
@@ -47,15 +49,15 @@ const SendModal: FC<SendModalProps> = (props) => {
   return (
     <ModalDialog close={props.onClose}>
       <form className='px-5' onSubmit={sendTransactionHandler}>
-        <div className='text-xl font-bold'>Send Funds</div>
+        <div className='text-xl font-bold'>{t('wallet.send_funds')}</div>
         <div className='my-5'>
-          <span className='font-bold'>Balance:&nbsp;</span>
+          <span className='font-bold'>{t('wallet.balance')}:&nbsp;</span>
           {balance} {appCtx.unit}
         </div>
         <div className='my-5 flex flex-col justify-center text-center items-center'>
           <div className='w-full md:w-10/12 py-1'>
             <label htmlFor='address' className='label-underline'>
-              Address
+              {t('wallet.address')}
             </label>
             <input
               id='address'
@@ -71,7 +73,7 @@ const SendModal: FC<SendModalProps> = (props) => {
 
           <div className='w-full md:w-10/12 py-1'>
             <label htmlFor='fee' className='label-underline'>
-              Fee
+              {t('tx.fee')}
             </label>
             <div className='flex'>
               <input
@@ -87,7 +89,7 @@ const SendModal: FC<SendModalProps> = (props) => {
 
           <div className='w-full md:w-10/12 py-1'>
             <label htmlFor='comment' className='label-underline'>
-              Comment
+              {t('tx.comment')}
             </label>
             <input
               id='comment'
@@ -104,7 +106,7 @@ const SendModal: FC<SendModalProps> = (props) => {
             type='submit'
             className='text-center h-10 bg-yellow-500 hover:bg-yellow-400 dark:hover:bg-yellow-400 rounded-lg text-white w-full'
           >
-            Send
+            {t('wallet.send')}
           </button>
         </div>
       </form>

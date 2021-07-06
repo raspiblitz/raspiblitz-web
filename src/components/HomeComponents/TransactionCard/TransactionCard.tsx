@@ -1,9 +1,12 @@
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as ArrowDownIcon } from '../../../assets/arrow-down.svg';
 import Transaction from './Transaction/Transaction';
 
+const MAX_ITEMS = 6;
+
 export const TransactionCard: FC<TransactionCardProps> = (props) => {
-  const MAX_ITEMS = 6;
+  const { t } = useTranslation();
   const [page, setPage] = useState(0);
 
   const pageForwardHandler = () => {
@@ -19,7 +22,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
   return (
     <div className='p-5 h-full'>
       <div className='bd-card flex flex-col transition-colors min-h-144 md:min-h-0'>
-        <div className='font-bold text-lg'>Transactions</div>
+        <div className='font-bold text-lg'>{t('tx.transactions')}</div>
         <ul className='mt-auto'>
           {currentPage.map((transaction: any, index: number) => {
             return (

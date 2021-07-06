@@ -1,7 +1,9 @@
 import { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AppContext } from '../../../store/app-context';
 
 export const LightningCard: FC<LightningCardProps> = (props) => {
+  const { t } = useTranslation();
   const appCtx = useContext(AppContext);
 
   const balance = appCtx.unit === 'BTC' ? props.channelBalance : props.channelBalance * 100_000_000;
@@ -9,24 +11,24 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
   return (
     <div className='p-5 h-full'>
       <div className='bd-card transition-colors'>
-        <h2 className='font-bold text-lg'>Lightning</h2>
+        <h2 className='font-bold text-lg'>{t('home.lightning')}</h2>
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>Version</h4>
+            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.version')}</h4>
             <div>{props.version}</div>
           </div>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>Status</h4>
+            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.status')}</h4>
             <div>{props.status}</div>
           </div>
         </div>
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>Channels</h4>
+            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.channel')}</h4>
             <div>{`${props.channelOnline} / ${props.channelTotal}`}</div>
           </div>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>Channcel Balance</h4>
+            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.channel_balance')}</h4>
             <div>
               {balance.toLocaleString()} {appCtx.unit}
             </div>

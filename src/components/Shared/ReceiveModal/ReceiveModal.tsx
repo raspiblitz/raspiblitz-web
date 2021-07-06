@@ -1,11 +1,13 @@
 import QRCode from 'qrcode.react';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { createRequest } from '../../../util/util';
 import AmountInput from '../AmountInput/AmountInput';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
+  const { t } = useTranslation();
   const [invoiceType, setInvoiceType] = useState('lightning');
   const [buttonText, setButtonText] = useState('Copy to Clipboard');
   const [address, setAddress] = useState('');
@@ -49,10 +51,10 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
   const copyToClipboardHandler = () => {
     navigator.clipboard.writeText(address);
-    setButtonText('✅ Copied!');
+    setButtonText('✅ ' + t('wallet.copied'));
 
     setTimeout(() => {
-      setButtonText('Copy to Clipboard');
+      setButtonText(t('wallet.copy_clipboard'));
     }, 3000);
   };
 
@@ -65,12 +67,12 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
   return (
     <ModalDialog close={props.onClose}>
-      {showLnInvoice && <div className='text-xl font-bold'>Create a Lightning Invoice</div>}
-      {!showLnInvoice && <div className='text-xl font-bold'>Fund your Wallet</div>}
+      {showLnInvoice && <div className='text-xl font-bold'>{t('wallet.create_invoice_ln')}</div>}
+      {!showLnInvoice && <div className='text-xl font-bold'>{t('wallet.fund')}</div>}
       <div className='pt-5 pb-1 flex justify-center'>
         <div className='px-2'>
           <label htmlFor='lightning' className={`${radioStyles} ${lnStyle}`}>
-            Lightning
+            {t('home.lightning')}
           </label>
           <input
             id='lightning'
@@ -83,7 +85,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
         </div>
         <div className='px-2'>
           <label htmlFor='onchain' className={`${radioStyles} ${walletStyle}`}>
-            Fund Wallet
+            {t('wallet.fund_short')}
           </label>
           <input
             id='onchain'
@@ -95,7 +97,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           />
         </div>
       </div>
-      {address && <div className='my-5'>Scan this QR Code or copy the below address to receive funds</div>}
+      {address && <div className='my-5'>{t('wallet.scan_qr')}</div>}
       {address && (
         <div className='my-5 flex justify-center'>
           <QRCode value={address} />

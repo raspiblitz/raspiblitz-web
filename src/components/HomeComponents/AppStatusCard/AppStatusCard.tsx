@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
+  const { t } = useTranslation();
   const [image, setImage] = useState('');
 
   const { id } = props;
@@ -16,7 +18,10 @@ export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
       });
   }, [id]);
 
-  const statusColor = props.status === 'online' ? 'text-green-400' : 'text-red-500';
+  const online = props.status === 'online';
+  const statusColor = online ? 'text-green-400' : 'text-red-500';
+  const status = online ? t('apps.online') : t('apps.offline');
+
   return (
     <div className='p-5 h-auto'>
       <div className='bd-card transition-colors'>
@@ -28,7 +33,7 @@ export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
           {/* Content */}
           <div className='w-3/4 pl-5 justify-center items-start flex flex-col text-xl'>
             <div className='dark:text-white'>{props.name}</div>
-            <div className={`pt-3 ${statusColor}`}>{props.status}</div>
+            <div className={`pt-3 ${statusColor}`}>{status}</div>
           </div>
         </div>
       </div>
