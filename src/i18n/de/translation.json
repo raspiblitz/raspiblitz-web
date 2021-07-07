@@ -5,7 +5,8 @@
       "enter_pass_placeholder": "Passwort A"
     },
     "settings": {
-      "language": "Sprache"
+      "language": "Sprache",
+      "curr_lang": "Aktuelle Sprache"
     }
   }
 }

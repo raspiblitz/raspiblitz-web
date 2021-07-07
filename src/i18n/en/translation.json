@@ -81,7 +81,8 @@
       "shutdown": "Shutdown",
       "cancel": "Cancel",
       "confirm": "Confirm",
-      "language": "Language"
+      "language": "Language",
+      "curr_lang": "Current language"
     }
   }
 }
