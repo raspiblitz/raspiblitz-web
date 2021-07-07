@@ -6,7 +6,8 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-create-react-app',
-    'storybook-addon-themes'
+    'storybook-addon-themes',
+    '@storybook/addon-toolbars'
   ],
   webpackFinal: async (config) => {
     config.module.rules.push({
