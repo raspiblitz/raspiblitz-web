@@ -6,7 +6,7 @@ import { createRequest } from '../../util/util';
 import { useTranslation } from 'react-i18next';
 
 export const Apps = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { availableApps, isInstalling } = useSSE();
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [id, setId] = useState<string | null>(null);
@@ -34,7 +34,7 @@ export const Apps = () => {
     <>
       {isDetailsOpen && <AppInfo id={id} onClose={closeDetailsHandler} />}
       {!isDetailsOpen && (
-        <div className='mobile-container md:content-container w-full dark:text-white overflow-y-auto transition-colors'>
+        <div className='mobile-container md:content-container page-container dark:text-white'>
           <div className='h-full flex flex-wrap flex-1'>
             <div className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>{t('apps.installed')}</div>
             {availableApps
@@ -55,7 +55,9 @@ export const Apps = () => {
                   </div>
                 );
               })}
-            <div className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>{t('apps.available')}</div>
+            <div className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>
+              {t('apps.available')}
+            </div>
             {availableApps
               .filter((app: any) => !app.installed)
               .map((app: any, index) => {

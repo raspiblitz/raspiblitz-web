@@ -13,23 +13,20 @@ const BottomNav: FC = () => {
   const divClasses = 'text-center mx-1';
 
   return (
-    <>
-      <div className='md:hidden h-16 invisible'></div>
-      <footer className='md:hidden z-10 flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 bg-white dark:bg-gray-800 transition-colors'>
-        <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-          <HomeLogo className={iconClasses} />
-          <div className={divClasses}>{t('navigation.home')}</div>
-        </NavLink>
-        <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-          <AppIcon className={iconClasses} />
-          <div className={divClasses}>{t('navigation.apps')}</div>
-        </NavLink>
-        <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-          <SettingsIcon className={iconClasses} />
-          <div className={divClasses}>{t('navigation.settings')}</div>
-        </NavLink>
-      </footer>
-    </>
+    <footer className='md:hidden z-10 flex flex-wrap items-center justify-evenly h-16 w-full shadow-inner fixed bottom-0 border-t-2 bg-white dark:bg-gray-800 transition-colors'>
+      <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+        <HomeLogo className={iconClasses} />
+        <div className={divClasses}>{t('navigation.home')}</div>
+      </NavLink>
+      <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+        <AppIcon className={iconClasses} />
+        <div className={divClasses}>{t('navigation.apps')}</div>
+      </NavLink>
+      <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+        <SettingsIcon className={iconClasses} />
+        <div className={divClasses}>{t('navigation.settings')}</div>
+      </NavLink>
+    </footer>
   );
 };
 
