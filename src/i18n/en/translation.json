@@ -4,7 +4,9 @@
       "home": "Home",
       "apps": "Apps",
       "settings": "Settings",
-      "back": "Back"
+      "back": "Back",
+      "dark_mode": "Dark Mode",
+      "display_sats": "Display Sats"
     },
     "login": {
       "enter_pass": "Enter password A",
@@ -78,7 +80,8 @@
       "reboot": "Reboot",
       "shutdown": "Shutdown",
       "cancel": "Cancel",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "language": "Language"
     }
   }
 }

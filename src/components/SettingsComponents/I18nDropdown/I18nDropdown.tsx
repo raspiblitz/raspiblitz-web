@@ -1,0 +1,52 @@
+import { ChangeEvent, FC, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { resources } from '../../../i18n/config';
+
+const I18nDropdown: FC = () => {
+  const { t, i18n } = useTranslation();
+  const selectRef = useRef<HTMLSelectElement>(null);
+  const [saveLang, setSaveLang] = useState(false);
+
+  const langs = Object.keys(resources);
+
+  const dropdownHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (event.target.value !== i18n.language) {
+      setSaveLang(true);
+    } else {
+      setSaveLang(false);
+    }
+  };
+
+  const saveLangHandler = () => {
+    i18n.changeLanguage(selectRef.current?.value);
+    setSaveLang(false);
+  };
+
+  return (
+    <div className='w-full lg:w-1/3 dark:text-white transition-colors box-border pt-5 px-5'>
+      <div className='relative bg-white dark:bg-gray-800 p-5 rounded shadow-xl flex justify-between'>
+        <label htmlFor='lngSelect' className='font-bold'>
+          {t('settings.language')}
+        </label>
+        <select id='lngSelect' ref={selectRef} onChange={dropdownHandler} className='border w-1/3'>
+          {langs.map((lang, i) => {
+            return (
+              <option key={i} value={lang}>
+                {lang}
+              </option>
+            );
+          })}
+        </select>
+        <button
+          onClick={saveLangHandler}
+          disabled={!saveLang}
+          className='w-1/3 shadow-xl rounded text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400'
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default I18nDropdown;

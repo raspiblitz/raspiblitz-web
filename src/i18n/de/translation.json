@@ -3,6 +3,9 @@
     "login": {
       "enter_pass": "Passwort A eingeben",
       "enter_pass_placeholder": "Passwort A"
+    },
+    "settings": {
+      "language": "Sprache"
     }
   }
 }

@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ChangePwModal from '../../components/SettingsComponents/ChangePwModal/ChangePwModal';
+import I18nDropdown from '../../components/SettingsComponents/I18nDropdown/I18nDropdown';
 import ConfirmModal from '../../components/Shared/ConfirmModal/ConfirmModal';
 import ActionBox from '../../container/ActionBox/ActionBox';
 
@@ -36,6 +37,7 @@ const Settings: FC = () => {
 
   return (
     <div className='mobile-container md:content-container overflow-y-auto flex flex-col w-full dark:text-white'>
+      <I18nDropdown />
       <ActionBox name={t('settings.change_pw')} actionName={t('settings.change')} action={showPwModalHandler} />
       <ActionBox name={t('settings.reboot')} actionName={t('settings.reboot')} action={showRebootModalHandler} />
       <ActionBox name={t('settings.shutdown')} actionName={t('settings.shutdown')} action={showShutdownModalHandler} />
