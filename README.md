@@ -14,6 +14,8 @@ If you want to bring the Raspiblitz WebUI to other languages, please help us tra
 
 ### Run Frontend & mock backend
 
+You need to install [Node.js](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/) first.
+
 Run `yarn install` & then `yarn start` to start the development server for the Frontend.
 
 To run the mock backend open another terminal, `cd` into [backend-mock](./backend-mock) and run `yarn install` then `yarn start` in that folder.
