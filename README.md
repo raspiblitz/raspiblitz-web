@@ -8,6 +8,12 @@ Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.co
 
 ## Development
 
+### Help translating
+
+This project uses [Weblate](https://hosted.weblate.org/projects/raspiblitz-web/) for translations.
+
+If you want to help this project in other languages, please help us translate it! :)
+
 ### Run Frontend & mock backend
 
 Run `yarn install` & then `yarn start` to start the development server for the Frontend.
