@@ -8,7 +8,7 @@ Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.co
 
 ## Development
 
-### Help translating
+### Translation
 
 This project uses [Weblate](https://hosted.weblate.org/projects/raspiblitz-web/) for translations.
 
