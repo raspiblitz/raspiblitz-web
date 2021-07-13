@@ -6,6 +6,10 @@ In collaboration with [Bitcoin Design](https://bitcoin.design/).
 
 Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.com/).
 
+## Translations
+
+If you want to bring the Raspiblitz WebUI to other languages, please help us translate it via [Weblate](https://hosted.weblate.org/projects/raspiblitz-web/translations/) :)
+
 ## Development
 
 ### Run Frontend & mock backend
