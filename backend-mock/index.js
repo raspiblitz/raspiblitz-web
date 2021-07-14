@@ -48,7 +48,7 @@ const eventsHandler = (request, response) => {
 /**
  * SSE Handler call
  */
-app.get('/events', eventsHandler);
+app.get('/sse/subscribe', eventsHandler);
 
 /***
  * AUTH
