@@ -1,4 +1,5 @@
-import { lazy, Suspense, useContext } from 'react';
+import axios from 'axios';
+import { lazy, Suspense, useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import BottomNav from './components/Navigation/BottomNav/BottomNav';
@@ -6,6 +7,7 @@ import Header from './components/Navigation/Header/Header';
 import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
 import LoadingScreen from './container/LoadingScreen/LoadingScreen';
 import './i18n/config';
+import Setup from './pages/Setup/Setup';
 import { AppContext } from './store/app-context';
 
 const Login = lazy(() => import('./pages/Login/Login'));
@@ -15,11 +17,41 @@ const Settings = lazy(() => import('./pages/Settings/Settings'));
 
 const App = () => {
   const appCtx = useContext(AppContext);
+  const [loading, setLoading] = useState(true);
+  const [setupDone, setSetupDone] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const req = await axios.get('http://localhost:8080/setup/status');
+      console.log(req.data);
+      if (req.data.progress === 100) {
+        setSetupDone(true);
+      } else {
+        setSetupDone(false);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  console.log('setup', setupDone, 'loading', loading);
 
   return (
     <Suspense fallback={<LoadingScreen />}>
       <div className='bg-gray-100 dark:bg-gray-700 transition-colors'>
-        {!appCtx.isLoggedIn && (
+        {!setupDone && loading && <LoadingScreen />}
+
+        {!setupDone && !loading && (
+          <BrowserRouter>
+            <Route path='/setup' component={Setup} />
+            <Route>
+              <Redirect to='/setup' />
+            </Route>
+          </BrowserRouter>
+        )}
+
+        {setupDone && !loading && !appCtx.isLoggedIn && (
           <BrowserRouter>
             <Switch>
               <Route path='/login' component={Login} />
@@ -30,7 +62,7 @@ const App = () => {
           </BrowserRouter>
         )}
 
-        {appCtx.isLoggedIn && (
+        {setupDone && !loading && appCtx.isLoggedIn && (
           <BrowserRouter>
             <Header></Header>
             <div className='flex'>

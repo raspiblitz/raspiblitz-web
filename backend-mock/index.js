@@ -51,6 +51,15 @@ const eventsHandler = (request, response) => {
 app.get('/sse/subscribe', eventsHandler);
 
 /***
+ * STATUS
+ * 100 if setup is done, otherwise step in the setup process
+ */
+app.get('/setup/status', (_, res) => {
+  console.log('call to setup/status');
+  res.send(JSON.stringify({ progress: 1 }));
+});
+
+/***
  * AUTH
  */
 
