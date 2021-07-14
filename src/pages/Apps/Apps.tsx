@@ -34,7 +34,7 @@ export const Apps = () => {
     <>
       {isDetailsOpen && <AppInfo id={id} onClose={closeDetailsHandler} />}
       {!isDetailsOpen && (
-        <div className='mobile-container md:content-container page-container dark:text-white'>
+        <div className='content-container page-container dark:text-white'>
           <div className='h-full flex flex-wrap flex-1'>
             <div className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>{t('apps.installed')}</div>
             {availableApps

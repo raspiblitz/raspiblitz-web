@@ -2,10 +2,6 @@
   min-height: calc(100vh - theme('spacing.16'));
 }
 
-.mobile-container {
-  min-height: calc(100vh - theme('spacing.32'));
-}
-
 /* Custom Scrollbar Chrome */
 ::-webkit-scrollbar {
   width: 5px;
