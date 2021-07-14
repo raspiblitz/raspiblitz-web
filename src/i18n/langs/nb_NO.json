@@ -1,0 +1,88 @@
+{
+    "translation": {
+        "navigation": {
+            "display_sats": "Vis SATS",
+            "dark_mode": "Mørk drakt",
+            "back": "Tilbake",
+            "apps": "Programmer",
+            "settings": "Innstillinger",
+            "home": "Hjem"
+        },
+        "home": {
+            "lightning": "Lynoverføring",
+            "channel_balance": "Kanalsaldo",
+            "channel": "Kanal",
+            "ssh": "SSH-innlogging",
+            "tor": "Tor",
+            "conn_details": "Tilkoblingsdetaljer",
+            "blocks_synced": "Blokker synkronisert",
+            "status": "Status",
+            "network": "Nettverk",
+            "version": "Versjon",
+            "bitcoin": "Bitcoin"
+        },
+        "login": {
+            "login": "Logg inn",
+            "error": "En feil inntraff",
+            "invalid_pass": "Ugyldig passord",
+            "enter_pass_placeholder": "Passord A",
+            "enter_pass": "Skriv inn passord A"
+        },
+        "apps": {
+            "author": "Utvikler",
+            "no_page": "Ingen side tilgjengelig",
+            "online": "tilkoblet",
+            "offline": "frakoblet",
+            "source": "Kildekode",
+            "about": "Om",
+            "info": "Info",
+            "uninstall": "Avinstaller",
+            "install": "Installer",
+            "open": "Åpne",
+            "available": "Tilgjengelige programmer",
+            "installed": "Installert"
+        },
+        "tx": {
+            "mempool": "Vis på mempool",
+            "comment": "Kommentar",
+            "value": "Verdi",
+            "request": "Forespørsel",
+            "description": "Beskrivelse",
+            "fee_rate": "Avgiftstakst",
+            "fee": "Avgift",
+            "date": "Dato",
+            "included_block": "Inkludert i blokk",
+            "confirmations": "Bekreftelser",
+            "txid": "Overførings-ID",
+            "tx_details": "Overføringsdetaljer",
+            "transactions": "Overføringer"
+        },
+        "wallet": {
+            "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta verdier",
+            "fund": "Fyll opp lommeboken din",
+            "fund_short": "Fyll opp lommebok",
+            "on_chain": "I kjeden",
+            "balance": "Saldo",
+            "address": "Adresse",
+            "send_funds": "Send verdier",
+            "create_invoice_ln": "Opprett en lynfaktura",
+            "copy_clipboard": "Kopier til utklippstavle",
+            "copied": "Kopiert",
+            "amount": "Beløp",
+            "send": "Send",
+            "receive": "Motta"
+        },
+        "settings": {
+            "curr_lang": "Nåværende språk",
+            "language": "Språk",
+            "confirm": "Bekreft",
+            "cancel": "Avbryt",
+            "shutdown": "Slå av",
+            "reboot": "Omstart",
+            "change": "Endre",
+            "new_pw": "Nytt passord",
+            "old_pw": "Gammelt passord",
+            "change_pw": "Endre passord"
+        }
+    }
+}
