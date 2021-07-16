@@ -101,7 +101,7 @@ const SendModal: FC<SendModalProps> = (props) => {
             />
           </div>
         </div>
-        <div className='inline-block w-4/5 lg:w-3/12 align-top mb-5'>
+        <div className='inline-block w-4/5 lg:w-3/12 align-top'>
           <button
             type='submit'
             className='text-center h-10 bg-yellow-500 hover:bg-yellow-400 dark:hover:bg-yellow-400 rounded-lg text-white w-full'
