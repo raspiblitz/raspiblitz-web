@@ -40,7 +40,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
             href={props.address}
             target='_blank'
             rel='noreferrer'
-            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400'
+            className='w-1/2 rounded shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400'
           >
             <LinkIcon />
             &nbsp;{t('apps.open')}
@@ -49,7 +49,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
         {props.installed && !props.address && (
           <button
             disabled={true}
-            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-gray-400 cursor-default'
+            className='w-1/2 rounded shadow-md flex justify-center items-center p-2 text-white bg-gray-400 cursor-default'
           >
             {t('apps.no_page')}
           </button>
@@ -57,7 +57,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
         {!props.installed && (
           <button
             disabled={props.installing}
-            className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none'
+            className='w-1/2 rounded shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none'
             onClick={() => props.onInstall(id)}
           >
             <PlusIcon />
@@ -65,7 +65,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
           </button>
         )}
         <button
-          className='w-1/2 shadow-md flex justify-center items-center p-2 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-300 dark:hover:text-black'
+          className='w-1/2 rounded shadow-md flex justify-center items-center p-2 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-300 dark:hover:text-black'
           onClick={() => props.onOpenDetails(id)}
         >
           <InfoIcon />
