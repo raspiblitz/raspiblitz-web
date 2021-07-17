@@ -10,6 +10,8 @@ Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.co
 
 If you want to bring the Raspiblitz WebUI to other languages, please help us translate it via [Weblate](https://hosted.weblate.org/projects/raspiblitz-web/translations/) :)
 
+Big thanks to our translators, which you can find in detail in this [README](src/i18n/README.md)
+
 ## Development
 
 ### Run Frontend & mock backend
