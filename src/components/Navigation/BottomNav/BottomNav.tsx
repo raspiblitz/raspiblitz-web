@@ -7,8 +7,8 @@ import { ReactComponent as SettingsIcon } from '../../../assets/settings.svg';
 
 const BottomNav: FC = () => {
   const { t } = useTranslation();
-  const navLinkClasses = 'dark:text-gray-300';
-  const navLinkActiveClasses = 'text-yellow-500 dark:text-yellow-500';
+  const navLinkClasses = 'dark:text-white opacity-80';
+  const navLinkActiveClasses = 'text-yellow-500 dark:text-yellow-500 opacity-100';
   const iconClasses = 'w-8 h-8 mx-auto';
   const divClasses = 'text-center mx-1';
 

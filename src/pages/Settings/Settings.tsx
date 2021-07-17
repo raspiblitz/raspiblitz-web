@@ -36,7 +36,7 @@ const Settings: FC = () => {
   };
 
   return (
-    <div className='mobile-container md:content-container page-container flex flex-col dark:text-white'>
+    <div className='content-container page-container flex flex-col dark:text-white'>
       <I18nDropdown />
       <ActionBox name={t('settings.change_pw')} actionName={t('settings.change')} action={showPwModalHandler} />
       <ActionBox name={t('settings.reboot')} actionName={t('settings.reboot')} action={showRebootModalHandler} />

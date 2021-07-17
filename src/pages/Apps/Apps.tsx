@@ -31,54 +31,50 @@ export const Apps = () => {
   }, []);
 
   return (
-    <>
+    <div className='content-container page-container dark:text-white'>
       {isDetailsOpen && <AppInfo id={id} onClose={closeDetailsHandler} />}
       {!isDetailsOpen && (
-        <div className='mobile-container md:content-container page-container dark:text-white'>
-          <div className='h-full flex flex-wrap flex-1'>
-            <div className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>{t('apps.installed')}</div>
-            {availableApps
-              .filter((app: any) => app.installed)
-              .map((app: any, index) => {
-                return (
-                  <div className='w-full lg:w-1/3 p-3' key={index}>
-                    <AppCard
-                      id={app.id}
-                      installing={false}
-                      name={app.name}
-                      description={app.description}
-                      onInstall={() => installHandler(app.id)}
-                      installed={app.installed}
-                      address={app.address}
-                      onOpenDetails={openDetailsHandler}
-                    />
-                  </div>
-                );
-              })}
-            <div className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>
-              {t('apps.available')}
-            </div>
-            {availableApps
-              .filter((app: any) => !app.installed)
-              .map((app: any, index) => {
-                return (
-                  <div className='w-full lg:w-1/3 p-3' key={index}>
-                    <AppCard
-                      id={app.id}
-                      name={app.name}
-                      installing={!!isInstalling}
-                      description={app.description}
-                      onInstall={() => installHandler(app.id)}
-                      installed={app.installed}
-                      onOpenDetails={openDetailsHandler}
-                    />
-                  </div>
-                );
-              })}
-          </div>
+        <div className='h-full flex flex-wrap flex-1'>
+          <div className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>{t('apps.installed')}</div>
+          {availableApps
+            .filter((app: any) => app.installed)
+            .map((app: any, index) => {
+              return (
+                <div className='w-full lg:w-1/3 p-3' key={index}>
+                  <AppCard
+                    id={app.id}
+                    installing={false}
+                    name={app.name}
+                    description={app.description}
+                    onInstall={() => installHandler(app.id)}
+                    installed={app.installed}
+                    address={app.address}
+                    onOpenDetails={openDetailsHandler}
+                  />
+                </div>
+              );
+            })}
+          <div className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>{t('apps.available')}</div>
+          {availableApps
+            .filter((app: any) => !app.installed)
+            .map((app: any, index) => {
+              return (
+                <div className='w-full lg:w-1/3 p-3' key={index}>
+                  <AppCard
+                    id={app.id}
+                    name={app.name}
+                    installing={!!isInstalling}
+                    description={app.description}
+                    onInstall={() => installHandler(app.id)}
+                    installed={app.installed}
+                    onOpenDetails={openDetailsHandler}
+                  />
+                </div>
+              );
+            })}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

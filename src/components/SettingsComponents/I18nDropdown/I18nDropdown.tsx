@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { resources } from '../../../i18n/config';
 
@@ -8,6 +8,12 @@ const I18nDropdown: FC = () => {
   const [saveLang, setSaveLang] = useState(false);
 
   const langs = Object.keys(resources);
+
+  useEffect(() => {
+    if (selectRef.current) {
+      selectRef.current.value = i18n.language;
+    }
+  }, [i18n]);
 
   const dropdownHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     if (event.target.value !== i18n.language) {
@@ -32,7 +38,7 @@ const I18nDropdown: FC = () => {
           <label htmlFor='lngSelect' className='font-bold'>
             {t('settings.language')}
           </label>
-          <select id='lngSelect' ref={selectRef} onChange={dropdownHandler} className='border w-1/3'>
+          <select id='lngSelect' ref={selectRef} onChange={dropdownHandler} className='border w-1/3 dark:text-black'>
             {langs.map((lang, i) => {
               return (
                 <option key={i} value={lang}>

@@ -82,7 +82,7 @@ export const Home: FC = (props) => {
       {receiveModal}
       {sendModal}
       {detailModal}
-      <div className='mobile-container md:content-container page-container dark:text-white'>
+      <div className='content-container page-container dark:text-white'>
         <div className={`h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}>
           <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
             <WalletCard
