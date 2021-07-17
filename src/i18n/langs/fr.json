@@ -24,21 +24,15 @@
             "conn_details": "Détails de la connexion",
             "tor": "Tor",
             "ssh": "Connexion SSH",
-            "lightning": "",
-            "channel": "Canal",
-            "channel_balance": ""
+            "channel": "Canal"
         },
         "wallet": {
-            "balance": "",
-            "on_chain": "",
             "receive": "Recevoir",
             "send": "Envoyer",
             "amount": "Montant",
             "copied": "Copié !",
             "copy_clipboard": "Copier dans le presse-papier",
             "create_invoice_ln": "Créer une facture Lightning",
-            "fund_short": "",
-            "fund": "",
             "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
             "send_funds": "Envoyer des fonds",
             "address": "Adresse"
@@ -48,13 +42,8 @@
             "tx_details": "Détails de la transaction",
             "txid": "Identifiant de transaction",
             "confirmations": "Confirmations",
-            "included_block": "",
             "date": "Date",
-            "fee": "",
-            "fee_rate": "",
             "description": "Description",
-            "mempool": "",
-            "request": "",
             "value": "Valeur",
             "comment": "Commentaire"
         },

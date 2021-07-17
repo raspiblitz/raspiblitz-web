@@ -8,3 +8,4 @@ Thank you for providing translations! 🙏
 
 - Norwegian: [@comradekingu](https://github.com/comradekingu)
 - French: J. Lavoie
+- German: J.Lavoie, Me
