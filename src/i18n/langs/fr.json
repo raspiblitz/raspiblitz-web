@@ -24,28 +24,39 @@
             "conn_details": "Détails de la connexion",
             "tor": "Tor",
             "ssh": "Connexion SSH",
-            "channel": "Canal"
+            "channel": "Canal",
+            "lightning": "",
+            "channel_balance": "Équilibre du canal"
         },
         "wallet": {
             "receive": "Recevoir",
             "send": "Envoyer",
             "amount": "Montant",
-            "copied": "Copié !",
+            "copied": "Copié !",
             "copy_clipboard": "Copier dans le presse-papier",
             "create_invoice_ln": "Créer une facture Lightning",
             "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
             "send_funds": "Envoyer des fonds",
-            "address": "Adresse"
+            "address": "Adresse",
+            "on_chain": "On-chain",
+            "fund_short": "Approvisionner porte-monnaie",
+            "balance": "Balance",
+            "fund": "Approvisionner votre porte-monnaie"
         },
         "tx": {
-            "transactions": "Transactions",
+            "transactions": "",
             "tx_details": "Détails de la transaction",
             "txid": "Identifiant de transaction",
-            "confirmations": "Confirmations",
+            "confirmations": "",
             "date": "Date",
             "description": "Description",
             "value": "Valeur",
-            "comment": "Commentaire"
+            "comment": "Commentaire",
+            "fee_rate": "Taux de frais",
+            "request": "Requête",
+            "mempool": "Voir dans mempool",
+            "fee": "Frais",
+            "included_block": "Inclus dans le block"
         },
         "apps": {
             "installed": "Installé",
@@ -56,7 +67,7 @@
             "info": "Infos",
             "no_page": "Aucune page disponible",
             "about": "À propos",
-            "author": "Auteur(e)",
+            "author": "Auteur",
             "source": "Code source",
             "offline": "hors ligne",
             "online": "en ligne"
