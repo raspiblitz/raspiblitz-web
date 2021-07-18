@@ -3580,9 +3580,9 @@
     "@testing-library/dom" "^8.0.0"
 
 "@testing-library/user-event@^13.1.9":
-  version "13.1.9"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-13.1.9.tgz#29e49a42659ac3c1023565ff56819e0153a82e99"
-  integrity sha512-NZr0zL2TMOs2qk+dNlqrAdbaRW5dAmYwd1yuQ4r7HpkVEOj0MWuUjDWwKhcLd/atdBy8ZSMHSKp+kXSQe47ezg==
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-13.2.0.tgz#8d63aaae1f5ec1d683d3afe57acd5f175f819f0f"
+  integrity sha512-wDEuKkkChNfA02Fpd9A39AXmdmxkvRcHyt/cK3WWiPAQTyMhcKFNM51aQgpEDJUcdj7uPsOaDEESoW/L1b2kZA==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
@@ -12805,9 +12805,9 @@ react-helmet-async@^1.0.7:
     shallowequal "^1.1.0"
 
 react-i18next@^11.11.0:
-  version "11.11.2"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-11.11.2.tgz#b8568b9f02e323ceb82cb895f41e4e588b8b066c"
-  integrity sha512-42tWoD0X12mJyYtTnK99Hihi2nCc3WIJ23WpUiDwojTWj7w5rfa/cCqo57QLhTFOoYSpG+ydr6Cr1hjtkvmVPw==
+  version "11.11.3"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-11.11.3.tgz#38d083bb079c3e6ee376b3321b0d6e409d798f68"
+  integrity sha512-upzG5/SpyOlYP5oSF4K8TZBvDWVhnCo38JNV+KnWjrg0+IaJCBltyh6lRGZDO5ovLyA4dU6Ip0bwbUCjb6Yyxw==
   dependencies:
     "@babel/runtime" "^7.14.5"
     html-parse-stringify "^3.0.1"
