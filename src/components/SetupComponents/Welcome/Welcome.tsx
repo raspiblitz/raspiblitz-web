@@ -8,10 +8,13 @@ const Welcome: FC = () => {
 
   return (
     <SetupContainer>
-        <span>{t('setup.welcome')}</span>
-        <span>{t('setup.setlanguage')}</span>
-        <I18nDropdown />
+      <div className='text-center'>
+        <div className='text-center'>{t('setup.set_lang')}</div>
+        <div className='flex justify-center'>
+          <I18nDropdown />
+        </div>
         <button className='bd-button p-2 my-5'>{t('setup.continue')}</button>
+      </div>
     </SetupContainer>
   );
 };
