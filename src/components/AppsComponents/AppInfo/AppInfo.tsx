@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ChevronLeft } from '../../../assets/chevron-left.svg';
-import { createRequest } from '../../../util/util';
+import { instance } from '../../../util/interceptor';
 
 export const AppInfo: FC<AppInfoProps> = (props) => {
   const { t } = useTranslation();
@@ -14,11 +14,9 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
 
   useEffect(() => {
     const fetchAppDetails = async () => {
-      const req = createRequest(`appdetails/${id}`, 'GET');
-      const resp = await fetch(req);
-      const respObj = await resp.json();
-      setImgs(respObj.images);
-      setResp(respObj);
+      const resp = await instance.get(`appdetails/${id}`);
+      setImgs(resp.data.images);
+      setResp(resp.data);
     };
     fetchAppDetails();
 
@@ -37,13 +35,11 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
   };
 
   const installHandler = () => {
-    const req = createRequest('install', 'POST', JSON.stringify({ id }));
-    fetch(req);
+    instance.post('install', { id });
   };
 
   const uninstallHandler = () => {
-    const req = createRequest('uninstall', 'POST', JSON.stringify({ id }));
-    fetch(req);
+    instance.post('uninstall', { id });
   };
 
   return (

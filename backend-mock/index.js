@@ -159,6 +159,7 @@ app.get('/appdetails/:id', (req, res) => {
  */
 
 app.post('/receive', (req, res) => {
+  console.log('call to /receive');
   if (req.body.type === 'lightning') {
     // include comment & amount for real req ..
     res.send(JSON.stringify({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' }));
@@ -168,6 +169,7 @@ app.post('/receive', (req, res) => {
 });
 
 app.post('/send', (req, res) => {
+  console.log('call to /send');
   res.status(200).send();
 });
 

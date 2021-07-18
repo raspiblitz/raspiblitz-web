@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { lazy, Suspense, useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -9,6 +8,7 @@ import LoadingScreen from './container/LoadingScreen/LoadingScreen';
 import './i18n/config';
 import Setup from './pages/Setup/Setup';
 import { AppContext } from './store/app-context';
+import { instance } from './util/interceptor';
 
 const Login = lazy(() => import('./pages/Login/Login'));
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -22,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const req = await axios.get('http://localhost:8080/setup/status');
+      const req = await instance.get('setup/status');
       console.log(req.data);
       if (req.data.progress === 100) {
         setSetupDone(true);

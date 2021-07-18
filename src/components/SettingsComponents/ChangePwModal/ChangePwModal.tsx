@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
-import { createRequest } from '../../../util/util';
+import { instance } from '../../../util/interceptor';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 const ChangePwModal: FC<ChangePwModalProps> = (props) => {
@@ -14,11 +14,10 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
 
   const changePasswordHandler = async () => {
     setIsLoading(true);
-    const req = createRequest('changepw', 'POST', JSON.stringify({ oldPassword, newPassword }));
-    const resp = fetch(req);
-    const status = (await resp).status;
+    const resp = await instance.post('changepw', { oldPassword, newPassword });
     setIsLoading(false);
-    if (status === 200) {
+    if (resp.status === 200) {
+      // TODO
     }
   };
 
