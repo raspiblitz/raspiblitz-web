@@ -83,6 +83,36 @@
       "confirm": "Confirm",
       "language": "Language",
       "curr_lang": "Current language"
+    },
+    "setup": {
+      "continue": "Continue",
+      "other_options": "Other Options",
+      "ok": "OK",
+      "fresh": {
+        "setup": "Setup a new Raspiblitz",
+        "from_backup": "Upload Migration Backup",
+        "shutdown": "Shutdown without Changes"
+      },
+      "update": {
+        "infotext": "We found data from an old RaspiBlitz on your HDD/SSD.\nYou can now start the UPDATE to version {{version}}. You will need to set a new Password A for the SSH login.\nAll your channels will stay open and other passwords will stay the same.\nPlease make sure to have your seed words & static channel backup file (just in case).\nDo you want to start the UPDATE of your RaspiBlitz now?",
+        "start": "Start Update"
+      },
+      "recovery": {
+        "infotext": "We found data from an existing RaspiBlitz on your HDD/SSD.\nYou can now start the RECOVERY to freshly build your system based on the existing configuration & data. This process is often used to repair broken features or clean the system up.\nYou will need to set a new Password A for the SSH login. All other passwords will stay the same and channels will stay open.\nPlease make sure to have your seed words & static channel backup file (just in case).\nDo you want to start the RECOVERY of your RaspiBlitz now?",
+        "start": "Start Recovery"
+      },
+      "migration": {
+        "infotext": "RaspiBlitz found data from {{type}}.\nYou can migrate your blockchain & LND data (funds & channels) over to RaspiBlitz.\nPlease make sure to have your {{type}} seed words & static channel backup file (just in case). Also any data of additional apps you had installed on {{type}} might get lost.\nDo you want to start the MIGRATION to RaspiBlitz now?",
+        "start_migration": "Start Migration",
+        "no_shutdown": "No + Shutdown"
+      },
+      "passwords": {
+        "infotext": "You will need to set new passwords.\nRaspiBlitz works with 3 different passwords:\nPASSWORD A) Main User Password (SSH & WebUI, sudo)\nPASSWORD B) APP Password (Additional Apps & API)\nPASSWORD C) Lightning Wallet Password for Unlock\nYou will need to set now Password: ${passwordinfo}\n(other passwords might stay like on your old node)\nFollow Password Rules: Minimal of 8 chars,\nno spaces and only special characters - or .\nWrite them down & store them in a safe place.",
+        "pass_a": "Password A - Main User Password",
+        "pass_b": "PASSWORD B - APP Password",
+        "pass_c": "PASSWORD C - Lightning Wallet Password",
+        "pass_info": "min 8 characters, 1 word, chars & numbers accepted, no special characters allowed"
+      }
     }
   }
 }
