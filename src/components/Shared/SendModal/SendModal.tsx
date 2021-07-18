@@ -2,7 +2,7 @@ import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
-import { createRequest } from '../../../util/util';
+import { instance } from '../../../util/interceptor';
 import AmountInput from '../AmountInput/AmountInput';
 
 const SendModal: FC<SendModalProps> = (props) => {
@@ -15,15 +15,14 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   const sendTransactionHandler = (event: FormEvent) => {
     event.preventDefault();
-    const body = JSON.stringify({
+    const body = {
       amount,
       address,
       fee,
       comment,
       unit: appCtx.unit
-    });
-    const req = createRequest('send', 'POST', body);
-    fetch(req);
+    };
+    instance.post('send', body);
   };
 
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {
