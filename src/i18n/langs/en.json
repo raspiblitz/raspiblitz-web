@@ -87,6 +87,7 @@
     "setup": {
       "continue": "Continue",
       "other_options": "Other Options",
+      "set_lang": "Set Language",
       "ok": "OK",
       "fresh": {
         "setup": "Setup a new Raspiblitz",
