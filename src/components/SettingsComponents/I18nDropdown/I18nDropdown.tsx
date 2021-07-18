@@ -50,7 +50,7 @@ const I18nDropdown: FC = () => {
           <button
             onClick={saveLangHandler}
             disabled={!saveLang}
-            className='w-1/3 shadow-xl rounded text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400 py-1'
+            className='w-1/3 bd-button'
           >
             Save
           </button>

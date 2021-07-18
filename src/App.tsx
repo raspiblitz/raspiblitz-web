@@ -23,7 +23,6 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const req = await instance.get('setup/status');
-      console.log(req.data);
       if (req.data.progress === 100) {
         setSetupDone(true);
       } else {
@@ -34,8 +33,6 @@ const App = () => {
 
     fetchData();
   }, []);
-
-  console.log('setup', setupDone, 'loading', loading);
 
   return (
     <Suspense fallback={<LoadingScreen />}>
