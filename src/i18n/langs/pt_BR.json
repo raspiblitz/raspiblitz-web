@@ -5,8 +5,8 @@
             "apps": "Aplicativos",
             "settings": "Configurações",
             "back": "Voltar",
-            "dark_mode": "Modo Escuro",
-            "display_sats": "Exibir Sats"
+            "dark_mode": "Modo escuro",
+            "display_sats": "Exibir sats"
         },
         "login": {
             "enter_pass": "Digite a senha A",
@@ -21,21 +21,21 @@
             "network": "Rede",
             "status": "Status",
             "blocks_synced": "Blocos sincronizados",
-            "conn_details": "Detalhes da Conexão",
+            "conn_details": "Detalhes da conexão",
             "tor": "Tor",
             "ssh": "Login SSH",
             "lightning": "Lightning",
             "channel": "Canal",
-            "channel_balance": "Equlíbrio do Canal"
+            "channel_balance": "Saldo do canal"
         },
         "wallet": {
-            "balance": "Equilíbrio",
+            "balance": "Saldo",
             "on_chain": "On-chain",
             "receive": "Receber",
             "send": "Enviar",
             "amount": "Quantidade",
             "copied": "Copiado!",
-            "copy_clipboard": "Copiar para a área de transferência",
+            "copy_clipboard": "Copiar para área de transferência",
             "create_invoice_ln": "Criar uma fatura Lightning",
             "fund_short": "Colocar fundos na carteira",
             "fund": "Colocar fundos na sua carteira",
@@ -45,22 +45,22 @@
         },
         "tx": {
             "transactions": "Transações",
-            "tx_details": "Detalhes da Transação",
-            "txid": "ID da Transação",
+            "tx_details": "Detalhes da transação",
+            "txid": "ID da transação",
             "confirmations": "Confirmações",
-            "included_block": "Incluído no Bloco",
+            "included_block": "Incluída no Bloco",
             "date": "Data",
             "fee": "Taxa",
             "fee_rate": "Taxa proporcional",
             "description": "Descrição",
             "mempool": "Visualizar na mempool",
-            "request": "Requisição",
+            "request": "Solicitação",
             "value": "Valor",
             "comment": "Comentário"
         },
         "apps": {
             "installed": "Instalado",
-            "available": "Aplicativos Disponíveis",
+            "available": "Aplicativos disponíveis",
             "open": "Abrir",
             "install": "Instalar",
             "uninstall": "Desinstalar",
@@ -69,8 +69,8 @@
             "about": "Sobre",
             "author": "Autor",
             "source": "Código fonte",
-            "offline": "off-line",
-            "online": "on-line"
+            "offline": "offline",
+            "online": "online"
         },
         "settings": {
             "change_pw": "Alterar senha",
