@@ -1,0 +1,22 @@
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import SetupContainer from '../../../container/SetupContainer/SetupContainer';
+import I18nDropdown from '../../SettingsComponents/I18nDropdown/I18nDropdown';
+
+const Welcome: FC = () => {
+  const { t } = useTranslation();
+
+  return (
+    <SetupContainer>
+      <div className='text-center'>
+        <div className='text-center'>{t('setup.set_lang')}</div>
+        <div className='flex justify-center'>
+          <I18nDropdown />
+        </div>
+        <button className='bd-button p-2 my-5'>{t('setup.continue')}</button>
+      </div>
+    </SetupContainer>
+  );
+};
+
+export default Welcome;

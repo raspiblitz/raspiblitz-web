@@ -48,14 +48,23 @@ const eventsHandler = (request, response) => {
 /**
  * SSE Handler call
  */
-app.get('/events', eventsHandler);
+app.get('/sse/subscribe', eventsHandler);
+
+/***
+ * STATUS
+ * 100 if setup is done, otherwise step in the setup process
+ */
+app.get('/setup/status', (_, res) => {
+  console.log('call to setup/status');
+  res.send(JSON.stringify({ progress: 100 }));
+});
 
 /***
  * AUTH
  */
 
-app.post('/login', (req, res) => {
-  console.log('call to /login');
+app.post('/system/login', (req, res) => {
+  console.log('call to /system/login');
   setTimeout(() => {
     if (req.body.password === 'password') {
       const token = auth.signToken();
@@ -89,13 +98,13 @@ app.post('/changepw', (req, res) => {
   res.send('success');
 });
 
-app.post('/reboot', (req, res) => {
-  console.log('call to /reboot');
+app.post('/system/reboot', (req, res) => {
+  console.log('call to /system/reboot');
   res.status(200).send();
 });
 
-app.post('/shutdown', (req, res) => {
-  console.log('call to /shutdown');
+app.post('/system/shutdown', (req, res) => {
+  console.log('call to /system/shutdown');
   res.status(200).send();
 });
 
@@ -150,6 +159,7 @@ app.get('/appdetails/:id', (req, res) => {
  */
 
 app.post('/receive', (req, res) => {
+  console.log('call to /receive');
   if (req.body.type === 'lightning') {
     // include comment & amount for real req ..
     res.send(JSON.stringify({ address: 'lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3' }));
@@ -159,6 +169,7 @@ app.post('/receive', (req, res) => {
 });
 
 app.post('/send', (req, res) => {
+  console.log('call to /send');
   res.status(200).send();
 });
 

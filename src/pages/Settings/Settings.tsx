@@ -46,14 +46,14 @@ const Settings: FC = () => {
         <ConfirmModal
           confirmText={t('settings.reboot') + '?'}
           onClose={hideRebootModalHandler}
-          confirmEndpoint='reboot'
+          confirmEndpoint='/system/reboot'
         />
       )}
       {confirmShutdown && (
         <ConfirmModal
           confirmText={t('settings.shutdown') + '?'}
           onClose={hideShutdownModalHandler}
-          confirmEndpoint='shutdown'
+          confirmEndpoint='/system/shutdown'
         />
       )}
     </div>

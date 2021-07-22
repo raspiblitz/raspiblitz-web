@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import AppInfo from '../../components/AppsComponents/AppInfo/AppInfo';
-import AppCard from '../../components/AppsComponents/AppCard/AppCard';
-import useSSE from '../../hooks/use-sse';
-import { createRequest } from '../../util/util';
 import { useTranslation } from 'react-i18next';
+import AppCard from '../../components/AppsComponents/AppCard/AppCard';
+import AppInfo from '../../components/AppsComponents/AppInfo/AppInfo';
+import useSSE from '../../hooks/use-sse';
+import { instance } from '../../util/interceptor';
 
 export const Apps = () => {
   const { t } = useTranslation();
@@ -12,8 +12,7 @@ export const Apps = () => {
   const [id, setId] = useState<string | null>(null);
 
   const installHandler = (id: string) => {
-    const req = createRequest('install', 'POST', JSON.stringify({ id }));
-    fetch(req);
+    instance.post('install', { id });
   };
 
   const openDetailsHandler = (id: string) => {
@@ -27,7 +26,7 @@ export const Apps = () => {
 
   // call to get available apps
   useEffect(() => {
-    fetch(createRequest('apps', 'GET'));
+    instance.get('apps');
   }, []);
 
   return (

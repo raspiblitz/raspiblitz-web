@@ -2,7 +2,7 @@ import QRCode from 'qrcode.react';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
-import { createRequest } from '../../../util/util';
+import { instance } from '../../../util/interceptor';
 import AmountInput from '../AmountInput/AmountInput';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
@@ -42,11 +42,9 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       amount: lnInvoice ? amount : undefined,
       comment: lnInvoice ? comment : undefined
     };
-    const req = createRequest('receive', 'POST', JSON.stringify(body));
-    const resp = await fetch(req);
-    const respObj = await resp.json();
+    const resp = await instance.post('receive', body);
     setIsLoading(false);
-    setAddress(respObj.address);
+    setAddress(resp.data.address);
   };
 
   const copyToClipboardHandler = () => {

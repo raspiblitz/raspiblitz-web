@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../../container/ModalDialog/ModalDialog';
-import { createRequest } from '../../../../util/util';
+import { instance } from '../../../../util/interceptor';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import LNDetails from './LNDetails/LNDetails';
 import OnchainDetails from './OnchainDetails/OnchainDetails';
@@ -17,12 +17,9 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
     setIsLoading(true);
 
     const fetchData = async () => {
-      const req = createRequest(`tx/${id}`, 'GET');
-      const resp = await fetch(req);
-
-      const respObj = await resp.json();
+      const resp = await instance.get(`tx/${id}`);
       setIsLoading(false);
-      setTxDetails(respObj);
+      setTxDetails(resp.data);
     };
 
     fetchData();

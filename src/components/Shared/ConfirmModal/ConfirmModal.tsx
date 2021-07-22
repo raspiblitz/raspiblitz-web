@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
-import { createRequest } from '../../../util/util';
+import { instance } from '../../../util/interceptor';
 
 const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const { t } = useTranslation();
@@ -13,10 +13,8 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const btnClasses = 'w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
 
   const shutdownHandler = async () => {
-    const req = createRequest(props.confirmEndpoint, 'POST');
-    const resp = fetch(req);
-    const status = await (await resp).status;
-    if (status === 200) {
+    const resp = await instance.post(props.confirmEndpoint);
+    if (resp.status === 200) {
       appCtx.setIsLoggedIn(false);
       history.push('/login');
     }

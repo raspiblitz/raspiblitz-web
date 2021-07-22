@@ -1,12 +1,12 @@
 import { FC, FormEvent, useContext, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as MoonLogo } from '../../assets/moon.svg';
 import { ReactComponent as RaspiBlitzLogo } from '../../assets/RaspiBlitz_Logo_Main.svg';
 import { ReactComponent as RaspiBlitzLogoDark } from '../../assets/RaspiBlitz_Logo_Main_Negative.svg';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner/LoadingSpinner';
 import { AppContext } from '../../store/app-context';
-import { createRequest } from '../../util/util';
-import { useTranslation } from 'react-i18next';
+import { instance } from '../../util/interceptor';
 
 const Login: FC = () => {
   const { t } = useTranslation();
@@ -19,23 +19,26 @@ const Login: FC = () => {
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
+
     setIsUnauthorized(false);
     setIsError(false);
     setIsLoading(true);
+
     const password = passwordInput.current?.value;
-    const req = createRequest('login', 'POST', JSON.stringify({ password }));
-    const respObj = fetch(req);
-    const resp = await respObj.catch(() => setIsError(true));
+    const resp = await instance.post('/system/login', { password }).catch((err) => {
+      if (err.response.status === 401) {
+        setIsUnauthorized(true);
+      } else {
+        setIsError(true);
+      }
+    });
+
     setIsLoading(false);
-    if (resp && resp.status === 200) {
-      const token = (await resp.json()).token;
-      localStorage.setItem('access_token', token);
+
+    if (resp) {
+      localStorage.setItem('access_token', resp.data.token);
       appCtx.setIsLoggedIn(true);
       history.push('/home');
-    } else if (resp && resp.status === 401) {
-      setIsUnauthorized(true);
-    } else {
-      setIsError(true);
     }
   };
 
