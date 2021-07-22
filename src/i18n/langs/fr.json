@@ -25,7 +25,6 @@
             "tor": "Tor",
             "ssh": "Connexion SSH",
             "channel": "Canal",
-            "lightning": "",
             "channel_balance": "Équilibre du canal"
         },
         "wallet": {
@@ -44,10 +43,8 @@
             "fund": "Approvisionner votre porte-monnaie"
         },
         "tx": {
-            "transactions": "",
             "tx_details": "Détails de la transaction",
             "txid": "Identifiant de transaction",
-            "confirmations": "",
             "date": "Date",
             "description": "Description",
             "value": "Valeur",
