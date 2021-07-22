@@ -56,15 +56,15 @@ app.get('/sse/subscribe', eventsHandler);
  */
 app.get('/setup/status', (_, res) => {
   console.log('call to setup/status');
-  res.send(JSON.stringify({ progress: 1 }));
+  res.send(JSON.stringify({ progress: 100 }));
 });
 
 /***
  * AUTH
  */
 
-app.post('/login', (req, res) => {
-  console.log('call to /login');
+app.post('/system/login', (req, res) => {
+  console.log('call to /system/login');
   setTimeout(() => {
     if (req.body.password === 'password') {
       const token = auth.signToken();
@@ -98,13 +98,13 @@ app.post('/changepw', (req, res) => {
   res.send('success');
 });
 
-app.post('/reboot', (req, res) => {
-  console.log('call to /reboot');
+app.post('/system/reboot', (req, res) => {
+  console.log('call to /system/reboot');
   res.status(200).send();
 });
 
-app.post('/shutdown', (req, res) => {
-  console.log('call to /shutdown');
+app.post('/system/shutdown', (req, res) => {
+  console.log('call to /system/shutdown');
   res.status(200).send();
 });
 
