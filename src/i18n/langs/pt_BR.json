@@ -1,0 +1,88 @@
+{
+    "translation": {
+        "navigation": {
+            "home": "Início",
+            "apps": "Aplicativos",
+            "settings": "Configurações",
+            "back": "Voltar",
+            "dark_mode": "Modo escuro",
+            "display_sats": "Exibir sats"
+        },
+        "login": {
+            "enter_pass": "Digite a senha A",
+            "enter_pass_placeholder": "Senha A",
+            "login": "Login",
+            "invalid_pass": "Senha inválida",
+            "error": "Ocorreu um erro"
+        },
+        "home": {
+            "bitcoin": "Bitcoin",
+            "version": "Versão",
+            "network": "Rede",
+            "status": "Status",
+            "blocks_synced": "Blocos sincronizados",
+            "conn_details": "Detalhes da conexão",
+            "tor": "Tor",
+            "ssh": "Login SSH",
+            "lightning": "Lightning",
+            "channel": "Canal",
+            "channel_balance": "Saldo do canal"
+        },
+        "wallet": {
+            "balance": "Saldo",
+            "on_chain": "On-chain",
+            "receive": "Receber",
+            "send": "Enviar",
+            "amount": "Quantidade",
+            "copied": "Copiado!",
+            "copy_clipboard": "Copiar para área de transferência",
+            "create_invoice_ln": "Criar uma fatura Lightning",
+            "fund_short": "Colocar fundos na carteira",
+            "fund": "Colocar fundos na sua carteira",
+            "scan_qr": "Leia este código QR ou copie o endereço abaixo para receber fundos",
+            "send_funds": "Enviar fundos",
+            "address": "Endereço"
+        },
+        "tx": {
+            "transactions": "Transações",
+            "tx_details": "Detalhes da transação",
+            "txid": "ID da transação",
+            "confirmations": "Confirmações",
+            "included_block": "Incluída no Bloco",
+            "date": "Data",
+            "fee": "Taxa",
+            "fee_rate": "Taxa proporcional",
+            "description": "Descrição",
+            "mempool": "Visualizar na mempool",
+            "request": "Solicitação",
+            "value": "Valor",
+            "comment": "Comentário"
+        },
+        "apps": {
+            "installed": "Instalado",
+            "available": "Aplicativos disponíveis",
+            "open": "Abrir",
+            "install": "Instalar",
+            "uninstall": "Desinstalar",
+            "info": "Informações",
+            "no_page": "Nenhuma página disponível",
+            "about": "Sobre",
+            "author": "Autor",
+            "source": "Código fonte",
+            "offline": "offline",
+            "online": "online"
+        },
+        "settings": {
+            "change_pw": "Alterar senha",
+            "old_pw": "Senha antiga",
+            "new_pw": "Senha nova",
+            "change": "Alterar",
+            "reboot": "Reiniciar",
+            "shutdown": "Desligar",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar",
+            "language": "Idioma",
+            "curr_lang": "Idioma atual"
+        }
+    }
+}
