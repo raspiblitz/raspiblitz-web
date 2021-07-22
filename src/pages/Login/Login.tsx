@@ -19,18 +19,22 @@ const Login: FC = () => {
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
+
     setIsUnauthorized(false);
     setIsError(false);
     setIsLoading(true);
+
     const password = passwordInput.current?.value;
-    const resp = await instance.post('/login', { password }).catch((err) => {
+    const resp = await instance.post('/system/login', { password }).catch((err) => {
       if (err.response.status === 401) {
         setIsUnauthorized(true);
       } else {
         setIsError(true);
       }
     });
+
     setIsLoading(false);
+
     if (resp) {
       localStorage.setItem('access_token', resp.data.token);
       appCtx.setIsLoggedIn(true);
