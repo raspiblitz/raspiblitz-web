@@ -41,7 +41,8 @@ const eventsHandler = (request, response) => {
   });
 
   request.on('close', () => {
-    // do nothing
+    // clear clients
+    util.clients = [];
   });
 };
 
