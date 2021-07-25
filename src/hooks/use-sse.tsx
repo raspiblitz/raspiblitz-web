@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../store/app-context';
 
-const SSE_URL = window.location.hostname.includes('localhost') ? 'http://localhost:8080/sse/subscribe' : '/sse/subscribe';
+const SSE_URL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080/sse/subscribe'
+  : '/sse/subscribe';
 
 const useSSE = () => {
   const appCtx = useContext(AppContext);
@@ -33,32 +35,34 @@ const useSSE = () => {
     if (!evtSource) {
       setEvtSource(new EventSource(SSE_URL));
     } else {
-      evtSource.addEventListener('syncstatus' as any, setSyncStatus);
+      evtSource.addEventListener('syncstatus', setSyncStatus);
 
-      evtSource.addEventListener('transactions' as any, setTx);
+      evtSource.addEventListener('transactions', setTx);
 
-      evtSource.addEventListener('appstatus' as any, setAppStat);
+      evtSource.addEventListener('appstatus', setAppStat);
 
-      evtSource.addEventListener('apps' as any, setApps);
+      evtSource.addEventListener('apps', setApps);
 
-      evtSource.addEventListener('install' as any, setInstall);
+      evtSource.addEventListener('install', setInstall);
     }
 
     return () => {
       // cleanup
       if (evtSource) {
-        evtSource.removeEventListener('syncstatus' as any, setSyncStatus);
-        evtSource.removeEventListener('transactions' as any, setTx);
-        evtSource.removeEventListener('appstatus' as any, setAppStat);
-        evtSource.removeEventListener('apps' as any, setApps);
-        evtSource.removeEventListener('install' as any, setInstall);
+        evtSource.removeEventListener('syncstatus', setSyncStatus);
+        evtSource.removeEventListener('transactions', setTx);
+        evtSource.removeEventListener('appstatus', setAppStat);
+        evtSource.removeEventListener('apps', setApps);
+        evtSource.removeEventListener('install', setInstall);
+
+        evtSource.close();
       }
     };
   }, [evtSource, setEvtSource]);
 
-  const setApps = (event: MessageEvent<string>) => {
+  const setApps = (event: Event) => {
     setAvailableApps((prev: any[]) => {
-      const apps = JSON.parse(event.data);
+      const apps = JSON.parse((event as MessageEvent<string>).data);
       if (prev.length === 0) {
         return apps;
       } else {
@@ -67,22 +71,22 @@ const useSSE = () => {
     });
   };
 
-  const setAppStat = (event: MessageEvent<string>) => {
-    setAppStatus(JSON.parse(event.data));
+  const setAppStat = (event: Event) => {
+    setAppStatus(JSON.parse((event as MessageEvent<string>).data));
   };
 
-  const setTx = (event: MessageEvent<string>) => {
-    const t = JSON.parse(event.data).sort((a: any, b: any) => b.time - a.time);
+  const setTx = (event: Event) => {
+    const t = JSON.parse((event as MessageEvent<string>).data).sort((a: any, b: any) => b.time - a.time);
     setTransactions(t);
   };
 
-  const setInstall = (event: MessageEvent<string>) => {
-    setIsInstalling(JSON.parse(event.data).id);
+  const setInstall = (event: Event) => {
+    setIsInstalling(JSON.parse((event as MessageEvent<string>).data).id);
   };
 
-  const setSyncStatus = (event: MessageEvent<string>) => {
+  const setSyncStatus = (event: Event) => {
     setHomeState((prev) => {
-      const message = JSON.parse(event.data);
+      const message = JSON.parse((event as MessageEvent<string>).data);
 
       return {
         ...prev,
