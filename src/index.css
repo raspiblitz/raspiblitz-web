@@ -7,7 +7,7 @@
 **/
 
 .label-underline {
-  @apply block text-gray-700 dark:text-gray-300 text-sm font-bold my-2 text-left;
+  @apply block text-gray-700 dark:text-white text-sm font-bold my-2 text-left;
 }
 
 .input-underline {
