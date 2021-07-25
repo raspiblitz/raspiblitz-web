@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import SetupContainer from '../../../container/SetupContainer/SetupContainer';
-import I18nDropdown from '../../SettingsComponents/I18nDropdown/I18nDropdown';
+import I18nDropdown from '../../SettingsComponents/I18nBox/I18nBox';
 
 const Welcome: FC = () => {
   const { t } = useTranslation();

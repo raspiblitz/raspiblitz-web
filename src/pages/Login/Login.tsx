@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { ReactComponent as MoonLogo } from '../../assets/moon.svg';
 import { ReactComponent as RaspiBlitzLogo } from '../../assets/RaspiBlitz_Logo_Main.svg';
 import { ReactComponent as RaspiBlitzLogoDark } from '../../assets/RaspiBlitz_Logo_Main_Negative.svg';
+import I18nDropdown from '../../components/Shared/I18nDropdown/I18nDropdown';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner/LoadingSpinner';
 import { AppContext } from '../../store/app-context';
 import { instance } from '../../util/interceptor';
@@ -45,6 +46,9 @@ const Login: FC = () => {
   return (
     <div className='w-screen h-screen flex flex-col justify-center items-center'>
       <MoonLogo className='h-8 fixed right-4 top-4 text-dark dark:text-yellow-500' onClick={appCtx.toggleDarkMode} />
+      <div className='h-8 w-48 fixed right-16 top-4 flex justify-around items-center'>
+        <I18nDropdown />
+      </div>
       {!appCtx.darkMode && <RaspiBlitzLogo className='h-10 my-2 block' />}
       {appCtx.darkMode && <RaspiBlitzLogoDark className='h-10 my-2 block' />}
       {isLoading && (
