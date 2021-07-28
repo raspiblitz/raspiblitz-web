@@ -1,89 +1,89 @@
 {
-  "translation": {
-    "navigation": {
-      "home": "Home",
-      "apps": "Apps",
-      "settings": "Settings",
-      "back": "Back",
-      "dark_mode": "Dark Mode",
-      "display_sats": "Display Sats",
-      "logout": "Logout"
-    },
-    "login": {
-      "enter_pass": "Enter password A",
-      "enter_pass_placeholder": "Password A",
-      "login": "Login",
-      "invalid_pass": "Invalid password",
-      "error": "An error occured"
-    },
-    "home": {
-      "bitcoin": "Bitcoin",
-      "version": "Version",
-      "network": "Network",
-      "status": "Status",
-      "blocks_synced": "Blocks synced",
-      "conn_details": "Connection Details",
-      "tor": "Tor",
-      "ssh": "SSH login",
-      "lightning": "Lightning",
-      "channel": "Channel",
-      "channel_balance": "Channel Balance"
-    },
-    "wallet": {
-      "balance": "Balance",
-      "on_chain": "On-chain",
-      "receive": "Receive",
-      "send": "Send",
-      "amount": "Amount",
-      "copied": "Copied!",
-      "copy_clipboard": "Copy to clipboard",
-      "create_invoice_ln": "Create a Lightning invoice",
-      "fund_short": "Fund wallet",
-      "fund": "Fund your wallet",
-      "scan_qr": "Scan this QR Code or copy the below address to receive funds",
-      "send_funds": "Send funds",
-      "address": "Address"
-    },
-    "tx": {
-      "transactions": "Transactions",
-      "tx_details": "Transaction Details",
-      "txid": "Transaction ID",
-      "confirmations": "Confirmations",
-      "included_block": "Included in Block",
-      "date": "Date",
-      "fee": "Fee",
-      "fee_rate": "Fee rate",
-      "description": "Description",
-      "mempool": "View on mempool",
-      "request": "Request",
-      "value": "Value",
-      "comment": "Comment"
-    },
-    "apps": {
-      "installed": "Installed",
-      "available": "Available Apps",
-      "open": "Open",
-      "install": "Install",
-      "uninstall": "Uninstall",
-      "info": "Info",
-      "no_page": "No page available",
-      "about": "About",
-      "author": "Author",
-      "source": "Source code",
-      "offline": "offline",
-      "online": "online"
-    },
-    "settings": {
-      "change_pw": "Change password",
-      "old_pw": "Old password",
-      "new_pw": "New password",
-      "change": "Change",
-      "reboot": "Reboot",
-      "shutdown": "Shutdown",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "language": "Language",
-      "curr_lang": "Current language"
+    "translation": {
+        "navigation": {
+            "home": "Home",
+            "apps": "Apps",
+            "settings": "Settings",
+            "back": "Back",
+            "dark_mode": "Dark Mode",
+            "display_sats": "Display SATS",
+            "logout": "Log out"
+        },
+        "login": {
+            "enter_pass": "Enter password A",
+            "enter_pass_placeholder": "Password A",
+            "login": "Log in",
+            "invalid_pass": "Invalid password",
+            "error": "An error occured"
+        },
+        "home": {
+            "bitcoin": "Bitcoin",
+            "version": "Version",
+            "network": "Network",
+            "status": "Status",
+            "blocks_synced": "Blocks synced",
+            "conn_details": "Connection Details",
+            "tor": "Tor",
+            "ssh": "SSH login",
+            "lightning": "Lightning",
+            "channel": "Channel",
+            "channel_balance": "Channel Balance"
+        },
+        "wallet": {
+            "balance": "Balance",
+            "on_chain": "On-chain",
+            "receive": "Receive",
+            "send": "Send",
+            "amount": "Amount",
+            "copied": "Copied!",
+            "copy_clipboard": "Copy to clipboard",
+            "create_invoice_ln": "Create a Lightning invoice",
+            "fund_short": "Fund wallet",
+            "fund": "Fund your wallet",
+            "scan_qr": "Scan this QR code or copy the address below to receive funds",
+            "send_funds": "Send funds",
+            "address": "Address"
+        },
+        "tx": {
+            "transactions": "Transactions",
+            "tx_details": "Transaction Details",
+            "txid": "Transaction ID",
+            "confirmations": "Confirmations",
+            "included_block": "Included in Block",
+            "date": "Date",
+            "fee": "Fee",
+            "fee_rate": "Fee rate",
+            "description": "Description",
+            "mempool": "View on mempool",
+            "request": "Request",
+            "value": "Value",
+            "comment": "Comment"
+        },
+        "apps": {
+            "installed": "Installed",
+            "available": "Available Apps",
+            "open": "Open",
+            "install": "Install",
+            "uninstall": "Uninstall",
+            "info": "Info",
+            "no_page": "No page available",
+            "about": "About",
+            "author": "Author",
+            "source": "Source code",
+            "offline": "offline",
+            "online": "online"
+        },
+        "settings": {
+            "change_pw": "Change password",
+            "old_pw": "Old password",
+            "new_pw": "New password",
+            "change": "Change",
+            "reboot": "Reboot",
+            "shutdown": "Shutdown",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
+            "language": "Language",
+            "curr_lang": "Current language"
+        }
     }
-  }
 }
