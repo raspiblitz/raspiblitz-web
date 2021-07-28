@@ -6,7 +6,8 @@
       "settings": "Settings",
       "back": "Back",
       "dark_mode": "Dark Mode",
-      "display_sats": "Display Sats"
+      "display_sats": "Display Sats",
+      "logout": "Logout"
     },
     "login": {
       "enter_pass": "Enter password A",
