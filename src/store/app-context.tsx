@@ -7,6 +7,7 @@ interface AppContextType {
   toggleUnit: () => void;
   toggleDarkMode: () => void;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  logout: () => void;
   evtSource: EventSource | null;
   setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
 }
@@ -19,6 +20,7 @@ export const AppContext = createContext<AppContextType>({
   unit: 'BTC',
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
+  logout: () => {},
   toggleDarkMode: () => {},
   evtSource: null,
   setEvtSource: () => {}
@@ -38,6 +40,11 @@ const AppContextProvider: FC = (props) => {
     setDarkMode((prevMode) => !prevMode);
   };
 
+  const logoutHandler = () => {
+    localStorage.removeItem('access_token');
+    setIsLoggedIn(false);
+  };
+
   useEffect(() => {
     // check dark mode
     const documentEl = document.documentElement.classList;
@@ -48,8 +55,8 @@ const AppContextProvider: FC = (props) => {
     }
 
     // check authenticated
-    // const token = localStorage.getItem('access_token');
-    // setIsLoggedIn(!!token);
+    const token = localStorage.getItem('access_token');
+    setIsLoggedIn(!!token);
   }, [darkMode]);
 
   const contextValue: AppContextType = {
@@ -58,6 +65,7 @@ const AppContextProvider: FC = (props) => {
     unit,
     toggleUnit: toggleUnitHandler,
     setIsLoggedIn,
+    logout: logoutHandler,
     toggleDarkMode: toggleDarkModeHandler,
     evtSource,
     setEvtSource
