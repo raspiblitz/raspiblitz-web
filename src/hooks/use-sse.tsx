@@ -36,13 +36,9 @@ const useSSE = () => {
       setEvtSource(new EventSource(SSE_URL));
     } else {
       evtSource.addEventListener('syncstatus', setSyncStatus);
-
       evtSource.addEventListener('transactions', setTx);
-
       evtSource.addEventListener('appstatus', setAppStat);
-
       evtSource.addEventListener('apps', setApps);
-
       evtSource.addEventListener('install', setInstall);
     }
 
@@ -55,6 +51,7 @@ const useSSE = () => {
         evtSource.removeEventListener('apps', setApps);
         evtSource.removeEventListener('install', setInstall);
 
+        setEvtSource(null);
         evtSource.close();
       }
     };
