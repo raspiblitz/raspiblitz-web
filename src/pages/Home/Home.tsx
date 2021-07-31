@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import AppStatusCard from '../../components/HomeComponents/AppStatusCard/AppStatusCard';
 import BitcoinCard from '../../components/HomeComponents/BitcoinCard/BitcoinCard';
@@ -10,23 +10,14 @@ import WalletCard from '../../components/HomeComponents/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
 import useSSE from '../../hooks/use-sse';
-import { instance } from '../../util/interceptor';
 
-export const Home: FC = (props) => {
+export const Home: FC = () => {
   const { homeState, transactions, appStatus } = useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [detailTxId, setDetailTxId] = useState('');
-
-  useEffect(() => {
-    Promise.allSettled([
-      instance.get('syncstatus'),
-      instance.get('transactions'),
-      instance.get('appstatus')
-    ]).then(() => {});
-  }, []);
 
   const showSendModalHandler = () => {
     setShowSendModal(true);

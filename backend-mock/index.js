@@ -40,6 +40,11 @@ const eventsHandler = (request, response) => {
     response
   });
 
+  sync.syncStatus();
+  apps.appStatus();
+  apps.listApps();
+  transactions.listTransactions();
+
   request.on('close', () => {
     // do nothing
   });
@@ -80,15 +85,6 @@ app.post('/logout', (req, res) => {
   res.status(200).send();
 });
 
-/***
- * SYNC
- */
-
-app.get('/syncstatus', (req, res) => {
-  sync.syncStatus();
-  res.status(200).send();
-});
-
 /**
  * SETTINGS
  */
@@ -105,20 +101,6 @@ app.post('/system/reboot', (req, res) => {
 
 app.post('/system/shutdown', (req, res) => {
   console.log('call to /system/shutdown');
-  res.status(200).send();
-});
-
-/***
- * APPS
- */
-
-app.get('/appstatus', (req, res) => {
-  apps.appStatus();
-  res.status(200).send();
-});
-
-app.get('/apps', (req, res) => {
-  apps.listApps();
   res.status(200).send();
 });
 
@@ -174,7 +156,7 @@ app.post('/send', (req, res) => {
 });
 
 app.get('/transactions', (req, res) => {
-  transactions.listTransactions();
+  // transactions.listTransactions();
   res.status(200).send();
 });
 
