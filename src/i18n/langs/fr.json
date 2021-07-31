@@ -6,7 +6,8 @@
             "settings": "Paramètres",
             "back": "Retour",
             "dark_mode": "Mode sombre",
-            "display_sats": "Afficher les Sats"
+            "display_sats": "Afficher SATS",
+            "logout": "Se déconnecter"
         },
         "login": {
             "enter_pass": "Entrez le mot de passe A",
@@ -25,7 +26,8 @@
             "tor": "Tor",
             "ssh": "Connexion SSH",
             "channel": "Canal",
-            "channel_balance": "Équilibre du canal"
+            "channel_balance": "Équilibre du canal",
+            "lightning": "Lightning"
         },
         "wallet": {
             "receive": "Recevoir",
