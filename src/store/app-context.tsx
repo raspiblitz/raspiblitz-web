@@ -1,4 +1,5 @@
-import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useState } from 'react';
+import { SSEContext } from './sse-context';
 
 interface AppContextType {
   isLoggedIn: boolean;
@@ -8,8 +9,6 @@ interface AppContextType {
   toggleDarkMode: () => void;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   logout: () => void;
-  evtSource: EventSource | null;
-  setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
 }
 
 type Unit = 'BTC' | 'Sat';
@@ -17,23 +16,23 @@ type Unit = 'BTC' | 'Sat';
 export const AppContext = createContext<AppContextType>({
   isLoggedIn: false,
   darkMode: false,
-  unit: 'BTC',
+  unit: 'Sat',
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
   logout: () => {},
-  toggleDarkMode: () => {},
-  evtSource: null,
-  setEvtSource: () => {}
+  toggleDarkMode: () => {}
 });
 
 const AppContextProvider: FC = (props) => {
-  const [unit, setUnit] = useState<Unit>('BTC');
+  const sseCtx = useContext(SSEContext);
+  const { evtSource, setEvtSource } = sseCtx;
+
+  const [unit, setUnit] = useState<Unit>('Sat');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [evtSource, setEvtSource] = useState<EventSource | null>(null);
 
   const toggleUnitHandler = () => {
-    setUnit((prevUnit) => (prevUnit === 'BTC' ? 'Sat' : 'BTC'));
+    setUnit((prevUnit) => (prevUnit === 'Sat' ? 'BTC' : 'Sat'));
   };
 
   const toggleDarkModeHandler = () => {
@@ -42,11 +41,17 @@ const AppContextProvider: FC = (props) => {
 
   const logoutHandler = () => {
     localStorage.removeItem('access_token');
+
+    // close EventSource on logout
+    if (evtSource) {
+      evtSource.close();
+      setEvtSource(null);
+    }
     setIsLoggedIn(false);
   };
 
   useEffect(() => {
-    // check dark mode
+    // check for dark mode
     const documentEl = document.documentElement.classList;
     if (darkMode) {
       documentEl.add('dark');
@@ -54,7 +59,7 @@ const AppContextProvider: FC = (props) => {
       documentEl.remove('dark');
     }
 
-    // check authenticated
+    // check if authenticated
     const token = localStorage.getItem('access_token');
     setIsLoggedIn(!!token);
   }, [darkMode]);
@@ -66,9 +71,7 @@ const AppContextProvider: FC = (props) => {
     toggleUnit: toggleUnitHandler,
     setIsLoggedIn,
     logout: logoutHandler,
-    toggleDarkMode: toggleDarkModeHandler,
-    evtSource,
-    setEvtSource
+    toggleDarkMode: toggleDarkModeHandler
   };
 
   return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>;
