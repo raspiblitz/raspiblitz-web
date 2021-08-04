@@ -19,12 +19,12 @@ This exposes the web server on `localhost:8080`.
 - `/reboot` - for rebooting the system
 - `/changepw` - for changing the password
 - `/shutdown` - for shutting the system down
-- `/events` - registers client for SSE Events. Related Endpoints:
-  - `/transactions` - triggers SSE Event for transactions
-  - `/syncstatus` - triggers SSE Event for syncstatus
-  - `/appstatus` - triggers SSE Event for syncstatus
-  - `/apps` - triggers SSE Event for apps (name, description, installed)
-  - `/install` - triggers SSE Event for apps & install
+- `/events` - registers client for SSE Events
+- `/transactions` - gets transactions
+- `/syncstatus` - returns current syncstatus (node sync, channels etc.)
+- `/appstatus` - returns current apps with status (online/offline)
+- `/apps` - gets all apps with information (name, description, installed)
+- `/install` - install app
 
 ### SSE Events
 
