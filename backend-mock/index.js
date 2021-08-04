@@ -15,7 +15,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
 
-// app.use('/', express.static('public'))
+app.use('/', express.static('../build'));
 
 /**
  * Main SSE Handler
@@ -39,6 +39,11 @@ const eventsHandler = (request, response) => {
     id,
     response
   });
+
+  sync.syncStatus();
+  apps.appStatus();
+  apps.listApps();
+  transactions.listTransactions();
 
   request.on('close', () => {
     // do nothing
@@ -84,8 +89,9 @@ app.post('/logout', (req, res) => {
  * SYNC
  */
 
+// TODO: send back response
 app.get('/syncstatus', (req, res) => {
-  sync.syncStatus();
+  // sync.syncStatus();
   res.status(200).send();
 });
 
@@ -112,23 +118,15 @@ app.post('/system/shutdown', (req, res) => {
  * APPS
  */
 
+// TODO: send back response
 app.get('/appstatus', (req, res) => {
-  apps.appStatus();
+  // apps.appStatus();
   res.status(200).send();
 });
 
+// TODO: send back response
 app.get('/apps', (req, res) => {
-  apps.listApps();
-  res.status(200).send();
-});
-
-app.post('/install', (req, res) => {
-  console.log('call to /install');
-  // send information that btc-pay is currently installing
-  util.sendSSE('install', { id: 'btc-pay' });
-  setTimeout(() => {
-    apps.installApp();
-  }, 5000);
+  // apps.listApps();
   res.status(200).send();
 });
 
@@ -174,7 +172,7 @@ app.post('/send', (req, res) => {
 });
 
 app.get('/transactions', (req, res) => {
-  transactions.listTransactions();
+  // transactions.listTransactions();
   res.status(200).send();
 });
 

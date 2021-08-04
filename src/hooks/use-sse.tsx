@@ -1,40 +1,59 @@
-import { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../store/app-context';
-
-const SSE_URL = window.location.hostname.includes('localhost')
-  ? 'http://localhost:8080/sse/subscribe'
-  : '/sse/subscribe';
+import { useContext, useEffect } from 'react';
+import { SSEContext, SSE_URL } from '../store/sse-context';
 
 const useSSE = () => {
-  const appCtx = useContext(AppContext);
-  const [homeState, setHomeState] = useState<HomeState>({
-    syncStatus: 0,
-    onchainBalance: 0,
-    lnBalance: 0,
-    currBlock: 0,
-    maxBlock: 0,
-    channelOnline: 0,
-    channelTotal: 0,
-    btcVersion: '',
-    btcStatus: '',
-    btcNetwork: '',
-    lnVersion: '',
-    lnStatus: '',
-    torAddress: '',
-    sshAddress: ''
-  });
-
-  const [appStatus, setAppStatus] = useState([]);
-  const [availableApps, setAvailableApps] = useState<any[]>([]);
-  const [transactions, setTransactions] = useState([]);
-  const [isInstalling, setIsInstalling] = useState<string | null>(null);
-
-  const { evtSource, setEvtSource } = appCtx;
+  const sseCtx = useContext(SSEContext);
+  const { evtSource, setEvtSource } = sseCtx;
 
   useEffect(() => {
     if (!evtSource) {
       setEvtSource(new EventSource(SSE_URL));
-    } else {
+    }
+
+    const setApps = (event: Event) => {
+      sseCtx.setAvailableApps((prev: any[]) => {
+        const apps = JSON.parse((event as MessageEvent<string>).data);
+        if (prev.length === 0) {
+          return apps;
+        } else {
+          return prev.map((old: any) => apps.find((newApp: any) => old.id === newApp.id) || old);
+        }
+      });
+    };
+
+    const setAppStat = (event: Event) => {
+      sseCtx.setAppStatus((prev: any) => {
+        const status = JSON.parse((event as MessageEvent<string>).data);
+
+        if (prev.length === 0) {
+          return status;
+        } else {
+          return prev.map((old: any) => status.find((newApp: any) => old.id === newApp.id) || old);
+        }
+      });
+    };
+
+    const setTx = (event: Event) => {
+      const t = JSON.parse((event as MessageEvent<string>).data).sort((a: any, b: any) => b.time - a.time);
+      sseCtx.setTransactions(t);
+    };
+
+    const setInstall = (event: Event) => {
+      sseCtx.setIsInstalling(JSON.parse((event as MessageEvent<string>).data).id);
+    };
+
+    const setSyncStatus = (event: Event) => {
+      sseCtx.setHomeState((prev: any) => {
+        const message = JSON.parse((event as MessageEvent<string>).data);
+
+        return {
+          ...prev,
+          ...message
+        };
+      });
+    };
+
+    if (evtSource) {
       evtSource.addEventListener('syncstatus', setSyncStatus);
       evtSource.addEventListener('transactions', setTx);
       evtSource.addEventListener('appstatus', setAppStat);
@@ -50,49 +69,17 @@ const useSSE = () => {
         evtSource.removeEventListener('appstatus', setAppStat);
         evtSource.removeEventListener('apps', setApps);
         evtSource.removeEventListener('install', setInstall);
-
-        setEvtSource(null);
-        evtSource.close();
       }
     };
-  }, [evtSource, setEvtSource]);
+  }, [evtSource, setEvtSource, sseCtx]);
 
-  const setApps = (event: Event) => {
-    setAvailableApps((prev: any[]) => {
-      const apps = JSON.parse((event as MessageEvent<string>).data);
-      if (prev.length === 0) {
-        return apps;
-      } else {
-        return prev.map((old) => apps.find((newApp: any) => old.id === newApp.id) || old);
-      }
-    });
+  return {
+    homeState: sseCtx.homeState,
+    appStatus: sseCtx.appStatus,
+    transactions: sseCtx.transactions,
+    availableApps: sseCtx.availableApps,
+    isInstalling: sseCtx.isInstalling
   };
-
-  const setAppStat = (event: Event) => {
-    setAppStatus(JSON.parse((event as MessageEvent<string>).data));
-  };
-
-  const setTx = (event: Event) => {
-    const t = JSON.parse((event as MessageEvent<string>).data).sort((a: any, b: any) => b.time - a.time);
-    setTransactions(t);
-  };
-
-  const setInstall = (event: Event) => {
-    setIsInstalling(JSON.parse((event as MessageEvent<string>).data).id);
-  };
-
-  const setSyncStatus = (event: Event) => {
-    setHomeState((prev) => {
-      const message = JSON.parse((event as MessageEvent<string>).data);
-
-      return {
-        ...prev,
-        ...message
-      };
-    });
-  };
-
-  return { homeState, transactions, appStatus, availableApps, isInstalling };
 };
 
 export default useSSE;

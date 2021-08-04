@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AppCard from '../../components/AppsComponents/AppCard/AppCard';
 import AppInfo from '../../components/AppsComponents/AppInfo/AppInfo';
@@ -23,11 +23,6 @@ export const Apps = () => {
     setId(null);
     setIsDetailsOpen(false);
   };
-
-  // call to get available apps
-  useEffect(() => {
-    instance.get('apps');
-  }, []);
 
   return (
     <div className='content-container page-container dark:text-white'>
