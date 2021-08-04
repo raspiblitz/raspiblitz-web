@@ -13,7 +13,6 @@ import useSSE from '../../hooks/use-sse';
 
 export const Home: FC = () => {
   const { homeState, transactions, appStatus } = useSSE();
-  console.log(homeState);
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);

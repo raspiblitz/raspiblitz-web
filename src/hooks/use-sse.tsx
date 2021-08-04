@@ -16,7 +16,7 @@ const useSSE = () => {
         if (prev.length === 0) {
           return apps;
         } else {
-          return prev.map((old) => apps.find((newApp: any) => old.id === newApp.id) || old);
+          return prev.map((old: any) => apps.find((newApp: any) => old.id === newApp.id) || old);
         }
       });
     };
@@ -25,10 +25,11 @@ const useSSE = () => {
       sseCtx.setAppStatus((prev: any) => {
         const status = JSON.parse((event as MessageEvent<string>).data);
 
-        return {
-          ...prev,
-          ...status
-        };
+        if (prev.length === 0) {
+          return status;
+        } else {
+          return prev.map((old: any) => status.find((newApp: any) => old.id === newApp.id) || old);
+        }
       });
     };
 
