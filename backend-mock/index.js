@@ -85,6 +85,16 @@ app.post('/logout', (req, res) => {
   res.status(200).send();
 });
 
+/***
+ * SYNC
+ */
+
+// TODO: send back response
+app.get('/syncstatus', (req, res) => {
+  // sync.syncStatus();
+  res.status(200).send();
+});
+
 /**
  * SETTINGS
  */
@@ -104,13 +114,19 @@ app.post('/system/shutdown', (req, res) => {
   res.status(200).send();
 });
 
-app.post('/install', (req, res) => {
-  console.log('call to /install');
-  // send information that btc-pay is currently installing
-  util.sendSSE('install', { id: 'btc-pay' });
-  setTimeout(() => {
-    apps.installApp();
-  }, 5000);
+/***
+ * APPS
+ */
+
+// TODO: send back response
+app.get('/appstatus', (req, res) => {
+  // apps.appStatus();
+  res.status(200).send();
+});
+
+// TODO: send back response
+app.get('/apps', (req, res) => {
+  // apps.listApps();
   res.status(200).send();
 });
 
