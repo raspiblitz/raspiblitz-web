@@ -1,8 +1,24 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import App from './App';
 
-test('should redirect to /login', () => {
+jest.mock('axios', () => {
+  return {
+    create: () => {
+      return {
+        get: () => {
+          return { data: { progress: 100 } };
+        },
+        interceptors: {
+          request: { use: jest.fn(), eject: jest.fn() }
+        }
+      };
+    }
+  };
+});
+
+test('should redirect to /login if progress is 100', async () => {
   render(<App />);
-  expect(window.location.pathname).toEqual('/login');
+
+  expect(await screen.findByText('Login')).toBeDefined();
 });
