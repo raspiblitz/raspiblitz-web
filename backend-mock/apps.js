@@ -30,6 +30,16 @@ const appStatus = () => {
       status: 'offline'
     }
   ]);
+
+  setTimeout(() => {
+    util.sendSSE('appstatus', [
+      {
+        id: 'bos',
+        name: 'Balance of Satoshis',
+        status: 'online'
+      }
+    ]);
+  }, 5000);
 };
 
 const listApps = () => {

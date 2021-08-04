@@ -15,7 +15,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
 
-// app.use('/', express.static('public'))
+app.use('/', express.static('../build'));
 
 /**
  * Main SSE Handler
