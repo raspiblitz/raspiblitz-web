@@ -15,7 +15,7 @@ describe('util', () => {
     expect(localStorage.setItem).toHaveBeenCalledWith(SETTINGS_KEY, JSON.stringify({ darkMode: false, lang: 'de' }));
   });
 
-  test('saveSettings should save partial settings', () => {
+  test('saveSettings should save metge with existing settings', () => {
     window.localStorage.__proto__.getItem = jest.fn(() => JSON.stringify({ darkMode: true, lang: 'en' }));
 
     saveSettings({ lang: 'de' });
