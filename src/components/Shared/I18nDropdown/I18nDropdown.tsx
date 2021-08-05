@@ -1,6 +1,7 @@
 import { ChangeEvent, FC, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { resources } from '../../../i18n/config';
+import { saveSettings } from '../../../util/util';
 
 const I18nDropdown: FC = () => {
   const { t, i18n } = useTranslation();
@@ -17,6 +18,7 @@ const I18nDropdown: FC = () => {
   const dropdownHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     if (event.target.value !== i18n.language) {
       i18n.changeLanguage(selectRef.current?.value);
+      saveSettings({ lang: i18n.language });
     }
   };
 
