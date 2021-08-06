@@ -36,50 +36,46 @@ const App = () => {
 
   return (
     <Suspense fallback={<LoadingScreen />}>
-      <div className='bg-gray-100 dark:bg-gray-700 transition-colors'>
-        {!setupDone && loading && <LoadingScreen />}
+      {!setupDone && loading && <LoadingScreen />}
 
-        {!setupDone && !loading && (
-          <BrowserRouter>
-            <Route path='/setup' component={Setup} />
+      {!setupDone && !loading && (
+        <BrowserRouter>
+          <Route path='/setup' component={Setup} />
+          <Route>
+            <Redirect to='/setup' />
+          </Route>
+        </BrowserRouter>
+      )}
+
+      {setupDone && !loading && !appCtx.isLoggedIn && (
+        <BrowserRouter>
+          <Switch>
+            <Route path='/login' component={Login} />
             <Route>
-              <Redirect to='/setup' />
+              <Redirect to='/login' />
             </Route>
-          </BrowserRouter>
-        )}
+          </Switch>
+        </BrowserRouter>
+      )}
 
-        {setupDone && !loading && !appCtx.isLoggedIn && (
-          <BrowserRouter>
-            <Switch>
-              <Route path='/login' component={Login} />
-              <Route>
-                <Redirect to='/login' />
-              </Route>
-            </Switch>
-          </BrowserRouter>
-        )}
-
-        {setupDone && !loading && appCtx.isLoggedIn && (
-          <BrowserRouter>
-            <Header></Header>
-            <div className='flex'>
-              <SideDrawer></SideDrawer>
-              <Switch>
-                <Route exact path='/'>
-                  <Redirect to='/home' />
-                </Route>
-                <Route path='/home' component={Home} />
-                <Route path='/apps' component={Apps} />
-                <Route path='/settings' component={Settings} />
-                <Route>
-                  <Redirect to='/home' />
-                </Route>
-              </Switch>
-            </div>
-            <BottomNav></BottomNav>
-          </BrowserRouter>
-        )}
-      </div>
+      {setupDone && !loading && appCtx.isLoggedIn && (
+        <BrowserRouter>
+          <Header></Header>
+          <SideDrawer></SideDrawer>
+          <Switch>
+            <Route exact path='/'>
+              <Redirect to='/home' />
+            </Route>
+            <Route path='/home' component={Home} />
+            <Route path='/apps' component={Apps} />
+            <Route path='/settings' component={Settings} />
+            <Route>
+              <Redirect to='/home' />
+            </Route>
+          </Switch>
+          <BottomNav></BottomNav>
+        </BrowserRouter>
+      )}
     </Suspense>
   );
 };

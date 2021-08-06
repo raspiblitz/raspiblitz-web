@@ -18,24 +18,24 @@ export const SideDrawer: FC = () => {
   };
 
   return (
-    <nav className='hidden md:inline-block content-container w-full md:w-2/12 fixed mt-16 px-2 pt-8 mb-16 shadow-lg bg-white dark:bg-gray-800 transition-colors'>
-      <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <HomeLogo className='inline-block w-8 h-8' />
-        <div className='w-1/2 mx-3 flex justify-center lg:block'>{t('navigation.home')}</div>
-      </NavLink>
-      <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <AppIcon className='inline-block w-8 h-8' />
-        <div className='w-full lg:w-1/2 mx-3 flex justify-center lg:block'>{t('navigation.apps')}</div>
-      </NavLink>
-      <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
-        <SettingsIcon className='inline-block w-8 h-8' />
-        <div className='w-1/2 mx-3 flex justify-center lg:block'>{t('navigation.settings')}</div>
-      </NavLink>
-      <div className='flex items-end'>
-        <button onClick={logoutHandler} className='bd-button w-full h-8 align-middle'>
-          {t('navigation.logout')}
-        </button>
+    <nav className='hidden md:flex flex-col justify-between content-container w-full md:w-2/12 fixed px-2 pt-8 mb-16 shadow-lg bg-white dark:bg-gray-800 transition-colors'>
+      <div>
+        <NavLink to='/home' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+          <HomeLogo className='inline-block w-8 h-8' />
+          <div className='w-1/2 mx-3 flex justify-center lg:block'>{t('navigation.home')}</div>
+        </NavLink>
+        <NavLink to='apps' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+          <AppIcon className='inline-block w-8 h-8' />
+          <div className='w-full lg:w-1/2 mx-3 flex justify-center lg:block'>{t('navigation.apps')}</div>
+        </NavLink>
+        <NavLink to='settings' className={navLinkClasses} activeClassName={navLinkActiveClasses}>
+          <SettingsIcon className='inline-block w-8 h-8' />
+          <div className='w-1/2 mx-3 flex justify-center lg:block'>{t('navigation.settings')}</div>
+        </NavLink>
       </div>
+      <button onClick={logoutHandler} className='bd-button w-full h-8 mb-3'>
+        {t('navigation.logout')}
+      </button>
     </nav>
   );
 };
