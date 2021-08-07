@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ChangePwModal from '../../components/SettingsComponents/ChangePwModal/ChangePwModal';
-import I18nBox from '../../components/SettingsComponents/I18nBox/I18nBox';
+import ChangePwModal from '../../components/Settings/ChangePwModal/ChangePwModal';
+import I18nBox from '../../components/Settings/I18nBox/I18nBox';
 import ConfirmModal from '../../components/Shared/ConfirmModal/ConfirmModal';
 import ActionBox from '../../container/ActionBox/ActionBox';
 

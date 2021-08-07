@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import AppCard from '../../components/AppsComponents/AppCard/AppCard';
-import AppInfo from '../../components/AppsComponents/AppInfo/AppInfo';
+import AppCard from '../../components/Apps/AppCard/AppCard';
+import AppInfo from '../../components/Apps/AppInfo/AppInfo';
 import useSSE from '../../hooks/use-sse';
 import { instance } from '../../util/interceptor';
 
