@@ -1,12 +1,12 @@
 import { FC, ReactElement, useEffect, useState } from 'react';
-import Migration from '../../components/SetupComponents/Migration/Migration';
-import Provision from '../../components/SetupComponents/Provision/Provision';
-import SetPasswords from '../../components/SetupComponents/SetPasswords/SetPasswords';
-import SetupDone from '../../components/SetupComponents/SetupDone/SetupDone';
-import FreshSetup from '../../components/SetupComponents/FreshSetup/FreshSetup';
-import UpdateRecover from '../../components/SetupComponents/UpdateRecover/UpdateRecover';
-import WalletCreation from '../../components/SetupComponents/WalletCreation/WalletCreation';
-import Welcome from '../../components/SetupComponents/Welcome/Welcome';
+import Migration from '../../components/Setup/Migration/Migration';
+import Provision from '../../components/Setup/Provision/Provision';
+import SetPasswords from '../../components/Setup/SetPasswords/SetPasswords';
+import SetupDone from '../../components/Setup/SetupDone/SetupDone';
+import FreshSetup from '../../components/Setup/FreshSetup/FreshSetup';
+import UpdateRecover from '../../components/Setup/UpdateRecover/UpdateRecover';
+import WalletCreation from '../../components/Setup/WalletCreation/WalletCreation';
+import Welcome from '../../components/Setup/Welcome/Welcome';
 import { SetupSteps } from '../../models/setup.model';
 
 const Setup: FC = () => {
