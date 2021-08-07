@@ -1,87 +1,87 @@
 {
-    "translation": {
-        "navigation": {
-            "home": "Accueil",
-            "apps": "Applis",
-            "settings": "Paramètres",
-            "back": "Retour",
-            "dark_mode": "Mode sombre",
-            "display_sats": "Afficher SATS",
-            "logout": "Se déconnecter"
-        },
-        "login": {
-            "enter_pass": "Entrez le mot de passe A",
-            "enter_pass_placeholder": "Mot de passe A",
-            "login": "Se connecter",
-            "invalid_pass": "Mot de passe invalide",
-            "error": "Une erreur s'est produite"
-        },
-        "home": {
-            "bitcoin": "Bitcoin",
-            "version": "Version",
-            "network": "Réseau",
-            "status": "État",
-            "blocks_synced": "Blocs synchronisés",
-            "conn_details": "Détails de la connexion",
-            "tor": "Tor",
-            "ssh": "Connexion SSH",
-            "channel": "Canal",
-            "channel_balance": "Équilibre du canal",
-            "lightning": "Lightning"
-        },
-        "wallet": {
-            "receive": "Recevoir",
-            "send": "Envoyer",
-            "amount": "Montant",
-            "copied": "Copié !",
-            "copy_clipboard": "Copier dans le presse-papier",
-            "create_invoice_ln": "Créer une facture Lightning",
-            "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
-            "send_funds": "Envoyer des fonds",
-            "address": "Adresse",
-            "on_chain": "On-chain",
-            "fund_short": "Approvisionner porte-monnaie",
-            "balance": "Balance",
-            "fund": "Approvisionner votre porte-monnaie"
-        },
-        "tx": {
-            "tx_details": "Détails de la transaction",
-            "txid": "Identifiant de transaction",
-            "date": "Date",
-            "description": "Description",
-            "value": "Valeur",
-            "comment": "Commentaire",
-            "fee_rate": "Taux de frais",
-            "request": "Requête",
-            "mempool": "Voir dans mempool",
-            "fee": "Frais",
-            "included_block": "Inclus dans le block"
-        },
-        "apps": {
-            "installed": "Installé",
-            "available": "Applications disponibles",
-            "open": "Ouvrir",
-            "install": "Installer",
-            "uninstall": "Désinstaller",
-            "info": "Infos",
-            "no_page": "Aucune page disponible",
-            "about": "À propos",
-            "author": "Auteur",
-            "source": "Code source",
-            "offline": "hors ligne",
-            "online": "en ligne"
-        },
-        "settings": {
-            "change_pw": "Changer le mot de passe",
-            "old_pw": "Ancien mot de passe",
-            "new_pw": "Nouveau mot de passe",
-            "change": "Changer",
-            "reboot": "Redémarrer",
-            "shutdown": "Éteindre",
-            "cancel": "Annuler",
-            "confirm": "Confirmer",
-            "language": "Langue",
-            "curr_lang": "Langue actuelle"
-        }
+  "translation": {
+    "navigation": {
+      "home": "Accueil",
+      "apps": "Applis",
+      "settings": "Paramètres",
+      "back": "Retour",
+      "dark_mode": "Mode sombre",
+      "display_sats": "Afficher SATS",
+      "logout": "Se déconnecter"
+    },
+    "login": {
+      "enter_pass": "Entrez le mot de passe A",
+      "enter_pass_placeholder": "Mot de passe A",
+      "login": "Se connecter",
+      "invalid_pass": "Mot de passe invalide",
+      "error": "Une erreur s'est produite"
+    },
+    "home": {
+      "bitcoin": "Bitcoin",
+      "version": "Version",
+      "network": "Réseau",
+      "status": "État",
+      "blocks_synced": "Blocs synchronisés",
+      "conn_details": "Détails de la connexion",
+      "tor": "Tor",
+      "ssh": "Connexion SSH",
+      "channel": "Canal",
+      "channel_balance": "Équilibre du canal",
+      "lightning": "Lightning"
+    },
+    "wallet": {
+      "receive": "Recevoir",
+      "send": "Envoyer",
+      "amount": "Montant",
+      "copied": "Copié !",
+      "copy_clipboard": "Copier dans le presse-papier",
+      "create_invoice_ln": "Créer une facture Lightning",
+      "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
+      "send_funds": "Envoyer des fonds",
+      "address": "Adresse",
+      "on_chain": "On-chain",
+      "fund_short": "Approvisionner porte-monnaie",
+      "balance": "Balance",
+      "fund": "Approvisionner votre porte-monnaie"
+    },
+    "tx": {
+      "tx_details": "Détails de la transaction",
+      "txid": "Identifiant de transaction",
+      "date": "Date",
+      "description": "Description",
+      "value": "Valeur",
+      "comment": "Commentaire",
+      "fee_rate": "Taux de frais",
+      "request": "Requête",
+      "mempool": "Voir dans mempool",
+      "fee": "Frais",
+      "included_block": "Inclus dans le block"
+    },
+    "apps": {
+      "installed": "Installé",
+      "available": "Applications disponibles",
+      "open": "Ouvrir",
+      "install": "Installer",
+      "uninstall": "Désinstaller",
+      "info": "Infos",
+      "no_page": "Aucune page disponible",
+      "about": "À propos",
+      "author": "Auteur",
+      "source": "Code source",
+      "offline": "hors ligne",
+      "online": "en ligne"
+    },
+    "settings": {
+      "change_pw": "Changer le mot de passe",
+      "old_pw": "Ancien mot de passe",
+      "new_pw": "Nouveau mot de passe",
+      "change": "Changer",
+      "reboot": "Redémarrer",
+      "shutdown": "Éteindre",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "language": "Langue",
+      "curr_lang": "Langue actuelle"
     }
+  }
 }
