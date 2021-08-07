@@ -15,11 +15,11 @@
 }
 
 .bd-card {
-  @apply h-full shadow-xl rounded-md bg-white px-6 py-6 text-black  dark:text-white dark:bg-gray-600;
+  @apply h-full shadow-xl rounded-md bg-white px-6 py-4 text-black  dark:text-white dark:bg-gray-600 transition-colors;
 }
 
 .bd-button {
-  @apply shadow-xl rounded text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400
+  @apply shadow-xl rounded text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400;
 }
 
 .page-container {

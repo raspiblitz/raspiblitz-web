@@ -1,13 +1,20 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ArrowDownIcon } from '../../../assets/arrow-down.svg';
+import LoadingBox from '../../Shared/LoadingBox/LoadingBox';
 import Transaction from './Transaction/Transaction';
 
 const MAX_ITEMS = 6;
 
 export const TransactionCard: FC<TransactionCardProps> = (props) => {
   const { t } = useTranslation();
+  const { transactions, showDetails } = props;
+
   const [page, setPage] = useState(0);
+
+  if (transactions.length === 0) {
+    return <LoadingBox />;
+  }
 
   const pageForwardHandler = () => {
     setPage((p) => p + 1);
@@ -17,7 +24,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
     setPage((p) => p - 1);
   };
 
-  const currentPage = props.transactions.slice(page * MAX_ITEMS, page * MAX_ITEMS + MAX_ITEMS);
+  const currentPage = transactions.slice(page * MAX_ITEMS, page * MAX_ITEMS + MAX_ITEMS);
 
   return (
     <div className='p-5 h-full'>
@@ -27,7 +34,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
           {currentPage.map((transaction: any, index: number) => {
             return (
               <Transaction
-                onClick={() => props.showDetails(transaction.id)}
+                onClick={() => showDetails(transaction.id)}
                 key={index}
                 type={transaction.type}
                 amount={transaction.amount}
@@ -49,7 +56,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
           <button
             className='bg-black hover:bg-gray-700 text-white p-2 rounded flex disabled:opacity-50'
             onClick={pageForwardHandler}
-            disabled={page * MAX_ITEMS + MAX_ITEMS >= props.transactions.length}
+            disabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
           >
             <ArrowDownIcon className='h-6 w-6 transform -rotate-90' />
           </button>

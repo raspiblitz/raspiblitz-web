@@ -1,37 +1,44 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import LoadingBox from '../../Shared/LoadingBox/LoadingBox';
 
 export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
   const { t } = useTranslation();
-  const syncPercentage = +((props.currBlock / props.maxBlock) * 100).toFixed(2);
+  const { currBlock, maxBlock, version, network, status } = props;
+
+  if (!currBlock || !maxBlock || !version || !network || !status) {
+    return <LoadingBox />;
+  }
+
+  const syncPercentage = +((currBlock / maxBlock) * 100).toFixed(2);
 
   return (
     <div className='p-5 h-full'>
-      <div className='bd-card transition-colors'>
+      <section className='bd-card'>
         <h2 className='font-bold text-lg'>{t('home.bitcoin')}</h2>
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.version')}</h4>
-            <div>{props.version}</div>
+            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.version')}</h6>
+            <p>{version}</p>
           </div>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.network')}</h4>
-            <div>{props.network}</div>
+            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.network')}</h6>
+            <p>{network}</p>
           </div>
         </div>
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.status')}</h4>
-            <div>
-              {props.status} ({syncPercentage} %)
-            </div>
+            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.status')}</h6>
+            <p>
+              {status} ({syncPercentage} %)
+            </p>
           </div>
           <div className='w-1/2'>
-            <h4 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.blocks_synced')}</h4>
-            <div>{`${props.currBlock} / ${props.maxBlock}`}</div>
+            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.blocks_synced')}</h6>
+            <p>{`${currBlock} / ${maxBlock}`}</p>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
