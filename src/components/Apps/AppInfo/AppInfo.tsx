@@ -2,9 +2,12 @@ import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ChevronLeft } from '../../../assets/chevron-left.svg';
 import { instance } from '../../../util/interceptor';
+import LoadingBox from '../../Shared/LoadingBox/LoadingBox';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 export const AppInfo: FC<AppInfoProps> = (props) => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(true);
   const [iconImg, setIconImg] = useState('');
   const [imgs, setImgs] = useState<string[]>([]);
   const [resp, setResp] = useState<any>({});
@@ -16,6 +19,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
       const resp = await instance.get(`appdetails/${id}`);
       setImgs(resp.data.images);
       setResp(resp.data);
+      setIsLoading(false);
     };
     fetchAppDetails();
 
@@ -28,6 +32,14 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
         import('../../../assets/cloud.svg').then((img) => setIconImg(img.default));
       });
   }, [id]);
+
+  if (isLoading) {
+    return (
+      <section className='content-container flex justify-center items-center'>
+        <LoadingSpinner />
+      </section>
+    );
+  }
 
   const openImgHandler = (img: string) => {
     window.open(img, '_blank', 'noopener,noreferrer');
@@ -42,7 +54,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
   };
 
   return (
-    <main className='mobile-container md:content-container w-full'>
+    <main className='content-container w-full'>
       {/* Back Button */}
       <section className='w-full px-5 py-9 dark:text-gray-200'>
         <button onClick={props.onClose} className='flex items-center outline-none text-xl font-bold'>
