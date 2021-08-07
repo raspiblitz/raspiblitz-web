@@ -44,7 +44,7 @@ const Login: FC = () => {
   };
 
   return (
-    <div className='w-screen h-screen flex flex-col justify-center items-center'>
+    <main className='w-screen h-screen flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-700 transition-colors'>
       <MoonLogo className='h-8 fixed right-4 top-4 text-dark dark:text-yellow-500' onClick={appCtx.toggleDarkMode} />
       <div className='h-8 w-48 fixed right-16 top-4 flex justify-around items-center'>
         <I18nDropdown />
@@ -74,7 +74,7 @@ const Login: FC = () => {
           {isError && <p className='text-red-500 bg-gray-200 px-5 py-2 rounded'>{t('login.error')}</p>}
         </>
       )}
-    </div>
+    </main>
   );
 };
 

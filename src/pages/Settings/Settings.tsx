@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ChangePwModal from '../../components/SettingsComponents/ChangePwModal/ChangePwModal';
-import I18nBox from '../../components/SettingsComponents/I18nBox/I18nBox';
+import ChangePwModal from '../../components/Settings/ChangePwModal/ChangePwModal';
+import I18nBox from '../../components/Settings/I18nBox/I18nBox';
 import ConfirmModal from '../../components/Shared/ConfirmModal/ConfirmModal';
 import ActionBox from '../../container/ActionBox/ActionBox';
 
@@ -36,7 +36,7 @@ const Settings: FC = () => {
   };
 
   return (
-    <div className='content-container page-container flex flex-col dark:text-white'>
+    <main className='content-container page-container flex flex-col dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors'>
       <I18nBox />
       <ActionBox name={t('settings.change_pw')} actionName={t('settings.change')} action={showPwModalHandler} />
       <ActionBox name={t('settings.reboot')} actionName={t('settings.reboot')} action={showRebootModalHandler} />
@@ -56,7 +56,7 @@ const Settings: FC = () => {
           confirmEndpoint='/system/shutdown'
         />
       )}
-    </div>
+    </main>
   );
 };
 

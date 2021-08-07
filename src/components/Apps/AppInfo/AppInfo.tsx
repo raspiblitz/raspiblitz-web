@@ -2,13 +2,14 @@ import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ChevronLeft } from '../../../assets/chevron-left.svg';
 import { instance } from '../../../util/interceptor';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 export const AppInfo: FC<AppInfoProps> = (props) => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(true);
   const [iconImg, setIconImg] = useState('');
   const [imgs, setImgs] = useState<string[]>([]);
   const [resp, setResp] = useState<any>({});
-  const buttonClasses = 'rounded p-2';
 
   const { id } = props;
 
@@ -17,6 +18,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
       const resp = await instance.get(`appdetails/${id}`);
       setImgs(resp.data.images);
       setResp(resp.data);
+      setIsLoading(false);
     };
     fetchAppDetails();
 
@@ -29,6 +31,14 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
         import('../../../assets/cloud.svg').then((img) => setIconImg(img.default));
       });
   }, [id]);
+
+  if (isLoading) {
+    return (
+      <section className='content-container flex justify-center items-center'>
+        <LoadingSpinner />
+      </section>
+    );
+  }
 
   const openImgHandler = (img: string) => {
     window.open(img, '_blank', 'noopener,noreferrer');
@@ -43,32 +53,33 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
   };
 
   return (
-    <div className='mobile-container md:content-container w-full'>
-      <div className='w-full text-lg font-bold px-5 p-9 dark:text-gray-200'>
-        <button onClick={props.onClose} className='flex items-center outline-none'>
+    <main className='content-container w-full'>
+      {/* Back Button */}
+      <section className='w-full px-5 py-9 dark:text-gray-200'>
+        <button onClick={props.onClose} className='flex items-center outline-none text-xl font-bold'>
           <ChevronLeft className='h-5 w-5 inline-block' />
           {t('navigation.back')}
         </button>
-      </div>
+      </section>
 
       {/* Image box with title */}
-      <div className='w-full px-10 flex items-center'>
+      <section className='w-full px-10 flex items-center'>
         <img className='max-h-16' src={iconImg} alt={`${props.id} Logo`} />
-        <div className='text-2xl px-5 dark:text-white'>{resp.name}</div>
+        <h1 className='text-2xl px-5 dark:text-white'>{resp.name}</h1>
         {!resp.installed && (
-          <button className={`bg-green-400 ${buttonClasses}`} onClick={installHandler}>
+          <button className={`bg-green-400 rounded p-2`} onClick={installHandler}>
             {t('apps.install')}
           </button>
         )}
         {resp.installed && (
-          <button className={`bg-red-500 text-white ${buttonClasses}`} onClick={uninstallHandler}>
+          <button className={`bg-red-500 text-white rounded p-2`} onClick={uninstallHandler}>
             {t('apps.uninstall')}
           </button>
         )}
-      </div>
+      </section>
 
       {/* Slideshow */}
-      <div className='container p-2 flex flex-nowrap overflow-x-auto'>
+      <section className='container p-2 flex flex-nowrap overflow-x-auto'>
         {imgs.map((img, i) => (
           <img
             id={'img' + i}
@@ -79,24 +90,24 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
             alt='img'
           />
         ))}
-      </div>
+      </section>
       {/* App Description */}
-      <div className='w-full p-5 flex items-center justify-center'>
-        <div className='w-full bd-card'>
-          <div className='text-lg'>
+      <section className='w-full p-5 flex items-center justify-center'>
+        <article className='w-full bd-card'>
+          <h3 className='text-lg'>
             {resp.name} v{resp.version}
-          </div>
-          <div className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.about')}</div>
-          <div>{resp.description}</div>
-          <div className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.author')}</div>
-          <div>{resp.author}</div>
-          <div className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.source')}</div>
+          </h3>
+          <h4 className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.about')}</h4>
+          <p>{resp.description}</p>
+          <h4 className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.author')}</h4>
+          <p>{resp.author}</p>
+          <h4 className='my-2 text-gray-500 dark:text-gray-300'> {t('apps.source')}</h4>
           <a href={resp.repository} className='text-blue-400 dark:text-blue-300 underline'>
             {resp.repository}
           </a>
-        </div>
-      </div>
-    </div>
+        </article>
+      </section>
+    </main>
   );
 };
 

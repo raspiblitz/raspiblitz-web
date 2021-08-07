@@ -10,7 +10,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const btnClasses = 'w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
+  const btnClasses = 'w-full xl:w-1/2 text-center h-10 my-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
 
   const changePasswordHandler = async () => {
     setIsLoading(true);

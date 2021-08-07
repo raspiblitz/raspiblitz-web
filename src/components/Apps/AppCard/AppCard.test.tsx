@@ -3,16 +3,14 @@ import { AppCard } from './AppCard';
 import i18n from '../../../i18n/test_config';
 import { I18nextProvider } from 'react-i18next';
 
-const bluuub = () => {};
-
 const basic = {
   id: '123',
   description: 'Hi',
   installed: false,
   installing: false,
   name: 'd',
-  onInstall: bluuub,
-  onOpenDetails: bluuub
+  onInstall: () => {},
+  onOpenDetails: () => {}
 };
 
 describe('AppCard', () => {
