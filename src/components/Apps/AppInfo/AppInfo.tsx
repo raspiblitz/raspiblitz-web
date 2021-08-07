@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ChevronLeft } from '../../../assets/chevron-left.svg';
 import { instance } from '../../../util/interceptor';
-import LoadingBox from '../../Shared/LoadingBox/LoadingBox';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 export const AppInfo: FC<AppInfoProps> = (props) => {
