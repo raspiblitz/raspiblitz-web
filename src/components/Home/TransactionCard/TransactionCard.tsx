@@ -1,8 +1,9 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ArrowDownIcon } from '../../../assets/arrow-down.svg';
+import { Transaction } from '../../../models/transaction.model';
 import LoadingBox from '../../Shared/LoadingBox/LoadingBox';
-import Transaction from './Transaction/Transaction';
+import SingleTransaction from './SingleTransaction/SingleTransaction';
 
 const MAX_ITEMS = 6;
 
@@ -31,17 +32,9 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
       <div className='bd-card flex flex-col transition-colors min-h-144 md:min-h-0'>
         <div className='font-bold text-lg'>{t('tx.transactions')}</div>
         <ul className='mt-auto'>
-          {currentPage.map((transaction: any, index: number) => {
+          {currentPage.map((transaction: Transaction, index: number) => {
             return (
-              <Transaction
-                onClick={() => showDetails(transaction.id)}
-                key={index}
-                type={transaction.type}
-                amount={transaction.amount}
-                time={transaction.time}
-                category={transaction.category}
-                comment={transaction.comment}
-              />
+              <SingleTransaction onClick={() => showDetails(transaction.id)} key={index} transaction={transaction} />
             );
           })}
         </ul>
@@ -69,6 +62,6 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
 export default TransactionCard;
 
 export interface TransactionCardProps {
-  transactions: any[];
+  transactions: Transaction[];
   showDetails: (id: string) => void;
 }

@@ -1,4 +1,8 @@
 import { useContext, useEffect } from 'react';
+import { AppStatus } from '../models/app-status.model';
+import { App } from '../models/app.model';
+import { HomeState } from '../models/home-state.model';
+import { Transaction } from '../models/transaction.model';
 import { SSEContext, SSE_URL } from '../store/sse-context';
 
 const useSSE = () => {
@@ -11,30 +15,32 @@ const useSSE = () => {
     }
 
     const setApps = (event: Event) => {
-      sseCtx.setAvailableApps((prev: any[]) => {
+      sseCtx.setAvailableApps((prev: App[]) => {
         const apps = JSON.parse((event as MessageEvent<string>).data);
         if (prev.length === 0) {
           return apps;
         } else {
-          return prev.map((old: any) => apps.find((newApp: any) => old.id === newApp.id) || old);
+          return prev.map((old: App) => apps.find((newApp: App) => old.id === newApp.id) || old);
         }
       });
     };
 
-    const setAppStat = (event: Event) => {
-      sseCtx.setAppStatus((prev: any) => {
+    const setAppStatus = (event: Event) => {
+      sseCtx.setAppStatus((prev: AppStatus[]) => {
         const status = JSON.parse((event as MessageEvent<string>).data);
 
         if (prev.length === 0) {
           return status;
         } else {
-          return prev.map((old: any) => status.find((newApp: any) => old.id === newApp.id) || old);
+          return prev.map((old: AppStatus) => status.find((newApp: AppStatus) => old.id === newApp.id) || old);
         }
       });
     };
 
     const setTx = (event: Event) => {
-      const t = JSON.parse((event as MessageEvent<string>).data).sort((a: any, b: any) => b.time - a.time);
+      const t = JSON.parse((event as MessageEvent<string>).data).sort(
+        (a: Transaction, b: Transaction) => b.time - a.time
+      );
       sseCtx.setTransactions(t);
     };
 
@@ -43,7 +49,7 @@ const useSSE = () => {
     };
 
     const setSyncStatus = (event: Event) => {
-      sseCtx.setHomeState((prev: any) => {
+      sseCtx.setHomeState((prev: HomeState) => {
         const message = JSON.parse((event as MessageEvent<string>).data);
 
         return {
@@ -56,7 +62,7 @@ const useSSE = () => {
     if (evtSource) {
       evtSource.addEventListener('syncstatus', setSyncStatus);
       evtSource.addEventListener('transactions', setTx);
-      evtSource.addEventListener('appstatus', setAppStat);
+      evtSource.addEventListener('appstatus', setAppStatus);
       evtSource.addEventListener('apps', setApps);
       evtSource.addEventListener('install', setInstall);
     }
@@ -66,7 +72,7 @@ const useSSE = () => {
       if (evtSource) {
         evtSource.removeEventListener('syncstatus', setSyncStatus);
         evtSource.removeEventListener('transactions', setTx);
-        evtSource.removeEventListener('appstatus', setAppStat);
+        evtSource.removeEventListener('appstatus', setAppStatus);
         evtSource.removeEventListener('apps', setApps);
         evtSource.removeEventListener('install', setInstall);
       }
@@ -83,20 +89,3 @@ const useSSE = () => {
 };
 
 export default useSSE;
-
-export interface HomeState {
-  syncStatus: number;
-  onchainBalance: number;
-  lnBalance: number;
-  currBlock: number;
-  maxBlock: number;
-  channelOnline: number;
-  channelTotal: number;
-  btcVersion: string;
-  btcStatus: string;
-  btcNetwork: string;
-  lnVersion: string;
-  lnStatus: string;
-  torAddress: string;
-  sshAddress: string;
-}
