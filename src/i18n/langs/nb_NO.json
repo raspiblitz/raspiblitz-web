@@ -6,7 +6,8 @@
             "back": "Tilbake",
             "apps": "Programmer",
             "settings": "Innstillinger",
-            "home": "Hjem"
+            "home": "Hjem",
+            "logout": "Logg ut"
         },
         "home": {
             "lightning": "Lynoverføring",
