@@ -1,72 +1,72 @@
 {
-    "translation": {
-        "login": {
-            "enter_pass": "Passwort A eingeben",
-            "enter_pass_placeholder": "Passwort A",
-            "error": "Ein Fehler ist aufgetreten",
-            "invalid_pass": "Ungültiges Passwort",
-            "login": "Anmelden"
-        },
-        "settings": {
-            "language": "Sprache",
-            "curr_lang": "Aktuelle Sprache",
-            "confirm": "Bestätigen",
-            "cancel": "Abbrechen",
-            "shutdown": "Herunterfahren",
-            "reboot": "Neu starten",
-            "change": "Ändern",
-            "new_pw": "Neues Passwort",
-            "old_pw": "Altes Passwort",
-            "change_pw": "Passwort ändern"
-        },
-        "navigation": {
-            "settings": "Einstellungen",
-            "display_sats": "Sats anzeigen",
-            "dark_mode": "Dunkler Modus",
-            "back": "Zurück",
-            "apps": "Anwendungen",
-            "home": "Startseite"
-        },
-        "home": {
-            "conn_details": "Verbindungsdetails",
-            "channel": "Kanal",
-            "ssh": "SSH-Anmeldung",
-            "tor": "Tor",
-            "status": "Status",
-            "network": "Netzwerk",
-            "version": "Version",
-            "bitcoin": "Bitcoin"
-        },
-        "wallet": {
-            "receive": "Erhalten",
-            "address": "Adresse",
-            "send_funds": "Geld senden",
-            "scan_qr": "Scannen Sie diesen QR-Code oder kopieren Sie die unten stehende Adresse, um das Geld zu erhalten",
-            "copy_clipboard": "In Zwischenablage kopieren",
-            "copied": "Kopiert!",
-            "amount": "Betrag",
-            "send": "Senden"
-        },
-        "apps": {
-            "online": "online",
-            "offline": "offline",
-            "source": "Quellcode",
-            "author": "Autor",
-            "about": "Über",
-            "no_page": "Keine Seite verfügbar",
-            "info": "Infos",
-            "uninstall": "Deinstallieren",
-            "install": "Installieren",
-            "open": "Öffnen",
-            "available": "Verfügbare Anwendungen",
-            "installed": "Installiert"
-        },
-        "tx": {
-            "comment": "Kommentar",
-            "value": "Wert",
-            "description": "Beschreibung",
-            "date": "Datum",
-            "confirmations": "Bestätigungen"
-        }
+  "translation": {
+    "login": {
+      "enter_pass": "Passwort A eingeben",
+      "enter_pass_placeholder": "Passwort A",
+      "error": "Ein Fehler ist aufgetreten",
+      "invalid_pass": "Ungültiges Passwort",
+      "login": "Anmelden"
+    },
+    "settings": {
+      "language": "Sprache",
+      "curr_lang": "Aktuelle Sprache",
+      "confirm": "Bestätigen",
+      "cancel": "Abbrechen",
+      "shutdown": "Herunterfahren",
+      "reboot": "Neu starten",
+      "change": "Ändern",
+      "new_pw": "Neues Passwort",
+      "old_pw": "Altes Passwort",
+      "change_pw": "Passwort ändern"
+    },
+    "navigation": {
+      "settings": "Einstellungen",
+      "display_sats": "Sats anzeigen",
+      "dark_mode": "Dunkler Modus",
+      "back": "Zurück",
+      "apps": "Anwendungen",
+      "home": "Startseite"
+    },
+    "home": {
+      "conn_details": "Verbindungsdetails",
+      "channel": "Kanal",
+      "ssh": "SSH-Anmeldung",
+      "tor": "Tor",
+      "status": "Status",
+      "network": "Netzwerk",
+      "version": "Version",
+      "bitcoin": "Bitcoin"
+    },
+    "wallet": {
+      "receive": "Erhalten",
+      "address": "Adresse",
+      "send_funds": "Geld senden",
+      "scan_qr": "Scannen Sie diesen QR-Code oder kopieren Sie die unten stehende Adresse, um das Geld zu erhalten",
+      "copy_clipboard": "In Zwischenablage kopieren",
+      "copied": "Kopiert!",
+      "amount": "Betrag",
+      "send": "Senden"
+    },
+    "apps": {
+      "online": "online",
+      "offline": "offline",
+      "source": "Quellcode",
+      "author": "Autor",
+      "about": "Über",
+      "no_page": "Keine Seite verfügbar",
+      "info": "Infos",
+      "uninstall": "Deinstallieren",
+      "install": "Installieren",
+      "open": "Öffnen",
+      "available": "Verfügbare Anwendungen",
+      "installed": "Installiert"
+    },
+    "tx": {
+      "comment": "Kommentar",
+      "value": "Wert",
+      "description": "Beschreibung",
+      "date": "Datum",
+      "confirmations": "Bestätigungen"
     }
+  }
 }
