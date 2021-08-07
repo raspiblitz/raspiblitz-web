@@ -10,9 +10,11 @@ const Template: Story<AppCardProps> = (args) => <AppCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  id: 'rtl',
-  name: 'Ride the Lightning',
-  description: 'Ride The Lightning - A full function web browser app for LND, C-Lightning and Eclair',
-  installed: false,
+  app: {
+    id: 'rtl',
+    name: 'Ride the Lightning',
+    description: 'Ride The Lightning - A full function web browser app for LND, C-Lightning and Eclair',
+    installed: false
+  },
   onInstall: () => {}
 };

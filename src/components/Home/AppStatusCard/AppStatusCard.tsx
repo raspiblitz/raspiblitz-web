@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AppStatus } from '../../../models/app-status.model';
 
-export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
+export const AppStatusCard: FC<{ app: AppStatus }> = (props) => {
+  const { id, name, status } = props.app;
   const { t } = useTranslation();
   const [image, setImage] = useState('');
-
-  const { id } = props;
 
   useEffect(() => {
     import(`../../../assets/apps/${id}.png`)
@@ -18,9 +18,9 @@ export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
       });
   }, [id]);
 
-  const online = props.status === 'online';
+  const online = status === 'online';
   const statusColor = online ? 'text-green-400' : 'text-red-500';
-  const status = online ? t('apps.online') : t('apps.offline');
+  const statusText = online ? t('apps.online') : t('apps.offline');
 
   return (
     <div className='p-5 h-auto'>
@@ -32,8 +32,8 @@ export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
           </div>
           {/* Content */}
           <div className='w-3/4 pl-5 justify-center items-start flex flex-col text-xl'>
-            <h4 className='dark:text-white'>{props.name}</h4>
-            <p className={`pt-3 ${statusColor}`}>{status}</p>
+            <h4 className='dark:text-white'>{name}</h4>
+            <p className={`pt-3 ${statusColor}`}>{statusText}</p>
           </div>
         </div>
       </article>
@@ -42,9 +42,3 @@ export const AppStatusCard: FC<AppStatusCardProps> = (props) => {
 };
 
 export default AppStatusCard;
-
-export interface AppStatusCardProps {
-  id: string;
-  name: string;
-  status: string;
-}

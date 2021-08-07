@@ -1,16 +1,19 @@
 import { Meta, Story } from '@storybook/react';
-import AppStatusCard, { AppStatusCardProps } from './AppStatusCard';
+import { AppStatus } from '../../../models/app-status.model';
+import AppStatusCard from './AppStatusCard';
 
 export default {
   title: 'HomeComponents/AppStatusCard',
   component: AppStatusCard
 } as Meta;
 
-const Template: Story<AppStatusCardProps> = (args) => <AppStatusCard {...args} />;
+const Template: Story<{ app: AppStatus }> = (args) => <AppStatusCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  id: 'rtl',
-  status: 'online',
-  name: 'Ride the Lightning'
+  app: {
+    id: 'rtl',
+    status: 'online',
+    name: 'Ride the Lightning'
+  }
 };
