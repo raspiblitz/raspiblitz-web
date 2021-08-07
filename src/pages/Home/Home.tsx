@@ -10,6 +10,7 @@ import WalletCard from '../../components/Home/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
 import useSSE from '../../hooks/use-sse';
+import { AppStatus } from '../../models/app-status.model';
 
 export const Home: FC = () => {
   const { homeState, transactions, appStatus } = useSSE();
@@ -108,10 +109,10 @@ export const Home: FC = () => {
             channelBalance={homeState.lnBalance}
           />
         </div>
-        {appStatus.map((app: any, index: number) => {
+        {appStatus.map((app: AppStatus) => {
           return (
-            <article key={index} className='col-span-2 md:col-span-1 row-span-1'>
-              <AppStatusCard id={app.id} name={app.name} status={app.status} />
+            <article key={app.id} className='col-span-2 md:col-span-1 row-span-1'>
+              <AppStatusCard app={app} />
             </article>
           );
         })}

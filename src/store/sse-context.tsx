@@ -1,17 +1,20 @@
 import { createContext, Dispatch, FC, SetStateAction, useState } from 'react';
-import { HomeState } from '../hooks/use-sse';
+import { AppStatus } from '../models/app-status.model';
+import { App } from '../models/app.model';
+import { HomeState } from '../models/home-state.model';
+import { Transaction } from '../models/transaction.model';
 
 interface SSEContextType {
   evtSource: EventSource | null;
   setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
   homeState: HomeState;
-  setHomeState: Dispatch<SetStateAction<any>>;
-  appStatus: any[];
-  setAppStatus: Dispatch<SetStateAction<any[]>>;
-  availableApps: any[];
-  setAvailableApps: Dispatch<SetStateAction<any[]>>;
-  transactions: any[];
-  setTransactions: Dispatch<SetStateAction<any[]>>;
+  setHomeState: Dispatch<SetStateAction<HomeState>>;
+  appStatus: AppStatus[];
+  setAppStatus: Dispatch<SetStateAction<AppStatus[]>>;
+  availableApps: App[];
+  setAvailableApps: Dispatch<SetStateAction<App[]>>;
+  transactions: Transaction[];
+  setTransactions: Dispatch<SetStateAction<Transaction[]>>;
   isInstalling: string | null;
   setIsInstalling: Dispatch<SetStateAction<string | null>>;
 }
@@ -68,9 +71,9 @@ const SSEContextProvider: FC = (props) => {
     torAddress: '',
     sshAddress: ''
   });
-  const [appStatus, setAppStatus] = useState<any[]>([]);
-  const [availableApps, setAvailableApps] = useState<any[]>([]);
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
+  const [availableApps, setAvailableApps] = useState<App[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isInstalling, setIsInstalling] = useState<string | null>(null);
 
   const contextValue: SSEContextType = {

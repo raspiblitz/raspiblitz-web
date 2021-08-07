@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { ReactComponent as InfoIcon } from '../../../assets/info.svg';
 import { ReactComponent as LinkIcon } from '../../../assets/link.svg';
 import { ReactComponent as PlusIcon } from '../../../assets/plus.svg';
+import { App } from '../../../models/app.model';
 
 export const AppCard: FC<AppCardProps> = (props) => {
+  const { id, description, installed, name, address } = props.app;
   const { t } = useTranslation();
   const [image, setImage] = useState('');
-
-  const { id } = props;
 
   useEffect(() => {
     import(`../../../assets/apps/${id}.png`)
@@ -26,18 +26,18 @@ export const AppCard: FC<AppCardProps> = (props) => {
       <div className='h-4/6 flex flex-row mt-2 items-center w-full'>
         {/* Icon */}
         <div className='w-1/4 flex justify-center items-center p-2'>
-          <img className='max-h-16' src={image} alt={`${props.id} Logo`} />
+          <img className='max-h-16' src={image} alt={`${id} Logo`} />
         </div>
         {/* Content */}
         <div className='w-3/4 justify-center items-start flex flex-col text-xl'>
-          <div>{props.name}</div>
-          <div className='text-gray-500 text-base overflow-ellipsis dark:text-gray-200'>{props.description}</div>
+          <div>{name}</div>
+          <div className='text-gray-500 text-base overflow-ellipsis dark:text-gray-200'>{description}</div>
         </div>
       </div>
       <div className='h-2/6 py-2 flex flex-row gap-2'>
-        {props.installed && props.address && (
+        {installed && address && (
           <a
-            href={props.address}
+            href={address}
             target='_blank'
             rel='noreferrer'
             className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400'
@@ -46,7 +46,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
             &nbsp;{t('apps.open')}
           </a>
         )}
-        {props.installed && !props.address && (
+        {installed && !address && (
           <button
             disabled={true}
             className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-gray-400 cursor-default'
@@ -54,7 +54,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
             {t('apps.no_page')}
           </button>
         )}
-        {!props.installed && (
+        {!installed && (
           <button
             disabled={props.installing}
             className='w-1/2 shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none'
@@ -79,12 +79,8 @@ export const AppCard: FC<AppCardProps> = (props) => {
 export default AppCard;
 
 export interface AppCardProps {
-  id: string;
-  name: string;
-  description: string;
-  installed: boolean;
+  app: App;
   installing: boolean;
-  address?: string;
   onInstall: (id: string) => void;
   onOpenDetails: (id: string) => void;
 }

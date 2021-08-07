@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import AppCard from '../../components/Apps/AppCard/AppCard';
 import AppInfo from '../../components/Apps/AppInfo/AppInfo';
 import useSSE from '../../hooks/use-sse';
+import { App } from '../../models/app.model';
 import { instance } from '../../util/interceptor';
 
 export const Apps: FC = () => {
@@ -32,18 +33,14 @@ export const Apps: FC = () => {
           <section className='h-full flex flex-wrap flex-1'>
             <h2 className='w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200'>{t('apps.installed')}</h2>
             {availableApps
-              .filter((app: any) => app.installed)
-              .map((app: any, index) => {
+              .filter((app: App) => app.installed)
+              .map((app: App, index) => {
                 return (
                   <article className='w-full lg:w-1/3 p-3' key={index}>
                     <AppCard
-                      id={app.id}
+                      app={app}
                       installing={false}
-                      name={app.name}
-                      description={app.description}
                       onInstall={() => installHandler(app.id)}
-                      installed={app.installed}
-                      address={app.address}
                       onOpenDetails={openDetailsHandler}
                     />
                   </article>
@@ -54,17 +51,14 @@ export const Apps: FC = () => {
           <section className='h-full flex flex-wrap flex-1'>
             <h2 className='block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 '>{t('apps.available')}</h2>
             {availableApps
-              .filter((app: any) => !app.installed)
-              .map((app: any, index) => {
+              .filter((app: App) => !app.installed)
+              .map((app: App) => {
                 return (
-                  <article className='w-full lg:w-1/3 p-3' key={index}>
+                  <article className='w-full lg:w-1/3 p-3' key={app.id}>
                     <AppCard
-                      id={app.id}
-                      name={app.name}
+                      app={app}
                       installing={!!isInstalling}
-                      description={app.description}
                       onInstall={() => installHandler(app.id)}
-                      installed={app.installed}
                       onOpenDetails={openDetailsHandler}
                     />
                   </article>
