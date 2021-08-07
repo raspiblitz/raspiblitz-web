@@ -20,5 +20,5 @@ jest.mock('axios', () => {
 test('should redirect to /login if progress is 100', async () => {
   render(<App />);
 
-  expect(await screen.findByText('Login')).toBeDefined();
+  expect(await screen.findByText('Log in')).toBeDefined();
 });
