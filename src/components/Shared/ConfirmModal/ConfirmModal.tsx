@@ -10,7 +10,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
   const history = useHistory();
-  const btnClasses = 'w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
+  const btnClasses = 'w-full xl:w-1/2 text-center h-10 my-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white';
 
   const shutdownHandler = async () => {
     const resp = await instance.post(props.confirmEndpoint);
