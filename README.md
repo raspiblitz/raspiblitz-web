@@ -1,5 +1,7 @@
 # Raspiblitz Web
 
+![Raspiblitz Dashboard](images/blitz_home.png)
+
 A mobile-first responsive Web UI for the [RaspiBlitz](https://github.com/rootzoll/raspiblitz).
 
 In collaboration with [Bitcoin Design](https://bitcoin.design/).
