@@ -74,6 +74,7 @@
     "@types/qrcode.react": "^1.0.1",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9",
+    "msw": "^0.34.0",
     "postcss": "^7",
     "storybook-addon-themes": "^6.1.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
