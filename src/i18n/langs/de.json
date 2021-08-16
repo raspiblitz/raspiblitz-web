@@ -25,7 +25,8 @@
       "dark_mode": "Dunkler Modus",
       "back": "Zurück",
       "apps": "Anwendungen",
-      "home": "Startseite"
+      "home": "Startseite",
+      "logout": "Abmelden"
     },
     "home": {
       "conn_details": "Verbindungsdetails",
@@ -35,7 +36,10 @@
       "status": "Status",
       "network": "Netzwerk",
       "version": "Version",
-      "bitcoin": "Bitcoin"
+      "bitcoin": "Bitcoin",
+      "channel_balance": "Kanal Guthaben",
+      "blocks_synced": "synchronisierte Blöcke",
+      "lightning": "Lightning"
     },
     "wallet": {
       "receive": "Erhalten",
@@ -45,7 +49,8 @@
       "copy_clipboard": "In Zwischenablage kopieren",
       "copied": "Kopiert!",
       "amount": "Betrag",
-      "send": "Senden"
+      "send": "Senden",
+      "balance": "Guthaben"
     },
     "apps": {
       "online": "online",
@@ -66,7 +71,11 @@
       "value": "Wert",
       "description": "Beschreibung",
       "date": "Datum",
-      "confirmations": "Bestätigungen"
+      "confirmations": "Bestätigungen",
+      "mempool": "Auf mempool anzeigen",
+      "txid": "Transaktions ID",
+      "tx_details": "Transaktionsdetails",
+      "transactions": "Transaktionen"
     }
   }
 }
