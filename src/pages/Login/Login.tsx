@@ -25,8 +25,8 @@ const Login: FC = () => {
     setIsError(false);
     setIsLoading(true);
 
-    const password = passwordInput.current?.value;
-    const resp = await instance.post('/system/login', { password }).catch((err) => {
+    const password_a = passwordInput.current?.value;
+    const resp = await instance.post('/system/login', { password_a }).catch((err) => {
       if (err.response.status === 401) {
         setIsUnauthorized(true);
       } else {
