@@ -1,4 +1,4 @@
-import { lazy, Suspense, useContext, useEffect, useState } from 'react';
+import { lazy, Suspense, useContext, useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import BottomNav from './components/Navigation/BottomNav/BottomNav';
@@ -8,7 +8,6 @@ import LoadingScreen from './container/LoadingScreen/LoadingScreen';
 import './i18n/config';
 import Setup from './pages/Setup/Setup';
 import { AppContext } from './store/app-context';
-import { instance } from './util/interceptor';
 
 const Login = lazy(() => import('./pages/Login/Login'));
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -17,22 +16,22 @@ const Settings = lazy(() => import('./pages/Settings/Settings'));
 
 const App = () => {
   const appCtx = useContext(AppContext);
-  const [loading, setLoading] = useState(true);
-  const [setupDone, setSetupDone] = useState(false);
+  const [loading] = useState(false);
+  const [setupDone] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const req = await instance.get('setup/status');
-      if (req.data.progress === 100) {
-        setSetupDone(true);
-      } else {
-        setSetupDone(false);
-      }
-      setLoading(false);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const req = await instance.get('setup/status');
+  //     if (req.data.progress === 100) {
+  //       setSetupDone(true);
+  //     } else {
+  //       setSetupDone(false);
+  //     }
+  //     setLoading(false);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <Suspense fallback={<LoadingScreen />}>
