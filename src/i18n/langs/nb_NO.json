@@ -26,8 +26,8 @@
       "login": "Logg inn",
       "error": "En feil inntraff",
       "invalid_pass": "Ugyldig passord",
-      "enter_pass_placeholder": "Passord A",
-      "enter_pass": "Skriv inn passord A"
+      "enter_pass_placeholder": "Passord B",
+      "enter_pass": "Skriv inn passord B"
     },
     "apps": {
       "author": "Utvikler",

@@ -10,8 +10,8 @@
       "logout": "Se déconnecter"
     },
     "login": {
-      "enter_pass": "Entrez le mot de passe A",
-      "enter_pass_placeholder": "Mot de passe A",
+      "enter_pass": "Entrez le mot de passe B",
+      "enter_pass_placeholder": "Mot de passe B",
       "login": "Se connecter",
       "invalid_pass": "Mot de passe invalide",
       "error": "Une erreur s'est produite"

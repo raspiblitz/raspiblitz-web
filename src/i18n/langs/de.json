@@ -1,8 +1,8 @@
 {
   "translation": {
     "login": {
-      "enter_pass": "Passwort A eingeben",
-      "enter_pass_placeholder": "Passwort A",
+      "enter_pass": "Passwort B eingeben",
+      "enter_pass_placeholder": "Passwort B",
       "error": "Ein Fehler ist aufgetreten",
       "invalid_pass": "Ungültiges Passwort",
       "login": "Anmelden"
