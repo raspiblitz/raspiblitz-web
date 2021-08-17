@@ -10,8 +10,8 @@
       "logout": "Log out"
     },
     "login": {
-      "enter_pass": "Enter password A",
-      "enter_pass_placeholder": "Password A",
+      "enter_pass": "Enter password B",
+      "enter_pass_placeholder": "Password B",
       "login": "Log in",
       "invalid_pass": "Invalid password",
       "error": "An error occured"

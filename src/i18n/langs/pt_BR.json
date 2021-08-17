@@ -9,8 +9,8 @@
       "display_sats": "Exibir sats"
     },
     "login": {
-      "enter_pass": "Digite a senha A",
-      "enter_pass_placeholder": "Senha A",
+      "enter_pass": "Digite a senha B",
+      "enter_pass_placeholder": "Senha B",
       "login": "Login",
       "invalid_pass": "Senha inválida",
       "error": "Ocorreu um erro"

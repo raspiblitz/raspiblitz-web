@@ -9,8 +9,8 @@
       "display_sats": "Mutass Satot"
     },
     "login": {
-      "enter_pass": "Irjd be a jelszót A",
-      "enter_pass_placeholder": "Jelszó A",
+      "enter_pass": "Irjd be a jelszót B",
+      "enter_pass_placeholder": "Jelszó B",
       "login": "Bejelentkezés",
       "invalid_pass": "Helytelen jelszó",
       "error": "Hiba történt"
