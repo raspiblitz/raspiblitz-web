@@ -24,3 +24,5 @@ export interface SavedSettings {
   lang: string;
   darkMode: boolean;
 }
+
+export const MODAL_ROOT = document.getElementById('modal-root')!;

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
 import { instance } from '../../../util/interceptor';
+import { MODAL_ROOT } from '../../../util/util';
 
 const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const { t } = useTranslation();
@@ -32,7 +33,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
         </button>
       </div>
     </ModalDialog>,
-    document.getElementById('modal-root')!
+    MODAL_ROOT
   );
 };
 
