@@ -16,6 +16,7 @@ const Routes: React.FC = () => {
   const [isLoading] = useState(false);
   const [setupDone] = useState(true);
 
+  // TODO: uncomment when setup support is done
   // useEffect(() => {
   //   const fetchData = async () => {
   //     setIsLoading(true);
@@ -35,45 +36,49 @@ const Routes: React.FC = () => {
     return <LoadingScreen />;
   }
 
+  if (setupDone && !isLoading) {
+    return (
+      <BrowserRouter>
+        <Route path='/setup' component={Setup} />
+        <Route>
+          <Redirect to='/setup' />
+        </Route>
+      </BrowserRouter>
+    );
+  }
+
+  if (setupDone && !isLoading && !appCtx.isLoggedIn) {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route path='/login' component={Login} />
+          <Route>
+            <Redirect to='/login' />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+
   return (
     <Suspense fallback={<SkeletonLoadingScreen />}>
-      {!setupDone && !isLoading && (
-        <BrowserRouter>
-          <Route path='/setup' component={Setup} />
-          <Route>
-            <Redirect to='/setup' />
-          </Route>
-        </BrowserRouter>
-      )}
-
-      {setupDone && !isLoading && !appCtx.isLoggedIn && (
-        <BrowserRouter>
+      <BrowserRouter>
+        <Layout>
           <Switch>
-            <Route path='/login' component={Login} />
+            <Route exact path='/'>
+              <Redirect to='/home' />
+            </Route>
+
+            <Route path='/home' component={LazyHome} />
+            <Route path='/apps' component={LazyApps} />
+            <Route path='/settings' component={LazySettings} />
+
             <Route>
-              <Redirect to='/login' />
+              <Redirect to='/home' />
             </Route>
           </Switch>
-        </BrowserRouter>
-      )}
-
-      {setupDone && !isLoading && appCtx.isLoggedIn && (
-        <BrowserRouter>
-          <Layout>
-            <Switch>
-              <Route exact path='/'>
-                <Redirect to='/home' />
-              </Route>
-              <Route path='/home' component={LazyHome} />
-              <Route path='/apps' component={LazyApps} />
-              <Route path='/settings' component={LazySettings} />
-              <Route>
-                <Redirect to='/home' />
-              </Route>
-            </Switch>
-          </Layout>
-        </BrowserRouter>
-      )}
+        </Layout>
+      </BrowserRouter>
     </Suspense>
   );
 };
