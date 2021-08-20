@@ -36,7 +36,7 @@ const Routes: React.FC = () => {
     return <LoadingScreen />;
   }
 
-  if (setupDone && !isLoading) {
+  if (!setupDone && !isLoading) {
     return (
       <BrowserRouter>
         <Route path='/setup' component={Setup} />
