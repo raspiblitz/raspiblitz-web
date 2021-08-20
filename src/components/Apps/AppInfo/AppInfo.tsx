@@ -53,7 +53,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
   };
 
   return (
-    <main className='content-container w-full'>
+    <main className='page-container content-container w-full'>
       {/* Back Button */}
       <section className='w-full px-5 py-9 dark:text-gray-200'>
         <button onClick={props.onClose} className='flex items-center outline-none text-xl font-bold'>
@@ -79,7 +79,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
       </section>
 
       {/* Slideshow */}
-      <section className='container p-2 flex flex-nowrap overflow-x-auto'>
+      <section className='flex container p-4 mx-auto flex-nowrap overflow-x-auto'>
         {imgs.map((img, i) => (
           <img
             id={'img' + i}
