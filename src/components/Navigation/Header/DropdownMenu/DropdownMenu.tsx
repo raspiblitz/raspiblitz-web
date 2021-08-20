@@ -2,6 +2,7 @@ import { forwardRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppContext } from '../../../../store/app-context';
 import Toggle from '../../../Shared/Toggle/Toggle';
+import { ReactComponent as LogoutIcon } from '../../../../assets/logout.svg';
 
 const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useTranslation();
@@ -26,7 +27,8 @@ const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
           <Toggle toggleText={t('navigation.dark_mode')} active={darkActive} toggleFn={appCtx.toggleDarkMode} />
         </div>
         <button className='bd-button w-full py-2 mt-3' onClick={logoutHandler}>
-          Logout
+          <LogoutIcon className='inline-block w-5 h-5' /> &nbsp;
+          {t('navigation.logout')}
         </button>
       </div>
     </div>

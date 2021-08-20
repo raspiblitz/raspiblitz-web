@@ -2,16 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import AppContextProvider from './store/app-context';
-import SSEContextProvider from './store/sse-context';
+import './i18n/config';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SSEContextProvider>
-      <AppContextProvider>
-        <App />
-      </AppContextProvider>
-    </SSEContextProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -71,7 +71,7 @@ export const Home: FC = () => {
       {sendModal}
       {detailModal}
       <main
-        className={`content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colorsh-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
+        className={`content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
         <article className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <WalletCard
