@@ -1,24 +1,17 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
 import App from './App';
+import { rest, server } from './testServer';
 
-jest.mock('axios', () => {
-  return {
-    create: () => {
-      return {
-        get: () => {
-          return { data: { progress: 100 } };
-        },
-        interceptors: {
-          request: { use: jest.fn(), eject: jest.fn() }
-        }
-      };
-    }
-  };
-});
+describe('App', () => {
+  test('should redirect to /login if progress is 100', async () => {
+    server.use(
+      rest.get('/setup/status', (_, res, ctx) => {
+        return res(ctx.json({ progress: 100 }));
+      })
+    );
 
-test('should redirect to /login if progress is 100', async () => {
-  render(<App />);
+    render(<App />);
 
-  expect(await screen.findByText('Log in')).toBeDefined();
+    expect(await screen.findByText('Log in')).toBeDefined();
+  });
 });

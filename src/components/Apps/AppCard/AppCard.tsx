@@ -15,7 +15,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
       .then((image) => {
         setImage(image.default);
       })
-      .catch((e) => {
+      .catch((_) => {
         // use fallback icon if image for id doesn't exist
         import('../../../assets/cloud.svg').then((img) => setImage(img.default));
       });

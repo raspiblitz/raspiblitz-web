@@ -11,6 +11,7 @@ import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
 import useSSE from '../../hooks/use-sse';
 import { AppStatus } from '../../models/app-status.model';
+import { MODAL_ROOT } from '../../util/util';
 
 export const Home: FC = () => {
   const { homeState, transactions, appStatus } = useSSE();
@@ -46,8 +47,7 @@ export const Home: FC = () => {
   };
 
   const receiveModal =
-    showReceiveModal &&
-    createPortal(<ReceiveModal onClose={closeReceiveModalHandler} />, document.getElementById('modal-root')!);
+    showReceiveModal && createPortal(<ReceiveModal onClose={closeReceiveModalHandler} />, MODAL_ROOT);
 
   const sendModal =
     showSendModal &&
@@ -57,15 +57,11 @@ export const Home: FC = () => {
         lnBalance={homeState.lnBalance}
         onClose={closeSendModalHandler}
       />,
-      document.getElementById('modal-root')!
+      MODAL_ROOT
     );
 
   const detailModal =
-    showDetailModal &&
-    createPortal(
-      <TransactionDetailModal id={detailTxId} close={closeDetailHandler} />,
-      document.getElementById('modal-root')!
-    );
+    showDetailModal && createPortal(<TransactionDetailModal id={detailTxId} close={closeDetailHandler} />, MODAL_ROOT);
 
   const gridRows = 6 + appStatus.length / 4;
 
@@ -77,21 +73,21 @@ export const Home: FC = () => {
       <main
         className={`content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colorsh-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
-        <div className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        <article className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <WalletCard
             onchainBalance={homeState.onchainBalance}
             lnBalance={homeState.lnBalance}
             onReceive={showReceiveHandler}
             onSend={showSendModalHandler}
           />
-        </div>
-        <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
+        </article>
+        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
           <TransactionCard transactions={transactions} showDetails={showDetailHandler} />
-        </div>
-        <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        </article>
+        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <ConnectionCard torAddress={homeState.torAddress} sshAddress={homeState.sshAddress} />
-        </div>
-        <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        </article>
+        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <BitcoinCard
             version={homeState.btcVersion}
             network={homeState.btcNetwork}
@@ -99,8 +95,8 @@ export const Home: FC = () => {
             currBlock={homeState.currBlock}
             maxBlock={homeState.maxBlock}
           />
-        </div>
-        <div className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        </article>
+        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <LightningCard
             version={homeState.lnVersion}
             status={homeState.lnStatus}
@@ -108,7 +104,7 @@ export const Home: FC = () => {
             channelTotal={homeState.channelTotal}
             channelBalance={homeState.lnBalance}
           />
-        </div>
+        </article>
         {appStatus.map((app: AppStatus) => {
           return (
             <article key={app.id} className='col-span-2 md:col-span-1 row-span-1'>
