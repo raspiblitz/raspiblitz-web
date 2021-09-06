@@ -36,6 +36,7 @@
       "send": "Send",
       "amount": "Amount",
       "copied": "Copied!",
+      "confirm": "Confirm",
       "copy_clipboard": "Copy to clipboard",
       "create_invoice_ln": "Create a Lightning invoice",
       "fund_short": "Fund wallet",

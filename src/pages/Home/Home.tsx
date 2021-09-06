@@ -1,5 +1,6 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import AppStatusCard from '../../components/Home/AppStatusCard/AppStatusCard';
 import BitcoinCard from '../../components/Home/BitcoinCard/BitcoinCard';
 import ConnectionCard from '../../components/Home/ConnectionCard/ConnectionCard';
@@ -8,18 +9,28 @@ import TransactionCard from '../../components/Home/TransactionCard/TransactionCa
 import TransactionDetailModal from '../../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal';
 import WalletCard from '../../components/Home/WalletCard/WalletCard';
 import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
+import ConfirmSendModal from '../../components/Shared/SendModal/ConfirmSendModal/ConfirmSendModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
 import useSSE from '../../hooks/use-sse';
 import { AppStatus } from '../../models/app-status.model';
+import { AppContext } from '../../store/app-context';
 import { MODAL_ROOT } from '../../util/util';
 
 export const Home: FC = () => {
+  const appCtx = useContext(AppContext);
   const { homeState, transactions, appStatus } = useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [detailTxId, setDetailTxId] = useState('');
+  const [confirmDetails, setConfirmDetails] = useState<{
+    address: string;
+    amount: string;
+    fee: string;
+    comment: string;
+  } | null>(null);
 
   const showSendModalHandler = () => {
     setShowSendModal(true);
@@ -46,6 +57,21 @@ export const Home: FC = () => {
     setShowDetailModal(false);
   };
 
+  const closeConfirmModalHandler = (confirmed: boolean) => {
+    setShowConfirmModal(false);
+    if (confirmed) {
+      const theme = appCtx.darkMode ? 'dark' : 'light';
+      // TODO: add translation
+      toast.success('Transaction sent!', { theme });
+    }
+  };
+
+  const showConfirmModalHandler = (address: string, amount: string, fee: string, comment: string) => {
+    setShowConfirmModal(true);
+    setConfirmDetails({ address, amount, fee, comment });
+    setShowSendModal(false);
+  };
+
   const receiveModal =
     showReceiveModal && createPortal(<ReceiveModal onClose={closeReceiveModalHandler} />, MODAL_ROOT);
 
@@ -56,12 +82,26 @@ export const Home: FC = () => {
         onchainBalance={homeState.onchainBalance}
         lnBalance={homeState.lnBalance}
         onClose={closeSendModalHandler}
+        onSend={showConfirmModalHandler}
       />,
       MODAL_ROOT
     );
 
   const detailModal =
     showDetailModal && createPortal(<TransactionDetailModal id={detailTxId} close={closeDetailHandler} />, MODAL_ROOT);
+
+  const confirmModal =
+    showConfirmModal &&
+    createPortal(
+      <ConfirmSendModal
+        address={confirmDetails!.address}
+        amount={confirmDetails!.amount}
+        fee={confirmDetails!.fee}
+        comment={confirmDetails!.comment}
+        onClose={closeConfirmModalHandler}
+      />,
+      MODAL_ROOT
+    );
 
   const gridRows = 6 + appStatus.length / 4;
 
@@ -70,6 +110,8 @@ export const Home: FC = () => {
       {receiveModal}
       {sendModal}
       {detailModal}
+      {confirmModal}
+      <ToastContainer />
       <main
         className={`content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './i18n/config';
 import Routes from './Routes';

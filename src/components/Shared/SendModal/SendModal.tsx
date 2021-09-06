@@ -104,8 +104,9 @@ const SendModal: FC<SendModalProps> = (props) => {
           <button
             type='submit'
             className='text-center h-10 bg-yellow-500 hover:bg-yellow-400 dark:hover:bg-yellow-400 rounded-lg text-white w-full'
+            onClick={props.onSend.bind(null, address, amount.toString(), fee, comment)}
           >
-            {t('wallet.send')}
+            {t('wallet.confirm')}
           </button>
         </div>
       </form>
@@ -119,4 +120,5 @@ export interface SendModalProps {
   onchainBalance: number;
   lnBalance: number;
   onClose: () => void;
+  onSend: (address: string, amount: string, fee: string, comment: string) => void;
 }
