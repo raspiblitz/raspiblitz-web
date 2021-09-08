@@ -22,7 +22,7 @@ const ModalDialog: FC<ModalDialogProps> = (props) => {
             <XIcon className='w-full h-full' />
           </button>
         </div>
-        <div className='px-5 pb-10'>{props.children}</div>
+        <div className='px-5'>{props.children}</div>
       </div>
     </ModalBackground>
   );
