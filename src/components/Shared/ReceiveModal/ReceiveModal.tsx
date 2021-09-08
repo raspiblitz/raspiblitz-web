@@ -103,7 +103,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       )}
       <form className='flex flex-col items-center' onSubmit={generateAddressHandler}>
         <div className='w-full overflow-x-auto m-2'>{address}</div>
-        <div className='w-4/5 mb-5'>
+        <div className='w-4/5'>
           {isLoading && (
             <div className='p-5'>
               <LoadingSpinner />

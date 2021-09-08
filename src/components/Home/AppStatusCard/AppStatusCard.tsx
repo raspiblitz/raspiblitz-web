@@ -24,7 +24,7 @@ export const AppStatusCard: FC<{ app: AppStatus }> = (props) => {
 
   return (
     <div className='p-5 h-auto'>
-      <article className='bd-card transition-colors'>
+      <article className='bd-card transition-colors flex items-center'>
         <div className='flex flex-row my-2 items-center w-full'>
           {/* Icon */}
           <div className='w-1/4 max-h-16 flex justify-center items-center p-2'>
