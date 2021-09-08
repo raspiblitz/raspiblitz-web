@@ -35,7 +35,7 @@ const ChangePwModal: FC<ChangePwModalProps> = (props) => {
       <h3 className='font-bold'>{t('settings.change_pw')}</h3>
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
-        <div className='mt-5 flex flex-col justify-center text-center items-center'>
+        <div className='my-5 flex flex-col justify-center text-center items-center'>
           <div className='w-full md:w-10/12 py-1'>
             <label htmlFor='oldpw' className='label-underline'>
               {t('settings.old_pw')}
