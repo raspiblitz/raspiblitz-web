@@ -58,7 +58,9 @@
       "mempool": "View on mempool",
       "request": "Request",
       "value": "Value",
-      "comment": "Comment"
+      "comment": "Comment",
+      "sent": "Transaction sent!",
+      "confirm_info":"Please confirm the following transaction"
     },
     "apps": {
       "installed": "Installed",

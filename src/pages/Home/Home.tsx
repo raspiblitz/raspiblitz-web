@@ -1,5 +1,6 @@
 import { FC, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import { toast, ToastContainer } from 'react-toastify';
 import AppStatusCard from '../../components/Home/AppStatusCard/AppStatusCard';
 import BitcoinCard from '../../components/Home/BitcoinCard/BitcoinCard';
@@ -17,6 +18,7 @@ import { AppContext } from '../../store/app-context';
 import { MODAL_ROOT } from '../../util/util';
 
 export const Home: FC = () => {
+  const { t } = useTranslation();
   const appCtx = useContext(AppContext);
   const { homeState, transactions, appStatus } = useSSE();
 
@@ -61,8 +63,7 @@ export const Home: FC = () => {
     setShowConfirmModal(false);
     if (confirmed) {
       const theme = appCtx.darkMode ? 'dark' : 'light';
-      // TODO: add translation
-      toast.success('Transaction sent!', { theme });
+      toast.success(t('tx.sent'), { theme });
     }
   };
 
