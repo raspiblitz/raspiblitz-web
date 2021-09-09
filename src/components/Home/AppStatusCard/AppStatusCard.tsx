@@ -23,7 +23,7 @@ export const AppStatusCard: FC<{ app: AppStatus }> = (props) => {
   const statusText = online ? t('apps.online') : t('apps.offline');
 
   return (
-    <div className='p-5 h-auto'>
+    <div className='p-5 h-full'>
       <article className='bd-card transition-colors flex items-center'>
         <div className='flex flex-row my-2 items-center w-full'>
           {/* Icon */}
