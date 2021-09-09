@@ -34,9 +34,9 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
 
   if (isLoading) {
     return (
-      <section className='content-container flex justify-center items-center'>
+      <main className='page-container content-container w-full dark:text-white bg-gray-100 dark:bg-gray-700 flex justify-center items-center'>
         <LoadingSpinner />
-      </section>
+      </main>
     );
   }
 
@@ -53,7 +53,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
   };
 
   return (
-    <main className='page-container content-container w-full'>
+    <main className='page-container content-container w-full dark:text-white bg-gray-100 dark:bg-gray-700'>
       {/* Back Button */}
       <section className='w-full px-5 py-9 dark:text-gray-200'>
         <button onClick={props.onClose} className='flex items-center outline-none text-xl font-bold'>
