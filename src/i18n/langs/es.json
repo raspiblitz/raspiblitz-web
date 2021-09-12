@@ -1,21 +1,13 @@
 {
   "translation": {
-    "login": {
-      "enter_pass": ""
-    },
     "home": {
       "status": ""
     },
     "wallet": {
-      "balance": "",
       "fund_short": ""
     },
     "tx": {
-      "confirmations": "",
       "value": ""
-    },
-    "apps": {
-      "no_page": ""
     },
     "settings": {
       "new_pw": ""
