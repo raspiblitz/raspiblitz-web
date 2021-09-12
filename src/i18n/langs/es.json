@@ -1,13 +1,7 @@
 {
   "translation": {
-    "home": {
-      "status": ""
-    },
     "wallet": {
       "fund_short": ""
-    },
-    "tx": {
-      "value": ""
     },
     "settings": {
       "new_pw": ""
