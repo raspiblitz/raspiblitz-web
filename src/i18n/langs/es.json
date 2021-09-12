@@ -1,89 +1,53 @@
 {
   "translation": {
     "navigation": {
-      "home": "",
       "apps": "",
-      "settings": "",
       "back": "",
-      "dark_mode": "",
-      "display_sats": "",
-      "logout": ""
+      "display_sats": ""
     },
     "login": {
       "enter_pass": "",
-      "enter_pass_placeholder": "",
       "login": "",
-      "invalid_pass": "",
       "error": ""
     },
     "home": {
-      "bitcoin": "",
       "version": "",
-      "network": "",
       "status": "",
-      "blocks_synced": "",
       "conn_details": "",
-      "tor": "",
       "ssh": "",
-      "lightning": "",
-      "channel": "",
-      "channel_balance": ""
+      "channel": ""
     },
     "wallet": {
       "balance": "",
-      "on_chain": "",
       "receive": "",
-      "send": "",
       "amount": "",
-      "copied": "",
       "copy_clipboard": "",
-      "create_invoice_ln": "",
       "fund_short": "",
-      "fund": "",
       "scan_qr": "",
-      "send_funds": "",
       "address": ""
     },
     "tx": {
-      "transactions": "",
       "tx_details": "",
-      "txid": "",
       "confirmations": "",
-      "included_block": "",
       "date": "",
-      "fee": "",
       "fee_rate": "",
-      "description": "",
       "mempool": "",
-      "request": "",
-      "value": "",
-      "comment": ""
+      "value": ""
     },
     "apps": {
       "installed": "",
-      "available": "",
       "open": "",
-      "install": "",
       "uninstall": "",
-      "info": "",
       "no_page": "",
-      "about": "",
       "author": "",
-      "source": "",
-      "offline": "",
-      "online": ""
+      "offline": ""
     },
     "settings": {
       "change_pw": "",
-      "old_pw": "",
       "new_pw": "",
-      "change": "",
       "reboot": "",
-      "shutdown": "",
       "cancel": "",
-      "confirm": "",
-      "language": "",
-      "curr_lang": ""
+      "language": ""
     }
   }
 }
