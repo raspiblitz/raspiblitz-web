@@ -1,35 +1,24 @@
 {
   "translation": {
-    "navigation": {
-      "back": ""
-    },
     "login": {
-      "enter_pass": "",
-      "error": ""
+      "enter_pass": ""
     },
     "home": {
-      "status": "",
-      "ssh": ""
+      "status": ""
     },
     "wallet": {
       "balance": "",
-      "amount": "",
-      "fund_short": "",
-      "address": ""
+      "fund_short": ""
     },
     "tx": {
       "confirmations": "",
-      "fee_rate": "",
       "value": ""
     },
     "apps": {
-      "open": "",
-      "no_page": "",
-      "offline": ""
+      "no_page": ""
     },
     "settings": {
-      "new_pw": "",
-      "cancel": ""
+      "new_pw": ""
     }
   }
 }
