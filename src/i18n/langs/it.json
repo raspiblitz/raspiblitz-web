@@ -1,1 +1,94 @@
-{}
+{
+  "translation": {
+    "settings": {
+      "curr_lang": "Linguaggio corrente",
+      "language": "Linguaggio",
+      "confirm": "Conferma",
+      "cancel": "Annulla",
+      "shutdown": "Spegni",
+      "reboot": "Riavvia",
+      "change": "Cambia",
+      "new_pw": "Nuova password",
+      "old_pw": "Vecchia password",
+      "change_pw": "Cambia password"
+    },
+    "apps": {
+      "online": "connesso",
+      "offline": "disconnesso",
+      "source": "Codice sorgente",
+      "author": "Autore",
+      "about": "About",
+      "no_page": "Nessuna pagina disponibile",
+      "info": "Info",
+      "uninstall": "Disinstalla",
+      "install": "Installa",
+      "open": "Aperto",
+      "available": "Applicazioni disponibili",
+      "installed": "Installato"
+    },
+    "tx": {
+      "confirm_info": "Conferma la transazione seguente",
+      "sent": "Transazione inviata!",
+      "comment": "Commento",
+      "value": "Valore",
+      "request": "Richiedi",
+      "mempool": "Vedi nella mempool",
+      "description": "Descrizione",
+      "fee_rate": "Tasso di commissione",
+      "fee": "Commissione",
+      "date": "Data",
+      "included_block": "Incluso nel blocco",
+      "confirmations": "Conferme",
+      "txid": "ID transazione",
+      "tx_details": "Dettagli della transazione",
+      "transactions": "Transazioni"
+    },
+    "wallet": {
+      "address": "Indirizzo",
+      "fund_short": "Deposita nel portafoglio",
+      "scan_qr": "Scannerizza questo codice QR o copia l'indirizzo sottostante per ricevere denaro",
+      "send_onchain": "Invia denaro On-chain",
+      "send_lightning": "Invia denaro via Lightning",
+      "fund": "Deposita nel tuo portafoglio",
+      "invoice": "Invoice",
+      "create_invoice_ln": "Crea una Lightning invoice",
+      "copy_clipboard": "Copia negli appunti",
+      "confirm": "Conferma",
+      "copied": "Copiato!",
+      "amount": "Importo",
+      "send": "Invia",
+      "receive": "Ricevi",
+      "on_chain": "On-chain",
+      "balance": "Saldo"
+    },
+    "home": {
+      "channel_balance": "Saldo del canale",
+      "channel": "Canale",
+      "lightning": "Lightning",
+      "ssh": "SSH login",
+      "tor": "Tor",
+      "conn_details": "Dettagli della connessione",
+      "blocks_synced": "Blocchi sincronizzati",
+      "status": "Stato",
+      "network": "Rete",
+      "version": "Versione",
+      "bitcoin": "Bitcoin"
+    },
+    "login": {
+      "error": "C'è stato un errore",
+      "invalid_pass": "Password non valida",
+      "login": "Log in",
+      "enter_pass_placeholder": "Password B",
+      "enter_pass": "Inserire password B"
+    },
+    "navigation": {
+      "logout": "Esci",
+      "display_sats": "Mostra SATS",
+      "dark_mode": "Modalità notturna",
+      "back": "Indietro",
+      "settings": "Impostazioni",
+      "apps": "Applicazioni",
+      "home": "Home"
+    }
+  }
+}
