@@ -43,7 +43,6 @@
     },
     "wallet": {
       "address": "Dirección",
-      "send_funds": "Enviar fondos",
       "scan_qr": "Escánea este código QR o copia la dirección de abajo para solicitar los fondos",
       "fund": "Agrega fondos a tu billetera",
       "fund_short": "Fondear billetera",

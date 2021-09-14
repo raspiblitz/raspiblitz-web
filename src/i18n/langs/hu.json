@@ -40,7 +40,6 @@
       "fund_short": "Tárca feltöltése",
       "fund": "Töltse fel a tárcáját",
       "scan_qr": "Szkennelje be ezt a QR kódot, vagy másolja ki a fizetési címet hogy pénzt fogadhasson",
-      "send_funds": "Összeg küldése",
       "address": "Cím"
     },
     "tx": {
