@@ -1,37 +1,25 @@
 {
   "translation": {
-    "navigation": {
-      "back": ""
-    },
     "login": {
-      "enter_pass": "",
-      "error": ""
+      "enter_pass": ""
     },
     "home": {
-      "status": "",
-      "ssh": ""
+      "status": ""
     },
     "wallet": {
       "balance": "",
-      "amount": "",
-      "invoice": "",
-      "scan_qr": ""
+      "invoice": ""
     },
     "tx": {
       "transactions": "",
-      "included_block": "",
-      "description": "",
-      "comment": ""
+      "description": ""
     },
     "apps": {
       "available": "",
-      "info": "",
       "source": ""
     },
     "settings": {
-      "old_pw": "",
-      "shutdown": "",
-      "curr_lang": ""
+      "shutdown": ""
     }
   }
 }
