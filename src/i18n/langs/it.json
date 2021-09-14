@@ -1,25 +1,16 @@
 {
   "translation": {
-    "login": {
-      "enter_pass": ""
-    },
     "home": {
       "status": ""
     },
     "wallet": {
-      "balance": "",
       "invoice": ""
     },
     "tx": {
-      "transactions": "",
       "description": ""
     },
     "apps": {
-      "available": "",
       "source": ""
-    },
-    "settings": {
-      "shutdown": ""
     }
   }
 }
