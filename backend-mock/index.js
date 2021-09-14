@@ -207,3 +207,11 @@ app.get('/api/v1/tx/:id', (req, res) => {
     );
   }
 });
+
+app.post('/api/v1/lightning/verify', (req, res) => {
+  console.log('call to /api/v1/lightning/verify with invoice', req.body.invoice);
+
+  return res
+    .status(200)
+    .send(JSON.stringify({ expiresIn: 123456, amount: '2200002', description: 'This is a description' }));
+});

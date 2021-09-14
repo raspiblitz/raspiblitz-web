@@ -1,28 +1,46 @@
 import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import ModalDialog from '../../../container/ModalDialog/ModalDialog';
 import { AppContext } from '../../../store/app-context';
 import { instance } from '../../../util/interceptor';
-import AmountInput from '../AmountInput/AmountInput';
+import ConfirmSendModal from './ConfirmSendModal/ConfirmSendModal';
+import SendLn from './SendLN/SendLN';
+import SendOnChain from './SendOnChain/SendOnChain';
+import { ReactComponent as SwitchIcon } from '../../../assets/switch-vertical.svg';
+import { useTranslation } from 'react-i18next';
 
 const SendModal: FC<SendModalProps> = (props) => {
-  const { t } = useTranslation();
   const appCtx = useContext(AppContext);
+  const { t } = useTranslation();
+
+  const [lnTransaction, setLnTransaction] = useState(true);
+  const [invoice, setInvoice] = useState('');
+  const [confirm, setConfirm] = useState(false);
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState(0);
   const [fee, setFee] = useState('');
   const [comment, setComment] = useState('');
 
-  const sendTransactionHandler = (event: FormEvent) => {
+  const confirmLnHandler = async (event: FormEvent) => {
     event.preventDefault();
-    const body = {
-      amount,
-      address,
-      fee,
-      comment,
-      unit: appCtx.unit
-    };
-    instance.post('send', body);
+    const resp = await instance.post('/lightning/verify', { invoice });
+    console.log(resp);
+    setAmount(resp.data.amount);
+    setComment(resp.data.description);
+    setConfirm(true);
+  };
+
+  const confirmOnChainHandler = (event: FormEvent) => {
+    event.preventDefault();
+    setConfirm(true);
+  };
+
+  const changeTransactionHandler = () => {
+    setLnTransaction((prev) => !prev);
+    setInvoice('');
+    setAddress('');
+    setAmount(0);
+    setFee('');
+    setComment('');
   };
 
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,75 +58,57 @@ const SendModal: FC<SendModalProps> = (props) => {
     setFee(event.target.value);
   };
 
-  const balance =
+  const changeInvoiceHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setInvoice(event.target.value);
+  };
+
+  const onchainBalance =
     appCtx.unit === 'BTC'
       ? props.onchainBalance.toLocaleString()
       : (props.onchainBalance * 100_000_000).toLocaleString();
 
+  const lnBalance =
+    appCtx.unit === 'BTC' ? props.lnBalance.toLocaleString() : (props.lnBalance * 100_000_000).toLocaleString();
+
+  if (confirm) {
+    const addr = lnTransaction ? invoice : address;
+    return (
+      <ModalDialog close={() => props.onClose(false)}>
+        <ConfirmSendModal
+          ln={lnTransaction}
+          back={() => setConfirm(false)}
+          amount={amount.toString()}
+          address={addr}
+          fee={fee}
+          comment={comment}
+          close={props.onClose}
+        />
+      </ModalDialog>
+    );
+  }
+
   return (
-    <ModalDialog close={props.onClose}>
-      <form className='px-5' onSubmit={sendTransactionHandler}>
-        <div className='text-xl font-bold'>{t('wallet.send_funds')}</div>
-        <div className='my-5'>
-          <span className='font-bold'>{t('wallet.balance')}:&nbsp;</span>
-          {balance} {appCtx.unit}
-        </div>
-        <div className='my-5 flex flex-col justify-center text-center items-center'>
-          <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='address' className='label-underline'>
-              {t('wallet.address')}
-            </label>
-            <input
-              id='address'
-              type='text'
-              className='w-full input-underline'
-              value={address}
-              onChange={changeAddressHandler}
-            />
-          </div>
-          <div className='w-full md:w-10/12 py-1'>
-            <AmountInput amount={amount} onChangeAmount={changeAmountHandler} />
-          </div>
-
-          <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='fee' className='label-underline'>
-              {t('tx.fee')}
-            </label>
-            <div className='flex'>
-              <input
-                id='fee'
-                type='number'
-                className='w-7/12 input-underline text-right'
-                value={fee}
-                onChange={changeFeeHandler}
-              />
-              <div className='w-5/12 text-sm break-words'>sat / vByte</div>
-            </div>
-          </div>
-
-          <div className='w-full md:w-10/12 py-1'>
-            <label htmlFor='comment' className='label-underline'>
-              {t('tx.comment')}
-            </label>
-            <input
-              id='comment'
-              type='text'
-              placeholder='Optional comment'
-              className='input-underline'
-              value={comment}
-              onChange={changeCommentHandler}
-            />
-          </div>
-        </div>
-        <div className='inline-block w-4/5 lg:w-3/12 align-top mb-5'>
-          <button
-            type='submit'
-            className='text-center h-10 bg-yellow-500 hover:bg-yellow-400 dark:hover:bg-yellow-400 rounded-lg text-white w-full'
-          >
-            {t('wallet.send')}
-          </button>
-        </div>
-      </form>
+    <ModalDialog close={() => props.onClose(false)}>
+      <button onClick={changeTransactionHandler} className='bd-button p-1 my-3 block'>
+        {t('settings.change')} <SwitchIcon className='inline-block p-0.5' />
+      </button>
+      {lnTransaction && (
+        <SendLn onChangeInvoice={changeInvoiceHandler} onConfirm={confirmLnHandler} balance={lnBalance} />
+      )}
+      {!lnTransaction && (
+        <SendOnChain
+          balance={onchainBalance}
+          address={address}
+          onChangeAddress={changeAddressHandler}
+          amount={amount}
+          onChangeAmount={changeAmountHandler}
+          fee={fee}
+          onChangeFee={changeFeeHandler}
+          comment={comment}
+          onChangeComment={changeCommentHandler}
+          onConfirm={confirmOnChainHandler}
+        />
+      )}
     </ModalDialog>
   );
 };
@@ -118,5 +118,5 @@ export default SendModal;
 export interface SendModalProps {
   onchainBalance: number;
   lnBalance: number;
-  onClose: () => void;
+  onClose: (confirmed: boolean) => void;
 }

@@ -1,5 +1,7 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
+import { toast, ToastContainer } from 'react-toastify';
 import AppStatusCard from '../../components/Home/AppStatusCard/AppStatusCard';
 import BitcoinCard from '../../components/Home/BitcoinCard/BitcoinCard';
 import ConnectionCard from '../../components/Home/ConnectionCard/ConnectionCard';
@@ -11,9 +13,12 @@ import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
 import SendModal from '../../components/Shared/SendModal/SendModal';
 import useSSE from '../../hooks/use-sse';
 import { AppStatus } from '../../models/app-status.model';
+import { AppContext } from '../../store/app-context';
 import { MODAL_ROOT } from '../../util/util';
 
 export const Home: FC = () => {
+  const { t } = useTranslation();
+  const appCtx = useContext(AppContext);
   const { homeState, transactions, appStatus } = useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
@@ -25,8 +30,12 @@ export const Home: FC = () => {
     setShowSendModal(true);
   };
 
-  const closeSendModalHandler = () => {
+  const closeSendModalHandler = (confirmed?: boolean) => {
     setShowSendModal(false);
+    if (confirmed) {
+      const theme = appCtx.darkMode ? 'dark' : 'light';
+      toast.success(t('tx.sent'), { theme });
+    }
   };
 
   const showReceiveHandler = () => {
@@ -70,6 +79,7 @@ export const Home: FC = () => {
       {receiveModal}
       {sendModal}
       {detailModal}
+      <ToastContainer />
       <main
         className={`content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
