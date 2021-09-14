@@ -21,7 +21,7 @@ app.listen(PORT, () => {
  * Main SSE Handler
  */
 const eventsHandler = (request, response) => {
-  console.log('call to /api/v1/sse/subscribe');
+  console.log('call to /api/sse/subscribe');
   const headers = {
     'Content-Type': 'text/event-stream',
     Connection: 'keep-alive',
@@ -53,7 +53,7 @@ const eventsHandler = (request, response) => {
 /**
  * SSE Handler call
  */
-app.get('/api/v1/sse/subscribe', eventsHandler);
+app.get('/api/sse/subscribe', eventsHandler);
 
 /***
  * STATUS
