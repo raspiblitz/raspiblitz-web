@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ReactComponent as FlipIcon } from '../../../assets/flip-vertical.svg';
+import { ReactComponent as SwitchIcon } from '../../../assets/switch-vertical.svg';
 import { AppContext } from '../../../store/app-context';
 import styles from './AmountInput.module.css';
 
@@ -27,7 +27,7 @@ const AmountInput: FC<AmountInputProps> = (props) => {
           onClick={appCtx.toggleUnit}
         >
           {appCtx.unit}
-          <FlipIcon className='h-5 w-5 text-black dark:text-white' />
+          <SwitchIcon className='h-5 w-5 text-black dark:text-white' />
         </span>
       </div>
     </>

@@ -38,11 +38,13 @@
       "copied": "Copied!",
       "confirm": "Confirm",
       "copy_clipboard": "Copy to clipboard",
+      "invoice": "Invoice",
       "create_invoice_ln": "Create a Lightning invoice",
       "fund_short": "Fund wallet",
       "fund": "Fund your wallet",
       "scan_qr": "Scan this QR code or copy the address below to receive funds",
-      "send_funds": "Send funds",
+      "send_onchain": "Send funds On-chain",
+      "send_lightning": "Send funds over Lightning",
       "address": "Address"
     },
     "tx": {
@@ -60,7 +62,7 @@
       "value": "Value",
       "comment": "Comment",
       "sent": "Transaction sent!",
-      "confirm_info":"Please confirm the following transaction"
+      "confirm_info": "Please confirm the following transaction"
     },
     "apps": {
       "installed": "Installed",
