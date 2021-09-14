@@ -1,55 +1,36 @@
 {
   "translation": {
     "navigation": {
-      "apps": "",
-      "back": "",
-      "display_sats": ""
+      "back": ""
     },
     "login": {
       "enter_pass": "",
-      "login": "",
       "error": ""
     },
     "home": {
-      "version": "",
       "status": "",
-      "conn_details": "",
-      "ssh": "",
-      "channel": ""
+      "ssh": ""
     },
     "wallet": {
       "balance": "",
-      "receive": "",
       "amount": "",
-      "confirm": "",
       "invoice": "",
-      "fund_short": "",
-      "scan_qr": "",
-      "send_lightning": ""
+      "scan_qr": ""
     },
     "tx": {
       "transactions": "",
-      "txid": "",
       "included_block": "",
-      "fee": "",
       "description": "",
-      "request": "",
-      "comment": "",
-      "confirm_info": ""
+      "comment": ""
     },
     "apps": {
       "available": "",
-      "install": "",
       "info": "",
-      "about": "",
-      "source": "",
-      "online": ""
+      "source": ""
     },
     "settings": {
       "old_pw": "",
-      "change": "",
       "shutdown": "",
-      "confirm": "",
       "curr_lang": ""
     }
   }
