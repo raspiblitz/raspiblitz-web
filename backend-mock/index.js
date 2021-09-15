@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const apps = require('./apps');
-const sync = require('./sync');
+const balance = require('./balance');
+const btcstatus = require('./btcstatus');
+const lnstatus = require('./lnstatus');
+const nodeinfo = require('./nodeinfo');
 const auth = require('./auth');
 const transactions = require('./transactions');
 const util = require('./util');
@@ -40,7 +43,10 @@ const eventsHandler = (request, response) => {
     response
   });
 
-  sync.syncStatus();
+  nodeinfo.nodeInfo();
+  btcstatus.btcStatus();
+  lnstatus.lnStatus();
+  balance.balance();
   apps.appStatus();
   apps.listApps();
   transactions.listTransactions();
