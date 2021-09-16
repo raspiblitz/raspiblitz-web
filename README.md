@@ -28,12 +28,6 @@ To run the mock backend open another terminal, `cd` into [backend-mock](./backen
 
 - For the login screen, use the password `password`.
 
-### Run storybook
-
-If you haven't done so already, run `yarn install` to install the dependencies.
-
-Then, run `yarn storybook` to start storybook.
-
 ## Credits & Licenses
 
 - RaspiBlitz Icon from [RaspiBlitz](https://github.com/rootzoll/raspiblitz)
