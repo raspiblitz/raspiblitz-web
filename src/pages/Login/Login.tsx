@@ -37,7 +37,7 @@ const Login: FC = () => {
     setIsLoading(false);
 
     if (resp) {
-      localStorage.setItem('access_token', resp.data.token);
+      localStorage.setItem('access_token', resp.data.access_token);
       appCtx.setIsLoggedIn(true);
       history.push('/home');
     }

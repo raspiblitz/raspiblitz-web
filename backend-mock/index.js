@@ -78,8 +78,8 @@ app.post('/api/v1/system/login', (req, res) => {
   console.log('call to /api/v1/system/login');
   setTimeout(() => {
     if (req.body.password === 'password') {
-      const token = auth.signToken();
-      res.status(200).send(JSON.stringify({ token }));
+      const access_token = auth.signToken();
+      res.status(200).send(JSON.stringify({ access_token }));
     } else {
       res.status(401).send();
     }
