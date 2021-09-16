@@ -1,14 +1,23 @@
 import { createContext, Dispatch, FC, SetStateAction, useState } from 'react';
 import { AppStatus } from '../models/app-status.model';
 import { App } from '../models/app.model';
-import { HomeState } from '../models/home-state.model';
+import { Balance } from '../models/balance';
+import { BtcStatus } from '../models/btc-status';
+import { LnStatus } from '../models/ln-status';
+import { NodeInfo } from '../models/node-info';
 import { Transaction } from '../models/transaction.model';
 
 interface SSEContextType {
   evtSource: EventSource | null;
   setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
-  homeState: HomeState;
-  setHomeState: Dispatch<SetStateAction<HomeState>>;
+  nodeInfo: NodeInfo;
+  setNodeInfo: Dispatch<SetStateAction<NodeInfo>>;
+  btcStatus: BtcStatus;
+  setBtcStatus: Dispatch<SetStateAction<BtcStatus>>;
+  lnStatus: LnStatus;
+  setLnStatus: Dispatch<SetStateAction<LnStatus>>;
+  balance: Balance;
+  setBalance: Dispatch<SetStateAction<Balance>>;
   appStatus: AppStatus[];
   setAppStatus: Dispatch<SetStateAction<AppStatus[]>>;
   availableApps: App[];
@@ -22,23 +31,33 @@ interface SSEContextType {
 export const SSEContext = createContext<SSEContextType>({
   evtSource: null,
   setEvtSource: () => {},
-  homeState: {
-    syncStatus: 0,
-    onchainBalance: 0,
-    lnBalance: 0,
-    currBlock: 0,
-    maxBlock: 0,
-    channelOnline: 0,
-    channelTotal: 0,
-    btcVersion: '',
-    btcStatus: '',
-    btcNetwork: '',
-    lnVersion: '',
-    lnStatus: '',
+  nodeInfo: {
+    name: '',
     torAddress: '',
     sshAddress: ''
   },
-  setHomeState: () => {},
+  setNodeInfo: () => {},
+  btcStatus: {
+    syncStatus: 0,
+    currBlock: 0,
+    maxBlock: 0,
+    btcStatus: '',
+    btcVersion: '',
+    btcNetwork: ''
+  },
+  setBtcStatus: () => {},
+  balance: {
+    onchainBalance: 0,
+    lnBalance: 0
+  },
+  lnStatus: {
+    channelOnline: 0,
+    channelTotal: 0,
+    lnStatus: '',
+    lnVersion: ''
+  },
+  setLnStatus: () => {},
+  setBalance: () => {},
   appStatus: [],
   setAppStatus: () => {},
   availableApps: [],
@@ -55,21 +74,28 @@ export const SSE_URL = window.location.hostname.includes('localhost')
 
 const SSEContextProvider: FC = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);
-  const [homeState, setHomeState] = useState<HomeState>({
+  const [nodeInfo, setNodeInfo] = useState<NodeInfo>({
+    name: '',
+    sshAddress: '',
+    torAddress: ''
+  });
+  const [btcStatus, setBtcStatus] = useState<BtcStatus>({
     syncStatus: 0,
-    onchainBalance: 0,
-    lnBalance: 0,
     currBlock: 0,
     maxBlock: 0,
+    btcNetwork: '',
+    btcStatus: '',
+    btcVersion: ''
+  });
+  const [lnStatus, setLnStatus] = useState<LnStatus>({
     channelOnline: 0,
     channelTotal: 0,
-    btcVersion: '',
-    btcStatus: '',
-    btcNetwork: '',
-    lnVersion: '',
     lnStatus: '',
-    torAddress: '',
-    sshAddress: ''
+    lnVersion: ''
+  });
+  const [balance, setBalance] = useState<Balance>({
+    onchainBalance: 0,
+    lnBalance: 0
   });
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);
@@ -79,8 +105,14 @@ const SSEContextProvider: FC = (props) => {
   const contextValue: SSEContextType = {
     evtSource,
     setEvtSource,
-    homeState,
-    setHomeState,
+    nodeInfo,
+    setNodeInfo,
+    btcStatus,
+    setBtcStatus,
+    lnStatus,
+    setLnStatus,
+    balance,
+    setBalance,
     appStatus,
     setAppStatus,
     availableApps,

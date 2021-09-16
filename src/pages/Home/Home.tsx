@@ -19,7 +19,7 @@ import { MODAL_ROOT } from '../../util/util';
 export const Home: FC = () => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
-  const { homeState, transactions, appStatus } = useSSE();
+  const { nodeInfo, balance, btcStatus, lnStatus, transactions, appStatus } = useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
@@ -62,8 +62,8 @@ export const Home: FC = () => {
     showSendModal &&
     createPortal(
       <SendModal
-        onchainBalance={homeState.onchainBalance}
-        lnBalance={homeState.lnBalance}
+        onchainBalance={balance.onchainBalance}
+        lnBalance={balance.lnBalance}
         onClose={closeSendModalHandler}
       />,
       MODAL_ROOT
@@ -85,8 +85,8 @@ export const Home: FC = () => {
       >
         <article className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <WalletCard
-            onchainBalance={homeState.onchainBalance}
-            lnBalance={homeState.lnBalance}
+            onchainBalance={balance.onchainBalance}
+            lnBalance={balance.lnBalance}
             onReceive={showReceiveHandler}
             onSend={showSendModalHandler}
           />
@@ -95,24 +95,24 @@ export const Home: FC = () => {
           <TransactionCard transactions={transactions} showDetails={showDetailHandler} />
         </article>
         <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
-          <ConnectionCard torAddress={homeState.torAddress} sshAddress={homeState.sshAddress} />
+          <ConnectionCard torAddress={nodeInfo.torAddress} sshAddress={nodeInfo.sshAddress} />
         </article>
         <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <BitcoinCard
-            version={homeState.btcVersion}
-            network={homeState.btcNetwork}
-            status={homeState.btcStatus}
-            currBlock={homeState.currBlock}
-            maxBlock={homeState.maxBlock}
+            version={btcStatus.btcVersion}
+            network={btcStatus.btcNetwork}
+            status={btcStatus.btcStatus}
+            currBlock={btcStatus.currBlock}
+            maxBlock={btcStatus.maxBlock}
           />
         </article>
         <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <LightningCard
-            version={homeState.lnVersion}
-            status={homeState.lnStatus}
-            channelOnline={homeState.channelOnline}
-            channelTotal={homeState.channelTotal}
-            channelBalance={homeState.lnBalance}
+            version={lnStatus.lnVersion}
+            status={lnStatus.lnStatus}
+            channelOnline={lnStatus.channelOnline}
+            channelTotal={lnStatus.channelTotal}
+            channelBalance={balance.lnBalance}
           />
         </article>
         {appStatus.map((app: AppStatus) => {
