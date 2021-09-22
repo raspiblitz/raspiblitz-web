@@ -5,6 +5,8 @@ import nb_NO from './langs/nb_NO.json';
 import fr from './langs/fr.json';
 import hu from './langs/hu.json';
 import pt_BR from './langs/pt_BR.json';
+import it from './langs/it.json';
+import es from './langs/es.json';
 import { initReactI18next } from 'react-i18next';
 import 'react-i18next';
 
@@ -14,7 +16,9 @@ export const resources = {
   nb_NO,
   fr,
   hu,
-  pt_BR
+  pt_BR,
+  it,
+  es
 };
 
 i18n.use(initReactI18next).init({
