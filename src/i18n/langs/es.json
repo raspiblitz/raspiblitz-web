@@ -1,0 +1,88 @@
+{
+  "translation": {
+    "settings": {
+      "curr_lang": "Lenguaje actual",
+      "language": "Lenguaje",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "shutdown": "Apagar",
+      "reboot": "Reiniciar",
+      "change": "Cambiar",
+      "new_pw": "Contraseña nueva",
+      "old_pw": "Contraseña vieja",
+      "change_pw": "Cambiar contraseña"
+    },
+    "apps": {
+      "online": "En línea",
+      "offline": "Fuera de línea",
+      "source": "Código fuente",
+      "author": "Autor",
+      "about": "Acerca de",
+      "no_page": "No hay página disponible",
+      "info": "Información",
+      "uninstall": "Desinstalar",
+      "install": "Instalar",
+      "open": "Abrir",
+      "available": "Aplicaciones disponibles",
+      "installed": "Installado"
+    },
+    "tx": {
+      "comment": "Descripción",
+      "value": "Precio",
+      "request": "Solicitar",
+      "mempool": "Ver en la mempool",
+      "description": "Descripción",
+      "fee_rate": "Tárifa de comisión",
+      "fee": "Comisión",
+      "date": "Fecha",
+      "included_block": "Incluído en el Bloque",
+      "txid": "Id. de la Transacción",
+      "confirmations": "Confirmaciones",
+      "tx_details": "Detalles de la Transacción",
+      "transactions": "Transacciones"
+    },
+    "wallet": {
+      "address": "Dirección",
+      "scan_qr": "Escánea este código QR o copia la dirección de abajo para solicitar los fondos",
+      "fund": "Agrega fondos a tu billetera",
+      "fund_short": "Fondear billetera",
+      "on_chain": "On-chain",
+      "create_invoice_ln": "Crear un recibo Lightning",
+      "copy_clipboard": "Copiar al portapapeles",
+      "copied": "¡Copiado!",
+      "amount": "Monto",
+      "send": "Enviar",
+      "receive": "Recibir",
+      "balance": "Balance"
+    },
+    "home": {
+      "lightning": "Lightning",
+      "channel_balance": "Balance de Canal",
+      "channel": "Canal",
+      "ssh": "Sesión SSH",
+      "tor": "Tor",
+      "conn_details": "Detalles de Conexión",
+      "blocks_synced": "Bloques sincronizados",
+      "status": "Estado",
+      "network": "Red",
+      "version": "Versión",
+      "bitcoin": "Bitcoin"
+    },
+    "login": {
+      "error": "Ocurrió un error",
+      "invalid_pass": "Contraseña Inválida",
+      "login": "Iniciar Sesión",
+      "enter_pass_placeholder": "Contraseña B",
+      "enter_pass": "Ingrese contraseña B"
+    },
+    "navigation": {
+      "logout": "Cerrar Sesión",
+      "display_sats": "Mostrar SATS",
+      "dark_mode": "Modo Oscuro",
+      "back": "Volver",
+      "settings": "Ajustes",
+      "apps": "Aplicaciones",
+      "home": "Inicio"
+    }
+  }
+}

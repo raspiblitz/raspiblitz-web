@@ -44,7 +44,6 @@
     "wallet": {
       "receive": "Erhalten",
       "address": "Adresse",
-      "send_funds": "Geld senden",
       "scan_qr": "Scannen Sie diesen QR-Code oder kopieren Sie die unten stehende Adresse, um das Geld zu erhalten",
       "copy_clipboard": "In Zwischenablage kopieren",
       "copied": "Kopiert!",

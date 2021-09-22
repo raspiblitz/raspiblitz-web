@@ -37,7 +37,6 @@
       "copy_clipboard": "Copier dans le presse-papier",
       "create_invoice_ln": "Créer une facture Lightning",
       "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
-      "send_funds": "Envoyer des fonds",
       "address": "Adresse",
       "on_chain": "On-chain",
       "fund_short": "Approvisionner porte-monnaie",
