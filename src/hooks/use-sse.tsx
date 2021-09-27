@@ -8,7 +8,7 @@ import { NodeInfo } from '../models/node-info';
 import { Transaction } from '../models/transaction.model';
 import { SSEContext, SSE_URL } from '../store/sse-context';
 
-const useSSE = () => {
+function useSSE() {
   const sseCtx = useContext(SSEContext);
   const { evtSource, setEvtSource } = sseCtx;
 
@@ -131,6 +131,6 @@ const useSSE = () => {
     availableApps: sseCtx.availableApps,
     isInstalling: sseCtx.isInstalling
   };
-};
+}
 
 export default useSSE;

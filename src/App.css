@@ -32,4 +32,5 @@ ul {
   user-select: none;
   pointer-events: none;
   cursor: default;
+  overflow: hidden;
 }
