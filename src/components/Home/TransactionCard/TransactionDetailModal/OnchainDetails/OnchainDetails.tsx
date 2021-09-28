@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ReactComponent as ClipboardIcon } from '../../../../../assets/clipboard.svg';
+import { ReactComponent as ClipboardIcon } from '../../../../../assets/clipboard-copy.svg';
 
 export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
   const { t } = useTranslation();
