@@ -1,47 +1,6 @@
 const util = require('./util');
 const fs = require('fs');
 
-const appStatus = () => {
-  console.log('call to appstatus');
-  util.sendSSE('appstatus', [
-    {
-      id: 'specter',
-      name: 'Specter Desktop',
-      status: 'online'
-    },
-    {
-      id: 'sphinx',
-      name: 'Sphinx Chat',
-      status: 'online'
-    },
-    {
-      id: 'btc-pay',
-      name: 'BTCPay Server',
-      status: 'offline'
-    },
-    {
-      id: 'rtl',
-      name: 'Ride the Lightning',
-      status: 'online'
-    },
-    {
-      id: 'bos',
-      name: 'Balance of Satoshis',
-      status: 'offline'
-    }
-  ]);
-
-  setTimeout(() => {
-    util.sendSSE('appstatus', [
-      {
-        id: 'bos',
-        name: 'Balance of Satoshis',
-        status: 'online'
-      }
-    ]);
-  }, 5000);
-};
-
 const listApps = () => {
   console.log('call to apps');
   util.sendSSE('apps', [
@@ -153,7 +112,7 @@ const appDetails = (req) => {
   return details;
 };
 
-module.exports = { appStatus, listApps, installApp, appDetails };
+module.exports = { listApps, installApp, appDetails };
 
 const getDescription = () => {
   return 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';

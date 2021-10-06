@@ -2,11 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const apps = require('./apps');
 const balance = require('./balance');
-const btcstatus = require('./btcstatus');
-const lnstatus = require('./lnstatus');
-const nodeinfo = require('./nodeinfo');
+const btcInfo = require('./btc_info');
+const lnstatus = require('./ln_status');
+const installedAppStatus = require('./installed_app_status');
+const systemInfo = require('./system_info');
 const auth = require('./auth');
 const transactions = require('./transactions');
+const walletBalance = require('./wallet_balance');
 const util = require('./util');
 
 const app = express();
@@ -43,13 +45,15 @@ const eventsHandler = (request, response) => {
     response
   });
 
-  nodeinfo.nodeInfo();
-  btcstatus.btcInfo();
+  systemInfo.systemInfo();
+  btcInfo.btcInfo();
   lnstatus.lnStatus();
   balance.balance();
+  installedAppStatus.appStatus();
   apps.appStatus();
   apps.listApps();
   transactions.listTransactions();
+  walletBalance.walletBalance();
 
   request.on('close', () => {
     // do nothing
