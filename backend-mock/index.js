@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const apps = require('./apps');
-const balance = require('./balance');
 const btcInfo = require('./btc_info');
 const lnstatus = require('./ln_status');
 const installedAppStatus = require('./installed_app_status');
@@ -48,9 +47,7 @@ const eventsHandler = (request, response) => {
   systemInfo.systemInfo();
   btcInfo.btcInfo();
   lnstatus.lnStatus();
-  balance.balance();
   installedAppStatus.appStatus();
-  apps.appStatus();
   apps.listApps();
   transactions.listTransactions();
   walletBalance.walletBalance();

@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
-import { AppStatus } from '../models/app-status.model';
+import { AppStatus } from '../models/app-status';
 import { App } from '../models/app.model';
-import { Balance } from '../models/balance';
-import { BtcStatus } from '../models/btc-status';
+import { BtcInfo } from '../models/btc-info';
 import { LnStatus } from '../models/ln-status';
-import { NodeInfo } from '../models/node-info';
+import { SystemInfo } from '../models/system-info';
 import { Transaction } from '../models/transaction.model';
+import { WalletBalance } from '../models/wallet-balance';
 import { SSEContext, SSE_URL } from '../store/sse-context';
 
 function useSSE() {
@@ -51,8 +51,8 @@ function useSSE() {
       sseCtx.setIsInstalling(JSON.parse((event as MessageEvent<string>).data).id);
     };
 
-    const setNodeInfo = (event: Event) => {
-      sseCtx.setNodeInfo((prev: NodeInfo) => {
+    const setSystemInfo = (event: Event) => {
+      sseCtx.setSystemInfo((prev: SystemInfo) => {
         const message = JSON.parse((event as MessageEvent<string>).data);
 
         return {
@@ -62,8 +62,8 @@ function useSSE() {
       });
     };
 
-    const setBtcStatus = (event: Event) => {
-      sseCtx.setBtcStatus((prev: BtcStatus) => {
+    const setBtcInfo = (event: Event) => {
+      sseCtx.setBtcInfo((prev: BtcInfo) => {
         const message = JSON.parse((event as MessageEvent<string>).data);
 
         return {
@@ -85,7 +85,7 @@ function useSSE() {
     };
 
     const setBalance = (event: Event) => {
-      sseCtx.setBalance((prev: Balance) => {
+      sseCtx.setBalance((prev: WalletBalance) => {
         const message = JSON.parse((event as MessageEvent<string>).data);
 
         return {
@@ -96,12 +96,12 @@ function useSSE() {
     };
 
     if (evtSource) {
-      evtSource.addEventListener('nodeinfo', setNodeInfo);
-      evtSource.addEventListener('btcstatus', setBtcStatus);
-      evtSource.addEventListener('lnstatus', setLnStatus);
-      evtSource.addEventListener('balance', setBalance);
+      evtSource.addEventListener('system_info', setSystemInfo);
+      evtSource.addEventListener('btc_info', setBtcInfo);
+      evtSource.addEventListener('ln_info_lite', setLnStatus);
+      evtSource.addEventListener('wallet_balance', setBalance);
       evtSource.addEventListener('transactions', setTx);
-      evtSource.addEventListener('appstatus', setAppStatus);
+      evtSource.addEventListener('installed_app_status', setAppStatus);
       evtSource.addEventListener('apps', setApps);
       evtSource.addEventListener('install', setInstall);
     }
@@ -109,12 +109,12 @@ function useSSE() {
     return () => {
       // cleanup
       if (evtSource) {
-        evtSource.removeEventListener('syncstatus', setNodeInfo);
-        evtSource.removeEventListener('btcstatus', setBtcStatus);
-        evtSource.removeEventListener('lnstatus', setLnStatus);
-        evtSource.removeEventListener('balance', setBalance);
+        evtSource.removeEventListener('system_info', setSystemInfo);
+        evtSource.removeEventListener('btc_info', setBtcInfo);
+        evtSource.removeEventListener('ln_info_lite', setLnStatus);
+        evtSource.removeEventListener('wallet_balance', setBalance);
         evtSource.removeEventListener('transactions', setTx);
-        evtSource.removeEventListener('appstatus', setAppStatus);
+        evtSource.removeEventListener('installed_app_status', setAppStatus);
         evtSource.removeEventListener('apps', setApps);
         evtSource.removeEventListener('install', setInstall);
       }
@@ -122,8 +122,8 @@ function useSSE() {
   }, [evtSource, setEvtSource, sseCtx]);
 
   return {
-    nodeInfo: sseCtx.nodeInfo,
-    btcStatus: sseCtx.btcStatus,
+    systemInfo: sseCtx.systemInfo,
+    btcInfo: sseCtx.btcInfo,
     lnStatus: sseCtx.lnStatus,
     balance: sseCtx.balance,
     appStatus: sseCtx.appStatus,

@@ -10,7 +10,7 @@ import DropdownMenu from './DropdownMenu/DropdownMenu';
 
 const Header: FC = () => {
   const appCtx = useContext(AppContext);
-  const { nodeInfo } = useSSE();
+  const { systemInfo } = useSSE();
   const dropdown = useRef<HTMLDivElement>(null);
   const menu = useRef<SVGSVGElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -44,7 +44,7 @@ const Header: FC = () => {
         {!appCtx.darkMode && <RaspiBlitzLogo className='h-8 hidden md:block' />}
         {appCtx.darkMode && <RaspiBlitzLogoDark className='h-8 hidden md:block' />}
       </NavLink>
-      <div className='font-bold text-xl'>{nodeInfo.name}</div>
+      <div className='font-bold text-xl'>{systemInfo.alias}</div>
       <div className='relative'>
         <MenuIcon ref={menu} onClick={showDropdownHandler} className='w-8 h-8' />
         {showDropdown && <DropdownMenu ref={dropdown} />}
