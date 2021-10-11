@@ -1,19 +1,26 @@
 import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppContext } from '../../../store/app-context';
+import { checkPropsUndefined } from '../../../util/util';
 import LoadingBox from '../../Shared/LoadingBox/LoadingBox';
 
 export const LightningCard: FC<LightningCardProps> = (props) => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
 
-  const { channelBalance, version, channelOnline, channelTotal, status } = props;
+  const { channelBalance, version, channelPending, channelActive, channelInactive, status } = props;
 
-  if (!channelBalance || !version || !channelOnline || !channelTotal || !status) {
+  if (checkPropsUndefined(props)) {
     return <LoadingBox />;
   }
 
-  const balance = appCtx.unit === 'BTC' ? channelBalance : channelBalance * 100_000_000;
+  // remove 'commit=...' from version string if exists
+  const indexCommit = version!.indexOf('commit');
+  const versionString = version?.slice(0, indexCommit === -1 ? version!.length : indexCommit);
+
+  const balance = appCtx.unit === 'BTC' ? (channelBalance || 0) / 100_000_000 : channelBalance!;
+
+  const channelTotal = channelActive! + channelInactive! + channelPending!;
 
   return (
     <div className='h-full p-5'>
@@ -22,7 +29,7 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
             <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.version')}</h6>
-            <p>{version}</p>
+            <p>{versionString}</p>
           </div>
           <div className='w-1/2'>
             <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.status')}</h6>
@@ -32,7 +39,7 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
         <div className='flex overflow-hidden py-4'>
           <div className='w-1/2'>
             <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.channel')}</h6>
-            <p>{`${channelOnline} / ${channelTotal}`}</p>
+            <p>{`${channelActive} / ${channelTotal}`}</p>
           </div>
           <div className='w-1/2'>
             <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.channel_balance')}</h6>
@@ -49,9 +56,10 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
 export default LightningCard;
 
 export interface LightningCardProps {
-  version: string;
-  status: string;
-  channelOnline: number;
-  channelTotal: number;
-  channelBalance: number;
+  version: string | undefined;
+  status: string | undefined;
+  channelActive: number | undefined;
+  channelInactive: number | undefined;
+  channelPending: number | undefined;
+  channelBalance: number | undefined;
 }

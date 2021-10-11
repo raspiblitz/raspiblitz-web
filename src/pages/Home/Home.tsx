@@ -114,9 +114,10 @@ export const Home: FC = () => {
           <LightningCard
             version={lnStatus.version!}
             status={'online'}
-            channelOnline={lnStatus.num_active_channels!}
-            channelTotal={lnStatus.num_active_channels!}
-            channelBalance={balance.channel_local_balance!}
+            channelActive={lnStatus.num_active_channels}
+            channelPending={lnStatus.num_pending_channels}
+            channelInactive={lnStatus.num_inactive_channels}
+            channelBalance={balance.channel_local_balance}
           />
         </article>
         {appStatus.map((app: AppStatus) => {

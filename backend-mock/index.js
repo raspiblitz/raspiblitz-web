@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const apps = require('./apps');
 const btcInfo = require('./btc_info');
-const lnstatus = require('./ln_status');
+const lnInfoLite = require('./ln_info_lite');
 const installedAppStatus = require('./installed_app_status');
 const systemInfo = require('./system_info');
 const auth = require('./auth');
@@ -46,7 +46,7 @@ const eventsHandler = (request, response) => {
 
   systemInfo.systemInfo();
   btcInfo.btcInfo();
-  lnstatus.lnStatus();
+  lnInfoLite.lnInfoLite();
   installedAppStatus.appStatus();
   apps.listApps();
   transactions.listTransactions();

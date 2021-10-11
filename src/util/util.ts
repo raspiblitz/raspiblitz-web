@@ -26,3 +26,15 @@ export interface SavedSettings {
 }
 
 export const MODAL_ROOT = document.getElementById('modal-root')!;
+
+export function checkPropsUndefined(props: object) {
+  let someUndefined = false;
+  Object.values(props).forEach((prop) => {
+    if (prop === null || prop === undefined) {
+      someUndefined = true;
+    }
+  });
+  return someUndefined;
+}
+
+export type PropType = number | string | null | undefined;
