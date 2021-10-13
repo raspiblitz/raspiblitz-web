@@ -4,7 +4,7 @@ const systemInfo = () => {
   console.log('sending system_info');
 
   util.sendSSE('system_info', {
-    alias: 'dave',
+    alias: 'myBlitz',
     color: '#3399ff',
     version: 'v1.8.0',
     health: 'attention_required',
