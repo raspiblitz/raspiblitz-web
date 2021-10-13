@@ -16,43 +16,43 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
   }
 
   // remove 'commit=...' from version string if exists
-  const indexCommit = version!.indexOf('commit');
-  const versionString = version?.slice(0, indexCommit === -1 ? version!.length : indexCommit);
+  const indexCommit = version.indexOf('commit');
+  const versionString = version?.slice(0, indexCommit === -1 ? version.length : indexCommit);
 
-  const convertedLocalBalance = appCtx.unit === 'BTC' ? (localBalance || 0) / 100_000_000 : localBalance!;
-  const convertedRemoteBalance = appCtx.unit === 'BTC' ? (remoteBalance || 0) / 100_000_000 : remoteBalance!;
+  const convertedLocalBalance = appCtx.unit === 'BTC' ? (localBalance || 0) / 100_000_000 : localBalance;
+  const convertedRemoteBalance = appCtx.unit === 'BTC' ? (remoteBalance || 0) / 100_000_000 : remoteBalance;
 
-  const channelTotal = channelActive! + channelInactive! + channelPending!;
+  const channelTotal = channelActive + channelInactive + channelPending;
 
   return (
     <div className='h-full p-5'>
-      <div className='bd-card'>
+      <section className='bd-card'>
         <h2 className='font-bold text-lg'>{t('home.lightning')}</h2>
         <div className='flex overflow-hidden py-4'>
-          <div className='w-1/2'>
+          <article className='w-1/2'>
             <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.version')}</h6>
-            <p>{`${implementation!} ${versionString!}`}</p>
-          </div>
-          <div className='w-1/2'>
-            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.channel_local_balance')}</h6>
+            <p>{`${implementation} ${versionString}`}</p>
+          </article>
+          <article className='w-1/2'>
+            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.local_balance')}</h6>
             <p>
               {convertedLocalBalance.toLocaleString()} {appCtx.unit}
             </p>
-          </div>
+          </article>
         </div>
         <div className='flex overflow-hidden py-4'>
-          <div className='w-1/2'>
+          <article className='w-1/2'>
             <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.channel')}</h6>
             <p>{`${channelActive} / ${channelTotal}`}</p>
-          </div>
-          <div className='w-1/2'>
-            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.channel_remote_balance')}</h6>
+          </article>
+          <article className='w-1/2'>
+            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.remote_balance')}</h6>
             <p>
               {convertedRemoteBalance.toLocaleString()} {appCtx.unit}
             </p>
-          </div>
+          </article>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
@@ -60,11 +60,11 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
 export default LightningCard;
 
 export interface LightningCardProps {
-  version: string | undefined;
-  implementation: string | undefined;
-  channelActive: number | undefined;
-  channelInactive: number | undefined;
-  channelPending: number | undefined;
-  localBalance: number | undefined;
-  remoteBalance: number | undefined;
+  version: string;
+  implementation: string;
+  channelActive: number;
+  channelInactive: number;
+  channelPending: number;
+  localBalance: number;
+  remoteBalance: number;
 }

@@ -27,7 +27,7 @@ const I18nDropdown: FC = () => {
       <label htmlFor='lngSelect' className='font-bold w-1/2 dark:text-white'>
         {t('settings.language')}
       </label>
-      <select id='lngSelect' ref={selectRef} onChange={dropdownHandler} className='border w-1/2 dark:text-black'>
+      <select id='lngSelect' ref={selectRef} onChange={dropdownHandler} className='border w-1/2 dark:text-black bg-white'>
         {langs.map((lang, i) => {
           return (
             <option key={i} value={lang}>

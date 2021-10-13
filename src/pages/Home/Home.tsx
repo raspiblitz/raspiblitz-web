@@ -102,22 +102,23 @@ export const Home: FC = () => {
         {/* TODO: change */}
         <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <BitcoinCard
-            version={btcInfo.version!.toString()}
+            version={btcInfo.subversion!}
+            peers={btcInfo.connections_in!}
             network={systemInfo.chain!}
-            status={'online'}
-            currBlock={btcInfo.blocks!}
-            maxBlock={btcInfo.blocks!}
+            blocks={btcInfo.blocks!}
+            headers={btcInfo.headers!}
+            progress={btcInfo.verification_progress!}
           />
         </article>
-        {/* TODO: change */}
         <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           <LightningCard
             version={lnStatus.version!}
-            status={'online'}
-            channelActive={lnStatus.num_active_channels}
-            channelPending={lnStatus.num_pending_channels}
-            channelInactive={lnStatus.num_inactive_channels}
-            channelBalance={balance.channel_local_balance}
+            implementation={lnStatus.implementation!}
+            channelActive={lnStatus.num_active_channels!}
+            channelPending={lnStatus.num_pending_channels!}
+            channelInactive={lnStatus.num_inactive_channels!}
+            localBalance={balance.channel_local_balance!}
+            remoteBalance={balance.channel_remote_balance!}
           />
         </article>
         {appStatus.map((app: AppStatus) => {
