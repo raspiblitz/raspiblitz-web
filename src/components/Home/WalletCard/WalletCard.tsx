@@ -10,10 +10,15 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
 
-  const onchainBalance = appCtx.unit === 'BTC' ? props.onchainBalance : props.onchainBalance * 100_000_000;
-  const lnBalance = appCtx.unit === 'BTC' ? props.lnBalance : props.lnBalance * 100_000_000;
+  const { onchainBalance, lnBalance } = props;
 
-  const totalBalance = appCtx.unit === 'BTC' ? +(onchainBalance + lnBalance).toFixed(8) : onchainBalance + lnBalance;
+  const convertedOnchainBalance = appCtx.unit === 'BTC' ? onchainBalance / 100_000_000 : onchainBalance;
+  const convertedLnBalance = appCtx.unit === 'BTC' ? lnBalance / 100_000_000 : lnBalance;
+
+  const totalBalance =
+    appCtx.unit === 'BTC'
+      ? +(convertedOnchainBalance + convertedLnBalance).toFixed(8)
+      : convertedOnchainBalance + convertedLnBalance;
 
   return (
     <div className='p-5 h-full'>
@@ -32,7 +37,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 &nbsp;{t('wallet.on_chain')}
               </span>
               <span className='text-lg font-bold'>
-                {onchainBalance.toLocaleString()} {appCtx.unit}
+                {convertedOnchainBalance.toLocaleString()} {appCtx.unit}
               </span>
             </div>
             <div className='w-full flex flex-col'>
@@ -41,7 +46,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 &nbsp;{t('home.lightning')}
               </span>
               <span className='text-lg font-bold'>
-                {lnBalance.toLocaleString()} {appCtx.unit}
+                {convertedLnBalance.toLocaleString()} {appCtx.unit}
               </span>
             </div>
           </div>
