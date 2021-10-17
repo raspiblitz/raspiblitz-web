@@ -10,7 +10,9 @@ let currClientId = 0;
  * @returns void
  */
 const sendSSE = (event, data) => {
-  clients.forEach((client) => client.response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`));
+  clients.forEach((client) =>
+    client.response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`)
+  );
 };
 
 module.exports = { clients, currClientId, sendSSE };

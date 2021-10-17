@@ -1,11 +1,11 @@
-import { createContext, Dispatch, FC, SetStateAction, useState } from 'react';
-import { AppStatus } from '../models/app-status.model';
-import { App } from '../models/app.model';
-import { Balance } from '../models/balance';
-import { BtcStatus } from '../models/btc-status';
-import { LnStatus } from '../models/ln-status';
-import { NodeInfo } from '../models/node-info';
-import { Transaction } from '../models/transaction.model';
+import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
+import { AppStatus } from "../models/app-status.model";
+import { App } from "../models/app.model";
+import { Balance } from "../models/balance";
+import { BtcStatus } from "../models/btc-status";
+import { LnStatus } from "../models/ln-status";
+import { NodeInfo } from "../models/node-info";
+import { Transaction } from "../models/transaction.model";
 
 interface SSEContextType {
   evtSource: EventSource | null;
@@ -32,29 +32,29 @@ export const SSEContext = createContext<SSEContextType>({
   evtSource: null,
   setEvtSource: () => {},
   nodeInfo: {
-    name: '',
-    torAddress: '',
-    sshAddress: ''
+    name: "",
+    torAddress: "",
+    sshAddress: "",
   },
   setNodeInfo: () => {},
   btcStatus: {
     syncStatus: 0,
     currBlock: 0,
     maxBlock: 0,
-    btcStatus: '',
-    btcVersion: '',
-    btcNetwork: ''
+    btcStatus: "",
+    btcVersion: "",
+    btcNetwork: "",
   },
   setBtcStatus: () => {},
   balance: {
     onchainBalance: 0,
-    lnBalance: 0
+    lnBalance: 0,
   },
   lnStatus: {
     channelOnline: 0,
     channelTotal: 0,
-    lnStatus: '',
-    lnVersion: ''
+    lnStatus: "",
+    lnVersion: "",
   },
   setLnStatus: () => {},
   setBalance: () => {},
@@ -65,37 +65,37 @@ export const SSEContext = createContext<SSEContextType>({
   transactions: [],
   setTransactions: () => {},
   isInstalling: null,
-  setIsInstalling: () => {}
+  setIsInstalling: () => {},
 });
 
-export const SSE_URL = window.location.hostname.includes('localhost')
-  ? 'http://localhost:8080/api/sse/subscribe'
-  : '/api/sse/subscribe';
+export const SSE_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:8080/api/sse/subscribe"
+  : "/api/sse/subscribe";
 
 const SSEContextProvider: FC = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);
   const [nodeInfo, setNodeInfo] = useState<NodeInfo>({
-    name: '',
-    sshAddress: '',
-    torAddress: ''
+    name: "",
+    sshAddress: "",
+    torAddress: "",
   });
   const [btcStatus, setBtcStatus] = useState<BtcStatus>({
     syncStatus: 0,
     currBlock: 0,
     maxBlock: 0,
-    btcNetwork: '',
-    btcStatus: '',
-    btcVersion: ''
+    btcNetwork: "",
+    btcStatus: "",
+    btcVersion: "",
   });
   const [lnStatus, setLnStatus] = useState<LnStatus>({
     channelOnline: 0,
     channelTotal: 0,
-    lnStatus: '',
-    lnVersion: ''
+    lnStatus: "",
+    lnVersion: "",
   });
   const [balance, setBalance] = useState<Balance>({
     onchainBalance: 0,
-    lnBalance: 0
+    lnBalance: 0,
   });
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);
@@ -120,10 +120,14 @@ const SSEContextProvider: FC = (props) => {
     transactions,
     setTransactions,
     isInstalling,
-    setIsInstalling
+    setIsInstalling,
   };
 
-  return <SSEContext.Provider value={contextValue}>{props.children}</SSEContext.Provider>;
+  return (
+    <SSEContext.Provider value={contextValue}>
+      {props.children}
+    </SSEContext.Provider>
+  );
 };
 
 export default SSEContextProvider;

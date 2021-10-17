@@ -1,12 +1,14 @@
-import { FC, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import ModalDialog from '../../../../container/ModalDialog/ModalDialog';
-import { instance } from '../../../../util/interceptor';
-import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
-import LNDetails from './LNDetails/LNDetails';
-import OnchainDetails from './OnchainDetails/OnchainDetails';
+import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import ModalDialog from "../../../../container/ModalDialog/ModalDialog";
+import { instance } from "../../../../util/interceptor";
+import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
+import LNDetails from "./LNDetails/LNDetails";
+import OnchainDetails from "./OnchainDetails/OnchainDetails";
 
-export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) => {
+export const TransactionDetailModal: FC<TransactionDetailModalProps> = (
+  props
+) => {
   const { t } = useTranslation();
   const [txDetails, setTxDetails] = useState<any>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -29,20 +31,22 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (props) =
     <ModalDialog close={props.close}>
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
-        <div className='flex flex-col'>
-          <div className='font-extrabold'>{t('tx.tx_details')}</div>
-          {txDetails.type === 'onchain' && (
+        <div className="flex flex-col">
+          <div className="font-extrabold">{t("tx.tx_details")}</div>
+          {txDetails.type === "onchain" && (
             <a
-              className='text-blue-400 underline break-all py-2'
-              target='_blank'
-              rel='noreferrer'
+              className="text-blue-400 underline break-all py-2"
+              target="_blank"
+              rel="noreferrer"
               href={`https://mempool.space/tx/${txDetails.hash}`}
             >
-              {t('tx.mempool')}
+              {t("tx.mempool")}
             </a>
           )}
-          {txDetails.type === 'onchain' && <OnchainDetails details={txDetails} />}
-          {txDetails.type === 'lightning' && <LNDetails details={txDetails} />}
+          {txDetails.type === "onchain" && (
+            <OnchainDetails details={txDetails} />
+          )}
+          {txDetails.type === "lightning" && <LNDetails details={txDetails} />}
         </div>
       )}
     </ModalDialog>

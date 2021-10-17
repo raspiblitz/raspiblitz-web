@@ -1,7 +1,15 @@
-import { createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { retrieveSettings, saveSettings } from '../util/util';
-import { SSEContext } from './sse-context';
+import {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { useTranslation } from "react-i18next";
+import { retrieveSettings, saveSettings } from "../util/util";
+import { SSEContext } from "./sse-context";
 
 interface AppContextType {
   isLoggedIn: boolean;
@@ -13,16 +21,16 @@ interface AppContextType {
   logout: () => void;
 }
 
-type Unit = 'BTC' | 'Sat';
+type Unit = "BTC" | "Sat";
 
 export const AppContext = createContext<AppContextType>({
   isLoggedIn: false,
   darkMode: false,
-  unit: 'Sat',
+  unit: "Sat",
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
   logout: () => {},
-  toggleDarkMode: () => {}
+  toggleDarkMode: () => {},
 });
 
 const AppContextProvider: FC = (props) => {
@@ -30,12 +38,12 @@ const AppContextProvider: FC = (props) => {
   const sseCtx = useContext(SSEContext);
   const { evtSource, setEvtSource } = sseCtx;
 
-  const [unit, setUnit] = useState<Unit>('Sat');
+  const [unit, setUnit] = useState<Unit>("Sat");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleUnitHandler = () => {
-    setUnit((prevUnit: Unit) => (prevUnit === 'Sat' ? 'BTC' : 'Sat'));
+    setUnit((prevUnit: Unit) => (prevUnit === "Sat" ? "BTC" : "Sat"));
   };
 
   const toggleDarkModeHandler = () => {
@@ -49,7 +57,7 @@ const AppContextProvider: FC = (props) => {
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem("access_token");
 
     // close EventSource on logout
     if (evtSource) {
@@ -76,13 +84,13 @@ const AppContextProvider: FC = (props) => {
     // check for dark mode
     const documentEl = document.documentElement.classList;
     if (darkMode) {
-      documentEl.add('dark');
+      documentEl.add("dark");
     } else {
-      documentEl.remove('dark');
+      documentEl.remove("dark");
     }
 
     // if authenticated log in automatically
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem("access_token");
     setIsLoggedIn(!!token);
   }, [darkMode, i18n]);
 
@@ -93,10 +101,14 @@ const AppContextProvider: FC = (props) => {
     toggleUnit: toggleUnitHandler,
     setIsLoggedIn,
     logout: logoutHandler,
-    toggleDarkMode: toggleDarkModeHandler
+    toggleDarkMode: toggleDarkModeHandler,
   };
 
-  return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={contextValue}>
+      {props.children}
+    </AppContext.Provider>
+  );
 };
 
 export default AppContextProvider;

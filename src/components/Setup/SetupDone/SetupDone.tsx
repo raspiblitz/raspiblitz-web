@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import SetupContainer from '../../../container/SetupContainer/SetupContainer';
+import { FC } from "react";
+import SetupContainer from "../../../container/SetupContainer/SetupContainer";
 
 const SetupDone: FC = (props) => {
   return <SetupContainer>SetupDone</SetupContainer>;

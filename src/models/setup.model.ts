@@ -8,5 +8,5 @@ export enum SetupSteps {
   SET_PASSWORDS,
   PROVISION,
   WALLET_CREATION,
-  DONE
+  DONE,
 }

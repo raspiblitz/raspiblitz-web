@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import SetupContainer from '../../../container/SetupContainer/SetupContainer';
+import { FC } from "react";
+import SetupContainer from "../../../container/SetupContainer/SetupContainer";
 
 const Migration: FC<MigrationProps> = (props) => {
   return <SetupContainer>{props.type} Migration</SetupContainer>;
@@ -8,5 +8,5 @@ const Migration: FC<MigrationProps> = (props) => {
 export default Migration;
 
 export interface MigrationProps {
-  type: 'MYNODE' | 'UMBREL';
+  type: "MYNODE" | "UMBREL";
 }
