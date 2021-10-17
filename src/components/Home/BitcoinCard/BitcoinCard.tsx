@@ -25,8 +25,10 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
             <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.version')}</h6>
             <p>{shownVersion}</p>
           </div>
-          <div className='w-1/2'>
-            <h6 className='text-sm text-gray-500 dark:text-gray-200'>{t('home.network')}</h6>
+          <div className="w-1/2">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+              {t("home.network")}
+            </h6>
             <p>{network}</p>
           </div>
         </div>

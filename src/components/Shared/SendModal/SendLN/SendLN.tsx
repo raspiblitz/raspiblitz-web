@@ -1,6 +1,6 @@
-import { ChangeEvent, FC, FormEvent, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { AppContext } from '../../../../store/app-context';
+import { ChangeEvent, FC, FormEvent, useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { AppContext } from "../../../../store/app-context";
 
 const SendLn: FC<SendLnProps> = (props) => {
   const appCtx = useContext(AppContext);
@@ -9,16 +9,21 @@ const SendLn: FC<SendLnProps> = (props) => {
 
   return (
     <form onSubmit={onConfirm}>
-      <h3 className='text-xl font-bold'>{t('wallet.send_lightning')}</h3>
-      <div className='my-5'>
-        <span className='font-bold'>{t('wallet.balance')}:&nbsp;</span>
+      <h3 className="text-xl font-bold">{t("wallet.send_lightning")}</h3>
+      <div className="my-5">
+        <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
         {balance} {appCtx.unit}
       </div>
-      <label className='label-underline' htmlFor='invoiceInput'>
-        {t('wallet.invoice')}
+      <label className="label-underline" htmlFor="invoiceInput">
+        {t("wallet.invoice")}
       </label>
-      <input id='invoiceInput' type='text' onChange={onChangeInvoice} className='input-underline' />
-      <button type='submit' className='bd-button p-3 my-3'>
+      <input
+        id="invoiceInput"
+        type="text"
+        onChange={onChangeInvoice}
+        className="input-underline"
+      />
+      <button type="submit" className="bd-button p-3 my-3">
         Submit
       </button>
     </form>

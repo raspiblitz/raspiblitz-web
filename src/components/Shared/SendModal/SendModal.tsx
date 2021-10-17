@@ -1,24 +1,24 @@
-import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
-import ModalDialog from '../../../container/ModalDialog/ModalDialog';
-import { AppContext } from '../../../store/app-context';
-import { instance } from '../../../util/interceptor';
-import ConfirmSendModal from './ConfirmSendModal/ConfirmSendModal';
-import SendLn from './SendLN/SendLN';
-import SendOnChain from './SendOnChain/SendOnChain';
-import { ReactComponent as SwitchIcon } from '../../../assets/switch-vertical.svg';
-import { useTranslation } from 'react-i18next';
+import { ChangeEvent, FC, FormEvent, useContext, useState } from "react";
+import ModalDialog from "../../../container/ModalDialog/ModalDialog";
+import { AppContext } from "../../../store/app-context";
+import { instance } from "../../../util/interceptor";
+import ConfirmSendModal from "./ConfirmSendModal/ConfirmSendModal";
+import SendLn from "./SendLN/SendLN";
+import SendOnChain from "./SendOnChain/SendOnChain";
+import { ReactComponent as SwitchIcon } from "../../../assets/switch-vertical.svg";
+import { useTranslation } from "react-i18next";
 
 const SendModal: FC<SendModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const { t } = useTranslation();
 
   const [lnTransaction, setLnTransaction] = useState(true);
-  const [invoice, setInvoice] = useState('');
+  const [invoice, setInvoice] = useState("");
   const [confirm, setConfirm] = useState(false);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
   const [amount, setAmount] = useState(0);
-  const [fee, setFee] = useState('');
-  const [comment, setComment] = useState('');
+  const [fee, setFee] = useState("");
+  const [comment, setComment] = useState("");
 
   // TODO: handle error
   const confirmLnHandler = async (event: FormEvent) => {
@@ -36,11 +36,11 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   const changeTransactionHandler = () => {
     setLnTransaction((prev) => !prev);
-    setInvoice('');
-    setAddress('');
+    setInvoice("");
+    setAddress("");
     setAmount(0);
-    setFee('');
-    setComment('');
+    setFee("");
+    setComment("");
   };
 
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -91,11 +91,18 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   return (
     <ModalDialog close={() => props.onClose(false)}>
-      <button onClick={changeTransactionHandler} className='bd-button p-1 my-3 block'>
-        {t('settings.change')} <SwitchIcon className='inline-block p-0.5' />
+      <button
+        onClick={changeTransactionHandler}
+        className="bd-button p-1 my-3 block"
+      >
+        {t("settings.change")} <SwitchIcon className="inline-block p-0.5" />
       </button>
       {lnTransaction && (
-        <SendLn onChangeInvoice={changeInvoiceHandler} onConfirm={confirmLnHandler} balance={lnBalance} />
+        <SendLn
+          onChangeInvoice={changeInvoiceHandler}
+          onConfirm={confirmLnHandler}
+          balance={lnBalance}
+        />
       )}
       {!lnTransaction && (
         <SendOnChain

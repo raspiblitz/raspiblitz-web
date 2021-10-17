@@ -24,7 +24,7 @@ export const Home: FC = () => {
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
-  const [detailTxId, setDetailTxId] = useState('');
+  const [detailTxId, setDetailTxId] = useState("");
 
   const showSendModalHandler = () => {
     setShowSendModal(true);
@@ -33,8 +33,8 @@ export const Home: FC = () => {
   const closeSendModalHandler = (confirmed?: boolean) => {
     setShowSendModal(false);
     if (confirmed) {
-      const theme = appCtx.darkMode ? 'dark' : 'light';
-      toast.success(t('tx.sent'), { theme });
+      const theme = appCtx.darkMode ? "dark" : "light";
+      toast.success(t("tx.sent"), { theme });
     }
   };
 
@@ -56,7 +56,11 @@ export const Home: FC = () => {
   };
 
   const receiveModal =
-    showReceiveModal && createPortal(<ReceiveModal onClose={closeReceiveModalHandler} />, MODAL_ROOT);
+    showReceiveModal &&
+    createPortal(
+      <ReceiveModal onClose={closeReceiveModalHandler} />,
+      MODAL_ROOT
+    );
 
   const sendModal =
     showSendModal &&
@@ -70,7 +74,11 @@ export const Home: FC = () => {
     );
 
   const detailModal =
-    showDetailModal && createPortal(<TransactionDetailModal id={detailTxId} close={closeDetailHandler} />, MODAL_ROOT);
+    showDetailModal &&
+    createPortal(
+      <TransactionDetailModal id={detailTxId} close={closeDetailHandler} />,
+      MODAL_ROOT
+    );
 
   const gridRows = 6 + appStatus.length / 4;
 
@@ -83,7 +91,7 @@ export const Home: FC = () => {
       <main
         className={`content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
-        <article className='col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        <article className="col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           <WalletCard
             onchainBalance={balance.onchain_total_balance!}
             lnBalance={balance.channel_local_balance!}
@@ -91,8 +99,11 @@ export const Home: FC = () => {
             onSend={showSendModalHandler}
           />
         </article>
-        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4'>
-          <TransactionCard transactions={transactions} showDetails={showDetailHandler} />
+        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4">
+          <TransactionCard
+            transactions={transactions}
+            showDetails={showDetailHandler}
+          />
         </article>
         <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
           {/* TODO: change */}
@@ -109,7 +120,7 @@ export const Home: FC = () => {
             progress={btcInfo.verification_progress!}
           />
         </article>
-        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           <LightningCard
             version={lnStatus.version!}
             implementation={lnStatus.implementation!}
@@ -122,7 +133,10 @@ export const Home: FC = () => {
         </article>
         {appStatus.map((app: AppStatus) => {
           return (
-            <article key={app.id} className='col-span-2 md:col-span-1 row-span-1'>
+            <article
+              key={app.id}
+              className="col-span-2 md:col-span-1 row-span-1"
+            >
               <AppStatusCard app={app} />
             </article>
           );

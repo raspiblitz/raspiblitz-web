@@ -1,15 +1,15 @@
-import { lazy, Suspense, useContext, useState } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import Layout from './container/Layout/Layout';
-import LoadingScreen from './container/LoadingScreen/LoadingScreen';
-import SkeletonLoadingScreen from './container/SkeletonLoadingScreen/SkeletonLoadingScreen';
-import Login from './pages/Login/Login';
-import Setup from './pages/Setup/Setup';
-import { AppContext } from './store/app-context';
+import { lazy, Suspense, useContext, useState } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import Layout from "./container/Layout/Layout";
+import LoadingScreen from "./container/LoadingScreen/LoadingScreen";
+import SkeletonLoadingScreen from "./container/SkeletonLoadingScreen/SkeletonLoadingScreen";
+import Login from "./pages/Login/Login";
+import Setup from "./pages/Setup/Setup";
+import { AppContext } from "./store/app-context";
 
-const LazyHome = lazy(() => import('./pages/Home/Home'));
-const LazyApps = lazy(() => import('./pages/Apps/Apps'));
-const LazySettings = lazy(() => import('./pages/Settings/Settings'));
+const LazyHome = lazy(() => import("./pages/Home/Home"));
+const LazyApps = lazy(() => import("./pages/Apps/Apps"));
+const LazySettings = lazy(() => import("./pages/Settings/Settings"));
 
 const Routes: React.FC = () => {
   const appCtx = useContext(AppContext);
@@ -39,9 +39,9 @@ const Routes: React.FC = () => {
   if (!setupDone && !isLoading) {
     return (
       <BrowserRouter>
-        <Route path='/setup' component={Setup} />
+        <Route path="/setup" component={Setup} />
         <Route>
-          <Redirect to='/setup' />
+          <Redirect to="/setup" />
         </Route>
       </BrowserRouter>
     );
@@ -51,9 +51,9 @@ const Routes: React.FC = () => {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path='/login' component={Login} />
+          <Route path="/login" component={Login} />
           <Route>
-            <Redirect to='/login' />
+            <Redirect to="/login" />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -65,16 +65,16 @@ const Routes: React.FC = () => {
       <BrowserRouter>
         <Layout>
           <Switch>
-            <Route exact path='/'>
-              <Redirect to='/home' />
+            <Route exact path="/">
+              <Redirect to="/home" />
             </Route>
 
-            <Route path='/home' component={LazyHome} />
-            <Route path='/apps' component={LazyApps} />
-            <Route path='/settings' component={LazySettings} />
+            <Route path="/home" component={LazyHome} />
+            <Route path="/apps" component={LazyApps} />
+            <Route path="/settings" component={LazySettings} />
 
             <Route>
-              <Redirect to='/home' />
+              <Redirect to="/home" />
             </Route>
           </Switch>
         </Layout>

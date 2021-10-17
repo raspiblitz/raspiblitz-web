@@ -62,15 +62,15 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
             onClick={props.onReceive}
             className='h-10 w-5/12 bg-black hover:bg-gray-700 text-white p-3 rounded flex justify-center items-center'
           >
-            <ReceiveIcon className='h-6 w-6' />
-            <span>&nbsp;{t('wallet.receive')}</span>
+            <ReceiveIcon className="h-6 w-6" />
+            <span>&nbsp;{t("wallet.receive")}</span>
           </button>
           <button
             onClick={props.onSend}
             className='h-10 w-5/12 bg-black hover:bg-gray-700 text-white p-3 rounded flex justify-center items-center'
           >
-            <SendIcon className='h-6 w-6' />
-            <span>&nbsp;{t('wallet.send')}</span>
+            <SendIcon className="h-6 w-6" />
+            <span>&nbsp;{t("wallet.send")}</span>
           </button>
         </section>
       </div>

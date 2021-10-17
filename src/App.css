@@ -1,5 +1,5 @@
 .content-container {
-  min-height: calc(100vh - theme('spacing.16'));
+  min-height: calc(100vh - theme("spacing.16"));
 }
 
 /* Custom Scrollbar Chrome */

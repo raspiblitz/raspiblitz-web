@@ -23,7 +23,10 @@ function useSSE() {
         if (prev.length === 0) {
           return apps;
         } else {
-          return prev.map((old: App) => apps.find((newApp: App) => old.id === newApp.id) || old);
+          return prev.map(
+            (old: App) =>
+              apps.find((newApp: App) => old.id === newApp.id) || old
+          );
         }
       });
     };
@@ -35,7 +38,10 @@ function useSSE() {
         if (prev.length === 0) {
           return status;
         } else {
-          return prev.map((old: AppStatus) => status.find((newApp: AppStatus) => old.id === newApp.id) || old);
+          return prev.map(
+            (old: AppStatus) =>
+              status.find((newApp: AppStatus) => old.id === newApp.id) || old
+          );
         }
       });
     };
@@ -48,7 +54,9 @@ function useSSE() {
     };
 
     const setInstall = (event: Event) => {
-      sseCtx.setIsInstalling(JSON.parse((event as MessageEvent<string>).data).id);
+      sseCtx.setIsInstalling(
+        JSON.parse((event as MessageEvent<string>).data).id
+      );
     };
 
     const setSystemInfo = (event: Event) => {
@@ -57,7 +65,7 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
@@ -68,7 +76,7 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
@@ -79,7 +87,7 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
@@ -90,7 +98,7 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
@@ -129,7 +137,7 @@ function useSSE() {
     appStatus: sseCtx.appStatus,
     transactions: sseCtx.transactions,
     availableApps: sseCtx.availableApps,
-    isInstalling: sseCtx.isInstalling
+    isInstalling: sseCtx.isInstalling,
   };
 }
 

@@ -47,7 +47,7 @@ export const SSEContext = createContext<SSEContextType>({
   transactions: [],
   setTransactions: () => {},
   isInstalling: null,
-  setIsInstalling: () => {}
+  setIsInstalling: () => {},
 });
 
 export const SSE_URL = window.location.hostname.includes('localhost')
@@ -125,10 +125,14 @@ const SSEContextProvider: FC = (props) => {
     transactions,
     setTransactions,
     isInstalling,
-    setIsInstalling
+    setIsInstalling,
   };
 
-  return <SSEContext.Provider value={contextValue}>{props.children}</SSEContext.Provider>;
+  return (
+    <SSEContext.Provider value={contextValue}>
+      {props.children}
+    </SSEContext.Provider>
+  );
 };
 
 export default SSEContextProvider;

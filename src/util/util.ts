@@ -14,7 +14,7 @@ export function saveSettings(settings: Partial<SavedSettings>): void {
 
   const newSettings = {
     ...prevSettings,
-    ...settings
+    ...settings,
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
 }
