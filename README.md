@@ -24,6 +24,10 @@ Run `yarn install` & then `yarn start` to start the development server for the F
 
 To run the mock backend open another terminal, `cd` into [backend-mock](./backend-mock) and run `yarn install` then `yarn start` in that folder.
 
+### Linting
+
+[eslint](https://eslint.org) and [prettier](https://prettier.io) will be used accoring to the [create-react-app docs](https://create-react-app.dev/docs/setting-up-your-editor)
+
 #### Notes on Login and auth
 
 - For the login screen, use the password `password`.
