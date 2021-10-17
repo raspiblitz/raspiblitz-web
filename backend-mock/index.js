@@ -1,12 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const apps = require("./apps");
-const balance = require("./balance");
-const btcstatus = require("./btcstatus");
-const lnstatus = require("./lnstatus");
-const nodeinfo = require("./nodeinfo");
+const btcInfo = require("./btc_info");
+const lnInfoLite = require("./ln_info_lite");
+const installedAppStatus = require("./installed_app_status");
+const systemInfo = require("./system_info");
 const auth = require("./auth");
 const transactions = require("./transactions");
+const walletBalance = require("./wallet_balance");
 const util = require("./util");
 
 const app = express();
@@ -43,13 +44,13 @@ const eventsHandler = (request, response) => {
     response,
   });
 
-  nodeinfo.nodeInfo();
-  btcstatus.btcStatus();
-  lnstatus.lnStatus();
-  balance.balance();
-  apps.appStatus();
+  systemInfo.systemInfo();
+  btcInfo.btcInfo();
+  lnInfoLite.lnInfoLite();
+  installedAppStatus.appStatus();
   apps.listApps();
   transactions.listTransactions();
+  walletBalance.walletBalance();
 
   request.on("close", () => {
     // do nothing
@@ -178,9 +179,14 @@ app.post("/api/v1/receive", (req, res) => {
   );
 });
 
-app.post("/api/v1/send", (req, res) => {
-  console.log("call to /api/v1/send");
-  res.status(200).send();
+app.post("/api/v1/send-coins", (req, res) => {
+  console.log("call to /api/v1/send-coins");
+  res.status(200).send({
+    txid: "txid",
+    address: "11234",
+    amount: 120202,
+    label: "someLabel",
+  });
 });
 
 app.get("/api/v1/transactions", (req, res) => {
@@ -220,17 +226,55 @@ app.get("/api/v1/tx/:id", (req, res) => {
   }
 });
 
-app.post("/api/v1/lightning/verify", (req, res) => {
+app.post("/api/v1/lightning/decode-pay-req", (req, res) => {
   console.log(
-    "call to /api/v1/lightning/verify with invoice",
+    "call to /api/v1/lightning/decode-pay-req with invoice",
     req.body.invoice
   );
 
   return res.status(200).send(
     JSON.stringify({
-      expiresIn: 123456,
-      amount: "2200002",
-      description: "This is a description",
+      destination:
+        "0323dbd695d801553837f9907100f304abd153932bb000a3a7ea9132ff3e7437a1",
+      payment_hash:
+        "dc171b0d9a6c33d40ba2d9ed95819b29af40d83132b15072ab4e8b60feb08b90",
+      num_satoshis: 20,
+      timestamp: 1633322501,
+      expiry: 36000,
+      description: "TEST",
+      description_hash: "",
+      fallback_addr: "",
+      cltv_expiry: 40,
+      route_hints: [],
+      payment_addr:
+        "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
+      num_msat: 20000,
+      features: [
+        {
+          key: 9,
+          value: {
+            name: "tlv-onion",
+            is_required: false,
+            is_known: true,
+          },
+        },
+        {
+          key: 14,
+          value: {
+            name: "payment-addr",
+            is_required: true,
+            is_known: true,
+          },
+        },
+        {
+          key: 17,
+          value: {
+            name: "multi-path-payments",
+            is_required: false,
+            is_known: true,
+          },
+        },
+      ],
     })
   );
 });

@@ -20,11 +20,13 @@ const SendModal: FC<SendModalProps> = (props) => {
   const [fee, setFee] = useState("");
   const [comment, setComment] = useState("");
 
+  // TODO: handle error
   const confirmLnHandler = async (event: FormEvent) => {
     event.preventDefault();
-    const resp = await instance.post("/lightning/verify", { invoice });
-    console.log(resp);
-    setAmount(resp.data.amount);
+    const resp = await instance.get(
+      "/lightning/decode-pay-req?pay_req=" + invoice
+    );
+    setAmount(resp.data.num_satoshis);
     setComment(resp.data.description);
     setConfirm(true);
   };
@@ -64,13 +66,13 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   const onchainBalance =
     appCtx.unit === "BTC"
-      ? props.onchainBalance.toLocaleString()
-      : (props.onchainBalance * 100_000_000).toLocaleString();
+      ? (props.onchainBalance / 100_000_000).toLocaleString()
+      : props.onchainBalance.toLocaleString();
 
   const lnBalance =
     appCtx.unit === "BTC"
-      ? props.lnBalance.toLocaleString()
-      : (props.lnBalance * 100_000_000).toLocaleString();
+      ? (props.lnBalance / 100_000_000_000).toLocaleString()
+      : (props.lnBalance / 1000).toLocaleString();
 
   if (confirm) {
     const addr = lnTransaction ? invoice : address;

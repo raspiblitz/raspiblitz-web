@@ -12,14 +12,14 @@ import WalletCard from "../../components/Home/WalletCard/WalletCard";
 import ReceiveModal from "../../components/Shared/ReceiveModal/ReceiveModal";
 import SendModal from "../../components/Shared/SendModal/SendModal";
 import useSSE from "../../hooks/use-sse";
-import { AppStatus } from "../../models/app-status.model";
+import { AppStatus } from "../../models/app-status";
 import { AppContext } from "../../store/app-context";
 import { MODAL_ROOT } from "../../util/util";
 
 export const Home: FC = () => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
-  const { nodeInfo, balance, btcStatus, lnStatus, transactions, appStatus } =
+  const { systemInfo, balance, btcInfo, lnStatus, transactions, appStatus } =
     useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
@@ -67,8 +67,8 @@ export const Home: FC = () => {
     showSendModal &&
     createPortal(
       <SendModal
-        onchainBalance={balance.onchainBalance}
-        lnBalance={balance.lnBalance}
+        onchainBalance={balance.onchain_confirmed_balance!}
+        lnBalance={balance.channel_local_balance!}
         onClose={closeSendModalHandler}
       />,
       MODAL_ROOT
@@ -94,8 +94,8 @@ export const Home: FC = () => {
       >
         <article className="col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           <WalletCard
-            onchainBalance={balance.onchainBalance}
-            lnBalance={balance.lnBalance}
+            onchainBalance={balance.onchain_total_balance!}
+            lnBalance={balance.channel_local_balance!}
             onReceive={showReceiveHandler}
             onSend={showSendModalHandler}
           />
@@ -107,27 +107,33 @@ export const Home: FC = () => {
           />
         </article>
         <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
+          {/* TODO: change */}
           <ConnectionCard
-            torAddress={nodeInfo.torAddress}
-            sshAddress={nodeInfo.sshAddress}
+            torAddress={systemInfo.tor_web_ui!}
+            sshAddress={systemInfo.ssh_address!}
           />
         </article>
+        {/* TODO: change */}
         <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           <BitcoinCard
-            version={btcStatus.btcVersion}
-            network={btcStatus.btcNetwork}
-            status={btcStatus.btcStatus}
-            currBlock={btcStatus.currBlock}
-            maxBlock={btcStatus.maxBlock}
+            version={btcInfo.subversion!}
+            conn_in={btcInfo.connections_in!}
+            conn_out={btcInfo.connections_out!}
+            network={systemInfo.chain!}
+            blocks={btcInfo.blocks!}
+            headers={btcInfo.headers!}
+            progress={btcInfo.verification_progress!}
           />
         </article>
         <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           <LightningCard
-            version={lnStatus.lnVersion}
-            status={lnStatus.lnStatus}
-            channelOnline={lnStatus.channelOnline}
-            channelTotal={lnStatus.channelTotal}
-            channelBalance={balance.lnBalance}
+            version={lnStatus.version!}
+            implementation={lnStatus.implementation!}
+            channelActive={lnStatus.num_active_channels!}
+            channelPending={lnStatus.num_pending_channels!}
+            channelInactive={lnStatus.num_inactive_channels!}
+            localBalance={balance.channel_local_balance!}
+            remoteBalance={balance.channel_remote_balance!}
           />
         </article>
         {appStatus.map((app: AppStatus) => {

@@ -11,20 +11,31 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const { ln, amount, address, fee, comment } = props;
 
+  // TODO: handle error
   const sendTransactionHandler = async (event: FormEvent) => {
     event.preventDefault();
-    const body = {
-      amount,
-      address,
-      fee,
-      comment,
-      unit: appCtx.unit,
-    };
-    const response = await instance.post("send", body).catch((e) => {
-      return e;
-    });
+    let response;
+    if (ln) {
+      response = await instance
+        .post("lightning/send-payment?pay_req=" + address)
+        .catch((e) => {
+          return e;
+        });
+    } else {
+      const body = {
+        amount,
+        address,
+        sat_per_vbyte: fee,
+        label: comment,
+        unit: appCtx.unit,
+      };
+      response = await instance
+        .post("lightning/send-coins", body)
+        .catch((e) => {
+          return e;
+        });
+    }
 
-    // TODO: handle error
     console.log(response);
     props.close(true);
   };
@@ -49,8 +60,7 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
         <h4 className="font-bold">{addressTitle}:</h4> {address}
       </article>
       <article className="my-2">
-        <h4 className="font-bold">{t("wallet.amount")}:</h4> {amount}{" "}
-        {appCtx.unit}
+        <h4 className="font-bold">{t("wallet.amount")}:</h4> {amount} Sat
       </article>
       {!ln && (
         <article className="my-2">

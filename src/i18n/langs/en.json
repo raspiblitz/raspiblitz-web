@@ -22,12 +22,18 @@
       "network": "Network",
       "status": "Status",
       "blocks_synced": "Blocks synced",
+      "connections": "Connections",
+      "conn_in": "Incoming",
+      "conn_out": "Outgoing",
       "conn_details": "Connection Details",
       "tor": "Tor",
       "ssh": "SSH login",
       "lightning": "Lightning",
       "channel": "Channel",
-      "channel_balance": "Channel Balance"
+      "channel_balance": "Channel Balance",
+      "local_balance": "Local Balance",
+      "remote_balance": "Remote Balane",
+      "pending_balance": "Pending Balance"
     },
     "wallet": {
       "balance": "Balance",

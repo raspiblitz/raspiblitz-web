@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AppStatus } from "../../../models/app-status.model";
+import { AppStatus } from "../../../models/app-status";
 
 export const AppStatusCard: FC<{ app: AppStatus }> = (props) => {
   const { id, name, status } = props.app;

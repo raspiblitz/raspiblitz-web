@@ -15,7 +15,7 @@
 }
 
 .bd-card {
-  @apply h-full shadow-xl rounded-md bg-white px-6 py-4 text-black  dark:text-white dark:bg-gray-600 transition-colors;
+  @apply h-full shadow-xl rounded-md bg-white px-6 py-4 text-black dark:text-white dark:bg-gray-600 transition-colors;
 }
 
 .bd-button {

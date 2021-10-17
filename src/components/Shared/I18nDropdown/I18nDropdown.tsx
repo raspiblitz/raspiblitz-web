@@ -31,7 +31,7 @@ const I18nDropdown: FC = () => {
         id="lngSelect"
         ref={selectRef}
         onChange={dropdownHandler}
-        className="border w-1/2 dark:text-black"
+        className="border w-1/2 dark:text-black bg-white"
       >
         {langs.map((lang, i) => {
           return (
