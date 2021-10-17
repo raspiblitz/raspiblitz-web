@@ -1,3 +1,14 @@
+export const SETTINGS_KEY = 'settings';
+export const MODAL_ROOT = document.getElementById('modal-root')!;
+
+export interface SavedSettings {
+  lang: string;
+  darkMode: boolean;
+}
+
+/**
+ * merges previous with new settings and saves it to local storage
+ */
 export function saveSettings(settings: Partial<SavedSettings>): void {
   const prevSettings = retrieveSettings();
 
@@ -8,26 +19,26 @@ export function saveSettings(settings: Partial<SavedSettings>): void {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
 }
 
+/**
+ * Retrieves settings from local storage and parses them into a {@link SavedSettings} object.
+ * @returns saved settings if they exist or null
+ */
 export function retrieveSettings(): SavedSettings | null {
-  const settings = localStorage.getItem(SETTINGS_KEY);
-  if (settings) {
-    const bla: SavedSettings = JSON.parse(settings);
-    return bla;
+  const settingString = localStorage.getItem(SETTINGS_KEY);
+  if (settingString) {
+    const settings: SavedSettings = JSON.parse(settingString);
+    return settings;
   }
 
   return null;
 }
 
-export const SETTINGS_KEY = 'settings';
-
-export interface SavedSettings {
-  lang: string;
-  darkMode: boolean;
-}
-
-export const MODAL_ROOT = document.getElementById('modal-root')!;
-
-export function checkPropsUndefined(props: object) {
+/**
+ * Checks if any prop value is null or undefined
+ * @param props the props object
+ * @returns if any property in the props object is null or undefined
+ */
+export function checkPropsUndefined(props: object): boolean {
   let someUndefined = false;
   Object.values(props).forEach((prop) => {
     if (prop === null || prop === undefined) {
@@ -36,5 +47,3 @@ export function checkPropsUndefined(props: object) {
   });
   return someUndefined;
 }
-
-export type PropType = number | string | null | undefined;
