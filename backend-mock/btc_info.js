@@ -34,8 +34,8 @@ const btcInfo = () => {
     ],
     version: 210100,
     subversion: "/Satoshi:0.21.1/",
-    connections_in: 1,
-    connections_out: 1,
+    connections_in: 16,
+    connections_out: 3,
   });
 };
 

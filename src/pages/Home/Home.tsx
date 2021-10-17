@@ -117,7 +117,8 @@ export const Home: FC = () => {
         <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           <BitcoinCard
             version={btcInfo.subversion!}
-            peers={btcInfo.connections_in!}
+            conn_in={btcInfo.connections_in!}
+            conn_out={btcInfo.connections_out!}
             network={systemInfo.chain!}
             blocks={btcInfo.blocks!}
             headers={btcInfo.headers!}

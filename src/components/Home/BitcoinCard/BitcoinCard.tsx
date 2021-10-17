@@ -10,7 +10,7 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
     return <LoadingBox />;
   }
 
-  const { blocks, headers, version, network, progress, peers } = props;
+  const { blocks, headers, version, network, progress, conn_in, conn_out } = props;
 
   const syncPercentage = (progress * 100).toFixed(2);
 
@@ -37,9 +37,9 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
         <div className="flex overflow-hidden py-4">
           <div className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
-              {t("home.peers")}
+              {t("home.connections")}
             </h6>
-            <p>{peers}</p>
+            <p>{`${conn_in} ${t("home.conn_in")}`} / <span className='inline-block'>{`${conn_out} ${t("home.conn_out")}`}</span></p>
           </div>
           <div className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
@@ -64,5 +64,6 @@ export interface BitcoinCardProps {
   blocks: number;
   headers: number;
   progress: number;
-  peers: number;
+  conn_in: number;
+  conn_out: number;
 }
