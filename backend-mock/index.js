@@ -226,13 +226,11 @@ app.post("/api/v1/lightning/verify", (req, res) => {
     req.body.invoice
   );
 
-  return res
-    .status(200)
-    .send(
-      JSON.stringify({
-        expiresIn: 123456,
-        amount: "2200002",
-        description: "This is a description",
-      })
-    );
+  return res.status(200).send(
+    JSON.stringify({
+      expiresIn: 123456,
+      amount: "2200002",
+      description: "This is a description",
+    })
+  );
 });
