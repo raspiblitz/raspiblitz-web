@@ -65,6 +65,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@testing-library/dom": "^8.9.1",
     "@types/qrcode.react": "^1.0.1",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9",
