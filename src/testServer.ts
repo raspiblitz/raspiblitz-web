@@ -1,10 +1,13 @@
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 
 const server = setupServer(
-  rest.get('*', (req, res, ctx) => {
+  rest.get("*", (req, res, ctx) => {
     console.error(`Add request handler for ${req.url.toString()}`);
-    return res(ctx.status(500), ctx.json({ error: 'Missing request handler.' }));
+    return res(
+      ctx.status(500),
+      ctx.json({ error: "Missing request handler." })
+    );
   })
 );
 

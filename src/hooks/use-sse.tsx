@@ -1,12 +1,12 @@
-import { useContext, useEffect } from 'react';
-import { AppStatus } from '../models/app-status.model';
-import { App } from '../models/app.model';
-import { Balance } from '../models/balance';
-import { BtcStatus } from '../models/btc-status';
-import { LnStatus } from '../models/ln-status';
-import { NodeInfo } from '../models/node-info';
-import { Transaction } from '../models/transaction.model';
-import { SSEContext, SSE_URL } from '../store/sse-context';
+import { useContext, useEffect } from "react";
+import { AppStatus } from "../models/app-status.model";
+import { App } from "../models/app.model";
+import { Balance } from "../models/balance";
+import { BtcStatus } from "../models/btc-status";
+import { LnStatus } from "../models/ln-status";
+import { NodeInfo } from "../models/node-info";
+import { Transaction } from "../models/transaction.model";
+import { SSEContext, SSE_URL } from "../store/sse-context";
 
 function useSSE() {
   const sseCtx = useContext(SSEContext);
@@ -23,7 +23,10 @@ function useSSE() {
         if (prev.length === 0) {
           return apps;
         } else {
-          return prev.map((old: App) => apps.find((newApp: App) => old.id === newApp.id) || old);
+          return prev.map(
+            (old: App) =>
+              apps.find((newApp: App) => old.id === newApp.id) || old
+          );
         }
       });
     };
@@ -35,7 +38,10 @@ function useSSE() {
         if (prev.length === 0) {
           return status;
         } else {
-          return prev.map((old: AppStatus) => status.find((newApp: AppStatus) => old.id === newApp.id) || old);
+          return prev.map(
+            (old: AppStatus) =>
+              status.find((newApp: AppStatus) => old.id === newApp.id) || old
+          );
         }
       });
     };
@@ -48,7 +54,9 @@ function useSSE() {
     };
 
     const setInstall = (event: Event) => {
-      sseCtx.setIsInstalling(JSON.parse((event as MessageEvent<string>).data).id);
+      sseCtx.setIsInstalling(
+        JSON.parse((event as MessageEvent<string>).data).id
+      );
     };
 
     const setNodeInfo = (event: Event) => {
@@ -57,7 +65,7 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
@@ -68,7 +76,7 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
@@ -79,7 +87,7 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
@@ -90,33 +98,33 @@ function useSSE() {
 
         return {
           ...prev,
-          ...message
+          ...message,
         };
       });
     };
 
     if (evtSource) {
-      evtSource.addEventListener('nodeinfo', setNodeInfo);
-      evtSource.addEventListener('btcstatus', setBtcStatus);
-      evtSource.addEventListener('lnstatus', setLnStatus);
-      evtSource.addEventListener('balance', setBalance);
-      evtSource.addEventListener('transactions', setTx);
-      evtSource.addEventListener('appstatus', setAppStatus);
-      evtSource.addEventListener('apps', setApps);
-      evtSource.addEventListener('install', setInstall);
+      evtSource.addEventListener("nodeinfo", setNodeInfo);
+      evtSource.addEventListener("btcstatus", setBtcStatus);
+      evtSource.addEventListener("lnstatus", setLnStatus);
+      evtSource.addEventListener("balance", setBalance);
+      evtSource.addEventListener("transactions", setTx);
+      evtSource.addEventListener("appstatus", setAppStatus);
+      evtSource.addEventListener("apps", setApps);
+      evtSource.addEventListener("install", setInstall);
     }
 
     return () => {
       // cleanup
       if (evtSource) {
-        evtSource.removeEventListener('syncstatus', setNodeInfo);
-        evtSource.removeEventListener('btcstatus', setBtcStatus);
-        evtSource.removeEventListener('lnstatus', setLnStatus);
-        evtSource.removeEventListener('balance', setBalance);
-        evtSource.removeEventListener('transactions', setTx);
-        evtSource.removeEventListener('appstatus', setAppStatus);
-        evtSource.removeEventListener('apps', setApps);
-        evtSource.removeEventListener('install', setInstall);
+        evtSource.removeEventListener("syncstatus", setNodeInfo);
+        evtSource.removeEventListener("btcstatus", setBtcStatus);
+        evtSource.removeEventListener("lnstatus", setLnStatus);
+        evtSource.removeEventListener("balance", setBalance);
+        evtSource.removeEventListener("transactions", setTx);
+        evtSource.removeEventListener("appstatus", setAppStatus);
+        evtSource.removeEventListener("apps", setApps);
+        evtSource.removeEventListener("install", setInstall);
       }
     };
   }, [evtSource, setEvtSource, sseCtx]);
@@ -129,7 +137,7 @@ function useSSE() {
     appStatus: sseCtx.appStatus,
     transactions: sseCtx.transactions,
     availableApps: sseCtx.availableApps,
-    isInstalling: sseCtx.isInstalling
+    isInstalling: sseCtx.isInstalling,
   };
 }
 

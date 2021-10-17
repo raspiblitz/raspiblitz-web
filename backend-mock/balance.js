@@ -1,11 +1,11 @@
-const util = require('./util');
+const util = require("./util");
 
 const balance = () => {
-  console.log('call to balance');
+  console.log("call to balance");
 
-  util.sendSSE('balance', {
+  util.sendSSE("balance", {
     onchainBalance: 0.00000001,
-    lnBalance: 1.003232
+    lnBalance: 1.003232,
   });
 };
 

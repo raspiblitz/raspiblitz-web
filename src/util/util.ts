@@ -3,7 +3,7 @@ export function saveSettings(settings: Partial<SavedSettings>): void {
 
   const newSettings = {
     ...prevSettings,
-    ...settings
+    ...settings,
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
 }
@@ -18,11 +18,11 @@ export function retrieveSettings(): SavedSettings | null {
   return null;
 }
 
-export const SETTINGS_KEY = 'settings';
+export const SETTINGS_KEY = "settings";
 
 export interface SavedSettings {
   lang: string;
   darkMode: boolean;
 }
 
-export const MODAL_ROOT = document.getElementById('modal-root')!;
+export const MODAL_ROOT = document.getElementById("modal-root")!;
