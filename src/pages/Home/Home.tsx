@@ -1,25 +1,26 @@
-import { FC, useContext, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { useTranslation } from 'react-i18next';
-import { toast, ToastContainer } from 'react-toastify';
-import AppStatusCard from '../../components/Home/AppStatusCard/AppStatusCard';
-import BitcoinCard from '../../components/Home/BitcoinCard/BitcoinCard';
-import ConnectionCard from '../../components/Home/ConnectionCard/ConnectionCard';
-import LightningCard from '../../components/Home/LightningCard/LightningCard';
-import TransactionCard from '../../components/Home/TransactionCard/TransactionCard';
-import TransactionDetailModal from '../../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal';
-import WalletCard from '../../components/Home/WalletCard/WalletCard';
-import ReceiveModal from '../../components/Shared/ReceiveModal/ReceiveModal';
-import SendModal from '../../components/Shared/SendModal/SendModal';
-import useSSE from '../../hooks/use-sse';
-import { AppStatus } from '../../models/app-status';
-import { AppContext } from '../../store/app-context';
-import { MODAL_ROOT } from '../../util/util';
+import { FC, useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
+import AppStatusCard from "../../components/Home/AppStatusCard/AppStatusCard";
+import BitcoinCard from "../../components/Home/BitcoinCard/BitcoinCard";
+import ConnectionCard from "../../components/Home/ConnectionCard/ConnectionCard";
+import LightningCard from "../../components/Home/LightningCard/LightningCard";
+import TransactionCard from "../../components/Home/TransactionCard/TransactionCard";
+import TransactionDetailModal from "../../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
+import WalletCard from "../../components/Home/WalletCard/WalletCard";
+import ReceiveModal from "../../components/Shared/ReceiveModal/ReceiveModal";
+import SendModal from "../../components/Shared/SendModal/SendModal";
+import useSSE from "../../hooks/use-sse";
+import { AppStatus } from "../../models/app-status";
+import { AppContext } from "../../store/app-context";
+import { MODAL_ROOT } from "../../util/util";
 
 export const Home: FC = () => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
-  const { systemInfo, balance, btcInfo, lnStatus, transactions, appStatus } = useSSE();
+  const { systemInfo, balance, btcInfo, lnStatus, transactions, appStatus } =
+    useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
@@ -105,12 +106,15 @@ export const Home: FC = () => {
             showDetails={showDetailHandler}
           />
         </article>
-        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           {/* TODO: change */}
-          <ConnectionCard torAddress={systemInfo.tor_web_ui!} sshAddress={systemInfo.ssh_address!} />
+          <ConnectionCard
+            torAddress={systemInfo.tor_web_ui!}
+            sshAddress={systemInfo.ssh_address!}
+          />
         </article>
         {/* TODO: change */}
-        <article className='w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2'>
+        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
           <BitcoinCard
             version={btcInfo.subversion!}
             peers={btcInfo.connections_in!}

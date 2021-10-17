@@ -16,20 +16,24 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
     event.preventDefault();
     let response;
     if (ln) {
-      response = await instance.post('lightning/send-payment?pay_req=' + address).catch((e) => {
-        return e;
-      });
+      response = await instance
+        .post("lightning/send-payment?pay_req=" + address)
+        .catch((e) => {
+          return e;
+        });
     } else {
       const body = {
         amount,
         address,
         sat_per_vbyte: fee,
         label: comment,
-        unit: appCtx.unit
+        unit: appCtx.unit,
       };
-      response = await instance.post('lightning/send-coins', body).catch((e) => {
-        return e;
-      });
+      response = await instance
+        .post("lightning/send-coins", body)
+        .catch((e) => {
+          return e;
+        });
     }
 
     console.log(response);
@@ -55,8 +59,8 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
       <article className="my-2">
         <h4 className="font-bold">{addressTitle}:</h4> {address}
       </article>
-      <article className='my-2'>
-        <h4 className='font-bold'>{t('wallet.amount')}:</h4> {amount} Sat
+      <article className="my-2">
+        <h4 className="font-bold">{t("wallet.amount")}:</h4> {amount} Sat
       </article>
       {!ln && (
         <article className="my-2">

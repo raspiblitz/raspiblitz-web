@@ -1,6 +1,3 @@
 {
-    "recommendations": [
-        "ecmel.vscode-html-css",
-        "bradlc.vscode-tailwindcss"
-    ]
+  "recommendations": ["ecmel.vscode-html-css", "bradlc.vscode-tailwindcss"]
 }

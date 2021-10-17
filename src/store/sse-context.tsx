@@ -1,11 +1,11 @@
-import { createContext, Dispatch, FC, SetStateAction, useState } from 'react';
-import { AppStatus } from '../models/app-status';
-import { App } from '../models/app.model';
-import { BtcInfo } from '../models/btc-info';
-import { LnStatus } from '../models/ln-status';
-import { SystemInfo } from '../models/system-info';
-import { Transaction } from '../models/transaction.model';
-import { WalletBalance } from '../models/wallet-balance';
+import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
+import { AppStatus } from "../models/app-status";
+import { App } from "../models/app.model";
+import { BtcInfo } from "../models/btc-info";
+import { LnStatus } from "../models/ln-status";
+import { SystemInfo } from "../models/system-info";
+import { Transaction } from "../models/transaction.model";
+import { WalletBalance } from "../models/wallet-balance";
 
 interface SSEContextType {
   evtSource: EventSource | null;
@@ -50,24 +50,24 @@ export const SSEContext = createContext<SSEContextType>({
   setIsInstalling: () => {},
 });
 
-export const SSE_URL = window.location.hostname.includes('localhost')
-  ? 'http://localhost:8080/api/sse/subscribe'
-  : '/sse/subscribe';
+export const SSE_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:8080/api/sse/subscribe"
+  : "/sse/subscribe";
 
 const SSEContextProvider: FC = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
-    alias: '',
-    color: '',
-    chain: '',
-    health: '',
+    alias: "",
+    color: "",
+    chain: "",
+    health: "",
     health_messages: [],
-    lan_api: '',
-    lan_web_ui: '',
-    ssh_address: '',
-    tor_api: '',
-    tor_web_ui: '',
-    version: ''
+    lan_api: "",
+    lan_web_ui: "",
+    ssh_address: "",
+    tor_api: "",
+    tor_web_ui: "",
+    version: "",
   });
   const [btcInfo, setBtcInfo] = useState<BtcInfo>({
     blocks: 0,
@@ -77,19 +77,19 @@ const SSEContextProvider: FC = (props) => {
     headers: 0,
     networks: [],
     size_on_disk: 0,
-    subversion: '',
+    subversion: "",
     verification_progress: 0,
-    version: 0
+    version: 0,
   });
   const [lnStatus, setLnStatus] = useState<LnStatus>({
     block_height: 0,
-    implementation: '',
+    implementation: "",
     num_active_channels: 0,
     num_inactive_channels: 0,
     num_pending_channels: 0,
     synced_to_chain: false,
     synced_to_graph: false,
-    version: ''
+    version: "",
   });
   const [balance, setBalance] = useState<WalletBalance>({
     onchain_total_balance: 0,
@@ -100,7 +100,7 @@ const SSEContextProvider: FC = (props) => {
     channel_pending_open_remote_balance: 0,
     channel_remote_balance: 0,
     channel_unsettled_local_balance: 0,
-    channel_unsettled_remote_balance: 0
+    channel_unsettled_remote_balance: 0,
   });
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);

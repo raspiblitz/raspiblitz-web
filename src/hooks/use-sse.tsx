@@ -1,12 +1,12 @@
-import { useContext, useEffect } from 'react';
-import { AppStatus } from '../models/app-status';
-import { App } from '../models/app.model';
-import { BtcInfo } from '../models/btc-info';
-import { LnStatus } from '../models/ln-status';
-import { SystemInfo } from '../models/system-info';
-import { Transaction } from '../models/transaction.model';
-import { WalletBalance } from '../models/wallet-balance';
-import { SSEContext, SSE_URL } from '../store/sse-context';
+import { useContext, useEffect } from "react";
+import { AppStatus } from "../models/app-status";
+import { App } from "../models/app.model";
+import { BtcInfo } from "../models/btc-info";
+import { LnStatus } from "../models/ln-status";
+import { SystemInfo } from "../models/system-info";
+import { Transaction } from "../models/transaction.model";
+import { WalletBalance } from "../models/wallet-balance";
+import { SSEContext, SSE_URL } from "../store/sse-context";
 
 function useSSE() {
   const sseCtx = useContext(SSEContext);
@@ -104,27 +104,27 @@ function useSSE() {
     };
 
     if (evtSource) {
-      evtSource.addEventListener('system_info', setSystemInfo);
-      evtSource.addEventListener('btc_info', setBtcInfo);
-      evtSource.addEventListener('ln_info_lite', setLnStatus);
-      evtSource.addEventListener('wallet_balance', setBalance);
-      evtSource.addEventListener('transactions', setTx);
-      evtSource.addEventListener('installed_app_status', setAppStatus);
-      evtSource.addEventListener('apps', setApps);
-      evtSource.addEventListener('install', setInstall);
+      evtSource.addEventListener("system_info", setSystemInfo);
+      evtSource.addEventListener("btc_info", setBtcInfo);
+      evtSource.addEventListener("ln_info_lite", setLnStatus);
+      evtSource.addEventListener("wallet_balance", setBalance);
+      evtSource.addEventListener("transactions", setTx);
+      evtSource.addEventListener("installed_app_status", setAppStatus);
+      evtSource.addEventListener("apps", setApps);
+      evtSource.addEventListener("install", setInstall);
     }
 
     return () => {
       // cleanup
       if (evtSource) {
-        evtSource.removeEventListener('system_info', setSystemInfo);
-        evtSource.removeEventListener('btc_info', setBtcInfo);
-        evtSource.removeEventListener('ln_info_lite', setLnStatus);
-        evtSource.removeEventListener('wallet_balance', setBalance);
-        evtSource.removeEventListener('transactions', setTx);
-        evtSource.removeEventListener('installed_app_status', setAppStatus);
-        evtSource.removeEventListener('apps', setApps);
-        evtSource.removeEventListener('install', setInstall);
+        evtSource.removeEventListener("system_info", setSystemInfo);
+        evtSource.removeEventListener("btc_info", setBtcInfo);
+        evtSource.removeEventListener("ln_info_lite", setLnStatus);
+        evtSource.removeEventListener("wallet_balance", setBalance);
+        evtSource.removeEventListener("transactions", setTx);
+        evtSource.removeEventListener("installed_app_status", setAppStatus);
+        evtSource.removeEventListener("apps", setApps);
+        evtSource.removeEventListener("install", setInstall);
       }
     };
   }, [evtSource, setEvtSource, sseCtx]);

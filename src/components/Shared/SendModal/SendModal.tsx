@@ -23,7 +23,9 @@ const SendModal: FC<SendModalProps> = (props) => {
   // TODO: handle error
   const confirmLnHandler = async (event: FormEvent) => {
     event.preventDefault();
-    const resp = await instance.get('/lightning/decode-pay-req?pay_req=' + invoice);
+    const resp = await instance.get(
+      "/lightning/decode-pay-req?pay_req=" + invoice
+    );
     setAmount(resp.data.num_satoshis);
     setComment(resp.data.description);
     setConfirm(true);
@@ -63,12 +65,12 @@ const SendModal: FC<SendModalProps> = (props) => {
   };
 
   const onchainBalance =
-    appCtx.unit === 'BTC'
+    appCtx.unit === "BTC"
       ? (props.onchainBalance / 100_000_000).toLocaleString()
       : props.onchainBalance.toLocaleString();
 
   const lnBalance =
-    appCtx.unit === 'BTC'
+    appCtx.unit === "BTC"
       ? (props.lnBalance / 100_000_000_000).toLocaleString()
       : (props.lnBalance / 1000).toLocaleString();
 

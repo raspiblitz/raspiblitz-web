@@ -1,5 +1,5 @@
-export const SETTINGS_KEY = 'settings';
-export const MODAL_ROOT = document.getElementById('modal-root')!;
+export const SETTINGS_KEY = "settings";
+export const MODAL_ROOT = document.getElementById("modal-root")!;
 
 export interface SavedSettings {
   lang: string;

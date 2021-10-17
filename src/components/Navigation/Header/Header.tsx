@@ -46,9 +46,13 @@ const Header: FC = () => {
           <RaspiBlitzLogoDark className="h-8 hidden md:block" />
         )}
       </NavLink>
-      <div className='font-bold text-xl'>{systemInfo.alias}</div>
-      <div className='relative'>
-        <MenuIcon ref={menu} onClick={showDropdownHandler} className='w-8 h-8' />
+      <div className="font-bold text-xl">{systemInfo.alias}</div>
+      <div className="relative">
+        <MenuIcon
+          ref={menu}
+          onClick={showDropdownHandler}
+          className="w-8 h-8"
+        />
         {showDropdown && <DropdownMenu ref={dropdown} />}
       </div>
     </header>
