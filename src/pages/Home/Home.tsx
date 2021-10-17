@@ -58,12 +58,11 @@ export const Home: FC = () => {
   const receiveModal =
     showReceiveModal && createPortal(<ReceiveModal onClose={closeReceiveModalHandler} />, MODAL_ROOT);
 
-  // TODO: change
   const sendModal =
     showSendModal &&
     createPortal(
       <SendModal
-        onchainBalance={balance.onchain_total_balance!}
+        onchainBalance={balance.onchain_confirmed_balance!}
         lnBalance={balance.channel_local_balance!}
         onClose={closeSendModalHandler}
       />,

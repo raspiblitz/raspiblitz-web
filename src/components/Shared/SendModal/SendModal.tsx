@@ -64,11 +64,13 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   const onchainBalance =
     appCtx.unit === 'BTC'
-      ? props.onchainBalance.toLocaleString()
-      : (props.onchainBalance * 100_000_000).toLocaleString();
+      ? (props.onchainBalance / 100_000_000).toLocaleString()
+      : props.onchainBalance.toLocaleString();
 
   const lnBalance =
-    appCtx.unit === 'BTC' ? props.lnBalance.toLocaleString() : (props.lnBalance * 100_000_000).toLocaleString();
+    appCtx.unit === 'BTC'
+      ? (props.lnBalance / 100_000_000_000).toLocaleString()
+      : (props.lnBalance / 1000).toLocaleString();
 
   if (confirm) {
     const addr = lnTransaction ? invoice : address;

@@ -19,7 +19,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
   const { onchainBalance, lnBalance } = props;
 
   const convertedOnchainBalance = appCtx.unit === 'BTC' ? onchainBalance / 100_000_000 : onchainBalance;
-  const convertedLnBalance = appCtx.unit === 'BTC' ? lnBalance / 100_000_000 : lnBalance;
+  const convertedLnBalance = appCtx.unit === 'BTC' ? lnBalance / 100_000_000_000 : lnBalance / 1000;
 
   const totalBalance =
     appCtx.unit === 'BTC'
