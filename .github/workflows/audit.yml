@@ -1,18 +1,21 @@
 name: Node.js CI
 
 on:
+  schedule:
+    # every day at 2am
+    - cron: "0 2 * * *"
   push:
     branches: [master]
   pull_request:
     branches: [master]
 
 jobs:
-  build:
+  audit:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -20,8 +23,4 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: |
-        yarn install --frozen-lockfile
-        yarn build
-        yarn test
+      - run: yarn audit --groups dependencies
