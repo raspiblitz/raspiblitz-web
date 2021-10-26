@@ -1,7 +1,10 @@
 import QRCode from "qrcode.react";
+import Tooltip from "rc-tooltip";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as ClipboardIcon } from "../../../assets/clipboard-copy.svg";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
+import useClipboard from "../../../hooks/use-clipboard";
 import { instance } from "../../../util/interceptor";
 import AmountInput from "../AmountInput/AmountInput";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
@@ -9,11 +12,11 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const { t } = useTranslation();
   const [invoiceType, setInvoiceType] = useState("lightning");
-  const [buttonText, setButtonText] = useState("Copy to Clipboard");
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState(0);
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [copyAddress, addressCopied] = useClipboard(address);
 
   const lnInvoice = invoiceType === "lightning";
 
@@ -48,15 +51,6 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
     setAddress(resp.data.address);
   };
 
-  const copyToClipboardHandler = () => {
-    navigator.clipboard.writeText(address);
-    setButtonText("✅ " + t("wallet.copied"));
-
-    setTimeout(() => {
-      setButtonText(t("wallet.copy_clipboard"));
-    }, 3000);
-  };
-
   const showLnInvoice = lnInvoice && !isLoading && !address;
 
   const radioStyles =
@@ -78,7 +72,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       {!showLnInvoice && (
         <div className="text-xl font-bold">{t("wallet.fund")}</div>
       )}
-      <div className="pt-5 pb-1 flex justify-center">
+      <div className="py-8 flex justify-center">
         <div className="px-2">
           <label htmlFor="lightning" className={`${radioStyles} ${lnStyle}`}>
             {t("home.lightning")}
@@ -116,7 +110,6 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
         className="flex flex-col items-center"
         onSubmit={generateAddressHandler}
       >
-        <div className="w-full overflow-x-auto m-2">{address}</div>
         <div className="w-4/5 mb-5">
           {isLoading && (
             <div className="p-5">
@@ -156,13 +149,23 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           )}
 
           {address && (
-            <button
-              type="button"
-              onClick={copyToClipboardHandler}
-              className={btnClasses}
-            >
-              {buttonText}
-            </button>
+            <>
+              <article className="flex flex-row items-center">
+                <div className="w-11/12 overflow-x-auto m-2">{address}</div>
+                <Tooltip
+                  overlay={
+                    <div>
+                      {addressCopied
+                        ? t("wallet.copied")
+                        : t("wallet.copy_clipboard")}
+                    </div>
+                  }
+                  placement="top"
+                >
+                  <ClipboardIcon className="w-6 h-6" onClick={copyAddress} />
+                </Tooltip>
+              </article>
+            </>
           )}
         </div>
       </form>
