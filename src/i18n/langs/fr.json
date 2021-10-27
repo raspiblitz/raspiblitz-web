@@ -31,7 +31,9 @@
       "conn_out": "Sortant",
       "local_balance": "Balance locale",
       "remote_balance": "Balance distante",
-      "pending_balance": "Balance en attente"
+      "pending_balance": "Balance en attente",
+      "conn_in": "Entrant",
+      "connections": "Connections"
     },
     "wallet": {
       "receive": "Recevoir",
@@ -64,7 +66,9 @@
       "fee": "Frais",
       "included_block": "Inclus dans le block",
       "transactions": "Transactions",
-      "confirmations": "Confirmations"
+      "confirmations": "Confirmations",
+      "confirm_info": "Veuillez confirmer la transaction suivante",
+      "sent": "Transaction envoyée !"
     },
     "apps": {
       "installed": "Installé",
