@@ -10,7 +10,8 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
     return <LoadingBox />;
   }
 
-  const { blocks, headers, version, network, progress, conn_in, conn_out } = props;
+  const { blocks, headers, version, network, progress, conn_in, conn_out } =
+    props;
 
   const syncPercentage = (progress * 100).toFixed(2);
 
@@ -39,7 +40,12 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.connections")}
             </h6>
-            <p>{`${conn_in} ${t("home.conn_in")}`} / <span className='inline-block'>{`${conn_out} ${t("home.conn_out")}`}</span></p>
+            <p>
+              {`${conn_in} ${t("home.conn_in")}`} /{" "}
+              <span className="inline-block">{`${conn_out} ${t(
+                "home.conn_out"
+              )}`}</span>
+            </p>
           </div>
           <div className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
