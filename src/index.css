@@ -1,3 +1,8 @@
+/*
+  https://stackoverflow.com/questions/47607602/how-to-add-a-tailwind-css-rule-to-css-checker
+  regarding the linting issues in this file
+*/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,6 +17,11 @@
 
 .input-underline {
   @apply mt-0 block w-full px-0.5 border-0 border-b-2 bg-transparent outline-none border-gray-200 focus:ring-0 focus:border-yellow-500 text-black dark:text-white;
+}
+
+.input-error {
+  @apply input-underline;
+  @apply border-red-500;
 }
 
 .bd-card {
