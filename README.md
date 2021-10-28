@@ -16,21 +16,38 @@ Big thanks to our translators, which you can find in detail in this [README](src
 
 ## Development
 
-### Run Frontend & mock backend
+### Dependencies
 
-You need to install [Node.js](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/) first.
+- [Node.js](https://nodejs.org/en/download/)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install/)
+- [nvm](https://github.com/nvm-sh/nvm#intro) is suppported but not required
 
-Run `yarn install` & then `yarn start` to start the development server for the Frontend.
+### Dev workflow
 
-To run the mock backend open another terminal, `cd` into [backend-mock](./backend-mock) and run `yarn install` then `yarn start` in that folder.
+#### Frontend
+
+```sh
+yarn install
+yarn start
+```
+
+##### Notes on Login and auth
+
+For the login screen, use the password `password`.
+
+#### [Mock backend](./backend-mock)
+
+Open another terminal
+
+```sh
+cd backend-mock
+yarn install
+yarn start
+```
 
 ### Linting
 
 [eslint](https://eslint.org) and [prettier](https://prettier.io) will be used accoring to the [create-react-app docs](https://create-react-app.dev/docs/setting-up-your-editor)
-
-#### Notes on Login and auth
-
-- For the login screen, use the password `password`.
 
 ## Credits & Licenses
 
