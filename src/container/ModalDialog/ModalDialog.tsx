@@ -3,9 +3,9 @@ import { FC, useEffect, useCallback } from "react";
 import { ReactComponent as XIcon } from "../../assets/X.svg";
 
 const disableScroll = {
-  on: () => document.body.classList.add('overflow-y-hidden'),
-  off: () => document.body.classList.remove('overflow-y-hidden')
-}
+  on: () => document.body.classList.add("overflow-y-hidden"),
+  off: () => document.body.classList.remove("overflow-y-hidden"),
+};
 
 const ModalDialog: FC<ModalDialogProps> = (props) => {
   disableScroll.on();
