@@ -13,7 +13,7 @@ const util = require("./util");
 const app = express();
 app.use(cors(), express.json());
 
-const PORT = 8080;
+const PORT = 8000;
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);

@@ -53,7 +53,7 @@ yarn install
 yarn start
 ```
 
-Then go to `http://localhost:8080` and use the password `password`.
+Then go to `http://localhost:3000` and use the password `password`.
 
 ##### Blitz API
 
@@ -66,9 +66,8 @@ This guide uses Polar for easier development, but you can also use a real lightn
 - Create a `.env` file (see [.env_sample in blitz_api](https://github.com/fusion44/blitz_api/blob/main/.env_sample)) and copy the bitcoin and ln info into it.
 - Make the following change in `blitz_api`:
   - In [main/app/main.py](https://github.com/fusion44/blitz_api/blob/main/app/main.py#L48), change the `prefix_format` from `/v{major}` to `/api/v{major}`.
-- Make the following changes in `raspiblitz-web`:
-  - In [package.json](./package.json), change the `proxy` from `http://localhost:8080` to `http://localhost:8000`
-  - In [store/sse-context.tsx](./src/store/sse-context.tsx) change the `SSE_URL` from `http://localhost:8080/api/sse/subscribe` to `http://localhost:8000/sse/subscribe`
+- Make the following change in `raspiblitz-web`:
+  - In [store/sse-context.tsx](./src/store/sse-context.tsx) change the `SSE_URL` from `http://localhost:8000/api/sse/subscribe` to `http://localhost:8000/sse/subscribe`
 
 Now you can start the `blitz_api` and run `yarn start` in raspiblitz-web.
 

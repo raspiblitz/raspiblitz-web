@@ -13,7 +13,7 @@
     "test": "craco test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8000",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
