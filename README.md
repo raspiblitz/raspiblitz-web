@@ -31,11 +31,19 @@ yarn install
 yarn start
 ```
 
-##### Notes on Login and auth
+#### Backend
 
-For the login screen, use the password `password`.
+For the backend, there currently exist two options:
 
-#### [Mock backend](./backend-mock)
+- Using the provided [Mock backend](#mock-backend)
+  - Easy to setup, but limited data
+- Using [blitz_api](#blitz-api) with Polar
+  - Some changes needed for local development
+  - Possibly more data (depending on your ln setup :) )
+
+##### Mock backend
+
+See [backend-mock folder](./backend-mock)
 
 Open another terminal
 
@@ -44,6 +52,26 @@ cd backend-mock
 yarn install
 yarn start
 ```
+
+Then go to `http://localhost:3000` and use the password `password`.
+
+##### Blitz API
+
+This guide uses Polar for easier development, but you can also use a real lightning node.
+
+- First, download [Polar](https://lightningpolar.com/) and get it to run.
+  - Create at least one bitcoin and one lightning node.
+- Next, clone the [blitz_api](https://github.com/fusion44/blitz_api), install the dependencies.
+  - In addition, you will need [redis](https://redis.io/) installed for `blitz_api` to work.
+- Create a `.env` file (see [.env_sample in blitz_api](https://github.com/fusion44/blitz_api/blob/main/.env_sample)) and copy the bitcoin and ln info into it.
+- Make the following change in `blitz_api`:
+  - In [main/app/main.py](https://github.com/fusion44/blitz_api/blob/main/app/main.py#L48), change the `prefix_format` from `/v{major}` to `/api/v{major}`.
+- Make the following change in `raspiblitz-web`:
+  - In [store/sse-context.tsx](./src/store/sse-context.tsx) change the `SSE_URL` from `http://localhost:8000/api/sse/subscribe` to `http://localhost:8000/sse/subscribe`
+
+Now you can start the `blitz_api` and run `yarn start` in raspiblitz-web.
+
+Please do not commit the above changes.
 
 ### Linting
 
