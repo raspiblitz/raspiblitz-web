@@ -27,7 +27,13 @@
       "ssh": "Connexion SSH",
       "channel": "Canal",
       "channel_balance": "Équilibre du canal",
-      "lightning": "Lightning"
+      "lightning": "Lightning",
+      "conn_out": "Sortant",
+      "local_balance": "Balance locale",
+      "remote_balance": "Balance distante",
+      "pending_balance": "Balance en attente",
+      "conn_in": "Entrant",
+      "connections": "Connections"
     },
     "wallet": {
       "receive": "Recevoir",
@@ -41,7 +47,11 @@
       "on_chain": "On-chain",
       "fund_short": "Approvisionner porte-monnaie",
       "balance": "Balance",
-      "fund": "Approvisionner votre porte-monnaie"
+      "fund": "Approvisionner votre porte-monnaie",
+      "send_lightning": "Envoyer de l'argent avec Lightning",
+      "send_onchain": "Envoyer de l'argent On-chain",
+      "confirm": "Confirmer",
+      "invoice": "Facture"
     },
     "tx": {
       "tx_details": "Détails de la transaction",
@@ -54,7 +64,11 @@
       "request": "Requête",
       "mempool": "Voir dans mempool",
       "fee": "Frais",
-      "included_block": "Inclus dans le block"
+      "included_block": "Inclus dans le block",
+      "transactions": "Transactions",
+      "confirmations": "Confirmations",
+      "confirm_info": "Veuillez confirmer la transaction suivante",
+      "sent": "Transaction envoyée !"
     },
     "apps": {
       "installed": "Installé",
