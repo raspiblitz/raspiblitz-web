@@ -226,10 +226,10 @@ app.get("/api/v1/tx/:id", (req, res) => {
   }
 });
 
-app.post("/api/v1/lightning/decode-pay-req", (req, res) => {
+app.get("/api/v1/lightning/decode-pay-req", (req, res) => {
   console.log(
     "call to /api/v1/lightning/decode-pay-req with invoice",
-    req.body.invoice
+    req.query['pay_req']
   );
 
   return res.status(200).send(
