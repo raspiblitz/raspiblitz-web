@@ -7,6 +7,12 @@ import SendLn from "./SendLN/SendLN";
 import SendOnChain from "./SendOnChain/SendOnChain";
 import { ReactComponent as SwitchIcon } from "../../../assets/switch-vertical.svg";
 import { useTranslation } from "react-i18next";
+import {
+  convertMSatToBtc,
+  convertMSatToSat,
+  convertSatToBtc,
+  convertToString,
+} from "../../../util/format";
 
 const SendModal: FC<SendModalProps> = (props) => {
   const appCtx = useContext(AppContext);
@@ -66,13 +72,13 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   const onchainBalance =
     appCtx.unit === "BTC"
-      ? (props.onchainBalance / 100_000_000).toLocaleString()
-      : props.onchainBalance.toLocaleString();
+      ? convertToString(appCtx.unit, convertSatToBtc(props.onchainBalance))
+      : convertToString(appCtx.unit, props.onchainBalance);
 
   const lnBalance =
     appCtx.unit === "BTC"
-      ? (props.lnBalance / 100_000_000_000).toLocaleString()
-      : (props.lnBalance / 1000).toLocaleString();
+      ? convertToString(appCtx.unit, convertMSatToBtc(props.lnBalance))
+      : convertToString(appCtx.unit, convertMSatToSat(props.lnBalance));
 
   if (confirm) {
     const addr = lnTransaction ? invoice : address;

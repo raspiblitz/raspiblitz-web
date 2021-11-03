@@ -5,6 +5,11 @@ import { ReactComponent as LightningIcon } from "../../../assets/lightning.svg";
 import { ReactComponent as ReceiveIcon } from "../../../assets/receive.svg";
 import { ReactComponent as SendIcon } from "../../../assets/send.svg";
 import { AppContext } from "../../../store/app-context";
+import {
+  convertMSatToBtc,
+  convertSatToBtc,
+  convertToString,
+} from "../../../util/format";
 import { checkPropsUndefined } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
@@ -19,9 +24,9 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
   const { onchainBalance, lnBalance } = props;
 
   const convertedOnchainBalance =
-    appCtx.unit === "BTC" ? onchainBalance / 100_000_000 : onchainBalance;
+    appCtx.unit === "BTC" ? convertSatToBtc(onchainBalance) : onchainBalance;
   const convertedLnBalance =
-    appCtx.unit === "BTC" ? lnBalance / 100_000_000_000 : lnBalance / 1000;
+    appCtx.unit === "BTC" ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
 
   const totalBalance =
     appCtx.unit === "BTC"
@@ -36,7 +41,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
             <article className="w-full flex flex-col">
               <h6 className="text-xl">{t("wallet.balance")}</h6>
               <p className="text-2xl font-bold">
-                {totalBalance.toLocaleString()} {appCtx.unit}
+                {convertToString(appCtx.unit, totalBalance)} {appCtx.unit}
               </p>
             </article>
             <article className="w-full flex flex-col">
@@ -45,7 +50,8 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 &nbsp;{t("wallet.on_chain")}
               </h6>
               <p className="text-lg font-bold">
-                {convertedOnchainBalance.toLocaleString()} {appCtx.unit}
+                {convertToString(appCtx.unit, convertedOnchainBalance)}{" "}
+                {appCtx.unit}
               </p>
             </article>
             <article className="w-full flex flex-col">
@@ -54,7 +60,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 &nbsp;{t("home.lightning")}
               </h6>
               <p className="text-lg font-bold">
-                {convertedLnBalance.toLocaleString()} {appCtx.unit}
+                {convertToString(appCtx.unit, convertedLnBalance)} {appCtx.unit}
               </p>
             </article>
           </div>
