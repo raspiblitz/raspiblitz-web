@@ -1,6 +1,7 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../store/app-context";
+import { convertMSatToBtc, convertToString } from "../../../util/format";
 import { checkPropsUndefined } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
@@ -30,9 +31,13 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
   );
 
   const convertedLocalBalance =
-    appCtx.unit === "BTC" ? (localBalance || 0) / 100_000_000 : localBalance;
+    appCtx.unit === "BTC"
+      ? convertMSatToBtc(localBalance || 0)
+      : localBalance / 1000;
   const convertedRemoteBalance =
-    appCtx.unit === "BTC" ? (remoteBalance || 0) / 100_000_000 : remoteBalance;
+    appCtx.unit === "BTC"
+      ? convertMSatToBtc(remoteBalance || 0)
+      : remoteBalance / 1000;
 
   const channelTotal = channelActive + channelInactive + channelPending;
 
@@ -52,7 +57,8 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
               {t("home.local_balance")}
             </h6>
             <p>
-              {convertedLocalBalance.toLocaleString()} {appCtx.unit}
+              {convertToString(appCtx.unit, convertedLocalBalance)}{" "}
+              {appCtx.unit}
             </p>
           </article>
         </div>
@@ -68,7 +74,8 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
               {t("home.remote_balance")}
             </h6>
             <p>
-              {convertedRemoteBalance.toLocaleString()} {appCtx.unit}
+              {convertToString(appCtx.unit, convertedRemoteBalance)}{" "}
+              {appCtx.unit}
             </p>
           </article>
         </div>

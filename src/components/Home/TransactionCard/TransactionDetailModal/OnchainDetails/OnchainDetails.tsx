@@ -53,7 +53,7 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
         <div className={valueClasses}>{details.feeRate} sat/vByte</div>
       </div>
       <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.desc")}</div>
+        <div className={keyClasses}>{t("tx.description")}</div>
         <div className={valueClasses}>{details.description}</div>
       </div>
     </div>

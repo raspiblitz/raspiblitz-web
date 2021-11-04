@@ -21,7 +21,7 @@ interface AppContextType {
   logout: () => void;
 }
 
-type Unit = "BTC" | "Sat";
+export type Unit = "BTC" | "Sat";
 
 export const AppContext = createContext<AppContextType>({
   isLoggedIn: false,
