@@ -64,6 +64,7 @@ This guide uses Polar for easier development, but you can also use a real lightn
 - Next, clone the [blitz_api](https://github.com/fusion44/blitz_api), install the dependencies.
   - In addition, you will need [redis](https://redis.io/) installed for `blitz_api` to work.
 - Create a `.env` file (see [.env_sample in blitz_api](https://github.com/fusion44/blitz_api/blob/main/.env_sample)) and copy the bitcoin and ln info into it.
+  - Important: When definining `shell_script_path` you need to define a directory where a folder called `config.scripts` and a file called `blitz.debug.sh` reside in. Otherwise `blitz_api` may not work (used on the RaspiBlitz for logging)
 - Make the following change in `blitz_api`:
   - In [main/app/main.py](https://github.com/fusion44/blitz_api/blob/main/app/main.py#L48), change the `prefix_format` from `/v{major}` to `/api/v{major}`.
 - Make the following change in `raspiblitz-web`:
