@@ -21,7 +21,7 @@
 
 .input-error {
   @apply input-underline;
-  @apply border-red-500;
+  @apply border-red-500 focus:border-red-500;
 }
 
 .bd-card {
