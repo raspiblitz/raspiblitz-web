@@ -75,6 +75,14 @@
       "txid": "Transaktions ID",
       "tx_details": "Transaktionsdetails",
       "transactions": "Transaktionen"
+    },
+    "forms": {
+      "validation": {
+        "lnInvoice": {
+          "required": "Bitte gib eine Lightning invoice ein",
+          "patternMismatch": "Falsches invoice format"
+        }
+      }
     }
   }
 }

@@ -105,6 +105,7 @@ const SendModal: FC<SendModalProps> = (props) => {
       >
         {t("settings.change")} <SwitchIcon className="inline-block p-0.5" />
       </button>
+
       {lnTransaction && (
         <SendLn
           onChangeInvoice={changeInvoiceHandler}
@@ -112,6 +113,7 @@ const SendModal: FC<SendModalProps> = (props) => {
           balance={lnBalance}
         />
       )}
+
       {!lnTransaction && (
         <SendOnChain
           balance={onchainBalance}
