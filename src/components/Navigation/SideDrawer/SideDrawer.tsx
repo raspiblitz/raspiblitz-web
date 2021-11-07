@@ -24,8 +24,9 @@ export const SideDrawer: FC = () => {
       <div>
         <NavLink
           to="/home"
-          className={navLinkClasses}
-          activeClassName={navLinkActiveClasses}
+          // className={navLinkClasses}
+          // activeClassName={navLinkActiveClasses}
+          className={({ isActive }) => navLinkClasses + (isActive ? " ${navLinkActiveClasses}" : "")}
         >
           <HomeLogo className="inline-block w-10 h-10" />
           <div className="w-1/2 mx-3 flex justify-center lg:block text-lg">
@@ -34,8 +35,9 @@ export const SideDrawer: FC = () => {
         </NavLink>
         <NavLink
           to="apps"
-          className={navLinkClasses}
-          activeClassName={navLinkActiveClasses}
+          // className={navLinkClasses}
+          // activeClassName={navLinkActiveClasses}
+          className={({ isActive }) => navLinkClasses + (isActive ? " ${navLinkActiveClasses}" : "")}
         >
           <AppIcon className="inline-block w-10 h-10" />
           <div className="w-full lg:w-1/2 mx-3 flex justify-center lg:block text-lg">
@@ -44,8 +46,9 @@ export const SideDrawer: FC = () => {
         </NavLink>
         <NavLink
           to="settings"
-          className={navLinkClasses}
-          activeClassName={navLinkActiveClasses}
+          // className={navLinkClasses}
+          // activeClassName={navLinkActiveClasses}
+          className={({ isActive }) => navLinkClasses + (isActive ? " ${navLinkActiveClasses}" : "")}
         >
           <SettingsIcon className="inline-block w-10 h-10" />
           <div className="w-1/2 mx-3 flex justify-center lg:block text-lg">

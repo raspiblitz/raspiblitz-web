@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext } from "../../../store/app-context";
 import { instance } from "../../../util/interceptor";
@@ -10,7 +10,7 @@ import { MODAL_ROOT } from "../../../util/util";
 const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
-  const history = useHistory();
+  const history = useNavigate();
   const btnClasses =
     "w-full xl:w-1/2 text-center h-10 my-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
 
@@ -18,7 +18,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
     const resp = await instance.post(props.confirmEndpoint);
     if (resp.status === 200) {
       appCtx.setIsLoggedIn(false);
-      history.push("/login");
+      history("/login");
     }
   };
 

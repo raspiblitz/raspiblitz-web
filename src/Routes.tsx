@@ -1,5 +1,5 @@
 import { lazy, Suspense, useContext, useState } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Navigate, Route } from "react-router-dom";
 import Layout from "./container/Layout/Layout";
 import LoadingScreen from "./container/LoadingScreen/LoadingScreen";
 import SkeletonLoadingScreen from "./container/SkeletonLoadingScreen/SkeletonLoadingScreen";
@@ -39,10 +39,12 @@ const Routes: React.FC = () => {
   if (!setupDone && !isLoading) {
     return (
       <BrowserRouter>
-        <Route path="/setup" component={Setup} />
-        <Route>
+        <Route path="/setup" element={<Setup />} />
+        <Route path="*" element={<Navigate to="/setup" />} />
+        {/* <Route render={() => <Redirect to="/setup" />} /> */}
+        {/* <Route>
           <Redirect to="/setup" />
-        </Route>
+        </Route> */}
       </BrowserRouter>
     );
   }
@@ -50,12 +52,14 @@ const Routes: React.FC = () => {
   if (setupDone && !isLoading && !appCtx.isLoggedIn) {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+
+          {/* <Route>
             <Redirect to="/login" />
-          </Route>
-        </Switch>
+          </Route> */}
+        </Routes>
       </BrowserRouter>
     );
   }
@@ -64,19 +68,22 @@ const Routes: React.FC = () => {
     <Suspense fallback={<SkeletonLoadingScreen />}>
       <BrowserRouter>
         <Layout>
-          <Switch>
-            <Route exact path="/">
+          <Routes>
+            {/* <Route exact path="/">
               <Redirect to="/home" />
-            </Route>
+            </Route> */}
 
-            <Route path="/home" component={LazyHome} />
-            <Route path="/apps" component={LazyApps} />
-            <Route path="/settings" component={LazySettings} />
+            <Route path="/home" element={<LazyHome />} />
+            <Route path="/apps" element={<LazyApps />} />
+            <Route path="/settings" element={<LazySettings />} />
 
-            <Route>
+            <Route path="*" element={<Navigate to="/home" />} />
+
+
+            {/* <Route>
               <Redirect to="/home" />
-            </Route>
-          </Switch>
+            </Route> */}
+          </Routes>
         </Layout>
       </BrowserRouter>
     </Suspense>

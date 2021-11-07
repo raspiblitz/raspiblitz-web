@@ -1,6 +1,6 @@
 import { FC, FormEvent, useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as MoonLogo } from "../../assets/moon.svg";
 import { ReactComponent as RaspiBlitzLogo } from "../../assets/RaspiBlitz_Logo_Main.svg";
 import { ReactComponent as RaspiBlitzLogoDark } from "../../assets/RaspiBlitz_Logo_Main_Negative.svg";
@@ -15,7 +15,7 @@ const Login: FC = () => {
   const [isUnauthorized, setIsUnauthorized] = useState(false);
   const [isError, setIsError] = useState(false);
   const appCtx = useContext(AppContext);
-  const history = useHistory();
+  const history = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
 
   const loginHandler = async (e: FormEvent) => {
@@ -41,7 +41,7 @@ const Login: FC = () => {
     if (resp) {
       localStorage.setItem("access_token", resp.data.access_token);
       appCtx.setIsLoggedIn(true);
-      history.push("/home");
+      history("/home");
     }
   };
 
