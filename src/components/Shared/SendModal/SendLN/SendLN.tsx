@@ -72,7 +72,7 @@ const SendLn: FC<SendLnProps> = (props) => {
         type="text"
         onChange={onChange}
         required
-        pattern="(lnbc|lntb|lntbs|lnbcrt)\w+"
+        pattern="(lnbc|lntb)\w+"
         className={isFormValid ? "input-underline" : "input-error"}
         placeholder="lnbc..."
       />
