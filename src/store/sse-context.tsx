@@ -51,7 +51,7 @@ export const SSEContext = createContext<SSEContextType>({
 });
 
 export const SSE_URL = window.location.hostname.includes("localhost")
-  ? "http://localhost:8000/api/sse/subscribe"
+  ? "http://localhost:8000/sse/subscribe"
   : "/sse/subscribe";
 
 const SSEContextProvider: FC = (props) => {

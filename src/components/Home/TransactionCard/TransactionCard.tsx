@@ -25,10 +25,14 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
     setPage((p) => p - 1);
   };
 
-  const currentPage = transactions.slice(
-    page * MAX_ITEMS,
-    page * MAX_ITEMS + MAX_ITEMS
-  );
+  let currentPage = transactions;
+
+  if (transactions.length > MAX_ITEMS) {
+    currentPage = transactions.slice(
+      page * MAX_ITEMS,
+      page * MAX_ITEMS + MAX_ITEMS
+    );
+  }
 
   return (
     <div className="p-5 h-full">
@@ -38,7 +42,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
           {currentPage.map((transaction: Transaction, index: number) => {
             return (
               <SingleTransaction
-                onClick={() => showDetails(transaction.id)}
+                onClick={() => showDetails(transaction.index)}
                 key={index}
                 transaction={transaction}
               />
@@ -70,5 +74,5 @@ export default TransactionCard;
 
 export interface TransactionCardProps {
   transactions: Transaction[];
-  showDetails: (id: string) => void;
+  showDetails: (index: number) => void;
 }

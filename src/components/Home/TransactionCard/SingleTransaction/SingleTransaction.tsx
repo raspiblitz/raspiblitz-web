@@ -5,20 +5,35 @@ import { ReactComponent as ChainIcon } from "../../../../assets/chain.svg";
 import { ReactComponent as LightningIcon } from "../../../../assets/lightning.svg";
 import { Transaction } from "../../../../models/transaction.model";
 import { AppContext } from "../../../../store/app-context";
-import { convertBtcToSat, convertToString } from "../../../../util/format";
+import {
+  convertMSatToBtc,
+  convertMSatToSat,
+  convertSatToBtc,
+  convertToString,
+} from "../../../../util/format";
 
 export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
-  const { amount, category, time, type, comment } = props.transaction;
+  const { amount, category, time_stamp, type, comment } = props.transaction;
   const appCtx = useContext(AppContext);
 
-  const sendingTx = category === "send";
+  const sendingTx = type === "send";
   const sign = sendingTx ? "" : "+";
-  const formattedAmount =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, amount)
-      : convertToString(appCtx.unit, convertBtcToSat(amount));
 
-  const date = new Date(time * 1000);
+  let formattedAmount;
+
+  if (category === "onchain") {
+    formattedAmount =
+      appCtx.unit === "BTC"
+        ? convertToString(appCtx.unit, convertSatToBtc(amount))
+        : convertToString(appCtx.unit, amount);
+  } else {
+    formattedAmount =
+      appCtx.unit === "BTC"
+        ? convertToString(appCtx.unit, convertMSatToBtc(amount))
+        : convertToString(appCtx.unit, convertMSatToSat(amount));
+  }
+
+  const date = new Date(time_stamp * 1000);
   const formattedDate = date.toLocaleString();
   const isoString = date.toISOString();
 
@@ -36,8 +51,8 @@ export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
       onClick={props.onClick}
     >
       <div className="flex justify-center items-center">
-        {type === "onchain" && <ChainIcon className="h-5 w-1/12" />}
-        {type === "lightning" && <LightningIcon className="h-5 w-1/12" />}
+        {category === "onchain" && <ChainIcon className="h-5 w-1/12" />}
+        {category === "ln" && <LightningIcon className="h-5 w-1/12" />}
         {categoryIcon}
         <div className="w-3/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap text-left">
           {comment || "Transaction"}

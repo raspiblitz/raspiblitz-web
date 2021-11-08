@@ -49,7 +49,6 @@ const eventsHandler = (request, response) => {
   lnInfoLite.lnInfoLite();
   installedAppStatus.appStatus();
   apps.listApps();
-  transactions.listTransactions();
   walletBalance.walletBalance();
 
   request.on("close", () => {
@@ -358,4 +357,9 @@ app.post("/api/v1/lightning/send-payment", (req, res) => {
       failure_reason: "FAILURE_REASON_NONE",
     })
   );
+});
+
+app.get("/api/v1/lightning/list-all-tx", (req, res) => {
+  console.log("call to /api/v1/lightning/list-all-tx");
+  return res.status(200).send(JSON.stringify(transactions.listTransactions()));
 });
