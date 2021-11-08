@@ -29,40 +29,40 @@ export const LNDetails: FC<LNDetailProps> = (props) => {
       : convertToString(appCtx.unit, convertMSatToSat(details.amount));
 
   return (
-    <div className="flex flex-col py-3 my-4">
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.txid")}</div>
-        <div className={valueClasses}>{details.id}</div>
+    <section className="flex flex-col py-3 my-4">
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.txid")}</h6>
+        <p className={valueClasses}>{details.id}</p>
         <div>
           <ClipboardIcon
             className="h-5 w-5 hover:text-blue-500"
             onClick={copyId}
           />
         </div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("home.status")}</div>
-        <div className={valueClasses}>{details.status}</div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.date")}</div>
-        <div className={valueClasses}>{date}</div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.fee")}</div>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("home.status")}</h6>
+        <p className={valueClasses}>{details.status}</p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.date")}</h6>
+        <p className={valueClasses}>{date}</p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.fee")}</h6>
         <div className={valueClasses}>{details.total_fees} mSat</div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.value")}</div>
-        <div className={valueClasses}>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.value")}</h6>
+        <p className={valueClasses}>
           {amount} {appCtx.unit}
-        </div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.description")}</div>
-        <div className={valueClasses}>{details.comment}</div>
-      </div>
-    </div>
+        </p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.description")}</h6>
+        <p className={valueClasses}>{details.comment}</p>
+      </article>
+    </section>
   );
 };
 

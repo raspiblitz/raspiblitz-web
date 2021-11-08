@@ -25,46 +25,44 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
       : convertToString(appCtx.unit, details.amount);
 
   return (
-    <div className="flex flex-col py-3 my-4">
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.txid")}</div>
-        <div className={valueClasses}>{details.id}</div>
+    <section className="flex flex-col py-3 my-4">
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.txid")}</h6>
+        <p className={valueClasses}>{details.id}</p>
         <div>
           <ClipboardIcon
             className="h-5 w-5 hover:text-blue-500"
             onClick={copyId}
           />
         </div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.confirmations")}</div>
-        <div className={valueClasses}>{details.num_confs || "Unconfirmed"}</div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.included_block")}</div>
-        <div className={valueClasses}>
-          {details.block_height || "Unconfirmed"}
-        </div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.date")}</div>
-        <div className={valueClasses}>{date}</div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("wallet.amount")}</div>
-        <div className={valueClasses}>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.confirmations")}</h6>
+        <p className={valueClasses}>{details.num_confs || "Unconfirmed"}</p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.included_block")}</h6>
+        <p className={valueClasses}>{details.block_height || "Unconfirmed"}</p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.date")}</h6>
+        <p className={valueClasses}>{date}</p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("wallet.amount")}</h6>
+        <p className={valueClasses}>
           {amount} {appCtx.unit}
-        </div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.fee")}</div>
-        <div className={valueClasses}>{details.total_fees || 0}</div>
-      </div>
-      <div className={containerClasses}>
-        <div className={keyClasses}>{t("tx.description")}</div>
-        <div className={valueClasses}>{details.comment}</div>
-      </div>
-    </div>
+        </p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.fee")}</h6>
+        <p className={valueClasses}>{details.total_fees || 0}</p>
+      </article>
+      <article className={containerClasses}>
+        <h6 className={keyClasses}>{t("tx.description")}</h6>
+        <p className={valueClasses}>{details.comment}</p>
+      </article>
+    </section>
   );
 };
 
