@@ -53,7 +53,6 @@
       "fee_rate": "Taxa proporcional",
       "description": "Descrição",
       "mempool": "Visualizar na mempool",
-      "request": "Solicitação",
       "value": "Valor",
       "comment": "Comentário"
     },

@@ -61,7 +61,6 @@
       "value": "Valeur",
       "comment": "Commentaire",
       "fee_rate": "Taux de frais",
-      "request": "Requête",
       "mempool": "Voir dans mempool",
       "fee": "Frais",
       "included_block": "Inclus dans le block",

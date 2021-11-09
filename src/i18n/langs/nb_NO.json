@@ -47,7 +47,6 @@
       "mempool": "Vis på mempool",
       "comment": "Kommentar",
       "value": "Verdi",
-      "request": "Forespørsel",
       "description": "Beskrivelse",
       "fee_rate": "Avgiftstakst",
       "fee": "Avgift",
