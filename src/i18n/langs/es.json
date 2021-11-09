@@ -29,7 +29,6 @@
     "tx": {
       "comment": "Descripción",
       "value": "Precio",
-      "request": "Solicitar",
       "mempool": "Ver en la mempool",
       "description": "Descripción",
       "fee_rate": "Tárifa de comisión",

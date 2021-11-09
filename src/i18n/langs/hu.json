@@ -53,7 +53,6 @@
       "fee_rate": "Díj ráta",
       "description": "Leírás",
       "mempool": "Megtekintés a mempool-on",
-      "request": "Kérvény",
       "value": "Érték",
       "comment": "Megjegyzés"
     },
