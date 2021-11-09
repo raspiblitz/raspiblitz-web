@@ -16,7 +16,7 @@ app.use(cors(), express.json());
 const PORT = 8000;
 
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+  console.info(`Server listening on http://localhost:${PORT}`);
 });
 
 // app.use('/', express.static('../build'));
@@ -25,7 +25,7 @@ app.listen(PORT, () => {
  * Main SSE Handler
  */
 const eventsHandler = (request, response) => {
-  console.log("call to /api/sse/subscribe");
+  console.info("call to /api/sse/subscribe");
   const headers = {
     "Content-Type": "text/event-stream",
     Connection: "keep-alive",
@@ -49,7 +49,6 @@ const eventsHandler = (request, response) => {
   lnInfoLite.lnInfoLite();
   installedAppStatus.appStatus();
   apps.listApps();
-  transactions.listTransactions();
   walletBalance.walletBalance();
 
   request.on("close", () => {
@@ -67,7 +66,7 @@ app.get("/api/sse/subscribe", eventsHandler);
  * 100 if setup is done, otherwise step in the setup process
  */
 app.get("/api/v1/setup/status", (_, res) => {
-  console.log("call to /api/v1/setup/status");
+  console.info("call to /api/v1/setup/status");
   res.send(JSON.stringify({ progress: 100 }));
 });
 
@@ -76,7 +75,7 @@ app.get("/api/v1/setup/status", (_, res) => {
  */
 
 app.post("/api/v1/system/login", (req, res) => {
-  console.log("call to /api/v1/system/login");
+  console.info("call to /api/v1/system/login");
   setTimeout(() => {
     if (req.body.password === "password") {
       const access_token = auth.signToken();
@@ -88,7 +87,7 @@ app.post("/api/v1/system/login", (req, res) => {
 });
 
 app.post("/api/v1/logout", (req, res) => {
-  console.log("call to /api/v1/logout");
+  console.info("call to /api/v1/logout");
   res.status(200).send();
 });
 
@@ -107,19 +106,19 @@ app.get("/api/v1/syncstatus", (req, res) => {
  */
 
 app.post("/api/v1/changepw", (req, res) => {
-  console.log(
+  console.info(
     `call to /api/v1/changepw with old: ${req.body.oldPassword} & new: ${req.body.newPassword}`
   );
   res.send("success");
 });
 
 app.post("/api/v1/system/reboot", (req, res) => {
-  console.log("call to /api/v1/system/reboot");
+  console.info("call to /api/v1/system/reboot");
   res.status(200).send();
 });
 
 app.post("/api/v1/system/shutdown", (req, res) => {
-  console.log("call to /api/v1/system/shutdown");
+  console.info("call to /api/v1/system/shutdown");
   res.status(200).send();
 });
 
@@ -140,7 +139,7 @@ app.get("/api/v1/apps", (req, res) => {
 });
 
 app.post("/api/v1/install", (req, res) => {
-  console.log("call to /api/v1/install for app", req.body.id);
+  console.info("call to /api/v1/install for app", req.body.id);
   // send information that btc-pay is currently installing
   util.sendSSE("install", { id: "btc-pay" });
   setTimeout(() => {
@@ -150,13 +149,13 @@ app.post("/api/v1/install", (req, res) => {
 });
 
 app.post("/api/v1/uninstall", (req, res) => {
-  console.log("call to /api/v1/uninstall for app", req.body.id);
+  console.info("call to /api/v1/uninstall for app", req.body.id);
   // TODO
   res.status(200).send();
 });
 
 app.get("/api/v1/appdetails/:id", (req, res) => {
-  console.log("call to /api/v1/appdetails with id: " + req.params.id);
+  console.info("call to /api/v1/appdetails with id: " + req.params.id);
   const details = apps.appDetails(req);
   res.send(details);
 });
@@ -166,7 +165,7 @@ app.get("/api/v1/appdetails/:id", (req, res) => {
  */
 
 app.post("/api/v1/receive", (req, res) => {
-  console.log("call to /api/v1/receive");
+  console.info("call to /api/v1/receive");
   if (req.body.type === "lightning") {
     // include comment & amount for real req ..
     res.send(
@@ -180,7 +179,7 @@ app.post("/api/v1/receive", (req, res) => {
 });
 
 app.post("/api/v1/send-coins", (req, res) => {
-  console.log("call to /api/v1/send-coins");
+  console.info("call to /api/v1/send-coins");
   res.status(200).send({
     txid: "txid",
     address: "11234",
@@ -195,7 +194,7 @@ app.get("/api/v1/transactions", (req, res) => {
 });
 
 app.get("/api/v1/tx/:id", (req, res) => {
-  console.log("call to /api/v1/tx/" + req.params.id);
+  console.info("call to /api/v1/tx/" + req.params.id);
   if (req.params.id === "blablabla") {
     res.send(
       JSON.stringify({
@@ -227,7 +226,7 @@ app.get("/api/v1/tx/:id", (req, res) => {
 });
 
 app.get("/api/v1/lightning/decode-pay-req", (req, res) => {
-  console.log(
+  console.info(
     "call to /api/v1/lightning/decode-pay-req with invoice",
     req.query["pay_req"]
   );
@@ -280,7 +279,7 @@ app.get("/api/v1/lightning/decode-pay-req", (req, res) => {
 });
 
 app.post("/api/v1/lightning/send-payment", (req, res) => {
-  console.log(
+  console.info(
     "call to /api/v1/lightning/send-payment with invoice",
     req.query["pay_req"]
   );
@@ -358,4 +357,9 @@ app.post("/api/v1/lightning/send-payment", (req, res) => {
       failure_reason: "FAILURE_REASON_NONE",
     })
   );
+});
+
+app.get("/api/v1/lightning/list-all-tx", (req, res) => {
+  console.info("call to /api/v1/lightning/list-all-tx");
+  return res.status(200).send(JSON.stringify(transactions.listTransactions()));
 });

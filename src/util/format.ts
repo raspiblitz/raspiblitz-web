@@ -24,5 +24,5 @@ export function convertToString(unit: Unit, num: number): string {
   if (unit === "Sat") {
     return num.toLocaleString(NUM_LOCALE);
   }
-  return num.toString();
+  return num.toFixed(8).toString();
 }

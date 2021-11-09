@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,19 +13,27 @@ import ReceiveModal from "../../components/Shared/ReceiveModal/ReceiveModal";
 import SendModal from "../../components/Shared/SendModal/SendModal";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
+import { Transaction } from "../../models/transaction.model";
 import { AppContext } from "../../store/app-context";
+import { instance } from "../../util/interceptor";
 import { MODAL_ROOT } from "../../util/util";
 
 export const Home: FC = () => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
-  const { systemInfo, balance, btcInfo, lnStatus, transactions, appStatus } =
-    useSSE();
+  const { systemInfo, balance, btcInfo, lnStatus, appStatus } = useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
-  const [detailTxId, setDetailTxId] = useState("");
+  const [detailTx, setDetailTx] = useState<Transaction | null>(null);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+  useEffect(() => {
+    instance.get("/lightning/list-all-tx?reversed=true").then((tx: any) => {
+      setTransactions(tx.data);
+    });
+  }, []);
 
   const showSendModalHandler = () => {
     setShowSendModal(true);
@@ -47,12 +55,18 @@ export const Home: FC = () => {
     setShowReceiveModal(false);
   };
 
-  const showDetailHandler = (id: string) => {
-    setDetailTxId(id);
+  const showDetailHandler = (index: number) => {
+    const tx = transactions.find((tx) => tx.index === index);
+    if (!tx) {
+      console.error("Could not find transaction with index ", index);
+      return;
+    }
+    setDetailTx(tx);
     setShowDetailModal(true);
   };
 
   const closeDetailHandler = () => {
+    setDetailTx(null);
     setShowDetailModal(false);
   };
 
@@ -77,7 +91,10 @@ export const Home: FC = () => {
   const detailModal =
     showDetailModal &&
     createPortal(
-      <TransactionDetailModal id={detailTxId} close={closeDetailHandler} />,
+      <TransactionDetailModal
+        transaction={detailTx!}
+        close={closeDetailHandler}
+      />,
       MODAL_ROOT
     );
 

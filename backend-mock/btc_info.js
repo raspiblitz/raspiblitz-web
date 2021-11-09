@@ -1,7 +1,7 @@
 const util = require("./util");
 
 const btcInfo = () => {
-  console.log("sending btc_info");
+  console.info("sending btc_info");
 
   util.sendSSE("btc_info", {
     blocks: 25,

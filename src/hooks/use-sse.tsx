@@ -4,7 +4,6 @@ import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
 import { LnStatus } from "../models/ln-status";
 import { SystemInfo } from "../models/system-info";
-import { Transaction } from "../models/transaction.model";
 import { WalletBalance } from "../models/wallet-balance";
 import { SSEContext, SSE_URL } from "../store/sse-context";
 
@@ -47,10 +46,12 @@ function useSSE() {
     };
 
     const setTx = (event: Event) => {
-      const t = JSON.parse((event as MessageEvent<string>).data).sort(
-        (a: Transaction, b: Transaction) => b.time - a.time
-      );
-      sseCtx.setTransactions(t);
+      const t = JSON.parse((event as MessageEvent<string>).data);
+      sseCtx.setTransactions((prev) => {
+        // add the newest transaction to the beginning
+        const current = [t, ...prev];
+        return current;
+      });
     };
 
     const setInstall = (event: Event) => {

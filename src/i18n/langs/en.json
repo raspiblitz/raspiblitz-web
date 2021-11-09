@@ -64,7 +64,6 @@
       "fee_rate": "Fee rate",
       "description": "Description",
       "mempool": "View on mempool",
-      "request": "Request",
       "value": "Value",
       "comment": "Comment",
       "sent": "Transaction sent!",

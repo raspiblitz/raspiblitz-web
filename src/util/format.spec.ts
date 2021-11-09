@@ -1,4 +1,9 @@
-import { convertBtcToSat, convertSatToBtc, convertToString } from "./format";
+import {
+  convertBtcToSat,
+  convertMSatToBtc,
+  convertSatToBtc,
+  convertToString,
+} from "./format";
 
 describe("format", () => {
   test("format sat to btc", () => {
@@ -29,5 +34,10 @@ describe("format", () => {
   test("format to String with Sat", () => {
     const amount = convertToString("Sat", 200_000_001);
     expect(amount).toEqual("200,000,001");
+  });
+
+  test("format to String with mSat to BTC", () => {
+    const amount = convertToString("BTC", convertMSatToBtc(21000));
+    expect(amount).toEqual("0.00000021");
   });
 });

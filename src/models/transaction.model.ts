@@ -1,8 +1,13 @@
 export interface Transaction {
+  index: number;
   id: string;
+  category: "ln" | "onchain";
+  type: "send" | "receive";
   amount: number;
-  time: number;
-  type: "onchain" | "lightning";
-  category: "send" | "receive" | "generate" | "immature" | "orphan";
-  comment?: string;
+  time_stamp: number;
+  comment: string;
+  status: "succeeded" | "failed";
+  block_height: null;
+  num_confs: number | null;
+  total_fees: number | null;
 }
