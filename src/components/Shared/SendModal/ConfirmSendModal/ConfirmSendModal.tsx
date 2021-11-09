@@ -36,7 +36,7 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
         });
     }
 
-    console.log(response);
+    console.info(response);
     props.close(true);
   };
 

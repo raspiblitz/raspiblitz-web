@@ -1,7 +1,7 @@
 const util = require("./util");
 
 const lnInfoLite = () => {
-  console.log("sending ln_info_lite");
+  console.info("sending ln_info_lite");
 
   util.sendSSE("ln_info_lite", {
     implementation: "LND",

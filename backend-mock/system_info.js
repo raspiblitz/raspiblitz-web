@@ -1,7 +1,7 @@
 const util = require("./util");
 
 const systemInfo = () => {
-  console.log("sending system_info");
+  console.info("sending system_info");
 
   util.sendSSE("system_info", {
     alias: "myBlitz",

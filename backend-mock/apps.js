@@ -2,7 +2,7 @@ const util = require("./util");
 const fs = require("fs");
 
 const listApps = () => {
-  console.log("call to apps");
+  console.info("call to apps");
   util.sendSSE("apps", [
     {
       id: "sphinx",
@@ -89,7 +89,7 @@ const listApps = () => {
 };
 
 const installApp = () => {
-  console.log("call to installApp");
+  console.info("call to installApp");
   util.sendSSE("apps", [
     {
       id: "btc-pay",

@@ -1,7 +1,7 @@
 const util = require("./util");
 
 const appStatus = () => {
-  console.log("sending installed_app_status");
+  console.info("sending installed_app_status");
   util.sendSSE("installed_app_status", [
     { id: "specter", name: "Specter Desktop", status: "online" },
     { id: "sphinx", name: "Sphinx Chat", status: "online" },
