@@ -79,6 +79,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       {showLnInvoice && (
         <div className="text-xl font-bold">{t("wallet.create_invoice_ln")}</div>
       )}
+
       {!showLnInvoice && (
         <div className="text-xl font-bold">{t("wallet.fund")}</div>
       )}
@@ -87,6 +88,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           <label htmlFor="lightning" className={`${radioStyles} ${lnStyle}`}>
             {t("home.lightning")}
           </label>
+
           <input
             id="lightning"
             type="radio"
@@ -100,6 +102,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           <label htmlFor="onchain" className={`${radioStyles} ${walletStyle}`}>
             {t("wallet.fund_onchain")}
           </label>
+
           <input
             id="onchain"
             type="radio"
@@ -125,6 +128,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           </p>
         </>
       )}
+
       <form
         className="w-full flex flex-col items-center"
         onSubmit={generateInvoiceHandler}

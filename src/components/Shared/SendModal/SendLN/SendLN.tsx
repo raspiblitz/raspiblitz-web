@@ -8,6 +8,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../../store/app-context";
+import InputField from "../../InputField/InputField";
 
 const SendLn: FC<SendLnProps> = (props) => {
   const appCtx = useContext(AppContext);
@@ -41,6 +42,8 @@ const SendLn: FC<SendLnProps> = (props) => {
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    console.log("FORM event", invoiceInput);
+
     event.preventDefault();
     const validity = invoiceInput?.current?.validity;
 
@@ -62,22 +65,18 @@ const SendLn: FC<SendLnProps> = (props) => {
         {balance} {appCtx.unit}
       </p>
 
-      <label className="label-underline" htmlFor="invoiceInput">
-        {t("wallet.invoice")}
-      </label>
-
-      <input
+      <InputField
         id="invoiceInput"
         ref={invoiceInput}
+        label={t("wallet.invoice")}
+        pattern="(lnbc|lntb)\w+"
+        placeholder="lnbc..."
         type="text"
         onChange={onChange}
-        required
-        pattern="(lnbc|lntb)\w+"
-        className={isFormValid ? "input-underline" : "input-error"}
-        placeholder="lnbc..."
+        isFormValid={isFormValid}
+        errorMessage={errorMessage}
+        required={true}
       />
-
-      <p className="text-red-500">{errorMessage}</p>
 
       <button
         type="submit"

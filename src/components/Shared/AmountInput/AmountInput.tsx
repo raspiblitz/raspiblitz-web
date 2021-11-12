@@ -13,6 +13,7 @@ const AmountInput: FC<AmountInputProps> = (props) => {
       <label htmlFor="amount" className="label-underline">
         {t("wallet.amount")}
       </label>
+
       <div className="flex flex-row">
         <input
           id="amount"
@@ -21,7 +22,9 @@ const AmountInput: FC<AmountInputProps> = (props) => {
           className="w-8/12 text-right input-underline mr-3 pr-5"
           value={props.amount}
           onChange={props.onChangeAmount}
+          required
         />
+
         <span
           className="flex justify-center items-center w-4/12 p-1 rounded shadow-md dark:bg-gray-600"
           onClick={appCtx.toggleUnit}

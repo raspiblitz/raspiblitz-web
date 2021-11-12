@@ -22,23 +22,30 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
   return (
     <form className="px-5" onSubmit={onConfirm}>
       <h3 className="text-xl font-bold">{t("wallet.send_onchain")}</h3>
+
       <div className="my-5">
         <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
         {balance} {appCtx.unit}
       </div>
+
       <div className="my-5 flex flex-col justify-center text-center items-center">
         <div className="w-full md:w-10/12 py-1">
           <label htmlFor="address" className="label-underline">
             {t("wallet.address")}
           </label>
+
           <input
             id="address"
             type="text"
             className="w-full input-underline"
             value={address}
             onChange={onChangeAddress}
+            required
+            // @TODO: is this corect?
+            pattern="(1|3|bc1)\w+"
           />
         </div>
+
         <div className="w-full md:w-10/12 py-1">
           <AmountInput amount={amount} onChangeAmount={onChangeAmount} />
         </div>
@@ -47,6 +54,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
           <label htmlFor="fee" className="label-underline">
             {t("tx.fee")}
           </label>
+
           <div className="flex">
             <input
               id="fee"
@@ -54,6 +62,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
               className="w-7/12 input-underline text-right"
               value={fee}
               onChange={onChangeFee}
+              required
             />
             <div className="w-5/12 text-sm break-words">sat / vByte</div>
           </div>
@@ -63,6 +72,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
           <label htmlFor="comment" className="label-underline">
             {t("tx.comment")}
           </label>
+
           <input
             id="comment"
             type="text"
@@ -73,6 +83,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
           />
         </div>
       </div>
+
       <div className="inline-block w-4/5 lg:w-3/12 align-top mb-5">
         <button
           type="submit"
