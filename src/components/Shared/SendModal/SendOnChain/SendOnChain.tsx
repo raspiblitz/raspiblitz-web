@@ -2,20 +2,21 @@ import { ChangeEvent, FC, FormEvent, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../../store/app-context";
 import AmountInput from "../../AmountInput/AmountInput";
+import InputField from "../../InputField/InputField";
 
 const SendOnChain: FC<SendOnChainProps> = (props) => {
   const { t } = useTranslation();
   const appCtx = useContext(AppContext);
   const {
-    balance,
     address,
-    onChangeAddress,
     amount,
-    onChangeAmount,
-    fee,
-    onChangeFee,
+    balance,
     comment,
+    fee,
+    onChangeAddress,
+    onChangeAmount,
     onChangeComment,
+    onChangeFee,
     onConfirm,
   } = props;
 
@@ -30,19 +31,16 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
 
       <div className="my-5 flex flex-col justify-center text-center items-center">
         <div className="w-full md:w-10/12 py-1">
-          <label htmlFor="address" className="label-underline">
-            {t("wallet.address")}
-          </label>
-
-          <input
+          <InputField
+            isFormValid={true}
             id="address"
-            type="text"
-            className="w-full input-underline"
-            value={address}
-            onChange={onChangeAddress}
-            required
-            // @TODO: is this corect?
+            label={t("wallet.address")}
             pattern="(1|3|bc1)\w+"
+            placeholder="bc..."
+            type="text"
+            onChange={onChangeAddress}
+            required={true}
+            value={address}
           />
         </div>
 
@@ -51,35 +49,28 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
         </div>
 
         <div className="w-full md:w-10/12 py-1">
-          <label htmlFor="fee" className="label-underline">
-            {t("tx.fee")}
-          </label>
-
-          <div className="flex">
-            <input
-              id="fee"
-              type="number"
-              className="w-7/12 input-underline text-right"
-              value={fee}
-              onChange={onChangeFee}
-              required
-            />
-            <div className="w-5/12 text-sm break-words">sat / vByte</div>
-          </div>
+          <InputField
+            isFormValid={true}
+            id="fee"
+            label={t("tx.fee")}
+            type="number"
+            onChange={onChangeFee}
+            required={true}
+            value={fee}
+            inputRightAddon="sat / vByte"
+          />
         </div>
 
         <div className="w-full md:w-10/12 py-1">
-          <label htmlFor="comment" className="label-underline">
-            {t("tx.comment")}
-          </label>
-
-          <input
+          <InputField
+            isFormValid={true}
             id="comment"
-            type="text"
+            label={t("tx.comment")}
             placeholder="Optional comment"
-            className="input-underline"
-            value={comment}
+            type="text"
             onChange={onChangeComment}
+            required={true}
+            value={comment}
           />
         </div>
       </div>
@@ -99,14 +90,14 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
 export default SendOnChain;
 
 export interface SendOnChainProps {
-  balance: string;
   address: string;
-  onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   amount: number;
-  onChangeAmount: (event: ChangeEvent<HTMLInputElement>) => void;
-  fee: string;
-  onChangeFee: (event: ChangeEvent<HTMLInputElement>) => void;
+  balance: string;
   comment: string;
+  fee: string;
+  onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAmount: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeComment: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFee: (event: ChangeEvent<HTMLInputElement>) => void;
   onConfirm: (event: FormEvent) => void;
 }

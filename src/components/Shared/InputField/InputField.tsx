@@ -6,13 +6,16 @@ const InputField = forwardRef(
     const {
       errorMessage,
       id,
+      inputRightAddon,
       isFormValid,
       label,
       onChange,
       pattern,
       placeholder,
       required,
+      textAlign,
       type,
+      value,
     } = props;
 
     return (
@@ -21,18 +24,29 @@ const InputField = forwardRef(
           {label}
         </label>
 
-        <input
-          className={isFormValid ? "input-underline" : "input-error"}
-          id={id}
-          onChange={onChange}
-          pattern={pattern}
-          placeholder={placeholder}
-          ref={ref}
-          required={required}
-          type={type}
-        />
+        <div className="flex">
+          <input
+            className={`
+              ${isFormValid ? "input-underline" : "input-error"}
+              ${textAlign === "right" ?? "text-right"}
+              ${inputRightAddon ?? "w-7/12"}
+            `}
+            id={id}
+            onChange={onChange}
+            pattern={pattern}
+            placeholder={placeholder}
+            ref={ref}
+            required={required}
+            type={type}
+            value={value}
+          />
 
-        <p className="text-red-500">{errorMessage}</p>
+          {inputRightAddon && (
+            <div className="w-5/12 text-sm break-words">{inputRightAddon}</div>
+          )}
+        </div>
+
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       </>
     );
   }
@@ -43,11 +57,14 @@ export default InputField;
 export interface InputFieldProps {
   errorMessage?: string;
   id: string;
+  inputRightAddon?: string;
   isFormValid?: boolean;
   label: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   pattern?: string;
   placeholder?: string;
   required?: boolean;
+  textAlign?: "right";
   type: "text" | "number";
+  value?: string | number;
 }
