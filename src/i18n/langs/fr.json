@@ -94,6 +94,14 @@
       "confirm": "Confirmer",
       "language": "Langue",
       "curr_lang": "Langue actuelle"
+    },
+    "forms": {
+      "validation": {
+        "lnInvoice": {
+          "required": "Veuillez saisir une facture Lightning",
+          "patternMismatch": "Format de facture incorrect"
+        }
+      }
     }
   }
 }
