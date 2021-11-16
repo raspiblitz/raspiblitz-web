@@ -30,10 +30,15 @@ export const Home: FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    instance.get("/lightning/list-all-tx?reversed=true").then((tx: any) => {
-      setTransactions(tx.data);
-    });
-  }, []);
+    instance
+      .get("/lightning/list-all-tx?reversed=true")
+      .then((tx: any) => {
+        setTransactions(tx.data);
+      })
+      .catch((_) => {
+        appCtx.logout();
+      });
+  }, [appCtx]);
 
   const showSendModalHandler = () => {
     setShowSendModal(true);
