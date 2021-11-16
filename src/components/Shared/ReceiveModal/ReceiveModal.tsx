@@ -1,15 +1,18 @@
 import QRCode from "qrcode.react";
 import Tooltip from "rc-tooltip";
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../assets/clipboard-copy.svg";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
+import { AppContext } from "../../../store/app-context";
+import { convertBtcToSat } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
 import AmountInput from "../AmountInput/AmountInput";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
+  const appCtx = useContext(AppContext);
   const { t } = useTranslation();
   const [invoiceType, setInvoiceType] = useState("lightning");
   const [address, setAddress] = useState("");
@@ -41,14 +44,25 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const generateAddressHandler = async (event: FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
-    const body = {
-      type: invoiceType,
-      amount: lnInvoice ? amount : undefined,
-      comment: lnInvoice ? comment : undefined,
-    };
-    const resp = await instance.post("receive", body);
+    if (lnInvoice) {
+      const mSatAmount =
+        appCtx.unit === "BTC" ? convertBtcToSat(amount) * 1000 : amount * 1000;
+      const resp = await instance.post(
+        `lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`
+      );
+      console.log(resp.data);
+      setAddress(resp.data.payment_request);
+    } else {
+      // Commented out until https://github.com/fusion44/blitz_api/issues/43 is resolved
+      // const body = {
+      //  type: invoiceType,
+      //  amount: lnInvoice ? amount : undefined,
+      //  comment: lnInvoice ? comment : undefined,
+      // };
+      // const resp = await instance.post("receive", body);
+      setAddress("bcrt1qu3yk3a9k2slu0g6l9wz3r0std2j9qypakgyrnr");
+    }
     setIsLoading(false);
-    setAddress(resp.data.address);
   };
 
   const showLnInvoice = lnInvoice && !isLoading && !address;

@@ -12,7 +12,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const history = useHistory();
   const btnClasses =
-    "w-full xl:w-1/2 text-center h-10 my-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
+    "w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
 
   const shutdownHandler = async () => {
     const resp = await instance.post(props.confirmEndpoint);
@@ -25,7 +25,7 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
   return createPortal(
     <ModalDialog close={props.onClose}>
       {props.confirmText}
-      <div className="py-3 flex flex-col xl:flex-row">
+      <div className="p-3 flex flex-col xl:flex-row">
         <button className={btnClasses} onClick={props.onClose}>
           {t("settings.cancel")}
         </button>

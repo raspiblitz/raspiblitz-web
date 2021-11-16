@@ -49,11 +49,11 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
   };
 
   const installHandler = () => {
-    instance.post("install", { id });
+    instance.post("install", { id }).catch(() => {});
   };
 
   const uninstallHandler = () => {
-    instance.post("uninstall", { id });
+    instance.post("uninstall", { id }).catch(() => {});
   };
 
   return (

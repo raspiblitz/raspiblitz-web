@@ -14,7 +14,9 @@ export const Apps: FC = () => {
   const [app, setApp] = useState<App | null>(null);
 
   const installHandler = (id: string) => {
-    instance.post("install", { id });
+    instance.post("install", { id }).catch(() => {
+      // TODO: handle error & show notification on install if endpoint exists in blitz_api
+    });
   };
 
   const openDetailsHandler = (app: App) => {
