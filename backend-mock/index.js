@@ -48,7 +48,6 @@ const eventsHandler = (request, response) => {
   btcInfo.btcInfo();
   lnInfoLite.lnInfoLite();
   installedAppStatus.appStatus();
-  apps.listApps();
   walletBalance.walletBalance();
 
   request.on("close", () => {

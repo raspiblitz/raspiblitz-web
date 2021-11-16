@@ -4,29 +4,30 @@ import AppCard from "../../components/Apps/AppCard/AppCard";
 import AppInfo from "../../components/Apps/AppInfo/AppInfo";
 import useSSE from "../../hooks/use-sse";
 import { App } from "../../models/app.model";
+import availableApps from "../../util/apps.json";
 import { instance } from "../../util/interceptor";
 
 export const Apps: FC = () => {
-  const { t } = useTranslation();
-  const { availableApps, isInstalling } = useSSE();
+  const { t } = useTranslation(["translation", "apps"]);
+  const { isInstalling } = useSSE();
   const [showDetails, setShowDetails] = useState(false);
-  const [id, setId] = useState<string | null>(null);
+  const [app, setApp] = useState<App | null>(null);
 
   const installHandler = (id: string) => {
     instance.post("install", { id });
   };
 
-  const openDetailsHandler = (id: string) => {
-    setId(id);
+  const openDetailsHandler = (app: App) => {
+    setApp(app);
     setShowDetails(true);
   };
   const closeDetailsHandler = () => {
-    setId(null);
+    setApp(null);
     setShowDetails(false);
   };
 
   if (showDetails) {
-    return <AppInfo id={id} onClose={closeDetailsHandler} />;
+    return <AppInfo app={app!} onClose={closeDetailsHandler} />;
   }
 
   return (
@@ -35,7 +36,7 @@ export const Apps: FC = () => {
         <h2 className="w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200">
           {t("apps.installed")}
         </h2>
-        {availableApps
+        {(availableApps as App[])
           .filter((app: App) => app.installed)
           .map((app: App, index) => {
             return (
@@ -55,7 +56,7 @@ export const Apps: FC = () => {
         <h2 className="block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 ">
           {t("apps.available")}
         </h2>
-        {availableApps
+        {(availableApps as App[])
           .filter((app: App) => !app.installed)
           .map((app: App) => {
             return (

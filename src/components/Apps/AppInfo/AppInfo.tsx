@@ -1,36 +1,38 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+// TODO: Change to dynamic images
+import Preview1 from "../../../assets/apps/preview/btc-rpc-explorer/1.png";
+import Preview2 from "../../../assets/apps/preview/btc-rpc-explorer/2.png";
+import Preview3 from "../../../assets/apps/preview/btc-rpc-explorer/3.png";
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
+import { App } from "../../../models/app.model";
 import { instance } from "../../../util/interceptor";
+import mockInfo from "../../../util/mock-info.json";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 export const AppInfo: FC<AppInfoProps> = (props) => {
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [iconImg, setIconImg] = useState("");
-  const [imgs, setImgs] = useState<string[]>([]);
-  const [resp, setResp] = useState<any>({});
-
-  const { id } = props;
+  const [imgs] = useState<any[]>([Preview1, Preview2, Preview3]);
+  const { id, name, installed, description } = props.app;
+  // TODO: Change to dynamic info
+  const { version, repository, author } = mockInfo;
 
   useEffect(() => {
-    const fetchAppDetails = async () => {
-      const resp = await instance.get(`appdetails/${id}`);
-      setImgs(resp.data.images);
-      setResp(resp.data);
-      setIsLoading(false);
-    };
-    fetchAppDetails();
-
-    import(`../../../assets/apps/${id}.png`)
+    setIsLoading(true);
+    import(`../../../assets/apps/logos/${id}.png`)
       .then((image) => {
         setIconImg(image.default);
       })
-      .catch((e) => {
+      .catch((_) => {
         // use fallback icon if image for id doesn't exist
         import("../../../assets/cloud.svg").then((img) =>
           setIconImg(img.default)
         );
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [id]);
 
@@ -69,9 +71,9 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
 
       {/* Image box with title */}
       <section className="w-full px-10 flex items-center">
-        <img className="max-h-16" src={iconImg} alt={`${props.id} Logo`} />
-        <h1 className="text-2xl px-5 dark:text-white">{resp.name}</h1>
-        {!resp.installed && (
+        <img className="max-h-16" src={iconImg} alt={`${id} Logo`} />
+        <h1 className="text-2xl px-5 dark:text-white">{name}</h1>
+        {!installed && (
           <button
             className={`bg-green-400 rounded p-2`}
             onClick={installHandler}
@@ -79,7 +81,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
             {t("apps.install")}
           </button>
         )}
-        {resp.installed && (
+        {installed && (
           <button
             className={`bg-red-500 text-white rounded p-2`}
             onClick={uninstallHandler}
@@ -106,27 +108,24 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
       <section className="w-full p-5 flex items-center justify-center">
         <article className="w-full bd-card">
           <h3 className="text-lg">
-            {resp.name} v{resp.version}
+            {name} {version}
           </h3>
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
-            {" "}
             {t("apps.about")}
           </h4>
-          <p>{resp.description}</p>
+          <p>{description}</p>
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
-            {" "}
             {t("apps.author")}
           </h4>
-          <p>{resp.author}</p>
+          <p>{author}</p>
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
-            {" "}
             {t("apps.source")}
           </h4>
           <a
-            href={resp.repository}
+            href={repository}
             className="text-blue-400 dark:text-blue-300 underline"
           >
-            {resp.repository}
+            {repository}
           </a>
         </article>
       </section>
@@ -137,6 +136,6 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
 export default AppInfo;
 
 export interface AppInfoProps {
-  id: string | null;
+  app: App;
   onClose: () => void;
 }

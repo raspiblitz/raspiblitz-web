@@ -105,3 +105,7 @@ Please do not commit the above changes.
   - [MIT License](https://github.com/Ride-The-Lightning/RTL/blob/master/LICENSE)
 - Specter Logo from [specter-desktop](https://github.com/cryptoadvance/specter-desktop)
   - [MIT License](https://github.com/cryptoadvance/specter-desktop/blob/master/LICENSE)
+- Mempool.space Logo from [mempool](https://github.com/mempool/mempool)
+  - [Mempool.space Trademark Policy](https://mempool.space/trademark-policy)
+- LNbits Logo from [lnbits-legend](https://github.com/lnbits/lnbits-legend)
+  - [MIT License](https://github.com/lnbits/lnbits-legend/blob/master/LICENSE)
