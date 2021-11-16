@@ -8,7 +8,7 @@ export const AppStatusCard: FC<{ app: AppStatus }> = (props) => {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    import(`../../../assets/apps/${id}.png`)
+    import(`../../../assets/apps/logos/${id}.png`)
       .then((image) => {
         setImage(image.default);
       })

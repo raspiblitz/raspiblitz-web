@@ -48,7 +48,6 @@ const eventsHandler = (request, response) => {
   btcInfo.btcInfo();
   lnInfoLite.lnInfoLite();
   installedAppStatus.appStatus();
-  apps.listApps();
   walletBalance.walletBalance();
 
   request.on("close", () => {
@@ -152,12 +151,6 @@ app.post("/api/v1/uninstall", (req, res) => {
   console.info("call to /api/v1/uninstall for app", req.body.id);
   // TODO
   res.status(200).send();
-});
-
-app.get("/api/v1/appdetails/:id", (req, res) => {
-  console.info("call to /api/v1/appdetails with id: " + req.params.id);
-  const details = apps.appDetails(req);
-  res.send(details);
 });
 
 /***
