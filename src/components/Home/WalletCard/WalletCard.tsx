@@ -12,6 +12,7 @@ import {
 } from "../../../util/format";
 import { checkPropsUndefined } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
+import btcLogo from "../../../assets/bitcoin-circle-white.svg";
 
 export const WalletCard: FC<WalletCardProps> = (props) => {
   const { t } = useTranslation();
@@ -37,7 +38,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
     <div className="p-5 h-full">
       <div className="bd-card h-full transition-colors">
         <section className="text-black flex flex-col lg:flex-row flex-wrap p-5">
-          <div className="bg-gradient-to-b from-yellow-500 bg-yellow-600 w-full text-white rounded-xl p-4">
+          <div className="relative bg-gradient-to-b from-yellow-500 bg-yellow-600 w-full text-white rounded-xl p-4 overflow-hidden">
             <article className="w-full flex flex-col">
               <h6 className="text-xl">{t("wallet.balance")}</h6>
               <p className="text-2xl font-bold">
@@ -63,6 +64,11 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 {convertToString(appCtx.unit, convertedLnBalance)} {appCtx.unit}
               </p>
             </article>
+            <img
+              src={btcLogo}
+              className="absolute -bottom-9 -right-9 h-32 w-32 opacity-30"
+              alt="Bitcoin Logo"
+            />
           </div>
         </section>
         <section className="flex justify-around p-2">
