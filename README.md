@@ -1,6 +1,8 @@
 # Raspiblitz Web
 
-![Raspiblitz Dashboard](images/blitz_home.png)
+![Raspiblitz Dashboard](preview.png)
+
+Images of the progress can be found at [raspiblitz-web-progress](https://github.com/cstenglein/raspiblitz-web-progress)
 
 A mobile-first responsive Web UI for the [RaspiBlitz](https://github.com/rootzoll/raspiblitz).
 
