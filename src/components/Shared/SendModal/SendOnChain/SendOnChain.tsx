@@ -29,7 +29,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
         {balance} {appCtx.unit}
       </div>
 
-      <div className="my-5 flex flex-col justify-center text-center items-center">
+      {/* <div className="my-5 flex flex-col justify-center text-center items-center">
         <div className="w-full md:w-10/12 py-1">
           <InputField
             isFormValid={true}
@@ -73,7 +73,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
             value={comment}
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="inline-block w-4/5 lg:w-3/12 align-top mb-5">
         <button
