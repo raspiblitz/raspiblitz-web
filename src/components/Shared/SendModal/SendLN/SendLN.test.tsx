@@ -38,7 +38,7 @@ describe("SendLN", () => {
     ).not.toBeDisabled();
 
     userEvent.click(await screen.findByRole("button", { name: "wallet.send" }));
-    expect(invoiceInput).toHaveClass("input-error");
+    await waitFor(() => expect(invoiceInput).toHaveClass("input-error"));
     expect(
       await screen.findByText("forms.validation.lnInvoice.required")
     ).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe("SendLN", () => {
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
     userEvent.type(invoiceInput, "123456789abc");
-    expect(invoiceInput).toHaveClass("input-error");
+    await waitFor(() => expect(invoiceInput).toHaveClass("input-error"));
     expect(
       await screen.findByText("forms.validation.lnInvoice.patternMismatch")
     ).toBeInTheDocument();
