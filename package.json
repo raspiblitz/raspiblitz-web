@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "i18next": "^21.0.0",
+    "i18next": "^21.5.2",
     "qrcode.react": "^1.0.1",
     "rc-tooltip": "^5.1.1",
     "react": "^17.0.2",
