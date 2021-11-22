@@ -69,8 +69,6 @@ This guide uses Polar for easier development, but you can also use a real lightn
   - Important: When definining `shell_script_path` you need to define a directory where a folder called `config.scripts` and a file called `blitz.debug.sh` reside in. Otherwise `blitz_api` may not work (used on the RaspiBlitz for logging)
 - Make the following change in `blitz_api`:
   - In [main/app/main.py](https://github.com/fusion44/blitz_api/blob/main/app/main.py#L48), change the `prefix_format` from `/v{major}` to `/api/v{major}`.
-- Make the following change in `raspiblitz-web`:
-  - In [store/sse-context.tsx](./src/store/sse-context.tsx) change the `SSE_URL` from `http://localhost:8000/api/sse/subscribe` to `http://localhost:8000/sse/subscribe`
 
 Now you can start the `blitz_api` and run `yarn start` in raspiblitz-web.
 
