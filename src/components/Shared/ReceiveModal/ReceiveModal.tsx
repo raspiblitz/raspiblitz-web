@@ -27,10 +27,16 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
     "text-center h-10 bg-yellow-500 hover:bg-yellow-400 rounded-lg w-full text-white";
 
   const invoiceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setInvoiceType(event.target.value);
     setAddress("");
     setAmount(0);
     setComment("");
+    setInvoiceType(() => {
+      const type = event.target.value;
+      if (type === "onchain") {
+        setAddress("bcrt1qu3yk3a9k2slu0g6l9wz3r0std2j9qypakgyrnr");
+      }
+      return type;
+    });
   };
 
   const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +108,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
         </div>
         <div className="px-2">
           <label htmlFor="onchain" className={`${radioStyles} ${walletStyle}`}>
-            {t("wallet.fund_short")}
+            {t("wallet.fund_onchain")}
           </label>
           <input
             id="onchain"
@@ -155,10 +161,9 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
             </div>
           )}
 
-          {!address && (
+          {!address && showLnInvoice && (
             <button type="submit" className={btnClasses}>
-              {showLnInvoice && "Create Invoice"}
-              {!showLnInvoice && "Generate Address"}
+              {t("wallet.create_invoice")}
             </button>
           )}
 

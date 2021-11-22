@@ -58,7 +58,7 @@ const eventsHandler = (request, response) => {
 /**
  * SSE Handler call
  */
-app.get("/api/sse/subscribe", eventsHandler);
+app.get("/sse/subscribe", eventsHandler);
 
 /***
  * STATUS
@@ -157,18 +157,11 @@ app.post("/api/v1/uninstall", (req, res) => {
  * TRANSACTIONS
  */
 
-app.post("/api/v1/receive", (req, res) => {
-  console.info("call to /api/v1/receive");
-  if (req.body.type === "lightning") {
-    // include comment & amount for real req ..
-    res.send(
-      JSON.stringify({ address: "lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3" })
-    );
-    return;
-  }
-  res.send(
-    JSON.stringify({ address: "bcrt1qxunuhx7ve74n6f7z667qrl7wjachdyyzndwdyz" })
+app.post("/api/v1/lightning/add-invoice", (req, res) => {
+  console.info(
+    `call to /api/v1/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`
   );
+  res.send(JSON.stringify({ payment_request: "lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3" }));
 });
 
 app.post("/api/v1/send-coins", (req, res) => {
