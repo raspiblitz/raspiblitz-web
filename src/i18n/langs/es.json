@@ -44,7 +44,6 @@
       "address": "Dirección",
       "scan_qr": "Escánea este código QR o copia la dirección de abajo para solicitar los fondos",
       "fund": "Agrega fondos a tu billetera",
-      "fund_short": "Fondear billetera",
       "on_chain": "On-chain",
       "create_invoice_ln": "Crear un recibo Lightning",
       "copy_clipboard": "Copiar al portapapeles",

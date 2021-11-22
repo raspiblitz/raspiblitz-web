@@ -37,7 +37,6 @@
       "copied": "Copiado!",
       "copy_clipboard": "Copiar para área de transferência",
       "create_invoice_ln": "Criar uma fatura Lightning",
-      "fund_short": "Colocar fundos na carteira",
       "fund": "Colocar fundos na sua carteira",
       "scan_qr": "Leia este código QR ou copie o endereço abaixo para receber fundos",
       "address": "Endereço"
