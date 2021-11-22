@@ -17,6 +17,8 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
     channelActive,
     channelInactive,
     implementation,
+    pendingLocalBalance,
+    pendingRemoteBalance,
   } = props;
 
   if (checkPropsUndefined(props)) {
@@ -38,6 +40,16 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
     appCtx.unit === "BTC"
       ? convertMSatToBtc(remoteBalance || 0)
       : remoteBalance / 1000;
+
+  const convertedLocalPendingBalance =
+    appCtx.unit === "BTC"
+      ? convertMSatToBtc(pendingLocalBalance || 0)
+      : pendingLocalBalance / 1000;
+
+  const convertedRemotePendingBalance =
+    appCtx.unit === "BTC"
+      ? convertMSatToBtc(pendingRemoteBalance || 0)
+      : pendingRemoteBalance / 1000;
 
   const channelTotal = channelActive + channelInactive + channelPending;
 
@@ -79,6 +91,26 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
             </p>
           </article>
         </div>
+        <div className="flex overflow-hidden py-4">
+          <article className="w-1/2">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+              {t("home.pending_balance_local")}
+            </h6>
+            <p>
+              {convertToString(appCtx.unit, convertedLocalPendingBalance)}{" "}
+              {appCtx.unit}
+            </p>
+          </article>
+          <article className="w-1/2">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+              {t("home.pending_balance_remote")}
+            </h6>
+            <p>
+              {convertToString(appCtx.unit, convertedRemotePendingBalance)}{" "}
+              {appCtx.unit}
+            </p>
+          </article>
+        </div>
       </section>
     </div>
   );
@@ -94,4 +126,6 @@ export interface LightningCardProps {
   channelPending: number;
   localBalance: number;
   remoteBalance: number;
+  pendingLocalBalance: number;
+  pendingRemoteBalance: number;
 }

@@ -6,9 +6,9 @@ const btcInfo = () => {
   util.sendSSE("btc_info", {
     blocks: 25,
     headers: 25,
-    verification_progress: 1.0,
-    difficulty: 0,
-    size_on_disk: 7752,
+    verification_progress: 0.9999983702720613,
+    difficulty: 22674148233453.11,
+    size_on_disk: 427431959018,
     networks: [
       {
         name: "ipv4",
