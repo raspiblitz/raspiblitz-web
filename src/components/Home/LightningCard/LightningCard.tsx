@@ -66,20 +66,20 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
+              {t("home.channel")}
+            </h6>
+            <p>{`${channelActive} / ${channelTotal}`}</p>
+          </article>
+        </div>
+        <div className="flex overflow-hidden py-4">
+          <article className="w-1/2">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.local_balance")}
             </h6>
             <p>
               {convertToString(appCtx.unit, convertedLocalBalance)}{" "}
               {appCtx.unit}
             </p>
-          </article>
-        </div>
-        <div className="flex overflow-hidden py-4">
-          <article className="w-1/2">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
-              {t("home.channel")}
-            </h6>
-            <p>{`${channelActive} / ${channelTotal}`}</p>
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
