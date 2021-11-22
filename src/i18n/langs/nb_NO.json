@@ -60,7 +60,6 @@
     "wallet": {
       "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta verdier",
       "fund": "Fyll opp lommeboken din",
-      "fund_short": "Fyll opp lommebok",
       "on_chain": "I kjeden",
       "balance": "Saldo",
       "address": "Adresse",

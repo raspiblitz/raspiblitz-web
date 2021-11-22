@@ -45,7 +45,6 @@
       "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
       "address": "Adresse",
       "on_chain": "On-chain",
-      "fund_short": "Approvisionner porte-monnaie",
       "balance": "Balance",
       "fund": "Approvisionner votre porte-monnaie",
       "send_lightning": "Envoyer de l'argent avec Lightning",

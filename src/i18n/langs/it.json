@@ -44,7 +44,6 @@
     },
     "wallet": {
       "address": "Indirizzo",
-      "fund_short": "Deposita nel portafoglio",
       "scan_qr": "Scannerizza questo codice QR o copia l'indirizzo sottostante per ricevere denaro",
       "send_onchain": "Invia denaro On-chain",
       "send_lightning": "Invia denaro via Lightning",
