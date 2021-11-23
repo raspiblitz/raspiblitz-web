@@ -13,6 +13,7 @@ import type { SubmitHandler } from "react-hook-form";
 interface IFormInputs {
   addressInput: string;
   feeInput: number;
+  amountInput: number;
   commentInput: string;
 }
 
@@ -70,7 +71,14 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
         </div>
 
         <div className="w-full md:w-10/12 py-1">
-          {/* <AmountInput amount={amount} onChangeAmount={onChangeAmount} /> */}
+          <AmountInput
+            amount={amount}
+            register={register("amountInput", {
+              required: t("forms.validation.chainAmount.required") as string,
+              onChange: onChangeAmount,
+            })}
+            errorMessage={errors.amountInput}
+          />
         </div>
 
         <div className="w-full md:w-10/12 py-1">
