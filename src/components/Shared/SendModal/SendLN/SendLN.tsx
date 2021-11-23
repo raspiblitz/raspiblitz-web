@@ -15,7 +15,6 @@ const SendLn: FC<SendLnProps> = (props) => {
   const { t } = useTranslation();
 
   interface IFormInputs {
-    firstName: string;
     invoiceInput: string;
   }
 

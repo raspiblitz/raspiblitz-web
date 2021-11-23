@@ -81,6 +81,10 @@
         "lnInvoice": {
           "required": "Bitte gib eine Lightning invoice ein",
           "patternMismatch": "Falsches invoice format"
+        },
+        "chainAddress": {
+          "required": "Bitte gib eine Bitocin Adresse ein",
+          "patternMismatch": "Falsches Adress format"
         }
       }
     }

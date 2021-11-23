@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FC, useContext, useState } from "react";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext } from "../../../store/app-context";
 import { instance } from "../../../util/interceptor";
@@ -36,8 +36,7 @@ const SendModal: FC<SendModalProps> = (props) => {
     setConfirm(true);
   };
 
-  const confirmOnChainHandler = (event: FormEvent) => {
-    event.preventDefault();
+  const confirmOnChainHandler = () => {
     setConfirm(true);
   };
 
