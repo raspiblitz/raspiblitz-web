@@ -27,8 +27,7 @@ const SendModal: FC<SendModalProps> = (props) => {
   const [comment, setComment] = useState("");
 
   // TODO: handle error
-  const confirmLnHandler = async (event: FormEvent) => {
-    event.preventDefault();
+  const confirmLnHandler = async () => {
     const resp = await instance.get(
       "/lightning/decode-pay-req?pay_req=" + invoice
     );

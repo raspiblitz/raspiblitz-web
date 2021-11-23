@@ -1,10 +1,6 @@
 import { forwardRef } from "react";
 import type { Ref } from "react";
-import type {
-  FieldError,
-  UseFormRegisterReturn,
-  ChangeHandler,
-} from "react-hook-form";
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 const InputField = forwardRef(
   (

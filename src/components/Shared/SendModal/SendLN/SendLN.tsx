@@ -1,4 +1,4 @@
-import { FC, FormEvent, useContext } from "react";
+import { FC, useContext } from "react";
 
 import type { ChangeEvent } from "react";
 
@@ -27,19 +27,7 @@ const SendLn: FC<SendLnProps> = (props) => {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
-
-  // const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   validateInput(event.target.validity);
-  //   onChangeInvoice(event);
-  // };
-  // const onChangeFoo = (event: SyntheticBaseEvent ) => {
-  //   console.log('onChangeFoo', event.target.native);
-  // };
-
-  // const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-  //       onConfirm(event);
-  // };
+  const onSubmit: SubmitHandler<IFormInputs> = (_data) => onConfirm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -57,7 +45,7 @@ const SendLn: FC<SendLnProps> = (props) => {
             value: /(lnbc|lntb)\w+/i,
             message: t("forms.validation.lnInvoice.patternMismatch"),
           },
-          // onChange: onChangeFoo
+          onChange: onChangeInvoice,
         })}
         label={t("wallet.invoice")}
         errorMessage={errors.invoiceInput}
@@ -78,6 +66,6 @@ export default SendLn;
 
 export interface SendLnProps {
   balance: string;
-  onConfirm: (event: FormEvent) => void;
+  onConfirm: () => void;
   onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
 }
