@@ -58,12 +58,12 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
             {...register("addressInput", {
               required: t("forms.validation.chainAddress.required") as string,
               pattern: {
-                value: /(1|3|bc1)\w+/i,
+                value: /^(1|3|bc1)\w+/i,
                 message: t("forms.validation.chainAddress.patternMismatch"),
               },
               onChange: onChangeAddress,
             })}
-            placeholder="bc..."
+            placeholder="bc1..."
             label={t("wallet.address")}
             errorMessage={errors.addressInput}
             value={address}

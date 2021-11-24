@@ -38,8 +38,8 @@ const InputField = forwardRef(
             onChange={onChange}
             className={`
                ${errorMessage ? "input-error" : "input-underline"}
-               ${(textAlign === "right" || type === "number") && "text-right"}
-               ${(inputRightAddon || inputRightElement) && "w-7/12"}
+               ${textAlign === "right" || type === "number" ? "text-right" : ""}
+               ${inputRightAddon || inputRightElement ? "w-7/12" : ""}
                `}
           />
 
