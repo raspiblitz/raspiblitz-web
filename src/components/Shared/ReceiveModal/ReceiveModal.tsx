@@ -22,25 +22,23 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
   const lnInvoice = invoiceType === "lightning";
 
-  const invoiceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const invoiceChangeHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     setAddress("");
     setAmount(0);
     setComment("");
-    setInvoiceType(() => {
-      const type = event.target.value;
-      if (type === "onchain") {
-        setIsLoading(true);
-        instance
-          .post("lightning/new-address", {
-            type: "p2wkh",
-          })
-          .then((resp) => {
-            setAddress(resp.data);
-            setIsLoading(false);
-          });
-      }
-      return type;
-    });
+
+    const type = event.target.value;
+    setInvoiceType(type);
+
+    if (type === "onchain") {
+      setIsLoading(true);
+      const resp = await instance.post("lightning/new-address", {
+        type: "p2wkh",
+      });
+      setAddress(resp.data);
+      setIsLoading(false);
+    }
   };
 
   const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +113,12 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       {address && (
         <>
           <div className="my-5 flex justify-center">
-            <QRCode value={address} className="overflow-visible" />
+            <QRCode
+              id="qr-code"
+              value={address}
+              className="overflow-visible"
+              alt="QR Code"
+            />
           </div>
           <p className="my-5 text-gray-500 dark:text-gray-300 text-sm">
             {t("wallet.scan_qr")}
