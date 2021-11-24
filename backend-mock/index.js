@@ -161,7 +161,12 @@ app.post("/api/v1/lightning/add-invoice", (req, res) => {
   console.info(
     `call to /api/v1/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`
   );
-  res.send(JSON.stringify({ payment_request: "lntb1u1pwz5w78pp5e8w8cr5c30xzws92v3" }));
+  res.send(
+    JSON.stringify({
+      payment_request:
+        "lnbcrt2u1pseumjxpp5v86496waqjpnt2y6wxa77er2wsrp6afqqmnk3ap0kzjr857vj7ksdqvvdhk6mt9de6qcqzpgxqrrsssp5dvku88d87th4wqmstcl4watfsje0azhk35wtey3vlh59nrr7s2qs9qyyssq3j2l3e3d022vz290j2m5asp7sgud036gfxg2ltm33nm2tcxqz7mntcfd8s3s5v28cna25nmraf75ugsvrflalhamvqrep6fed7amuvcqxnzjpe",
+    })
+  );
 });
 
 app.post("/api/v1/send-coins", (req, res) => {
@@ -348,4 +353,11 @@ app.post("/api/v1/lightning/send-payment", (req, res) => {
 app.get("/api/v1/lightning/list-all-tx", (req, res) => {
   console.info("call to /api/v1/lightning/list-all-tx");
   return res.status(200).send(JSON.stringify(transactions.listTransactions()));
+});
+
+app.post("/api/v1/lightning/new-address", (req, res) => {
+  console.info(
+    `call to /api/v1/lightning/new-address with type ${req.body.type}`
+  );
+  return res.status(200).send("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz");
 });
