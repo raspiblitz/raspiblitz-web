@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 
-import type { ChangeEvent, FormEvent } from "react";
+import type { ChangeEvent } from "react";
 
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../../store/app-context";
@@ -101,9 +101,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
               onChange: onChangeComment,
             })}
             label={t("tx.comment")}
-            errorMessage={errors.commentInput}
             value={comment}
-            inputRightAddon="sat / vByte"
             placeholder="Optional comment"
           />
         </div>

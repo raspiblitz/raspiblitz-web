@@ -1,5 +1,6 @@
 import Tooltip from "rc-tooltip";
-import { ChangeEvent, FC, FormEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
+import type { ChangeEvent, FC } from "react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
@@ -8,7 +9,16 @@ import { AppContext } from "../../../store/app-context";
 import { convertBtcToSat } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
 import AmountInput from "../AmountInput/AmountInput";
+import InputField from "../InputField/InputField";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+
+interface IFormInputs {
+  amountInput: number;
+  commentInput: string;
+}
 
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const appCtx = useContext(AppContext);
@@ -49,8 +59,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
     setAmount(+event.target.value);
   };
 
-  const generateInvoiceHandler = async (event: FormEvent) => {
-    event.preventDefault();
+  const generateInvoiceHandler = async () => {
     setIsLoading(true);
     const mSatAmount =
       appCtx.unit === "BTC" ? convertBtcToSat(amount) * 1000 : amount * 1000;
@@ -73,6 +82,17 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
     invoiceType === "onchain"
       ? "text-white bg-yellow-500 dark:bg-yellow-500"
       : "";
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, submitCount },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
+
+  const onSubmit: SubmitHandler<IFormInputs> = (_data) =>
+    generateInvoiceHandler();
 
   return (
     <ModalDialog close={props.onClose}>
@@ -131,44 +151,73 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
       <form
         className="w-full flex flex-col items-center"
-        onSubmit={generateInvoiceHandler}
+        onSubmit={handleSubmit(onSubmit)}
       >
-        {isLoading && (
-          <div className="p-5">
-            <LoadingSpinner />
-          </div>
-        )}
-        {showLnInvoice && (
-          <div className="flex flex-col pb-5 justify-center text-center">
-            <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
-            <div className="flex flex-col justify-center mt-2">
-              <label
-                htmlFor="comment"
-                className="block text-gray-700 dark:text-white text-sm mb-2 font-bold text-left"
-              >
-                Comment
-              </label>
-              <input
-                id="comment"
-                type="text"
-                placeholder="Optional comment"
-                value={comment}
-                onChange={commentChangeHandler}
-                className="input-underline"
-              />
+        <fieldset className="w-4/5 mb-5">
+          {isLoading && (
+            <div className="p-5">
+              <LoadingSpinner />
             </div>
-          </div>
-        )}
+          )}
 
-        {!address && showLnInvoice && (
-          <button
-            type="submit"
-            className="text-center h-10 bg-yellow-500 hover:bg-yellow-400 rounded-lg w-full text-white mb-5"
-          >
-            {t("wallet.create_invoice")}
-          </button>
-        )}
+          {showLnInvoice && (
+            <div className="flex flex-col pb-5 justify-center text-center">
+              <AmountInput
+                amount={amount}
+                register={register("amountInput", {
+                  required: t(
+                    "forms.validation.chainAmount.required"
+                  ) as string,
+                  onChange: amountChangeHandler,
+                })}
+                errorMessage={errors.amountInput}
+              />
+
+              <div className="flex flex-col justify-center mt-2">
+                <InputField
+                  {...register("commentInput", {
+                    onChange: commentChangeHandler,
+                  })}
+                  label={t("tx.comment")}
+                  value={comment}
+                  placeholder="Optional comment"
+                />
+              </div>
+            </div>
+          )}
+
+          {!address && showLnInvoice && (
+            <button
+              type="submit"
+              className="bd-button p-3 my-3"
+              disabled={submitCount > 0 && !isValid}
+            >
+              {t("wallet.create_invoice")}
+            </button>
+          )}
+
+          {address && (
+            <>
+              <article className="flex flex-row items-center">
+                <div className="w-11/12 overflow-x-auto m-2">{address}</div>
+                <Tooltip
+                  overlay={
+                    <div>
+                      {addressCopied
+                        ? t("wallet.copied")
+                        : t("wallet.copy_clipboard")}
+                    </div>
+                  }
+                  placement="top"
+                >
+                  <ClipboardIcon className="w-6 h-6" onClick={copyAddress} />
+                </Tooltip>
+              </article>
+            </>
+          )}
+        </fieldset>
       </form>
+
       {address && (
         <>
           <article className="flex flex-row items-center mb-5">

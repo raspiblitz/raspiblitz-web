@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import type { FC, Ref } from "react";
+import type { ReactElement, Ref } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { HTMLInputTypeAttribute } from "react";
 
@@ -50,7 +50,9 @@ const InputField = forwardRef(
           {inputRightElement}
         </div>
 
-        {errorMessage && <p className="text-red-500">{errorMessage.message}</p>}
+        {errorMessage && (
+          <p className="text-left text-red-500">{errorMessage.message}</p>
+        )}
       </>
     );
   }
@@ -64,7 +66,7 @@ export interface InputFieldProps extends UseFormRegisterReturn {
   placeholder?: string;
   value?: string;
   inputRightAddon?: string;
-  inputRightElement?: any | string;
+  inputRightElement?: ReactElement | string;
   textAlign?: "right";
   type?: HTMLInputTypeAttribute;
 }
