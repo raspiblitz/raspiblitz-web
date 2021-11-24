@@ -4,8 +4,9 @@ import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
 import SendLN from "./SendLN";
+import type { SendLnProps } from "./SendLN";
 
-const basicProps = {
+const basicProps: SendLnProps = {
   balance: "123456",
   onConfirm: () => {},
   onChangeInvoice: () => {},
