@@ -1,8 +1,7 @@
-import QRCode from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import { ChangeEvent, FC, FormEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ClipboardIcon } from "../../../assets/clipboard-copy.svg";
+import QRCode from "react-qr-code";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
 import { AppContext } from "../../../store/app-context";
@@ -23,20 +22,23 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
   const lnInvoice = invoiceType === "lightning";
 
-  const btnClasses =
-    "text-center h-10 bg-yellow-500 hover:bg-yellow-400 rounded-lg w-full text-white";
-
-  const invoiceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const invoiceChangeHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     setAddress("");
     setAmount(0);
     setComment("");
-    setInvoiceType(() => {
-      const type = event.target.value;
-      if (type === "onchain") {
-        setAddress("bcrt1qu3yk3a9k2slu0g6l9wz3r0std2j9qypakgyrnr");
-      }
-      return type;
-    });
+
+    const type = event.target.value;
+    setInvoiceType(type);
+
+    if (type === "onchain") {
+      setIsLoading(true);
+      const resp = await instance.post("lightning/new-address", {
+        type: "p2wkh",
+      });
+      setAddress(resp.data);
+      setIsLoading(false);
+    }
   };
 
   const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,34 +49,22 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
     setAmount(+event.target.value);
   };
 
-  const generateAddressHandler = async (event: FormEvent) => {
+  const generateInvoiceHandler = async (event: FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
-    if (lnInvoice) {
-      const mSatAmount =
-        appCtx.unit === "BTC" ? convertBtcToSat(amount) * 1000 : amount * 1000;
-      const resp = await instance.post(
-        `lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`
-      );
-      console.log(resp.data);
-      setAddress(resp.data.payment_request);
-    } else {
-      // Commented out until https://github.com/fusion44/blitz_api/issues/43 is resolved
-      // const body = {
-      //  type: invoiceType,
-      //  amount: lnInvoice ? amount : undefined,
-      //  comment: lnInvoice ? comment : undefined,
-      // };
-      // const resp = await instance.post("receive", body);
-      setAddress("bcrt1qu3yk3a9k2slu0g6l9wz3r0std2j9qypakgyrnr");
-    }
+    const mSatAmount =
+      appCtx.unit === "BTC" ? convertBtcToSat(amount) * 1000 : amount * 1000;
+    const resp = await instance.post(
+      `lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`
+    );
+    setAddress(resp.data.payment_request);
     setIsLoading(false);
   };
 
   const showLnInvoice = lnInvoice && !isLoading && !address;
 
   const radioStyles =
-    "px-3 py-2 shadow-md rounded-lg hover:text-white hover:bg-yellow-400 dark:hover:bg-yellow-400 dark:text-white dark:bg-gray-600";
+    "px-3 py-2 shadow-md rounded-lg hover:text-white hover:bg-yellow-400 dark:hover:bg-yellow-400 dark:text-white dark:bg-gray-500";
   const lnStyle =
     invoiceType === "lightning"
       ? "text-white bg-yellow-500 dark:bg-yellow-500"
@@ -92,8 +82,8 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       {!showLnInvoice && (
         <div className="text-xl font-bold">{t("wallet.fund")}</div>
       )}
-      <div className="py-8 flex justify-center">
-        <div className="px-2">
+      <div className="py-5 flex flex-col md:flex-row justify-center">
+        <div className="p-2 my-2">
           <label htmlFor="lightning" className={`${radioStyles} ${lnStyle}`}>
             {t("home.lightning")}
           </label>
@@ -106,7 +96,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
             onChange={invoiceChangeHandler}
           />
         </div>
-        <div className="px-2">
+        <div className="p-2 my-2">
           <label htmlFor="onchain" className={`${radioStyles} ${walletStyle}`}>
             {t("wallet.fund_onchain")}
           </label>
@@ -120,74 +110,84 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           />
         </div>
       </div>
-      {address && <div className="my-5">{t("wallet.scan_qr")}</div>}
       {address && (
-        <div className="my-5 flex justify-center">
-          <QRCode value={address} />
-        </div>
+        <>
+          <div className="my-5 flex justify-center">
+            <QRCode
+              id="qr-code"
+              value={address}
+              className="overflow-visible"
+              alt="QR Code"
+            />
+          </div>
+          <p className="my-5 text-gray-500 dark:text-gray-300 text-sm">
+            {t("wallet.scan_qr")}
+          </p>
+        </>
       )}
       <form
-        className="flex flex-col items-center"
-        onSubmit={generateAddressHandler}
+        className="w-full flex flex-col items-center"
+        onSubmit={generateInvoiceHandler}
       >
-        <div className="w-4/5 mb-5">
-          {isLoading && (
-            <div className="p-5">
-              <LoadingSpinner />
-            </div>
-          )}
-          {showLnInvoice && (
-            <div className="flex flex-col pb-5 justify-center text-center">
-              <AmountInput
-                amount={amount}
-                onChangeAmount={amountChangeHandler}
+        {isLoading && (
+          <div className="p-5">
+            <LoadingSpinner />
+          </div>
+        )}
+        {showLnInvoice && (
+          <div className="flex flex-col pb-5 justify-center text-center">
+            <AmountInput amount={amount} onChangeAmount={amountChangeHandler} />
+            <div className="flex flex-col justify-center mt-2">
+              <label
+                htmlFor="comment"
+                className="block text-gray-700 dark:text-white text-sm mb-2 font-bold text-left"
+              >
+                Comment
+              </label>
+              <input
+                id="comment"
+                type="text"
+                placeholder="Optional comment"
+                value={comment}
+                onChange={commentChangeHandler}
+                className="input-underline"
               />
-              <div className="flex flex-col justify-center mt-2">
-                <label
-                  htmlFor="comment"
-                  className="block text-gray-700 dark:text-gray-300 text-sm mb-2 font-bold text-left"
-                >
-                  Comment
-                </label>
-                <input
-                  id="comment"
-                  type="text"
-                  placeholder="Optional comment"
-                  value={comment}
-                  onChange={commentChangeHandler}
-                  className="input-underline"
-                />
-              </div>
             </div>
-          )}
+          </div>
+        )}
 
-          {!address && showLnInvoice && (
-            <button type="submit" className={btnClasses}>
-              {t("wallet.create_invoice")}
-            </button>
-          )}
-
-          {address && (
-            <>
-              <article className="flex flex-row items-center">
-                <div className="w-11/12 overflow-x-auto m-2">{address}</div>
-                <Tooltip
-                  overlay={
-                    <div>
-                      {addressCopied
-                        ? t("wallet.copied")
-                        : t("wallet.copy_clipboard")}
-                    </div>
-                  }
-                  placement="top"
-                >
-                  <ClipboardIcon className="w-6 h-6" onClick={copyAddress} />
-                </Tooltip>
-              </article>
-            </>
-          )}
-        </div>
+        {!address && showLnInvoice && (
+          <button
+            type="submit"
+            className="text-center h-10 bg-yellow-500 hover:bg-yellow-400 rounded-lg w-full text-white mb-5"
+          >
+            {t("wallet.create_invoice")}
+          </button>
+        )}
       </form>
+      {address && (
+        <>
+          <article className="flex flex-row items-center mb-5">
+            <Tooltip
+              overlay={
+                <div>
+                  {addressCopied
+                    ? t("wallet.copied")
+                    : t("wallet.copy_clipboard")}
+                </div>
+              }
+              placement="top"
+            >
+              <p
+                onClick={copyAddress}
+                className="w-full break-all m-2 text-gray-600 dark:text-white"
+              >
+                {address}
+              </p>
+            </Tooltip>
+          </article>
+        </>
+      )}
     </ModalDialog>
   );
 };

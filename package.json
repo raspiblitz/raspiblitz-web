@@ -55,11 +55,11 @@
   "dependencies": {
     "axios": "^0.24.0",
     "i18next": "^21.5.2",
-    "qrcode.react": "^1.0.1",
     "rc-tooltip": "^5.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^11.14.2",
+    "react-qr-code": "^2.0.3",
     "react-router-dom": "^5.2.0",
     "react-toastify": "^8.1.0"
   },
@@ -72,7 +72,6 @@
     "@testing-library/user-event": "^13.1.9",
     "@types/jest": "^26.0.15",
     "@types/node": "^14.0.0",
-    "@types/qrcode.react": "^1.0.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
