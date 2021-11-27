@@ -195,26 +195,6 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
               {t("wallet.create_invoice")}
             </button>
           )}
-
-          {address && (
-            <>
-              <article className="flex flex-row items-center">
-                <div className="w-11/12 overflow-x-auto m-2">{address}</div>
-                <Tooltip
-                  overlay={
-                    <div>
-                      {addressCopied
-                        ? t("wallet.copied")
-                        : t("wallet.copy_clipboard")}
-                    </div>
-                  }
-                  placement="top"
-                >
-                  <ClipboardIcon className="w-6 h-6" onClick={copyAddress} />
-                </Tooltip>
-              </article>
-            </>
-          )}
         </fieldset>
       </form>
 
