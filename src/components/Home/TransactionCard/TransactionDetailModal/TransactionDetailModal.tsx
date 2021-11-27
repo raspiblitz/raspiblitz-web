@@ -16,17 +16,7 @@ export const TransactionDetailModal: FC<TransactionDetailModalProps> = (
       <section className="flex flex-col">
         <h4 className="font-extrabold">{t("tx.tx_details")}</h4>
         {transaction?.category === "onchain" && (
-          <>
-            <a
-              className="text-blue-400 underline break-all py-2"
-              target="_blank"
-              rel="noreferrer"
-              href={`https://mempool.space/tx/${transaction.id}`}
-            >
-              {t("tx.mempool")}
-            </a>
-            <OnchainDetails details={transaction} />
-          </>
+          <OnchainDetails details={transaction} />
         )}
         {transaction?.category === "ln" && <LNDetails details={transaction} />}
       </section>
