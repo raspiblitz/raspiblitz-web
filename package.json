@@ -8,17 +8,13 @@
     "url": "https://cstenglein.com/"
   },
   "scripts": {
+    "postinstall": "husky install",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8000",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "{src,backend-mock}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"

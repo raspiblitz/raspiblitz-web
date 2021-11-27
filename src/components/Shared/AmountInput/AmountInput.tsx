@@ -15,10 +15,10 @@ const AmountInput: FC<AmountInputProps> = (props) => {
       </label>
       <div className="flex flex-row">
         <input
-                  id="amount"
+          id="amount"
           type="number"
           style={styles}
-                      className="w-8/12 text-right input-underline mr-3 pr-5"
+          className="w-8/12 text-right input-underline mr-3 pr-5"
           value={props.amount}
           onChange={props.onChangeAmount}
         />
