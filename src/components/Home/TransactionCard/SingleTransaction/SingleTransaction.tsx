@@ -1,8 +1,4 @@
 import { FC, useContext } from "react";
-import { ReactComponent as ReceiveIcon } from "../../../../assets/arrow-down.svg";
-import { ReactComponent as SendIcon } from "../../../../assets/arrow-up.svg";
-import { ReactComponent as ChainIcon } from "../../../../assets/chain.svg";
-import { ReactComponent as LightningIcon } from "../../../../assets/lightning.svg";
 import { Transaction } from "../../../../models/transaction.model";
 import { AppContext } from "../../../../store/app-context";
 import {
@@ -11,9 +7,11 @@ import {
   convertSatToBtc,
   convertToString,
 } from "../../../../util/format";
+import CategoryIcon from "./CategoryIcon";
 
 export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
-  const { amount, category, time_stamp, type, comment } = props.transaction;
+  const { amount, category, time_stamp, type, comment, status } =
+    props.transaction;
   const appCtx = useContext(AppContext);
 
   const sendingTx = type === "send";
@@ -39,34 +37,27 @@ export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
 
   const color = sendingTx ? "text-red-400" : "text-green-400";
 
-  const categoryIcon = sendingTx ? (
-    <SendIcon className="h-5 w-1/12 transform rotate-45" />
-  ) : (
-    <ReceiveIcon className="h-5 w-1/12" />
-  );
-
   return (
     <li
-      className="text-center px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-600"
+      className="text-center px-0 md:px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-500 flex flex-col justify-center"
       onClick={props.onClick}
     >
-      <div className="flex justify-center items-center">
-        {category === "onchain" && <ChainIcon className="h-5 w-1/12" />}
-        {category === "ln" && <LightningIcon className="h-5 w-1/12" />}
-        {categoryIcon}
-        <div className="w-3/12 italic overflow-ellipsis overflow-hidden whitespace-nowrap text-left">
-          {comment || "Transaction"}
+      <div className="flex justify-center items-center w-full">
+        <div className="w-2/12">
+          <CategoryIcon category={category} type={type} status={status} />
         </div>
-        <p className={`inline-block w-7/12 ${color}`}>
+        <time className="text-sm w-5/12" dateTime={isoString}>
+          {formattedDate}
+        </time>
+        <p className={`inline-block w-8/12 ${color}`}>
           {sign}
           {formattedAmount} {appCtx.unit}
         </p>
       </div>
-
-      <time className="text-sm" dateTime={isoString}>
-        {formattedDate}
-      </time>
-      <div className="w-11/12 h-1 mx-auto">
+      <div className="w-full italic overflow-ellipsis overflow-hidden whitespace-nowrap text-center">
+        {comment || "Transaction"}
+      </div>
+      <div className="w-full h-1 mx-auto">
         <div className="border border-b border-gray-200" />
       </div>
     </li>
