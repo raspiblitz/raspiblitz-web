@@ -83,8 +83,11 @@
           "patternMismatch": "Falsches invoice format"
         },
         "chainAddress": {
-          "required": "Bitte gib eine Bitocin Adresse ein",
+          "required": "Bitte gib eine Bitcoin Adresse ein",
           "patternMismatch": "Falsches Adress format"
+        },
+        "chainFee": {
+          "required": "Bitte gib eine Gebühr ein"
         }
       }
     }
