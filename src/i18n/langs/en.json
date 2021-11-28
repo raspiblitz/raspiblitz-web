@@ -111,7 +111,8 @@
           "patternMismatch": "Wrong address format"
         },
         "chainAmount": {
-          "required": "Please input an amount"
+          "required": "Please input an amount",
+          "max": "Your balance is too low to send this amount"
         },
         "chainFee": {
           "required": "Please input a fee amount"

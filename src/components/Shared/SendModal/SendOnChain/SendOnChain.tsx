@@ -4,6 +4,9 @@ import type { ChangeEvent } from "react";
 
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../../store/app-context";
+
+import { convertSatToBtc, convertToString } from "../../../../util/format";
+
 import AmountInput from "../../AmountInput/AmountInput";
 import InputField from "../../InputField/InputField";
 
@@ -19,7 +22,14 @@ interface IFormInputs {
 
 const SendOnChain: FC<SendOnChainProps> = (props) => {
   const { t } = useTranslation();
+
   const appCtx = useContext(AppContext);
+
+  const balanceDecorated =
+    appCtx.unit === "BTC"
+      ? convertToString(appCtx.unit, convertSatToBtc(props.balance))
+      : convertToString(appCtx.unit, props.balance);
+
   const {
     address,
     amount,
@@ -42,14 +52,15 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
   });
 
   const onSubmit: SubmitHandler<IFormInputs> = (_data) => onConfirm();
-
+  console.log("balance", balance);
+  console.log("balance -1", +balance - 1);
   return (
     <form className="px-5" onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-xl font-bold">{t("wallet.send_onchain")}</h3>
 
       <p className="my-5">
         <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
-        {balance} {appCtx.unit}
+        {balanceDecorated} {appCtx.unit}
       </p>
 
       <fieldset className="my-5 flex flex-col justify-center text-center items-center">
@@ -75,6 +86,10 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
             amount={amount}
             register={register("amountInput", {
               required: t("forms.validation.chainAmount.required") as string,
+              max: {
+                value: props.balance,
+                message: t("forms.validation.chainAmount.max"),
+              },
               onChange: onChangeAmount,
             })}
             errorMessage={errors.amountInput}
@@ -125,7 +140,7 @@ export default SendOnChain;
 export interface SendOnChainProps {
   address: string;
   amount: number;
-  balance: string;
+  balance: number;
   comment: string;
   fee: string;
   onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;

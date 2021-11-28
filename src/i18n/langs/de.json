@@ -88,7 +88,8 @@
           "patternMismatch": "Falsches Adress format"
         },
         "chainAmount": {
-          "required": "Bitte gib einen Betrag ein"
+          "required": "Bitte gib einen Betrag ein",
+          "max": "Dein Guthaben reicht nicht aus, um diesen Bertrag zu verschicken"
         },
         "chainFee": {
           "required": "Bitte gib eine Gebühr ein"

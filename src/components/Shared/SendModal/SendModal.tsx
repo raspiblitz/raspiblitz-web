@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import {
   convertMSatToBtc,
   convertMSatToSat,
-  convertSatToBtc,
   convertToString,
 } from "../../../util/format";
 
@@ -68,11 +67,6 @@ const SendModal: FC<SendModalProps> = (props) => {
     setInvoice(event.target.value);
   };
 
-  const onchainBalance =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertSatToBtc(props.onchainBalance))
-      : convertToString(appCtx.unit, props.onchainBalance);
-
   const lnBalance =
     appCtx.unit === "BTC"
       ? convertToString(appCtx.unit, convertMSatToBtc(props.lnBalance))
@@ -114,7 +108,7 @@ const SendModal: FC<SendModalProps> = (props) => {
 
       {!lnTransaction && (
         <SendOnChain
-          balance={onchainBalance}
+          balance={props.onchainBalance}
           address={address}
           onChangeAddress={changeAddressHandler}
           amount={amount}
