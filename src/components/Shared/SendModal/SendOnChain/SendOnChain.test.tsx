@@ -9,7 +9,7 @@ import type { SendOnChainProps } from "./SendOnChain";
 const basicProps: SendOnChainProps = {
   address: "",
   amount: 12,
-  balance: "",
+  balance: 100,
   comment: "",
   fee: "",
   onChangeAddress: () => {},
@@ -79,6 +79,19 @@ describe("SendOnChain", () => {
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
       screen.getByText("forms.validation.chainAddress.patternMismatch")
+    ).toBeInTheDocument();
+  });
+
+  test("validates amount is lower than balance", async () => {
+    const amountInput = screen.getByLabelText(
+      "wallet.amount"
+    ) as HTMLInputElement;
+
+    userEvent.clear(amountInput);
+    userEvent.type(amountInput, "999");
+    await waitFor(() => expect(amountInput).toHaveClass("input-error"));
+    expect(
+      screen.getByText("forms.validation.chainAmount.max")
     ).toBeInTheDocument();
   });
 

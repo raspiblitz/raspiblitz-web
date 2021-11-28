@@ -25,11 +25,6 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
 
   const appCtx = useContext(AppContext);
 
-  const balanceDecorated =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertSatToBtc(props.balance))
-      : convertToString(appCtx.unit, props.balance);
-
   const {
     address,
     amount,
@@ -43,6 +38,11 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
     onConfirm,
   } = props;
 
+  const balanceDecorated =
+    appCtx.unit === "BTC"
+      ? convertToString(appCtx.unit, convertSatToBtc(balance))
+      : convertToString(appCtx.unit, balance);
+
   const {
     register,
     handleSubmit,
@@ -52,8 +52,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
   });
 
   const onSubmit: SubmitHandler<IFormInputs> = (_data) => onConfirm();
-  console.log("balance", balance);
-  console.log("balance -1", +balance - 1);
+
   return (
     <form className="px-5" onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-xl font-bold">{t("wallet.send_onchain")}</h3>
