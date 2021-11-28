@@ -35,3 +35,17 @@
 .page-container {
   @apply h-full w-full md:w-10/12 md:ml-auto mb-16 md:mb-0 mt-16 overflow-y-auto transition-colors;
 }
+
+/**
+  * Remove up/down arrows from number intput
+**/
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

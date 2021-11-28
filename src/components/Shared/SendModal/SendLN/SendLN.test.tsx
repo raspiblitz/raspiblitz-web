@@ -1,11 +1,17 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
 import SendLN from "./SendLN";
+import type { SendLnProps } from "./SendLN";
 
-const basicProps = {
+const basicProps: SendLnProps = {
   balance: "123456",
   onConfirm: () => {},
   onChangeInvoice: () => {},
@@ -38,7 +44,7 @@ describe("SendLN", () => {
     ).not.toBeDisabled();
 
     userEvent.click(await screen.findByRole("button", { name: "wallet.send" }));
-    expect(invoiceInput).toHaveClass("input-error");
+    await waitFor(() => expect(invoiceInput).toHaveClass("input-error"));
     expect(
       await screen.findByText("forms.validation.lnInvoice.required")
     ).toBeInTheDocument();
@@ -48,7 +54,7 @@ describe("SendLN", () => {
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
     userEvent.type(invoiceInput, "123456789abc");
-    expect(invoiceInput).toHaveClass("input-error");
+    await waitFor(() => expect(invoiceInput).toHaveClass("input-error"));
     expect(
       await screen.findByText("forms.validation.lnInvoice.patternMismatch")
     ).toBeInTheDocument();

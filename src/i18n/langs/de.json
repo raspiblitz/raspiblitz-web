@@ -1,24 +1,5 @@
 {
   "translation": {
-    "login": {
-      "enter_pass": "Passwort B eingeben",
-      "enter_pass_placeholder": "Passwort B",
-      "error": "Ein Fehler ist aufgetreten",
-      "invalid_pass": "Ungültiges Passwort",
-      "login": "Anmelden"
-    },
-    "settings": {
-      "language": "Sprache",
-      "curr_lang": "Aktuelle Sprache",
-      "confirm": "Bestätigen",
-      "cancel": "Abbrechen",
-      "shutdown": "Herunterfahren",
-      "reboot": "Neu starten",
-      "change": "Ändern",
-      "new_pw": "Neues Passwort",
-      "old_pw": "Altes Passwort",
-      "change_pw": "Passwort ändern"
-    },
     "navigation": {
       "settings": "Einstellungen",
       "display_sats": "Sats anzeigen",
@@ -27,6 +8,13 @@
       "apps": "Anwendungen",
       "home": "Startseite",
       "logout": "Abmelden"
+    },
+    "login": {
+      "enter_pass": "Passwort B eingeben",
+      "enter_pass_placeholder": "Passwort B",
+      "error": "Ein Fehler ist aufgetreten",
+      "invalid_pass": "Ungültiges Passwort",
+      "login": "Anmelden"
     },
     "home": {
       "conn_details": "Verbindungsdetails",
@@ -51,6 +39,18 @@
       "send": "Senden",
       "balance": "Guthaben"
     },
+    "tx": {
+      "comment": "Kommentar",
+      "comment_placeholder": "Optionaler Kommentar",
+      "value": "Wert",
+      "description": "Beschreibung",
+      "date": "Datum",
+      "confirmations": "Bestätigungen",
+      "mempool": "Auf mempool anzeigen",
+      "txid": "Transaktions ID",
+      "tx_details": "Transaktionsdetails",
+      "transactions": "Transaktionen"
+    },
     "apps": {
       "online": "online",
       "offline": "offline",
@@ -65,22 +65,34 @@
       "available": "Verfügbare Anwendungen",
       "installed": "Installiert"
     },
-    "tx": {
-      "comment": "Kommentar",
-      "value": "Wert",
-      "description": "Beschreibung",
-      "date": "Datum",
-      "confirmations": "Bestätigungen",
-      "mempool": "Auf mempool anzeigen",
-      "txid": "Transaktions ID",
-      "tx_details": "Transaktionsdetails",
-      "transactions": "Transaktionen"
+    "settings": {
+      "language": "Sprache",
+      "curr_lang": "Aktuelle Sprache",
+      "confirm": "Bestätigen",
+      "cancel": "Abbrechen",
+      "shutdown": "Herunterfahren",
+      "reboot": "Neu starten",
+      "change": "Ändern",
+      "new_pw": "Neues Passwort",
+      "old_pw": "Altes Passwort",
+      "change_pw": "Passwort ändern"
     },
     "forms": {
       "validation": {
         "lnInvoice": {
           "required": "Bitte gib eine Lightning invoice ein",
           "patternMismatch": "Falsches invoice format"
+        },
+        "chainAddress": {
+          "required": "Bitte gib eine Bitcoin Adresse ein",
+          "patternMismatch": "Falsches Adress format"
+        },
+        "chainAmount": {
+          "required": "Bitte gib einen Betrag ein",
+          "max": "Dein Guthaben reicht nicht aus, um diesen Bertrag zu verschicken"
+        },
+        "chainFee": {
+          "required": "Bitte gib eine Gebühr ein"
         }
       }
     }

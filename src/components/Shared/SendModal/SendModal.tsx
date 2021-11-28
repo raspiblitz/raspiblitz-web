@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FC, useContext, useState } from "react";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext } from "../../../store/app-context";
 import { instance } from "../../../util/interceptor";
@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import {
   convertMSatToBtc,
   convertMSatToSat,
-  convertSatToBtc,
   convertToString,
 } from "../../../util/format";
 
@@ -27,8 +26,7 @@ const SendModal: FC<SendModalProps> = (props) => {
   const [comment, setComment] = useState("");
 
   // TODO: handle error
-  const confirmLnHandler = async (event: FormEvent) => {
-    event.preventDefault();
+  const confirmLnHandler = async () => {
     const resp = await instance.get(
       "/lightning/decode-pay-req?pay_req=" + invoice
     );
@@ -37,8 +35,7 @@ const SendModal: FC<SendModalProps> = (props) => {
     setConfirm(true);
   };
 
-  const confirmOnChainHandler = (event: FormEvent) => {
-    event.preventDefault();
+  const confirmOnChainHandler = () => {
     setConfirm(true);
   };
 
@@ -69,11 +66,6 @@ const SendModal: FC<SendModalProps> = (props) => {
   const changeInvoiceHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setInvoice(event.target.value);
   };
-
-  const onchainBalance =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertSatToBtc(props.onchainBalance))
-      : convertToString(appCtx.unit, props.onchainBalance);
 
   const lnBalance =
     appCtx.unit === "BTC"
@@ -116,7 +108,7 @@ const SendModal: FC<SendModalProps> = (props) => {
 
       {!lnTransaction && (
         <SendOnChain
-          balance={onchainBalance}
+          balance={props.onchainBalance}
           address={address}
           onChangeAddress={changeAddressHandler}
           amount={amount}

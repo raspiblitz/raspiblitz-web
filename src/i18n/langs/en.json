@@ -70,6 +70,7 @@
       "mempool": "View on mempool",
       "value": "Value",
       "comment": "Comment",
+      "comment_placeholder": "Optional comment",
       "sent": "Transaction sent!",
       "confirm_info": "Please confirm the following transaction"
     },
@@ -104,6 +105,17 @@
         "lnInvoice": {
           "required": "Please input a Lightning invoice",
           "patternMismatch": "Wrong invoice format"
+        },
+        "chainAddress": {
+          "required": "Please input a Bitcoin address",
+          "patternMismatch": "Wrong address format"
+        },
+        "chainAmount": {
+          "required": "Please input an amount",
+          "max": "Your balance is too low to send this amount"
+        },
+        "chainFee": {
+          "required": "Please input a fee amount"
         }
       }
     }

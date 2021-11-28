@@ -1,60 +1,35 @@
-import {
-  ChangeEvent,
-  FC,
-  FormEvent,
-  useContext,
-  useState,
-  useRef,
-} from "react";
+import { FC, useContext } from "react";
+
+import type { ChangeEvent } from "react";
+
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../../store/app-context";
+import InputField from "../../InputField/InputField";
+
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 
 const SendLn: FC<SendLnProps> = (props) => {
   const appCtx = useContext(AppContext);
   const { balance, onChangeInvoice, onConfirm } = props;
   const { t } = useTranslation();
 
-  const invoiceInput = useRef<HTMLInputElement>(null);
-  const [isFormValid, setIsFormValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+  interface IFormInputs {
+    invoiceInput: string;
+  }
 
-  const validateInput = (validity: HTMLInputElement["validity"]) => {
-    setIsFormValid(validity.valid);
-    setErrorMessage("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, submitCount },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
 
-    if (validity.valueMissing) {
-      setErrorMessage(t("forms.validation.lnInvoice.required"));
-      return false;
-    }
-
-    if (validity.patternMismatch) {
-      setErrorMessage(t("forms.validation.lnInvoice.patternMismatch"));
-      return false;
-    }
-
-    return true;
-  };
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    validateInput(event.target.validity);
-    onChangeInvoice(event);
-  };
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const validity = invoiceInput?.current?.validity;
-
-    if (validity) {
-      const isFormValid = validateInput(validity);
-
-      if (isFormValid) {
-        onConfirm(event);
-      }
-    }
-  };
+  const onSubmit: SubmitHandler<IFormInputs> = (_data) => onConfirm();
 
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-xl font-bold">{t("wallet.send_lightning")}</h3>
 
       <p className="my-5">
@@ -62,27 +37,24 @@ const SendLn: FC<SendLnProps> = (props) => {
         {balance} {appCtx.unit}
       </p>
 
-      <label className="label-underline" htmlFor="invoiceInput">
-        {t("wallet.invoice")}
-      </label>
-
-      <input
-        id="invoiceInput"
-        ref={invoiceInput}
-        type="text"
-        onChange={onChange}
-        required
-        pattern="(lnbc|lntb)\w+"
-        className={isFormValid ? "input-underline" : "input-error"}
+      <InputField
+        {...register("invoiceInput", {
+          required: t("forms.validation.lnInvoice.required") as string,
+          pattern: {
+            value: /^(lnbc|lntb)\w+/i,
+            message: t("forms.validation.lnInvoice.patternMismatch"),
+          },
+          onChange: onChangeInvoice,
+        })}
+        label={t("wallet.invoice")}
+        errorMessage={errors.invoiceInput}
         placeholder="lnbc..."
       />
-
-      <p className="text-red-500">{errorMessage}</p>
 
       <button
         type="submit"
         className="bd-button p-3 my-3"
-        disabled={!isFormValid}
+        disabled={submitCount > 0 && !isValid}
       >
         {t("wallet.send")}
       </button>
@@ -94,6 +66,6 @@ export default SendLn;
 
 export interface SendLnProps {
   balance: string;
-  onConfirm: (event: FormEvent) => void;
+  onConfirm: () => void;
   onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
 }

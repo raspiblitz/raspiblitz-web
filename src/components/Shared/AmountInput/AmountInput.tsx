@@ -1,35 +1,40 @@
-import { ChangeEventHandler, FC, useContext } from "react";
+import { useContext } from "react";
+import type { FC } from "react";
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as SwitchIcon } from "../../../assets/switch-vertical.svg";
 import { AppContext } from "../../../store/app-context";
-import styles from "./AmountInput.module.css";
+import InputField from "../InputField/InputField";
 
 const AmountInput: FC<AmountInputProps> = (props) => {
   const { t } = useTranslation();
-  const appCtx = useContext(AppContext);
 
-  return (
-    <>
-      <label htmlFor="amount" className="label-underline">
-        {t("wallet.amount")}
-      </label>
-      <div className="flex flex-row">
-        <input
-          id="amount"
-          type="number"
-          style={styles}
-          className="w-8/12 text-right input-underline mr-3 pr-5"
-          value={props.amount}
-          onChange={props.onChangeAmount}
-        />
+  const ButtonToggleUnit: FC = () => {
+    const appCtx = useContext(AppContext);
+
+    return (
+      <>
         <span
-          className="flex justify-center items-center w-4/12 p-1 rounded shadow-md dark:bg-gray-600"
+          className="flex justify-center items-center w-4/12 ml-6 p-1 rounded shadow-md dark:bg-gray-600"
           onClick={appCtx.toggleUnit}
         >
           {appCtx.unit}
           <SwitchIcon className="h-5 w-5 text-black dark:text-white" />
         </span>
-      </div>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <InputField
+        {...props.register}
+        type="number"
+        label={t("wallet.amount")}
+        errorMessage={props.errorMessage}
+        value={`${props.amount}`}
+        inputRightElement={<ButtonToggleUnit />}
+      />
     </>
   );
 };
@@ -38,5 +43,6 @@ export default AmountInput;
 
 export interface AmountInputProps {
   amount: number;
-  onChangeAmount: ChangeEventHandler<HTMLInputElement>;
+  register: UseFormRegisterReturn;
+  errorMessage?: FieldError;
 }
