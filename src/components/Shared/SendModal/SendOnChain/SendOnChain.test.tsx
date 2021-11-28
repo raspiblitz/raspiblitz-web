@@ -111,5 +111,9 @@ describe("SendOnChain", () => {
       userEvent.type(feeInput, "1");
       await waitFor(() => expect(feeInput).not.toHaveClass("input-error"));
     });
+
+    expect(
+      screen.getByRole("button", { name: "wallet.confirm" })
+    ).not.toBeDisabled();
   });
 });
