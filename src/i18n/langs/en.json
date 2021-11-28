@@ -70,6 +70,7 @@
       "mempool": "View on mempool",
       "value": "Value",
       "comment": "Comment",
+      "comment_placeholder": "Optional comment",
       "sent": "Transaction sent!",
       "confirm_info": "Please confirm the following transaction"
     },
@@ -108,6 +109,9 @@
         "chainAddress": {
           "required": "Please input a Bitcoin address",
           "patternMismatch": "Wrong address format"
+        },
+        "chainAmount": {
+          "required": "Please input an amount"
         },
         "chainFee": {
           "required": "Please input a fee amount"

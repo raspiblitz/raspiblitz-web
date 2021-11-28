@@ -48,6 +48,7 @@ const SendLn: FC<SendLnProps> = (props) => {
         })}
         label={t("wallet.invoice")}
         errorMessage={errors.invoiceInput}
+        placeholder="lnbc..."
       />
 
       <button

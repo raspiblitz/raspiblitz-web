@@ -58,7 +58,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
             {...register("addressInput", {
               required: t("forms.validation.chainAddress.required") as string,
               pattern: {
-                value: /^(1|3|bc1)\w+/i,
+                value: /^(1|3|bc1|tb1|tpub|bcrt)\w+/i,
                 message: t("forms.validation.chainAddress.patternMismatch"),
               },
               onChange: onChangeAddress,
@@ -102,7 +102,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
             })}
             label={t("tx.comment")}
             value={comment}
-            placeholder="Optional comment"
+            placeholder={t("tx.comment_placeholder")}
           />
         </div>
       </fieldset>

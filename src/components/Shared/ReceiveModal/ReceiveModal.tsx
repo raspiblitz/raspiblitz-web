@@ -180,7 +180,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
                   })}
                   label={t("tx.comment")}
                   value={comment}
-                  placeholder="Optional comment"
+                  placeholder={t("tx.comment_placeholder")}
                 />
               </div>
             </div>
