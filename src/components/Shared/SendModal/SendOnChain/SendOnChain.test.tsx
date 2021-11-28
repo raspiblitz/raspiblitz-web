@@ -5,6 +5,7 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
 import SendOnChain from "./SendOnChain";
 import type { SendOnChainProps } from "./SendOnChain";
+import { act } from "react-dom/test-utils";
 
 const basicProps: SendOnChainProps = {
   address: "",
@@ -101,11 +102,15 @@ describe("SendOnChain", () => {
     ) as HTMLInputElement;
     const feeInput = screen.getByLabelText("tx.fee") as HTMLInputElement;
 
-    userEvent.type(addressInput, "bc1123456789");
-    expect(addressInput).not.toHaveClass("input-error");
+    await act(async () => {
+      userEvent.type(addressInput, "bc1123456789");
+      await waitFor(() => expect(addressInput).not.toHaveClass("input-error"));
+    });
 
-    userEvent.type(feeInput, "1");
-    expect(feeInput).not.toHaveClass("input-error");
+    await act(async () => {
+      userEvent.type(feeInput, "1");
+      await waitFor(() => expect(feeInput).not.toHaveClass("input-error"));
+    });
 
     expect(
       screen.getByRole("button", { name: "wallet.confirm" })
