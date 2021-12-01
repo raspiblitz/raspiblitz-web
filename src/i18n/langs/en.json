@@ -36,7 +36,9 @@
       "local_balance": "Local Channel Balance",
       "remote_balance": "Remote Channel Balance",
       "pending_balance_local": "Pending Local Balance",
-      "pending_balance_remote": "Pending Remote Balance"
+      "pending_balance_remote": "Pending Remote Balance",
+      "show": "Show",
+      "hide": "Hide"
     },
     "wallet": {
       "balance": "Balance",
