@@ -29,10 +29,16 @@
       "channel_balance": "Équilibre du canal",
       "lightning": "Lightning",
       "conn_out": "Sortant",
-      "local_balance": "Balance locale",
-      "remote_balance": "Balance distante",
+      "local_balance": "Balance locale du canal",
+      "remote_balance": "Balance distante du canal",
       "conn_in": "Entrant",
-      "connections": "Connections"
+      "connections": "Connexions",
+      "show": "Afficher",
+      "hide": "Cacher",
+      "difficulty": "Difficulté",
+      "blockchain_size": "Taille de la blockchain",
+      "pending_balance_local": "Balance local en attente",
+      "pending_balance_remote": "Balance à distance en attente"
     },
     "wallet": {
       "receive": "Recevoir",
@@ -45,11 +51,13 @@
       "address": "Adresse",
       "on_chain": "On-chain",
       "balance": "Balance",
-      "fund": "Approvisionner votre porte-monnaie",
+      "fund": "Approvisionner votre porte-monnaie on-chain",
       "send_lightning": "Envoyer de l'argent avec Lightning",
       "send_onchain": "Envoyer de l'argent On-chain",
       "confirm": "Confirmer",
-      "invoice": "Facture"
+      "invoice": "Facture",
+      "create_invoice": "Créer une facture",
+      "fund_onchain": "Approvisionner on-chain"
     },
     "tx": {
       "tx_details": "Détails de la transaction",
@@ -65,7 +73,8 @@
       "transactions": "Transactions",
       "confirmations": "Confirmations",
       "confirm_info": "Veuillez confirmer la transaction suivante",
-      "sent": "Transaction envoyée !"
+      "sent": "Transaction envoyée !",
+      "comment_placeholder": "Commentaire facultatif"
     },
     "apps": {
       "installed": "Installé",
@@ -98,6 +107,17 @@
         "lnInvoice": {
           "required": "Veuillez saisir une facture Lightning",
           "patternMismatch": "Format de facture incorrect"
+        },
+        "chainAddress": {
+          "patternMismatch": "Format d'adresse incorrect",
+          "required": "Veuillez saisir une adresse Bitcoin"
+        },
+        "chainFee": {
+          "required": "Veuillez saisir un montant de frais"
+        },
+        "chainAmount": {
+          "max": "Votre solde est trop bas pour envoyer ce montant",
+          "required": "Veuillez saisir un montant"
         }
       }
     }
