@@ -52,7 +52,6 @@
       "invoice": "Invoice",
       "create_invoice": "Create invoice",
       "create_invoice_ln": "Create a Lightning invoice",
-      "fund_onchain": "Fund on-chain",
       "fund": "Fund your on-chain wallet",
       "scan_qr": "Scan this QR code or copy the address below to receive funds",
       "send_onchain": "Send funds On-chain",

@@ -22,7 +22,7 @@ describe("ReceiveModal", () => {
     );
 
     await act(async () => {
-      (await screen.findByText("wallet.fund_onchain")).click();
+      (await screen.findByText("wallet.on_chain")).click();
     });
 
     await waitFor(() => expect(container.querySelector("svg")).toBeDefined());

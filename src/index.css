@@ -32,6 +32,10 @@
   @apply shadow-xl rounded text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400;
 }
 
+.switch-button {
+  @apply text-black bg-white hover:text-white hover:bg-yellow-400 disabled:bg-yellow-500 disabled:text-white disabled:cursor-default px-2 py-1 m-1 shadow-md rounded-lg dark:text-white dark:bg-gray-500 dark:hover:bg-yellow-400 dark:disabled:text-white dark:disabled:bg-yellow-500;
+}
+
 .page-container {
   @apply h-full w-full md:w-10/12 md:ml-auto mb-16 md:mb-0 mt-16 overflow-y-auto transition-colors;
 }

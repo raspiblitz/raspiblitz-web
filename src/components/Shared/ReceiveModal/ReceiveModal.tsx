@@ -11,6 +11,7 @@ import { instance } from "../../../util/interceptor";
 import AmountInput from "../AmountInput/AmountInput";
 import InputField from "../InputField/InputField";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import SwitchTxType, { TxType } from "../SwitchTxType/SwitchTxType";
 
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
@@ -23,25 +24,23 @@ interface IFormInputs {
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const { t } = useTranslation();
-  const [invoiceType, setInvoiceType] = useState("lightning");
+  const [invoiceType, setInvoiceType] = useState(TxType.lightning);
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState(0);
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copyAddress, addressCopied] = useClipboard(address);
 
-  const lnInvoice = invoiceType === "lightning";
+  const lnInvoice = invoiceType === TxType.lightning;
 
-  const invoiceChangeHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+  const invoiceChangeHandler = async (txType: TxType) => {
     setAddress("");
     setAmount(0);
     setComment("");
 
-    const type = event.target.value;
-    setInvoiceType(type);
+    setInvoiceType(txType);
 
-    if (type === "onchain") {
+    if (txType === TxType.onChain) {
       setIsLoading(true);
       const resp = await instance.post("lightning/new-address", {
         type: "p2wkh",
@@ -72,17 +71,6 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
   const showLnInvoice = lnInvoice && !isLoading && !address;
 
-  const radioStyles =
-    "px-3 py-2 shadow-md rounded-lg hover:text-white hover:bg-yellow-400 dark:hover:bg-yellow-400 dark:text-white dark:bg-gray-500";
-  const lnStyle =
-    invoiceType === "lightning"
-      ? "text-white bg-yellow-500 dark:bg-yellow-500"
-      : "";
-  const walletStyle =
-    invoiceType === "onchain"
-      ? "text-white bg-yellow-500 dark:bg-yellow-500"
-      : "";
-
   const {
     register,
     handleSubmit,
@@ -103,36 +91,11 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       {!showLnInvoice && (
         <div className="text-xl font-bold">{t("wallet.fund")}</div>
       )}
-      <div className="py-5 flex flex-col md:flex-row justify-center">
-        <div className="p-2 my-2">
-          <label htmlFor="lightning" className={`${radioStyles} ${lnStyle}`}>
-            {t("home.lightning")}
-          </label>
 
-          <input
-            id="lightning"
-            type="radio"
-            className="hidden"
-            name="invoiceType"
-            value="lightning"
-            onChange={invoiceChangeHandler}
-          />
-        </div>
-        <div className="p-2 my-2">
-          <label htmlFor="onchain" className={`${radioStyles} ${walletStyle}`}>
-            {t("wallet.fund_onchain")}
-          </label>
-
-          <input
-            id="onchain"
-            type="radio"
-            className="hidden"
-            name="invoiceType"
-            value="onchain"
-            onChange={invoiceChangeHandler}
-          />
-        </div>
+      <div className="my-3">
+        <SwitchTxType getTxType={invoiceChangeHandler} />
       </div>
+
       {address && (
         <>
           <div className="my-5 flex justify-center">
