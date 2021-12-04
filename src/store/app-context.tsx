@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { retrieveSettings, saveSettings } from "../util/util";
+import { parseJwt, retrieveSettings, saveSettings } from "../util/util";
 import { SSEContext } from "./sse-context";
 
 interface AppContextType {
@@ -91,7 +91,15 @@ const AppContextProvider: FC = (props) => {
 
     // if authenticated log in automatically
     const token = localStorage.getItem("access_token");
-    setIsLoggedIn(!!token);
+    if (token) {
+      const payload = parseJwt(token);
+      if (payload.expires > Date.now()) {
+        setIsLoggedIn(true);
+      } else {
+        localStorage.removeItem("access_token");
+        console.info(`Token expired at ${payload.expires}.`);
+      }
+    }
   }, [darkMode, i18n]);
 
   const contextValue: AppContextType = {
