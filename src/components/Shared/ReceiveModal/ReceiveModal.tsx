@@ -93,7 +93,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
       )}
 
       <div className="my-3">
-        <SwitchTxType getTxType={invoiceChangeHandler} />
+        <SwitchTxType onTxTypeChange={invoiceChangeHandler} />
       </div>
 
       {address && (

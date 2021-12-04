@@ -13,7 +13,7 @@ const SwitchTxType: FC<SwitchTxTypeProps> = (props) => {
 
   const handleClick = (txType: TxType) => {
     setTxType(txType);
-    props.getTxType(txType);
+    props.onTxTypeChange(txType);
   };
 
   return (
@@ -40,5 +40,5 @@ const SwitchTxType: FC<SwitchTxTypeProps> = (props) => {
 export default SwitchTxType;
 
 export interface SwitchTxTypeProps {
-  getTxType: (txtype: TxType) => void;
+  onTxTypeChange: (txtype: TxType) => void;
 }

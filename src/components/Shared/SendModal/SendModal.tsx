@@ -90,7 +90,7 @@ const SendModal: FC<SendModalProps> = (props) => {
   return (
     <ModalDialog close={() => props.onClose(false)}>
       <div className="my-3">
-        <SwitchTxType getTxType={changeTransactionHandler} />
+        <SwitchTxType onTxTypeChange={changeTransactionHandler} />
       </div>
 
       {lnTransaction && (
