@@ -12,6 +12,7 @@ const ModalDialog: FC<ModalDialogProps> = (props) => {
 
   const closeModal = useCallback(() => {
     props.close();
+    disableScroll.off();
   }, [props]);
 
   useEffect(() => {
@@ -24,7 +25,6 @@ const ModalDialog: FC<ModalDialogProps> = (props) => {
     window.addEventListener("keydown", close);
     return () => {
       window.removeEventListener("keydown", close);
-      disableScroll.off();
     };
   }, [props, closeModal]);
 
