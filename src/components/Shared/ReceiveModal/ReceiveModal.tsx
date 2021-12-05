@@ -24,14 +24,14 @@ interface IFormInputs {
 const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const appCtx = useContext(AppContext);
   const { t } = useTranslation();
-  const [invoiceType, setInvoiceType] = useState(TxType.lightning);
+  const [invoiceType, setInvoiceType] = useState(TxType.LIGHTNING);
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState(0);
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copyAddress, addressCopied] = useClipboard(address);
 
-  const lnInvoice = invoiceType === TxType.lightning;
+  const lnInvoice = invoiceType === TxType.LIGHTNING;
 
   const invoiceChangeHandler = async (txType: TxType) => {
     setAddress("");
@@ -40,7 +40,7 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
 
     setInvoiceType(txType);
 
-    if (txType === TxType.onChain) {
+    if (txType === TxType.ONCHAIN) {
       setIsLoading(true);
       const resp = await instance.post("lightning/new-address", {
         type: "p2wkh",

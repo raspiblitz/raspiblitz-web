@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import type { FC } from "react";
 
 export enum TxType {
-  onChain = "ONCHAIN",
-  lightning = "LIGHTNING",
+  ONCHAIN,
+  LIGHTNING,
 }
 
 const SwitchTxType: FC<SwitchTxTypeProps> = (props) => {
   const { t } = useTranslation();
-  const [txType, setTxType] = useState<TxType>(TxType.lightning);
+  const [txType, setTxType] = useState<TxType>(TxType.LIGHTNING);
 
   const handleClick = (txType: TxType) => {
     setTxType(txType);
@@ -19,17 +19,17 @@ const SwitchTxType: FC<SwitchTxTypeProps> = (props) => {
   return (
     <div>
       <button
-        disabled={txType === TxType.lightning}
+        disabled={txType === TxType.LIGHTNING}
         className="switch-button"
-        onClick={() => handleClick(TxType.lightning)}
+        onClick={() => handleClick(TxType.LIGHTNING)}
       >
         {t("home.lightning")}
       </button>
 
       <button
-        disabled={txType === TxType.onChain}
+        disabled={txType === TxType.ONCHAIN}
         className="switch-button"
-        onClick={() => handleClick(TxType.onChain)}
+        onClick={() => handleClick(TxType.ONCHAIN)}
       >
         {t("wallet.on_chain")}
       </button>

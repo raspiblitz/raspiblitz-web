@@ -38,7 +38,7 @@ const SendModal: FC<SendModalProps> = (props) => {
   };
 
   const changeTransactionHandler = (txType: TxType) => {
-    setLnTransaction(txType === TxType.lightning);
+    setLnTransaction(txType === TxType.LIGHTNING);
     setInvoice("");
     setAddress("");
     setAmount(0);

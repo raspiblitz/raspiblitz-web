@@ -40,7 +40,7 @@ describe("SwitchTxType", () => {
     expect(buttonOnChain).not.toBeDisabled();
     buttonOnChain.click();
     expect(handeTxTypeChangeMock).toHaveBeenCalledTimes(1);
-    expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.onChain);
+    expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.ONCHAIN);
     expect(buttonOnChain).toBeDisabled();
     expect(buttonLn).not.toBeDisabled();
   });
