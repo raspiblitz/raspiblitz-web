@@ -1,3 +1,5 @@
+import { TokenPayload } from "../models/token";
+
 export const SETTINGS_KEY = "settings";
 export const MODAL_ROOT = document.getElementById("modal-root")!;
 
@@ -49,7 +51,7 @@ export function checkPropsUndefined(props: object): boolean {
 }
 
 // see https://stackoverflow.com/a/38552302
-export function parseJwt(token: string): any {
+export function parseJwt(token: string): TokenPayload {
   const base64Url = token.split(".")[1];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   const jsonPayload = decodeURIComponent(
