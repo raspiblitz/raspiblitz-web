@@ -4,9 +4,8 @@ import { AppContext } from "../../../store/app-context";
 import { instance } from "../../../util/interceptor";
 import ConfirmSendModal from "./ConfirmSendModal/ConfirmSendModal";
 import SendLn from "./SendLN/SendLN";
+import SwitchTxType, { TxType } from "../SwitchTxType/SwitchTxType";
 import SendOnChain from "./SendOnChain/SendOnChain";
-import { ReactComponent as SwitchIcon } from "../../../assets/switch-vertical.svg";
-import { useTranslation } from "react-i18next";
 import {
   convertMSatToBtc,
   convertMSatToSat,
@@ -15,7 +14,6 @@ import {
 
 const SendModal: FC<SendModalProps> = (props) => {
   const appCtx = useContext(AppContext);
-  const { t } = useTranslation();
 
   const [lnTransaction, setLnTransaction] = useState(true);
   const [invoice, setInvoice] = useState("");
@@ -39,8 +37,8 @@ const SendModal: FC<SendModalProps> = (props) => {
     setConfirm(true);
   };
 
-  const changeTransactionHandler = () => {
-    setLnTransaction((prev) => !prev);
+  const changeTransactionHandler = (txType: TxType) => {
+    setLnTransaction(txType === TxType.LIGHTNING);
     setInvoice("");
     setAddress("");
     setAmount(0);
@@ -91,12 +89,9 @@ const SendModal: FC<SendModalProps> = (props) => {
 
   return (
     <ModalDialog close={() => props.onClose(false)}>
-      <button
-        onClick={changeTransactionHandler}
-        className="bd-button p-1 my-3 block"
-      >
-        {t("settings.change")} <SwitchIcon className="inline-block p-0.5" />
-      </button>
+      <div className="my-3">
+        <SwitchTxType onTxTypeChange={changeTransactionHandler} />
+      </div>
 
       {lnTransaction && (
         <SendLn
