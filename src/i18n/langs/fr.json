@@ -56,8 +56,7 @@
       "send_onchain": "Envoyer de l'argent On-chain",
       "confirm": "Confirmer",
       "invoice": "Facture",
-      "create_invoice": "Créer une facture",
-      "fund_onchain": "Approvisionner on-chain"
+      "create_invoice": "Créer une facture"
     },
     "tx": {
       "tx_details": "Détails de la transaction",
