@@ -89,6 +89,11 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
                 value: props.balance,
                 message: t("forms.validation.chainAmount.max"),
               },
+              validate: {
+                value: (value) =>
+                  value > 0 ||
+                  (t("forms.validation.chainAmount.required") as string),
+              },
               onChange: onChangeAmount,
             })}
             errorMessage={errors.amountInput}

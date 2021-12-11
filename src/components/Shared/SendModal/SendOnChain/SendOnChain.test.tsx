@@ -96,6 +96,19 @@ describe("SendOnChain", () => {
     ).toBeInTheDocument();
   });
 
+  test("validates amount is bigger than zero", async () => {
+    const amountInput = screen.getByLabelText(
+      "wallet.amount"
+    ) as HTMLInputElement;
+
+    userEvent.clear(amountInput);
+    userEvent.type(amountInput, "0");
+    await waitFor(() => expect(amountInput).toHaveClass("input-error"));
+    expect(
+      screen.getByText("forms.validation.chainAmount.required")
+    ).toBeInTheDocument();
+  });
+
   test("valid form passes", async () => {
     const addressInput = screen.getByLabelText(
       "wallet.address"

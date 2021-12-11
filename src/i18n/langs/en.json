@@ -107,6 +107,9 @@
       "curr_lang": "Current language"
     },
     "forms": {
+      "hint": {
+        "invoiceAmountZero": "Invoice amount is zero"
+      },
       "validation": {
         "lnInvoice": {
           "required": "Please input a Lightning invoice",

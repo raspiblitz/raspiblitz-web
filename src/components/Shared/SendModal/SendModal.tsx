@@ -83,13 +83,14 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     return (
       <ModalDialog close={() => onClose(false)}>
         <ConfirmSendModal
-          ln={lnTransaction}
-          back={() => setConfirm(false)}
-          amount={amount.toString()}
           address={addr}
-          fee={fee}
-          comment={comment}
+          invoiceAmount={amount}
+          back={() => setConfirm(false)}
+          balance={lnBalance}
           close={onClose}
+          comment={comment}
+          fee={fee}
+          ln={lnTransaction}
         />
       </ModalDialog>
     );
@@ -105,21 +106,21 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
         <SendLn
           onChangeInvoice={changeInvoiceHandler}
           onConfirm={confirmLnHandler}
-          balance={convertedLnBalance}
+          balanceDecorated={convertedLnBalance}
         />
       )}
 
       {!lnTransaction && (
         <SendOnChain
-          balance={onchainBalance}
           address={address}
-          onChangeAddress={changeAddressHandler}
           amount={amount}
-          onChangeAmount={changeAmountHandler}
-          fee={fee}
-          onChangeFee={changeFeeHandler}
+          balance={onchainBalance}
           comment={comment}
+          fee={fee}
+          onChangeAddress={changeAddressHandler}
+          onChangeAmount={changeAmountHandler}
           onChangeComment={changeCommentHandler}
+          onChangeFee={changeFeeHandler}
           onConfirm={confirmOnChainHandler}
         />
       )}
