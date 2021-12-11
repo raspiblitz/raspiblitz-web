@@ -15,12 +15,4 @@ module.exports = {
       "4/5": "80%",
     },
   },
-  variants: {
-    extend: {
-      opacity: ["disabled"],
-      backgroundColor: ["disabled"],
-      cursor: ["disabled"],
-      textColor: ["disabled"],
-    },
-  },
 };
