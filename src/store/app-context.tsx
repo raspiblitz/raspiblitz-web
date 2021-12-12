@@ -16,10 +16,12 @@ interface AppContextType {
   isLoggedIn: boolean;
   darkMode: boolean;
   unit: Unit;
+  walletLocked: boolean;
   toggleUnit: () => void;
   toggleDarkMode: () => void;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   logout: () => void;
+  setWalletLocked: Dispatch<SetStateAction<boolean>>;
 }
 
 export type Unit = "BTC" | "Sat";
@@ -28,10 +30,12 @@ export const AppContext = createContext<AppContextType>({
   isLoggedIn: false,
   darkMode: false,
   unit: "Sat",
+  walletLocked: false,
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
   logout: () => {},
   toggleDarkMode: () => {},
+  setWalletLocked: () => {},
 });
 
 const AppContextProvider: FC = (props) => {
@@ -42,6 +46,7 @@ const AppContextProvider: FC = (props) => {
   const [unit, setUnit] = useState<Unit>("Sat");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [walletLocked, setWalletLocked] = useState(false);
 
   const toggleUnitHandler = () => {
     setUnit((prevUnit: Unit) => (prevUnit === "Sat" ? "BTC" : "Sat"));
@@ -107,10 +112,12 @@ const AppContextProvider: FC = (props) => {
     isLoggedIn,
     darkMode,
     unit,
+    walletLocked,
     toggleUnit: toggleUnitHandler,
     setIsLoggedIn,
     logout: logoutHandler,
     toggleDarkMode: toggleDarkModeHandler,
+    setWalletLocked,
   };
 
   return (

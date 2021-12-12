@@ -1,32 +1,36 @@
-import ModalBackground from "../ModalBackground/ModalBackground";
-import { FC, useEffect, useCallback } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { ReactComponent as XIcon } from "../../assets/X.svg";
+import ModalBackground from "../ModalBackground/ModalBackground";
 
-const disableScroll = {
+export const disableScroll = {
   on: () => document.body.classList.add("overflow-y-hidden"),
   off: () => document.body.classList.remove("overflow-y-hidden"),
 };
 
-const ModalDialog: FC<ModalDialogProps> = (props) => {
+type Props = {
+  close: () => void;
+};
+
+const ModalDialog: FC<Props> = ({ close, children }) => {
   disableScroll.on();
 
   const closeModal = useCallback(() => {
-    props.close();
+    close();
     disableScroll.off();
-  }, [props]);
+  }, [close]);
 
   useEffect(() => {
-    const close = (event: KeyboardEvent) => {
+    const closeOnEsc = (event: KeyboardEvent) => {
       // close on Esc
       if (event.key === "Escape") {
         closeModal();
       }
     };
-    window.addEventListener("keydown", close);
+    window.addEventListener("keydown", closeOnEsc);
     return () => {
-      window.removeEventListener("keydown", close);
+      window.removeEventListener("keydown", closeOnEsc);
     };
-  }, [props, closeModal]);
+  }, [close, closeModal]);
 
   return (
     <ModalBackground>
@@ -39,14 +43,10 @@ const ModalDialog: FC<ModalDialogProps> = (props) => {
             <XIcon className="w-full h-full" />
           </button>
         </div>
-        <div className="px-5">{props.children}</div>
+        <div className="px-5">{children}</div>
       </div>
     </ModalBackground>
   );
 };
 
 export default ModalDialog;
-
-export interface ModalDialogProps {
-  close: () => void;
-}

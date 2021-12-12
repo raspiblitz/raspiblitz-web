@@ -56,7 +56,8 @@
       "scan_qr": "Scan this QR code or copy the address below to receive funds",
       "send_onchain": "Send funds On-chain",
       "send_lightning": "Send funds over Lightning",
-      "address": "Address"
+      "address": "Address",
+      "unlock_success": "Wallet unlocked"
     },
     "tx": {
       "transactions": "Transactions",
@@ -117,6 +118,10 @@
         },
         "chainFee": {
           "required": "Please input a fee amount"
+        },
+        "unlock": {
+          "pass_c": "Password C",
+          "required": "Please input Password C"
         }
       }
     }
