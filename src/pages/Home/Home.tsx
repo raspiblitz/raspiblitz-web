@@ -29,6 +29,8 @@ export const Home: FC = () => {
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
+  const { logout } = appCtx;
+
   useEffect(() => {
     instance
       .get("/lightning/list-all-tx?reversed=true")
@@ -36,9 +38,9 @@ export const Home: FC = () => {
         setTransactions(tx.data);
       })
       .catch((_) => {
-        appCtx.logout();
+        logout();
       });
-  }, [appCtx]);
+  }, [logout]);
 
   const showSendModalHandler = () => {
     setShowSendModal(true);

@@ -3,6 +3,7 @@ import {
   Dispatch,
   FC,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -56,7 +57,7 @@ const AppContextProvider: FC = (props) => {
     });
   };
 
-  const logoutHandler = () => {
+  const logoutHandler = useCallback(() => {
     localStorage.removeItem("access_token");
 
     // close EventSource on logout
@@ -65,7 +66,7 @@ const AppContextProvider: FC = (props) => {
       setEvtSource(null);
     }
     setIsLoggedIn(false);
-  };
+  }, [evtSource, setEvtSource]);
 
   useEffect(() => {
     const settings = retrieveSettings();
