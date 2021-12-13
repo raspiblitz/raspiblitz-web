@@ -10,6 +10,8 @@ const transactions = require("./transactions");
 const walletBalance = require("./wallet_balance");
 const util = require("./util");
 
+let walletLocked = true;
+
 const app = express();
 app.use(cors(), express.json());
 
@@ -352,6 +354,9 @@ app.post("/api/v1/lightning/send-payment", (req, res) => {
 
 app.get("/api/v1/lightning/list-all-tx", (req, res) => {
   console.info("call to /api/v1/lightning/list-all-tx");
+  if (walletLocked) {
+    return res.status(423).send();
+  }
   return res.status(200).send(JSON.stringify(transactions.listTransactions()));
 });
 
@@ -360,4 +365,15 @@ app.post("/api/v1/lightning/new-address", (req, res) => {
     `call to /api/v1/lightning/new-address with type ${req.body.type}`
   );
   return res.status(200).send("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz");
+});
+
+app.post("/api/v1/lightning/unlock-wallet", (req, res) => {
+  console.info(
+    `call to /api/v1/lightning/unlock-wallet with type ${req.body.password}`
+  );
+  if (req.body.password === "password") {
+    walletLocked = false;
+    return res.status(200).send(true);
+  }
+  return res.status(401).send();
 });
