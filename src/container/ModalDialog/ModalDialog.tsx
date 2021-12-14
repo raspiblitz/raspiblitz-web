@@ -8,10 +8,11 @@ export const disableScroll = {
 };
 
 type Props = {
+  closeable?: boolean;
   close: () => void;
 };
 
-const ModalDialog: FC<Props> = ({ close, children }) => {
+const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
   disableScroll.on();
 
   const closeModal = useCallback(() => {
@@ -22,7 +23,7 @@ const ModalDialog: FC<Props> = ({ close, children }) => {
   useEffect(() => {
     const closeOnEsc = (event: KeyboardEvent) => {
       // close on Esc
-      if (event.key === "Escape") {
+      if (closeable && event.key === "Escape") {
         closeModal();
       }
     };
@@ -30,18 +31,20 @@ const ModalDialog: FC<Props> = ({ close, children }) => {
     return () => {
       window.removeEventListener("keydown", closeOnEsc);
     };
-  }, [close, closeModal]);
+  }, [closeable, close, closeModal]);
 
   return (
     <ModalBackground>
       <div className="w-4/5 h-auto lg:w-1/2 xl:w-2/5 xl:max-w-screen-sm bg-white text-center rounded-lg flex flex-col mx-5 dark:bg-gray-700 dark:text-white">
         <div className="flex pr-2 pt-1">
-          <button
-            onClick={closeModal}
-            className="flex items-end ml-auto h-7 w-7 mt-1"
-          >
-            <XIcon className="w-full h-full" />
-          </button>
+          {closeable && (
+            <button
+              onClick={closeModal}
+              className="flex items-end ml-auto h-7 w-7 mt-1"
+            >
+              <XIcon className="w-full h-full" />
+            </button>
+          )}
         </div>
         <div className="px-5">{children}</div>
       </div>

@@ -24,6 +24,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
+  const [passwordWrong, setPasswordWrong] = useState(false);
 
   const unlockHandler = (data: { passwordInput: string }) => {
     setIsLoading(true);
@@ -32,29 +33,30 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
       .then((res) => {
         if (res.data) {
           setWalletLocked(false);
-          // disableScroll somehow doesn't trigger on Close
+          // disableScroll doesn't trigger on modal close
           disableScroll.off();
           onClose(true);
         }
       })
       .catch((_) => {
         setIsLoading(false);
+        setPasswordWrong(true);
       });
   };
 
   return createPortal(
-    <ModalDialog close={() => onClose(false)}>
+    <ModalDialog closeable={false} close={() => onClose(false)}>
       {isLoading && (
         <>
-          <h2 className="font-bold text-lg">Unlocking</h2>
+          <h2 className="font-bold text-lg">{t("wallet.unlocking")}</h2>
           <LoadingSpinner />
         </>
       )}
       {!isLoading && (
         <>
-          <h2 className="font-bold text-lg">Unlock Wallet</h2>
+          <h2 className="font-bold text-lg mt-5">{t("wallet.unlock_title")}</h2>
           <article>
-            <div>Unlock your Wallet</div>
+            <h5 className="p-2">{t("wallet.unlock_subtitle")}</h5>
             <form onSubmit={handleSubmit(unlockHandler)}>
               <InputField
                 {...register("passwordInput", {
@@ -63,16 +65,20 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
                 label={t("forms.validation.unlock.pass_c")}
                 errorMessage={errors.passwordInput}
                 placeholder={t("forms.validation.unlock.pass_c")}
+                type="password"
               />
               <button
                 type="submit"
                 className="bd-button p-3 my-5"
                 disabled={!isValid}
               >
-                Unlock
+                {t("wallet.unlock")}
               </button>
             </form>
           </article>
+          {passwordWrong && (
+            <div className="my-5 text-red-500">Wrong password</div>
+          )}
         </>
       )}
     </ModalDialog>,
