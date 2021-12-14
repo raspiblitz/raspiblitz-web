@@ -47,10 +47,10 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
   return createPortal(
     <ModalDialog closeable={false} close={() => onClose(false)}>
       {isLoading && (
-        <>
-          <h2 className="font-bold text-lg">{t("wallet.unlocking")}</h2>
+        <article className="py-5">
+          <h2 className="font-bold text-lg pb-5">{t("wallet.unlocking")}</h2>
           <LoadingSpinner />
-        </>
+        </article>
       )}
       {!isLoading && (
         <>
