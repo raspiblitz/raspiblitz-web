@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
@@ -13,14 +13,6 @@ module.exports = {
     },
     maxWidth: {
       "4/5": "80%",
-    },
-  },
-  variants: {
-    extend: {
-      opacity: ["disabled"],
-      backgroundColor: ["disabled"],
-      cursor: ["disabled"],
-      textColor: ["disabled"],
     },
   },
 };
