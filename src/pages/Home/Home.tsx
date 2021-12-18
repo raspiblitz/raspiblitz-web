@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -36,7 +37,7 @@ const Home: FC = () => {
     if (!walletLocked) {
       instance
         .get("/lightning/list-all-tx?reversed=true")
-        .then((tx: any) => {
+        .then((tx: AxiosResponse<Transaction[]>) => {
           setTransactions(tx.data);
         })
         .catch((err) => {

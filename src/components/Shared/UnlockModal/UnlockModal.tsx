@@ -77,7 +77,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
             </form>
           </article>
           {passwordWrong && (
-            <div className="my-5 text-red-500">Wrong password</div>
+            <p className="my-5 text-red-500">{t("login.invalid_pass")}</p>
           )}
         </>
       )}
