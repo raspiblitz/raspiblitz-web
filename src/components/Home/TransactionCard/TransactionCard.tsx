@@ -1,20 +1,41 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowDownIcon } from "../../../assets/arrow-down.svg";
+import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.svg";
 import { Transaction } from "../../../models/transaction.model";
+import { AppContext } from "../../../store/app-context";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 import SingleTransaction from "./SingleTransaction/SingleTransaction";
 
+type Props = {
+  transactions: Transaction[];
+  showDetails: (index: number) => void;
+};
+
 const MAX_ITEMS = 6;
 
-export const TransactionCard: FC<TransactionCardProps> = (props) => {
+const TransactionCard: FC<Props> = ({ transactions, showDetails }) => {
   const { t } = useTranslation();
-  const { transactions, showDetails } = props;
-
+  const { walletLocked } = useContext(AppContext);
   const [page, setPage] = useState(0);
 
-  if (transactions.length === 0) {
+  if (transactions.length === 0 && !walletLocked) {
     return <LoadingBox />;
+  }
+
+  if (walletLocked) {
+    return (
+      <div className="p-5 h-full">
+        <article className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
+          <article className="h-full flex justify-center items-center">
+            <div>
+              <ClosedLockIcon className="h-6 w-6" />
+            </div>
+            WALLET LOCKED
+          </article>
+        </article>
+      </div>
+    );
   }
 
   const pageForwardHandler = () => {
@@ -36,8 +57,8 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
 
   return (
     <div className="p-5 h-full">
-      <div className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
-        <div className="font-bold text-lg">{t("tx.transactions")}</div>
+      <section className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
+        <h2 className="font-bold text-lg">{t("tx.transactions")}</h2>
         <ul className="mt-auto">
           {currentPage.map((transaction: Transaction, index: number) => {
             return (
@@ -49,7 +70,7 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
             );
           })}
         </ul>
-        <div className="flex justify-around py-5 mt-auto">
+        <article className="flex justify-around py-5 mt-auto">
           <button
             onClick={pageBackwardHandler}
             disabled={page === 0}
@@ -64,15 +85,10 @@ export const TransactionCard: FC<TransactionCardProps> = (props) => {
           >
             <ArrowDownIcon className="h-6 w-6 transform -rotate-90" />
           </button>
-        </div>
-      </div>
+        </article>
+      </section>
     </div>
   );
 };
 
 export default TransactionCard;
-
-export interface TransactionCardProps {
-  transactions: Transaction[];
-  showDetails: (index: number) => void;
-}

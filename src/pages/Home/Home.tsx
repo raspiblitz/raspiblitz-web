@@ -1,4 +1,5 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
+import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
@@ -11,6 +12,7 @@ import TransactionDetailModal from "../../components/Home/TransactionCard/Transa
 import WalletCard from "../../components/Home/WalletCard/WalletCard";
 import ReceiveModal from "../../components/Shared/ReceiveModal/ReceiveModal";
 import SendModal from "../../components/Shared/SendModal/SendModal";
+import UnlockModal from "../../components/Shared/UnlockModal/UnlockModal";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
 import { Transaction } from "../../models/transaction.model";
@@ -18,9 +20,9 @@ import { AppContext } from "../../store/app-context";
 import { instance } from "../../util/interceptor";
 import { MODAL_ROOT } from "../../util/util";
 
-export const Home: FC = () => {
+const Home: FC = () => {
   const { t } = useTranslation();
-  const appCtx = useContext(AppContext);
+  const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
   const { systemInfo, balance, btcInfo, lnStatus, appStatus } = useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
@@ -29,38 +31,45 @@ export const Home: FC = () => {
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  const { logout } = appCtx;
+  const theme = darkMode ? "dark" : "light";
 
   useEffect(() => {
-    instance
-      .get("/lightning/list-all-tx?reversed=true")
-      .then((tx: any) => {
-        setTransactions(tx.data);
-      })
-      .catch((_) => {
-        logout();
-      });
-  }, [logout]);
-
-  const showSendModalHandler = () => {
-    setShowSendModal(true);
-  };
-
-  const closeSendModalHandler = (confirmed?: boolean) => {
-    setShowSendModal(false);
-    if (confirmed) {
-      const theme = appCtx.darkMode ? "dark" : "light";
-      toast.success(t("tx.sent"), { theme });
+    if (!walletLocked) {
+      instance
+        .get("/lightning/list-all-tx?reversed=true")
+        .then((tx: AxiosResponse<Transaction[]>) => {
+          setTransactions(tx.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 423) {
+            setWalletLocked(true);
+          }
+          // TODO: additional error handling #15
+        });
     }
-  };
+  }, [walletLocked, setWalletLocked]);
 
-  const showReceiveHandler = () => {
+  const showSendModalHandler = useCallback(() => {
+    setShowSendModal(true);
+  }, []);
+
+  const closeSendModalHandler = useCallback(
+    (confirmed?: boolean) => {
+      setShowSendModal(false);
+      if (confirmed) {
+        toast.success(t("tx.sent"), { theme });
+      }
+    },
+    [t, theme]
+  );
+
+  const showReceiveHandler = useCallback(() => {
     setShowReceiveModal(true);
-  };
+  }, []);
 
-  const closeReceiveModalHandler = () => {
+  const closeReceiveModalHandler = useCallback(() => {
     setShowReceiveModal(false);
-  };
+  }, []);
 
   const showDetailHandler = (index: number) => {
     const tx = transactions.find((tx) => tx.index === index);
@@ -72,10 +81,10 @@ export const Home: FC = () => {
     setShowDetailModal(true);
   };
 
-  const closeDetailHandler = () => {
+  const closeDetailHandler = useCallback(() => {
     setDetailTx(null);
     setShowDetailModal(false);
-  };
+  }, []);
 
   const receiveModal =
     showReceiveModal &&
@@ -107,8 +116,22 @@ export const Home: FC = () => {
 
   const gridRows = 6 + appStatus.length / 4;
 
+  const closeUnlockModal = useCallback(
+    (unlocked: boolean) => {
+      if (unlocked) {
+        toast.success(t("wallet.unlock_success"), { theme });
+      }
+    },
+    [t, theme]
+  );
+
+  const unlockModal = walletLocked && (
+    <UnlockModal onClose={closeUnlockModal} />
+  );
+
   return (
     <>
+      {unlockModal}
       {receiveModal}
       {sendModal}
       {detailModal}

@@ -1,15 +1,9 @@
-import {
-  render,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
-import SendLN from "./SendLN";
 import type { SendLnProps } from "./SendLN";
+import SendLN from "./SendLN";
 
 const basicProps: SendLnProps = {
   balance: "123456",

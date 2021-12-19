@@ -1,7 +1,15 @@
 import { TokenPayload } from "../models/token";
 
+const createModalRoot = () => {
+  const modalRoot = document.createElement("div");
+  modalRoot.setAttribute("id", "modal-root");
+  document.body.appendChild(modalRoot);
+  return modalRoot;
+};
+
 export const SETTINGS_KEY = "settings";
-export const MODAL_ROOT = document.getElementById("modal-root")!;
+export const MODAL_ROOT =
+  document.getElementById("modal-root") || createModalRoot();
 
 export interface SavedSettings {
   lang: string;
