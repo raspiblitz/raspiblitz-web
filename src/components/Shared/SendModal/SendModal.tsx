@@ -1,18 +1,26 @@
 import { ChangeEvent, FC, useContext, useState } from "react";
+import { createPortal } from "react-dom";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext } from "../../../store/app-context";
-import { instance } from "../../../util/interceptor";
-import ConfirmSendModal from "./ConfirmSendModal/ConfirmSendModal";
-import SendLn from "./SendLN/SendLN";
-import SwitchTxType, { TxType } from "../SwitchTxType/SwitchTxType";
-import SendOnChain from "./SendOnChain/SendOnChain";
 import {
   convertMSatToBtc,
   convertMSatToSat,
   convertToString,
 } from "../../../util/format";
+import { instance } from "../../../util/interceptor";
+import { MODAL_ROOT } from "../../../util/util";
+import SwitchTxType, { TxType } from "../SwitchTxType/SwitchTxType";
+import ConfirmSendModal from "./ConfirmSendModal/ConfirmSendModal";
+import SendLn from "./SendLN/SendLN";
+import SendOnChain from "./SendOnChain/SendOnChain";
 
-const SendModal: FC<SendModalProps> = (props) => {
+type Props = {
+  lnBalance: number;
+  onchainBalance: number;
+  onClose: (confirmed: boolean) => void;
+};
+
+const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const appCtx = useContext(AppContext);
 
   const [lnTransaction, setLnTransaction] = useState(true);
@@ -65,15 +73,15 @@ const SendModal: FC<SendModalProps> = (props) => {
     setInvoice(event.target.value);
   };
 
-  const lnBalance =
+  const convertedLnBalance =
     appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertMSatToBtc(props.lnBalance))
-      : convertToString(appCtx.unit, convertMSatToSat(props.lnBalance));
+      ? convertToString(appCtx.unit, convertMSatToBtc(lnBalance))
+      : convertToString(appCtx.unit, convertMSatToSat(lnBalance));
 
   if (confirm) {
     const addr = lnTransaction ? invoice : address;
     return (
-      <ModalDialog close={() => props.onClose(false)}>
+      <ModalDialog close={() => onClose(false)}>
         <ConfirmSendModal
           ln={lnTransaction}
           back={() => setConfirm(false)}
@@ -81,14 +89,14 @@ const SendModal: FC<SendModalProps> = (props) => {
           address={addr}
           fee={fee}
           comment={comment}
-          close={props.onClose}
+          close={onClose}
         />
       </ModalDialog>
     );
   }
 
-  return (
-    <ModalDialog close={() => props.onClose(false)}>
+  return createPortal(
+    <ModalDialog close={() => onClose(false)}>
       <div className="my-3">
         <SwitchTxType onTxTypeChange={changeTransactionHandler} />
       </div>
@@ -97,13 +105,13 @@ const SendModal: FC<SendModalProps> = (props) => {
         <SendLn
           onChangeInvoice={changeInvoiceHandler}
           onConfirm={confirmLnHandler}
-          balance={lnBalance}
+          balance={convertedLnBalance}
         />
       )}
 
       {!lnTransaction && (
         <SendOnChain
-          balance={props.onchainBalance}
+          balance={onchainBalance}
           address={address}
           onChangeAddress={changeAddressHandler}
           amount={amount}
@@ -115,14 +123,9 @@ const SendModal: FC<SendModalProps> = (props) => {
           onConfirm={confirmOnChainHandler}
         />
       )}
-    </ModalDialog>
+    </ModalDialog>,
+    MODAL_ROOT
   );
 };
 
 export default SendModal;
-
-export interface SendModalProps {
-  onchainBalance: number;
-  lnBalance: number;
-  onClose: (confirmed: boolean) => void;
-}
