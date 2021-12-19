@@ -1,6 +1,9 @@
 import Tooltip from "rc-tooltip";
-import { useContext, useState } from "react";
 import type { ChangeEvent, FC } from "react";
+import { useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
@@ -8,20 +11,22 @@ import useClipboard from "../../../hooks/use-clipboard";
 import { AppContext } from "../../../store/app-context";
 import { convertBtcToSat } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
+import { MODAL_ROOT } from "../../../util/util";
 import AmountInput from "../AmountInput/AmountInput";
 import InputField from "../InputField/InputField";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import SwitchTxType, { TxType } from "../SwitchTxType/SwitchTxType";
-
-import { useForm } from "react-hook-form";
-import type { SubmitHandler } from "react-hook-form";
 
 interface IFormInputs {
   amountInput: number;
   commentInput: string;
 }
 
-const ReceiveModal: FC<ReceiveModalProps> = (props) => {
+type Props = {
+  onClose: () => void;
+};
+
+const ReceiveModal: FC<Props> = ({ onClose }) => {
   const appCtx = useContext(AppContext);
   const { t } = useTranslation();
   const [invoiceType, setInvoiceType] = useState(TxType.LIGHTNING);
@@ -82,8 +87,8 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
   const onSubmit: SubmitHandler<IFormInputs> = (_data) =>
     generateInvoiceHandler();
 
-  return (
-    <ModalDialog close={props.onClose}>
+  return createPortal(
+    <ModalDialog close={onClose}>
       {showLnInvoice && (
         <div className="text-xl font-bold">{t("wallet.create_invoice_ln")}</div>
       )}
@@ -184,12 +189,9 @@ const ReceiveModal: FC<ReceiveModalProps> = (props) => {
           </article>
         </>
       )}
-    </ModalDialog>
+    </ModalDialog>,
+    MODAL_ROOT
   );
 };
 
 export default ReceiveModal;
-
-export interface ReceiveModalProps {
-  onClose: () => void;
-}

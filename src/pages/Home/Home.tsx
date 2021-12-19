@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
 import { FC, useCallback, useContext, useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
 import AppStatusCard from "../../components/Home/AppStatusCard/AppStatusCard";
@@ -18,7 +17,6 @@ import { AppStatus } from "../../models/app-status";
 import { Transaction } from "../../models/transaction.model";
 import { AppContext } from "../../store/app-context";
 import { instance } from "../../util/interceptor";
-import { MODAL_ROOT } from "../../util/util";
 
 const Home: FC = () => {
   const { t } = useTranslation();
@@ -86,33 +84,24 @@ const Home: FC = () => {
     setShowDetailModal(false);
   }, []);
 
-  const receiveModal =
-    showReceiveModal &&
-    createPortal(
-      <ReceiveModal onClose={closeReceiveModalHandler} />,
-      MODAL_ROOT
-    );
+  const receiveModal = showReceiveModal && (
+    <ReceiveModal onClose={closeReceiveModalHandler} />
+  );
 
-  const sendModal =
-    showSendModal &&
-    createPortal(
-      <SendModal
-        onchainBalance={balance.onchain_confirmed_balance!}
-        lnBalance={balance.channel_local_balance!}
-        onClose={closeSendModalHandler}
-      />,
-      MODAL_ROOT
-    );
+  const sendModal = showSendModal && (
+    <SendModal
+      onchainBalance={balance.onchain_confirmed_balance!}
+      lnBalance={balance.channel_local_balance!}
+      onClose={closeSendModalHandler}
+    />
+  );
 
-  const detailModal =
-    showDetailModal &&
-    createPortal(
-      <TransactionDetailModal
-        transaction={detailTx!}
-        close={closeDetailHandler}
-      />,
-      MODAL_ROOT
-    );
+  const detailModal = showDetailModal && (
+    <TransactionDetailModal
+      transaction={detailTx!}
+      close={closeDetailHandler}
+    />
+  );
 
   const gridRows = 6 + appStatus.length / 4;
 
