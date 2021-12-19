@@ -8,6 +8,7 @@ import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg"
 import { App } from "../../../models/app.model";
 import { instance } from "../../../util/interceptor";
 import mockInfo from "../../../util/mock-info.json";
+import ImageCarousel from "../../Shared/ImageCarousel/ImageCarousel";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 export const AppInfo: FC<AppInfoProps> = (props) => {
@@ -44,10 +45,6 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
     );
   }
 
-  const openImgHandler = (img: string) => {
-    window.open(img, "_blank", "noopener,noreferrer");
-  };
-
   const installHandler = () => {
     instance.post("install", { id }).catch(() => {});
   };
@@ -70,7 +67,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
       </section>
 
       {/* Image box with title */}
-      <section className="w-full px-10 flex items-center">
+      <section className="w-full px-10 flex items-center mb-5">
         <img className="max-h-16" src={iconImg} alt={`${id} Logo`} />
         <h1 className="text-2xl px-5 dark:text-white">{name}</h1>
         {!installed && (
@@ -91,19 +88,10 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
         )}
       </section>
 
-      {/* Slideshow */}
-      <section className="flex container p-4 mx-auto flex-nowrap overflow-x-auto">
-        {imgs.map((img, i) => (
-          <img
-            id={"img" + i}
-            key={i}
-            onClick={() => openImgHandler(img)}
-            className="rounded-xl p-2 max-w-4/5"
-            src={img}
-            alt="img"
-          />
-        ))}
+      <section>
+        <ImageCarousel imgs={imgs} />
       </section>
+
       {/* App Description */}
       <section className="w-full p-5 flex items-center justify-center">
         <article className="w-full bd-card">
