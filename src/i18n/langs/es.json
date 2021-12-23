@@ -52,8 +52,7 @@
       "send": "Enviar",
       "receive": "Recibir",
       "balance": "Balance",
-      "confirm": "Confirmar",
-      "invoice": ""
+      "confirm": "Confirmar"
     },
     "home": {
       "lightning": "Lightning",
