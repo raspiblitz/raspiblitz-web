@@ -50,6 +50,7 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
         label: comment,
         unit: appCtx.unit,
       };
+
       response = await instance
         .post("lightning/send-coins", body)
         .catch((e) => {

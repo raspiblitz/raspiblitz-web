@@ -98,9 +98,7 @@ describe("SendOnChain", () => {
       userEvent.type(amountInput, "999");
     });
 
-    await act(async () => {
-      userEvent.click(screen.getByText("wallet.confirm"));
-    });
+    userEvent.click(screen.getByText("wallet.confirm"));
 
     await waitFor(() => expect(amountInput).toHaveClass("input-error"));
     expect(
@@ -116,9 +114,9 @@ describe("SendOnChain", () => {
     await act(async () => {
       userEvent.clear(amountInput);
       userEvent.type(amountInput, "0");
+      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
     });
 
-    await waitFor(() => expect(amountInput).toHaveClass("input-error"));
     expect(
       screen.getByText("forms.validation.chainAmount.required")
     ).toBeInTheDocument();
