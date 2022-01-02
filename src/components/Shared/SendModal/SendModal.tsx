@@ -57,9 +57,6 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
   };
-  const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
-  };
 
   const changeCommentHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setComment(event.target.value);
@@ -118,7 +115,6 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
           comment={comment}
           fee={fee}
           onChangeAddress={changeAddressHandler}
-          onChangeAmount={changeAmountHandler}
           onChangeComment={changeCommentHandler}
           onChangeFee={changeFeeHandler}
           onConfirm={confirmOnChainHandler}

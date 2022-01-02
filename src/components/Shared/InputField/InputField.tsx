@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { ReactElement, Ref } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { HTMLInputTypeAttribute } from "react";
+import type { HTMLInputTypeAttribute } from "react";
 
 const InputField = forwardRef(
   (

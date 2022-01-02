@@ -95,6 +95,7 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
 
               <AmountInput
                 amount={amount}
+                errorMessage={errors.amountInput}
                 register={register("amountInput", {
                   required: t(
                     "forms.validation.chainAmount.required"
@@ -110,7 +111,6 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
                   },
                   onChange: amountChangeHandler,
                 })}
-                errorMessage={errors.amountInput}
               />
             </div>
           )}
