@@ -1,6 +1,6 @@
-import { FC, FormEvent, useContext, useRef, useState } from "react";
+import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as MoonLogo } from "../../assets/moon.svg";
 import { ReactComponent as RaspiBlitzLogo } from "../../assets/RaspiBlitz_Logo_Main.svg";
 import { ReactComponent as RaspiBlitzLogoDark } from "../../assets/RaspiBlitz_Logo_Main_Negative.svg";
@@ -14,9 +14,19 @@ const Login: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUnauthorized, setIsUnauthorized] = useState(false);
   const [isError, setIsError] = useState(false);
-  const appCtx = useContext(AppContext);
+  const { isLoggedIn, setIsLoggedIn, darkMode, toggleDarkMode } =
+    useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
+  const location = useLocation();
+  const from =
+    (location.state as { from?: Location })?.from?.pathname || "/home";
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      return navigate(from || "/home", { replace: true });
+    }
+  }, [navigate, from, isLoggedIn]);
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
@@ -40,9 +50,8 @@ const Login: FC = () => {
 
     if (resp) {
       localStorage.setItem("access_token", resp.data.access_token);
-      console.log("logging in");
-      appCtx.setIsLoggedIn(true);
-      navigate("/home");
+      setIsLoggedIn(true);
+      navigate(from, { replace: true });
     }
   };
 
@@ -50,13 +59,13 @@ const Login: FC = () => {
     <main className="w-screen h-screen flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-700 transition-colors">
       <MoonLogo
         className="h-8 fixed right-4 top-4 text-dark dark:text-yellow-500"
-        onClick={appCtx.toggleDarkMode}
+        onClick={toggleDarkMode}
       />
       <div className="h-8 w-48 fixed right-16 top-4 flex justify-around items-center">
         <I18nDropdown />
       </div>
-      {!appCtx.darkMode && <RaspiBlitzLogo className="h-10 my-2 block" />}
-      {appCtx.darkMode && <RaspiBlitzLogoDark className="h-10 my-2 block" />}
+      {!darkMode && <RaspiBlitzLogo className="h-10 my-2 block" />}
+      {darkMode && <RaspiBlitzLogoDark className="h-10 my-2 block" />}
       {isLoading && (
         <div className="py-5">
           <LoadingSpinner color="text-yellow-500" />
