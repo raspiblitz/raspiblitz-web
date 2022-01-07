@@ -136,6 +136,11 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
                   required: t(
                     "forms.validation.chainAmount.required"
                   ) as string,
+                  validate: {
+                    greaterThanZero: (value) =>
+                      value > 0 ||
+                      (t("forms.validation.chainAmount.required") as string),
+                  },
                   onChange: amountChangeHandler,
                 })}
                 errorMessage={errors.amountInput}

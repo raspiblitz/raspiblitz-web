@@ -51,7 +51,8 @@
       "amount": "Monto",
       "send": "Enviar",
       "receive": "Recibir",
-      "balance": "Balance"
+      "balance": "Balance",
+      "confirm": "Confirmar"
     },
     "home": {
       "lightning": "Lightning",
@@ -64,7 +65,18 @@
       "status": "Estado",
       "network": "Red",
       "version": "Versión",
-      "bitcoin": "Bitcoin"
+      "bitcoin": "Bitcoin",
+      "difficulty": "Dificultad",
+      "blockchain_size": "Tamaño de Cadena de Bloques",
+      "pending_balance_remote": "Balance Remoto Pendiente",
+      "hide": "Ocultar",
+      "show": "Mostrar",
+      "pending_balance_local": "Balance Local Pendiente",
+      "connections": "Conexiones",
+      "conn_in": "Entrante",
+      "conn_out": "Saliente",
+      "local_balance": "Balance Local",
+      "remote_balance": "Balance Remoto"
     },
     "login": {
       "error": "Ocurrió un error",
@@ -81,6 +93,13 @@
       "settings": "Ajustes",
       "apps": "Aplicaciones",
       "home": "Inicio"
+    },
+    "forms": {
+      "validation": {
+        "unlock": {
+          "pass_c": "Contraseña C"
+        }
+      }
     }
   }
 }

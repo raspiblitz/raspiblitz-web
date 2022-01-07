@@ -1,17 +1,15 @@
-import { FC, useContext } from "react";
-
-import type { ChangeEvent } from "react";
+import { useContext, useState } from "react";
+import type { FC, ChangeEvent } from "react";
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../../store/app-context";
 
 import { convertSatToBtc, convertToString } from "../../../../util/format";
 
-import AmountInput from "../../AmountInput/AmountInput";
 import InputField from "../../InputField/InputField";
-
-import { useForm } from "react-hook-form";
-import type { SubmitHandler } from "react-hook-form";
+import AmountInput from "../../AmountInput/AmountInput";
 
 interface IFormInputs {
   addressInput: string;
@@ -22,21 +20,24 @@ interface IFormInputs {
 
 const SendOnChain: FC<SendOnChainProps> = (props) => {
   const { t } = useTranslation();
-
   const appCtx = useContext(AppContext);
 
   const {
     address,
-    amount,
     balance,
     comment,
     fee,
     onChangeAddress,
-    onChangeAmount,
     onChangeComment,
     onChangeFee,
     onConfirm,
   } = props;
+
+  const [amount, setAmount] = useState(props.amount);
+
+  const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setAmount(+event.target.value);
+  };
 
   const balanceDecorated =
     appCtx.unit === "BTC"
@@ -83,15 +84,20 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
         <div className="w-full md:w-10/12 py-1">
           <AmountInput
             amount={amount}
+            errorMessage={errors?.amountInput}
             register={register("amountInput", {
               required: t("forms.validation.chainAmount.required") as string,
               max: {
-                value: props.balance,
+                value: balance,
                 message: t("forms.validation.chainAmount.max"),
               },
-              onChange: onChangeAmount,
+              validate: {
+                greaterThanZero: (value) =>
+                  value > 0 ||
+                  (t("forms.validation.chainAmount.required") as string),
+              },
+              onChange: changeAmountHandler,
             })}
-            errorMessage={errors.amountInput}
           />
         </div>
 
@@ -143,7 +149,6 @@ export interface SendOnChainProps {
   comment: string;
   fee: string;
   onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeAmount: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeComment: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeFee: (event: ChangeEvent<HTMLInputElement>) => void;
   onConfirm: () => void;

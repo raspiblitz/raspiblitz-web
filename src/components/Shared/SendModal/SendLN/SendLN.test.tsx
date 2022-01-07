@@ -6,7 +6,7 @@ import type { SendLnProps } from "./SendLN";
 import SendLN from "./SendLN";
 
 const basicProps: SendLnProps = {
-  balance: "123456",
+  balanceDecorated: "123456",
   onConfirm: () => {},
   onChangeInvoice: () => {},
 };

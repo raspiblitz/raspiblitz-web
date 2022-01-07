@@ -14,7 +14,6 @@ const basicProps: SendOnChainProps = {
   comment: "",
   fee: "",
   onChangeAddress: () => {},
-  onChangeAmount: () => {},
   onChangeComment: () => {},
   onChangeFee: () => {},
   onConfirm: () => {},
@@ -68,15 +67,21 @@ describe("SendOnChain", () => {
       "wallet.address"
     ) as HTMLInputElement;
 
-    userEvent.clear(addressInput);
-    userEvent.type(addressInput, "abc123456789");
+    await act(async () => {
+      userEvent.clear(addressInput);
+      userEvent.type(addressInput, "abc123456789");
+    });
+
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
       screen.getByText("forms.validation.chainAddress.patternMismatch")
     ).toBeInTheDocument();
 
-    userEvent.clear(addressInput);
-    userEvent.type(addressInput, "bc1");
+    await act(async () => {
+      userEvent.clear(addressInput);
+      userEvent.type(addressInput, "bc1");
+    });
+
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
       screen.getByText("forms.validation.chainAddress.patternMismatch")
@@ -88,11 +93,32 @@ describe("SendOnChain", () => {
       "wallet.amount"
     ) as HTMLInputElement;
 
-    userEvent.clear(amountInput);
-    userEvent.type(amountInput, "999");
+    await act(async () => {
+      userEvent.clear(amountInput);
+      userEvent.type(amountInput, "999");
+    });
+
+    userEvent.click(screen.getByText("wallet.confirm"));
+
     await waitFor(() => expect(amountInput).toHaveClass("input-error"));
     expect(
       screen.getByText("forms.validation.chainAmount.max")
+    ).toBeInTheDocument();
+  });
+
+  test("validates amount is bigger than zero", async () => {
+    const amountInput = screen.getByLabelText(
+      "wallet.amount"
+    ) as HTMLInputElement;
+
+    await act(async () => {
+      userEvent.clear(amountInput);
+      userEvent.type(amountInput, "0");
+      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
+    });
+
+    expect(
+      screen.getByText("forms.validation.chainAmount.required")
     ).toBeInTheDocument();
   });
 

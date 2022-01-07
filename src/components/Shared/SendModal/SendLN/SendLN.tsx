@@ -11,7 +11,7 @@ import type { SubmitHandler } from "react-hook-form";
 
 const SendLn: FC<SendLnProps> = (props) => {
   const appCtx = useContext(AppContext);
-  const { balance, onChangeInvoice, onConfirm } = props;
+  const { balanceDecorated, onChangeInvoice, onConfirm } = props;
   const { t } = useTranslation();
 
   interface IFormInputs {
@@ -34,7 +34,7 @@ const SendLn: FC<SendLnProps> = (props) => {
 
       <p className="my-5">
         <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
-        {balance} {appCtx.unit}
+        {balanceDecorated} {appCtx.unit}
       </p>
 
       <InputField
@@ -65,7 +65,7 @@ const SendLn: FC<SendLnProps> = (props) => {
 export default SendLn;
 
 export interface SendLnProps {
-  balance: string;
+  balanceDecorated: string;
   onConfirm: () => void;
   onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
 }
