@@ -23,4 +23,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn audit --groups dependencies
+      - run: |
+              yarn
+              yarn npm audit --environment production
+
