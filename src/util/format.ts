@@ -21,7 +21,7 @@ export function convertMSatToBtc(mSat: number): number {
 }
 
 export function convertToString(unit: Unit, num: number): string {
-  if (unit === "Sat") {
+  if (unit === Unit.SAT) {
     return num.toLocaleString(NUM_LOCALE);
   }
   return num.toFixed(8).toString();

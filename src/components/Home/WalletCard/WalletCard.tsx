@@ -1,10 +1,11 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import btcLogo from "../../../assets/bitcoin-circle-white.svg";
 import { ReactComponent as ChainIcon } from "../../../assets/chain.svg";
 import { ReactComponent as LightningIcon } from "../../../assets/lightning.svg";
 import { ReactComponent as ReceiveIcon } from "../../../assets/receive.svg";
 import { ReactComponent as SendIcon } from "../../../assets/send.svg";
-import { AppContext } from "../../../store/app-context";
+import { AppContext, Unit } from "../../../store/app-context";
 import {
   convertMSatToBtc,
   convertSatToBtc,
@@ -12,11 +13,10 @@ import {
 } from "../../../util/format";
 import { checkPropsUndefined } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
-import btcLogo from "../../../assets/bitcoin-circle-white.svg";
 
 export const WalletCard: FC<WalletCardProps> = (props) => {
   const { t } = useTranslation();
-  const appCtx = useContext(AppContext);
+  const { unit } = useContext(AppContext);
 
   if (checkPropsUndefined(props)) {
     return <LoadingBox />;
@@ -25,12 +25,12 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
   const { onchainBalance, lnBalance } = props;
 
   const convertedOnchainBalance =
-    appCtx.unit === "BTC" ? convertSatToBtc(onchainBalance) : onchainBalance;
+    unit === Unit.BTC ? convertSatToBtc(onchainBalance) : onchainBalance;
   const convertedLnBalance =
-    appCtx.unit === "BTC" ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
+    unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
 
   const totalBalance =
-    appCtx.unit === "BTC"
+    unit === Unit.BTC
       ? +(convertedOnchainBalance + convertedLnBalance).toFixed(8)
       : convertedOnchainBalance + convertedLnBalance;
 
@@ -42,7 +42,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
             <article className="w-full flex flex-col">
               <h6 className="text-xl">{t("wallet.balance")}</h6>
               <p className="text-2xl font-bold">
-                {convertToString(appCtx.unit, totalBalance)} {appCtx.unit}
+                {convertToString(unit, totalBalance)} {unit}
               </p>
             </article>
             <article className="w-full flex flex-col">
@@ -51,8 +51,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 &nbsp;{t("wallet.on_chain")}
               </h6>
               <p className="text-lg font-bold">
-                {convertToString(appCtx.unit, convertedOnchainBalance)}{" "}
-                {appCtx.unit}
+                {convertToString(unit, convertedOnchainBalance)} {unit}
               </p>
             </article>
             <article className="w-full flex flex-col">
@@ -61,7 +60,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 &nbsp;{t("home.lightning")}
               </h6>
               <p className="text-lg font-bold">
-                {convertToString(appCtx.unit, convertedLnBalance)} {appCtx.unit}
+                {convertToString(unit, convertedLnBalance)} {unit}
               </p>
             </article>
             <img

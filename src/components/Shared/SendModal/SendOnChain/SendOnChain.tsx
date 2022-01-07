@@ -1,15 +1,12 @@
+import type { ChangeEvent, FC } from "react";
 import { useContext, useState } from "react";
-import type { FC, ChangeEvent } from "react";
-import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
-
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "../../../../store/app-context";
-
+import { AppContext, Unit } from "../../../../store/app-context";
 import { convertSatToBtc, convertToString } from "../../../../util/format";
-
-import InputField from "../../InputField/InputField";
 import AmountInput from "../../AmountInput/AmountInput";
+import InputField from "../../InputField/InputField";
 
 interface IFormInputs {
   addressInput: string;
@@ -20,7 +17,7 @@ interface IFormInputs {
 
 const SendOnChain: FC<SendOnChainProps> = (props) => {
   const { t } = useTranslation();
-  const appCtx = useContext(AppContext);
+  const { unit } = useContext(AppContext);
 
   const {
     address,
@@ -40,9 +37,9 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
   };
 
   const balanceDecorated =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertSatToBtc(balance))
-      : convertToString(appCtx.unit, balance);
+    unit === Unit.BTC
+      ? convertToString(unit, convertSatToBtc(balance))
+      : convertToString(unit, balance);
 
   const {
     register,
@@ -60,7 +57,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
 
       <p className="my-5">
         <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
-        {balanceDecorated} {appCtx.unit}
+        {balanceDecorated} {unit}
       </p>
 
       <fieldset className="my-5 flex flex-col justify-center text-center items-center">

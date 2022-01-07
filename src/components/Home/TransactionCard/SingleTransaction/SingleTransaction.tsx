@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import { Transaction } from "../../../../models/transaction.model";
-import { AppContext } from "../../../../store/app-context";
+import { AppContext, Unit } from "../../../../store/app-context";
 import {
   convertMSatToBtc,
   convertMSatToSat,
@@ -12,7 +12,7 @@ import CategoryIcon from "./CategoryIcon";
 export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
   const { amount, category, time_stamp, type, comment, status } =
     props.transaction;
-  const appCtx = useContext(AppContext);
+  const { unit } = useContext(AppContext);
 
   const sendingTx = type === "send";
   const sign = sendingTx ? "" : "+";
@@ -21,14 +21,14 @@ export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
 
   if (category === "onchain") {
     formattedAmount =
-      appCtx.unit === "BTC"
-        ? convertToString(appCtx.unit, convertSatToBtc(amount))
-        : convertToString(appCtx.unit, amount);
+      unit === Unit.BTC
+        ? convertToString(unit, convertSatToBtc(amount))
+        : convertToString(unit, amount);
   } else {
     formattedAmount =
-      appCtx.unit === "BTC"
-        ? convertToString(appCtx.unit, convertMSatToBtc(amount))
-        : convertToString(appCtx.unit, convertMSatToSat(amount));
+      unit === Unit.BTC
+        ? convertToString(unit, convertMSatToBtc(amount))
+        : convertToString(unit, convertMSatToSat(amount));
   }
 
   const date = new Date(time_stamp * 1000);
@@ -51,7 +51,7 @@ export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
         </time>
         <p className={`inline-block w-8/12 ${color}`}>
           {sign}
-          {formattedAmount} {appCtx.unit}
+          {formattedAmount} {unit}
         </p>
       </div>
       <div className="w-full italic overflow-ellipsis overflow-hidden whitespace-nowrap text-center">

@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import { AppContext } from "../../../store/app-context";
+import { AppContext, Unit } from "../../../store/app-context";
 import {
   convertMSatToBtc,
   convertMSatToSat,
@@ -21,7 +21,7 @@ type Props = {
 };
 
 const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
-  const appCtx = useContext(AppContext);
+  const { unit } = useContext(AppContext);
 
   const [lnTransaction, setLnTransaction] = useState(true);
   const [invoice, setInvoice] = useState("");
@@ -71,9 +71,9 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   };
 
   const convertedLnBalance =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertMSatToBtc(lnBalance))
-      : convertToString(appCtx.unit, convertMSatToSat(lnBalance));
+    unit === Unit.BTC
+      ? convertToString(unit, convertMSatToBtc(lnBalance))
+      : convertToString(unit, convertMSatToSat(lnBalance));
 
   if (confirm) {
     const addr = lnTransaction ? invoice : address;

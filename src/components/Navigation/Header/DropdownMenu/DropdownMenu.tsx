@@ -1,14 +1,14 @@
 import { forwardRef, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as LogoutIcon } from "../../../../assets/logout.svg";
-import { AppContext } from "../../../../store/app-context";
+import { AppContext, Unit } from "../../../../store/app-context";
 import Toggle from "../../../Shared/Toggle/Toggle";
 
 const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useTranslation();
   const { unit, darkMode, logout, toggleDarkMode, toggleUnit } =
     useContext(AppContext);
-  const unitActive = unit === "Sat";
+  const unitActive = unit === Unit.SAT;
 
   const logoutHandler = () => {
     logout();

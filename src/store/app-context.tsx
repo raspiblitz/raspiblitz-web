@@ -25,12 +25,15 @@ interface AppContextType {
   setWalletLocked: Dispatch<SetStateAction<boolean>>;
 }
 
-export type Unit = "BTC" | "Sat";
+export enum Unit {
+  BTC,
+  SAT,
+}
 
 export const AppContext = createContext<AppContextType>({
   isLoggedIn: false,
   darkMode: false,
-  unit: "Sat",
+  unit: Unit.SAT,
   walletLocked: false,
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
@@ -43,14 +46,14 @@ const AppContextProvider: FC = ({ children }) => {
   const { i18n } = useTranslation();
   const { evtSource, setEvtSource } = useContext(SSEContext);
 
-  const [unit, setUnit] = useState<Unit>("Sat");
+  const [unit, setUnit] = useState<Unit>(Unit.SAT);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [walletLocked, setWalletLocked] = useState(false);
   const navigate = useNavigate();
 
   const toggleUnitHandler = () => {
-    setUnit((prevUnit: Unit) => (prevUnit === "Sat" ? "BTC" : "Sat"));
+    setUnit((prevUnit: Unit) => (prevUnit === Unit.SAT ? Unit.BTC : Unit.SAT));
   };
 
   const toggleDarkModeHandler = () => {

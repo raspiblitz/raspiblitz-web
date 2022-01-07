@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../../../assets/clipboard-copy.svg";
 import useClipboard from "../../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../../models/transaction.model";
-import { AppContext } from "../../../../../store/app-context";
+import { AppContext, Unit } from "../../../../../store/app-context";
 import { convertSatToBtc, convertToString } from "../../../../../util/format";
 
 export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
-  const appCtx = useContext(AppContext);
+  const { unit } = useContext(AppContext);
   const { t } = useTranslation();
   const { details } = props;
   const [copyId] = useClipboard(details.id);
@@ -20,9 +20,9 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
   const date = new Date(details.time_stamp * 1000).toLocaleString(); // epoch time => * 1000
 
   const amount =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertSatToBtc(details.amount))
-      : convertToString(appCtx.unit, details.amount);
+    unit === Unit.BTC
+      ? convertToString(unit, convertSatToBtc(details.amount))
+      : convertToString(unit, details.amount);
 
   return (
     <>
@@ -62,7 +62,7 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
         <article className={containerClasses}>
           <h6 className={keyClasses}>{t("wallet.amount")}</h6>
           <p className={valueClasses}>
-            {amount} {appCtx.unit}
+            {amount} {unit}
           </p>
         </article>
         <article className={containerClasses}>

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
-import { AppContext } from "../../../store/app-context";
+import { AppContext, Unit } from "../../../store/app-context";
 import { convertBtcToSat } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
@@ -27,7 +27,7 @@ type Props = {
 };
 
 const ReceiveModal: FC<Props> = ({ onClose }) => {
-  const appCtx = useContext(AppContext);
+  const { unit } = useContext(AppContext);
   const { t } = useTranslation();
   const [invoiceType, setInvoiceType] = useState(TxType.LIGHTNING);
   const [address, setAddress] = useState("");
@@ -66,7 +66,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
   const generateInvoiceHandler = async () => {
     setIsLoading(true);
     const mSatAmount =
-      appCtx.unit === "BTC" ? convertBtcToSat(amount) * 1000 : amount * 1000;
+      unit === Unit.BTC ? convertBtcToSat(amount) * 1000 : amount * 1000;
     const resp = await instance.post(
       `lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`
     );
