@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as AppIcon } from "../../../assets/apps.svg";
 import { ReactComponent as HomeLogo } from "../../../assets/home.svg";
-import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { ReactComponent as LogoutIcon } from "../../../assets/logout.svg";
+import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { AppContext } from "../../../store/app-context";
 
 export const SideDrawer: FC = () => {
@@ -24,8 +24,9 @@ export const SideDrawer: FC = () => {
       <div>
         <NavLink
           to="/home"
-          className={navLinkClasses}
-          activeClassName={navLinkActiveClasses}
+          className={({ isActive }) =>
+            navLinkClasses + (isActive ? " " + navLinkActiveClasses : "")
+          }
         >
           <HomeLogo className="inline-block w-10 h-10" />
           <div className="w-1/2 mx-3 flex justify-center lg:block text-lg">
@@ -33,9 +34,10 @@ export const SideDrawer: FC = () => {
           </div>
         </NavLink>
         <NavLink
-          to="apps"
-          className={navLinkClasses}
-          activeClassName={navLinkActiveClasses}
+          to="/apps"
+          className={({ isActive }) =>
+            navLinkClasses + (isActive ? " " + navLinkActiveClasses : "")
+          }
         >
           <AppIcon className="inline-block w-10 h-10" />
           <div className="w-full lg:w-1/2 mx-3 flex justify-center lg:block text-lg">
@@ -43,9 +45,10 @@ export const SideDrawer: FC = () => {
           </div>
         </NavLink>
         <NavLink
-          to="settings"
-          className={navLinkClasses}
-          activeClassName={navLinkActiveClasses}
+          to="/settings"
+          className={({ isActive }) =>
+            navLinkClasses + (isActive ? " " + navLinkActiveClasses : "")
+          }
         >
           <SettingsIcon className="inline-block w-10 h-10" />
           <div className="w-1/2 mx-3 flex justify-center lg:block text-lg">

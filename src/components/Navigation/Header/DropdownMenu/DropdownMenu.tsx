@@ -1,17 +1,17 @@
 import { forwardRef, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "../../../../store/app-context";
-import Toggle from "../../../Shared/Toggle/Toggle";
 import { ReactComponent as LogoutIcon } from "../../../../assets/logout.svg";
+import { AppContext, Unit } from "../../../../store/app-context";
+import Toggle from "../../../Shared/Toggle/Toggle";
 
 const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useTranslation();
-  const appCtx = useContext(AppContext);
-  const unitActive = appCtx.unit === "Sat";
-  const darkActive = appCtx.darkMode;
+  const { unit, darkMode, logout, toggleDarkMode, toggleUnit } =
+    useContext(AppContext);
+  const unitActive = unit === Unit.SAT;
 
   const logoutHandler = () => {
-    appCtx.logout();
+    logout();
   };
 
   return (
@@ -24,14 +24,14 @@ const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
           <Toggle
             toggleText={t("navigation.display_sats")}
             active={unitActive}
-            toggleFn={appCtx.toggleUnit}
+            toggleFn={toggleUnit}
           />
         </div>
         <div className="w-full py-4">
           <Toggle
             toggleText={t("navigation.dark_mode")}
-            active={darkActive}
-            toggleFn={appCtx.toggleDarkMode}
+            active={darkMode}
+            toggleFn={toggleDarkMode}
           />
         </div>
         <button className="bd-button w-full py-2 mt-3" onClick={logoutHandler}>

@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { parseJwt, retrieveSettings, saveSettings } from "../util/util";
 import { SSEContext } from "./sse-context";
 
@@ -24,12 +25,15 @@ interface AppContextType {
   setWalletLocked: Dispatch<SetStateAction<boolean>>;
 }
 
-export type Unit = "BTC" | "Sat";
+export enum Unit {
+  BTC,
+  SAT,
+}
 
 export const AppContext = createContext<AppContextType>({
   isLoggedIn: false,
   darkMode: false,
-  unit: "Sat",
+  unit: Unit.SAT,
   walletLocked: false,
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
@@ -38,18 +42,18 @@ export const AppContext = createContext<AppContextType>({
   setWalletLocked: () => {},
 });
 
-const AppContextProvider: FC = (props) => {
+const AppContextProvider: FC = ({ children }) => {
   const { i18n } = useTranslation();
-  const sseCtx = useContext(SSEContext);
-  const { evtSource, setEvtSource } = sseCtx;
+  const { evtSource, setEvtSource } = useContext(SSEContext);
 
-  const [unit, setUnit] = useState<Unit>("Sat");
+  const [unit, setUnit] = useState<Unit>(Unit.SAT);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [walletLocked, setWalletLocked] = useState(false);
+  const navigate = useNavigate();
 
   const toggleUnitHandler = () => {
-    setUnit((prevUnit: Unit) => (prevUnit === "Sat" ? "BTC" : "Sat"));
+    setUnit((prevUnit: Unit) => (prevUnit === Unit.SAT ? Unit.BTC : Unit.SAT));
   };
 
   const toggleDarkModeHandler = () => {
@@ -71,7 +75,8 @@ const AppContextProvider: FC = (props) => {
       setEvtSource(null);
     }
     setIsLoggedIn(false);
-  }, [evtSource, setEvtSource]);
+    navigate("/");
+  }, [evtSource, setEvtSource, navigate]);
 
   useEffect(() => {
     const settings = retrieveSettings();
@@ -121,9 +126,7 @@ const AppContextProvider: FC = (props) => {
   };
 
   return (
-    <AppContext.Provider value={contextValue}>
-      {props.children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 };
 

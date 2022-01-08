@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../../../assets/clipboard-copy.svg";
 import useClipboard from "../../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../../models/transaction.model";
-import { AppContext } from "../../../../../store/app-context";
+import { AppContext, Unit } from "../../../../../store/app-context";
 import {
   convertMSatToBtc,
   convertMSatToSat,
@@ -11,7 +11,7 @@ import {
 } from "../../../../../util/format";
 
 export const LNDetails: FC<LNDetailProps> = (props) => {
-  const appCtx = useContext(AppContext);
+  const { unit } = useContext(AppContext);
   const { t } = useTranslation();
   const { details } = props;
   const [copyId] = useClipboard(details.id);
@@ -24,9 +24,9 @@ export const LNDetails: FC<LNDetailProps> = (props) => {
   const date = new Date(details.time_stamp * 1000).toLocaleString(); // epoch time => * 1000
 
   const amount =
-    appCtx.unit === "BTC"
-      ? convertToString(appCtx.unit, convertMSatToBtc(details.amount))
-      : convertToString(appCtx.unit, convertMSatToSat(details.amount));
+    unit === Unit.BTC
+      ? convertToString(unit, convertMSatToBtc(details.amount))
+      : convertToString(unit, convertMSatToSat(details.amount));
 
   return (
     <section className="flex flex-col py-3 my-4">
@@ -55,7 +55,7 @@ export const LNDetails: FC<LNDetailProps> = (props) => {
       <article className={containerClasses}>
         <h6 className={keyClasses}>{t("tx.value")}</h6>
         <p className={valueClasses}>
-          {amount} {appCtx.unit}
+          {amount} {unit}
         </p>
       </article>
       <article className={containerClasses}>

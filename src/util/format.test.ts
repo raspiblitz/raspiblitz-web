@@ -1,3 +1,4 @@
+import { Unit } from "../store/app-context";
 import {
   convertBtcToSat,
   convertMSatToBtc,
@@ -27,17 +28,17 @@ describe("format", () => {
   });
 
   test("format to String with BTC", () => {
-    const amount = convertToString("BTC", 2.00000001);
+    const amount = convertToString(Unit.BTC, 2.00000001);
     expect(amount).toEqual("2.00000001");
   });
 
   test("format to String with Sat", () => {
-    const amount = convertToString("Sat", 200_000_001);
+    const amount = convertToString(Unit.SAT, 200_000_001);
     expect(amount).toEqual("200,000,001");
   });
 
   test("format to String with mSat to BTC", () => {
-    const amount = convertToString("BTC", convertMSatToBtc(21000));
+    const amount = convertToString(Unit.BTC, convertMSatToBtc(21000));
     expect(amount).toEqual("0.00000021");
   });
 });
