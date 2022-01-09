@@ -9753,9 +9753,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^12.1.6":
-  version: 12.1.6
-  resolution: "lint-staged@npm:12.1.6"
+"lint-staged@npm:^12.1.7":
+  version: 12.1.7
+  resolution: "lint-staged@npm:12.1.7"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.16
@@ -9772,7 +9772,7 @@ __metadata:
     yaml: ^1.10.2
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 429584c6604f0d9dcec9a7f632c9a3046f1e1d06e0e9c017fc59d7998f1baa4f8338aaa1658517b08e39a0320252ca8fc6b194a038024f0c68ac07217b57f2bb
+  checksum: 3d0757706c8b0ca3f004bb2ffa89a9d5fc97ccdebfa4cde29a9636c661538780e194b99cbc5e4b8b89b13986187b33c97e009b09014511bbd45ee05ba557d0eb
   languageName: node
   linkType: hard
 
@@ -11829,6 +11829,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-selector-parser@npm:^6.0.8":
+  version: 6.0.8
+  resolution: "postcss-selector-parser@npm:6.0.8"
+  dependencies:
+    cssesc: ^3.0.0
+    util-deprecate: ^1.0.2
+  checksum: 550351c8d04216106e259f7c433652aa6742dd7ddbedf7afdc313526963bb170589a6fefd1bc1fe6268a2cf9f5073d4ecb09bc7b5b4bef49edf80634300500af
+  languageName: node
+  linkType: hard
+
 "postcss-svgo@npm:^5.0.3":
   version: 5.0.3
   resolution: "postcss-svgo@npm:5.0.3"
@@ -12180,7 +12190,7 @@ __metadata:
     axios: ^0.24.0
     husky: ^7.0.4
     i18next: ^21.6.5
-    lint-staged: ^12.1.6
+    lint-staged: ^12.1.7
     msw: ^0.36.3
     postcss: ^8.4.5
     prettier: ^2.5.1
@@ -12193,7 +12203,7 @@ __metadata:
     react-router-dom: ^6.2.1
     react-scripts: 5.0.0
     react-toastify: ^8.1.0
-    tailwindcss: ^3.0.11
+    tailwindcss: ^3.0.12
     typescript: ~4.5.4
   languageName: unknown
   linkType: soft
@@ -13823,9 +13833,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.0.11":
-  version: 3.0.11
-  resolution: "tailwindcss@npm:3.0.11"
+"tailwindcss@npm:^3.0.12":
+  version: 3.0.12
+  resolution: "tailwindcss@npm:3.0.12"
   dependencies:
     arg: ^5.0.1
     chalk: ^4.1.2
@@ -13843,7 +13853,7 @@ __metadata:
     postcss-js: ^4.0.0
     postcss-load-config: ^3.1.0
     postcss-nested: 5.0.6
-    postcss-selector-parser: ^6.0.7
+    postcss-selector-parser: ^6.0.8
     postcss-value-parser: ^4.2.0
     quick-lru: ^5.1.1
     resolve: ^1.20.0
@@ -13853,7 +13863,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 50bc9ce20509d9a3b262490cafbf741026362899bada64acfec296ce0de4101432f03102599dd0fe86e20199b5ebc6ff2dfc21dc6d5286c030527a182000a840
+  checksum: d7de0458419ca50409f295831926cf76d2be1385894781c185b8200d3c568b10c7af2c27460582e47d8d4f89eacc7808f67027c1e8bc3820ac285d9497b675bb
   languageName: node
   linkType: hard
 
