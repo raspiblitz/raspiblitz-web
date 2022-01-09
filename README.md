@@ -24,6 +24,20 @@ Big thanks to our translators, which you can find in detail in this [README](src
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/)
 - [nvm](https://github.com/nvm-sh/nvm#intro) is suppported but not required
 
+#### Update npm dependencies
+
+```sh
+yarn upgrade-interactive
+```
+
+If you notice several versions of a dep in the `yarn.lock`-file:
+
+```sh
+yarn dedupe
+```
+
+Further info: https://dev.to/arcanis/yarn-2-2-dedupe-faster-lighter-ha5#dedupe-command
+
 ### Dev workflow
 
 #### Frontend
