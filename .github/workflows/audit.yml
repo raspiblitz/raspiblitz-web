@@ -24,6 +24,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: |
-              yarn
-              yarn npm audit --environment production
-
+          yarn
+          yarn dedupe --check
+          yarn npm audit --environment production
