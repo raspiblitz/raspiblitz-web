@@ -28,11 +28,14 @@ const Home: FC = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
 
   const theme = darkMode ? "dark" : "light";
 
   useEffect(() => {
     if (!walletLocked) {
+      setIsLoadingTransactions(true);
+
       instance
         .get("/lightning/list-all-tx?reversed=true")
         .then((tx: AxiosResponse<Transaction[]>) => {
@@ -43,9 +46,12 @@ const Home: FC = () => {
             setWalletLocked(true);
           }
           // TODO: additional error handling #15
+        })
+        .finally(() => {
+          setIsLoadingTransactions(false);
         });
     }
-  }, [walletLocked, setWalletLocked]);
+  }, [walletLocked, setWalletLocked, setIsLoadingTransactions]);
 
   const showSendModalHandler = useCallback(() => {
     setShowSendModal(true);
@@ -138,6 +144,7 @@ const Home: FC = () => {
         </article>
         <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4">
           <TransactionCard
+            isLoading={isLoadingTransactions}
             transactions={transactions}
             showDetails={showDetailHandler}
           />
