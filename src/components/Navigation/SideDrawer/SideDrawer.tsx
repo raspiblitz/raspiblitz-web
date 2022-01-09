@@ -1,4 +1,5 @@
-import { FC, useContext } from "react";
+import { useContext } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as AppIcon } from "../../../assets/apps.svg";
