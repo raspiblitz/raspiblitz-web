@@ -10,10 +10,12 @@ import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
-export const ConnectionCard: FC<ConnectionCardProps> = ({
-  sshAddress,
-  torAddress,
-}) => {
+export type Props = {
+  torAddress: string;
+  sshAddress: string;
+};
+
+export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
   const { t } = useTranslation();
   const [showAddress, setShowAddress] = useState(true);
   const [copyTor, clippedTor] = useClipboard(torAddress);
@@ -86,9 +88,18 @@ export const ConnectionCard: FC<ConnectionCardProps> = ({
             {t("home.ssh")}
           </h6>
           <div className="flex">
-            <p className={showAddress ? "w-10/12" : "w-10/12 text-blur"}>
+            <a
+              className={`${
+                showAddress
+                  ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
+                  : "w-10/12 text-blur"
+              }`}
+              href={`ssh://${sshAddress}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               {showAddress ? sshAddress : HIDDEN_TEXT}
-            </p>
+            </a>
             <Tooltip
               overlay={
                 <div>
@@ -110,8 +121,3 @@ export const ConnectionCard: FC<ConnectionCardProps> = ({
 };
 
 export default ConnectionCard;
-
-export interface ConnectionCardProps {
-  torAddress: string;
-  sshAddress: string;
-}
