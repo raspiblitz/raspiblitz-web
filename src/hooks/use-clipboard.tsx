@@ -14,7 +14,22 @@ function useClipboard(text: string): [() => void, boolean] {
   }, [timer]);
 
   const copy = () => {
-    navigator.clipboard.writeText(text);
+    // on HTTPS or localhost, navigator.clipboard works
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    } else {
+      // https://stackoverflow.com/a/65996386
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      document.execCommand("copy");
+      textArea.remove();
+    }
     setClipped(true);
     if (timer) {
       clearTimeout(timer);
