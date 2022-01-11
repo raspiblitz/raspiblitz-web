@@ -79,7 +79,7 @@
       "comment_placeholder": "Optional comment",
       "sent": "Transaction sent!",
       "confirm_info": "Please confirm the following transaction",
-      "transactions_none": "...no transactions yet, much sad"
+      "transactions_none": "No transactions yet, much sad"
     },
     "apps": {
       "installed": "Installed",

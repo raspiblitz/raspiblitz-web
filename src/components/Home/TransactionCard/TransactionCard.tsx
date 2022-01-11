@@ -1,6 +1,7 @@
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowDownIcon } from "../../../assets/arrow-down.svg";
+import { ReactComponent as InfoCircleIcon } from "../../../assets/info-circle.svg";
 import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.svg";
 import { Transaction } from "../../../models/transaction.model";
 import { AppContext } from "../../../store/app-context";
@@ -63,10 +64,15 @@ const TransactionCard: FC<Props> = ({
       <section className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
         <h2 className="font-bold text-lg">{t("tx.transactions")}</h2>
 
-        {transactions.length === 0 && <p>{t("tx.transactions_none")}</p>}
+        {transactions.length === 0 && (
+          <div className="flex justify-center items-center h-full">
+            <InfoCircleIcon className="h-6 w-6" />
+            &nbsp;{t("tx.transactions_none")}
+          </div>
+        )}
 
         {transactions.length > 0 && (
-          <ul className="mt-auto">
+          <ul className="py-5">
             {currentPageTxs.map((transaction: Transaction, index: number) => {
               return (
                 <SingleTransaction
@@ -80,7 +86,7 @@ const TransactionCard: FC<Props> = ({
         )}
 
         {transactions.length > 0 && (
-          <article className="flex justify-around py-5 mt-auto">
+          <div className="flex justify-around py-5 mt-auto">
             <button
               onClick={pageBackwardHandler}
               disabled={page === 0}
@@ -96,7 +102,7 @@ const TransactionCard: FC<Props> = ({
             >
               <ArrowDownIcon className="h-6 w-6 transform -rotate-90" />
             </button>
-          </article>
+          </div>
         )}
       </section>
     </div>
