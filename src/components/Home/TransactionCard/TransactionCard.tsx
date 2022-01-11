@@ -7,7 +7,7 @@ import { AppContext } from "../../../store/app-context";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 import SingleTransaction from "./SingleTransaction/SingleTransaction";
 
-type Props = {
+export type Props = {
   transactions: Transaction[];
   showDetails: (index: number) => void;
   isLoading: boolean;
@@ -16,12 +16,10 @@ type Props = {
 const MAX_ITEMS = 6;
 
 const TransactionCard: FC<Props> = ({
-  /* transactions, */
+  transactions,
   isLoading,
   showDetails,
 }) => {
-  const transactions: Transaction[] = [];
-
   const { t } = useTranslation();
   const { walletLocked } = useContext(AppContext);
   const [page, setPage] = useState(0);
@@ -65,7 +63,7 @@ const TransactionCard: FC<Props> = ({
       <section className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
         <h2 className="font-bold text-lg">{t("tx.transactions")}</h2>
 
-        {transactions.length === 0 && <p>...no transactions yet, much sad</p>}
+        {transactions.length === 0 && <p>{t("tx.transactions_none")}</p>}
 
         {transactions.length > 0 && (
           <ul className="mt-auto">
