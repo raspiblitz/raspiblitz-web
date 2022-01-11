@@ -1,21 +1,21 @@
+import type { HTMLInputTypeAttribute, ReactElement, Ref } from "react";
 import { forwardRef } from "react";
-import type { ReactElement, Ref } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import type { HTMLInputTypeAttribute } from "react";
 
 const InputField = forwardRef(
   (
     {
-      name,
-      label,
+      autoFocus,
       errorMessage,
-      placeholder,
-      value,
       inputRightAddon,
       inputRightElement,
-      type,
-      textAlign,
+      label,
+      name,
       onChange,
+      placeholder,
+      textAlign,
+      type,
+      value,
       ...rest
     }: InputFieldProps,
     ref: Ref<HTMLInputElement>
@@ -28,19 +28,20 @@ const InputField = forwardRef(
 
         <div className="flex">
           <input
-            id={name}
-            name={name}
-            value={value}
-            type={type}
-            placeholder={placeholder}
             {...rest}
-            ref={ref}
-            onChange={onChange}
+            autoFocus={autoFocus}
             className={`
                ${errorMessage ? "input-error" : "input-underline"}
                ${textAlign === "right" || type === "number" ? "text-right" : ""}
                ${inputRightAddon || inputRightElement ? "w-7/12" : ""}
                `}
+            id={name}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            ref={ref}
+            type={type}
+            value={value}
           />
 
           {inputRightAddon && (
@@ -61,6 +62,7 @@ const InputField = forwardRef(
 export default InputField;
 
 export interface InputFieldProps extends UseFormRegisterReturn {
+  autoFocus?: boolean;
   label: string;
   errorMessage?: FieldError;
   placeholder?: string;
