@@ -79,10 +79,11 @@ const Login: FC = () => {
           >
             <label className="label-underline">{t("login.enter_pass")}</label>
             <input
+              autoFocus
+              className="input-underline my-5 w-8/12 md:w-96"
+              placeholder={t("login.enter_pass_placeholder")}
               ref={passwordInput}
               type="password"
-              placeholder={t("login.enter_pass_placeholder")}
-              className="input-underline my-5 w-8/12 md:w-96"
             />
             <button
               type="submit"

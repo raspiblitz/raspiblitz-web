@@ -62,8 +62,9 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
                 {...register("passwordInput", {
                   required: t("forms.validation.unlock.required") as string,
                 })}
-                label={t("forms.validation.unlock.pass_c")}
+                autoFocus
                 errorMessage={errors.passwordInput}
+                label={t("forms.validation.unlock.pass_c")}
                 placeholder={t("forms.validation.unlock.pass_c")}
                 type="password"
               />
