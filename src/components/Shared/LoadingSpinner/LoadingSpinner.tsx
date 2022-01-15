@@ -1,11 +1,16 @@
-import { FC } from "react";
+import type { FC } from "react";
 import "./LoadingSpinner.css";
 
-const LoadingSpinner: FC<{ color?: string }> = (props) => {
-  const color = props.color || "text-yellow-500";
+type Props = {
+  color?: string;
+};
 
+const LoadingSpinner: FC<Props> = ({ color }) => {
   return (
-    <div id="loading-spinner" className={`${color} lds-ring`}>
+    <div
+      id="loading-spinner"
+      className={`${color || "text-yellow-500"} lds-ring`}
+    >
       <div></div>
       <div></div>
       <div></div>

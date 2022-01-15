@@ -9,7 +9,7 @@ import { AppContext } from "../../../store/app-context";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
 
 const Header: FC = () => {
-  const appCtx = useContext(AppContext);
+  const { darkMode } = useContext(AppContext);
   const { systemInfo } = useSSE();
   const dropdown = useRef<HTMLDivElement>(null);
   const menu = useRef<SVGSVGElement>(null);
@@ -41,10 +41,8 @@ const Header: FC = () => {
     <header className="fixed top-0 z-10 flex items-center justify-between border-b border-gray-300 h-16 mx-auto px-8 w-full shadow-md bg-white dark:bg-gray-800 dark:text-gray-300 transition-colors">
       <NavLink to="/">
         <RaspiBlitzMobileLogo className="h-8 w-8 md:hidden text-black dark:text-white" />
-        {!appCtx.darkMode && <RaspiBlitzLogo className="h-8 hidden md:block" />}
-        {appCtx.darkMode && (
-          <RaspiBlitzLogoDark className="h-8 hidden md:block" />
-        )}
+        {!darkMode && <RaspiBlitzLogo className="h-8 hidden md:block" />}
+        {darkMode && <RaspiBlitzLogoDark className="h-8 hidden md:block" />}
       </NavLink>
       <div className="font-bold text-xl">{systemInfo.alias}</div>
       <div className="relative">
