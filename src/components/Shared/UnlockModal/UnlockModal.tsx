@@ -10,6 +10,11 @@ import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 import InputField from "../InputField/InputField";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import type { SubmitHandler } from "react-hook-form";
+
+interface IFormInputs {
+  passwordInput: string;
+}
 
 type Props = {
   onClose: (unlocked: boolean) => void;
@@ -19,14 +24,17 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
   const { t } = useTranslation();
   const { setWalletLocked } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordWrong, setPasswordWrong] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
-  const [passwordWrong, setPasswordWrong] = useState(false);
+  } = useForm<IFormInputs>({ mode: "onChange" });
 
-  const unlockHandler = (data: { passwordInput: string }) => {
+  const unlockHandler: SubmitHandler<IFormInputs> = (data: {
+    passwordInput: string;
+  }) => {
     setIsLoading(true);
     instance
       .post("/lightning/unlock-wallet", { password: data.passwordInput })
@@ -47,16 +55,19 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
   return createPortal(
     <ModalDialog closeable={false} close={() => onClose(false)}>
       {isLoading && (
-        <article className="py-5">
+        <div className="py-5">
           <h2 className="font-bold text-lg pb-5">{t("wallet.unlocking")}</h2>
           <LoadingSpinner />
-        </article>
+        </div>
       )}
+
       {!isLoading && (
         <>
           <h2 className="font-bold text-lg mt-5">{t("wallet.unlock_title")}</h2>
-          <article>
-            <h5 className="p-2">{t("wallet.unlock_subtitle")}</h5>
+
+          <div>
+            <h3 className="p-2">{t("wallet.unlock_subtitle")}</h3>
+
             <form onSubmit={handleSubmit(unlockHandler)}>
               <InputField
                 {...register("passwordInput", {
@@ -68,6 +79,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
                 placeholder={t("forms.validation.unlock.pass_c")}
                 type="password"
               />
+
               <button
                 type="submit"
                 className="bd-button p-3 my-5"
@@ -76,7 +88,8 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
                 {t("wallet.unlock")}
               </button>
             </form>
-          </article>
+          </div>
+
           {passwordWrong && (
             <p className="my-5 text-red-500">{t("login.invalid_pass")}</p>
           )}
