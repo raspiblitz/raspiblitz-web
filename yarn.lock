@@ -6535,12 +6535,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.6.5":
-  version: 21.6.5
-  resolution: "i18next@npm:21.6.5"
+"i18next@npm:^21.6.6":
+  version: 21.6.6
+  resolution: "i18next@npm:21.6.6"
   dependencies:
     "@babel/runtime": ^7.12.0
-  checksum: 1897f751d346c692cae70e977f64982862114fc0453a75fe89f31b8029cf39606aa663f33495172eccb02c9297a089110f14a11e38be3e66092c0510ab616a06
+  checksum: 0a3c3e01897af4f48cb8ca53aa769d064393918afe2a52c9bc354e13c190ba79543941efeb731c4c0ae72662e8506af1e287371f1d9b071b955fc6b2f84c6164
   languageName: node
   linkType: hard
 
@@ -8482,9 +8482,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^0.36.3":
-  version: 0.36.3
-  resolution: "msw@npm:0.36.3"
+"msw@npm:^0.36.4":
+  version: 0.36.4
+  resolution: "msw@npm:0.36.4"
   dependencies:
     "@mswjs/cookies": ^0.1.6
     "@mswjs/interceptors": ^0.12.7
@@ -8508,7 +8508,7 @@ __metadata:
     yargs: ^17.3.0
   bin:
     msw: cli/index.js
-  checksum: c418eb6a9fa4f46ae873c61744bca420e10497e06eab45fbc8dd34b36655826d9c43d34c2241b5af082290ebf9f242e1889985334e7bf926acfe0328bce71e0a
+  checksum: 1eb8d37a4c1323118204ea117e978ac24f73c5867661c3252c01ab29918814b71fa323cfb99ed0ac43fe58862bdb0529ef046361b7d2b554a6ba4f0749c5168b
   languageName: node
   linkType: hard
 
@@ -9105,7 +9105,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-parse@npm:^1.0.6":
+"path-parse@npm:^1.0.6, path-parse@npm:^1.0.7":
   version: 1.0.7
   resolution: "path-parse@npm:1.0.7"
   checksum: 49abf3d81115642938a8700ec580da6e830dde670be21893c62f4e10bd7dd4c3742ddc603fe24f898cba7eb0c6bc1777f8d9ac14185d34540c6d4d80cd9cae8a
@@ -10264,21 +10264,21 @@ __metadata:
     autoprefixer: ^10.4.2
     axios: ^0.24.0
     husky: ^7.0.4
-    i18next: ^21.6.5
+    i18next: ^21.6.6
     lint-staged: ^12.1.7
-    msw: ^0.36.3
+    msw: ^0.36.4
     postcss: ^8.4.5
     prettier: ^2.5.1
     rc-tooltip: ^5.1.1
     react: ^17.0.2
     react-dom: ^17.0.2
-    react-hook-form: ^7.22.5
+    react-hook-form: ^7.24.0
     react-i18next: ^11.15.3
     react-qr-code: ^2.0.3
     react-router-dom: ^6.2.1
     react-scripts: 5.0.0
     react-toastify: ^8.1.0
-    tailwindcss: ^3.0.12
+    tailwindcss: ^3.0.15
     typescript: ~4.5.4
   languageName: unknown
   linkType: soft
@@ -10435,12 +10435,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.22.5":
-  version: 7.22.5
-  resolution: "react-hook-form@npm:7.22.5"
+"react-hook-form@npm:^7.24.0":
+  version: 7.24.0
+  resolution: "react-hook-form@npm:7.24.0"
   peerDependencies:
     react: ^16.8.0 || ^17
-  checksum: 73c76e132f96f01cf9bd447817dda393c57e04ab65005946cefd96436f5b49bc5fa2b3e24d2d1fa737c7334f971e28aef4f617cf25dbf89d0d019d0cb0b0e41f
+  checksum: 6df7b33c7e8023fadd7cf7415f975497d55866b0d5ae32f9735def3e2c7eb1455989f997e726b84e878d895e8ae0901db337f78eb9bb8edc3a146b7858b7d805
   languageName: node
   linkType: hard
 
@@ -10851,13 +10851,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.14.2, resolve@npm:^1.19.0, resolve@npm:^1.20.0":
-  version: 1.20.0
-  resolution: "resolve@npm:1.20.0"
+"resolve@npm:^1.14.2, resolve@npm:^1.19.0, resolve@npm:^1.20.0, resolve@npm:^1.21.0":
+  version: 1.21.0
+  resolution: "resolve@npm:1.21.0"
   dependencies:
-    is-core-module: ^2.2.0
-    path-parse: ^1.0.6
-  checksum: 40cf70b2cde00ef57f99daf2dc63c6a56d6c14a1b7fc51735d06a6f0a3b97cb67b4fb7ef6c747b4e13a7baba83b0ef625d7c4ce92a483cd5af923c3b65fd16fe
+    is-core-module: ^2.8.0
+    path-parse: ^1.0.7
+    supports-preserve-symlinks-flag: ^1.0.0
+  bin:
+    resolve: bin/resolve
+  checksum: d7d9092a5c04a048bea16c7e5a2eb605ac3e8363a0cc5644de1fde17d5028e8d5f4343aab1d99bd327b98e91a66ea83e242718150c64dfedcb96e5e7aad6c4f5
   languageName: node
   linkType: hard
 
@@ -10871,13 +10874,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>":
-  version: 1.20.0
-  resolution: "resolve@patch:resolve@npm%3A1.20.0#~builtin<compat/resolve>::version=1.20.0&hash=07638b"
+"resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.21.0#~builtin<compat/resolve>":
+  version: 1.21.0
+  resolution: "resolve@patch:resolve@npm%3A1.21.0#~builtin<compat/resolve>::version=1.21.0&hash=07638b"
   dependencies:
-    is-core-module: ^2.2.0
-    path-parse: ^1.0.6
-  checksum: a0dd7d16a8e47af23afa9386df2dff10e3e0debb2c7299a42e581d9d9b04d7ad5d2c53f24f1e043f7b3c250cbdc71150063e53d0b6559683d37f790b7c8c3cd5
+    is-core-module: ^2.8.0
+    path-parse: ^1.0.7
+    supports-preserve-symlinks-flag: ^1.0.0
+  bin:
+    resolve: bin/resolve
+  checksum: a0a4d1f7409e73190f31f901f8a619960bb3bd4ae38ba3a54c7ea7e1c87758d28a73256bb8d6a35996a903d1bf14f53883f0dcac6c571c063cb8162d813ad26e
   languageName: node
   linkType: hard
 
@@ -11828,6 +11834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"supports-preserve-symlinks-flag@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
+  checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
+  languageName: node
+  linkType: hard
+
 "svg-parser@npm:^2.0.2":
   version: 2.0.4
   resolution: "svg-parser@npm:2.0.4"
@@ -11882,9 +11895,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.0.12, tailwindcss@npm:^3.0.2":
-  version: 3.0.12
-  resolution: "tailwindcss@npm:3.0.12"
+"tailwindcss@npm:^3.0.15, tailwindcss@npm:^3.0.2":
+  version: 3.0.15
+  resolution: "tailwindcss@npm:3.0.15"
   dependencies:
     arg: ^5.0.1
     chalk: ^4.1.2
@@ -11905,14 +11918,14 @@ __metadata:
     postcss-selector-parser: ^6.0.8
     postcss-value-parser: ^4.2.0
     quick-lru: ^5.1.1
-    resolve: ^1.20.0
+    resolve: ^1.21.0
   peerDependencies:
     autoprefixer: ^10.0.2
     postcss: ^8.0.9
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: d7de0458419ca50409f295831926cf76d2be1385894781c185b8200d3c568b10c7af2c27460582e47d8d4f89eacc7808f67027c1e8bc3820ac285d9497b675bb
+  checksum: acbf45202d3046e87c3a55e80ca93f7344960fb4d0daa3d5f5a2b28e8afd7a26d023f9142632168d1a3076eff701499bed40cafa3823c371de596f42e98ba84d
   languageName: node
   linkType: hard
 
