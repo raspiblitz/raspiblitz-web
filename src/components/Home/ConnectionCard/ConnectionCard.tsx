@@ -31,8 +31,8 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
 
   return (
     <div className="p-5 h-full">
-      <section className="bd-card transition-colors">
-        <article className="font-bold text-lg flex items-center">
+      <div className="bd-card transition-colors">
+        <div className="font-bold text-lg flex items-center">
           {t("home.conn_details")}&nbsp;
           <Tooltip
             overlay={<div>{showAddress ? t("home.hide") : t("home.show")}</div>}
@@ -50,7 +50,7 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
               />
             )}
           </Tooltip>
-        </article>
+        </div>
         <article className="flex flex-col overflow-hidden py-4">
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
             {t("home.tor")}
@@ -115,7 +115,7 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
             </Tooltip>
           </div>
         </article>
-      </section>
+      </div>
     </div>
   );
 };
