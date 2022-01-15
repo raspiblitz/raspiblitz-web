@@ -9,9 +9,13 @@ import {
 } from "../../../../util/format";
 import CategoryIcon from "./CategoryIcon";
 
-export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
-  const { amount, category, time_stamp, type, comment, status } =
-    props.transaction;
+export type Props = {
+  transaction: Transaction;
+  onClick: () => void;
+};
+
+export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
+  const { amount, category, time_stamp, type, comment, status } = transaction;
   const { unit } = useContext(AppContext);
 
   const sendingTx = type === "send";
@@ -40,7 +44,7 @@ export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
   return (
     <li
       className="text-center px-0 md:px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-500 flex flex-col justify-center"
-      onClick={props.onClick}
+      onClick={onClick}
     >
       <div className="flex justify-center items-center w-full">
         <div className="w-2/12">
@@ -65,8 +69,3 @@ export const SingleTransaction: FC<SingleTransactionProps> = (props) => {
 };
 
 export default SingleTransaction;
-
-export interface SingleTransactionProps {
-  transaction: Transaction;
-  onClick: () => void;
-}

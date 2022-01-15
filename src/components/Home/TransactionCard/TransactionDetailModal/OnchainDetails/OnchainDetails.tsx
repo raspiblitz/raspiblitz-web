@@ -5,19 +5,18 @@ import useClipboard from "../../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../../models/transaction.model";
 import { AppContext, Unit } from "../../../../../store/app-context";
 import { convertSatToBtc, convertToString } from "../../../../../util/format";
+import "../TransactionDetails.css";
 
-export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
+export type Props = {
+  details: Transaction;
+};
+
+export const OnchainDetails: FC<Props> = ({ details }) => {
   const { unit } = useContext(AppContext);
   const { t } = useTranslation();
-  const { details } = props;
   const [copyId] = useClipboard(details.id);
 
-  const containerClasses =
-    "m-2 py-1 flex overflow-hidden border-gray-400 border-b-2 text-left";
-  const keyClasses = "w-1/2 text-gray-500 dark:text-gray-200";
-  const valueClasses = "w-1/2 overflow-hidden overflow-x-auto mx-2";
-
-  const date = new Date(details.time_stamp * 1000).toLocaleString(); // epoch time => * 1000
+  const date = new Date(details.time_stamp * 1000).toLocaleString(); // epoch time => multiply by 1000
 
   const amount =
     unit === Unit.BTC
@@ -35,9 +34,9 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
         {t("tx.mempool")}
       </a>
       <section className="flex flex-col py-3 my-4">
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.txid")}</h6>
-          <p className={valueClasses}>{details.id}</p>
+        <article className="detail-container">
+          <h6 className="detail-key">{t("tx.txid")}</h6>
+          <p className="detail-value">{details.id}</p>
           <div>
             <ClipboardIcon
               className="h-5 w-5 hover:text-blue-500"
@@ -45,33 +44,33 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
             />
           </div>
         </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.confirmations")}</h6>
-          <p className={valueClasses}>{details.num_confs || "Unconfirmed"}</p>
+        <article className="detail-container">
+          <h6 className="detail-key">{t("tx.confirmations")}</h6>
+          <p className="detail-value">{details.num_confs || "Unconfirmed"}</p>
         </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.included_block")}</h6>
-          <p className={valueClasses}>
+        <article className="detail-container">
+          <h6 className="detail-key">{t("tx.included_block")}</h6>
+          <p className="detail-value">
             {details.block_height || "Unconfirmed"}
           </p>
         </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.date")}</h6>
-          <p className={valueClasses}>{date}</p>
+        <article className="detail-container">
+          <h6 className="detail-key">{t("tx.date")}</h6>
+          <p className="detail-value">{date}</p>
         </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("wallet.amount")}</h6>
-          <p className={valueClasses}>
+        <article className="detail-container">
+          <h6 className="detail-key">{t("wallet.amount")}</h6>
+          <p className="detail-value">
             {amount} {unit}
           </p>
         </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.fee")}</h6>
-          <p className={valueClasses}>{details.total_fees || 0}</p>
+        <article className="detail-container">
+          <h6 className="detail-key">{t("tx.fee")}</h6>
+          <p className="detail-value">{details.total_fees || 0}</p>
         </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.description")}</h6>
-          <p className={valueClasses}>{details.comment}</p>
+        <article className="detail-container">
+          <h6 className="detail-key">{t("tx.description")}</h6>
+          <p className="detail-value">{details.comment}</p>
         </article>
       </section>
     </>
@@ -79,7 +78,3 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
 };
 
 export default OnchainDetails;
-
-export interface OnchainDetailProps {
-  details: Transaction;
-}

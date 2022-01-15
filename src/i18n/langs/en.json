@@ -57,6 +57,7 @@
       "send_onchain": "Send funds On-chain",
       "send_lightning": "Send funds over Lightning",
       "address": "Address",
+      "wallet_locked": "Wallet locked",
       "unlock_title": "Unlock Wallet",
       "unlock_subtitle": "Unlock your Wallet",
       "unlock_success": "Wallet unlocked",

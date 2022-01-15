@@ -31,7 +31,7 @@ const TransactionCard: FC<Props> = ({
         <div className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
           <div className="h-full flex justify-center items-center">
             <ClosedLockIcon className="h-6 w-6" />
-            WALLET LOCKED
+            {t("wallet.wallet_locked")}
           </div>
         </div>
       </div>
