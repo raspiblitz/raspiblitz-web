@@ -10,10 +10,12 @@ import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
-export const ConnectionCard: FC<ConnectionCardProps> = ({
-  sshAddress,
-  torAddress,
-}) => {
+export type Props = {
+  torAddress: string;
+  sshAddress: string;
+};
+
+export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
   const { t } = useTranslation();
   const [showAddress, setShowAddress] = useState(true);
   const [copyTor, clippedTor] = useClipboard(torAddress);
@@ -49,7 +51,7 @@ export const ConnectionCard: FC<ConnectionCardProps> = ({
             )}
           </Tooltip>
         </div>
-        <div className="flex flex-col overflow-hidden py-4">
+        <article className="flex flex-col overflow-hidden py-4">
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
             {t("home.tor")}
           </h6>
@@ -80,15 +82,24 @@ export const ConnectionCard: FC<ConnectionCardProps> = ({
               />
             </Tooltip>
           </div>
-        </div>
-        <div className="flex flex-col overflow-hidden py-4">
+        </article>
+        <article className="flex flex-col overflow-hidden py-4">
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
             {t("home.ssh")}
           </h6>
           <div className="flex">
-            <p className={showAddress ? "w-10/12" : "w-10/12 text-blur"}>
+            <a
+              className={`${
+                showAddress
+                  ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
+                  : "w-10/12 text-blur"
+              }`}
+              href={`ssh://${sshAddress}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               {showAddress ? sshAddress : HIDDEN_TEXT}
-            </p>
+            </a>
             <Tooltip
               overlay={
                 <div>
@@ -103,15 +114,10 @@ export const ConnectionCard: FC<ConnectionCardProps> = ({
               />
             </Tooltip>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   );
 };
 
 export default ConnectionCard;
-
-export interface ConnectionCardProps {
-  torAddress: string;
-  sshAddress: string;
-}
