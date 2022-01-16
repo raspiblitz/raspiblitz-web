@@ -21,7 +21,7 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="inline-block relative">
       <div className="absolute left-0 right-0 bottom-0 flex justify-center gap-5 p-0 mb-5">
         {imgs.map((_, index) => {
           if (activeImg === index) {
@@ -46,7 +46,7 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
         })}
         ;
       </div>
-      <div className="w-full overflow-hidden px-5">
+      <div className="overflow-hidden px-5">
         {imgs.map((img, index) => {
           if (index === activeImg) {
             return (

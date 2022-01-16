@@ -11,12 +11,17 @@ import mockInfo from "../../../util/mock-info.json";
 import ImageCarousel from "../../Shared/ImageCarousel/ImageCarousel";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
-export const AppInfo: FC<AppInfoProps> = (props) => {
+export type Props = {
+  app: App;
+  onClose: () => void;
+};
+
+export const AppInfo: FC<Props> = ({ app, onClose }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [iconImg, setIconImg] = useState("");
   const [imgs] = useState<any[]>([Preview1, Preview2, Preview3]);
-  const { id, name, installed, description } = props.app;
+  const { id, name, installed, description } = app;
   // TODO: Change to dynamic info
   const { version, repository, author } = mockInfo;
 
@@ -28,6 +33,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
       })
       .catch((_) => {
         // use fallback icon if image for id doesn't exist
+        // TODO: error handling
         import("../../../assets/cloud.svg").then((img) =>
           setIconImg(img.default)
         );
@@ -46,10 +52,12 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
   }
 
   const installHandler = () => {
+    // TODO: error handling
     instance.post("install", { id }).catch(() => {});
   };
 
   const uninstallHandler = () => {
+    // TODO: error handling
     instance.post("uninstall", { id }).catch(() => {});
   };
 
@@ -58,7 +66,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
       {/* Back Button */}
       <section className="w-full px-5 py-9 dark:text-gray-200">
         <button
-          onClick={props.onClose}
+          onClick={onClose}
           className="flex items-center outline-none text-xl font-bold"
         >
           <ChevronLeft className="h-5 w-5 inline-block" />
@@ -88,7 +96,7 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
         )}
       </section>
 
-      <section>
+      <section className="text-center">
         <ImageCarousel imgs={imgs} />
       </section>
 
@@ -122,8 +130,3 @@ export const AppInfo: FC<AppInfoProps> = (props) => {
 };
 
 export default AppInfo;
-
-export interface AppInfoProps {
-  app: App;
-  onClose: () => void;
-}
