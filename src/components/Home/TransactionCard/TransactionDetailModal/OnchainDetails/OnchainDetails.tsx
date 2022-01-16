@@ -1,11 +1,11 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../../../assets/clipboard-copy.svg";
+import KeyValueDisplay from "../../../../../container/KeyValueDisplay/KeyValueDisplay";
 import useClipboard from "../../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../../models/transaction.model";
 import { AppContext, Unit } from "../../../../../store/app-context";
 import { convertSatToBtc, convertToString } from "../../../../../util/format";
-import "../TransactionDetails.css";
 
 export type Props = {
   details: Transaction;
@@ -23,6 +23,21 @@ export const OnchainDetails: FC<Props> = ({ details }) => {
       ? convertToString(unit, convertSatToBtc(details.amount))
       : convertToString(unit, details.amount);
 
+  const entries: { key: string; value: string }[] = [
+    {
+      key: t("tx.confirmations"),
+      value: `${details.num_confs || "Unconfirmed"}`,
+    },
+    {
+      key: t("tx.included_block"),
+      value: `${details.block_height || "Unconfirmed"}`,
+    },
+    { key: t("tx.date"), value: date },
+    { key: t("wallet.amount"), value: `${amount} ${unit}` },
+    { key: t("tx.fee"), value: `${details.total_fees}` },
+    { key: t("tx.description"), value: details.comment },
+  ];
+
   return (
     <>
       <a
@@ -34,9 +49,13 @@ export const OnchainDetails: FC<Props> = ({ details }) => {
         {t("tx.mempool")}
       </a>
       <section className="flex flex-col py-3 my-4">
-        <article className="detail-container">
-          <h6 className="detail-key">{t("tx.txid")}</h6>
-          <p className="detail-value">{details.id}</p>
+        <article className="m-2 py-1 flex overflow-hidden border-gray-400 border-b-2 text-left">
+          <h6 className="w-1/2 text-gray-500 dark:text-gray-200">
+            {t("tx.txid")}
+          </h6>
+          <p className="w-1/2 overflow-hidden overflow-x-auto mx-2">
+            {details.id}
+          </p>
           <div>
             <ClipboardIcon
               className="h-5 w-5 hover:text-blue-500"
@@ -44,34 +63,13 @@ export const OnchainDetails: FC<Props> = ({ details }) => {
             />
           </div>
         </article>
-        <article className="detail-container">
-          <h6 className="detail-key">{t("tx.confirmations")}</h6>
-          <p className="detail-value">{details.num_confs || "Unconfirmed"}</p>
-        </article>
-        <article className="detail-container">
-          <h6 className="detail-key">{t("tx.included_block")}</h6>
-          <p className="detail-value">
-            {details.block_height || "Unconfirmed"}
-          </p>
-        </article>
-        <article className="detail-container">
-          <h6 className="detail-key">{t("tx.date")}</h6>
-          <p className="detail-value">{date}</p>
-        </article>
-        <article className="detail-container">
-          <h6 className="detail-key">{t("wallet.amount")}</h6>
-          <p className="detail-value">
-            {amount} {unit}
-          </p>
-        </article>
-        <article className="detail-container">
-          <h6 className="detail-key">{t("tx.fee")}</h6>
-          <p className="detail-value">{details.total_fees || 0}</p>
-        </article>
-        <article className="detail-container">
-          <h6 className="detail-key">{t("tx.description")}</h6>
-          <p className="detail-value">{details.comment}</p>
-        </article>
+        {entries.map((entry) => (
+          <KeyValueDisplay
+            key={entry.key}
+            name={entry.key}
+            value={entry.value}
+          />
+        ))}
       </section>
     </>
   );

@@ -1,6 +1,7 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../../../assets/clipboard-copy.svg";
+import KeyValueDisplay from "../../../../../container/KeyValueDisplay/KeyValueDisplay";
 import useClipboard from "../../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../../models/transaction.model";
 import { AppContext, Unit } from "../../../../../store/app-context";
@@ -9,7 +10,6 @@ import {
   convertMSatToSat,
   convertToString,
 } from "../../../../../util/format";
-import "../TransactionDetails.css";
 
 export type Props = {
   details: Transaction;
@@ -27,11 +27,23 @@ export const LNDetails: FC<Props> = ({ details }) => {
       ? convertToString(unit, convertMSatToBtc(details.amount))
       : convertToString(unit, convertMSatToSat(details.amount));
 
+  const entries: { key: string; value: string }[] = [
+    { key: t("home.status"), value: details.status },
+    { key: t("tx.date"), value: date },
+    { key: t("tx.fee"), value: `${details.total_fees || 0} mSat` },
+    { key: t("tx.value"), value: `${amount} ${unit}` },
+    { key: t("tx.description"), value: details.comment },
+  ];
+
   return (
     <section className="flex flex-col py-3 my-4">
-      <article className="detail-container">
-        <h6 className="detail-key">{t("tx.txid")}</h6>
-        <p className="detail-value">{details.id}</p>
+      <article className="m-2 py-1 flex overflow-hidden border-gray-400 border-b-2 text-left">
+        <h6 className="w-1/2 text-gray-500 dark:text-gray-200">
+          {t("tx.txid")}
+        </h6>
+        <p className="w-1/2 overflow-hidden overflow-x-auto mx-2">
+          {details.id}
+        </p>
         <div>
           <ClipboardIcon
             className="h-5 w-5 hover:text-blue-500"
@@ -39,28 +51,9 @@ export const LNDetails: FC<Props> = ({ details }) => {
           />
         </div>
       </article>
-      <article className="detail-container">
-        <h6 className="detail-key">{t("home.status")}</h6>
-        <p className="detail-value">{details.status}</p>
-      </article>
-      <article className="detail-container">
-        <h6 className="detail-key">{t("tx.date")}</h6>
-        <p className="detail-value">{date}</p>
-      </article>
-      <article className="detail-container">
-        <h6 className="detail-key">{t("tx.fee")}</h6>
-        <div className="detail-value">{details.total_fees || 0} mSat</div>
-      </article>
-      <article className="detail-container">
-        <h6 className="detail-key">{t("tx.value")}</h6>
-        <p className="detail-value">
-          {amount} {unit}
-        </p>
-      </article>
-      <article className="detail-container">
-        <h6 className="detail-key">{t("tx.description")}</h6>
-        <p className="detail-value">{details.comment}</p>
-      </article>
+      {entries.map((entry) => (
+        <KeyValueDisplay key={entry.key} name={entry.key} value={entry.value} />
+      ))}
     </section>
   );
 };
