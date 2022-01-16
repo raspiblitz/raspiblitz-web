@@ -7,26 +7,33 @@ import { AppContext } from "../../../store/app-context";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 
-const ConfirmModal: FC<ConfirmModalProps> = (props) => {
+export type Props = {
+  confirmText: string;
+  confirmEndpoint: string;
+  onClose: () => void;
+};
+
+const btnClasses =
+  "w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
+
+const ConfirmModal: FC<Props> = ({ confirmText, confirmEndpoint, onClose }) => {
   const { t } = useTranslation();
-  const appCtx = useContext(AppContext);
+  const { setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
-  const btnClasses =
-    "w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
 
   const shutdownHandler = async () => {
-    const resp = await instance.post(props.confirmEndpoint);
+    const resp = await instance.post(confirmEndpoint);
     if (resp.status === 200) {
-      appCtx.setIsLoggedIn(false);
+      setIsLoggedIn(false);
       navigate("/login");
     }
   };
 
   return createPortal(
-    <ModalDialog close={props.onClose}>
-      {props.confirmText}
+    <ModalDialog close={onClose}>
+      {confirmText}
       <div className="p-3 flex flex-col xl:flex-row">
-        <button className={btnClasses} onClick={props.onClose}>
+        <button className={btnClasses} onClick={onClose}>
           {t("settings.cancel")}
         </button>
         <button className={btnClasses} onClick={shutdownHandler}>
@@ -39,9 +46,3 @@ const ConfirmModal: FC<ConfirmModalProps> = (props) => {
 };
 
 export default ConfirmModal;
-
-export interface ConfirmModalProps {
-  confirmText: string;
-  confirmEndpoint: string;
-  onClose: () => void;
-}

@@ -1,28 +1,42 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../../../assets/clipboard-copy.svg";
+import KeyValueDisplay from "../../../../../container/KeyValueDisplay/KeyValueDisplay";
 import useClipboard from "../../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../../models/transaction.model";
 import { AppContext, Unit } from "../../../../../store/app-context";
 import { convertSatToBtc, convertToString } from "../../../../../util/format";
 
-export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
+export type Props = {
+  details: Transaction;
+};
+
+export const OnchainDetails: FC<Props> = ({ details }) => {
   const { unit } = useContext(AppContext);
   const { t } = useTranslation();
-  const { details } = props;
   const [copyId] = useClipboard(details.id);
 
-  const containerClasses =
-    "m-2 py-1 flex overflow-hidden border-gray-400 border-b-2 text-left";
-  const keyClasses = "w-1/2 text-gray-500 dark:text-gray-200";
-  const valueClasses = "w-1/2 overflow-hidden overflow-x-auto mx-2";
-
-  const date = new Date(details.time_stamp * 1000).toLocaleString(); // epoch time => * 1000
+  const date = new Date(details.time_stamp * 1000).toLocaleString(); // epoch time => multiply by 1000
 
   const amount =
     unit === Unit.BTC
       ? convertToString(unit, convertSatToBtc(details.amount))
       : convertToString(unit, details.amount);
+
+  const entries: { key: string; value: string }[] = [
+    {
+      key: t("tx.confirmations"),
+      value: `${details.num_confs || "Unconfirmed"}`,
+    },
+    {
+      key: t("tx.included_block"),
+      value: `${details.block_height || "Unconfirmed"}`,
+    },
+    { key: t("tx.date"), value: date },
+    { key: t("wallet.amount"), value: `${amount} ${unit}` },
+    { key: t("tx.fee"), value: `${details.total_fees}` },
+    { key: t("tx.description"), value: details.comment },
+  ];
 
   return (
     <>
@@ -35,9 +49,13 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
         {t("tx.mempool")}
       </a>
       <section className="flex flex-col py-3 my-4">
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.txid")}</h6>
-          <p className={valueClasses}>{details.id}</p>
+        <article className="m-2 py-1 flex overflow-hidden border-gray-400 border-b-2 text-left">
+          <h6 className="w-1/2 text-gray-500 dark:text-gray-200">
+            {t("tx.txid")}
+          </h6>
+          <p className="w-1/2 overflow-hidden overflow-x-auto mx-2">
+            {details.id}
+          </p>
           <div>
             <ClipboardIcon
               className="h-5 w-5 hover:text-blue-500"
@@ -45,41 +63,16 @@ export const OnchainDetails: FC<OnchainDetailProps> = (props) => {
             />
           </div>
         </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.confirmations")}</h6>
-          <p className={valueClasses}>{details.num_confs || "Unconfirmed"}</p>
-        </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.included_block")}</h6>
-          <p className={valueClasses}>
-            {details.block_height || "Unconfirmed"}
-          </p>
-        </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.date")}</h6>
-          <p className={valueClasses}>{date}</p>
-        </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("wallet.amount")}</h6>
-          <p className={valueClasses}>
-            {amount} {unit}
-          </p>
-        </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.fee")}</h6>
-          <p className={valueClasses}>{details.total_fees || 0}</p>
-        </article>
-        <article className={containerClasses}>
-          <h6 className={keyClasses}>{t("tx.description")}</h6>
-          <p className={valueClasses}>{details.comment}</p>
-        </article>
+        {entries.map((entry) => (
+          <KeyValueDisplay
+            key={entry.key}
+            name={entry.key}
+            value={entry.value}
+          />
+        ))}
       </section>
     </>
   );
 };
 
 export default OnchainDetails;
-
-export interface OnchainDetailProps {
-  details: Transaction;
-}

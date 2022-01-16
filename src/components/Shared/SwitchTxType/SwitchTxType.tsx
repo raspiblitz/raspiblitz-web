@@ -1,19 +1,23 @@
+import type { FC } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { FC } from "react";
 
 export enum TxType {
   ONCHAIN,
   LIGHTNING,
 }
 
-const SwitchTxType: FC<SwitchTxTypeProps> = (props) => {
+export type Props = {
+  onTxTypeChange: (txtype: TxType) => void;
+};
+
+const SwitchTxType: FC<Props> = ({ onTxTypeChange }) => {
   const { t } = useTranslation();
   const [txType, setTxType] = useState<TxType>(TxType.LIGHTNING);
 
   const handleClick = (txType: TxType) => {
     setTxType(txType);
-    props.onTxTypeChange(txType);
+    onTxTypeChange(txType);
   };
 
   return (
@@ -38,7 +42,3 @@ const SwitchTxType: FC<SwitchTxTypeProps> = (props) => {
 };
 
 export default SwitchTxType;
-
-export interface SwitchTxTypeProps {
-  onTxTypeChange: (txtype: TxType) => void;
-}

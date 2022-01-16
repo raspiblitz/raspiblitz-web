@@ -1,15 +1,18 @@
-import { FC } from "react";
+import type { FC } from "react";
 
-const Toggle: FC<ToggleProps> = (props) => {
-  const color = props.active ? "bg-green-400" : "bg-gray-200";
-  const slideRight = props.active && "translate-x-6";
+export type Props = {
+  toggleText: string;
+  active: boolean;
+  toggleFn: () => void;
+};
+
+const Toggle: FC<Props> = ({ toggleText, active, toggleFn }) => {
+  const color = active ? "bg-green-400" : "bg-gray-200";
+  const slideRight = active && "translate-x-6";
 
   return (
-    <div
-      className="flex items-center justify-center w-full"
-      onClick={props.toggleFn}
-    >
-      <div className="w-2/3">{props.toggleText}&nbsp;</div>
+    <div className="flex items-center justify-center w-full" onClick={toggleFn}>
+      <div className="w-2/3">{toggleText}&nbsp;</div>
       <div className="w-1/3">
         <div
           className={`flex items-center h-3 w-10 rounded-full duration-300 ease-in-out ${color}`}
@@ -24,9 +27,3 @@ const Toggle: FC<ToggleProps> = (props) => {
 };
 
 export default Toggle;
-
-export interface ToggleProps {
-  toggleText: string;
-  active: boolean;
-  toggleFn: () => void;
-}

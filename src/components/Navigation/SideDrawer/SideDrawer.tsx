@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import type { FC } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as AppIcon } from "../../../assets/apps.svg";
@@ -16,12 +16,8 @@ const createClassName = ({ isActive }: { isActive: boolean }) =>
 const navIconClasses = "inline-block w-10 h-10";
 
 export const SideDrawer: FC = () => {
-  const appCtx = useContext(AppContext);
+  const { logout } = useContext(AppContext);
   const { t } = useTranslation();
-
-  const logoutHandler = () => {
-    appCtx.logout();
-  };
 
   return (
     <nav className="hidden md:flex flex-col justify-between content-container w-full md:w-2/12 fixed px-2 pt-8 mb-16 shadow-lg bg-white dark:bg-gray-800 transition-colors">
@@ -46,7 +42,7 @@ export const SideDrawer: FC = () => {
         </NavLink>
       </div>
 
-      <button onClick={logoutHandler} className="bd-button w-full h-8 mb-3">
+      <button onClick={logout} className="bd-button w-full h-8 mb-3">
         <LogoutIcon className="inline-block w-5 h-5" />
         &nbsp;
         {t("navigation.logout")}

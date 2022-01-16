@@ -15,14 +15,19 @@ type Props = {
 export const TransactionDetailModal: FC<Props> = ({ transaction, close }) => {
   const { t } = useTranslation();
 
+  // prevent error when closing via 'Esc' key
+  if (!transaction) {
+    return <></>;
+  }
+
+  const { category } = transaction;
+
   return createPortal(
     <ModalDialog close={close}>
       <section className="flex flex-col">
         <h4 className="font-extrabold">{t("tx.tx_details")}</h4>
-        {transaction?.category === "onchain" && (
-          <OnchainDetails details={transaction} />
-        )}
-        {transaction?.category === "ln" && <LNDetails details={transaction} />}
+        {category === "onchain" && <OnchainDetails details={transaction} />}
+        {category === "ln" && <LNDetails details={transaction} />}
       </section>
     </ModalDialog>,
     MODAL_ROOT
