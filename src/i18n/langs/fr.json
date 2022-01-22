@@ -56,7 +56,13 @@
       "send_onchain": "Envoyer de l'argent On-chain",
       "confirm": "Confirmer",
       "invoice": "Facture",
-      "create_invoice": "Créer une facture"
+      "create_invoice": "Créer une facture",
+      "wallet_locked": "Portefeuille verrouillé",
+      "unlock_title": "Déverrouiller le portefeuille",
+      "unlock_subtitle": "Déverrouillez votre portefeuille",
+      "unlock_success": "Portefeuille déverrouillé",
+      "unlock": "Déverrouiller",
+      "unlocking": "Déverrouillage"
     },
     "tx": {
       "tx_details": "Détails de la transaction",
@@ -73,7 +79,8 @@
       "confirmations": "Confirmations",
       "confirm_info": "Veuillez confirmer la transaction suivante",
       "sent": "Transaction envoyée !",
-      "comment_placeholder": "Commentaire facultatif"
+      "comment_placeholder": "Commentaire facultatif",
+      "transactions_none": "Aucune transaction pour le moment, il est temps de faire la première"
     },
     "apps": {
       "installed": "Installé",
@@ -117,7 +124,14 @@
         "chainAmount": {
           "max": "Votre solde est trop bas pour envoyer ce montant",
           "required": "Veuillez saisir un montant"
+        },
+        "unlock": {
+          "required": "Veuillez saisir le mot de passe C",
+          "pass_c": "Mot de passe C"
         }
+      },
+      "hint": {
+        "invoiceAmountZero": "Le montant de la facture est nul"
       }
     }
   }
