@@ -115,7 +115,8 @@
       "validation": {
         "lnInvoice": {
           "required": "Please input a Lightning invoice",
-          "patternMismatch": "Wrong invoice format"
+          "patternMismatch": "Wrong invoice format",
+          "max": "Your balance is too low to pay this invoice"
         },
         "chainAddress": {
           "required": "Please input a Bitcoin address",

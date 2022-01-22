@@ -72,6 +72,23 @@ describe("ConfirmSendModal", () => {
   });
 
   describe("ln-invoice with amount above zero", () => {
+    test("show error if amount is bigger than balance", async () => {
+      await act(async () => {
+        render(
+          <I18nextProvider i18n={i18n}>
+            <ConfirmSendModal {...basicProps} invoiceAmount={111} />
+          </I18nextProvider>
+        );
+      });
+
+      expect(
+        screen.queryByText("forms.validation.lnInvoice.max")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "check.svg settings.confirm" })
+      ).toBeDisabled();
+    });
+
     test("valid form passes", async () => {
       render(
         <I18nextProvider i18n={i18n}>

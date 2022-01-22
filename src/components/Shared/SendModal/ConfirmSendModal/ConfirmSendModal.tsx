@@ -24,16 +24,17 @@ export type Props = {
 };
 
 const ConfirmSendModal: FC<Props> = ({
-  ln,
-  invoiceAmount,
   address,
-  fee,
-  comment,
-  balance,
   back,
+  balance,
   close,
+  comment,
+  fee,
+  invoiceAmount,
+  ln,
 }) => {
   const { t } = useTranslation();
+
   const { unit } = useContext(AppContext);
 
   const [amount, setAmount] = useState(0);
@@ -41,6 +42,8 @@ const ConfirmSendModal: FC<Props> = ({
   const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);
   };
+
+  const isInvoiceAmountBiggerThanBalance = invoiceAmount > balance;
 
   const {
     register,
@@ -86,7 +89,6 @@ const ConfirmSendModal: FC<Props> = ({
   };
 
   const addressTitle = ln ? t("wallet.invoice") : t("wallet.address");
-
   const commentHeading = ln ? t("tx.description") : t("tx.comment");
 
   return (
@@ -111,9 +113,15 @@ const ConfirmSendModal: FC<Props> = ({
         <article className="my-2">
           <h4 className="font-bold">{t("wallet.amount")}:</h4>
 
-          {invoiceAmount !== 0 && <span>{invoiceAmount} Sat</span>}
+          {Number(invoiceAmount) !== 0 && <span>{invoiceAmount} Sat</span>}
 
-          {invoiceAmount === 0 && (
+          {isInvoiceAmountBiggerThanBalance && (
+            <p className=" text-red-500">
+              {t("forms.validation.lnInvoice.max")}
+            </p>
+          )}
+
+          {Number(invoiceAmount) === 0 && (
             <div>
               <p>{t("forms.hint.invoiceAmountZero")}</p>
 
@@ -164,7 +172,9 @@ const ConfirmSendModal: FC<Props> = ({
           <button
             className="bd-button py-2 px-3 flex"
             type="submit"
-            disabled={submitCount > 0 && !isValid}
+            disabled={
+              (submitCount > 0 && !isValid) || isInvoiceAmountBiggerThanBalance
+            }
           >
             <CheckIcon />
             &nbsp; {t("settings.confirm")}
