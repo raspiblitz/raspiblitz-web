@@ -1,13 +1,11 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
+import type { Props } from "./ConfirmSendModal";
 import ConfirmSendModal from "./ConfirmSendModal";
-import type { ConfirmSendModalProps } from "./ConfirmSendModal";
-import { act } from "react-dom/test-utils";
 
-const basicProps: ConfirmSendModalProps = {
+const basicProps: Props = {
   address:
     "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
   invoiceAmount: 0,
@@ -34,15 +32,11 @@ describe("ConfirmSendModal", () => {
         "wallet.amount"
       ) as HTMLInputElement;
 
-      await act(async () => {
-        userEvent.clear(amountInput);
-        userEvent.type(amountInput, "999");
-      });
+      userEvent.clear(amountInput);
+      userEvent.type(amountInput, "999");
 
-      await act(async () => {
-        userEvent.click(screen.getByText("settings.confirm"));
-        await waitFor(() => expect(amountInput).toHaveClass("input-error"));
-      });
+      userEvent.click(await screen.findByText("settings.confirm"));
+      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
       expect(
         screen.getByText("forms.validation.chainAmount.max")
@@ -54,11 +48,9 @@ describe("ConfirmSendModal", () => {
         "wallet.amount"
       ) as HTMLInputElement;
 
-      await act(async () => {
-        userEvent.clear(amountInput);
-        userEvent.type(amountInput, "0");
-        await waitFor(() => expect(amountInput).toHaveClass("input-error"));
-      });
+      userEvent.clear(amountInput);
+      userEvent.type(amountInput, "0");
+      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
       expect(
         screen.getByText("forms.validation.chainAmount.required")
@@ -70,10 +62,8 @@ describe("ConfirmSendModal", () => {
         "wallet.amount"
       ) as HTMLInputElement;
 
-      await act(async () => {
-        userEvent.type(amountInput, "100");
-        await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
-      });
+      userEvent.type(amountInput, "100");
+      await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
 
       expect(
         screen.getByRole("button", { name: "check.svg settings.confirm" })
@@ -83,19 +73,19 @@ describe("ConfirmSendModal", () => {
 
   describe("ln-invoice with amount above zero", () => {
     test("valid form passes", async () => {
-      await act(async () => {
-        render(
-          <I18nextProvider i18n={i18n}>
-            <ConfirmSendModal {...basicProps} invoiceAmount={100} />
-          </I18nextProvider>
-        );
-      });
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal {...basicProps} invoiceAmount={100} />
+        </I18nextProvider>
+      );
 
       const submitButton = screen.queryByText("wallet.amount");
       expect(submitButton).not.toBeInTheDocument();
 
       expect(
-        screen.getByRole("button", { name: "check.svg settings.confirm" })
+        await screen.findByRole("button", {
+          name: "check.svg settings.confirm",
+        })
       ).not.toBeDisabled();
     });
   });
