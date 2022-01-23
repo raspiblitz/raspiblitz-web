@@ -14,13 +14,15 @@ interface IFormInputs {
 
 export type Props = {
   address: string;
-  invoiceAmount: number;
   back: () => void;
   balance: number;
   close: (confirmed: boolean) => void;
   comment: string;
+  expiry: number;
   fee: string;
-  ln: boolean;
+  invoiceAmount: number;
+  isLnTx: boolean;
+  timestamp: number;
 };
 
 const ConfirmSendModal: FC<Props> = ({
@@ -29,9 +31,11 @@ const ConfirmSendModal: FC<Props> = ({
   balance,
   close,
   comment,
+  expiry,
   fee,
   invoiceAmount,
-  ln,
+  isLnTx,
+  timestamp,
 }) => {
   const { t } = useTranslation();
 
@@ -43,7 +47,17 @@ const ConfirmSendModal: FC<Props> = ({
     setAmount(+event.target.value);
   };
 
-  const isInvoiceAmountBiggerThanBalance = invoiceAmount > balance;
+  const invoiceExpiryDate = timestamp + expiry;
+  const invoiceExpiryDateDecorated = new Intl.DateTimeFormat("default", {
+    dateStyle: "medium",
+    timeStyle: "medium",
+  })
+    .format(invoiceExpiryDate)
+    .toString();
+  const isInvoiceExpired: boolean = invoiceExpiryDate < Date.now();
+  const isInvoiceAmountBiggerThanBalance: boolean = invoiceAmount > balance;
+  const isValidLnInvoice: boolean =
+    isLnTx && !isInvoiceExpired && !isInvoiceAmountBiggerThanBalance;
 
   const {
     register,
@@ -58,11 +72,12 @@ const ConfirmSendModal: FC<Props> = ({
     let response;
     let error = null;
 
-    if (ln) {
+    if (isLnTx) {
       let msatQuery = "";
       if (amount > 0) {
         msatQuery = `&amount_msat=${amount}`;
       }
+
       response = await instance
         .post(`lightning/send-payment?pay_req=${address}${msatQuery}`)
         .catch((e) => {
@@ -88,12 +103,12 @@ const ConfirmSendModal: FC<Props> = ({
     close(!error);
   };
 
-  const addressTitle = ln ? t("wallet.invoice") : t("wallet.address");
-  const commentHeading = ln ? t("tx.description") : t("tx.comment");
+  const addressTitle = isLnTx ? t("wallet.invoice") : t("wallet.address");
+  const commentHeading = isLnTx ? t("tx.description") : t("tx.comment");
 
   return (
     <form onSubmit={handleSubmit(sendTransactionHandler)}>
-      <section className="break-all">
+      <div className="break-all">
         <button
           onClick={back}
           className="flex items-center justify-center outline-none font-bold"
@@ -106,13 +121,19 @@ const ConfirmSendModal: FC<Props> = ({
           {t("tx.confirm_info")}:{" "}
         </h4>
 
-        <article className="my-2">
+        <div className="my-2">
           <h4 className="font-bold">{addressTitle}:</h4> {address}
-        </article>
+          <br />
+          {isInvoiceExpired && (
+            <p className=" text-red-500">
+              {t("forms.validation.lnInvoice.expired")}:{" "}
+              {invoiceExpiryDateDecorated}
+            </p>
+          )}
+        </div>
 
-        <article className="my-2">
+        <div className="my-2">
           <h4 className="font-bold">{t("wallet.amount")}:</h4>
-
           {Number(invoiceAmount) !== 0 && <span>{invoiceAmount} Sat</span>}
 
           {isInvoiceAmountBiggerThanBalance && (
@@ -146,18 +167,18 @@ const ConfirmSendModal: FC<Props> = ({
               />
             </div>
           )}
-        </article>
+        </div>
 
-        {!ln && (
-          <article className="my-2">
+        {!isLnTx && (
+          <div className="my-2">
             <h4 className="font-bold">{t("tx.fee")}:</h4> {fee} sat/vByte
-          </article>
+          </div>
         )}
 
         {comment && (
-          <article className="my-2">
+          <div className="my-2">
             <h4 className="font-bold">{commentHeading}:</h4> {comment}
-          </article>
+          </div>
         )}
 
         <div className="flex justify-around px-2 py-5">
@@ -172,15 +193,13 @@ const ConfirmSendModal: FC<Props> = ({
           <button
             className="bd-button py-2 px-3 flex"
             type="submit"
-            disabled={
-              (submitCount > 0 && !isValid) || isInvoiceAmountBiggerThanBalance
-            }
+            disabled={(submitCount > 0 && !isValid) || !isValidLnInvoice}
           >
             <CheckIcon />
             &nbsp; {t("settings.confirm")}
           </button>
         </div>
-      </section>
+      </div>
     </form>
   );
 };

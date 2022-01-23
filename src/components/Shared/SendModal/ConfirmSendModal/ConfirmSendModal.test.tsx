@@ -8,13 +8,15 @@ import ConfirmSendModal from "./ConfirmSendModal";
 const basicProps: Props = {
   address:
     "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
-  invoiceAmount: 0,
   back: () => {},
   balance: 100,
   close: () => {},
   comment: "",
+  expiry: 36000,
   fee: "",
-  ln: true,
+  invoiceAmount: 0,
+  isLnTx: true,
+  timestamp: 1893456000000, // 01 Jan 2030 00:00:00 GMT
 };
 
 describe("ConfirmSendModal", () => {
@@ -72,6 +74,30 @@ describe("ConfirmSendModal", () => {
   });
 
   describe("ln-invoice with amount above zero", () => {
+    test("show error if invoice is expired", async () => {
+      await act(async () => {
+        render(
+          <I18nextProvider i18n={i18n}>
+            <ConfirmSendModal
+              {...basicProps}
+              timestamp={1640995200000} // "Sat Jan 01 2022 08:00:00
+              expiry={36000}
+            />
+          </I18nextProvider>
+        );
+      });
+
+      expect(
+        screen.queryByText(
+          "forms.validation.lnInvoice.expired",
+          { exact: false } /* exclude displayed date */
+        )
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "check.svg settings.confirm" })
+      ).toBeDisabled();
+    });
+
     test("show error if amount is bigger than balance", async () => {
       await act(async () => {
         render(
