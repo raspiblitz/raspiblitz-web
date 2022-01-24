@@ -1,28 +1,46 @@
-import { FC, useContext, useState } from "react";
 import type { ChangeEvent } from "react";
+import { FC, useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as CheckIcon } from "../../../../assets/check.svg";
+import { ReactComponent as ChevronLeft } from "../../../../assets/chevron-left.svg";
 import { ReactComponent as XIcon } from "../../../../assets/X.svg";
 import { AppContext } from "../../../../store/app-context";
 import { instance } from "../../../../util/interceptor";
-import { ReactComponent as ChevronLeft } from "../../../../assets/chevron-left.svg";
-import { useForm } from "react-hook-form";
 import AmountInput from "../../AmountInput/AmountInput";
+interface IFormInputs {
+  amountInput: number;
+}
 
-const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
+export type Props = {
+  address: string;
+  invoiceAmount: number;
+  back: () => void;
+  balance: number;
+  close: (confirmed: boolean) => void;
+  comment: string;
+  fee: string;
+  ln: boolean;
+};
+
+const ConfirmSendModal: FC<Props> = ({
+  ln,
+  invoiceAmount,
+  address,
+  fee,
+  comment,
+  balance,
+  back,
+  close,
+}) => {
   const { t } = useTranslation();
-  const appCtx = useContext(AppContext);
-  const { ln, invoiceAmount, address, fee, comment } = props;
+  const { unit } = useContext(AppContext);
 
   const [amount, setAmount] = useState(0);
 
   const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);
   };
-
-  interface IFormInputs {
-    amountInput: number;
-  }
 
   const {
     register,
@@ -35,12 +53,17 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
   // TODO: handle error
   const sendTransactionHandler = async () => {
     let response;
+    let error = null;
 
     if (ln) {
+      let msatQuery = "";
+      if (amount > 0) {
+        msatQuery = `&amount_msat=${amount}`;
+      }
       response = await instance
-        .post("lightning/send-payment?pay_req=" + address)
+        .post(`lightning/send-payment?pay_req=${address}${msatQuery}`)
         .catch((e) => {
-          return e;
+          error = e;
         });
     } else {
       const body = {
@@ -48,18 +71,18 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
         address,
         sat_per_vbyte: fee,
         label: comment,
-        unit: appCtx.unit,
+        unit,
       };
 
       response = await instance
         .post("lightning/send-coins", body)
         .catch((e) => {
-          return e;
+          error = e;
         });
     }
 
     console.info(response);
-    props.close(true);
+    close(!error);
   };
 
   const addressTitle = ln ? t("wallet.invoice") : t("wallet.address");
@@ -70,7 +93,7 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
     <form onSubmit={handleSubmit(sendTransactionHandler)}>
       <section className="break-all">
         <button
-          onClick={props.back}
+          onClick={back}
           className="flex items-center justify-center outline-none font-bold"
         >
           <ChevronLeft className="h-4 w-4 inline-block" />
@@ -88,9 +111,9 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
         <article className="my-2">
           <h4 className="font-bold">{t("wallet.amount")}:</h4>
 
-          {Number(invoiceAmount) !== 0 && <span>{invoiceAmount} Sat</span>}
+          {invoiceAmount !== 0 && <span>{invoiceAmount} Sat</span>}
 
-          {Number(invoiceAmount) === 0 && (
+          {invoiceAmount === 0 && (
             <div>
               <p>{t("forms.hint.invoiceAmountZero")}</p>
 
@@ -102,7 +125,7 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
                     "forms.validation.chainAmount.required"
                   ) as string,
                   max: {
-                    value: props.balance,
+                    value: balance,
                     message: t("forms.validation.chainAmount.max"),
                   },
                   validate: {
@@ -132,7 +155,7 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
         <div className="flex justify-around px-2 py-5">
           <button
             className="shadow-xl rounded text-white bg-red-500 hover:bg-red-400 py-2 px-3 flex"
-            onClick={() => props.close(false)}
+            onClick={() => close(false)}
           >
             <XIcon />
             &nbsp;{t("settings.cancel")}
@@ -151,16 +174,5 @@ const ConfirmSendModal: FC<ConfirmSendModalProps> = (props) => {
     </form>
   );
 };
-
-export interface ConfirmSendModalProps {
-  address: string;
-  invoiceAmount: number;
-  back: () => void;
-  balance: number;
-  close: (confirmed: boolean) => void;
-  comment: string;
-  fee: string;
-  ln: boolean;
-}
 
 export default ConfirmSendModal;
