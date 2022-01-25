@@ -32,7 +32,7 @@ const ConfirmModal: FC<Props> = ({ confirmText, confirmEndpoint, onClose }) => {
   return createPortal(
     <ModalDialog close={onClose}>
       {confirmText}
-      <div className="p-3 flex flex-col xl:flex-row">
+      <div className="flex flex-col p-3 xl:flex-row">
         <button className={btnClasses} onClick={onClose}>
           {t("settings.cancel")}
         </button>

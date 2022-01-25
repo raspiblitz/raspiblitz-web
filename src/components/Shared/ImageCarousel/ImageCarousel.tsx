@@ -21,15 +21,15 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
   };
 
   return (
-    <div className="inline-block relative">
-      <div className="absolute left-0 right-0 bottom-0 flex justify-center gap-5 p-0 mb-5">
+    <div className="relative inline-block">
+      <div className="absolute left-0 right-0 bottom-0 mb-5 flex justify-center gap-5 p-0">
         {imgs.map((_, index) => {
           if (activeImg === index) {
             return (
               <button
                 key={index}
                 type="button"
-                className="bg-white h-3 w-10 z-10"
+                className="z-10 h-3 w-10 bg-white"
                 onClick={() => switchImgHandler(index)}
               ></button>
             );
@@ -39,7 +39,7 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
             <button
               key={index}
               type="button"
-              className="bg-white h-3 w-10 z-10 opacity-30 hover:opacity-75"
+              className="z-10 h-3 w-10 bg-white opacity-30 hover:opacity-75"
               onClick={() => switchImgHandler(index)}
             ></button>
           );
@@ -57,18 +57,18 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
           );
         })}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 flex justify-between h-full mx-5">
+      <div className="absolute bottom-0 left-0 right-0 mx-5 flex h-full justify-between">
         <button
           onClick={back}
-          className="w-20 flex justify-center items-center z-10 opacity-30 hover:opacity-100"
+          className="z-10 flex w-20 items-center justify-center opacity-30 hover:opacity-100"
         >
-          <ChevronLeft className="w-8 h-8 text-white" />
+          <ChevronLeft className="h-8 w-8 text-white" />
         </button>
         <button
           onClick={next}
-          className="w-20 flex justify-center items-center z-10 opacity-30 hover:opacity-100"
+          className="z-10 flex w-20 items-center justify-center opacity-30 hover:opacity-100"
         >
-          <ChevronLeft className="rotate-180 w-8 h-8 text-white" />
+          <ChevronLeft className="h-8 w-8 rotate-180 text-white" />
         </button>
       </div>
     </div>

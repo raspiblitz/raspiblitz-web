@@ -17,11 +17,11 @@ const UpdateRecover: FC<UpdateRecoverProps> = (props) => {
     <SetupContainer>
       {props.type}
       <div className="w-1/2">{infoText}</div>
-      <div className="w-1/2 flex flex-col md:flex-row justify-between mt-5">
-        <button className="bd-button p-2 my-3 whitespace-pre-line">
+      <div className="mt-5 flex w-1/2 flex-col justify-between md:flex-row">
+        <button className="bd-button my-3 whitespace-pre-line p-2">
           {startText}
         </button>
-        <button className="bd-button p-2 my-3 whitespace-pre-line">
+        <button className="bd-button my-3 whitespace-pre-line p-2">
           {t("setup.other_options")}
         </button>
       </div>

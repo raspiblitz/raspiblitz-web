@@ -60,8 +60,8 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
         {balanceDecorated} {unit}
       </p>
 
-      <fieldset className="my-5 flex flex-col justify-center text-center items-center">
-        <div className="w-full md:w-10/12 py-1">
+      <fieldset className="my-5 flex flex-col items-center justify-center text-center">
+        <div className="w-full py-1 md:w-10/12">
           <InputField
             {...register("addressInput", {
               required: t("forms.validation.chainAddress.required") as string,
@@ -78,7 +78,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
           />
         </div>
 
-        <div className="w-full md:w-10/12 py-1">
+        <div className="w-full py-1 md:w-10/12">
           <AmountInput
             amount={amount}
             errorMessage={errors?.amountInput}
@@ -98,7 +98,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
           />
         </div>
 
-        <div className="w-full md:w-10/12 py-1">
+        <div className="w-full py-1 md:w-10/12">
           <InputField
             {...register("feeInput", {
               required: t("forms.validation.chainFee.required") as string,
@@ -112,7 +112,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
           />
         </div>
 
-        <div className="w-full md:w-10/12 py-1">
+        <div className="w-full py-1 md:w-10/12">
           <InputField
             {...register("commentInput", {
               onChange: onChangeComment,
@@ -124,10 +124,10 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
         </div>
       </fieldset>
 
-      <div className="inline-block w-4/5 lg:w-3/12 align-top mb-5">
+      <div className="mb-5 inline-block w-4/5 align-top lg:w-3/12">
         <button
           type="submit"
-          className="bd-button p-3 my-3"
+          className="bd-button my-3 p-3"
           disabled={submitCount > 0 && !isValid}
         >
           {t("wallet.confirm")}

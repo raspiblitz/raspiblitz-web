@@ -54,7 +54,7 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
 
   if (isLoading) {
     return (
-      <main className="page-container content-container w-full dark:text-white bg-gray-100 dark:bg-gray-700 flex justify-center items-center">
+      <main className="page-container content-container flex w-full items-center justify-center bg-gray-100 dark:bg-gray-700 dark:text-white">
         <LoadingSpinner />
       </main>
     );
@@ -71,25 +71,25 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
   };
 
   return (
-    <main className="page-container content-container w-full dark:text-white bg-gray-100 dark:bg-gray-700">
+    <main className="page-container content-container w-full bg-gray-100 dark:bg-gray-700 dark:text-white">
       {/* Back Button */}
       <section className="w-full px-5 py-9 dark:text-gray-200">
         <button
           onClick={onClose}
-          className="flex items-center outline-none text-xl font-bold"
+          className="flex items-center text-xl font-bold outline-none"
         >
-          <ChevronLeft className="h-5 w-5 inline-block" />
+          <ChevronLeft className="inline-block h-5 w-5" />
           {t("navigation.back")}
         </button>
       </section>
 
       {/* Image box with title */}
-      <section className="w-full px-10 flex items-center mb-5">
+      <section className="mb-5 flex w-full items-center px-10">
         <img className="max-h-16" src={iconImg} alt={`${id} Logo`} />
-        <h1 className="text-2xl px-5 dark:text-white">{name}</h1>
+        <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
         {!installed && (
           <button
-            className={`bg-green-400 rounded p-2`}
+            className={`rounded bg-green-400 p-2`}
             onClick={installHandler}
           >
             {t("apps.install")}
@@ -97,7 +97,7 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
         )}
         {installed && (
           <button
-            className={`bg-red-500 text-white rounded p-2`}
+            className={`rounded bg-red-500 p-2 text-white`}
             onClick={uninstallHandler}
           >
             {t("apps.uninstall")}
@@ -110,8 +110,8 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
       </section>
 
       {/* App Description */}
-      <section className="w-full p-5 flex items-center justify-center">
-        <article className="w-full bd-card">
+      <section className="flex w-full items-center justify-center p-5">
+        <article className="bd-card w-full">
           <h3 className="text-lg">
             {name} {version}
           </h3>
@@ -128,7 +128,7 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
           </h4>
           <a
             href={repository}
-            className="text-blue-400 dark:text-blue-300 underline"
+            className="text-blue-400 underline dark:text-blue-300"
           >
             {repository}
           </a>

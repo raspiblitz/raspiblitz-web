@@ -27,9 +27,9 @@ const TransactionCard: FC<Props> = ({
 
   if (walletLocked) {
     return (
-      <div className="p-5 h-full">
-        <div className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
-          <div className="h-full flex justify-center items-center">
+      <div className="h-full p-5">
+        <div className="bd-card md:min-h-0 flex min-h-144 flex-col transition-colors">
+          <div className="flex h-full items-center justify-center">
             <ClosedLockIcon className="h-6 w-6" />
             {t("wallet.wallet_locked")}
           </div>
@@ -60,12 +60,12 @@ const TransactionCard: FC<Props> = ({
   }
 
   return (
-    <div className="p-5 h-full">
-      <section className="bd-card flex flex-col transition-colors min-h-144 md:min-h-0">
-        <h2 className="font-bold text-lg">{t("tx.transactions")}</h2>
+    <div className="h-full p-5">
+      <section className="bd-card md:min-h-0 flex min-h-144 flex-col transition-colors">
+        <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 
         {transactions.length === 0 && (
-          <div className="flex justify-center items-center h-full">
+          <div className="flex h-full items-center justify-center">
             <InfoCircleIcon className="h-6 w-6" />
             &nbsp;{t("tx.transactions_none")}
           </div>
@@ -86,21 +86,21 @@ const TransactionCard: FC<Props> = ({
         )}
 
         {transactions.length > 0 && (
-          <div className="flex justify-around py-5 mt-auto">
+          <div className="mt-auto flex justify-around py-5">
             <button
               onClick={pageBackwardHandler}
               disabled={page === 0}
-              className="bg-black hover:bg-gray-700 text-white p-2 rounded flex disabled:opacity-50"
+              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50"
             >
-              <ArrowDownIcon className="h-6 w-6 transform rotate-90" />
+              <ArrowDownIcon className="h-6 w-6 rotate-90 transform" />
             </button>
 
             <button
-              className="bg-black hover:bg-gray-700 text-white p-2 rounded flex disabled:opacity-50"
+              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50"
               onClick={pageForwardHandler}
               disabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
             >
-              <ArrowDownIcon className="h-6 w-6 transform -rotate-90" />
+              <ArrowDownIcon className="h-6 w-6 -rotate-90 transform" />
             </button>
           </div>
         )}

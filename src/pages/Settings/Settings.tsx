@@ -36,7 +36,7 @@ const Settings: FC = () => {
   };
 
   return (
-    <main className="content-container page-container flex flex-col dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors">
+    <main className="content-container page-container flex flex-col bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white">
       <I18nBox />
       <ActionBox
         name={t("settings.change_pw")}

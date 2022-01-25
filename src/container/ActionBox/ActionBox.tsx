@@ -2,14 +2,14 @@ import { FC } from "react";
 
 const ActionBox: FC<ActionBoxProps> = (props) => {
   return (
-    <div className="w-full lg:w-1/3 dark:text-white transition-colors box-border pt-5 px-5">
-      <div className="relative bg-white dark:bg-gray-800 p-5 rounded shadow-xl">
+    <div className="box-border w-full px-5 pt-5 transition-colors dark:text-white lg:w-1/3">
+      <div className="relative rounded bg-white p-5 shadow-xl dark:bg-gray-800">
         <div className="flex justify-between">
-          <div className="font-bold w-1/2 xl:w-2/3 flex items-center">
+          <div className="flex w-1/2 items-center font-bold xl:w-2/3">
             {props.name}
           </div>
           <button
-            className="w-1/2 xl:w-1/3 bd-button py-1"
+            className="bd-button w-1/2 py-1 xl:w-1/3"
             onClick={props.action}
           >
             {props.actionName}

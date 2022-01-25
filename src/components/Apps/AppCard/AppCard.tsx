@@ -25,27 +25,27 @@ export const AppCard: FC<AppCardProps> = (props) => {
   }, [id]);
 
   return (
-    <div className="bd-card dark:bg-gray-600 transition-colors">
-      <div className="h-4/6 flex flex-row mt-2 items-center w-full">
+    <div className="bd-card transition-colors dark:bg-gray-600">
+      <div className="mt-2 flex h-4/6 w-full flex-row items-center">
         {/* Icon */}
-        <div className="w-1/4 flex justify-center items-center p-2">
+        <div className="flex w-1/4 items-center justify-center p-2">
           <img className="max-h-16" src={image} alt={`${id} Logo`} />
         </div>
         {/* Content */}
-        <div className="w-3/4 justify-center items-start flex flex-col text-xl">
+        <div className="flex w-3/4 flex-col items-start justify-center text-xl">
           <div>{name}</div>
-          <div className="text-gray-500 text-base overflow-ellipsis dark:text-gray-200">
+          <div className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
             {description}
           </div>
         </div>
       </div>
-      <div className="h-2/6 py-2 flex flex-row gap-2">
+      <div className="flex h-2/6 flex-row gap-2 py-2">
         {installed && address && (
           <a
             href={address}
             target="_blank"
             rel="noreferrer"
-            className="w-1/2 rounded shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400"
+            className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
           >
             <LinkIcon />
             &nbsp;{t("apps.open")}
@@ -54,7 +54,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
         {installed && !address && (
           <button
             disabled={true}
-            className="w-1/2 rounded shadow-md flex justify-center items-center p-2 text-white bg-gray-400 cursor-default"
+            className="flex w-1/2 cursor-default items-center justify-center rounded bg-gray-400 p-2 text-white shadow-md"
           >
             {t("apps.no_page")}
           </button>
@@ -62,7 +62,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
         {!installed && (
           <button
             disabled={installing}
-            className="w-1/2 rounded shadow-md flex justify-center items-center p-2 text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400 disabled:text-white disabled:pointer-events-none"
+            className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
             onClick={() => onInstall(id)}
           >
             <PlusIcon />
@@ -70,7 +70,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
           </button>
         )}
         <button
-          className="w-1/2 rounded shadow-md flex justify-center items-center p-2 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-300 dark:hover:text-black"
+          className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
           onClick={() => onOpenDetails(props.app)}
         >
           <InfoIcon />

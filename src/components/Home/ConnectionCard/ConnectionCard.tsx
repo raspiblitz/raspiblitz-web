@@ -30,9 +30,9 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
   }
 
   return (
-    <div className="p-5 h-full">
+    <div className="h-full p-5">
       <div className="bd-card transition-colors">
-        <div className="font-bold text-lg flex items-center">
+        <div className="flex items-center text-lg font-bold">
           {t("home.conn_details")}&nbsp;
           <Tooltip
             overlay={<div>{showAddress ? t("home.hide") : t("home.show")}</div>}
@@ -41,12 +41,12 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
             {showAddress ? (
               <EyeOffIcon
                 onClick={toggleAddressHandler}
-                className="inline-block align-top h-6 w-6 cursor-pointer"
+                className="inline-block h-6 w-6 cursor-pointer align-top"
               />
             ) : (
               <EyeIcon
                 onClick={toggleAddressHandler}
-                className="inline-block align-top h-6 w-6 cursor-pointer"
+                className="inline-block h-6 w-6 cursor-pointer align-top"
               />
             )}
           </Tooltip>
@@ -60,7 +60,7 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
               className={`${
                 showAddress
                   ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
-                  : "w-10/12 text-blur"
+                  : "text-blur w-10/12"
               }`}
               href={`//${torAddress}`}
               target="_blank"
@@ -77,7 +77,7 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
               placement="top"
             >
               <ClipboardIcon
-                className="inline-flex justify-self-end h-6 w-2/12 cursor-pointer"
+                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                 onClick={copyTor}
               />
             </Tooltip>
@@ -92,7 +92,7 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
               className={`${
                 showAddress
                   ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
-                  : "w-10/12 text-blur"
+                  : "text-blur w-10/12"
               }`}
               href={`ssh://${sshAddress}`}
               target="_blank"
@@ -109,7 +109,7 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
               placement="top"
             >
               <ClipboardIcon
-                className="inline-flex justify-self-end h-6 w-2/12 cursor-pointer"
+                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                 onClick={copySsh}
               />
             </Tooltip>

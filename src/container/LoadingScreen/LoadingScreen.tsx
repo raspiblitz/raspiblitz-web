@@ -8,9 +8,9 @@ const LoadingScreen: FC = () => {
   const appCtx = useContext(AppContext);
 
   return (
-    <div className="h-screen w-screen bg-gray-100 dark:bg-gray-700 flex flex-col justify-center items-center">
-      {!appCtx.darkMode && <RaspiBlitzLogo className="h-12 mb-5" />}
-      {appCtx.darkMode && <RaspiBlitzLogoDark className="h-12 mb-5" />}
+    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-700">
+      {!appCtx.darkMode && <RaspiBlitzLogo className="mb-5 h-12" />}
+      {appCtx.darkMode && <RaspiBlitzLogoDark className="mb-5 h-12" />}
       <LoadingSpinner color="text-yellow-500" />
     </div>
   );

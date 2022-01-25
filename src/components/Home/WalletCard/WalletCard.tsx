@@ -35,17 +35,17 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
       : convertedOnchainBalance + convertedLnBalance;
 
   return (
-    <div className="p-5 h-full">
+    <div className="h-full p-5">
       <div className="bd-card h-full transition-colors">
-        <section className="text-black flex flex-col lg:flex-row flex-wrap p-5">
-          <div className="relative bg-gradient-to-b from-yellow-500 bg-yellow-600 w-full text-white rounded-xl p-4 overflow-hidden">
-            <article className="w-full flex flex-col">
+        <section className="flex flex-col flex-wrap p-5 text-black lg:flex-row">
+          <div className="relative w-full overflow-hidden rounded-xl bg-yellow-600 bg-gradient-to-b from-yellow-500 p-4 text-white">
+            <article className="flex w-full flex-col">
               <h6 className="text-xl">{t("wallet.balance")}</h6>
               <p className="text-2xl font-bold">
                 {convertToString(unit, totalBalance)} {unit}
               </p>
             </article>
-            <article className="w-full flex flex-col">
+            <article className="flex w-full flex-col">
               <h6>
                 <ChainIcon className="inline h-5 w-5" />
                 &nbsp;{t("wallet.on_chain")}
@@ -54,7 +54,7 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
                 {convertToString(unit, convertedOnchainBalance)} {unit}
               </p>
             </article>
-            <article className="w-full flex flex-col">
+            <article className="flex w-full flex-col">
               <h6>
                 <LightningIcon className="inline h-5 w-5" />
                 &nbsp;{t("home.lightning")}
@@ -73,14 +73,14 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
         <section className="flex justify-around p-2">
           <button
             onClick={props.onReceive}
-            className="h-10 w-5/12 bg-black hover:bg-gray-700 text-white p-3 rounded flex justify-center items-center"
+            className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
           >
             <ReceiveIcon className="h-6 w-6" />
             <span>&nbsp;{t("wallet.receive")}</span>
           </button>
           <button
             onClick={props.onSend}
-            className="h-10 w-5/12 bg-black hover:bg-gray-700 text-white p-3 rounded flex justify-center items-center"
+            className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
           >
             <SendIcon className="h-6 w-6" />
             <span>&nbsp;{t("wallet.send")}</span>

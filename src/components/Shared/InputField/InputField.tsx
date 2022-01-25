@@ -45,7 +45,7 @@ const InputField = forwardRef(
           />
 
           {inputRightAddon && (
-            <div className="w-5/12 text-sm break-words">{inputRightAddon}</div>
+            <div className="w-5/12 break-words text-sm">{inputRightAddon}</div>
           )}
 
           {inputRightElement}

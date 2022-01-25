@@ -56,7 +56,7 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
   return (
     <div className="h-full p-5">
       <section className="bd-card">
-        <h2 className="font-bold text-lg">{t("home.lightning")}</h2>
+        <h2 className="text-lg font-bold">{t("home.lightning")}</h2>
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">

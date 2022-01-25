@@ -34,9 +34,9 @@ const FreshSetup: FC = (props) => {
         />
         <label htmlFor="SHUTDOWN">{t("setup.fresh.shutdown")}</label>
       </div>
-      <div className="w-1/2 flex flex-col md:flex-row justify-between mt-5">
-        <button className="bd-button p-2 my-3">{t("setup.ok")}</button>
-        <button className="bd-button p-2 my-3">{t("settings.cancel")}</button>
+      <div className="mt-5 flex w-1/2 flex-col justify-between md:flex-row">
+        <button className="bd-button my-3 p-2">{t("setup.ok")}</button>
+        <button className="bd-button my-3 p-2">{t("settings.cancel")}</button>
       </div>
     </SetupContainer>
   );

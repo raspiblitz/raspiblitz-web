@@ -17,9 +17,9 @@ const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div
       ref={ref}
-      className="flex absolute right-0 border border-black rounded-lg w-56 z-10 bg-white dark:bg-gray-800 dark:border-gray-300"
+      className="absolute right-0 z-10 flex w-56 rounded-lg border border-black bg-white dark:border-gray-300 dark:bg-gray-800"
     >
-      <div className="flex w-full text-center justify-center flex-col items-center">
+      <div className="flex w-full flex-col items-center justify-center text-center">
         <div className="w-full py-4">
           <Toggle
             toggleText={t("navigation.display_sats")}
@@ -34,8 +34,8 @@ const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
             toggleFn={toggleDarkMode}
           />
         </div>
-        <button className="bd-button w-full py-2 mt-3" onClick={logoutHandler}>
-          <LogoutIcon className="inline-block w-5 h-5" /> &nbsp;
+        <button className="bd-button mt-3 w-full py-2" onClick={logoutHandler}>
+          <LogoutIcon className="inline-block h-5 w-5" /> &nbsp;
           {t("navigation.logout")}
         </button>
       </div>

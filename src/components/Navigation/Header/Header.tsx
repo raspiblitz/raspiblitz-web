@@ -38,18 +38,18 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="fixed top-0 z-10 flex items-center justify-between border-b border-gray-300 h-16 mx-auto px-8 w-full shadow-md bg-white dark:bg-gray-800 dark:text-gray-300 transition-colors">
+    <header className="fixed top-0 z-10 mx-auto flex h-16 w-full items-center justify-between border-b border-gray-300 bg-white px-8 shadow-md transition-colors dark:bg-gray-800 dark:text-gray-300">
       <NavLink to="/">
-        <RaspiBlitzMobileLogo className="h-8 w-8 md:hidden text-black dark:text-white" />
-        {!darkMode && <RaspiBlitzLogo className="h-8 hidden md:block" />}
-        {darkMode && <RaspiBlitzLogoDark className="h-8 hidden md:block" />}
+        <RaspiBlitzMobileLogo className="h-8 w-8 text-black dark:text-white md:hidden" />
+        {!darkMode && <RaspiBlitzLogo className="hidden h-8 md:block" />}
+        {darkMode && <RaspiBlitzLogoDark className="hidden h-8 md:block" />}
       </NavLink>
-      <div className="font-bold text-xl">{systemInfo.alias}</div>
+      <div className="text-xl font-bold">{systemInfo.alias}</div>
       <div className="relative">
         <MenuIcon
           ref={menu}
           onClick={showDropdownHandler}
-          className="w-8 h-8"
+          className="h-8 w-8"
         />
         {showDropdown && <DropdownMenu ref={dropdown} />}
       </div>

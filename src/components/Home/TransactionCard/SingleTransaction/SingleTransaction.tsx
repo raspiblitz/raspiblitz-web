@@ -43,14 +43,14 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
 
   return (
     <li
-      className="text-center px-0 md:px-4 py-3 hover:bg-gray-300 dark:hover:bg-gray-500 flex flex-col justify-center"
+      className="flex flex-col justify-center px-0 py-3 text-center hover:bg-gray-300 dark:hover:bg-gray-500 md:px-4"
       onClick={onClick}
     >
-      <div className="flex justify-center items-center w-full">
+      <div className="flex w-full items-center justify-center">
         <div className="w-2/12">
           <CategoryIcon category={category} type={type} status={status} />
         </div>
-        <time className="text-sm w-5/12" dateTime={isoString}>
+        <time className="w-5/12 text-sm" dateTime={isoString}>
           {formattedDate}
         </time>
         <p className={`inline-block w-8/12 ${color}`}>
@@ -58,10 +58,10 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
           {formattedAmount} {unit}
         </p>
       </div>
-      <div className="w-full italic overflow-ellipsis overflow-hidden whitespace-nowrap text-center">
+      <div className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center italic">
         {comment || "Transaction"}
       </div>
-      <div className="w-full h-1 mx-auto">
+      <div className="mx-auto h-1 w-full">
         <div className="border border-b border-gray-200" />
       </div>
     </li>

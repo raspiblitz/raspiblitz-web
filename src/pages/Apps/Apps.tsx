@@ -33,16 +33,16 @@ export const Apps: FC = () => {
   }
 
   return (
-    <main className="content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors">
-      <section className="h-full flex flex-wrap flex-1">
-        <h2 className="w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200">
+    <main className="content-container page-container bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white">
+      <section className="flex h-full flex-1 flex-wrap">
+        <h2 className="w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
           {t("apps.installed")}
         </h2>
         {(availableApps as App[])
           .filter((app: App) => app.installed)
           .map((app: App, index) => {
             return (
-              <article className="w-full lg:w-1/3 p-3" key={index}>
+              <article className="w-full p-3 lg:w-1/3" key={index}>
                 <AppCard
                   app={app}
                   installing={false}
@@ -54,15 +54,15 @@ export const Apps: FC = () => {
           })}
       </section>
 
-      <section className="h-full flex flex-wrap flex-1">
-        <h2 className="block w-full text-xl font-bold px-5 pt-8 pb-5 dark:text-gray-200 ">
+      <section className="flex h-full flex-1 flex-wrap">
+        <h2 className="block w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200 ">
           {t("apps.available")}
         </h2>
         {(availableApps as App[])
           .filter((app: App) => !app.installed)
           .map((app: App) => {
             return (
-              <article className="w-full lg:w-1/3 p-3" key={app.id}>
+              <article className="w-full p-3 lg:w-1/3" key={app.id}>
                 <AppCard
                   app={app}
                   installing={!!isInstalling}
