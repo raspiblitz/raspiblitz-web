@@ -1,11 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
-import SendOnChain from "./SendOnChain";
 import type { SendOnChainProps } from "./SendOnChain";
-import { act } from "react-dom/test-utils";
+import SendOnChain from "./SendOnChain";
 
 const basicProps: SendOnChainProps = {
   address: "",
@@ -20,15 +18,16 @@ const basicProps: SendOnChainProps = {
 };
 
 describe("SendOnChain", () => {
-  beforeEach(() => {
+  const setup = () =>
     render(
       <I18nextProvider i18n={i18n}>
         <SendOnChain {...basicProps} />
       </I18nextProvider>
     );
-  });
 
   test("render", async () => {
+    setup();
+
     expect(screen.getByText("wallet.send_onchain")).toBeInTheDocument();
 
     expect(screen.getByLabelText("wallet.address")).toBeInTheDocument();
@@ -42,6 +41,8 @@ describe("SendOnChain", () => {
   });
 
   test("validates the input for empty value", async () => {
+    setup();
+
     expect(
       screen.getByRole("button", { name: "wallet.confirm" })
     ).not.toBeDisabled();
@@ -63,6 +64,8 @@ describe("SendOnChain", () => {
   });
 
   test("validates the address-input for BTC address format", async () => {
+    setup();
+
     const addressInput = screen.getByLabelText(
       "wallet.address"
     ) as HTMLInputElement;
@@ -89,6 +92,8 @@ describe("SendOnChain", () => {
   });
 
   test("validates amount is lower than balance", async () => {
+    setup();
+
     const amountInput = screen.getByLabelText(
       "wallet.amount"
     ) as HTMLInputElement;
@@ -107,6 +112,8 @@ describe("SendOnChain", () => {
   });
 
   test("validates amount is bigger than zero", async () => {
+    setup();
+
     const amountInput = screen.getByLabelText(
       "wallet.amount"
     ) as HTMLInputElement;
@@ -123,6 +130,8 @@ describe("SendOnChain", () => {
   });
 
   test("valid form passes", async () => {
+    setup();
+
     const addressInput = screen.getByLabelText(
       "wallet.address"
     ) as HTMLInputElement;

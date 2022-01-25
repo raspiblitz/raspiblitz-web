@@ -21,15 +21,16 @@ const basicProps: Props = {
 
 describe("ConfirmSendModal", () => {
   describe("ln-invoice with zero amount", () => {
-    beforeEach(() => {
+    const setup = () =>
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal {...basicProps} />
         </I18nextProvider>
       );
-    });
 
     test("validates amount is lower than balance", async () => {
+      setup();
+
       const amountInput = screen.getByLabelText(
         "wallet.amount"
       ) as HTMLInputElement;
@@ -46,6 +47,8 @@ describe("ConfirmSendModal", () => {
     });
 
     test("validates amount is bigger than zero", async () => {
+      setup();
+
       const amountInput = screen.getByLabelText(
         "wallet.amount"
       ) as HTMLInputElement;
@@ -60,6 +63,8 @@ describe("ConfirmSendModal", () => {
     });
 
     test("valid form passes", async () => {
+      setup();
+
       const amountInput = screen.getByLabelText(
         "wallet.amount"
       ) as HTMLInputElement;
@@ -75,20 +80,18 @@ describe("ConfirmSendModal", () => {
 
   describe("ln-invoice with amount above zero", () => {
     test("show error if invoice is expired", async () => {
-      await act(async () => {
-        render(
-          <I18nextProvider i18n={i18n}>
-            <ConfirmSendModal
-              {...basicProps}
-              timestamp={1640995200000} // "Sat Jan 01 2022 08:00:00
-              expiry={36000}
-            />
-          </I18nextProvider>
-        );
-      });
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal
+            {...basicProps}
+            timestamp={1640995200000} // "Sat Jan 01 2022 08:00:00
+            expiry={36000}
+          />
+        </I18nextProvider>
+      );
 
       expect(
-        screen.queryByText(
+        screen.getByText(
           "forms.validation.lnInvoice.expired",
           { exact: false } /* exclude displayed date */
         )
@@ -99,16 +102,14 @@ describe("ConfirmSendModal", () => {
     });
 
     test("show error if amount is bigger than balance", async () => {
-      await act(async () => {
-        render(
-          <I18nextProvider i18n={i18n}>
-            <ConfirmSendModal {...basicProps} invoiceAmount={111} />
-          </I18nextProvider>
-        );
-      });
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal {...basicProps} invoiceAmount={111} />
+        </I18nextProvider>
+      );
 
       expect(
-        screen.queryByText("forms.validation.lnInvoice.max")
+        await screen.findByText("forms.validation.lnInvoice.max")
       ).toBeInTheDocument();
       expect(
         screen.getByRole("button", { name: "check.svg settings.confirm" })
