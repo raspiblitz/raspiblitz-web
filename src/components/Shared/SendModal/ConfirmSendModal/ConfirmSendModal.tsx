@@ -125,7 +125,7 @@ const ConfirmSendModal: FC<Props> = ({
           <h4 className="font-bold">{addressTitle}:</h4> {address}
           <br />
           {isInvoiceExpired && (
-            <p className=" text-red-500">
+            <p className="text-red-500">
               {t("forms.validation.lnInvoice.expired")}:{" "}
               {invoiceExpiryDateDecorated}
             </p>
@@ -137,7 +137,7 @@ const ConfirmSendModal: FC<Props> = ({
           {Number(invoiceAmount) !== 0 && <span>{invoiceAmount} Sat</span>}
 
           {isInvoiceAmountBiggerThanBalance && (
-            <p className=" text-red-500">
+            <p className="text-red-500">
               {t("forms.validation.lnInvoice.max")}
             </p>
           )}
