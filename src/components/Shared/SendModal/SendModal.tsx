@@ -30,6 +30,8 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const [amount, setAmount] = useState(0);
   const [fee, setFee] = useState("");
   const [comment, setComment] = useState("");
+  const [timestamp, setTimestamp] = useState(0);
+  const [expiry, setExpiry] = useState(0);
 
   // TODO: handle error
   const confirmLnHandler = async () => {
@@ -38,6 +40,8 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     );
     setAmount(resp.data.num_satoshis);
     setComment(resp.data.description);
+    setTimestamp(resp.data.timestamp);
+    setExpiry(resp.data.expiry);
     setConfirm(true);
   };
 
@@ -81,13 +85,15 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
       <ModalDialog close={() => onClose(false)}>
         <ConfirmSendModal
           address={addr}
-          invoiceAmount={amount}
           back={() => setConfirm(false)}
           balance={lnBalance}
           close={onClose}
           comment={comment}
+          expiry={expiry}
           fee={fee}
-          ln={lnTransaction}
+          invoiceAmount={amount}
+          isLnTx={lnTransaction}
+          timestamp={timestamp}
         />
       </ModalDialog>
     );

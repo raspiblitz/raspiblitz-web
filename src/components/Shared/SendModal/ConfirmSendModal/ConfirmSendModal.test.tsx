@@ -8,26 +8,29 @@ import ConfirmSendModal from "./ConfirmSendModal";
 const basicProps: Props = {
   address:
     "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
-  invoiceAmount: 0,
   back: () => {},
   balance: 100,
   close: () => {},
   comment: "",
+  expiry: 36000,
   fee: "",
-  ln: true,
+  invoiceAmount: 0,
+  isLnTx: true,
+  timestamp: 1893456000000, // 01 Jan 2030 00:00:00 GMT
 };
 
 describe("ConfirmSendModal", () => {
   describe("ln-invoice with zero amount", () => {
-    beforeEach(() => {
+    const setup = () =>
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal {...basicProps} />
         </I18nextProvider>
       );
-    });
 
     test("validates amount is lower than balance", async () => {
+      setup();
+
       const amountInput = screen.getByLabelText(
         "wallet.amount"
       ) as HTMLInputElement;
@@ -44,6 +47,8 @@ describe("ConfirmSendModal", () => {
     });
 
     test("validates amount is bigger than zero", async () => {
+      setup();
+
       const amountInput = screen.getByLabelText(
         "wallet.amount"
       ) as HTMLInputElement;
@@ -58,6 +63,8 @@ describe("ConfirmSendModal", () => {
     });
 
     test("valid form passes", async () => {
+      setup();
+
       const amountInput = screen.getByLabelText(
         "wallet.amount"
       ) as HTMLInputElement;
@@ -72,6 +79,43 @@ describe("ConfirmSendModal", () => {
   });
 
   describe("ln-invoice with amount above zero", () => {
+    test("show error if invoice is expired", async () => {
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal
+            {...basicProps}
+            timestamp={1640995200000} // "Sat Jan 01 2022 08:00:00
+            expiry={36000}
+          />
+        </I18nextProvider>
+      );
+
+      expect(
+        screen.getByText(
+          "forms.validation.lnInvoice.expired",
+          { exact: false } /* exclude displayed date */
+        )
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "check.svg settings.confirm" })
+      ).toBeDisabled();
+    });
+
+    test("show error if amount is bigger than balance", async () => {
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal {...basicProps} invoiceAmount={111} />
+        </I18nextProvider>
+      );
+
+      expect(
+        await screen.findByText("forms.validation.lnInvoice.max")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "check.svg settings.confirm" })
+      ).toBeDisabled();
+    });
+
     test("valid form passes", async () => {
       render(
         <I18nextProvider i18n={i18n}>

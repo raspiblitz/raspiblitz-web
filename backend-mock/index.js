@@ -231,7 +231,7 @@ app.get("/api/v1/lightning/decode-pay-req", (req, res) => {
       payment_hash:
         "dc171b0d9a6c33d40ba2d9ed95819b29af40d83132b15072ab4e8b60feb08b90",
       num_satoshis: 20,
-      timestamp: 1633322501,
+      timestamp: 1893456000000,
       expiry: 36000,
       description: "TEST",
       description_hash: "",
