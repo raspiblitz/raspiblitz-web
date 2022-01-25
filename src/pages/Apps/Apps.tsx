@@ -4,7 +4,7 @@ import AppCard from "../../components/Apps/AppCard/AppCard";
 import AppInfo from "../../components/Apps/AppInfo/AppInfo";
 import useSSE from "../../hooks/use-sse";
 import { App } from "../../models/app.model";
-import availableApps from "../../util/apps.json";
+import availableApps from "../../apps/apps.json";
 import { instance } from "../../util/interceptor";
 
 export const Apps: FC = () => {

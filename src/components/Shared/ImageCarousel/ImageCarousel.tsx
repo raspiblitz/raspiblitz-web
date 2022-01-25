@@ -44,7 +44,6 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
             ></button>
           );
         })}
-        ;
       </div>
       <div className="overflow-hidden px-5">
         {imgs.map((img, index) => {

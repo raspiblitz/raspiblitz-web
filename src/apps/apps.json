@@ -46,5 +46,11 @@
     "installed": true,
     "address": "https://192.168.0.599:4081/",
     "hiddenService": "blablablabla.onion"
+  },
+  {
+    "id": "thunderhub",
+    "name": "Thunderhub",
+    "description": "ThunderHub - LND Lightning Node Manager in your Browser ",
+    "installed": false
   }
 ]

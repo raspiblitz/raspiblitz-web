@@ -1,13 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import mockInfo from "../../../apps/mock-info.json";
 // TODO: Change to dynamic images
-import Preview1 from "../../../assets/apps/preview/btc-rpc-explorer/1.png";
-import Preview2 from "../../../assets/apps/preview/btc-rpc-explorer/2.png";
-import Preview3 from "../../../assets/apps/preview/btc-rpc-explorer/3.png";
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
 import { App } from "../../../models/app.model";
 import { instance } from "../../../util/interceptor";
-import mockInfo from "../../../util/mock-info.json";
 import ImageCarousel from "../../Shared/ImageCarousel/ImageCarousel";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
@@ -20,13 +17,14 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [iconImg, setIconImg] = useState("");
-  const [imgs] = useState<any[]>([Preview1, Preview2, Preview3]);
+  const [imgs, setImgs] = useState<string[]>([]);
   const { id, name, installed, description } = app;
   // TODO: Change to dynamic info
   const { version, repository, author } = mockInfo;
 
   useEffect(() => {
     setIsLoading(true);
+    // import Logo
     import(`../../../assets/apps/logos/${id}.png`)
       .then((image) => {
         setIconImg(image.default);
@@ -37,10 +35,21 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
         import("../../../assets/cloud.svg").then((img) =>
           setIconImg(img.default)
         );
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
+
+    // import app images
+    [1, 2, 3].forEach((num) => {
+      import(`../../../assets/apps/preview/${id}/${num}.png`)
+        .then((image) => {
+          setImgs((prev) => {
+            prev[num - 1] = image.default;
+            return prev;
+          });
+        })
+        .catch((_) => {});
+    });
+
+    setIsLoading(false);
   }, [id]);
 
   if (isLoading) {
