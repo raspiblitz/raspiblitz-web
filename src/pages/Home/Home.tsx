@@ -132,9 +132,9 @@ const Home: FC = () => {
       {detailModal}
       <ToastContainer />
       <main
-        className={`content-container page-container dark:text-white bg-gray-100 dark:bg-gray-700 transition-colors h-full grid gap-2 grid-cols-1 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
+        className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
-        <article className="col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
+        <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
           <WalletCard
             onchainBalance={balance.onchain_total_balance!}
             lnBalance={balance.channel_local_balance!}
@@ -142,14 +142,14 @@ const Home: FC = () => {
             onSend={showSendModalHandler}
           />
         </article>
-        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-4">
+        <article className="col-span-2 row-span-4 w-full md:col-span-1 xl:col-span-2">
           <TransactionCard
             isLoading={isLoadingTransactions}
             transactions={transactions}
             showDetails={showDetailHandler}
           />
         </article>
-        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
+        <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           {/* TODO: change */}
           <ConnectionCard
             torAddress={systemInfo.tor_web_ui!}
@@ -157,10 +157,10 @@ const Home: FC = () => {
           />
         </article>
         {/* TODO: change */}
-        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
+        <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <BitcoinCard info={btcInfo} network={systemInfo.chain!} />
         </article>
-        <article className="w-full col-span-2 md:col-span-1 xl:col-span-2 row-span-2">
+        <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <LightningCard
             version={lnStatus.version!}
             implementation={lnStatus.implementation!}
@@ -177,7 +177,7 @@ const Home: FC = () => {
           return (
             <article
               key={app.id}
-              className="col-span-2 md:col-span-1 row-span-1"
+              className="col-span-2 row-span-1 md:col-span-1"
             >
               <AppStatusCard app={app} />
             </article>

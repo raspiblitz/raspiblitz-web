@@ -6,9 +6,9 @@ const I18nBox: FC = () => {
   const { t, i18n } = useTranslation();
 
   return (
-    <div className="w-full lg:w-1/3 dark:text-white transition-colors box-border pt-5 px-5">
-      <div className="bg-white dark:bg-gray-800 p-5 rounded shadow-xl flex flex-col">
-        <div className="w-full justify-center flex my-2">
+    <div className="box-border w-full px-5 pt-5 transition-colors dark:text-white lg:w-1/3">
+      <div className="flex flex-col rounded bg-white p-5 shadow-xl dark:bg-gray-800">
+        <div className="my-2 flex w-full justify-center">
           {t("settings.curr_lang")}:&nbsp;<strong>{i18n.language}</strong>
         </div>
         <div className="flex justify-between">

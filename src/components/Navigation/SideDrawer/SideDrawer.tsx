@@ -20,30 +20,30 @@ export const SideDrawer: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <nav className="hidden md:flex flex-col justify-between content-container w-full md:w-2/12 fixed px-2 pt-8 mb-16 shadow-lg bg-white dark:bg-gray-800 transition-colors">
+    <nav className="content-container fixed mb-16 hidden w-full flex-col justify-between bg-white px-2 pt-8 shadow-lg transition-colors dark:bg-gray-800 md:flex md:w-2/12">
       <div>
         <NavLink to="/home" className={(props) => createClassName(props)}>
           <HomeLogo className={navIconClasses} />
-          <span className="w-1/2 mx-3 flex justify-center lg:block text-lg">
+          <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
             {t("navigation.home")}
           </span>
         </NavLink>
         <NavLink to="/apps" className={(props) => createClassName(props)}>
           <AppIcon className={navIconClasses} />
-          <span className="w-full lg:w-1/2 mx-3 flex justify-center lg:block text-lg">
+          <span className="mx-3 flex w-full justify-center text-lg lg:block lg:w-1/2">
             {t("navigation.apps")}
           </span>
         </NavLink>
         <NavLink to="/settings" className={(props) => createClassName(props)}>
           <SettingsIcon className={navIconClasses} />
-          <span className="w-1/2 mx-3 flex justify-center lg:block text-lg">
+          <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
             {t("navigation.settings")}
           </span>
         </NavLink>
       </div>
 
-      <button onClick={logout} className="bd-button w-full h-8 mb-3">
-        <LogoutIcon className="inline-block w-5 h-5" />
+      <button onClick={logout} className="bd-button mb-3 h-8 w-full">
+        <LogoutIcon className="inline-block h-5 w-5" />
         &nbsp;
         {t("navigation.logout")}
       </button>

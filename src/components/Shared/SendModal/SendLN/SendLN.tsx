@@ -53,7 +53,7 @@ const SendLn: FC<SendLnProps> = (props) => {
 
       <button
         type="submit"
-        className="bd-button p-3 my-3"
+        className="bd-button my-3 p-3"
         disabled={submitCount > 0 && !isValid}
       >
         {t("wallet.send")}

@@ -34,9 +34,9 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
   const diff = (difficulty! / 1024 / 1024 / 1024 / 1024).toFixed(2);
 
   return (
-    <div className="p-5 h-full">
+    <div className="h-full p-5">
       <section className="bd-card">
-        <h2 className="font-bold text-lg">{t("home.bitcoin")}</h2>
+        <h2 className="text-lg font-bold">{t("home.bitcoin")}</h2>
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">

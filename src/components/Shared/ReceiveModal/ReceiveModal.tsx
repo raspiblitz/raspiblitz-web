@@ -111,17 +111,17 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
               alt="QR Code"
             />
           </div>
-          <p className="my-5 text-gray-500 dark:text-gray-300 text-sm">
+          <p className="my-5 text-sm text-gray-500 dark:text-gray-300">
             {t("wallet.scan_qr")}
           </p>
         </>
       )}
 
       <form
-        className="w-full flex flex-col items-center"
+        className="flex w-full flex-col items-center"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <fieldset className="w-4/5 mb-5">
+        <fieldset className="mb-5 w-4/5">
           {isLoading && (
             <div className="p-5">
               <LoadingSpinner />
@@ -129,7 +129,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
           )}
 
           {showLnInvoice && (
-            <div className="flex flex-col pb-5 justify-center text-center">
+            <div className="flex flex-col justify-center pb-5 text-center">
               <AmountInput
                 amount={amount}
                 register={register("amountInput", {
@@ -146,7 +146,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
                 errorMessage={errors.amountInput}
               />
 
-              <div className="flex flex-col justify-center mt-2">
+              <div className="mt-2 flex flex-col justify-center">
                 <InputField
                   {...register("commentInput", {
                     onChange: commentChangeHandler,
@@ -162,7 +162,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
           {!address && showLnInvoice && (
             <button
               type="submit"
-              className="bd-button p-3 my-3"
+              className="bd-button my-3 p-3"
               disabled={submitCount > 0 && !isValid}
             >
               {t("wallet.create_invoice")}
@@ -173,7 +173,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
 
       {address && (
         <>
-          <article className="flex flex-row items-center mb-5">
+          <article className="mb-5 flex flex-row items-center">
             <Tooltip
               overlay={
                 <div>
@@ -186,7 +186,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
             >
               <p
                 onClick={copyAddress}
-                className="w-full break-all m-2 text-gray-600 dark:text-white"
+                className="m-2 w-full break-all text-gray-600 dark:text-white"
               >
                 {address}
               </p>

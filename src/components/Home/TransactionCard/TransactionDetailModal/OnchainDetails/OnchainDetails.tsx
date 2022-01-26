@@ -41,19 +41,19 @@ export const OnchainDetails: FC<Props> = ({ details }) => {
   return (
     <>
       <a
-        className="text-blue-400 underline break-all py-2"
+        className="break-all py-2 text-blue-400 underline"
         target="_blank"
         rel="noreferrer"
         href={`https://mempool.space/tx/${details.id}`}
       >
         {t("tx.mempool")}
       </a>
-      <section className="flex flex-col py-3 my-4">
-        <article className="m-2 py-1 flex overflow-hidden border-gray-400 border-b-2 text-left">
+      <section className="my-4 flex flex-col py-3">
+        <article className="m-2 flex overflow-hidden border-b-2 border-gray-400 py-1 text-left">
           <h6 className="w-1/2 text-gray-500 dark:text-gray-200">
             {t("tx.txid")}
           </h6>
-          <p className="w-1/2 overflow-hidden overflow-x-auto mx-2">
+          <p className="mx-2 w-1/2 overflow-hidden overflow-x-auto">
             {details.id}
           </p>
           <div>

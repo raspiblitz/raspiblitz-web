@@ -21,7 +21,7 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
     return (
       <>
         <span
-          className="flex justify-center items-center w-4/12 ml-6 p-1 rounded shadow-md dark:bg-gray-600"
+          className="ml-6 flex w-4/12 items-center justify-center rounded p-1 shadow-md dark:bg-gray-600"
           onClick={toggleUnit}
         >
           {unit}

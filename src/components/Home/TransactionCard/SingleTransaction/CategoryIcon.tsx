@@ -21,23 +21,23 @@ const CategoryIcon: FC<CategoryIconProps> = (props) => {
       case "in_flight":
         return (
           <DotsIcon
-            className={`h-7 w-7 p-1 rounded-full bg-gray-500 text-white`}
+            className={`h-7 w-7 rounded-full bg-gray-500 p-1 text-white`}
           />
         );
       case "failed":
         return (
           <ClockIcon
-            className={`h-7 w-7 p-1 rounded-full bg-gray-500 text-white`}
+            className={`h-7 w-7 rounded-full bg-gray-500 p-1 text-white`}
           />
         );
       case "succeeded":
         return (
-          <LightningIconSolid className={`h-7 w-7 p-1 rounded-full ${color}`} />
+          <LightningIconSolid className={`h-7 w-7 rounded-full p-1 ${color}`} />
         );
     }
   }
 
-  return <ChainIcon className={`h-7 w-7 p-1 rounded-full ${color}`} />;
+  return <ChainIcon className={`h-7 w-7 rounded-full p-1 ${color}`} />;
 };
 
 export interface CategoryIconProps {

@@ -56,14 +56,14 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
     <ModalDialog closeable={false} close={() => onClose(false)}>
       {isLoading && (
         <div className="py-5">
-          <h2 className="font-bold text-lg pb-5">{t("wallet.unlocking")}</h2>
+          <h2 className="pb-5 text-lg font-bold">{t("wallet.unlocking")}</h2>
           <LoadingSpinner />
         </div>
       )}
 
       {!isLoading && (
         <>
-          <h2 className="font-bold text-lg mt-5">{t("wallet.unlock_title")}</h2>
+          <h2 className="mt-5 text-lg font-bold">{t("wallet.unlock_title")}</h2>
 
           <div>
             <h3 className="p-2">{t("wallet.unlock_subtitle")}</h3>
@@ -82,7 +82,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
 
               <button
                 type="submit"
-                className="bd-button p-3 my-5"
+                className="bd-button my-5 p-3"
                 disabled={!isValid}
               >
                 {t("wallet.unlock")}

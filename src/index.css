@@ -12,11 +12,11 @@
 **/
 
 .label-underline {
-  @apply block text-gray-700 dark:text-white text-sm font-bold my-2 text-left;
+  @apply my-2 block text-left text-sm font-bold text-gray-700 dark:text-white;
 }
 
 .input-underline {
-  @apply mt-0 block w-full px-0.5 border-0 border-b-2 bg-transparent outline-none border-gray-200 focus:ring-0 focus:border-yellow-500 text-black dark:text-white;
+  @apply mt-0 block w-full border-0 border-b-2 border-gray-200 bg-transparent px-0.5 text-black outline-none focus:border-yellow-500 focus:ring-0 dark:text-white;
 }
 
 .input-error {
@@ -25,19 +25,19 @@
 }
 
 .bd-card {
-  @apply h-full shadow-xl rounded-md bg-white px-6 py-4 text-black dark:text-white dark:bg-gray-600 transition-colors;
+  @apply h-full rounded-md bg-white px-6 py-4 text-black shadow-xl transition-colors dark:bg-gray-600 dark:text-white;
 }
 
 .bd-button {
-  @apply shadow-xl rounded text-white bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-400;
+  @apply rounded bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-400;
 }
 
 .switch-button {
-  @apply text-black bg-white hover:text-white hover:bg-yellow-400 disabled:bg-yellow-500 disabled:text-white disabled:cursor-default px-2 py-1 m-1 shadow-md rounded-lg dark:text-white dark:bg-gray-500 dark:hover:bg-yellow-400 dark:disabled:text-white dark:disabled:bg-yellow-500;
+  @apply m-1 rounded-lg bg-white px-2 py-1 text-black shadow-md hover:bg-yellow-400 hover:text-white disabled:cursor-default disabled:bg-yellow-500 disabled:text-white dark:bg-gray-500 dark:text-white dark:hover:bg-yellow-400 dark:disabled:bg-yellow-500 dark:disabled:text-white;
 }
 
 .page-container {
-  @apply h-full w-full md:w-10/12 md:ml-auto mb-16 md:mb-0 mt-16 overflow-y-auto transition-colors;
+  @apply mb-16 mt-16 h-full w-full overflow-y-auto transition-colors md:ml-auto md:mb-0 md:w-10/12;
 }
 
 /**

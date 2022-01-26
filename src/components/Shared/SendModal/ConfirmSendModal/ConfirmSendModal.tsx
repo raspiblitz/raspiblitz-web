@@ -111,9 +111,9 @@ const ConfirmSendModal: FC<Props> = ({
       <div className="break-all">
         <button
           onClick={back}
-          className="flex items-center justify-center outline-none font-bold"
+          className="flex items-center justify-center font-bold outline-none"
         >
-          <ChevronLeft className="h-4 w-4 inline-block" />
+          <ChevronLeft className="inline-block h-4 w-4" />
           {t("navigation.back")}
         </button>
 
@@ -183,7 +183,7 @@ const ConfirmSendModal: FC<Props> = ({
 
         <div className="flex justify-around px-2 py-5">
           <button
-            className="shadow-xl rounded text-white bg-red-500 hover:bg-red-400 py-2 px-3 flex"
+            className="flex rounded bg-red-500 py-2 px-3 text-white shadow-xl hover:bg-red-400"
             onClick={() => close(false)}
           >
             <XIcon />
@@ -191,7 +191,7 @@ const ConfirmSendModal: FC<Props> = ({
           </button>
 
           <button
-            className="bd-button py-2 px-3 flex"
+            className="bd-button flex py-2 px-3"
             type="submit"
             disabled={(submitCount > 0 && !isValid) || !isValidLnInvoice}
           >

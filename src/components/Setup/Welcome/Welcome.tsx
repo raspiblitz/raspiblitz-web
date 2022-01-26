@@ -13,7 +13,7 @@ const Welcome: FC = () => {
         <div className="flex justify-center">
           <I18nDropdown />
         </div>
-        <button className="bd-button p-2 my-5">{t("setup.continue")}</button>
+        <button className="bd-button my-5 p-2">{t("setup.continue")}</button>
       </div>
     </SetupContainer>
   );

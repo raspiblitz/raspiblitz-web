@@ -35,14 +35,14 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
 
   return (
     <ModalBackground>
-      <div className="w-4/5 h-auto lg:w-1/2 xl:w-2/5 xl:max-w-screen-sm bg-white text-center rounded-lg flex flex-col mx-5 dark:bg-gray-700 dark:text-white">
+      <div className="xl:max-w-screen-sm mx-5 flex h-auto w-4/5 flex-col rounded-lg bg-white text-center dark:bg-gray-700 dark:text-white lg:w-1/2 xl:w-2/5">
         <div className="flex pr-2 pt-1">
           {closeable && (
             <button
               onClick={closeModal}
-              className="flex items-end ml-auto h-7 w-7 mt-1"
+              className="ml-auto mt-1 flex h-7 w-7 items-end"
             >
-              <XIcon className="w-full h-full" />
+              <XIcon className="h-full w-full" />
             </button>
           )}
         </div>
