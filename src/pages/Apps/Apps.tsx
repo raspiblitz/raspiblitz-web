@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { useState } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import AppCard from "../../components/Apps/AppCard/AppCard";
 import AppInfo from "../../components/Apps/AppInfo/AppInfo";

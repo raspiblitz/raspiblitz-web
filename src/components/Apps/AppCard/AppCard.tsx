@@ -1,8 +1,9 @@
-import { FC, useEffect, useState } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as InfoIcon } from "../../../assets/info.svg";
 import { ReactComponent as LinkIcon } from "../../../assets/link.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
+import AppIcon from "../../../container/AppIcon/AppIcon";
 import { App } from "../../../models/app.model";
 
 type Props = {
@@ -20,29 +21,13 @@ export const AppCard: FC<Props> = ({
 }) => {
   const { id, description, installed, name, address } = app;
   const { t } = useTranslation();
-  const [appLogo, setAppLogo] = useState("");
-
-  useEffect(() => {
-    import(`../../../assets/apps/logos/${id}.png`)
-      .then((image) => {
-        setAppLogo(image.default);
-      })
-      .catch((_) => {
-        // use fallback icon if image for id doesn't exist
-        import("../../../assets/cloud.svg")
-          .then((img) => setAppLogo(img.default))
-          .catch((_) => {
-            // do nothing if cloud img doesn't exist
-          });
-      });
-  }, [id]);
 
   return (
     <div className="bd-card transition-colors dark:bg-gray-800">
       <div className="mt-2 flex h-4/6 w-full flex-row items-center">
         {/* Icon */}
         <div className="flex w-1/4 items-center justify-center p-2">
-          <img className="max-h-16" src={appLogo} alt={`${id} Logo`} />
+          <AppIcon appId={id} />
         </div>
         {/* Content */}
         <div className="flex w-3/4 flex-col items-start justify-center text-xl">

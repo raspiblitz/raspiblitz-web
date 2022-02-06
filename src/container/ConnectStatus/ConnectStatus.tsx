@@ -1,4 +1,5 @@
-import { FC, useContext } from "react";
+import { useContext } from "react";
+import type { FC } from "react";
 import { ReactComponent as CheckCircle } from "../../assets/check-circle.svg";
 import { ReactComponent as DotsCircle } from "../../assets/dots-circle-horizontal.svg";
 import { ReactComponent as XCircle } from "../../assets/x-circle.svg";

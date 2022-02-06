@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import mockInfo from "../../../apps/mock-info.json";
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
+import AppIcon from "../../../container/AppIcon/AppIcon";
 import { App } from "../../../models/app.model";
 import { instance } from "../../../util/interceptor";
 import ImageCarousel from "../../Shared/ImageCarousel/ImageCarousel";
@@ -15,7 +16,6 @@ export type Props = {
 export const AppInfo: FC<Props> = ({ app, onClose }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const [iconImg, setIconImg] = useState("");
   const [imgs, setImgs] = useState<string[]>([]);
   const { id, name, installed, description } = app;
   // TODO: Change to dynamic info
@@ -23,26 +23,14 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    // import Logo
-    import(`../../../assets/apps/logos/${id}.png`)
-      .then((image) => {
-        setIconImg(image.default);
-      })
-      .catch((_) => {
-        // use fallback icon if image for id doesn't exist
-        import("../../../assets/cloud.svg")
-          .then((img) => setIconImg(img.default))
-          .catch((_) => {
-            // do nothing if cloud image doesn't exist either
-          });
-      });
 
-    // import app images
-    Promise.allSettled([
-      import(`../../../assets/apps/preview/${id}/1.png`),
-      import(`../../../assets/apps/preview/${id}/2.png`),
-      import(`../../../assets/apps/preview/${id}/3.png`),
-    ]).then((promises) => {
+    async function loadAppImages() {
+      const promises = await Promise.allSettled([
+        import(`../../../assets/apps/preview/${id}/1.png`),
+        import(`../../../assets/apps/preview/${id}/2.png`),
+        import(`../../../assets/apps/preview/${id}/3.png`),
+      ]);
+
       promises.forEach((promise, i) => {
         if (promise.status === "fulfilled") {
           setImgs((prev) => {
@@ -54,7 +42,9 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
         }
       });
       setIsLoading(false);
-    });
+    }
+
+    loadAppImages();
   }, [id]);
 
   if (isLoading) {
@@ -90,7 +80,7 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
 
       {/* Image box with title */}
       <section className="mb-5 flex w-full items-center px-10">
-        <img className="max-h-16" src={iconImg} alt={`${id} Logo`} />
+        <AppIcon appId={id} />
         <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
         {!installed && (
           <button
