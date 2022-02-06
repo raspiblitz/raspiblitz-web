@@ -9,6 +9,7 @@ const auth = require("./auth");
 const transactions = require("./transactions");
 const walletBalance = require("./wallet_balance");
 const util = require("./util");
+require("dotenv").config();
 
 let walletLocked = true;
 
@@ -77,8 +78,9 @@ app.get("/api/v1/setup/status", (_, res) => {
 
 app.post("/api/v1/system/login", (req, res) => {
   console.info("call to /api/v1/system/login");
+  // setTimeout to simulate some delay
   setTimeout(() => {
-    if (req.body.password === "password") {
+    if (req.body.password === process.env.WALLET_PASSWORD) {
       const access_token = auth.signToken();
       res.status(200).send(JSON.stringify({ access_token }));
     } else {
