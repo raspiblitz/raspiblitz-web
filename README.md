@@ -94,6 +94,8 @@ Please do not commit the above changes.
 
 ## Credits & Licenses
 
+### Icons
+
 - RaspiBlitz Icon from [RaspiBlitz](https://github.com/rootzoll/raspiblitz)
   - [MIT License](https://github.com/rootzoll/raspiblitz/blob/v1.7/LICENSE)
 - Bitcoin, Send & Flip vertical Icon from [BitcoinDesign](https://github.com/bitcoindesign/bitcoin-icons)
@@ -107,14 +109,10 @@ Please do not commit the above changes.
 
 ### App logos
 
-- Sphinx Logo from [Sphinx Chat](https://sphinx.chat/)
-  - [MIT License](https://github.com/stakwork/sphinx-relay/blob/master/LICENSE)
 - BTC RPC Logo from [Bitcoin Explorer](https://bitcoinexplorer.org)
   - [MIT License](https://github.com/janoside/btc-rpc-explorer)
 - BTCPay Logo from [btcpayserver](https://github.com/btcpayserver/btcpayserver)
   - [MIT License](https://github.com/btcpayserver/btcpayserver/blob/master/LICENSE)
-- LNDManage Logo from [lndmanage](https://github.com/bitromortac/lndmanage)
-  - [MIT License](https://github.com/bitromortac/lndmanage/blob/master/LICENSE)
 - RTL Logo from [RTL](https://github.com/Ride-The-Lightning/RTL)
   - [MIT License](https://github.com/Ride-The-Lightning/RTL/blob/master/LICENSE)
 - Specter Logo from [specter-desktop](https://github.com/cryptoadvance/specter-desktop)

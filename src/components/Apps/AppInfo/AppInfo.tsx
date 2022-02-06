@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import mockInfo from "../../../apps/mock-info.json";
-// TODO: Change to dynamic images
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
+import AppIcon from "../../../container/AppIcon/AppIcon";
 import { App } from "../../../models/app.model";
 import { instance } from "../../../util/interceptor";
 import ImageCarousel from "../../Shared/ImageCarousel/ImageCarousel";
@@ -15,8 +15,7 @@ export type Props = {
 
 export const AppInfo: FC<Props> = ({ app, onClose }) => {
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(false);
-  const [iconImg, setIconImg] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [imgs, setImgs] = useState<string[]>([]);
   const { id, name, installed, description } = app;
   // TODO: Change to dynamic info
@@ -24,32 +23,28 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    // import Logo
-    import(`../../../assets/apps/logos/${id}.png`)
-      .then((image) => {
-        setIconImg(image.default);
-      })
-      .catch((_) => {
-        // use fallback icon if image for id doesn't exist
-        // TODO: error handling
-        import("../../../assets/cloud.svg").then((img) =>
-          setIconImg(img.default)
-        );
-      });
 
-    // import app images
-    [1, 2, 3].forEach((num) => {
-      import(`../../../assets/apps/preview/${id}/${num}.png`)
-        .then((image) => {
+    async function loadAppImages() {
+      const promises = await Promise.allSettled([
+        import(`../../../assets/apps/preview/${id}/1.png`),
+        import(`../../../assets/apps/preview/${id}/2.png`),
+        import(`../../../assets/apps/preview/${id}/3.png`),
+      ]);
+
+      promises.forEach((promise, i) => {
+        if (promise.status === "fulfilled") {
           setImgs((prev) => {
-            prev[num - 1] = image.default;
+            prev[i] = promise.value.default;
             return prev;
           });
-        })
-        .catch((_) => {});
-    });
+        } else {
+          // Ignore if image not available
+        }
+      });
+      setIsLoading(false);
+    }
 
-    setIsLoading(false);
+    loadAppImages();
   }, [id]);
 
   if (isLoading) {
@@ -85,7 +80,7 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
 
       {/* Image box with title */}
       <section className="mb-5 flex w-full items-center px-10">
-        <img className="max-h-16" src={iconImg} alt={`${id} Logo`} />
+        <AppIcon appId={id} />
         <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
         {!installed && (
           <button
@@ -106,7 +101,7 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
       </section>
 
       <section className="text-center">
-        <ImageCarousel imgs={imgs} />
+        {!isLoading && <ImageCarousel imgs={imgs} />}
       </section>
 
       {/* App Description */}

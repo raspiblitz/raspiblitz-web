@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
 
 type Props = {
-  imgs: any[];
+  imgs: string[];
 };
 
 const ImageCarousel: FC<Props> = ({ imgs }) => {
@@ -29,7 +29,7 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
               <button
                 key={index}
                 type="button"
-                className="z-10 h-3 w-10 bg-white"
+                className="z-10 h-3 w-10 border border-black bg-white"
                 onClick={() => switchImgHandler(index)}
               ></button>
             );
@@ -39,7 +39,7 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
             <button
               key={index}
               type="button"
-              className="z-10 h-3 w-10 bg-white opacity-30 hover:opacity-75"
+              className="z-10 h-3 w-10 border border-black bg-white opacity-30 hover:opacity-75"
               onClick={() => switchImgHandler(index)}
             ></button>
           );
