@@ -5,31 +5,44 @@ import { ReactComponent as LinkIcon } from "../../../assets/link.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import { App } from "../../../models/app.model";
 
-export const AppCard: FC<AppCardProps> = (props) => {
-  const { id, description, installed, name, address } = props.app;
-  const { installing, onInstall, onOpenDetails } = props;
+type Props = {
+  app: App;
+  installing: boolean;
+  onInstall: (id: string) => void;
+  onOpenDetails: (app: App) => void;
+};
+
+export const AppCard: FC<Props> = ({
+  app,
+  installing,
+  onInstall,
+  onOpenDetails,
+}) => {
+  const { id, description, installed, name, address } = app;
   const { t } = useTranslation();
-  const [image, setImage] = useState("");
+  const [appLogo, setAppLogo] = useState("");
 
   useEffect(() => {
     import(`../../../assets/apps/logos/${id}.png`)
       .then((image) => {
-        setImage(image.default);
+        setAppLogo(image.default);
       })
       .catch((_) => {
         // use fallback icon if image for id doesn't exist
-        import("../../../assets/cloud.svg").then((img) =>
-          setImage(img.default)
-        );
+        import("../../../assets/cloud.svg")
+          .then((img) => setAppLogo(img.default))
+          .catch((_) => {
+            // do nothing if cloud img doesn't exist
+          });
       });
   }, [id]);
 
   return (
-    <div className="bd-card transition-colors dark:bg-gray-600">
+    <div className="bd-card transition-colors dark:bg-gray-800">
       <div className="mt-2 flex h-4/6 w-full flex-row items-center">
         {/* Icon */}
         <div className="flex w-1/4 items-center justify-center p-2">
-          <img className="max-h-16" src={image} alt={`${id} Logo`} />
+          <img className="max-h-16" src={appLogo} alt={`${id} Logo`} />
         </div>
         {/* Content */}
         <div className="flex w-3/4 flex-col items-start justify-center text-xl">
@@ -71,7 +84,7 @@ export const AppCard: FC<AppCardProps> = (props) => {
         )}
         <button
           className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
-          onClick={() => onOpenDetails(props.app)}
+          onClick={() => onOpenDetails(app)}
         >
           <InfoIcon />
           &nbsp;{t("apps.info")}
@@ -82,10 +95,3 @@ export const AppCard: FC<AppCardProps> = (props) => {
 };
 
 export default AppCard;
-
-export interface AppCardProps {
-  app: App;
-  installing: boolean;
-  onInstall: (id: string) => void;
-  onOpenDetails: (app: App) => void;
-}

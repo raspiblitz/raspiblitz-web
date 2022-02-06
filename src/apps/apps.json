@@ -1,13 +1,5 @@
 [
   {
-    "id": "sphinx",
-    "name": "Sphinx Chat",
-    "description": "Chat and pay over the Lightning Network",
-    "installed": true,
-    "address": "https://192.168.0.599:4081/",
-    "hiddenService": "blablablabla.onion"
-  },
-  {
     "id": "btc-rpc-explorer",
     "name": "BTC RPC Explorer",
     "description": "Bitcoin RPC Explorer",

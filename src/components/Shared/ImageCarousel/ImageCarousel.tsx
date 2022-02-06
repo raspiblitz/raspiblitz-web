@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
 
 type Props = {
-  imgs: any[];
+  imgs: string[];
 };
 
 const ImageCarousel: FC<Props> = ({ imgs }) => {

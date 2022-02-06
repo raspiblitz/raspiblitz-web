@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import mockInfo from "../../../apps/mock-info.json";
-// TODO: Change to dynamic images
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
 import { App } from "../../../models/app.model";
 import { instance } from "../../../util/interceptor";
@@ -15,7 +14,7 @@ export type Props = {
 
 export const AppInfo: FC<Props> = ({ app, onClose }) => {
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [iconImg, setIconImg] = useState("");
   const [imgs, setImgs] = useState<string[]>([]);
   const { id, name, installed, description } = app;
@@ -31,25 +30,31 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
       })
       .catch((_) => {
         // use fallback icon if image for id doesn't exist
-        // TODO: error handling
-        import("../../../assets/cloud.svg").then((img) =>
-          setIconImg(img.default)
-        );
+        import("../../../assets/cloud.svg")
+          .then((img) => setIconImg(img.default))
+          .catch((_) => {
+            // do nothing if cloud image doesn't exist either
+          });
       });
 
     // import app images
-    [1, 2, 3].forEach((num) => {
-      import(`../../../assets/apps/preview/${id}/${num}.png`)
-        .then((image) => {
+    Promise.allSettled([
+      import(`../../../assets/apps/preview/${id}/1.png`),
+      import(`../../../assets/apps/preview/${id}/2.png`),
+      import(`../../../assets/apps/preview/${id}/3.png`),
+    ]).then((promises) => {
+      promises.forEach((promise, i) => {
+        if (promise.status === "fulfilled") {
           setImgs((prev) => {
-            prev[num - 1] = image.default;
+            prev[i] = promise.value.default;
             return prev;
           });
-        })
-        .catch((_) => {});
+        } else {
+          // Ignore if image not available
+        }
+      });
+      setIsLoading(false);
     });
-
-    setIsLoading(false);
   }, [id]);
 
   if (isLoading) {
@@ -106,7 +111,7 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
       </section>
 
       <section className="text-center">
-        <ImageCarousel imgs={imgs} />
+        {!isLoading && <ImageCarousel imgs={imgs} />}
       </section>
 
       {/* App Description */}
