@@ -7,6 +7,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.scrollbar-stable {
+  scrollbar-gutter: stable;
+}
+
 /**
   * Custom Tailwind class CSS
 **/
