@@ -10,7 +10,7 @@
       "logout": "Logg ut"
     },
     "home": {
-      "lightning": "Lynoverføring",
+      "lightning": "Lyn",
       "channel_balance": "Kanalsaldo",
       "channel": "Kanal",
       "ssh": "SSH-innlogging",
@@ -20,7 +20,18 @@
       "status": "Status",
       "network": "Nettverk",
       "version": "Versjon",
-      "bitcoin": "Bitcoin"
+      "bitcoin": "Bitcoin",
+      "hide": "Skjul",
+      "difficulty": "Vanskelighet",
+      "blockchain_size": "Størrelse på Blokkjede",
+      "pending_balance_local": "Ventende Lokal balanse",
+      "pending_balance_remote": "Ventende Fjern Balanse",
+      "show": "Vis",
+      "conn_in": "Innkommende",
+      "conn_out": "Utgående",
+      "connections": "Tilkoblinger",
+      "local_balance": "Lokal Kanal Balanse",
+      "remote_balance": "Fjern kanal Balanse"
     },
     "login": {
       "login": "Logg inn",
@@ -44,7 +55,7 @@
       "installed": "Installert"
     },
     "tx": {
-      "mempool": "Vis på mempool",
+      "mempool": "Vis i mempool",
       "comment": "Kommentar",
       "value": "Verdi",
       "description": "Beskrivelse",
@@ -55,12 +66,16 @@
       "confirmations": "Bekreftelser",
       "txid": "Overførings-ID",
       "tx_details": "Overføringsdetaljer",
-      "transactions": "Overføringer"
+      "transactions": "Overføringer",
+      "sent": "Transaksjon sendt",
+      "transactions_none": "Ingen transaksjoner registrert, på tide å lage din første",
+      "comment_placeholder": "Valgfri kommentar",
+      "confirm_info": "Vennligst bekreft følgende transaksjon"
     },
     "wallet": {
-      "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta verdier",
+      "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta midler",
       "fund": "Fyll opp lommeboken din",
-      "on_chain": "I kjeden",
+      "on_chain": "On-chain",
       "balance": "Saldo",
       "address": "Adresse",
       "create_invoice_ln": "Opprett en lynfaktura",
@@ -68,7 +83,18 @@
       "copied": "Kopiert!",
       "amount": "Beløp",
       "send": "Send",
-      "receive": "Motta"
+      "receive": "Motta",
+      "wallet_locked": "Lommebok låst",
+      "unlock": "Lås opp",
+      "unlock_success": "Lommenok opplåst",
+      "unlocking": "Låser opp",
+      "create_invoice": "Lag Faktura",
+      "invoice": "Faktura",
+      "send_onchain": "Send midler On-chain",
+      "send_lightning": "Send midler over Lyn",
+      "confirm": "Bekreft",
+      "unlock_title": "Lås opp lommebok",
+      "unlock_subtitle": "Lås opp din lommebok"
     },
     "settings": {
       "curr_lang": "Nåværende språk",
@@ -81,6 +107,17 @@
       "new_pw": "Nytt passord",
       "old_pw": "Gammelt passord",
       "change_pw": "Endre passord"
+    },
+    "forms": {
+      "hint": {
+        "invoiceAmountZero": "beløp i faktura er tomt"
+      },
+      "validation": {
+        "lnInvoice": {
+          "patternMismatch": "Feil faktura format",
+          "required": "Vennligst fyll inn Lyn Faktura"
+        }
+      }
     }
   }
 }
