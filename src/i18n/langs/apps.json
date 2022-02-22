@@ -16,7 +16,13 @@
       "conn_out": "Utgående",
       "conn_details": "Tilkoblings Detaljer",
       "channel": "Kanal",
-      "version": "Versjon"
+      "version": "Versjon",
+      "difficulty": "Vanskelighet",
+      "status": "Status",
+      "bitcoin": "Bitcoin",
+      "lightning": "Lyn",
+      "tor": "Tor",
+      "ssh": "SSH log inn"
     },
     "forms": {
       "validation": {
@@ -31,7 +37,8 @@
           "patternMismatch": "Feil adresse format"
         },
         "chainAmount": {
-          "required": "Vennligst fyll inn beløp"
+          "required": "Vennligst fyll inn beløp",
+          "max": "Din balanse er for lav til å sende dette beløpet"
         },
         "unlock": {
           "pass_c": "Passord C",
@@ -65,7 +72,9 @@
       "send_lightning": "Send over Lightning",
       "address": "Adresse",
       "unlock_title": "Lås opp Lommebok",
-      "unlock_subtitle": "Lås opp din Lommebok"
+      "unlock_subtitle": "Lås opp din Lommebok",
+      "on_chain": "On-chain",
+      "send": "Send"
     },
     "tx": {
       "value": "Verdi",
@@ -95,7 +104,9 @@
       "author": "Forfatter",
       "offline": "Frakoblet",
       "online": "Tilkoblet",
-      "open": "Åpen"
+      "open": "Åpen",
+      "info": "Info",
+      "source": "Kildekode"
     },
     "settings": {
       "change_pw": "Bytt Passord",
@@ -113,7 +124,7 @@
       "home": "Hjem",
       "apps": "Apper",
       "settings": "Innstillinger",
-      "dark_mode": "Dark Mode",
+      "dark_mode": "Mørk modus",
       "display_sats": "Vis SATS",
       "logout": "Logg ut",
       "back": "Tilbake"
