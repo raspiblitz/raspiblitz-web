@@ -1,137 +1,82 @@
 {
   "translation": {
     "navigation": {
-      "home": "",
       "apps": "",
-      "settings": "",
       "back": "",
-      "dark_mode": "",
-      "display_sats": "",
-      "logout": ""
+      "display_sats": ""
     },
     "login": {
       "enter_pass": "",
-      "enter_pass_placeholder": "",
       "login": "",
-      "invalid_pass": "",
       "error": ""
     },
     "home": {
-      "bitcoin": "",
       "version": "",
-      "network": "",
       "status": "",
-      "blocks_synced": "",
       "connections": "",
-      "conn_in": "",
       "conn_out": "",
-      "conn_details": "",
       "difficulty": "",
-      "blockchain_size": "",
       "tor": "",
-      "ssh": "",
       "lightning": "",
-      "channel": "",
       "channel_balance": "",
-      "local_balance": "",
       "remote_balance": "",
-      "pending_balance_local": "",
       "pending_balance_remote": "",
-      "show": "",
       "hide": ""
     },
     "wallet": {
-      "balance": "",
       "on_chain": "",
-      "receive": "",
       "send": "",
-      "amount": "",
       "copied": "",
-      "confirm": "",
       "copy_clipboard": "",
-      "invoice": "",
       "create_invoice": "",
-      "create_invoice_ln": "",
       "fund": "",
-      "scan_qr": "",
       "send_onchain": "",
-      "send_lightning": "",
       "address": "",
-      "wallet_locked": "",
       "unlock_title": "",
-      "unlock_subtitle": "",
       "unlock_success": "",
-      "unlock": "",
       "unlocking": ""
     },
     "tx": {
-      "transactions": "",
       "tx_details": "",
-      "txid": "",
       "confirmations": "",
-      "included_block": "",
       "date": "",
-      "fee": "",
       "fee_rate": "",
-      "description": "",
       "mempool": "",
-      "value": "",
       "comment": "",
-      "comment_placeholder": "",
       "sent": "",
-      "confirm_info": "",
       "transactions_none": ""
     },
     "apps": {
-      "installed": "",
       "available": "",
-      "open": "",
       "install": "",
-      "uninstall": "",
       "info": "",
-      "no_page": "",
       "about": "",
-      "author": "",
       "source": "",
-      "offline": "",
       "online": ""
     },
     "settings": {
-      "change_pw": "",
       "old_pw": "",
-      "new_pw": "",
       "change": "",
-      "reboot": "",
       "shutdown": "",
-      "cancel": "",
       "confirm": "",
-      "language": "",
       "curr_lang": ""
     },
     "forms": {
-      "hint": {
-        "invoiceAmountZero": ""
-      },
       "validation": {
         "lnInvoice": {
           "required": "",
-          "patternMismatch": "",
-          "max": "",
-          "expired": ""
+          "max": ""
         },
         "chainAddress": {
-          "required": "",
-          "patternMismatch": ""
+          "required": ""
         },
         "chainAmount": {
-          "required": "",
-          "max": ""
+          "required": ""
         },
         "chainFee": {
           "required": ""
         },
         "unlock": {
-          "pass_c": "",
           "required": ""
         }
       }
