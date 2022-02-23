@@ -1,82 +1,51 @@
 {
   "translation": {
     "navigation": {
-      "apps": "",
-      "back": "",
-      "display_sats": ""
+      "back": ""
     },
     "login": {
       "enter_pass": "",
-      "login": "",
       "error": ""
     },
     "home": {
-      "version": "",
       "status": "",
-      "connections": "",
       "conn_out": "",
-      "difficulty": "",
       "tor": "",
-      "lightning": "",
       "channel_balance": "",
-      "remote_balance": "",
-      "pending_balance_remote": "",
-      "hide": ""
+      "pending_balance_remote": ""
     },
     "wallet": {
       "on_chain": "",
-      "send": "",
       "copied": "",
-      "copy_clipboard": "",
       "create_invoice": "",
-      "fund": "",
       "send_onchain": "",
-      "address": "",
       "unlock_title": "",
-      "unlock_success": "",
       "unlocking": ""
     },
     "tx": {
-      "tx_details": "",
       "confirmations": "",
-      "date": "",
       "fee_rate": "",
-      "mempool": "",
       "comment": "",
-      "sent": "",
       "transactions_none": ""
     },
     "apps": {
-      "available": "",
       "install": "",
-      "info": "",
       "about": "",
-      "source": "",
       "online": ""
     },
     "settings": {
-      "old_pw": "",
       "change": "",
-      "shutdown": "",
-      "confirm": "",
-      "curr_lang": ""
+      "confirm": ""
     },
     "forms": {
       "validation": {
         "lnInvoice": {
-          "required": "",
-          "max": ""
+          "required": ""
         },
         "chainAddress": {
           "required": ""
         },
-        "chainAmount": {
-          "required": ""
-        },
         "chainFee": {
-          "required": ""
-        },
-        "unlock": {
           "required": ""
         }
       }
