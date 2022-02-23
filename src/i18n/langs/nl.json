@@ -1,17 +1,10 @@
 {
   "translation": {
     "home": {
-      "status": "",
       "pending_balance_remote": ""
-    },
-    "wallet": {
-      "send_onchain": ""
     },
     "tx": {
       "fee_rate": ""
-    },
-    "apps": {
-      "about": ""
     },
     "forms": {
       "validation": {
