@@ -1,17 +1,7 @@
 {
   "translation": {
-    "home": {
-      "pending_balance_remote": ""
-    },
     "tx": {
       "fee_rate": ""
-    },
-    "forms": {
-      "validation": {
-        "lnInvoice": {
-          "required": ""
-        }
-      }
     }
   }
 }
