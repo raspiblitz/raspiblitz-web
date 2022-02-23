@@ -1,34 +1,21 @@
 {
   "translation": {
-    "login": {
-      "enter_pass": ""
-    },
     "home": {
       "status": "",
-      "tor": "",
       "pending_balance_remote": ""
     },
     "wallet": {
-      "copied": "",
-      "send_onchain": "",
-      "unlocking": ""
+      "send_onchain": ""
     },
     "tx": {
-      "fee_rate": "",
-      "transactions_none": ""
+      "fee_rate": ""
     },
     "apps": {
       "about": ""
     },
-    "settings": {
-      "change": ""
-    },
     "forms": {
       "validation": {
         "lnInvoice": {
-          "required": ""
-        },
-        "chainFee": {
           "required": ""
         }
       }
