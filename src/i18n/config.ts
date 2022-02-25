@@ -7,6 +7,7 @@ import hu from "./langs/hu.json";
 import pt_BR from "./langs/pt_BR.json";
 import it from "./langs/it.json";
 import es from "./langs/es.json";
+import nl from "./langs/nl.json";
 import { initReactI18next } from "react-i18next";
 import "react-i18next";
 
@@ -14,6 +15,7 @@ export const resources = {
   en,
   de,
   nb_NO,
+  nl,
   fr,
   hu,
   pt_BR,
