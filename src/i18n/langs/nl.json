@@ -1,0 +1,140 @@
+{
+  "translation": {
+    "settings": {
+      "reboot": "Herstart",
+      "shutdown": "Zet uit",
+      "cancel": "Annuleer",
+      "confirm": "Bevestig",
+      "language": "Taal",
+      "curr_lang": "Huidige taal",
+      "change": "Aanpassen",
+      "change_pw": "Verander wachtwoord",
+      "old_pw": "Oude wachtwoord",
+      "new_pw": "Nieuw wachtwoord"
+    },
+    "forms": {
+      "hint": {
+        "invoiceAmountZero": "Bedrag van de rekening is nul"
+      },
+      "validation": {
+        "lnInvoice": {
+          "expired": "Rekening verkopen",
+          "required": "Voer alsjeblieft een Lightning rekening in",
+          "max": "Je balans is te laag om deze rekening te betalen",
+          "patternMismatch": "Verkeerde formaat van de rekening"
+        },
+        "chainAmount": {
+          "max": "Je balans is te laag om dit bedrag te verzenden",
+          "required": "Vul alsjeblieft een bedrag in"
+        },
+        "unlock": {
+          "required": "Vul alsjeblieft Wachtwoord C in",
+          "pass_c": "Wachtwoord C"
+        },
+        "chainAddress": {
+          "required": "Vul alsjeblieft een Bitcoin adres in",
+          "patternMismatch": "Verkeerd formaat van adres"
+        },
+        "chainFee": {
+          "required": "Vul alsjeblieft een vergoeding in"
+        }
+      }
+    },
+    "apps": {
+      "install": "Installeer",
+      "open": "Open",
+      "installed": "Geïnstalleerd",
+      "uninstall": "Verwijder",
+      "info": "Info",
+      "about": "Over",
+      "no_page": "Geen pagina beschikbaar",
+      "author": "Auteur",
+      "source": "Broncode",
+      "offline": "offline",
+      "online": "online",
+      "available": "Beschikbare Apps"
+    },
+    "tx": {
+      "transactions_none": "Nog geen transactie hier; tijd om je eerste te maken",
+      "txid": "Transactie ID",
+      "tx_details": "Transactie Details",
+      "transactions": "Transacties",
+      "confirmations": "Bevestigingen",
+      "date": "Datum",
+      "fee_rate": "Tarief",
+      "mempool": "Bekijk in mempool",
+      "value": "Waarde",
+      "fee": "vergoeding",
+      "description": "Omschrijving",
+      "comment": "Opmerking",
+      "confirm_info": "Bevestig alsjeblieft de volgende transactie",
+      "comment_placeholder": "Opmerking (optioneel)",
+      "sent": "Transactie verstuurd!",
+      "included_block": "Toegevoegd aan Blok"
+    },
+    "wallet": {
+      "unlock": "Deblokkeer",
+      "unlocking": "Deblokkeren…",
+      "on_chain": "On-chain",
+      "receive": "Ontvang",
+      "balance": "Balans",
+      "send": "Stuur",
+      "amount": "Bedrag",
+      "invoice": "Rekening",
+      "copied": "Gekopieerd!",
+      "confirm": "Bevestig",
+      "copy_clipboard": "Kopieer naar clipboard",
+      "create_invoice": "Creëer rekening",
+      "create_invoice_ln": "Creëer Lightning rekening",
+      "scan_qr": "Scan deze QR code of kopieer onderstaand adres om tegoeden te ontvangen",
+      "fund": "Stort geld op uw on-chain portemonnee",
+      "send_onchain": "Stuur tegoeden On-chain",
+      "send_lightning": "Stuur tegoeden via Lightning",
+      "address": "Adres",
+      "wallet_locked": "Portemonnee vergrendeld",
+      "unlock_success": "Portemonnee ontgrendeld",
+      "unlock_title": "Ontgrendel Portemonnee",
+      "unlock_subtitle": "Ontgrendel je Portemonnee"
+    },
+    "navigation": {
+      "back": "Terug",
+      "settings": "Instellingen",
+      "logout": "Uitloggen",
+      "dark_mode": "Donkere modus",
+      "home": "Home",
+      "apps": "Apps",
+      "display_sats": "Toon SATS"
+    },
+    "login": {
+      "login": "Inloggen",
+      "enter_pass": "Vul Wachtwoord B in",
+      "enter_pass_placeholder": "Wachtwoord B",
+      "error": "Er is een fout opgetreden",
+      "invalid_pass": "Ongeldig wachtwoord"
+    },
+    "home": {
+      "status": "Status",
+      "conn_out": "Uitgaand",
+      "ssh": "SSH login",
+      "network": "Netwerk",
+      "bitcoin": "Bitcoin",
+      "version": "Versie",
+      "conn_in": "Inkomend",
+      "connections": "Verbindingen",
+      "blocks_synced": "Blokken gesynchroniseerd",
+      "conn_details": "Details van de Verbinding",
+      "blockchain_size": "Grootte van de Blockchain",
+      "tor": "Tor",
+      "difficulty": "Moeilijkheid",
+      "lightning": "Lightning",
+      "show": "Toon",
+      "channel": "Kanaal",
+      "hide": "Verberg",
+      "pending_balance_remote": "Extern Saldo in behandeling",
+      "channel_balance": "Saldo van kanaal",
+      "local_balance": "Lokaal Saldo van Kanaal",
+      "remote_balance": "Saldo van Extern Kanaal",
+      "pending_balance_local": "Lokaal Saldo in behandeling"
+    }
+  }
+}
