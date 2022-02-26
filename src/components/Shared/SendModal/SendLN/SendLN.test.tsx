@@ -2,10 +2,11 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
-import type { SendLnProps } from "./SendLN";
+import type { Props } from "./SendLN";
 import SendLN from "./SendLN";
 
-const basicProps: SendLnProps = {
+const basicProps: Props = {
+  loading: false,
   balanceDecorated: "123456",
   onConfirm: () => {},
   onChangeInvoice: () => {},
@@ -13,6 +14,7 @@ const basicProps: SendLnProps = {
 
 describe("SendLN", () => {
   beforeEach(() => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
     render(
       <I18nextProvider i18n={i18n}>
         <SendLN {...basicProps} />

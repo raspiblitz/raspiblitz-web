@@ -1,22 +1,30 @@
-import { FC, useContext } from "react";
-
 import type { ChangeEvent } from "react";
-
+import { FC, useContext } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../../../store/app-context";
+import ButtonWithSpinner from "../../ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../InputField/InputField";
 
-import { useForm } from "react-hook-form";
-import type { SubmitHandler } from "react-hook-form";
+export type Props = {
+  balanceDecorated: string;
+  loading: boolean;
+  onConfirm: () => void;
+  onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+interface IFormInputs {
+  invoiceInput: string;
+}
 
-const SendLn: FC<SendLnProps> = (props) => {
-  const appCtx = useContext(AppContext);
-  const { balanceDecorated, onChangeInvoice, onConfirm } = props;
+const SendLn: FC<Props> = ({
+  loading,
+  balanceDecorated,
+  onConfirm,
+  onChangeInvoice,
+}) => {
+  const { unit } = useContext(AppContext);
   const { t } = useTranslation();
-
-  interface IFormInputs {
-    invoiceInput: string;
-  }
 
   const {
     register,
@@ -26,7 +34,7 @@ const SendLn: FC<SendLnProps> = (props) => {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<IFormInputs> = (_data) => onConfirm();
+  const onSubmit: SubmitHandler<IFormInputs> = (_) => onConfirm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,7 +42,7 @@ const SendLn: FC<SendLnProps> = (props) => {
 
       <p className="my-5">
         <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
-        {balanceDecorated} {appCtx.unit}
+        {balanceDecorated} {unit}
       </p>
 
       <InputField
@@ -49,23 +57,19 @@ const SendLn: FC<SendLnProps> = (props) => {
         label={t("wallet.invoice")}
         errorMessage={errors.invoiceInput}
         placeholder="lnbc..."
+        disabled={loading}
       />
 
-      <button
+      <ButtonWithSpinner
         type="submit"
         className="bd-button my-3 p-3"
-        disabled={submitCount > 0 && !isValid}
+        loading={loading}
+        disabled={(submitCount > 0 && !isValid) || loading}
       >
         {t("wallet.send")}
-      </button>
+      </ButtonWithSpinner>
     </form>
   );
 };
 
 export default SendLn;
-
-export interface SendLnProps {
-  balanceDecorated: string;
-  onConfirm: () => void;
-  onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
-}
