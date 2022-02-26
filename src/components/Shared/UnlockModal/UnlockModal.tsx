@@ -1,5 +1,6 @@
 import { FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
+import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ModalDialog, {
@@ -8,9 +9,8 @@ import ModalDialog, {
 import { AppContext } from "../../../store/app-context";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
+import ButtonWithSpinner from "../ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../InputField/InputField";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import type { SubmitHandler } from "react-hook-form";
 
 interface IFormInputs {
   passwordInput: string;
@@ -36,6 +36,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
     passwordInput: string;
   }) => {
     setIsLoading(true);
+    setPasswordWrong(false);
     instance
       .post("/lightning/unlock-wallet", { password: data.passwordInput })
       .then((res) => {
@@ -54,46 +55,36 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
 
   return createPortal(
     <ModalDialog closeable={false} close={() => onClose(false)}>
-      {isLoading && (
-        <div className="py-5">
-          <h2 className="pb-5 text-lg font-bold">{t("wallet.unlocking")}</h2>
-          <LoadingSpinner />
-        </div>
-      )}
+      <h2 className="mt-5 text-lg font-bold">{t("wallet.unlock_title")}</h2>
 
-      {!isLoading && (
-        <>
-          <h2 className="mt-5 text-lg font-bold">{t("wallet.unlock_title")}</h2>
+      <div>
+        <h3 className="p-2">{t("wallet.unlock_subtitle")}</h3>
 
-          <div>
-            <h3 className="p-2">{t("wallet.unlock_subtitle")}</h3>
+        <form onSubmit={handleSubmit(unlockHandler)}>
+          <InputField
+            {...register("passwordInput", {
+              required: t("forms.validation.unlock.required") as string,
+            })}
+            autoFocus
+            errorMessage={errors.passwordInput}
+            label={t("forms.validation.unlock.pass_c")}
+            placeholder={t("forms.validation.unlock.pass_c")}
+            type="password"
+            disabled={isLoading}
+          />
+          <ButtonWithSpinner
+            type="submit"
+            className="bd-button my-5 p-3"
+            loading={isLoading}
+            disabled={!isValid}
+          >
+            {t("wallet.unlock")}
+          </ButtonWithSpinner>
+        </form>
+      </div>
 
-            <form onSubmit={handleSubmit(unlockHandler)}>
-              <InputField
-                {...register("passwordInput", {
-                  required: t("forms.validation.unlock.required") as string,
-                })}
-                autoFocus
-                errorMessage={errors.passwordInput}
-                label={t("forms.validation.unlock.pass_c")}
-                placeholder={t("forms.validation.unlock.pass_c")}
-                type="password"
-              />
-
-              <button
-                type="submit"
-                className="bd-button my-5 p-3"
-                disabled={!isValid}
-              >
-                {t("wallet.unlock")}
-              </button>
-            </form>
-          </div>
-
-          {passwordWrong && (
-            <p className="my-5 text-red-500">{t("login.invalid_pass")}</p>
-          )}
-        </>
+      {passwordWrong && (
+        <p className="mb-5 text-red-500">{t("login.invalid_pass")}</p>
       )}
     </ModalDialog>,
     MODAL_ROOT

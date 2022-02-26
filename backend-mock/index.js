@@ -373,9 +373,12 @@ app.post("/api/v1/lightning/unlock-wallet", (req, res) => {
   console.info(
     `call to /api/v1/lightning/unlock-wallet with type ${req.body.password}`
   );
-  if (req.body.password === "password") {
-    walletLocked = false;
-    return res.status(200).send(true);
-  }
-  return res.status(401).send();
+  // simulate loading time
+  setTimeout(() => {
+    if (req.body.password === "password") {
+      walletLocked = false;
+      return res.status(200).send(true);
+    }
+    return res.status(401).send();
+  }, 1500);
 });
