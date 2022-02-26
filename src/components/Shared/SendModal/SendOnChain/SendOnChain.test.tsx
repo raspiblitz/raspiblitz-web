@@ -97,11 +97,11 @@ describe("SendOnChain", () => {
     userEvent.clear(amountInput);
     userEvent.type(amountInput, "999");
 
-    userEvent.click(screen.getByText("wallet.confirm"));
+    userEvent.click(await screen.findByText("wallet.confirm"));
 
     await waitFor(() => expect(amountInput).toHaveClass("input-error"));
     expect(
-      screen.getByText("forms.validation.chainAmount.max")
+      await screen.findByText("forms.validation.chainAmount.max")
     ).toBeInTheDocument();
   });
 

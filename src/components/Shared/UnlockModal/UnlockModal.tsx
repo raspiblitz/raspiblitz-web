@@ -78,7 +78,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
             loading={isLoading}
             disabled={!isValid}
           >
-            {t("wallet.unlock")}
+            {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
           </ButtonWithSpinner>
         </form>
       </div>
