@@ -2,21 +2,22 @@ import { AxiosResponse } from "axios";
 import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
-import AppStatusCard from "../../components/Home/AppStatusCard/AppStatusCard";
-import BitcoinCard from "../../components/Home/BitcoinCard/BitcoinCard";
-import ConnectionCard from "../../components/Home/ConnectionCard/ConnectionCard";
-import LightningCard from "../../components/Home/LightningCard/LightningCard";
-import TransactionCard from "../../components/Home/TransactionCard/TransactionCard";
-import TransactionDetailModal from "../../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
-import WalletCard from "../../components/Home/WalletCard/WalletCard";
-import ReceiveModal from "../../components/Shared/ReceiveModal/ReceiveModal";
-import SendModal from "../../components/Shared/SendModal/SendModal";
-import UnlockModal from "../../components/Shared/UnlockModal/UnlockModal";
-import useSSE from "../../hooks/use-sse";
-import { AppStatus } from "../../models/app-status";
-import { Transaction } from "../../models/transaction.model";
-import { AppContext } from "../../store/app-context";
-import { instance } from "../../util/interceptor";
+import AppStatusCard from "../components/Home/AppStatusCard/AppStatusCard";
+import BitcoinCard from "../components/Home/BitcoinCard/BitcoinCard";
+import ConnectionCard from "../components/Home/ConnectionCard/ConnectionCard";
+import LightningCard from "../components/Home/LightningCard/LightningCard";
+import TransactionCard from "../components/Home/TransactionCard/TransactionCard";
+import TransactionDetailModal from "../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
+import WalletCard from "../components/Home/WalletCard/WalletCard";
+import ReceiveModal from "../components/Shared/ReceiveModal/ReceiveModal";
+import SendModal from "../components/Shared/SendModal/SendModal";
+import UnlockModal from "../components/Shared/UnlockModal/UnlockModal";
+import useSSE from "../hooks/use-sse";
+import { AppStatus } from "../models/app-status";
+import { Transaction } from "../models/transaction.model";
+import { AppContext } from "../store/app-context";
+import { instance } from "../util/interceptor";
+import { enableGutter } from "../util/util";
 
 const Home: FC = () => {
   const { t } = useTranslation();
@@ -33,6 +34,7 @@ const Home: FC = () => {
   const theme = darkMode ? "dark" : "light";
 
   useEffect(() => {
+    enableGutter();
     if (!walletLocked) {
       setIsLoadingTransactions(true);
 

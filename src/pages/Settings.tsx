@@ -1,15 +1,20 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ChangePwModal from "../../components/Settings/ChangePwModal/ChangePwModal";
-import I18nBox from "../../components/Settings/I18nBox/I18nBox";
-import ConfirmModal from "../../components/Shared/ConfirmModal/ConfirmModal";
-import ActionBox from "../../container/ActionBox/ActionBox";
+import ChangePwModal from "../components/Settings/ChangePwModal/ChangePwModal";
+import I18nBox from "../components/Settings/I18nBox/I18nBox";
+import ConfirmModal from "../components/Shared/ConfirmModal/ConfirmModal";
+import ActionBox from "../container/ActionBox/ActionBox";
+import { enableGutter } from "../util/util";
 
 const Settings: FC = () => {
   const { t } = useTranslation();
   const [confirmShutdown, setConfirmShutdown] = useState(false);
   const [confirmReboot, setConfirmReboot] = useState(false);
   const [showPwModal, setShowPwModal] = useState(false);
+
+  useEffect(() => {
+    enableGutter();
+  }, []);
 
   const showShutdownModalHandler = () => {
     setConfirmShutdown(true);

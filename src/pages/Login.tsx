@@ -1,14 +1,14 @@
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ReactComponent as MoonLogo } from "../../assets/moon.svg";
-import { ReactComponent as RaspiBlitzLogo } from "../../assets/RaspiBlitz_Logo_Main.svg";
-import { ReactComponent as RaspiBlitzLogoDark } from "../../assets/RaspiBlitz_Logo_Main_Negative.svg";
-import I18nDropdown from "../../components/Shared/I18nDropdown/I18nDropdown";
-import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
-import { AppContext } from "../../store/app-context";
-import { instance } from "../../util/interceptor";
-import { enableGutter } from "../../util/util";
+import { ReactComponent as MoonLogo } from "../assets/moon.svg";
+import { ReactComponent as RaspiBlitzLogo } from "../assets/RaspiBlitz_Logo_Main.svg";
+import { ReactComponent as RaspiBlitzLogoDark } from "../assets/RaspiBlitz_Logo_Main_Negative.svg";
+import I18nDropdown from "../components/Shared/I18nDropdown/I18nDropdown";
+import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
+import { AppContext } from "../store/app-context";
+import { instance } from "../util/interceptor";
+import { enableGutter } from "../util/util";
 
 const Login: FC = () => {
   const { t } = useTranslation();

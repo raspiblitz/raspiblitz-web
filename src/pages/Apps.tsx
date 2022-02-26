@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import AppCard from "../../components/Apps/AppCard/AppCard";
-import AppInfo from "../../components/Apps/AppInfo/AppInfo";
-import useSSE from "../../hooks/use-sse";
-import { App } from "../../models/app.model";
-import availableApps from "../../apps/apps.json";
-import { instance } from "../../util/interceptor";
+import AppCard from "../components/Apps/AppCard/AppCard";
+import AppInfo from "../components/Apps/AppInfo/AppInfo";
+import useSSE from "../hooks/use-sse";
+import { App } from "../models/app.model";
+import availableApps from "../apps/apps.json";
+import { instance } from "../util/interceptor";
+import { enableGutter } from "../util/util";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
   const { isInstalling } = useSSE();
   const [showDetails, setShowDetails] = useState(false);
   const [app, setApp] = useState<App | null>(null);
+
+  useEffect(() => {
+    enableGutter();
+  }, []);
 
   const installHandler = (id: string) => {
     instance.post("install", { id }).catch(() => {
