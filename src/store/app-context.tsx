@@ -10,7 +10,12 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { parseJwt, retrieveSettings, saveSettings } from "../util/util";
+import {
+  disableGutter,
+  parseJwt,
+  retrieveSettings,
+  saveSettings,
+} from "../util/util";
 import { SSEContext } from "./sse-context";
 
 interface AppContextType {
@@ -75,6 +80,7 @@ const AppContextProvider: FC = ({ children }) => {
       setEvtSource(null);
     }
     setIsLoggedIn(false);
+    disableGutter();
     navigate("/");
   }, [evtSource, setEvtSource, navigate]);
 

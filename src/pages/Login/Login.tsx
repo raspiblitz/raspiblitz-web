@@ -8,6 +8,7 @@ import I18nDropdown from "../../components/Shared/I18nDropdown/I18nDropdown";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
 import { AppContext } from "../../store/app-context";
 import { instance } from "../../util/interceptor";
+import { enableGutter } from "../../util/util";
 
 const Login: FC = () => {
   const { t } = useTranslation();
@@ -51,6 +52,7 @@ const Login: FC = () => {
     if (resp) {
       localStorage.setItem("access_token", resp.data.access_token);
       setIsLoggedIn(true);
+      enableGutter();
       navigate(from, { replace: true });
     }
   };
