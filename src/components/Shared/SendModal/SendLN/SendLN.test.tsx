@@ -12,17 +12,17 @@ const basicProps: Props = {
   onChangeInvoice: () => {},
 };
 
-describe("SendLN", () => {
-  beforeEach(() => {
-    // eslint-disable-next-line testing-library/no-render-in-setup
-    render(
-      <I18nextProvider i18n={i18n}>
-        <SendLN {...basicProps} />
-      </I18nextProvider>
-    );
-  });
+const setup = () => {
+  render(
+    <I18nextProvider i18n={i18n}>
+      <SendLN {...basicProps} />
+    </I18nextProvider>
+  );
+};
 
+describe("SendLN", () => {
   test("render", async () => {
+    setup();
     expect(
       await screen.findByText("wallet.send_lightning")
     ).toBeInTheDocument();
@@ -33,6 +33,7 @@ describe("SendLN", () => {
   });
 
   test("validates the input for empty value", async () => {
+    setup();
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
     expect(
@@ -47,6 +48,7 @@ describe("SendLN", () => {
   });
 
   test("validates the input for LN invoice format", async () => {
+    setup();
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
     userEvent.type(invoiceInput, "123456789abc");
@@ -71,6 +73,7 @@ describe("SendLN", () => {
   });
 
   test("valid LN invoice passes", async () => {
+    setup();
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
     userEvent.type(
