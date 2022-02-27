@@ -5,10 +5,10 @@ import "./App.css";
 import Layout from "./container/Layout/Layout";
 import RequireAuth from "./container/RequireAuth/RequireAuth";
 import "./i18n/config";
-import Apps from "./pages/Apps/Apps";
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Settings from "./pages/Settings/Settings";
+import Apps from "./pages/Apps";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Settings from "./pages/Settings";
 
 const App: FC = () => {
   return (

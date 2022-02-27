@@ -8,14 +8,18 @@ export enum TxType {
 }
 
 export type Props = {
+  disabled?: boolean;
   onTxTypeChange: (txtype: TxType) => void;
 };
 
-const SwitchTxType: FC<Props> = ({ onTxTypeChange }) => {
+const SwitchTxType: FC<Props> = ({ onTxTypeChange, disabled }) => {
   const { t } = useTranslation();
   const [txType, setTxType] = useState<TxType>(TxType.LIGHTNING);
 
   const handleClick = (txType: TxType) => {
+    if (disabled) {
+      return;
+    }
     setTxType(txType);
     onTxTypeChange(txType);
   };

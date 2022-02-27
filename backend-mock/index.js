@@ -226,51 +226,53 @@ app.get("/api/v1/lightning/decode-pay-req", (req, res) => {
     req.query["pay_req"]
   );
 
-  return res.status(200).send(
-    JSON.stringify({
-      destination:
-        "0323dbd695d801553837f9907100f304abd153932bb000a3a7ea9132ff3e7437a1",
-      payment_hash:
-        "dc171b0d9a6c33d40ba2d9ed95819b29af40d83132b15072ab4e8b60feb08b90",
-      num_satoshis: 20,
-      timestamp: 1893456000000,
-      expiry: 36000,
-      description: "TEST",
-      description_hash: "",
-      fallback_addr: "",
-      cltv_expiry: 40,
-      route_hints: [],
-      payment_addr:
-        "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
-      num_msat: 20000,
-      features: [
-        {
-          key: 9,
-          value: {
-            name: "tlv-onion",
-            is_required: false,
-            is_known: true,
+  setTimeout(() => {
+    return res.status(200).send(
+      JSON.stringify({
+        destination:
+          "0323dbd695d801553837f9907100f304abd153932bb000a3a7ea9132ff3e7437a1",
+        payment_hash:
+          "dc171b0d9a6c33d40ba2d9ed95819b29af40d83132b15072ab4e8b60feb08b90",
+        num_satoshis: 20,
+        timestamp: 1893456000000,
+        expiry: 36000,
+        description: "TEST",
+        description_hash: "",
+        fallback_addr: "",
+        cltv_expiry: 40,
+        route_hints: [],
+        payment_addr:
+          "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
+        num_msat: 20000,
+        features: [
+          {
+            key: 9,
+            value: {
+              name: "tlv-onion",
+              is_required: false,
+              is_known: true,
+            },
           },
-        },
-        {
-          key: 14,
-          value: {
-            name: "payment-addr",
-            is_required: true,
-            is_known: true,
+          {
+            key: 14,
+            value: {
+              name: "payment-addr",
+              is_required: true,
+              is_known: true,
+            },
           },
-        },
-        {
-          key: 17,
-          value: {
-            name: "multi-path-payments",
-            is_required: false,
-            is_known: true,
+          {
+            key: 17,
+            value: {
+              name: "multi-path-payments",
+              is_required: false,
+              is_known: true,
+            },
           },
-        },
-      ],
-    })
-  );
+        ],
+      })
+    );
+  }, 1500);
 });
 
 app.post("/api/v1/lightning/send-payment", (req, res) => {
@@ -373,9 +375,12 @@ app.post("/api/v1/lightning/unlock-wallet", (req, res) => {
   console.info(
     `call to /api/v1/lightning/unlock-wallet with type ${req.body.password}`
   );
-  if (req.body.password === "password") {
-    walletLocked = false;
-    return res.status(200).send(true);
-  }
-  return res.status(401).send();
+  // simulate loading time
+  setTimeout(() => {
+    if (req.body.password === "password") {
+      walletLocked = false;
+      return res.status(200).send(true);
+    }
+    return res.status(401).send();
+  }, 1500);
 });

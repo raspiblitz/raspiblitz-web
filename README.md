@@ -133,6 +133,9 @@ Please do not commit the above changes.
   - [ISC License](https://github.com/zpao/qrcode.react/blob/master/LICENSE)
 - CSS Loading Spinner from [loading.io](https://loading.io/css/)
   - [CC0 License](https://loading.io/css/)
+- ButtonSpinner from [SpinKit](https://github.com/tobiasahlin/SpinKit)
+  - [MIT License](https://github.com/tobiasahlin/SpinKit/blob/master/LICENSE)
+
 
 ### App logos
 

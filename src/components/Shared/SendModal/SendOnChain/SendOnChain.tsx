@@ -8,6 +8,17 @@ import { convertSatToBtc, convertToString } from "../../../../util/format";
 import AmountInput from "../../AmountInput/AmountInput";
 import InputField from "../../InputField/InputField";
 
+export type Props = {
+  address: string;
+  amount: number;
+  balance: number;
+  comment: string;
+  fee: string;
+  onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeComment: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFee: (event: ChangeEvent<HTMLInputElement>) => void;
+  onConfirm: () => void;
+};
 interface IFormInputs {
   addressInput: string;
   feeInput: number;
@@ -15,25 +26,24 @@ interface IFormInputs {
   commentInput: string;
 }
 
-const SendOnChain: FC<SendOnChainProps> = (props) => {
+const SendOnChain: FC<Props> = ({
+  amount,
+  address,
+  balance,
+  comment,
+  fee,
+  onChangeAddress,
+  onChangeComment,
+  onChangeFee,
+  onConfirm,
+}) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
 
-  const {
-    address,
-    balance,
-    comment,
-    fee,
-    onChangeAddress,
-    onChangeComment,
-    onChangeFee,
-    onConfirm,
-  } = props;
-
-  const [amount, setAmount] = useState(props.amount);
+  const [confirmAmount, setConfirmAmount] = useState(amount);
 
   const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
+    setConfirmAmount(+event.target.value);
   };
 
   const balanceDecorated =
@@ -80,7 +90,7 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
 
         <div className="w-full py-1 md:w-10/12">
           <AmountInput
-            amount={amount}
+            amount={confirmAmount}
             errorMessage={errors?.amountInput}
             register={register("amountInput", {
               required: t("forms.validation.chainAmount.required") as string,
@@ -138,15 +148,3 @@ const SendOnChain: FC<SendOnChainProps> = (props) => {
 };
 
 export default SendOnChain;
-
-export interface SendOnChainProps {
-  address: string;
-  amount: number;
-  balance: number;
-  comment: string;
-  fee: string;
-  onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeComment: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFee: (event: ChangeEvent<HTMLInputElement>) => void;
-  onConfirm: () => void;
-}

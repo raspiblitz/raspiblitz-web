@@ -1,11 +1,11 @@
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
-import type { SendOnChainProps } from "./SendOnChain";
+import type { Props } from "./SendOnChain";
 import SendOnChain from "./SendOnChain";
 
-const basicProps: SendOnChainProps = {
+const basicProps: Props = {
   address: "",
   amount: 12,
   balance: 100,
@@ -70,20 +70,16 @@ describe("SendOnChain", () => {
       "wallet.address"
     ) as HTMLInputElement;
 
-    await act(async () => {
-      userEvent.clear(addressInput);
-      userEvent.type(addressInput, "abc123456789");
-    });
+    userEvent.clear(addressInput);
+    userEvent.type(addressInput, "abc123456789");
 
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
       screen.getByText("forms.validation.chainAddress.patternMismatch")
     ).toBeInTheDocument();
 
-    await act(async () => {
-      userEvent.clear(addressInput);
-      userEvent.type(addressInput, "bc1");
-    });
+    userEvent.clear(addressInput);
+    userEvent.type(addressInput, "bc1");
 
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
@@ -98,16 +94,14 @@ describe("SendOnChain", () => {
       "wallet.amount"
     ) as HTMLInputElement;
 
-    await act(async () => {
-      userEvent.clear(amountInput);
-      userEvent.type(amountInput, "999");
-    });
+    userEvent.clear(amountInput);
+    userEvent.type(amountInput, "999");
 
-    userEvent.click(screen.getByText("wallet.confirm"));
+    userEvent.click(await screen.findByText("wallet.confirm"));
 
     await waitFor(() => expect(amountInput).toHaveClass("input-error"));
     expect(
-      screen.getByText("forms.validation.chainAmount.max")
+      await screen.findByText("forms.validation.chainAmount.max")
     ).toBeInTheDocument();
   });
 
@@ -118,11 +112,9 @@ describe("SendOnChain", () => {
       "wallet.amount"
     ) as HTMLInputElement;
 
-    await act(async () => {
-      userEvent.clear(amountInput);
-      userEvent.type(amountInput, "0");
-      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
-    });
+    userEvent.clear(amountInput);
+    userEvent.type(amountInput, "0");
+    await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
     expect(
       screen.getByText("forms.validation.chainAmount.required")
@@ -137,15 +129,11 @@ describe("SendOnChain", () => {
     ) as HTMLInputElement;
     const feeInput = screen.getByLabelText("tx.fee") as HTMLInputElement;
 
-    await act(async () => {
-      userEvent.type(addressInput, "bc1123456789");
-      await waitFor(() => expect(addressInput).not.toHaveClass("input-error"));
-    });
+    userEvent.type(addressInput, "bc1123456789");
+    await waitFor(() => expect(addressInput).not.toHaveClass("input-error"));
 
-    await act(async () => {
-      userEvent.type(feeInput, "1");
-      await waitFor(() => expect(feeInput).not.toHaveClass("input-error"));
-    });
+    userEvent.type(feeInput, "1");
+    await waitFor(() => expect(feeInput).not.toHaveClass("input-error"));
 
     expect(
       screen.getByRole("button", { name: "wallet.confirm" })

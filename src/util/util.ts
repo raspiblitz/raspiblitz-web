@@ -71,3 +71,11 @@ export function parseJwt(token: string): TokenPayload {
 
   return JSON.parse(jsonPayload);
 }
+
+export function enableGutter(): void {
+  document.documentElement.classList.add("scrollbar-stable");
+}
+
+export function disableGutter(): void {
+  document.documentElement.classList.remove("scrollbar-stable");
+}

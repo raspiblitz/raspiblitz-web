@@ -32,12 +32,15 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const [comment, setComment] = useState("");
   const [timestamp, setTimestamp] = useState(0);
   const [expiry, setExpiry] = useState(0);
+  const [loading, setIsLoading] = useState(false);
 
   // TODO: handle error
   const confirmLnHandler = async () => {
+    setIsLoading(true);
     const resp = await instance.get(
       "/lightning/decode-pay-req?pay_req=" + invoice
     );
+    setIsLoading(false);
     setAmount(resp.data.num_satoshis);
     setComment(resp.data.description);
     setTimestamp(resp.data.timestamp);
@@ -79,6 +82,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
       ? convertToString(unit, convertMSatToBtc(lnBalance))
       : convertToString(unit, convertMSatToSat(lnBalance));
 
+  // confirm send
   if (confirm) {
     const addr = lnTransaction ? invoice : address;
     return (
@@ -99,33 +103,49 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     );
   }
 
-  return createPortal(
-    <ModalDialog close={() => onClose(false)}>
-      <div className="my-3">
-        <SwitchTxType onTxTypeChange={changeTransactionHandler} />
-      </div>
+  // Send LN
+  if (lnTransaction) {
+    return createPortal(
+      <ModalDialog close={() => onClose(false)} closeable={!loading}>
+        <div className="my-3">
+          <SwitchTxType
+            onTxTypeChange={changeTransactionHandler}
+            disabled={loading}
+          />
+        </div>
 
-      {lnTransaction && (
         <SendLn
+          loading={loading}
           onChangeInvoice={changeInvoiceHandler}
           onConfirm={confirmLnHandler}
           balanceDecorated={convertedLnBalance}
         />
-      )}
+      </ModalDialog>,
+      MODAL_ROOT
+    );
+  }
 
-      {!lnTransaction && (
-        <SendOnChain
-          address={address}
-          amount={amount}
-          balance={onchainBalance}
-          comment={comment}
-          fee={fee}
-          onChangeAddress={changeAddressHandler}
-          onChangeComment={changeCommentHandler}
-          onChangeFee={changeFeeHandler}
-          onConfirm={confirmOnChainHandler}
+  // Send On-Chain
+  return createPortal(
+    <ModalDialog close={() => onClose(false)}>
+      <div className="my-3">
+        <SwitchTxType
+          onTxTypeChange={changeTransactionHandler}
+          disabled={loading}
         />
-      )}
+      </div>
+
+      <SendOnChain
+        address={address}
+        amount={amount}
+        balance={onchainBalance}
+        comment={comment}
+        fee={fee}
+        onChangeAddress={changeAddressHandler}
+        onChangeComment={changeCommentHandler}
+        onChangeFee={changeFeeHandler}
+        onConfirm={confirmOnChainHandler}
+      />
     </ModalDialog>,
     MODAL_ROOT
   );

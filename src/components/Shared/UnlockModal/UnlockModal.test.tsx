@@ -29,12 +29,12 @@ describe("UnlockModal", () => {
 
     const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
 
-    const button = screen.getByText("wallet.unlock");
+    const button = screen.getByRole("button");
 
     expect(button).toBeDisabled();
 
     userEvent.type(input, "1234");
-    expect(await screen.findByText("wallet.unlock")).toBeEnabled();
+    expect(await screen.findByRole("button")).toBeEnabled();
   });
 
   test("should show text on wrong password", async () => {
