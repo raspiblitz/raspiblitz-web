@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const ActionBox: FC<ActionBoxProps> = (props) => {
   return (
-    <div className="box-border w-full px-5 pt-5 transition-colors dark:text-white lg:w-1/3">
+    <div className="box-border w-full px-5 pt-5 transition-colors dark:text-white lg:w-1/2">
       <div className="relative rounded bg-white p-5 shadow-xl dark:bg-gray-800">
         <div className="flex justify-between">
           <div className="flex w-1/2 items-center font-bold xl:w-2/3">
