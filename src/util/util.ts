@@ -79,3 +79,11 @@ export function enableGutter(): void {
 export function disableGutter(): void {
   document.documentElement.classList.remove("scrollbar-stable");
 }
+
+export function setWindowAlias(nodeAlias: string | null): void {
+  if (!nodeAlias) {
+    document.title = "RaspiBlitz Web";
+  } else {
+    document.title = `RaspiBlitz - ${nodeAlias}`;
+  }
+}

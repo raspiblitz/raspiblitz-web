@@ -15,6 +15,7 @@ import {
   parseJwt,
   retrieveSettings,
   saveSettings,
+  setWindowAlias,
 } from "../util/util";
 import { SSEContext } from "./sse-context";
 
@@ -81,6 +82,7 @@ const AppContextProvider: FC = ({ children }) => {
     }
     setIsLoggedIn(false);
     disableGutter();
+    setWindowAlias(null);
     navigate("/");
   }, [evtSource, setEvtSource, navigate]);
 

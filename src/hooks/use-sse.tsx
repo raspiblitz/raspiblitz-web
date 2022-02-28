@@ -6,6 +6,7 @@ import { LnStatus } from "../models/ln-status";
 import { SystemInfo } from "../models/system-info";
 import { WalletBalance } from "../models/wallet-balance";
 import { SSEContext, SSE_URL } from "../store/sse-context";
+import { setWindowAlias } from "../util/util";
 
 function useSSE() {
   const sseCtx = useContext(SSEContext);
@@ -61,9 +62,11 @@ function useSSE() {
     };
 
     const setSystemInfo = (event: Event) => {
+      const message = JSON.parse((event as MessageEvent<string>).data);
+      if (message.alias) {
+        setWindowAlias(message.alias);
+      }
       sseCtx.setSystemInfo((prev: SystemInfo) => {
-        const message = JSON.parse((event as MessageEvent<string>).data);
-
         return {
           ...prev,
           ...message,
