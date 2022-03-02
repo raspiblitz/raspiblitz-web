@@ -6,12 +6,12 @@ import { AppCard } from "./AppCard";
 const app = {
   id: "123",
   description: "Hi",
-  installed: false,
   name: "d",
 };
 
 const basicProps = {
-  installing: false,
+  installingAppId: null,
+  app: app,
   onInstall: () => {},
   onOpenDetails: () => {},
 };
@@ -20,7 +20,7 @@ describe("AppCard", () => {
   test("display install button if installed is false", async () => {
     render(
       <I18nextProvider i18n={i18n}>
-        <AppCard {...basicProps} app={app} />
+        <AppCard {...basicProps} installed={false} />
       </I18nextProvider>
     );
     expect(await screen.findByText("apps.install")).toBeDefined();
@@ -29,10 +29,7 @@ describe("AppCard", () => {
   test("display open button if installed & address is available", async () => {
     render(
       <I18nextProvider i18n={i18n}>
-        <AppCard
-          {...basicProps}
-          app={{ ...app, installed: true, address: "abc" }}
-        />
+        <AppCard {...basicProps} address={"addr"} installed={true} />
       </I18nextProvider>
     );
     expect(await screen.findByText("apps.open")).toBeDefined();
@@ -41,7 +38,7 @@ describe("AppCard", () => {
   test("display no_page button if installed & address is not available", async () => {
     render(
       <I18nextProvider i18n={i18n}>
-        <AppCard {...basicProps} app={{ ...app, installed: true }} />
+        <AppCard {...basicProps} installed={true} />
       </I18nextProvider>
     );
     expect(await screen.findByText("apps.no_page")).toBeDefined();

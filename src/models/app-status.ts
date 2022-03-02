@@ -1,5 +1,6 @@
 export interface AppStatus {
   id: string;
-  name: string;
   status: "online" | "offline";
+  address?: string;
+  hiddenService?: string;
 }

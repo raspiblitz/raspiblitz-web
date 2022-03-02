@@ -10,14 +10,15 @@ import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 export type Props = {
   app: App;
+  installed: boolean;
   onClose: () => void;
 };
 
-export const AppInfo: FC<Props> = ({ app, onClose }) => {
+export const AppInfo: FC<Props> = ({ app, installed, onClose }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [imgs, setImgs] = useState<string[]>([]);
-  const { id, name, installed, description } = app;
+  const { id, name, description } = app;
   // TODO: Change to dynamic info
   const { version, repository, author } = mockInfo;
 

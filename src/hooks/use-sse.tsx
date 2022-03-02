@@ -56,7 +56,7 @@ function useSSE() {
     };
 
     const setInstall = (event: Event) => {
-      sseCtx.setIsInstalling(
+      sseCtx.setInstallingAppId(
         JSON.parse((event as MessageEvent<string>).data).id
       );
     };
@@ -141,7 +141,7 @@ function useSSE() {
     appStatus: sseCtx.appStatus,
     transactions: sseCtx.transactions,
     availableApps: sseCtx.availableApps,
-    isInstalling: sseCtx.isInstalling,
+    installingAppId: sseCtx.installingAppId,
   };
 }
 

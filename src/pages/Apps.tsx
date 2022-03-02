@@ -1,26 +1,34 @@
-import { useEffect, useState } from "react";
 import type { FC } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { availableApps } from "../apps/availableApps";
 import AppCard from "../components/Apps/AppCard/AppCard";
 import AppInfo from "../components/Apps/AppInfo/AppInfo";
 import useSSE from "../hooks/use-sse";
 import { App } from "../models/app.model";
-import availableApps from "../apps/apps.json";
 import { instance } from "../util/interceptor";
 import { enableGutter } from "../util/util";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { isInstalling } = useSSE();
+  const { appStatus, installingAppId } = useSSE();
   const [showDetails, setShowDetails] = useState(false);
   const [app, setApp] = useState<App | null>(null);
+  const appStatusIds = appStatus.map((appStatus) => appStatus.id);
+
+  const installedApps = Array.from(availableApps.keys()).filter((appId) =>
+    appStatusIds.includes(appId)
+  );
+  const notInstalledApps = Array.from(availableApps.keys()).filter(
+    (appId) => !appStatusIds.includes(appId)
+  );
 
   useEffect(() => {
     enableGutter();
   }, []);
 
   const installHandler = (id: string) => {
-    instance.post("install", { id }).catch(() => {
+    instance.post(`apps/install/${id}`).catch(() => {
       // TODO: handle error & show notification on install if endpoint exists in blitz_api
     });
   };
@@ -29,13 +37,20 @@ export const Apps: FC = () => {
     setApp(app);
     setShowDetails(true);
   };
+
   const closeDetailsHandler = () => {
     setApp(null);
     setShowDetails(false);
   };
 
-  if (showDetails) {
-    return <AppInfo app={app!} onClose={closeDetailsHandler} />;
+  if (showDetails && app) {
+    return (
+      <AppInfo
+        app={app}
+        installed={appStatusIds.includes(app.id)}
+        onClose={closeDetailsHandler}
+      />
+    );
   }
 
   return (
@@ -44,40 +59,43 @@ export const Apps: FC = () => {
         <h2 className="w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
           {t("apps.installed")}
         </h2>
-        {(availableApps as App[])
-          .filter((app: App) => app.installed)
-          .map((app: App, index) => {
-            return (
-              <article className="w-full p-3 lg:w-1/3" key={index}>
-                <AppCard
-                  app={app}
-                  installing={false}
-                  onInstall={() => installHandler(app.id)}
-                  onOpenDetails={openDetailsHandler}
-                />
-              </article>
-            );
-          })}
+        {/* TODO: make address / hiddenService faster */}
+        {installedApps.map((appId: string) => {
+          return (
+            <article className="w-full p-3 lg:w-1/3" key={appId}>
+              <AppCard
+                app={availableApps.get(appId)!}
+                installed={true}
+                installingAppId={null}
+                onInstall={() => installHandler(appId)}
+                onOpenDetails={openDetailsHandler}
+                address={appStatus.find((a) => a.id === appId)?.address}
+                hiddenService={
+                  appStatus.find((a) => a.id === appId)?.hiddenService
+                }
+              />
+            </article>
+          );
+        })}
       </section>
 
       <section className="flex h-full flex-1 flex-wrap">
         <h2 className="block w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200 ">
           {t("apps.available")}
         </h2>
-        {(availableApps as App[])
-          .filter((app: App) => !app.installed)
-          .map((app: App) => {
-            return (
-              <article className="w-full p-3 lg:w-1/3" key={app.id}>
-                <AppCard
-                  app={app}
-                  installing={!!isInstalling}
-                  onInstall={() => installHandler(app.id)}
-                  onOpenDetails={openDetailsHandler}
-                />
-              </article>
-            );
-          })}
+        {notInstalledApps.map((appId: string) => {
+          return (
+            <article className="w-full p-3 lg:w-1/3" key={appId}>
+              <AppCard
+                app={availableApps.get(appId)!}
+                installed={false}
+                installingAppId={installingAppId}
+                onInstall={() => installHandler(appId)}
+                onOpenDetails={openDetailsHandler}
+              />
+            </article>
+          );
+        })}
       </section>
     </main>
   );
