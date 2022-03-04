@@ -141,18 +141,18 @@ app.get("/api/v1/apps", (req, res) => {
   res.status(200).send();
 });
 
-app.post("/api/v1/install", (req, res) => {
-  console.info("call to /api/v1/install for app", req.body.id);
+app.post("/api/v1/apps/install/:id", (req, res) => {
+  console.info("call to /api/v1/apps/install for app", req.params.id);
   // send information that btc-pay is currently installing
-  util.sendSSE("install", { id: "btc-pay" });
+  util.sendSSE("install", { id: "mempool" });
   setTimeout(() => {
     apps.installApp();
   }, 5000);
   res.status(200).send();
 });
 
-app.post("/api/v1/uninstall", (req, res) => {
-  console.info("call to /api/v1/uninstall for app", req.body.id);
+app.post("/api/v1/apps/uninstall/:id", (req, res) => {
+  console.info("call to /api/v1/apps/uninstall for app", req.params.id);
   // TODO
   res.status(200).send();
 });

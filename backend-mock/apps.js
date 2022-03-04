@@ -2,13 +2,34 @@ const util = require("./util");
 
 const installApp = () => {
   console.info("call to installApp");
-  util.sendSSE("apps", [
+  util.sendSSE("installed_app_status", [
+    {
+      id: "specter",
+      status: "online",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
     {
       id: "btc-pay",
-      name: "BTCPay Server",
-      description:
-        "Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor",
-      installed: true,
+      status: "offline",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
+    {
+      id: "rtl",
+      status: "online",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
+    {
+      id: "lnbits",
+      status: "online",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
+    {
+      id: "mempool",
+      status: "online",
       address: "https://192.168.0.599:4081/",
       hiddenService: "blablablabla.onion",
     },

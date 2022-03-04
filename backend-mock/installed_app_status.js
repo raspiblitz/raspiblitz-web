@@ -3,16 +3,40 @@ const util = require("./util");
 const appStatus = () => {
   console.info("sending installed_app_status");
   util.sendSSE("installed_app_status", [
-    { id: "specter", name: "Specter Desktop", status: "online" },
-    { id: "sphinx", name: "Sphinx Chat", status: "online" },
-    { id: "btc-pay", name: "BTCPay Server", status: "offline" },
-    { id: "rtl", name: "Ride the Lightning", status: "online" },
-    { id: "bos", name: "Balance of Satoshis", status: "offline" },
+    {
+      id: "specter",
+      status: "online",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
+    {
+      id: "btc-pay",
+      status: "offline",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
+    {
+      id: "rtl",
+      status: "online",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
+    {
+      id: "lnbits",
+      status: "online",
+      address: "http://192.168.0.1",
+      hiddenService: "blablablabla.onion",
+    },
   ]);
 
   setTimeout(() => {
     util.sendSSE("installed_app_status", [
-      { id: "specter", name: "Specter Desktop", status: "offline" },
+      {
+        id: "specter",
+        status: "offline",
+        address: "http://192.168.0.1",
+        hiddenService: "blablablabla.onion",
+      },
     ]);
   }, 5000);
 };
