@@ -52,7 +52,8 @@
       "install": "Installer",
       "open": "Åpne",
       "available": "Tilgjengelige programmer",
-      "installed": "Installert"
+      "installed": "Installert",
+      "installing": "Installerer …"
     },
     "tx": {
       "mempool": "Vis i mempool",
@@ -115,7 +116,24 @@
       "validation": {
         "lnInvoice": {
           "patternMismatch": "Feil faktura format",
-          "required": "Vennligst fyll inn Lyn Faktura"
+          "required": "Vennligst fyll inn Lyn Faktura",
+          "expired": "Utløpt faktura",
+          "max": "Saldoen din strekker ikke til å betale denne fakturaen"
+        },
+        "unlock": {
+          "pass_c": "Passord C",
+          "required": "Skriv inn passord C"
+        },
+        "chainAddress": {
+          "patternMismatch": "Feil adresseformat",
+          "required": "Skriv inn en bitcoin-adresse"
+        },
+        "chainFee": {
+          "required": "Skriv inn et gebyrbeløp"
+        },
+        "chainAmount": {
+          "required": "Skriv inn beløp",
+          "max": "Kontoen din strekker ikke til å sende dette beløpet"
         }
       }
     }
