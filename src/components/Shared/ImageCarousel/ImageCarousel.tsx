@@ -60,15 +60,15 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
       <div className="absolute bottom-0 left-0 right-0 mx-5 flex h-full justify-between">
         <button
           onClick={back}
-          className="z-10 flex w-20 items-center justify-center opacity-30 hover:opacity-100"
+          className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
         >
-          <ChevronLeft className="h-8 w-8 text-white" />
+          <ChevronLeft className="h-8 w-8 text-gray-700" />
         </button>
         <button
           onClick={next}
-          className="z-10 flex w-20 items-center justify-center opacity-30 hover:opacity-100"
+          className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
         >
-          <ChevronLeft className="h-8 w-8 rotate-180 text-white" />
+          <ChevronLeft className="h-8 w-8 rotate-180 text-gray-700" />
         </button>
       </div>
     </div>
