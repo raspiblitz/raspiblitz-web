@@ -26,7 +26,7 @@ export const AppCard: FC<Props> = ({
   address,
   hiddenService,
 }) => {
-  const { id, description, name } = app;
+  const { id, name } = app;
   const { t } = useTranslation();
 
   return (
@@ -40,7 +40,7 @@ export const AppCard: FC<Props> = ({
         <div className="flex w-3/4 flex-col items-start justify-center text-xl">
           <div>{name}</div>
           <div className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
-            {description}
+            {t(`appInfo.${id}.shortDescription`)}
           </div>
         </div>
       </div>
@@ -79,7 +79,6 @@ export const AppCard: FC<Props> = ({
             disabled
             loading={true}
             className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
-            onClick={() => onInstall(id)}
           >
             {t("apps.installing")}
           </ButtonWithSpinner>
