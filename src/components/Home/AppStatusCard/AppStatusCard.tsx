@@ -1,11 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { availableApps } from "../../../apps/availableApps";
 import { AppStatus } from "../../../models/app-status";
 
-export const AppStatusCard: FC<{ app: AppStatus }> = (props) => {
-  const { id, name, status } = props.app;
+export const AppStatusCard: FC<{ app: AppStatus }> = ({ app }) => {
+  const { id, status } = app;
   const { t } = useTranslation();
   const [image, setImage] = useState("");
+  const appName = availableApps.get(id)?.name;
 
   useEffect(() => {
     import(`../../../assets/apps/logos/${id}.png`)
@@ -34,7 +36,7 @@ export const AppStatusCard: FC<{ app: AppStatus }> = (props) => {
           </div>
           {/* Content */}
           <div className="flex w-3/4 flex-col items-start justify-center pl-5 text-xl">
-            <h4 className="dark:text-white">{name}</h4>
+            <h4 className="dark:text-white">{appName}</h4>
             <p className={`pt-3 ${statusColor}`}>{statusText}</p>
           </div>
         </div>

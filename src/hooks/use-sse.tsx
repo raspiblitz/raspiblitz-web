@@ -33,15 +33,18 @@ function useSSE() {
 
     const setAppStatus = (event: Event) => {
       sseCtx.setAppStatus((prev: AppStatus[]) => {
-        const status = JSON.parse((event as MessageEvent<string>).data);
-
+        const status: AppStatus[] = JSON.parse(
+          (event as MessageEvent<string>).data
+        );
         if (prev.length === 0) {
           return status;
         } else {
-          return prev.map(
-            (old: AppStatus) =>
-              status.find((newApp: AppStatus) => old.id === newApp.id) || old
-          );
+          const currentIds = status.map((item) => item.id);
+
+          // remove items which get updated and concat arrays
+          return prev
+            .filter((item) => !currentIds.includes(item.id))
+            .concat(status);
         }
       });
     };
@@ -56,7 +59,7 @@ function useSSE() {
     };
 
     const setInstall = (event: Event) => {
-      sseCtx.setIsInstalling(
+      sseCtx.setInstallingAppId(
         JSON.parse((event as MessageEvent<string>).data).id
       );
     };
@@ -141,7 +144,7 @@ function useSSE() {
     appStatus: sseCtx.appStatus,
     transactions: sseCtx.transactions,
     availableApps: sseCtx.availableApps,
-    isInstalling: sseCtx.isInstalling,
+    installingAppId: sseCtx.installingAppId,
   };
 }
 

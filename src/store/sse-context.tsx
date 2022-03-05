@@ -25,8 +25,8 @@ interface SSEContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  isInstalling: string | null;
-  setIsInstalling: Dispatch<SetStateAction<string | null>>;
+  installingAppId: string | null;
+  setInstallingAppId: Dispatch<SetStateAction<string | null>>;
 }
 
 export const SSEContext = createContext<SSEContextType>({
@@ -46,8 +46,8 @@ export const SSEContext = createContext<SSEContextType>({
   setAvailableApps: () => {},
   transactions: [],
   setTransactions: () => {},
-  isInstalling: null,
-  setIsInstalling: () => {},
+  installingAppId: null,
+  setInstallingAppId: () => {},
 });
 
 export const SSE_URL = window.location.hostname.includes("localhost")
@@ -105,7 +105,7 @@ const SSEContextProvider: FC = (props) => {
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [isInstalling, setIsInstalling] = useState<string | null>(null);
+  const [installingAppId, setInstallingAppId] = useState<string | null>(null);
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -124,8 +124,8 @@ const SSEContextProvider: FC = (props) => {
     setAvailableApps,
     transactions,
     setTransactions,
-    isInstalling,
-    setIsInstalling,
+    installingAppId,
+    setInstallingAppId,
   };
 
   return (

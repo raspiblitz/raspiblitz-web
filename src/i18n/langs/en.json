@@ -84,6 +84,7 @@
     },
     "apps": {
       "installed": "Installed",
+      "installing": "Installing",
       "available": "Available Apps",
       "open": "Open",
       "install": "Install",
