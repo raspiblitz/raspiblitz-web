@@ -1,26 +1,37 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import mockInfo from "../../../apps/mock-info.json";
 import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
+import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
+import { ReactComponent as TrashIcon } from "../../../assets/trash.svg";
 import AppIcon from "../../../container/AppIcon/AppIcon";
 import { App } from "../../../models/app.model";
-import { instance } from "../../../util/interceptor";
+import { availableApps } from "../../../util/availableApps";
+import ButtonWithSpinner from "../../Shared/ButtonWithSpinner/ButtonWithSpinner";
 import ImageCarousel from "../../Shared/ImageCarousel/ImageCarousel";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 export type Props = {
   app: App;
+  installingAppId: string | null;
   installed: boolean;
+  onInstall: () => void;
+  onUninstall: () => void;
   onClose: () => void;
 };
 
-export const AppInfo: FC<Props> = ({ app, installed, onClose }) => {
+export const AppInfo: FC<Props> = ({
+  app,
+  installingAppId,
+  installed,
+  onInstall,
+  onUninstall,
+  onClose,
+}) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [imgs, setImgs] = useState<string[]>([]);
-  const { id, name, description } = app;
-  // TODO: Change to dynamic info
-  const { version, repository, author } = mockInfo;
+  const { id, name } = app;
+  const { author, version, repository } = availableApps.get(id)!;
 
   useEffect(() => {
     setIsLoading(true);
@@ -56,16 +67,6 @@ export const AppInfo: FC<Props> = ({ app, installed, onClose }) => {
     );
   }
 
-  const installHandler = () => {
-    // TODO: error handling
-    instance.post("install", { id }).catch(() => {});
-  };
-
-  const uninstallHandler = () => {
-    // TODO: error handling
-    instance.post("uninstall", { id }).catch(() => {});
-  };
-
   return (
     <main className="page-container content-container w-full bg-gray-100 dark:bg-gray-700 dark:text-white">
       {/* Back Button */}
@@ -80,23 +81,36 @@ export const AppInfo: FC<Props> = ({ app, installed, onClose }) => {
       </section>
 
       {/* Image box with title */}
-      <section className="mb-5 flex w-full items-center px-10">
+      <section className="mb-5 flex w-full flex-wrap items-center justify-center">
         <AppIcon appId={id} />
         <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
-        {!installed && (
+        {installingAppId !== id && !installed && (
           <button
-            className={`rounded bg-green-400 p-2`}
-            onClick={installHandler}
+            disabled={!!installingAppId}
+            className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+            onClick={onInstall}
           >
-            {t("apps.install")}
+            <PlusIcon />
+            &nbsp;{t("apps.install")}
           </button>
+        )}
+        {installingAppId === id && (
+          <ButtonWithSpinner
+            disabled
+            loading={true}
+            className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+          >
+            {t("apps.installing")}
+          </ButtonWithSpinner>
         )}
         {installed && (
           <button
-            className={`rounded bg-red-500 p-2 text-white`}
-            onClick={uninstallHandler}
+            disabled={!!installingAppId}
+            className={`flex rounded bg-red-500 p-2 text-white shadow-md disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white`}
+            onClick={onUninstall}
           >
-            {t("apps.uninstall")}
+            <TrashIcon />
+            &nbsp;{t("apps.uninstall")}
           </button>
         )}
       </section>
@@ -114,7 +128,7 @@ export const AppInfo: FC<Props> = ({ app, installed, onClose }) => {
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
             {t("apps.about")}
           </h4>
-          <p>{description}</p>
+          <p>{t(`appInfo.${id}.about`)}</p>
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
             {t("apps.author")}
           </h4>

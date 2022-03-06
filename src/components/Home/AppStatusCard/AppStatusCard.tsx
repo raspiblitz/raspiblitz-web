@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { availableApps } from "../../../apps/availableApps";
+import { availableApps } from "../../../util/availableApps";
 import { AppStatus } from "../../../models/app-status";
 
 export const AppStatusCard: FC<{ app: AppStatus }> = ({ app }) => {

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { availableApps } from "../apps/availableApps";
+import { availableApps } from "../util/availableApps";
 import AppCard from "../components/Apps/AppCard/AppCard";
 import AppInfo from "../components/Apps/AppInfo/AppInfo";
 import useSSE from "../hooks/use-sse";
@@ -33,6 +33,12 @@ export const Apps: FC = () => {
     });
   };
 
+  const uninstallHandler = (id: string) => {
+    instance.post(`apps/uninstall/${id}`).catch(() => {
+      // TODO: handle error & show notification on install if endpoint exists in blitz_api
+    });
+  };
+
   const openDetailsHandler = (app: App) => {
     setApp(app);
     setShowDetails(true);
@@ -47,6 +53,9 @@ export const Apps: FC = () => {
     return (
       <AppInfo
         app={app}
+        installingAppId={installingAppId}
+        onInstall={() => installHandler(app.id)}
+        onUninstall={() => uninstallHandler(app.id)}
         installed={appStatusIds.includes(app.id)}
         onClose={closeDetailsHandler}
       />
