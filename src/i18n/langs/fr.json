@@ -94,7 +94,8 @@
       "author": "Auteur",
       "source": "Code source",
       "offline": "hors ligne",
-      "online": "en ligne"
+      "online": "en ligne",
+      "installing": "Installation"
     },
     "settings": {
       "change_pw": "Changer le mot de passe",
@@ -112,7 +113,9 @@
       "validation": {
         "lnInvoice": {
           "required": "Veuillez saisir une facture Lightning",
-          "patternMismatch": "Format de facture incorrect"
+          "patternMismatch": "Format de facture incorrect",
+          "max": "Votre solde insuffisant pour payer cette facture",
+          "expired": "Facture expirée"
         },
         "chainAddress": {
           "patternMismatch": "Format d'adresse incorrect",
@@ -132,6 +135,15 @@
       },
       "hint": {
         "invoiceAmountZero": "Le montant de la facture est nul"
+      }
+    },
+    "appInfo": {
+      "specter": {
+        "shortDescription": "Une interface graphique pour Bitcoin Core optimisée pour fonctionner avec des portefeuilles matériels"
+      },
+      "rtl": {
+        "about": "RTL est une interface utilisateur web complète, indépendante de l'appareil, qui permet de gérer les opérations des nœuds Lightning. RTL est disponible sur les implémentations LND, C-Lightning et Eclair.",
+        "shortDescription": "Une application web complète pour LND, C-Lightning et Eclair"
       }
     }
   }
