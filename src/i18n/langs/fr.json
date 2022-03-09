@@ -94,7 +94,8 @@
       "author": "Auteur",
       "source": "Code source",
       "offline": "hors ligne",
-      "online": "en ligne"
+      "online": "en ligne",
+      "installing": "Installation"
     },
     "settings": {
       "change_pw": "Changer le mot de passe",
@@ -112,7 +113,9 @@
       "validation": {
         "lnInvoice": {
           "required": "Veuillez saisir une facture Lightning",
-          "patternMismatch": "Format de facture incorrect"
+          "patternMismatch": "Format de facture incorrect",
+          "max": "Votre solde insuffisant pour payer cette facture",
+          "expired": "Facture expirée"
         },
         "chainAddress": {
           "patternMismatch": "Format d'adresse incorrect",
@@ -132,6 +135,36 @@
       },
       "hint": {
         "invoiceAmountZero": "Le montant de la facture est nul"
+      }
+    },
+    "appInfo": {
+      "specter": {
+        "shortDescription": "Une interface graphique pour Bitcoin Core optimisée pour fonctionner avec des portefeuilles matériels",
+        "about": "Bitcoin Core possède une interface de ligne de commande très puissante et un merveilleux daemon. En utilisant PSBT et HWI, il peut également fonctionner avec des portefeuilles matériels. Il en va de même pour les configurations multisignatures. L'objectif de ce projet est de créer une interface graphique pratique et conviviale autour de Bitcoin Core, en mettant l'accent sur la configuration multisignature avec des portefeuilles matériels et des appareils en air gap."
+      },
+      "rtl": {
+        "about": "RTL est une interface utilisateur web complète, indépendante de l'appareil, qui permet de gérer les opérations des nœuds Lightning. RTL est disponible sur les implémentations LND, C-Lightning et Eclair.",
+        "shortDescription": "Une application web complète pour LND, C-Lightning et Eclair"
+      },
+      "btc-pay": {
+        "shortDescription": "Acceptez les paiements Bitcoin. Processeur de paiement Bitcoin gratuit, open-source et auto-hébergé.",
+        "about": "BTCPay Server est un processeur de paiement Bitcoin gratuit et open-source qui vous permet d'accepter des bitcoins sans frais ni intermédiaires."
+      },
+      "lnbits": {
+        "shortDescription": "Système de portefeuille/comptes Lightning-network gratuit et open source",
+        "about": "LNbits est un serveur Python très simple qui se trouve au-dessus de n'importe quelle source de financement et peut être utilisé comme système de comptes pour atténuer le risque d'exposer les applications à votre solde complet, via des clés API uniques pour chaque portefeuille."
+      },
+      "btc-rpc-explorer": {
+        "shortDescription": "Explorateur Bitcoin RPC",
+        "about": "Il s'agit d'un explorateur auto-hébergé pour la blockchain Bitcoin, piloté par des appels RPC vers votre propre nœud Bitcoin. Il est facile à exécuter et peut être connecté à d'autres outils (comme les serveurs Electrum) pour obtenir un explorateur complet."
+      },
+      "mempool": {
+        "shortDescription": "Un explorateur open-source développé pour la communauté Bitcoin",
+        "about": " Un explorateur open source développé pour la communauté Bitcoin, axé sur le marché émergent des frais de transaction pour faciliter notre transition vers un écosystème multicouche."
+      },
+      "thunderhub": {
+        "shortDescription": "LND Lightning Node Manager dans votre navigateur",
+        "about": "ThunderHub est un gestionnaire de nœuds LND open source où vous pouvez gérer et surveiller votre nœud sur n'importe quel appareil ou navigateur. Il vous permet de prendre le contrôle du réseau Lightning avec une UX simple et intuitive et la technologie la plus récente."
       }
     }
   }
