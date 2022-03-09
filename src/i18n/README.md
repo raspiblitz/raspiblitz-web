@@ -6,8 +6,11 @@ Credits:
 
 Thank you for providing translations! 🙏
 
-- Norwegian Bokmål: [@comradekingu](https://github.com/comradekingu)
+- Norwegian Bokmål: [@comradekingu](https://github.com/comradekingu) [moskusminer](https://github.com/moskusminer)
 - French: J. Lavoie, [@bitpaint](https://github.com/bitpaint)
 - German: J.Lavoie, Me
-- Portuguese (Brazil) [@Nom4d3](https://github.com/Nom4d3) [@bitcoinheiro](https://github.com/bitcoinheiro)
+- Portuguese (Brazil) [@Nom4d3](https://github.com/Nom4d3) [@bitcoinheiro](https://github.com/bitcoinheiro) [mbombonato](https://github.com/mbombonato)
 - Hungarian [@karozagorus](https://github.com/karozagorus)
+- Italian: [GiovanniZotta](https://github.com/GiovanniZotta)
+- Spanish: [moses](https://github.com/mosmat) [Sebas Arriola](https://github.com/sebdeveloper6952)
+- Dutch: Buddy Busy
