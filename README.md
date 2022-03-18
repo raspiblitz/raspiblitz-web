@@ -65,6 +65,16 @@ yarn dedupe
 
 Further info: https://dev.to/arcanis/yarn-2-2-dedupe-faster-lighter-ha5#dedupe-command
 
+### Dev install with external RaspiBlitz as Backend (macOS)
+
+- Make sure `nvm` is installed.
+- Run `nvm install v14.19.0` or if already installed `nvm use v14.19.0`
+- Install yran on a fresh nvm: `npm install --global yarn`
+- run `yarn install`
+- change in `package.json` the proxy to the local IP of your RaspiBlitz & port 80
+- change in `see-context.tsx` for the `SSE_URL` the local IP of your RaspiBlitz & port 80
+- with `yarn run` it should now connect to your external raspiblitz
+
 ### Dev workflow
 
 #### Frontend
