@@ -10,3 +10,7 @@ export enum SetupSteps {
   WALLET_CREATION,
   DONE,
 }
+
+export enum SetupStatus {
+  DONE = "DONE",
+}

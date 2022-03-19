@@ -1,13 +1,13 @@
 import { FC, ReactElement, useEffect, useState } from "react";
-import Migration from "../../components/Setup/Migration/Migration";
-import Provision from "../../components/Setup/Provision/Provision";
-import SetPasswords from "../../components/Setup/SetPasswords/SetPasswords";
-import SetupDone from "../../components/Setup/SetupDone/SetupDone";
-import FreshSetup from "../../components/Setup/FreshSetup/FreshSetup";
-import UpdateRecover from "../../components/Setup/UpdateRecover/UpdateRecover";
-import WalletCreation from "../../components/Setup/WalletCreation/WalletCreation";
-import Welcome from "../../components/Setup/Welcome/Welcome";
-import { SetupSteps } from "../../models/setup.model";
+import FreshSetup from "../components/Setup/FreshSetup/FreshSetup";
+import Migration from "../components/Setup/Migration/Migration";
+import Provision from "../components/Setup/Provision/Provision";
+import SetPasswords from "../components/Setup/SetPasswords/SetPasswords";
+import SetupDone from "../components/Setup/SetupDone/SetupDone";
+import UpdateRecover from "../components/Setup/UpdateRecover/UpdateRecover";
+import WalletCreation from "../components/Setup/WalletCreation/WalletCreation";
+import Welcome from "../components/Setup/Welcome/Welcome";
+import { SetupSteps } from "../models/setup.model";
 
 const Setup: FC = () => {
   const [step, setStep] = useState<SetupSteps>(SetupSteps.WELCOME);
