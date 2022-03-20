@@ -1,10 +1,21 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { ReactComponent as MoonLogo } from "../../assets/moon.svg";
+import I18nDropdown from "../../components/Shared/I18nDropdown/I18nDropdown";
+import { AppContext } from "../../store/app-context";
 
-const SetupContainer: FC = (props) => {
+const SetupContainer: FC = ({ children }) => {
+  const { toggleDarkMode } = useContext(AppContext);
   return (
-    <main className="content-container flex h-screen w-screen flex-col flex-wrap items-center justify-center transition-colors dark:text-white">
-      <div className="rounded border border-gray-300 bg-white p-4 shadow-lg lg:w-2/3">
-        {props.children}
+    <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700">
+      <MoonLogo
+        className="text-dark fixed right-4 top-4 h-8 dark:text-yellow-500"
+        onClick={toggleDarkMode}
+      />
+      <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
+        <I18nDropdown />
+      </div>
+      <div className="h-2/3 w-4/5">
+        <div className="bd-card">{children}</div>
       </div>
     </main>
   );
