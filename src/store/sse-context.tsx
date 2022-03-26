@@ -59,9 +59,9 @@ if (
   backendserver = "http://localhost:8000";
 }
 export const SSE_URL = window.location.hostname.includes("localhost")
-  ? backendserver + "/api/sse/subscribe"
+  ? `${backendserver}/api/sse/subscribe`
   : "/api/sse/subscribe";
-console.log("Running with backend server: " + backendserver);
+console.info("Running with backend server: ", backendserver);
 
 const SSEContextProvider: FC = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);

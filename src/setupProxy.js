@@ -8,7 +8,7 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 var backendserver = process.env.REACT_APP_BACKEND;
 if (
-  process.env.REACT_APP_BACKEND == null ||
+  process.env.REACT_APP_BACKEND === null ||
   process.env.REACT_APP_BACKEND === ""
 ) {
   backendserver = "http://localhost:8000";
