@@ -140,7 +140,7 @@
     "appInfo": {
       "rtl": {
         "shortDescription": "A full function web browser app for LND, C-Lightning and Eclair",
-        "about": "RTL is a full function, device agnostic, web user interface to help manage lightning node operations. RTL is available on LND, C-Lightning and Eclair implementations."
+        "about": "RTL is a full function, device agnostic, web user interface to help manage Lightning node operations. RTL is available on LND, C-Lightning and Eclair implementations."
       },
       "specter": {
         "shortDescription": "A desktop GUI for Bitcoin Core optimised to work with hardware wallets",

@@ -75,7 +75,7 @@
     },
     "wallet": {
       "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta midler",
-      "fund": "Fyll opp lommeboken din",
+      "fund": "Fyll opp den kjedede lommeboken din",
       "on_chain": "On-chain",
       "balance": "Saldo",
       "address": "Adresse",
@@ -135,6 +135,36 @@
           "required": "Skriv inn beløp",
           "max": "Kontoen din strekker ikke til å sende dette beløpet"
         }
+      }
+    },
+    "appInfo": {
+      "rtl": {
+        "shortDescription": "En fullverdig nettleser for LND, C-Lightning og Eclair",
+        "about": "RTL er et fullstendig nettgrensesnitt som lar deg håndtere Lightning-modeoperasjoner, på alle enheter. RTL er tilgjengelig på LND, C-Lightning og Eclair-implementasjoner."
+      },
+      "specter": {
+        "shortDescription": "Et skrivebordsbrukergrensesnitt for Bitcoin Core, optimalisert for å fungere med maskinvarelommebøker",
+        "about": "Bitcoin Core har et veldig kraftig kommandolinjegrensesnitt og en storartet nisse. Ved bruk av PSBT og HWI kan det også fungere med maskinvarelommebøker, men fungerer kun på Linux-måten for øyeblikket. Det samme er tilfelle for multisignatursoppsett. Målet med prosjektet er å lage en beleilig og brukervennlig grafisk løsning for Bitcoin Core, med fokus på multisignatursoppsett med maskinvarelommebøker og enheter som ikke er tilkoblet."
+      },
+      "btc-pay": {
+        "shortDescription": "Godta Bitcoin-betalinger. En gratis, fri og selvtjent Bitcoin-betalingsformidler.",
+        "about": "BTCPay-tjeneren er en gratis og fri Bitcoin-betalingsformidler som lar deg godta bitcoin uten gebyrer eller mellommenn."
+      },
+      "mempool": {
+        "shortDescription": "En fri utforsker utviklet for Bitcoin-gemenskapen",
+        "about": " En fri utforsker utviklet av Bitcoin-gemenskapen, der fokuset er gebyrmarkedet for overføringer som er i emning, for å hjelpe overgangen til et flerlags-økosystem."
+      },
+      "thunderhub": {
+        "shortDescription": "LND Lightning-nodehåndterer i nettleseren din",
+        "about": "Thunderhub er en fri LND-node-håndterer der du kan håndtere og overvåke din node på alle enheter eller nettlseere. Du kan ta kontroll over Ligtning-nettverket med et enkelt og intuitivt grensesnitt og den mest oppdaterte systemstabelen."
+      },
+      "lnbits": {
+        "about": "LNbits er en enkel Python-tjener som sitter på toppen av en kronerullingskilde og kan brukes som kontosystem for å unngå risikoen med å ta inn hele kontoverdien din i programmer, via unike API-nøkler for hver lommebok.",
+        "shortDescription": "Gratis og fritt Lightning-nettverkslommebok/kontosystem"
+      },
+      "btc-rpc-explorer": {
+        "shortDescription": "Bitcoin RPC-utforsker",
+        "about": "Dette er en selvtjent utforsker for hele Bitcoin-blokk-kjeden. Den drives av RPC-kall til din egen Bitcoin-node. Den er enkel å kjøre og kan kobles til andre verktøy (som Electrum-tjenere) for å oppnå en fullverdig utforsker."
       }
     }
   }

@@ -65,11 +65,18 @@ app.get("/sse/subscribe", eventsHandler);
 
 /***
  * STATUS
- * 100 if setup is done, otherwise step in the setup process
+ * DONE if setup is done, otherwise step in the setup process
  */
 app.get("/api/v1/setup/status", (_, res) => {
   console.info("call to /api/v1/setup/status");
-  res.send(JSON.stringify({ progress: 100 }));
+  return res.status(200).send(
+    JSON.stringify({
+      // send something else than DONE to route to setup
+      setupPhase: "DONE",
+      state: "",
+      message: "",
+    })
+  );
 });
 
 /***
