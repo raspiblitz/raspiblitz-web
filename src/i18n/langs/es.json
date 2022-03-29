@@ -82,8 +82,8 @@
       "error": "Ocurrió un error",
       "invalid_pass": "Contraseña Inválida",
       "login": "Iniciar Sesión",
-      "enter_pass_placeholder": "Contraseña B",
-      "enter_pass": "Ingrese contraseña B"
+      "enter_pass_placeholder": "Contraseña A",
+      "enter_pass": "Ingrese contraseña A"
     },
     "navigation": {
       "logout": "Cerrar Sesión",

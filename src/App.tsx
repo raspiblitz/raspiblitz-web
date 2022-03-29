@@ -1,4 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -6,7 +7,7 @@ import Layout from "./container/Layout/Layout";
 import LoadingScreen from "./container/LoadingScreen/LoadingScreen";
 import RequireAuth from "./container/RequireAuth/RequireAuth";
 import "./i18n/config";
-import { SetupStatus } from "./models/setup.model";
+import { SetupPhase } from "./models/setup.model";
 import Apps from "./pages/Apps";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -21,14 +22,19 @@ const App: FC = () => {
   const { isLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   useEffect(() => {
     if (firstCall) {
       async function check() {
         setFirstCall(false);
+        if (location.pathname === "/login") return;
         const resp = await instance.get("/setup/status");
         if (resp) {
-          const status = resp.data.setupPhase;
-          if (status !== SetupStatus.DONE) {
+          const setupPhase = resp.data.setupPhase;
+          const initialsync = resp.data.initialsync;
+          console.log(`initialsync(${initialsync})`);
+          if (setupPhase !== SetupPhase.DONE || initialsync === "running") {
             navigate("/setup");
           }
         }

@@ -76,8 +76,8 @@
       "error": "C'è stato un errore",
       "invalid_pass": "Password non valida",
       "login": "Log in",
-      "enter_pass_placeholder": "Password B",
-      "enter_pass": "Inserire password B"
+      "enter_pass_placeholder": "Password A",
+      "enter_pass": "Inserire password A"
     },
     "navigation": {
       "logout": "Esci",
