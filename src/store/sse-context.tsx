@@ -51,7 +51,7 @@ export const SSEContext = createContext<SSEContextType>({
 });
 
 // for personal development - change backend with .env file
-var backendserver = process.env.REACT_APP_BACKEND;
+let backendserver = process.env.REACT_APP_BACKEND;
 if (
   process.env.REACT_APP_BACKEND == null ||
   process.env.REACT_APP_BACKEND === ""
