@@ -50,9 +50,18 @@ export const SSEContext = createContext<SSEContextType>({
   setInstallingAppId: () => {},
 });
 
+// for personal development - change backend with .env file
+let backendserver = process.env.REACT_APP_BACKEND;
+if (
+  process.env.REACT_APP_BACKEND == null ||
+  process.env.REACT_APP_BACKEND === ""
+) {
+  backendserver = "http://localhost:8000";
+}
 export const SSE_URL = window.location.hostname.includes("localhost")
-  ? "http://localhost:8000/sse/subscribe"
+  ? `${backendserver}/api/sse/subscribe`
   : "/api/sse/subscribe";
+console.info("Running with backend server: ", backendserver);
 
 const SSEContextProvider: FC = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);

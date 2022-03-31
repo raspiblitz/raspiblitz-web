@@ -65,6 +65,16 @@ yarn dedupe
 
 Further info: https://dev.to/arcanis/yarn-2-2-dedupe-faster-lighter-ha5#dedupe-command
 
+### Dev install with external RaspiBlitz as Backend (macOS)
+
+- Make sure `nvm` is installed.
+- Run `nvm install v14.19.0` or if already installed `nvm use v14.19.0`
+- Install yarn on a fresh nvm: `npm install --global yarn`
+- run `yarn install`
+- copy `.env.sample` to `.env` (the .env file will be ignored by git)
+- change in `.env` the value of `REACT_APP_BACKEND` to your local raspiblitz - for example if your RaspiBlitz is running on local Ip 192.168.1.123 then change value to `192.168.1.123:80`
+- with `yarn start` it should now connect to your external raspiblitz
+
 ### Dev workflow
 
 #### Frontend

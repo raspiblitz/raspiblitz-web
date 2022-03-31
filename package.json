@@ -1,5 +1,8 @@
 {
   "name": "raspiblitz-web",
+  "config": {
+    "port": "3000"
+  },
   "version": "0.1.0",
   "license": "MIT",
   "author": {
@@ -14,7 +17,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8000",
   "lint-staged": {
     "{src,backend-mock}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
@@ -50,6 +52,7 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
+    "http-proxy-middleware": "^2.0.4",
     "i18next": "^21.6.12",
     "rc-tooltip": "^5.1.1",
     "react": "^17.0.2",
