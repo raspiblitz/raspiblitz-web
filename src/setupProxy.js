@@ -7,10 +7,7 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 // https://create-react-app.dev/docs/proxying-api-requests-in-development/#configuring-the-proxy-manually
 
 let backendserver = process.env.REACT_APP_BACKEND;
-if (
-  process.env.REACT_APP_BACKEND === null ||
-  process.env.REACT_APP_BACKEND === ""
-) {
+if (!process.env.REACT_APP_BACKEND) {
   backendserver = "http://localhost:8000";
 }
 
