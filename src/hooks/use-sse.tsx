@@ -73,8 +73,9 @@ function useSSE() {
         sseCtx.setInstallingApp(null);
       } else if (installEventData.result && installEventData.result === "win") {
         // TODO: send a one of those small notifications
-        if (installEventData.mode === "on") alert(`Install finished :)`);
-        else {
+        if (installEventData.mode === "on") {
+          alert(`Install finished :)`);
+        } else {
           alert(`Deinstall finished`);
         }
         // set the install context back to null
