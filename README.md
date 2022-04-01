@@ -68,9 +68,9 @@ Further info: https://dev.to/arcanis/yarn-2-2-dedupe-faster-lighter-ha5#dedupe-c
 ### Dev install with external RaspiBlitz as Backend (macOS)
 
 - Make sure `nvm` is installed.
-- Run `nvm install v14.19.0` or if already installed `nvm use v14.19.0`
+- Run `nvm install 16` or if already installed `nvm use`
 - Install yarn on a fresh nvm: `npm install --global yarn`
-- run `yarn install`
+- run `yarn`
 - copy `.env.sample` to `.env` (the .env file will be ignored by git)
 - change in `.env` the value of `REACT_APP_BACKEND` to your local raspiblitz - for example if your RaspiBlitz is running on local Ip 192.168.1.123 then change value to `192.168.1.123:80`
 - with `yarn start` it should now connect to your external raspiblitz
@@ -145,7 +145,6 @@ Please do not commit the above changes.
   - [CC0 License](https://loading.io/css/)
 - ButtonSpinner from [SpinKit](https://github.com/tobiasahlin/SpinKit)
   - [MIT License](https://github.com/tobiasahlin/SpinKit/blob/master/LICENSE)
-
 
 ### App logos
 
