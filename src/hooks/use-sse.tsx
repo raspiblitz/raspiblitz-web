@@ -60,6 +60,7 @@ function useSSE() {
 
     const setInstall = (event: Event) => {
       const installEventData = JSON.parse((event as MessageEvent<string>).data);
+      // {"id": "specter", "mode": "on", "result": "running", "details": ""}
       if (installEventData.result && installEventData.result === "fail") {
         // TODO: replace with a propper Installed Failed Notification
         // should be with an OK button so that user can note & report error
