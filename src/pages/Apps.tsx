@@ -1,15 +1,15 @@
 import type { FC } from "react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { availableApps } from "../util/availableApps";
 import AppCard from "../components/Apps/AppCard/AppCard";
 import AppInfo from "../components/Apps/AppInfo/AppInfo";
-import { AppStatus } from "../models/app-status";
+import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
 import useSSE from "../hooks/use-sse";
+import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
+import { availableApps } from "../util/availableApps";
 import { instance } from "../util/interceptor";
 import { enableGutter } from "../util/util";
-import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
@@ -88,13 +88,13 @@ export const Apps: FC = () => {
   return (
     <main className="content-container page-container bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white">
       {isLoading && (
-        <section className="flex h-full flex-1 flex-wrap place-items-center">
+        <section className="content-container flex items-center justify-center">
           <LoadingSpinner color="text-yellow-500" />
         </section>
       )}
       {!isLoading && (
         <div>
-          <section className="flex h-full flex-1 flex-wrap">
+          <section className="flex h-full flex-wrap">
             <h2 className="w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
               {t("apps.installed")}
             </h2>
@@ -115,7 +115,7 @@ export const Apps: FC = () => {
               );
             })}
           </section>
-          <section className="flex h-full flex-1 flex-wrap">
+          <section className="flex h-full flex-wrap">
             <h2 className="block w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200 ">
               {t("apps.available")}
             </h2>
