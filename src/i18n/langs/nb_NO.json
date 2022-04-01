@@ -146,7 +146,7 @@
         "shortDescription": "Et skrivebordsbrukergrensesnitt for Bitcoin Core, optimalisert for å fungere med maskinvarelommebøker",
         "about": "Bitcoin Core har et veldig kraftig kommandolinjegrensesnitt og en storartet nisse. Ved bruk av PSBT og HWI kan det også fungere med maskinvarelommebøker, men fungerer kun på Linux-måten for øyeblikket. Det samme er tilfelle for multisignatursoppsett. Målet med prosjektet er å lage en beleilig og brukervennlig grafisk løsning for Bitcoin Core, med fokus på multisignatursoppsett med maskinvarelommebøker og enheter som ikke er tilkoblet."
       },
-      "btc-pay": {
+      "btcpayserver": {
         "shortDescription": "Godta Bitcoin-betalinger. En gratis, fri og selvtjent Bitcoin-betalingsformidler.",
         "about": "BTCPay-tjeneren er en gratis og fri Bitcoin-betalingsformidler som lar deg godta bitcoin uten gebyrer eller mellommenn."
       },

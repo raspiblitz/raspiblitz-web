@@ -25,8 +25,8 @@ interface SSEContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  installingAppId: string | null;
-  setInstallingAppId: Dispatch<SetStateAction<string | null>>;
+  installingApp: any | null;
+  setInstallingApp: Dispatch<SetStateAction<any | null>>;
 }
 
 export const SSEContext = createContext<SSEContextType>({
@@ -46,8 +46,8 @@ export const SSEContext = createContext<SSEContextType>({
   setAvailableApps: () => {},
   transactions: [],
   setTransactions: () => {},
-  installingAppId: null,
-  setInstallingAppId: () => {},
+  installingApp: null,
+  setInstallingApp: () => {},
 });
 
 // for personal development - change backend with .env file
@@ -114,7 +114,7 @@ const SSEContextProvider: FC = (props) => {
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [installingAppId, setInstallingAppId] = useState<string | null>(null);
+  const [installingApp, setInstallingApp] = useState<any | null>(null);
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -133,8 +133,8 @@ const SSEContextProvider: FC = (props) => {
     setAvailableApps,
     transactions,
     setTransactions,
-    installingAppId,
-    setInstallingAppId,
+    installingApp,
+    setInstallingApp,
   };
 
   return (

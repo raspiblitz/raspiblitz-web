@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as InfoIcon } from "../../../assets/info.svg";
 import { ReactComponent as LinkIcon } from "../../../assets/link.svg";
@@ -10,7 +10,7 @@ import ButtonWithSpinner from "../../Shared/ButtonWithSpinner/ButtonWithSpinner"
 type Props = {
   app: App;
   installed: boolean;
-  installingAppId: string | null;
+  installingApp: any | null;
   address?: string;
   hiddenService?: string;
   onInstall: (id: string) => void;
@@ -20,7 +20,7 @@ type Props = {
 export const AppCard: FC<Props> = ({
   app,
   installed,
-  installingAppId,
+  installingApp,
   onInstall,
   onOpenDetails,
   address,
@@ -28,6 +28,16 @@ export const AppCard: FC<Props> = ({
 }) => {
   const { id, name } = app;
   const { t } = useTranslation();
+  const [isInstallWaiting, setInstallWaiting] = useState(false);
+
+  useEffect(() => {
+    setInstallWaiting(false);
+  }, []);
+
+  const installButtonPressed = (id: string) => {
+    setInstallWaiting(true);
+    onInstall(id);
+  };
 
   return (
     <div className="bd-card transition-colors dark:bg-gray-800">
@@ -64,25 +74,33 @@ export const AppCard: FC<Props> = ({
             {t("apps.no_page")}
           </button>
         )}
-        {installingAppId !== id && !installed && (
-          <button
-            disabled={!!installingAppId}
-            className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
-            onClick={() => onInstall(id)}
-          >
-            <PlusIcon />
-            &nbsp;{t("apps.install")}
-          </button>
-        )}
-        {installingAppId === id && (
-          <ButtonWithSpinner
-            disabled
-            loading={true}
-            className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
-          >
-            {t("apps.installing")}
-          </ButtonWithSpinner>
-        )}
+        {(installingApp == null ||
+          installingApp.id !== id ||
+          installingApp.result == "fail") &&
+          !installed && (
+            <button
+              disabled={
+                isInstallWaiting ||
+                (installingApp != null && installingApp.result != "fail")
+              }
+              className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+              onClick={() => installButtonPressed(id)}
+            >
+              <PlusIcon />
+              &nbsp;{t("apps.install")}
+            </button>
+          )}
+        {installingApp &&
+          installingApp.id === id &&
+          installingApp.result === "running" && (
+            <ButtonWithSpinner
+              disabled
+              loading={true}
+              className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+            >
+              {t("apps.installing")}
+            </ButtonWithSpinner>
+          )}
         <button
           className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
           onClick={() => onOpenDetails(app)}

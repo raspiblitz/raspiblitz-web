@@ -10,7 +10,7 @@ const installApp = () => {
       hiddenService: "blablablabla.onion",
     },
     {
-      id: "btc-pay",
+      id: "btcpayserver",
       status: "offline",
       address: "http://192.168.0.1",
       hiddenService: "blablablabla.onion",

@@ -30,9 +30,9 @@ export const availableApps = new Map([
     },
   ],
   [
-    "btc-pay",
+    "btcpayserver",
     {
-      id: "btc-pay",
+      id: "btcpayserver",
       name: "BTCPay Server",
       author: "BTCPay Server",
       version: "v1.4.4",

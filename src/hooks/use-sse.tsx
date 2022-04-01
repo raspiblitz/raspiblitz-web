@@ -59,9 +59,28 @@ function useSSE() {
     };
 
     const setInstall = (event: Event) => {
-      sseCtx.setInstallingAppId(
-        JSON.parse((event as MessageEvent<string>).data).id
-      );
+      const installEventData = JSON.parse((event as MessageEvent<string>).data);
+      if (installEventData.result && installEventData.result === "fail") {
+        // TODO: replace with a propper Installed Failed Notification
+        // should be with an OK button so that user can note & report error
+        if (installEventData.mode === "on")
+          alert(`Install Failed: ${installEventData.details}`);
+        else {
+          alert(`Deinstall Failed: ${installEventData.details}`);
+        }
+        // set the install context back to null
+        sseCtx.setInstallingApp(null);
+      } else if (installEventData.result && installEventData.result === "win") {
+        // TODO: send a one of those small notifications
+        if (installEventData.mode === "on") alert(`Install finished :)`);
+        else {
+          alert(`Deinstall finished`);
+        }
+        // set the install context back to null
+        sseCtx.setInstallingApp(null);
+      } else {
+        sseCtx.setInstallingApp(installEventData);
+      }
     };
 
     const setSystemInfo = (event: Event) => {
@@ -144,7 +163,7 @@ function useSSE() {
     appStatus: sseCtx.appStatus,
     transactions: sseCtx.transactions,
     availableApps: sseCtx.availableApps,
-    installingAppId: sseCtx.installingAppId,
+    installingApp: sseCtx.installingApp,
   };
 }
 
