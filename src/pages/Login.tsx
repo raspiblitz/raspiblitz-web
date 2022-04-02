@@ -36,7 +36,7 @@ const Login: FC = () => {
         return navigate(from || "/home", { replace: true });
       }
     }
-  }, [navigate, from, isLoggedIn]);
+  }, [navigate, from, isLoggedIn, back]);
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();

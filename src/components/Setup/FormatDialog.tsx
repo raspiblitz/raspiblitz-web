@@ -2,21 +2,21 @@ import { FC, useRef, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 
-export interface InputData {
+export type Props = {
   containsBlockchain: boolean;
   callback: (deleteData: boolean, keepBlockchainData: boolean) => void;
-}
+};
 
-const FormatDialog: FC<InputData> = (props) => {
+const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
   const { t } = useTranslation();
 
   const [step, setStep] = useState(0);
   const keepBlockchain = useRef(true);
 
   useEffect(() => {
-    keepBlockchain.current = props.containsBlockchain;
-    setStep(props.containsBlockchain ? 1 : 2);
-  }, []);
+    keepBlockchain.current = containsBlockchain;
+    setStep(containsBlockchain ? 1 : 2);
+  }, [containsBlockchain]);
 
   const handleBlockchain = (keep: boolean) => {
     keepBlockchain.current = keep;
@@ -63,14 +63,14 @@ const FormatDialog: FC<InputData> = (props) => {
             </div>
           )}
           <button
-            onClick={() => props.callback(false, keepBlockchain.current)}
+            onClick={() => callback(false, keepBlockchain.current)}
             className="bd-button my-5 p-2"
           >
             Cancel
           </button>
           &nbsp;
           <button
-            onClick={() => props.callback(true, keepBlockchain.current)}
+            onClick={() => callback(true, keepBlockchain.current)}
             className="bd-button my-5 p-2"
           >
             DELETE OLD DATA

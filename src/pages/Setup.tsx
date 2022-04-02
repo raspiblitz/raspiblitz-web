@@ -1,22 +1,22 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import WaitScreen from "../components/Setup/WaitScreen";
-import SyncScreen from "../components/Setup/SyncScreen";
-import SetupMenu from "../components/Setup/SetupMenu";
-import InputNodename from "../components/Setup/InputNodename";
-import InputPassword from "../components/Setup/InputPassword";
-import RecoveryDialog from "../components/Setup/RecoveryDialog";
-import StartDoneDialog from "../components/Setup/StartDoneDialog";
 import FinalDialog from "../components/Setup/FinalDialog";
 import FormatDialog from "../components/Setup/FormatDialog";
+import InputNodename from "../components/Setup/InputNodename";
+import InputPassword from "../components/Setup/InputPassword";
 import LightningDialog from "../components/Setup/LightningDialog";
 import MigrationDialog from "../components/Setup/MigrationDialog";
+import RecoveryDialog from "../components/Setup/RecoveryDialog";
+import SetupMenu from "../components/Setup/SetupMenu";
+import StartDoneDialog from "../components/Setup/StartDoneDialog";
+import SyncScreen from "../components/Setup/SyncScreen";
+import WaitScreen from "../components/Setup/WaitScreen";
 import {
+  SetupLightning,
+  SetupMigrationMode,
+  SetupMigrationOS,
   SetupPhase,
   SetupStatus,
-  SetupLightning,
-  SetupMigrationOS,
-  SetupMigrationMode,
 } from "../models/setup.model";
 import { instance } from "../util/interceptor";
 
@@ -340,9 +340,9 @@ const Setup: FC = () => {
     setHtml(<InputNodename callback={callbackInputNodename} />);
   };
 
-  const callbackInputNodename = (nodename: string) => {
+  const callbackInputNodename = (nodename: string | null) => {
     // on cancel jump back to setup menu
-    if (nodename === "") {
+    if (!nodename) {
       showSetupMenu();
       return;
     }
@@ -378,17 +378,13 @@ const Setup: FC = () => {
 
   const showInputPasswordA = () => {
     setHtml(
-      <InputPassword
-        passwordType="a"
-        setupPhase={setupPhase.current}
-        callback={callbackInputPasswordA}
-      />
+      <InputPassword passwordType="a" callback={callbackInputPasswordA} />
     );
   };
 
-  const callbackInputPasswordA = (password: string) => {
+  const callbackInputPasswordA = (password: string | null) => {
     // on cancel jump back to setup menu
-    if (password === "") {
+    if (!password) {
       showSetupMenu();
       return;
     }
@@ -419,17 +415,13 @@ const Setup: FC = () => {
 
   const showInputPasswordB = () => {
     setHtml(
-      <InputPassword
-        passwordType="b"
-        setupPhase={setupPhase.current}
-        callback={callbackInputPasswordB}
-      />
+      <InputPassword passwordType="b" callback={callbackInputPasswordB} />
     );
   };
 
-  const callbackInputPasswordB = (password: string) => {
+  const callbackInputPasswordB = (password: string | null) => {
     // on cancel jump back to setup menu
-    if (password === "") {
+    if (!password) {
       showSetupMenu();
       return;
     }
@@ -450,17 +442,13 @@ const Setup: FC = () => {
 
   const showInputPasswordC = () => {
     setHtml(
-      <InputPassword
-        passwordType="c"
-        setupPhase={setupPhase.current}
-        callback={callbackInputPasswordC}
-      />
+      <InputPassword passwordType="c" callback={callbackInputPasswordC} />
     );
   };
 
-  const callbackInputPasswordC = (password: string) => {
+  const callbackInputPasswordC = (password: string | null) => {
     // on cancel jump back to setup menu
-    if (password === "") {
+    if (!password) {
       showSetupMenu();
       return;
     }

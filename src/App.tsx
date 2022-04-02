@@ -22,18 +22,18 @@ const App: FC = () => {
   const { isLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (firstCall) {
       async function check() {
         setFirstCall(false);
-        if (location.pathname === "/login") return;
+        if (pathname === "/login") return;
         const resp = await instance.get("/setup/status");
         if (resp) {
           const setupPhase = resp.data.setupPhase;
           const initialsync = resp.data.initialsync;
-          console.log(`initialsync(${initialsync})`);
+          console.info(`initialsync(${initialsync})`);
           if (setupPhase !== SetupPhase.DONE || initialsync === "running") {
             navigate("/setup");
           }
@@ -42,7 +42,7 @@ const App: FC = () => {
       check();
     }
     setIsLoading(false);
-  }, [isLoggedIn, firstCall, navigate]);
+  }, [isLoggedIn, firstCall, navigate, pathname]);
 
   if (isLoading) {
     return <LoadingScreen />;

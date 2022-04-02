@@ -3,44 +3,48 @@ import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
 
-export interface InputData {
-  setupPhase: string;
+export type Props = {
+  setupPhase: SetupPhase;
   seedWords: string;
   callback: () => void;
-}
+};
 
-const FinalDialog: FC<InputData> = (props) => {
+const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   const { t } = useTranslation();
 
-  let Headline: string = "Setup is finished.";
-  if (props.setupPhase === SetupPhase.RECOVERY) {
-    Headline = "Recovery is finished.";
-  }
-  if (props.setupPhase === SetupPhase.UPDATE) {
-    Headline = "Update is finished.";
-  }
-  if (props.setupPhase === SetupPhase.MIGRATION) {
-    Headline = "Migration is finished.";
+  let headline: string;
+  switch (setupPhase) {
+    case SetupPhase.RECOVERY:
+      headline = "Recovery is finished.";
+      break;
+    case SetupPhase.UPDATE:
+      headline = "Update is finished.";
+      break;
+    case SetupPhase.MIGRATION:
+      headline = "Migration is finished.";
+      break;
+    default:
+      headline = "Setup is finished.";
   }
 
   return (
     <SetupContainer>
       <div className="text-center">
-        <div className="text-center">{Headline}</div>
+        <div className="text-center">{headline}</div>
         <br />
-        {props.seedWords !== "" && (
+        {seedWords && (
           <div className="text-center">
             <div className="text-sm">
               Please write down your seed words &amp; store at a safe place:
             </div>
-            <div className="text-sm italic">{props.seedWords}</div>
+            <div className="text-sm italic">{seedWords}</div>
           </div>
         )}
         <br />
         <div className="text-center text-sm">
           Will now reboot and sync up the blockchain.
         </div>
-        <button onClick={() => props.callback()} className="bd-button my-5 p-2">
+        <button onClick={() => callback()} className="bd-button my-5 p-2">
           OK, do final Reboot
         </button>
       </div>

@@ -1,14 +1,13 @@
-import { FC, useState, ChangeEvent } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 
-export interface Callback {
-  callback: (nodename: string) => void;
-}
+export type Props = {
+  callback: (nodename: string | null) => void;
+};
 
-const InputNodename: FC<Callback> = (props) => {
-  const [Nodename, setNodename] = useState("");
-
+const InputNodename: FC<Props> = ({ callback }) => {
+  const [nodeName, setNodename] = useState("");
   const { t } = useTranslation();
   // later use {t("setup.set_lang")}
 
@@ -16,26 +15,22 @@ const InputNodename: FC<Callback> = (props) => {
     setNodename(event.target.value);
   };
 
-  const Cancel = () => {
-    props.callback("");
-  };
-
   const Continue = () => {
     // check is password is valid
-    if (Nodename == "") {
+    if (!nodeName) {
       alert("Nodename cannot be empty.");
       return;
     }
-    if (Nodename.length < 4) {
+    if (nodeName.length < 4) {
       alert("Password needs to be at least 4 characters long.");
       return;
     }
-    if (!Nodename.match(/^[a-zA-Z0-9]*$/)) {
+    if (!nodeName.match(/^[a-zA-Z0-9]*$/)) {
       alert("Nodename should just contain characters & numbers.");
       return;
     }
 
-    props.callback(Nodename);
+    callback(nodeName);
   };
 
   return (
@@ -50,12 +45,12 @@ const InputNodename: FC<Callback> = (props) => {
             id="oldpw"
             className="input-underline w-full"
             type="text"
-            value={Nodename}
+            value={nodeName}
             onChange={changeNodenameHandler}
             required
           />
         </div>
-        <button onClick={() => Cancel()} className="bd-button my-5 p-2">
+        <button onClick={() => callback(null)} className="bd-button my-5 p-2">
           Cancel
         </button>
         &nbsp;

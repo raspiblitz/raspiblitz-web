@@ -1,25 +1,24 @@
-import { FC, useState, ChangeEvent } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 
-export interface InputData {
+export type Props = {
   passwordType: string;
-  setupPhase: string;
-  callback: (password: string) => void;
-}
+  callback: (password: string | null) => void;
+};
 
-const InputPassword: FC<InputData> = (props) => {
+const InputPassword: FC<Props> = ({ passwordType, callback }) => {
   const { t } = useTranslation();
   // later use {t("setup.set_lang")}
 
-  const [Password, setPassword] = useState("");
-  const [PasswordRepeat, setPasswordRepeat] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordRepeat, setPasswordRepeat] = useState("");
 
   let PasswordName: string = "";
   let Headline: string = "";
   let Details: string = "";
 
-  switch (props.passwordType) {
+  switch (passwordType) {
     case "a":
       PasswordName = "Password A";
       Headline = "Set your new Admin-Password (Password A)";
@@ -38,7 +37,7 @@ const InputPassword: FC<InputData> = (props) => {
       break;
     default:
       console.info("Unknown passwordType .. automatic cancel");
-      props.callback("");
+      callback(null);
       break;
   }
 
@@ -54,30 +53,30 @@ const InputPassword: FC<InputData> = (props) => {
 
   const Continue = () => {
     // check is password is valid
-    if (Password == "") {
+    if (!password) {
       alert("Password cannot be empty.");
       return;
     }
-    if (Password.length < 8) {
+    if (password.length < 8) {
       alert("Password needs to be at least 8 characters long.");
       return;
     }
-    if (!Password.match(/^[a-zA-Z0-9]*$/)) {
+    if (!password.match(/^[a-zA-Z0-9]*$/)) {
       alert("Password should just contain characters & numbers.");
       return;
     }
-    if (Password !== PasswordRepeat) {
+    if (password !== passwordRepeat) {
       alert("Password entries are not the same.");
       return;
     }
 
-    props.callback(Password);
+    callback(password);
     setPassword("");
     setPasswordRepeat("");
   };
 
   const Cancel = () => {
-    props.callback("");
+    callback(null);
   };
 
   return (
@@ -93,7 +92,7 @@ const InputPassword: FC<InputData> = (props) => {
             id="passfirst"
             className="input-underline w-full"
             type="password"
-            value={Password}
+            value={password}
             onChange={changePasswordHandler}
             required
           />
@@ -106,7 +105,7 @@ const InputPassword: FC<InputData> = (props) => {
             id="passrepeat"
             className="input-underline w-full"
             type="password"
-            value={PasswordRepeat}
+            value={passwordRepeat}
             onChange={changePasswordRepeatHandler}
             required
           />

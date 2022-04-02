@@ -1,10 +1,9 @@
-import { FC, ChangeEvent, useState, useContext } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActionBoxProps } from "../../container/ActionBox/ActionBox";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
-import { instance } from "../../util/interceptor";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import { instance } from "../../util/interceptor";
 
 export interface InputData {
   data: any;
@@ -15,8 +14,8 @@ const SyncScreen: FC<InputData> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [Password, setPassword] = useState("");
-  const [RunningUnlock, setRunningUnlock] = useState(false);
+  const [password, setPassword] = useState("");
+  const [runningUnlock, setRunningUnlock] = useState(false);
 
   const changePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -27,7 +26,7 @@ const SyncScreen: FC<InputData> = (props) => {
     try {
       const resp = await instance
         .post("/lightning/unlock-wallet", {
-          password: Password,
+          password: password,
         })
         .catch((err) => {
           if (err.response.status === 403) {
@@ -83,7 +82,7 @@ const SyncScreen: FC<InputData> = (props) => {
         {props.data.n_default !== "" &&
           props.data.n_default !== "none" &&
           props.data.ln_default_locked !== "0" &&
-          !RunningUnlock && (
+          !runningUnlock && (
             <div className="justify-center">
               <label htmlFor="passfirst" className="label-underline">
                 Please unlock your Lightning Wallet (Password C):
@@ -92,7 +91,7 @@ const SyncScreen: FC<InputData> = (props) => {
                 id="passfirst"
                 className="input-underline w-full"
                 type="password"
-                value={Password}
+                value={password}
                 onChange={changePasswordHandler}
                 required
               />
@@ -104,7 +103,7 @@ const SyncScreen: FC<InputData> = (props) => {
               </button>
             </div>
           )}
-        {RunningUnlock && (
+        {runningUnlock && (
           <div className="justify-center">
             <LoadingSpinner color="text-yellow-500" />
           </div>
