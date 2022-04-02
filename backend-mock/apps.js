@@ -14,7 +14,7 @@ router.post("/install/:id", (req, res) => {
 
 router.post("/uninstall/:id", (req, res) => {
   console.info("call to /api/v1/apps/uninstall for app", req.params.id);
-  // TODO
+  // TODO: Create the same example as install but with uninstall
   res.status(200).send();
 });
 
