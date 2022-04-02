@@ -357,7 +357,10 @@ const Setup: FC = () => {
   // ### LIGHTNING DIALOG ###
 
   const showLightningDialog = () => {
-    setHtml(<LightningDialog callback={callbackLightningDialog} />);
+    // TODO: Once WebUi can support c-lightning or run without Lighting
+    // show this dialog - until then fix selection to LND
+    // setHtml(<LightningDialog callback={callbackLightningDialog} />);
+    callbackLightningDialog(SetupLightning.LND);
   };
 
   const callbackLightningDialog = (lightningSelect: SetupLightning) => {
