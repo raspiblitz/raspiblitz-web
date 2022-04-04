@@ -109,6 +109,15 @@
       "language": "Language",
       "curr_lang": "Current language"
     },
+    "setup": {
+      "pleasewait": "please wait",
+      "shuttingdown": "shutting down",
+      "restarting": "restarting",
+      "restartinfo": "please wait until RaspiBlitz answers again",
+      "preparingsetup": "preparing setup",
+      "runningsetup": "Running Setup",
+      "setupwait": "setup will take some minutes"
+    },
     "forms": {
       "hint": {
         "invoiceAmountZero": "Invoice amount is zero"
