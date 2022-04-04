@@ -22,7 +22,8 @@ import { enableGutter } from "../util/util";
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
-  const { systemInfo, balance, btcInfo, lnStatus, appStatus } = useSSE();
+  const { systemInfo, balance, btcInfo, lnStatus, appStatus, hardwareInfo } =
+    useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
@@ -156,6 +157,10 @@ const Home: FC = () => {
           <ConnectionCard
             torAddress={systemInfo.tor_web_ui!}
             sshAddress={systemInfo.ssh_address!}
+            cpu_overall_percent={hardwareInfo?.cpu_overall_percent!}
+            vram_usage_percent={hardwareInfo?.vram_usage_percent!}
+            disk_io_read_bytes={hardwareInfo?.disk_io_read_bytes!}
+            disk_io_write_bytes={hardwareInfo?.disk_io_write_bytes!}
           />
         </article>
         {/* TODO: change */}

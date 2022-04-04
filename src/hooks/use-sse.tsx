@@ -166,7 +166,7 @@ function useSSE() {
         evtSource.removeEventListener("installed_app_status", setAppStatus);
         evtSource.removeEventListener("apps", setApps);
         evtSource.removeEventListener("install", setInstall);
-        evtSource.addEventListener("hardware_info", setHardwareInfo);
+        evtSource.removeEventListener("hardware_info", setHardwareInfo);
       }
     };
   }, [evtSource, setEvtSource, sseCtx]);
