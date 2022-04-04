@@ -142,7 +142,10 @@ export const ConnectionCard: FC<Props> = ({
               Disk IO Read
             </h6>
             <div className="flex">
-              {(disk_io_read_bytes / (1024 * 1024)).toFixed(2)} MB
+              {disk_io_read_bytes
+                ? (disk_io_read_bytes / (1024 * 1024)).toFixed(2)
+                : "-"}{" "}
+              MB
             </div>
           </div>
         </article>
@@ -156,7 +159,10 @@ export const ConnectionCard: FC<Props> = ({
               Disk IO Write
             </h6>
             <div className="flex">
-              {(disk_io_write_bytes / (1024 * 1024)).toFixed(2)} MB
+              {disk_io_write_bytes
+                ? (disk_io_write_bytes / (1024 * 1024)).toFixed(2)
+                : "-"}{" "}
+              MB
             </div>
           </div>
         </article>
