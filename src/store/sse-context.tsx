@@ -2,6 +2,7 @@ import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
+import { HardwareInfo } from "../models/hardware-info";
 import { LnStatus } from "../models/ln-status";
 import { SystemInfo } from "../models/system-info";
 import { Transaction } from "../models/transaction.model";
@@ -27,6 +28,8 @@ interface SSEContextType {
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
   installingApp: any | null;
   setInstallingApp: Dispatch<SetStateAction<any | null>>;
+  hardwareInfo: Partial<HardwareInfo> | null;
+  setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
 }
 
 export const SSEContext = createContext<SSEContextType>({
@@ -48,6 +51,8 @@ export const SSEContext = createContext<SSEContextType>({
   setTransactions: () => {},
   installingApp: null,
   setInstallingApp: () => {},
+  hardwareInfo: {},
+  setHardwareInfo: () => {},
 });
 
 // for personal development - change backend with .env file
@@ -112,6 +117,7 @@ const SSEContextProvider: FC = (props) => {
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [installingApp, setInstallingApp] = useState<any | null>(null);
+  const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -132,6 +138,8 @@ const SSEContextProvider: FC = (props) => {
     setTransactions,
     installingApp,
     setInstallingApp,
+    hardwareInfo,
+    setHardwareInfo,
   };
 
   return (
