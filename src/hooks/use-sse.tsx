@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
+import { HardwareInfo } from "../models/hardware-info";
 import { LnStatus } from "../models/ln-status";
 import { SystemInfo } from "../models/system-info";
 import { WalletBalance } from "../models/wallet-balance";
@@ -131,6 +132,17 @@ function useSSE() {
       });
     };
 
+    const setHardwareInfo = (event: Event) => {
+      sseCtx.setHardwareInfo((prev: HardwareInfo | null) => {
+        const message = JSON.parse((event as MessageEvent<string>).data);
+
+        return {
+          ...prev,
+          ...message,
+        };
+      });
+    };
+
     if (evtSource) {
       evtSource.addEventListener("system_info", setSystemInfo);
       evtSource.addEventListener("btc_info", setBtcInfo);
@@ -140,6 +152,7 @@ function useSSE() {
       evtSource.addEventListener("installed_app_status", setAppStatus);
       evtSource.addEventListener("apps", setApps);
       evtSource.addEventListener("install", setInstall);
+      evtSource.addEventListener("hardware_info", setHardwareInfo);
     }
 
     return () => {
@@ -153,6 +166,7 @@ function useSSE() {
         evtSource.removeEventListener("installed_app_status", setAppStatus);
         evtSource.removeEventListener("apps", setApps);
         evtSource.removeEventListener("install", setInstall);
+        evtSource.removeEventListener("hardware_info", setHardwareInfo);
       }
     };
   }, [evtSource, setEvtSource, sseCtx]);
@@ -166,6 +180,7 @@ function useSSE() {
     transactions: sseCtx.transactions,
     availableApps: sseCtx.availableApps,
     installingApp: sseCtx.installingApp,
+    hardwareInfo: sseCtx.hardwareInfo,
   };
 }
 

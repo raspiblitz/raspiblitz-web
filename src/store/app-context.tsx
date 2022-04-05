@@ -121,7 +121,7 @@ const AppContextProvider: FC = ({ children }) => {
         }
       } catch {
         localStorage.removeItem("access_token");
-        console.info(`Token unvalied at - removed.`);
+        console.info(`Token invalid - removed.`);
       }
     }
   }, [darkMode, i18n]);
