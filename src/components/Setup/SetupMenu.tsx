@@ -14,14 +14,14 @@ const ChooseSetup: FC<InputData> = (props) => {
   return (
     <SetupContainer>
       <div className="text-center">
-        <div className="text-center">Setup Options</div>
+        <div className="text-center">{t("setup.setupoptions")}</div>
         {props.setupPhase === SetupPhase.RECOVERY && (
           <span>
             <button
               onClick={() => props.callback(SetupPhase.RECOVERY)}
               className="bd-button my-5 p-2"
             >
-              Recover my RaspiBlitz
+              {t("setup.recoverblitz")}
             </button>
             <br />
           </span>
@@ -32,7 +32,7 @@ const ChooseSetup: FC<InputData> = (props) => {
               onClick={() => props.callback(SetupPhase.UPDATE)}
               className="bd-button my-5 p-2"
             >
-              Update my RaspiBlitz
+              {t("setup.updateblitz")}
             </button>
             <br />
           </span>
@@ -43,7 +43,7 @@ const ChooseSetup: FC<InputData> = (props) => {
               onClick={() => props.callback(SetupPhase.MIGRATION)}
               className="bd-button my-5 p-2"
             >
-              Migrate to RaspiBlitz
+              {t("setup.migrateblitz")}
             </button>
             <br />
           </span>
@@ -52,14 +52,14 @@ const ChooseSetup: FC<InputData> = (props) => {
           onClick={() => props.callback(SetupPhase.SETUP)}
           className="bd-button my-5 p-2"
         >
-          Setup a fresh RaspiBlitz
+          {t("setup.setupblitz")}
         </button>
         <br />
         <button
           onClick={() => props.callback(SetupPhase.NULL)}
           className="bd-button my-5 p-2"
         >
-          Shutdown
+          {t("setup.shutdown")}
         </button>
         <br />
       </div>

@@ -27,53 +27,50 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
     <SetupContainer>
       {step === 1 && (
         <div className="text-center">
-          <div className="text-center">Blockchain found on HDD/SSD</div>
+          <div className="text-center">{t("setup.blockchain_found_short")}</div>
           <div className="text-center text-sm">
-            On your HDD/SSD existing blockchain data was found.
+            {t("setup.blockchain_found_long")}
           </div>
           <button
             onClick={() => handleBlockchain(false)}
             className="bd-button my-5 p-2"
           >
-            Delete Blockchain
+            {t("setup.blockchain_delete")}
           </button>
           &nbsp;
           <button
             onClick={() => handleBlockchain(true)}
             className="bd-button my-5 p-2"
           >
-            Keep Blockchain
+            {t("setup.blockchain_keep")}
           </button>
         </div>
       )}
       {step === 2 && (
         <div className="text-center">
-          <div className="text-center">OK to delete all data on HDD/SSD?</div>
+          <div className="text-center">{t("setup.hdd_delete_short")}</div>
           {keepBlockchain.current && (
             <div className="text-center text-sm">
-              Please confirm that you want to delete all previous data on the
-              HDD/SSD and just keep the blockchain data for your fresh
-              RaspiBlitz.
+              {t("setup.hdd_delete_keep_blockchain")}
             </div>
           )}
           {!keepBlockchain.current && (
             <div className="text-center text-sm">
-              Please confirm that you want to delete all previous data on the
-              HDD/SSD to start a fresh RaspiBlitz.
+              {t("setup.hdd_delete_no_blockchain")}
             </div>
           )}
           <button
             onClick={() => callback(false, keepBlockchain.current)}
             className="bd-button my-5 p-2"
           >
-            Cancel
+            {t("setup.cancel")}
           </button>
           &nbsp;
           <button
             onClick={() => callback(true, keepBlockchain.current)}
             className="bd-button my-5 p-2"
           >
-            DELETE OLD DATA
+            {t("setup.hdd_delete")}
           </button>
         </div>
       )}

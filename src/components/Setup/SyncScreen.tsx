@@ -51,12 +51,13 @@ const SyncScreen: FC<InputData> = (props) => {
   return (
     <SetupContainer>
       <div className="text-center">
-        <div className="text-center">RaspiBlitz Initial Sync</div>
+        <div className="text-center">{t("setup.sync_headline")}</div>
         <br />
         {props.data.btc_default_ready === "1" && (
           <span>
             <div className="text-center text-sm">
-              Blockchain Sync: {props.data.btc_default_sync_percentage}% (
+              {t("setup.sync_bitcoin_sync")}:{" "}
+              {props.data.btc_default_sync_percentage}% (
               {props.data.btc_default_peers} peers)
             </div>
           </span>
@@ -64,8 +65,8 @@ const SyncScreen: FC<InputData> = (props) => {
         {props.data.btc_default_ready !== "1" && (
           <span>
             <div className="text-center text-sm">
-              ... Bitcoin starting ({props.data.system_count_start_blockchain})
-              ...
+              ... {t("setup.sync_bitcoin_starting")} (
+              {props.data.system_count_start_blockchain}) ...
             </div>
           </span>
         )}
@@ -85,7 +86,7 @@ const SyncScreen: FC<InputData> = (props) => {
           !runningUnlock && (
             <div className="justify-center">
               <label htmlFor="passfirst" className="label-underline">
-                Please unlock your Lightning Wallet (Password C):
+                {t("setup.sync_wallet_info")}
               </label>
               <input
                 id="passfirst"
@@ -99,7 +100,7 @@ const SyncScreen: FC<InputData> = (props) => {
                 onClick={() => unlockWallet()}
                 className="bd-button my-5 p-2"
               >
-                Unlock Wallet
+                {t("setup.sync_wallet_unlock")}
               </button>
             </div>
           )}
@@ -112,10 +113,10 @@ const SyncScreen: FC<InputData> = (props) => {
           onClick={() => props.callback("shutdown", null)}
           className="bd-button my-5 p-2"
         >
-          Shutdown
+          {t("setup.shutdown")}
         </button>
         <div className="text-center text-sm italic">
-          (sync will continue on next restart)
+          {t("setup.sync_restartinfo")}
         </div>
       </div>
     </SetupContainer>

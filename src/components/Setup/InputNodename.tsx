@@ -18,28 +18,27 @@ const InputNodename: FC<Props> = ({ callback }) => {
   const Continue = () => {
     // check is password is valid
     if (!nodeName) {
-      alert("Nodename cannot be empty.");
+      alert(t("setup.nodename_error_empty"));
       return;
     }
     if (nodeName.length < 4) {
-      alert("Password needs to be at least 4 characters long.");
+      alert(t("setup.nodename_error_length"));
       return;
     }
     if (!nodeName.match(/^[a-zA-Z0-9]*$/)) {
-      alert("Nodename should just contain characters & numbers.");
+      alert(t("setup.nodename_error_chars"));
       return;
     }
-
     callback(nodeName);
   };
 
   return (
     <SetupContainer>
       <div className="text-center">
-        <div className="text-center">Input Nodename</div>
+        <div className="text-center">{t("setup.nodename_input")}</div>
         <div className="w-full py-1 md:w-10/12">
           <label htmlFor="oldpw" className="label-underline">
-            Node Name
+            {t("setup.nodename_name")}
           </label>
           <input
             id="oldpw"
@@ -51,11 +50,11 @@ const InputNodename: FC<Props> = ({ callback }) => {
           />
         </div>
         <button onClick={() => callback(null)} className="bd-button my-5 p-2">
-          Cancel
+          {t("setup.cancel")}
         </button>
         &nbsp;
         <button onClick={() => Continue()} className="bd-button my-5 p-2">
-          OK
+          {t("setup.ok")}
         </button>
       </div>
     </SetupContainer>
