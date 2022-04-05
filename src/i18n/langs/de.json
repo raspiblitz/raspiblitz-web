@@ -77,6 +77,15 @@
       "old_pw": "Altes Passwort",
       "change_pw": "Passwort ändern"
     },
+    "setup": {
+      "pleasewait": "bitte warten",
+      "shuttingdown": "schalte aus",
+      "restarting": "starte neu",
+      "restartinfo": "bitte warten bis RaspiBlitz sich wieder meldet",
+      "preparingsetup": "bereite Einrichtung vor",
+      "runningsetup": "Einrichtung läuft",
+      "setupwait": "Einrichtung wird einige Minuten dauern"
+    },
     "forms": {
       "validation": {
         "lnInvoice": {

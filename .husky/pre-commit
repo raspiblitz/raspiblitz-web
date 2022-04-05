@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged
+# deactivated beause of Git ERROR: .husky/pre-commit: line 5: npx: command not found
+# npx lint-staged
