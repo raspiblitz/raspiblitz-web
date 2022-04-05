@@ -15,16 +15,16 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   let headline: string;
   switch (setupPhase) {
     case SetupPhase.RECOVERY:
-      headline = "Recovery is finished.";
+      headline = t("setup.final_recovery");
       break;
     case SetupPhase.UPDATE:
-      headline = "Update is finished.";
+      headline = t("setup.final_update");
       break;
     case SetupPhase.MIGRATION:
-      headline = "Migration is finished.";
+      headline = t("setup.final_migration");
       break;
     default:
-      headline = "Setup is finished.";
+      headline = t("setup.final_setup");
   }
 
   return (
@@ -34,18 +34,16 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
         <br />
         {seedWords && (
           <div className="text-center">
-            <div className="text-sm">
-              Please write down your seed words &amp; store at a safe place:
-            </div>
+            <div className="text-sm">{t("setup.final_seedwords")}</div>
             <div className="text-sm italic">{seedWords}</div>
           </div>
         )}
         <br />
         <div className="text-center text-sm">
-          Will now reboot and sync up the blockchain.
+          {t("setup.final_info_reboot")}
         </div>
         <button onClick={() => callback()} className="bd-button my-5 p-2">
-          OK, do final Reboot
+          {t("setup.final_do_reboot")}
         </button>
       </div>
     </SetupContainer>

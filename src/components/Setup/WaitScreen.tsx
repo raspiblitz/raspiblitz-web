@@ -17,21 +17,21 @@ const WaitScreen: FC<InputData> = (props) => {
   let details = "";
   switch (props.status) {
     case SetupStatus.WAIT:
-      headline = "... waiting ...";
+      headline = `... ${t("setup.pleasewait")} ...`;
       break;
     case SetupStatus.SHUTDOWN:
-      headline = "... shutting down ...";
+      headline = `... ${t("setup.shuttingdown")} ...`;
       break;
     case SetupStatus.REBOOT:
-      headline = "... restarting ...";
-      details = "(please wait until RaspiBlitz answers again)";
+      headline = `... ${t("setup.restarting")} ...`;
+      details = `(${t("setup.restartinfo")})`;
       break;
     case SetupStatus.WAITPROVISION:
-      headline = "... preparing setup ...";
-      details = "(setup will take some minutes)";
+      headline = `... ${t("setup.preparingsetup")} ...`;
+      details = `(${t("setup.setupwait")})`;
       break;
     case SetupStatus.PROVISION:
-      headline = "Running Setup:";
+      headline = `${t("setup.runningsetup")}:`;
       details = props.message;
       break;
     default:

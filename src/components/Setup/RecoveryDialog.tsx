@@ -14,10 +14,10 @@ const RecoveryDialog: FC<InputData> = (props) => {
   let text: string = "";
   switch (props.setupPhase) {
     case SetupPhase.RECOVERY:
-      text = "Do you wanna start Recovery?";
+      text = t("setup.start_recovery");
       break;
     case SetupPhase.UPDATE:
-      text = "Do you wanna start Recovery?";
+      text = t("setup.start_update");
       break;
   }
 
@@ -29,14 +29,14 @@ const RecoveryDialog: FC<InputData> = (props) => {
           onClick={() => props.callback(true)}
           className="bd-button my-5 p-2"
         >
-          Yes
+          {t("setup.yes")}
         </button>
         &nbsp;
         <button
           onClick={() => props.callback(false)}
           className="bd-button my-5 p-2"
         >
-          Other Options
+          {t("setup.other_options")}
         </button>
       </div>
     </SetupContainer>

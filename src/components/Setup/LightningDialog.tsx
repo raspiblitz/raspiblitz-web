@@ -15,7 +15,7 @@ const LightningDialog: FC<InputData> = (props) => {
   return (
     <SetupContainer>
       <div className="text-center">
-        <div className="text-center">Choose your Lightning Implementaion:</div>
+        <div className="text-center">{t("setup.select_lightning")}</div>
         <button
           onClick={() => props.callback(SetupLightning.LND)}
           className="bd-button my-5 p-2"
@@ -27,14 +27,14 @@ const LightningDialog: FC<InputData> = (props) => {
           onClick={() => props.callback(SetupLightning.NONE)}
           className="bd-button my-5 p-2"
         >
-          Just Bitcoin
+          {t("setup.select_bitcoin")}
         </button>
         <br />
         <button
           onClick={() => props.callback(SetupLightning.NULL)}
           className="bd-button my-5 p-2"
         >
-          Cancel
+          {t("setup.cancel")}
         </button>
       </div>
     </SetupContainer>

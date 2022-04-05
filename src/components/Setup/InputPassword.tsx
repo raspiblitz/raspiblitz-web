@@ -20,20 +20,19 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
 
   switch (passwordType) {
     case "a":
-      PasswordName = "Password A";
-      Headline = "Set your new Admin-Password (Password A)";
-      Details = "Use this password for login to your RaspiBlitz.";
+      PasswordName = t("setup.password_a_name");
+      Headline = t("setup.password_a_short");
+      Details = t("setup.password_a_details");
       break;
     case "b":
-      PasswordName = "Password B";
-      Headline = "Set your new App-Password (Password B)";
-      Details =
-        "Use this password for additional Apps you can install on your RaspiBlitz.";
+      PasswordName = t("setup.password_b_name");
+      Headline = t("setup.password_b_short");
+      Details = t("setup.password_b_details");
       break;
     case "c":
-      PasswordName = "Password C";
-      Headline = "Set your new Lightning-Wallet-Password (Password C)";
-      Details = "Use this password to unlock your Lightning Wallet.";
+      PasswordName = t("setup.password_c_name");
+      Headline = t("setup.password_c_short");
+      Details = t("setup.password_c_details");
       break;
     default:
       console.info("Unknown passwordType .. automatic cancel");
@@ -54,19 +53,19 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
   const Continue = () => {
     // check is password is valid
     if (!password) {
-      alert("Password cannot be empty.");
+      alert(t("setup.password_error_empty"));
       return;
     }
     if (password.length < 8) {
-      alert("Password needs to be at least 8 characters long.");
+      alert(t("setup.password_error_length"));
       return;
     }
     if (!password.match(/^[a-zA-Z0-9]*$/)) {
-      alert("Password should just contain characters & numbers.");
+      alert(t("setup.password_error_chars"));
       return;
     }
     if (password !== passwordRepeat) {
-      alert("Password entries are not the same.");
+      alert(t("setup.password_error_match"));
       return;
     }
 
@@ -99,7 +98,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
         </div>
         <div className="w-full py-1 md:w-10/12">
           <label htmlFor="passrepeat" className="label-underline">
-            {PasswordName} (Repeat)
+            {PasswordName} ({t("setup.password_repeat")})
           </label>
           <input
             id="passrepeat"
@@ -111,11 +110,11 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
           />
         </div>
         <button onClick={() => Cancel()} className="bd-button my-5 p-2">
-          Cancel
+          {t("setup.cancel")}
         </button>
         &nbsp;
         <button onClick={() => Continue()} className="bd-button my-5 p-2">
-          OK
+          {t("setup.ok")}
         </button>
       </div>
     </SetupContainer>

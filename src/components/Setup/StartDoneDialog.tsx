@@ -11,19 +11,19 @@ export interface InputData {
 const StartDoneDialog: FC<InputData> = (props) => {
   const { t } = useTranslation();
 
-  let Headline: string = "OK. Everything is ready to Setup your RaspiBlitz.";
-  let Button: string = "Start Setup";
+  let Headline: string = t("setup.done_setup_ready");
+  let Button: string = t("setup.done_setup_start");
   if (props.setupPhase === SetupPhase.RECOVERY) {
-    Headline = "OK. Everything is ready to recover your RaspiBlitz.";
-    Button = "Start Recovery";
+    Headline = t("setup.done_recover_ready");
+    Button = t("setup.done_recover_start");
   }
   if (props.setupPhase === SetupPhase.UPDATE) {
-    Headline = "OK. Everything is ready to update your RaspiBlitz.";
-    Button = "Start Update";
+    Headline = t("setup.done_update_ready");
+    Button = t("setup.done_update_start");
   }
   if (props.setupPhase === SetupPhase.MIGRATION) {
-    Headline = "OK. Everything is ready to migrate to RaspiBlitz.";
-    Button = "Start Migration";
+    Headline = t("setup.done_migration_ready");
+    Button = t("setup.done_migration_start");
   }
 
   return (
