@@ -1,5 +1,7 @@
 import { ChangeEvent, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as X } from "../../assets/X.svg";
+import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 
 export type Props = {
@@ -15,7 +17,7 @@ const InputNodename: FC<Props> = ({ callback }) => {
     setNodename(event.target.value);
   };
 
-  const Continue = () => {
+  const continueHandler = () => {
     // check is password is valid
     if (!nodeName) {
       alert(t("setup.nodename_error_empty"));
@@ -34,8 +36,10 @@ const InputNodename: FC<Props> = ({ callback }) => {
 
   return (
     <SetupContainer>
-      <div className="text-center">
-        <div className="text-center">{t("setup.nodename_input")}</div>
+      <h2 className="text-center text-lg font-bold">
+        {t("setup.nodename_input")}
+      </h2>
+      <div className="flex flex-col items-center justify-center">
         <div className="w-full py-1 md:w-10/12">
           <label htmlFor="oldpw" className="label-underline">
             {t("setup.nodename_name")}
@@ -49,13 +53,22 @@ const InputNodename: FC<Props> = ({ callback }) => {
             required
           />
         </div>
-        <button onClick={() => callback(null)} className="bd-button my-5 p-2">
-          {t("setup.cancel")}
-        </button>
-        &nbsp;
-        <button onClick={() => Continue()} className="bd-button my-5 p-2">
-          {t("setup.ok")}
-        </button>
+        <div className='flex gap-2 mt-5'>
+          <button
+            onClick={() => callback(null)}
+            className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+          >
+            <X className="inline h-6 w-6" />
+            <span className="p-2">{t("setup.cancel")}</span>
+          </button>
+          <button
+            onClick={continueHandler}
+            className="bd-button flex items-center px-2"
+          >
+            <span className="p-2">Continue</span>
+            <ArrowRight className="inline h-6 w-6" />
+          </button>
+        </div>
       </div>
     </SetupContainer>
   );

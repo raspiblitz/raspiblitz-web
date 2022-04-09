@@ -73,8 +73,8 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
           </SelectOption>
         </div>
         <div className="mt-auto">
-          <button type="submit" className="bd-button p-4">
-            Continue
+          <button type="submit" className="bd-button flex items-center p-2">
+            <span className="p-2">Continue</span>
             <ArrowRight className="inline h-6 w-6" />
           </button>
         </div>

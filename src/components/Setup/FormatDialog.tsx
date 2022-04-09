@@ -1,5 +1,7 @@
-import { FC, useRef, useState, useEffect } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as Trash } from "../../assets/trash.svg";
+import { ReactComponent as X } from "../../assets/X.svg";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 
 export type Props = {
@@ -59,19 +61,22 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
               {t("setup.hdd_delete_no_blockchain")}
             </div>
           )}
-          <button
-            onClick={() => callback(false, keepBlockchain.current)}
-            className="bd-button my-5 p-2"
-          >
-            {t("setup.cancel")}
-          </button>
-          &nbsp;
-          <button
-            onClick={() => callback(true, keepBlockchain.current)}
-            className="bd-button my-5 p-2"
-          >
-            {t("setup.hdd_delete")}
-          </button>
+          <div className="mt-5 flex justify-center gap-2">
+            <button
+              onClick={() => callback(false, keepBlockchain.current)}
+              className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+            >
+              <X className="inline h-6 w-6" />
+              <span className="p-2">{t("setup.cancel")}</span>
+            </button>
+            <button
+              onClick={() => callback(true, keepBlockchain.current)}
+              className="bd-button flex items-center rounded px-2"
+            >
+              <Trash className="inline h-6 w-6" />
+              <span className="p-2">{t("setup.hdd_delete")}</span>
+            </button>
+          </div>
         </div>
       )}
     </SetupContainer>

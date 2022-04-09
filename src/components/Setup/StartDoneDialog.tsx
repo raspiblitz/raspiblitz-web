@@ -2,46 +2,49 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
+import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
+import { ReactComponent as X } from "../../assets/X.svg";
 
-export interface InputData {
+export type Props = {
   setupPhase: SetupPhase;
   callback: (cancel: boolean) => void;
-}
+};
 
-const StartDoneDialog: FC<InputData> = (props) => {
+const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
   const { t } = useTranslation();
 
-  let Headline: string = t("setup.done_setup_ready");
-  let Button: string = t("setup.done_setup_start");
-  if (props.setupPhase === SetupPhase.RECOVERY) {
-    Headline = t("setup.done_recover_ready");
-    Button = t("setup.done_recover_start");
+  let headline: string = t("setup.done_setup_ready");
+  let buttonText: string = t("setup.done_setup_start");
+  if (setupPhase === SetupPhase.RECOVERY) {
+    headline = t("setup.done_recover_ready");
+    buttonText = t("setup.done_recover_start");
   }
-  if (props.setupPhase === SetupPhase.UPDATE) {
-    Headline = t("setup.done_update_ready");
-    Button = t("setup.done_update_start");
+  if (setupPhase === SetupPhase.UPDATE) {
+    headline = t("setup.done_update_ready");
+    buttonText = t("setup.done_update_start");
   }
-  if (props.setupPhase === SetupPhase.MIGRATION) {
-    Headline = t("setup.done_migration_ready");
-    Button = t("setup.done_migration_start");
+  if (setupPhase === SetupPhase.MIGRATION) {
+    headline = t("setup.done_migration_ready");
+    buttonText = t("setup.done_migration_start");
   }
 
   return (
     <SetupContainer>
-      <div className="text-center">
-        <div className="text-center">{Headline}</div>
+      <h2 className="text-center text-lg font-bold">{headline}</h2>
+      <div className="mt-5 flex justify-center gap-2">
         <button
-          onClick={() => props.callback(true)}
-          className="bd-button my-5 p-2"
+          onClick={() => callback(true)}
+          className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
         >
-          Cancel
+          <X className="inline h-6 w-6" />
+          <span className="p-2">{t("setup.cancel")}</span>
         </button>
-        &nbsp;
         <button
-          onClick={() => props.callback(false)}
-          className="bd-button my-5 p-2"
+          onClick={() => callback(false)}
+          className="bd-button flex items-center px-2"
         >
-          {Button}
+          <span className="p-2 ">{buttonText}</span>
+          <ArrowRight className="inline h-6 w-6" />
         </button>
       </div>
     </SetupContainer>
