@@ -32,7 +32,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
         onSubmit={submitHandler}
         onChange={changeHandler}
       >
-        <div className="self-center">
+        <div>
           {setupPhase === SetupPhase.RECOVERY && (
             <SelectOption
               id="recovery"
@@ -71,9 +71,11 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
             {t("setup.shutdown")}
           </SelectOption>
         </div>
-        <button type="submit" className="bd-button mt-auto p-4">
-          Continue
-        </button>
+        <div className="mt-auto">
+          <button type="submit" className="bd-button p-4">
+            Continue
+          </button>
+        </div>
       </form>
     </SetupContainer>
   );
