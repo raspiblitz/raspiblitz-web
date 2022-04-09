@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import SelectOption from "../../container/SelectOption/SelectOption";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
+import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -74,6 +75,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
         <div className="mt-auto">
           <button type="submit" className="bd-button p-4">
             Continue
+            <ArrowRight className="inline h-6 w-6" />
           </button>
         </div>
       </form>
