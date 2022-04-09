@@ -7,8 +7,8 @@ router.get("/status", function (req, res) {
   res.status(200).send(
     JSON.stringify({
       // send something else than "done" to route to setup
-      setupPhase: "done",
-      state: "",
+      setupPhase: "setup",
+      state: "waitsetup",
       message: "",
     })
   );
@@ -16,7 +16,15 @@ router.get("/status", function (req, res) {
 
 router.get("/setup-start-info", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
-  res.send("STATUS");
+  res.status(200).send(
+    JSON.stringify({
+      // send something else than "done" to route to setup
+      setupPhase: "setup",
+      hddGotBlockchain: "0",
+      hddGotMigrationData: null,
+      migrationMode: null,
+    })
+  );
 });
 
 router.post("/setup-start-done", function (req, res) {

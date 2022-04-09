@@ -1,68 +1,80 @@
-import { FC } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import SelectOption from "../../container/SelectOption/SelectOption";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
 
-export interface InputData {
+export type Props = {
   setupPhase: SetupPhase;
   callback: (setupmode: SetupPhase) => void;
-}
+};
 
-const ChooseSetup: FC<InputData> = (props) => {
+const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
   const { t } = useTranslation();
+  const [selected, setSelected] = useState<SetupPhase>(SetupPhase.NULL);
+
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    callback(selected);
+  };
+
+  const changeHandler = (e: ChangeEvent<HTMLFormElement>) => {
+    setSelected(e.target.value);
+  };
 
   return (
     <SetupContainer>
-      <div className="text-center">
-        <div className="text-center">{t("setup.setupoptions")}</div>
-        {props.setupPhase === SetupPhase.RECOVERY && (
-          <span>
-            <button
-              onClick={() => props.callback(SetupPhase.RECOVERY)}
-              className="bd-button my-5 p-2"
+      <h2 className="m-2 text-center text-lg font-bold">
+        {t("setup.setupoptions")}
+      </h2>
+      <form
+        className="flex h-full flex-col flex-wrap items-center justify-center"
+        onSubmit={submitHandler}
+        onChange={changeHandler}
+      >
+        <div className="self-center">
+          {setupPhase === SetupPhase.RECOVERY && (
+            <SelectOption
+              id="recovery"
+              radioGroup="setup"
+              value={SetupPhase.RECOVERY}
             >
               {t("setup.recoverblitz")}
-            </button>
-            <br />
-          </span>
-        )}
-        {props.setupPhase === SetupPhase.UPDATE && (
-          <span>
-            <button
-              onClick={() => props.callback(SetupPhase.UPDATE)}
-              className="bd-button my-5 p-2"
+            </SelectOption>
+          )}
+          {setupPhase === SetupPhase.UPDATE && (
+            <SelectOption
+              id="update"
+              radioGroup="setup"
+              value={SetupPhase.UPDATE}
             >
               {t("setup.updateblitz")}
-            </button>
-            <br />
-          </span>
-        )}
-        {props.setupPhase === SetupPhase.MIGRATION && (
-          <span>
-            <button
-              onClick={() => props.callback(SetupPhase.MIGRATION)}
-              className="bd-button my-5 p-2"
+            </SelectOption>
+          )}
+          {setupPhase === SetupPhase.MIGRATION && (
+            <SelectOption
+              id="migration"
+              radioGroup="setup"
+              value={SetupPhase.MIGRATION}
             >
               {t("setup.migrateblitz")}
-            </button>
-            <br />
-          </span>
-        )}
-        <button
-          onClick={() => props.callback(SetupPhase.SETUP)}
-          className="bd-button my-5 p-2"
-        >
-          {t("setup.setupblitz")}
+            </SelectOption>
+          )}
+          <SelectOption id="setup" radioGroup="setup" value={SetupPhase.SETUP}>
+            {t("setup.setupblitz")}
+          </SelectOption>
+          <SelectOption
+            id="shutdown"
+            radioGroup="setup"
+            value={SetupPhase.NULL}
+          >
+            {t("setup.shutdown")}
+          </SelectOption>
+        </div>
+        <button type="submit" className="bd-button mt-auto p-4">
+          Continue
         </button>
-        <br />
-        <button
-          onClick={() => props.callback(SetupPhase.NULL)}
-          className="bd-button my-5 p-2"
-        >
-          {t("setup.shutdown")}
-        </button>
-        <br />
-      </div>
+      </form>
     </SetupContainer>
   );
 };
