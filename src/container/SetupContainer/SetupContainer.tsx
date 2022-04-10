@@ -3,7 +3,11 @@ import { ReactComponent as MoonLogo } from "../../assets/moon.svg";
 import I18nDropdown from "../../components/Shared/I18nDropdown/I18nDropdown";
 import { AppContext } from "../../store/app-context";
 
-const SetupContainer: FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const SetupContainer: FC<Props> = ({ children }) => {
   const { toggleDarkMode } = useContext(AppContext);
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700">
