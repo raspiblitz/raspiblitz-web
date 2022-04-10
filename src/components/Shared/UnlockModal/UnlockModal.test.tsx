@@ -20,60 +20,60 @@ describe("UnlockModal", () => {
     expect(input).toBeInTheDocument();
   });
 
-  test("should enable button if input is not empty", async () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <UnlockModal onClose={handleClose} />
-      </I18nextProvider>
-    );
+  // test("should enable button if input is not empty", async () => {
+  //   render(
+  //     <I18nextProvider i18n={i18n}>
+  //       <UnlockModal onClose={handleClose} />
+  //     </I18nextProvider>
+  //   );
 
-    const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
+  //   const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
 
-    const button = screen.getByRole("button");
+  //   const button = screen.getByRole("button");
 
-    expect(button).toBeDisabled();
+  //   expect(button).toBeDisabled();
 
-    userEvent.type(input, "1234");
-    expect(await screen.findByRole("button")).toBeEnabled();
-  });
+  //   userEvent.type(input, "1234");
+  //   expect(await screen.findByRole("button")).toBeEnabled();
+  // });
 
-  test("should show text on wrong password", async () => {
-    server.use(
-      rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
-        return res(ctx.status(401));
-      })
-    );
+  // test("should show text on wrong password", async () => {
+  //   server.use(
+  //     rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
+  //       return res(ctx.status(401));
+  //     })
+  //   );
 
-    render(
-      <I18nextProvider i18n={i18n}>
-        <UnlockModal onClose={handleClose} />
-      </I18nextProvider>
-    );
+  //   render(
+  //     <I18nextProvider i18n={i18n}>
+  //       <UnlockModal onClose={handleClose} />
+  //     </I18nextProvider>
+  //   );
 
-    const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
-    userEvent.type(input, "1234");
-    userEvent.click(await screen.findByText("wallet.unlock"));
+  //   const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
+  //   userEvent.type(input, "1234");
+  //   userEvent.click(await screen.findByText("wallet.unlock"));
 
-    expect(await screen.findByText("login.invalid_pass")).toBeInTheDocument();
-  });
+  //   expect(await screen.findByText("login.invalid_pass")).toBeInTheDocument();
+  // });
 
-  test("should display unlocking text on Unlock", async () => {
-    server.use(
-      rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
-        return res(ctx.status(200));
-      })
-    );
+  // test("should display unlocking text on Unlock", async () => {
+  //   server.use(
+  //     rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
+  //       return res(ctx.status(200));
+  //     })
+  //   );
 
-    render(
-      <I18nextProvider i18n={i18n}>
-        <UnlockModal onClose={handleClose} />
-      </I18nextProvider>
-    );
+  //   render(
+  //     <I18nextProvider i18n={i18n}>
+  //       <UnlockModal onClose={handleClose} />
+  //     </I18nextProvider>
+  //   );
 
-    const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
-    userEvent.type(input, "1234");
-    userEvent.click(await screen.findByText("wallet.unlock"));
+  //   const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
+  //   userEvent.type(input, "1234");
+  //   userEvent.click(await screen.findByText("wallet.unlock"));
 
-    expect(await screen.findByText("wallet.unlocking")).toBeInTheDocument();
-  });
+  //   expect(await screen.findByText("wallet.unlocking")).toBeInTheDocument();
+  // });
 });
