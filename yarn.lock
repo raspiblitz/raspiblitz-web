@@ -2137,12 +2137,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:^14.0.4":
-  version: 14.0.4
-  resolution: "@testing-library/user-event@npm:14.0.4"
+"@testing-library/user-event@npm:^14.1.0":
+  version: 14.1.0
+  resolution: "@testing-library/user-event@npm:14.1.0"
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
-  checksum: 7a99309acfd22e5173543546548ad2fe8b53466294607fdc9300e914d320f86b1631a45f2e5a695750c1067272d7b57ed541e7e3645fe1fff4de285ecdf76521
+  checksum: 6fabd42a0ea747912183d1780063a1128609007703647ce5e4f2d88a43c9db02771e737403722a7ee5211dbe47b14fd3088aaaafa24d341ca086875546e5a83b
   languageName: node
   linkType: hard
 
@@ -10198,7 +10198,7 @@ __metadata:
     "@testing-library/dom": ^8.13.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^13.0.0
-    "@testing-library/user-event": ^14.0.4
+    "@testing-library/user-event": ^14.1.0
     "@types/jest": ^27.4.1
     "@types/node": ^16.11.26
     "@types/react": ^18.0.1
@@ -10217,7 +10217,7 @@ __metadata:
     react: ^18.0.0
     react-dom: ^18.0.0
     react-hook-form: ^7.29.0
-    react-i18next: ^11.16.3
+    react-i18next: ^11.16.5
     react-qr-code: ^2.0.4
     react-router-dom: ^6.3.0
     react-scripts: 5.0.0
@@ -10387,9 +10387,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^11.16.3":
-  version: 11.16.3
-  resolution: "react-i18next@npm:11.16.3"
+"react-i18next@npm:^11.16.5":
+  version: 11.16.5
+  resolution: "react-i18next@npm:11.16.5"
   dependencies:
     "@babel/runtime": ^7.14.5
     html-escaper: ^2.0.2
@@ -10402,7 +10402,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: b910a34bdf6d46fa1fb22a90b1904f6dce158a591b7fae4d1bb150e3946feb498b5ce56801ca7c3682d40677d7b64dc122f5bc76a9a0b8eb7da01ffefcbf4f2f
+  checksum: 3934f9c1dd3eace157858f06d8813ced22c396201853ea5400059da7b9227dca91b67103a6829fb7ba8bb24179ba321ed327b8a8847b31ae3b18b4abcad5d87c
   languageName: node
   linkType: hard
 
