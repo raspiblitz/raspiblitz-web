@@ -7,7 +7,7 @@ import "./index.css";
 import AppContextProvider from "./store/app-context";
 import SSEContextProvider from "./store/sse-context";
 
-const container = document.getElementById("options-root") as HTMLElement;
+const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
