@@ -1,4 +1,5 @@
-import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
+import type { FC } from "react";
+import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
@@ -60,7 +61,11 @@ export const SSE_URL = window.location.hostname.includes("localhost")
   : "/api/sse/subscribe";
 console.info("Running with backend server: ", backendserver);
 
-const SSEContextProvider: FC = (props) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const SSEContextProvider: FC<Props> = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",

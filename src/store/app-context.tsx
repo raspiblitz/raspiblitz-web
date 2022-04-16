@@ -1,13 +1,13 @@
 import {
   createContext,
   Dispatch,
-  FC,
   SetStateAction,
   useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
@@ -48,7 +48,11 @@ export const AppContext = createContext<AppContextType>({
   setWalletLocked: () => {},
 });
 
-const AppContextProvider: FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const AppContextProvider: FC<Props> = ({ children }) => {
   const { i18n } = useTranslation();
   const { evtSource, setEvtSource } = useContext(SSEContext);
 
