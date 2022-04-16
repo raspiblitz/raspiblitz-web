@@ -7,7 +7,7 @@ router.get("/status", function (req, res) {
   res.status(200).send(
     JSON.stringify({
       // send something else than "done" to route to setup
-      setupPhase: "done",
+      setupPhase: "DONE",
       state: "",
       message: "",
     })
