@@ -26,24 +26,26 @@ describe("SwitchTxType", () => {
     expect(buttonOnChain).not.toBeDisabled();
   });
 
-  // test("tx-type: onchain", async () => {
-  //   const handeTxTypeChangeMock = jest.fn();
+  // https://github.com/cstenglein/raspiblitz-web/issues/234
+  // skipped due to react v18 update
+  test.skip("tx-type: onchain", async () => {
+    const handeTxTypeChangeMock = jest.fn();
 
-  //   render(
-  //     <I18nextProvider i18n={i18n}>
-  //       <SwitchTxType onTxTypeChange={handeTxTypeChangeMock} />
-  //     </I18nextProvider>
-  //   );
+    render(
+      <I18nextProvider i18n={i18n}>
+        <SwitchTxType onTxTypeChange={handeTxTypeChangeMock} />
+      </I18nextProvider>
+    );
 
-  //   const buttonLn = screen.getByText("home.lightning");
-  //   const buttonOnChain = screen.getByText("wallet.on_chain");
+    const buttonLn = screen.getByText("home.lightning");
+    const buttonOnChain = screen.getByText("wallet.on_chain");
 
-  //   expect(buttonLn).toBeDisabled();
-  //   expect(buttonOnChain).not.toBeDisabled();
-  //   buttonOnChain.click();
-  //   expect(handeTxTypeChangeMock).toHaveBeenCalledTimes(1);
-  //   expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.ONCHAIN);
-  //   expect(buttonOnChain).toBeDisabled();
-  //   expect(buttonLn).not.toBeDisabled();
-  // });
+    expect(buttonLn).toBeDisabled();
+    expect(buttonOnChain).not.toBeDisabled();
+    buttonOnChain.click();
+    expect(handeTxTypeChangeMock).toHaveBeenCalledTimes(1);
+    expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.ONCHAIN);
+    expect(buttonOnChain).toBeDisabled();
+    expect(buttonLn).not.toBeDisabled();
+  });
 });

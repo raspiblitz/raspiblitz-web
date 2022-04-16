@@ -31,23 +31,25 @@ describe("ConfirmSendModal", () => {
       });
     };
 
-    // test("validates amount is lower than balance", async () => {
-    //   await setup();
+    // https://github.com/cstenglein/raspiblitz-web/issues/234
+    // skipped due to react v18 update
+    test.skip("validates amount is lower than balance", async () => {
+      await setup();
 
-    //   const amountInput = screen.getByLabelText(
-    //     "wallet.amount"
-    //   ) as HTMLInputElement;
+      const amountInput = screen.getByLabelText(
+        "wallet.amount"
+      ) as HTMLInputElement;
 
-    //   userEvent.clear(amountInput);
-    //   userEvent.type(amountInput, "999");
+      userEvent.clear(amountInput);
+      userEvent.type(amountInput, "999");
 
-    //   userEvent.click(await screen.findByText("settings.confirm"));
-    //   await waitFor(() => expect(amountInput).toHaveClass("input-error"));
+      userEvent.click(await screen.findByText("settings.confirm"));
+      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
-    //   expect(
-    //     screen.getByText("forms.validation.chainAmount.max")
-    //   ).toBeInTheDocument();
-    // });
+      expect(
+        screen.getByText("forms.validation.chainAmount.max")
+      ).toBeInTheDocument();
+    });
 
     test("validates amount is bigger than zero", async () => {
       await setup();
