@@ -1,26 +1,17 @@
-import { FC, useEffect, useState } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { availableApps } from "../../../util/availableApps";
+import AppIcon from "../../../container/AppIcon/AppIcon";
 import { AppStatus } from "../../../models/app-status";
+import { availableApps } from "../../../util/availableApps";
 
-export const AppStatusCard: FC<{ app: AppStatus }> = ({ app }) => {
+type Props = {
+  app: AppStatus;
+};
+
+export const AppStatusCard: FC<Props> = ({ app }) => {
   const { id, status } = app;
   const { t } = useTranslation();
-  const [image, setImage] = useState("");
   const appName = availableApps.get(id)?.name;
-
-  useEffect(() => {
-    import(`../../../assets/apps/logos/${id}.png`)
-      .then((image) => {
-        setImage(image.default);
-      })
-      .catch((e) => {
-        // use fallback icon if image for id doesn't exist
-        import("../../../assets/cloud.svg").then((img) =>
-          setImage(img.default)
-        );
-      });
-  }, [id]);
 
   const online = status === "online";
   const statusColor = online ? "text-green-400" : "text-red-500";
@@ -32,7 +23,7 @@ export const AppStatusCard: FC<{ app: AppStatus }> = ({ app }) => {
         <div className="my-2 flex w-full flex-row items-center">
           {/* Icon */}
           <div className="flex max-h-16 w-1/4 items-center justify-center p-2">
-            <img className="max-h-16" src={image} alt="logo" />
+            <AppIcon appId={id} />
           </div>
           {/* Content */}
           <div className="flex w-3/4 flex-col items-start justify-center pl-5 text-xl">
