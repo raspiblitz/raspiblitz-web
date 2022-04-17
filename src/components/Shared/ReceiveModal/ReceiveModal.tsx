@@ -38,7 +38,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
 
   const lnInvoice = invoiceType === TxType.LIGHTNING;
 
-  const invoiceChangeHandler = async (txType: TxType) => {
+  const changeInvoiceHandler = async (txType: TxType) => {
     setAddress("");
     setAmount(0);
     setComment("");
@@ -98,7 +98,10 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
       )}
 
       <div className="my-3">
-        <SwitchTxType onTxTypeChange={invoiceChangeHandler} />
+        <SwitchTxType
+          invoiceType={invoiceType}
+          onTxTypeChange={changeInvoiceHandler}
+        />
       </div>
 
       {address && (

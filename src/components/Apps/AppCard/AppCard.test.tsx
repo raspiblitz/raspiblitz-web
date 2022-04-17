@@ -18,35 +18,29 @@ const basicProps = {
 
 describe("AppCard", () => {
   test("display install button if installed is false", async () => {
-    await act(async () => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <AppCard {...basicProps} installed={false} />
-        </I18nextProvider>
-      );
-    });
+    render(
+      <I18nextProvider i18n={i18n}>
+        <AppCard {...basicProps} installed={false} />
+      </I18nextProvider>
+    );
     expect(await screen.findByText("apps.install")).toBeDefined();
   });
 
   test("display open button if installed & address is available", async () => {
-    await act(async () => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <AppCard {...basicProps} address={"addr"} installed={true} />
-        </I18nextProvider>
-      );
-    });
+    render(
+      <I18nextProvider i18n={i18n}>
+        <AppCard {...basicProps} address={"addr"} installed={true} />
+      </I18nextProvider>
+    );
     expect(await screen.findByText("apps.open")).toBeDefined();
   });
 
   test("display no_page button if installed & address is not available", async () => {
-    await act(async () => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <AppCard {...basicProps} installed={true} />
-        </I18nextProvider>
-      );
-    });
+    render(
+      <I18nextProvider i18n={i18n}>
+        <AppCard {...basicProps} installed={true} />
+      </I18nextProvider>
+    );
     expect(await screen.findByText("apps.no_page")).toBeDefined();
   });
 });

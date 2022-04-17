@@ -2,6 +2,7 @@ import { render, screen, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
+import { TxType } from "../../SwitchTxType/SwitchTxType";
 import type { Props } from "./ConfirmSendModal";
 import ConfirmSendModal from "./ConfirmSendModal";
 
@@ -15,7 +16,7 @@ const basicProps: Props = {
   expiry: 36000,
   fee: "",
   invoiceAmount: 0,
-  isLnTx: true,
+  invoiceType: TxType.LIGHTNING,
   timestamp: 1893456000000, // 01 Jan 2030 00:00:00 GMT
 };
 
