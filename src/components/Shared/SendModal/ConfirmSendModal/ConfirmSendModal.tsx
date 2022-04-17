@@ -8,6 +8,7 @@ import { ReactComponent as XIcon } from "../../../../assets/X.svg";
 import { AppContext } from "../../../../store/app-context";
 import { instance } from "../../../../util/interceptor";
 import AmountInput from "../../AmountInput/AmountInput";
+import { TxType } from "../../SwitchTxType/SwitchTxType";
 interface IFormInputs {
   amountInput: number;
 }
@@ -21,7 +22,7 @@ export type Props = {
   expiry: number;
   fee: string;
   invoiceAmount: number;
-  isLnTx: boolean;
+  invoiceType: TxType;
   timestamp: number;
 };
 
@@ -34,14 +35,13 @@ const ConfirmSendModal: FC<Props> = ({
   expiry,
   fee,
   invoiceAmount,
-  isLnTx,
+  invoiceType,
   timestamp,
 }) => {
   const { t } = useTranslation();
-
   const { unit } = useContext(AppContext);
-
   const [amount, setAmount] = useState(0);
+  const isLnTx = invoiceType === TxType.LIGHTNING;
 
   const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);

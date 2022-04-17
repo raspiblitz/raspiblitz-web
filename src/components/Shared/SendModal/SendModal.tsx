@@ -23,7 +23,7 @@ type Props = {
 const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const { unit } = useContext(AppContext);
 
-  const [lnTransaction, setLnTransaction] = useState(true);
+  const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [invoice, setInvoice] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [address, setAddress] = useState("");
@@ -53,7 +53,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   };
 
   const changeTransactionHandler = (txType: TxType) => {
-    setLnTransaction(txType === TxType.LIGHTNING);
+    setInvoiceType(txType);
     setInvoice("");
     setAddress("");
     setAmount(0);
@@ -84,7 +84,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
 
   // confirm send
   if (confirm) {
-    const addr = lnTransaction ? invoice : address;
+    const addr = invoiceType ? invoice : address;
     return (
       <ModalDialog close={() => onClose(false)}>
         <ConfirmSendModal
@@ -96,7 +96,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
           expiry={expiry}
           fee={fee}
           invoiceAmount={amount}
-          isLnTx={lnTransaction}
+          invoiceType={invoiceType}
           timestamp={timestamp}
         />
       </ModalDialog>
@@ -104,11 +104,12 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   }
 
   // Send LN
-  if (lnTransaction) {
+  if (invoiceType) {
     return createPortal(
       <ModalDialog close={() => onClose(false)} closeable={!loading}>
         <div className="my-3">
           <SwitchTxType
+            invoiceType={invoiceType}
             onTxTypeChange={changeTransactionHandler}
             disabled={loading}
           />
@@ -130,6 +131,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     <ModalDialog close={() => onClose(false)}>
       <div className="my-3">
         <SwitchTxType
+          invoiceType={invoiceType}
           onTxTypeChange={changeTransactionHandler}
           disabled={loading}
         />
