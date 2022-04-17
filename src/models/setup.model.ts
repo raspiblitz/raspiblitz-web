@@ -12,5 +12,5 @@ export enum SetupSteps {
 }
 
 export enum SetupStatus {
-  DONE = "DONE",
+  DONE = "done",
 }
