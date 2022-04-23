@@ -53,7 +53,7 @@ const InputNodename: FC<Props> = ({ callback }) => {
             required
           />
         </div>
-        <div className='flex gap-2 mt-5'>
+        <div className="mt-5 flex gap-2">
           <button
             onClick={() => callback(null)}
             className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"

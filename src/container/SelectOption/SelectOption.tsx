@@ -4,6 +4,7 @@ type Props = {
   id: string;
   radioGroup: string;
   value: string;
+  children?: React.ReactNode;
 };
 
 const SelectOption: FC<Props> = ({ children, id, radioGroup, value }) => {
@@ -11,7 +12,7 @@ const SelectOption: FC<Props> = ({ children, id, radioGroup, value }) => {
     <>
       <label
         htmlFor={id}
-        className="my-4 flex items-center justify-center rounded px-4 shadow-md bg-gray-50 dark:bg-gray-700"
+        className="my-4 flex items-center justify-center rounded bg-gray-50 px-4 shadow-md dark:bg-gray-700"
       >
         <input
           id={id}
