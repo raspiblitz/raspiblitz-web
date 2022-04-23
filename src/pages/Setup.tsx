@@ -20,17 +20,35 @@ import {
 } from "../models/setup.model";
 import { instance } from "../util/interceptor";
 
+enum Screen {
+  WAIT,
+  START_DONE,
+  FORMAT,
+  SETUP,
+  INPUTA,
+  INPUTB,
+  INPUTC,
+  INPUT_NODENAME,
+  RECOVERY,
+  MIGRATION,
+  FINAL,
+  SYNC,
+}
+
 const Setup: FC = () => {
   console.log("Buildung Setup");
 
   // init with waiting screen
-  const [html, setHtml] = useState(
-    <WaitScreen status={SetupStatus.WAIT} message="" />
-  );
+  const [page, setPage] = useState(Screen.WAIT);
 
-  const setupPhaseOnStart = useRef(SetupPhase.NULL);
-  const setupPhase = useRef(SetupPhase.NULL);
-  const gotBlockchain = useRef(false);
+  const [syncData, setSyncData] = useState(null);
+  const [waitScreenStatus, setWaitScreenStatus] = useState(SetupStatus.WAIT);
+  const [waitScreenMessage, setWaitScreenMessage] = useState("");
+
+  const [setupPhaseOnStart, setSetupPhaseOnStart] = useState(SetupPhase.NULL);
+  const [setupPhase, setSetupPhase] = useState(SetupPhase.NULL);
+  const [gotBlockchain, setGotBlockchain] = useState(false);
+
   const keepBlockchain = useRef(true);
   const migrationOS = useRef(SetupMigrationOS.NULL);
   const migrationMode = useRef(SetupMigrationMode.NULL);
@@ -81,9 +99,9 @@ const Setup: FC = () => {
         }
       } else {
         // update waiting screen
-        setHtml(
-          <WaitScreen status={resp.data.state} message={resp.data.message} />
-        );
+        setWaitScreenStatus(resp.data.state);
+        setWaitScreenMessage(resp.data.message);
+        setPage(Screen.WAIT);
       }
     } catch {
       console.log("status request failed - device is off or in reboot?");
@@ -101,23 +119,21 @@ const Setup: FC = () => {
       const resp = await instance.get("/setup/setup-start-info");
       console.log(resp);
 
-      gotBlockchain.current = resp.data.hddGotBlockchain === "1";
-      setupPhaseOnStart.current = resp.data.setupPhase;
+      setGotBlockchain(resp.data.hddGotBlockchain === "1");
+      setSetupPhaseOnStart(resp.data.setupPhase);
       migrationOS.current = resp.data.hddGotMigrationData;
       migrationMode.current = resp.data.migrationMode;
 
       switch (resp.data.setupPhase) {
         case SetupPhase.RECOVERY:
-          showRecoveryDialog();
-          break;
         case SetupPhase.UPDATE:
-          showRecoveryDialog();
+          setPage(Screen.RECOVERY);
           break;
         case SetupPhase.MIGRATION:
-          showMigrationDialog();
+          setPage(Screen.MIGRATION);
           break;
         case SetupPhase.SETUP:
-          showSetupMenu();
+          setPage(Screen.SETUP);
           break;
         default:
           showError("unkown setupphase on init");
@@ -132,7 +148,7 @@ const Setup: FC = () => {
       // call API to start recovery
       const resp = await instance.post("/setup/setup-start-done", {
         hostname: hostname.current,
-        forceFreshSetup: setupPhase.current === SetupPhase.SETUP,
+        forceFreshSetup: setupPhase === SetupPhase.SETUP,
         keepBlockchain: keepBlockchain.current,
         lightning: lightning.current,
         passwordA: passwordA.current,
@@ -167,7 +183,7 @@ const Setup: FC = () => {
       if (resp) {
         console.log(resp);
         seedWords.current = resp.data.seedwordsNEW;
-        showFinalDialog();
+        setPage(Screen.FINAL);
       }
     } catch {
       showError("request for final setup data failed");
@@ -201,7 +217,9 @@ const Setup: FC = () => {
 
   // start setup shutdown (if user wants to cancel whole setup)
   const setupSetupShutdown = async () => {
-    setHtml(<WaitScreen status={SetupStatus.WAIT} message="" />);
+    setWaitScreenStatus(SetupStatus.WAIT);
+    setWaitScreenMessage("");
+    setPage(Screen.WAIT);
     try {
       const resp = await instance.get("/setup/shutdown");
     } catch {
@@ -227,64 +245,32 @@ const Setup: FC = () => {
   // #######################
 
   const showError = (message: string) => {
-    setHtml(<WaitScreen status={SetupStatus.ERROR} message={message} />);
-  };
-
-  // ### RECOVERY DIALOG ###
-
-  const showRecoveryDialog = () => {
-    setHtml(
-      <RecoveryDialog
-        setupPhase={setupPhaseOnStart.current}
-        callback={callbackRecoveryDialog}
-      />
-    );
+    setWaitScreenStatus(SetupStatus.ERROR);
+    setWaitScreenMessage(message);
+    setPage(Screen.WAIT);
   };
 
   const callbackRecoveryDialog = (startRecovery: boolean) => {
     if (startRecovery) {
-      setupPhase.current = SetupPhase.RECOVERY;
-      showInputPasswordA();
+      setSetupPhase(SetupPhase.RECOVERY);
+      setPage(Screen.INPUTA);
     } else {
-      showSetupMenu();
+      setPage(Screen.SETUP);
     }
-  };
-
-  // ### MIGRATION DIALOG ###
-
-  const showMigrationDialog = () => {
-    setHtml(
-      <MigrationDialog
-        migrationOS={migrationOS.current}
-        migrationMode={migrationMode.current}
-        callback={callbackMigrationDialog}
-      />
-    );
   };
 
   const callbackMigrationDialog = (start: boolean) => {
     if (start) {
-      setupPhase.current = SetupPhase.MIGRATION;
-      showInputPasswordA();
+      setSetupPhase(SetupPhase.MIGRATION);
+      setPage(Screen.INPUTA);
     } else {
       setupSetupShutdown();
     }
   };
 
-  // ### SETUP MENU ###
-
-  const showSetupMenu = () => {
-    setHtml(
-      <SetupMenu
-        setupPhase={setupPhaseOnStart.current}
-        callback={callbackSetupMenu}
-      />
-    );
-  };
-
   const callbackSetupMenu = (setupmode: SetupPhase) => {
     // remember what setup the user wants
-    setupPhase.current = setupmode;
+    setSetupPhase(setupmode);
 
     // switch to the next screen based on user selection
     switch (setupmode) {
@@ -292,29 +278,18 @@ const Setup: FC = () => {
         setupSetupShutdown();
         break;
       case SetupPhase.RECOVERY:
-        showInputPasswordA();
+        setPage(Screen.INPUTA);
         break;
       case SetupPhase.UPDATE:
-        showInputPasswordA();
+        setPage(Screen.INPUTA);
         break;
       case SetupPhase.MIGRATION:
-        showInputPasswordA();
+        setPage(Screen.INPUTA);
         break;
       case SetupPhase.SETUP:
-        showFormatDialog();
+        setPage(Screen.FORMAT);
         break;
     }
-  };
-
-  // ### FORMAT DIALOG ###
-
-  const showFormatDialog = () => {
-    setHtml(
-      <FormatDialog
-        containsBlockchain={gotBlockchain.current}
-        callback={callbackFormatDialog}
-      />
-    );
   };
 
   const callbackFormatDialog = (
@@ -323,7 +298,7 @@ const Setup: FC = () => {
   ) => {
     // on cancel jump back to setup menu
     if (!deleteData) {
-      showSetupMenu();
+      setPage(Screen.SETUP);
       return;
     }
 
@@ -331,19 +306,13 @@ const Setup: FC = () => {
     keepBlockchain.current = keepBlockchainData;
 
     // next step is always password A
-    showInputNodename();
-  };
-
-  // ### INPUT NODENAME ###
-
-  const showInputNodename = () => {
-    setHtml(<InputNodename callback={callbackInputNodename} />);
+    setPage(Screen.INPUT_NODENAME);
   };
 
   const callbackInputNodename = (nodename: string | null) => {
     // on cancel jump back to setup menu
     if (!nodename) {
-      showSetupMenu();
+      setPage(Screen.SETUP);
       return;
     }
 
@@ -366,7 +335,7 @@ const Setup: FC = () => {
   const callbackLightningDialog = (lightningSelect: SetupLightning) => {
     // on cancel jump back to setup menu
     if (lightningSelect === SetupLightning.NULL) {
-      showSetupMenu();
+      setPage(Screen.SETUP);
       return;
     }
 
@@ -374,21 +343,15 @@ const Setup: FC = () => {
     lightning.current = lightningSelect;
 
     // next step is always password A
-    showInputPasswordA();
+    setPage(Screen.INPUTA);
   };
 
   // ### INPUT PASSWORDS ###
 
-  const showInputPasswordA = () => {
-    setHtml(
-      <InputPassword passwordType="a" callback={callbackInputPasswordA} />
-    );
-  };
-
   const callbackInputPasswordA = (password: string | null) => {
     // on cancel jump back to setup menu
     if (!password) {
-      showSetupMenu();
+      setPage(Screen.SETUP);
       return;
     }
 
@@ -397,35 +360,29 @@ const Setup: FC = () => {
 
     // based on setupPhase ... continue to a different next screen
     console.log(setupPhase);
-    if (setupPhase.current === SetupPhase.RECOVERY) {
-      showStartDoneDialog();
+    if (setupPhase === SetupPhase.RECOVERY) {
+      setPage(Screen.START_DONE);
       return;
     }
-    if (setupPhase.current === SetupPhase.UPDATE) {
-      showStartDoneDialog();
+    if (setupPhase === SetupPhase.UPDATE) {
+      setPage(Screen.START_DONE);
       return;
     }
-    if (setupPhase.current === SetupPhase.SETUP) {
-      showInputPasswordB();
+    if (setupPhase === SetupPhase.SETUP) {
+      setPage(Screen.INPUTB);
       return;
     }
-    if (setupPhase.current === SetupPhase.MIGRATION) {
-      showInputPasswordB();
+    if (setupPhase === SetupPhase.MIGRATION) {
+      setPage(Screen.INPUTB);
       return;
     }
     showError("unkown follow up state: passworda");
   };
 
-  const showInputPasswordB = () => {
-    setHtml(
-      <InputPassword passwordType="b" callback={callbackInputPasswordB} />
-    );
-  };
-
   const callbackInputPasswordB = (password: string | null) => {
     // on cancel jump back to setup menu
     if (!password) {
-      showSetupMenu();
+      setPage(Screen.SETUP);
       return;
     }
 
@@ -435,24 +392,18 @@ const Setup: FC = () => {
     // based on setupPhase ... continue to a different next screen
     if (lightning.current === SetupLightning.NONE) {
       // without lightning no password c is needed - finish setup
-      showStartDoneDialog();
+      setPage(Screen.START_DONE);
       return;
     }
 
     // all other cases - get password c
-    showInputPasswordC();
-  };
-
-  const showInputPasswordC = () => {
-    setHtml(
-      <InputPassword passwordType="c" callback={callbackInputPasswordC} />
-    );
+    setPage(Screen.INPUTC);
   };
 
   const callbackInputPasswordC = (password: string | null) => {
     // on cancel jump back to setup menu
     if (!password) {
-      showSetupMenu();
+      setPage(Screen.SETUP);
       return;
     }
 
@@ -460,45 +411,18 @@ const Setup: FC = () => {
     passwordC.current = password;
 
     // now finish setup
-    showStartDoneDialog();
-  };
-
-  // ### START DONE DIALOG ###
-
-  const showStartDoneDialog = () => {
-    setHtml(
-      <StartDoneDialog
-        setupPhase={setupPhase.current}
-        callback={callbackStartDoneDialog}
-      />
-    );
+    setPage(Screen.START_DONE);
   };
 
   const callbackStartDoneDialog = (cancel: boolean) => {
     // on cancel jump back to setup menu
     if (cancel) {
-      showSetupMenu();
+      setPage(Screen.SETUP);
       return;
     }
 
     // no kick-off setup with all those data
     setupStart();
-  };
-
-  // ### START FINAL DIALOG ###
-
-  const showFinalDialog = () => {
-    setHtml(
-      <FinalDialog
-        setupPhase={setupPhase.current}
-        seedWords={seedWords.current}
-        callback={callbackFinalDialog}
-      />
-    );
-  };
-
-  const callbackFinalDialog = () => {
-    setupFinalReboot();
   };
 
   // ### SYNC SCREEN ###
@@ -515,7 +439,8 @@ const Setup: FC = () => {
         }
       });
     if (resp) {
-      setHtml(<SyncScreen data={resp.data} callback={callbackSyncScreen} />);
+      setSyncData(resp.data);
+      setPage(Screen.SYNC);
     }
   };
 
@@ -525,7 +450,74 @@ const Setup: FC = () => {
     }
   };
 
-  return html;
+  switch (page) {
+    case Screen.WAIT:
+      return (
+        <WaitScreen status={waitScreenStatus} message={waitScreenMessage} />
+      );
+    case Screen.SETUP:
+      return (
+        <SetupMenu
+          setupPhase={setupPhaseOnStart}
+          callback={callbackSetupMenu}
+        />
+      );
+    case Screen.START_DONE:
+      return (
+        <StartDoneDialog
+          setupPhase={setupPhase}
+          callback={callbackStartDoneDialog}
+        />
+      );
+    case Screen.FORMAT:
+      return (
+        <FormatDialog
+          containsBlockchain={gotBlockchain}
+          callback={callbackFormatDialog}
+        />
+      );
+    case Screen.RECOVERY:
+      return (
+        <RecoveryDialog
+          setupPhase={setupPhaseOnStart}
+          callback={callbackRecoveryDialog}
+        />
+      );
+    case Screen.MIGRATION:
+      return (
+        <MigrationDialog
+          migrationOS={migrationOS.current}
+          migrationMode={migrationMode.current}
+          callback={callbackMigrationDialog}
+        />
+      );
+    case Screen.INPUTA:
+      return (
+        <InputPassword passwordType="a" callback={callbackInputPasswordA} />
+      );
+    case Screen.INPUTB:
+      return (
+        <InputPassword passwordType="b" callback={callbackInputPasswordB} />
+      );
+    case Screen.INPUTC:
+      return (
+        <InputPassword passwordType="c" callback={callbackInputPasswordC} />
+      );
+    case Screen.INPUT_NODENAME:
+      return <InputNodename callback={callbackInputNodename} />;
+    case Screen.FINAL:
+      return (
+        <FinalDialog
+          setupPhase={setupPhase}
+          seedWords={seedWords.current}
+          callback={setupFinalReboot}
+        />
+      );
+    case Screen.SYNC:
+      return <SyncScreen data={syncData} callback={callbackSyncScreen} />;
+    default:
+      return <div></div>;
+  }
 };
 
 export default Setup;

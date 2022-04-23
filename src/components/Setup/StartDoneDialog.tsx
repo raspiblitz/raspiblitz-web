@@ -13,19 +13,25 @@ export type Props = {
 const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
   const { t } = useTranslation();
 
-  let headline: string = t("setup.done_setup_ready");
-  let buttonText: string = t("setup.done_setup_start");
-  if (setupPhase === SetupPhase.RECOVERY) {
-    headline = t("setup.done_recover_ready");
-    buttonText = t("setup.done_recover_start");
-  }
-  if (setupPhase === SetupPhase.UPDATE) {
-    headline = t("setup.done_update_ready");
-    buttonText = t("setup.done_update_start");
-  }
-  if (setupPhase === SetupPhase.MIGRATION) {
-    headline = t("setup.done_migration_ready");
-    buttonText = t("setup.done_migration_start");
+  let headline: string;
+  let buttonText: string;
+
+  switch (setupPhase) {
+    case SetupPhase.RECOVERY:
+      headline = t("setup.done_recover_ready");
+      buttonText = t("setup.done_recover_start");
+      break;
+    case SetupPhase.UPDATE:
+      headline = t("setup.done_update_ready");
+      buttonText = t("setup.done_update_start");
+      break;
+    case SetupPhase.MIGRATION:
+      headline = t("setup.done_migration_ready");
+      buttonText = t("setup.done_migration_start");
+      break;
+    default:
+      headline = t("setup.done_setup_ready");
+      buttonText = t("setup.done_setup_start");
   }
 
   return (
