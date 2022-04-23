@@ -8,6 +8,7 @@ export const disableScroll = {
 };
 
 type Props = {
+  children?: React.ReactNode;
   closeable?: boolean;
   close: () => void;
 };

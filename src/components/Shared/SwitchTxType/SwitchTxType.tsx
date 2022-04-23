@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export enum TxType {
@@ -9,35 +8,34 @@ export enum TxType {
 
 export type Props = {
   disabled?: boolean;
+  invoiceType: TxType;
   onTxTypeChange: (txtype: TxType) => void;
 };
 
-const SwitchTxType: FC<Props> = ({ onTxTypeChange, disabled }) => {
+const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
   const { t } = useTranslation();
-  const [txType, setTxType] = useState<TxType>(TxType.LIGHTNING);
 
-  const handleClick = (txType: TxType) => {
+  const setTxTypeHandler = (txType: TxType) => {
     if (disabled) {
       return;
     }
-    setTxType(txType);
     onTxTypeChange(txType);
   };
 
   return (
     <div>
       <button
-        disabled={txType === TxType.LIGHTNING}
+        disabled={invoiceType === TxType.LIGHTNING}
         className="switch-button"
-        onClick={() => handleClick(TxType.LIGHTNING)}
+        onClick={() => setTxTypeHandler(TxType.LIGHTNING)}
       >
         {t("home.lightning")}
       </button>
 
       <button
-        disabled={txType === TxType.ONCHAIN}
+        disabled={invoiceType === TxType.ONCHAIN}
         className="switch-button"
-        onClick={() => handleClick(TxType.ONCHAIN)}
+        onClick={() => setTxTypeHandler(TxType.ONCHAIN)}
       >
         {t("wallet.on_chain")}
       </button>
