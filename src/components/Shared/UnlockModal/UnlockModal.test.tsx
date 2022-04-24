@@ -59,7 +59,7 @@ describe("UnlockModal", () => {
 
   // https://github.com/cstenglein/raspiblitz-web/issues/234
   // skipped due to react v18 update
-  test.skip("should display unlocking text on nlock", async () => {
+  test.skip("should display unlocking text on unlock", async () => {
     server.use(
       rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
         return res(ctx.status(200));
