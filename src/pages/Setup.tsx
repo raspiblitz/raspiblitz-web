@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FinalDialog from "../components/Setup/FinalDialog";
 import FormatDialog from "../components/Setup/FormatDialog";
@@ -35,8 +35,6 @@ enum Screen {
 }
 
 const Setup: FC = () => {
-  console.log("Buildung Setup");
-
   // init with waiting screen
   const [page, setPage] = useState(Screen.WAIT);
 
@@ -48,15 +46,15 @@ const Setup: FC = () => {
   const [setupPhase, setSetupPhase] = useState(SetupPhase.NULL);
   const [gotBlockchain, setGotBlockchain] = useState(false);
 
-  const keepBlockchain = useRef(true);
-  const migrationOS = useRef(SetupMigrationOS.NULL);
-  const migrationMode = useRef(SetupMigrationMode.NULL);
-  const lightning = useRef(SetupLightning.NULL);
-  const hostname = useRef("");
-  const passwordA = useRef("");
-  const passwordB = useRef("");
-  const passwordC = useRef("");
-  const seedWords = useRef("");
+  const [keepBlockchain, setKeepBlockchain] = useState(true);
+  const [migrationOS, setMigrationOS] = useState(SetupMigrationOS.NULL);
+  const [migrationMode, setMigrationMode] = useState(SetupMigrationMode.NULL);
+  const [lightning, setLightning] = useState(SetupLightning.NULL);
+  const [hostname, setHostname] = useState("");
+  const [passwordA, setPasswordA] = useState("");
+  const [passwordB, setPasswordB] = useState("");
+  const [passwordC, setPasswordC] = useState("");
+  const [seedwords, setSeedwords] = useState("");
 
   const navigate = useNavigate();
 
@@ -86,8 +84,8 @@ const Setup: FC = () => {
 
       setGotBlockchain(resp.data.hddGotBlockchain === "1");
       setSetupPhaseOnStart(resp.data.setupPhase);
-      migrationOS.current = resp.data.hddGotMigrationData;
-      migrationMode.current = resp.data.migrationMode;
+      setMigrationOS(resp.data.hddGotMigrationData);
+      setMigrationMode(resp.data.migrationMode);
 
       switch (resp.data.setupPhase) {
         case SetupPhase.RECOVERY:
@@ -122,7 +120,7 @@ const Setup: FC = () => {
         });
       if (resp) {
         console.log(resp);
-        seedWords.current = resp.data.seedwordsNEW;
+        setSeedwords(resp.data.seedwordsNEW);
         setPage(Screen.FINAL);
       }
     } catch {
@@ -183,13 +181,13 @@ const Setup: FC = () => {
     try {
       // call API to start recovery
       const resp = await instance.post("/setup/setup-start-done", {
-        hostname: hostname.current,
+        hostname: hostname,
         forceFreshSetup: setupPhase === SetupPhase.SETUP,
-        keepBlockchain: keepBlockchain.current,
-        lightning: lightning.current,
-        passwordA: passwordA.current,
-        passwordB: passwordB.current,
-        passwordC: passwordC.current,
+        keepBlockchain: keepBlockchain,
+        lightning: lightning,
+        passwordA: passwordA,
+        passwordB: passwordB,
+        passwordC: passwordC,
       });
 
       // remember authorization for later API calls
@@ -278,11 +276,7 @@ const Setup: FC = () => {
         setupSetupShutdown();
         break;
       case SetupPhase.RECOVERY:
-        setPage(Screen.INPUTA);
-        break;
       case SetupPhase.UPDATE:
-        setPage(Screen.INPUTA);
-        break;
       case SetupPhase.MIGRATION:
         setPage(Screen.INPUTA);
         break;
@@ -303,7 +297,7 @@ const Setup: FC = () => {
     }
 
     // store for later
-    keepBlockchain.current = keepBlockchainData;
+    setKeepBlockchain(keepBlockchainData);
 
     // next step is always password A
     setPage(Screen.INPUT_NODENAME);
@@ -317,11 +311,11 @@ const Setup: FC = () => {
     }
 
     // store for later
-    hostname.current = nodename;
+    setHostname(nodename);
 
     // TODO: Once WebUi can support c-lightning or run without Lighting
     // show this dialog - until then fix selection to LND
-    lightning.current = SetupLightning.LND;
+    setLightning(SetupLightning.LND);
 
     // next step is always password A
     setPage(Screen.INPUTA);
@@ -340,7 +334,7 @@ const Setup: FC = () => {
     checkPasswordCancel(password);
 
     // store password for later
-    passwordA.current = password!;
+    setPasswordA(password!);
 
     // based on setupPhase ... continue to a different next screen
     console.log(setupPhase);
@@ -367,10 +361,10 @@ const Setup: FC = () => {
     checkPasswordCancel(password);
 
     // store password for later
-    passwordB.current = password!;
+    setPasswordB(password!);
 
     // based on setupPhase ... continue to a different next screen
-    if (lightning.current === SetupLightning.NONE) {
+    if (lightning === SetupLightning.NONE) {
       // without lightning no password c is needed - finish setup
       setPage(Screen.START_DONE);
       return;
@@ -384,7 +378,7 @@ const Setup: FC = () => {
     checkPasswordCancel(password);
 
     // store password for later
-    passwordC.current = password!;
+    setPasswordC(password!);
 
     // now finish setup
     setPage(Screen.START_DONE);
@@ -444,8 +438,8 @@ const Setup: FC = () => {
     case Screen.MIGRATION:
       return (
         <MigrationDialog
-          migrationOS={migrationOS.current}
-          migrationMode={migrationMode.current}
+          migrationOS={migrationOS}
+          migrationMode={migrationMode}
           callback={callbackMigrationDialog}
         />
       );
@@ -467,7 +461,7 @@ const Setup: FC = () => {
       return (
         <FinalDialog
           setupPhase={setupPhase}
-          seedWords={seedWords.current}
+          seedWords={seedwords}
           callback={setupFinalReboot}
         />
       );
