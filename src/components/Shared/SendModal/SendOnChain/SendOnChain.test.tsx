@@ -78,13 +78,13 @@ describe("SendOnChain", () => {
 
     addressInput = await screen.findByLabelText("wallet.address");
 
-    // expect(addressInput).toHaveClass("input-error");
+    await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
       screen.getByText("forms.validation.chainAddress.patternMismatch")
     ).toBeInTheDocument();
 
     userEvent.clear(addressInput);
-    userEvent.type(addressInput, "bc1q");
+    userEvent.type(addressInput, "bc1");
 
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
