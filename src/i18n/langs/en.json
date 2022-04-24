@@ -147,7 +147,7 @@
       "nodename_input": "Input Nodename",
       "nodename_name": "Node Name",
       "nodename_error_empty": "Nodename cannot be empty.",
-      "nodename_error_length": "Password needs to be at least 4 characters long.",
+      "nodename_error_length": "Nodename needs to be at least 4 characters long.",
       "nodename_error_chars": "Nodename should just contain characters & numbers.",
       "password_a_name": "Password A",
       "password_a_short": "Set your new Admin-Password (Password A)",
