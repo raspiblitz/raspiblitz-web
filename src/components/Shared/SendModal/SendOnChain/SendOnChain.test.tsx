@@ -1,4 +1,4 @@
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
@@ -18,18 +18,16 @@ const basicProps: Props = {
 };
 
 describe("SendOnChain", () => {
-  const setup = async () => {
-    await act(async () => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <SendOnChain {...basicProps} />
-        </I18nextProvider>
-      );
-    });
+  const setup = () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <SendOnChain {...basicProps} />
+      </I18nextProvider>
+    );
   };
 
   test("render", async () => {
-    await setup();
+    setup();
 
     expect(screen.getByText("wallet.send_onchain")).toBeInTheDocument();
 
@@ -73,20 +71,20 @@ describe("SendOnChain", () => {
   test.skip("validates the address-input for BTC address format", async () => {
     setup();
 
-    const addressInput = screen.getByLabelText(
-      "wallet.address"
-    ) as HTMLInputElement;
+    let addressInput = screen.getByLabelText("wallet.address");
 
     userEvent.clear(addressInput);
     userEvent.type(addressInput, "abc123456789");
 
-    await waitFor(() => expect(addressInput).toHaveClass("input-error"));
+    addressInput = await screen.findByLabelText("wallet.address");
+
+    // expect(addressInput).toHaveClass("input-error");
     expect(
       screen.getByText("forms.validation.chainAddress.patternMismatch")
     ).toBeInTheDocument();
 
     userEvent.clear(addressInput);
-    userEvent.type(addressInput, "bc1");
+    userEvent.type(addressInput, "bc1q");
 
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(

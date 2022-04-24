@@ -1,4 +1,4 @@
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../../i18n/test_config";
@@ -22,47 +22,42 @@ const basicProps: Props = {
 
 describe("ConfirmSendModal", () => {
   describe("ln-invoice with zero amount", () => {
-    const setup = async () => {
-      await act(async () => {
-        render(
-          <I18nextProvider i18n={i18n}>
-            <ConfirmSendModal {...basicProps} />
-          </I18nextProvider>
-        );
-      });
+    const setup = () => {
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal {...basicProps} />
+        </I18nextProvider>
+      );
     };
 
-    // https://github.com/cstenglein/raspiblitz-web/issues/234
-    // skipped due to react v18 update
-    test.skip("validates amount is lower than balance", async () => {
-      await setup();
+    test("validates amount is lower than balance", async () => {
+      setup();
 
-      const amountInput = screen.getByLabelText(
-        "wallet.amount"
-      ) as HTMLInputElement;
+      let amountInput = screen.getByLabelText("wallet.amount");
 
       userEvent.clear(amountInput);
       userEvent.type(amountInput, "999");
 
-      userEvent.click(await screen.findByText("settings.confirm"));
+      amountInput = await screen.findByLabelText("wallet.amount");
+
       await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
       expect(
-        screen.getByText("forms.validation.chainAmount.max")
+        await screen.findByText("forms.validation.chainAmount.max")
       ).toBeInTheDocument();
     });
 
     test("validates amount is bigger than zero", async () => {
-      await setup();
+      setup();
 
-      const amountInput = screen.getByLabelText(
-        "wallet.amount"
-      ) as HTMLInputElement;
+      let amountInput = screen.getByLabelText("wallet.amount");
 
-      await act(async () => {
-        userEvent.clear(amountInput);
-      });
+      userEvent.clear(amountInput);
+
       userEvent.type(amountInput, "0");
+
+      amountInput = await screen.findByLabelText("wallet.amount");
+
       await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
       expect(
@@ -71,7 +66,7 @@ describe("ConfirmSendModal", () => {
     });
 
     test("valid form passes", async () => {
-      await setup();
+      setup();
 
       const amountInput = screen.getByLabelText(
         "wallet.amount"
