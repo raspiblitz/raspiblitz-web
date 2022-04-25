@@ -74,7 +74,7 @@ const SendOnChain: FC<Props> = ({
         <div className="w-full py-1 md:w-10/12">
           <InputField
             {...register("addressInput", {
-              required: t("forms.validation.chainAddress.required") as string,
+              required: t("forms.validation.chainAddress.required"),
               pattern: {
                 value: /^(1|3|bc1|tb1|tpub|bcrt)\w+/i,
                 message: t("forms.validation.chainAddress.patternMismatch"),
@@ -93,15 +93,14 @@ const SendOnChain: FC<Props> = ({
             amount={confirmAmount}
             errorMessage={errors?.amountInput}
             register={register("amountInput", {
-              required: t("forms.validation.chainAmount.required") as string,
+              required: t("forms.validation.chainAmount.required"),
               max: {
                 value: balance,
                 message: t("forms.validation.chainAmount.max"),
               },
               validate: {
                 greaterThanZero: (value) =>
-                  value > 0 ||
-                  (t("forms.validation.chainAmount.required") as string),
+                  value > 0 || t("forms.validation.chainAmount.required"),
               },
               onChange: changeAmountHandler,
             })}
@@ -111,7 +110,7 @@ const SendOnChain: FC<Props> = ({
         <div className="w-full py-1 md:w-10/12">
           <InputField
             {...register("feeInput", {
-              required: t("forms.validation.chainFee.required") as string,
+              required: t("forms.validation.chainFee.required"),
               onChange: onChangeFee,
             })}
             label={t("tx.fee")}
