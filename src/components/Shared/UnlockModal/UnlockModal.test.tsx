@@ -8,12 +8,16 @@ import UnlockModal from "./UnlockModal";
 const handleClose = jest.fn();
 
 describe("UnlockModal", () => {
-  test("renders", () => {
+  const setup = () => {
     render(
       <I18nextProvider i18n={i18n}>
         <UnlockModal onClose={handleClose} />
       </I18nextProvider>
     );
+  };
+
+  test("renders", () => {
+    setup();
 
     const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
     expect(input).toHaveClass("input-underline");
@@ -23,11 +27,7 @@ describe("UnlockModal", () => {
   // https://github.com/cstenglein/raspiblitz-web/issues/234
   // skipped due to react v18 update
   test.skip("should enable button if input is not empty", async () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <UnlockModal onClose={handleClose} />
-      </I18nextProvider>
-    );
+    setup();
 
     const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
 
@@ -48,33 +48,25 @@ describe("UnlockModal", () => {
       })
     );
 
-    render(
-      <I18nextProvider i18n={i18n}>
-        <UnlockModal onClose={handleClose} />
-      </I18nextProvider>
-    );
+    setup();
 
     const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
     userEvent.type(input, "1234");
-    userEvent.click(await screen.findByText("wallet.unlock"));
+    userEvent.click(screen.getByText("wallet.unlock"));
 
     expect(await screen.findByText("login.invalid_pass")).toBeInTheDocument();
   });
 
   // https://github.com/cstenglein/raspiblitz-web/issues/234
   // skipped due to react v18 update
-  test.skip("should display unlocking text on Unlock", async () => {
+  test.skip("should display unlocking text on unlock", async () => {
     server.use(
       rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
         return res(ctx.status(200));
       })
     );
 
-    render(
-      <I18nextProvider i18n={i18n}>
-        <UnlockModal onClose={handleClose} />
-      </I18nextProvider>
-    );
+    setup();
 
     const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
     userEvent.type(input, "1234");
