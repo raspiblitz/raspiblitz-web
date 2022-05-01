@@ -164,7 +164,7 @@ const Setup: FC = () => {
     // loop poll
     setTimeout(() => {
       setupMonitoringLoop();
-    }, 1200);
+    }, 4000);
   }, [initSetupFinal, initSetupStart, navigate, showSyncScreen]);
 
   // will be called when component ready

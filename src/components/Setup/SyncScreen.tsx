@@ -2,12 +2,26 @@ import { ChangeEvent, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import ProgressCircle from "../../container/ProgressCircle/ProgressCircle";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { instance } from "../../util/interceptor";
 
 export interface InputData {
-  data: any;
+  data: SyncData | any;
   callback: (action: string, data: any) => void;
+}
+
+interface SyncData {
+  initialsync: string;
+  btc_default: string;
+  btc_default_ready: string;
+  btc_default_sync_percentage: string;
+  btc_default_peers: string;
+  system_count_start_blockchain: string;
+  ln_default: string;
+  ln_default_ready: string;
+  ln_default_locked: string;
+  system_count_start_lightning: string;
 }
 
 const SyncScreen: FC<InputData> = ({ data, callback }) => {
@@ -36,6 +50,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
           setRunningUnlock(false);
         }
       });
+    // TODO: Why setRunningUnlock always after 30s?
     setTimeout(() => {
       setPassword("");
       setRunningUnlock(false);
@@ -44,74 +59,78 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
 
   return (
     <SetupContainer>
-      <div className="text-center">
-        <div className="text-center">{t("setup.sync_headline")}</div>
-        <br />
-        {data.btc_default_ready === "1" && (
-          <span>
-            <div className="text-center text-sm">
-              {t("setup.sync_bitcoin_sync")}: {data.btc_default_sync_percentage}
-              % ({data.btc_default_peers} peers)
+      <section className="flex h-full flex-col items-center justify-center md:p-8">
+        <h2 className="text-center text-lg font-bold">
+          {t("setup.sync_headline")}
+        </h2>
+        <div className="flex h-full w-full flex-col py-1 md:w-10/12">
+          <div className="my-auto flex flex-col items-center justify-between md:flex-row">
+            <div className="my-8 flex w-full justify-center md:my-0 md:w-1/2">
+              {data.btc_default_ready === "1" && (
+                <>
+                  <ProgressCircle
+                    progress={+data.btc_default_sync_percentage}
+                  />
+                </>
+              )}
             </div>
-          </span>
-        )}
-        {data.btc_default_ready !== "1" && (
-          <span>
-            <div className="text-center text-sm">
-              ... {t("setup.sync_bitcoin_starting")} (
-              {data.system_count_start_blockchain}) ...
+            <div className="flex w-full flex-col justify-center md:w-1/2">
+              {data.btc_default_ready !== "1" && (
+                <div className="text-center text-sm">
+                  ... {t("setup.sync_bitcoin_starting")} (
+                  {data.system_count_start_blockchain}) ...
+                </div>
+              )}
+              {data.ln_default &&
+                data.ln_default !== "none" &&
+                data.ln_default_locked !== "1" && (
+                  <div className="text-center text-sm">
+                    Lightning: ready({data.ln_default_ready}) starts(
+                    {data.system_count_start_lightning})
+                  </div>
+                )}
+              {data.ln_default &&
+                data.ln_default !== "none" &&
+                data.ln_default_locked !== "0" &&
+                !runningUnlock && (
+                  <div className="flex flex-col justify-center">
+                    <label htmlFor="passfirst" className="label-underline">
+                      {t("setup.sync_wallet_info")}
+                    </label>
+                    <input
+                      id="passfirst"
+                      className="input-underline w-full"
+                      type="password"
+                      value={password}
+                      onChange={changePasswordHandler}
+                      required
+                    />
+                    <button
+                      onClick={unlockWallet}
+                      className="bd-button my-5 p-2"
+                    >
+                      {t("setup.sync_wallet_unlock")}
+                    </button>
+                  </div>
+                )}
+              {runningUnlock && (
+                <div className="justify-center">
+                  <LoadingSpinner color="text-yellow-500" />
+                </div>
+              )}
             </div>
-          </span>
-        )}
-        {data.n_default !== "" &&
-          data.n_default !== "none" &&
-          data.ln_default_locked !== "1" && (
-            <span>
-              <div className="text-center text-sm">
-                Lightning: ready({data.ln_default_ready}) starts(
-                {data.system_count_start_lightning})
-              </div>
-            </span>
-          )}
-        {data.n_default !== "" &&
-          data.n_default !== "none" &&
-          data.ln_default_locked !== "0" &&
-          !runningUnlock && (
-            <div className="justify-center">
-              <label htmlFor="passfirst" className="label-underline">
-                {t("setup.sync_wallet_info")}
-              </label>
-              <input
-                id="passfirst"
-                className="input-underline w-full"
-                type="password"
-                value={password}
-                onChange={changePasswordHandler}
-                required
-              />
-              <button
-                onClick={() => unlockWallet()}
-                className="bd-button my-5 p-2"
-              >
-                {t("setup.sync_wallet_unlock")}
-              </button>
-            </div>
-          )}
-        {runningUnlock && (
-          <div className="justify-center">
-            <LoadingSpinner color="text-yellow-500" />
           </div>
-        )}
-        <button
-          onClick={() => callback("shutdown", null)}
-          className="bd-button my-5 p-2"
-        >
-          {t("setup.shutdown")}
-        </button>
-        <div className="text-center text-sm italic">
-          {t("setup.sync_restartinfo")}
+          <button
+            onClick={() => callback("shutdown", null)}
+            className="bd-button my-5 p-2"
+          >
+            {t("settings.shutdown")}
+          </button>
+          <div className="text-center text-sm italic">
+            {t("setup.sync_restartinfo")}
+          </div>
         </div>
-      </div>
+      </section>
     </SetupContainer>
   );
 };

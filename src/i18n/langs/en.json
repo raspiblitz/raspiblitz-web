@@ -118,7 +118,6 @@
       "runningsetup": "Running Setup",
       "setupwait": "setup will take some minutes",
       "lightningoutdated": "The node you want to migrate from uses a newer Lightning version than this RaspiBlitz. Please wait for an updated release. You can shutdown and startup with your old node sd card - no changes were made.",
-      "shutdown": "shutdown",
       "convert_umbrel": "Do you want to convert UMBREL to RaspiBlitz?",
       "convert_citadel": "Do you want to convert CITADEL to RaspiBlitz?",
       "convert_mynode": "Do you want to convert MYNODE to RaspiBlitz?",
@@ -184,7 +183,7 @@
       "sync_wallet_unlock": "Unlock Wallet",
       "sync_wallet_info": "Please unlock your Lightning Wallet (Password C):",
       "sync_bitcoin_starting": "Bitcoin starting",
-      "sync_bitcoin_sync": "Bitcoin Sync",
+      "sync_bitcoin_sync": "Sync Progress",
       "sync_restartinfo": "(sync will continue on next restart)"
     },
     "forms": {

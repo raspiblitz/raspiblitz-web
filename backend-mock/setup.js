@@ -6,10 +6,10 @@ router.get("/status", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send(
     JSON.stringify({
-      // send something else than "done" to route to setup
-      setupPhase: "recovery",
-      state: "waitsetup",
-      message: "",
+      setupPhase: "done",
+      state: "ready",
+      message: "Node Running",
+      initialsync: "",
     })
   );
 });
@@ -49,7 +49,20 @@ router.get("/shutdown", function (req, res) {
 
 router.post("/setup-sync-info", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
-  res.send("STATUS");
+  res.send(
+    JSON.stringify({
+      initialsync: "running",
+      btc_default: "bitcoin",
+      btc_default_ready: "1",
+      btc_default_sync_percentage: "100.00",
+      btc_default_peers: "24",
+      system_count_start_blockchain: "1",
+      ln_default: "lnd",
+      ln_default_ready: "1",
+      ln_default_locked: "1",
+      system_count_start_lightning: "1",
+    })
+  );
 });
 
 module.exports = router;
