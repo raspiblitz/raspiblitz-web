@@ -78,10 +78,14 @@ const Setup: FC = () => {
 
   // prepare for first round of user interaction dialogs
   const initSetupStart = useCallback(async () => {
-    try {
-      const resp = await instance.get("/setup/setup-start-info");
-      console.log(resp);
+    const resp = await instance
+      .get("/setup/setup-start-info")
+      .catch((error) =>
+        showError(`request for init setup data failed: ${error}`)
+      );
+    console.log(resp);
 
+    if (resp) {
       setGotBlockchain(resp.data.hddGotBlockchain === "1");
       setSetupPhaseOnStart(resp.data.setupPhase);
       setMigrationOS(resp.data.hddGotMigrationData);
@@ -101,30 +105,22 @@ const Setup: FC = () => {
         default:
           showError("unkown setupphase on init");
       }
-    } catch {
-      showError("request for init setup data failed");
     }
   }, []);
 
   // prepare for last round of user interaction dialogs
   const initSetupFinal = useCallback(async () => {
-    try {
-      const resp = await instance
-        .get("/setup/setup-final-info")
-        .catch((err) => {
-          if (err.response.status === 403) {
-            navigate("/login?back=/setup");
-          } else {
-            showError(`request for setup start failed: ${err.response.status}`);
-          }
-        });
-      if (resp) {
-        console.log(resp);
-        setSeedwords(resp.data.seedwordsNEW);
-        setPage(Screen.FINAL);
+    const resp = await instance.get("/setup/setup-final-info").catch((err) => {
+      if (err.response.status === 403) {
+        navigate("/login?back=/setup");
+      } else {
+        showError(`request for setup start failed: ${err.response.status}`);
       }
-    } catch {
-      showError("request for final setup data failed");
+    });
+    if (resp) {
+      console.log(resp);
+      setSeedwords(resp.data.seedwordsNEW);
+      setPage(Screen.FINAL);
     }
   }, [navigate]);
 
@@ -173,7 +169,7 @@ const Setup: FC = () => {
 
   // will be called when component ready
   useEffect(() => {
-    console.info("kick-off monitoring loop: " + Date.now());
+    console.info("kick-off monitoring loop: " + new Date().toISOString());
     setupMonitoringLoop();
   }, [setupMonitoringLoop]);
 
@@ -237,10 +233,6 @@ const Setup: FC = () => {
       );
     });
   };
-
-  // #######################
-  // DIALOG LOGIC
-  // #######################
 
   const showError = (message: string) => {
     setWaitScreenStatus(SetupStatus.ERROR);
@@ -321,44 +313,43 @@ const Setup: FC = () => {
     setPage(Screen.INPUTA);
   };
 
-  // ### INPUT PASSWORDS ###
   // on cancel jump back to setup menu
-  const checkPasswordCancel = (password: string | null) => {
+  const checkPasswordCancel = (password: string | null): boolean => {
     if (!password) {
       setPage(Screen.SETUP);
-      return;
+      return true;
     }
+    return false;
   };
 
   const callbackInputPasswordA = (password: string | null) => {
-    checkPasswordCancel(password);
+    if (checkPasswordCancel(password)) {
+      return;
+    }
 
     // store password for later
     setPasswordA(password!);
 
     // based on setupPhase ... continue to a different next screen
     console.log(setupPhase);
-    if (setupPhase === SetupPhase.RECOVERY) {
-      setPage(Screen.START_DONE);
-      return;
+    switch (setupPhase) {
+      case SetupPhase.RECOVERY:
+      case SetupPhase.UPDATE:
+        setPage(Screen.START_DONE);
+        break;
+      case SetupPhase.SETUP:
+      case SetupPhase.MIGRATION:
+        setPage(Screen.INPUTB);
+        break;
+      default:
+        showError("unkown follow up state: passworda");
     }
-    if (setupPhase === SetupPhase.UPDATE) {
-      setPage(Screen.START_DONE);
-      return;
-    }
-    if (setupPhase === SetupPhase.SETUP) {
-      setPage(Screen.INPUTB);
-      return;
-    }
-    if (setupPhase === SetupPhase.MIGRATION) {
-      setPage(Screen.INPUTB);
-      return;
-    }
-    showError("unkown follow up state: passworda");
   };
 
   const callbackInputPasswordB = (password: string | null) => {
-    checkPasswordCancel(password);
+    if (checkPasswordCancel(password)) {
+      return;
+    }
 
     // store password for later
     setPasswordB(password!);
@@ -375,7 +366,9 @@ const Setup: FC = () => {
   };
 
   const callbackInputPasswordC = (password: string | null) => {
-    checkPasswordCancel(password);
+    if (checkPasswordCancel(password)) {
+      return;
+    }
 
     // store password for later
     setPasswordC(password!);

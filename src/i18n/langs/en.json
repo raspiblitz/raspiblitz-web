@@ -162,7 +162,7 @@
       "password_error_empty": "Password cannot be empty.",
       "password_error_length": "Password needs to be at least 8 characters long.",
       "password_error_chars": "Password should just contain characters & numbers.",
-      "password_error_match": "Password entries are not the same.",
+      "password_error_match": "Passwords do not match.",
       "done_setup_ready": "OK. Everything is ready to setup your RaspiBlitz.",
       "done_setup_start": "Start Setup",
       "done_recover_ready": "OK. Everything is ready to recover your RaspiBlitz.",

@@ -1,46 +1,35 @@
 import { ChangeEvent, FC, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 import { ReactComponent as X } from "../../assets/X.svg";
+import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import InputField from "../Shared/InputField/InputField";
 
 export type Props = {
-  passwordType: string;
+  passwordType: "a" | "b" | "c";
   callback: (password: string | null) => void;
 };
 
+interface IFormInputs {
+  passfirst: string;
+  passrepeat: string;
+}
+
 const InputPassword: FC<Props> = ({ passwordType, callback }) => {
   const { t } = useTranslation();
-  // later use {t("setup.set_lang")}
 
   const [password, setPassword] = useState("");
-  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [, setPasswordRepeat] = useState("");
 
-  let passwordName: string = "";
-  let headline: string = "";
-  let details: string = "";
-
-  switch (passwordType) {
-    case "a":
-      passwordName = t("setup.password_a_name");
-      headline = t("setup.password_a_short");
-      details = t("setup.password_a_details");
-      break;
-    case "b":
-      passwordName = t("setup.password_b_name");
-      headline = t("setup.password_b_short");
-      details = t("setup.password_b_details");
-      break;
-    case "c":
-      passwordName = t("setup.password_c_name");
-      headline = t("setup.password_c_short");
-      details = t("setup.password_c_details");
-      break;
-    default:
-      console.info("Unknown passwordType .. automatic cancel");
-      callback(null);
-      break;
-  }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
 
   const changePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -52,28 +41,13 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
     setPasswordRepeat(event.target.value);
   };
 
-  const continueHandler = () => {
-    // check is password is valid
-    if (!password) {
-      alert(t("setup.password_error_empty"));
-      return;
-    }
-    if (password.length < 8) {
-      alert(t("setup.password_error_length"));
-      return;
-    }
-    if (!password.match(/^[a-zA-Z0-9]*$/)) {
-      alert(t("setup.password_error_chars"));
-      return;
-    }
-    if (password !== passwordRepeat) {
-      alert(t("setup.password_error_match"));
-      return;
-    }
+  const validatePassRepeat = (repeatPw: string): string | undefined => {
+    return repeatPw === password ? undefined : t("setup.password_error_match");
+  };
 
+  const continueHandler = () => {
     callback(password);
-    setPassword("");
-    setPasswordRepeat("");
+    reset();
   };
 
   const cancelHandler = () => {
@@ -82,52 +56,70 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
 
   return (
     <SetupContainer>
-      <div className="flex flex-col items-center text-center">
-        <h2 className="text-center text-lg font-bold">{headline}</h2>
-        <span className="text-center text-sm italic">{details}</span>
-        <div className="w-full py-1 md:w-10/12">
-          <label htmlFor="passfirst" className="label-underline">
-            {passwordName}
-          </label>
-          <input
-            id="passfirst"
-            className="input-underline w-full"
-            type="password"
-            value={password}
-            onChange={changePasswordHandler}
-            required
-          />
-        </div>
-        <div className="w-full py-1 md:w-10/12">
-          <label htmlFor="passrepeat" className="label-underline">
-            {passwordName} ({t("setup.password_repeat")})
-          </label>
-          <input
-            id="passrepeat"
-            className="input-underline w-full"
-            type="password"
-            value={passwordRepeat}
-            onChange={changePasswordRepeatHandler}
-            required
-          />
-        </div>
-        <div className="mt-5 flex justify-center gap-2">
-          <button
-            onClick={cancelHandler}
-            className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
-          >
-            <X className="inline h-6 w-6" />
-            <span className="p-2">{t("setup.cancel")}</span>
-          </button>
-          <button
-            onClick={continueHandler}
-            className="bd-button flex items-center px-2"
-          >
-            <span className="p-2 ">{t("setup.ok")}</span>
-            <ArrowRight className="inline h-6 w-6" />
-          </button>
-        </div>
-      </div>
+      <section className="flex h-full flex-col items-center justify-center p-8">
+        <h2 className="text-center text-lg font-bold">
+          {t(`setup.password_${passwordType}_short`)}
+        </h2>
+        <span className="text-center text-sm italic">
+          {t(`setup.password_${passwordType}_details`)}
+        </span>
+        <form
+          onSubmit={handleSubmit(continueHandler)}
+          className="flex h-full w-full flex-col py-1 md:w-10/12"
+        >
+          <article className="my-auto">
+            <InputField
+              {...register("passfirst", {
+                required: t("setup.password_error_empty"),
+                onChange: changePasswordHandler,
+                pattern: {
+                  value: /^[a-zA-Z0-9]*$/,
+                  message: t("setup.password_error_chars"),
+                },
+                minLength: {
+                  value: 8,
+                  message: t("setup.password_error_length"),
+                },
+              })}
+              type="password"
+              label={t(`setup.password_${passwordType}_name`)}
+              errorMessage={errors.passfirst}
+            />
+            <InputField
+              {...register("passrepeat", {
+                required: t("setup.password_error_empty"),
+                onChange: changePasswordRepeatHandler,
+                validate: validatePassRepeat,
+              })}
+              type="password"
+              label={
+                t("setup.password_repeat") +
+                " " +
+                t(`setup.password_${passwordType}_name`)
+              }
+              errorMessage={errors.passrepeat}
+            />
+          </article>
+          <article className="mt-10 flex flex-col items-center justify-center gap-10 md:flex-row">
+            <button
+              onClick={cancelHandler}
+              type="button"
+              className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+            >
+              <X className="inline h-6 w-6" />
+              <span className="p-2">{t("setup.cancel")}</span>
+            </button>
+            <button
+              disabled={!isValid}
+              type="submit"
+              className="bd-button flex items-center px-2 disabled:bg-gray-400"
+            >
+              <span className="p-2">{t("setup.ok")}</span>
+              <ArrowRight className="inline h-6 w-6" />
+            </button>
+          </article>
+        </form>
+      </section>
     </SetupContainer>
   );
 };

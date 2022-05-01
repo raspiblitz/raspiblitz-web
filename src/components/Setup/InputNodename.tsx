@@ -17,7 +17,6 @@ interface IFormInputs {
 const InputNodename: FC<Props> = ({ callback }) => {
   const [inputNodeName, setInputNodeName] = useState("");
   const { t } = useTranslation();
-  // later use {t("setup.set_lang")}
 
   const changeNodenameHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNodeName(event.target.value);
