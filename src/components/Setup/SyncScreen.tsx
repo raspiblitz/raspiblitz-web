@@ -66,28 +66,24 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
         <div className="flex h-full w-full flex-col py-1 md:w-10/12">
           <div className="my-auto flex flex-col items-center justify-between md:flex-row">
             <div className="my-8 flex w-full justify-center md:my-0 md:w-1/2">
-              {data.btc_default_ready === "1" && (
-                <>
-                  <ProgressCircle
-                    progress={+data.btc_default_sync_percentage}
-                  />
-                </>
-              )}
+              <ProgressCircle
+                progress={57}
+                starting={data.btc_default_ready !== "1"}
+              />
             </div>
             <div className="flex w-full flex-col justify-center md:w-1/2">
-              {data.btc_default_ready !== "1" && (
-                <div className="text-center text-sm">
-                  ... {t("setup.sync_bitcoin_starting")} (
-                  {data.system_count_start_blockchain}) ...
-                </div>
-              )}
               {data.ln_default &&
                 data.ln_default !== "none" &&
                 data.ln_default_locked !== "1" && (
-                  <div className="text-center text-sm">
-                    Lightning: ready({data.ln_default_ready}) starts(
-                    {data.system_count_start_lightning})
-                  </div>
+                  <article>
+                    <h6 className="text-sm text-gray-500 dark:text-gray-300">
+                      {t("home.lightning")}
+                    </h6>
+                    <p>
+                      Lightning: ready({data.ln_default_ready}) starts(
+                      {data.system_count_start_lightning})
+                    </p>
+                  </article>
                 )}
               {data.ln_default &&
                 data.ln_default !== "none" &&
@@ -114,20 +110,22 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                   </div>
                 )}
               {runningUnlock && (
-                <div className="justify-center">
+                <div className="flex justify-center">
                   <LoadingSpinner color="text-yellow-500" />
                 </div>
               )}
             </div>
           </div>
-          <button
-            onClick={() => callback("shutdown", null)}
-            className="bd-button my-5 p-2"
-          >
-            {t("settings.shutdown")}
-          </button>
-          <div className="text-center text-sm italic">
-            {t("setup.sync_restartinfo")}
+          <div className="mx-auto flex flex-col justify-center">
+            <button
+              onClick={() => callback("shutdown", null)}
+              className="bd-button my-5 p-2"
+            >
+              {t("settings.shutdown")}
+            </button>
+            <div className="text-center text-sm italic">
+              {t("setup.sync_restartinfo")}
+            </div>
           </div>
         </div>
       </section>

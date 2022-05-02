@@ -2,13 +2,19 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  progress: number;
+  progress: number | null;
+  starting: boolean;
 };
 
-// See https://css-tricks.com/building-progress-ring-quickly/
-const ProgressCircle: FC<Props> = ({ progress }) => {
+// For base see https://css-tricks.com/building-progress-ring-quickly/
+const ProgressCircle: FC<Props> = ({ progress, starting }) => {
   const { t } = useTranslation();
   const circle = document.querySelector("circle");
+
+  if (!progress) {
+    progress = 0;
+  }
+
   if (circle) {
     const radius = circle!.r.baseVal.value;
     const circumference = radius * 2 * Math.PI;
@@ -25,7 +31,15 @@ const ProgressCircle: FC<Props> = ({ progress }) => {
       <circle
         className="origin-[50%_50%] -rotate-90 stroke-orange-400 transition-[stroke-dashoffset] ease-in-out"
         strokeWidth={4}
-        fill="transparent"
+        fill="none"
+        r="120"
+        cx="128"
+        cy="128"
+      />
+      <circle
+        className="origin-[50%_50%] -rotate-90 stroke-gray-400 opacity-20"
+        strokeWidth={6}
+        fill="none"
         r="120"
         cx="128"
         cy="128"
@@ -37,7 +51,9 @@ const ProgressCircle: FC<Props> = ({ progress }) => {
         textAnchor="middle"
         className="fill-black dark:fill-white"
       >
-        {t("setup.sync_bitcoin_sync")}: {progress}%
+        {starting
+          ? `${t("setup.sync_bitcoin_starting")}...`
+          : `${t("setup.sync_bitcoin_sync")}: ${progress}%`}
       </text>
     </svg>
   );
