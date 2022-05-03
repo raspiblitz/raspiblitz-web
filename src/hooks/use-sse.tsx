@@ -75,7 +75,19 @@ function useSSE() {
       } else if (installEventData.result && installEventData.result === "win") {
         // TODO: send a one of those small notifications
         if (installEventData.mode === "on") {
-          alert(`Install finished :)`);
+          console.log(installEventData);
+          console.log(installEventData.httpsForced);
+          console.log(installEventData.httpsSelfsigned);
+          if (
+            installEventData.httpsForced === "1" &&
+            installEventData.httpsSelfsigned === "1"
+          ) {
+            alert(
+              `Install finished :)\n\nYou may need to accept self-signed HTTPS certificate in your browser on first use.`
+            );
+          } else {
+            alert(`Install finished :)`);
+          }
         } else {
           alert(`Deinstall finished`);
         }
