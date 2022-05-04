@@ -8,7 +8,7 @@ Thank you for providing translations! 🙏
 
 - Norwegian Bokmål: [@comradekingu](https://github.com/comradekingu) [moskusminer](https://github.com/moskusminer)
 - French: J. Lavoie, [@bitpaint](https://github.com/bitpaint)
-- German: J.Lavoie, Me
+- German: J.Lavoie, Me, [@escapedcat](https://github.com/escapedcat)
 - Portuguese (Brazil) [@Nom4d3](https://github.com/Nom4d3) [@bitcoinheiro](https://github.com/bitcoinheiro) [mbombonato](https://github.com/mbombonato)
 - Hungarian [@karozagorus](https://github.com/karozagorus)
 - Italian: [GiovanniZotta](https://github.com/GiovanniZotta)
