@@ -11,41 +11,60 @@ export type Props = {
 
 const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   const { t } = useTranslation();
-
-  let headline: string;
-  switch (setupPhase) {
-    case SetupPhase.RECOVERY:
-      headline = t("setup.final_recovery");
-      break;
-    case SetupPhase.UPDATE:
-      headline = t("setup.final_update");
-      break;
-    case SetupPhase.MIGRATION:
-      headline = t("setup.final_migration");
-      break;
-    default:
-      headline = t("setup.final_setup");
-  }
+  const words = seedWords.split(" ");
+  const partOne = words.slice(0, 8);
+  const partTwo = words.slice(8, 16);
+  const partThree = words.slice(16, 24);
 
   return (
     <SetupContainer>
-      <div className="text-center">
-        <div className="text-center">{headline}</div>
-        <br />
+      <section className="flex h-full flex-col items-center justify-center md:p-8">
+        <h2 className="text-center text-lg font-bold">
+          {t(`setup.final_${setupPhase || "setup"}`)}
+        </h2>
         {seedWords && (
-          <div className="text-center">
-            <div className="text-sm">{t("setup.final_seedwords")}</div>
-            <div className="text-sm italic">{seedWords}</div>
-          </div>
+          <article className="my-auto flex flex-col items-center justify-center">
+            <h4 className="my-2 font-bold">{t("setup.final_seedwords")}</h4>
+            <div className="flex flex-row gap-4 md:gap-10">
+              <div className="flex flex-col">
+                {partOne.map((word, i) => {
+                  return (
+                    <div key={i} className="input-underline py-2">
+                      {i + 1} {word}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex flex-col">
+                {partTwo.map((word, i) => {
+                  return (
+                    <div key={i} className="input-underline py-2">
+                      {i + 9} {word}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex flex-col">
+                {partThree.map((word, i) => {
+                  return (
+                    <div key={i} className="input-underline py-2">
+                      {i + 17} {word}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </article>
         )}
-        <br />
-        <div className="text-center text-sm">
-          {t("setup.final_info_reboot")}
-        </div>
-        <button onClick={() => callback()} className="bd-button my-5 p-2">
-          {t("setup.final_do_reboot")}
-        </button>
-      </div>
+        <article className="justify-cente mt-4 flex flex-col items-center">
+          <div className="my-4 text-center text-sm">
+            {t("setup.final_info_reboot")}
+          </div>
+          <button onClick={() => callback()} className="bd-button p-2">
+            {t("setup.final_do_reboot")}
+          </button>
+        </article>
+      </section>
     </SetupContainer>
   );
 };

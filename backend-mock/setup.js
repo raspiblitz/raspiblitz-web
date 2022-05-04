@@ -6,8 +6,8 @@ router.get("/status", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send(
     JSON.stringify({
-      setupPhase: "done",
-      state: "ready",
+      setupPhase: "recovery",
+      state: "waitfinal",
       message: "Node Running",
       initialsync: "",
     })
@@ -34,7 +34,12 @@ router.post("/setup-start-done", function (req, res) {
 
 router.get("/setup-final-info", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
-  res.send("STATUS");
+  res.send(
+    JSON.stringify({
+      seedwordsNEW:
+        "Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry happy day",
+    })
+  );
 });
 
 router.get("/setup-final-done", function (req, res) {
@@ -49,20 +54,7 @@ router.get("/shutdown", function (req, res) {
 
 router.post("/setup-sync-info", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
-  res.send(
-    JSON.stringify({
-      initialsync: "running",
-      btc_default: "bitcoin",
-      btc_default_ready: "1",
-      btc_default_sync_percentage: "100.00",
-      btc_default_peers: "24",
-      system_count_start_blockchain: "1",
-      ln_default: "lnd",
-      ln_default_ready: "1",
-      ln_default_locked: "1",
-      system_count_start_lightning: "1",
-    })
-  );
+  res.send(true);
 });
 
 module.exports = router;

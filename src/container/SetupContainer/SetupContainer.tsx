@@ -18,7 +18,7 @@ const SetupContainer: FC<Props> = ({ children }) => {
       <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
         <I18nDropdown />
       </div>
-      <div className="h-2/3 w-4/5">
+      <div className="min-h-[2/3] w-4/5">
         <div className="bd-card">{children}</div>
       </div>
     </main>
