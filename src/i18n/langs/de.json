@@ -2,7 +2,7 @@
   "translation": {
     "navigation": {
       "settings": "Einstellungen",
-      "display_sats": "Sats anzeigen",
+      "display_sats": "SATS anzeigen",
       "dark_mode": "Dunkler Modus",
       "back": "Zurück",
       "apps": "Anwendungen",
@@ -27,7 +27,18 @@
       "bitcoin": "Bitcoin",
       "channel_balance": "Kanal Guthaben",
       "blocks_synced": "synchronisierte Blöcke",
-      "lightning": "Lightning"
+      "lightning": "Lightning",
+      "show": "Anzeigen",
+      "hide": "Verbergen",
+      "difficulty": "Schwierigkeitsgrad",
+      "blockchain_size": "Blockchain Größe",
+      "pending_balance_local": "Ausstehendes Guthaben des lokalen Kanals",
+      "pending_balance_remote": "Ausstehendes Guthaben des remote Kanals",
+      "connections": "Verbindungen",
+      "conn_in": "Eingehend",
+      "local_balance": "Guthaben des lokalen Kanals",
+      "conn_out": "Ausgehend",
+      "remote_balance": "Guthaben des remote Kanals"
     },
     "wallet": {
       "receive": "Erhalten",
@@ -37,7 +48,18 @@
       "copied": "Kopiert!",
       "amount": "Betrag",
       "send": "Senden",
-      "balance": "Guthaben"
+      "balance": "Guthaben",
+      "create_invoice_ln": "Lightning Rechnung erstellen",
+      "wallet_locked": "Wallet gesperrt",
+      "create_invoice": "Rechnung erstellen",
+      "confirm": "Bestätigen",
+      "invoice": "Rechnung",
+      "send_lightning": "Geld via Lightning versenden",
+      "unlock_title": "Wallet entsperren",
+      "unlock_subtitle": "Entsperre deine Wallet",
+      "unlock_success": "Wallet entsperrt",
+      "unlock": "Entsperren",
+      "unlocking": "Entsperre"
     },
     "tx": {
       "comment": "Kommentar",
@@ -49,7 +71,13 @@
       "mempool": "Auf mempool anzeigen",
       "txid": "Transaktions ID",
       "tx_details": "Transaktionsdetails",
-      "transactions": "Transaktionen"
+      "transactions": "Transaktionen",
+      "transactions_none": "Noch keine Transaktionen. Wird Zeit, deine erste zu machen",
+      "fee": "Gebühr",
+      "included_block": "Im Block inkludiert",
+      "fee_rate": "Gebühr Kurs",
+      "sent": "Transaktion gesendet!",
+      "confirm_info": "Bitte bestätige die diese Transaktion"
     },
     "apps": {
       "online": "online",
@@ -63,7 +91,8 @@
       "install": "Installieren",
       "open": "Öffnen",
       "available": "Verfügbare Anwendungen",
-      "installed": "Installiert"
+      "installed": "Installiert",
+      "installing": "Installiere"
     },
     "settings": {
       "language": "Sprache",
@@ -81,7 +110,9 @@
       "validation": {
         "lnInvoice": {
           "required": "Bitte gib eine Lightning invoice ein",
-          "patternMismatch": "Falsches invoice format"
+          "patternMismatch": "Falsches invoice format",
+          "max": "Dein Guthaben reicht nicht aus, um diese Rechnung zu bezahlen",
+          "expired": "Rechnung ist abgelaufen"
         },
         "chainAddress": {
           "required": "Bitte gib eine Bitcoin Adresse ein",
@@ -93,7 +124,39 @@
         },
         "chainFee": {
           "required": "Bitte gib eine Gebühr ein"
+        },
+        "unlock": {
+          "pass_c": "Passwort C",
+          "required": "Bitte gebe Passwort C ein"
         }
+      },
+      "hint": {
+        "invoiceAmountZero": "Rechnungssumme ist null"
+      }
+    },
+    "appInfo": {
+      "rtl": {
+        "shortDescription": "Eine umfagreiche Webbrowser Applikation für LND, C-Lightning and Eclair",
+        "about": "RTL ist ein umfängliches, gerät-unabhängiges, Web user interface um eine Lightning node zu betreiben. RTL ist verfügbar für LND, C-Lightning und Eclair Implementierungen."
+      },
+      "specter": {
+        "shortDescription": "Eine Desktop GUI für Bitcoin Core, optimiert für hardware wallets"
+      },
+      "btc-pay": {
+        "shortDescription": "Nehme Bezahlungen via Bitcoin an. Ein freier, open-source & selbst-gehosteter Bitcoin payment processor.",
+        "about": "BTCPay Server ist ein freier, open-source Bitcoin payment processor, welcher es Dir möglich macht, Bitcoin ohne Gebühren oder via Vermittler zu empfangen."
+      },
+      "lnbits": {
+        "shortDescription": "Freie open-source lightning-network wallet/accounts System"
+      },
+      "btc-rpc-explorer": {
+        "shortDescription": "Bitcoin RPC Explorer"
+      },
+      "mempool": {
+        "shortDescription": "Ein open-source Explorer entwickelt für die Bitcoin Community"
+      },
+      "thunderhub": {
+        "shortDescription": "LND Lightning Node Manager in deinem Browser"
       }
     }
   }
