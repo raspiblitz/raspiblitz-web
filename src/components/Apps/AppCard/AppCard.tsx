@@ -39,14 +39,6 @@ export const AppCard: FC<Props> = ({
     onInstall(id);
   };
 
-  const openButtonPressed = (address: string) => {
-    if (address.startsWith("https")) {
-      alert(
-        "You need to accept the self-signed certificate first to use this app."
-      );
-    }
-  };
-
   return (
     <div className="bd-card transition-colors dark:bg-gray-800">
       <div className="mt-2 flex h-4/6 w-full flex-row items-center">
