@@ -33,7 +33,6 @@ const App: FC = () => {
         if (resp) {
           const setupPhase = resp.data.setupPhase;
           const initialsync = resp.data.initialsync;
-          console.info(`initialsync(${initialsync})`);
           if (setupPhase !== SetupPhase.DONE || initialsync === "running") {
             navigate("/setup");
           }

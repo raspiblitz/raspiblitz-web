@@ -64,7 +64,7 @@ if (!process.env.REACT_APP_BACKEND) {
 export const SSE_URL = window.location.hostname.includes("localhost")
   ? `${backendserver}/api/sse/subscribe`
   : "/api/sse/subscribe";
-console.info("Running with backend server: ", backendserver);
+//console.info("Running with backend server: ", backendserver);
 
 type Props = {
   children?: React.ReactNode;
