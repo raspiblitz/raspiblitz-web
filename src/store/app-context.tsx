@@ -115,12 +115,17 @@ const AppContextProvider: FC<Props> = ({ children }) => {
     // if authenticated log in automatically
     const token = localStorage.getItem("access_token");
     if (token) {
-      const payload = parseJwt(token);
-      if (payload.expires > Date.now()) {
-        setIsLoggedIn(true);
-      } else {
+      try {
+        const payload = parseJwt(token);
+        if (payload.expires > Date.now()) {
+          setIsLoggedIn(true);
+        } else {
+          localStorage.removeItem("access_token");
+          console.info(`Token expired at ${payload.expires}.`);
+        }
+      } catch {
         localStorage.removeItem("access_token");
-        console.info(`Token expired at ${payload.expires}.`);
+        console.info(`Token invalid - removed.`);
       }
     }
   }, [darkMode, i18n]);

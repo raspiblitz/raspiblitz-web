@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
+import { HardwareInfo } from "../models/hardware-info";
 import { LnStatus } from "../models/ln-status";
 import { SystemInfo } from "../models/system-info";
 import { WalletBalance } from "../models/wallet-balance";
@@ -59,9 +60,42 @@ function useSSE() {
     };
 
     const setInstall = (event: Event) => {
-      sseCtx.setInstallingAppId(
-        JSON.parse((event as MessageEvent<string>).data).id
-      );
+      const installEventData = JSON.parse((event as MessageEvent<string>).data);
+      // {"id": "specter", "mode": "on", "result": "running", "details": ""}
+      if (installEventData.result && installEventData.result === "fail") {
+        // TODO: replace with a propper Installed Failed Notification
+        // should be with an OK button so that user can note & report error
+        if (installEventData.mode === "on")
+          alert(`Install Failed: ${installEventData.details}`);
+        else {
+          alert(`Deinstall Failed: ${installEventData.details}`);
+        }
+        // set the install context back to null
+        sseCtx.setInstallingApp(null);
+      } else if (installEventData.result && installEventData.result === "win") {
+        // TODO: send a one of those small notifications
+        if (installEventData.mode === "on") {
+          console.log(installEventData);
+          console.log(installEventData.httpsForced);
+          console.log(installEventData.httpsSelfsigned);
+          if (
+            installEventData.httpsForced === "1" &&
+            installEventData.httpsSelfsigned === "1"
+          ) {
+            alert(
+              `Install finished :)\n\nYou may need to accept self-signed HTTPS certificate in your browser on first use.`
+            );
+          } else {
+            alert(`Install finished :)`);
+          }
+        } else {
+          alert(`Deinstall finished`);
+        }
+        // set the install context back to null
+        sseCtx.setInstallingApp(null);
+      } else {
+        sseCtx.setInstallingApp(installEventData);
+      }
     };
 
     const setSystemInfo = (event: Event) => {
@@ -110,6 +144,17 @@ function useSSE() {
       });
     };
 
+    const setHardwareInfo = (event: Event) => {
+      sseCtx.setHardwareInfo((prev: HardwareInfo | null) => {
+        const message = JSON.parse((event as MessageEvent<string>).data);
+
+        return {
+          ...prev,
+          ...message,
+        };
+      });
+    };
+
     if (evtSource) {
       evtSource.addEventListener("system_info", setSystemInfo);
       evtSource.addEventListener("btc_info", setBtcInfo);
@@ -119,6 +164,7 @@ function useSSE() {
       evtSource.addEventListener("installed_app_status", setAppStatus);
       evtSource.addEventListener("apps", setApps);
       evtSource.addEventListener("install", setInstall);
+      evtSource.addEventListener("hardware_info", setHardwareInfo);
     }
 
     return () => {
@@ -132,6 +178,7 @@ function useSSE() {
         evtSource.removeEventListener("installed_app_status", setAppStatus);
         evtSource.removeEventListener("apps", setApps);
         evtSource.removeEventListener("install", setInstall);
+        evtSource.removeEventListener("hardware_info", setHardwareInfo);
       }
     };
   }, [evtSource, setEvtSource, sseCtx]);
@@ -144,7 +191,8 @@ function useSSE() {
     appStatus: sseCtx.appStatus,
     transactions: sseCtx.transactions,
     availableApps: sseCtx.availableApps,
-    installingAppId: sseCtx.installingAppId,
+    installingApp: sseCtx.installingApp,
+    hardwareInfo: sseCtx.hardwareInfo,
   };
 }
 

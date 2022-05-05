@@ -19,15 +19,24 @@ const Login: FC = () => {
     useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
+
   const location = useLocation();
   const from =
     (location.state as { from?: Location })?.from?.pathname || "/home";
+  const queryParams = new URLSearchParams(window.location.search);
+  const back = queryParams.get("back");
 
   useEffect(() => {
     if (isLoggedIn) {
-      return navigate(from || "/home", { replace: true });
+      if (back) {
+        console.log(`back(${back})`);
+        return navigate(back, { replace: true });
+      } else {
+        console.log(`from(${from})`);
+        return navigate(from || "/home", { replace: true });
+      }
     }
-  }, [navigate, from, isLoggedIn]);
+  }, [navigate, from, isLoggedIn, back]);
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
@@ -53,7 +62,13 @@ const Login: FC = () => {
       localStorage.setItem("access_token", resp.data.access_token);
       setIsLoggedIn(true);
       enableGutter();
-      navigate(from, { replace: true });
+      if (back) {
+        console.log(`back(${back})`);
+        navigate(back, { replace: true });
+      } else {
+        console.log(`from(${from})`);
+        navigate(from, { replace: true });
+      }
     }
   };
 

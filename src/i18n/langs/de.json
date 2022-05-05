@@ -10,8 +10,8 @@
       "logout": "Abmelden"
     },
     "login": {
-      "enter_pass": "Passwort B eingeben",
-      "enter_pass_placeholder": "Passwort B",
+      "enter_pass": "Passwort A eingeben",
+      "enter_pass_placeholder": "Passwort A",
       "error": "Ein Fehler ist aufgetreten",
       "invalid_pass": "Ungültiges Passwort",
       "login": "Anmelden"
@@ -105,6 +105,15 @@
       "new_pw": "Neues Passwort",
       "old_pw": "Altes Passwort",
       "change_pw": "Passwort ändern"
+    },
+    "setup": {
+      "pleasewait": "bitte warten",
+      "shuttingdown": "schalte aus",
+      "restarting": "starte neu",
+      "restartinfo": "bitte warten bis RaspiBlitz sich wieder meldet",
+      "preparingsetup": "bereite Einrichtung vor",
+      "runningsetup": "Einrichtung läuft",
+      "setupwait": "Einrichtung wird einige Minuten dauern"
     },
     "forms": {
       "validation": {

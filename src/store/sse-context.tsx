@@ -3,6 +3,7 @@ import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
+import { HardwareInfo } from "../models/hardware-info";
 import { LnStatus } from "../models/ln-status";
 import { SystemInfo } from "../models/system-info";
 import { Transaction } from "../models/transaction.model";
@@ -26,8 +27,10 @@ interface SSEContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  installingAppId: string | null;
-  setInstallingAppId: Dispatch<SetStateAction<string | null>>;
+  installingApp: any | null;
+  setInstallingApp: Dispatch<SetStateAction<any | null>>;
+  hardwareInfo: Partial<HardwareInfo> | null;
+  setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
 }
 
 export const SSEContext = createContext<SSEContextType>({
@@ -47,8 +50,10 @@ export const SSEContext = createContext<SSEContextType>({
   setAvailableApps: () => {},
   transactions: [],
   setTransactions: () => {},
-  installingAppId: null,
-  setInstallingAppId: () => {},
+  installingApp: null,
+  setInstallingApp: () => {},
+  hardwareInfo: {},
+  setHardwareInfo: () => {},
 });
 
 // for personal development - change backend with .env file
@@ -59,7 +64,7 @@ if (!process.env.REACT_APP_BACKEND) {
 export const SSE_URL = window.location.hostname.includes("localhost")
   ? `${backendserver}/api/sse/subscribe`
   : "/api/sse/subscribe";
-console.info("Running with backend server: ", backendserver);
+//console.info("Running with backend server: ", backendserver);
 
 type Props = {
   children?: React.ReactNode;
@@ -116,7 +121,8 @@ const SSEContextProvider: FC<Props> = (props) => {
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [installingAppId, setInstallingAppId] = useState<string | null>(null);
+  const [installingApp, setInstallingApp] = useState<any | null>(null);
+  const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -135,8 +141,10 @@ const SSEContextProvider: FC<Props> = (props) => {
     setAvailableApps,
     transactions,
     setTransactions,
-    installingAppId,
-    setInstallingAppId,
+    installingApp,
+    setInstallingApp,
+    hardwareInfo,
+    setHardwareInfo,
   };
 
   return (

@@ -13,9 +13,20 @@ const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 export type Props = {
   torAddress: string;
   sshAddress: string;
+  cpu_overall_percent: number;
+  disk_io_read_bytes: number;
+  vram_usage_percent: number;
+  disk_io_write_bytes: number;
 };
 
-export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
+export const ConnectionCard: FC<Props> = ({
+  sshAddress,
+  torAddress,
+  cpu_overall_percent,
+  vram_usage_percent,
+  disk_io_read_bytes,
+  disk_io_write_bytes,
+}) => {
   const { t } = useTranslation();
   const [showAddress, setShowAddress] = useState(true);
   const [copyTor, clippedTor] = useClipboard(torAddress);
@@ -30,8 +41,8 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
   }
 
   return (
-    <div className="h-full p-5">
-      <div className="bd-card transition-colors">
+    <div className="flex h-full flex-col p-5 lg:flex-row">
+      <div className="bd-card w-full transition-colors lg:mr-2 lg:w-1/2">
         <div className="flex items-center text-lg font-bold">
           {t("home.conn_details")}&nbsp;
           <Tooltip
@@ -113,6 +124,46 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
                 onClick={copySsh}
               />
             </Tooltip>
+          </div>
+        </article>
+      </div>
+      {/* TODO: Hardware Card - Move out later */}
+      <div className="bd-card mt-10 w-full transition-colors lg:mt-0 lg:ml-2 lg:w-1/2">
+        <div className="flex items-center text-lg font-bold">
+          Hardware Details
+        </div>
+        <article className="flex flex-row overflow-hidden py-4">
+          <div className="flex w-1/2 flex-col">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">CPU %</h6>
+            <div className="flex">{cpu_overall_percent}</div>
+          </div>
+          <div className="flex w-1/2 flex-col">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+              Disk IO Read
+            </h6>
+            <div className="flex">
+              {disk_io_read_bytes
+                ? (disk_io_read_bytes / (1024 * 1024)).toFixed(2)
+                : "-"}{" "}
+              MB
+            </div>
+          </div>
+        </article>
+        <article className="flex flex-row overflow-hidden py-4">
+          <div className="flex w-1/2 flex-col">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">RAM %</h6>
+            <div className="flex">{vram_usage_percent}</div>
+          </div>
+          <div className="flex w-1/2 flex-col">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+              Disk IO Write
+            </h6>
+            <div className="flex">
+              {disk_io_write_bytes
+                ? (disk_io_write_bytes / (1024 * 1024)).toFixed(2)
+                : "-"}{" "}
+              MB
+            </div>
           </div>
         </article>
       </div>

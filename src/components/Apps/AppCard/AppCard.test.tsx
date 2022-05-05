@@ -10,7 +10,7 @@ const app = {
 };
 
 const basicProps = {
-  installingAppId: null,
+  installingApp: null,
   app: app,
   onInstall: () => {},
   onOpenDetails: () => {},

@@ -1,16 +1,41 @@
-export enum SetupSteps {
-  WELCOME = 0,
-  SETUP_FRESH,
-  UPDATE,
-  RECOVER,
-  MYNODE_MIGRATION,
-  UMBREL_MIGRATION,
-  SET_PASSWORDS,
-  PROVISION,
-  WALLET_CREATION,
-  DONE,
+export enum SetupPhase {
+  NULL = "",
+  DONE = "done",
+  SETUP = "setup",
+  RECOVERY = "recovery",
+  UPDATE = "update",
+  MIGRATION = "migration",
 }
 
 export enum SetupStatus {
-  DONE = "done",
+  NULL = "",
+  WAIT = "wait",
+  ERROR = "error",
+  WAITSETUP = "waitsetup",
+  WAITFINAL = "waitfinal",
+  WAITPROVISION = "waitprovision",
+  PROVISION = "provision",
+  READY = "ready",
+  SHUTDOWN = "shutdown",
+  REBOOT = "reboot",
+}
+
+export enum SetupLightning {
+  NULL = "",
+  NONE = "none",
+  LND = "lnd",
+  CLIGHTNING = "cl",
+}
+
+export enum SetupMigrationOS {
+  NULL = "",
+  UMBREL = "umbrel",
+  CITADEL = "citadel",
+  MYNODE = "mynode",
+}
+
+export enum SetupMigrationMode {
+  NULL = "",
+  NORMAL = "normal",
+  OUTDATED = "outdatedLightning",
 }

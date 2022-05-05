@@ -1,24 +1,471 @@
-import { FC, ReactElement, useEffect, useState } from "react";
-import Welcome from "../components/Setup/Welcome";
-import { SetupSteps } from "../models/setup.model";
+import { FC, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import FinalDialog from "../components/Setup/FinalDialog";
+import FormatDialog from "../components/Setup/FormatDialog";
+import InputNodename from "../components/Setup/InputNodename";
+import InputPassword from "../components/Setup/InputPassword";
+import MigrationDialog from "../components/Setup/MigrationDialog";
+import RecoveryDialog from "../components/Setup/RecoveryDialog";
+import SetupMenu from "../components/Setup/SetupMenu";
+import StartDoneDialog from "../components/Setup/StartDoneDialog";
+import SyncScreen from "../components/Setup/SyncScreen";
+import WaitScreen from "../components/Setup/WaitScreen";
+import {
+  SetupLightning,
+  SetupMigrationMode,
+  SetupMigrationOS,
+  SetupPhase,
+  SetupStatus,
+} from "../models/setup.model";
+import { instance } from "../util/interceptor";
+
+enum Screen {
+  WAIT,
+  START_DONE,
+  FORMAT,
+  SETUP,
+  INPUTA,
+  INPUTB,
+  INPUTC,
+  INPUT_NODENAME,
+  RECOVERY,
+  MIGRATION,
+  FINAL,
+  SYNC,
+}
 
 const Setup: FC = () => {
-  const [step, setStep] = useState<SetupSteps>(SetupSteps.WELCOME);
+  // init with waiting screen
+  const [page, setPage] = useState(Screen.WAIT);
 
-  useEffect(() => {
-    // call status and set step accordingly
-    setStep(0);
+  const [syncData, setSyncData] = useState(null);
+  const [waitScreenStatus, setWaitScreenStatus] = useState(SetupStatus.WAIT);
+  const [waitScreenMessage, setWaitScreenMessage] = useState("");
+
+  const [setupPhaseOnStart, setSetupPhaseOnStart] = useState(SetupPhase.NULL);
+  const [setupPhase, setSetupPhase] = useState(SetupPhase.NULL);
+  const [gotBlockchain, setGotBlockchain] = useState(false);
+
+  const [keepBlockchain, setKeepBlockchain] = useState(true);
+  const [migrationOS, setMigrationOS] = useState(SetupMigrationOS.NULL);
+  const [migrationMode, setMigrationMode] = useState(SetupMigrationMode.NULL);
+  const [lightning, setLightning] = useState(SetupLightning.NULL);
+  const [hostname, setHostname] = useState("");
+  const [passwordA, setPasswordA] = useState("");
+  const [passwordB, setPasswordB] = useState("");
+  const [passwordC, setPasswordC] = useState("");
+  const [seedwords, setSeedwords] = useState("");
+
+  const navigate = useNavigate();
+
+  // ### SYNC SCREEN ###
+  const showSyncScreen = useCallback(async () => {
+    // call API to start recovery
+    const resp = await instance
+      .post("/setup/setup-sync-info", {})
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/login?back=/setup");
+        } else {
+          console.log(`request for sync failed: ${err.response.status}`);
+        }
+      });
+    if (resp) {
+      setSyncData(resp.data);
+      setPage(Screen.SYNC);
+    }
+  }, [navigate]);
+
+  // prepare for first round of user interaction dialogs
+  const initSetupStart = useCallback(async () => {
+    const resp = await instance
+      .get("/setup/setup-start-info")
+      .catch((error) =>
+        showError(`request for init setup data failed: ${error}`)
+      );
+    console.log(resp);
+
+    if (resp) {
+      setGotBlockchain(resp.data.hddGotBlockchain === "1");
+      setSetupPhaseOnStart(resp.data.setupPhase);
+      setMigrationOS(resp.data.hddGotMigrationData);
+      setMigrationMode(resp.data.migrationMode);
+
+      switch (resp.data.setupPhase) {
+        case SetupPhase.RECOVERY:
+        case SetupPhase.UPDATE:
+          setPage(Screen.RECOVERY);
+          break;
+        case SetupPhase.MIGRATION:
+          setPage(Screen.MIGRATION);
+          break;
+        case SetupPhase.SETUP:
+          setPage(Screen.SETUP);
+          break;
+        default:
+          showError("unkown setupphase on init");
+      }
+    }
   }, []);
 
-  let setupStep: ReactElement<any, any> | null = null;
+  // prepare for last round of user interaction dialogs
+  const initSetupFinal = useCallback(async () => {
+    const resp = await instance.get("/setup/setup-final-info").catch((err) => {
+      if (err.response.status === 403) {
+        navigate("/login?back=/setup");
+      } else {
+        showError(`request for setup start failed: ${err.response.status}`);
+      }
+    });
+    if (resp) {
+      console.log(resp);
+      setSeedwords(resp.data.seedwordsNEW);
+      setPage(Screen.FINAL);
+    }
+  }, [navigate]);
 
-  switch (step) {
+  // will loop pull status until user interaction is needed
+  const setupMonitoringLoop = useCallback(async () => {
+    try {
+      // get state of node from API
+      const resp = await instance.get("/setup/status");
+      console.log(resp);
+
+      // special cases for user interaction (exit loop)
+      if (resp.data.state === SetupStatus.WAITSETUP) {
+        initSetupStart();
+        return;
+      }
+      if (resp.data.state === SetupStatus.WAITFINAL) {
+        initSetupFinal();
+        return;
+      }
+
+      if (resp.data.state === SetupStatus.READY) {
+        if (resp.data.initialsync === "running") {
+          // initial sync still running
+          showSyncScreen();
+        } else {
+          // ok ready & inital sync done -> go to dashboard
+          console.log("READY --> DASHBOARD");
+          navigate("/");
+          return;
+        }
+      } else {
+        // update waiting screen
+        setWaitScreenStatus(resp.data.state);
+        setWaitScreenMessage(resp.data.message);
+        setPage(Screen.WAIT);
+      }
+    } catch {
+      console.log("status request failed - device is off or in reboot?");
+    }
+
+    // loop poll
+    setTimeout(() => {
+      setupMonitoringLoop();
+    }, 4000);
+  }, [initSetupFinal, initSetupStart, navigate, showSyncScreen]);
+
+  // will be called when component ready
+  useEffect(() => {
+    console.info("kick-off monitoring loop: " + new Date().toISOString());
+    setupMonitoringLoop();
+  }, [setupMonitoringLoop]);
+
+  const setupStart = async () => {
+    try {
+      // call API to start recovery
+      const resp = await instance.post("/setup/setup-start-done", {
+        hostname: hostname,
+        forceFreshSetup: setupPhase === SetupPhase.SETUP,
+        keepBlockchain: keepBlockchain,
+        lightning: lightning,
+        passwordA: passwordA,
+        passwordB: passwordB,
+        passwordC: passwordC,
+      });
+
+      // remember authorization for later API calls
+      if (resp) {
+        localStorage.setItem("access_token", resp.data.access_token);
+      }
+
+      // fall back to loop polling until setup finished
+      setupMonitoringLoop();
+    } catch {
+      showError("request for setup start failed");
+    }
+  };
+
+  // kick-off final reboot
+  const setupFinalReboot = async () => {
+    try {
+      // call API to start recovery
+      await instance.post("/setup/setup-final-done", {}).catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/login?back=/setup");
+        } else {
+          showError(
+            `request for final setup done failed: ${err.response.status}`
+          );
+        }
+      });
+
+      // fall back to loop polling until setup finished
+      setupMonitoringLoop();
+    } catch {
+      showError(
+        "reboot request failed - but that can also happen when shutdown happened"
+      );
+    }
+  };
+
+  // start setup shutdown (if user wants to cancel whole setup)
+  const setupSetupShutdown = async () => {
+    setWaitScreenStatus(SetupStatus.WAIT);
+    setWaitScreenMessage("");
+    setPage(Screen.WAIT);
+
+    await instance.get("/setup/shutdown").catch(() => {
+      showError(
+        "shutdown request failed - but that can also happen when shutdown happened"
+      );
+    });
+  };
+
+  const showError = (message: string) => {
+    setWaitScreenStatus(SetupStatus.ERROR);
+    setWaitScreenMessage(message);
+    setPage(Screen.WAIT);
+  };
+
+  const callbackRecoveryDialog = (startRecovery: boolean) => {
+    if (startRecovery) {
+      setSetupPhase(SetupPhase.RECOVERY);
+      setPage(Screen.INPUTA);
+    } else {
+      setPage(Screen.SETUP);
+    }
+  };
+
+  const callbackMigrationDialog = (start: boolean) => {
+    if (start) {
+      setSetupPhase(SetupPhase.MIGRATION);
+      setPage(Screen.INPUTA);
+    } else {
+      setupSetupShutdown();
+    }
+  };
+
+  const callbackSetupMenu = (setupmode: SetupPhase) => {
+    // remember what setup the user wants
+    setSetupPhase(setupmode);
+
+    // switch to the next screen based on user selection
+    switch (setupmode) {
+      case SetupPhase.NULL:
+        setupSetupShutdown();
+        break;
+      case SetupPhase.RECOVERY:
+      case SetupPhase.UPDATE:
+      case SetupPhase.MIGRATION:
+        setPage(Screen.INPUTA);
+        break;
+      case SetupPhase.SETUP:
+        setPage(Screen.FORMAT);
+        break;
+    }
+  };
+
+  const callbackFormatDialog = (
+    deleteData: boolean,
+    keepBlockchainData: boolean
+  ) => {
+    // on cancel jump back to setup menu
+    if (!deleteData) {
+      setPage(Screen.SETUP);
+      return;
+    }
+
+    // store for later
+    setKeepBlockchain(keepBlockchainData);
+
+    // next step is always password A
+    setPage(Screen.INPUT_NODENAME);
+  };
+
+  const callbackInputNodename = (nodename: string | null) => {
+    // on cancel jump back to setup menu
+    if (!nodename) {
+      setPage(Screen.SETUP);
+      return;
+    }
+
+    // store for later
+    setHostname(nodename);
+
+    // TODO: Once WebUi can support c-lightning or run without Lighting
+    // show this dialog - until then fix selection to LND
+    setLightning(SetupLightning.LND);
+
+    // next step is always password A
+    setPage(Screen.INPUTA);
+  };
+
+  // on cancel jump back to setup menu
+  const checkPasswordCancel = (password: string | null): boolean => {
+    if (!password) {
+      setPage(Screen.SETUP);
+      return true;
+    }
+    return false;
+  };
+
+  const callbackInputPasswordA = (password: string | null) => {
+    if (checkPasswordCancel(password)) {
+      return;
+    }
+
+    // store password for later
+    setPasswordA(password!);
+
+    // based on setupPhase ... continue to a different next screen
+    console.log(setupPhase);
+    switch (setupPhase) {
+      case SetupPhase.RECOVERY:
+      case SetupPhase.UPDATE:
+        setPage(Screen.START_DONE);
+        break;
+      case SetupPhase.SETUP:
+      case SetupPhase.MIGRATION:
+        setPage(Screen.INPUTB);
+        break;
+      default:
+        showError("unkown follow up state: passworda");
+    }
+  };
+
+  const callbackInputPasswordB = (password: string | null) => {
+    if (checkPasswordCancel(password)) {
+      return;
+    }
+
+    // store password for later
+    setPasswordB(password!);
+
+    // based on setupPhase ... continue to a different next screen
+    if (lightning === SetupLightning.NONE) {
+      // without lightning no password c is needed - finish setup
+      setPage(Screen.START_DONE);
+      return;
+    }
+
+    // all other cases - get password c
+    setPage(Screen.INPUTC);
+  };
+
+  const callbackInputPasswordC = (password: string | null) => {
+    if (checkPasswordCancel(password)) {
+      return;
+    }
+
+    // store password for later
+    setPasswordC(password!);
+
+    // now finish setup
+    setPage(Screen.START_DONE);
+  };
+
+  const callbackStartDoneDialog = (cancel: boolean) => {
+    // on cancel jump back to setup menu
+    if (cancel) {
+      setPage(Screen.SETUP);
+      return;
+    }
+
+    // no kick-off setup with all those data
+    setupStart();
+  };
+
+  const callbackSyncScreen = async (action: string, data: any) => {
+    if (action === "shutdown") {
+      // start setup shutdown (if user wants to cancel whole setup)
+      await instance.post("/system/shutdown").catch(() => {
+        console.log(
+          "shutdown request failed - but that can also happen when shutdown happened"
+        );
+      });
+    }
+  };
+
+  switch (page) {
+    case Screen.SETUP:
+      return (
+        <SetupMenu
+          setupPhase={setupPhaseOnStart}
+          callback={callbackSetupMenu}
+        />
+      );
+    case Screen.START_DONE:
+      return (
+        <StartDoneDialog
+          setupPhase={setupPhase}
+          callback={callbackStartDoneDialog}
+        />
+      );
+    case Screen.FORMAT:
+      return (
+        <FormatDialog
+          containsBlockchain={gotBlockchain}
+          callback={callbackFormatDialog}
+        />
+      );
+    case Screen.RECOVERY:
+      return (
+        <RecoveryDialog
+          setupPhase={setupPhaseOnStart}
+          callback={callbackRecoveryDialog}
+        />
+      );
+    case Screen.MIGRATION:
+      return (
+        <MigrationDialog
+          migrationOS={migrationOS}
+          migrationMode={migrationMode}
+          callback={callbackMigrationDialog}
+        />
+      );
+    case Screen.INPUTA:
+      return (
+        <InputPassword passwordType="a" callback={callbackInputPasswordA} />
+      );
+    case Screen.INPUTB:
+      return (
+        <InputPassword passwordType="b" callback={callbackInputPasswordB} />
+      );
+    case Screen.INPUTC:
+      return (
+        <InputPassword passwordType="c" callback={callbackInputPasswordC} />
+      );
+    case Screen.INPUT_NODENAME:
+      return <InputNodename callback={callbackInputNodename} />;
+    case Screen.FINAL:
+      return (
+        <FinalDialog
+          setupPhase={setupPhase}
+          seedWords={seedwords}
+          callback={setupFinalReboot}
+        />
+      );
+    case Screen.SYNC:
+      return <SyncScreen data={syncData} callback={callbackSyncScreen} />;
+    case Screen.WAIT:
     default:
-      setupStep = <Welcome />;
-      break;
+      return (
+        <WaitScreen status={waitScreenStatus} message={waitScreenMessage} />
+      );
   }
-
-  return setupStep;
 };
 
 export default Setup;

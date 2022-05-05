@@ -18,7 +18,6 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
     verification_progress,
     connections_in,
     connections_out,
-    difficulty,
     size_on_disk,
   } = props.info;
 
@@ -30,8 +29,6 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
 
   // size_on_disk is in byte => convert to GB - 1024 ^ 2 = 1048576
   const diskSize = (size_on_disk! / 1024 / 1024 / 1024).toFixed(2);
-
-  const diff = (difficulty! / 1024 / 1024 / 1024 / 1024).toFixed(2);
 
   return (
     <div className="h-full p-5">
@@ -78,7 +75,7 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.difficulty")}
             </h6>
-            <p>{diff} TH</p>
+            <p>TBD</p>
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">

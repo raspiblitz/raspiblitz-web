@@ -12,7 +12,7 @@ import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 export type Props = {
   app: App;
-  installingAppId: string | null;
+  installingApp: any | null;
   installed: boolean;
   onInstall: () => void;
   onUninstall: () => void;
@@ -21,7 +21,7 @@ export type Props = {
 
 export const AppInfo: FC<Props> = ({
   app,
-  installingAppId,
+  installingApp,
   installed,
   onInstall,
   onUninstall,
@@ -84,9 +84,9 @@ export const AppInfo: FC<Props> = ({
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
         <AppIcon appId={id} />
         <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
-        {installingAppId !== id && !installed && (
+        {(installingApp == null || installingApp.id !== id) && !installed && (
           <button
-            disabled={!!installingAppId}
+            disabled={!!installingApp}
             className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
             onClick={onInstall}
           >
@@ -94,18 +94,31 @@ export const AppInfo: FC<Props> = ({
             &nbsp;{t("apps.install")}
           </button>
         )}
-        {installingAppId === id && (
-          <ButtonWithSpinner
-            disabled
-            loading={true}
-            className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
-          >
-            {t("apps.installing")}
-          </ButtonWithSpinner>
-        )}
-        {installed && (
+        {installingApp &&
+          installingApp.id === id &&
+          installingApp.mode === "on" && (
+            <ButtonWithSpinner
+              disabled
+              loading={true}
+              className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+            >
+              {t("apps.installing")}
+            </ButtonWithSpinner>
+          )}
+        {installingApp &&
+          installingApp.id === id &&
+          installingApp.mode === "off" && (
+            <ButtonWithSpinner
+              disabled
+              loading={true}
+              className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+            >
+              {t("apps.deinstalling")}
+            </ButtonWithSpinner>
+          )}
+        {(installingApp == null || installingApp.id !== id) && installed && (
           <button
-            disabled={!!installingAppId}
+            disabled={!!installingApp}
             className={`flex rounded bg-red-500 p-2 text-white shadow-md disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white`}
             onClick={onUninstall}
           >

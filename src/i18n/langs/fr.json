@@ -10,8 +10,8 @@
       "logout": "Se déconnecter"
     },
     "login": {
-      "enter_pass": "Entrez le mot de passe B",
-      "enter_pass_placeholder": "Mot de passe B",
+      "enter_pass": "Entrez le mot de passe A",
+      "enter_pass_placeholder": "Mot de passe A",
       "login": "Se connecter",
       "invalid_pass": "Mot de passe invalide",
       "error": "Une erreur s'est produite"
@@ -146,7 +146,7 @@
         "about": "RTL est une interface utilisateur web complète, indépendante de l'appareil, qui permet de gérer les opérations des nœuds Lightning. RTL est disponible sur les implémentations LND, C-Lightning et Eclair.",
         "shortDescription": "Une application web complète pour LND, C-Lightning et Eclair"
       },
-      "btc-pay": {
+      "btcpayserver": {
         "shortDescription": "Acceptez les paiements Bitcoin. Processeur de paiement Bitcoin gratuit, open-source et auto-hébergé.",
         "about": "BTCPay Server est un processeur de paiement Bitcoin gratuit et open-source qui vous permet d'accepter des bitcoins sans frais ni intermédiaires."
       },

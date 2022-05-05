@@ -107,8 +107,8 @@
     },
     "login": {
       "login": "Inloggen",
-      "enter_pass": "Vul Wachtwoord B in",
-      "enter_pass_placeholder": "Wachtwoord B",
+      "enter_pass": "Vul Wachtwoord A in",
+      "enter_pass_placeholder": "Wachtwoord A",
       "error": "Er is een fout opgetreden",
       "invalid_pass": "Ongeldig wachtwoord"
     },
