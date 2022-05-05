@@ -152,7 +152,6 @@
         "shortDescription": "Eine Desktop GUI für Bitcoin Core, optimiert für hardware wallets"
       },
       "btc-pay": {
-        "shortDescription": "Nehme Bezahlungen via Bitcoin an. Ein freier, open-source & selbst-gehosteter Bitcoin payment processor.",
         "about": "BTCPay Server ist ein freier, open-source Bitcoin payment processor, welcher es Dir möglich macht, Bitcoin ohne Gebühren oder via Vermittler zu empfangen."
       },
       "lnbits": {
