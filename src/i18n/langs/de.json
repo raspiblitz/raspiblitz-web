@@ -151,9 +151,6 @@
       "specter": {
         "shortDescription": "Eine Desktop GUI für Bitcoin Core, optimiert für hardware wallets"
       },
-      "btc-pay": {
-        "about": "BTCPay Server ist ein freier, open-source Bitcoin payment processor, welcher es Dir möglich macht, Bitcoin ohne Gebühren oder via Vermittler zu empfangen."
-      },
       "lnbits": {
         "shortDescription": "Freie open-source lightning-network wallet/accounts System"
       },
