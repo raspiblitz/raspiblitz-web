@@ -31,7 +31,7 @@ const App: FC = () => {
     if (firstCall) {
       async function check() {
         setFirstCall(false);
-        if (pathname.includes("/login")) {
+        if (pathname.startsWith("/login")) {
           return;
         }
         await instance.get("/setup/status").then((resp) => {
