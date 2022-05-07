@@ -53,10 +53,12 @@ const Home: FC = () => {
           } else {
             setTxError(
               `${t("login.error")}: ${
-                err.response?.data?.detail?.[0]?.msg || ""
+                err.response?.data?.detail?.[0]?.msg ||
+                err.response?.data?.detail
               }`
             );
           }
+          setTransactions([]);
         })
         .finally(() => {
           setIsLoadingTransactions(false);
@@ -186,16 +188,18 @@ const Home: FC = () => {
             pendingRemoteBalance={balance.channel_pending_open_remote_balance!}
           />
         </article>
-        {appStatus.map((app: AppStatus) => {
-          return (
-            <article
-              key={app.id}
-              className="col-span-2 row-span-1 md:col-span-1"
-            >
-              <AppStatusCard app={app} />
-            </article>
-          );
-        })}
+        {appStatus
+          .filter((app: AppStatus) => app.installed)
+          .map((app: AppStatus) => {
+            return (
+              <article
+                key={app.id}
+                className="col-span-2 row-span-1 md:col-span-1"
+              >
+                <AppStatusCard app={app} />
+              </article>
+            );
+          })}
       </main>
     </>
   );

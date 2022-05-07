@@ -27,9 +27,9 @@ export const HardwareCard: FC<Props> = ({ hardwareInfo }) => {
     disks,
   } = hardwareInfo;
 
-  const systemTemp = temperaturesCelsius.system_temp;
+  const systemTemp = temperaturesCelsius.system_temp.toFixed(2);
 
-  const cpuPercent = (cpuOverallPercent / PI_NUM_CORES) * 100;
+  const cpuPercent = ((cpuOverallPercent / PI_NUM_CORES) * 100).toFixed(2);
 
   const mainHDD = disks.find((disk) => disk.device === "/");
 
