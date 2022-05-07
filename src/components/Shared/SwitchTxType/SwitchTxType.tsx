@@ -27,21 +27,23 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
   return (
     <div>
       <button
+        name="lightning"
         disabled={invoiceType === TxType.LIGHTNING}
         className="switch-button"
         onClick={() => setTxTypeHandler(TxType.LIGHTNING)}
       >
         <LightningIcon className="mr-1 inline h-6 w-6 align-bottom" />
-        <span className="inline align-bottom">{t("home.lightning")}</span>
+        {t("home.lightning")}
       </button>
 
       <button
+        name="onchain"
         disabled={invoiceType === TxType.ONCHAIN}
         className="switch-button"
         onClick={() => setTxTypeHandler(TxType.ONCHAIN)}
       >
         <ChainIcon className="mr-1 inline h-6 w-6 align-bottom" />
-        <span className="inline align-bottom">{t("wallet.on_chain")}</span>
+        {t("wallet.on_chain")}
       </button>
     </div>
   );

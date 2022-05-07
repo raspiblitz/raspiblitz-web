@@ -4,6 +4,7 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as SendIcon } from "../../../../assets/send.svg";
+import ErrorMessage from "../../../../container/ErrorMessage/ErrorMessage";
 import { AppContext } from "../../../../store/app-context";
 import ButtonWithSpinner from "../../ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../InputField/InputField";
@@ -63,7 +64,7 @@ const SendLn: FC<Props> = ({
         disabled={loading}
       />
 
-      {error && <div className="my-4 text-red-500">{error}</div>}
+      {error && <ErrorMessage errorMessage={error} />}
 
       <ButtonWithSpinner
         type="submit"

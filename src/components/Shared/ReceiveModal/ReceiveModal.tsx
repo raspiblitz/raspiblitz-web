@@ -6,6 +6,7 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
+import ErrorMessage from "../../../container/ErrorMessage/ErrorMessage";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
 import { AppContext, Unit } from "../../../store/app-context";
@@ -178,7 +179,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
             </div>
           )}
 
-          {error && <div className="my-4 text-red-500">{error}</div>}
+          {error && <ErrorMessage errorMessage={error} />}
 
           {!address && showLnInvoice && (
             <button

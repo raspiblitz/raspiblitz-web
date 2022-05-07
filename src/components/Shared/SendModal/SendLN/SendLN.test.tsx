@@ -28,20 +28,16 @@ describe("SendLN", () => {
       await screen.findByText("wallet.send_lightning")
     ).toBeInTheDocument();
     expect(await screen.findByLabelText("wallet.invoice")).toBeInTheDocument();
-    expect(
-      await screen.findByRole("button", { name: "wallet.send" })
-    ).not.toBeDisabled();
+    expect(await screen.findByText("wallet.send")).not.toBeDisabled();
   });
 
   test("validates the input for empty value", async () => {
     setup();
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
-    expect(
-      await screen.findByRole("button", { name: "wallet.send" })
-    ).not.toBeDisabled();
+    expect(await screen.findByText("wallet.send")).not.toBeDisabled();
 
-    userEvent.click(await screen.findByRole("button", { name: "wallet.send" }));
+    userEvent.click(await screen.findByText("wallet.send"));
     await waitFor(() => expect(invoiceInput).toHaveClass("input-error"));
     expect(
       await screen.findByText("forms.validation.lnInvoice.required")
@@ -81,9 +77,7 @@ describe("SendLN", () => {
       invoiceInput,
       "lnbcrt500u1psc09t8pp5jxn0qqx5rnv4zhc7tvftlfr2p7lq25cm8af0h2k5vcy0cfkgwugqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5n9uetwjh0wua595fqtce8r3n5lnqk6f603en2k4wx8p988vl5haq9qy9qsqtgsp7ery57uge8jh66sgu42rttsnpyygdtjx05r5sexjdljrfa3hd9mj4z8w3xhp2nz30fa79jcug3chsw2g7jk75zwel33qsl455nqpx9p6z5"
     );
-    expect(
-      await screen.findByRole("button", { name: "wallet.send" })
-    ).not.toBeDisabled();
+    expect(await screen.findByText("wallet.send")).not.toBeDisabled();
     expect(invoiceInput).not.toHaveClass("input-error");
 
     userEvent.clear(invoiceInput);
@@ -91,9 +85,7 @@ describe("SendLN", () => {
       invoiceInput,
       "lntb500u1psc09t8pp5jxn0qqx5rnv4zhc7tvftlfr2p7lq25cm8af0h2k5vcy0cfkgwugqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5n9uetwjh0wua595fqtce8r3n5lnqk6f603en2k4wx8p988vl5haq9qy9qsqtgsp7ery57uge8jh66sgu42rttsnpyygdtjx05r5sexjdljrfa3hd9mj4z8w3xhp2nz30fa79jcug3chsw2g7jk75zwel33qsl455nqpx9p6z5"
     );
-    expect(
-      await screen.findByRole("button", { name: "wallet.send" })
-    ).not.toBeDisabled();
+    expect(await screen.findByText("wallet.send")).not.toBeDisabled();
     expect(invoiceInput).not.toHaveClass("input-error");
   });
 });

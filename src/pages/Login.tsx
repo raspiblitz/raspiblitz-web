@@ -6,6 +6,7 @@ import { ReactComponent as RaspiBlitzLogo } from "../assets/RaspiBlitz_Logo_Main
 import { ReactComponent as RaspiBlitzLogoDark } from "../assets/RaspiBlitz_Logo_Main_Negative.svg";
 import I18nDropdown from "../components/Shared/I18nDropdown/I18nDropdown";
 import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
+import ErrorMessage from "../container/ErrorMessage/ErrorMessage";
 import { AppContext } from "../store/app-context";
 import { instance } from "../util/interceptor";
 import { enableGutter } from "../util/util";
@@ -13,8 +14,7 @@ import { enableGutter } from "../util/util";
 const Login: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const [isUnauthorized, setIsUnauthorized] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState("");
   const { isLoggedIn, setIsLoggedIn, darkMode, toggleDarkMode } =
     useContext(AppContext);
   const navigate = useNavigate();
@@ -41,19 +41,18 @@ const Login: FC = () => {
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
 
-    setIsUnauthorized(false);
-    setIsError(false);
+    setError("");
     setIsLoading(true);
 
     const password = passwordInput.current?.value;
     const resp = await instance
       .post("/system/login", { password })
       .catch((err) => {
-        if (err.response.status === 401) {
-          setIsUnauthorized(true);
-        } else {
-          setIsError(true);
-        }
+        setError(
+          `${t("login.error")}: ${
+            err.response?.data?.detail[0]?.msg || err.response?.data.detail
+          }`
+        );
       });
 
     setIsLoading(false);
@@ -109,16 +108,7 @@ const Login: FC = () => {
               {t("login.login")}
             </button>
           </form>
-          {isUnauthorized && (
-            <p className="rounded bg-gray-200 px-5 py-2 text-red-500">
-              {t("login.invalid_pass")}
-            </p>
-          )}
-          {isError && (
-            <p className="rounded bg-gray-200 px-5 py-2 text-red-500">
-              {t("login.error")}
-            </p>
-          )}
+          {error && <ErrorMessage errorMessage={error} />}
         </>
       )}
     </main>
