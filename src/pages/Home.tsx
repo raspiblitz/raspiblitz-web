@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import AppStatusCard from "../components/Home/AppStatusCard/AppStatusCard";
 import BitcoinCard from "../components/Home/BitcoinCard/BitcoinCard";
 import ConnectionCard from "../components/Home/ConnectionCard/ConnectionCard";
@@ -143,7 +143,6 @@ const Home: FC = () => {
       {receiveModal}
       {sendModal}
       {detailModal}
-      <ToastContainer />
       <main
         className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
