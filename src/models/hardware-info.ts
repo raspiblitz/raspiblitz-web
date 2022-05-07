@@ -21,7 +21,8 @@ export interface HardwareInfo {
 }
 
 export interface TemperatureInfo {
-  [name: string]: unknown;
+  system_temp: number;
+  coretemp: unknown[];
 }
 
 export interface DiskInfo {

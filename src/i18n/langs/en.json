@@ -82,6 +82,13 @@
       "confirm_info": "Please confirm the following transaction",
       "transactions_none": "No transactions yet, time to make your first one"
     },
+    "hardware": {
+      "header": "Hardware Details",
+      "cpu_load": "CPU Load",
+      "temp": "Temperature",
+      "ram_usage": "RAM Usage",
+      "disk_usage": "Disk Space used"
+    },
     "apps": {
       "installed": "Installed",
       "installing": "Installing",

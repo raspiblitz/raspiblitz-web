@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import AppStatusCard from "../components/Home/AppStatusCard/AppStatusCard";
 import BitcoinCard from "../components/Home/BitcoinCard/BitcoinCard";
 import ConnectionCard from "../components/Home/ConnectionCard/ConnectionCard";
+import HardwareCard from "../components/Home/HardwareCard/HardwareCard";
 import LightningCard from "../components/Home/LightningCard/LightningCard";
 import TransactionCard from "../components/Home/TransactionCard/TransactionCard";
 import TransactionDetailModal from "../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
@@ -153,15 +154,13 @@ const Home: FC = () => {
           />
         </article>
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
-          {/* TODO: change */}
-          <ConnectionCard
-            torAddress={systemInfo.tor_web_ui!}
-            sshAddress={systemInfo.ssh_address!}
-            cpu_overall_percent={hardwareInfo?.cpu_overall_percent!}
-            vram_usage_percent={hardwareInfo?.vram_usage_percent!}
-            disk_io_read_bytes={hardwareInfo?.disk_io_read_bytes!}
-            disk_io_write_bytes={hardwareInfo?.disk_io_write_bytes!}
-          />
+          <div className="flex h-full flex-col p-5 lg:flex-row">
+            <ConnectionCard
+              torAddress={systemInfo.tor_web_ui!}
+              sshAddress={systemInfo.ssh_address!}
+            />
+            <HardwareCard hardwareInfo={hardwareInfo} />
+          </div>
         </article>
         {/* TODO: change */}
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">

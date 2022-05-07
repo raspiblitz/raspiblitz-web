@@ -12,13 +12,13 @@ import { WalletBalance } from "../models/wallet-balance";
 interface SSEContextType {
   evtSource: EventSource | null;
   setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
-  systemInfo: Partial<SystemInfo>;
+  systemInfo: SystemInfo;
   setSystemInfo: Dispatch<SetStateAction<SystemInfo>>;
-  btcInfo: Partial<BtcInfo>;
+  btcInfo: BtcInfo;
   setBtcInfo: Dispatch<SetStateAction<BtcInfo>>;
-  lnStatus: Partial<LnStatus>;
+  lnStatus: LnStatus;
   setLnStatus: Dispatch<SetStateAction<LnStatus>>;
-  balance: Partial<WalletBalance>;
+  balance: WalletBalance;
   setBalance: Dispatch<SetStateAction<WalletBalance>>;
 
   appStatus: AppStatus[];
@@ -29,19 +29,19 @@ interface SSEContextType {
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
   installingApp: any | null;
   setInstallingApp: Dispatch<SetStateAction<any | null>>;
-  hardwareInfo: Partial<HardwareInfo> | null;
+  hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
 }
 
 export const SSEContext = createContext<SSEContextType>({
   evtSource: null,
   setEvtSource: () => {},
-  systemInfo: {},
+  systemInfo: {} as SystemInfo,
   setSystemInfo: () => {},
-  btcInfo: {},
+  btcInfo: {} as BtcInfo,
   setBtcInfo: () => {},
-  balance: {},
-  lnStatus: {},
+  balance: {} as WalletBalance,
+  lnStatus: {} as LnStatus,
   setLnStatus: () => {},
   setBalance: () => {},
   appStatus: [],
@@ -52,19 +52,16 @@ export const SSEContext = createContext<SSEContextType>({
   setTransactions: () => {},
   installingApp: null,
   setInstallingApp: () => {},
-  hardwareInfo: {},
+  hardwareInfo: {} as HardwareInfo,
   setHardwareInfo: () => {},
 });
 
 // for personal development - change backend with .env file
-let backendserver = process.env.REACT_APP_BACKEND;
-if (!process.env.REACT_APP_BACKEND) {
-  backendserver = "http://localhost:8000";
-}
+const backendserver = process.env.REACT_APP_BACKEND || "http://localhost:8000";
+
 export const SSE_URL = window.location.hostname.includes("localhost")
   ? `${backendserver}/api/sse/subscribe`
   : "/api/sse/subscribe";
-//console.info("Running with backend server: ", backendserver);
 
 type Props = {
   children?: React.ReactNode;

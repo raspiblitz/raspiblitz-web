@@ -78,11 +78,9 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
             className="bd-button my-5 p-3"
             loading={isLoading}
             disabled={!isValid}
+            icon={<LockOpen className="mx-1 h-6 w-6" />}
           >
-            <LockOpen className="mx-1 h-6 w-6" />
-            <span>
-              {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
-            </span>
+            {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
           </ButtonWithSpinner>
         </form>
       </div>
