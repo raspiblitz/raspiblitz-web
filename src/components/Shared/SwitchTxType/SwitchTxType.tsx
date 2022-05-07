@@ -1,5 +1,7 @@
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as ChainIcon } from "../../../assets/chain.svg";
+import { ReactComponent as LightningIcon } from "../../../assets/lightning.svg";
 
 export enum TxType {
   ONCHAIN,
@@ -29,7 +31,8 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
         className="switch-button"
         onClick={() => setTxTypeHandler(TxType.LIGHTNING)}
       >
-        {t("home.lightning")}
+        <LightningIcon className="mr-1 inline h-6 w-6 align-bottom" />
+        <span className="inline align-bottom">{t("home.lightning")}</span>
       </button>
 
       <button
@@ -37,7 +40,8 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
         className="switch-button"
         onClick={() => setTxTypeHandler(TxType.ONCHAIN)}
       >
-        {t("wallet.on_chain")}
+        <ChainIcon className="mr-1 inline h-6 w-6 align-bottom" />
+        <span className="inline align-bottom">{t("wallet.on_chain")}</span>
       </button>
     </div>
   );

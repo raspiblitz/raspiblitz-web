@@ -35,6 +35,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copyAddress, addressCopied] = useClipboard(address);
+  const [error, setError] = useState("");
 
   const lnInvoice = invoiceType === TxType.LIGHTNING;
 
@@ -42,16 +43,25 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
     setAddress("");
     setAmount(0);
     setComment("");
+    setError("");
 
     setInvoiceType(txType);
 
     if (txType === TxType.ONCHAIN) {
       setIsLoading(true);
-      const resp = await instance.post("lightning/new-address", {
-        type: "p2wkh",
-      });
-      setAddress(resp.data);
-      setIsLoading(false);
+      await instance
+        .post("lightning/new-address", {
+          type: "p2wkh",
+        })
+        .then((resp) => {
+          setAddress(resp.data);
+        })
+        .catch((err) => {
+          setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
 
@@ -67,14 +77,20 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
     setIsLoading(true);
     const mSatAmount =
       unit === Unit.BTC ? convertBtcToSat(amount) * 1000 : amount * 1000;
-    const resp = await instance.post(
-      `lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`
-    );
-    setAddress(resp.data.payment_request);
-    setIsLoading(false);
+    await instance
+      .post(`lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`)
+      .then((resp) => {
+        setAddress(resp.data.payment_request);
+      })
+      .catch((err) => {
+        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
-  const showLnInvoice = lnInvoice && !isLoading && !address;
+  const showLnInvoice = lnInvoice && !isLoading;
 
   const {
     register,
@@ -131,7 +147,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
             </div>
           )}
 
-          {showLnInvoice && (
+          {showLnInvoice && !address && (
             <div className="flex flex-col justify-center pb-5 text-center">
               <AmountInput
                 amount={amount}
@@ -161,6 +177,8 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
               </div>
             </div>
           )}
+
+          {error && <div className="my-4 text-red-500">{error}</div>}
 
           {!address && showLnInvoice && (
             <button

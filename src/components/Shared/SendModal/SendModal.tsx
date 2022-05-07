@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext, Unit } from "../../../store/app-context";
 import {
@@ -22,6 +23,7 @@ type Props = {
 
 const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const { unit } = useContext(AppContext);
+  const { t } = useTranslation();
 
   const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [invoice, setInvoice] = useState("");
@@ -33,19 +35,26 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const [timestamp, setTimestamp] = useState(0);
   const [expiry, setExpiry] = useState(0);
   const [loading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  // TODO: handle error
   const confirmLnHandler = async () => {
     setIsLoading(true);
-    const resp = await instance.get(
-      "/lightning/decode-pay-req?pay_req=" + invoice
-    );
-    setIsLoading(false);
-    setAmount(resp.data.num_satoshis);
-    setComment(resp.data.description);
-    setTimestamp(resp.data.timestamp);
-    setExpiry(resp.data.expiry);
-    setConfirm(true);
+    setError("");
+    await instance
+      .get("/lightning/decode-pay-req?pay_req=" + invoice)
+      .then((resp) => {
+        setAmount(resp.data.num_satoshis);
+        setComment(resp.data.description);
+        setTimestamp(resp.data.timestamp);
+        setExpiry(resp.data.expiry);
+        setConfirm(true);
+      })
+      .catch((err) => {
+        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const confirmOnChainHandler = () => {
@@ -59,6 +68,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     setAmount(0);
     setFee("");
     setComment("");
+    setError("");
   };
 
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -120,6 +130,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
           onChangeInvoice={changeInvoiceHandler}
           onConfirm={confirmLnHandler}
           balanceDecorated={convertedLnBalance}
+          error={error}
         />
       </ModalDialog>,
       MODAL_ROOT

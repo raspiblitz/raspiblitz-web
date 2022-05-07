@@ -67,7 +67,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
           <div className="my-auto flex flex-col items-center justify-between md:flex-row">
             <div className="my-8 flex w-full justify-center md:my-0 md:w-1/2">
               <ProgressCircle
-                progress={57}
+                progress={+data.btc_default_sync_percentage}
                 starting={data.btc_default_ready !== "1"}
               />
             </div>

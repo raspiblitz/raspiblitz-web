@@ -47,8 +47,10 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
             </article>
             <article className="flex w-full flex-col">
               <h6>
-                <ChainIcon className="inline h-5 w-5" />
-                &nbsp;{t("wallet.on_chain")}
+                <ChainIcon className="mr-1 inline h-5 w-5 align-bottom" />
+                <span className="inline align-bottom text-sm">
+                  {t("wallet.on_chain")}
+                </span>
               </h6>
               <p className="text-lg font-bold">
                 {convertToString(unit, convertedOnchainBalance)} {unit}
@@ -56,8 +58,10 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
             </article>
             <article className="flex w-full flex-col">
               <h6>
-                <LightningIcon className="inline h-5 w-5" />
-                &nbsp;{t("home.lightning")}
+                <LightningIcon className="mr-1 inline h-5 w-5 align-bottom" />
+                <span className="inline align-bottom text-sm">
+                  {t("home.lightning")}
+                </span>
               </h6>
               <p className="text-lg font-bold">
                 {convertToString(unit, convertedLnBalance)} {unit}

@@ -10,6 +10,7 @@ const basicProps: Props = {
   balanceDecorated: "123456",
   onConfirm: () => {},
   onChangeInvoice: () => {},
+  error: "",
 };
 
 const setup = () => {
