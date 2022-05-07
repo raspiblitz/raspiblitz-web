@@ -21,15 +21,15 @@ export const HardwareCard: FC<Props> = ({ hardwareInfo }) => {
   }
 
   const {
-    cpu_overall_percent,
-    temperatures_celsius,
+    cpu_overall_percent: cpuOverallPercent,
+    temperatures_celsius: temperaturesCelsius,
+    vram_usage_percent: vramUsagePercent,
     disks,
-    vram_usage_percent,
   } = hardwareInfo;
 
-  const system_temp = temperatures_celsius.system_temp;
+  const systemTemp = temperaturesCelsius.system_temp;
 
-  const cpuPercent = (cpu_overall_percent / PI_NUM_CORES) * 100;
+  const cpuPercent = (cpuOverallPercent / PI_NUM_CORES) * 100;
 
   const mainHDD = disks.find((disk) => disk.device === "/");
 
@@ -64,7 +64,7 @@ export const HardwareCard: FC<Props> = ({ hardwareInfo }) => {
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
             {t("hardware.temp")}
           </h6>
-          <div className="flex">{system_temp} °C</div>
+          <div className="flex">{systemTemp} °C</div>
         </div>
       </article>
       <article className="flex flex-row overflow-hidden py-4">
@@ -72,7 +72,7 @@ export const HardwareCard: FC<Props> = ({ hardwareInfo }) => {
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
             {t("hardware.ram_usage")}
           </h6>
-          <div className="flex">{vram_usage_percent} %</div>
+          <div className="flex">{vramUsagePercent} %</div>
         </div>
         <div className="flex w-1/2 flex-col">
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
