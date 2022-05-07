@@ -4,10 +4,15 @@ import { BtcInfo } from "../../../models/btc-info";
 import { checkPropsUndefined } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
-export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
+type Props = {
+  info: BtcInfo;
+  network: string;
+};
+
+export const BitcoinCard: FC<Props> = ({ info, network }) => {
   const { t } = useTranslation();
 
-  if (checkPropsUndefined(props)) {
+  if (checkPropsUndefined({ info, network })) {
     return <LoadingBox />;
   }
 
@@ -19,9 +24,7 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
     connections_in,
     connections_out,
     size_on_disk,
-  } = props.info;
-
-  const { network } = props;
+  } = info;
 
   const syncPercentage = (verification_progress! * 100).toFixed(2);
 
@@ -73,9 +76,9 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
-              {t("home.difficulty")}
+              {t("home.blocktime")}
             </h6>
-            <p>TBD</p>
+            <p>{blocks}</p>
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
@@ -90,8 +93,3 @@ export const BitcoinCard: FC<BitcoinCardProps> = (props) => {
 };
 
 export default BitcoinCard;
-
-export interface BitcoinCardProps {
-  info: Partial<BtcInfo>;
-  network: string;
-}
