@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useTranslation } from "react-i18next";
 import AppIcon from "../../../container/AppIcon/AppIcon";
 import { AppStatus } from "../../../models/app-status";
 import { availableApps } from "../../../util/availableApps";
@@ -9,13 +8,8 @@ type Props = {
 };
 
 export const AppStatusCard: FC<Props> = ({ app }) => {
-  const { id, status } = app;
-  const { t } = useTranslation();
+  const { id } = app;
   const appName = availableApps.get(id)?.name;
-
-  const online = status === "online";
-  const statusColor = online ? "text-green-400" : "text-red-500";
-  const statusText = online ? t("apps.online") : t("apps.offline");
 
   return (
     <div className="h-full p-5">
@@ -28,7 +22,6 @@ export const AppStatusCard: FC<Props> = ({ app }) => {
           {/* Content */}
           <div className="flex w-3/4 flex-col items-start justify-center pl-5 text-xl">
             <h4 className="dark:text-white">{appName}</h4>
-            <p className={`pt-3 ${statusColor}`}>{statusText}</p>
           </div>
         </div>
       </article>
