@@ -32,6 +32,7 @@ const Home: FC = () => {
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
+  const [txError, setTxError] = useState("");
 
   const theme = darkMode ? "dark" : "light";
 
@@ -39,6 +40,7 @@ const Home: FC = () => {
     enableGutter();
     if (!walletLocked) {
       setIsLoadingTransactions(true);
+      setTxError("");
 
       instance
         .get("/lightning/list-all-tx?reversed=true")
@@ -48,14 +50,19 @@ const Home: FC = () => {
         .catch((err) => {
           if (err.response.status === 423) {
             setWalletLocked(true);
+          } else {
+            setTxError(
+              `${t("login.error")}: ${
+                err.response?.data?.detail?.[0]?.msg || ""
+              }`
+            );
           }
-          // TODO: additional error handling #15
         })
         .finally(() => {
           setIsLoadingTransactions(false);
         });
     }
-  }, [walletLocked, setWalletLocked, setIsLoadingTransactions]);
+  }, [t, walletLocked, setWalletLocked, setIsLoadingTransactions]);
 
   const showSendModalHandler = useCallback(() => {
     setShowSendModal(true);
@@ -151,6 +158,7 @@ const Home: FC = () => {
             isLoading={isLoadingTransactions}
             transactions={transactions}
             showDetails={showDetailHandler}
+            error={txError}
           />
         </article>
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
@@ -162,7 +170,6 @@ const Home: FC = () => {
             <HardwareCard hardwareInfo={hardwareInfo} />
           </div>
         </article>
-        {/* TODO: change */}
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <BitcoinCard info={btcInfo} network={systemInfo.chain!} />
         </article>

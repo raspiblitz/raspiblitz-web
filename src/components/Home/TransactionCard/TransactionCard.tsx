@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowDownIcon } from "../../../assets/arrow-down.svg";
 import { ReactComponent as InfoCircleIcon } from "../../../assets/info-circle.svg";
 import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.svg";
+import ErrorMessage from "../../../container/ErrorMessage/ErrorMessage";
 import { Transaction } from "../../../models/transaction.model";
 import { AppContext } from "../../../store/app-context";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
@@ -12,6 +13,7 @@ export type Props = {
   transactions: Transaction[];
   showDetails: (index: number) => void;
   isLoading: boolean;
+  error: string;
 };
 
 const MAX_ITEMS = 6;
@@ -20,6 +22,7 @@ const TransactionCard: FC<Props> = ({
   transactions,
   isLoading,
   showDetails,
+  error,
 }) => {
   const { t } = useTranslation();
   const { walletLocked } = useContext(AppContext);
@@ -64,7 +67,9 @@ const TransactionCard: FC<Props> = ({
       <section className="bd-card md:min-h-0 flex min-h-144 flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 
-        {transactions.length === 0 && (
+        {error && <ErrorMessage errorMessage={error} />}
+
+        {!error && transactions.length === 0 && (
           <div className="flex h-full items-center justify-center">
             <InfoCircleIcon className="h-6 w-6" />
             &nbsp;{t("tx.transactions_none")}

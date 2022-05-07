@@ -14,7 +14,7 @@ export const HardwareCard: FC<Props> = ({ hardwareInfo }) => {
 
   if (!hardwareInfo) {
     return (
-      <div className="mt-10 w-full transition-colors lg:mt-0 lg:ml-2 lg:w-1/2">
+      <div className="h-full w-1/2">
         <LoadingBox />
       </div>
     );

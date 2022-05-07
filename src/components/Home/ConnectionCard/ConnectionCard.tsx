@@ -26,7 +26,11 @@ export const ConnectionCard: FC<Props> = ({ sshAddress, torAddress }) => {
   };
 
   if (!sshAddress || !torAddress) {
-    return <LoadingBox />;
+    return (
+      <div className="h-full w-1/2">
+        <LoadingBox />
+      </div>
+    );
   }
 
   return (
