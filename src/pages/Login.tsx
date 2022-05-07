@@ -45,30 +45,36 @@ const Login: FC = () => {
     setIsLoading(true);
 
     const password = passwordInput.current?.value;
-    const resp = await instance
+    await instance
       .post("/system/login", { password })
+      .then((resp) => {
+        localStorage.setItem("access_token", resp.data.access_token);
+        setIsLoggedIn(true);
+        enableGutter();
+        if (back) {
+          console.log(`back(${back})`);
+          navigate(back, { replace: true });
+        } else {
+          console.log(`from(${from})`);
+          navigate(from, { replace: true });
+        }
+      })
       .catch((err) => {
-        setError(
-          `${t("login.error")}: ${
-            err.response?.data?.detail[0]?.msg || err.response?.data.detail
-          }`
-        );
+        // TODO: maybe better error message for 500
+        console.log({ err });
+        if (err.response.status === 500) {
+          setError(t("login.error"));
+        } else {
+          setError(
+            `${t("login.error")}: ${
+              err.response?.data?.detail[0]?.msg || err.response?.data.detail
+            }`
+          );
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-
-    setIsLoading(false);
-
-    if (resp) {
-      localStorage.setItem("access_token", resp.data.access_token);
-      setIsLoggedIn(true);
-      enableGutter();
-      if (back) {
-        console.log(`back(${back})`);
-        navigate(back, { replace: true });
-      } else {
-        console.log(`from(${from})`);
-        navigate(from, { replace: true });
-      }
-    }
   };
 
   return (
