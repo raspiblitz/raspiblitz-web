@@ -28,7 +28,9 @@ const App: FC = () => {
     if (firstCall) {
       async function check() {
         setFirstCall(false);
-        if (pathname === "/login") return;
+        if (pathname === "/login") {
+          return;
+        }
         const resp = await instance.get("/setup/status");
         if (resp) {
           const setupPhase = resp.data.setupPhase;

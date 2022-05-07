@@ -4,6 +4,7 @@ import ButtonSpinner from "./ButtonSpinner/ButtonSpinner";
 type Props = {
   className?: string;
   loading?: boolean;
+  icon?: React.ReactElement;
 } & ButtonHTMLAttributes<unknown>;
 
 const ButtonWithSpinner: FC<Props> = ({
@@ -12,6 +13,7 @@ const ButtonWithSpinner: FC<Props> = ({
   loading,
   disabled,
   onClick,
+  icon,
   type,
 }) => {
   return (
@@ -23,6 +25,7 @@ const ButtonWithSpinner: FC<Props> = ({
     >
       <div className="flex">
         {loading && <ButtonSpinner />}
+        {!loading && icon}
         {children}
       </div>
     </button>
