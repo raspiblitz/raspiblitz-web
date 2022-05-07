@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import AppStatusCard from "../components/Home/AppStatusCard/AppStatusCard";
 import BitcoinCard from "../components/Home/BitcoinCard/BitcoinCard";
 import ConnectionCard from "../components/Home/ConnectionCard/ConnectionCard";
+import HardwareCard from "../components/Home/HardwareCard/HardwareCard";
 import LightningCard from "../components/Home/LightningCard/LightningCard";
 import TransactionCard from "../components/Home/TransactionCard/TransactionCard";
 import TransactionDetailModal from "../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
@@ -31,6 +32,7 @@ const Home: FC = () => {
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
+  const [txError, setTxError] = useState("");
 
   const theme = darkMode ? "dark" : "light";
 
@@ -38,6 +40,7 @@ const Home: FC = () => {
     enableGutter();
     if (!walletLocked) {
       setIsLoadingTransactions(true);
+      setTxError("");
 
       instance
         .get("/lightning/list-all-tx?reversed=true")
@@ -47,14 +50,21 @@ const Home: FC = () => {
         .catch((err) => {
           if (err.response.status === 423) {
             setWalletLocked(true);
+          } else {
+            setTxError(
+              `${t("login.error")}: ${
+                err.response?.data?.detail?.[0]?.msg ||
+                err.response?.data?.detail
+              }`
+            );
           }
-          // TODO: additional error handling #15
+          setTransactions([]);
         })
         .finally(() => {
           setIsLoadingTransactions(false);
         });
     }
-  }, [walletLocked, setWalletLocked, setIsLoadingTransactions]);
+  }, [t, walletLocked, setWalletLocked, setIsLoadingTransactions]);
 
   const showSendModalHandler = useCallback(() => {
     setShowSendModal(true);
@@ -150,20 +160,18 @@ const Home: FC = () => {
             isLoading={isLoadingTransactions}
             transactions={transactions}
             showDetails={showDetailHandler}
+            error={txError}
           />
         </article>
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
-          {/* TODO: change */}
-          <ConnectionCard
-            torAddress={systemInfo.tor_web_ui!}
-            sshAddress={systemInfo.ssh_address!}
-            cpu_overall_percent={hardwareInfo?.cpu_overall_percent!}
-            vram_usage_percent={hardwareInfo?.vram_usage_percent!}
-            disk_io_read_bytes={hardwareInfo?.disk_io_read_bytes!}
-            disk_io_write_bytes={hardwareInfo?.disk_io_write_bytes!}
-          />
+          <div className="flex h-full flex-col p-5 lg:flex-row">
+            <ConnectionCard
+              torAddress={systemInfo.tor_web_ui!}
+              sshAddress={systemInfo.ssh_address!}
+            />
+            <HardwareCard hardwareInfo={hardwareInfo} />
+          </div>
         </article>
-        {/* TODO: change */}
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <BitcoinCard info={btcInfo} network={systemInfo.chain!} />
         </article>
@@ -180,16 +188,18 @@ const Home: FC = () => {
             pendingRemoteBalance={balance.channel_pending_open_remote_balance!}
           />
         </article>
-        {appStatus.map((app: AppStatus) => {
-          return (
-            <article
-              key={app.id}
-              className="col-span-2 row-span-1 md:col-span-1"
-            >
-              <AppStatusCard app={app} />
-            </article>
-          );
-        })}
+        {appStatus
+          .filter((app: AppStatus) => app.installed)
+          .map((app: AppStatus) => {
+            return (
+              <article
+                key={app.id}
+                className="col-span-2 row-span-1 md:col-span-1"
+              >
+                <AppStatusCard app={app} />
+              </article>
+            );
+          })}
       </main>
     </>
   );

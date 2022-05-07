@@ -4,6 +4,7 @@ const btcInfo = require("./btc_info");
 const lnInfoLite = require("./ln_info_lite");
 const installedAppStatus = require("./installed_app_status");
 const systemInfo = require("./system_info");
+const hardwareInfo = require("./hardware_info");
 const walletBalance = require("./wallet_balance");
 const util = require("./util");
 const setup = require("./setup");
@@ -52,6 +53,7 @@ const eventsHandler = (request, response) => {
   });
 
   systemInfo.systemInfo();
+  hardwareInfo.hardwareInfo();
   btcInfo.btcInfo();
   lnInfoLite.lnInfoLite();
   installedAppStatus.appStatus();

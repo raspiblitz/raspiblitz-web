@@ -60,14 +60,13 @@ const Login: FC = () => {
         }
       })
       .catch((err) => {
-        // TODO: maybe better error message for 500
         console.log({ err });
         if (err.response.status === 500) {
           setError(t("login.error"));
         } else {
           setError(
             `${t("login.error")}: ${
-              err.response?.data?.detail[0]?.msg || err.response?.data.detail
+              err.response?.data?.detail?.[0]?.msg || err.response?.data.detail
             }`
           );
         }
