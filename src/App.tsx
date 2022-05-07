@@ -5,6 +5,7 @@ import "./App.css";
 import Layout from "./container/Layout/Layout";
 import LoadingScreen from "./container/LoadingScreen/LoadingScreen";
 import RequireAuth from "./container/RequireAuth/RequireAuth";
+import RequireSetup from "./container/RequireSetup/RequireSetup";
 import SkeletonLoadingScreen from "./container/SkeletonLoadingScreen/SkeletonLoadingScreen";
 import "./i18n/config";
 import { SetupPhase } from "./models/setup.model";
@@ -20,6 +21,7 @@ const LazySettings = lazy(() => import("./pages/Settings"));
 const App: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [firstCall, setFirstCall] = useState(true);
+  const [needsSetup, setNeedsSetup] = useState(false);
   const { isLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -29,17 +31,19 @@ const App: FC = () => {
     if (firstCall) {
       async function check() {
         setFirstCall(false);
-        if (pathname === "/login") {
+        if (pathname.includes("/login")) {
           return;
         }
-        const resp = await instance.get("/setup/status");
-        if (resp) {
+        await instance.get("/setup/status").then((resp) => {
           const setupPhase = resp.data.setupPhase;
           const initialsync = resp.data.initialsync;
           if (setupPhase !== SetupPhase.DONE || initialsync === "running") {
+            setNeedsSetup(true);
             navigate("/setup");
+          } else {
+            setNeedsSetup(false);
           }
-        }
+        });
       }
       check();
     }
@@ -58,7 +62,9 @@ const App: FC = () => {
         path="/setup"
         element={
           <Suspense fallback={<LoadingScreen />}>
-            <LazySetup />
+            <RequireSetup needsSetup={needsSetup}>
+              <LazySetup />
+            </RequireSetup>
           </Suspense>
         }
       />
