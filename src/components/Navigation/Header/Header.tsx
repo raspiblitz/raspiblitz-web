@@ -4,7 +4,6 @@ import { ReactComponent as MenuIcon } from "../../../assets/menu.svg";
 import { ReactComponent as RaspiBlitzMobileLogo } from "../../../assets/RaspiBlitz_Logo_Icon.svg";
 import { ReactComponent as RaspiBlitzLogo } from "../../../assets/RaspiBlitz_Logo_Main.svg";
 import { ReactComponent as RaspiBlitzLogoDark } from "../../../assets/RaspiBlitz_Logo_Main_Negative.svg";
-import ConnectStatus from "../../../container/ConnectStatus/ConnectStatus";
 import useSSE from "../../../hooks/use-sse";
 import { AppContext } from "../../../store/app-context";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
@@ -47,7 +46,6 @@ const Header: FC = () => {
       </NavLink>
       <div className="text-xl font-bold">{systemInfo.alias}</div>
       <div className="flex items-center">
-        <ConnectStatus />
         <MenuIcon
           ref={menu}
           onClick={showDropdownHandler}
