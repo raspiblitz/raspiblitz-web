@@ -73,6 +73,7 @@ export const ConnectionCard: FC<Props> = ({
                   ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
                   : "text-blur w-10/12"
               }`}
+              title={`${torAddress}`}
               href={`//${torAddress}`}
               target="_blank"
               rel="noreferrer"
@@ -105,6 +106,7 @@ export const ConnectionCard: FC<Props> = ({
                   ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
                   : "text-blur w-10/12"
               }`}
+              title={`${sshAddress}`}
               href={`ssh://${sshAddress}`}
               target="_blank"
               rel="noreferrer"
