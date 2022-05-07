@@ -11,6 +11,7 @@ import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 import ButtonWithSpinner from "../ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../InputField/InputField";
+import { ReactComponent as LockOpen } from "../../../assets/lock-open.svg";
 
 interface IFormInputs {
   passwordInput: string;
@@ -78,7 +79,10 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
             loading={isLoading}
             disabled={!isValid}
           >
-            {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
+            <LockOpen className="mx-1 h-6 w-6" />
+            <span>
+              {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
+            </span>
           </ButtonWithSpinner>
         </form>
       </div>

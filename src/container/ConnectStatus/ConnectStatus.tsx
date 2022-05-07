@@ -10,17 +10,18 @@ const ConnectStatus: FC = () => {
   if (!evtSource) {
     return <div></div>;
   }
+
+  const { readyState } = evtSource;
+
   return (
     <div className="mx-10 flex h-8 w-8 items-center justify-center">
-      {evtSource.readyState === evtSource.OPEN && (
+      {readyState === evtSource.OPEN && (
         <CheckCircle className="text-green-600" />
       )}
-      {evtSource.readyState === evtSource.CONNECTING && (
+      {readyState === evtSource.CONNECTING && (
         <DotsCircle className="text-blue-600" />
       )}
-      {evtSource.readyState === evtSource.CLOSED && (
-        <XCircle className="text-red-600" />
-      )}
+      {readyState === evtSource.CLOSED && <XCircle className="text-red-600" />}
     </div>
   );
 };

@@ -32,7 +32,7 @@
 }
 
 .bd-button {
-  @apply rounded bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-400;
+  @apply rounded bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-400 dark:disabled:bg-gray-500;
 }
 
 .switch-button {
