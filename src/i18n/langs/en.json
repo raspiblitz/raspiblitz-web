@@ -27,6 +27,7 @@
       "conn_out": "Outgoing",
       "conn_details": "Connection Details",
       "difficulty": "Difficulty",
+      "blocktime": "Blocktime",
       "blockchain_size": "Blockchain Size",
       "tor": "Tor",
       "ssh": "SSH login",

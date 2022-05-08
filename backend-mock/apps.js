@@ -5,7 +5,12 @@ const util = require("./util");
 router.post("/install/:id", (req, res) => {
   console.info("call to /api/v1/apps/install for app", req.params.id);
   // send information that btc-pay is currently installing
-  util.sendSSE("install", { id: "mempool" });
+  util.sendSSE("install", {
+    id: "rtl",
+    mode: "on",
+    result: "running",
+    details: "",
+  });
   setTimeout(() => {
     installApp();
   }, 5000);
@@ -20,39 +25,31 @@ router.post("/uninstall/:id", (req, res) => {
 
 const installApp = () => {
   console.info("call to installApp");
+
+  // inform Frontend that app finished installing
+  util.sendSSE("install", {
+    id: "rtl",
+    mode: "on",
+    result: "win",
+    httpsForced: "0",
+    httpsSelfsigned: "1",
+    details: "OK",
+  });
+
   util.sendSSE("installed_app_status", [
     {
-      id: "specter",
-      status: "online",
-      address: "http://192.168.0.1",
-      hiddenService: "blablablabla.onion",
-    },
-    {
-      id: "btcpayserver",
-      status: "offline",
-      address: "http://192.168.0.1",
-      hiddenService: "blablablabla.onion",
-    },
-    {
       id: "rtl",
+      installed: true,
       status: "online",
-      address: "http://192.168.0.1",
-      hiddenService: "blablablabla.onion",
-    },
-    {
-      id: "lnbits",
-      status: "online",
-      address: "http://192.168.0.1",
-      hiddenService: "blablablabla.onion",
-    },
-    {
-      id: "mempool",
-      status: "online",
-      address: "https://192.168.0.599:4081/",
-      hiddenService: "blablablabla.onion",
+      address: "http://192.168.1.100:3000",
+      httpsForced: "0",
+      httpsSelfsigned: "1",
+      hiddenService:
+        "4pt2luoyrnzhu3ddbbqvaxky66gusdybrqf63pcdwip7kgwluvgzlaqd.onion",
+      authMethod: "password_b",
+      details: {},
+      error: "",
     },
   ]);
-  // inform Frontend that no apps are currently installing
-  util.sendSSE("install", { id: null });
 };
 module.exports = router;
