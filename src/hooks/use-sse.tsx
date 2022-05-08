@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
@@ -58,15 +59,16 @@ function useSSE() {
     };
 
     const setInstall = (event: MessageEvent<string>) => {
+      toast.dismiss();
       const installEventData = JSON.parse(event.data);
       // {"id": "specter", "mode": "on", "result": "running", "details": ""}
       if (installEventData.result && installEventData.result === "fail") {
         // TODO: replace with a propper Installed Failed Notification
         // should be with an OK button so that user can note & report error
         if (installEventData.mode === "on")
-          alert(`Install Failed: ${installEventData.details}`);
+          toast(`Install Failed: ${installEventData.details}`);
         else {
-          alert(`Deinstall Failed: ${installEventData.details}`);
+          toast(`Deinstall Failed: ${installEventData.details}`);
         }
         // set the install context back to null
         sseCtx.setInstallingApp(null);
@@ -80,18 +82,20 @@ function useSSE() {
             installEventData.httpsForced === "1" &&
             installEventData.httpsSelfsigned === "1"
           ) {
-            alert(
+            toast(
               `Install finished :)\n\nYou may need to accept self-signed HTTPS certificate in your browser on first use.`
             );
           } else {
-            alert(`Install finished :)`);
+            toast(`Install finished :)`);
           }
         } else {
-          alert(`Deinstall finished`);
+          toast(`Deinstall finished`);
         }
         // set the install context back to null
+
         sseCtx.setInstallingApp(null);
       } else {
+        toast("START INSTALL", { isLoading: true, autoClose: false });
         sseCtx.setInstallingApp(installEventData);
       }
     };
