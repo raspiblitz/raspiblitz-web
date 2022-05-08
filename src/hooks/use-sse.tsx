@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
@@ -18,9 +19,9 @@ function useSSE() {
       setEvtSource(new EventSource(SSE_URL));
     }
 
-    const setApps = (event: Event) => {
+    const setApps = (event: MessageEvent<string>) => {
       sseCtx.setAvailableApps((prev: App[]) => {
-        const apps = JSON.parse((event as MessageEvent<string>).data);
+        const apps = JSON.parse(event.data);
         if (prev.length === 0) {
           return apps;
         } else {
@@ -32,11 +33,9 @@ function useSSE() {
       });
     };
 
-    const setAppStatus = (event: Event) => {
+    const setAppStatus = (event: MessageEvent<string>) => {
       sseCtx.setAppStatus((prev: AppStatus[]) => {
-        const status: AppStatus[] = JSON.parse(
-          (event as MessageEvent<string>).data
-        );
+        const status: AppStatus[] = JSON.parse(event.data);
         if (prev.length === 0) {
           return status;
         } else {
@@ -50,8 +49,8 @@ function useSSE() {
       });
     };
 
-    const setTx = (event: Event) => {
-      const t = JSON.parse((event as MessageEvent<string>).data);
+    const setTx = (event: MessageEvent<string>) => {
+      const t = JSON.parse(event.data);
       sseCtx.setTransactions((prev) => {
         // add the newest transaction to the beginning
         const current = [t, ...prev];
@@ -59,16 +58,17 @@ function useSSE() {
       });
     };
 
-    const setInstall = (event: Event) => {
-      const installEventData = JSON.parse((event as MessageEvent<string>).data);
+    const setInstall = (event: MessageEvent<string>) => {
+      toast.dismiss();
+      const installEventData = JSON.parse(event.data);
       // {"id": "specter", "mode": "on", "result": "running", "details": ""}
       if (installEventData.result && installEventData.result === "fail") {
         // TODO: replace with a propper Installed Failed Notification
         // should be with an OK button so that user can note & report error
         if (installEventData.mode === "on")
-          alert(`Install Failed: ${installEventData.details}`);
+          toast(`Install Failed: ${installEventData.details}`);
         else {
-          alert(`Deinstall Failed: ${installEventData.details}`);
+          toast(`Deinstall Failed: ${installEventData.details}`);
         }
         // set the install context back to null
         sseCtx.setInstallingApp(null);
@@ -82,24 +82,26 @@ function useSSE() {
             installEventData.httpsForced === "1" &&
             installEventData.httpsSelfsigned === "1"
           ) {
-            alert(
+            toast(
               `Install finished :)\n\nYou may need to accept self-signed HTTPS certificate in your browser on first use.`
             );
           } else {
-            alert(`Install finished :)`);
+            toast(`Install finished :)`);
           }
         } else {
-          alert(`Deinstall finished`);
+          toast(`Deinstall finished`);
         }
         // set the install context back to null
+
         sseCtx.setInstallingApp(null);
       } else {
+        toast("START INSTALL", { isLoading: true, autoClose: false });
         sseCtx.setInstallingApp(installEventData);
       }
     };
 
-    const setSystemInfo = (event: Event) => {
-      const message = JSON.parse((event as MessageEvent<string>).data);
+    const setSystemInfo = (event: MessageEvent<string>) => {
+      const message = JSON.parse(event.data);
       if (message.alias) {
         setWindowAlias(message.alias);
       }
@@ -111,9 +113,9 @@ function useSSE() {
       });
     };
 
-    const setBtcInfo = (event: Event) => {
+    const setBtcInfo = (event: MessageEvent<string>) => {
       sseCtx.setBtcInfo((prev: BtcInfo) => {
-        const message = JSON.parse((event as MessageEvent<string>).data);
+        const message = JSON.parse(event.data);
 
         return {
           ...prev,
@@ -122,9 +124,9 @@ function useSSE() {
       });
     };
 
-    const setLnStatus = (event: Event) => {
+    const setLnStatus = (event: MessageEvent<string>) => {
       sseCtx.setLnStatus((prev: LnStatus) => {
-        const message = JSON.parse((event as MessageEvent<string>).data);
+        const message = JSON.parse(event.data);
 
         return {
           ...prev,
@@ -133,9 +135,9 @@ function useSSE() {
       });
     };
 
-    const setBalance = (event: Event) => {
+    const setBalance = (event: MessageEvent<string>) => {
       sseCtx.setBalance((prev: WalletBalance) => {
-        const message = JSON.parse((event as MessageEvent<string>).data);
+        const message = JSON.parse(event.data);
 
         return {
           ...prev,
@@ -144,9 +146,9 @@ function useSSE() {
       });
     };
 
-    const setHardwareInfo = (event: Event) => {
+    const setHardwareInfo = (event: MessageEvent<string>) => {
       sseCtx.setHardwareInfo((prev: HardwareInfo | null) => {
-        const message = JSON.parse((event as MessageEvent<string>).data);
+        const message = JSON.parse(event.data);
 
         return {
           ...prev,

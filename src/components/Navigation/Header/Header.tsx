@@ -4,13 +4,13 @@ import { ReactComponent as MenuIcon } from "../../../assets/menu.svg";
 import { ReactComponent as RaspiBlitzMobileLogo } from "../../../assets/RaspiBlitz_Logo_Icon.svg";
 import { ReactComponent as RaspiBlitzLogo } from "../../../assets/RaspiBlitz_Logo_Main.svg";
 import { ReactComponent as RaspiBlitzLogoDark } from "../../../assets/RaspiBlitz_Logo_Main_Negative.svg";
-import useSSE from "../../../hooks/use-sse";
 import { AppContext } from "../../../store/app-context";
+import { SSEContext } from "../../../store/sse-context";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
 
 const Header: FC = () => {
   const { darkMode } = useContext(AppContext);
-  const { systemInfo } = useSSE();
+  const { systemInfo } = useContext(SSEContext);
   const dropdown = useRef<HTMLDivElement>(null);
   const menu = useRef<SVGSVGElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
