@@ -42,7 +42,7 @@ export const BitcoinCard: FC<Props> = ({ info, network }) => {
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.version")}
             </h6>
-            <p>{shownVersion}</p>
+            <p>{shownVersion || "-"}</p>
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
@@ -68,7 +68,7 @@ export const BitcoinCard: FC<Props> = ({ info, network }) => {
               {t("home.blocks_synced")}
             </h6>
             <p>
-              {`${blocks} / ${headers}`}{" "}
+              {`${blocks || "-"} / ${headers || "-"}`}{" "}
               <span className="inline-block">({syncPercentage} %)</span>
             </p>
           </article>
@@ -78,7 +78,7 @@ export const BitcoinCard: FC<Props> = ({ info, network }) => {
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.blocktime")}
             </h6>
-            <p>{blocks}</p>
+            <p>{blocks || "-"}</p>
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">

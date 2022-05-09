@@ -105,15 +105,15 @@ const SSEContextProvider: FC<Props> = (props) => {
     version: "",
   });
   const [balance, setBalance] = useState<WalletBalance>({
-    onchain_total_balance: 0,
-    onchain_unconfirmed_balance: 0,
-    onchain_confirmed_balance: 0,
-    channel_local_balance: 0,
-    channel_pending_open_local_balance: 0,
-    channel_pending_open_remote_balance: 0,
-    channel_remote_balance: 0,
-    channel_unsettled_local_balance: 0,
-    channel_unsettled_remote_balance: 0,
+    onchain_total_balance: null,
+    onchain_unconfirmed_balance: null,
+    onchain_confirmed_balance: null,
+    channel_local_balance: null,
+    channel_pending_open_local_balance: null,
+    channel_pending_open_remote_balance: null,
+    channel_remote_balance: null,
+    channel_unsettled_local_balance: null,
+    channel_unsettled_remote_balance: null,
   });
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);

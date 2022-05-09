@@ -62,7 +62,7 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.version")}
             </h6>
-            <p>{`${implementation} ${versionString}`}</p>
+            <p>{`${implementation || "-"} ${versionString}`}</p>
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
