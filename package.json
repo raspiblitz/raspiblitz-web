@@ -54,12 +54,12 @@
     "axios": "^0.26.1",
     "http-proxy-middleware": "^2.0.6",
     "i18next": "^21.6.16",
+    "qrcode.react": "^3.0.1",
     "rc-tooltip": "^5.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.30.0",
     "react-i18next": "^11.16.7",
-    "react-qr-code": "^2.0.4",
     "react-router-dom": "^6.3.0",
     "react-toastify": "^8.2.0"
   },

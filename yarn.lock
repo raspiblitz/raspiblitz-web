@@ -10167,7 +10167,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -10209,10 +10209,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qr.js@npm:0.0.0":
-  version: 0.0.0
-  resolution: "qr.js@npm:0.0.0"
-  checksum: 5ac6c393967bdeaa660e7fd3a501a25eb538c1f6008a4d30ab2b97bbe520e5c236530090773f1578aa0a523cdaa6923c866615e21143f9e7cd22abd41c789b69
+"qrcode.react@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "qrcode.react@npm:3.0.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 107bb08a9cb0077de982dc3204484f9e43f204141d02c587cffaf31c8ff94d1237a62e67e1938a94a8be25ae62b6db9d810eab0b42bac15db364e4a77c72fd28
   languageName: node
   linkType: hard
 
@@ -10284,12 +10286,12 @@ __metadata:
     postcss: ^8.4.12
     prettier: ^2.6.2
     prettier-plugin-tailwindcss: ^0.1.10
+    qrcode.react: ^3.0.1
     rc-tooltip: ^5.1.1
     react: ^18.0.0
     react-dom: ^18.0.0
     react-hook-form: ^7.30.0
     react-i18next: ^11.16.7
-    react-qr-code: ^2.0.4
     react-router-dom: ^6.3.0
     react-scripts: 5.0.1
     react-toastify: ^8.2.0
@@ -10488,22 +10490,6 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
-  languageName: node
-  linkType: hard
-
-"react-qr-code@npm:^2.0.4":
-  version: 2.0.5
-  resolution: "react-qr-code@npm:2.0.5"
-  dependencies:
-    prop-types: ^15.7.2
-    qr.js: 0.0.0
-  peerDependencies:
-    react: ^16.x || ^17.x || ^18.x
-    react-native-svg: "*"
-  peerDependenciesMeta:
-    react-native-svg:
-      optional: true
-  checksum: e09964642a26457e089a1f1c9d436ebee4e061b251d74a7ec7a5c067d5a2e3df2381ed4fb558592783021b6573d1b64d335f67841c925222de007b3550132cf5
   languageName: node
   linkType: hard
 
