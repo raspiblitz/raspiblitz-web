@@ -3488,12 +3488,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.26.1":
-  version: 0.26.1
-  resolution: "axios@npm:0.26.1"
+"axios@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "axios@npm:0.27.2"
   dependencies:
-    follow-redirects: ^1.14.8
-  checksum: d9eb58ff4bc0b36a04783fc9ff760e9245c829a5a1052ee7ca6013410d427036b1d10d04e7380c02f3508c5eaf3485b1ae67bd2adbfec3683704745c8d7a6e1a
+    follow-redirects: ^1.14.9
+    form-data: ^4.0.0
+  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
   languageName: node
   linkType: hard
 
@@ -6031,13 +6032,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.8":
-  version: 1.14.9
-  resolution: "follow-redirects@npm:1.14.9"
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.9":
+  version: 1.15.0
+  resolution: "follow-redirects@npm:1.15.0"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: f5982e0eb481818642492d3ca35a86989c98af1128b8e1a62911a3410621bc15d2b079e8170b35b19d3bdee770b73ed431a257ed86195af773771145baa57845
+  checksum: eaec81c3e0ae57aae2422e38ad3539d0e7279b3a63f9681eeea319bb683dea67502c4e097136b8ce9721542b4e236e092b6b49e34e326cdd7733c274f0a3f378
   languageName: node
   linkType: hard
 
@@ -6080,6 +6081,17 @@ __metadata:
     combined-stream: ^1.0.8
     mime-types: ^2.1.12
   checksum: b019e8d35c8afc14a2bd8a7a92fa4f525a4726b6d5a9740e8d2623c30e308fbb58dc8469f90415a856698933c8479b01646a9dff33c87cc4e76d72aedbbf860d
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "form-data@npm:4.0.0"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: 01135bf8675f9d5c61ff18e2e2932f719ca4de964e3be90ef4c36aacfc7b9cb2fceb5eca0b7e0190e3383fe51c5b37f4cb80b62ca06a99aaabfcfd6ac7c9328c
   languageName: node
   linkType: hard
 
@@ -6677,12 +6689,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "husky@npm:7.0.4"
+"husky@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "husky@npm:8.0.0"
   bin:
     husky: lib/bin.js
-  checksum: c6ec4af63da2c9522da8674a20ad9b48362cc92704896cc8a58c6a2a39d797feb2b806f93fbd83a6d653fbdceb2c3b6e0b602c6b2e8565206ffc2882ef7db9e9
+  checksum: b6b842abdd1bbc9322ad0c2003471fa35f94c9c01fccef3a6b5262f53e3f1bde1d78787f8a96ed8ef8a15ab3a7d56c83f576afd1cf7618588df77940044081df
   languageName: node
   linkType: hard
 
@@ -10277,9 +10289,9 @@ __metadata:
     "@types/react": ^18.0.9
     "@types/react-dom": ^18.0.3
     autoprefixer: ^10.4.7
-    axios: ^0.26.1
+    axios: ^0.27.2
     http-proxy-middleware: ^2.0.6
-    husky: ^7.0.4
+    husky: ^8.0.0
     i18next: ^21.8.0
     lint-staged: ^12.4.1
     msw: ^0.39.2
@@ -10294,7 +10306,7 @@ __metadata:
     react-i18next: ^11.16.9
     react-router-dom: ^6.3.0
     react-scripts: 5.0.1
-    react-toastify: ^8.2.0
+    react-toastify: ^9.0.1
     tailwindcss: ^3.0.24
     typescript: ~4.6.4
   languageName: unknown
@@ -10591,15 +10603,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "react-toastify@npm:8.2.0"
+"react-toastify@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "react-toastify@npm:9.0.1"
   dependencies:
     clsx: ^1.1.1
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: 670f1176fb9fd247c7ce0cad22e72578cbfa356dd1920a810ec4aa19faa4dab16db9efbdaaf761bdd368c4fad5c3d7f15568d5328b7b3c8699539064e88fcd4b
+  checksum: 920603bfd18d26537ad7fcd31899eea1469922176a730a8e597c199447af79cb8dba3bd30e9327aa3f841790737d564880f76c83b60ec34c4b1c5c32e2a79b06
   languageName: node
   linkType: hard
 
