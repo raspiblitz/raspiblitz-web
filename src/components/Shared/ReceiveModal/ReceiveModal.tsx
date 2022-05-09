@@ -1,3 +1,4 @@
+import { QRCodeSVG } from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import type { ChangeEvent, FC } from "react";
 import { useContext, useState } from "react";
@@ -5,7 +6,6 @@ import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import QRCode from "react-qr-code";
 import ErrorMessage from "../../../container/ErrorMessage/ErrorMessage";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
@@ -124,12 +124,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
       {address && (
         <>
           <div className="my-5 flex justify-center">
-            <QRCode
-              id="qr-code"
-              value={address}
-              className="overflow-visible"
-              alt="QR Code"
-            />
+            <QRCodeSVG value={address} size={256} />
           </div>
           <p className="my-5 text-sm text-gray-500 dark:text-gray-300">
             {t("wallet.scan_qr")}
