@@ -69,7 +69,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
             radioGroup="setup"
             value={SetupPhase.NULL}
           >
-            {t("setup.shutdown")}
+            {t("settings.shutdown")}
           </SelectOption>
         </div>
         <div className="mt-auto">

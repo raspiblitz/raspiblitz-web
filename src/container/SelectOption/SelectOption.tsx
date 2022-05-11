@@ -4,26 +4,26 @@ type Props = {
   id: string;
   radioGroup: string;
   value: string;
+  selected?: boolean;
   children?: React.ReactNode;
 };
 
 const SelectOption: FC<Props> = ({ children, id, radioGroup, value }) => {
   return (
-    <>
-      <label
-        htmlFor={id}
-        className="my-4 flex items-center justify-center rounded bg-gray-50 px-4 shadow-md dark:bg-gray-700"
-      >
-        <input
-          id={id}
-          type="radio"
-          name={radioGroup}
-          value={value}
-          className="w-2/12"
-        />
-        <span className="w-10/12 rounded p-5 px-4 text-center">{children}</span>
+    <div
+      className={`my-4 rounded border border-gray-700 shadow-md dark:bg-gray-700`}
+    >
+      <input
+        id={id}
+        type="radio"
+        name={radioGroup}
+        value={value}
+        className="mx-4 align-middle"
+      />
+      <label htmlFor={id} className="inline-block py-8 px-4">
+        <span className="text-center align-middle">{children}</span>
       </label>
-    </>
+    </div>
   );
 };
 
