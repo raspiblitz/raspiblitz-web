@@ -61,17 +61,17 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
               {t("setup.hdd_delete_no_blockchain")}
             </div>
           )}
-          <div className="mt-5 flex justify-center gap-2">
+          <div className="mt-5 flex flex-col justify-center gap-2 md:flex-row">
             <button
               onClick={() => callback(false, keepBlockchain.current)}
-              className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+              className="rounded  bg-red-500 p-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
             >
               <X className="inline h-6 w-6" />
               <span className="p-2">{t("setup.cancel")}</span>
             </button>
             <button
               onClick={() => callback(true, keepBlockchain.current)}
-              className="bd-button flex items-center rounded px-2"
+              className="bd-button rounded p-2"
             >
               <Trash className="inline h-6 w-6" />
               <span className="p-2">{t("setup.hdd_delete")}</span>
