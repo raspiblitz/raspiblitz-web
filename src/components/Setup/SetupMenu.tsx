@@ -1,9 +1,12 @@
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as ArrowRightIcon } from "../../assets/arrow-sm-right.svg";
+import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
+import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
+import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
 import SelectOption from "../../container/SelectOption/SelectOption";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
-import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -12,15 +15,17 @@ export type Props = {
 
 const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
   const { t } = useTranslation();
-  const [selected, setSelected] = useState<SetupPhase>(SetupPhase.NULL);
+  const [selected, setSelected] = useState<SetupPhase | null>(null);
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    callback(selected);
+    if (selected !== null) {
+      callback(selected);
+    }
   };
 
-  const changeHandler = (e: ChangeEvent<HTMLFormElement>) => {
-    setSelected(e.target.value);
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSelected(e.target.value as SetupPhase);
   };
 
   return (
@@ -31,7 +36,6 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
       <form
         className="flex h-full flex-col flex-wrap items-center justify-center"
         onSubmit={submitHandler}
-        onChange={changeHandler}
       >
         <div>
           {setupPhase === SetupPhase.RECOVERY && (
@@ -39,7 +43,10 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
               id="recovery"
               radioGroup="setup"
               value={SetupPhase.RECOVERY}
+              selected={selected}
+              onSelectOption={changeHandler}
             >
+              <RefreshIcon className="mr-1 inline h-6 w-6 align-bottom" />
               {t("setup.recoverblitz")}
             </SelectOption>
           )}
@@ -48,6 +55,8 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
               id="update"
               radioGroup="setup"
               value={SetupPhase.UPDATE}
+              selected={selected}
+              onSelectOption={changeHandler}
             >
               {t("setup.updateblitz")}
             </SelectOption>
@@ -57,25 +66,41 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
               id="migration"
               radioGroup="setup"
               value={SetupPhase.MIGRATION}
+              selected={selected}
+              onSelectOption={changeHandler}
             >
               {t("setup.migrateblitz")}
             </SelectOption>
           )}
-          <SelectOption id="setup" radioGroup="setup" value={SetupPhase.SETUP}>
+          <SelectOption
+            id="setup"
+            radioGroup="setup"
+            value={SetupPhase.SETUP}
+            selected={selected}
+            onSelectOption={changeHandler}
+          >
+            <PlusIcon className="mr-1 inline h-6 w-6 align-bottom" />
             {t("setup.setupblitz")}
           </SelectOption>
           <SelectOption
             id="shutdown"
             radioGroup="setup"
             value={SetupPhase.NULL}
+            selected={selected}
+            onSelectOption={changeHandler}
           >
+            <XCircleIcon className="mr-1 inline h-6 w-6 align-bottom" />
             {t("settings.shutdown")}
           </SelectOption>
         </div>
         <div className="mt-auto">
-          <button type="submit" className="bd-button flex items-center p-2">
+          <button
+            type="submit"
+            className="bd-button flex items-center p-2"
+            disabled={selected === null}
+          >
             <span className="p-2">Continue</span>
-            <ArrowRight className="inline h-6 w-6" />
+            <ArrowRightIcon className="inline h-6 w-6" />
           </button>
         </div>
       </form>
