@@ -28,7 +28,7 @@ export const WalletCard: FC<Props> = ({
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
 
-  if (onchainBalance !== null && lnBalance != null) {
+  if (onchainBalance !== null && lnBalance !== null) {
   }
 
   const convertedOnchainBalance =
@@ -42,7 +42,7 @@ export const WalletCard: FC<Props> = ({
 
   let totalBalance = null;
 
-  if (convertedOnchainBalance != null && convertedLnBalance != null) {
+  if (convertedOnchainBalance !== null && convertedLnBalance !== null) {
     totalBalance =
       unit === Unit.BTC
         ? +(convertedOnchainBalance + convertedLnBalance).toFixed(8)
