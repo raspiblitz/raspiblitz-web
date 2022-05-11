@@ -18,7 +18,7 @@ If you want to try it out, run the following scripts on your RaspiBlitz:
 
 `./config.scripts/blitz.web.api.sh on` installs the backend (blitz_api)
 
-`./config.scripts/blitz.web.ui.sh` installs the frontend (raspiblitz-web)
+`./config.scripts/blitz.web.ui.sh on` installs the frontend (raspiblitz-web)
 
 You need to run both scripts for the WebUI to work.
 

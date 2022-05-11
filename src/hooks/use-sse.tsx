@@ -1,18 +1,58 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
 import { HardwareInfo } from "../models/hardware-info";
+import { InstallAppData } from "../models/install-app";
 import { LnStatus } from "../models/ln-status";
 import { SystemInfo } from "../models/system-info";
 import { WalletBalance } from "../models/wallet-balance";
 import { SSEContext, SSE_URL } from "../store/sse-context";
+import { availableApps } from "../util/availableApps";
 import { setWindowAlias } from "../util/util";
 
+/**
+ * Establishes a SSE connection if not available yet & attaches / removes event listeners
+ * to the single events to update the SSEContext
+ * @returns the infos from the SSEContext
+ */
 function useSSE() {
   const sseCtx = useContext(SSEContext);
   const { evtSource, setEvtSource } = sseCtx;
+
+  const appInstallSuccessHandler = useCallback(
+    (installData: InstallAppData, appName: string) => {
+      if (installData.mode === "on") {
+        if (
+          installData.httpsForced === "1" &&
+          installData.httpsSelfsigned === "1"
+        ) {
+          toast(
+            `Install finished :)\n\nYou may need to accept self-signed HTTPS certificate in your browser on first use.`
+          );
+        } else {
+          toast(`${appName} installed successfully!`);
+        }
+      } else {
+        toast(`${appName} successfully uninstalled!`);
+      }
+    },
+    []
+  );
+
+  const appInstallErrorHandler = useCallback(
+    (installData: InstallAppData, appName: string) => {
+      // TODO: replace with a propper Installed Failed Notification
+      // should be with an OK button so that user can note & report error
+      if (installData.mode === "on")
+        toast(`Install of ${appName} failed: ${installData.details}`);
+      else {
+        toast(`Uninstall of ${appName} failed: ${installData.details}`);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     if (!evtSource) {
@@ -60,44 +100,23 @@ function useSSE() {
 
     const setInstall = (event: MessageEvent<string>) => {
       toast.dismiss();
-      const installEventData = JSON.parse(event.data);
-      // {"id": "specter", "mode": "on", "result": "running", "details": ""}
-      if (installEventData.result && installEventData.result === "fail") {
-        // TODO: replace with a propper Installed Failed Notification
-        // should be with an OK button so that user can note & report error
-        if (installEventData.mode === "on")
-          toast(`Install Failed: ${installEventData.details}`);
-        else {
-          toast(`Deinstall Failed: ${installEventData.details}`);
-        }
-        // set the install context back to null
+      const InstallAppData = JSON.parse(event.data) as InstallAppData;
+      const appName = availableApps.get(InstallAppData.id)?.name || "";
+      if (InstallAppData.result === "fail") {
+        appInstallErrorHandler(InstallAppData, appName);
         sseCtx.setInstallingApp(null);
-      } else if (installEventData.result && installEventData.result === "win") {
-        // TODO: send a one of those small notifications
-        if (installEventData.mode === "on") {
-          console.log(installEventData);
-          console.log(installEventData.httpsForced);
-          console.log(installEventData.httpsSelfsigned);
-          if (
-            installEventData.httpsForced === "1" &&
-            installEventData.httpsSelfsigned === "1"
-          ) {
-            toast(
-              `Install finished :)\n\nYou may need to accept self-signed HTTPS certificate in your browser on first use.`
-            );
-          } else {
-            toast(`Install finished :)`);
-          }
-        } else {
-          toast(`Deinstall finished`);
-        }
-        // set the install context back to null
-
-        sseCtx.setInstallingApp(null);
-      } else {
-        toast("START INSTALL", { isLoading: true, autoClose: false });
-        sseCtx.setInstallingApp(installEventData);
+        return;
       }
+      if (InstallAppData.result === "win") {
+        appInstallSuccessHandler(InstallAppData, appName);
+        sseCtx.setInstallingApp(null);
+        return;
+      }
+      toast(`START INSTALL of ${appName}`, {
+        isLoading: true,
+        autoClose: false,
+      });
+      sseCtx.setInstallingApp(InstallAppData);
     };
 
     const setSystemInfo = (event: MessageEvent<string>) => {
@@ -183,7 +202,13 @@ function useSSE() {
         evtSource.removeEventListener("hardware_info", setHardwareInfo);
       }
     };
-  }, [evtSource, setEvtSource, sseCtx]);
+  }, [
+    evtSource,
+    setEvtSource,
+    sseCtx,
+    appInstallSuccessHandler,
+    appInstallErrorHandler,
+  ]);
 
   return {
     systemInfo: sseCtx.systemInfo,

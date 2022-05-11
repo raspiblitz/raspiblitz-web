@@ -11,28 +11,43 @@ import {
   convertSatToBtc,
   convertToString,
 } from "../../../util/format";
-import { checkPropsUndefined } from "../../../util/util";
-import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
-export const WalletCard: FC<WalletCardProps> = (props) => {
+type Props = {
+  onchainBalance: number | null;
+  lnBalance: number | null;
+  onReceive: () => void;
+  onSend: () => void;
+};
+
+export const WalletCard: FC<Props> = ({
+  onchainBalance,
+  lnBalance,
+  onReceive,
+  onSend,
+}) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
 
-  if (checkPropsUndefined(props)) {
-    return <LoadingBox />;
+  if (onchainBalance !== null && lnBalance !== null) {
   }
-
-  const { onchainBalance, lnBalance } = props;
 
   const convertedOnchainBalance =
     unit === Unit.BTC ? convertSatToBtc(onchainBalance) : onchainBalance;
-  const convertedLnBalance =
-    unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
+  let convertedLnBalance = null;
 
-  const totalBalance =
-    unit === Unit.BTC
-      ? +(convertedOnchainBalance + convertedLnBalance).toFixed(8)
-      : convertedOnchainBalance + convertedLnBalance;
+  if (lnBalance) {
+    convertedLnBalance =
+      unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
+  }
+
+  let totalBalance = null;
+
+  if (convertedOnchainBalance !== null && convertedLnBalance !== null) {
+    totalBalance =
+      unit === Unit.BTC
+        ? +(convertedOnchainBalance + convertedLnBalance).toFixed(8)
+        : convertedOnchainBalance + convertedLnBalance;
+  }
 
   return (
     <div className="h-full p-5">
@@ -76,14 +91,14 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
         </section>
         <section className="flex justify-around p-2">
           <button
-            onClick={props.onReceive}
+            onClick={onReceive}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
           >
             <ReceiveIcon className="h-6 w-6" />
             <span>&nbsp;{t("wallet.receive")}</span>
           </button>
           <button
-            onClick={props.onSend}
+            onClick={onSend}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
           >
             <SendIcon className="h-6 w-6" />
@@ -96,10 +111,3 @@ export const WalletCard: FC<WalletCardProps> = (props) => {
 };
 
 export default WalletCard;
-
-export interface WalletCardProps {
-  onchainBalance: number;
-  lnBalance: number;
-  onReceive: () => void;
-  onSend: () => void;
-}

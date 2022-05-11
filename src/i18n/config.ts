@@ -1,15 +1,15 @@
 import i18n from "i18next";
-import en from "./langs/en.json";
+import "react-i18next";
+import { initReactI18next } from "react-i18next";
 import de from "./langs/de.json";
-import nb_NO from "./langs/nb_NO.json";
+import en from "./langs/en.json";
+import es from "./langs/es.json";
 import fr from "./langs/fr.json";
 import hu from "./langs/hu.json";
-import pt_BR from "./langs/pt_BR.json";
 import it from "./langs/it.json";
-import es from "./langs/es.json";
+import nb_NO from "./langs/nb_NO.json";
 import nl from "./langs/nl.json";
-import { initReactI18next } from "react-i18next";
-import "react-i18next";
+import pt_BR from "./langs/pt_BR.json";
 
 export const resources = {
   en,

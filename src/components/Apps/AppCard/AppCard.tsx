@@ -74,14 +74,14 @@ export const AppCard: FC<Props> = ({
             {t("apps.no_page")}
           </button>
         )}
-        {(installingApp == null ||
+        {(installingApp === null ||
           installingApp.id !== id ||
           installingApp.result === "fail") &&
           !installed && (
             <button
               disabled={
                 isInstallWaiting ||
-                (installingApp != null && installingApp.result !== "fail")
+                (installingApp !== null && installingApp?.result !== "fail")
               }
               className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
               onClick={() => installButtonPressed(id)}
