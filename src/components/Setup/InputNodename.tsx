@@ -51,11 +51,15 @@ const InputNodename: FC<Props> = ({ callback }) => {
                 onChange: changeNodenameHandler,
                 pattern: {
                   value: /^[a-zA-Z0-9]*$/,
-                  message: t("setup.nodename_error_chars"),
+                  message: t("setup.nodename_err_chars"),
                 },
                 minLength: {
                   value: 4,
-                  message: t("setup.nodename_error_length"),
+                  message: t("setup.nodename_err_min_length"),
+                },
+                maxLength: {
+                  value: 32,
+                  message: t("setup.nodename_err_max_length"),
                 },
               })}
               label={t("setup.nodename_name")}

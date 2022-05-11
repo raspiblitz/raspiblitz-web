@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
+import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -61,6 +62,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             {t("setup.final_info_reboot")}
           </div>
           <button onClick={() => callback()} className="bd-button p-2">
+            <RefreshIcon className="mr-1 inline h-6 w-6 align-top" />
             {t("setup.final_do_reboot")}
           </button>
         </article>
