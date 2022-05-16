@@ -92,8 +92,8 @@
     },
     "apps": {
       "installed": "Installed",
-      "installing": "Installing {{appName}}",
-      "uninstalling": "Uninstalling {{appName}}",
+      "installing": "Installing",
+      "uninstalling": "Uninstalling",
       "available": "Available Apps",
       "open": "Open",
       "install": "Install",

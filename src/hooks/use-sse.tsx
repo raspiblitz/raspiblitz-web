@@ -23,21 +23,9 @@ function useSSE() {
   const sseCtx = useContext(SSEContext);
   const { evtSource, setEvtSource } = sseCtx;
 
-  const failedNotification = (text: string) => {
-    return (
-      <div className="flex flex-col">
-        <span className="text-red-500">{text}</span>
-        <span className="text-sm text-gray-500">Show More</span>
-      </div>
-    );
-  };
-
   const appInstallSuccessHandler = useCallback(
     (installData: InstallAppData, appName: string) => {
       if (installData.mode === "on") {
-        toast.success(
-          failedNotification(t("apps.install_success", { appName }))
-        );
         toast.success(t("apps.install_success", { appName }));
       } else {
         toast.success(t("apps.uninstall_success", { appName }));
@@ -48,8 +36,6 @@ function useSSE() {
 
   const appInstallErrorHandler = useCallback(
     (installData: InstallAppData, appName: string) => {
-      // TODO: replace with a propper Installed Failed Notification
-      // should be with an OK button so that user can note & report error
       if (installData.mode === "on") {
         toast.error(
           t("apps.install_failure", { appName, details: installData.details })
@@ -124,8 +110,8 @@ function useSSE() {
       const installing = installAppData.mode === "on";
       toast(
         installing
-          ? t("apps.installing", { appName })
-          : t("apps.uninstalling", { appName }),
+          ? `${t("apps.installing")} ${appName}`
+          : `${t("apps.uninstalling")} ${appName}`,
         {
           isLoading: true,
           autoClose: false,
