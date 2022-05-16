@@ -44,7 +44,7 @@ const InputNodename: FC<Props> = ({ callback }) => {
           onSubmit={handleSubmit(continueHandler)}
           className="flex h-full w-full flex-col py-1 md:w-10/12"
         >
-          <article className="my-auto">
+          <article className="m-auto md:w-1/2">
             <InputField
               {...register("inputNodeName", {
                 required: t("setup.nodename_error_empty"),

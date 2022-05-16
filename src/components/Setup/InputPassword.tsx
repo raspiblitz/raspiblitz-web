@@ -67,7 +67,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
           onSubmit={handleSubmit(continueHandler)}
           className="flex h-full w-full flex-col py-1 md:w-10/12"
         >
-          <article className="my-auto">
+          <article className="m-auto md:w-1/2">
             <InputField
               {...register("passfirst", {
                 required: t("setup.password_error_empty"),
