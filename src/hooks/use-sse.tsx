@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
@@ -18,40 +19,34 @@ import { setWindowAlias } from "../util/util";
  * @returns the infos from the SSEContext
  */
 function useSSE() {
+  const { t } = useTranslation();
   const sseCtx = useContext(SSEContext);
   const { evtSource, setEvtSource } = sseCtx;
 
   const appInstallSuccessHandler = useCallback(
     (installData: InstallAppData, appName: string) => {
       if (installData.mode === "on") {
-        if (
-          installData.httpsForced === "1" &&
-          installData.httpsSelfsigned === "1"
-        ) {
-          toast(
-            `Install finished :)\n\nYou may need to accept self-signed HTTPS certificate in your browser on first use.`
-          );
-        } else {
-          toast(`${appName} installed successfully!`);
-        }
+        toast.success(t("apps.install_success", { appName }));
       } else {
-        toast(`${appName} successfully uninstalled!`);
+        toast.success(t("apps.uninstall_success", { appName }));
       }
     },
-    []
+    [t]
   );
 
   const appInstallErrorHandler = useCallback(
     (installData: InstallAppData, appName: string) => {
-      // TODO: replace with a propper Installed Failed Notification
-      // should be with an OK button so that user can note & report error
-      if (installData.mode === "on")
-        toast(`Install of ${appName} failed: ${installData.details}`);
-      else {
-        toast(`Uninstall of ${appName} failed: ${installData.details}`);
+      if (installData.mode === "on") {
+        toast.error(
+          t("apps.install_failure", { appName, details: installData.details })
+        );
+      } else {
+        toast.error(
+          t("apps.uninstall_failure", { appName, details: installData.details })
+        );
       }
     },
-    []
+    [t]
   );
 
   useEffect(() => {
@@ -100,23 +95,29 @@ function useSSE() {
 
     const setInstall = (event: MessageEvent<string>) => {
       toast.dismiss();
-      const InstallAppData = JSON.parse(event.data) as InstallAppData;
-      const appName = availableApps.get(InstallAppData.id)?.name || "";
-      if (InstallAppData.result === "fail") {
-        appInstallErrorHandler(InstallAppData, appName);
+      const installAppData = JSON.parse(event.data) as InstallAppData;
+      const appName = availableApps.get(installAppData.id)?.name || "";
+      if (installAppData.result === "fail") {
+        appInstallErrorHandler(installAppData, appName);
         sseCtx.setInstallingApp(null);
         return;
       }
-      if (InstallAppData.result === "win") {
-        appInstallSuccessHandler(InstallAppData, appName);
+      if (installAppData.result === "win") {
+        appInstallSuccessHandler(installAppData, appName);
         sseCtx.setInstallingApp(null);
         return;
       }
-      toast(`START INSTALL of ${appName}`, {
-        isLoading: true,
-        autoClose: false,
-      });
-      sseCtx.setInstallingApp(InstallAppData);
+      const installing = installAppData.mode === "on";
+      toast(
+        installing
+          ? `${t("apps.installing")} ${appName}`
+          : `${t("apps.uninstalling")} ${appName}`,
+        {
+          isLoading: true,
+          autoClose: false,
+        }
+      );
+      sseCtx.setInstallingApp(installAppData);
     };
 
     const setSystemInfo = (event: MessageEvent<string>) => {
@@ -203,6 +204,7 @@ function useSSE() {
       }
     };
   }, [
+    t,
     evtSource,
     setEvtSource,
     sseCtx,

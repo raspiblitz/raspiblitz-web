@@ -93,6 +93,7 @@
     "apps": {
       "installed": "Installed",
       "installing": "Installing",
+      "uninstalling": "Uninstalling",
       "available": "Available Apps",
       "open": "Open",
       "install": "Install",
@@ -103,7 +104,11 @@
       "author": "Author",
       "source": "Source code",
       "offline": "offline",
-      "online": "online"
+      "online": "online",
+      "install_success": "{{appName}} installed successfully",
+      "install_failure": "Installation of {{appName}} failed: {{details}}",
+      "uninstall_success": "Successfully uninstalled {{appName}}",
+      "uninstall_failure": "Uninstall of {{appName}} failed: {{details}}"
     },
     "settings": {
       "change_pw": "Change password",
