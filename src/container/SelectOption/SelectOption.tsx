@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
 import { SetupPhase } from "../../models/setup.model";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   value: string;
   selected: SetupPhase | null;
   children?: React.ReactNode;
-  onSelectOption: (event: ChangeEvent<HTMLInputElement>) => void;
+  onSelectOption: (value: SetupPhase) => void;
 };
 
 const SelectOption: FC<Props> = ({
@@ -21,18 +21,18 @@ const SelectOption: FC<Props> = ({
   const currentSelected = selected === value;
   return (
     <div
-      className={`my-4 rounded border border-gray-700 px-2 shadow-md ${
-        currentSelected ? "bg-yellow-500" : "dark:bg-gray-700"
+      className={`my-4 rounded border-4 border-gray-200 px-2 ${
+        currentSelected ? "border-4 border-yellow-500" : "dark:bg-gray-700"
       }`}
+      onClick={() => onSelectOption(value as SetupPhase)}
     >
-      {/* Empty bc react complaints */}
       <input
         id={id}
         type="radio"
         name={radioGroup}
         value={value}
         checked={currentSelected}
-        onChange={onSelectOption}
+        readOnly
         className="appearance-none align-middle"
       />
       <label htmlFor={id} className="inline-block py-8">

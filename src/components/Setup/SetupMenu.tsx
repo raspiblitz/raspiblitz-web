@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowRightIcon } from "../../assets/arrow-sm-right.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
@@ -24,8 +24,8 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
     }
   };
 
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSelected(e.target.value as SetupPhase);
+  const changeHandler = (setupPhase: SetupPhase) => {
+    setSelected(setupPhase);
   };
 
   return (
