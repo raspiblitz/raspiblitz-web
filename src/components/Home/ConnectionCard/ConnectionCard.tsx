@@ -59,7 +59,7 @@ export const ConnectionCard: FC<Props> = ({
       <ModalDialog close={closeModalHandler}>
         <div className="my-5 flex flex-col items-center justify-center">
           <QRCodeSVG value={nodeId} size={256} />
-          <div className="mt-10 mb-3 text-sm text-gray-500">{nodeId}</div>
+          <p className="mt-10 mb-3 text-sm text-gray-500">{nodeId}</p>
         </div>
       </ModalDialog>,
       MODAL_ROOT

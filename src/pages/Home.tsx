@@ -169,7 +169,6 @@ const Home: FC = () => {
         </article>
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <div className="flex h-full flex-col p-5 lg:flex-row">
-            {/* TODO: add correct nodeId */}
             <ConnectionCard
               torAddress={systemInfo.tor_web_ui!}
               sshAddress={systemInfo.ssh_address!}
