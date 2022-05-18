@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -13,6 +12,7 @@ import WalletCard from "../components/Home/WalletCard/WalletCard";
 import ReceiveModal from "../components/Shared/ReceiveModal/ReceiveModal";
 import SendModal from "../components/Shared/SendModal/SendModal";
 import UnlockModal from "../components/Shared/UnlockModal/UnlockModal";
+import { useInterval } from "../hooks/use-interval";
 import useSSE from "../hooks/use-sse";
 import { AppStatus } from "../models/app-status";
 import { Transaction } from "../models/transaction.model";
@@ -36,35 +36,40 @@ const Home: FC = () => {
 
   const theme = darkMode ? "dark" : "light";
 
+  const getTransactions = useCallback(async () => {
+    try {
+      const tx = await instance.get("/lightning/list-all-tx?reversed=true");
+      setTransactions(tx.data);
+    } catch (err: any) {
+      if (err.response.status === 423) {
+        setWalletLocked(true);
+      } else {
+        setTxError(
+          `${t("login.error")}: ${
+            err.response?.data?.detail?.[0]?.msg || err.response?.data?.detail
+          }`
+        );
+      }
+    }
+  }, [setWalletLocked, t]);
+
   useEffect(() => {
     enableGutter();
     if (!walletLocked) {
       setIsLoadingTransactions(true);
       setTxError("");
-
-      instance
-        .get("/lightning/list-all-tx?reversed=true")
-        .then((tx: AxiosResponse<Transaction[]>) => {
-          setTransactions(tx.data);
-        })
-        .catch((err) => {
-          if (err.response.status === 423) {
-            setWalletLocked(true);
-          } else {
-            setTxError(
-              `${t("login.error")}: ${
-                err.response?.data?.detail?.[0]?.msg ||
-                err.response?.data?.detail
-              }`
-            );
-          }
-          setTransactions([]);
-        })
-        .finally(() => {
-          setIsLoadingTransactions(false);
-        });
     }
   }, [t, walletLocked, setWalletLocked, setIsLoadingTransactions]);
+
+  useEffect(() => {
+    if (!walletLocked && isLoadingTransactions) {
+      getTransactions().finally(() => {
+        setIsLoadingTransactions(false);
+      });
+    }
+  }, [isLoadingTransactions, walletLocked, getTransactions]);
+
+  useInterval(getTransactions, 5000);
 
   const showSendModalHandler = useCallback(() => {
     setShowSendModal(true);
