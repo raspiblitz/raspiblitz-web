@@ -172,6 +172,7 @@ const Home: FC = () => {
             <ConnectionCard
               torAddress={systemInfo.tor_web_ui!}
               sshAddress={systemInfo.ssh_address!}
+              nodeId={lnStatus.identity_pubkey}
             />
             <HardwareCard hardwareInfo={hardwareInfo} />
           </div>

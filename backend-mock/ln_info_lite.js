@@ -6,6 +6,7 @@ const lnInfoLite = () => {
   util.sendSSE("ln_info_lite", {
     implementation: "LND",
     version: "0.13.0-beta commit=v0.13.0-beta",
+    identity_pubkey: "somePubKey@Toraddress:port",
     num_pending_channels: 1,
     num_active_channels: 3,
     num_inactive_channels: 2,

@@ -16,7 +16,7 @@ function useClipboard(text: string): [() => void, boolean] {
   const copy = () => {
     // on HTTPS or localhost, navigator.clipboard works
     if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text);
+      navigator.clipboard.writeText(text);
     } else {
       // https://stackoverflow.com/a/65996386
       const textArea = document.createElement("textarea");

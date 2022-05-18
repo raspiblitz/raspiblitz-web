@@ -97,6 +97,7 @@ const SSEContextProvider: FC<Props> = (props) => {
   const [lnStatus, setLnStatus] = useState<LnStatus>({
     block_height: 0,
     implementation: "",
+    identity_pubkey: "",
     num_active_channels: 0,
     num_inactive_channels: 0,
     num_pending_channels: 0,
