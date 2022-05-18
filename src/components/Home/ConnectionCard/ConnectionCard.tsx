@@ -1,3 +1,4 @@
+import { QRCodeSVG } from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap.css";
 import { FC, useState } from "react";
@@ -11,7 +12,6 @@ import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
 import { MODAL_ROOT } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
-import { QRCodeSVG } from "qrcode.react";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
@@ -28,7 +28,7 @@ export const ConnectionCard: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const [showAddress, setShowAddress] = useState(true);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [copyTor, clippedTor] = useClipboard(torAddress);
   const [copySsh, clippedSsh] = useClipboard(sshAddress);
   const [copyNodeId, clippedNodeId] = useClipboard(nodeId);

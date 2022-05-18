@@ -1,6 +1,7 @@
 export interface LnStatus {
   implementation: string;
   version: string;
+  identity_pubkey: string;
   num_pending_channels: number;
   num_active_channels: number;
   num_inactive_channels: number;
