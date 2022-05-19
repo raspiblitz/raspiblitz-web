@@ -14,6 +14,7 @@ import {
 
 type Props = {
   onchainBalance: number | null;
+  onChainUnconfirmed: number | null;
   lnBalance: number | null;
   onReceive: () => void;
   onSend: () => void;
@@ -21,32 +22,42 @@ type Props = {
 
 export const WalletCard: FC<Props> = ({
   onchainBalance,
+  onChainUnconfirmed,
   lnBalance,
   onReceive,
   onSend,
 }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
+  let convertedOnchainBalance = null;
+  let convertedOnchainBalanceUnconfirmed = null;
+  let convertedLnBalance = null;
+  let totalBalance = null;
+  let unconfirmedSign = "";
 
   if (onchainBalance !== null && lnBalance !== null) {
-  }
+    convertedOnchainBalance =
+      unit === Unit.BTC ? convertSatToBtc(onchainBalance) : onchainBalance;
 
-  const convertedOnchainBalance =
-    unit === Unit.BTC ? convertSatToBtc(onchainBalance) : onchainBalance;
-  let convertedLnBalance = null;
+    if (onChainUnconfirmed) {
+      convertedOnchainBalanceUnconfirmed =
+        unit === Unit.BTC
+          ? convertSatToBtc(onChainUnconfirmed)
+          : onChainUnconfirmed;
+      unconfirmedSign = onChainUnconfirmed > 0 ? "+" : "";
+    }
 
-  if (lnBalance) {
-    convertedLnBalance =
-      unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
-  }
+    if (lnBalance) {
+      convertedLnBalance =
+        unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
+    }
 
-  let totalBalance = null;
-
-  if (convertedOnchainBalance !== null && convertedLnBalance !== null) {
-    totalBalance =
-      unit === Unit.BTC
-        ? +(convertedOnchainBalance + convertedLnBalance).toFixed(8)
-        : convertedOnchainBalance + convertedLnBalance;
+    if (convertedOnchainBalance !== null && convertedLnBalance !== null) {
+      totalBalance =
+        unit === Unit.BTC
+          ? +(convertedOnchainBalance + convertedLnBalance).toFixed(8)
+          : convertedOnchainBalance + convertedLnBalance;
+    }
   }
 
   return (
@@ -67,8 +78,17 @@ export const WalletCard: FC<Props> = ({
                   {t("wallet.on_chain")}
                 </span>
               </h6>
-              <p className="text-lg font-bold">
-                {convertToString(unit, convertedOnchainBalance)} {unit}
+              <p className="break-before-auto break-words text-lg font-bold">
+                <span>
+                  {convertToString(unit, convertedOnchainBalance)} {unit}
+                </span>
+                <span className="block md:inline-block">
+                  {onChainUnconfirmed !== 0 &&
+                    ` (${unconfirmedSign} ${convertToString(
+                      unit,
+                      convertedOnchainBalanceUnconfirmed
+                    )})`}
+                </span>
               </p>
             </article>
             <article className="flex w-full flex-col">

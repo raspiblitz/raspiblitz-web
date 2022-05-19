@@ -188,7 +188,7 @@ router.post("/unlock-wallet", (req, res) => {
       return res.status(200).send(true);
     }
     return res.status(401).send();
-  }, 1500);
+  }, 1000);
 });
 
 module.exports = router;

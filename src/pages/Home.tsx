@@ -153,8 +153,9 @@ const Home: FC = () => {
       >
         <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
           <WalletCard
-            onchainBalance={balance.onchain_total_balance!}
-            lnBalance={balance.channel_local_balance!}
+            onchainBalance={balance.onchain_total_balance}
+            onChainUnconfirmed={balance.onchain_unconfirmed_balance}
+            lnBalance={balance.channel_local_balance}
             onReceive={showReceiveHandler}
             onSend={showSendModalHandler}
           />
