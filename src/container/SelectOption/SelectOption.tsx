@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { SetupPhase } from "../../models/setup.model";
+import { SetupLightning, SetupPhase } from "../../models/setup.model";
 
 type Props = {
   id: string;
@@ -7,7 +7,9 @@ type Props = {
   value: string;
   selected: string | null;
   children?: React.ReactNode;
-  onSelectOption: (value: any) => void;
+  onSelectOption: (
+    value: SetupPhase
+  ) => void | ((value: SetupLightning) => void);
 };
 
 const SelectOption: FC<Props> = ({
