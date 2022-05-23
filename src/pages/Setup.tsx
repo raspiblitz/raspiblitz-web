@@ -4,6 +4,7 @@ import FinalDialog from "../components/Setup/FinalDialog";
 import FormatDialog from "../components/Setup/FormatDialog";
 import InputNodename from "../components/Setup/InputNodename";
 import InputPassword from "../components/Setup/InputPassword";
+import LightningDialog from "../components/Setup/LightningDialog";
 import MigrationDialog from "../components/Setup/MigrationDialog";
 import RecoveryDialog from "../components/Setup/RecoveryDialog";
 import SetupMenu from "../components/Setup/SetupMenu";
@@ -24,6 +25,7 @@ enum Screen {
   START_DONE,
   FORMAT,
   SETUP,
+  LIGHTNING,
   INPUTA,
   INPUTB,
   INPUTC,
@@ -295,6 +297,18 @@ const Setup: FC = () => {
     setPage(Screen.INPUT_NODENAME);
   };
 
+  const callbackLightning = (lightning: SetupLightning) => {
+    if (!lightning) {
+      setPage(Screen.SETUP);
+      return;
+    }
+
+    // store for later
+    setLightning(SetupLightning.LND);
+
+    setPage(Screen.INPUTA);
+  };
+
   const callbackInputNodename = (nodename: string | null) => {
     // on cancel jump back to setup menu
     if (!nodename) {
@@ -305,12 +319,7 @@ const Setup: FC = () => {
     // store for later
     setHostname(nodename);
 
-    // TODO: Once WebUi can support c-lightning or run without Lighting
-    // show this dialog - until then fix selection to LND
-    setLightning(SetupLightning.LND);
-
-    // next step is always password A
-    setPage(Screen.INPUTA);
+    setPage(Screen.LIGHTNING);
   };
 
   // on cancel jump back to setup menu
@@ -436,6 +445,8 @@ const Setup: FC = () => {
           callback={callbackMigrationDialog}
         />
       );
+    case Screen.LIGHTNING:
+      return <LightningDialog callback={callbackLightning} />;
     case Screen.INPUTA:
       return (
         <InputPassword passwordType="a" callback={callbackInputPasswordA} />

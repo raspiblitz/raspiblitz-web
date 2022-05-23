@@ -5,9 +5,9 @@ type Props = {
   id: string;
   radioGroup: string;
   value: string;
-  selected: SetupPhase | null;
+  selected: string | null;
   children?: React.ReactNode;
-  onSelectOption: (value: SetupPhase) => void;
+  onSelectOption: (value: any) => void;
 };
 
 const SelectOption: FC<Props> = ({

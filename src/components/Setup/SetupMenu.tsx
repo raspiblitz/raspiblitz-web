@@ -99,7 +99,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
             className="bd-button flex items-center p-2"
             disabled={selected === null}
           >
-            <span className="p-2">Continue</span>
+            <span className="p-2">{t("setup.continue")}</span>
             <ArrowRightIcon className="inline h-6 w-6" />
           </button>
         </div>
