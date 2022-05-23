@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { SetupLightning, SetupPhase } from "../../models/setup.model";
 
 type Props = {
   id: string;
@@ -7,9 +6,9 @@ type Props = {
   value: string;
   selected: string | null;
   children?: React.ReactNode;
-  onSelectOption: (
-    value: SetupPhase
-  ) => void | ((value: SetupLightning) => void);
+  // Can be LightningDialog or SetupPhase
+  // TODO: Move both to something better than enums
+  onSelectOption: (value: any) => void;
 };
 
 const SelectOption: FC<Props> = ({
@@ -26,7 +25,7 @@ const SelectOption: FC<Props> = ({
       className={`my-4 rounded border-4 border-gray-200 px-2 ${
         currentSelected ? "border-4 border-yellow-500" : "dark:bg-gray-700"
       }`}
-      onClick={() => onSelectOption(value as SetupPhase)}
+      onClick={() => onSelectOption(value)}
     >
       <input
         id={id}
