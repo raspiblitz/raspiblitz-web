@@ -4,6 +4,7 @@ import FinalDialog from "../components/Setup/FinalDialog";
 import FormatDialog from "../components/Setup/FormatDialog";
 import InputNodename from "../components/Setup/InputNodename";
 import InputPassword from "../components/Setup/InputPassword";
+import LightningDialog from "../components/Setup/LightningDialog";
 import MigrationDialog from "../components/Setup/MigrationDialog";
 import RecoveryDialog from "../components/Setup/RecoveryDialog";
 import SetupMenu from "../components/Setup/SetupMenu";
@@ -24,9 +25,10 @@ enum Screen {
   START_DONE,
   FORMAT,
   SETUP,
-  INPUTA,
-  INPUTB,
-  INPUTC,
+  LIGHTNING,
+  INPUT_A,
+  INPUT_B,
+  INPUT_C,
   INPUT_NODENAME,
   RECOVERY,
   MIGRATION,
@@ -243,7 +245,7 @@ const Setup: FC = () => {
   const callbackRecoveryDialog = (startRecovery: boolean) => {
     if (startRecovery) {
       setSetupPhase(SetupPhase.RECOVERY);
-      setPage(Screen.INPUTA);
+      setPage(Screen.INPUT_A);
     } else {
       setPage(Screen.SETUP);
     }
@@ -252,7 +254,7 @@ const Setup: FC = () => {
   const callbackMigrationDialog = (start: boolean) => {
     if (start) {
       setSetupPhase(SetupPhase.MIGRATION);
-      setPage(Screen.INPUTA);
+      setPage(Screen.INPUT_A);
     } else {
       setupSetupShutdown();
     }
@@ -270,7 +272,7 @@ const Setup: FC = () => {
       case SetupPhase.RECOVERY:
       case SetupPhase.UPDATE:
       case SetupPhase.MIGRATION:
-        setPage(Screen.INPUTA);
+        setPage(Screen.INPUT_A);
         break;
       case SetupPhase.SETUP:
         setPage(Screen.FORMAT);
@@ -295,6 +297,18 @@ const Setup: FC = () => {
     setPage(Screen.INPUT_NODENAME);
   };
 
+  const callbackLightning = (lightning: SetupLightning) => {
+    if (!lightning) {
+      setPage(Screen.SETUP);
+      return;
+    }
+
+    // store for later
+    setLightning(SetupLightning.LND);
+
+    setPage(Screen.INPUT_A);
+  };
+
   const callbackInputNodename = (nodename: string | null) => {
     // on cancel jump back to setup menu
     if (!nodename) {
@@ -305,12 +319,7 @@ const Setup: FC = () => {
     // store for later
     setHostname(nodename);
 
-    // TODO: Once WebUi can support c-lightning or run without Lighting
-    // show this dialog - until then fix selection to LND
-    setLightning(SetupLightning.LND);
-
-    // next step is always password A
-    setPage(Screen.INPUTA);
+    setPage(Screen.LIGHTNING);
   };
 
   // on cancel jump back to setup menu
@@ -339,7 +348,7 @@ const Setup: FC = () => {
         break;
       case SetupPhase.SETUP:
       case SetupPhase.MIGRATION:
-        setPage(Screen.INPUTB);
+        setPage(Screen.INPUT_B);
         break;
       default:
         showError("unkown follow up state: passworda");
@@ -362,7 +371,7 @@ const Setup: FC = () => {
     }
 
     // all other cases - get password c
-    setPage(Screen.INPUTC);
+    setPage(Screen.INPUT_C);
   };
 
   const callbackInputPasswordC = (password: string | null) => {
@@ -436,15 +445,17 @@ const Setup: FC = () => {
           callback={callbackMigrationDialog}
         />
       );
-    case Screen.INPUTA:
+    case Screen.LIGHTNING:
+      return <LightningDialog callback={callbackLightning} />;
+    case Screen.INPUT_A:
       return (
         <InputPassword passwordType="a" callback={callbackInputPasswordA} />
       );
-    case Screen.INPUTB:
+    case Screen.INPUT_B:
       return (
         <InputPassword passwordType="b" callback={callbackInputPasswordB} />
       );
-    case Screen.INPUTC:
+    case Screen.INPUT_C:
       return (
         <InputPassword passwordType="c" callback={callbackInputPasswordC} />
       );
