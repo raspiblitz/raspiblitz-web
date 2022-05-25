@@ -43,6 +43,7 @@ const SendOnChain: FC<Props> = ({
   const [confirmAmount, setConfirmAmount] = useState(amount);
 
   const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log("SendOnchain handler", event.target.value);
     setConfirmAmount(+event.target.value);
   };
 
@@ -90,7 +91,6 @@ const SendOnChain: FC<Props> = ({
 
         <div className="w-full py-1 md:w-10/12">
           <AmountInput
-            onChange={changeAmountHandler}
             amount={confirmAmount}
             errorMessage={errors?.amountInput}
             register={register("amountInput", {
@@ -103,6 +103,7 @@ const SendOnChain: FC<Props> = ({
                 greaterThanZero: (value) =>
                   value > 0 || t("forms.validation.chainAmount.required"),
               },
+              onChange: changeAmountHandler,
             })}
           />
         </div>

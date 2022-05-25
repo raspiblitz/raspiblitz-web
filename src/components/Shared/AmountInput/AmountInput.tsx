@@ -9,20 +9,16 @@ export type Props = {
   amount: number;
   register: UseFormRegisterReturn;
   errorMessage?: FieldError;
-  onChange: any; // TODO: change to fititng function
 };
 
-const AmountInput: FC<Props> = ({
-  amount,
-  register,
-  errorMessage,
-  onChange,
-}) => {
+const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
   const { t } = useTranslation();
   const [amountInput, setAmountInput] = useState<string>(
     amount ? "" + amount : ""
   );
   const { unit, toggleUnit } = useContext(AppContext);
+
+  const { onChange } = register;
 
   const toggleHandler = () => {
     let formattedValue = amountInput;
@@ -43,7 +39,7 @@ const AmountInput: FC<Props> = ({
     onChange({ target: { value: formattedValue } });
   };
 
-  const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
     value = value.replace(/[^0-9.,]/, "");
     if (unit === Unit.SAT) {
@@ -56,7 +52,8 @@ const AmountInput: FC<Props> = ({
       value = output.shift() + (output.length ? "." + output.join("") : "");
     }
     setAmountInput(value);
-    onChange({ target: { value } });
+    e.target.value = value.replace(/,/g, "");
+    onChange(e);
   };
 
   return (
