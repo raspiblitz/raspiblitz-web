@@ -90,6 +90,7 @@ const SendOnChain: FC<Props> = ({
 
         <div className="w-full py-1 md:w-10/12">
           <AmountInput
+            onChange={changeAmountHandler}
             amount={confirmAmount}
             errorMessage={errors?.amountInput}
             register={register("amountInput", {
@@ -102,7 +103,6 @@ const SendOnChain: FC<Props> = ({
                 greaterThanZero: (value) =>
                   value > 0 || t("forms.validation.chainAmount.required"),
               },
-              onChange: changeAmountHandler,
             })}
           />
         </div>
