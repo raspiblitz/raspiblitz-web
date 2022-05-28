@@ -3,10 +3,14 @@ import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as SwitchIcon } from "../../../assets/switch-vertical.svg";
 import { AppContext, Unit } from "../../../store/app-context";
-import { convertBtcToSat, convertSatToBtc } from "../../../util/format";
+import {
+  convertBtcToSat,
+  convertSatToBtc,
+  formatAmount,
+} from "../../../util/format";
 
 export type Props = {
-  amount: number;
+  amount?: number;
   register: UseFormRegisterReturn;
   errorMessage?: FieldError;
 };
@@ -14,7 +18,7 @@ export type Props = {
 const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
   const { t } = useTranslation();
   const [amountInput, setAmountInput] = useState<string>(
-    amount ? "" + amount : ""
+    amount ? `${amount}` : ""
   );
   const { unit, toggleUnit } = useContext(AppContext);
 
@@ -22,38 +26,38 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
 
   const toggleHandler = () => {
     let formattedValue = amountInput;
-    if (unit === Unit.BTC) {
+    if (unit === Unit.BTC && formattedValue) {
       formattedValue = new Intl.NumberFormat("en-US").format(
-        convertBtcToSat(+formattedValue)!
+        convertBtcToSat(+formattedValue)
       );
-      setAmountInput(formattedValue);
     } else {
+      // remove separators
       formattedValue = formattedValue.replace(/,|\./g, "");
-      console.log(+convertSatToBtc(+formattedValue)!);
-      formattedValue = new Intl.NumberFormat("en-US", {
-        minimumFractionDigits: 8,
-      }).format(convertSatToBtc(parseInt(formattedValue))!);
-      setAmountInput(formattedValue);
+      if (formattedValue) {
+        formattedValue = new Intl.NumberFormat("en-US", {
+          minimumFractionDigits: 8,
+        }).format(convertSatToBtc(parseInt(formattedValue))!);
+      }
     }
+    setAmountInput(formattedValue);
     toggleUnit();
     onChange({ target: { value: formattedValue } });
   };
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
-    value = value.replace(/[^0-9.,]/, "");
-    if (unit === Unit.SAT) {
-      value = value.replace(/,|\./g, "");
-      value = new Intl.NumberFormat("en-US").format(+value);
-    } else {
-      // remove commas and replace ".." with "."
-      value = value.replace(/,/g, "").replace(/\.\./g, ".");
-      const output = value.split(".");
-      value = output.shift() + (output.length ? "." + output.join("") : "");
+    let selectionStart = e.target.selectionStart;
+    let selectionEnd = e.target.selectionEnd;
+    value = formatAmount(value, unit);
+    // do not shift position if comma was added
+    if (value.length > e.target.value.length) {
+      selectionStart = selectionStart ? selectionStart + 1 : null;
+      selectionEnd = selectionEnd ? selectionEnd + 1 : null;
     }
     setAmountInput(value);
     e.target.value = value.replace(/,/g, "");
-    onChange(e);
+    await onChange(e);
+    e.target.setSelectionRange(selectionStart, selectionEnd);
   };
 
   return (

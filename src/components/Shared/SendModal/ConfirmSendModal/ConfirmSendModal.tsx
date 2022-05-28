@@ -14,6 +14,7 @@ interface IFormInputs {
 }
 
 export type Props = {
+  amount: number;
   address: string;
   back: () => void;
   balance: number;
@@ -27,6 +28,7 @@ export type Props = {
 };
 
 const ConfirmSendModal: FC<Props> = ({
+  amount,
   address,
   back,
   balance,
@@ -40,11 +42,11 @@ const ConfirmSendModal: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
-  const [amount, setAmount] = useState(0);
+  const [amountInput, setAmountInput] = useState(amount);
   const isLnTx = invoiceType === TxType.LIGHTNING;
 
   const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
+    setAmountInput(+event.target.value);
   };
 
   const invoiceExpiryDate = timestamp + expiry;
@@ -54,10 +56,11 @@ const ConfirmSendModal: FC<Props> = ({
   })
     .format(invoiceExpiryDate)
     .toString();
-  const isInvoiceExpired: boolean = invoiceExpiryDate < Date.now();
+  const isInvoiceExpired: boolean = isLnTx && invoiceExpiryDate < Date.now();
   const isInvoiceAmountBiggerThanBalance: boolean = invoiceAmount > balance;
   const isValidLnInvoice: boolean =
-    isLnTx && !isInvoiceExpired && !isInvoiceAmountBiggerThanBalance;
+    !isLnTx ||
+    (isLnTx && !isInvoiceExpired && !isInvoiceAmountBiggerThanBalance);
 
   const {
     register,
@@ -74,8 +77,8 @@ const ConfirmSendModal: FC<Props> = ({
 
     if (isLnTx) {
       let msatQuery = "";
-      if (amount > 0) {
-        msatQuery = `&amount_msat=${amount}`;
+      if (amountInput > 0) {
+        msatQuery = `&amount_msat=${amountInput}`;
       }
 
       response = await instance
@@ -85,7 +88,7 @@ const ConfirmSendModal: FC<Props> = ({
         });
     } else {
       const body = {
-        amount: invoiceAmount === 0 ? amount : invoiceAmount,
+        amount: invoiceAmount === 0 ? amountInput : invoiceAmount,
         address,
         sat_per_vbyte: fee,
         label: comment,
@@ -147,7 +150,7 @@ const ConfirmSendModal: FC<Props> = ({
               <p>{t("forms.hint.invoiceAmountZero")}</p>
 
               <AmountInput
-                amount={amount}
+                amount={amountInput}
                 errorMessage={errors.amountInput}
                 register={register("amountInput", {
                   required: t(

@@ -11,6 +11,7 @@ const basicProps: Props = {
   balance: 100,
   comment: "",
   fee: "",
+  onChangeAmount: () => {},
   onChangeAddress: () => {},
   onChangeComment: () => {},
   onChangeFee: () => {},
