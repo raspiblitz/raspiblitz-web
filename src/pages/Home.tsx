@@ -23,7 +23,7 @@ import { enableGutter } from "../util/util";
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
-  const { systemInfo, balance, btcInfo, lnStatus, appStatus, hardwareInfo } =
+  const { systemInfo, balance, btcInfo, lnInfoLite, appStatus, hardwareInfo } =
     useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
@@ -35,6 +35,8 @@ const Home: FC = () => {
   const [txError, setTxError] = useState("");
 
   const theme = darkMode ? "dark" : "light";
+  const lnImplAvailable =
+    lnInfoLite.implementation && lnInfoLite.implementation !== "NONE";
 
   const getTransactions = useCallback(async () => {
     try {
@@ -62,12 +64,12 @@ const Home: FC = () => {
   }, [t, walletLocked, setWalletLocked, setIsLoadingTransactions]);
 
   useEffect(() => {
-    if (!walletLocked && isLoadingTransactions) {
+    if (lnImplAvailable && !walletLocked && isLoadingTransactions) {
       getTransactions().finally(() => {
         setIsLoadingTransactions(false);
       });
     }
-  }, [isLoadingTransactions, walletLocked, getTransactions]);
+  }, [lnImplAvailable, isLoadingTransactions, walletLocked, getTransactions]);
 
   useInterval(getTransactions, 5000);
 
@@ -127,8 +129,6 @@ const Home: FC = () => {
     />
   );
 
-  const gridRows = 6 + appStatus.length / 4;
-
   const closeUnlockModal = useCallback(
     (unlocked: boolean) => {
       if (unlocked) {
@@ -142,6 +142,9 @@ const Home: FC = () => {
     <UnlockModal onClose={closeUnlockModal} />
   );
 
+  const gridRows = 6 + appStatus.length / 4;
+  const height = lnImplAvailable ? "h-full" : "h-full md:h-1/2";
+
   return (
     <>
       {unlockModal}
@@ -151,49 +154,59 @@ const Home: FC = () => {
       <main
         className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
-        <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
-          <WalletCard
-            onchainBalance={balance.onchain_total_balance}
-            onChainUnconfirmed={balance.onchain_unconfirmed_balance}
-            lnBalance={balance.channel_local_balance}
-            onReceive={showReceiveHandler}
-            onSend={showSendModalHandler}
-          />
-        </article>
-        <article className="col-span-2 row-span-4 w-full md:col-span-1 xl:col-span-2">
-          <TransactionCard
-            isLoading={isLoadingTransactions}
-            transactions={transactions}
-            showDetails={showDetailHandler}
-            error={txError}
-          />
-        </article>
+        {lnImplAvailable && (
+          <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
+            <WalletCard
+              onchainBalance={balance.onchain_total_balance}
+              onChainUnconfirmed={balance.onchain_unconfirmed_balance}
+              lnBalance={balance.channel_local_balance}
+              onReceive={showReceiveHandler}
+              onSend={showSendModalHandler}
+            />
+          </article>
+        )}
+        {lnImplAvailable && (
+          <article className="col-span-2 row-span-4 w-full md:col-span-1 xl:col-span-2">
+            <TransactionCard
+              isLoading={isLoadingTransactions}
+              transactions={transactions}
+              showDetails={showDetailHandler}
+              error={txError}
+            />
+          </article>
+        )}
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
-          <div className="flex h-full flex-col p-5 lg:flex-row">
+          <div className={`flex ${height} flex-col p-5 lg:flex-row`}>
             <ConnectionCard
               torAddress={systemInfo.tor_web_ui!}
               sshAddress={systemInfo.ssh_address!}
-              nodeId={lnStatus.identity_pubkey}
+              nodeId={lnInfoLite.identity_pubkey}
             />
             <HardwareCard hardwareInfo={hardwareInfo} />
           </div>
         </article>
-        <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
+        <article
+          className={`${height} col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2`}
+        >
           <BitcoinCard info={btcInfo} network={systemInfo.chain!} />
         </article>
-        <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
-          <LightningCard
-            version={lnStatus.version!}
-            implementation={lnStatus.implementation!}
-            channelActive={lnStatus.num_active_channels!}
-            channelPending={lnStatus.num_pending_channels!}
-            channelInactive={lnStatus.num_inactive_channels!}
-            localBalance={balance.channel_local_balance!}
-            remoteBalance={balance.channel_remote_balance!}
-            pendingLocalBalance={balance.channel_pending_open_local_balance!}
-            pendingRemoteBalance={balance.channel_pending_open_remote_balance!}
-          />
-        </article>
+        {lnImplAvailable && (
+          <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
+            <LightningCard
+              version={lnInfoLite.version!}
+              implementation={lnInfoLite.implementation!}
+              channelActive={lnInfoLite.num_active_channels!}
+              channelPending={lnInfoLite.num_pending_channels!}
+              channelInactive={lnInfoLite.num_inactive_channels!}
+              localBalance={balance.channel_local_balance!}
+              remoteBalance={balance.channel_remote_balance!}
+              pendingLocalBalance={balance.channel_pending_open_local_balance!}
+              pendingRemoteBalance={
+                balance.channel_pending_open_remote_balance!
+              }
+            />
+          </article>
+        )}
         {appStatus
           .filter((app: AppStatus) => app.installed)
           .map((app: AppStatus) => {
