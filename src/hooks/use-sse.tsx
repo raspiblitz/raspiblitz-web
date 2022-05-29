@@ -6,7 +6,7 @@ import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
 import { HardwareInfo } from "../models/hardware-info";
 import { InstallAppData } from "../models/install-app";
-import { LnStatus } from "../models/ln-status";
+import { LnInfoLite } from "../models/ln-info-lite";
 import { SystemInfo } from "../models/system-info";
 import { WalletBalance } from "../models/wallet-balance";
 import { SSEContext, SSE_URL } from "../store/sse-context";
@@ -144,8 +144,8 @@ function useSSE() {
       });
     };
 
-    const setLnStatus = (event: MessageEvent<string>) => {
-      sseCtx.setLnStatus((prev: LnStatus) => {
+    const setLnInfoLite = (event: MessageEvent<string>) => {
+      sseCtx.setLnStatus((prev: LnInfoLite) => {
         const message = JSON.parse(event.data);
 
         return {
@@ -180,7 +180,7 @@ function useSSE() {
     if (evtSource) {
       evtSource.addEventListener("system_info", setSystemInfo);
       evtSource.addEventListener("btc_info", setBtcInfo);
-      evtSource.addEventListener("ln_info_lite", setLnStatus);
+      evtSource.addEventListener("ln_info_lite", setLnInfoLite);
       evtSource.addEventListener("wallet_balance", setBalance);
       evtSource.addEventListener("transactions", setTx);
       evtSource.addEventListener("installed_app_status", setAppStatus);
@@ -194,7 +194,7 @@ function useSSE() {
       if (evtSource) {
         evtSource.removeEventListener("system_info", setSystemInfo);
         evtSource.removeEventListener("btc_info", setBtcInfo);
-        evtSource.removeEventListener("ln_info_lite", setLnStatus);
+        evtSource.removeEventListener("ln_info_lite", setLnInfoLite);
         evtSource.removeEventListener("wallet_balance", setBalance);
         evtSource.removeEventListener("transactions", setTx);
         evtSource.removeEventListener("installed_app_status", setAppStatus);
@@ -215,7 +215,7 @@ function useSSE() {
   return {
     systemInfo: sseCtx.systemInfo,
     btcInfo: sseCtx.btcInfo,
-    lnStatus: sseCtx.lnStatus,
+    lnInfoLite: sseCtx.lnInfoLite,
     balance: sseCtx.balance,
     appStatus: sseCtx.appStatus,
     transactions: sseCtx.transactions,

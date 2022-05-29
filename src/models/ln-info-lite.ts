@@ -1,4 +1,4 @@
-export interface LnStatus {
+export interface LnInfoLite {
   implementation: string;
   version: string;
   identity_pubkey: string;

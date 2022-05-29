@@ -4,7 +4,7 @@ import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
 import { HardwareInfo } from "../models/hardware-info";
-import { LnStatus } from "../models/ln-status";
+import { LnInfoLite } from "../models/ln-info-lite";
 import { SystemInfo } from "../models/system-info";
 import { Transaction } from "../models/transaction.model";
 import { WalletBalance } from "../models/wallet-balance";
@@ -16,8 +16,8 @@ interface SSEContextType {
   setSystemInfo: Dispatch<SetStateAction<SystemInfo>>;
   btcInfo: BtcInfo;
   setBtcInfo: Dispatch<SetStateAction<BtcInfo>>;
-  lnStatus: LnStatus;
-  setLnStatus: Dispatch<SetStateAction<LnStatus>>;
+  lnInfoLite: LnInfoLite;
+  setLnStatus: Dispatch<SetStateAction<LnInfoLite>>;
   balance: WalletBalance;
   setBalance: Dispatch<SetStateAction<WalletBalance>>;
 
@@ -41,7 +41,7 @@ export const SSEContext = createContext<SSEContextType>({
   btcInfo: {} as BtcInfo,
   setBtcInfo: () => {},
   balance: {} as WalletBalance,
-  lnStatus: {} as LnStatus,
+  lnInfoLite: {} as LnInfoLite,
   setLnStatus: () => {},
   setBalance: () => {},
   appStatus: [],
@@ -94,7 +94,7 @@ const SSEContextProvider: FC<Props> = (props) => {
     verification_progress: 0,
     version: 0,
   });
-  const [lnStatus, setLnStatus] = useState<LnStatus>({
+  const [lnInfoLite, setLnInfoLite] = useState<LnInfoLite>({
     block_height: 0,
     implementation: "",
     identity_pubkey: "",
@@ -129,8 +129,8 @@ const SSEContextProvider: FC<Props> = (props) => {
     setSystemInfo,
     btcInfo,
     setBtcInfo,
-    lnStatus,
-    setLnStatus,
+    lnInfoLite,
+    setLnStatus: setLnInfoLite,
     balance,
     setBalance,
     appStatus,
