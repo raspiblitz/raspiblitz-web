@@ -35,7 +35,7 @@ const Home: FC = () => {
   const [txError, setTxError] = useState("");
 
   const theme = darkMode ? "dark" : "light";
-  const lnImplAvailable =
+  const isLnImplAvailable =
     lnInfoLite.implementation && lnInfoLite.implementation !== "NONE";
 
   const getTransactions = useCallback(async () => {
@@ -64,12 +64,12 @@ const Home: FC = () => {
   }, [t, walletLocked, setWalletLocked, setIsLoadingTransactions]);
 
   useEffect(() => {
-    if (lnImplAvailable && !walletLocked && isLoadingTransactions) {
+    if (isLnImplAvailable && !walletLocked && isLoadingTransactions) {
       getTransactions().finally(() => {
         setIsLoadingTransactions(false);
       });
     }
-  }, [lnImplAvailable, isLoadingTransactions, walletLocked, getTransactions]);
+  }, [isLnImplAvailable, isLoadingTransactions, walletLocked, getTransactions]);
 
   useInterval(getTransactions, 5000);
 
@@ -143,7 +143,7 @@ const Home: FC = () => {
   );
 
   const gridRows = 6 + appStatus.length / 4;
-  const height = lnImplAvailable ? "h-full" : "h-full md:h-1/2";
+  const height = isLnImplAvailable ? "h-full" : "h-full md:h-1/2";
 
   return (
     <>
@@ -154,7 +154,7 @@ const Home: FC = () => {
       <main
         className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
-        {lnImplAvailable && (
+        {isLnImplAvailable && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard
               onchainBalance={balance.onchain_total_balance}
@@ -165,7 +165,7 @@ const Home: FC = () => {
             />
           </article>
         )}
-        {lnImplAvailable && (
+        {isLnImplAvailable && (
           <article className="col-span-2 row-span-4 w-full md:col-span-1 xl:col-span-2">
             <TransactionCard
               isLoading={isLoadingTransactions}
@@ -190,7 +190,7 @@ const Home: FC = () => {
         >
           <BitcoinCard info={btcInfo} network={systemInfo.chain!} />
         </article>
-        {lnImplAvailable && (
+        {isLnImplAvailable && (
           <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
             <LightningCard
               version={lnInfoLite.version!}
