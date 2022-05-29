@@ -94,7 +94,7 @@ const SSEContextProvider: FC<Props> = (props) => {
     verification_progress: 0,
     version: 0,
   });
-  const [lnStatus, setLnStatus] = useState<LnInfoLite>({
+  const [lnInfoLite, setLnInfoLite] = useState<LnInfoLite>({
     block_height: 0,
     implementation: "",
     identity_pubkey: "",
@@ -129,8 +129,8 @@ const SSEContextProvider: FC<Props> = (props) => {
     setSystemInfo,
     btcInfo,
     setBtcInfo,
-    lnInfoLite: lnStatus,
-    setLnStatus,
+    lnInfoLite,
+    setLnStatus: setLnInfoLite,
     balance,
     setBalance,
     appStatus,
