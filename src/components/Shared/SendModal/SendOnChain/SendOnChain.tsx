@@ -1,5 +1,5 @@
 import type { ChangeEvent, FC } from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -14,6 +14,7 @@ export type Props = {
   balance: number;
   comment: string;
   fee: string;
+  onChangeAmount: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeComment: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeFee: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -32,6 +33,7 @@ const SendOnChain: FC<Props> = ({
   balance,
   comment,
   fee,
+  onChangeAmount,
   onChangeAddress,
   onChangeComment,
   onChangeFee,
@@ -40,15 +42,12 @@ const SendOnChain: FC<Props> = ({
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
 
-  const [confirmAmount, setConfirmAmount] = useState(amount);
-
-  const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setConfirmAmount(+event.target.value);
-  };
+  const convertedBalance =
+    unit === Unit.BTC ? convertSatToBtc(balance) : balance;
 
   const balanceDecorated =
     unit === Unit.BTC
-      ? convertToString(unit, convertSatToBtc(balance))
+      ? convertToString(unit, convertedBalance)
       : convertToString(unit, balance);
 
   const {
@@ -90,19 +89,19 @@ const SendOnChain: FC<Props> = ({
 
         <div className="w-full py-1 md:w-10/12">
           <AmountInput
-            amount={confirmAmount}
+            amount={amount}
             errorMessage={errors?.amountInput}
             register={register("amountInput", {
               required: t("forms.validation.chainAmount.required"),
               max: {
-                value: balance,
+                value: convertedBalance || 0,
                 message: t("forms.validation.chainAmount.max"),
               },
               validate: {
                 greaterThanZero: (value) =>
                   value > 0 || t("forms.validation.chainAmount.required"),
               },
-              onChange: changeAmountHandler,
+              onChange: onChangeAmount,
             })}
           />
         </div>

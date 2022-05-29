@@ -71,6 +71,10 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     setError("");
   };
 
+  const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setAmount(+event.target.value);
+  };
+
   const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
   };
@@ -94,10 +98,11 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
 
   // confirm send
   if (confirm) {
-    const addr = invoiceType ? invoice : address;
+    const addr = invoiceType === TxType.LIGHTNING ? invoice : address;
     return (
       <ModalDialog close={() => onClose(false)}>
         <ConfirmSendModal
+          amount={amount}
           address={addr}
           back={() => setConfirm(false)}
           balance={lnBalance}
@@ -114,7 +119,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   }
 
   // Send LN
-  if (invoiceType) {
+  if (invoiceType === TxType.LIGHTNING) {
     return createPortal(
       <ModalDialog close={() => onClose(false)} closeable={!loading}>
         <div className="my-3">
@@ -154,6 +159,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
         balance={onchainBalance}
         comment={comment}
         fee={fee}
+        onChangeAmount={changeAmountHandler}
         onChangeAddress={changeAddressHandler}
         onChangeComment={changeCommentHandler}
         onChangeFee={changeFeeHandler}
