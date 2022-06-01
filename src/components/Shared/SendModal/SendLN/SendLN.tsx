@@ -51,7 +51,7 @@ const SendLn: FC<Props> = ({
 
       <InputField
         {...register("invoiceInput", {
-          required: t("forms.validation.lnInvoice.required") as string,
+          required: t("forms.validation.lnInvoice.required"),
           pattern: {
             value: /^(lnbc|lntb)\w+/i,
             message: t("forms.validation.lnInvoice.patternMismatch"),

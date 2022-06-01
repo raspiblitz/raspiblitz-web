@@ -148,15 +148,11 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
               <AmountInput
                 amount={amount}
                 register={register("amountInput", {
-                  required: t(
-                    "forms.validation.chainAmount.required"
-                  ) as string,
+                  required: t("forms.validation.chainAmount.required"),
                   validate: {
-                    greaterThanZero: (value) =>
-                      value > 0 ||
-                      (t("forms.validation.chainAmount.required") as string),
+                    greaterThanZero: () =>
+                      amount > 0 || t("forms.validation.chainAmount.required"),
                   },
-
                   onChange: amountChangeHandler,
                 })}
                 errorMessage={errors.amountInput}

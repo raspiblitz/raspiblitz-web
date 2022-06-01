@@ -98,8 +98,8 @@ const SendOnChain: FC<Props> = ({
                 message: t("forms.validation.chainAmount.max"),
               },
               validate: {
-                greaterThanZero: (value) =>
-                  value > 0 || t("forms.validation.chainAmount.required"),
+                greaterThanZero: () =>
+                  amount > 0 || t("forms.validation.chainAmount.required"),
               },
               onChange: onChangeAmount,
             })}
