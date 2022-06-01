@@ -1,15 +1,21 @@
-import { FC, FormEvent, useState } from "react";
+import { FC, FormEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowRightIcon } from "../../assets/arrow-sm-right.svg";
 import SelectOption from "../../container/SelectOption/SelectOption";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupLightning } from "../../models/setup.model";
+import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
+import CLNLogoDark from "../../assets/core-lightning-dark.png";
+import CLNLogoLight from "../../assets/core-lightning-light.png";
+import LNDLogo from "../../assets/lnd.png";
+import { AppContext } from "../../store/app-context";
 
 export interface InputData {
   callback: (lightningSelect: SetupLightning) => void;
 }
 
 const LightningDialog: FC<InputData> = ({ callback }) => {
+  const { darkMode } = useContext(AppContext);
   const { t } = useTranslation();
   const [selected, setSelected] = useState<SetupLightning | null>(null);
 
@@ -34,7 +40,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
         className="flex h-full flex-col flex-wrap items-center justify-center"
         onSubmit={submitHandler}
       >
-        <div className="text-center">
+        <div className="w-full text-center md:w-1/2">
           <SelectOption
             id="lnd"
             radioGroup="setup"
@@ -42,7 +48,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
             selected={selected}
             onSelectOption={changeHandler}
           >
-            {t("setup.lnd")}
+            <img src={LNDLogo} alt="LND Logo" className="h-16 w-20" />
           </SelectOption>
           <SelectOption
             id="clightning"
@@ -51,7 +57,11 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
             selected={selected}
             onSelectOption={changeHandler}
           >
-            {t("setup.cln")}
+            <img
+              src={darkMode ? CLNLogoDark : CLNLogoLight}
+              alt="Core Lightning Logo"
+              className="h-20 w-40 transition-all"
+            />
           </SelectOption>
           <SelectOption
             id="none"
@@ -69,6 +79,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
             selected={selected}
             onSelectOption={changeHandler}
           >
+            <XCircleIcon className="mr-1 inline h-6 w-6 align-bottom" />
             {t("setup.cancel")}
           </SelectOption>
         </div>

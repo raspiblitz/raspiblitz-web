@@ -160,3 +160,7 @@ Please do not commit the above changes.
   - [Mempool.space Trademark Policy](https://mempool.space/trademark-policy)
 - LNbits Logo from [lnbits-legend](https://github.com/lnbits/lnbits-legend)
   - [MIT License](https://github.com/lnbits/lnbits-legend/blob/master/LICENSE)
+- LND Logo from [LightningLabs](https://github.com/lightningnetwork/lnd)
+  - [MIT License (?)](https://github.com/lightningnetwork/lnd/blob/master/LICENSE)
+- Core Lightning Logo from [Blockstream](https://blockstream.com/)
+  - [Blockstream Corporate Brand Guideline](https://blockstream.com/brand-assets/)
