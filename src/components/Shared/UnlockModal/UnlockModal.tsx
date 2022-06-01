@@ -64,7 +64,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
         <form onSubmit={handleSubmit(unlockHandler)}>
           <InputField
             {...register("passwordInput", {
-              required: t("forms.validation.unlock.required") as string,
+              required: t("forms.validation.unlock.required"),
             })}
             autoFocus
             errorMessage={errors.passwordInput}

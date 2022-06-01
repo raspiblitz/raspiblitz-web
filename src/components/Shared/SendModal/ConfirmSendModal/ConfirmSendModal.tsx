@@ -153,17 +153,15 @@ const ConfirmSendModal: FC<Props> = ({
                 amount={amountInput}
                 errorMessage={errors.amountInput}
                 register={register("amountInput", {
-                  required: t(
-                    "forms.validation.chainAmount.required"
-                  ) as string,
+                  required: t("forms.validation.chainAmount.required"),
                   max: {
                     value: balance,
                     message: t("forms.validation.chainAmount.max"),
                   },
                   validate: {
-                    greaterThanZero: (value) =>
-                      value > 0 ||
-                      (t("forms.validation.chainAmount.required") as string),
+                    greaterThanZero: () =>
+                      amountInput > 0 ||
+                      t("forms.validation.chainAmount.required"),
                   },
                   onChange: amountChangeHandler,
                 })}
