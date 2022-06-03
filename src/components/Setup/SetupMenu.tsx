@@ -37,7 +37,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
         className="flex h-full flex-col flex-wrap items-center justify-center"
         onSubmit={submitHandler}
       >
-        <div>
+        <div className="my-auto">
           {setupPhase === SetupPhase.RECOVERY && (
             <SelectOption
               id="recovery"

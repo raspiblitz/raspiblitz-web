@@ -40,7 +40,7 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
       <div className="mt-5 flex justify-center gap-2">
         <button
           onClick={() => callback(true)}
-          className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+          className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
         >
           <X className="inline h-6 w-6" />
           <span className="p-2">{t("setup.cancel")}</span>
