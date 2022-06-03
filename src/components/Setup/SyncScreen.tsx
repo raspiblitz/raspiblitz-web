@@ -5,6 +5,8 @@ import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinne
 import ProgressCircle from "../../container/ProgressCircle/ProgressCircle";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { instance } from "../../util/interceptor";
+import { ReactComponent as CheckCircleIcon } from "../../assets/check-circle.svg";
+import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
 
 export interface InputData {
   data: SyncData | any;
@@ -79,10 +81,20 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                     <h6 className="text-sm text-gray-500 dark:text-gray-300">
                       {t("home.lightning")}
                     </h6>
-                    <p>
-                      Lightning: ready({data.ln_default_ready}) starts(
-                      {data.system_count_start_lightning})
-                    </p>
+                    <div className="flex justify-around">
+                      <p className="flex gap-2">
+                        {t("setup.started")}:
+                        {data.ln_default_ready === "1" ? (
+                          <CheckCircleIcon className="inline h-6 w-6" />
+                        ) : (
+                          <XCircleIcon className="inline h-6 w-6" />
+                        )}
+                      </p>
+                      <p className="flex">
+                        {t("setup.restarts")}:{" "}
+                        {data.system_count_start_lightning}
+                      </p>
+                    </div>
                   </article>
                 )}
               {data.ln_default &&

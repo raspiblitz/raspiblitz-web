@@ -204,7 +204,9 @@
       "sync_wallet_info": "Please unlock your Lightning Wallet (Password C):",
       "sync_bitcoin_starting": "Starting sync",
       "sync_bitcoin_sync": "Sync Progress",
-      "sync_restartinfo": "(sync will continue on next restart)"
+      "sync_restartinfo": "(sync will continue on next restart)",
+      "started": "Started",
+      "restarts": "Restarts"
     },
     "forms": {
       "hint": {
