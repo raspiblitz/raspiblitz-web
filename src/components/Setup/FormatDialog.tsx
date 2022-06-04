@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as Trash } from "../../assets/trash.svg";
+import { ReactComponent as DBIcon } from "../../assets/database.svg";
+import { ReactComponent as TrashIcon } from "../../assets/trash.svg";
 import { ReactComponent as X } from "../../assets/X.svg";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 
@@ -28,38 +29,43 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
   return (
     <SetupContainer>
       {step === 1 && (
-        <div className="text-center">
-          <div className="text-center">{t("setup.blockchain_found_short")}</div>
-          <div className="text-center text-sm">
-            {t("setup.blockchain_found_long")}
-          </div>
-          <button
-            onClick={() => handleBlockchain(false)}
-            className="bd-button my-5 p-2"
-          >
-            {t("setup.blockchain_delete")}
-          </button>
-          &nbsp;
-          <button
-            onClick={() => handleBlockchain(true)}
-            className="bd-button my-5 p-2"
-          >
-            {t("setup.blockchain_keep")}
-          </button>
-        </div>
+        <section className="flex h-full flex-col items-center justify-center p-8">
+          <h2 className="m-2 text-center text-lg font-bold">
+            {t("setup.blockchain_found_short")}
+          </h2>
+          <p className="text-sm">{t("setup.blockchain_found_long")}</p>
+          <article className="mt-10 flex flex-col items-center justify-center gap-10 md:flex-row">
+            <button
+              onClick={() => handleBlockchain(false)}
+              className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+            >
+              <TrashIcon className="inline h-6 w-6" />
+              <span className="p-2">{t("setup.blockchain_delete")}</span>
+            </button>
+            <button
+              onClick={() => handleBlockchain(true)}
+              className="bd-button rounded p-2"
+            >
+              <DBIcon className="inline h-6 w-6" />
+              <span className="p-2">{t("setup.blockchain_keep")}</span>
+            </button>
+          </article>
+        </section>
       )}
       {step === 2 && (
-        <div className="text-center">
-          <div className="text-center">{t("setup.hdd_delete_short")}</div>
+        <section className="flex h-full flex-col items-center justify-center p-8">
+          <h2 className="m-2 text-center text-lg font-bold">
+            {t("setup.hdd_delete_short")}
+          </h2>
           {keepBlockchain.current && (
-            <div className="text-center text-sm">
+            <p className="text-center text-sm">
               {t("setup.hdd_delete_keep_blockchain")}
-            </div>
+            </p>
           )}
           {!keepBlockchain.current && (
-            <div className="text-center text-sm">
+            <p className="text-center text-sm">
               {t("setup.hdd_delete_no_blockchain")}
-            </div>
+            </p>
           )}
           <div className="mt-5 flex flex-col justify-center gap-2 md:flex-row">
             <button
@@ -73,11 +79,11 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
               onClick={() => callback(true, keepBlockchain.current)}
               className="bd-button rounded p-2"
             >
-              <Trash className="inline h-6 w-6" />
+              <TrashIcon className="inline h-6 w-6" />
               <span className="p-2">{t("setup.hdd_delete")}</span>
             </button>
           </div>
-        </div>
+        </section>
       )}
     </SetupContainer>
   );
