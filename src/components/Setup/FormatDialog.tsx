@@ -33,7 +33,7 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
           <h2 className="m-2 text-center text-lg font-bold">
             {t("setup.blockchain_found_short")}
           </h2>
-          <div className="text-sm">{t("setup.blockchain_found_long")}</div>
+          <p className="text-sm">{t("setup.blockchain_found_long")}</p>
           <article className="mt-10 flex flex-col items-center justify-center gap-10 md:flex-row">
             <button
               onClick={() => handleBlockchain(false)}
@@ -58,14 +58,14 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
             {t("setup.hdd_delete_short")}
           </h2>
           {keepBlockchain.current && (
-            <div className="text-center text-sm">
+            <p className="text-center text-sm">
               {t("setup.hdd_delete_keep_blockchain")}
-            </div>
+            </p>
           )}
           {!keepBlockchain.current && (
-            <div className="text-center text-sm">
+            <p className="text-center text-sm">
               {t("setup.hdd_delete_no_blockchain")}
-            </div>
+            </p>
           )}
           <div className="mt-5 flex flex-col justify-center gap-2 md:flex-row">
             <button
