@@ -73,8 +73,6 @@ const SSEContextProvider: FC<Props> = (props) => {
     alias: "",
     color: "",
     chain: "",
-    health: "",
-    health_messages: [],
     lan_api: "",
     lan_web_ui: "",
     ssh_address: "",
