@@ -7,8 +7,6 @@ const systemInfo = () => {
     alias: "myBlitz",
     color: "#3399ff",
     version: "v1.8.0",
-    health: "attention_required",
-    health_messages: [{ id: 25, level: "warning", message: "HDD 85% full" }],
     tor_web_ui:
       "arg6ybal4b7dszmsncsrudcpdfkxadzfdi24ktceodah7tgmdopgpyfd.onion",
     tor_api:
