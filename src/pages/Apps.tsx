@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import AppCard from "../components/Apps/AppCard/AppCard";
 import AppInfo from "../components/Apps/AppInfo/AppInfo";
 import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
@@ -51,14 +52,14 @@ export const Apps: FC = () => {
   };
 
   const installHandler = (id: string) => {
-    instance.post(`apps/install/${id}`).catch(() => {
-      // TODO: handle error & show notification on install if endpoint exists in blitz_api
+    instance.post(`apps/install/${id}`).catch((err) => {
+      toast.error(err.response.data.detail || err.response.data);
     });
   };
 
   const uninstallHandler = (id: string) => {
-    instance.post(`apps/uninstall/${id}`, { keepData: true }).catch(() => {
-      // TODO: handle error & show notification on install if endpoint exists in blitz_api
+    instance.post(`apps/uninstall/${id}`, { keepData: true }).catch((err) => {
+      toast.error(err.response.data.detail || err.response.data);
     });
   };
 
