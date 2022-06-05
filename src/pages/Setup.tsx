@@ -304,7 +304,7 @@ const Setup: FC = () => {
     }
 
     // store for later
-    setLightning(SetupLightning.LND);
+    setLightning(lightning);
 
     setPage(Screen.INPUT_A);
   };
