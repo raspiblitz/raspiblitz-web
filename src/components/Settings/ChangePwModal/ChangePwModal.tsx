@@ -1,92 +1,135 @@
 import { ChangeEvent, FC, useState } from "react";
 import { createPortal } from "react-dom";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
+import { ReactComponent as XIcon } from "../../../assets/X.svg";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
-import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
+import ButtonWithSpinner from "../../Shared/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "../../Shared/InputField/InputField";
 
-const ChangePwModal: FC<ChangePwModalProps> = (props) => {
+export type Props = {
+  onClose: () => void;
+};
+interface IFormInputs {
+  oldPassword: string;
+  newPassword: string;
+}
+
+const ChangePwModal: FC<Props> = ({ onClose }) => {
   const { t } = useTranslation();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const btnClasses =
-    "w-full xl:w-1/2 text-center h-10 my-2 md:mx-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
 
-  const changePasswordHandler = async () => {
+  const changePwHandler = async () => {
     setIsLoading(true);
-    const resp = await instance.post("changepw", { oldPassword, newPassword });
-    setIsLoading(false);
-    if (resp.status === 200) {
-      // TODO
-    }
+    const params = {
+      type: "a",
+      old_password: oldPassword,
+      new_password: newPassword,
+    };
+    await instance
+      .post("/system/change-password", {}, { params })
+      .then((resp) => {
+        toast.success(t("settings.pass_a_changed"));
+        onClose();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.detail || err.response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
-  const changeOldPasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeOldPw = (event: ChangeEvent<HTMLInputElement>) => {
     setOldPassword(event.target.value);
   };
 
-  const changeNewPasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeNewPw = (event: ChangeEvent<HTMLInputElement>) => {
     setNewPassword(event.target.value);
   };
 
-  if (isLoading) {
-    return createPortal(
-      <ModalDialog close={props.onClose}>
-        <h3 className="font-bold">{t("settings.change_pw")}</h3>
-        <LoadingSpinner />
-      </ModalDialog>,
-      MODAL_ROOT
-    );
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
 
   return createPortal(
-    <ModalDialog close={props.onClose}>
-      <h3 className="font-bold">{t("settings.change_pw")}</h3>
-      <div className="my-5 flex flex-col items-center justify-center text-center">
-        <div className="w-full py-1 md:w-10/12">
-          <label htmlFor="oldpw" className="label-underline">
-            {t("settings.old_pw")}
-          </label>
-          <input
-            id="oldpw"
-            className="input-underline w-full"
-            type="password"
+    <ModalDialog close={onClose}>
+      <h3 className="font-bold">{t("settings.change_pw_a")}</h3>
+      <form
+        className="my-5 flex flex-col items-center justify-center text-center"
+        onSubmit={handleSubmit(changePwHandler)}
+      >
+        <article className="w-full py-2 md:w-10/12">
+          <InputField
+            {...register("oldPassword", {
+              required: t("setup.password_error_empty"),
+              pattern: {
+                value: /^[a-zA-Z0-9]*$/,
+                message: t("setup.password_error_chars"),
+              },
+              minLength: {
+                value: 8,
+                message: t("setup.password_error_length"),
+              },
+              onChange: onChangeOldPw,
+            })}
             value={oldPassword}
-            onChange={changeOldPasswordHandler}
-            required
+            label={t("settings.old_pw")}
+            errorMessage={errors.oldPassword}
           />
-        </div>
-        <div className="w-full py-1 md:w-10/12">
-          <label htmlFor="newpw" className="label-underline">
-            {t("settings.new_pw")}
-          </label>
-          <input
-            id="newpw"
-            className="input-underline w-full"
-            type="password"
+        </article>
+        <article className="w-full py-2 md:w-10/12">
+          <InputField
+            {...register("newPassword", {
+              required: t("setup.password_error_empty"),
+              pattern: {
+                value: /^[a-zA-Z0-9]*$/,
+                message: t("setup.password_error_chars"),
+              },
+              minLength: {
+                value: 8,
+                message: t("setup.password_error_length"),
+              },
+              onChange: onChangeNewPw,
+            })}
             value={newPassword}
-            onChange={changeNewPasswordHandler}
-            required
+            label={t("settings.new_pw")}
+            errorMessage={errors.newPassword}
           />
-        </div>
-        <div className="flex w-full flex-col pt-2 text-white md:w-2/3 xl:flex-row">
-          <button className={btnClasses} onClick={props.onClose}>
-            {t("settings.cancel")}
+        </article>
+        <article className="flex w-full flex-col justify-around gap-6 pt-8 text-white md:w-2/3 xl:flex-row">
+          <button
+            className="flex items-center justify-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+            onClick={onClose}
+            type="button"
+          >
+            <XIcon className="inline h-6 w-6" />
+            <span className="p-2">{t("settings.cancel")}</span>
           </button>
-          <button className={btnClasses} onClick={changePasswordHandler}>
-            {t("settings.change_pw")}
-          </button>
-        </div>
-      </div>
+          <ButtonWithSpinner
+            type="submit"
+            className="bd-button flex items-center justify-center px-2 disabled:bg-gray-400"
+            disabled={!isValid}
+            loading={isLoading}
+            icon={<RefreshIcon className="inline h-6 w-6" />}
+          >
+            <span className="p-2">{t("settings.change_pw_a")}</span>
+          </ButtonWithSpinner>
+        </article>
+      </form>
     </ModalDialog>,
     MODAL_ROOT
   );
 };
 
 export default ChangePwModal;
-
-export interface ChangePwModalProps {
-  onClose: () => void;
-}

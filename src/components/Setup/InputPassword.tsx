@@ -104,7 +104,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
             <button
               onClick={cancelHandler}
               type="button"
-              className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+              className="flex items-center justify-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
             >
               <X className="inline h-6 w-6" />
               <span className="p-2">{t("setup.cancel")}</span>
@@ -112,7 +112,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
             <button
               disabled={!isValid}
               type="submit"
-              className="bd-button flex items-center px-2 disabled:bg-gray-400"
+              className="bd-button flex items-center justify-center px-2 disabled:bg-gray-400"
             >
               <span className="p-2">{t("setup.ok")}</span>
               <ArrowRight className="inline h-6 w-6" />

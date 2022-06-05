@@ -114,7 +114,7 @@
       "uninstall_failure": "Uninstall of {{appName}} failed: {{details}}"
     },
     "settings": {
-      "change_pw": "Change password",
+      "change_pw_a": "Change password A",
       "old_pw": "Old password",
       "new_pw": "New password",
       "change": "Change",
@@ -123,7 +123,8 @@
       "cancel": "Cancel",
       "confirm": "Confirm",
       "language": "Language",
-      "curr_lang": "Current language"
+      "curr_lang": "Current language",
+      "pass_a_changed": "Password A changed successfully"
     },
     "setup": {
       "pleasewait": "please wait",

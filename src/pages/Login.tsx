@@ -60,7 +60,6 @@ const Login: FC = () => {
         }
       })
       .catch((err) => {
-        console.log({ err });
         if (err.response.status === 500) {
           setError(t("login.error"));
         } else {

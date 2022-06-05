@@ -70,7 +70,7 @@
       "online": "online"
     },
     "settings": {
-      "change_pw": "Alterar senha",
+      "change_pw_a": "Alterar senha A",
       "old_pw": "Senha antiga",
       "new_pw": "Senha nova",
       "change": "Alterar",

@@ -23,7 +23,7 @@ const ButtonWithSpinner: FC<Props> = ({
       className={className}
       disabled={disabled || loading}
     >
-      <div className="flex">
+      <div className="flex items-center justify-center">
         {loading && <ButtonSpinner />}
         {!loading && icon}
         {children}

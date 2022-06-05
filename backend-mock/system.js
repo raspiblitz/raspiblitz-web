@@ -16,6 +16,11 @@ router.post("/login", (req, res) => {
   }, 100);
 });
 
+router.post("/change-password", (req, res) => {
+  console.info(`call to ${req.originalUrl}`);
+  res.status(200).send();
+});
+
 router.post("/reboot", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send();

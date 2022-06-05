@@ -99,7 +99,7 @@
       "installing": "Installation"
     },
     "settings": {
-      "change_pw": "Changer le mot de passe",
+      "change_pw_a": "Changer le mot de passe A",
       "old_pw": "Ancien mot de passe",
       "new_pw": "Nouveau mot de passe",
       "change": "Changer",
