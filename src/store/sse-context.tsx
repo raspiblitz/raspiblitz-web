@@ -94,7 +94,7 @@ const SSEContextProvider: FC<Props> = (props) => {
   });
   const [lnInfoLite, setLnInfoLite] = useState<LnInfoLite>({
     block_height: 0,
-    implementation: "",
+    implementation: null,
     identity_pubkey: "",
     num_active_channels: 0,
     num_inactive_channels: 0,
