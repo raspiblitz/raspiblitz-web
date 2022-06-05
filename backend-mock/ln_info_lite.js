@@ -4,7 +4,7 @@ const lnInfoLite = () => {
   console.info("sending ln_info_lite");
 
   util.sendSSE("ln_info_lite", {
-    implementation: "",
+    implementation: "LND",
     version: "0.13.0-beta commit=v0.13.0-beta",
     identity_pubkey: "somePubKey@Toraddress:port",
     num_pending_channels: 1,
