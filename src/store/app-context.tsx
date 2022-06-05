@@ -38,7 +38,7 @@ export enum Unit {
 
 export const AppContext = createContext<AppContextType>({
   isLoggedIn: false,
-  darkMode: false,
+  darkMode: true,
   unit: Unit.SAT,
   walletLocked: false,
   toggleUnit: () => {},
@@ -58,7 +58,7 @@ const AppContextProvider: FC<Props> = ({ children }) => {
 
   const [unit, setUnit] = useState<Unit>(Unit.SAT);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [walletLocked, setWalletLocked] = useState(false);
   const navigate = useNavigate();
 
