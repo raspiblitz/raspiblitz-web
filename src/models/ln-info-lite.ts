@@ -1,5 +1,5 @@
 export interface LnInfoLite {
-  implementation: string;
+  implementation: string | null;
   version: string;
   identity_pubkey: string;
   num_pending_channels: number;
