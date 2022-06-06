@@ -12,6 +12,7 @@ import { SetupPhase } from "./models/setup.model";
 import Login from "./pages/Login";
 import { AppContext } from "./store/app-context";
 import { instance } from "./util/interceptor";
+import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./util/util";
 
 const LazySetup = lazy(() => import("./pages/Setup"));
 const LazyHome = lazy(() => import("./pages/Home"));
@@ -49,6 +50,41 @@ const App: FC = () => {
     }
     setIsLoading(false);
   }, [isLoggedIn, firstCall, navigate, pathname]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
+
+    function refresh(triggerTime: number) {
+      setTimeout(() => doRefresh(), triggerTime);
+    }
+
+    function doRefresh() {
+      if (!localStorage.getItem(ACCESS_TOKEN)) {
+        return;
+      }
+      instance
+        .post("system/refresh-token", {})
+        .then((resp) => {
+          const token = resp.data?.access_token;
+          if (token) {
+            localStorage.setItem(ACCESS_TOKEN, token);
+            const payload = parseJwt(token);
+            refresh(REFRESH_TIME(payload.expires));
+          }
+        })
+        .catch(() => {
+          // do nothing
+        });
+    }
+
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    if (token) {
+      const payload = parseJwt(token);
+      refresh(REFRESH_TIME(payload.expires));
+    }
+  }, [isLoggedIn]);
 
   if (isLoading) {
     return <LoadingScreen />;
