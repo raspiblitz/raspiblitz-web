@@ -52,6 +52,7 @@ const Setup: FC = () => {
   const [migrationOS, setMigrationOS] = useState(SetupMigrationOS.NULL);
   const [migrationMode, setMigrationMode] = useState(SetupMigrationMode.NULL);
   const [lightning, setLightning] = useState(SetupLightning.NULL);
+
   const [hostname, setHostname] = useState("");
   const [passwordA, setPasswordA] = useState("");
   const [passwordB, setPasswordB] = useState("");
@@ -177,15 +178,16 @@ const Setup: FC = () => {
 
   const setupStart = async () => {
     try {
+      const forceFreshSetup = setupPhase === SetupPhase.SETUP;
       // call API to start recovery
       const resp = await instance.post("/setup/setup-start-done", {
-        hostname: hostname,
-        forceFreshSetup: setupPhase === SetupPhase.SETUP,
-        keepBlockchain: keepBlockchain,
-        lightning: lightning,
-        passwordA: passwordA,
-        passwordB: passwordB,
-        passwordC: passwordC,
+        hostname,
+        forceFreshSetup,
+        keepBlockchain,
+        lightning,
+        passwordA,
+        passwordB,
+        passwordC,
       });
 
       // remember authorization for later API calls
@@ -224,7 +226,7 @@ const Setup: FC = () => {
   };
 
   // start setup shutdown (if user wants to cancel whole setup)
-  const setupSetupShutdown = async () => {
+  const setupShutdown = async () => {
     setWaitScreenStatus(SetupStatus.WAIT);
     setWaitScreenMessage("");
     setPage(Screen.WAIT);
@@ -256,7 +258,7 @@ const Setup: FC = () => {
       setSetupPhase(SetupPhase.MIGRATION);
       setPage(Screen.INPUT_A);
     } else {
-      setupSetupShutdown();
+      setupShutdown();
     }
   };
 
@@ -267,7 +269,7 @@ const Setup: FC = () => {
     // switch to the next screen based on user selection
     switch (setupmode) {
       case SetupPhase.NULL:
-        setupSetupShutdown();
+        setupShutdown();
         break;
       case SetupPhase.RECOVERY:
       case SetupPhase.UPDATE:
