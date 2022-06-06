@@ -4,6 +4,7 @@ import ChangePwModal from "../components/Settings/ChangePwModal/ChangePwModal";
 import I18nBox from "../components/Settings/I18nBox/I18nBox";
 import ConfirmModal from "../components/Shared/ConfirmModal/ConfirmModal";
 import ActionBox from "../container/ActionBox/ActionBox";
+import VersionBox from "../container/VersionBox/VersionBox";
 import { enableGutter } from "../util/util";
 
 const Settings: FC = () => {
@@ -73,6 +74,7 @@ const Settings: FC = () => {
           confirmEndpoint="/system/shutdown"
         />
       )}
+      <VersionBox />
     </main>
   );
 };
