@@ -246,7 +246,7 @@ const Setup: FC = () => {
 
   const callbackRecoveryDialog = (startRecovery: boolean) => {
     if (startRecovery) {
-      setSetupPhase(SetupPhase.RECOVERY);
+      setSetupPhase(setupPhaseOnStart);
       setPage(Screen.INPUT_A);
     } else {
       setPage(Screen.SETUP);
