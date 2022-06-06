@@ -6,7 +6,9 @@ const systemInfo = () => {
   util.sendSSE("system_info", {
     alias: "myBlitz",
     color: "#3399ff",
-    version: "v1.8.0",
+    platform: "raspiblitz",
+    platform_version: "1.7.2rc1",
+    api_version: "v0.5.0beta",
     tor_web_ui:
       "arg6ybal4b7dszmsncsrudcpdfkxadzfdi24ktceodah7tgmdopgpyfd.onion",
     tor_api:

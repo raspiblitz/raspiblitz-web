@@ -72,13 +72,15 @@ const SSEContextProvider: FC<Props> = (props) => {
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
     color: "",
+    platform: "",
+    platform_version: "",
+    api_version: "",
     chain: "",
     lan_api: "",
     lan_web_ui: "",
     ssh_address: "",
     tor_api: "",
     tor_web_ui: "",
-    version: "",
   });
   const [btcInfo, setBtcInfo] = useState<BtcInfo>({
     blocks: 0,

@@ -196,6 +196,7 @@ const Home: FC = () => {
               transactions={transactions}
               showDetails={showDetailHandler}
               error={txError}
+              implementation={implementation}
             />
           </article>
         )}

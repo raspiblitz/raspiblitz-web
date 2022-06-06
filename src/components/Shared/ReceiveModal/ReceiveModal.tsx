@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import ErrorMessage from "../../../container/ErrorMessage/ErrorMessage";
+import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
 import { AppContext, Unit } from "../../../store/app-context";
@@ -171,7 +171,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
             </div>
           )}
 
-          {error && <ErrorMessage errorMessage={error} />}
+          {error && <Message message={error} />}
 
           {!address && showLnInvoice && (
             <button

@@ -1,7 +1,9 @@
 export interface SystemInfo {
   alias: string;
   color: string;
-  version: string;
+  platform: string;
+  platform_version: string;
+  api_version: string;
   tor_web_ui: string;
   tor_api: string;
   lan_web_ui: string;
