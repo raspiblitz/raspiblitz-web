@@ -70,7 +70,7 @@
       "online": "online"
     },
     "settings": {
-      "change_pw": "Jelszó változtatása",
+      "change_pw_a": "Jelszó változtatása A",
       "old_pw": "Régi jelszó",
       "new_pw": "Új jelszó",
       "change": "Váltópénz",

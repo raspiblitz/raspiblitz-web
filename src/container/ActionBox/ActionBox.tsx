@@ -1,29 +1,24 @@
-import { FC } from "react";
+import type { FC } from "react";
 
-const ActionBox: FC<ActionBoxProps> = (props) => {
+export type Props = {
+  name: string;
+  actionName: string;
+  action: () => void;
+};
+
+const ActionBox: FC<Props> = ({ name, action, actionName }) => {
   return (
     <div className="box-border w-full px-5 pt-5 transition-colors dark:text-white lg:w-1/2">
-      <div className="relative rounded bg-white p-5 shadow-xl dark:bg-gray-800">
+      <article className="relative rounded bg-white p-5 shadow-xl dark:bg-gray-800">
         <div className="flex justify-between">
-          <div className="flex w-1/2 items-center font-bold xl:w-2/3">
-            {props.name}
-          </div>
-          <button
-            className="bd-button w-1/2 py-1 xl:w-1/3"
-            onClick={props.action}
-          >
-            {props.actionName}
+          <h4 className="flex w-1/2 items-center font-bold xl:w-2/3">{name}</h4>
+          <button className="bd-button w-1/2 py-1 xl:w-1/3" onClick={action}>
+            {actionName}
           </button>
         </div>
-      </div>
+      </article>
     </div>
   );
 };
 
 export default ActionBox;
-
-export interface ActionBoxProps {
-  name: string;
-  actionName: string;
-  action: () => void;
-}

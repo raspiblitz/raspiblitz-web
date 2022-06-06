@@ -107,7 +107,7 @@
       "change": "Endre",
       "new_pw": "Nytt passord",
       "old_pw": "Gammelt passord",
-      "change_pw": "Endre passord"
+      "change_pw_a": "Endre passord A"
     },
     "forms": {
       "hint": {
