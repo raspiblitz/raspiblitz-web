@@ -1,4 +1,7 @@
 import { TokenPayload } from "../models/token";
+import { instance } from "./interceptor";
+
+export const ACCESS_TOKEN = "access_token";
 
 const createModalRoot = () => {
   const modalRoot = document.createElement("div");
@@ -86,4 +89,12 @@ export function setWindowAlias(nodeAlias: string | null): void {
   } else {
     document.title = `RaspiBlitz - ${nodeAlias}`;
   }
+}
+
+export function refreshToken(): void {
+  instance.post("system/refresh-token", {}).then((resp) => {
+    if (resp.data.access_token) {
+      localStorage.setItem(ACCESS_TOKEN, resp.data.access_token);
+    }
+  });
 }

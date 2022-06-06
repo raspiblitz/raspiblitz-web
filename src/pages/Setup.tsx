@@ -19,6 +19,7 @@ import {
   SetupStatus,
 } from "../models/setup.model";
 import { instance } from "../util/interceptor";
+import { ACCESS_TOKEN } from "../util/util";
 
 enum Screen {
   WAIT,
@@ -192,7 +193,7 @@ const Setup: FC = () => {
 
       // remember authorization for later API calls
       if (resp) {
-        localStorage.setItem("access_token", resp.data.access_token);
+        localStorage.setItem(ACCESS_TOKEN, resp.data.access_token);
       }
 
       // fall back to loop polling until setup finished

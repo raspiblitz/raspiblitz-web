@@ -9,7 +9,7 @@ import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
 import ErrorMessage from "../container/ErrorMessage/ErrorMessage";
 import { AppContext } from "../store/app-context";
 import { instance } from "../util/interceptor";
-import { enableGutter } from "../util/util";
+import { ACCESS_TOKEN, enableGutter } from "../util/util";
 
 const Login: FC = () => {
   const { t } = useTranslation();
@@ -48,7 +48,7 @@ const Login: FC = () => {
     await instance
       .post("/system/login", { password })
       .then((resp) => {
-        localStorage.setItem("access_token", resp.data.access_token);
+        localStorage.setItem(ACCESS_TOKEN, resp.data.access_token);
         setIsLoggedIn(true);
         enableGutter();
         if (back) {
