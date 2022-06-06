@@ -9,6 +9,7 @@ const props: Props = {
   isLoading: false,
   showDetails: () => {},
   error: "",
+  implementation: "",
 };
 
 describe("TransactionCard", () => {

@@ -6,7 +6,7 @@ import { ReactComponent as RaspiBlitzLogo } from "../assets/RaspiBlitz_Logo_Main
 import { ReactComponent as RaspiBlitzLogoDark } from "../assets/RaspiBlitz_Logo_Main_Negative.svg";
 import I18nDropdown from "../components/Shared/I18nDropdown/I18nDropdown";
 import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
-import ErrorMessage from "../container/ErrorMessage/ErrorMessage";
+import Message from "../container/Message/Message";
 import { AppContext } from "../store/app-context";
 import { instance } from "../util/interceptor";
 import { enableGutter } from "../util/util";
@@ -112,7 +112,7 @@ const Login: FC = () => {
               {t("login.login")}
             </button>
           </form>
-          {error && <ErrorMessage errorMessage={error} />}
+          {error && <Message message={error} />}
         </>
       )}
     </main>
