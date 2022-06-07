@@ -17,7 +17,7 @@ router.post("/add-invoice", (req, res) => {
 });
 
 router.post("/send-coins", (req, res) => {
-  console.info("call to /api/v1/send-coins");
+  console.info(`call to ${req.originalUrl}`);
   res.status(200).send({
     txid: "txid",
     address: "11234",
@@ -83,8 +83,7 @@ router.get("/decode-pay-req", (req, res) => {
 
 router.post("/send-payment", (req, res) => {
   console.info(
-    "call to /api/v1/lightning/send-payment with invoice",
-    req.query["pay_req"]
+    `call to ${req.originalUrl} with invoice ${req.query["pay_req"]}`
   );
 
   return res.status(200).send(
@@ -163,7 +162,7 @@ router.post("/send-payment", (req, res) => {
 });
 
 router.get("/list-all-tx", (req, res) => {
-  console.info("call to /api/v1/lightning/list-all-tx");
+  console.info(`call to ${req.originalUrl}`);
   if (WALLET_LOCKED) {
     return res.status(423).send();
   }
@@ -189,6 +188,18 @@ router.post("/unlock-wallet", (req, res) => {
     }
     return res.status(401).send();
   }, 1000);
+});
+
+router.post("/open-channel", (req, res) => {
+  console.info(`call to ${req.originalUrl}`);
+});
+
+router.get("/list-channel", (req, res) => {
+  console.info(`call to ${req.originalUrl}`);
+});
+
+router.post("/close-channel", (req, res) => {
+  console.info(`call to ${req.originalUrl}`);
 });
 
 module.exports = router;
