@@ -2,15 +2,28 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import packageJson from "../../../package.json";
 
-const VersionBox: FC = () => {
+type Props = {
+  platformVersion: string;
+  apiVersion: string;
+};
+
+const VersionBox: FC<Props> = ({ platformVersion, apiVersion }) => {
   const { t } = useTranslation();
   return (
     <article className="box-border w-full px-5 pt-5 transition-colors dark:text-white lg:w-1/2">
-      <div className="relative flex flex-row gap-3 rounded bg-white p-5 shadow-xl dark:bg-gray-800">
-        <p className="font-bold">Raspiblitz Web</p>
-        <p>
-          {t("home.version")} {packageJson.version}
-        </p>
+      <div className="relative flex flex-col gap-3 rounded bg-white p-5 shadow-xl dark:bg-gray-800">
+        <h5 className="font-bold">{t("home.versions")}</h5>
+        <article>
+          <p>
+            RaspiBlitz: <b>{platformVersion}</b>
+          </p>
+          <p>
+            RaspiBlitz WebUI: <b>{packageJson.version}</b>
+          </p>
+          <p>
+            Blitz-API: <b>{apiVersion}</b>
+          </p>
+        </article>
       </div>
     </article>
   );

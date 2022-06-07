@@ -5,6 +5,7 @@ import I18nBox from "../components/Settings/I18nBox/I18nBox";
 import ConfirmModal from "../components/Shared/ConfirmModal/ConfirmModal";
 import ActionBox from "../container/ActionBox/ActionBox";
 import VersionBox from "../container/VersionBox/VersionBox";
+import useSSE from "../hooks/use-sse";
 import { enableGutter } from "../util/util";
 
 const Settings: FC = () => {
@@ -12,6 +13,7 @@ const Settings: FC = () => {
   const [confirmShutdown, setConfirmShutdown] = useState(false);
   const [confirmReboot, setConfirmReboot] = useState(false);
   const [showPwModal, setShowPwModal] = useState(false);
+  const { systemInfo } = useSSE();
 
   useEffect(() => {
     enableGutter();
@@ -59,6 +61,10 @@ const Settings: FC = () => {
         actionName={t("settings.shutdown")}
         action={showShutdownModalHandler}
       />
+      <VersionBox
+        platformVersion={systemInfo.platform_version}
+        apiVersion={systemInfo.api_version}
+      />
       {showPwModal && <ChangePwModal onClose={hidePwModalHandler} />}
       {confirmReboot && (
         <ConfirmModal
@@ -74,7 +80,6 @@ const Settings: FC = () => {
           confirmEndpoint="/system/shutdown"
         />
       )}
-      <VersionBox />
     </main>
   );
 };
