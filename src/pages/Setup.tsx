@@ -86,7 +86,6 @@ const Setup: FC = () => {
       .catch((error) =>
         showError(`request for init setup data failed: ${error}`)
       );
-    console.log(resp);
 
     if (resp) {
       setGotBlockchain(resp.data.hddGotBlockchain === "1");
