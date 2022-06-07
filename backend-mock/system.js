@@ -21,6 +21,19 @@ router.post("/change-password", (req, res) => {
   res.status(200).send();
 });
 
+router.post("/refresh-token", (req, res) => {
+  console.info(`call to ${req.originalUrl}`);
+  if (!req.headers.authorization) {
+    return res.status(401).send(
+      JSON.stringify({
+        detail: "Not authenticated",
+      })
+    );
+  }
+  const access_token = auth.signToken();
+  res.status(200).send(JSON.stringify({ access_token }));
+});
+
 router.post("/reboot", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send();

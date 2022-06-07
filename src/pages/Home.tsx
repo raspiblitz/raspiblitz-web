@@ -48,7 +48,11 @@ const Home: FC = () => {
       return;
     }
     try {
-      const tx = await instance.get("/lightning/list-all-tx?reversed=true");
+      const tx = await instance.get("/lightning/list-all-tx", {
+        params: {
+          reversed: true,
+        },
+      });
       setTransactions(tx.data);
     } catch (err: any) {
       if (err.response.status === 423) {

@@ -1,5 +1,9 @@
 import { TokenPayload } from "../models/token";
 
+export const ACCESS_TOKEN = "access_token";
+// refresh 10min before expiry
+export const REFRESH_TIME = (expiry: number) => expiry - Date.now() - 600_000;
+
 const createModalRoot = () => {
   const modalRoot = document.createElement("div");
   modalRoot.setAttribute("id", "modal-root");
@@ -58,18 +62,8 @@ export function checkPropsUndefined(props: object): boolean {
   return someUndefined;
 }
 
-// see https://stackoverflow.com/a/38552302
 export function parseJwt(token: string): TokenPayload {
-  const base64Url = token.split(".")[1];
-  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  const jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split("")
-      .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-      .join("")
-  );
-
-  return JSON.parse(jsonPayload);
+  return JSON.parse(atob(token.split(".")[1]));
 }
 
 export function enableGutter(): void {

@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import {
   createContext,
   Dispatch,
@@ -7,10 +8,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
+  ACCESS_TOKEN,
   disableGutter,
   parseJwt,
   retrieveSettings,
@@ -77,7 +78,7 @@ const AppContextProvider: FC<Props> = ({ children }) => {
   };
 
   const logoutHandler = useCallback(() => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem(ACCESS_TOKEN);
 
     // close EventSource on logout
     if (evtSource) {
@@ -113,18 +114,18 @@ const AppContextProvider: FC<Props> = ({ children }) => {
     }
 
     // if authenticated log in automatically
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem(ACCESS_TOKEN);
     if (token) {
       try {
         const payload = parseJwt(token);
         if (payload.expires > Date.now()) {
           setIsLoggedIn(true);
         } else {
-          localStorage.removeItem("access_token");
+          localStorage.removeItem(ACCESS_TOKEN);
           console.info(`Token expired at ${payload.expires}.`);
         }
       } catch {
-        localStorage.removeItem("access_token");
+        localStorage.removeItem(ACCESS_TOKEN);
         console.info(`Token invalid - removed.`);
       }
     }
