@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
-import { SetupMigrationOS, SetupMigrationMode } from "../../models/setup.model";
+import { SetupMigrationMode, SetupMigrationOS } from "../../models/setup.model";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;
@@ -9,16 +9,20 @@ export interface InputData {
   callback: (migrate: boolean) => void;
 }
 
-const MigrationDialog: FC<InputData> = (props) => {
+const MigrationDialog: FC<InputData> = ({
+  migrationOS,
+  migrationMode,
+  callback,
+}) => {
   const { t } = useTranslation();
 
-  if (props.migrationMode === SetupMigrationMode.OUTDATED) {
+  if (migrationMode === SetupMigrationMode.OUTDATED) {
     return (
       <SetupContainer>
         <div className="text-center">
           <div className="text-center">{t("setup.lightningoutdated")}</div>
           <button
-            onClick={() => props.callback(false)}
+            onClick={() => callback(false)}
             className="bd-button my-5 p-2"
           >
             {t("setup.shutdown")}
@@ -29,7 +33,7 @@ const MigrationDialog: FC<InputData> = (props) => {
   }
 
   let text: string = "";
-  switch (props.migrationOS) {
+  switch (migrationOS) {
     case SetupMigrationOS.UMBREL:
       text = t("setup.convert_umbrel");
       break;
@@ -46,17 +50,11 @@ const MigrationDialog: FC<InputData> = (props) => {
       <div className="text-center">
         <div className="text-center">{text}</div>
         <div className="text-center text-sm">{t("setup.convertwarning")}</div>
-        <button
-          onClick={() => props.callback(false)}
-          className="bd-button my-5 p-2"
-        >
+        <button onClick={() => callback(false)} className="bd-button my-5 p-2">
           {t("setup.no_and_shutdown")}
         </button>
         &nbsp;
-        <button
-          onClick={() => props.callback(true)}
-          className="bd-button my-5 p-2"
-        >
+        <button onClick={() => callback(true)} className="bd-button my-5 p-2">
           {t("setup.yes_and_migrate")}
         </button>
       </div>

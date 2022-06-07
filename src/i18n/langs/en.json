@@ -208,7 +208,8 @@
       "sync_bitcoin_sync": "Sync Progress",
       "sync_restartinfo": "(sync will continue on next restart)",
       "started": "Started",
-      "restarts": "Restarts"
+      "restarts": "Restarts",
+      "cancel_setup": "Do you really want to cancel the setup process"
     },
     "forms": {
       "hint": {

@@ -8,14 +8,14 @@ export interface InputData {
   message: string;
 }
 
-const WaitScreen: FC<InputData> = (props) => {
+const WaitScreen: FC<InputData> = ({ status, message }) => {
   const { t } = useTranslation();
 
   // optimize for certain states like
   // setup.scripts/eventInfoWait.sh
   let headline = "";
   let details = "";
-  switch (props.status) {
+  switch (status) {
     case SetupStatus.WAIT:
       headline = `... ${t("setup.pleasewait")} ...`;
       break;
@@ -32,11 +32,11 @@ const WaitScreen: FC<InputData> = (props) => {
       break;
     case SetupStatus.PROVISION:
       headline = `${t("setup.runningsetup")}:`;
-      details = props.message;
+      details = message;
       break;
     default:
-      headline = props.status;
-      details = props.message;
+      headline = status;
+      details = message;
   }
 
   let content = (
