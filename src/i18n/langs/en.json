@@ -19,6 +19,7 @@
     "home": {
       "bitcoin": "Bitcoin",
       "version": "Version",
+      "versions": "Versions",
       "network": "Network",
       "status": "Status",
       "blocks_synced": "Blocks synced",
