@@ -9,23 +9,31 @@ import { MODAL_ROOT } from "../../../util/util";
 
 export type Props = {
   confirmText: string;
-  confirmEndpoint: string;
+  confirmEndpoint?: string; // TODO remove
+  onConfirm?: () => void;
   onClose: () => void;
 };
 
 const btnClasses =
   "w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
 
-const ConfirmModal: FC<Props> = ({ confirmText, confirmEndpoint, onClose }) => {
+const ConfirmModal: FC<Props> = ({
+  confirmText,
+  confirmEndpoint,
+  onConfirm,
+  onClose,
+}) => {
   const { t } = useTranslation();
   const { setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
 
   const shutdownHandler = async () => {
-    const resp = await instance.post(confirmEndpoint);
-    if (resp.status === 200) {
-      setIsLoggedIn(false);
-      navigate("/login");
+    if (confirmEndpoint) {
+      const resp = await instance.post(confirmEndpoint);
+      if (resp.status === 200) {
+        setIsLoggedIn(false);
+        navigate("/login");
+      }
     }
   };
 
@@ -36,9 +44,16 @@ const ConfirmModal: FC<Props> = ({ confirmText, confirmEndpoint, onClose }) => {
         <button className={btnClasses} onClick={onClose}>
           {t("settings.cancel")}
         </button>
-        <button className={btnClasses} onClick={shutdownHandler}>
-          {t("settings.confirm")}
-        </button>
+        {onConfirm && (
+          <button className={btnClasses} onClick={onConfirm}>
+            {t("settings.confirm")}
+          </button>
+        )}
+        {!onConfirm && (
+          <button className={btnClasses} onClick={shutdownHandler}>
+            {t("settings.confirm")}
+          </button>
+        )}
       </div>
     </ModalDialog>,
     MODAL_ROOT

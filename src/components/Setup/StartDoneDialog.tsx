@@ -1,9 +1,10 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
-import { SetupPhase } from "../../models/setup.model";
 import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 import { ReactComponent as X } from "../../assets/X.svg";
+import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import { SetupPhase } from "../../models/setup.model";
+import ConfirmModal from "../Shared/ConfirmModal/ConfirmModal";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -12,6 +13,7 @@ export type Props = {
 
 const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
   const { t } = useTranslation();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   let headline: string;
   let buttonText: string;
@@ -34,26 +36,43 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
       buttonText = t("setup.done_setup_start");
   }
 
+  const handleCancel = () => {
+    setShowConfirmModal(true);
+  };
+
+  const hideConfirm = () => {
+    setShowConfirmModal(false);
+  };
+
   return (
-    <SetupContainer>
-      <h2 className="text-center text-lg font-bold">{headline}</h2>
-      <div className="mt-5 flex justify-center gap-2">
-        <button
-          onClick={() => callback(true)}
-          className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
-        >
-          <X className="inline h-6 w-6" />
-          <span className="p-2">{t("setup.cancel")}</span>
-        </button>
-        <button
-          onClick={() => callback(false)}
-          className="bd-button flex items-center px-2"
-        >
-          <span className="p-2 ">{buttonText}</span>
-          <ArrowRight className="inline h-6 w-6" />
-        </button>
-      </div>
-    </SetupContainer>
+    <>
+      {showConfirmModal && (
+        <ConfirmModal
+          confirmText={`${t("setup.cancel_setup")}?`}
+          onClose={hideConfirm}
+          onConfirm={() => callback(true)}
+        />
+      )}
+      <SetupContainer>
+        <h2 className="text-center text-lg font-bold">{headline}</h2>
+        <div className="mt-5 flex justify-center gap-2">
+          <button
+            onClick={handleCancel}
+            className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+          >
+            <X className="inline h-6 w-6" />
+            <span className="p-2">{t("setup.cancel")}</span>
+          </button>
+          <button
+            onClick={() => callback(false)}
+            className="bd-button flex items-center px-2"
+          >
+            <span className="p-2 ">{buttonText}</span>
+            <ArrowRight className="inline h-6 w-6" />
+          </button>
+        </div>
+      </SetupContainer>
+    </>
   );
 };
 
