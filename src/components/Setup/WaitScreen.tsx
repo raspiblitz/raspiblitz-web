@@ -2,13 +2,14 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupStatus } from "../../models/setup.model";
+import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
 
-export interface InputData {
+export type Props = {
   status: SetupStatus;
   message: string;
-}
+};
 
-const WaitScreen: FC<InputData> = ({ status, message }) => {
+const WaitScreen: FC<Props> = ({ status, message }) => {
   const { t } = useTranslation();
 
   // optimize for certain states like
@@ -39,14 +40,15 @@ const WaitScreen: FC<InputData> = ({ status, message }) => {
       details = message;
   }
 
-  let content = (
-    <div className="text-center">
-      <div className="text-center">{headline}</div>
-      <div className="text-center text-sm italic">{details}</div>
-    </div>
+  return (
+    <SetupContainer>
+      <section className="flex flex-col items-center justify-center">
+        <h2 className="my-2 font-bold">{headline}</h2>
+        <p className="my-2 text-sm italic">{details}</p>
+        <LoadingSpinner />
+      </section>
+    </SetupContainer>
   );
-
-  return <SetupContainer>{content}</SetupContainer>;
 };
 
 export default WaitScreen;
