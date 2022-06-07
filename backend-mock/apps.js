@@ -37,6 +37,11 @@ const installApp = () => {
   });
 
   util.sendSSE("installed_app_status", [
+    { id: "lnbits", installed: false, status: "offline", error: "" },
+    { id: "thunderhub", installed: false, status: "offline", error: "" },
+    { id: "btcpayserver", installed: false, status: "offline", error: "" },
+    { id: "mempool", installed: false, status: "offline", error: "" },
+    { id: "btc-rpc-explorer", installed: false, status: "offline", error: "" },
     {
       id: "rtl",
       installed: true,
@@ -44,8 +49,7 @@ const installApp = () => {
       address: "http://192.168.1.100:3000",
       httpsForced: "0",
       httpsSelfsigned: "1",
-      hiddenService:
-        "4pt2luoyrnzhu3ddbbqvaxky66gusdybrqf63pcdwip7kgwluvgzlaqd.onion",
+      hiddenService: "4pt2ludsdsdns48dwnd2899rqf63pcdwdwdwh7dwaeukn1w.onion",
       authMethod: "password_b",
       details: {},
       error: "",
