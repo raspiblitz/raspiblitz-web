@@ -63,7 +63,9 @@ export function checkPropsUndefined(props: object): boolean {
 }
 
 export function parseJwt(token: string): TokenPayload {
-  return JSON.parse(atob(token.split(".")[1]));
+  // 1st part is header, 2nd part is payload, 3rd is signature
+  const payload = token.split(".")[1];
+  return JSON.parse(atob(payload));
 }
 
 export function enableGutter(): void {

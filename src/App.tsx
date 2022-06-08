@@ -74,8 +74,8 @@ const App: FC = () => {
             refresh(REFRESH_TIME(payload.expires));
           }
         })
-        .catch(() => {
-          // do nothing
+        .catch((e) => {
+          console.error("Error: token refresh failed with: ", e);
         });
     }
 
