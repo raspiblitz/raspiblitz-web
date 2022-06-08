@@ -9,7 +9,7 @@ import { MODAL_ROOT } from "../../../util/util";
 
 export type Props = {
   confirmText: string;
-  confirmEndpoint?: string; // TODO remove
+  confirmEndpoint?: string; // TODO #345 remove
   onConfirm?: () => void;
   onClose: () => void;
 };
