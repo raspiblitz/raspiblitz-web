@@ -141,7 +141,7 @@
       "migrate_umbrel": "Do you want to migrate from UMBREL to RaspiBlitz?",
       "migrate_citadel": "Do you want to migrate from CITADEL to RaspiBlitz?",
       "migrate_mynode": "Do you want to migrate from MYNODE to RaspiBlitz?",
-      "convertwarning": "RaspiBlitz can only convert your Blockchain and Lightning LND data (funds + channels) at the moment. Data from additional installed apps might get deleted in the migraton process.",
+      "convertwarning": "RaspiBlitz can only convert your Blockchain and Lightning data (funds + channels) at the moment. Data from additional installed apps might get deleted in the migraton process.",
       "no_and_shutdown": "No and Shutdown",
       "yes_and_migrate": "Migrate to RaspiBlitz",
       "start_recovery": "Do you wanna start Recovery?",
