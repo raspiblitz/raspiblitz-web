@@ -76,7 +76,11 @@ export const AppCard: FC<Props> = ({
         <div className="relative flex w-3/4 flex-col items-start justify-center text-xl">
           <h4>{name}</h4>
           {installed && (
-            <Tooltip trigger="click" overlay={tooltipContent} placement="top">
+            <Tooltip
+              trigger={["click", "hover"]}
+              overlay={tooltipContent}
+              placement="top"
+            >
               <LockIcon className="absolute  top-0 right-0 h-6 w-6" />
             </Tooltip>
           )}
