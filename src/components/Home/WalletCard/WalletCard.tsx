@@ -47,7 +47,7 @@ export const WalletCard: FC<Props> = ({
       unconfirmedSign = onChainUnconfirmed > 0 ? "+" : "";
     }
 
-    if (lnBalance) {
+    if (lnBalance !== null) {
       convertedLnBalance =
         unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
     }

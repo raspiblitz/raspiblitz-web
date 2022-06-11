@@ -60,7 +60,9 @@ const Home: FC = () => {
       } else {
         setTxError(
           `${t("login.error")}: ${
-            err.response?.data?.detail?.[0]?.msg || err.response?.data?.detail
+            err.response?.data?.detail?.[0]?.msg ||
+            err.response?.data?.detail ||
+            err.message
           }`
         );
       }
