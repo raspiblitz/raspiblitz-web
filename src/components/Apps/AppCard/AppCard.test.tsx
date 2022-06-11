@@ -1,17 +1,35 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../i18n/test_config";
-import { AppCard } from "./AppCard";
+import { AppStatus, AuthMethod } from "../../../models/app-status";
+import { App } from "../../../models/app.model";
+import { AppCard, Props } from "./AppCard";
 
-const app = {
+const app: App = {
   id: "123",
-  description: "Hi",
-  name: "d",
+  author: "Me",
+  name: "someApp",
+  repository: "http://example.com",
+  version: "1.0.0",
 };
 
-const basicProps = {
+const appStatus: AppStatus = {
+  id: "123",
+  installed: false,
+  address: "",
+  authMethod: AuthMethod.NONE,
+  details: "",
+  hiddenService: "",
+  httpsForced: "0",
+  httpsSelfsigned: "0",
+  error: "",
+};
+
+const basicProps: Props = {
   installingApp: null,
-  app: app,
+  appInfo: app,
+  appStatusInfo: appStatus,
+  installed: false,
   onInstall: () => {},
   onOpenDetails: () => {},
 };

@@ -25,31 +25,15 @@ export const Apps: FC = () => {
   }, []);
 
   // on every render sort installed & uninstalled app keys
-  const installedAppsData = appStatus.filter((app: AppStatus) => {
+  const installedApps = appStatus.filter((app: AppStatus) => {
     return app.installed;
   });
-  const installedApps = Array.from(installedAppsData, (app: AppStatus) => {
-    return app.id;
-  });
-  const notInstalledAppsData = appStatus.filter((app: AppStatus) => {
+  const notInstalledApps = appStatus.filter((app: AppStatus) => {
     return !app.installed;
   });
-  const notInstalledApps = Array.from(
-    notInstalledAppsData,
-    (app: AppStatus) => {
-      return app.id;
-    }
-  );
 
-  // in case no App data received yet .. show loading
+  // in case no App data received yet => show loading
   const isLoading = appStatus.length === 0;
-
-  const getAppStatus: any = (id: string, datafield: string) => {
-    // return AppStatus from SSE context if available (always the latest updates)
-    const fromSSE: any = appStatus.find((a) => a.id === id);
-    if (fromSSE && fromSSE[datafield]) return fromSSE[datafield];
-    return null;
-  };
 
   const installHandler = (id: string) => {
     instance.post(`apps/install/${id}`).catch((err) => {
@@ -74,13 +58,14 @@ export const Apps: FC = () => {
   };
 
   if (showDetails && app) {
+    const appInfos = appStatus.find((a) => a.id === app.id)!;
     return (
       <AppInfo
         app={app}
         installingApp={installingApp}
         onInstall={() => installHandler(app.id)}
         onUninstall={() => uninstallHandler(app.id)}
-        installed={getAppStatus(app.id, "installed")}
+        installed={appInfos?.installed}
         onClose={closeDetailsHandler}
       />
     );
@@ -99,18 +84,18 @@ export const Apps: FC = () => {
             <h2 className="w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
               {t("apps.installed")}
             </h2>
-            {/* TODO: make address / hiddenService faster */}
-            {installedApps.map((appId: string) => {
+            {installedApps.map((appStatus: AppStatus) => {
               return (
-                <article className="w-full p-3 lg:w-1/3" key={appId}>
+                <article className="w-full p-3 lg:w-1/3" key={appStatus.id}>
                   <AppCard
-                    app={availableApps.get(appId)!}
+                    appInfo={availableApps.get(appStatus.id)!}
+                    appStatusInfo={appStatus}
                     installed={true}
                     installingApp={null}
-                    onInstall={() => installHandler(appId)}
+                    onInstall={() => installHandler(appStatus.id)}
                     onOpenDetails={openDetailsHandler}
-                    address={getAppStatus(appId, "address")}
-                    hiddenService={getAppStatus(appId, "hiddenService")}
+                    address={appStatus.address}
+                    hiddenService={appStatus.hiddenService}
                   />
                 </article>
               );
@@ -120,14 +105,15 @@ export const Apps: FC = () => {
             <h2 className="block w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200 ">
               {t("apps.available")}
             </h2>
-            {notInstalledApps.map((appId: string) => {
+            {notInstalledApps.map((appStatus: AppStatus) => {
               return (
-                <article className="w-full p-3 lg:w-1/3" key={appId}>
+                <article className="w-full p-3 lg:w-1/3" key={appStatus.id}>
                   <AppCard
-                    app={availableApps.get(appId)!}
+                    appInfo={availableApps.get(appStatus.id)!}
+                    appStatusInfo={appStatus}
                     installed={false}
                     installingApp={installingApp}
-                    onInstall={() => installHandler(appId)}
+                    onInstall={() => installHandler(appStatus.id)}
                     onOpenDetails={openDetailsHandler}
                   />
                 </article>

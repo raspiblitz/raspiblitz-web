@@ -113,7 +113,12 @@
       "install_success": "{{appName}} installed successfully",
       "install_failure": "Installation of {{appName}} failed: {{details}}",
       "uninstall_success": "Successfully uninstalled {{appName}}",
-      "uninstall_failure": "Uninstall of {{appName}} failed: {{details}}"
+      "uninstall_failure": "Uninstall of {{appName}} failed: {{details}}",
+      "selfsigned_cert": "This app uses a self-signed HTTPS certificate",
+      "login_admin_pass_b": "Login with User 'admin' & Password B",
+      "login_pass_b": "Login with Password B",
+      "login_no_pass": "Login without Password",
+      "login_userdef": "Login with user-defined Password"
     },
     "settings": {
       "change_pw_a": "Change password A",

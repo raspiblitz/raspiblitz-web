@@ -1,14 +1,19 @@
-import { FC, useState, useEffect } from "react";
+import Tooltip from "rc-tooltip";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as InfoIcon } from "../../../assets/info.svg";
+import { ReactComponent as InfoIcon } from "../../../assets/information-circle.svg";
 import { ReactComponent as LinkIcon } from "../../../assets/link.svg";
+import { ReactComponent as LockIcon } from "../../../assets/lock-open.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import AppIcon from "../../../container/AppIcon/AppIcon";
+import { AppStatus, AuthMethod } from "../../../models/app-status";
 import { App } from "../../../models/app.model";
+
 import ButtonWithSpinner from "../../Shared/ButtonWithSpinner/ButtonWithSpinner";
 
-type Props = {
-  app: App;
+export type Props = {
+  appInfo: App;
+  appStatusInfo: AppStatus;
   installed: boolean;
   installingApp: any | null;
   address?: string;
@@ -18,15 +23,15 @@ type Props = {
 };
 
 export const AppCard: FC<Props> = ({
-  app,
+  appInfo,
+  appStatusInfo,
   installed,
   installingApp,
   onInstall,
   onOpenDetails,
   address,
-  hiddenService,
 }) => {
-  const { id, name } = app;
+  const { id, name } = appInfo;
   const { t } = useTranslation();
   const [isInstallWaiting, setInstallWaiting] = useState(false);
 
@@ -39,6 +44,27 @@ export const AppCard: FC<Props> = ({
     onInstall(id);
   };
 
+  const tooltipContent = (
+    <div>
+      {appStatusInfo.httpsForced === "1" &&
+        appStatusInfo.httpsSelfsigned === "1" && (
+          <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
+        )}
+      {appStatusInfo.authMethod === AuthMethod.NONE && (
+        <h2>{t("apps.login_no_pass")}</h2>
+      )}
+      {appStatusInfo.authMethod === AuthMethod.PASSWORD_B && (
+        <h2>{t("apps.login_pass_b")}</h2>
+      )}
+      {appStatusInfo.authMethod === AuthMethod.USER_ADMIN_PASSWORD_B && (
+        <h2>{t("apps.login_admin_pass_b")}</h2>
+      )}
+      {appStatusInfo.authMethod === AuthMethod.USER_DEFINED && (
+        <h2>{t("apps.login_userdef")}</h2>
+      )}
+    </div>
+  );
+
   return (
     <div className="bd-card transition-colors dark:bg-gray-800">
       <div className="mt-2 flex h-4/6 w-full flex-row items-center">
@@ -47,11 +73,16 @@ export const AppCard: FC<Props> = ({
           <AppIcon appId={id} />
         </div>
         {/* Content */}
-        <div className="flex w-3/4 flex-col items-start justify-center text-xl">
-          <div>{name}</div>
-          <div className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
+        <div className="relative flex w-3/4 flex-col items-start justify-center text-xl">
+          <h4>{name}</h4>
+          {installed && (
+            <Tooltip trigger="click" overlay={tooltipContent} placement="top">
+              <LockIcon className="absolute  top-0 right-0 h-6 w-6" />
+            </Tooltip>
+          )}
+          <p className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
             {t(`appInfo.${id}.shortDescription`)}
-          </div>
+          </p>
         </div>
       </div>
       <div className="flex h-2/6 flex-row gap-2 py-2">
@@ -103,7 +134,7 @@ export const AppCard: FC<Props> = ({
           )}
         <button
           className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
-          onClick={() => onOpenDetails(app)}
+          onClick={() => onOpenDetails(appInfo)}
         >
           <InfoIcon />
           &nbsp;{t("apps.info")}
