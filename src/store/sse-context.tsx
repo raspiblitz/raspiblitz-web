@@ -6,6 +6,7 @@ import { BtcInfo } from "../models/btc-info";
 import { HardwareInfo } from "../models/hardware-info";
 import { LnInfoLite } from "../models/ln-info-lite";
 import { SystemInfo } from "../models/system-info";
+import { SystemStartupInfo } from "../models/system-startup-info";
 import { Transaction } from "../models/transaction.model";
 import { WalletBalance } from "../models/wallet-balance";
 
@@ -31,6 +32,8 @@ interface SSEContextType {
   setInstallingApp: Dispatch<SetStateAction<any | null>>;
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
+  systemStartupInfo: SystemStartupInfo | null;
+  setSystemStartupInfo: Dispatch<SetStateAction<SystemStartupInfo | null>>;
 }
 
 export const SSEContext = createContext<SSEContextType>({
@@ -54,6 +57,8 @@ export const SSEContext = createContext<SSEContextType>({
   setInstallingApp: () => {},
   hardwareInfo: {} as HardwareInfo,
   setHardwareInfo: () => {},
+  systemStartupInfo: {} as SystemStartupInfo,
+  setSystemStartupInfo: () => {},
 });
 
 // for personal development - change backend with .env file
@@ -121,6 +126,8 @@ const SSEContextProvider: FC<Props> = (props) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [installingApp, setInstallingApp] = useState<any | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
+  const [systemStartupInfo, setSystemStartupInfo] =
+    useState<SystemStartupInfo | null>(null);
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -143,6 +150,8 @@ const SSEContextProvider: FC<Props> = (props) => {
     setInstallingApp,
     hardwareInfo,
     setHardwareInfo,
+    systemStartupInfo,
+    setSystemStartupInfo,
   };
 
   return (

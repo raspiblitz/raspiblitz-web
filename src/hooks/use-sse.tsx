@@ -8,6 +8,7 @@ import { HardwareInfo } from "../models/hardware-info";
 import { InstallAppData } from "../models/install-app";
 import { LnInfoLite } from "../models/ln-info-lite";
 import { SystemInfo } from "../models/system-info";
+import { SystemStartupInfo } from "../models/system-startup-info";
 import { WalletBalance } from "../models/wallet-balance";
 import { SSEContext, SSE_URL } from "../store/sse-context";
 import { availableApps } from "../util/availableApps";
@@ -177,6 +178,17 @@ function useSSE() {
       });
     };
 
+    const setSystemStartupInfo = (event: MessageEvent<string>) => {
+      sseCtx.setSystemStartupInfo((prev: SystemStartupInfo | null) => {
+        const message = JSON.parse(event.data);
+
+        return {
+          ...prev,
+          ...message,
+        };
+      });
+    };
+
     if (evtSource) {
       evtSource.addEventListener("system_info", setSystemInfo);
       evtSource.addEventListener("btc_info", setBtcInfo);
@@ -187,6 +199,7 @@ function useSSE() {
       evtSource.addEventListener("apps", setApps);
       evtSource.addEventListener("install", setInstall);
       evtSource.addEventListener("hardware_info", setHardwareInfo);
+      evtSource.addEventListener("system_startup_info", setSystemStartupInfo);
     }
 
     return () => {
@@ -201,6 +214,10 @@ function useSSE() {
         evtSource.removeEventListener("apps", setApps);
         evtSource.removeEventListener("install", setInstall);
         evtSource.removeEventListener("hardware_info", setHardwareInfo);
+        evtSource.removeEventListener(
+          "system_startup_info",
+          setSystemStartupInfo
+        );
       }
     };
   }, [
@@ -213,6 +230,7 @@ function useSSE() {
   ]);
 
   return {
+    evtSource: sseCtx.evtSource,
     systemInfo: sseCtx.systemInfo,
     btcInfo: sseCtx.btcInfo,
     lnInfoLite: sseCtx.lnInfoLite,
@@ -222,6 +240,7 @@ function useSSE() {
     availableApps: sseCtx.availableApps,
     installingApp: sseCtx.installingApp,
     hardwareInfo: sseCtx.hardwareInfo,
+    systemStartupInfo: sseCtx.systemStartupInfo,
   };
 }
 

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as LockOpen } from "../../../assets/lock-open.svg";
 import ModalDialog, {
   disableScroll,
 } from "../../../container/ModalDialog/ModalDialog";
@@ -11,7 +12,6 @@ import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 import ButtonWithSpinner from "../ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../InputField/InputField";
-import { ReactComponent as LockOpen } from "../../../assets/lock-open.svg";
 
 interface IFormInputs {
   passwordInput: string;
