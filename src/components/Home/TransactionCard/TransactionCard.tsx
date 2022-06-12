@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowDownIcon } from "../../../assets/arrow-down.svg";
-import { ReactComponent as InfoCircleIcon } from "../../../assets/info-circle.svg";
+import { ReactComponent as InfoCircleIcon } from "../../../assets/information-circle.svg";
 import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.svg";
 import Message from "../../../container/Message/Message";
 import { Transaction } from "../../../models/transaction.model";
