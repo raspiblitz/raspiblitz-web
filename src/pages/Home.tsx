@@ -24,8 +24,15 @@ import { enableGutter } from "../util/util";
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
-  const { systemInfo, balance, btcInfo, lnInfoLite, appStatus, hardwareInfo } =
-    useSSE();
+  const {
+    systemInfo,
+    balance,
+    btcInfo,
+    lnInfoLite,
+    appStatus,
+    hardwareInfo,
+    systemStartupInfo,
+  } = useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
@@ -38,13 +45,15 @@ const Home: FC = () => {
   const theme = darkMode ? "dark" : "light";
 
   const { implementation } = lnInfoLite;
+  const { lightning: lightningState } = systemStartupInfo || {};
+
   const isLnImplSelected =
     implementation !== null &&
     implementation !== "" &&
     implementation !== "NONE";
 
   const getTransactions = useCallback(async () => {
-    if (!isLnImplSelected) {
+    if (!isLnImplSelected || (lightningState && lightningState !== "done")) {
       return;
     }
     try {
@@ -54,6 +63,9 @@ const Home: FC = () => {
         },
       });
       setTransactions(tx.data);
+      if (tx.status === 200 && walletLocked) {
+        setWalletLocked(false);
+      }
     } catch (err: any) {
       if (err.response.status === 423) {
         setWalletLocked(true);
@@ -67,15 +79,7 @@ const Home: FC = () => {
         );
       }
     }
-  }, [isLnImplSelected, setWalletLocked, t]);
-
-  useEffect(() => {
-    enableGutter();
-    if (!walletLocked) {
-      setIsLoadingTransactions(true);
-      setTxError("");
-    }
-  }, [t, walletLocked, setWalletLocked, setIsLoadingTransactions]);
+  }, [lightningState, isLnImplSelected, walletLocked, setWalletLocked, t]);
 
   useEffect(() => {
     if (isLnImplSelected && !walletLocked && isLoadingTransactions) {
@@ -89,6 +93,25 @@ const Home: FC = () => {
     isLoadingTransactions,
     walletLocked,
     getTransactions,
+  ]);
+
+  useEffect(() => {
+    enableGutter();
+
+    if (lightningState === "locked") {
+      setWalletLocked(true);
+    }
+
+    if (!walletLocked) {
+      setIsLoadingTransactions(true);
+      setTxError("");
+    }
+  }, [
+    t,
+    lightningState,
+    walletLocked,
+    setWalletLocked,
+    setIsLoadingTransactions,
   ]);
 
   useInterval(getTransactions, 5000);
@@ -152,10 +175,13 @@ const Home: FC = () => {
   const closeUnlockModal = useCallback(
     (unlocked: boolean) => {
       if (unlocked) {
+        if (systemStartupInfo) {
+          systemStartupInfo.lightning = "done";
+        }
         toast.success(t("wallet.unlock_success"), { theme });
       }
     },
-    [t, theme]
+    [t, theme, systemStartupInfo]
   );
 
   const unlockModal = walletLocked && (
@@ -167,11 +193,14 @@ const Home: FC = () => {
 
   if (implementation === null) {
     return (
-      <main
-        className={`content-container page-container flex h-full items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white`}
-      >
-        <LoadingSpinner />
-      </main>
+      <>
+        {unlockModal}
+        <main
+          className={`content-container page-container flex h-full items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white`}
+        >
+          <LoadingSpinner />
+        </main>
+      </>
     );
   }
 

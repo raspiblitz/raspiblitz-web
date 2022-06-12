@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const util = require("./util");
+const util = require("./sse/util");
 
 router.post("/install/:id", (req, res) => {
   console.info("call to /api/v1/apps/install for app", req.params.id);

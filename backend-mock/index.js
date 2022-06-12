@@ -1,12 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const btcInfo = require("./btc_info");
-const lnInfoLite = require("./ln_info_lite");
-const installedAppStatus = require("./installed_app_status");
-const systemInfo = require("./system_info");
-const hardwareInfo = require("./hardware_info");
-const walletBalance = require("./wallet_balance");
-const util = require("./util");
+const btcInfo = require("./sse/btc_info");
+const lnInfoLite = require("./sse/ln_info_lite");
+const installedAppStatus = require("./sse/installed_app_status");
+const systemInfo = require("./sse/system_info");
+const hardwareInfo = require("./sse/hardware_info");
+const walletBalance = require("./sse/wallet_balance");
+const systemStartupInfo = require("./sse/system_startup_info");
+const util = require("./sse/util");
 const setup = require("./setup");
 const system = require("./system");
 const apps = require("./apps");
@@ -52,6 +53,7 @@ const eventsHandler = (request, response) => {
     response,
   });
 
+  systemStartupInfo.systemStartupInfo();
   systemInfo.systemInfo();
   hardwareInfo.hardwareInfo();
   btcInfo.btcInfo();
