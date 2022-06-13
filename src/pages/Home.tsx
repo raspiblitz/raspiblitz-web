@@ -9,7 +9,9 @@ import LightningCard from "../components/Home/LightningCard/LightningCard";
 import TransactionCard from "../components/Home/TransactionCard/TransactionCard";
 import TransactionDetailModal from "../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
 import WalletCard from "../components/Home/WalletCard/WalletCard";
+import CloseChannelModal from "../components/Shared/CloseChannelModal/CloseChannelModal";
 import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
+import OpenChannelModal from "../components/Shared/OpenChannelModal/OpenChannelModal";
 import ReceiveModal from "../components/Shared/ReceiveModal/ReceiveModal";
 import SendModal from "../components/Shared/SendModal/SendModal";
 import UnlockModal from "../components/Shared/UnlockModal/UnlockModal";
@@ -37,6 +39,8 @@ const Home: FC = () => {
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
+  const [showOpenChannelModal, setShowOpenChannelModal] = useState(false);
+  const [showCloseChannelModal, setShowCloseChannelModal] = useState(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
@@ -172,6 +176,30 @@ const Home: FC = () => {
     />
   );
 
+  const showOpenChannelModalHandler = () => {
+    setShowOpenChannelModal(true);
+  };
+
+  const closeOpenChannelModal = () => {
+    setShowOpenChannelModal(false);
+  };
+
+  const openChannelModal = showOpenChannelModal && (
+    <OpenChannelModal onClose={closeOpenChannelModal} />
+  );
+
+  const showCloseChannelModalHandler = () => {
+    setShowCloseChannelModal(true);
+  };
+
+  const closeCloseChannelModal = () => {
+    setShowCloseChannelModal(false);
+  };
+
+  const closeChannelModal = showCloseChannelModal && (
+    <CloseChannelModal onClose={closeCloseChannelModal} />
+  );
+
   const closeUnlockModal = useCallback(
     (unlocked: boolean) => {
       if (unlocked) {
@@ -210,6 +238,8 @@ const Home: FC = () => {
       {receiveModal}
       {sendModal}
       {detailModal}
+      {openChannelModal}
+      {closeChannelModal}
       <main
         className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
@@ -221,6 +251,8 @@ const Home: FC = () => {
               lnBalance={balance.channel_local_balance}
               onReceive={showReceiveHandler}
               onSend={showSendModalHandler}
+              onOpenChannel={showOpenChannelModalHandler}
+              onCloseChannel={showCloseChannelModalHandler}
             />
           </article>
         )}

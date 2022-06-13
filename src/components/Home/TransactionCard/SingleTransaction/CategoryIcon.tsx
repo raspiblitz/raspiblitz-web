@@ -9,9 +9,13 @@ import {
   TransactionType,
 } from "../../../../models/transaction.model";
 
-const CategoryIcon: FC<CategoryIconProps> = (props) => {
-  const { category, type, status } = props;
+export type Props = {
+  category: TransactionCategory;
+  type: TransactionType;
+  status: TransactionStatus;
+};
 
+const CategoryIcon: FC<Props> = ({ category, type, status }) => {
   const sendingTx = type === "send";
 
   const color = sendingTx ? "text-white bg-red-500" : "text-white bg-green-500";
@@ -39,11 +43,5 @@ const CategoryIcon: FC<CategoryIconProps> = (props) => {
 
   return <ChainIcon className={`h-7 w-7 rounded-full p-1 ${color}`} />;
 };
-
-export interface CategoryIconProps {
-  category: TransactionCategory;
-  type: TransactionType;
-  status: TransactionStatus;
-}
 
 export default CategoryIcon;

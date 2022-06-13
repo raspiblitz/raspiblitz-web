@@ -18,6 +18,8 @@ type Props = {
   lnBalance: number | null;
   onReceive: () => void;
   onSend: () => void;
+  onOpenChannel: () => void;
+  onCloseChannel: () => void;
 };
 
 export const WalletCard: FC<Props> = ({
@@ -26,6 +28,8 @@ export const WalletCard: FC<Props> = ({
   lnBalance,
   onReceive,
   onSend,
+  onOpenChannel,
+  onCloseChannel,
 }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
@@ -114,15 +118,29 @@ export const WalletCard: FC<Props> = ({
             onClick={onReceive}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
           >
-            <ReceiveIcon className="h-6 w-6" />
-            <span>&nbsp;{t("wallet.receive")}</span>
+            <ReceiveIcon className="mr-1 h-6 w-6" />
+            <span>{t("wallet.receive")}</span>
           </button>
           <button
             onClick={onSend}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
           >
-            <SendIcon className="h-6 w-6" />
-            <span>&nbsp;{t("wallet.send")}</span>
+            <SendIcon className="mr-1 h-6 w-6" />
+            <span>{t("wallet.send")}</span>
+          </button>
+        </section>
+        <section className="flex justify-around p-2">
+          <button
+            onClick={onOpenChannel}
+            className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
+          >
+            <span>Open Channel</span>
+          </button>
+          <button
+            onClick={onCloseChannel}
+            className="flex h-10 w-5/12 items-center justify-center rounded bg-black p-3 text-white hover:bg-gray-700"
+          >
+            <span>Close Channel</span>
           </button>
         </section>
       </div>

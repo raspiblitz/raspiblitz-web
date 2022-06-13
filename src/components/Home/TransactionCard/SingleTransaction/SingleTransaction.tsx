@@ -61,8 +61,8 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
       <div className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center italic">
         {comment || "Transaction"}
       </div>
-      <div className="mx-auto h-1 w-full">
-        <div className="border border-b border-gray-200" />
+      <div className="mx-auto h-1 w-full pt-4">
+        <div className="border border-b border-gray-200 dark:border-gray-400" />
       </div>
     </li>
   );
