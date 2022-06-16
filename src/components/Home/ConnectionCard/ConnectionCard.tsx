@@ -37,7 +37,7 @@ export const ConnectionCard: FC<Props> = ({
     setShowAddress((prev) => !prev);
   };
 
-  if (!sshAddress || !torAddress || !nodeId) {
+  if (!sshAddress || !torAddress) {
     return (
       <div className="h-full w-1/2">
         <LoadingBox />
@@ -156,47 +156,49 @@ export const ConnectionCard: FC<Props> = ({
             </Tooltip>
           </div>
         </article>
-        <article className="flex flex-col overflow-hidden py-4">
-          <h6 className="text-sm text-gray-500 dark:text-gray-200">
-            {t("home.node_id")}
-          </h6>
-          <div className="flex">
-            <a
-              className={`${
-                showAddress
-                  ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
-                  : "text-blur w-10/12"
-              }`}
-              title={`${nodeId}`}
-              href={`ssh://${nodeId}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {showAddress ? nodeId : HIDDEN_TEXT}
-            </a>
-            <Tooltip
-              overlay={
-                <div>
-                  {clippedNodeId
-                    ? t("wallet.copied")
-                    : t("wallet.copy_clipboard")}
-                </div>
-              }
-              placement="top"
-            >
-              <ClipboardIcon
-                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                onClick={copyNodeId}
-              />
-            </Tooltip>
-            <Tooltip overlay={<div>{t("home.show_qr")}</div>} placement="top">
-              <QRCodeIcon
-                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                onClick={showModalHandler}
-              />
-            </Tooltip>
-          </div>
-        </article>
+        {nodeId && (
+          <article className="flex flex-col overflow-hidden py-4">
+            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+              {t("home.node_id")}
+            </h6>
+            <div className="flex">
+              <a
+                className={`${
+                  showAddress
+                    ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
+                    : "text-blur w-10/12"
+                }`}
+                title={`${nodeId}`}
+                href={`ssh://${nodeId}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {showAddress ? nodeId : HIDDEN_TEXT}
+              </a>
+              <Tooltip
+                overlay={
+                  <div>
+                    {clippedNodeId
+                      ? t("wallet.copied")
+                      : t("wallet.copy_clipboard")}
+                  </div>
+                }
+                placement="top"
+              >
+                <ClipboardIcon
+                  className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+                  onClick={copyNodeId}
+                />
+              </Tooltip>
+              <Tooltip overlay={<div>{t("home.show_qr")}</div>} placement="top">
+                <QRCodeIcon
+                  className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+                  onClick={showModalHandler}
+                />
+              </Tooltip>
+            </div>
+          </article>
+        )}
       </div>
     </>
   );
