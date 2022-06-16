@@ -191,7 +191,7 @@ const Home: FC = () => {
   const gridRows = 6 + appStatus.length / 4;
   const height = isLnImplSelected ? "h-full" : "h-full md:h-1/2";
 
-  if (implementation === null) {
+  if (implementation === null && lightningState !== "disabled") {
     return (
       <>
         {unlockModal}
