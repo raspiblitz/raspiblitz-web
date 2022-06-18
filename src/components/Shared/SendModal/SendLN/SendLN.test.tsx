@@ -32,12 +32,13 @@ describe("SendLN", () => {
   });
 
   test("validates the input for empty value", async () => {
+    const user = userEvent.setup();
     setup();
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
     expect(await screen.findByText("wallet.send")).not.toBeDisabled();
 
-    userEvent.click(await screen.findByText("wallet.send"));
+    await user.click(await screen.findByText("wallet.send"));
     await waitFor(() => expect(invoiceInput).toHaveClass("input-error"));
     expect(
       await screen.findByText("forms.validation.lnInvoice.required")
@@ -45,24 +46,25 @@ describe("SendLN", () => {
   });
 
   test("validates the input for LN invoice format", async () => {
+    const user = userEvent.setup();
     setup();
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
-    userEvent.type(invoiceInput, "123456789abc");
+    await user.type(invoiceInput, "123456789abc");
     await waitFor(() => expect(invoiceInput).toHaveClass("input-error"));
     expect(
       await screen.findByText("forms.validation.lnInvoice.patternMismatch")
     ).toBeInTheDocument();
 
-    userEvent.clear(invoiceInput);
-    userEvent.type(invoiceInput, "lnbc");
+    await user.clear(invoiceInput);
+    await user.type(invoiceInput, "lnbc");
     expect(invoiceInput).toHaveClass("input-error");
     expect(
       await screen.findByText("forms.validation.lnInvoice.patternMismatch")
     ).toBeInTheDocument();
 
-    userEvent.clear(invoiceInput);
-    userEvent.type(invoiceInput, "lntb");
+    await user.clear(invoiceInput);
+    await user.type(invoiceInput, "lntb");
     expect(invoiceInput).toHaveClass("input-error");
     expect(
       await screen.findByText("forms.validation.lnInvoice.patternMismatch")
@@ -70,18 +72,19 @@ describe("SendLN", () => {
   });
 
   test("valid LN invoice passes", async () => {
+    const user = userEvent.setup();
     setup();
     const invoiceInput = await screen.findByLabelText("wallet.invoice");
 
-    userEvent.type(
+    await user.type(
       invoiceInput,
       "lnbcrt500u1psc09t8pp5jxn0qqx5rnv4zhc7tvftlfr2p7lq25cm8af0h2k5vcy0cfkgwugqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5n9uetwjh0wua595fqtce8r3n5lnqk6f603en2k4wx8p988vl5haq9qy9qsqtgsp7ery57uge8jh66sgu42rttsnpyygdtjx05r5sexjdljrfa3hd9mj4z8w3xhp2nz30fa79jcug3chsw2g7jk75zwel33qsl455nqpx9p6z5"
     );
     expect(await screen.findByText("wallet.send")).not.toBeDisabled();
     expect(invoiceInput).not.toHaveClass("input-error");
 
-    userEvent.clear(invoiceInput);
-    userEvent.type(
+    await user.clear(invoiceInput);
+    await user.type(
       invoiceInput,
       "lntb500u1psc09t8pp5jxn0qqx5rnv4zhc7tvftlfr2p7lq25cm8af0h2k5vcy0cfkgwugqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5n9uetwjh0wua595fqtce8r3n5lnqk6f603en2k4wx8p988vl5haq9qy9qsqtgsp7ery57uge8jh66sgu42rttsnpyygdtjx05r5sexjdljrfa3hd9mj4z8w3xhp2nz30fa79jcug3chsw2g7jk75zwel33qsl455nqpx9p6z5"
     );

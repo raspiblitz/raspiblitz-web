@@ -32,12 +32,13 @@ describe("ConfirmSendModal", () => {
     };
 
     test("validates amount is lower than balance", async () => {
+      const user = userEvent.setup();
       setup();
 
       let amountInput = screen.getByLabelText("wallet.amount");
 
-      userEvent.clear(amountInput);
-      userEvent.type(amountInput, "999");
+      await user.clear(amountInput);
+      await user.type(amountInput, "999");
 
       amountInput = await screen.findByLabelText("wallet.amount");
 
@@ -49,13 +50,13 @@ describe("ConfirmSendModal", () => {
     });
 
     test("validates amount is bigger than zero", async () => {
+      const user = userEvent.setup();
       setup();
 
       let amountInput = screen.getByLabelText("wallet.amount");
 
-      userEvent.clear(amountInput);
-
-      userEvent.type(amountInput, "0");
+      await user.clear(amountInput);
+      await user.type(amountInput, "0");
 
       amountInput = await screen.findByLabelText("wallet.amount");
 
@@ -67,13 +68,14 @@ describe("ConfirmSendModal", () => {
     });
 
     test("valid form passes", async () => {
+      const user = userEvent.setup();
       setup();
 
       const amountInput = screen.getByLabelText(
         "wallet.amount"
       ) as HTMLInputElement;
 
-      userEvent.type(amountInput, "100");
+      await user.type(amountInput, "100");
       await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
 
       expect(
