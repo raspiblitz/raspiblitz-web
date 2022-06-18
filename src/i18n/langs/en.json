@@ -149,8 +149,8 @@
       "convertwarning": "RaspiBlitz can only convert your Blockchain and Lightning data (funds + channels) at the moment. Data from additional installed apps might get deleted in the migraton process.",
       "no_and_shutdown": "No and Shutdown",
       "yes_and_migrate": "Migrate to RaspiBlitz",
-      "start_recovery": "Do you wanna start Recovery?",
-      "start_update": "Do you wanna start Update?",
+      "start_recovery": "Would you like start the recovery process?",
+      "start_update": "Would you like to start the update and recovery process?",
       "yes": "Yes",
       "cancel": "Cancel",
       "ok": "OK",
@@ -247,8 +247,8 @@
     },
     "appInfo": {
       "rtl": {
-        "shortDescription": "A full function web browser app for LND, C-Lightning and Eclair",
-        "about": "RTL is a full function, device agnostic, web user interface to help manage Lightning node operations. RTL is available on LND, C-Lightning and Eclair implementations."
+        "shortDescription": "A full function web browser app for LND, Core Lightning and Eclair",
+        "about": "RTL is a full function, device agnostic, web user interface to help manage Lightning node operations. RTL is available on LND, Core Lightning and Eclair implementations."
       },
       "specter": {
         "shortDescription": "A desktop GUI for Bitcoin Core optimised to work with hardware wallets",

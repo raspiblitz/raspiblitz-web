@@ -139,8 +139,8 @@
     },
     "appInfo": {
       "rtl": {
-        "shortDescription": "En fullverdig nettleser for LND, C-Lightning og Eclair",
-        "about": "RTL er et fullstendig nettgrensesnitt som lar deg håndtere Lightning-modeoperasjoner, på alle enheter. RTL er tilgjengelig på LND, C-Lightning og Eclair-implementasjoner."
+        "shortDescription": "En fullverdig nettleser for LND, Core Lightning og Eclair",
+        "about": "RTL er et fullstendig nettgrensesnitt som lar deg håndtere Lightning-modeoperasjoner, på alle enheter. RTL er tilgjengelig på LND, Core Lightning og Eclair-implementasjoner."
       },
       "specter": {
         "shortDescription": "Et skrivebordsbrukergrensesnitt for Bitcoin Core, optimalisert for å fungere med maskinvarelommebøker",
