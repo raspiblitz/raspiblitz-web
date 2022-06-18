@@ -9,7 +9,7 @@ import LightningCard from "../components/Home/LightningCard/LightningCard";
 import TransactionCard from "../components/Home/TransactionCard/TransactionCard";
 import TransactionDetailModal from "../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
 import WalletCard from "../components/Home/WalletCard/WalletCard";
-import CloseChannelModal from "../components/Shared/CloseChannelModal/CloseChannelModal";
+import ListChannelModal from "../components/Shared/ListChannelModal/ListChannelModal";
 import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
 import OpenChannelModal from "../components/Shared/OpenChannelModal/OpenChannelModal";
 import ReceiveModal from "../components/Shared/ReceiveModal/ReceiveModal";
@@ -40,7 +40,7 @@ const Home: FC = () => {
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showOpenChannelModal, setShowOpenChannelModal] = useState(false);
-  const [showCloseChannelModal, setShowCloseChannelModal] = useState(false);
+  const [showListChannelModal, setShowListChannelModal] = useState(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
@@ -189,15 +189,15 @@ const Home: FC = () => {
   );
 
   const showCloseChannelModalHandler = () => {
-    setShowCloseChannelModal(true);
+    setShowListChannelModal(true);
   };
 
-  const closeCloseChannelModal = () => {
-    setShowCloseChannelModal(false);
+  const closeListChannelModal = () => {
+    setShowListChannelModal(false);
   };
 
-  const closeChannelModal = showCloseChannelModal && (
-    <CloseChannelModal onClose={closeCloseChannelModal} />
+  const listChannelModal = showListChannelModal && (
+    <ListChannelModal onClose={closeListChannelModal} />
   );
 
   const closeUnlockModal = useCallback(
@@ -239,7 +239,7 @@ const Home: FC = () => {
       {sendModal}
       {detailModal}
       {openChannelModal}
-      {closeChannelModal}
+      {listChannelModal}
       <main
         className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >

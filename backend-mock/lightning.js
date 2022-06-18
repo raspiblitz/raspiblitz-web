@@ -201,14 +201,38 @@ router.post("/unlock-wallet", (req, res) => {
 
 router.post("/open-channel", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
+  return res.status(200).send();
 });
 
 router.get("/list-channel", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
+  return res.send(
+    JSON.stringify([
+      {
+        channel_id: "bla",
+        active: true,
+        peer_publickey: "sndsdnsknwwn",
+        peer_alias: "MY_NICE_CHANNEL",
+        balance_local: 1_000_000,
+        balance_remote: 5_000_000,
+        balance_capacity: 6_000_000,
+      },
+      {
+        channel_id: "id2",
+        active: true,
+        peer_publickey: "myPubKey",
+        peer_alias: "MY PEER ALIAS",
+        balance_local: 100_000_000,
+        balance_remote: 200_000_000,
+        balance_capacity: 300_000_000,
+      },
+    ])
+  );
 });
 
 router.post("/close-channel", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
+  return res.status(200).send();
 });
 
 module.exports = router;

@@ -35,6 +35,10 @@
   @apply rounded bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-400 dark:disabled:bg-gray-500;
 }
 
+.bd-button-red {
+  @apply rounded bg-red-500 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400 dark:disabled:bg-gray-500;
+}
+
 .switch-button {
   @apply m-1 rounded-lg bg-white px-2 py-1 text-black shadow-md hover:bg-yellow-400 hover:text-white disabled:cursor-default disabled:bg-yellow-500 disabled:text-white dark:bg-gray-500 dark:text-white dark:hover:bg-yellow-400 dark:disabled:bg-yellow-500 dark:disabled:text-white;
 }

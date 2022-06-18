@@ -29,7 +29,19 @@ const OpenChannelModal: FC<Props> = ({ onClose }) => {
   });
 
   return createPortal(
-    <ModalDialog close={onClose}>OPEN CHANNEL MODAL</ModalDialog>,
+    <ModalDialog close={onClose}>
+      <h2>OPEN CHANNEL</h2>
+      <article>
+        <article>
+          <label>Fee Rate</label>
+          <select>
+            <option>Urgent</option>
+            <option>Normal</option>
+            <option>Slow</option>
+          </select>
+        </article>
+      </article>
+    </ModalDialog>,
     MODAL_ROOT
   );
 };

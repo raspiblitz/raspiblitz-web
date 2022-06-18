@@ -37,13 +37,18 @@
       "show_qr": "Show QR Code",
       "lightning": "Lightning",
       "channel": "Channel",
+      "channel_id": "Channel ID",
       "channel_balance": "Channel Balance",
       "local_balance": "Local Channel Balance",
       "remote_balance": "Remote Channel Balance",
       "pending_balance_local": "Pending Local Balance",
       "pending_balance_remote": "Pending Remote Balance",
+      "active": "Active",
+      "close_channel": "Close Channel",
+      "force_close": "Force close",
       "show": "Show",
       "hide": "Hide",
+      "no": "No",
       "onchain_cln_no_support": "Showing on-chain transactions is currently not supported with Core Lightning"
     },
     "wallet": {

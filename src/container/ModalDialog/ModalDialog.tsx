@@ -36,7 +36,7 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
 
   return (
     <ModalBackground>
-      <div className="xl:max-w-screen-sm mx-5 flex h-auto w-4/5 flex-col rounded-lg bg-white text-center dark:bg-gray-800 dark:text-white lg:w-1/2 xl:w-2/5">
+      <div className="xl:max-w-screen-sm mx-5 flex h-auto max-h-[100%] w-4/5 flex-col overflow-y-scroll rounded-lg bg-white text-center dark:bg-gray-800 dark:text-white lg:w-1/2 xl:w-2/5">
         <div className="flex pr-2 pt-1">
           {closeable && (
             <button
