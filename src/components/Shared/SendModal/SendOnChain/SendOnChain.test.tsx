@@ -42,23 +42,22 @@ describe("SendOnChain", () => {
     ).not.toBeDisabled();
   });
 
-  // https://github.com/cstenglein/raspiblitz-web/issues/234
-  // skipped due to react v18 update
-  test.skip("validates the input for empty value", async () => {
+  test("validates the input for empty value", async () => {
+    const user = userEvent.setup();
     setup();
 
     expect(
       screen.getByRole("button", { name: "wallet.confirm" })
     ).not.toBeDisabled();
 
-    userEvent.click(screen.getByRole("button", { name: "wallet.confirm" }));
-
+    await user.click(screen.getByRole("button", { name: "wallet.confirm" }));
     await waitFor(() =>
       expect(screen.getByLabelText("wallet.address")).toHaveClass("input-error")
     );
     expect(
       screen.getByText("forms.validation.chainAddress.required")
     ).toBeInTheDocument();
+
     await waitFor(() =>
       expect(screen.getByLabelText("tx.fee")).toHaveClass("input-error")
     );
@@ -67,15 +66,14 @@ describe("SendOnChain", () => {
     ).toBeInTheDocument();
   });
 
-  // https://github.com/cstenglein/raspiblitz-web/issues/234
-  // skipped due to react v18 update
-  test.skip("validates the address-input for BTC address format", async () => {
+  test("validates the address-input for BTC address format", async () => {
+    const user = userEvent.setup();
     setup();
 
     let addressInput = screen.getByLabelText("wallet.address");
 
-    userEvent.clear(addressInput);
-    userEvent.type(addressInput, "abc123456789");
+    await user.clear(addressInput);
+    await user.type(addressInput, "abc123456789");
 
     addressInput = await screen.findByLabelText("wallet.address");
 
@@ -84,8 +82,8 @@ describe("SendOnChain", () => {
       screen.getByText("forms.validation.chainAddress.patternMismatch")
     ).toBeInTheDocument();
 
-    userEvent.clear(addressInput);
-    userEvent.type(addressInput, "bc1");
+    await user.clear(addressInput);
+    await user.type(addressInput, "bc1");
 
     await waitFor(() => expect(addressInput).toHaveClass("input-error"));
     expect(
@@ -93,19 +91,18 @@ describe("SendOnChain", () => {
     ).toBeInTheDocument();
   });
 
-  // https://github.com/cstenglein/raspiblitz-web/issues/234
-  // skipped due to react v18 update
-  test.skip("validates amount is lower than balance", async () => {
+  test("validates amount is lower than balance", async () => {
+    const user = userEvent.setup();
+
     setup();
 
     const amountInput = screen.getByLabelText(
       "wallet.amount"
     ) as HTMLInputElement;
 
-    userEvent.clear(amountInput);
-    userEvent.type(amountInput, "999");
-
-    userEvent.click(await screen.findByText("wallet.confirm"));
+    await user.clear(amountInput);
+    await user.type(amountInput, "999");
+    await user.click(await screen.findByText("wallet.confirm"));
 
     await waitFor(() => expect(amountInput).toHaveClass("input-error"));
     expect(
@@ -116,14 +113,15 @@ describe("SendOnChain", () => {
   // https://github.com/cstenglein/raspiblitz-web/issues/234
   // skipped due to react v18 update
   test.skip("validates amount is bigger than zero", async () => {
+    const user = userEvent.setup();
     setup();
 
     const amountInput = screen.getByLabelText(
       "wallet.amount"
     ) as HTMLInputElement;
 
-    userEvent.clear(amountInput);
-    userEvent.type(amountInput, "0");
+    await user.clear(amountInput);
+    await user.type(amountInput, "0");
     await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
     expect(
@@ -134,6 +132,7 @@ describe("SendOnChain", () => {
   // https://github.com/cstenglein/raspiblitz-web/issues/234
   // skipped due to react v18 update
   test.skip("valid form passes", async () => {
+    const user = userEvent.setup();
     setup();
 
     const addressInput = screen.getByLabelText(
@@ -141,10 +140,10 @@ describe("SendOnChain", () => {
     ) as HTMLInputElement;
     const feeInput = screen.getByLabelText("tx.fee") as HTMLInputElement;
 
-    userEvent.type(addressInput, "bc1123456789");
+    await user.type(addressInput, "bc1123456789");
     await waitFor(() => expect(addressInput).not.toHaveClass("input-error"));
 
-    userEvent.type(feeInput, "1");
+    await user.type(feeInput, "1");
     await waitFor(() => expect(feeInput).not.toHaveClass("input-error"));
 
     expect(
