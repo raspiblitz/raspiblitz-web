@@ -26,15 +26,15 @@ export const OnchainDetails: FC<Props> = ({ details }) => {
   const entries: { key: string; value: string }[] = [
     {
       key: t("tx.confirmations"),
-      value: `${details.num_confs || "Unconfirmed"}`,
+      value: `${details.num_confs || t("tx.unconfirmed")}`,
     },
     {
       key: t("tx.included_block"),
-      value: `${details.block_height || "Unconfirmed"}`,
+      value: `${details.block_height || t("tx.unconfirmed")}`,
     },
     { key: t("tx.date"), value: date },
     { key: t("wallet.amount"), value: `${amount} ${unit}` },
-    { key: t("tx.fee"), value: `${details.total_fees}` },
+    { key: t("tx.fee"), value: `${details.total_fees || ""}` },
     { key: t("tx.description"), value: details.comment },
   ];
 
