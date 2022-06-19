@@ -145,8 +145,8 @@
     },
     "appInfo": {
       "rtl": {
-        "shortDescription": "Eine umfagreiche Webbrowser Applikation für LND, C-Lightning and Eclair",
-        "about": "RTL ist ein umfängliches, gerät-unabhängiges, Web user interface um eine Lightning node zu betreiben. RTL ist verfügbar für LND, C-Lightning und Eclair Implementierungen."
+        "shortDescription": "Eine umfagreiche Webbrowser Applikation für LND, Core Lightning and Eclair",
+        "about": "RTL ist ein umfängliches, gerät-unabhängiges, Web user interface um eine Lightning node zu betreiben. RTL ist verfügbar für LND, Core Lightning und Eclair Implementierungen."
       },
       "specter": {
         "shortDescription": "Eine Desktop GUI für Bitcoin Core, optimiert für hardware wallets"

@@ -144,8 +144,8 @@
         "about": "Bitcoin Core possède une interface de ligne de commande très puissante et un merveilleux daemon. En utilisant PSBT et HWI, il peut également fonctionner avec des portefeuilles matériels. Il en va de même pour les configurations multisignatures. L'objectif de ce projet est de créer une interface graphique pratique et conviviale autour de Bitcoin Core, en mettant l'accent sur la configuration multisignature avec des portefeuilles matériels et des appareils en air gap."
       },
       "rtl": {
-        "about": "RTL est une interface utilisateur web complète, indépendante de l'appareil, qui permet de gérer les opérations des nœuds Lightning. RTL est disponible sur les implémentations LND, C-Lightning et Eclair.",
-        "shortDescription": "Une application web complète pour LND, C-Lightning et Eclair"
+        "about": "RTL est une interface utilisateur web complète, indépendante de l'appareil, qui permet de gérer les opérations des nœuds Lightning. RTL est disponible sur les implémentations LND, Core Lightning et Eclair.",
+        "shortDescription": "Une application web complète pour LND, Core Lightning et Eclair"
       },
       "btcpayserver": {
         "shortDescription": "Acceptez les paiements Bitcoin. Processeur de paiement Bitcoin gratuit, open-source et auto-hébergé.",
