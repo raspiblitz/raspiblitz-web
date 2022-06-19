@@ -29,6 +29,12 @@ export function convertToString(unit: Unit, num: number | null): string {
   return num.toFixed(8).toString();
 }
 
+/**
+ * Formats a normal string like "12345" to a formatted one => "123,456"
+ * @param value the value to be formatted
+ * @param unit The unit (BTC / SAT) , see also {@link Unit}
+ * @returns the formatted value
+ */
 export function formatAmount(value: string, unit: Unit): string {
   // replace every character except numbers and separators
   value = value.replace(/[^0-9.,]/, "");
@@ -53,4 +59,15 @@ export function formatAmount(value: string, unit: Unit): string {
     value = output.shift() + (output.length ? "." + output.join("") : "");
   }
   return value;
+}
+
+/**
+ * Removes the commas from a string number and returns the number representation of that string
+ * e.g. "123,456" => 123456
+ * @param value the value to convert e.g. "123,456"
+ * @returns the converted number, e.g. 123456
+ */
+export function stringToNumber(value: string): number {
+  const valueCopy = value.replace(/,/g, "");
+  return +valueCopy;
 }

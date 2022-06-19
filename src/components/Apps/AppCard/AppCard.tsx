@@ -2,7 +2,7 @@ import Tooltip from "rc-tooltip";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as InfoIcon } from "../../../assets/information-circle.svg";
-import { ReactComponent as LinkIcon } from "../../../assets/link.svg";
+import { ReactComponent as LinkIcon } from "../../../assets/external-link.svg";
 import { ReactComponent as LockIcon } from "../../../assets/lock-open.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import AppIcon from "../../../container/AppIcon/AppIcon";

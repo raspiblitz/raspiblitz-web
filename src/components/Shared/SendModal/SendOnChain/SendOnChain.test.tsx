@@ -110,9 +110,7 @@ describe("SendOnChain", () => {
     ).toBeInTheDocument();
   });
 
-  // https://github.com/cstenglein/raspiblitz-web/issues/234
-  // skipped due to react v18 update
-  test.skip("validates amount is bigger than zero", async () => {
+  test("validates amount is bigger than zero", async () => {
     const user = userEvent.setup();
     setup();
 

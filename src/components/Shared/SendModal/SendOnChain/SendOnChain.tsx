@@ -4,7 +4,11 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "../../../../store/app-context";
-import { convertSatToBtc, convertToString } from "../../../../util/format";
+import {
+  convertSatToBtc,
+  convertToString,
+  stringToNumber,
+} from "../../../../util/format";
 import AmountInput from "../../AmountInput/AmountInput";
 import InputField from "../../InputField/InputField";
 
@@ -23,7 +27,7 @@ export type Props = {
 interface IFormInputs {
   addressInput: string;
   feeInput: number;
-  amountInput: number;
+  amountInput: string;
   commentInput: string;
 }
 
@@ -98,8 +102,9 @@ const SendOnChain: FC<Props> = ({
                 message: t("forms.validation.chainAmount.max"),
               },
               validate: {
-                greaterThanZero: () =>
-                  amount > 0 || t("forms.validation.chainAmount.required"),
+                greaterThanZero: (val) =>
+                  stringToNumber(val) > 0 ||
+                  t("forms.validation.chainAmount.required"),
               },
               onChange: onChangeAmount,
             })}

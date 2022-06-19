@@ -10,7 +10,7 @@ import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
 import { AppContext, Unit } from "../../../store/app-context";
-import { convertBtcToSat } from "../../../util/format";
+import { convertBtcToSat, stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 import AmountInput from "../AmountInput/AmountInput";
@@ -19,7 +19,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import SwitchTxType, { TxType } from "../SwitchTxType/SwitchTxType";
 
 interface IFormInputs {
-  amountInput: number;
+  amountInput: string;
   commentInput: string;
 }
 
@@ -150,8 +150,9 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
                 register={register("amountInput", {
                   required: t("forms.validation.chainAmount.required"),
                   validate: {
-                    greaterThanZero: () =>
-                      amount > 0 || t("forms.validation.chainAmount.required"),
+                    greaterThanZero: (val) =>
+                      stringToNumber(val) > 0 ||
+                      t("forms.validation.chainAmount.required"),
                   },
                   onChange: amountChangeHandler,
                 })}
