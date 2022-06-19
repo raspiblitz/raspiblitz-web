@@ -81,9 +81,13 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
         </span>
       </div>
 
-      {errorMessage && (
-        <p className="text-left text-red-500">{errorMessage.message}</p>
-      )}
+      <p
+        className={`
+        text-left text-sm text-red-500
+        ${errorMessage ? "" : "h-5"}`}
+      >
+        {errorMessage?.message}
+      </p>
     </>
   );
 };
