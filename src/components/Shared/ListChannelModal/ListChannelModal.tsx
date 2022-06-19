@@ -1,9 +1,11 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { LightningChannel } from "../../../models/lightning-channel";
+import { AppContext } from "../../../store/app-context";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 import ChannelList from "./ChannelList/ChannelList";
@@ -13,8 +15,12 @@ type Props = {
 };
 
 const ListChannelModal: FC<Props> = ({ onClose }) => {
+  const { darkMode } = useContext(AppContext);
   const { t } = useTranslation();
   const [openChannels, setOpenChannels] = useState<LightningChannel[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const theme = darkMode ? "dark" : "light";
 
   const updateChannel = useCallback(() => {
     instance
@@ -23,33 +29,42 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
         setOpenChannels(resp.data);
       })
       .catch((err) => {
-        console.error(err);
+        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
       });
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     updateChannel();
   }, [updateChannel]);
 
   const deleteChannelHandler = (channelId: string, forceClose: boolean) => {
+    setIsLoading(true);
     instance
       .post("lightning/close-channel", {
         channel_id: channelId,
         force_close: forceClose,
       })
-      .then((resp) => {
-        toast("BLA");
+      .then(() => {
+        toast.success(t("home.channel_closed"), { theme });
         updateChannel();
       })
       .catch((err) => {
-        console.error(err);
-      });
+        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return createPortal(
     <ModalDialog close={onClose}>
-      <h2 className="mb-2 text-lg font-bold">Current Open Channels</h2>
-      <ChannelList channel={openChannels} onDelete={deleteChannelHandler} />
+      <h2 className="mb-2 text-lg font-bold">
+        {t("home.current_open_channels")}
+      </h2>
+      <ChannelList
+        channel={openChannels}
+        onDelete={deleteChannelHandler}
+        isLoading={isLoading}
+      />
+      {error && <Message message={error} />}
     </ModalDialog>,
     MODAL_ROOT
   );

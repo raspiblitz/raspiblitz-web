@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ChainIcon } from "../../../assets/chain.svg";
+import { ReactComponent as ChainIcon } from "../../../assets/link.svg";
 import { ReactComponent as LightningIcon } from "../../../assets/lightning.svg";
 
 export enum TxType {

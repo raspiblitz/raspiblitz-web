@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ReactComponent as ChainIcon } from "../../../../assets/chain.svg";
+import { ReactComponent as ChainIcon } from "../../../../assets/link.svg";
 import { ReactComponent as ClockIcon } from "../../../../assets/clock.svg";
 import { ReactComponent as DotsIcon } from "../../../../assets/dots-horizontal.svg";
 import { ReactComponent as LightningIconSolid } from "../../../../assets/lightning.svg";
@@ -41,7 +41,11 @@ const CategoryIcon: FC<Props> = ({ category, type, status }) => {
     }
   }
 
-  return <ChainIcon className={`h-7 w-7 rounded-full p-1 ${color}`} />;
+  return (
+    <ChainIcon
+      className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
+    />
+  );
 };
 
 export default CategoryIcon;

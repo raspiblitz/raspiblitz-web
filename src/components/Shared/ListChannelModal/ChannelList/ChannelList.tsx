@@ -3,11 +3,12 @@ import { LightningChannel } from "../../../../models/lightning-channel";
 import Channel from "./Channel/Channel";
 
 type Props = {
+  isLoading: boolean;
   channel: LightningChannel[];
   onDelete: (channelId: string, forceClose: boolean) => void;
 };
 
-const ChannelList: FC<Props> = ({ channel, onDelete }) => {
+const ChannelList: FC<Props> = ({ isLoading, channel, onDelete }) => {
   const [showDetails, setShowDetails] = useState<string | null>(null);
 
   const toggleDetailHandler = (channelId: string) => {
@@ -26,6 +27,7 @@ const ChannelList: FC<Props> = ({ channel, onDelete }) => {
           key={c.channel_id}
           channel={c}
           showDetails={c.channel_id === showDetails}
+          isLoading={isLoading}
           onClick={toggleDetailHandler}
           onDelete={onDelete}
         />

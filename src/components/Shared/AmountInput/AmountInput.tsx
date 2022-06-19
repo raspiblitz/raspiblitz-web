@@ -22,8 +22,6 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
   );
   const { unit, toggleUnit } = useContext(AppContext);
 
-  const { onChange } = register;
-
   const toggleHandler = () => {
     let formattedValue = amountInput;
     if (unit === Unit.BTC && formattedValue) {
@@ -41,7 +39,7 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
     }
     setAmountInput(formattedValue);
     toggleUnit();
-    onChange({ target: { value: formattedValue } });
+    register.onChange({ target: { value: formattedValue } });
   };
 
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +47,14 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
     let selectionStart = e.target.selectionStart;
     let selectionEnd = e.target.selectionEnd;
     value = formatAmount(value, unit);
-    // do not shift position if comma was added
+    // do not shift position of cursor if comma was added
     if (value.length > e.target.value.length) {
       selectionStart = selectionStart ? selectionStart + 1 : null;
       selectionEnd = selectionEnd ? selectionEnd + 1 : null;
     }
     setAmountInput(value);
     e.target.value = value.replace(/,/g, "");
-    await onChange(e);
+    await register.onChange(e);
     e.target.setSelectionRange(selectionStart, selectionEnd);
   };
 

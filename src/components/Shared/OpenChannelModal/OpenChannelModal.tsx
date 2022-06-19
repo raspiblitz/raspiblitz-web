@@ -1,15 +1,23 @@
-import type { FC } from "react";
-import { useContext } from "react";
+import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import { ReactComponent as ChannelIcon } from "../../../assets/link.svg";
+import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext } from "../../../store/app-context";
+import { stringToNumber } from "../../../util/format";
+import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
+import AmountInput from "../AmountInput/AmountInput";
+import ButtonWithSpinner from "../ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "../InputField/InputField";
 
 interface IFormInputs {
-  amountInput: number;
-  commentInput: string;
+  nodeUri: string;
+  fundingAmount: string;
+  feeRate: string;
 }
 
 type Props = {
@@ -17,29 +25,95 @@ type Props = {
 };
 
 const OpenChannelModal: FC<Props> = ({ onClose }) => {
-  const { unit } = useContext(AppContext);
+  const { darkMode } = useContext(AppContext);
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [amount, setAmount] = useState<number | undefined>(undefined);
+  const theme = darkMode ? "dark" : "light";
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, submitCount },
+    formState: { errors, isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
 
+  const openChannelHandler = async (data: IFormInputs) => {
+    setIsLoading(true);
+    instance
+      .post("lightning/open-channel", {
+        local_funding_amount: amount,
+        node_URI: data.nodeUri,
+        target_confs: +data.feeRate,
+      })
+      .then(() => {
+        toast.success(t("home.channel_opened"), { theme });
+        onClose();
+      })
+      .catch((err) =>
+        setError(`${t("login.error")}: ${err.response?.data?.detail}`)
+      )
+      .finally(() => setIsLoading(false));
+  };
+
+  const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setAmount(+event.target.value);
+  };
+
   return createPortal(
     <ModalDialog close={onClose}>
-      <h2>OPEN CHANNEL</h2>
-      <article>
-        <article>
-          <label>Fee Rate</label>
-          <select>
-            <option>Urgent</option>
-            <option>Normal</option>
-            <option>Slow</option>
-          </select>
-        </article>
+      <h2 className="mb-2 text-lg font-bold">{t("home.open_channel")}</h2>
+      <article className="py-8">
+        <form onSubmit={handleSubmit(openChannelHandler)}>
+          <InputField
+            {...register("nodeUri", {
+              required: t("forms.validation.node_uri.required"),
+            })}
+            label={t("home.node_uri")}
+            errorMessage={errors.nodeUri}
+          />
+          <AmountInput
+            amount={amount}
+            errorMessage={errors.fundingAmount}
+            register={register("fundingAmount", {
+              required: t("forms.validation.amount.required"),
+              validate: {
+                greaterThanZero: (val) =>
+                  stringToNumber(val) > 0 ||
+                  t("forms.validation.amount.required"),
+              },
+              onChange: changeAmountHandler,
+            })}
+          />
+          <div className="flex justify-around py-8 md:mx-auto md:w-1/2">
+            <label htmlFor="targetConf" className="font-bold">
+              {t("tx.fee_rate")}
+            </label>
+            <select
+              id="targetConf"
+              defaultValue={4}
+              {...register("feeRate")}
+              className="rounded bg-yellow-500 p-1 text-white"
+            >
+              <option value={1}>{t("home.urgent")}</option>
+              <option value={4}>{t("home.normal")}</option>
+              <option value={20}>{t("home.slow")}</option>
+            </select>
+          </div>
+
+          <ButtonWithSpinner
+            type="submit"
+            className="bd-button p-2"
+            loading={isLoading}
+            disabled={!isValid}
+            icon={<ChannelIcon className="mx-1 h-6 w-6" />}
+          >
+            {t("home.open_channel")}
+          </ButtonWithSpinner>
+        </form>
+        {error && <Message message={error} />}
       </article>
     </ModalDialog>,
     MODAL_ROOT

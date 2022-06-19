@@ -44,11 +44,21 @@
       "pending_balance_local": "Pending Local Balance",
       "pending_balance_remote": "Pending Remote Balance",
       "active": "Active",
+      "node_uri": "Node URI",
+      "open_channel": "Open Channel",
+      "list_open_channels": "List Channels",
+      "current_open_channels": "Current open Channels",
       "close_channel": "Close Channel",
+      "confirm_channel_close": "Confirm Channel close",
       "force_close": "Force close",
+      "urgent": "Urgent",
+      "normal": "Normal",
+      "slow": "Slow",
       "show": "Show",
       "hide": "Hide",
       "no": "No",
+      "channel_opened": "Channel opened successfullly",
+      "channel_closed": "Channel closed successfully",
       "onchain_cln_no_support": "Showing on-chain transactions is currently not supported with Core Lightning"
     },
     "wallet": {
@@ -246,7 +256,13 @@
         },
         "unlock": {
           "pass_c": "Password C",
-          "required": "Please input Password C"
+          "required": "Password C is required"
+        },
+        "node_uri": {
+          "required": "Please input a node URI"
+        },
+        "amount": {
+          "required": "Please input an amount"
         }
       }
     },

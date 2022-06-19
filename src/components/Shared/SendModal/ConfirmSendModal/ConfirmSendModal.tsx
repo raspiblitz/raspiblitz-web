@@ -6,11 +6,12 @@ import { ReactComponent as CheckIcon } from "../../../../assets/check.svg";
 import { ReactComponent as ChevronLeft } from "../../../../assets/chevron-left.svg";
 import { ReactComponent as XIcon } from "../../../../assets/X.svg";
 import { AppContext } from "../../../../store/app-context";
+import { stringToNumber } from "../../../../util/format";
 import { instance } from "../../../../util/interceptor";
 import AmountInput from "../../AmountInput/AmountInput";
 import { TxType } from "../../SwitchTxType/SwitchTxType";
 interface IFormInputs {
-  amountInput: number;
+  amountInput: string;
 }
 
 export type Props = {
@@ -72,7 +73,6 @@ const ConfirmSendModal: FC<Props> = ({
 
   // TODO: handle error
   const sendTransactionHandler = async () => {
-    let response;
     let error = null;
 
     if (isLnTx) {
@@ -81,7 +81,7 @@ const ConfirmSendModal: FC<Props> = ({
         msatQuery = `&amount_msat=${amountInput}`;
       }
 
-      response = await instance
+      await instance
         .post(`lightning/send-payment?pay_req=${address}${msatQuery}`)
         .catch((e) => {
           error = e;
@@ -95,14 +95,10 @@ const ConfirmSendModal: FC<Props> = ({
         unit,
       };
 
-      response = await instance
-        .post("lightning/send-coins", body)
-        .catch((e) => {
-          error = e;
-        });
+      await instance.post("lightning/send-coins", body).catch((e) => {
+        error = e;
+      });
     }
-
-    console.info(response);
     close(!error);
   };
 
@@ -159,8 +155,8 @@ const ConfirmSendModal: FC<Props> = ({
                     message: t("forms.validation.chainAmount.max"),
                   },
                   validate: {
-                    greaterThanZero: () =>
-                      amountInput > 0 ||
+                    greaterThanZero: (val) =>
+                      stringToNumber(val) > 0 ||
                       t("forms.validation.chainAmount.required"),
                   },
                   onChange: amountChangeHandler,

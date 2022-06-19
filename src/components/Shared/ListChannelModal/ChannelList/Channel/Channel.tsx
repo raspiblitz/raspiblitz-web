@@ -5,15 +5,23 @@ import { ReactComponent as ChevronUpIcon } from "../../../../../assets/chevron-u
 import { LightningChannel } from "../../../../../models/lightning-channel";
 import { AppContext } from "../../../../../store/app-context";
 import { convertToString } from "../../../../../util/format";
+import ButtonWithSpinner from "../../../ButtonWithSpinner/ButtonWithSpinner";
 
 type Props = {
+  isLoading: boolean;
   showDetails: boolean;
   channel: LightningChannel;
   onClick: (channelId: string) => void;
   onDelete: (channelId: string, forceClose: boolean) => void;
 };
 
-const Channel: FC<Props> = ({ showDetails, channel, onClick, onDelete }) => {
+const Channel: FC<Props> = ({
+  isLoading,
+  showDetails,
+  channel,
+  onClick,
+  onDelete,
+}) => {
   const { unit } = useContext(AppContext);
   const { t } = useTranslation();
   const [confirm, setConfirm] = useState(false);
@@ -73,7 +81,7 @@ const Channel: FC<Props> = ({ showDetails, channel, onClick, onDelete }) => {
             </button>
             {confirm && (
               <div className="flex flex-col justify-center gap-4">
-                <span>Confirm closing the Channel</span>
+                <span>{t("home.confirm_channel_close")}</span>
                 <div className="flex items-center justify-center gap-2">
                   <label htmlFor="forceClose">{t("home.force_close")}</label>
                   <input id="forceClose" type="checkbox" ref={forceCloseEl} />
@@ -81,16 +89,18 @@ const Channel: FC<Props> = ({ showDetails, channel, onClick, onDelete }) => {
                 <div className="flex justify-center gap-4">
                   <button
                     onClick={() => setConfirm(false)}
+                    disabled={isLoading}
                     className="bd-button-red p-2"
                   >
-                    Cancel
+                    {t("setup.cancel")}
                   </button>
-                  <button
+                  <ButtonWithSpinner
+                    loading={isLoading}
                     className="bd-button p-2"
                     onClick={closeChannelHandler}
                   >
-                    YES
-                  </button>
+                    {t("setup.yes")}
+                  </ButtonWithSpinner>
                 </div>
               </div>
             )}
