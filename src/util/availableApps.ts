@@ -36,7 +36,7 @@ export const availableApps = new Map([
       name: "BTCPay Server",
       author: "BTCPay Server",
       version: "v1.5.4",
-      repository: "https://github.com/cryptoadvance/specter-desktop",
+      repository: "https://github.com/btcpayserver/btcpayserver",
     },
   ],
   [
@@ -55,7 +55,7 @@ export const availableApps = new Map([
       id: "mempool",
       name: "Mempool.space",
       author: "The Mempool Open Source Project",
-      version: "v2.3.1",
+      version: "v2.4.0",
       repository: "https://github.com/mempool/mempool",
     },
   ],
