@@ -84,11 +84,11 @@ export const WalletCard: FC<Props> = ({
               </h6>
               <p className="break-before-auto break-words text-lg font-bold">
                 <span>
-                  {convertToString(unit, convertedOnchainBalance)} {unit}
+                  {convertToString(unit, convertedOnchainBalance)} {unit}&nbsp;
                 </span>
                 <span className="block md:inline-block">
                   {onChainUnconfirmed !== 0 &&
-                    ` (${unconfirmedSign} ${convertToString(
+                    `(${unconfirmedSign}${convertToString(
                       unit,
                       convertedOnchainBalanceUnconfirmed
                     )})`}
