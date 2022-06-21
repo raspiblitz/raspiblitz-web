@@ -23,6 +23,8 @@ import { AppContext } from "../store/app-context";
 import { instance } from "../util/interceptor";
 import { enableGutter } from "../util/util";
 
+const startupToastId = "startup-toast";
+
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
@@ -49,7 +51,44 @@ const Home: FC = () => {
   const theme = darkMode ? "dark" : "light";
 
   const { implementation } = lnInfoLite;
-  const { lightning: lightningState } = systemStartupInfo || {};
+  const {
+    lightning: lightningState,
+    bitcoin,
+    bitcoin_msg,
+    lightning_msg,
+  } = systemStartupInfo || {};
+
+  useEffect(() => {
+    const statusToastContent = (
+      <div className="flex flex-col">
+        <p>
+          {t("home.bitcoin")} {bitcoin}
+        </p>
+        <p>{bitcoin_msg}</p>
+        <p>
+          {t("home.lightning")} {lightningState}
+        </p>
+        <p>{lightning_msg}</p>
+      </div>
+    );
+    if (bitcoin && lightningState) {
+      if (bitcoin === "done" && lightningState === "done") {
+        toast.dismiss(startupToastId);
+      }
+
+      if (toast.isActive(startupToastId)) {
+        toast.update(startupToastId, {
+          render: statusToastContent,
+        });
+      } else {
+        toast(statusToastContent, {
+          toastId: startupToastId,
+          isLoading: true,
+          autoClose: false,
+        });
+      }
+    }
+  }, [t, lightningState, bitcoin, bitcoin_msg, lightning_msg]);
 
   const isLnImplSelected =
     implementation !== null &&
@@ -203,13 +242,10 @@ const Home: FC = () => {
   const closeUnlockModal = useCallback(
     (unlocked: boolean) => {
       if (unlocked) {
-        if (systemStartupInfo) {
-          systemStartupInfo.lightning = "done";
-        }
         toast.success(t("wallet.unlock_success"), { theme });
       }
     },
-    [t, theme, systemStartupInfo]
+    [t, theme]
   );
 
   const unlockModal = walletLocked && (
@@ -231,6 +267,10 @@ const Home: FC = () => {
       </>
     );
   }
+
+  // if (lightningState === "done" && systemStartupInfo?.bitcoin === "done") {
+  //   toast.dismiss(startupToastId);
+  // }
 
   return (
     <>
