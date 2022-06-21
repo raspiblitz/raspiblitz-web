@@ -72,8 +72,12 @@ const Home: FC = () => {
       </div>
     );
     if (bitcoin && lightningState) {
-      if (bitcoin === "done" && lightningState === "done") {
+      if (
+        (bitcoin === "done" && lightningState === "done") ||
+        (bitcoin === "done" && lightningState === "disabled")
+      ) {
         toast.dismiss(startupToastId);
+        return;
       }
 
       if (toast.isActive(startupToastId)) {
