@@ -10,33 +10,6 @@ In collaboration with [Bitcoin Design](https://bitcoin.design/).
 
 Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.com/).
 
-## Technical Preview on RaspiBlitz 1.7.2
-
-There is a technical Preview available on RaspiBlitz 1.7.2.
-
-If you want to try it out, run the following scripts on your RaspiBlitz:
-
-`./config.scripts/blitz.web.api.sh on` installs the backend (blitz_api)
-
-`./config.scripts/blitz.web.ui.sh on` installs the frontend (raspiblitz-web)
-
-You need to run both scripts for the WebUI to work.
-
-Current limitations are:
-
-- Password to login is currently `12345678` (can be changed by editing the `login_password` in `~/blitz_api/.env`)
-- App (un)installs won't work.
-- No C-Lightning integration (only LND works for now)
-- Connection Details won't show
-- Opening / Closing Channels not implemented
-- Some info may be missing / mocked.
-
-What should work (try on your own risk):
-
-- See / inspect transactions
-- Send / receive on-chain / over lightning
-- See some general info about your node (channels, version, blocks, connections)
-
 ## Translations
 
 If you want to bring the Raspiblitz WebUI to other languages, please help us translate it via [Weblate](https://hosted.weblate.org/projects/raspiblitz-web/translations/) :)
