@@ -28,15 +28,8 @@ const startupToastId = "startup-toast";
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
-  const {
-    systemInfo,
-    balance,
-    btcInfo,
-    lnInfoLite,
-    appStatus,
-    hardwareInfo,
-    systemStartupInfo,
-  } = useSSE();
+  const { systemInfo, balance, lnInfoLite, appStatus, systemStartupInfo } =
+    useSSE();
 
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
@@ -314,29 +307,17 @@ const Home: FC = () => {
               sshAddress={systemInfo.ssh_address!}
               nodeId={lnInfoLite.identity_pubkey}
             />
-            <HardwareCard hardwareInfo={hardwareInfo} />
+            <HardwareCard />
           </div>
         </article>
         <article
           className={`${height} col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2`}
         >
-          <BitcoinCard info={btcInfo} network={systemInfo.chain!} />
+          <BitcoinCard />
         </article>
         {isLnImplSelected && (
           <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
-            <LightningCard
-              version={lnInfoLite.version!}
-              implementation={lnInfoLite.implementation!}
-              channelActive={lnInfoLite.num_active_channels!}
-              channelPending={lnInfoLite.num_pending_channels!}
-              channelInactive={lnInfoLite.num_inactive_channels!}
-              localBalance={balance.channel_local_balance!}
-              remoteBalance={balance.channel_remote_balance!}
-              pendingLocalBalance={balance.channel_pending_open_local_balance!}
-              pendingRemoteBalance={
-                balance.channel_pending_open_remote_balance!
-              }
-            />
+            <LightningCard />
           </article>
         )}
         {appStatus

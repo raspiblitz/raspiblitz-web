@@ -1,8 +1,8 @@
 import Tooltip from "rc-tooltip";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as InfoIcon } from "../../../assets/information-circle.svg";
 import { ReactComponent as LinkIcon } from "../../../assets/external-link.svg";
+import { ReactComponent as InfoIcon } from "../../../assets/information-circle.svg";
 import { ReactComponent as LockIcon } from "../../../assets/lock-open.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import AppIcon from "../../../container/AppIcon/AppIcon";
@@ -44,24 +44,28 @@ export const AppCard: FC<Props> = ({
     onInstall(id);
   };
 
+  const setAuthMethodText = (authMethod: AuthMethod | undefined): string => {
+    switch (authMethod) {
+      case AuthMethod.NONE:
+        return t("apps.login_no_pass");
+      case AuthMethod.PASSWORD_B:
+        return t("apps.login_pass_b");
+      case AuthMethod.USER_ADMIN_PASSWORD_B:
+        return t("apps.login_admin_pass_b");
+      case AuthMethod.USER_DEFINED:
+        return t("apps.login_userdef");
+      default:
+        return "";
+    }
+  };
+
   const tooltipContent = (
     <div>
       {appStatusInfo.httpsForced === "1" &&
         appStatusInfo.httpsSelfsigned === "1" && (
           <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
         )}
-      {appStatusInfo.authMethod === AuthMethod.NONE && (
-        <h2>{t("apps.login_no_pass")}</h2>
-      )}
-      {appStatusInfo.authMethod === AuthMethod.PASSWORD_B && (
-        <h2>{t("apps.login_pass_b")}</h2>
-      )}
-      {appStatusInfo.authMethod === AuthMethod.USER_ADMIN_PASSWORD_B && (
-        <h2>{t("apps.login_admin_pass_b")}</h2>
-      )}
-      {appStatusInfo.authMethod === AuthMethod.USER_DEFINED && (
-        <h2>{t("apps.login_userdef")}</h2>
-      )}
+      {<h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>}
     </div>
   );
 
@@ -118,7 +122,7 @@ export const AppCard: FC<Props> = ({
                 isInstallWaiting ||
                 (installingApp !== null && installingApp?.result !== "fail")
               }
-              className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+              className="bd-button flex w-1/2 items-center justify-center p-2 disabled:pointer-events-none"
               onClick={() => installButtonPressed(id)}
             >
               <PlusIcon />
@@ -131,7 +135,7 @@ export const AppCard: FC<Props> = ({
             <ButtonWithSpinner
               disabled
               loading={true}
-              className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+              className="bd-button flex w-1/2 items-center justify-center  p-2 disabled:pointer-events-none"
             >
               {t("apps.installing")}
             </ButtonWithSpinner>

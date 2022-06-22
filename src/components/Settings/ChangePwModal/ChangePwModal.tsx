@@ -25,16 +25,16 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
   const [newPassword, setNewPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const changePwHandler = async () => {
+  const changePwHandler = () => {
     setIsLoading(true);
     const params = {
       type: "a",
       old_password: oldPassword,
       new_password: newPassword,
     };
-    await instance
+    instance
       .post("/system/change-password", {}, { params })
-      .then((resp) => {
+      .then(() => {
         toast.success(t("settings.pass_a_changed"));
         onClose();
       })
@@ -109,7 +109,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
         </article>
         <article className="flex w-full flex-col justify-around gap-6 pt-8 text-white md:w-2/3 xl:flex-row">
           <button
-            className="flex items-center justify-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+            className="bd-button-red flex items-center justify-center px-2"
             onClick={onClose}
             type="button"
           >

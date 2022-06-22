@@ -1,27 +1,32 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "../../../store/app-context";
+import { SSEContext } from "../../../store/sse-context";
 import { convertMSatToBtc, convertToString } from "../../../util/format";
 import { checkPropsUndefined } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
-export const LightningCard: FC<LightningCardProps> = (props) => {
+export const LightningCard: FC = () => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
+  const { lnInfoLite, balance } = useContext(SSEContext);
 
   const {
-    localBalance,
-    remoteBalance,
+    num_active_channels: activeChannels,
+    num_inactive_channels: inactiveChannels,
+    num_pending_channels: pendingChannels,
     version,
-    channelPending,
-    channelActive,
-    channelInactive,
     implementation,
-    pendingLocalBalance,
-    pendingRemoteBalance,
-  } = props;
+  } = lnInfoLite;
 
-  if (checkPropsUndefined(props)) {
+  const {
+    channel_pending_open_local_balance: localBalance,
+    channel_pending_open_remote_balance: remoteBalance,
+    channel_pending_open_local_balance: pendingLocalBalance,
+    channel_pending_open_remote_balance: pendingRemoteBalance,
+  } = balance;
+
+  if (checkPropsUndefined({ lnInfoLite, balance })) {
     return <LoadingBox />;
   }
 
@@ -35,23 +40,23 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
   const convertedLocalBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(localBalance || 0)
-      : localBalance / 1000;
+      : localBalance! / 1000;
   const convertedRemoteBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(remoteBalance || 0)
-      : remoteBalance / 1000;
+      : remoteBalance! / 1000;
 
   const convertedLocalPendingBalance =
     unit === Unit.BTC
-      ? convertMSatToBtc(pendingLocalBalance || 0)
-      : pendingLocalBalance / 1000;
+      ? convertMSatToBtc(pendingLocalBalance! || 0)
+      : pendingLocalBalance! / 1000;
 
   const convertedRemotePendingBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(pendingRemoteBalance || 0)
-      : pendingRemoteBalance / 1000;
+      : pendingRemoteBalance! / 1000;
 
-  const channelTotal = channelActive + channelInactive + channelPending;
+  const channelTotal = activeChannels + inactiveChannels + pendingChannels;
 
   return (
     <div className="h-full p-5">
@@ -68,7 +73,7 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.channel")}
             </h6>
-            <p>{`${channelActive} / ${channelTotal}`}</p>
+            <p>{`${activeChannels} / ${channelTotal}`}</p>
           </article>
         </div>
         <div className="flex overflow-hidden py-4">
@@ -113,15 +118,3 @@ export const LightningCard: FC<LightningCardProps> = (props) => {
 };
 
 export default LightningCard;
-
-export interface LightningCardProps {
-  version: string;
-  implementation: string;
-  channelActive: number;
-  channelInactive: number;
-  channelPending: number;
-  localBalance: number;
-  remoteBalance: number;
-  pendingLocalBalance: number;
-  pendingRemoteBalance: number;
-}

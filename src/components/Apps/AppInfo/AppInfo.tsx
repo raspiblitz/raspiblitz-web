@@ -87,7 +87,7 @@ export const AppInfo: FC<Props> = ({
         {(installingApp == null || installingApp.id !== id) && !installed && (
           <button
             disabled={!!installingApp}
-            className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+            className="bd-button flex rounded p-2 disabled:pointer-events-none"
             onClick={onInstall}
           >
             <PlusIcon />
@@ -100,7 +100,7 @@ export const AppInfo: FC<Props> = ({
             <ButtonWithSpinner
               disabled
               loading={true}
-              className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+              className="bd-button flex rounded p-2 text-white disabled:pointer-events-none"
             >
               {t("apps.installing")}
             </ButtonWithSpinner>
@@ -111,7 +111,7 @@ export const AppInfo: FC<Props> = ({
             <ButtonWithSpinner
               disabled
               loading={true}
-              className="flex rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400 disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white"
+              className="bd-button flex rounded p-2 disabled:pointer-events-none"
             >
               {t("apps.deinstalling")}
             </ButtonWithSpinner>

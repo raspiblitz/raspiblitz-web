@@ -8,12 +8,10 @@ const I18nBox: FC = () => {
   return (
     <div className="box-border w-full px-5 pt-5 transition-colors dark:text-white lg:w-1/2">
       <div className="flex flex-col rounded bg-white p-5 shadow-xl dark:bg-gray-800">
-        <div className="my-2 flex w-full justify-center">
+        <p className="my-2 flex w-full justify-center">
           {t("settings.curr_lang")}:&nbsp;<strong>{i18n.language}</strong>
-        </div>
-        <div className="flex justify-between">
-          <I18nDropdown />
-        </div>
+        </p>
+        <I18nDropdown />
       </div>
     </div>
   );

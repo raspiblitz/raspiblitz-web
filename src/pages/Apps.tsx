@@ -79,7 +79,7 @@ export const Apps: FC = () => {
         </section>
       )}
       {!isLoading && (
-        <div>
+        <>
           <section className="flex h-full flex-wrap">
             <h2 className="w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
               {t("apps.installed")}
@@ -120,7 +120,7 @@ export const Apps: FC = () => {
               );
             })}
           </section>
-        </div>
+        </>
       )}
     </main>
   );

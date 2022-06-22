@@ -1,18 +1,14 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { BtcInfo } from "../../../models/btc-info";
+import { SSEContext } from "../../../store/sse-context";
 import { checkPropsUndefined } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
-type Props = {
-  info: BtcInfo;
-  network: string;
-};
-
-export const BitcoinCard: FC<Props> = ({ info, network }) => {
+export const BitcoinCard: FC = () => {
   const { t } = useTranslation();
+  const { btcInfo, systemInfo } = useContext(SSEContext);
 
-  if (checkPropsUndefined({ info, network })) {
+  if (checkPropsUndefined({ btcInfo, systemInfo })) {
     return <LoadingBox />;
   }
 
@@ -24,7 +20,7 @@ export const BitcoinCard: FC<Props> = ({ info, network }) => {
     connections_in,
     connections_out,
     size_on_disk,
-  } = info;
+  } = btcInfo;
 
   const syncPercentage = (verification_progress! * 100).toFixed(2);
 
@@ -48,7 +44,7 @@ export const BitcoinCard: FC<Props> = ({ info, network }) => {
             <h6 className="text-sm text-gray-500 dark:text-gray-200">
               {t("home.network")}
             </h6>
-            <p>{network}</p>
+            <p>{systemInfo.chain}</p>
           </article>
         </div>
         <div className="flex overflow-hidden py-4">
