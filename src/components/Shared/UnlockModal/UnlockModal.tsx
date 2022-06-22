@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -43,8 +43,6 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
       .then((res) => {
         if (res.data) {
           setWalletLocked(false);
-          // disableScroll doesn't trigger on modal close
-          disableScroll.off();
           onClose(true);
         }
       })
@@ -53,6 +51,10 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
         setPasswordWrong(true);
       });
   };
+
+  useEffect(() => {
+    return () => disableScroll.off();
+  }, []);
 
   return createPortal(
     <ModalDialog closeable={false} close={() => onClose(false)}>

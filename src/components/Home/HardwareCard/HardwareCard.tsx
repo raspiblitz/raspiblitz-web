@@ -1,16 +1,13 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { HardwareInfo } from "../../../models/hardware-info";
+import { SSEContext } from "../../../store/sse-context";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
 const PI_NUM_CORES = 4;
 
-export type Props = {
-  hardwareInfo: HardwareInfo | null;
-};
-
-export const HardwareCard: FC<Props> = ({ hardwareInfo }) => {
+export const HardwareCard: FC = () => {
   const { t } = useTranslation();
+  const { hardwareInfo } = useContext(SSEContext);
 
   if (!hardwareInfo) {
     return (
