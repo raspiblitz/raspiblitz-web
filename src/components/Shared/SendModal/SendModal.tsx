@@ -122,13 +122,11 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   if (invoiceType === TxType.LIGHTNING) {
     return createPortal(
       <ModalDialog close={() => onClose(false)} closeable={!loading}>
-        <div className="my-3">
-          <SwitchTxType
-            invoiceType={invoiceType}
-            onTxTypeChange={changeTransactionHandler}
-            disabled={loading}
-          />
-        </div>
+        <SwitchTxType
+          invoiceType={invoiceType}
+          onTxTypeChange={changeTransactionHandler}
+          disabled={loading}
+        />
 
         <SendLn
           loading={loading}
@@ -145,13 +143,11 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   // Send On-Chain
   return createPortal(
     <ModalDialog close={() => onClose(false)}>
-      <div className="my-3">
-        <SwitchTxType
-          invoiceType={invoiceType}
-          onTxTypeChange={changeTransactionHandler}
-          disabled={loading}
-        />
-      </div>
+      <SwitchTxType
+        invoiceType={invoiceType}
+        onTxTypeChange={changeTransactionHandler}
+        disabled={loading}
+      />
 
       <SendOnChain
         address={address}

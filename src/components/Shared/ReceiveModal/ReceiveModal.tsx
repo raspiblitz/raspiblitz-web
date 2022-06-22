@@ -1,5 +1,3 @@
-import { QRCodeSVG } from "qrcode.react";
-import Tooltip from "rc-tooltip";
 import type { ChangeEvent, FC } from "react";
 import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
@@ -8,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import useClipboard from "../../../hooks/use-clipboard";
 import { AppContext, Unit } from "../../../store/app-context";
 import { convertBtcToSat, stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
@@ -17,6 +14,7 @@ import AmountInput from "../AmountInput/AmountInput";
 import InputField from "../InputField/InputField";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import SwitchTxType, { TxType } from "../SwitchTxType/SwitchTxType";
+import ReceiveOnChain from "./ReceiveOnChain/ReceiveOnChain";
 
 interface IFormInputs {
   amountInput: string;
@@ -35,7 +33,6 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
   const [amount, setAmount] = useState(0);
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [copyAddress, addressCopied] = useClipboard(address);
   const [error, setError] = useState("");
 
   const lnInvoice = invoiceType === TxType.LIGHTNING;
@@ -74,11 +71,11 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
     setAmount(+event.target.value);
   };
 
-  const generateInvoiceHandler = async () => {
+  const generateInvoiceHandler = () => {
     setIsLoading(true);
     const mSatAmount =
       unit === Unit.BTC ? convertBtcToSat(amount) * 1000 : amount * 1000;
-    await instance
+    instance
       .post(`lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`)
       .then((resp) => {
         setAddress(resp.data.payment_request);
@@ -106,13 +103,9 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
 
   return createPortal(
     <ModalDialog close={onClose}>
-      {showLnInvoice && (
-        <div className="text-xl font-bold">{t("wallet.create_invoice_ln")}</div>
-      )}
-
-      {!showLnInvoice && (
-        <div className="text-xl font-bold">{t("wallet.fund")}</div>
-      )}
+      <div className="text-xl font-bold">
+        {showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
+      </div>
 
       <div className="my-3">
         <SwitchTxType
@@ -120,17 +113,6 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
           onTxTypeChange={changeInvoiceHandler}
         />
       </div>
-
-      {address && (
-        <>
-          <div className="my-5 flex justify-center">
-            <QRCodeSVG value={address} size={256} />
-          </div>
-          <p className="my-5 text-sm text-gray-500 dark:text-gray-300">
-            {t("wallet.scan_qr")}
-          </p>
-        </>
-      )}
 
       <form
         className="flex w-full flex-col items-center"
@@ -186,29 +168,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
         </fieldset>
       </form>
 
-      {address && (
-        <>
-          <article className="mb-5 flex flex-row items-center">
-            <Tooltip
-              overlay={
-                <div>
-                  {addressCopied
-                    ? t("wallet.copied")
-                    : t("wallet.copy_clipboard")}
-                </div>
-              }
-              placement="top"
-            >
-              <p
-                onClick={copyAddress}
-                className="m-2 w-full break-all text-gray-600 dark:text-white"
-              >
-                {address}
-              </p>
-            </Tooltip>
-          </article>
-        </>
-      )}
+      {address && <ReceiveOnChain address={address} />}
     </ModalDialog>,
     MODAL_ROOT
   );

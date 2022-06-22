@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../../i18n/test_config";
 import { rest, server } from "../../../testServer";
@@ -15,16 +15,17 @@ beforeAll(() => {
 
 describe("ReceiveModal", () => {
   test("Retrieves new on-chain address on click of on-chain button", async () => {
-    const { container } = render(
+    const user = userEvent.setup();
+    render(
       <I18nextProvider i18n={i18n}>
         <ReceiveModal onClose={() => {}} />
       </I18nextProvider>
     );
 
-    await act(async () => {
-      (await screen.findByText("wallet.on_chain")).click();
-    });
+    const onChainBtn = await screen.findByText("wallet.on_chain");
 
-    await waitFor(() => expect(container.querySelector("svg")).toBeDefined());
+    await user.click(onChainBtn);
+
+    expect(await screen.findByRole("img")).toBeDefined();
   });
 });
