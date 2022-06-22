@@ -272,10 +272,6 @@ const Home: FC = () => {
     );
   }
 
-  // if (lightningState === "done" && systemStartupInfo?.bitcoin === "done") {
-  //   toast.dismiss(startupToastId);
-  // }
-
   return (
     <>
       {unlockModal}
