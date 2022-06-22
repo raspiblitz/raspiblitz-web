@@ -25,17 +25,20 @@ import { enableGutter } from "../util/util";
 
 const startupToastId = "startup-toast";
 
+type ModalType =
+  | "SEND"
+  | "RECEIVE"
+  | "DETAIL"
+  | "OPEN_CHANNEL"
+  | "LIST_CHANNEL"
+  | "UNLOCK";
+
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
-  const { systemInfo, balance, lnInfoLite, appStatus, systemStartupInfo } =
-    useSSE();
+  const { balance, lnInfoLite, appStatus, systemStartupInfo } = useSSE();
 
-  const [showSendModal, setShowSendModal] = useState(false);
-  const [showReceiveModal, setShowReceiveModal] = useState(false);
-  const [showDetailModal, setShowDetailModal] = useState(false);
-  const [showOpenChannelModal, setShowOpenChannelModal] = useState(false);
-  const [showListChannelModal, setShowListChannelModal] = useState(false);
+  const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
@@ -156,27 +159,13 @@ const Home: FC = () => {
 
   useInterval(getTransactions, 5000);
 
-  const showSendModalHandler = useCallback(() => {
-    setShowSendModal(true);
-  }, []);
-
-  const closeSendModalHandler = useCallback(
-    (confirmed?: boolean) => {
-      setShowSendModal(false);
-      if (confirmed) {
-        toast.success(t("tx.sent"), { theme });
-      }
-    },
-    [t, theme]
-  );
-
-  const showReceiveHandler = useCallback(() => {
-    setShowReceiveModal(true);
-  }, []);
-
-  const closeReceiveModalHandler = useCallback(() => {
-    setShowReceiveModal(false);
-  }, []);
+  const closeModalHandler = (txSent?: any) => {
+    setShowModal(false);
+    setDetailTx(null);
+    if (txSent) {
+      toast.success(t("tx.sent"), { theme });
+    }
+  };
 
   const showDetailHandler = (index: number) => {
     const tx = transactions.find((tx) => tx.index === index);
@@ -185,77 +174,48 @@ const Home: FC = () => {
       return;
     }
     setDetailTx(tx);
-    setShowDetailModal(true);
+    setShowModal("DETAIL");
   };
 
-  const closeDetailHandler = useCallback(() => {
-    setDetailTx(null);
-    setShowDetailModal(false);
-  }, []);
+  if (walletLocked) {
+    setShowModal("UNLOCK");
+  }
 
-  const receiveModal = showReceiveModal && (
-    <ReceiveModal onClose={closeReceiveModalHandler} />
-  );
-
-  const sendModal = showSendModal && (
-    <SendModal
-      onchainBalance={balance.onchain_confirmed_balance!}
-      lnBalance={balance.channel_local_balance!}
-      onClose={closeSendModalHandler}
-    />
-  );
-
-  const detailModal = showDetailModal && (
-    <TransactionDetailModal
-      transaction={detailTx!}
-      close={closeDetailHandler}
-    />
-  );
-
-  const showOpenChannelModalHandler = () => {
-    setShowOpenChannelModal(true);
+  const determineModal = () => {
+    switch (showModal) {
+      case "DETAIL":
+        return (
+          <TransactionDetailModal
+            transaction={detailTx!}
+            close={closeModalHandler}
+          />
+        );
+      case "SEND":
+        return (
+          <SendModal
+            onchainBalance={balance.onchain_confirmed_balance!}
+            lnBalance={balance.channel_local_balance!}
+            onClose={closeModalHandler}
+          />
+        );
+      case "RECEIVE":
+        return <ReceiveModal onClose={closeModalHandler} />;
+      case "OPEN_CHANNEL":
+        return <OpenChannelModal onClose={closeModalHandler} />;
+      case "LIST_CHANNEL":
+        return <ListChannelModal onClose={closeModalHandler} />;
+      case "UNLOCK":
+        return <UnlockModal onClose={closeModalHandler} />;
+      case false:
+      default:
+        return undefined;
+    }
   };
-
-  const closeOpenChannelModal = () => {
-    setShowOpenChannelModal(false);
-  };
-
-  const openChannelModal = showOpenChannelModal && (
-    <OpenChannelModal onClose={closeOpenChannelModal} />
-  );
-
-  const showCloseChannelModalHandler = () => {
-    setShowListChannelModal(true);
-  };
-
-  const closeListChannelModal = () => {
-    setShowListChannelModal(false);
-  };
-
-  const listChannelModal = showListChannelModal && (
-    <ListChannelModal onClose={closeListChannelModal} />
-  );
-
-  const closeUnlockModal = useCallback(
-    (unlocked: boolean) => {
-      if (unlocked) {
-        toast.success(t("wallet.unlock_success"), { theme });
-      }
-    },
-    [t, theme]
-  );
-
-  const unlockModal = walletLocked && (
-    <UnlockModal onClose={closeUnlockModal} />
-  );
-
-  const gridRows = 6 + appStatus.length / 4;
-  const height = isLnImplSelected ? "h-full" : "h-full md:h-1/2";
 
   if (implementation === null && lightningState !== "disabled") {
     return (
       <>
-        {unlockModal}
+        {determineModal()}
         <main
           className={`content-container page-container flex h-full items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white`}
         >
@@ -265,27 +225,22 @@ const Home: FC = () => {
     );
   }
 
+  const gridRows = 6 + appStatus.length / 4;
+  const height = isLnImplSelected ? "h-full" : "h-full md:h-1/2";
+
   return (
     <>
-      {unlockModal}
-      {receiveModal}
-      {sendModal}
-      {detailModal}
-      {openChannelModal}
-      {listChannelModal}
+      {determineModal()}
       <main
         className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
         {isLnImplSelected && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard
-              onchainBalance={balance.onchain_total_balance}
-              onChainUnconfirmed={balance.onchain_unconfirmed_balance}
-              lnBalance={balance.channel_local_balance}
-              onReceive={showReceiveHandler}
-              onSend={showSendModalHandler}
-              onOpenChannel={showOpenChannelModalHandler}
-              onCloseChannel={showCloseChannelModalHandler}
+              onReceive={() => setShowModal("RECEIVE")}
+              onSend={() => setShowModal("SEND")}
+              onOpenChannel={() => setShowModal("OPEN_CHANNEL")}
+              onCloseChannel={() => setShowModal("LIST_CHANNEL")}
             />
           </article>
         )}
@@ -302,11 +257,7 @@ const Home: FC = () => {
         )}
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <div className={`flex ${height} flex-col p-5 lg:flex-row`}>
-            <ConnectionCard
-              torAddress={systemInfo.tor_web_ui!}
-              sshAddress={systemInfo.ssh_address!}
-              nodeId={lnInfoLite.identity_pubkey}
-            />
+            <ConnectionCard />
             <HardwareCard />
           </div>
         </article>
