@@ -3,7 +3,9 @@ import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { ReactComponent as LockOpen } from "../../../assets/lock-open.svg";
+import Message from "../../../container/Message/Message";
 import ModalDialog, {
   disableScroll,
 } from "../../../container/ModalDialog/ModalDialog";
@@ -18,14 +20,15 @@ interface IFormInputs {
 }
 
 type Props = {
-  onClose: (unlocked: boolean) => void;
+  onClose: () => void;
 };
 
 const UnlockModal: FC<Props> = ({ onClose }) => {
   const { t } = useTranslation();
-  const { setWalletLocked } = useContext(AppContext);
+  const { setWalletLocked, darkMode } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
+  const theme = darkMode ? "dark" : "light";
 
   const {
     register,
@@ -43,7 +46,8 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
       .then((res) => {
         if (res.data) {
           setWalletLocked(false);
-          onClose(true);
+          toast.success(t("wallet.unlock_success"), { theme });
+          onClose();
         }
       })
       .catch((_) => {
@@ -57,7 +61,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
   }, []);
 
   return createPortal(
-    <ModalDialog closeable={false} close={() => onClose(false)}>
+    <ModalDialog closeable={false} close={() => onClose()}>
       <h2 className="mt-5 text-lg font-bold">{t("wallet.unlock_title")}</h2>
 
       <div>
@@ -87,9 +91,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
         </form>
       </div>
 
-      {passwordWrong && (
-        <p className="mb-5 text-red-500">{t("login.invalid_pass")}</p>
-      )}
+      {passwordWrong && <Message message={t("login.invalid_pass")} />}
     </ModalDialog>,
     MODAL_ROOT
   );

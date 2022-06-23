@@ -1,7 +1,7 @@
 import { QRCodeSVG } from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap.css";
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../assets/clipboard-copy.svg";
@@ -10,25 +10,21 @@ import { ReactComponent as EyeIcon } from "../../../assets/eye.svg";
 import { ReactComponent as QRCodeIcon } from "../../../assets/qrcode.svg";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../../hooks/use-clipboard";
+import { SSEContext } from "../../../store/sse-context";
 import { MODAL_ROOT } from "../../../util/util";
 import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
-export type Props = {
-  torAddress: string;
-  sshAddress: string;
-  nodeId: string;
-};
-
-export const ConnectionCard: FC<Props> = ({
-  sshAddress,
-  torAddress,
-  nodeId,
-}) => {
+export const ConnectionCard: FC = () => {
   const { t } = useTranslation();
+  const { systemInfo, lnInfoLite } = useContext(SSEContext);
   const [showAddress, setShowAddress] = useState(true);
   const [showModal, setShowModal] = useState(false);
+
+  const { tor_web_ui: torAddress, ssh_address: sshAddress } = systemInfo;
+  const { identity_pubkey: nodeId } = lnInfoLite || {};
+
   const [copyTor, clippedTor] = useClipboard(torAddress);
   const [copySsh, clippedSsh] = useClipboard(sshAddress);
   const [copyNodeId, clippedNodeId] = useClipboard(nodeId);

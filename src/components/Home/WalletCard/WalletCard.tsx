@@ -1,11 +1,12 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import btcLogo from "../../../assets/bitcoin-circle-white.svg";
-import { ReactComponent as ChainIcon } from "../../../assets/link.svg";
 import { ReactComponent as LightningIcon } from "../../../assets/lightning.svg";
+import { ReactComponent as ChainIcon } from "../../../assets/link.svg";
 import { ReactComponent as ReceiveIcon } from "../../../assets/receive.svg";
 import { ReactComponent as SendIcon } from "../../../assets/send.svg";
 import { AppContext, Unit } from "../../../store/app-context";
+import { SSEContext } from "../../../store/sse-context";
 import {
   convertMSatToBtc,
   convertSatToBtc,
@@ -13,9 +14,6 @@ import {
 } from "../../../util/format";
 
 type Props = {
-  onchainBalance: number | null;
-  onChainUnconfirmed: number | null;
-  lnBalance: number | null;
   onReceive: () => void;
   onSend: () => void;
   onOpenChannel: () => void;
@@ -23,9 +21,6 @@ type Props = {
 };
 
 export const WalletCard: FC<Props> = ({
-  onchainBalance,
-  onChainUnconfirmed,
-  lnBalance,
   onReceive,
   onSend,
   onOpenChannel,
@@ -33,6 +28,14 @@ export const WalletCard: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
+  const { balance } = useContext(SSEContext);
+
+  const {
+    onchain_total_balance: onchainBalance,
+    onchain_unconfirmed_balance: onChainUnconfirmed,
+    channel_local_balance: lnBalance,
+  } = balance;
+
   let convertedOnchainBalance = null;
   let convertedOnchainBalanceUnconfirmed = null;
   let convertedLnBalance = null;
