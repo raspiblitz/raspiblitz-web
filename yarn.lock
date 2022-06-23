@@ -2237,9 +2237,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^8.13.0, @testing-library/dom@npm:^8.5.0":
-  version: 8.13.0
-  resolution: "@testing-library/dom@npm:8.13.0"
+"@testing-library/dom@npm:^8.14.0, @testing-library/dom@npm:^8.5.0":
+  version: 8.14.0
+  resolution: "@testing-library/dom@npm:8.14.0"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/runtime": ^7.12.5
@@ -2249,7 +2249,7 @@ __metadata:
     dom-accessibility-api: ^0.5.9
     lz-string: ^1.4.4
     pretty-format: ^27.0.2
-  checksum: 880f1872b9949800d4444e3bdbd03df86d6f41ec7c27136dff1da29e87d2df2d7ee904afcdf895ffce351c25bd12119117eae023354d50e707ad56d43b2ed3ed
+  checksum: a916ea5167bc02b4666a519814c2b9563be91e912038816e3bd2a4e295122a3aab68b102fc8f0205219e5c4201e6994894bc7d24a8b4aae0e2e8f88cbeb65971
   languageName: node
   linkType: hard
 
@@ -2524,13 +2524,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*, @types/jest@npm:^28.1.2":
-  version: 28.1.2
-  resolution: "@types/jest@npm:28.1.2"
+"@types/jest@npm:*, @types/jest@npm:^28.1.3":
+  version: 28.1.3
+  resolution: "@types/jest@npm:28.1.3"
   dependencies:
     jest-matcher-utils: ^28.0.0
     pretty-format: ^28.0.0
-  checksum: 53ec95b0b27c61380225b94f8660e661e8c6c6fc69b7130531fb5d72ebf5c8838a4266b8a6d7b3a77b3bcdabed632de0c21c9592a2529c1efe80a0f0a995a3aa
+  checksum: 28141f2d5b3bafd063362de9790cb8f219488d9b0ad47524a84bef1142a4f0d9d35be0c56988d9f922205225cc83c986acd4be424bd8653b38dc27ab672455e2
   languageName: node
   linkType: hard
 
@@ -8647,9 +8647,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^0.42.1":
-  version: 0.42.1
-  resolution: "msw@npm:0.42.1"
+"msw@npm:^0.42.2":
+  version: 0.42.2
+  resolution: "msw@npm:0.42.2"
   dependencies:
     "@mswjs/cookies": ^0.2.0
     "@mswjs/interceptors": ^0.16.3
@@ -8678,7 +8678,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 8b3078978303ebc4e4dfc29092bf47b82982694f4d90fbcad62e626a969198e393f66c954f71603c942d1f20c6147de60b77765b233a88c00f3e0eb7bbaf2ce2
+  checksum: 1365a75a211c8ff5440bc4003f692d91ab008e1dca35da287bf0071d5e224376f8b222e24c9b583e52fce385434e614facfbb572db9aa6cc924807d51859c1ff
   languageName: node
   linkType: hard
 
@@ -10434,11 +10434,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "raspiblitz-web@workspace:."
   dependencies:
-    "@testing-library/dom": ^8.13.0
+    "@testing-library/dom": ^8.14.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^13.3.0
     "@testing-library/user-event": ^14.2.1
-    "@types/jest": ^28.1.2
+    "@types/jest": ^28.1.3
     "@types/node": ^16.11.41
     "@types/react": ^18.0.14
     "@types/react-dom": ^18.0.5
@@ -10448,7 +10448,7 @@ __metadata:
     husky: ^8.0.1
     i18next: ^21.8.10
     lint-staged: ^13.0.2
-    msw: ^0.42.1
+    msw: ^0.42.2
     postcss: ^8.4.14
     prettier: ^2.7.1
     prettier-plugin-tailwindcss: ^0.1.11
@@ -10460,8 +10460,8 @@ __metadata:
     react-i18next: ^11.17.2
     react-router-dom: ^6.3.0
     react-scripts: 5.0.1
-    react-toastify: ^9.0.4
-    tailwindcss: ^3.1.3
+    react-toastify: ^9.0.5
+    tailwindcss: ^3.1.4
     typescript: ~4.7.4
   languageName: unknown
   linkType: soft
@@ -10764,15 +10764,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^9.0.4":
-  version: 9.0.4
-  resolution: "react-toastify@npm:9.0.4"
+"react-toastify@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "react-toastify@npm:9.0.5"
   dependencies:
     clsx: ^1.1.1
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: 130c443f1c6f72033dbed6b5c41c88a5fab6c7e8f7bc320c400c09bc7ca11116158d554feb212b160aa1320308b69771217663bd0762b5ffd5f68bef6dba5b86
+  checksum: 5baf2705e20e698619fdffe9fba89d55bd4314ab49075704522a2166fcb6b17d9d34781cef937e818d583a410d11b37bfe6ed8a02638b08a672998741cf40e1c
   languageName: node
   linkType: hard
 
@@ -12067,9 +12067,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.0.2, tailwindcss@npm:^3.1.3":
-  version: 3.1.3
-  resolution: "tailwindcss@npm:3.1.3"
+"tailwindcss@npm:^3.0.2, tailwindcss@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "tailwindcss@npm:3.1.4"
   dependencies:
     arg: ^5.0.2
     chokidar: ^3.5.3
@@ -12098,7 +12098,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: ff7e159301ad1e55db95e9251c27c7d0f2274ac149874201d4ebcca8db2f1d3aba6f1e22ada88499961936d21ec74a82a6aa461064e1a3d0668017e2b0d3658d
+  checksum: 716b7d80e51c4904d845920cbb88483114ae6f14b20328b9206f49fd642bbcd390b9764fc574f85901b0377184c5d4eb94c00bcf73e280f81e772cf621d390a5
   languageName: node
   linkType: hard
 
