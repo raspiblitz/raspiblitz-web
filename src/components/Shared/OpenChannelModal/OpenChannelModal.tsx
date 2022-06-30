@@ -43,11 +43,17 @@ const OpenChannelModal: FC<Props> = ({ onClose }) => {
   const openChannelHandler = async (data: IFormInputs) => {
     setIsLoading(true);
     instance
-      .post("lightning/open-channel", {
-        local_funding_amount: amount,
-        node_URI: data.nodeUri,
-        target_confs: +data.feeRate,
-      })
+      .post(
+        "lightning/open-channel",
+        {},
+        {
+          params: {
+            local_funding_amount: amount,
+            node_URI: data.nodeUri,
+            target_confs: +data.feeRate,
+          },
+        }
+      )
       .then(() => {
         toast.success(t("home.channel_opened"), { theme });
         onClose();
