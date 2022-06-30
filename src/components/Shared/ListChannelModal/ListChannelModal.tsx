@@ -40,10 +40,16 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
   const deleteChannelHandler = (channelId: string, forceClose: boolean) => {
     setIsLoading(true);
     instance
-      .post("lightning/close-channel", {
-        channel_id: channelId,
-        force_close: forceClose,
-      })
+      .post(
+        "lightning/close-channel",
+        {},
+        {
+          params: {
+            channel_id: channelId,
+            force_close: forceClose,
+          },
+        }
+      )
       .then(() => {
         toast.success(t("home.channel_closed"), { theme });
         updateChannel();
