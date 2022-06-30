@@ -37,7 +37,6 @@ const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
   const { balance, lnInfoLite, appStatus, systemStartupInfo } = useSSE();
-
   const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -159,7 +158,7 @@ const Home: FC = () => {
 
   useInterval(getTransactions, 5000);
 
-  const closeModalHandler = (txSent?: any) => {
+  const closeModalHandler = (txSent?: boolean) => {
     setShowModal(false);
     setDetailTx(null);
     if (txSent) {
@@ -177,8 +176,12 @@ const Home: FC = () => {
     setShowModal("DETAIL");
   };
 
-  if (walletLocked) {
+  if (walletLocked && showModal !== "UNLOCK") {
     setShowModal("UNLOCK");
+  }
+
+  if (!walletLocked && showModal === "UNLOCK") {
+    setShowModal(false);
   }
 
   const determineModal = () => {
