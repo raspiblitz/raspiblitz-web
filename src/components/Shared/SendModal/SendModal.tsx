@@ -15,7 +15,7 @@ import ConfirmSendModal from "./ConfirmSendModal/ConfirmSendModal";
 import SendLn from "./SendLN/SendLN";
 import SendOnChain from "./SendOnChain/SendOnChain";
 
-type Props = {
+export type Props = {
   lnBalance: number;
   onchainBalance: number;
   onClose: (confirmed: boolean) => void;
@@ -41,7 +41,11 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     setIsLoading(true);
     setError("");
     await instance
-      .get("/lightning/decode-pay-req?pay_req=" + invoice)
+      .get("/lightning/decode-pay-req", {
+        params: {
+          pay_req: invoice,
+        },
+      })
       .then((resp) => {
         setAmount(resp.data.num_satoshis);
         setComment(resp.data.description);

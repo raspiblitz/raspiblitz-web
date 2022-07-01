@@ -33,7 +33,7 @@ const SendLn: FC<Props> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, submitCount },
+    formState: { errors, isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -70,7 +70,7 @@ const SendLn: FC<Props> = ({
         type="submit"
         className="bd-button my-8 p-3"
         loading={loading}
-        disabled={(submitCount > 0 && !isValid) || loading}
+        disabled={!isValid || loading}
         icon={<SendIcon className="mr-2 h-6 w-6" />}
       >
         {t("wallet.send")}

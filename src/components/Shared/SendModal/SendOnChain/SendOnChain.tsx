@@ -57,7 +57,7 @@ const SendOnChain: FC<Props> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, submitCount },
+    formState: { errors, isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -141,7 +141,7 @@ const SendOnChain: FC<Props> = ({
         <button
           type="submit"
           className="bd-button my-3 p-3"
-          disabled={submitCount > 0 && !isValid}
+          disabled={!isValid}
         >
           {t("wallet.confirm")}
         </button>
