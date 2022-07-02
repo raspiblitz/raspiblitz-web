@@ -54,9 +54,9 @@ const InputField = forwardRef(
         <p
           className={`
         text-left text-sm text-red-500
-        ${errorMessage ? "" : "h-5"}`}
+        ${errorMessage ? "" : "invisible"}`}
         >
-          {errorMessage?.message}
+          {errorMessage?.message || "error"}
         </p>
       </>
     );
