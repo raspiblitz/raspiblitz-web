@@ -14,3 +14,4 @@ Thank you for providing translations! 🙏
 - Italian: [GiovanniZotta](https://github.com/GiovanniZotta)
 - Spanish: [moses](https://github.com/mosmat) [Sebas Arriola](https://github.com/sebdeveloper6952)
 - Dutch: Buddy Busy
+- Spanish: [@mosmat](https://github.com/mosmat) & Fernando Serer
