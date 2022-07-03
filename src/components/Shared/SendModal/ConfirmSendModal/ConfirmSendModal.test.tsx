@@ -18,7 +18,7 @@ const basicProps: Props = {
   fee: "",
   invoiceAmount: 0,
   invoiceType: TxType.LIGHTNING,
-  timestamp: 1893456000000, // 01 Jan 2030 00:00:00 GMT
+  timestamp: 1893456000, // 01 Jan 2030 00:00:00 GMT
 };
 
 describe("ConfirmSendModal", () => {
@@ -90,7 +90,7 @@ describe("ConfirmSendModal", () => {
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal
             {...basicProps}
-            timestamp={1640995200000} // "Sat Jan 01 2022 08:00:00
+            timestamp={1640995200} // "Sat Jan 01 2022 08:00:00
             expiry={36000}
           />
         </I18nextProvider>
@@ -136,7 +136,7 @@ describe("ConfirmSendModal", () => {
         await screen.findByRole("button", {
           name: "check.svg settings.confirm",
         })
-      ).not.toBeDisabled();
+      ).toBeDisabled();
     });
   });
 });

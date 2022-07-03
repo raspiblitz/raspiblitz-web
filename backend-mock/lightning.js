@@ -10,10 +10,16 @@ router.post("/add-invoice", (req, res) => {
     `call to /api/v1/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`
   );
   res.send(
+    // LND invoice
     JSON.stringify({
       payment_request:
-        "lnbcrt2u1pseumjxpp5v86496waqjpnt2y6wxa77er2wsrp6afqqmnk3ap0kzjr857vj7ksdqvvdhk6mt9de6qcqzpgxqrrsssp5dvku88d87th4wqmstcl4watfsje0azhk35wtey3vlh59nrr7s2qs9qyyssq3j2l3e3d022vz290j2m5asp7sgud036gfxg2ltm33nm2tcxqz7mntcfd8s3s5v28cna25nmraf75ugsvrflalhamvqrep6fed7amuvcqxnzjpe",
+        "lnbcrt500u1p3vza0ppp5nyyutzvav66suf7070wxje3ys7mrx44283l6u82cywjrc0ylunhsdqqcqzpgxqyz5vqsp5j5wdagc9nwxsqu9z2r562nznwqlgw760tr8nkx7ty3ahrks73lgq9qyyssqjf0r2apc84cvcyrp4w3rt3ymm44hl2kveavjsmjee9xdc35s8a6j3zyzqckkpyehgxpvuyqe4q9r5uejaqysg6vslr2wdt82wg4jm7cqp3xxp9",
     })
+    // CLN invoice
+    // JSON.stringify({
+    //   payment_request:
+    //     "lnbcrt500u1p3vzavmsp5pmsj2spnr2lnwc2zsvk34aknjgdgx4gvh2ysmhtla2z97vtdanhspp5kkgdwd64vtrc357f37k83y3cse3e78z6nnxsw52r7gl5dut8grzsdp92phkcctjypykuan0d93k2grxdaezqcmpwfhkcxqyjw5qcqp29qyysgq23lvlur06f7ltsct9tl8pjaezztpmm8z4hmq03nh7yscanww60zravptucv8l7ekeefp80050c8rwrywty932l0wtyke5dn0shzlg5gpxctemt",
+    // })
   );
 });
 
@@ -34,37 +40,38 @@ router.get("/decode-pay-req", (req, res) => {
   );
 
   setTimeout(() => {
+    // LND invoice
     return res.status(200).send(
       JSON.stringify({
         destination:
-          "0323dbd695d801553837f9907100f304abd153932bb000a3a7ea9132ff3e7437a1",
+          "03fd5eeea1e7ef8bf25124e5bb0f4546e1dd28ce09d6c0d5136f417d74e8afb270",
         payment_hash:
-          "dc171b0d9a6c33d40ba2d9ed95819b29af40d83132b15072ab4e8b60feb08b90",
-        num_satoshis: 20,
-        timestamp: 1893456000000,
-        expiry: 36000,
-        description: "TEST",
+          "9909c5899d66b50e27cff3dc69662487b63356aa3c7fae1d5823a43c3c9fe4ef",
+        num_satoshis: 50000,
+        timestamp: 1656845793,
+        expiry: 86400,
+        description: "",
         description_hash: "",
         fallback_addr: "",
         cltv_expiry: 40,
         route_hints: [],
         payment_addr:
-          "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
-        num_msat: 20000,
+          "951cdea3059b8d0070a250e9a54c53703e877b4f58cf3b1bcb247b71da1e8fd0",
+        num_msat: 50000000,
         features: [
-          {
-            key: 9,
-            value: {
-              name: "tlv-onion",
-              is_required: false,
-              is_known: true,
-            },
-          },
           {
             key: 14,
             value: {
               name: "payment-addr",
               is_required: true,
+              is_known: true,
+            },
+          },
+          {
+            key: 9,
+            value: {
+              name: "tlv-onion",
+              is_required: false,
               is_known: true,
             },
           },
@@ -77,9 +84,53 @@ router.get("/decode-pay-req", (req, res) => {
             },
           },
         ],
+        currency: "",
       })
     );
   }, 1500);
+
+  // CLN invoice
+  // return res.status(200).send(JSON.stringify({
+  //   "destination": "0221861fdbe92325c98bf90c61b68b8419ba825d6b8901eb46fa1c5f9fc7ec7eee",
+  //   "payment_hash": "b590d7375562c788d3c98fac78923886639f1c5a9ccd075143f23f46f16740c5",
+  //   "num_satoshis": 50000,
+  //   "timestamp": 1656845723,
+  //   "expiry": 604800,
+  //   "description": "Polar Invoice for carol",
+  //   "description_hash": "",
+  //   "fallback_addr": "",
+  //   "cltv_expiry": 10,
+  //   "route_hints": [],
+  //   "payment_addr": "0ee12540331abf376142832d1af6d3921a83550cba890ddd7fea845f316decef",
+  //   "num_msat": 50000000,
+  //   "features": [
+  //     {
+  //       "key": 14,
+  //       "value": {
+  //         "name": "payment-addr",
+  //         "is_required": true,
+  //         "is_known": true
+  //       }
+  //     },
+  //     {
+  //       "key": 17,
+  //       "value": {
+  //         "name": "multi-path-payments",
+  //         "is_required": false,
+  //         "is_known": true
+  //       }
+  //     },
+  //     {
+  //       "key": 8,
+  //       "value": {
+  //         "name": "tlv-onion",
+  //         "is_required": true,
+  //         "is_known": true
+  //       }
+  //     }
+  //   ],
+  //   "currency": ""
+  // }));
 });
 
 router.post("/send-payment", (req, res) => {

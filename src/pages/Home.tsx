@@ -90,9 +90,7 @@ const Home: FC = () => {
   }, [t, lightningState, bitcoin, bitcoin_msg, lightning_msg]);
 
   const isLnImplSelected =
-    implementation !== null &&
-    implementation !== "" &&
-    implementation !== "NONE";
+    implementation === "LND_GRPC" || implementation === "CLN_GRPC";
 
   const getTransactions = useCallback(async () => {
     if (!isLnImplSelected || (lightningState && lightningState !== "done")) {

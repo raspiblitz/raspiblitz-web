@@ -1,5 +1,5 @@
 export interface LnInfoLite {
-  implementation: string | null;
+  implementation: "LND_GRPC" | "CLN_GRPC" | "NULL" | "" | null;
   version: string;
   identity_pubkey: string;
   num_pending_channels: number;
