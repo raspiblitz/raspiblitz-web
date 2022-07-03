@@ -156,7 +156,7 @@ const Home: FC = () => {
     setIsLoadingTransactions,
   ]);
 
-  useInterval(getTransactions, 5000);
+  useInterval(getTransactions, 20000);
 
   const closeModalHandler = (txSent?: boolean) => {
     setShowModal(false);
