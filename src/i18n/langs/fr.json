@@ -45,7 +45,9 @@
       "show_qr": "Afficher QR Code",
       "versions": "Versions",
       "active": "Actif",
-      "channel_id": "ID du canal"
+      "channel_id": "ID du canal",
+      "node_uri": "URI du noeud",
+      "open_channel": "Ouvrir un canal"
     },
     "wallet": {
       "receive": "Recevoir",
