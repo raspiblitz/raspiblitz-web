@@ -24,7 +24,10 @@ const I18nDropdown: FC = () => {
 
   return (
     <article className="flex justify-between">
-      <label htmlFor="lngSelect" className="w-1/2 font-bold dark:text-white">
+      <label
+        htmlFor="lngSelect"
+        className="mr-2 w-1/2 font-bold dark:text-white"
+      >
         {t("settings.language")}
       </label>
       <select

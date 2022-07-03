@@ -12,6 +12,16 @@ router.get("/status", function (req, res) {
       initialsync: "",
     })
   );
+
+  // Syncscreen
+  // res.status(200).send(
+  //   JSON.stringify({
+  //     setupPhase: "",
+  //     state: "ready",
+  //     message: "Node Running",
+  //     initialsync: "running",
+  //   })
+  // );
 });
 
 router.get("/setup-start-info", function (req, res) {
@@ -54,7 +64,20 @@ router.get("/shutdown", function (req, res) {
 
 router.post("/setup-sync-info", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
-  res.send(true);
+  res.status(200).send(
+    JSON.stringify({
+      initialsync: "",
+      btc_default: "1",
+      btc_default_ready: "1",
+      btc_default_sync_percentage: "20",
+      btc_default_peers: "3",
+      system_count_start_blockchain: "1",
+      ln_default: "1",
+      ln_default_ready: "1",
+      ln_default_locked: "1",
+      system_count_start_lightning: "3",
+    })
+  );
 });
 
 module.exports = router;

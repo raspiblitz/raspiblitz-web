@@ -1,12 +1,15 @@
 import { ChangeEvent, FC, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import { ReactComponent as CheckCircleIcon } from "../../assets/check-circle.svg";
+import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
+import Message from "../../container/Message/Message";
 import ProgressCircle from "../../container/ProgressCircle/ProgressCircle";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { instance } from "../../util/interceptor";
-import { ReactComponent as CheckCircleIcon } from "../../assets/check-circle.svg";
-import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
+import ButtonWithSpinner from "../Shared/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "../Shared/InputField/InputField";
 
 export interface InputData {
   data: SyncData | any;
@@ -26,12 +29,17 @@ interface SyncData {
   system_count_start_lightning: string;
 }
 
+interface IFormInputs {
+  passwordInput: string;
+}
+
 const SyncScreen: FC<InputData> = ({ data, callback }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const [runningUnlock, setRunningUnlock] = useState(false);
+  const [passwordWrong, setPasswordWrong] = useState(false);
 
   const changePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -39,6 +47,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
 
   const unlockWallet = async () => {
     setRunningUnlock(true);
+    setPasswordWrong(false);
     await instance
       .post("/lightning/unlock-wallet", {
         password: password,
@@ -47,9 +56,9 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
         if (err.response.status === 403) {
           navigate("/login?back=/setup");
         } else {
-          console.log("error on unlock wallet");
           setPassword("");
           setRunningUnlock(false);
+          setPasswordWrong(true);
         }
       });
     // TODO: Why setRunningUnlock always after 30s?
@@ -58,6 +67,14 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
       setRunningUnlock(false);
     }, 30000);
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
 
   return (
     <SetupContainer>
@@ -99,33 +116,34 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                 )}
               {data.ln_default &&
                 data.ln_default !== "none" &&
-                data.ln_default_locked !== "0" &&
-                !runningUnlock && (
-                  <div className="flex flex-col justify-center">
-                    <label htmlFor="passfirst" className="label-underline">
-                      {t("setup.sync_wallet_info")}
-                    </label>
-                    <input
-                      id="passfirst"
-                      className="input-underline w-full"
+                data.ln_default_locked !== "0" && (
+                  <form
+                    className="flex flex-col justify-center"
+                    onSubmit={handleSubmit(unlockWallet)}
+                  >
+                    <InputField
+                      {...register("passwordInput", {
+                        required: t("setup.password_error_empty"),
+                        onChange: changePasswordHandler,
+                      })}
                       type="password"
+                      label={t("setup.sync_wallet_info")}
+                      disabled={runningUnlock}
+                      errorMessage={errors.passwordInput}
                       value={password}
-                      onChange={changePasswordHandler}
-                      required
                     />
-                    <button
+                    <ButtonWithSpinner
+                      type="submit"
                       onClick={unlockWallet}
+                      loading={runningUnlock}
+                      disabled={!isValid}
                       className="bd-button my-5 p-2"
                     >
                       {t("setup.sync_wallet_unlock")}
-                    </button>
-                  </div>
+                    </ButtonWithSpinner>
+                  </form>
                 )}
-              {runningUnlock && (
-                <div className="flex justify-center">
-                  <LoadingSpinner color="text-yellow-500" />
-                </div>
-              )}
+              {passwordWrong && <Message message={t("login.invalid_pass")} />}
             </div>
           </div>
           <div className="mx-auto flex flex-col justify-center">
