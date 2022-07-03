@@ -39,7 +39,13 @@
       "blockchain_size": "Taille de la blockchain",
       "pending_balance_local": "Balance local en attente",
       "pending_balance_remote": "Balance à distance en attente",
-      "blocktime": "Blocktime"
+      "blocktime": "Blocktime",
+      "webui": "WebUI",
+      "node_id": "ID du noeud",
+      "show_qr": "Afficher QR Code",
+      "versions": "Versions",
+      "active": "Actif",
+      "channel_id": "ID du canal"
     },
     "wallet": {
       "receive": "Recevoir",
