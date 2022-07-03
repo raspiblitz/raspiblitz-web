@@ -25,6 +25,7 @@ export type Props = {
   fee: string;
   invoiceAmount: number;
   invoiceType: TxType;
+  /** epoch time in seconds */
   timestamp: number;
 };
 
@@ -50,13 +51,11 @@ const ConfirmSendModal: FC<Props> = ({
     setAmountInput(+event.target.value);
   };
 
-  const invoiceExpiryDate = timestamp + expiry;
+  const invoiceExpiryDate = (timestamp + expiry) * 1000;
   const invoiceExpiryDateDecorated = new Intl.DateTimeFormat("default", {
     dateStyle: "medium",
     timeStyle: "medium",
-  })
-    .format(invoiceExpiryDate)
-    .toString();
+  }).format(new Date(invoiceExpiryDate));
   const isInvoiceExpired: boolean = isLnTx && invoiceExpiryDate < Date.now();
   const isInvoiceAmountBiggerThanBalance: boolean = invoiceAmount > balance;
   const isValidLnInvoice: boolean =
@@ -66,7 +65,7 @@ const ConfirmSendModal: FC<Props> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, submitCount },
+    formState: { errors, isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -190,7 +189,7 @@ const ConfirmSendModal: FC<Props> = ({
           <button
             className="bd-button flex py-2 px-3"
             type="submit"
-            disabled={(submitCount > 0 && !isValid) || !isValidLnInvoice}
+            disabled={!isValid || !isValidLnInvoice}
           >
             <CheckIcon />
             &nbsp; {t("settings.confirm")}
