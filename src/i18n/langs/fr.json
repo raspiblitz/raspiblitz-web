@@ -47,7 +47,19 @@
       "active": "Actif",
       "channel_id": "ID du canal",
       "node_uri": "URI du noeud",
-      "open_channel": "Ouvrir un canal"
+      "open_channel": "Ouvrir un canal",
+      "list_open_channels": "Liste de canaux",
+      "current_open_channels": "Canaux actuellement ouverts",
+      "close_channel": "Fermer le canal",
+      "confirm_channel_close": "Confirmer la fermeture du canal",
+      "force_close": "Fermeture forcée",
+      "urgent": "Urgent",
+      "normal": "Normal",
+      "slow": "Lent",
+      "no": "Non",
+      "channel_opened": "Canal ouvert avec succès",
+      "onchain_cln_no_support": "L'affichage des transactions sur la chaîne n'est actuellement pas pris en charge par Core Lightning.",
+      "channel_closed": "Canal fermé avec succès"
     },
     "wallet": {
       "receive": "Recevoir",
@@ -89,7 +101,8 @@
       "confirm_info": "Veuillez confirmer la transaction suivante",
       "sent": "Transaction envoyée !",
       "comment_placeholder": "Commentaire facultatif",
-      "transactions_none": "Aucune transaction pour le moment, il est temps de faire la première"
+      "transactions_none": "Aucune transaction pour le moment, il est temps de faire la première",
+      "unconfirmed": "Non confirmée"
     },
     "apps": {
       "installed": "Installé",
@@ -104,7 +117,16 @@
       "source": "Code source",
       "offline": "hors ligne",
       "online": "en ligne",
-      "installing": "Installation"
+      "installing": "Installation",
+      "selfsigned_cert": "Cette application utilise un certificat HTTPS auto-signé",
+      "login_admin_pass_b": "Connectez-vous avec l'utilisateur 'admin' et le mot de passe B",
+      "login_pass_b": "Connectez-vous avec le mot de passe B",
+      "login_no_pass": "Connexion sans mot de passe",
+      "login_userdef": "Connexion avec un mot de passe défini par l'utilisateur",
+      "uninstall_success": "{{appName}} désinstallé avec succès",
+      "uninstalling": "Désinstallation de",
+      "install_success": "{{appName}} a été installé avec succès",
+      "install_failure": "L'installation de {{appName}} a échoué : {{details}}"
     },
     "settings": {
       "change_pw_a": "Changer le mot de passe A",
@@ -116,7 +138,8 @@
       "cancel": "Annuler",
       "confirm": "Confirmer",
       "language": "Langue",
-      "curr_lang": "Langue actuelle"
+      "curr_lang": "Langue actuelle",
+      "pass_a_changed": "Le mot de passe A a été modifié avec succès"
     },
     "forms": {
       "validation": {
@@ -138,8 +161,14 @@
           "required": "Veuillez saisir un montant"
         },
         "unlock": {
-          "required": "Veuillez saisir le mot de passe C",
+          "required": "Le mot de passe C est requis",
           "pass_c": "Mot de passe C"
+        },
+        "amount": {
+          "required": "Veuillez saisir un montant"
+        },
+        "node_uri": {
+          "required": "Veuillez entrer un URI de nœud"
         }
       },
       "hint": {
@@ -192,7 +221,7 @@
       "migrate_umbrel": "Voulez-vous convertir UMBREL en RaspiBlitz ?",
       "migrate_citadel": "Voulez-vous convertir CITADEL en RaspiBlitz ?",
       "migrate_mynode": "Voulez-vous convertir MYNODE en RaspiBlitz ?",
-      "convertwarning": "RaspiBlitz peut seulement convertir vos données Blockchain et Lightning LND (fonds + canaux) pour le moment. Les données des autres applications installées peuvent être supprimées lors du processus de migration.",
+      "convertwarning": "RaspiBlitz peut seulement convertir vos données Blockchain et Lightning (fonds + canaux) pour le moment. Les données des autres applications installées peuvent être supprimées lors du processus de migration.",
       "no_and_shutdown": "Non et arrêt",
       "yes": "Oui",
       "updateblitz": "Mettre à jour mon RaspiBlitz",
@@ -239,8 +268,8 @@
       "sync_bitcoin_sync": "Progrès de la synchronisation",
       "sync_restartinfo": "(la synchronisation se poursuivra au prochain redémarrage)",
       "yes_and_migrate": "Migrer vers RaspiBlitz",
-      "start_recovery": "Voulez-vous commencer la récupération ?",
-      "start_update": "Voulez-vous commencer la mise a jour ?",
+      "start_recovery": "Voulez-vous commencer le processus de récupération ?",
+      "start_update": "Voulez-vous lancer le processus de mise à jour et de récupération ?",
       "other_options": "Autres options",
       "setupoptions": "Options d'installation",
       "recoverblitz": "Récupération de mon RaspiBlitz",
@@ -252,7 +281,13 @@
       "password_c_short": "Définissez votre nouveau mot de passe \"Lightning-Wallet\" (mot de passe C)",
       "password_c_details": "Utilisez ce mot de passe pour déverrouiller votre Wallet Lightning .",
       "password_error_empty": "Le mot de passe ne peut pas être vide.",
-      "password_error_length": "Le mot de passe doit comporter au moins 8 caractères."
+      "password_error_length": "Le mot de passe doit comporter au moins 8 caractères.",
+      "restarts": "Redémarre",
+      "started": "Démarré",
+      "continue": "Continuer",
+      "lnd": "LND",
+      "cln": "Core Lightning",
+      "cancel_setup": "Voulez-vous vraiment annuler le processus de configuration"
     },
     "hardware": {
       "disk_usage": "Espace disque utilisé",
