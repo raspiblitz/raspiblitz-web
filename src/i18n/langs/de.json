@@ -38,7 +38,27 @@
       "conn_in": "Eingehend",
       "local_balance": "Guthaben des lokalen Kanals",
       "conn_out": "Ausgehend",
-      "remote_balance": "Guthaben des remote Kanals"
+      "remote_balance": "Guthaben des remote Kanals",
+      "webui": "WebUI",
+      "node_id": "NodeID",
+      "blocktime": "Blockzeit",
+      "show_qr": "Zeige QR Code an",
+      "versions": "Versionen",
+      "channel_id": "Kanal ID",
+      "active": "Aktiv",
+      "open_channel": "Öffne Kanal",
+      "list_open_channels": "Kanalliste",
+      "current_open_channels": "Aktuell geöffnete Kanäle",
+      "close_channel": "Kanal schließen",
+      "confirm_channel_close": "Bestätigung Kanal zu schließen",
+      "force_close": "Erzwungene Schließung",
+      "urgent": "Dringend",
+      "normal": "Normal",
+      "slow": "Langsam",
+      "no": "Nein",
+      "channel_opened": "Kanal erfolgreich geöffnet",
+      "channel_closed": "Kanal erfolgreich geschlossen",
+      "onchain_cln_no_support": "Anzeige der on-chain-Transaktionen wird aktuell vom Core Lightning nicht unterstützt"
     },
     "wallet": {
       "receive": "Erhalten",
@@ -77,7 +97,8 @@
       "included_block": "Im Block inkludiert",
       "fee_rate": "Gebühr Kurs",
       "sent": "Transaktion gesendet!",
-      "confirm_info": "Bitte bestätige die diese Transaktion"
+      "confirm_info": "Bitte bestätige die diese Transaktion",
+      "unconfirmed": "Unbestätigt"
     },
     "apps": {
       "online": "online",
@@ -92,7 +113,17 @@
       "open": "Öffnen",
       "available": "Verfügbare Anwendungen",
       "installed": "Installiert",
-      "installing": "Installiere"
+      "installing": "Installiere",
+      "uninstall_failure": "Deinstallation von {{appName}} fehlgeschlagen: {{details}}",
+      "uninstall_success": "{{appName}} erfolgreich deinstalliert",
+      "selfsigned_cert": "Diese Anwendung verwendet ein selbst-signiertes HTTPS-Zertifikat",
+      "login_admin_pass_b": "Anmenden mit Benutzer 'admin' und Passwort B",
+      "login_pass_b": "Anmelden mit Passwort B",
+      "login_no_pass": "Anmelden ohne Passwort",
+      "uninstalling": "Deinstalliere",
+      "install_success": "{{appName}} erfolgreich installiert",
+      "install_failure": "Installation von {{appName}} fehlgeschlagen: {{details}}",
+      "login_userdef": "Anmelden mit benutzerdefiniertem Passwort"
     },
     "settings": {
       "language": "Sprache",
@@ -104,7 +135,8 @@
       "change": "Ändern",
       "new_pw": "Neues Passwort",
       "old_pw": "Altes Passwort",
-      "change_pw_a": "Passwort A ändern"
+      "change_pw_a": "Passwort A ändern",
+      "pass_a_changed": "Passwort A wurde erfolgreich geändert"
     },
     "setup": {
       "pleasewait": "bitte warten",
@@ -113,7 +145,8 @@
       "restartinfo": "bitte warten bis RaspiBlitz sich wieder meldet",
       "preparingsetup": "bereite Einrichtung vor",
       "runningsetup": "Einrichtung läuft",
-      "setupwait": "Einrichtung wird einige Minuten dauern"
+      "setupwait": "Einrichtung wird einige Minuten dauern",
+      "continue": "Fortfahren"
     },
     "forms": {
       "validation": {
@@ -167,6 +200,13 @@
       "thunderhub": {
         "shortDescription": "LND Lightning Node Manager in deinem Browser"
       }
+    },
+    "hardware": {
+      "temp": "Temperatur",
+      "disk_usage": "Verbrauchter Speicherplatz",
+      "cpu_load": "CPU Auslastung",
+      "header": "Hardware Details",
+      "ram_usage": "Arbeitsspeicher Nutzung"
     }
   }
 }
