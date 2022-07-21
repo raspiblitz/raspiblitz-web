@@ -5,10 +5,12 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as CheckIcon } from "../../../../assets/check.svg";
 import { ReactComponent as ChevronLeft } from "../../../../assets/chevron-left.svg";
 import { ReactComponent as XIcon } from "../../../../assets/X.svg";
+import Message from "../../../../container/Message/Message";
 import { AppContext } from "../../../../store/app-context";
 import { stringToNumber } from "../../../../util/format";
 import { instance } from "../../../../util/interceptor";
 import AmountInput from "../../AmountInput/AmountInput";
+import ButtonWithSpinner from "../../ButtonWithSpinner/ButtonWithSpinner";
 import { TxType } from "../../SwitchTxType/SwitchTxType";
 interface IFormInputs {
   amountInput: string;
@@ -45,6 +47,8 @@ const ConfirmSendModal: FC<Props> = ({
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
   const [amountInput, setAmountInput] = useState(amount);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const isLnTx = invoiceType === TxType.LIGHTNING;
 
   const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -70,9 +74,9 @@ const ConfirmSendModal: FC<Props> = ({
     mode: "onChange",
   });
 
-  // TODO: handle error
   const sendTransactionHandler = async () => {
-    let error = null;
+    setError(null);
+    setIsLoading(true);
 
     if (isLnTx) {
       let msatQuery = "";
@@ -80,10 +84,21 @@ const ConfirmSendModal: FC<Props> = ({
         msatQuery = `&amount_msat=${amountInput}`;
       }
 
-      await instance
+      instance
         .post(`lightning/send-payment?pay_req=${address}${msatQuery}`)
-        .catch((e) => {
-          error = e;
+        .then(() => {
+          setIsLoading(false);
+          close(true);
+        })
+        .catch((err) => {
+          setError(
+            `${t("login.error")}: ${
+              err.response?.data?.detail?.[0]?.msg ||
+              err.response?.data?.detail ||
+              err.message
+            }`
+          );
+          setIsLoading(false);
         });
     } else {
       const body = {
@@ -94,11 +109,23 @@ const ConfirmSendModal: FC<Props> = ({
         unit,
       };
 
-      await instance.post("lightning/send-coins", body).catch((e) => {
-        error = e;
-      });
+      await instance
+        .post("lightning/send-coins", body)
+        .then(() => {
+          setIsLoading(false);
+          close(true);
+        })
+        .catch((err) => {
+          setError(
+            `${t("login.error")}: ${
+              err.response?.data?.detail?.[0]?.msg ||
+              err.response?.data?.detail ||
+              err.message
+            }`
+          );
+          setIsLoading(false);
+        });
     }
-    close(!error);
   };
 
   const addressTitle = isLnTx ? t("wallet.invoice") : t("wallet.address");
@@ -177,23 +204,27 @@ const ConfirmSendModal: FC<Props> = ({
           </div>
         )}
 
+        {error && <Message message={error} />}
+
         <div className="flex justify-around px-2 py-5">
           <button
             className="flex rounded bg-red-500 py-2 px-3 text-white shadow-xl hover:bg-red-400"
             onClick={() => close(false)}
+            disabled={isLoading}
           >
             <XIcon />
             &nbsp;{t("settings.cancel")}
           </button>
 
-          <button
+          <ButtonWithSpinner
             className="bd-button flex py-2 px-3"
             type="submit"
+            loading={isLoading}
+            icon={<CheckIcon />}
             disabled={!isValid || !isValidLnInvoice}
           >
-            <CheckIcon />
-            &nbsp; {t("settings.confirm")}
-          </button>
+            <span className="mx-1">{t("settings.confirm")}</span>
+          </ButtonWithSpinner>
         </div>
       </div>
     </form>
