@@ -9,6 +9,7 @@ import useSSE from "../hooks/use-sse";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { availableApps } from "../util/availableApps";
+import { checkError } from "../util/checkError";
 import { instance } from "../util/interceptor";
 import { enableGutter } from "../util/util";
 
@@ -37,13 +38,13 @@ export const Apps: FC = () => {
 
   const installHandler = (id: string) => {
     instance.post(`apps/install/${id}`).catch((err) => {
-      toast.error(err.response.data.detail || err.response.data);
+      toast.error(checkError(err));
     });
   };
 
   const uninstallHandler = (id: string) => {
     instance.post(`apps/uninstall/${id}`, { keepData: true }).catch((err) => {
-      toast.error(err.response.data.detail || err.response.data);
+      toast.error(checkError(err));
     });
   };
 

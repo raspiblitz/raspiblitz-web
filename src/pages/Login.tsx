@@ -8,6 +8,7 @@ import I18nDropdown from "../components/Shared/I18nDropdown/I18nDropdown";
 import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
 import Message from "../container/Message/Message";
 import { AppContext } from "../store/app-context";
+import { checkError } from "../util/checkError";
 import { instance } from "../util/interceptor";
 import { ACCESS_TOKEN, enableGutter } from "../util/util";
 
@@ -59,17 +60,7 @@ const Login: FC = () => {
           navigate(from, { replace: true });
         }
       })
-      .catch((err) => {
-        if (err.response.status === 500) {
-          setError(t("login.error"));
-        } else {
-          setError(
-            `${t("login.error")}: ${
-              err.response?.data?.detail?.[0]?.msg || err.response?.data.detail
-            }`
-          );
-        }
-      })
+      .catch((err) => setError(checkError(err)))
       .finally(() => {
         setIsLoading(false);
       });

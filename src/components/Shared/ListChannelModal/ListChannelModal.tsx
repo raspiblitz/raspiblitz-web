@@ -6,6 +6,7 @@ import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { LightningChannel } from "../../../models/lightning-channel";
 import { AppContext } from "../../../store/app-context";
+import { checkError } from "../../../util/checkError";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 import ChannelList from "./ChannelList/ChannelList";
@@ -29,9 +30,9 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
         setOpenChannels(resp.data);
       })
       .catch((err) => {
-        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+        setError(checkError(err));
       });
-  }, [t]);
+  }, []);
 
   useEffect(() => {
     updateChannel();
@@ -55,7 +56,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
         updateChannel();
       })
       .catch((err) => {
-        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+        setError(checkError(err));
       })
       .finally(() => setIsLoading(false));
   };
@@ -65,11 +66,13 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
       <h2 className="mb-2 text-lg font-bold">
         {t("home.current_open_channels")}
       </h2>
-      <ChannelList
-        channel={openChannels}
-        onDelete={deleteChannelHandler}
-        isLoading={isLoading}
-      />
+      {openChannels.length > 0 && (
+        <ChannelList
+          channel={openChannels}
+          onDelete={deleteChannelHandler}
+          isLoading={isLoading}
+        />
+      )}
       {error && <Message message={error} />}
     </ModalDialog>,
     MODAL_ROOT

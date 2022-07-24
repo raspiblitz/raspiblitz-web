@@ -7,6 +7,7 @@ import { ReactComponent as ChevronLeft } from "../../../../assets/chevron-left.s
 import { ReactComponent as XIcon } from "../../../../assets/X.svg";
 import Message from "../../../../container/Message/Message";
 import { AppContext } from "../../../../store/app-context";
+import { checkError } from "../../../../util/checkError";
 import { stringToNumber } from "../../../../util/format";
 import { instance } from "../../../../util/interceptor";
 import AmountInput from "../../AmountInput/AmountInput";
@@ -91,13 +92,7 @@ const ConfirmSendModal: FC<Props> = ({
           close(true);
         })
         .catch((err) => {
-          setError(
-            `${t("login.error")}: ${
-              err.response?.data?.detail?.[0]?.msg ||
-              err.response?.data?.detail ||
-              err.message
-            }`
-          );
+          setError(checkError(err));
           setIsLoading(false);
         });
     } else {
@@ -116,13 +111,7 @@ const ConfirmSendModal: FC<Props> = ({
           close(true);
         })
         .catch((err) => {
-          setError(
-            `${t("login.error")}: ${
-              err.response?.data?.detail?.[0]?.msg ||
-              err.response?.data?.detail ||
-              err.message
-            }`
-          );
+          setError(checkError(err));
           setIsLoading(false);
         });
     }

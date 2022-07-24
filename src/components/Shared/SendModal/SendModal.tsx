@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext, Unit } from "../../../store/app-context";
+import { checkError } from "../../../util/checkError";
 import {
   convertMSatToBtc,
   convertMSatToSat,
@@ -54,7 +55,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
         setConfirm(true);
       })
       .catch((err) => {
-        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+        setError(checkError(err));
       })
       .finally(() => {
         setIsLoading(false);
