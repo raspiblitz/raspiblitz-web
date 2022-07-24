@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
-import { useTranslation } from "react-i18next";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext, Unit } from "../../../store/app-context";
 import { checkError } from "../../../util/checkError";
@@ -24,7 +23,6 @@ export type Props = {
 
 const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const { unit } = useContext(AppContext);
-  const { t } = useTranslation();
 
   const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [invoice, setInvoice] = useState("");
