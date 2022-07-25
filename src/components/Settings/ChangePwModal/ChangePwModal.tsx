@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
 import { ReactComponent as XIcon } from "../../../assets/X.svg";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
+import { checkError } from "../../../util/checkError";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 import ButtonWithSpinner from "../../Shared/ButtonWithSpinner/ButtonWithSpinner";
@@ -39,7 +40,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
         onClose();
       })
       .catch((err) => {
-        toast.error(err.response.data.detail || err.response.data);
+        toast.error(checkError(err));
       })
       .finally(() => {
         setIsLoading(false);

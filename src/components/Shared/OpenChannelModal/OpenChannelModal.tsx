@@ -7,6 +7,7 @@ import { ReactComponent as ChannelIcon } from "../../../assets/link.svg";
 import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext } from "../../../store/app-context";
+import { checkError } from "../../../util/checkError";
 import { stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
@@ -58,9 +59,7 @@ const OpenChannelModal: FC<Props> = ({ onClose }) => {
         toast.success(t("home.channel_opened"), { theme });
         onClose();
       })
-      .catch((err) =>
-        setError(`${t("login.error")}: ${err.response?.data?.detail}`)
-      )
+      .catch((err) => setError(checkError(err)))
       .finally(() => setIsLoading(false));
   };
 

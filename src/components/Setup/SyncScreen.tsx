@@ -45,12 +45,16 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
     setPassword(event.target.value);
   };
 
-  const unlockWallet = async () => {
+  const unlockWallet = () => {
     setRunningUnlock(true);
     setPasswordWrong(false);
-    await instance
+    instance
       .post("/lightning/unlock-wallet", {
         password: password,
+      })
+      .then(() => {
+        setPassword("");
+        setRunningUnlock(false);
       })
       .catch((err) => {
         if (err.response.status === 403) {
@@ -61,11 +65,6 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
           setPasswordWrong(true);
         }
       });
-    // TODO: Why setRunningUnlock always after 30s?
-    setTimeout(() => {
-      setPassword("");
-      setRunningUnlock(false);
-    }, 30000);
   };
 
   const {

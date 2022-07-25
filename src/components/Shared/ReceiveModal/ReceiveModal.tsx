@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
 import { AppContext, Unit } from "../../../store/app-context";
+import { checkError } from "../../../util/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
@@ -55,7 +56,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
           setAddress(resp.data);
         })
         .catch((err) => {
-          setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+          setError(checkError(err));
         })
         .finally(() => {
           setIsLoading(false);
@@ -81,7 +82,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
         setAddress(resp.data.payment_request);
       })
       .catch((err) => {
-        setError(`${t("login.error")}: ${err.response?.data?.detail}`);
+        setError(checkError(err));
       })
       .finally(() => {
         setIsLoading(false);

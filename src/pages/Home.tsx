@@ -20,6 +20,7 @@ import useSSE from "../hooks/use-sse";
 import { AppStatus } from "../models/app-status";
 import { Transaction } from "../models/transaction.model";
 import { AppContext } from "../store/app-context";
+import { checkError } from "../util/checkError";
 import { instance } from "../util/interceptor";
 import { enableGutter } from "../util/util";
 
@@ -110,16 +111,10 @@ const Home: FC = () => {
       if (err.response.status === 423) {
         setWalletLocked(true);
       } else {
-        setTxError(
-          `${t("login.error")}: ${
-            err.response?.data?.detail?.[0]?.msg ||
-            err.response?.data?.detail ||
-            err.message
-          }`
-        );
+        setTxError(checkError(err));
       }
     }
-  }, [lightningState, isLnImplSelected, walletLocked, setWalletLocked, t]);
+  }, [lightningState, isLnImplSelected, walletLocked, setWalletLocked]);
 
   useEffect(() => {
     if (isLnImplSelected && !walletLocked && isLoadingTransactions) {
