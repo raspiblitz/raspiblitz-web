@@ -65,6 +65,7 @@ describe("checkError", () => {
       response: {
         data: {
           detail: {
+            //@ts-ignore - We want to test undefined behaviour
             test: "test",
           },
         },
