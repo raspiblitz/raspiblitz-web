@@ -47,7 +47,7 @@ const ConfirmSendModal: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
-  const [amountInput, setAmountInput] = useState(amount);
+  const [amountInput, setAmountInput] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const isLnTx = invoiceType === TxType.LIGHTNING;
