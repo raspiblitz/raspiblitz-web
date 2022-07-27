@@ -2462,6 +2462,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/event-source-polyfill@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@types/event-source-polyfill@npm:1.0.0"
+  checksum: 5b3eacace596ce8c1c3f877ea7967e9634922faa7187f9d4000fd3d7b765f84917603dbc95c98d28ff592e80cb7bc588166ec9ea841d262be0d919bf9ed79c14
+  languageName: node
+  linkType: hard
+
 "@types/express-serve-static-core@npm:*, @types/express-serve-static-core@npm:^4.17.18":
   version: 4.17.28
   resolution: "@types/express-serve-static-core@npm:4.17.28"
@@ -5799,6 +5806,13 @@ __metadata:
   version: 1.8.1
   resolution: "etag@npm:1.8.1"
   checksum: 571aeb3dbe0f2bbd4e4fadbdb44f325fc75335cd5f6f6b6a091e6a06a9f25ed5392f0863c5442acb0646787446e816f13cbfc6edce5b07658541dff573cab1ff
+  languageName: node
+  linkType: hard
+
+"event-source-polyfill@npm:^1.0.26":
+  version: 1.0.26
+  resolution: "event-source-polyfill@npm:1.0.26"
+  checksum: 300f8740b906383ca7e92da3391c5556ef6882bdbd0029395c96c5fe8edf47fe6ca01348481bfb4d272863d8589dfa91f72bd40371e6f514d9836710a8e4c18e
   languageName: node
   linkType: hard
 
@@ -10543,12 +10557,14 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^13.3.0
     "@testing-library/user-event": ^14.3.0
+    "@types/event-source-polyfill": ^1.0.0
     "@types/jest": ^28.1.6
     "@types/node": ^16.11.45
     "@types/react": ^18.0.15
     "@types/react-dom": ^18.0.6
     autoprefixer: ^10.4.7
     axios: ^0.27.2
+    event-source-polyfill: ^1.0.26
     http-proxy-middleware: ^2.0.6
     husky: ^8.0.1
     i18next: ^21.8.14
