@@ -1,12 +1,10 @@
-# Raspiblitz Web
+<h1 align="center">Raspiblitz Web - a responsive Web UI for the RaspiBlitz</h1>
 
 ![Raspiblitz Dashboard](preview.png)
 
-Images of the progress can be found at [raspiblitz-web-progress](https://github.com/cstenglein/raspiblitz-web-progress)
-
-A mobile-first responsive Web UI for the [RaspiBlitz](https://github.com/rootzoll/raspiblitz).
-
 In collaboration with [Bitcoin Design](https://bitcoin.design/).
+
+Images of the WebUI can be found at [raspiblitz-web-progress](https://github.com/cstenglein/raspiblitz-web-progress)
 
 Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.com/).
 
@@ -14,7 +12,7 @@ Built with [React](https://reactjs.org/) & [Tailwind CSS](https://tailwindcss.co
 
 If you want to bring the Raspiblitz WebUI to other languages, please help us translate it via [Weblate](https://hosted.weblate.org/projects/raspiblitz-web/translations/) :)
 
-Big thanks to our translators, which you can find in detail in this [README](src/i18n/README.md)
+Big thanks to our translators, which you can find in this [README](src/i18n/README.md).
 
 ## Development
 
