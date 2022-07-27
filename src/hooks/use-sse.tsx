@@ -1,3 +1,4 @@
+import { EventSourcePolyfill } from "event-source-polyfill";
 import { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -12,7 +13,7 @@ import { SystemStartupInfo } from "../models/system-startup-info";
 import { WalletBalance } from "../models/wallet-balance";
 import { SSEContext, SSE_URL } from "../store/sse-context";
 import { availableApps } from "../util/availableApps";
-import { setWindowAlias } from "../util/util";
+import { ACCESS_TOKEN, setWindowAlias } from "../util/util";
 
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners
@@ -52,7 +53,13 @@ function useSSE() {
 
   useEffect(() => {
     if (!evtSource) {
-      setEvtSource(new EventSource(SSE_URL));
+      setEvtSource(
+        new EventSourcePolyfill(SSE_URL, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+          },
+        })
+      );
     }
 
     const setApps = (event: MessageEvent<string>) => {
