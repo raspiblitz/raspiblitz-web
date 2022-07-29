@@ -126,7 +126,8 @@
       "uninstall_success": "{{appName}} désinstallé avec succès",
       "uninstalling": "Désinstallation de",
       "install_success": "{{appName}} a été installé avec succès",
-      "install_failure": "L'installation de {{appName}} a échoué : {{details}}"
+      "install_failure": "L'installation de {{appName}} a échoué : {{details}}",
+      "uninstall_failure": "La désinstallation de {{appName}} a échoué: {{details}}"
     },
     "settings": {
       "change_pw_a": "Changer le mot de passe A",
