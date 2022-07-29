@@ -1,27 +1,13 @@
 {
   "translation": {
-    "home": {
-      "channel": ""
-    },
     "wallet": {
       "invoice": ""
-    },
-    "hardware": {
-      "cpu_load": ""
     },
     "settings": {
       "shutdown": ""
     },
     "setup": {
-      "blockchain_found_short": "",
       "done_update_ready": ""
-    },
-    "forms": {
-      "validation": {
-        "chainAmount": {
-          "max": ""
-        }
-      }
     }
   }
 }
