@@ -1,97 +1,59 @@
 {
   "translation": {
-    "navigation": {
-      "back": ""
-    },
     "login": {
-      "enter_pass": "",
-      "error": ""
+      "enter_pass": ""
     },
     "home": {
       "network": "",
-      "conn_in": "",
       "blocktime": "",
-      "ssh": "",
       "channel": "",
-      "remote_balance": "",
       "node_uri": "",
-      "close_channel": "",
-      "normal": "",
-      "no": ""
+      "normal": ""
     },
     "wallet": {
       "balance": "",
-      "amount": "",
       "invoice": "",
-      "scan_qr": "",
-      "wallet_locked": "",
-      "unlock": ""
+      "wallet_locked": ""
     },
     "tx": {
       "txid": "",
-      "fee": "",
-      "value": "",
-      "sent": ""
+      "value": ""
     },
     "hardware": {
       "cpu_load": ""
     },
     "apps": {
-      "installed": "",
       "open": "",
-      "no_page": "",
       "offline": "",
-      "uninstall_success": "",
       "login_pass_b": ""
     },
     "settings": {
-      "old_pw": "",
-      "shutdown": "",
-      "curr_lang": ""
+      "shutdown": ""
     },
     "setup": {
       "restarting": "",
-      "setupwait": "",
       "migrate_citadel": "",
-      "yes_and_migrate": "",
       "cancel": "",
-      "recoverblitz": "",
       "blockchain_found_short": "",
-      "hdd_delete_short": "",
       "nodename_input": "",
-      "nodename_err_max_length": "",
       "password_a_details": "",
-      "password_c_name": "",
       "password_error_empty": "",
-      "done_setup_ready": "",
       "done_update_ready": "",
-      "final_recovery": "",
       "final_seedwords": "",
-      "select_bitcoin": "",
-      "sync_wallet_unlock": "",
-      "sync_restartinfo": ""
+      "sync_wallet_unlock": ""
     },
     "forms": {
       "hint": {
         "invoiceAmountZero": ""
       },
       "validation": {
-        "lnInvoice": {
-          "expired": ""
-        },
         "chainAmount": {
           "max": ""
-        },
-        "node_uri": {
-          "required": ""
         }
       }
     },
     "appInfo": {
       "specter": {
-        "shortDescription": ""
-      },
-      "lnbits": {
         "shortDescription": ""
       },
       "mempool": {
