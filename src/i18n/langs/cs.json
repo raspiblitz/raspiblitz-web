@@ -1,13 +1,7 @@
 {
   "translation": {
-    "wallet": {
-      "invoice": ""
-    },
     "settings": {
       "shutdown": ""
-    },
-    "setup": {
-      "done_update_ready": ""
     }
   }
 }
