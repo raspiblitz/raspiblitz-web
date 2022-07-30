@@ -179,8 +179,123 @@
       "lightningoutdated": "Noden du vill migrera ifrån använder en nyare Lightnng-version än denna RaspiBlitz. Var god vänta för en uppdaterad release. Du kan stänga av och starta upp med din gamla nods SD-kort - inga förändringar har utförts.",
       "blockchain_delete": "Radera blockkedja",
       "blockchain_keep": "Behåll blockkedja",
-      "blockchain_found_long": "Existerande blockkedjedata hittad på din HDD/SSD",
-      "hdd_delete_short": "OK till att radera all data på HDD/SDD?"
+      "blockchain_found_long": "Existerande blockkedjedata hittad på din HDD/SSD.",
+      "hdd_delete_short": "OK till att radera all data på HDD/SDD?",
+      "hdd_delete_keep_blockchain": "Var god bekräfta att du vill radera all tidigare data på HDD/SSD och endast spara blockkedjedatan för din färska RaspiBlitz.",
+      "hdd_delete_no_blockchain": "Var god bekräfta att du vill radera all tidigare data på HDD/SDD för att starta RaspiBlitz.",
+      "nodename_name": "Nodnamn",
+      "password_a_details": "Använd ditt lösenord för att logga in på din RaspiBlitz.",
+      "password_b_name": "Lösenord B",
+      "password_b_short": "Ställ in ditt nya app-lösenord (Lösenord B)",
+      "password_b_details": "Använd detta lösenord för ytterligare appar du kan installera på din RaspiBlitz.",
+      "password_c_name": "Lösenord C",
+      "password_c_short": "Ställ in ditt nya Lightningwalletlösenord (Lösenord C)",
+      "password_c_details": "Använd detta lösenord för att låsa upp din Lightningplånbok.",
+      "password_repeat": "Upprepa",
+      "password_error_empty": "Lösenord kan inte vara tomt.",
+      "password_error_length": "Lösenordet måste vara åtminstone 8 karaktärer långt.",
+      "password_error_chars": "Lösenordet ska bara innehålla karaktärer och nummer.",
+      "password_error_match": "Lösenorden matchar inte.",
+      "done_setup_ready": "OK. Allting är redo för att installera din RaspiBlitz.",
+      "done_setup_start": "Starta installation",
+      "done_migration_start": "Starta migrering",
+      "final_update": "Uppdatering klar.",
+      "final_migration": "Migrationen är klar.",
+      "final_setup": "Installationen är klar.",
+      "final_seedwords": "Var god skriv ner seedorden och spara på en säker plats:",
+      "final_info_reboot": "Kommer nu starta om och synkronisera blockkedjan.",
+      "final_do_reboot": "Ok, utför slutgiltiga omstarten",
+      "select_lightning": "Välj din Lightningimplementation:",
+      "select_bitcoin": "Endast Bitcoin",
+      "lnd": "LND",
+      "sync_headline": "RaspiBlitz initial synkronisering",
+      "sync_wallet_unlock": "Lås upp plånbok",
+      "sync_bitcoin_sync": "Synkroniseringsstatus",
+      "sync_restartinfo": "(synkronisering fortsätter nästa omstart)",
+      "nodename_err_min_length": "Nodnamn måste vara minst 4 karaktärer långt.",
+      "password_a_name": "Lösenord A",
+      "password_a_short": "Ställ in ditt nya adminlösenord (Lösenord A)",
+      "sync_wallet_info": "Var god lås upp din Lightningwallet (Lösenord C):",
+      "cancel_setup": "Vill du verkligen avbryta installationsprocessen",
+      "done_recover_ready": "OK. Allting är redo för att återställa din RaspiBlitz.",
+      "done_recover_start": "Starta återställning",
+      "done_migration_ready": "OK. Allting är redo för att migrera din RaspiBlitz.",
+      "done_update_ready": "OK. Allting är redo för att uppdatera din RaspiBlitz.",
+      "done_update_start": "Starta uppdatering",
+      "restarts": "Startar om",
+      "final_recovery": "Återställning klar.",
+      "cln": "Core Lightning",
+      "sync_bitcoin_starting": "Startar synkronisering",
+      "started": "Startad",
+      "nodename_err_max_length": "Nodnamn måste vara maximalt 32 karaktärer långt.",
+      "nodename_input": "Ange nodnamn",
+      "nodename_error_empty": "Nodnamn kan inte vara tomt.",
+      "hdd_delete": "RADERA GAMMAL DATA",
+      "nodename_err_chars": "Nodnamn ska innehålla karaktärer och siffror."
+    },
+    "forms": {
+      "validation": {
+        "lnInvoice": {
+          "patternMismatch": "Fel fakturaformat",
+          "required": "Var god ange en Lightningfaktura",
+          "max": "Din balans är för låg för att betala fakturan",
+          "expired": "Fakturan har löpt ut"
+        },
+        "chainAddress": {
+          "required": "Var god ange en Bitcoinadress",
+          "patternMismatch": "Fel adressformat"
+        },
+        "unlock": {
+          "pass_c": "Lösenord C",
+          "required": "Lösenord C krävs"
+        },
+        "node_uri": {
+          "required": "Var god ange en nod-URI"
+        },
+        "amount": {
+          "required": "Var god ange ett belopp"
+        },
+        "chainAmount": {
+          "required": "Var god ange belopp",
+          "max": "Din balans är för låg för att skicka detta belopp"
+        },
+        "chainFee": {
+          "required": "Var god ange en avgift"
+        }
+      },
+      "hint": {
+        "invoiceAmountZero": "Fakturabeloppet är noll"
+      }
+    },
+    "appInfo": {
+      "rtl": {
+        "shortDescription": "En fullständig webbläsar-app för LND, Core Lightning och Eclair",
+        "about": "RLT är ett fullständigt, enhetsoberoende webbgränssnitt för att administrera Lightningnoder. RTL finns tillgängligt för LND, Core Lightning och Eclair."
+      },
+      "specter": {
+        "shortDescription": "Ett skrivbordsgränssnitt för Bitcoin Core optimerad för att hantera hårdvaruplånböcker",
+        "about": "Bitcoin Core har ett väldigt kraftfullt kommandopromptgränssnitt och en underbar serverdaemon. Med hjälp av PSBT och HWI kan det också användas med hårdvaruplånböcker, men för närvarande är det för linux-aktigt. Samma sak gäller multisignatur-upplägg. Målet med detta projekt är att skapa ett smidigt och användarvänligt gränssnit runt Bitcoin Core med fokus på multisignatur-upplägg med hårdvaruplånböcker och enheter med airgap."
+      },
+      "lnbits": {
+        "shortDescription": "Gratis och öppen källkod Lightningnätverks plånbok/redovisningssystem",
+        "about": "LNBits är en väldigt enkel Python-server som sitter ovanpå valfri inkomstkälla och kan användas som redovisningssystem för att mildra risken för att utsätta applikationer för din fulla balans, via unika API-nycklar för varje plånbok."
+      },
+      "btc-rpc-explorer": {
+        "about": "Detta är en självhostad utforskare för Bitcoinkedjan, drivs genom RPC-anrop till din egna Bitcoinnod. Det är enkelt att köra och kan anslutas till andra verktig (som Electrum servrar) för att åstadkomma en fullfjädrad utforskare.",
+        "shortDescription": "Bitcoin RPC Explorer"
+      },
+      "mempool": {
+        "about": " En opensourceutforskare utvecklad för Bitcoincommunityt. Med fokus på den stundande marknaden för transaktionsavgifter för att underlätta övergången till ett ekosystem i flera lager.",
+        "shortDescription": "En opensourceutforskare utvecklad för Bitcoincommunityt"
+      },
+      "thunderhub": {
+        "about": "ThunderHub är en öppen källkods LND-nodhanterare där du kan hantera och övervaka din nod från valfri enhet och läsare. Den möjliggör dig att ta kontroll över lightningnätverket med ett enkelt och intuitivt gränssnitt med den senast uppdaterade tekniken.",
+        "shortDescription": "LND Lightningnodhanterare i din läsare"
+      },
+      "btcpayserver": {
+        "shortDescription": "Acceptera Bitcoinbetalningar. Gratis, öppen källkod och självhostad Bitcoinbetalningsprocessor.",
+        "about": "BTCPay Server är en gratis och öppen källkods Bitcoin-betalningsprocessor som låter dig acceptera bitcoin utan avgifter eller mellanhänder."
+      }
     }
   }
 }
