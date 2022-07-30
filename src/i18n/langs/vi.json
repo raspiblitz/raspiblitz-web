@@ -1,42 +1,26 @@
 {
   "translation": {
     "home": {
-      "network": "",
-      "channel": "",
-      "normal": ""
+      "channel": ""
     },
     "wallet": {
       "invoice": ""
     },
-    "tx": {
-      "txid": ""
-    },
     "hardware": {
       "cpu_load": ""
-    },
-    "apps": {
-      "offline": ""
     },
     "settings": {
       "shutdown": ""
     },
     "setup": {
-      "migrate_citadel": "",
       "blockchain_found_short": "",
-      "password_a_details": "",
-      "done_update_ready": "",
-      "sync_wallet_unlock": ""
+      "done_update_ready": ""
     },
     "forms": {
       "validation": {
         "chainAmount": {
           "max": ""
         }
-      }
-    },
-    "appInfo": {
-      "mempool": {
-        "shortDescription": ""
       }
     }
   }
