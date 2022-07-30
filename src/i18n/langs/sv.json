@@ -1,51 +1,33 @@
 {
   "translation": {
-    "login": {
-      "enter_pass": ""
-    },
     "home": {
       "network": "",
-      "blocktime": "",
       "channel": "",
-      "node_uri": "",
       "normal": ""
     },
     "wallet": {
-      "balance": "",
-      "invoice": "",
-      "wallet_locked": ""
+      "invoice": ""
     },
     "tx": {
-      "txid": "",
-      "value": ""
+      "txid": ""
     },
     "hardware": {
       "cpu_load": ""
     },
     "apps": {
-      "open": "",
-      "offline": "",
-      "login_pass_b": ""
+      "offline": ""
     },
     "settings": {
       "shutdown": ""
     },
     "setup": {
-      "restarting": "",
       "migrate_citadel": "",
-      "cancel": "",
       "blockchain_found_short": "",
-      "nodename_input": "",
       "password_a_details": "",
-      "password_error_empty": "",
       "done_update_ready": "",
-      "final_seedwords": "",
       "sync_wallet_unlock": ""
     },
     "forms": {
-      "hint": {
-        "invoiceAmountZero": ""
-      },
       "validation": {
         "chainAmount": {
           "max": ""
@@ -53,9 +35,6 @@
       }
     },
     "appInfo": {
-      "specter": {
-        "shortDescription": ""
-      },
       "mempool": {
         "shortDescription": ""
       }
