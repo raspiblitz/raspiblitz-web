@@ -1,129 +1,75 @@
 {
   "translation": {
     "navigation": {
-      "apps": "",
-      "back": "",
-      "display_sats": ""
+      "back": ""
     },
     "login": {
       "enter_pass": "",
-      "login": "",
       "error": ""
     },
     "home": {
-      "version": "",
       "network": "",
-      "blocks_synced": "",
       "conn_in": "",
-      "conn_details": "",
       "blocktime": "",
-      "webui": "",
       "ssh": "",
-      "show_qr": "",
       "channel": "",
-      "channel_balance": "",
       "remote_balance": "",
-      "pending_balance_remote": "",
       "node_uri": "",
-      "list_open_channels": "",
       "close_channel": "",
-      "force_close": "",
       "normal": "",
-      "show": "",
-      "no": "",
-      "channel_closed": ""
+      "no": ""
     },
     "wallet": {
       "balance": "",
-      "receive": "",
       "amount": "",
-      "confirm": "",
       "invoice": "",
-      "create_invoice_ln": "",
       "scan_qr": "",
-      "send_lightning": "",
       "wallet_locked": "",
-      "unlock_subtitle": "",
       "unlock": ""
     },
     "tx": {
-      "transactions": "",
       "txid": "",
-      "included_block": "",
       "fee": "",
-      "description": "",
       "value": "",
-      "comment_placeholder": "",
-      "sent": "",
-      "transactions_none": ""
+      "sent": ""
     },
     "hardware": {
-      "cpu_load": "",
-      "ram_usage": ""
+      "cpu_load": ""
     },
     "apps": {
       "installed": "",
-      "uninstalling": "",
       "open": "",
-      "uninstall": "",
       "no_page": "",
-      "author": "",
       "offline": "",
-      "install_success": "",
       "uninstall_success": "",
-      "selfsigned_cert": "",
-      "login_pass_b": "",
-      "login_userdef": ""
+      "login_pass_b": ""
     },
     "settings": {
       "old_pw": "",
-      "change": "",
       "shutdown": "",
-      "confirm": "",
       "curr_lang": ""
     },
     "setup": {
-      "pleasewait": "",
       "restarting": "",
-      "preparingsetup": "",
       "setupwait": "",
-      "lightningoutdated": "",
       "migrate_citadel": "",
-      "convertwarning": "",
       "yes_and_migrate": "",
-      "start_update": "",
       "cancel": "",
-      "other_options": "",
       "recoverblitz": "",
-      "migrateblitz": "",
       "blockchain_found_short": "",
-      "blockchain_delete": "",
       "hdd_delete_short": "",
-      "hdd_delete_no_blockchain": "",
       "nodename_input": "",
-      "nodename_error_empty": "",
       "nodename_err_max_length": "",
-      "password_a_name": "",
       "password_a_details": "",
-      "password_b_short": "",
       "password_c_name": "",
-      "password_c_details": "",
       "password_error_empty": "",
-      "password_error_chars": "",
       "done_setup_ready": "",
-      "done_recover_ready": "",
       "done_update_ready": "",
-      "done_migration_ready": "",
       "final_recovery": "",
-      "final_migration": "",
       "final_seedwords": "",
-      "final_do_reboot": "",
       "select_bitcoin": "",
-      "cln": "",
       "sync_wallet_unlock": "",
-      "sync_bitcoin_starting": "",
-      "sync_restartinfo": "",
-      "restarts": ""
+      "sync_restartinfo": ""
     },
     "forms": {
       "hint": {
@@ -131,17 +77,10 @@
       },
       "validation": {
         "lnInvoice": {
-          "patternMismatch": "",
           "expired": ""
-        },
-        "chainAddress": {
-          "patternMismatch": ""
         },
         "chainAmount": {
           "max": ""
-        },
-        "unlock": {
-          "pass_c": ""
         },
         "node_uri": {
           "required": ""
@@ -149,25 +88,13 @@
       }
     },
     "appInfo": {
-      "rtl": {
-        "shortDescription": ""
-      },
       "specter": {
-        "shortDescription": ""
-      },
-      "btcpayserver": {
         "shortDescription": ""
       },
       "lnbits": {
         "shortDescription": ""
       },
-      "btc-rpc-explorer": {
-        "shortDescription": ""
-      },
       "mempool": {
-        "shortDescription": ""
-      },
-      "thunderhub": {
         "shortDescription": ""
       }
     }
