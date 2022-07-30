@@ -179,7 +179,8 @@
       "lightningoutdated": "Noden du vill migrera ifrån använder en nyare Lightnng-version än denna RaspiBlitz. Var god vänta för en uppdaterad release. Du kan stänga av och starta upp med din gamla nods SD-kort - inga förändringar har utförts.",
       "blockchain_delete": "Radera blockkedja",
       "blockchain_keep": "Behåll blockkedja",
-      "blockchain_found_long": "Existerande blockkedjedata hittad på din HDD/SSD"
+      "blockchain_found_long": "Existerande blockkedjedata hittad på din HDD/SSD",
+      "hdd_delete_short": "OK till att radera all data på HDD/SDD?"
     }
   }
 }
