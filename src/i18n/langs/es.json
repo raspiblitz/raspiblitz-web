@@ -77,7 +77,9 @@
       "unlock_success": "Billetera desbloqueada",
       "unlocking": "Desbloqueando",
       "unlock_title": "Desbloquear billetera",
-      "unlock_subtitle": "Desbloquear tu billetera"
+      "unlock_subtitle": "Desbloquear tu billetera",
+      "send_onchain": "Envía fondos On-chain",
+      "send_lightning": "Envía fondos vía Lightning"
     },
     "home": {
       "lightning": "Lightning",
@@ -119,7 +121,8 @@
       "channel_id": "ID del Canal",
       "current_open_channels": "Canales abiertos actuales",
       "channel_opened": "Canal abierto satisfactoriamente",
-      "channel_closed": "Canal cerrado satisfactoriamente"
+      "channel_closed": "Canal cerrado satisfactoriamente",
+      "webui": "WebUI"
     },
     "login": {
       "error": "Ocurrió un error",
@@ -173,7 +176,18 @@
       "pleasewait": "por favor espera",
       "migrate_citadel": "¿Quieres migrar de CITADEL a RaspiBlitz?",
       "yes_and_migrate": "Migrar a RaspiBlitz",
-      "start_recovery": "¿Te gustaría iniciar el proceso de recuperación?"
+      "start_recovery": "¿Te gustaría iniciar el proceso de recuperación?",
+      "lightningoutdated": "El nodo desde el que quieres migrar usa una versión posterior que esta RaspiBlitz. Por favor, espera a una versión actualizada. Puedes apagar y encender con la tarjeta sd anterior de tu nodo - no se han realizado cambios.",
+      "convertwarning": "RaspiBlitz solo puede convertir tus datos Blockchain y Lightning (fondos y canales) de momento. Los datos de aplicaciones adicionales se podrían perder en el proceso de migración.",
+      "nodename_error_empty": "El nombre del nodo no puede estar vacío.",
+      "nodename_err_min_length": "El nombre del nodo debe ser al menos de 4 caracteres.",
+      "nodename_err_max_length": "El nombre del nodo debe ser como máximo de 32 caracteres.",
+      "hdd_delete": "BORRAR DATOS ANTIGUOS",
+      "nodename_err_chars": "El nombre del nodo debería contener solo caracteres y números.",
+      "password_a_name": "Contraseña A",
+      "hdd_delete_keep_blockchain": "Por favor confirma que quieres borrar todos los datos previos en el disco/SSD y mantener solo los datos blockchain en tu nueva RaspiBlitz.",
+      "hdd_delete_no_blockchain": "Por favor confirma que quieres borrar todos los datos previos en el disco/SSH para iniciar RaspiBlitz.",
+      "nodename_name": "Nombre del nodo"
     },
     "hardware": {
       "header": "Detalles de hardware",

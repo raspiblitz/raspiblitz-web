@@ -1,1 +1,88 @@
-{}
+{
+  "translation": {
+    "navigation": {
+      "home": "Trang chủ",
+      "apps": "Ứng dụng",
+      "settings": "Hệ thống",
+      "back": "Trước",
+      "logout": "Thoát"
+    },
+    "login": {
+      "login": "Đăng nhập",
+      "invalid_pass": "Sai mật khẩu",
+      "enter_pass": "Nhập mật khẩu A",
+      "error": "Báo lỗi",
+      "enter_pass_placeholder": "Mật khẩu A"
+    },
+    "home": {
+      "version": "Phiên bản",
+      "status": "Trạng thái",
+      "connections": "Kết nối",
+      "webui": "WebUI",
+      "blockchain_size": "Kích cỡ chuỗi",
+      "blocktime": "Khối",
+      "channel": "Kênh",
+      "channel_id": "Kênh ID",
+      "close_channel": "Đóng kênh",
+      "list_open_channels": "Liệt kê các kênh",
+      "urgent": "Khẩn cấp",
+      "normal": "Bình thường",
+      "channel_closed": "Đóng kênh thành công",
+      "bitcoin": "Bitcoin",
+      "versions": "Nhiều phiên bản",
+      "difficulty": "Độ khó",
+      "open_channel": "Mở kênh",
+      "channel_opened": "Mở kênh thành công",
+      "current_open_channels": "Các kênh đang mở hiện tại"
+    },
+    "settings": {
+      "new_pw": "Mật khẩu mới",
+      "confirm": "Xác nhận",
+      "old_pw": "Mật khẩu cũ",
+      "pass_a_changed": "Mật khẩu đã thay đổi thành công",
+      "language": "Ngôn ngữ",
+      "curr_lang": "Ngôn ngữ hiện tại",
+      "shutdown": "Tắt nguồn",
+      "cancel": "Hủy",
+      "change": "Thay đổi",
+      "change_pw_a": "Đổi mật khẩu A",
+      "reboot": "Khởi động lại nguồn"
+    },
+    "setup": {
+      "cancel": "Hủy",
+      "ok": "Đồng ý",
+      "yes": "Có",
+      "blockchain_delete": "Xóa chuỗi",
+      "blockchain_keep": "Giữ chuỗi",
+      "cancel_setup": "Bạn muốn hủy quy trình cài đặt này",
+      "restarts": "Khởi động lại",
+      "continue": "Tiếp"
+    },
+    "forms": {
+      "validation": {
+        "chainFee": {
+          "required": "Nhập khoản phí mong muốn"
+        },
+        "chainAmount": {
+          "required": "Nhập"
+        },
+        "unlock": {
+          "required": "Yêu cầu mật khẩu C",
+          "pass_c": "Mật khẩu C"
+        },
+        "node_uri": {
+          "required": "Nhập node URI"
+        },
+        "amount": {
+          "required": "Nhập số tiền"
+        }
+      }
+    },
+    "hardware": {
+      "temp": "Nhiệt độ"
+    },
+    "tx": {
+      "fee": "Phí"
+    }
+  }
+}
