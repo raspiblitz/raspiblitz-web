@@ -25,7 +25,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
 
   const updateChannel = useCallback(() => {
     instance
-      .get("lightning/list-channel")
+      .get("lightning/list-channels")
       .then((resp) => {
         setOpenChannels(resp.data);
       })
