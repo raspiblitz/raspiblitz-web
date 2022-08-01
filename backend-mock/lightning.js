@@ -255,7 +255,7 @@ router.post("/open-channel", (req, res) => {
   return res.status(200).send();
 });
 
-router.get("/list-channel", (req, res) => {
+router.get("/list-channels", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   return res.send(
     JSON.stringify([
