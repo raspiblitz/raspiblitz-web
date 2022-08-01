@@ -31,6 +31,7 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
     window.addEventListener("keydown", closeOnEsc);
     return () => {
       window.removeEventListener("keydown", closeOnEsc);
+      disableScroll.off();
     };
   }, [closeable, close, closeModal]);
 
