@@ -57,7 +57,7 @@
       "show": "Show",
       "hide": "Hide",
       "no": "No",
-      "channel_opened": "Channel opened successfullly",
+      "channel_opened": "Channel opened successfully",
       "channel_closed": "Channel closed successfully",
       "onchain_cln_no_support": "Showing on-chain transactions is currently not supported with Core Lightning"
     },
