@@ -6,7 +6,8 @@
       "settings": "Hệ thống",
       "back": "Trước",
       "logout": "Thoát",
-      "display_sats": "Hiển thị SATS"
+      "display_sats": "Hiển thị SATS",
+      "dark_mode": "Chế độ nền tối"
     },
     "login": {
       "login": "Đăng nhập",
@@ -44,20 +45,21 @@
       "node_id": "Thứ tự Node",
       "show_qr": "Hiển thị mã QR",
       "lightning": "Lightning",
-      "remote_balance": "Cân bằng kênh từ xa",
-      "channel_balance": "Cân bằng kênh",
-      "pending_balance_local": "Đang chờ cân bằng kênh nội tại",
-      "pending_balance_remote": "Đang chờ cân bằng kênh từ xa",
-      "active": "Hoạt động",
+      "remote_balance": "Số dư kênh từ xa",
+      "channel_balance": "Số dư kênh",
+      "pending_balance_local": "Đang chờ Số dư kênh nội tại",
+      "pending_balance_remote": "Đang chờ Số dư kênh từ xa",
+      "active": "Kích hoạt",
       "node_uri": "Node URI",
       "confirm_channel_close": "Xác nhận đóng kênh",
       "slow": "Chậm",
       "show": "Xem",
       "hide": "Ẩn",
-      "force_close": "Ép đóng kênh",
+      "force_close": "Ép đóng",
       "no": "Không",
       "onchain_cln_no_support": "Hiển thị các giao dịch trên chuỗi hiện không được hỗ trợ bởi Core Lightning",
-      "local_balance": "Cân bằng kênh nội tại"
+      "local_balance": "Số dư kênh nội tại",
+      "blocks_synced": "Các khối đã được đồng bộ hóa dữ liệu"
     },
     "settings": {
       "new_pw": "Mật khẩu mới",
@@ -99,7 +101,7 @@
       "hdd_delete_no_blockchain": "Xác nhận xóa tất cả dữ liệu trước đó trên HDD/SSD để bắt đầu RaspiBlitz.",
       "nodename_err_max_length": "Tên Node có nhiều nhất 32 ký tự.",
       "nodename_err_chars": "Tên Node chỉ bao gồm chữ và số.",
-      "password_a_short": "Thiết lập người dủng Admin mới - Mật khẩu (Mật khẩu A)",
+      "password_a_short": "Thiết lập người dùng Admin mới - Mật khẩu (Mật khẩu A)",
       "password_b_name": "Mật khẩu B",
       "password_b_short": "Thiết lập ứng dụng mới - Mật khẩu (Mật khẩu B)",
       "password_b_details": "Sử dụng mật khẩu này cho các ứng dụng mà bạn có thể cài đặt trên RaspiBlitz của bạn.",
@@ -118,7 +120,7 @@
       "final_do_reboot": "Ok, khởi động lại lần cuối",
       "select_lightning": "Chọn cách thực hiện Lightning:",
       "blockchain_found_short": "Chuỗi khối đã tìm thấy trên ổ cứng HDD/SSD",
-      "blockchain_found_long": "Dữ liệu chuỗi khối đã có trên ổ cứng HDD/SSD",
+      "blockchain_found_long": "Dữ liệu chuỗi khối đã có trên ổ cứng HDD/SSD.",
       "done_setup_ready": "Ok. Sẵn sàng thiết lập hệ thống RaspiBlitz của bạn.",
       "done_setup_start": "Bắt đẩu thiết lập hệ thống",
       "final_update": "Cập nhật hoàn tất.",
@@ -128,7 +130,7 @@
       "hdd_delete": "XÓA DỮ LIỆU CŨ",
       "nodename_name": "Tên Node",
       "runningsetup": "Đang chạy thiết lập",
-      "lightningoutdated": "Node có phiên bản Lightning mới hơn RaspiBlitz. Vui lòng chờ phiên bản cập nhật mới. Bạn có thể tắt máy và bắt đầu lại với thẻ nhớ sd của node cũ - không có thay đổi.",
+      "lightningoutdated": "Node có phiên bản Lightning mới hơn RaspiBlitz. Vui lòng chờ phiên bản cập nhật mới. Bạn có thể tắt máy và bắt đầu lại với thẻ nhớ SD của node cũ - không có thay đổi.",
       "nodename_error_empty": "Tên Node không thể bỏ trống.",
       "nodename_input": "Nhập tên Node",
       "convertwarning": "Hiện tại RaspiBlitz chỉ có thể chuyển hóa chuỗi khối và dữ liệu Lightning (vốn + kênh) của bạn. Các dữ liệu của các ứng dụng khác có thể bị xóa trong quy trình lưu chuyển.",
@@ -162,7 +164,7 @@
           "required": "Nhập khoản phí mong muốn"
         },
         "chainAmount": {
-          "required": "Nhập số",
+          "required": "Nhập số mong muốn",
           "max": "Tài khoản của bạn không đủ để thực hiện giao dịch này"
         },
         "unlock": {
@@ -173,7 +175,7 @@
           "required": "Nhập node URI"
         },
         "amount": {
-          "required": "Nhập số tiền"
+          "required": "Nhập số mong muốn"
         },
         "lnInvoice": {
           "expired": "Hóa đơn đã hết hạn",
@@ -187,15 +189,15 @@
         }
       },
       "hint": {
-        "invoiceAmountZero": "Hóa đơn không có giá trị"
+        "invoiceAmountZero": "Giá trị trên hóa đơn bằng không"
       }
     },
     "hardware": {
       "temp": "Nhiệt độ",
       "header": "Thông số phần cứng",
       "ram_usage": "Dung lượng RAM",
-      "cpu_load": "CPU Load",
-      "disk_usage": "Dung lượng bộ nhớ đã sử dụng"
+      "cpu_load": "Tải bộ xử lý trung tâm",
+      "disk_usage": "Dung lượng ổ cứng đã sử dụng"
     },
     "tx": {
       "fee": "Phí",
@@ -267,7 +269,32 @@
     },
     "appInfo": {
       "rtl": {
-        "shortDescription": "Một web trình duyệt đầy đủ chức năng cho LND, Core Lightning và Eclair"
+        "shortDescription": "Một web trình duyệt đầy đủ chức năng cho LND, Core Lightning và Eclair",
+        "about": "RTL là một ứng dụng web đa thích ứng có đầy đủ chức năng để quản lý hoạt động của Lightning node. RTL hiện diện trên LND, Core Lightning và Eclair."
+      },
+      "specter": {
+        "shortDescription": "Giao diện đồ họa người dùng trên máy tính để bàn cho Bitcoin Core được tối ưu hóa để sử dụng với các loại ví cứng",
+        "about": "Bitcoin Core có một giao diện dòng lệnh rất hữu ích và là một chương trình chạy như một tiến trình nền khá hoàn hảo. Sử dụng PSBT và HWI để có thể tương thích với các ví cứng, nhưng hiện tại chương trình có cách hoạt động giống của Linux. Cách thiết lập đa chữ ký cũng có ứng dụng tương tự. Mục đích của dự án là tạo một giao diện thân thiện và tiện lợi xung quanh Bitcoin Core với trọng tâm là thiết lập đa chữ ký với các ví cứng và các thiết bị kết nối không cần internet."
+      },
+      "btcpayserver": {
+        "shortDescription": "Chấp nhận các thanh toán Bitcoin. Miễn phí, mã nguồn mở và tự chủ, bộ xử lý thanh toán Bitcoin.",
+        "about": "Máy chủ BTCPay là một bộ xử lý thanh toán Bitcoin với mã nguồn mở và miễn phí giúp bạn chấp nhận bitcoin mà không cần phí hay qua trung gian."
+      },
+      "lnbits": {
+        "shortDescription": "Miễn phí, mã nguồn mở hệ thống ví/tài khoản qua kết nối mạng lightning",
+        "about": "LNbits là một máy chủ Python nằm trên các mã nguồn, và có thể được sử dụng như một hệ thống tài khoản để giảm thiểu rủi ro tiếp cận số dư của bạn qua các ứng dụng, thông qua khóa API cho mỗi ví."
+      },
+      "btc-rpc-explorer": {
+        "shortDescription": "Trình duyệt Bitcoin RPC",
+        "about": "Một trình duyệt đám mây tự lưu trữ cho chuỗi Bitcoin, thúc đẩy bởi RPC calls đến Bitcoin node của bạn. Dễ chạy và có thể kết nối đến các công cụ khác (như máy chủ Electrum ) để trở thành trình duyệt đa chức năng."
+      },
+      "mempool": {
+        "shortDescription": "Một trình duyệt mở được thiết kế bởi cộng đồng Bitcoin",
+        "about": " Một trình duyệt mở được thiết kế bởi cộng đồng Bitcoin, tập trung vào các thị trường phí giao dịch để giúp chuyển hóa qua một hệ sinh thái đa tầng."
+      },
+      "thunderhub": {
+        "shortDescription": "Quản trị LND Lightning Node trong trình duyệt của bạn",
+        "about": "ThunderHub là một quản trị LND node mã nguồn mở được sử dụng để quản trị và theo dõi node của bạn trên bất kỳ thiết bị hoặc trình duyệt nào. Chương trình cho phép kiểm soát kết nối lightning với giao diện đơn giản thuận tiện và cập nhật các công nghệ tức thời."
       }
     }
   }
