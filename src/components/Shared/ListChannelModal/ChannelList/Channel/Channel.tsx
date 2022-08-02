@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ChevronDownIcon } from "../../../../../assets/chevron-down.svg";
 import { ReactComponent as ChevronUpIcon } from "../../../../../assets/chevron-up.svg";
 import { LightningChannel } from "../../../../../models/lightning-channel";
-import { AppContext } from "../../../../../store/app-context";
-import { convertToString } from "../../../../../util/format";
+import { AppContext, Unit } from "../../../../../store/app-context";
+import { convertSatToBtc, convertToString } from "../../../../../util/format";
 import ButtonWithSpinner from "../../../ButtonWithSpinner/ButtonWithSpinner";
 
 type Props = {
@@ -27,8 +27,14 @@ const Channel: FC<Props> = ({
   const [confirm, setConfirm] = useState(false);
   const forceCloseEl = useRef<HTMLInputElement>(null);
 
-  const convertedLocal = convertToString(unit, channel.balance_local);
-  const convertedRemote = convertToString(unit, channel.balance_remote);
+  const convertedLocal =
+    unit === Unit.SAT
+      ? convertToString(unit, channel.balance_local)
+      : convertSatToBtc(channel.balance_local);
+  const convertedRemote =
+    unit === Unit.SAT
+      ? convertToString(unit, channel.balance_remote)
+      : convertSatToBtc(channel.balance_remote);
 
   const clickHandler = () => {
     setConfirm(false);
@@ -51,24 +57,30 @@ const Channel: FC<Props> = ({
       </div>
       {showDetails && (
         <section className="flex flex-col gap-4 py-4">
-          <article className="flex justify-around">
-            <div className="flex w-1/2 justify-around">
-              <h4 className="font-bold">{t("home.channel_id")}</h4>
-              <p>{channel.channel_id}</p>
+          <article className="flex flex-col items-center justify-center md:flex-row md:justify-around">
+            <div className="mb-1 flex w-full flex-col justify-center md:w-1/2 md:justify-around">
+              <h4 className="mb-1 font-bold">{t("home.channel_id")}</h4>
+              <p className="mx-2 overflow-x-auto">{channel.channel_id}</p>
             </div>
-            <div className="flex w-1/2 justify-around">
-              <h4 className="font-bold">{t("home.active")}</h4>
-              <p>{channel.active ? t("setup.yes") : t("home.no")}</p>
+            <div className="mb-1 flex w-full flex-col justify-center md:w-1/2 md:justify-around">
+              <h4 className="mb-1 font-bold">{t("home.active")}</h4>
+              <p className="mx-2 overflow-x-auto">
+                {channel.active ? t("setup.yes") : t("home.no")}
+              </p>
             </div>
           </article>
-          <article className="flex justify-around">
-            <div className="flex flex-col justify-around md:w-1/2 md:flex-row">
-              <h4 className="font-bold">{t("home.local_balance")}</h4>
-              <p>{convertedLocal}</p>
+          <article className="flex flex-col items-center justify-center md:flex-row md:justify-around">
+            <div className="mb-1 flex w-full flex-col justify-center md:w-1/2 md:justify-around">
+              <h4 className="mb-1 font-bold">{t("home.local_balance")}</h4>
+              <p className="mx-2 overflow-x-auto">
+                {convertedLocal} {unit}
+              </p>
             </div>
-            <div className="flex flex-col justify-around md:w-1/2 md:flex-row">
-              <h4 className="font-bold">{t("home.remote_balance")}</h4>
-              <p>{convertedRemote}</p>
+            <div className="mb-1 flex w-full flex-col justify-center md:w-1/2 md:justify-around">
+              <h4 className="mb-1 font-bold">{t("home.remote_balance")}</h4>
+              <p className="mx-2 overflow-x-auto">
+                {convertedRemote} {unit}
+              </p>
             </div>
           </article>
           <article>
