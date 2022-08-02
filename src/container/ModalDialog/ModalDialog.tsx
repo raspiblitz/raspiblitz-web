@@ -14,25 +14,29 @@ type Props = {
 };
 
 const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
-  disableScroll.on();
-
   const closeModal = useCallback(() => {
     close();
     disableScroll.off();
   }, [close]);
 
-  useEffect(() => {
-    const closeOnEsc = (event: KeyboardEvent) => {
-      // close on Esc
+  // close Modal on Esc
+  const closeOnEsc = useCallback(
+    (event: KeyboardEvent) => {
       if (closeable && event.key === "Escape") {
         closeModal();
       }
-    };
+    },
+    [closeModal, closeable]
+  );
+
+  useEffect(() => {
+    disableScroll.on();
     window.addEventListener("keydown", closeOnEsc);
     return () => {
       window.removeEventListener("keydown", closeOnEsc);
+      disableScroll.off();
     };
-  }, [closeable, close, closeModal]);
+  }, [closeable, close, closeModal, closeOnEsc]);
 
   return (
     <ModalBackground>
