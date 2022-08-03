@@ -40,18 +40,20 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
 
   return (
     <ModalBackground>
-      <div className="xl:max-w-screen-sm mx-5 flex h-auto max-h-[100%] w-4/5 flex-col overflow-y-auto rounded-lg bg-white pb-4 text-center dark:bg-gray-800 dark:text-white lg:w-1/2 xl:w-2/5">
+      <div className="xl:max-w-screen-sm flex h-screen max-h-[100%] w-screen flex-col overflow-y-auto rounded-lg bg-white pb-4 text-center dark:bg-gray-800 dark:text-white md:h-auto md:w-4/5 lg:w-1/2 xl:mx-5 xl:w-2/5">
         <div className="flex pr-2 pt-1">
-          {closeable && (
-            <button
-              onClick={closeModal}
-              className="ml-auto mt-1 flex h-7 w-7 items-end"
-            >
-              <XIcon className="h-full w-full" />
-            </button>
-          )}
+          <button
+            onClick={closeModal}
+            className={`ml-auto mt-1 flex h-7 w-7 items-end ${
+              closeable ? "" : "invisible"
+            }`}
+          >
+            <XIcon className="h-full w-full" />
+          </button>
         </div>
-        <div className="px-5">{children}</div>
+        <div className="flex h-full flex-col justify-center px-5">
+          {children}
+        </div>
       </div>
     </ModalBackground>
   );
