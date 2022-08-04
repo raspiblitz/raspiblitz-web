@@ -6,9 +6,9 @@ import { ReactComponent as CheckIcon } from "../../../../assets/check.svg";
 import { ReactComponent as ChevronLeft } from "../../../../assets/chevron-left.svg";
 import { ReactComponent as XIcon } from "../../../../assets/X.svg";
 import Message from "../../../../container/Message/Message";
-import { AppContext } from "../../../../store/app-context";
+import { AppContext, Unit } from "../../../../store/app-context";
 import { checkError } from "../../../../util/checkError";
-import { stringToNumber } from "../../../../util/format";
+import { convertBtcToSat, stringToNumber } from "../../../../util/format";
 import { instance } from "../../../../util/interceptor";
 import AmountInput from "../../AmountInput/AmountInput";
 import ButtonWithSpinner from "../../ButtonWithSpinner/ButtonWithSpinner";
@@ -82,7 +82,14 @@ const ConfirmSendModal: FC<Props> = ({
     if (isLnTx) {
       let msatQuery = "";
       if (amountInput > 0) {
-        msatQuery = `&amount_msat=${amountInput}`;
+        // amount in the amountInput is in SAT / BTC
+        let amountMSat: number;
+        if (unit === Unit.BTC) {
+          amountMSat = convertBtcToSat(amountInput) * 1000;
+        } else {
+          amountMSat = amountInput * 1000;
+        }
+        msatQuery = `&amount_msat=${amountMSat}`;
       }
 
       instance
