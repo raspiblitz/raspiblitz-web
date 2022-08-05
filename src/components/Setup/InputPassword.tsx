@@ -87,7 +87,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                   required: t("setup.password_error_empty"),
                   onChange: changePasswordHandler,
                   pattern: {
-                    value: /^[a-zA-Z0-9]*$/,
+                    value: /^[a-zA-Z0-9\-\.]*$/,
                     message: t("setup.password_error_chars"),
                   },
                   minLength: {

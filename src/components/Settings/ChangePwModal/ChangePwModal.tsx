@@ -75,7 +75,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
             {...register("oldPassword", {
               required: t("setup.password_error_empty"),
               pattern: {
-                value: /^[a-zA-Z0-9]*$/,
+                value: /^[a-zA-Z0-9\-\.]*$/,
                 message: t("setup.password_error_chars"),
               },
               minLength: {
@@ -94,7 +94,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
             {...register("newPassword", {
               required: t("setup.password_error_empty"),
               pattern: {
-                value: /^[a-zA-Z0-9]*$/,
+                value: /^[a-zA-Z0-9\-\.]*$/,
                 message: t("setup.password_error_chars"),
               },
               minLength: {
