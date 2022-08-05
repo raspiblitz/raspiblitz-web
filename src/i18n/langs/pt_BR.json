@@ -6,12 +6,13 @@
       "settings": "Configurações",
       "back": "Voltar",
       "dark_mode": "Modo escuro",
-      "display_sats": "Exibir sats"
+      "display_sats": "Exibir SATS",
+      "logout": "Sair"
     },
     "login": {
       "enter_pass": "Digite a senha A",
       "enter_pass_placeholder": "Senha A",
-      "login": "Login",
+      "login": "Acessar",
       "invalid_pass": "Senha inválida",
       "error": "Ocorreu um erro"
     },
@@ -26,7 +27,39 @@
       "ssh": "Login SSH",
       "lightning": "Lightning",
       "channel": "Canal",
-      "channel_balance": "Saldo do canal"
+      "channel_balance": "Saldo do canal",
+      "show": "Mostrar",
+      "hide": "Ocultar",
+      "difficulty": "Dificuldade",
+      "blockchain_size": "Tamanho da Blockchain",
+      "pending_balance_remote": "Saldo remoto pendente",
+      "pending_balance_local": "Saldo local pendente",
+      "node_id": "Nome do Node",
+      "webui": "Interface de usuário",
+      "show_qr": "Mostrar QR Code",
+      "channel_opened": "Canal aberto com sucesso",
+      "conn_in": "Entrada",
+      "conn_out": "Saída",
+      "connections": "Conexões",
+      "list_open_channels": "Listar Canais",
+      "local_balance": "Saldo do canal local",
+      "blocktime": "Tempo de bloco",
+      "versions": "Versões",
+      "onchain_cln_no_support": "No momento, a exibição de transações na cadeia não é compatível com o Core Lightning",
+      "channel_id": "ID do Canal",
+      "remote_balance": "Saldo do Canal Remoto",
+      "active": "Ativo",
+      "node_uri": "Node URI",
+      "open_channel": "Abrir Canal",
+      "current_open_channels": "Canais abertos atuais",
+      "close_channel": "Fechar Canal",
+      "confirm_channel_close": "Confirmar fechamento de canal",
+      "force_close": "Forçar Fechamento",
+      "urgent": "Urgente",
+      "normal": "Normal",
+      "slow": "Lento",
+      "no": "Não",
+      "channel_closed": "Canal fechado com sucesso"
     },
     "wallet": {
       "balance": "Saldo",
@@ -36,10 +69,21 @@
       "amount": "Quantidade",
       "copied": "Copiado!",
       "copy_clipboard": "Copiar para área de transferência",
-      "create_invoice_ln": "Criar uma fatura Lightning",
-      "fund": "Colocar fundos na sua carteira",
+      "create_invoice_ln": "Criar um Invoice Lightning",
+      "fund": "Colocar fundos na sua carteira on-chain",
       "scan_qr": "Leia este código QR ou copie o endereço abaixo para receber fundos",
-      "address": "Endereço"
+      "address": "Endereço",
+      "send_onchain": "Enviar fundos On-chain",
+      "send_lightning": "Enviar fundos via Lightning",
+      "invoice": "Fatura",
+      "confirm": "Confirmar",
+      "unlocking": "Desbloqueio",
+      "unlock": "Desbloquear",
+      "wallet_locked": "Carteira bloqueada",
+      "unlock_title": "Carteira desbloqueada",
+      "create_invoice": "Criar fatura",
+      "unlock_subtitle": "Desbloquear sua Carteira",
+      "unlock_success": "Carteira Desbloqueada"
     },
     "tx": {
       "transactions": "Transações",
@@ -53,7 +97,12 @@
       "description": "Descrição",
       "mempool": "Visualizar na mempool",
       "value": "Valor",
-      "comment": "Comentário"
+      "comment": "Comentário",
+      "sent": "Transação enviada!",
+      "comment_placeholder": "Comentário opcional",
+      "transactions_none": "Nenhuma transação ainda, hora de fazer sua primeira",
+      "confirm_info": "Por favor, confirme a seguinte transação",
+      "unconfirmed": "Não confirmado"
     },
     "apps": {
       "installed": "Instalado",
@@ -67,7 +116,18 @@
       "author": "Autor",
       "source": "Código fonte",
       "offline": "offline",
-      "online": "online"
+      "online": "online",
+      "login_no_pass": "Entrar sem senha",
+      "login_admin_pass_b": "Faça login com o usuário 'admin' e senha B",
+      "login_pass_b": "Entrar com a senha B",
+      "login_userdef": "Login com senha definida pelo usuário",
+      "uninstalling": "Desinstalando",
+      "install_failure": "Falha na instalação de {{appName}}: {{details}}",
+      "uninstall_success": "{{appName}} desinstalado com sucesso",
+      "uninstall_failure": "Falha na desinstalação de {{appName}}: {{details}}",
+      "install_success": "{{appName}} instalado com sucesso",
+      "installing": "Instalando",
+      "selfsigned_cert": "Este aplicativo usa um certificado HTTPS autoassinado"
     },
     "settings": {
       "change_pw_a": "Alterar senha A",
@@ -79,7 +139,163 @@
       "cancel": "Cancelar",
       "confirm": "Confirmar",
       "language": "Idioma",
-      "curr_lang": "Idioma atual"
+      "curr_lang": "Idioma atual",
+      "pass_a_changed": "Senha A alterada com sucesso"
+    },
+    "setup": {
+      "password_error_chars": "A senha deve conter apenas caracteres e números.",
+      "select_bitcoin": "Apenas Bitcoin",
+      "sync_wallet_info": "Por favor, desbloqueie sua carteira Lightning (senha C):",
+      "migrate_umbrel": "Deseja migrar do UMBREL para o RaspiBlitz?",
+      "password_c_name": "Senha C",
+      "password_c_short": "Defina sua nova senha da carteira do Lightning (senha C)",
+      "password_a_details": "Use esta senha para fazer login no seu RaspiBlitz.",
+      "password_b_details": "Use esta senha para aplicativos adicionais que você pode instalar em seu RaspiBlitz.",
+      "done_setup_start": "Iniciar configuração",
+      "done_recover_ready": "OK. Está tudo pronto para recuperar seu RaspiBlitz.",
+      "done_recover_start": "Iniciar a recuperação",
+      "password_c_details": "Use esta senha para desbloquear sua carteira Lightning.",
+      "password_repeat": "Repetir",
+      "password_error_empty": "A senha não pode estar vazia.",
+      "password_error_length": "A senha precisa ter pelo menos 8 caracteres.",
+      "done_update_ready": "OK. Está tudo pronto para atualizar seu RaspiBlitz.",
+      "done_update_start": "Começar atualização",
+      "done_migration_ready": "OK. Está tudo pronto para migrar para o RaspiBlitz.",
+      "final_recovery": "A recuperação está concluída.",
+      "final_update": "A atualização está concluída.",
+      "final_migration": "A migração está concluída.",
+      "cancel_setup": "Deseja realmente cancelar o processo de configuração",
+      "cancel": "Cancelar",
+      "other_options": "Outras opções",
+      "ok": "ok",
+      "setupoptions": "Opções de Configuração",
+      "recoverblitz": "Recuperar meu RaspiBlitz",
+      "updateblitz": "Atualizar meu RaspiBlitz",
+      "migrateblitz": "Migrar para RaspiBlitz",
+      "setupblitz": "Configure um novo RaspiBlitz",
+      "done_setup_ready": "OK. Está tudo pronto para configurar seu RaspiBlitz.",
+      "nodename_error_empty": "Nome do Node não pode ficar vazio.",
+      "nodename_err_min_length": "Nome do node deve ter ao menos 4 caracteres.",
+      "password_a_short": "Defina sua nova senha de administrador (senha A)",
+      "sync_bitcoin_starting": "Iniciando sincronização",
+      "password_error_match": "As senhas não coincidem.",
+      "done_migration_start": "Iniciar migração",
+      "continue": "Continuar",
+      "hdd_delete_keep_blockchain": "Por favor, confirme que você deseja excluir todos os dados anteriores no HDD/SSD e apenas mantenha os dados do blockchain para o seu novo RaspiBlitz.",
+      "hdd_delete_no_blockchain": "Por favor, confirme que deseja excluir todos os dados anteriores no HDD/SSD para iniciar o RaspiBlitz.",
+      "nodename_input": "Nome do Node de entrada",
+      "nodename_name": "Nome do Node",
+      "hdd_delete_short": "Ok para deletar o conteúdo no HDD/SSD?",
+      "pleasewait": "por favor, aguarde",
+      "password_b_name": "Senha B",
+      "password_b_short": "Defina sua nova senha de aplicativo (senha B)",
+      "final_do_reboot": "OK, faça a reinicialização final",
+      "select_lightning": "Escolha sua Implementação do Lightning:",
+      "started": "Iniciado",
+      "restarts": "Reinicia",
+      "blockchain_delete": "Deletar Blockchain",
+      "start_update": "Deseja iniciar o processo de atualização e recuperação?",
+      "yes": "Sim",
+      "blockchain_found_short": "Blockchain encontrado em HDD/SSD",
+      "blockchain_found_long": "No seu HDD/SSD foram encontrados dados de blockchain existentes.",
+      "preparingsetup": "preparando a configuração",
+      "runningsetup": "Configuração em execução",
+      "setupwait": "a configuração levará alguns minutos",
+      "lightningoutdated": "O nó do qual você deseja migrar usa uma versão do Lightning mais recente que esta RaspiBlitz. Aguarde uma versão atualizada. Você pode desligar e inicializar com seu cartão SD de nó antigo - nenhuma alteração foi feita.",
+      "convertwarning": "O RaspiBlitz só pode converter seus dados Blockchain e Lightning (fundos + canais) no momento. Os dados de aplicativos instalados adicionais podem ser excluídos no processo de migração.",
+      "no_and_shutdown": "Não e Desligar",
+      "final_info_reboot": "Agora irá reiniciar e sincronizar o blockchain.",
+      "migrate_citadel": "Deseja migrar do CITADEL para o RaspiBlitz?",
+      "yes_and_migrate": "Migrar para RaspiBlitz",
+      "start_recovery": "Gostaria de iniciar o processo de recuperação?",
+      "blockchain_keep": "Manter Blockchain",
+      "shuttingdown": "desligando",
+      "restarting": "reiniciando",
+      "restartinfo": "por favor espere até que RaspiBlitz responda novamente",
+      "migrate_mynode": "Deseja migrar do MYNODE para o RaspiBlitz?",
+      "hdd_delete": "APAGAR DADOS ANTIGOS",
+      "nodename_err_max_length": "Nome do Node deve ter no máximo 32 caracteres.",
+      "nodename_err_chars": "Nome do Node deve conter apenas caracteres e números.",
+      "password_a_name": "Senha A",
+      "final_setup": "A configuração está concluída.",
+      "final_seedwords": "Por favor, anote suas palavras-semente e guarde em um local seguro:",
+      "lnd": "LND",
+      "cln": "Core Lightning",
+      "sync_headline": "Sincronização inicial RaspiBlitz",
+      "sync_wallet_unlock": "Desbloquear carteira",
+      "sync_bitcoin_sync": "Sincronizar Progresso",
+      "sync_restartinfo": "(a sincronização continuará na próxima reinicialização)"
+    },
+    "appInfo": {
+      "btcpayserver": {
+        "about": "O BTCPay Server é um processador de pagamento Bitcoin gratuito e de código aberto que permite que você aceite bitcoin sem taxas ou intermediários.",
+        "shortDescription": "Aceite pagamentos em Bitcoin. Processador de pagamento Bitcoin gratuito, de código aberto e auto-hospedado."
+      },
+      "rtl": {
+        "shortDescription": "Um aplicativo de navegador da Web com todas as funções para LND, Core Lightning e Eclair",
+        "about": "O RTL é uma interface de usuário da Web de função completa, independente de dispositivo, para ajudar a gerenciar as operações do nó do Lightning. O RTL está disponível nas implementações LND, Core Lightning e Eclair."
+      },
+      "lnbits": {
+        "about": "O LNbits é um servidor Python muito simples que fica em cima de qualquer fonte de financiamento e pode ser usado como um sistema de contas para mitigar o risco de expor aplicativos ao seu saldo total, por meio de chaves de API exclusivas para cada carteira.",
+        "shortDescription": "Sistema de carteira/contas de rede relâmpago gratuito e de código aberto"
+      },
+      "thunderhub": {
+        "about": "ThunderHub é um gerenciador de nós LND de código aberto onde você pode gerenciar e monitorar seu nó em qualquer dispositivo ou navegador. Ele permite que você assuma o controle da Lightning Network com um UX simples e intuitivo e a pilha de tecnologia mais atualizada.",
+        "shortDescription": "LND Lightning Node Manager em seu navegador"
+      },
+      "btc-rpc-explorer": {
+        "shortDescription": "Explorador de RPC Bitcoin",
+        "about": "Este é um explorador auto-hospedado para o blockchain Bitcoin, impulsionado por chamadas RPC para seu próprio nó Bitcoin. É fácil de executar e pode ser conectado a outras ferramentas (como servidores Electrum) para obter um explorador completo."
+      },
+      "specter": {
+        "about": "O Bitcoin Core tem uma interface de linha de comando muito poderosa e um daemon maravilhoso. Usando PSBT e HWI, ele também pode funcionar com carteiras de hardware, mas no momento é muito linux-way. O mesmo se aplica a configurações de múltiplas assinaturas. O objetivo deste projeto é criar uma GUI conveniente e fácil de usar em torno do Bitcoin Core com foco na configuração de várias assinaturas com carteiras de hardware e dispositivos airgapped.",
+        "shortDescription": "Uma GUI de desktop para Bitcoin Core otimizada para trabalhar com carteiras de hardware"
+      },
+      "mempool": {
+        "about": " Um explorador de código aberto desenvolvido para a comunidade Bitcoin, com foco no mercado emergente de taxas de transação para ajudar nossa transição para um ecossistema multicamadas.",
+        "shortDescription": "Um explorador de código aberto desenvolvido para a comunidade Bitcoin"
+      }
+    },
+    "forms": {
+      "validation": {
+        "unlock": {
+          "required": "A senha C é obrigatória",
+          "pass_c": "Senha C"
+        },
+        "lnInvoice": {
+          "patternMismatch": "Formato de fatura incorreto",
+          "required": "Insira uma fatura Lightning",
+          "max": "Seu saldo é muito baixo para pagar esta fatura",
+          "expired": "A fatura expirou"
+        },
+        "chainAmount": {
+          "max": "Seu saldo é muito baixo para enviar este valor",
+          "required": "Por favor, insira um valor"
+        },
+        "chainAddress": {
+          "required": "Por favor, insira um endereço Bitcoin",
+          "patternMismatch": "Formato de endereço incorreto"
+        },
+        "chainFee": {
+          "required": "Insira um valor de taxa"
+        },
+        "node_uri": {
+          "required": "Insira um URI de Node"
+        },
+        "amount": {
+          "required": "Por favor, insira um valor"
+        }
+      },
+      "hint": {
+        "invoiceAmountZero": "O valor da fatura é zero"
+      }
+    },
+    "hardware": {
+      "header": "Detalhes de hardware",
+      "cpu_load": "Carga da CPU",
+      "disk_usage": "Espaço de disco ocupado",
+      "ram_usage": "Uso de RAM",
+      "temp": "Temperatura"
     }
   }
 }
