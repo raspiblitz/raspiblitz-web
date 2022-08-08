@@ -5,7 +5,9 @@
       "apps": "Ứng dụng",
       "settings": "Hệ thống",
       "back": "Trước",
-      "logout": "Thoát"
+      "logout": "Thoát",
+      "display_sats": "Hiển thị SATS",
+      "dark_mode": "Chế độ nền tối"
     },
     "login": {
       "login": "Đăng nhập",
@@ -20,7 +22,7 @@
       "connections": "Kết nối",
       "webui": "WebUI",
       "blockchain_size": "Kích cỡ chuỗi",
-      "blocktime": "Khối",
+      "blocktime": "Thời gian của khối",
       "channel": "Kênh",
       "channel_id": "Kênh ID",
       "close_channel": "Đóng kênh",
@@ -33,7 +35,31 @@
       "difficulty": "Độ khó",
       "open_channel": "Mở kênh",
       "channel_opened": "Mở kênh thành công",
-      "current_open_channels": "Các kênh đang mở hiện tại"
+      "current_open_channels": "Các kênh đang mở hiện tại",
+      "network": "Mạng lưới kết nối",
+      "conn_in": "Kết nối đến",
+      "conn_out": "Kết nối đi",
+      "conn_details": "Chi tiết kết nối",
+      "tor": "Tor",
+      "ssh": "Đăng nhập SSH",
+      "node_id": "Thứ tự Node",
+      "show_qr": "Hiển thị mã QR",
+      "lightning": "Lightning",
+      "remote_balance": "Số dư kênh từ xa",
+      "channel_balance": "Số dư kênh",
+      "pending_balance_local": "Đang chờ Số dư kênh nội tại",
+      "pending_balance_remote": "Đang chờ Số dư kênh từ xa",
+      "active": "Kích hoạt",
+      "node_uri": "Node URI",
+      "confirm_channel_close": "Xác nhận đóng kênh",
+      "slow": "Chậm",
+      "show": "Xem",
+      "hide": "Ẩn",
+      "force_close": "Ép đóng",
+      "no": "Không",
+      "onchain_cln_no_support": "Hiển thị các giao dịch trên chuỗi hiện không được hỗ trợ bởi Core Lightning",
+      "local_balance": "Số dư kênh nội tại",
+      "blocks_synced": "Các khối đã được đồng bộ hóa dữ liệu"
     },
     "settings": {
       "new_pw": "Mật khẩu mới",
@@ -56,7 +82,81 @@
       "blockchain_keep": "Giữ chuỗi",
       "cancel_setup": "Bạn muốn hủy quy trình cài đặt này",
       "restarts": "Khởi động lại",
-      "continue": "Tiếp"
+      "continue": "Tiếp",
+      "pleasewait": "Vui lòng chờ",
+      "shuttingdown": "Đang tắt máy",
+      "restarting": "Đang khởi động lại",
+      "restartinfo": "Vui lòng chờ cho đến khi RaspiBlitz trả lời",
+      "preparingsetup": "chuẩn bị thiết lập hệ thống",
+      "setupwait": "Thiết lập sẽ mất một vài phút",
+      "migrate_umbrel": "Bạn muốn lưu chuyển dữ liệu từ UMBREL qua RaspiBlitz?",
+      "migrate_citadel": "Bạn muốn lưu chuyển dữ liệu từ CITADEL qua RaspiBlitz?",
+      "no_and_shutdown": "Không và tắt máy",
+      "migrate_mynode": "Bạn muốn lưu chuyển dữ liệu từ MYNODE qua RaspiBlitz?",
+      "yes_and_migrate": "Lưu chuyển dữ liệu qua RaspiBlitz",
+      "start_recovery": "Bạn muốn bắt đầu quy trình phục hồi dữ liệu?",
+      "other_options": "Lựa chọn khác",
+      "migrateblitz": "Lưu chuyển dữ liệu qua RaspiBlitz",
+      "hdd_delete_short": "OK để xóa tất cả dữ liệu trên HDD/SSD?",
+      "hdd_delete_no_blockchain": "Xác nhận xóa tất cả dữ liệu trước đó trên HDD/SSD để bắt đầu RaspiBlitz.",
+      "nodename_err_max_length": "Tên Node có nhiều nhất 32 ký tự.",
+      "nodename_err_chars": "Tên Node chỉ bao gồm chữ và số.",
+      "password_a_short": "Thiết lập người dùng Admin mới - Mật khẩu (Mật khẩu A)",
+      "password_b_name": "Mật khẩu B",
+      "password_b_short": "Thiết lập ứng dụng mới - Mật khẩu (Mật khẩu B)",
+      "password_b_details": "Sử dụng mật khẩu này cho các ứng dụng mà bạn có thể cài đặt trên RaspiBlitz của bạn.",
+      "password_c_details": "Sử dụng mật khẩu này để mở khóa ví Lightning của bạn.",
+      "password_error_empty": "Mật khẩu không thể bỏ trống.",
+      "password_error_length": "Mật khẩu cần có ít nhất 8 ký tự.",
+      "password_error_match": "Mật khẩu không đúng.",
+      "done_migration_start": "Bắt đầu sao chép",
+      "done_recover_ready": "Ok. Sẵn sàng hồi phục dữ liệu RaspiBlitz của bạn.",
+      "done_recover_start": "Bắt đầu phục hồi dữ liệu",
+      "done_update_ready": "Ok. Sẵn sàng cập nhật RaspiBlitz của bạn.",
+      "done_update_start": "Sẵn sàng cập nhật",
+      "final_setup": "Thiết lập hệ thống hoàn tất.",
+      "final_recovery": "Phục hồi dữ liệu hoàn tất.",
+      "final_info_reboot": "Bây giờ sẽ khởi động lại và cập nhật chuỗi khối.",
+      "final_do_reboot": "Ok, khởi động lại lần cuối",
+      "select_lightning": "Chọn cách thực hiện Lightning:",
+      "blockchain_found_short": "Chuỗi khối đã tìm thấy trên ổ cứng HDD/SSD",
+      "blockchain_found_long": "Dữ liệu chuỗi khối đã có trên ổ cứng HDD/SSD.",
+      "done_setup_ready": "Ok. Sẵn sàng thiết lập hệ thống RaspiBlitz của bạn.",
+      "done_setup_start": "Bắt đẩu thiết lập hệ thống",
+      "final_update": "Cập nhật hoàn tất.",
+      "final_migration": "Lưu chuyển dữ liệu hoàn tất.",
+      "done_migration_ready": "Ok. Sẵn sàng lưu chuyển dữ liệu qua RaspiBlitz.",
+      "final_seedwords": "Viết và lưu giữ chuỗi mật khẩu của bạn tại một nơi bảo mật:",
+      "hdd_delete": "XÓA DỮ LIỆU CŨ",
+      "nodename_name": "Tên Node",
+      "runningsetup": "Đang chạy thiết lập",
+      "lightningoutdated": "Node có phiên bản Lightning mới hơn RaspiBlitz. Vui lòng chờ phiên bản cập nhật mới. Bạn có thể tắt máy và bắt đầu lại với thẻ nhớ SD của node cũ - không có thay đổi.",
+      "nodename_error_empty": "Tên Node không thể bỏ trống.",
+      "nodename_input": "Nhập tên Node",
+      "convertwarning": "Hiện tại RaspiBlitz chỉ có thể chuyển hóa chuỗi khối và dữ liệu Lightning (vốn + kênh) của bạn. Các dữ liệu của các ứng dụng khác có thể bị xóa trong quy trình lưu chuyển.",
+      "recoverblitz": "Phục hồi RaspiBlitz của tôi",
+      "hdd_delete_keep_blockchain": "Xác nhận xóa tất cả dữ liệu trước đó trên HDD/SSD và giữ lại dữ liệu trên chuỗi khối cho RaspiBlitz mới của bạn.",
+      "nodename_err_min_length": "Tên Node cần có ít nhất 4 ký tự.",
+      "password_a_details": "Sử dụng mật khẩu này để đăng nhập vào RaspiBlitz của bạn.",
+      "start_update": "Bạn muốn bắt đầu quy trình cập nhât và phục hồi dữ liệu?",
+      "password_a_name": "Mật khẩu A",
+      "password_c_name": "Mật khẩu C",
+      "password_repeat": "Lặp lại",
+      "setupoptions": "Thiết lập tùy chỉnh",
+      "updateblitz": "Cập nhật RaspiBlitz của tôi",
+      "setupblitz": "Thiết lập một RaspiBlitz mới",
+      "password_c_short": "Thiết lập ví Lightning mới - Mật khẩu (Mật khẩu C)",
+      "password_error_chars": "Mật khẩu chỉ bao gồm chữ và số.",
+      "select_bitcoin": "Chỉ Bitcoin",
+      "lnd": "LND",
+      "cln": "Core Lightning",
+      "sync_bitcoin_starting": "Bắt đầu cập nhật",
+      "sync_headline": "Cập nhật lần đầu RápiBlitz",
+      "sync_wallet_unlock": "Mở khóa ví",
+      "sync_wallet_info": "Vui lòng mở khóa ví Lightning của bạn (Mật khẩu C):",
+      "sync_bitcoin_sync": "Quy trình cập nhật",
+      "sync_restartinfo": "(cập nhật sẽ tiếp tục trong lần khởi động tiếp theo)",
+      "started": "Đã bắt đầu"
     },
     "forms": {
       "validation": {
@@ -64,7 +164,8 @@
           "required": "Nhập khoản phí mong muốn"
         },
         "chainAmount": {
-          "required": "Nhập"
+          "required": "Nhập số mong muốn",
+          "max": "Tài khoản của bạn không đủ để thực hiện giao dịch này"
         },
         "unlock": {
           "required": "Yêu cầu mật khẩu C",
@@ -74,15 +175,127 @@
           "required": "Nhập node URI"
         },
         "amount": {
-          "required": "Nhập số tiền"
+          "required": "Nhập số mong muốn"
+        },
+        "lnInvoice": {
+          "expired": "Hóa đơn đã hết hạn",
+          "required": "Nhập một hóa đơn Lightning",
+          "patternMismatch": "Sai định dạng hóa đơn",
+          "max": "Số dư của bạn không đủ để trả hóa đơn này"
+        },
+        "chainAddress": {
+          "required": "Vui lòng nhập địa chỉ Bitcoin",
+          "patternMismatch": "Sai địa chỉ định dạng"
         }
+      },
+      "hint": {
+        "invoiceAmountZero": "Giá trị trên hóa đơn bằng không"
       }
     },
     "hardware": {
-      "temp": "Nhiệt độ"
+      "temp": "Nhiệt độ",
+      "header": "Thông số phần cứng",
+      "ram_usage": "Dung lượng RAM",
+      "cpu_load": "Tải bộ xử lý trung tâm",
+      "disk_usage": "Dung lượng ổ cứng đã sử dụng"
     },
     "tx": {
-      "fee": "Phí"
+      "fee": "Phí",
+      "tx_details": "Chi tiết giao dịch",
+      "txid": "Giao dịch ID",
+      "confirmations": "Các xác nhận",
+      "included_block": "Trong khối",
+      "fee_rate": "Mức phí",
+      "description": "Diễn dịch",
+      "comment": "Góp ý",
+      "unconfirmed": "Chưa xác nhận",
+      "sent": "Đã gửi giao dịch!",
+      "confirm_info": "Xác nhận giao dịch sau đây",
+      "transactions_none": "Chưa có giao dịch, tạo giao dịch đầu tiên của bạn",
+      "mempool": "Xem giao dịch trên mempool",
+      "value": "Giá trị",
+      "comment_placeholder": "Góp ý tùy chọn",
+      "transactions": "Các giao dịch",
+      "date": "Ngày"
+    },
+    "wallet": {
+      "on_chain": "Trên chuỗi khối",
+      "amount": "Số lượng",
+      "copied": "Đã sao chép!",
+      "copy_clipboard": "Sao chép tạm thời",
+      "invoice": "Hóa đơn",
+      "create_invoice": "Tạo hóa đơn",
+      "create_invoice_ln": "Tạo một hóa đơn Lightning",
+      "fund": "Cung cấp vốn cho ví của bạn",
+      "scan_qr": "Quét mã QR hoặc sao chép địa chỉ bên dưới để nhận vốn",
+      "address": "Địa chỉ",
+      "unlock_success": "Ví đã được mở khóa",
+      "unlock": "Mở khóa",
+      "unlocking": "Đang mở khóa",
+      "send_onchain": "Gửi vốn trên chuỗi khối",
+      "send_lightning": "Gửi vốn qua Lightning",
+      "unlock_subtitle": "Mở khóa ví của bạn",
+      "send": "Gửi",
+      "balance": "Số dư",
+      "receive": "Nhận",
+      "confirm": "Xác nhận",
+      "unlock_title": "Mở khóa Ví",
+      "wallet_locked": "Ví đã khóa"
+    },
+    "apps": {
+      "uninstalling": "Đang gỡ bỏ cài đặt",
+      "installed": "Đã cài đặt",
+      "available": "Các ứng dụng đã cài",
+      "source": "Mã nguồn",
+      "install": "Cài đặt",
+      "uninstall": "Gỡ bỏ",
+      "no_page": "Không có trang này",
+      "open": "Mở",
+      "info": "Thông tin ứng dụng",
+      "about": "Thông số chung về ứng dụng",
+      "offline": "Không kết nối mạng",
+      "online": "Có kết nối mạng",
+      "install_failure": "Cài đặt {{tên ứng dụng}} không thành công: {{chi tiết}}",
+      "install_success": "{{tên ứng dụng}} cài đặt thành công",
+      "uninstall_success": "Cài đặt thành công {{tên ứng dụng}}",
+      "uninstall_failure": "Gỡ bỏ cài đặt {{tên ứng dụng}} không thành công: {{chi tiết}}",
+      "login_pass_b": "Đăng nhập với mật khẩu B",
+      "login_no_pass": "Đăng nhập không cần mật khẩu",
+      "login_userdef": "Đăng nhập với mật khẩu được thiết lập từ người dủng",
+      "selfsigned_cert": "Ứng dụng này sử dụng chứng chỉ tự ký HTTPS",
+      "login_admin_pass_b": "Đăng nhập với tư cách người dùng Admin và mật khẩu B",
+      "author": "Tác giả",
+      "installing": "Đang cài đặt"
+    },
+    "appInfo": {
+      "rtl": {
+        "shortDescription": "Một web trình duyệt đầy đủ chức năng cho LND, Core Lightning và Eclair",
+        "about": "RTL là một ứng dụng web đa thích ứng có đầy đủ chức năng để quản lý hoạt động của Lightning node. RTL hiện diện trên LND, Core Lightning và Eclair."
+      },
+      "specter": {
+        "shortDescription": "Giao diện đồ họa người dùng trên máy tính để bàn cho Bitcoin Core được tối ưu hóa để sử dụng với các loại ví cứng",
+        "about": "Bitcoin Core có một giao diện dòng lệnh rất hữu ích và là một chương trình chạy như một tiến trình nền khá hoàn hảo. Sử dụng PSBT và HWI để có thể tương thích với các ví cứng, nhưng hiện tại chương trình có cách hoạt động giống của Linux. Cách thiết lập đa chữ ký cũng có ứng dụng tương tự. Mục đích của dự án là tạo một giao diện thân thiện và tiện lợi xung quanh Bitcoin Core với trọng tâm là thiết lập đa chữ ký với các ví cứng và các thiết bị kết nối không cần internet."
+      },
+      "btcpayserver": {
+        "shortDescription": "Chấp nhận các thanh toán Bitcoin. Miễn phí, mã nguồn mở và tự chủ, bộ xử lý thanh toán Bitcoin.",
+        "about": "Máy chủ BTCPay là một bộ xử lý thanh toán Bitcoin với mã nguồn mở và miễn phí giúp bạn chấp nhận bitcoin mà không cần phí hay qua trung gian."
+      },
+      "lnbits": {
+        "shortDescription": "Miễn phí, mã nguồn mở hệ thống ví/tài khoản qua kết nối mạng lightning",
+        "about": "LNbits là một máy chủ Python nằm trên các mã nguồn, và có thể được sử dụng như một hệ thống tài khoản để giảm thiểu rủi ro tiếp cận số dư của bạn qua các ứng dụng, thông qua khóa API cho mỗi ví."
+      },
+      "btc-rpc-explorer": {
+        "shortDescription": "Trình duyệt Bitcoin RPC",
+        "about": "Một trình duyệt đám mây tự lưu trữ cho chuỗi Bitcoin, thúc đẩy bởi RPC calls đến Bitcoin node của bạn. Dễ chạy và có thể kết nối đến các công cụ khác (như máy chủ Electrum ) để trở thành trình duyệt đa chức năng."
+      },
+      "mempool": {
+        "shortDescription": "Một trình duyệt mở được thiết kế bởi cộng đồng Bitcoin",
+        "about": " Một trình duyệt mở được thiết kế bởi cộng đồng Bitcoin, tập trung vào các thị trường phí giao dịch để giúp chuyển hóa qua một hệ sinh thái đa tầng."
+      },
+      "thunderhub": {
+        "shortDescription": "Quản trị LND Lightning Node trong trình duyệt của bạn",
+        "about": "ThunderHub là một quản trị LND node mã nguồn mở được sử dụng để quản trị và theo dõi node của bạn trên bất kỳ thiết bị hoặc trình duyệt nào. Chương trình cho phép kiểm soát kết nối lightning với giao diện đơn giản thuận tiện và cập nhật các công nghệ tức thời."
+      }
     }
   }
 }
