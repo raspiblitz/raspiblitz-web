@@ -84,6 +84,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
               },
               onChange: onChangeOldPw,
             })}
+            type="password"
             value={oldPassword}
             label={t("settings.old_pw")}
             errorMessage={errors.oldPassword}
@@ -103,6 +104,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
               },
               onChange: onChangeNewPw,
             })}
+            type="password"
             value={newPassword}
             label={t("settings.new_pw")}
             errorMessage={errors.newPassword}
@@ -119,7 +121,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
           </button>
           <ButtonWithSpinner
             type="submit"
-            className="bd-button flex items-center justify-center px-2 disabled:bg-gray-400"
+            className="bd-button flex items-center justify-center px-2"
             disabled={!isValid}
             loading={isLoading}
             icon={<RefreshIcon className="inline h-6 w-6" />}
