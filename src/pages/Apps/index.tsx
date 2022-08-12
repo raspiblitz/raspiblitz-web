@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
 import { App } from "../../models/app.model";

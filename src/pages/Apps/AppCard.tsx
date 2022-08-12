@@ -8,7 +8,7 @@ import { ReactComponent as LinkIcon } from "../../assets/external-link.svg";
 import { ReactComponent as InfoIcon } from "../../assets/information-circle.svg";
 import { ReactComponent as LockIcon } from "../../assets/lock-open.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
-import ButtonWithSpinner from "../../components/Shared/ButtonWithSpinner/ButtonWithSpinner";
+import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 
 export type Props = {
   appInfo: App;

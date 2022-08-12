@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 import { ReactComponent as X } from "../../assets/X.svg";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
-import ConfirmModal from "../../components/Shared/ConfirmModal/ConfirmModal";
-import InputField from "../../components/Shared/InputField/InputField";
+import ConfirmModal from "../../components/ConfirmModal";
+import InputField from "../../components/InputField";
 
 export type Props = {
   passwordType: "a" | "b" | "c";

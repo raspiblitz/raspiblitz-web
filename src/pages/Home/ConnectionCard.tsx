@@ -8,7 +8,7 @@ import { ReactComponent as ClipboardIcon } from "../../assets/clipboard-copy.svg
 import { ReactComponent as EyeOffIcon } from "../../assets/eye-off.svg";
 import { ReactComponent as EyeIcon } from "../../assets/eye.svg";
 import { ReactComponent as QRCodeIcon } from "../../assets/qrcode.svg";
-import LoadingBox from "../../components/Shared/LoadingBox/LoadingBox";
+import LoadingBox from "../../components/LoadingBox";
 import ModalDialog from "../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../hooks/use-clipboard";
 import { SSEContext } from "../../context/sse-context";

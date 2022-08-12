@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import ModalDialog from "../../../../container/ModalDialog/ModalDialog";
 import { Transaction } from "../../../../models/transaction.model";
 import { MODAL_ROOT } from "../../../../util/util";
-import LNDetails from "./LNDetails/LNDetails";
-import OnchainDetails from "./OnchainDetails/OnchainDetails";
+import LNDetails from "./LNDetails";
+import OnchainDetails from "./OnchainDetails";
 
 type Props = {
   transaction: Transaction;

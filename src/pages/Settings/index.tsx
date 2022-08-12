@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ConfirmModal from "../../components/Shared/ConfirmModal/ConfirmModal";
+import ConfirmModal from "../../components/ConfirmModal";
 import ActionBox from "../../container/ActionBox/ActionBox";
 import VersionBox from "../../container/VersionBox/VersionBox";
 import useSSE from "../../hooks/use-sse";

@@ -10,8 +10,8 @@ import ProgressCircle from "../../container/ProgressCircle/ProgressCircle";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import ButtonWithSpinner from "../../components/Shared/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "../../components/Shared/InputField/InputField";
+import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "../../components/InputField";
 
 export interface InputData {
   data: SyncData | any;

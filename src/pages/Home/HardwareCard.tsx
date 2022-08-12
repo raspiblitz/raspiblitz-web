@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { SSEContext } from "../../context/sse-context";
-import LoadingBox from "../../components/Shared/LoadingBox/LoadingBox";
+import LoadingBox from "../../components/LoadingBox";
 
 const PI_NUM_CORES = 4;
 
