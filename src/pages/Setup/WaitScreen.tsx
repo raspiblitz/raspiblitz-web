@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupStatus } from "../../models/setup.model";
-import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
 
 export type Props = {
   status: SetupStatus;

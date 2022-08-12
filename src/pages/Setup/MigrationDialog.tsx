@@ -4,7 +4,7 @@ import { ReactComponent as CloudDownload } from "../../assets/cloud-download.svg
 import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "../../models/setup.model";
-import ConfirmModal from "../Shared/ConfirmModal/ConfirmModal";
+import ConfirmModal from "../../components/Shared/ConfirmModal/ConfirmModal";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;

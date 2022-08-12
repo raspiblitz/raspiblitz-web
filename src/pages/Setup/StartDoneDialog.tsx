@@ -4,7 +4,7 @@ import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 import { ReactComponent as X } from "../../assets/X.svg";
 import SetupContainer from "../../container/SetupContainer/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
-import ConfirmModal from "../Shared/ConfirmModal/ConfirmModal";
+import ConfirmModal from "../../components/Shared/ConfirmModal/ConfirmModal";
 
 export type Props = {
   setupPhase: SetupPhase;
