@@ -1,14 +1,6 @@
 import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import AppStatusCard from "../../components/Home/AppStatusCard/AppStatusCard";
-import BitcoinCard from "../../components/Home/BitcoinCard/BitcoinCard";
-import ConnectionCard from "../../components/Home/ConnectionCard/ConnectionCard";
-import HardwareCard from "../../components/Home/HardwareCard/HardwareCard";
-import LightningCard from "../../components/Home/LightningCard/LightningCard";
-import TransactionCard from "../../components/Home/TransactionCard/TransactionCard";
-import TransactionDetailModal from "../../components/Home/TransactionCard/TransactionDetailModal/TransactionDetailModal";
-import WalletCard from "../../components/Home/WalletCard/WalletCard";
 import ListChannelModal from "../../components/Shared/ListChannelModal/ListChannelModal";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
 import OpenChannelModal from "../../components/Shared/OpenChannelModal/OpenChannelModal";
@@ -23,6 +15,14 @@ import { AppContext } from "../../store/app-context";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
 import { enableGutter } from "../../util/util";
+import AppStatusCard from "./AppStatusCard";
+import BitcoinCard from "./BitcoinCard";
+import ConnectionCard from "./ConnectionCard";
+import HardwareCard from "./HardwareCard";
+import LightningCard from "./LightningCard";
+import TransactionCard from "./TransactionCard/TransactionCard";
+import TransactionDetailModal from "./TransactionCard/TransactionDetailModal/TransactionDetailModal";
+import WalletCard from "./WalletCard";
 
 const startupToastId = "startup-toast";
 

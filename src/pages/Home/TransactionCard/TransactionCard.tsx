@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowDownIcon } from "../../../assets/arrow-down.svg";
 import { ReactComponent as InfoCircleIcon } from "../../../assets/information-circle.svg";
 import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.svg";
+import LoadingBox from "../../../components/Shared/LoadingBox/LoadingBox";
 import Message from "../../../container/Message/Message";
 import { Transaction } from "../../../models/transaction.model";
 import { AppContext } from "../../../store/app-context";
-import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
 import SingleTransaction from "./SingleTransaction/SingleTransaction";
 
 export type Props = {

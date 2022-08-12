@@ -4,15 +4,15 @@ import "rc-tooltip/assets/bootstrap.css";
 import { FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ClipboardIcon } from "../../../assets/clipboard-copy.svg";
-import { ReactComponent as EyeOffIcon } from "../../../assets/eye-off.svg";
-import { ReactComponent as EyeIcon } from "../../../assets/eye.svg";
-import { ReactComponent as QRCodeIcon } from "../../../assets/qrcode.svg";
-import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import useClipboard from "../../../hooks/use-clipboard";
-import { SSEContext } from "../../../store/sse-context";
-import { MODAL_ROOT } from "../../../util/util";
-import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
+import { ReactComponent as ClipboardIcon } from "../../assets/clipboard-copy.svg";
+import { ReactComponent as EyeOffIcon } from "../../assets/eye-off.svg";
+import { ReactComponent as EyeIcon } from "../../assets/eye.svg";
+import { ReactComponent as QRCodeIcon } from "../../assets/qrcode.svg";
+import LoadingBox from "../../components/Shared/LoadingBox/LoadingBox";
+import ModalDialog from "../../container/ModalDialog/ModalDialog";
+import useClipboard from "../../hooks/use-clipboard";
+import { SSEContext } from "../../store/sse-context";
+import { MODAL_ROOT } from "../../util/util";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 

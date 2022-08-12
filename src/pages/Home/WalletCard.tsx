@@ -1,17 +1,17 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import btcLogo from "../../../assets/bitcoin-circle-white.svg";
-import { ReactComponent as LightningIcon } from "../../../assets/lightning.svg";
-import { ReactComponent as ChainIcon } from "../../../assets/link.svg";
-import { ReactComponent as ReceiveIcon } from "../../../assets/receive.svg";
-import { ReactComponent as SendIcon } from "../../../assets/send.svg";
-import { AppContext, Unit } from "../../../store/app-context";
-import { SSEContext } from "../../../store/sse-context";
+import btcLogo from "../../assets/bitcoin-circle-white.svg";
+import { ReactComponent as LightningIcon } from "../../assets/lightning.svg";
+import { ReactComponent as ChainIcon } from "../../assets/link.svg";
+import { ReactComponent as ReceiveIcon } from "../../assets/receive.svg";
+import { ReactComponent as SendIcon } from "../../assets/send.svg";
+import { AppContext, Unit } from "../../store/app-context";
+import { SSEContext } from "../../store/sse-context";
 import {
   convertMSatToBtc,
   convertSatToBtc,
   convertToString,
-} from "../../../util/format";
+} from "../../util/format";
 
 type Props = {
   onReceive: () => void;

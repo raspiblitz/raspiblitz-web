@@ -1,8 +1,8 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { SSEContext } from "../../../store/sse-context";
-import { checkPropsUndefined } from "../../../util/util";
-import LoadingBox from "../../Shared/LoadingBox/LoadingBox";
+import { SSEContext } from "../../store/sse-context";
+import { checkPropsUndefined } from "../../util/util";
+import LoadingBox from "../../components/Shared/LoadingBox/LoadingBox";
 
 export const BitcoinCard: FC = () => {
   const { t } = useTranslation();
