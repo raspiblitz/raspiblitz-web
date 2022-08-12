@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as AppIcon } from "../../../assets/apps.svg";
-import { ReactComponent as HomeLogo } from "../../../assets/home.svg";
-import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
+import { ReactComponent as AppIcon } from "../assets/apps.svg";
+import { ReactComponent as HomeLogo } from "../assets/home.svg";
+import { ReactComponent as SettingsIcon } from "../assets/settings.svg";
 
 const navLinkClasses = "dark:text-white opacity-80";
 const navLinkActiveClasses = "text-yellow-500 dark:text-yellow-500 opacity-100";

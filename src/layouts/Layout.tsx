@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import BottomNav from "../../components/Navigation/BottomNav/BottomNav";
-import Header from "../../components/Navigation/Header/Header";
-import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import BottomNav from "./BottomNav";
+import Header from "./Header";
+import SideDrawer from "./SideDrawer";
 
 type Props = {
   children?: React.ReactNode;

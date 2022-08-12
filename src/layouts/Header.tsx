@@ -1,12 +1,12 @@
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as MenuIcon } from "../../../assets/menu.svg";
-import { ReactComponent as RaspiBlitzMobileLogo } from "../../../assets/RaspiBlitz_Logo_Icon.svg";
-import { ReactComponent as RaspiBlitzLogo } from "../../../assets/RaspiBlitz_Logo_Main.svg";
-import { ReactComponent as RaspiBlitzLogoDark } from "../../../assets/RaspiBlitz_Logo_Main_Negative.svg";
-import { AppContext } from "../../../context/app-context";
-import { SSEContext } from "../../../context/sse-context";
-import DropdownMenu from "./DropdownMenu/DropdownMenu";
+import { ReactComponent as MenuIcon } from "../assets/menu.svg";
+import { ReactComponent as RaspiBlitzMobileLogo } from "../assets/RaspiBlitz_Logo_Icon.svg";
+import { ReactComponent as RaspiBlitzLogo } from "../assets/RaspiBlitz_Logo_Main.svg";
+import { ReactComponent as RaspiBlitzLogoDark } from "../assets/RaspiBlitz_Logo_Main_Negative.svg";
+import { AppContext } from "../context/app-context";
+import { SSEContext } from "../context/sse-context";
+import DropdownMenu from "./DropdownMenu";
 
 const Header: FC = () => {
   const { darkMode } = useContext(AppContext);

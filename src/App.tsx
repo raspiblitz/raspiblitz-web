@@ -2,7 +2,7 @@ import { FC, lazy, Suspense, useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Layout from "./container/Layout/Layout";
+import Layout from "./layouts/Layout";
 import LoadingScreen from "./container/LoadingScreen/LoadingScreen";
 import RequireAuth from "./container/RequireAuth/RequireAuth";
 import RequireSetup from "./container/RequireSetup/RequireSetup";

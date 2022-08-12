@@ -2,11 +2,11 @@ import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as AppIcon } from "../../../assets/apps.svg";
-import { ReactComponent as HomeLogo } from "../../../assets/home.svg";
-import { ReactComponent as LogoutIcon } from "../../../assets/logout.svg";
-import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
-import { AppContext } from "../../../context/app-context";
+import { ReactComponent as AppIcon } from "../assets/apps.svg";
+import { ReactComponent as HomeLogo } from "../assets/home.svg";
+import { ReactComponent as LogoutIcon } from "../assets/logout.svg";
+import { ReactComponent as SettingsIcon } from "../assets/settings.svg";
+import { AppContext } from "../context/app-context";
 
 const navLinkClasses =
   "flex md:flex-col lg:flex-row items-center justify-center py-4 xl:pl-6 mx-auto w-full dark:text-white opacity-80";
