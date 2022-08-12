@@ -3,7 +3,7 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "../../../i18n/test_config";
 import { AppStatus, AuthMethod } from "../../../models/app-status";
 import { App } from "../../../models/app.model";
-import { AppCard, Props } from "./AppCard";
+import { AppCard, Props } from "../AppCard";
 
 const app: App = {
   id: "123",

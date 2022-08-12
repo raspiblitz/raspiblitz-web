@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
-import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
-import { ReactComponent as TrashIcon } from "../../../assets/trash.svg";
-import AppIcon from "../../../container/AppIcon/AppIcon";
-import { App } from "../../../models/app.model";
-import { availableApps } from "../../../util/availableApps";
-import ButtonWithSpinner from "../../Shared/ButtonWithSpinner/ButtonWithSpinner";
-import ImageCarousel from "../../Shared/ImageCarousel/ImageCarousel";
-import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
+import { ReactComponent as ChevronLeft } from "../../assets/chevron-left.svg";
+import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
+import { ReactComponent as TrashIcon } from "../../assets/trash.svg";
+import ButtonWithSpinner from "../../components/Shared/ButtonWithSpinner/ButtonWithSpinner";
+import ImageCarousel from "../../components/Shared/ImageCarousel/ImageCarousel";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import AppIcon from "../../container/AppIcon/AppIcon";
+import { App } from "../../models/app.model";
+import { availableApps } from "../../util/availableApps";
 
 export type Props = {
   app: App;
@@ -38,9 +38,9 @@ export const AppInfo: FC<Props> = ({
 
     async function loadAppImages() {
       const promises = await Promise.allSettled([
-        import(`../../../assets/apps/preview/${id}/1.png`),
-        import(`../../../assets/apps/preview/${id}/2.png`),
-        import(`../../../assets/apps/preview/${id}/3.png`),
+        import(`../../assets/apps/preview/${id}/1.png`),
+        import(`../../assets/apps/preview/${id}/2.png`),
+        import(`../../assets/apps/preview/${id}/3.png`),
       ]);
 
       promises.forEach((promise, i) => {
