@@ -89,7 +89,6 @@ describe("ConfirmSendModal", () => {
     test("amountInput correctly sends mSat", async () => {
       server.use(
         rest.post("/api/v1/lightning/send-payment", (req, res, ctx) => {
-          console.log(req.url.searchParams.get("amount_msat"));
           if (req.url.searchParams.get("amount_msat") === "10000") {
             return res(ctx.status(200));
           } else {
