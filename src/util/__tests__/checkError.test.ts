@@ -1,4 +1,4 @@
-import { checkError } from "./checkError";
+import { checkError } from "../checkError";
 
 jest.mock("i18next", () => ({
   t: () => "An error occurred",
