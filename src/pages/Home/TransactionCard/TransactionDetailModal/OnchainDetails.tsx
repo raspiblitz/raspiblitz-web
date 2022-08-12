@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ClipboardIcon } from "../../../../assets/clipboard-copy.svg";
-import KeyValueDisplay from "../../../../container/KeyValueDisplay/KeyValueDisplay";
+import KeyValueDisplay from "./KeyValueDisplay";
 import useClipboard from "../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../models/transaction.model";
 import { convertSatToBtc, convertToString } from "../../../../util/format";

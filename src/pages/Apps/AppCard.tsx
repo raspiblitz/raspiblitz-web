@@ -1,7 +1,7 @@
 import Tooltip from "rc-tooltip";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import AppIcon from "../..//container/AppIcon/AppIcon";
+import AppIcon from "../../components/AppIcon";
 import { AppStatus, AuthMethod } from "../..//models/app-status";
 import { App } from "../..//models/app.model";
 import { ReactComponent as LinkIcon } from "../../assets/external-link.svg";

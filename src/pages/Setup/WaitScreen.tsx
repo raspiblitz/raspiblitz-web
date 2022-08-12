@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import SetupContainer from "../../layouts/SetupContainer";
 import { SetupStatus } from "../../models/setup.model";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 

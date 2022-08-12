@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import AppIcon from "../../container/AppIcon/AppIcon";
+import AppIcon from "../../components/AppIcon";
 import { AppStatus } from "../../models/app-status";
 import { availableApps } from "../../util/availableApps";
 

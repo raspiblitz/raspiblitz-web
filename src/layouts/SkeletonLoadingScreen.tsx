@@ -1,5 +1,5 @@
 import { FC } from "react";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const SkeletonLoadingScreen: FC = () => {
   return (

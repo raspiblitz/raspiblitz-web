@@ -7,7 +7,7 @@ import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 import { ReactComponent as XIcon } from "../../assets/X.svg";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../components/InputField";
-import ModalDialog from "../../container/ModalDialog/ModalDialog";
+import ModalDialog from "../../layouts/ModalDialog";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
 import { MODAL_ROOT } from "../../util/util";

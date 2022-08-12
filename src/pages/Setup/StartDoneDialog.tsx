@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
 import { ReactComponent as X } from "../../assets/X.svg";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import SetupContainer from "../../layouts/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
 import ConfirmModal from "../../components/ConfirmModal";
 

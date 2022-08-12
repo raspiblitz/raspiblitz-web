@@ -2,7 +2,7 @@ import { FC, useContext } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import ModalDialog from "../container/ModalDialog/ModalDialog";
+import ModalDialog from "../layouts/ModalDialog";
 import { AppContext } from "../context/app-context";
 import { instance } from "../util/interceptor";
 import { MODAL_ROOT } from "../util/util";

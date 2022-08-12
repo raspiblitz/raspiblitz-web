@@ -6,7 +6,7 @@ import { ReactComponent as RaspiBlitzLogo } from "../../assets/RaspiBlitz_Logo_M
 import { ReactComponent as RaspiBlitzLogoDark } from "../../assets/RaspiBlitz_Logo_Main_Negative.svg";
 import I18nDropdown from "../../components/I18nDropdown";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import Message from "../../container/Message/Message";
+import Message from "../../components/Message";
 import { AppContext } from "../../context/app-context";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";

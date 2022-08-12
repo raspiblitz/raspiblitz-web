@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ConfirmModal from "../../components/ConfirmModal";
-import ActionBox from "../../container/ActionBox/ActionBox";
-import VersionBox from "../../container/VersionBox/VersionBox";
 import useSSE from "../../hooks/use-sse";
 import { enableGutter } from "../../util/util";
+import ActionBox from "./ActionBox";
 import ChangePwModal from "./ChangePwModal";
 import I18nBox from "./I18nBox";
+import VersionBox from "./VersionBox";
 
 const Settings: FC = () => {
   const { t } = useTranslation();

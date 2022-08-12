@@ -8,7 +8,7 @@ import { ReactComponent as XIcon } from "../../../assets/X.svg";
 import AmountInput from "../../../components/AmountInput";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import { TxType } from "../SwitchTxType";
-import Message from "../../../container/Message/Message";
+import Message from "../../../components/Message";
 import { AppContext, Unit } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../util/format";

@@ -4,8 +4,8 @@ import { ReactComponent as ArrowRightIcon } from "../../assets/arrow-sm-right.sv
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
-import SelectOption from "../../container/SelectOption/SelectOption";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import SelectOption from "./SelectOption";
+import SetupContainer from "../../layouts/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
 
 export type Props = {

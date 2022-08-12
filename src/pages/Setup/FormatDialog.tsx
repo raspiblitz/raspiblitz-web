@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as DBIcon } from "../../assets/database.svg";
 import { ReactComponent as TrashIcon } from "../../assets/trash.svg";
 import { ReactComponent as X } from "../../assets/X.svg";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import SetupContainer from "../../layouts/SetupContainer";
 import ConfirmModal from "../../components/ConfirmModal";
 
 export type Props = {

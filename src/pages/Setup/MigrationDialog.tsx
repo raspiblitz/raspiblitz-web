@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as CloudDownload } from "../../assets/cloud-download.svg";
 import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import SetupContainer from "../../layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "../../models/setup.model";
 import ConfirmModal from "../../components/ConfirmModal";
 

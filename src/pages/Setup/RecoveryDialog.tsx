@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as CloudDownload } from "../../assets/cloud-download.svg";
 import { ReactComponent as Cog } from "../../assets/cog.svg";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import SetupContainer from "../../layouts/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
 
 export type Props = {

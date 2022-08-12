@@ -1,8 +1,8 @@
 import { FC, FormEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowRightIcon } from "../../assets/arrow-sm-right.svg";
-import SelectOption from "../../container/SelectOption/SelectOption";
-import SetupContainer from "../../container/SetupContainer/SetupContainer";
+import SelectOption from "./SelectOption";
+import SetupContainer from "../../layouts/SetupContainer";
 import { SetupLightning } from "../../models/setup.model";
 import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
 import CLNLogoDark from "../../assets/core-lightning-dark.png";

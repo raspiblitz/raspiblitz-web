@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
-import { ReactComponent as MoonLogo } from "../../assets/moon.svg";
-import I18nDropdown from "../../components/I18nDropdown";
-import { AppContext } from "../../context/app-context";
+import { ReactComponent as MoonLogo } from "../assets/moon.svg";
+import I18nDropdown from "../components/I18nDropdown";
+import { AppContext } from "../context/app-context";
 
 type Props = {
   children?: React.ReactNode;

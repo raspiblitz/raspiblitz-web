@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect } from "react";
-import { ReactComponent as XIcon } from "../../assets/X.svg";
-import ModalBackground from "../ModalBackground/ModalBackground";
+import { ReactComponent as XIcon } from "../assets/X.svg";
+import ModalBackground from "./ModalBackground";
 
 export const disableScroll = {
   on: () => document.body.classList.add("overflow-y-hidden"),

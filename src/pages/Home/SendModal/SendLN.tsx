@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as SendIcon } from "../../../assets/send.svg";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../../components/InputField";
-import Message from "../../../container/Message/Message";
+import Message from "../../../components/Message";
 import { AppContext } from "../../../context/app-context";
 
 export type Props = {

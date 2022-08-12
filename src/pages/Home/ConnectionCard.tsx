@@ -9,7 +9,7 @@ import { ReactComponent as EyeOffIcon } from "../../assets/eye-off.svg";
 import { ReactComponent as EyeIcon } from "../../assets/eye.svg";
 import { ReactComponent as QRCodeIcon } from "../../assets/qrcode.svg";
 import LoadingBox from "../../components/LoadingBox";
-import ModalDialog from "../../container/ModalDialog/ModalDialog";
+import ModalDialog from "../../layouts/ModalDialog";
 import useClipboard from "../../hooks/use-clipboard";
 import { SSEContext } from "../../context/sse-context";
 import { MODAL_ROOT } from "../../util/util";

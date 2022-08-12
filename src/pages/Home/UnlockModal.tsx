@@ -5,10 +5,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { ReactComponent as LockOpen } from "../../assets/lock-open.svg";
-import Message from "../../container/Message/Message";
-import ModalDialog, {
-  disableScroll,
-} from "../../container/ModalDialog/ModalDialog";
+import Message from "../../components/Message";
+import ModalDialog, { disableScroll } from "../../layouts/ModalDialog";
 import { AppContext } from "../../context/app-context";
 import { instance } from "../../util/interceptor";
 import { MODAL_ROOT } from "../../util/util";

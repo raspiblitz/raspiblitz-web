@@ -4,7 +4,7 @@ import { ReactComponent as ArrowDownIcon } from "../../../assets/arrow-down.svg"
 import { ReactComponent as InfoCircleIcon } from "../../../assets/information-circle.svg";
 import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.svg";
 import LoadingBox from "../../../components/LoadingBox";
-import Message from "../../../container/Message/Message";
+import Message from "../../../components/Message";
 import { Transaction } from "../../../models/transaction.model";
 import { AppContext } from "../../../context/app-context";
 import SingleTransaction from "./SingleTransaction";

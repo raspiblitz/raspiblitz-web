@@ -6,7 +6,7 @@ import { ReactComponent as TrashIcon } from "../../assets/trash.svg";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import ImageCarousel from "./ImageCarousel";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import AppIcon from "../../container/AppIcon/AppIcon";
+import AppIcon from "../../components/AppIcon";
 import { App } from "../../models/app.model";
 import { availableApps } from "../../util/availableApps";
 

@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import SwitchTxType, { TxType } from "../SwitchTxType";
-import ModalDialog from "../../../container/ModalDialog/ModalDialog";
+import ModalDialog from "../../../layouts/ModalDialog";
 import { AppContext, Unit } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import {
