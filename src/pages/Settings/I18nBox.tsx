@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import I18nDropdown from "../../Shared/I18nDropdown/I18nDropdown";
+import I18nDropdown from "../../components/Shared/I18nDropdown/I18nDropdown";
 
 const I18nBox: FC = () => {
   const { t, i18n } = useTranslation();

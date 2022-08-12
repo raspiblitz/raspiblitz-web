@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ChangePwModal from "../../components/Settings/ChangePwModal/ChangePwModal";
-import I18nBox from "../../components/Settings/I18nBox/I18nBox";
 import ConfirmModal from "../../components/Shared/ConfirmModal/ConfirmModal";
 import ActionBox from "../../container/ActionBox/ActionBox";
 import VersionBox from "../../container/VersionBox/VersionBox";
 import useSSE from "../../hooks/use-sse";
 import { enableGutter } from "../../util/util";
+import ChangePwModal from "./ChangePwModal";
+import I18nBox from "./I18nBox";
 
 const Settings: FC = () => {
   const { t } = useTranslation();

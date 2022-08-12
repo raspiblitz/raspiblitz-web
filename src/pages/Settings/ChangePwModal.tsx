@@ -3,14 +3,14 @@ import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
-import { ReactComponent as XIcon } from "../../../assets/X.svg";
-import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import { checkError } from "../../../util/checkError";
-import { instance } from "../../../util/interceptor";
-import { MODAL_ROOT } from "../../../util/util";
-import ButtonWithSpinner from "../../Shared/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "../../Shared/InputField/InputField";
+import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
+import { ReactComponent as XIcon } from "../../assets/X.svg";
+import ButtonWithSpinner from "../../components/Shared/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "../../components/Shared/InputField/InputField";
+import ModalDialog from "../../container/ModalDialog/ModalDialog";
+import { checkError } from "../../util/checkError";
+import { instance } from "../../util/interceptor";
+import { MODAL_ROOT } from "../../util/util";
 
 export type Props = {
   onClose: () => void;
