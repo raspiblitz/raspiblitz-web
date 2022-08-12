@@ -1,25 +1,25 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FinalDialog from "../components/Setup/FinalDialog";
-import FormatDialog from "../components/Setup/FormatDialog";
-import InputNodename from "../components/Setup/InputNodename";
-import InputPassword from "../components/Setup/InputPassword";
-import LightningDialog from "../components/Setup/LightningDialog";
-import MigrationDialog from "../components/Setup/MigrationDialog";
-import RecoveryDialog from "../components/Setup/RecoveryDialog";
-import SetupMenu from "../components/Setup/SetupMenu";
-import StartDoneDialog from "../components/Setup/StartDoneDialog";
-import SyncScreen from "../components/Setup/SyncScreen";
-import WaitScreen from "../components/Setup/WaitScreen";
+import FinalDialog from "../../components/Setup/FinalDialog";
+import FormatDialog from "../../components/Setup/FormatDialog";
+import InputNodename from "../../components/Setup/InputNodename";
+import InputPassword from "../../components/Setup/InputPassword";
+import LightningDialog from "../../components/Setup/LightningDialog";
+import MigrationDialog from "../../components/Setup/MigrationDialog";
+import RecoveryDialog from "../../components/Setup/RecoveryDialog";
+import SetupMenu from "../../components/Setup/SetupMenu";
+import StartDoneDialog from "../../components/Setup/StartDoneDialog";
+import SyncScreen from "../../components/Setup/SyncScreen";
+import WaitScreen from "../../components/Setup/WaitScreen";
 import {
   SetupLightning,
   SetupMigrationMode,
   SetupMigrationOS,
   SetupPhase,
   SetupStatus,
-} from "../models/setup.model";
-import { instance } from "../util/interceptor";
-import { ACCESS_TOKEN } from "../util/util";
+} from "../../models/setup.model";
+import { instance } from "../../util/interceptor";
+import { ACCESS_TOKEN } from "../../util/util";
 
 enum Screen {
   WAIT,

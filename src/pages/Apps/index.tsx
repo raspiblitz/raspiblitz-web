@@ -2,16 +2,16 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import AppCard from "../components/Apps/AppCard/AppCard";
-import AppInfo from "../components/Apps/AppInfo/AppInfo";
-import LoadingSpinner from "../components/Shared/LoadingSpinner/LoadingSpinner";
-import useSSE from "../hooks/use-sse";
-import { AppStatus } from "../models/app-status";
-import { App } from "../models/app.model";
-import { availableApps } from "../util/availableApps";
-import { checkError } from "../util/checkError";
-import { instance } from "../util/interceptor";
-import { enableGutter } from "../util/util";
+import AppCard from "../../components/Apps/AppCard/AppCard";
+import AppInfo from "../../components/Apps/AppInfo/AppInfo";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import useSSE from "../../hooks/use-sse";
+import { AppStatus } from "../../models/app-status";
+import { App } from "../../models/app.model";
+import { availableApps } from "../../util/availableApps";
+import { checkError } from "../../util/checkError";
+import { instance } from "../../util/interceptor";
+import { enableGutter } from "../../util/util";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
