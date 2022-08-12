@@ -2,7 +2,7 @@ import { QRCodeSVG } from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import useClipboard from "../../hooks/use-clipboard";
+import useClipboard from "../../../hooks/use-clipboard";
 
 type Props = {
   address: string;

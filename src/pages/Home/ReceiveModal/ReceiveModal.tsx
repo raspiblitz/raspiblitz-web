@@ -4,17 +4,17 @@ import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import Message from "../../container/Message/Message";
-import ModalDialog from "../../container/ModalDialog/ModalDialog";
-import { AppContext, Unit } from "../../context/app-context";
-import { checkError } from "../../util/checkError";
-import { convertBtcToSat, stringToNumber } from "../../util/format";
-import { instance } from "../../util/interceptor";
-import { MODAL_ROOT } from "../../util/util";
-import AmountInput from "../../components/AmountInput";
-import InputField from "../../components/InputField";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import SwitchTxType, { TxType } from "./SwitchTxType";
+import Message from "../../../container/Message/Message";
+import ModalDialog from "../../../container/ModalDialog/ModalDialog";
+import { AppContext, Unit } from "../../../context/app-context";
+import { checkError } from "../../../util/checkError";
+import { convertBtcToSat, stringToNumber } from "../../../util/format";
+import { instance } from "../../../util/interceptor";
+import { MODAL_ROOT } from "../../../util/util";
+import AmountInput from "../../../components/AmountInput";
+import InputField from "../../../components/InputField";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import SwitchTxType, { TxType } from "../SwitchTxType";
 import ReceiveOnChain from "./ReceiveOnChain";
 
 interface IFormInputs {

@@ -17,7 +17,7 @@ import HardwareCard from "./HardwareCard";
 import LightningCard from "./LightningCard";
 import ListChannelModal from "./ListChannelModal/ListChannelModal";
 import OpenChannelModal from "./OpenChannelModal";
-import ReceiveModal from "./ReceiveModal";
+import ReceiveModal from "./ReceiveModal/ReceiveModal";
 import SendModal from "./SendModal/SendModal";
 import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionDetailModal from "./TransactionCard/TransactionDetailModal/TransactionDetailModal";
