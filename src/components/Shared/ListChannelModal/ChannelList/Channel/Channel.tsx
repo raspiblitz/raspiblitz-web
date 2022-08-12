@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ChevronDownIcon } from "../../../../../assets/chevron-down.svg";
 import { ReactComponent as ChevronUpIcon } from "../../../../../assets/chevron-up.svg";
 import { LightningChannel } from "../../../../../models/lightning-channel";
-import { AppContext, Unit } from "../../../../../store/app-context";
+import { AppContext, Unit } from "../../../../../context/app-context";
 import { convertSatToBtc, convertToString } from "../../../../../util/format";
 import ButtonWithSpinner from "../../../ButtonWithSpinner/ButtonWithSpinner";
 

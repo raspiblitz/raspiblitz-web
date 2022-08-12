@@ -1,8 +1,8 @@
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import LoadingBox from "../../components/Shared/LoadingBox/LoadingBox";
-import { AppContext, Unit } from "../../store/app-context";
-import { SSEContext } from "../../store/sse-context";
+import { AppContext, Unit } from "../../context/app-context";
+import { SSEContext } from "../../context/sse-context";
 import { convertMSatToBtc, convertToString } from "../../util/format";
 import { checkPropsUndefined } from "../../util/util";
 

@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { AppContext } from "../../store/app-context";
+import { AppContext } from "../../context/app-context";
 
 type Props = {
   children: JSX.Element;

@@ -7,7 +7,7 @@ import { ReactComponent as RaspiBlitzLogoDark } from "../../assets/RaspiBlitz_Lo
 import I18nDropdown from "../../components/Shared/I18nDropdown/I18nDropdown";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
 import Message from "../../container/Message/Message";
-import { AppContext } from "../../store/app-context";
+import { AppContext } from "../../context/app-context";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
 import { ACCESS_TOKEN, enableGutter } from "../../util/util";

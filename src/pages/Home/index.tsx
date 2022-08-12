@@ -11,7 +11,7 @@ import { useInterval } from "../../hooks/use-interval";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
 import { Transaction } from "../../models/transaction.model";
-import { AppContext } from "../../store/app-context";
+import { AppContext } from "../../context/app-context";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
 import { enableGutter } from "../../util/util";

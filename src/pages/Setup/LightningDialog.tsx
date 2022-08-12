@@ -8,7 +8,7 @@ import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
 import CLNLogoDark from "../../assets/core-lightning-dark.png";
 import CLNLogoLight from "../../assets/core-lightning-light.png";
 import LNDLogo from "../../assets/lnd.png";
-import { AppContext } from "../../store/app-context";
+import { AppContext } from "../../context/app-context";
 
 export interface InputData {
   callback: (lightningSelect: SetupLightning) => void;

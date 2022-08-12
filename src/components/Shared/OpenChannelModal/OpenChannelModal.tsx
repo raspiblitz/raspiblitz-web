@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { ReactComponent as ChannelIcon } from "../../../assets/link.svg";
 import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import { AppContext } from "../../../store/app-context";
+import { AppContext } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import { stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";

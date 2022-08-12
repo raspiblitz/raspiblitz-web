@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Message from "../../../container/Message/Message";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import { AppContext, Unit } from "../../../store/app-context";
+import { AppContext, Unit } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";

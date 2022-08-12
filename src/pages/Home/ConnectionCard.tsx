@@ -11,7 +11,7 @@ import { ReactComponent as QRCodeIcon } from "../../assets/qrcode.svg";
 import LoadingBox from "../../components/Shared/LoadingBox/LoadingBox";
 import ModalDialog from "../../container/ModalDialog/ModalDialog";
 import useClipboard from "../../hooks/use-clipboard";
-import { SSEContext } from "../../store/sse-context";
+import { SSEContext } from "../../context/sse-context";
 import { MODAL_ROOT } from "../../util/util";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";

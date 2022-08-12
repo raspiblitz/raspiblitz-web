@@ -3,7 +3,7 @@ import { useContext } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { AppContext, Unit } from "../../../../store/app-context";
+import { AppContext, Unit } from "../../../../context/app-context";
 import {
   convertSatToBtc,
   convertToString,

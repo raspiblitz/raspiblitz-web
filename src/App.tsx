@@ -10,7 +10,7 @@ import SkeletonLoadingScreen from "./container/SkeletonLoadingScreen/SkeletonLoa
 import "./i18n/config";
 import { SetupPhase } from "./models/setup.model";
 import Login from "./pages/Login";
-import { AppContext } from "./store/app-context";
+import { AppContext } from "./context/app-context";
 import { instance } from "./util/interceptor";
 import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./util/util";
 

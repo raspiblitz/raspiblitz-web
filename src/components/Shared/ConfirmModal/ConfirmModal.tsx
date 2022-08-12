@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import { AppContext } from "../../../store/app-context";
+import { AppContext } from "../../../context/app-context";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util/util";
 

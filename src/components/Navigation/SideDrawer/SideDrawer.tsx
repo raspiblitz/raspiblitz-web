@@ -6,7 +6,7 @@ import { ReactComponent as AppIcon } from "../../../assets/apps.svg";
 import { ReactComponent as HomeLogo } from "../../../assets/home.svg";
 import { ReactComponent as LogoutIcon } from "../../../assets/logout.svg";
 import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
-import { AppContext } from "../../../store/app-context";
+import { AppContext } from "../../../context/app-context";
 
 const navLinkClasses =
   "flex md:flex-col lg:flex-row items-center justify-center py-4 xl:pl-6 mx-auto w-full dark:text-white opacity-80";

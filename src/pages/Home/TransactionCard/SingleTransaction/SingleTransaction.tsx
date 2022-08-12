@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import { Transaction } from "../../../../models/transaction.model";
-import { AppContext, Unit } from "../../../../store/app-context";
+import { AppContext, Unit } from "../../../../context/app-context";
 import {
   convertMSatToBtc,
   convertMSatToSat,

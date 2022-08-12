@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as SendIcon } from "../../../../assets/send.svg";
 import Message from "../../../../container/Message/Message";
-import { AppContext } from "../../../../store/app-context";
+import { AppContext } from "../../../../context/app-context";
 import ButtonWithSpinner from "../../ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../InputField/InputField";
 

@@ -6,7 +6,7 @@ import { ReactComponent as CheckIcon } from "../../../../assets/check.svg";
 import { ReactComponent as ChevronLeft } from "../../../../assets/chevron-left.svg";
 import { ReactComponent as XIcon } from "../../../../assets/X.svg";
 import Message from "../../../../container/Message/Message";
-import { AppContext, Unit } from "../../../../store/app-context";
+import { AppContext, Unit } from "../../../../context/app-context";
 import { checkError } from "../../../../util/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../../util/format";
 import { instance } from "../../../../util/interceptor";

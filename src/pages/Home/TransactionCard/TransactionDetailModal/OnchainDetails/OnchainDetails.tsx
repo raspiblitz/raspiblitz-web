@@ -4,7 +4,7 @@ import { ReactComponent as ClipboardIcon } from "../../../../../assets/clipboard
 import KeyValueDisplay from "../../../../../container/KeyValueDisplay/KeyValueDisplay";
 import useClipboard from "../../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../../models/transaction.model";
-import { AppContext, Unit } from "../../../../../store/app-context";
+import { AppContext, Unit } from "../../../../../context/app-context";
 import { convertSatToBtc, convertToString } from "../../../../../util/format";
 
 export type Props = {

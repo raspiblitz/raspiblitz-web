@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as SwitchIcon } from "../../../assets/switch-vertical.svg";
-import { AppContext, Unit } from "../../../store/app-context";
+import { AppContext, Unit } from "../../../context/app-context";
 import {
   convertBtcToSat,
   convertSatToBtc,

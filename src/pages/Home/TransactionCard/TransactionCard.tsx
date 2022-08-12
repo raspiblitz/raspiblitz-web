@@ -6,7 +6,7 @@ import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.sv
 import LoadingBox from "../../../components/Shared/LoadingBox/LoadingBox";
 import Message from "../../../container/Message/Message";
 import { Transaction } from "../../../models/transaction.model";
-import { AppContext } from "../../../store/app-context";
+import { AppContext } from "../../../context/app-context";
 import SingleTransaction from "./SingleTransaction/SingleTransaction";
 
 export type Props = {

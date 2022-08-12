@@ -5,8 +5,8 @@ import { ReactComponent as LightningIcon } from "../../assets/lightning.svg";
 import { ReactComponent as ChainIcon } from "../../assets/link.svg";
 import { ReactComponent as ReceiveIcon } from "../../assets/receive.svg";
 import { ReactComponent as SendIcon } from "../../assets/send.svg";
-import { AppContext, Unit } from "../../store/app-context";
-import { SSEContext } from "../../store/sse-context";
+import { AppContext, Unit } from "../../context/app-context";
+import { SSEContext } from "../../context/sse-context";
 import {
   convertMSatToBtc,
   convertSatToBtc,

@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import ModalDialog from "../../../container/ModalDialog/ModalDialog";
-import { AppContext, Unit } from "../../../store/app-context";
+import { AppContext, Unit } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import {
   convertMSatToBtc,
