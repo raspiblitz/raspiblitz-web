@@ -11,9 +11,9 @@ import { LnInfoLite } from "../models/ln-info-lite";
 import { SystemInfo } from "../models/system-info";
 import { SystemStartupInfo } from "../models/system-startup-info";
 import { WalletBalance } from "../models/wallet-balance";
-import { SSEContext, SSE_URL } from "../store/sse-context";
+import { SSEContext, SSE_URL } from "../context/sse-context";
 import { availableApps } from "../util/availableApps";
-import { ACCESS_TOKEN, setWindowAlias } from "../util/util";
+import { ACCESS_TOKEN, setWindowAlias } from "../util";
 
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners

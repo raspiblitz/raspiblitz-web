@@ -5,8 +5,8 @@ import { ToastContainer } from "react-toastify";
 import App from "./App";
 import "./i18n/config";
 import "./index.css";
-import AppContextProvider from "./store/app-context";
-import SSEContextProvider from "./store/sse-context";
+import AppContextProvider from "./context/app-context";
+import SSEContextProvider from "./context/sse-context";
 
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
