@@ -12,7 +12,7 @@ import LoadingBox from "../../components/LoadingBox";
 import ModalDialog from "../../layouts/ModalDialog";
 import useClipboard from "../../hooks/use-clipboard";
 import { SSEContext } from "../../context/sse-context";
-import { MODAL_ROOT } from "../../util/util";
+import { MODAL_ROOT } from "../../util";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 

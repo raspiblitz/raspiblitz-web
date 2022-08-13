@@ -9,7 +9,7 @@ import Message from "../../components/Message";
 import ModalDialog, { disableScroll } from "../../layouts/ModalDialog";
 import { AppContext } from "../../context/app-context";
 import { instance } from "../../util/interceptor";
-import { MODAL_ROOT } from "../../util/util";
+import { MODAL_ROOT } from "../../util";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../components/InputField";
 

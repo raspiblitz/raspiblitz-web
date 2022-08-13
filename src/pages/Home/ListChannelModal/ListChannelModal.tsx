@@ -8,7 +8,7 @@ import { LightningChannel } from "../../../models/lightning-channel";
 import { AppContext } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import { instance } from "../../../util/interceptor";
-import { MODAL_ROOT } from "../../../util/util";
+import { MODAL_ROOT } from "../../../util";
 import ChannelList from "./ChannelList";
 
 type Props = {

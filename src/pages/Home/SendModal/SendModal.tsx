@@ -10,7 +10,7 @@ import {
   convertToString,
 } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
-import { MODAL_ROOT } from "../../../util/util";
+import { MODAL_ROOT } from "../../../util";
 import ConfirmSendModal from "./ConfirmSendModal";
 import SendLn from "./SendLN";
 import SendOnChain from "./SendOnChain";

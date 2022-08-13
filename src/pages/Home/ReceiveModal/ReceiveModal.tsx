@@ -10,7 +10,7 @@ import { AppContext, Unit } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
-import { MODAL_ROOT } from "../../../util/util";
+import { MODAL_ROOT } from "../../../util";
 import AmountInput from "../../../components/AmountInput";
 import InputField from "../../../components/InputField";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";

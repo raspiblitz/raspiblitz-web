@@ -17,7 +17,7 @@ import {
   retrieveSettings,
   saveSettings,
   setWindowAlias,
-} from "../util/util";
+} from "../util";
 import { SSEContext } from "./sse-context";
 
 interface AppContextType {

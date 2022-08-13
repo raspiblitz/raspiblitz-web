@@ -4,7 +4,7 @@ import LoadingBox from "../../components/LoadingBox";
 import { AppContext, Unit } from "../../context/app-context";
 import { SSEContext } from "../../context/sse-context";
 import { convertMSatToBtc, convertToString } from "../../util/format";
-import { checkPropsUndefined } from "../../util/util";
+import { checkPropsUndefined } from "../../util";
 
 export const LightningCard: FC = () => {
   const { t } = useTranslation();

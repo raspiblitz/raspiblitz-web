@@ -9,7 +9,7 @@ import { AppStatus } from "../../models/app-status";
 import { Transaction } from "../../models/transaction.model";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import { enableGutter } from "../../util/util";
+import { enableGutter } from "../../util";
 import AppStatusCard from "./AppStatusCard";
 import BitcoinCard from "./BitcoinCard";
 import ConnectionCard from "./ConnectionCard";

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import ModalDialog from "../layouts/ModalDialog";
 import { AppContext } from "../context/app-context";
 import { instance } from "../util/interceptor";
-import { MODAL_ROOT } from "../util/util";
+import { MODAL_ROOT } from "../util";
 
 export type Props = {
   confirmText: string;

@@ -8,7 +8,7 @@ import {
   SetupStatus,
 } from "../../models/setup.model";
 import { instance } from "../../util/interceptor";
-import { ACCESS_TOKEN } from "../../util/util";
+import { ACCESS_TOKEN } from "../../util";
 import FinalDialog from "./FinalDialog";
 import FormatDialog from "./FormatDialog";
 import InputNodename from "./InputNodename";

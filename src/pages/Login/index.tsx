@@ -10,7 +10,7 @@ import Message from "../../components/Message";
 import { AppContext } from "../../context/app-context";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import { ACCESS_TOKEN, enableGutter } from "../../util/util";
+import { ACCESS_TOKEN, enableGutter } from "../../util";
 
 const Login: FC = () => {
   const { t } = useTranslation();

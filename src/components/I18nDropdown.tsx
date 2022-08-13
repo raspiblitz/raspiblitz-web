@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { resources } from "../i18n/config";
-import { saveSettings } from "../util/util";
+import { saveSettings } from "../util";
 
 const I18nDropdown: FC = () => {
   const { t, i18n } = useTranslation();

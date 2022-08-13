@@ -9,7 +9,7 @@ import { App } from "../../models/app.model";
 import { availableApps } from "../../util/availableApps";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import { enableGutter } from "../../util/util";
+import { enableGutter } from "../../util";
 import AppCard from "./AppCard";
 import AppInfo from "./AppInfo";
 

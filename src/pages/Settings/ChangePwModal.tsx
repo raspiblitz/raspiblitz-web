@@ -10,7 +10,7 @@ import InputField from "../../components/InputField";
 import ModalDialog from "../../layouts/ModalDialog";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import { MODAL_ROOT } from "../../util/util";
+import { MODAL_ROOT } from "../../util";
 
 export type Props = {
   onClose: () => void;
