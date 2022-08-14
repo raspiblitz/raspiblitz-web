@@ -1,11 +1,10 @@
+import { ArrowSmRightIcon, XIcon } from "@heroicons/react/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
-import { ReactComponent as X } from "../../assets/X.svg";
-import SetupContainer from "../../layouts/SetupContainer";
 import ConfirmModal from "../../components/ConfirmModal";
 import InputField from "../../components/InputField";
+import SetupContainer from "../../layouts/SetupContainer";
 
 export type Props = {
   callback: (nodename: string | null) => void;
@@ -90,7 +89,7 @@ const InputNodename: FC<Props> = ({ callback }) => {
                 onClick={handleCancel}
                 className="flex items-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
               >
-                <X className="inline h-6 w-6" />
+                <XIcon className="inline h-6 w-6" />
                 <span className="p-2">{t("setup.cancel")}</span>
               </button>
               <button
@@ -99,7 +98,7 @@ const InputNodename: FC<Props> = ({ callback }) => {
                 className="bd-button flex items-center px-2 disabled:bg-gray-400"
               >
                 <span className="p-2">Continue</span>
-                <ArrowRight className="inline h-6 w-6" />
+                <ArrowSmRightIcon className="inline h-6 w-6" />
               </button>
             </article>
           </form>

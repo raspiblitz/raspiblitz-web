@@ -1,12 +1,14 @@
+import {
+  ArrowSmRightIcon,
+  PlusIcon,
+  RefreshIcon,
+  XCircleIcon,
+} from "@heroicons/react/outline";
 import { FC, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ArrowRightIcon } from "../../assets/arrow-sm-right.svg";
-import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
-import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
-import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
-import SelectOption from "./SelectOption";
 import SetupContainer from "../../layouts/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
+import SelectOption from "./SelectOption";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -100,7 +102,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
             disabled={selected === null}
           >
             <span className="p-2">{t("setup.continue")}</span>
-            <ArrowRightIcon className="inline h-6 w-6" />
+            <ArrowSmRightIcon className="inline h-6 w-6" />
           </button>
         </div>
       </form>

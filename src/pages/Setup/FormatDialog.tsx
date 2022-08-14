@@ -1,10 +1,8 @@
+import { DatabaseIcon, TrashIcon, XIcon } from "@heroicons/react/outline";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as DBIcon } from "../../assets/database.svg";
-import { ReactComponent as TrashIcon } from "../../assets/trash.svg";
-import { ReactComponent as X } from "../../assets/X.svg";
-import SetupContainer from "../../layouts/SetupContainer";
 import ConfirmModal from "../../components/ConfirmModal";
+import SetupContainer from "../../layouts/SetupContainer";
 
 export type Props = {
   containsBlockchain: boolean;
@@ -64,7 +62,7 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
                 onClick={() => handleBlockchain(true)}
                 className="bd-button rounded p-2"
               >
-                <DBIcon className="inline h-6 w-6" />
+                <DatabaseIcon className="inline h-6 w-6" />
                 <span className="p-2">{t("setup.blockchain_keep")}</span>
               </button>
             </article>
@@ -90,7 +88,7 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
                 onClick={handleCancel}
                 className="rounded  bg-red-500 p-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
               >
-                <X className="inline h-6 w-6" />
+                <XIcon className="inline h-6 w-6" />
                 <span className="p-2">{t("setup.cancel")}</span>
               </button>
               <button

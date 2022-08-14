@@ -1,11 +1,13 @@
+import {
+  CogIcon,
+  HomeIcon,
+  LogoutIcon,
+  ViewGridIcon,
+} from "@heroicons/react/outline";
 import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as AppIcon } from "../assets/apps.svg";
-import { ReactComponent as HomeLogo } from "../assets/home.svg";
-import { ReactComponent as LogoutIcon } from "../assets/logout.svg";
-import { ReactComponent as SettingsIcon } from "../assets/settings.svg";
 import { AppContext } from "../context/app-context";
 
 const navLinkClasses =
@@ -23,19 +25,19 @@ export const SideDrawer: FC = () => {
     <nav className="content-container fixed mb-16 hidden w-full flex-col justify-between bg-white px-2 pt-8 shadow-lg transition-colors dark:bg-gray-800 md:flex md:w-2/12">
       <div>
         <NavLink to="/home" className={(props) => createClassName(props)}>
-          <HomeLogo className={navIconClasses} />
+          <HomeIcon className={navIconClasses} />
           <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
             {t("navigation.home")}
           </span>
         </NavLink>
         <NavLink to="/apps" className={(props) => createClassName(props)}>
-          <AppIcon className={navIconClasses} />
+          <ViewGridIcon className={navIconClasses} />
           <span className="mx-3 flex w-full justify-center text-lg lg:block lg:w-1/2">
             {t("navigation.apps")}
           </span>
         </NavLink>
         <NavLink to="/settings" className={(props) => createClassName(props)}>
-          <SettingsIcon className={navIconClasses} />
+          <CogIcon className={navIconClasses} />
           <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
             {t("navigation.settings")}
           </span>

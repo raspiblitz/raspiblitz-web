@@ -1,13 +1,15 @@
+import {
+  ExternalLinkIcon,
+  InformationCircleIcon,
+  LockOpenIcon,
+  PlusIcon,
+} from "@heroicons/react/outline";
 import Tooltip from "rc-tooltip";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import AppIcon from "../../components/AppIcon";
 import { AppStatus, AuthMethod } from "../..//models/app-status";
 import { App } from "../..//models/app.model";
-import { ReactComponent as LinkIcon } from "../../assets/external-link.svg";
-import { ReactComponent as InfoIcon } from "../../assets/information-circle.svg";
-import { ReactComponent as LockIcon } from "../../assets/lock-open.svg";
-import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
+import AppIcon from "../../components/AppIcon";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 
 export type Props = {
@@ -84,7 +86,7 @@ export const AppCard: FC<Props> = ({
               overlay={tooltipContent}
               placement="top"
             >
-              <LockIcon className="absolute  top-0 right-0 h-6 w-6" />
+              <LockOpenIcon className="absolute  top-0 right-0 h-6 w-6" />
             </Tooltip>
           )}
           <p className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
@@ -100,7 +102,7 @@ export const AppCard: FC<Props> = ({
             rel="noreferrer"
             className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
           >
-            <LinkIcon />
+            <ExternalLinkIcon className="inline h-6 w-6" />
             &nbsp;{t("apps.open")}
           </a>
         )}
@@ -124,7 +126,7 @@ export const AppCard: FC<Props> = ({
               className="bd-button flex w-1/2 items-center justify-center p-2 disabled:pointer-events-none"
               onClick={() => installButtonPressed(id)}
             >
-              <PlusIcon />
+              <PlusIcon className="inline h-6 w-6" />
               &nbsp;{t("apps.install")}
             </button>
           )}
@@ -143,7 +145,7 @@ export const AppCard: FC<Props> = ({
           className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
           onClick={() => onOpenDetails(appInfo)}
         >
-          <InfoIcon />
+          <InformationCircleIcon className="inline h-6 w-6" />
           &nbsp;{t("apps.info")}
         </button>
       </div>

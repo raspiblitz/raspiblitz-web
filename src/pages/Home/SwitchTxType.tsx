@@ -1,7 +1,6 @@
+import { LightningBoltIcon, LinkIcon } from "@heroicons/react/outline";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ChainIcon } from "../../assets/link.svg";
-import { ReactComponent as LightningIcon } from "../../assets/lightning.svg";
 
 export enum TxType {
   ONCHAIN,
@@ -32,7 +31,7 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
         className="switch-button"
         onClick={() => setTxTypeHandler(TxType.LIGHTNING)}
       >
-        <LightningIcon className="mr-1 inline h-6 w-6 align-bottom" />
+        <LightningBoltIcon className="mr-1 inline h-6 w-6 align-bottom" />
         {t("home.lightning")}
       </button>
 
@@ -42,7 +41,7 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
         className="switch-button"
         onClick={() => setTxTypeHandler(TxType.ONCHAIN)}
       >
-        <ChainIcon className="mr-1 inline h-6 w-6 rotate-45 transform align-bottom" />
+        <LinkIcon className="mr-1 inline h-6 w-6 rotate-45 transform align-bottom" />
         {t("wallet.on_chain")}
       </button>
     </div>

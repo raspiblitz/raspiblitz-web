@@ -1,10 +1,9 @@
+import { CloudDownloadIcon, XCircleIcon } from "@heroicons/react/outline";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as CloudDownload } from "../../assets/cloud-download.svg";
-import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
+import ConfirmModal from "../../components/ConfirmModal";
 import SetupContainer from "../../layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "../../models/setup.model";
-import ConfirmModal from "../../components/ConfirmModal";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;
@@ -74,7 +73,7 @@ const MigrationDialog: FC<InputData> = ({
               onClick={() => callback(true)}
               className="bd-button rounded p-2"
             >
-              <CloudDownload className="inline h-6 w-6" />
+              <CloudDownloadIcon className="inline h-6 w-6" />
               <span className="p-2">{t("setup.yes_and_migrate")}</span>
             </button>
           </article>

@@ -1,17 +1,19 @@
+import {
+  ClipboardCopyIcon,
+  EyeIcon,
+  EyeOffIcon,
+  QrcodeIcon,
+} from "@heroicons/react/outline";
 import { QRCodeSVG } from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap.css";
 import { FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ClipboardIcon } from "../../assets/clipboard-copy.svg";
-import { ReactComponent as EyeOffIcon } from "../../assets/eye-off.svg";
-import { ReactComponent as EyeIcon } from "../../assets/eye.svg";
-import { ReactComponent as QRCodeIcon } from "../../assets/qrcode.svg";
 import LoadingBox from "../../components/LoadingBox";
-import ModalDialog from "../../layouts/ModalDialog";
-import useClipboard from "../../hooks/use-clipboard";
 import { SSEContext } from "../../context/sse-context";
+import useClipboard from "../../hooks/use-clipboard";
+import ModalDialog from "../../layouts/ModalDialog";
 import { MODAL_ROOT } from "../../util";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
@@ -112,7 +114,7 @@ export const ConnectionCard: FC = () => {
               }
               placement="top"
             >
-              <ClipboardIcon
+              <ClipboardCopyIcon
                 className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                 onClick={copyTor}
               />
@@ -145,7 +147,7 @@ export const ConnectionCard: FC = () => {
               }
               placement="top"
             >
-              <ClipboardIcon
+              <ClipboardCopyIcon
                 className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                 onClick={copySsh}
               />
@@ -181,13 +183,13 @@ export const ConnectionCard: FC = () => {
                 }
                 placement="top"
               >
-                <ClipboardIcon
+                <ClipboardCopyIcon
                   className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                   onClick={copyNodeId}
                 />
               </Tooltip>
               <Tooltip overlay={<div>{t("home.show_qr")}</div>} placement="top">
-                <QRCodeIcon
+                <QrcodeIcon
                   className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                   onClick={showModalHandler}
                 />

@@ -1,10 +1,12 @@
+import {
+  DownloadIcon,
+  LightningBoltIcon,
+  LinkIcon,
+} from "@heroicons/react/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import btcLogo from "../../assets/bitcoin-circle-white.svg";
-import { ReactComponent as LightningIcon } from "../../assets/lightning.svg";
-import { ReactComponent as ChainIcon } from "../../assets/link.svg";
-import { ReactComponent as ReceiveIcon } from "../../assets/receive.svg";
-import { ReactComponent as SendIcon } from "../../assets/send.svg";
+import { ReactComponent as BitcoinCircleWhiteIcon } from "../../assets/bitcoin-circle-white.svg";
+import { ReactComponent as ShareIcon } from "../../assets/share.svg";
 import { AppContext, Unit } from "../../context/app-context";
 import { SSEContext } from "../../context/sse-context";
 import {
@@ -80,7 +82,7 @@ export const WalletCard: FC<Props> = ({
             </article>
             <article className="flex w-full flex-col">
               <h6>
-                <ChainIcon className="mr-1 inline h-5 w-5 rotate-45 transform align-bottom" />
+                <LinkIcon className="mr-1 inline h-5 w-5 rotate-45 transform align-bottom" />
                 <span className="inline align-bottom text-sm">
                   {t("wallet.on_chain")}
                 </span>
@@ -100,7 +102,7 @@ export const WalletCard: FC<Props> = ({
             </article>
             <article className="flex w-full flex-col">
               <h6>
-                <LightningIcon className="mr-1 inline h-5 w-5 align-bottom" />
+                <LightningBoltIcon className="mr-1 inline h-5 w-5 align-bottom" />
                 <span className="inline align-bottom text-sm">
                   {t("home.lightning")}
                 </span>
@@ -109,11 +111,7 @@ export const WalletCard: FC<Props> = ({
                 {convertToString(unit, convertedLnBalance)} {unit}
               </p>
             </article>
-            <img
-              src={btcLogo}
-              className="absolute -bottom-9 -right-9 h-32 w-32 opacity-30"
-              alt="Bitcoin Logo"
-            />
+            <BitcoinCircleWhiteIcon className="absolute -bottom-9 -right-9 h-32 w-32 opacity-30" />
           </div>
         </section>
         <section className="flex justify-around p-2">
@@ -121,14 +119,14 @@ export const WalletCard: FC<Props> = ({
             onClick={onReceive}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
           >
-            <ReceiveIcon className="mr-1 h-6 w-6" />
+            <DownloadIcon className="mr-1 h-6 w-6" />
             <span>{t("wallet.receive")}</span>
           </button>
           <button
             onClick={onSend}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
           >
-            <SendIcon className="mr-1 h-6 w-6" />
+            <ShareIcon className="mr-1 h-6 w-6" />
             <span>{t("wallet.send")}</span>
           </button>
         </section>

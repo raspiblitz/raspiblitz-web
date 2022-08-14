@@ -1,5 +1,5 @@
+import { XIcon } from "@heroicons/react/outline";
 import { FC, useCallback, useEffect } from "react";
-import { ReactComponent as XIcon } from "../assets/X.svg";
 import ModalBackground from "./ModalBackground";
 
 export const disableScroll = {

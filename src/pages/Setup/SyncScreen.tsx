@@ -1,17 +1,19 @@
+import {
+  CheckCircleIcon,
+  LockOpenIcon,
+  XCircleIcon,
+} from "@heroicons/react/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as CheckCircleIcon } from "../../assets/check-circle.svg";
-import { ReactComponent as LockOpenIcon } from "../../assets/lock-open.svg";
-import { ReactComponent as XCircleIcon } from "../../assets/x-circle.svg";
+import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "../../components/InputField";
 import Message from "../../components/Message";
-import ProgressCircle from "./ProgressCircle";
 import SetupContainer from "../../layouts/SetupContainer";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "../../components/InputField";
+import ProgressCircle from "./ProgressCircle";
 
 export interface InputData {
   data: SyncData | any;

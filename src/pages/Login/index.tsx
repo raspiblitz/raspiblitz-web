@@ -1,16 +1,16 @@
+import { MoonIcon } from "@heroicons/react/outline";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ReactComponent as MoonLogo } from "../../assets/moon.svg";
 import { ReactComponent as RaspiBlitzLogo } from "../../assets/RaspiBlitz_Logo_Main.svg";
 import { ReactComponent as RaspiBlitzLogoDark } from "../../assets/RaspiBlitz_Logo_Main_Negative.svg";
 import I18nDropdown from "../../components/I18nDropdown";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Message from "../../components/Message";
 import { AppContext } from "../../context/app-context";
+import { ACCESS_TOKEN, enableGutter } from "../../util";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import { ACCESS_TOKEN, enableGutter } from "../../util";
 
 const Login: FC = () => {
   const { t } = useTranslation();
@@ -68,7 +68,7 @@ const Login: FC = () => {
 
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700">
-      <MoonLogo
+      <MoonIcon
         className="text-dark fixed right-4 top-4 h-8 dark:text-yellow-500"
         onClick={toggleDarkMode}
       />

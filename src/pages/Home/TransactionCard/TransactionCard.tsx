@@ -1,12 +1,14 @@
+import {
+  ArrowDownIcon,
+  InformationCircleIcon,
+  LockClosedIcon,
+} from "@heroicons/react/outline";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ArrowDownIcon } from "../../../assets/arrow-down.svg";
-import { ReactComponent as InfoCircleIcon } from "../../../assets/information-circle.svg";
-import { ReactComponent as ClosedLockIcon } from "../../../assets/lock-closed.svg";
 import LoadingBox from "../../../components/LoadingBox";
 import Message from "../../../components/Message";
-import { Transaction } from "../../../models/transaction.model";
 import { AppContext } from "../../../context/app-context";
+import { Transaction } from "../../../models/transaction.model";
 import SingleTransaction from "./SingleTransaction";
 
 export type Props = {
@@ -35,7 +37,7 @@ const TransactionCard: FC<Props> = ({
       <div className="h-full p-5">
         <div className="bd-card md:min-h-0 flex min-h-144 flex-col transition-colors">
           <div className="flex h-full items-center justify-center">
-            <ClosedLockIcon className="h-6 w-6" />
+            <LockClosedIcon className="h-6 w-6" />
             {t("wallet.wallet_locked")}
           </div>
         </div>
@@ -81,7 +83,7 @@ const TransactionCard: FC<Props> = ({
 
         {!error && transactions.length === 0 && (
           <div className="flex h-full items-center justify-center">
-            <InfoCircleIcon className="h-6 w-6" />
+            <InformationCircleIcon className="h-6 w-6" />
             &nbsp;{t("tx.transactions_none")}
           </div>
         )}

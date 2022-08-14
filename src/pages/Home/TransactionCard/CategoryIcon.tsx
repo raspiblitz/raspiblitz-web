@@ -1,8 +1,10 @@
+import {
+  ClockIcon,
+  DotsHorizontalIcon,
+  LinkIcon,
+} from "@heroicons/react/outline";
+import { LightningBoltIcon } from "@heroicons/react/solid";
 import { FC } from "react";
-import { ReactComponent as ChainIcon } from "../../../assets/link.svg";
-import { ReactComponent as ClockIcon } from "../../../assets/clock.svg";
-import { ReactComponent as DotsIcon } from "../../../assets/dots-horizontal.svg";
-import { ReactComponent as LightningIconSolid } from "../../../assets/lightning.svg";
 import {
   TransactionCategory,
   TransactionStatus,
@@ -24,7 +26,7 @@ const CategoryIcon: FC<Props> = ({ category, type, status }) => {
     switch (status) {
       case "in_flight":
         return (
-          <DotsIcon
+          <DotsHorizontalIcon
             className={`h-7 w-7 rounded-full bg-gray-500 p-1 text-white`}
           />
         );
@@ -36,13 +38,13 @@ const CategoryIcon: FC<Props> = ({ category, type, status }) => {
         );
       case "succeeded":
         return (
-          <LightningIconSolid className={`h-7 w-7 rounded-full p-1 ${color}`} />
+          <LightningBoltIcon className={`h-7 w-7 rounded-full p-1 ${color}`} />
         );
     }
   }
 
   return (
-    <ChainIcon
+    <LinkIcon
       className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
     />
   );

@@ -1,17 +1,17 @@
+import { LockOpenIcon } from "@heroicons/react/outline";
 import { FC, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { ReactComponent as LockOpen } from "../../assets/lock-open.svg";
-import Message from "../../components/Message";
-import ModalDialog, { disableScroll } from "../../layouts/ModalDialog";
-import { AppContext } from "../../context/app-context";
-import { instance } from "../../util/interceptor";
-import { MODAL_ROOT } from "../../util";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../components/InputField";
+import Message from "../../components/Message";
+import { AppContext } from "../../context/app-context";
+import ModalDialog, { disableScroll } from "../../layouts/ModalDialog";
+import { MODAL_ROOT } from "../../util";
+import { instance } from "../../util/interceptor";
 
 interface IFormInputs {
   passwordInput: string;
@@ -82,7 +82,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
             className="bd-button my-5 p-3"
             loading={isLoading}
             disabled={!isValid}
-            icon={<LockOpen className="mx-1 h-6 w-6" />}
+            icon={<LockOpenIcon className="mx-1 h-6 w-6" />}
           >
             {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
           </ButtonWithSpinner>

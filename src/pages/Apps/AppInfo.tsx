@@ -1,14 +1,12 @@
+import { ChevronLeftIcon, PlusIcon, TrashIcon } from "@heroicons/react/outline";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ChevronLeft } from "../../assets/chevron-left.svg";
-import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
-import { ReactComponent as TrashIcon } from "../../assets/trash.svg";
-import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
-import ImageCarousel from "./ImageCarousel";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import AppIcon from "../../components/AppIcon";
+import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { App } from "../../models/app.model";
 import { availableApps } from "../../util/availableApps";
+import ImageCarousel from "./ImageCarousel";
 
 export type Props = {
   app: App;
@@ -75,7 +73,7 @@ export const AppInfo: FC<Props> = ({
           onClick={onClose}
           className="flex items-center text-xl font-bold outline-none"
         >
-          <ChevronLeft className="inline-block h-5 w-5" />
+          <ChevronLeftIcon className="inline-block h-5 w-5" />
           {t("navigation.back")}
         </button>
       </section>
