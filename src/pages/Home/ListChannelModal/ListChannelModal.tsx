@@ -10,6 +10,7 @@ import { checkError } from "../../../util/checkError";
 import { instance } from "../../../util/interceptor";
 import { MODAL_ROOT } from "../../../util";
 import ChannelList from "./ChannelList";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 type Props = {
   onClose: () => void;
@@ -66,6 +67,11 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
       <h2 className="mb-2 text-lg font-bold">
         {t("home.current_open_channels")}
       </h2>
+      {isLoading && (
+        <div className="my-2 flex justify-center">
+          <LoadingSpinner />
+        </div>
+      )}
       {openChannels.length === 0 && <p>{t("home.no_open_channels")}</p>}
       {openChannels.length > 0 && (
         <ChannelList
