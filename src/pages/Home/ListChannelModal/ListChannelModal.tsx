@@ -67,12 +67,12 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
       <h2 className="mb-2 text-lg font-bold">
         {t("home.current_open_channels")}
       </h2>
-      {!isLoading && (
+      {isLoading && (
         <div className="my-2 flex justify-center">
           <LoadingSpinner />
         </div>
       )}
-      {openChannels.length !== 0 && <p>{t("home.no_open_channels")}</p>}
+      {openChannels.length === 0 && <p>{t("home.no_open_channels")}</p>}
       {openChannels.length > 0 && (
         <ChannelList
           channel={openChannels}
