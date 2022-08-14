@@ -43,6 +43,7 @@
       "remote_balance": "Remote Channel Balance",
       "pending_balance_local": "Pending Local Balance",
       "pending_balance_remote": "Pending Remote Balance",
+      "no_open_channels": "You currently have no open channels",
       "active": "Active",
       "node_uri": "Node URI",
       "open_channel": "Open Channel",

@@ -66,6 +66,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
       <h2 className="mb-2 text-lg font-bold">
         {t("home.current_open_channels")}
       </h2>
+      {openChannels.length === 0 && <p>{t("home.no_open_channels")}</p>}
       {openChannels.length > 0 && (
         <ChannelList
           channel={openChannels}
