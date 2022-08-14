@@ -52,7 +52,7 @@ describe("SendModal", () => {
       setup();
 
       const sendBtn = screen.getByRole("button", {
-        name: "share.svg wallet.send",
+        name: "wallet.send",
       });
       const addressInput = screen.getByLabelText("wallet.invoice");
       expect(sendBtn).toBeDisabled();
@@ -65,7 +65,7 @@ describe("SendModal", () => {
       setup();
 
       const sendBtn = screen.getByRole("button", {
-        name: "share.svg wallet.send",
+        name: "wallet.send",
       });
       const addressInput = screen.getByLabelText("wallet.invoice");
       await user.type(addressInput, "bla");
@@ -107,7 +107,7 @@ describe("SendModal", () => {
       setup();
 
       const sendBtn = screen.getByRole("button", {
-        name: "share.svg wallet.send",
+        name: "wallet.send",
       });
       const addressInput = screen.getByLabelText("wallet.invoice");
       await user.type(addressInput, "lnbc111");

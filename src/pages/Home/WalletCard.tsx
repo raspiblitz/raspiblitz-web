@@ -1,12 +1,14 @@
 import {
+  BitcoinCircleIcon,
+  ShareIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
   DownloadIcon,
   LightningBoltIcon,
   LinkIcon,
 } from "@heroicons/react/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as BitcoinCircleWhiteIcon } from "../../assets/bitcoin-circle-white.svg";
-import { ReactComponent as ShareIcon } from "../../assets/share.svg";
 import { AppContext, Unit } from "../../context/app-context";
 import { SSEContext } from "../../context/sse-context";
 import {
@@ -111,7 +113,7 @@ export const WalletCard: FC<Props> = ({
                 {convertToString(unit, convertedLnBalance)} {unit}
               </p>
             </article>
-            <BitcoinCircleWhiteIcon className="absolute -bottom-9 -right-9 h-32 w-32 opacity-30" />
+            <BitcoinCircleIcon className="absolute -bottom-9 -right-9 h-32 w-32 opacity-30" />
           </div>
         </section>
         <section className="flex justify-around p-2">

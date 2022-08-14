@@ -1486,6 +1486,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bitcoin-design/bitcoin-icons-react@npm:^0.1.9":
+  version: 0.1.9
+  resolution: "@bitcoin-design/bitcoin-icons-react@npm:0.1.9"
+  peerDependencies:
+    react: ">= 16"
+  checksum: f851ffb8a93054ce448a013a8a61eda7e95220485ec3a89aaf120c591b9b7edc97ec2668f7b75ca542adb6158cf3ea720cad1e5ac560f9dce34b6df4092cdc17
+  languageName: node
+  linkType: hard
+
 "@csstools/normalize.css@npm:*":
   version: 12.0.0
   resolution: "@csstools/normalize.css@npm:12.0.0"
@@ -10562,6 +10571,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "raspiblitz-web@workspace:."
   dependencies:
+    "@bitcoin-design/bitcoin-icons-react": ^0.1.9
     "@heroicons/react": ^1.0.6
     "@testing-library/dom": ^8.16.0
     "@testing-library/jest-dom": ^5.16.4
