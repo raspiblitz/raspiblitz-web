@@ -1,6 +1,6 @@
 import { forwardRef, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as LogoutIcon } from "../assets/logout.svg";
+import { LogoutIcon } from "@heroicons/react/outline";
 import { AppContext, Unit } from "../context/app-context";
 import Toggle from "../components/Toggle";
 

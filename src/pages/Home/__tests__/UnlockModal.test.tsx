@@ -30,7 +30,7 @@ describe("UnlockModal", () => {
 
     const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
     const button = screen.getByRole("button", {
-      name: "lock-open.svg wallet.unlock",
+      name: "wallet.unlock",
     });
     expect(button).toBeDisabled();
 

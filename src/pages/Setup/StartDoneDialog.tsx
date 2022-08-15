@@ -1,10 +1,9 @@
+import { ArrowSmRightIcon, XIcon } from "@heroicons/react/outline";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ArrowRight } from "../../assets/arrow-sm-right.svg";
-import { ReactComponent as X } from "../../assets/X.svg";
+import ConfirmModal from "../../components/ConfirmModal";
 import SetupContainer from "../../layouts/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
-import ConfirmModal from "../../components/ConfirmModal";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -60,7 +59,7 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
             onClick={handleCancel}
             className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
           >
-            <X className="inline h-6 w-6" />
+            <XIcon className="inline h-6 w-6" />
             <span className="p-2">{t("setup.cancel")}</span>
           </button>
           <button
@@ -68,7 +67,7 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
             className="bd-button flex items-center px-2"
           >
             <span className="p-2 ">{buttonText}</span>
-            <ArrowRight className="inline h-6 w-6" />
+            <ArrowSmRightIcon className="inline h-6 w-6" />
           </button>
         </div>
       </SetupContainer>

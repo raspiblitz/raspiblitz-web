@@ -82,7 +82,7 @@ describe("ConfirmSendModal", () => {
       await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
 
       expect(
-        screen.getByRole("button", { name: "check.svg settings.confirm" })
+        screen.getByRole("button", { name: "settings.confirm" })
       ).not.toBeDisabled();
     });
 
@@ -107,7 +107,7 @@ describe("ConfirmSendModal", () => {
       await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
 
       const confirmBtn = screen.getByRole("button", {
-        name: "check.svg settings.confirm",
+        name: "settings.confirm",
       });
 
       await user.click(confirmBtn);
@@ -135,7 +135,7 @@ describe("ConfirmSendModal", () => {
         )
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("button", { name: "check.svg settings.confirm" })
+        screen.getByRole("button", { name: "settings.confirm" })
       ).toBeDisabled();
     });
 
@@ -150,7 +150,7 @@ describe("ConfirmSendModal", () => {
         await screen.findByText("forms.validation.lnInvoice.max")
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("button", { name: "check.svg settings.confirm" })
+        screen.getByRole("button", { name: "settings.confirm" })
       ).toBeDisabled();
     });
 
@@ -166,7 +166,7 @@ describe("ConfirmSendModal", () => {
 
       expect(
         await screen.findByRole("button", {
-          name: "check.svg settings.confirm",
+          name: "settings.confirm",
         })
       ).toBeDisabled();
     });

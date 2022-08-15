@@ -1,9 +1,9 @@
+import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import type { ChangeEvent } from "react";
 import { FC, useContext } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as SendIcon } from "../../../assets/send.svg";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../../components/InputField";
 import Message from "../../../components/Message";
@@ -71,7 +71,7 @@ const SendLn: FC<Props> = ({
         className="bd-button my-8 p-3"
         loading={loading}
         disabled={!isValid || loading}
-        icon={<SendIcon className="mr-2 h-6 w-6" />}
+        icon={<ShareIcon className="mr-2 h-6 w-6" />}
       >
         {t("wallet.send")}
       </ButtonWithSpinner>

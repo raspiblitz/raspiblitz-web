@@ -1,18 +1,16 @@
+import { CheckIcon, ChevronLeftIcon, XIcon } from "@heroicons/react/outline";
 import type { ChangeEvent } from "react";
 import { FC, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as CheckIcon } from "../../../assets/check.svg";
-import { ReactComponent as ChevronLeft } from "../../../assets/chevron-left.svg";
-import { ReactComponent as XIcon } from "../../../assets/X.svg";
 import AmountInput from "../../../components/AmountInput";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
-import { TxType } from "../SwitchTxType";
 import Message from "../../../components/Message";
 import { AppContext, Unit } from "../../../context/app-context";
 import { checkError } from "../../../util/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../util/format";
 import { instance } from "../../../util/interceptor";
+import { TxType } from "../SwitchTxType";
 interface IFormInputs {
   amountInput: string;
 }
@@ -134,7 +132,7 @@ const ConfirmSendModal: FC<Props> = ({
           onClick={back}
           className="flex items-center justify-center font-bold outline-none"
         >
-          <ChevronLeft className="inline-block h-4 w-4" />
+          <ChevronLeftIcon className="inline-block h-4 w-4" />
           {t("navigation.back")}
         </button>
 

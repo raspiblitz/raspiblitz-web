@@ -1,19 +1,19 @@
+import { LinkIcon } from "@heroicons/react/outline";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { ReactComponent as ChannelIcon } from "../../assets/link.svg";
-import Message from "../../components/Message";
-import ModalDialog from "../../layouts/ModalDialog";
-import { AppContext } from "../../context/app-context";
-import { checkError } from "../../util/checkError";
-import { stringToNumber } from "../../util/format";
-import { instance } from "../../util/interceptor";
-import { MODAL_ROOT } from "../../util";
 import AmountInput from "../../components/AmountInput";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../components/InputField";
+import Message from "../../components/Message";
+import { AppContext } from "../../context/app-context";
+import ModalDialog from "../../layouts/ModalDialog";
+import { MODAL_ROOT } from "../../util";
+import { checkError } from "../../util/checkError";
+import { stringToNumber } from "../../util/format";
+import { instance } from "../../util/interceptor";
 
 interface IFormInputs {
   nodeUri: string;
@@ -113,7 +113,7 @@ const OpenChannelModal: FC<Props> = ({ onClose }) => {
             className="bd-button p-2"
             loading={isLoading}
             disabled={!isValid}
-            icon={<ChannelIcon className="mx-1 h-6 w-6" />}
+            icon={<LinkIcon className="mx-1 h-6 w-6" />}
           >
             {t("home.open_channel")}
           </ButtonWithSpinner>

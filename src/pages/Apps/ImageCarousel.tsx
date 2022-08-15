@@ -1,5 +1,5 @@
+import { ChevronLeftIcon } from "@heroicons/react/outline";
 import { FC, useState } from "react";
-import { ReactComponent as ChevronLeft } from "../../assets/chevron-left.svg";
 
 type Props = {
   imgs: string[];
@@ -62,13 +62,13 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
           onClick={back}
           className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
         >
-          <ChevronLeft className="h-8 w-8 text-gray-700" />
+          <ChevronLeftIcon className="h-8 w-8 text-gray-700" />
         </button>
         <button
           onClick={next}
           className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
         >
-          <ChevronLeft className="h-8 w-8 rotate-180 text-gray-700" />
+          <ChevronLeftIcon className="h-8 w-8 rotate-180 text-gray-700" />
         </button>
       </div>
     </div>

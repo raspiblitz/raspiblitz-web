@@ -1,7 +1,7 @@
+import { SwitchVerticalIcon } from "@heroicons/react/outline";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as SwitchIcon } from "../assets/switch-vertical.svg";
 import { AppContext, Unit } from "../context/app-context";
 import { convertBtcToSat, convertSatToBtc, formatAmount } from "../util/format";
 
@@ -73,7 +73,7 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
           onClick={toggleHandler}
         >
           {unit}
-          <SwitchIcon className="h-5 w-5 text-black dark:text-white" />
+          <SwitchVerticalIcon className="ml-1 h-5 w-5 text-black dark:text-white" />
         </span>
       </div>
 

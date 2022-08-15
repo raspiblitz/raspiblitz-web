@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as MenuIcon } from "../assets/menu.svg";
+import { MenuIcon } from "@heroicons/react/outline";
 import { ReactComponent as RaspiBlitzMobileLogo } from "../assets/RaspiBlitz_Logo_Icon.svg";
 import { ReactComponent as RaspiBlitzLogo } from "../assets/RaspiBlitz_Logo_Main.svg";
 import { ReactComponent as RaspiBlitzLogoDark } from "../assets/RaspiBlitz_Logo_Main_Negative.svg";

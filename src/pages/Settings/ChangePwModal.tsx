@@ -1,16 +1,15 @@
+import { RefreshIcon, XIcon } from "@heroicons/react/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
-import { ReactComponent as XIcon } from "../../assets/X.svg";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../components/InputField";
 import ModalDialog from "../../layouts/ModalDialog";
+import { MODAL_ROOT } from "../../util";
 import { checkError } from "../../util/checkError";
 import { instance } from "../../util/interceptor";
-import { MODAL_ROOT } from "../../util";
 
 export type Props = {
   onClose: () => void;

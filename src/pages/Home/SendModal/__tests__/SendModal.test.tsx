@@ -27,10 +27,10 @@ describe("SendModal", () => {
 
     const addressInput = screen.getByLabelText("wallet.invoice");
     const lnTypeBtn = screen.getByRole("button", {
-      name: "lightning.svg home.lightning",
+      name: "home.lightning",
     });
     const onChainBtn = screen.getByRole("button", {
-      name: "link.svg wallet.on_chain",
+      name: "wallet.on_chain",
     });
 
     expect(addressInput).toBeInTheDocument();
@@ -41,7 +41,7 @@ describe("SendModal", () => {
   it("should close on click of X button", async () => {
     const user = userEvent.setup();
     setup();
-    const closeBtn = screen.getByRole("button", { name: "X.svg" });
+    const closeBtn = screen.getByRole("button", { name: "" });
     await user.click(closeBtn);
     expect(handleClose).toHaveBeenCalled();
   });
@@ -52,7 +52,7 @@ describe("SendModal", () => {
       setup();
 
       const sendBtn = screen.getByRole("button", {
-        name: "send.svg wallet.send",
+        name: "wallet.send",
       });
       const addressInput = screen.getByLabelText("wallet.invoice");
       expect(sendBtn).toBeDisabled();
@@ -65,7 +65,7 @@ describe("SendModal", () => {
       setup();
 
       const sendBtn = screen.getByRole("button", {
-        name: "send.svg wallet.send",
+        name: "wallet.send",
       });
       const addressInput = screen.getByLabelText("wallet.invoice");
       await user.type(addressInput, "bla");
@@ -107,7 +107,7 @@ describe("SendModal", () => {
       setup();
 
       const sendBtn = screen.getByRole("button", {
-        name: "send.svg wallet.send",
+        name: "wallet.send",
       });
       const addressInput = screen.getByLabelText("wallet.invoice");
       await user.type(addressInput, "lnbc111");
@@ -126,7 +126,7 @@ describe("SendModal", () => {
       setup();
 
       const onChainBtn = screen.getByRole("button", {
-        name: "link.svg wallet.on_chain",
+        name: "wallet.on_chain",
       });
 
       await user.click(onChainBtn);

@@ -1,11 +1,11 @@
+import { ClipboardCopyIcon } from "@heroicons/react/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ClipboardIcon } from "../../../../assets/clipboard-copy.svg";
-import KeyValueDisplay from "./KeyValueDisplay";
+import { AppContext, Unit } from "../../../../context/app-context";
 import useClipboard from "../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../models/transaction.model";
 import { convertSatToBtc, convertToString } from "../../../../util/format";
-import { AppContext, Unit } from "../../../../context/app-context";
+import KeyValueDisplay from "./KeyValueDisplay";
 
 export type Props = {
   details: Transaction;
@@ -57,7 +57,7 @@ export const OnchainDetails: FC<Props> = ({ details }) => {
             {details.id}
           </p>
           <div>
-            <ClipboardIcon
+            <ClipboardCopyIcon
               className="h-5 w-5 hover:text-blue-500"
               onClick={copyId}
             />

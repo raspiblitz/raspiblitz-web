@@ -1,11 +1,10 @@
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 import { FC, useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ChevronDownIcon } from "../../../assets/chevron-down.svg";
-import { ReactComponent as ChevronUpIcon } from "../../../assets/chevron-up.svg";
-import { LightningChannel } from "../../../models/lightning-channel";
-import { AppContext, Unit } from "../../../context/app-context";
-import { convertSatToBtc, convertToString } from "../../../util/format";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
+import { AppContext, Unit } from "../../../context/app-context";
+import { LightningChannel } from "../../../models/lightning-channel";
+import { convertSatToBtc, convertToString } from "../../../util/format";
 
 type Props = {
   isLoading: boolean;

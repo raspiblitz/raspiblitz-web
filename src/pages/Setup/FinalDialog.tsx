@@ -1,8 +1,8 @@
+import { RefreshIcon } from "@heroicons/react/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../layouts/SetupContainer";
 import { SetupPhase } from "../../models/setup.model";
-import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 
 export type Props = {
   setupPhase: SetupPhase;
