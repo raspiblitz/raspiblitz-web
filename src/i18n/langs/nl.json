@@ -174,7 +174,8 @@
       "slow": "Langzaam",
       "no": "Nee",
       "channel_opened": "Kanaal succesvol geopend",
-      "channel_closed": "Kanaal succesvol gesloten"
+      "channel_closed": "Kanaal succesvol gesloten",
+      "no_open_channels": "U hebt op dit moment geen open kanalen"
     },
     "hardware": {
       "disk_usage": "Disk ruimte gebruikt",
