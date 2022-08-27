@@ -1,171 +1,316 @@
 {
   "translation": {
-    "navigation": {
-      "display_sats": "Vis SATS",
-      "dark_mode": "Mørk drakt",
-      "back": "Tilbake",
-      "apps": "Programmer",
-      "settings": "Innstillinger",
-      "home": "Hjem",
-      "logout": "Logg ut"
-    },
-    "home": {
-      "lightning": "Lyn",
-      "channel_balance": "Kanalsaldo",
-      "channel": "Kanal",
-      "ssh": "SSH-innlogging",
-      "tor": "Tor",
-      "conn_details": "Tilkoblingsdetaljer",
-      "blocks_synced": "Blokker synkronisert",
-      "status": "Status",
-      "network": "Nettverk",
-      "version": "Versjon",
-      "bitcoin": "Bitcoin",
-      "hide": "Skjul",
-      "difficulty": "Vanskelighet",
-      "blockchain_size": "Størrelse på Blokkjede",
-      "pending_balance_local": "Ventende Lokal balanse",
-      "pending_balance_remote": "Ventende Fjern Balanse",
-      "show": "Vis",
-      "conn_in": "Innkommende",
-      "conn_out": "Utgående",
-      "connections": "Tilkoblinger",
-      "local_balance": "Lokal Kanal Balanse",
-      "remote_balance": "Fjern kanal Balanse"
-    },
-    "login": {
-      "login": "Logg inn",
-      "error": "En feil inntraff",
-      "invalid_pass": "Ugyldig passord",
-      "enter_pass_placeholder": "Passord A",
-      "enter_pass": "Skriv inn passord A"
+    "appInfo": {
+      "btc-rpc-explorer": {
+        "about": "Dette er en selvtjent utforsker for hele Bitcoin-blokk-kjeden. Den drives av RPC-kall til din egen Bitcoin-node. Den er enkel å kjøre og kan kobles til andre verktøy (som Electrum-tjenere) for å oppnå en fullverdig utforsker.",
+        "shortDescription": "Bitcoin RPC-utforsker"
+      },
+      "btcpayserver": {
+        "about": "BTCPay-tjeneren er en gratis og fri Bitcoin-betalingsformidler som lar deg godta bitcoin uten gebyrer eller mellommenn.",
+        "shortDescription": "Godta Bitcoin-betalinger. En gratis, fri og selvtjent Bitcoin-betalingsformidler."
+      },
+      "lnbits": {
+        "about": "LNbits er en enkel Python-tjener som sitter på toppen av en kronerullingskilde og kan brukes som kontosystem for å unngå risikoen med å ta inn hele kontoverdien din i programmer, via unike API-nøkler for hver lommebok.",
+        "shortDescription": "Gratis og fritt Lightning-nettverkslommebok/kontosystem"
+      },
+      "mempool": {
+        "about": " En fri utforsker utviklet av Bitcoin-gemenskapen, der fokuset er gebyrmarkedet for overføringer som er i emning, for å hjelpe overgangen til et flerlags-økosystem.",
+        "shortDescription": "En fri utforsker utviklet for Bitcoin-gemenskapen"
+      },
+      "rtl": {
+        "about": "RTL er et fullstendig nettgrensesnitt som lar deg håndtere Lightning-modeoperasjoner, på alle enheter. RTL er tilgjengelig på LND, Core Lightning og Eclair-implementasjoner.",
+        "shortDescription": "En fullverdig nettleser for LND, Core Lightning og Eclair"
+      },
+      "specter": {
+        "about": "Bitcoin Core har et veldig kraftig kommandolinjegrensesnitt og en storartet nisse. Ved bruk av PSBT og HWI kan det også fungere med maskinvarelommebøker, men fungerer kun på Linux-måten for øyeblikket. Det samme er tilfelle for multisignatursoppsett. Målet med prosjektet er å lage en beleilig og brukervennlig grafisk løsning for Bitcoin Core, med fokus på multisignatursoppsett med maskinvarelommebøker og enheter som ikke er tilkoblet.",
+        "shortDescription": "Et skrivebordsbrukergrensesnitt for Bitcoin Core, optimalisert for å fungere med maskinvarelommebøker"
+      },
+      "thunderhub": {
+        "about": "Thunderhub er en fri LND-node-håndterer der du kan håndtere og overvåke din node på alle enheter eller nettlseere. Du kan ta kontroll over Ligtning-nettverket med et enkelt og intuitivt grensesnitt og den mest oppdaterte systemstabelen.",
+        "shortDescription": "LND Lightning-nodehåndterer i nettleseren din"
+      }
     },
     "apps": {
-      "author": "Utvikler",
-      "no_page": "Ingen side tilgjengelig",
-      "online": "tilkoblet",
-      "offline": "frakoblet",
-      "source": "Kildekode",
       "about": "Om",
-      "info": "Info",
-      "uninstall": "Avinstaller",
-      "install": "Installer",
-      "open": "Åpne",
+      "author": "Utvikler",
       "available": "Tilgjengelige programmer",
+      "info": "Info",
+      "install": "Installer",
+      "install_failure": "",
+      "install_success": "",
       "installed": "Installert",
-      "installing": "Installerer …"
-    },
-    "tx": {
-      "mempool": "Vis i mempool",
-      "comment": "Kommentar",
-      "value": "Verdi",
-      "description": "Beskrivelse",
-      "fee_rate": "Avgiftstakst",
-      "fee": "Avgift",
-      "date": "Dato",
-      "included_block": "Inkludert i blokk",
-      "confirmations": "Bekreftelser",
-      "txid": "Overførings-ID",
-      "tx_details": "Overføringsdetaljer",
-      "transactions": "Overføringer",
-      "sent": "Transaksjon sendt",
-      "transactions_none": "Ingen transaksjoner registrert, på tide å lage din første",
-      "comment_placeholder": "Valgfri kommentar",
-      "confirm_info": "Vennligst bekreft følgende transaksjon"
-    },
-    "wallet": {
-      "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta midler",
-      "fund": "Fyll opp den kjedede lommeboken din",
-      "on_chain": "On-chain",
-      "balance": "Saldo",
-      "address": "Adresse",
-      "create_invoice_ln": "Opprett en lynfaktura",
-      "copy_clipboard": "Kopier til utklippstavle",
-      "copied": "Kopiert!",
-      "amount": "Beløp",
-      "send": "Send",
-      "receive": "Motta",
-      "wallet_locked": "Lommebok låst",
-      "unlock": "Lås opp",
-      "unlock_success": "Lommenok opplåst",
-      "unlocking": "Låser opp",
-      "create_invoice": "Lag Faktura",
-      "invoice": "Faktura",
-      "send_onchain": "Send midler On-chain",
-      "send_lightning": "Send midler over Lyn",
-      "confirm": "Bekreft",
-      "unlock_title": "Lås opp lommebok",
-      "unlock_subtitle": "Lås opp din lommebok"
-    },
-    "settings": {
-      "curr_lang": "Nåværende språk",
-      "language": "Språk",
-      "confirm": "Bekreft",
-      "cancel": "Avbryt",
-      "shutdown": "Slå av",
-      "reboot": "Omstart",
-      "change": "Endre",
-      "new_pw": "Nytt passord",
-      "old_pw": "Gammelt passord",
-      "change_pw_a": "Endre passord A"
+      "installing": "Installerer …",
+      "login_admin_pass_b": "",
+      "login_no_pass": "",
+      "login_pass_b": "",
+      "login_userdef": "",
+      "no_page": "Ingen side tilgjengelig",
+      "offline": "frakoblet",
+      "online": "tilkoblet",
+      "open": "Åpne",
+      "selfsigned_cert": "",
+      "source": "Kildekode",
+      "uninstall": "Avinstaller",
+      "uninstall_failure": "",
+      "uninstall_success": "",
+      "uninstalling": ""
     },
     "forms": {
       "hint": {
         "invoiceAmountZero": "beløp i faktura er tomt"
       },
       "validation": {
-        "lnInvoice": {
-          "patternMismatch": "Feil faktura format",
-          "required": "Vennligst fyll inn Lyn Faktura",
-          "expired": "Utløpt faktura",
-          "max": "Saldoen din strekker ikke til å betale denne fakturaen"
-        },
-        "unlock": {
-          "pass_c": "Passord C",
-          "required": "Skriv inn passord C"
+        "amount": {
+          "required": ""
         },
         "chainAddress": {
           "patternMismatch": "Feil adresseformat",
           "required": "Skriv inn en bitcoin-adresse"
         },
+        "chainAmount": {
+          "max": "Kontoen din strekker ikke til å sende dette beløpet",
+          "required": "Skriv inn beløp"
+        },
         "chainFee": {
           "required": "Skriv inn et gebyrbeløp"
         },
-        "chainAmount": {
-          "required": "Skriv inn beløp",
-          "max": "Kontoen din strekker ikke til å sende dette beløpet"
+        "lnInvoice": {
+          "expired": "Utløpt faktura",
+          "max": "Saldoen din strekker ikke til å betale denne fakturaen",
+          "patternMismatch": "Feil faktura format",
+          "required": "Vennligst fyll inn Lyn Faktura"
+        },
+        "node_uri": {
+          "required": ""
+        },
+        "unlock": {
+          "pass_c": "Passord C",
+          "required": "Skriv inn passord C"
         }
       }
     },
-    "appInfo": {
-      "rtl": {
-        "shortDescription": "En fullverdig nettleser for LND, Core Lightning og Eclair",
-        "about": "RTL er et fullstendig nettgrensesnitt som lar deg håndtere Lightning-modeoperasjoner, på alle enheter. RTL er tilgjengelig på LND, Core Lightning og Eclair-implementasjoner."
-      },
-      "specter": {
-        "shortDescription": "Et skrivebordsbrukergrensesnitt for Bitcoin Core, optimalisert for å fungere med maskinvarelommebøker",
-        "about": "Bitcoin Core har et veldig kraftig kommandolinjegrensesnitt og en storartet nisse. Ved bruk av PSBT og HWI kan det også fungere med maskinvarelommebøker, men fungerer kun på Linux-måten for øyeblikket. Det samme er tilfelle for multisignatursoppsett. Målet med prosjektet er å lage en beleilig og brukervennlig grafisk løsning for Bitcoin Core, med fokus på multisignatursoppsett med maskinvarelommebøker og enheter som ikke er tilkoblet."
-      },
-      "btcpayserver": {
-        "shortDescription": "Godta Bitcoin-betalinger. En gratis, fri og selvtjent Bitcoin-betalingsformidler.",
-        "about": "BTCPay-tjeneren er en gratis og fri Bitcoin-betalingsformidler som lar deg godta bitcoin uten gebyrer eller mellommenn."
-      },
-      "mempool": {
-        "shortDescription": "En fri utforsker utviklet for Bitcoin-gemenskapen",
-        "about": " En fri utforsker utviklet av Bitcoin-gemenskapen, der fokuset er gebyrmarkedet for overføringer som er i emning, for å hjelpe overgangen til et flerlags-økosystem."
-      },
-      "thunderhub": {
-        "shortDescription": "LND Lightning-nodehåndterer i nettleseren din",
-        "about": "Thunderhub er en fri LND-node-håndterer der du kan håndtere og overvåke din node på alle enheter eller nettlseere. Du kan ta kontroll over Ligtning-nettverket med et enkelt og intuitivt grensesnitt og den mest oppdaterte systemstabelen."
-      },
-      "lnbits": {
-        "about": "LNbits er en enkel Python-tjener som sitter på toppen av en kronerullingskilde og kan brukes som kontosystem for å unngå risikoen med å ta inn hele kontoverdien din i programmer, via unike API-nøkler for hver lommebok.",
-        "shortDescription": "Gratis og fritt Lightning-nettverkslommebok/kontosystem"
-      },
-      "btc-rpc-explorer": {
-        "shortDescription": "Bitcoin RPC-utforsker",
-        "about": "Dette er en selvtjent utforsker for hele Bitcoin-blokk-kjeden. Den drives av RPC-kall til din egen Bitcoin-node. Den er enkel å kjøre og kan kobles til andre verktøy (som Electrum-tjenere) for å oppnå en fullverdig utforsker."
-      }
+    "hardware": {
+      "cpu_load": "",
+      "disk_usage": "",
+      "header": "",
+      "ram_usage": "",
+      "temp": ""
+    },
+    "home": {
+      "active": "",
+      "bitcoin": "Bitcoin",
+      "blockchain_size": "Størrelse på Blokkjede",
+      "blocks_synced": "Blokker synkronisert",
+      "blocktime": "",
+      "channel": "Kanal",
+      "channel_balance": "Kanalsaldo",
+      "channel_closed": "",
+      "channel_id": "",
+      "channel_opened": "",
+      "close_channel": "",
+      "confirm_channel_close": "",
+      "conn_details": "Tilkoblingsdetaljer",
+      "conn_in": "Innkommende",
+      "conn_out": "Utgående",
+      "connections": "Tilkoblinger",
+      "current_open_channels": "",
+      "difficulty": "Vanskelighet",
+      "force_close": "",
+      "hide": "Skjul",
+      "lightning": "Lyn",
+      "list_open_channels": "",
+      "local_balance": "Lokal Kanal Balanse",
+      "network": "Nettverk",
+      "no": "",
+      "no_open_channels": "",
+      "node_id": "",
+      "node_uri": "",
+      "normal": "",
+      "onchain_cln_no_support": "",
+      "open_channel": "",
+      "pending_balance_local": "Ventende Lokal balanse",
+      "pending_balance_remote": "Ventende Fjern Balanse",
+      "remote_balance": "Fjern kanal Balanse",
+      "show": "Vis",
+      "show_qr": "",
+      "slow": "",
+      "ssh": "SSH-innlogging",
+      "status": "Status",
+      "tor": "Tor",
+      "urgent": "",
+      "version": "Versjon",
+      "versions": "",
+      "webui": ""
+    },
+    "language": {
+      "cs": "Czech",
+      "de": "tysk",
+      "en": "engelsk",
+      "es": "spansk",
+      "fr": "fransk",
+      "hu": "ungarsk",
+      "it": "italiensk",
+      "nb_NO": "norsk",
+      "nl": "nederlandsk",
+      "pt_BR": "portugisisk (brasiliansk)",
+      "sv": "svensk",
+      "vi": "Vietnamesisk"
+    },
+    "login": {
+      "enter_pass": "Skriv inn passord A",
+      "enter_pass_placeholder": "Passord A",
+      "error": "En feil inntraff",
+      "invalid_pass": "Ugyldig passord",
+      "login": "Logg inn"
+    },
+    "navigation": {
+      "apps": "Programmer",
+      "back": "Tilbake",
+      "dark_mode": "Mørk drakt",
+      "display_sats": "Vis SATS",
+      "home": "Hjem",
+      "logout": "Logg ut",
+      "settings": "Innstillinger"
+    },
+    "settings": {
+      "cancel": "Avbryt",
+      "change": "Endre",
+      "change_pw_a": "Endre passord A",
+      "confirm": "Bekreft",
+      "curr_lang": "Nåværende språk",
+      "language": "Språk",
+      "new_pw": "Nytt passord",
+      "old_pw": "Gammelt passord",
+      "pass_a_changed": "",
+      "reboot": "Omstart",
+      "shutdown": "Slå av"
+    },
+    "setup": {
+      "blockchain_delete": "",
+      "blockchain_found_long": "",
+      "blockchain_found_short": "",
+      "blockchain_keep": "",
+      "cancel": "",
+      "cancel_setup": "",
+      "cln": "",
+      "continue": "",
+      "convertwarning": "",
+      "done_migration_ready": "",
+      "done_migration_start": "",
+      "done_recover_ready": "",
+      "done_recover_start": "",
+      "done_setup_ready": "",
+      "done_setup_start": "",
+      "done_update_ready": "",
+      "done_update_start": "",
+      "final_do_reboot": "",
+      "final_info_reboot": "",
+      "final_migration": "",
+      "final_recovery": "",
+      "final_seedwords": "",
+      "final_setup": "",
+      "final_update": "",
+      "hdd_delete": "",
+      "hdd_delete_keep_blockchain": "",
+      "hdd_delete_no_blockchain": "",
+      "hdd_delete_short": "",
+      "lightningoutdated": "",
+      "lnd": "",
+      "migrate_citadel": "",
+      "migrate_mynode": "",
+      "migrate_umbrel": "",
+      "migrateblitz": "",
+      "no_and_shutdown": "",
+      "nodename_err_chars": "",
+      "nodename_err_max_length": "",
+      "nodename_err_min_length": "",
+      "nodename_error_empty": "",
+      "nodename_input": "",
+      "nodename_name": "",
+      "ok": "",
+      "other_options": "",
+      "password_a_details": "",
+      "password_a_name": "",
+      "password_a_short": "",
+      "password_b_details": "",
+      "password_b_name": "",
+      "password_b_short": "",
+      "password_c_details": "",
+      "password_c_name": "",
+      "password_c_short": "",
+      "password_error_chars": "",
+      "password_error_empty": "",
+      "password_error_length": "",
+      "password_error_match": "",
+      "password_repeat": "",
+      "pleasewait": "",
+      "preparingsetup": "",
+      "recoverblitz": "",
+      "restartinfo": "",
+      "restarting": "",
+      "restarts": "",
+      "runningsetup": "",
+      "select_bitcoin": "",
+      "select_lightning": "",
+      "setupblitz": "",
+      "setupoptions": "",
+      "setupwait": "",
+      "shuttingdown": "",
+      "start_recovery": "",
+      "start_update": "",
+      "started": "",
+      "sync_bitcoin_starting": "",
+      "sync_bitcoin_sync": "",
+      "sync_headline": "",
+      "sync_restartinfo": "",
+      "sync_wallet_info": "",
+      "sync_wallet_unlock": "",
+      "updateblitz": "",
+      "yes": "",
+      "yes_and_migrate": ""
+    },
+    "tx": {
+      "comment": "Kommentar",
+      "comment_placeholder": "Valgfri kommentar",
+      "confirm_info": "Vennligst bekreft følgende transaksjon",
+      "confirmations": "Bekreftelser",
+      "date": "Dato",
+      "description": "Beskrivelse",
+      "fee": "Avgift",
+      "fee_rate": "Avgiftstakst",
+      "included_block": "Inkludert i blokk",
+      "mempool": "Vis i mempool",
+      "sent": "Transaksjon sendt",
+      "transactions": "Overføringer",
+      "transactions_none": "Ingen transaksjoner registrert, på tide å lage din første",
+      "tx_details": "Overføringsdetaljer",
+      "txid": "Overførings-ID",
+      "unconfirmed": "",
+      "value": "Verdi"
+    },
+    "wallet": {
+      "address": "Adresse",
+      "amount": "Beløp",
+      "balance": "Saldo",
+      "confirm": "Bekreft",
+      "copied": "Kopiert!",
+      "copy_clipboard": "Kopier til utklippstavle",
+      "create_invoice": "Lag Faktura",
+      "create_invoice_ln": "Opprett en lynfaktura",
+      "fund": "Fyll opp den kjedede lommeboken din",
+      "invoice": "Faktura",
+      "on_chain": "On-chain",
+      "receive": "Motta",
+      "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta midler",
+      "send": "Send",
+      "send_lightning": "Send midler over Lyn",
+      "send_onchain": "Send midler On-chain",
+      "unlock": "Lås opp",
+      "unlock_subtitle": "Lås opp din lommebok",
+      "unlock_success": "Lommenok opplåst",
+      "unlock_title": "Lås opp lommebok",
+      "unlocking": "Låser opp",
+      "wallet_locked": "Lommebok låst"
     }
   }
 }

@@ -72,7 +72,7 @@ const Login: FC = () => {
         className="text-dark fixed right-4 top-4 h-8 dark:text-yellow-500"
         onClick={toggleDarkMode}
       />
-      <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
+      <div className="fixed right-16 top-4 flex h-8 w-72 items-center justify-around">
         <I18nDropdown />
       </div>
       {!darkMode && <RaspiBlitzLogo className="my-2 block h-10" />}
