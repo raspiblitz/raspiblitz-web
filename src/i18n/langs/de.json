@@ -122,7 +122,6 @@
       "local_balance": "Guthaben des lokalen Kanals",
       "network": "Netzwerk",
       "no": "Nein",
-      "no_open_channels": "",
       "node_id": "Node-ID",
       "node_uri": "URI der Node",
       "normal": "Normal",

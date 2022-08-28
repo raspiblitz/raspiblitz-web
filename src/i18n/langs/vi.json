@@ -122,7 +122,6 @@
       "local_balance": "Số dư kênh nội tại",
       "network": "Mạng lưới kết nối",
       "no": "Không",
-      "no_open_channels": "",
       "node_id": "Thứ tự Node",
       "node_uri": "Node URI",
       "normal": "Bình thường",

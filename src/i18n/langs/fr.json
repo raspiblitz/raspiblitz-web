@@ -122,7 +122,6 @@
       "local_balance": "Balance locale du canal",
       "network": "Réseau",
       "no": "Non",
-      "no_open_channels": "",
       "node_id": "ID du noeud",
       "node_uri": "URI du noeud",
       "normal": "Normal",
