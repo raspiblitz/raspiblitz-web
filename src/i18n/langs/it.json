@@ -69,9 +69,6 @@
       "reboot": "Riavvia",
       "shutdown": "Spegni"
     },
-    "setup": {
-      "runningsetup": ""
-    },
     "tx": {
       "comment": "Commento",
       "confirm_info": "Conferma la transazione seguente",

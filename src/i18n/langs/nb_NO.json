@@ -139,9 +139,6 @@
       "reboot": "Omstart",
       "shutdown": "Slå av"
     },
-    "setup": {
-      "runningsetup": ""
-    },
     "tx": {
       "comment": "Kommentar",
       "comment_placeholder": "Valgfri kommentar",

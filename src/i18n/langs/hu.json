@@ -68,9 +68,6 @@
       "reboot": "Újraindítás",
       "shutdown": "Leállítás"
     },
-    "setup": {
-      "runningsetup": ""
-    },
     "tx": {
       "comment": "Megjegyzés",
       "confirmations": "Konfirmációk",
