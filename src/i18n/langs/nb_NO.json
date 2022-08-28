@@ -140,7 +140,6 @@
       "shutdown": "Slå av"
     },
     "setup": {
-      "migrate_mynode": "",
       "runningsetup": ""
     },
     "tx": {

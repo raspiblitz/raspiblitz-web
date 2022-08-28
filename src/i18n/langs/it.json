@@ -70,7 +70,6 @@
       "shutdown": "Spegni"
     },
     "setup": {
-      "migrate_mynode": "",
       "runningsetup": ""
     },
     "tx": {

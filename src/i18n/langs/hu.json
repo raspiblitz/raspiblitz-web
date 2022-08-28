@@ -69,7 +69,6 @@
       "shutdown": "Leállítás"
     },
     "setup": {
-      "migrate_mynode": "",
       "runningsetup": ""
     },
     "tx": {
