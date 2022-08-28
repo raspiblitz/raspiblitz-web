@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { render, waitFor } from "utils/test-utils";
+import { render, waitFor } from "test-utils";
 import App from "./App";
 import { rest, server } from "./testServer";
 

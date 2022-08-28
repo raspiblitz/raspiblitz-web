@@ -1,6 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import { I18nextProvider } from "react-i18next";
-import i18n from "../../../i18n/test_config";
+import { render, screen } from "test-utils";
 import { AppStatus, AuthMethod } from "../../../models/app-status";
 import { App } from "../../../models/app.model";
 import { AppCard, Props } from "../AppCard";
@@ -36,29 +34,17 @@ const basicProps: Props = {
 
 describe("AppCard", () => {
   test("display install button if installed is false", async () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <AppCard {...basicProps} installed={false} />
-      </I18nextProvider>
-    );
+    render(<AppCard {...basicProps} installed={false} />);
     expect(await screen.findByText("apps.install")).toBeDefined();
   });
 
   test("display open button if installed & address is available", async () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <AppCard {...basicProps} address={"addr"} installed={true} />
-      </I18nextProvider>
-    );
+    render(<AppCard {...basicProps} address={"addr"} installed={true} />);
     expect(await screen.findByText("apps.open")).toBeDefined();
   });
 
   test("display no_page button if installed & address is not available", async () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <AppCard {...basicProps} installed={true} />
-      </I18nextProvider>
-    );
+    render(<AppCard {...basicProps} installed={true} />);
     expect(await screen.findByText("apps.no_page")).toBeDefined();
   });
 });

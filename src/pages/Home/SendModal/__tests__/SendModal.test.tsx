@@ -1,8 +1,6 @@
-import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { UserEvent } from "@testing-library/user-event/dist/types/setup";
-import { I18nextProvider } from "react-i18next";
-import i18n from "../../../../i18n/test_config";
+import { render, screen } from "test-utils";
 import { rest, server } from "../../../../testServer";
 import SendModal, { Props } from "../SendModal";
 
@@ -14,11 +12,7 @@ const basicProps: Props = {
 };
 
 const setup = () => {
-  render(
-    <I18nextProvider i18n={i18n}>
-      <SendModal {...basicProps} />
-    </I18nextProvider>
-  );
+  render(<SendModal {...basicProps} />);
 };
 
 describe("SendModal", () => {

@@ -1,7 +1,5 @@
-import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { I18nextProvider } from "react-i18next";
-import i18n from "../../../i18n/test_config";
+import { render, screen } from "test-utils";
 import { rest, server } from "../../../testServer";
 import UnlockModal from "../UnlockModal";
 
@@ -9,11 +7,7 @@ const handleClose = jest.fn();
 
 describe("UnlockModal", () => {
   const setup = () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <UnlockModal onClose={handleClose} />
-      </I18nextProvider>
-    );
+    render(<UnlockModal onClose={handleClose} />);
   };
 
   test("renders", () => {
