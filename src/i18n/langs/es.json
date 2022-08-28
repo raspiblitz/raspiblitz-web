@@ -1,25 +1,13 @@
 {
   "translation": {
     "appInfo": {
-      "btc-rpc-explorer": {
-        "shortDescription": ""
-      },
       "btcpayserver": {
-        "shortDescription": ""
-      },
-      "lnbits": {
         "shortDescription": ""
       },
       "mempool": {
         "shortDescription": ""
       },
-      "rtl": {
-        "shortDescription": ""
-      },
       "specter": {
-        "shortDescription": ""
-      },
-      "thunderhub": {
         "shortDescription": ""
       }
     },
@@ -50,18 +38,11 @@
     },
     "forms": {
       "validation": {
-        "amount": {
-          "required": ""
-        },
         "chainAddress": {
           "required": ""
         },
-        "chainAmount": {
-          "required": ""
-        },
         "lnInvoice": {
-          "expired": "",
-          "patternMismatch": ""
+          "expired": ""
         },
         "node_uri": {
           "required": ""
@@ -103,7 +84,6 @@
       "local_balance": "Balance Local",
       "network": "Red",
       "no": "No",
-      "node_id": "",
       "node_uri": "URI del nodo",
       "normal": "Normal",
       "onchain_cln_no_support": "Mostrar transacciones on-chain no está soportado actualmente con Core Lightning",
@@ -171,16 +151,11 @@
       "blockchain_found_short": "Cadena de bloques encontrada en el disco duro / SSD",
       "blockchain_keep": "Mantener la cadena de bloques",
       "cancel": "Cancelar",
-      "cln": "",
       "continue": "Continuar",
       "convertwarning": "RaspiBlitz solo puede convertir tus datos Blockchain y Lightning (fondos y canales) de momento. Los datos de aplicaciones adicionales se podrían perder en el proceso de migración.",
-      "done_migration_start": "",
       "done_recover_start": "",
-      "done_setup_start": "",
       "done_update_start": "",
-      "final_info_reboot": "",
       "final_recovery": "",
-      "final_setup": "",
       "hdd_delete": "BORRAR DATOS ANTIGUOS",
       "hdd_delete_keep_blockchain": "Por favor confirma que quieres borrar todos los datos previos en el disco/SSD y mantener solo los datos blockchain en tu nueva RaspiBlitz.",
       "hdd_delete_no_blockchain": "Por favor confirma que quieres borrar todos los datos previos en el disco/SSH para iniciar RaspiBlitz.",
@@ -199,11 +174,8 @@
       "ok": "OK",
       "other_options": "Otras opciones",
       "password_a_name": "Contraseña A",
-      "password_b_details": "",
       "password_b_short": "",
-      "password_c_name": "",
       "password_error_chars": "",
-      "password_error_length": "",
       "password_repeat": "",
       "pleasewait": "por favor espera",
       "preparingsetup": "preparando instalación",
@@ -211,16 +183,13 @@
       "restartinfo": "por favor espera hasta que RaspiBlitz responda de nuevo",
       "restarting": "reiniciando",
       "runningsetup": "Ejecutando instalación",
-      "select_lightning": "",
       "setupblitz": "Instalar un nuevo RaspiBlitz",
       "setupoptions": "Opciones de instalación",
       "setupwait": "La instalación llevará unos minutos",
       "shuttingdown": "apagando",
       "start_recovery": "¿Te gustaría iniciar el proceso de recuperación?",
       "start_update": "¿Te gustaría empezar la actualización y el proceso de recuperación?",
-      "sync_bitcoin_starting": "",
       "sync_headline": "",
-      "sync_wallet_info": "",
       "updateblitz": "Actualizar mi RaspiBlitz",
       "yes": "Sí",
       "yes_and_migrate": "Migrar a RaspiBlitz"
