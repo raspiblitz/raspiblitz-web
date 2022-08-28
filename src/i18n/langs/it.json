@@ -14,13 +14,6 @@
       "source": "Codice sorgente",
       "uninstall": "Disinstalla"
     },
-    "forms": {
-      "validation": {
-        "unlock": {
-          "pass_c": ""
-        }
-      }
-    },
     "home": {
       "bitcoin": "Bitcoin",
       "blocks_synced": "Blocchi sincronizzati",
@@ -77,11 +70,8 @@
       "shutdown": "Spegni"
     },
     "setup": {
-      "done_update_ready": "",
       "migrate_mynode": "",
-      "password_b_name": "",
-      "runningsetup": "",
-      "updateblitz": ""
+      "runningsetup": ""
     },
     "tx": {
       "comment": "Commento",

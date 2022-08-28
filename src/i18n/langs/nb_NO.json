@@ -140,11 +140,8 @@
       "shutdown": "Slå av"
     },
     "setup": {
-      "done_update_ready": "",
       "migrate_mynode": "",
-      "password_b_name": "",
-      "runningsetup": "",
-      "updateblitz": ""
+      "runningsetup": ""
     },
     "tx": {
       "comment": "Kommentar",
