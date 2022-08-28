@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import AppIcon from "../../components/AppIcon";
 import { AppStatus } from "../../models/app-status";
-import { availableApps } from "../../util/availableApps";
+import { availableApps } from "../../utils/availableApps";
 
 type Props = {
   app: AppStatus;

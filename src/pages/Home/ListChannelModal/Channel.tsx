@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import { AppContext, Unit } from "../../../context/app-context";
 import { LightningChannel } from "../../../models/lightning-channel";
-import { convertSatToBtc, convertToString } from "../../../util/format";
+import { convertSatToBtc, convertToString } from "../../../utils/format";
 
 type Props = {
   isLoading: boolean;

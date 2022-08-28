@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ConfirmModal from "../../components/ConfirmModal";
 import useSSE from "../../hooks/use-sse";
-import { enableGutter } from "../../util";
+import { enableGutter } from "../../utils";
 import ActionBox from "./ActionBox";
 import ChangePwModal from "./ChangePwModal";
 import I18nBox from "./I18nBox";

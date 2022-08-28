@@ -7,9 +7,9 @@ import AmountInput from "../../../components/AmountInput";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import Message from "../../../components/Message";
 import { AppContext, Unit } from "../../../context/app-context";
-import { checkError } from "../../../util/checkError";
-import { convertBtcToSat, stringToNumber } from "../../../util/format";
-import { instance } from "../../../util/interceptor";
+import { checkError } from "../../../utils/checkError";
+import { convertBtcToSat, stringToNumber } from "../../../utils/format";
+import { instance } from "../../../utils/interceptor";
 import { TxType } from "../SwitchTxType";
 interface IFormInputs {
   amountInput: string;

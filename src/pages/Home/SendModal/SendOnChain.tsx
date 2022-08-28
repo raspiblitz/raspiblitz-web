@@ -10,7 +10,7 @@ import {
   convertSatToBtc,
   convertToString,
   stringToNumber,
-} from "../../../util/format";
+} from "../../../utils/format";
 
 export type Props = {
   address: string;
