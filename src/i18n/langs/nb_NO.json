@@ -140,15 +140,10 @@
       "shutdown": "Slå av"
     },
     "setup": {
-      "continue": "",
       "done_update_ready": "",
-      "final_update": "",
       "migrate_mynode": "",
-      "nodename_input": "",
       "password_b_name": "",
-      "password_error_match": "",
       "runningsetup": "",
-      "start_update": "",
       "updateblitz": ""
     },
     "tx": {

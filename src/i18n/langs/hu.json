@@ -1,10 +1,5 @@
 {
   "translation": {
-    "appInfo": {
-      "mempool": {
-        "shortDescription": ""
-      }
-    },
     "apps": {
       "about": "Részletek",
       "author": "Készítő",
@@ -21,9 +16,6 @@
     },
     "forms": {
       "validation": {
-        "chainAmount": {
-          "max": ""
-        },
         "unlock": {
           "pass_c": ""
         }
@@ -37,7 +29,6 @@
       "conn_details": "Kapcsolati adatok",
       "lightning": "Lightning",
       "network": "Hálózat",
-      "pending_balance_local": "",
       "ssh": "SSH bejelentkezés",
       "status": "Státusz",
       "tor": "Tor",
@@ -85,15 +76,10 @@
       "shutdown": "Leállítás"
     },
     "setup": {
-      "continue": "",
       "done_update_ready": "",
-      "final_update": "",
       "migrate_mynode": "",
-      "nodename_input": "",
       "password_b_name": "",
-      "password_error_match": "",
       "runningsetup": "",
-      "start_update": "",
       "updateblitz": ""
     },
     "tx": {
@@ -121,8 +107,7 @@
       "on_chain": "Láncon",
       "receive": "Fogadás",
       "scan_qr": "Szkennelje be ezt a QR kódot, vagy másolja ki a fizetési címet hogy pénzt fogadhasson",
-      "send": "Küldés",
-      "wallet_locked": ""
+      "send": "Küldés"
     }
   }
 }

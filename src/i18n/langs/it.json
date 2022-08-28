@@ -1,10 +1,5 @@
 {
   "translation": {
-    "appInfo": {
-      "mempool": {
-        "shortDescription": ""
-      }
-    },
     "apps": {
       "about": "About",
       "author": "Autore",
@@ -21,9 +16,6 @@
     },
     "forms": {
       "validation": {
-        "chainAmount": {
-          "max": ""
-        },
         "unlock": {
           "pass_c": ""
         }
@@ -37,7 +29,6 @@
       "conn_details": "Dettagli della connessione",
       "lightning": "Lightning",
       "network": "Rete",
-      "pending_balance_local": "",
       "ssh": "SSH login",
       "status": "Stato",
       "tor": "Tor",
@@ -86,15 +77,10 @@
       "shutdown": "Spegni"
     },
     "setup": {
-      "continue": "",
       "done_update_ready": "",
-      "final_update": "",
       "migrate_mynode": "",
-      "nodename_input": "",
       "password_b_name": "",
-      "password_error_match": "",
       "runningsetup": "",
-      "start_update": "",
       "updateblitz": ""
     },
     "tx": {

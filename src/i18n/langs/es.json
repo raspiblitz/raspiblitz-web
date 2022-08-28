@@ -1,10 +1,5 @@
 {
   "translation": {
-    "appInfo": {
-      "mempool": {
-        "shortDescription": ""
-      }
-    },
     "apps": {
       "about": "Acerca de",
       "author": "Autor",
@@ -32,9 +27,6 @@
     },
     "forms": {
       "validation": {
-        "lnInvoice": {
-          "expired": ""
-        },
         "unlock": {
           "pass_c": "Contraseña C"
         }
@@ -141,7 +133,6 @@
       "cancel": "Cancelar",
       "continue": "Continuar",
       "convertwarning": "RaspiBlitz solo puede convertir tus datos Blockchain y Lightning (fondos y canales) de momento. Los datos de aplicaciones adicionales se podrían perder en el proceso de migración.",
-      "done_update_start": "",
       "hdd_delete": "BORRAR DATOS ANTIGUOS",
       "hdd_delete_keep_blockchain": "Por favor confirma que quieres borrar todos los datos previos en el disco/SSD y mantener solo los datos blockchain en tu nueva RaspiBlitz.",
       "hdd_delete_no_blockchain": "Por favor confirma que quieres borrar todos los datos previos en el disco/SSH para iniciar RaspiBlitz.",
@@ -160,7 +151,6 @@
       "ok": "OK",
       "other_options": "Otras opciones",
       "password_a_name": "Contraseña A",
-      "password_error_chars": "",
       "pleasewait": "por favor espera",
       "preparingsetup": "preparando instalación",
       "recoverblitz": "Restablecer mi RaspiBlitz",
