@@ -38,6 +38,11 @@
       }
     ]
   },
+  "jest": {
+    "moduleNameMapper": {
+      "^test-utils$": "<rootDir>/src/utils/test-utils.tsx"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",

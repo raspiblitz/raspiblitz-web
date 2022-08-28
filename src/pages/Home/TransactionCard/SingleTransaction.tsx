@@ -6,7 +6,7 @@ import {
   convertMSatToSat,
   convertSatToBtc,
   convertToString,
-} from "../../../util/format";
+} from "../../../utils/format";
 import CategoryIcon from "./CategoryIcon";
 
 export type Props = {

@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../components/InputField";
 import ModalDialog from "../../layouts/ModalDialog";
-import { MODAL_ROOT } from "../../util";
-import { checkError } from "../../util/checkError";
-import { instance } from "../../util/interceptor";
+import { MODAL_ROOT } from "../../utils";
+import { checkError } from "../../utils/checkError";
+import { instance } from "../../utils/interceptor";
 
 export type Props = {
   onClose: () => void;

@@ -11,8 +11,8 @@ import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpin
 import InputField from "../../components/InputField";
 import Message from "../../components/Message";
 import SetupContainer from "../../layouts/SetupContainer";
-import { checkError } from "../../util/checkError";
-import { instance } from "../../util/interceptor";
+import { checkError } from "../../utils/checkError";
+import { instance } from "../../utils/interceptor";
 import ProgressCircle from "./ProgressCircle";
 
 export interface InputData {

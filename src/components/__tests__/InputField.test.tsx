@@ -1,9 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "test-utils";
 
-import { I18nextProvider } from "react-i18next";
-import i18n from "../../i18n/test_config";
-import InputField from "../InputField";
 import type { InputFieldProps } from "../InputField";
+import InputField from "../InputField";
 
 const basicProps: InputFieldProps = {
   label: "Banana Label",
@@ -15,11 +13,7 @@ const basicProps: InputFieldProps = {
 
 describe("InputField", () => {
   test("render with placeholder", async () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <InputField {...basicProps} placeholder="A yellow fruit" />
-      </I18nextProvider>
-    );
+    render(<InputField {...basicProps} placeholder="A yellow fruit" />);
 
     const input = await screen.findByLabelText("Banana Label");
     await waitFor(() => expect(input).toHaveClass("input-underline"));
@@ -29,12 +23,10 @@ describe("InputField", () => {
 
   test("render with error-message", async () => {
     render(
-      <I18nextProvider i18n={i18n}>
-        <InputField
-          {...basicProps}
-          errorMessage={{ type: "required", message: "Banana required!" }}
-        />
-      </I18nextProvider>
+      <InputField
+        {...basicProps}
+        errorMessage={{ type: "required", message: "Banana required!" }}
+      />
     );
 
     const input = await screen.findByLabelText("Banana Label");
@@ -44,23 +36,17 @@ describe("InputField", () => {
   });
 
   test("prop inputRightAddon", async () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <InputField {...basicProps} inputRightAddon="Right add-on text" />
-      </I18nextProvider>
-    );
+    render(<InputField {...basicProps} inputRightAddon="Right add-on text" />);
 
     expect(screen.getByText("Right add-on text")).toBeInTheDocument();
   });
 
   test("prop inputRightElement", async () => {
     render(
-      <I18nextProvider i18n={i18n}>
-        <InputField
-          {...basicProps}
-          inputRightElement={<button>Click me!</button>}
-        />
-      </I18nextProvider>
+      <InputField
+        {...basicProps}
+        inputRightElement={<button>Click me!</button>}
+      />
     );
 
     expect(screen.getByText("Click me!")).toBeInTheDocument();

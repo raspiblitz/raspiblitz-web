@@ -10,10 +10,10 @@ import InputField from "../../components/InputField";
 import Message from "../../components/Message";
 import { AppContext } from "../../context/app-context";
 import ModalDialog from "../../layouts/ModalDialog";
-import { MODAL_ROOT } from "../../util";
-import { checkError } from "../../util/checkError";
-import { stringToNumber } from "../../util/format";
-import { instance } from "../../util/interceptor";
+import { MODAL_ROOT } from "../../utils";
+import { checkError } from "../../utils/checkError";
+import { stringToNumber } from "../../utils/format";
+import { instance } from "../../utils/interceptor";
 
 interface IFormInputs {
   nodeUri: string;

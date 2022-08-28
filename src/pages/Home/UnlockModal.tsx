@@ -10,8 +10,8 @@ import InputField from "../../components/InputField";
 import Message from "../../components/Message";
 import { AppContext } from "../../context/app-context";
 import ModalDialog, { disableScroll } from "../../layouts/ModalDialog";
-import { MODAL_ROOT } from "../../util";
-import { instance } from "../../util/interceptor";
+import { MODAL_ROOT } from "../../utils";
+import { instance } from "../../utils/interceptor";
 
 interface IFormInputs {
   passwordInput: string;

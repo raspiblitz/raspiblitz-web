@@ -12,8 +12,8 @@ import { SystemInfo } from "../models/system-info";
 import { SystemStartupInfo } from "../models/system-startup-info";
 import { WalletBalance } from "../models/wallet-balance";
 import { SSEContext, SSE_URL } from "../context/sse-context";
-import { availableApps } from "../util/availableApps";
-import { ACCESS_TOKEN, setWindowAlias } from "../util";
+import { availableApps } from "../utils/availableApps";
+import { ACCESS_TOKEN, setWindowAlias } from "../utils";
 
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners

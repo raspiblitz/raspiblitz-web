@@ -11,8 +11,8 @@ import "./i18n/config";
 import { SetupPhase } from "./models/setup.model";
 import Login from "./pages/Login";
 import { AppContext } from "./context/app-context";
-import { instance } from "./util/interceptor";
-import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./util";
+import { instance } from "./utils/interceptor";
+import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./utils";
 
 const LazySetup = lazy(() => import("./pages/Setup"));
 const LazyHome = lazy(() => import("./pages/Home"));

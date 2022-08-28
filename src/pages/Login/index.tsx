@@ -8,9 +8,9 @@ import I18nDropdown from "../../components/I18nDropdown";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Message from "../../components/Message";
 import { AppContext } from "../../context/app-context";
-import { ACCESS_TOKEN, enableGutter } from "../../util";
-import { checkError } from "../../util/checkError";
-import { instance } from "../../util/interceptor";
+import { ACCESS_TOKEN, enableGutter } from "../../utils";
+import { checkError } from "../../utils/checkError";
+import { instance } from "../../utils/interceptor";
 
 const Login: FC = () => {
   const { t } = useTranslation();

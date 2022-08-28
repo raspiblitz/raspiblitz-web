@@ -5,7 +5,7 @@ import AppIcon from "../../components/AppIcon";
 import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { App } from "../../models/app.model";
-import { availableApps } from "../../util/availableApps";
+import { availableApps } from "../../utils/availableApps";
 import ImageCarousel from "./ImageCarousel";
 
 export type Props = {

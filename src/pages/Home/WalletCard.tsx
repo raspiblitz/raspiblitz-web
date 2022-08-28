@@ -15,7 +15,7 @@ import {
   convertMSatToBtc,
   convertSatToBtc,
   convertToString,
-} from "../../util/format";
+} from "../../utils/format";
 
 type Props = {
   onReceive: () => void;

@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import ModalDialog from "../layouts/ModalDialog";
 import { AppContext } from "../context/app-context";
-import { instance } from "../util/interceptor";
-import { MODAL_ROOT } from "../util";
+import { instance } from "../utils/interceptor";
+import { MODAL_ROOT } from "../utils";
 
 export type Props = {
   confirmText: string;

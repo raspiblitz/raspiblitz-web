@@ -3,14 +3,14 @@ import { createPortal } from "react-dom";
 import SwitchTxType, { TxType } from "../SwitchTxType";
 import ModalDialog from "../../../layouts/ModalDialog";
 import { AppContext, Unit } from "../../../context/app-context";
-import { checkError } from "../../../util/checkError";
+import { checkError } from "../../../utils/checkError";
 import {
   convertMSatToBtc,
   convertMSatToSat,
   convertToString,
-} from "../../../util/format";
-import { instance } from "../../../util/interceptor";
-import { MODAL_ROOT } from "../../../util";
+} from "../../../utils/format";
+import { instance } from "../../../utils/interceptor";
+import { MODAL_ROOT } from "../../../utils";
 import ConfirmSendModal from "./ConfirmSendModal";
 import SendLn from "./SendLN";
 import SendOnChain from "./SendOnChain";

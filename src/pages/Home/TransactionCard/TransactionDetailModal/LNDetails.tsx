@@ -8,7 +8,7 @@ import {
   convertMSatToBtc,
   convertMSatToSat,
   convertToString,
-} from "../../../../util/format";
+} from "../../../../utils/format";
 import KeyValueDisplay from "./KeyValueDisplay";
 
 export type Props = {

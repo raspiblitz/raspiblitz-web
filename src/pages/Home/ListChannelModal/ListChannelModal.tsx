@@ -6,9 +6,9 @@ import Message from "../../../components/Message";
 import ModalDialog from "../../../layouts/ModalDialog";
 import { LightningChannel } from "../../../models/lightning-channel";
 import { AppContext } from "../../../context/app-context";
-import { checkError } from "../../../util/checkError";
-import { instance } from "../../../util/interceptor";
-import { MODAL_ROOT } from "../../../util";
+import { checkError } from "../../../utils/checkError";
+import { instance } from "../../../utils/interceptor";
+import { MODAL_ROOT } from "../../../utils";
 import ChannelList from "./ChannelList";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 

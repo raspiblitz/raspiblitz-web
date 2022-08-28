@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "../../../../context/app-context";
 import useClipboard from "../../../../hooks/use-clipboard";
 import { Transaction } from "../../../../models/transaction.model";
-import { convertSatToBtc, convertToString } from "../../../../util/format";
+import { convertSatToBtc, convertToString } from "../../../../utils/format";
 import KeyValueDisplay from "./KeyValueDisplay";
 
 export type Props = {

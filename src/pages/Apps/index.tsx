@@ -6,10 +6,10 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
 import { App } from "../../models/app.model";
-import { availableApps } from "../../util/availableApps";
-import { checkError } from "../../util/checkError";
-import { instance } from "../../util/interceptor";
-import { enableGutter } from "../../util";
+import { availableApps } from "../../utils/availableApps";
+import { checkError } from "../../utils/checkError";
+import { instance } from "../../utils/interceptor";
+import { enableGutter } from "../../utils";
 import AppCard from "./AppCard";
 import AppInfo from "./AppInfo";
 

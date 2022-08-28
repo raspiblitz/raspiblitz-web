@@ -1,8 +1,6 @@
-import { render, waitFor } from "@testing-library/react";
-import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
+import { render, waitFor } from "test-utils";
 import App from "./App";
-import i18n from "./i18n/test_config";
 import { rest, server } from "./testServer";
 
 const mockedUsedNavigate = jest.fn();
@@ -32,11 +30,9 @@ describe("App", () => {
     );
 
     render(
-      <I18nextProvider i18n={i18n}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </I18nextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     );
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalledTimes(1));
   });
@@ -55,11 +51,9 @@ describe("App", () => {
       })
     );
     render(
-      <I18nextProvider i18n={i18n}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </I18nextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     );
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalledTimes(0));
   });
