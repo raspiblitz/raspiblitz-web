@@ -38,7 +38,6 @@
       "install": "Installer",
       "installed": "Installert",
       "installing": "Installerer …",
-      "login_userdef": "",
       "no_page": "Ingen side tilgjengelig",
       "offline": "frakoblet",
       "online": "tilkoblet",
@@ -74,16 +73,12 @@
         }
       }
     },
-    "hardware": {
-      "ram_usage": ""
-    },
     "home": {
       "bitcoin": "Bitcoin",
       "blockchain_size": "Størrelse på Blokkjede",
       "blocks_synced": "Blokker synkronisert",
       "channel": "Kanal",
       "channel_balance": "Kanalsaldo",
-      "close_channel": "",
       "conn_details": "Tilkoblingsdetaljer",
       "conn_in": "Innkommende",
       "conn_out": "Utgående",
@@ -93,7 +88,6 @@
       "lightning": "Lyn",
       "local_balance": "Lokal Kanal Balanse",
       "network": "Nettverk",
-      "node_uri": "",
       "pending_balance_local": "Ventende Lokal balanse",
       "pending_balance_remote": "Ventende Fjern Balanse",
       "remote_balance": "Fjern kanal Balanse",
@@ -146,25 +140,15 @@
       "shutdown": "Slå av"
     },
     "setup": {
-      "blockchain_keep": "",
       "continue": "",
-      "done_recover_ready": "",
       "done_update_ready": "",
-      "final_migration": "",
       "final_update": "",
-      "hdd_delete_short": "",
       "migrate_mynode": "",
-      "nodename_err_chars": "",
       "nodename_input": "",
-      "password_a_details": "",
       "password_b_name": "",
-      "password_c_short": "",
       "password_error_match": "",
-      "recoverblitz": "",
       "runningsetup": "",
-      "setupoptions": "",
       "start_update": "",
-      "sync_headline": "",
       "updateblitz": ""
     },
     "tx": {

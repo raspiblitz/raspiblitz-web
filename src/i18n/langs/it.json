@@ -1,13 +1,7 @@
 {
   "translation": {
     "appInfo": {
-      "btcpayserver": {
-        "shortDescription": ""
-      },
       "mempool": {
-        "shortDescription": ""
-      },
-      "specter": {
         "shortDescription": ""
       }
     },
@@ -18,7 +12,6 @@
       "info": "Info",
       "install": "Installa",
       "installed": "Installato",
-      "login_pass_b": "",
       "no_page": "Nessuna pagina disponibile",
       "offline": "disconnesso",
       "online": "connesso",
@@ -27,14 +20,8 @@
       "uninstall": "Disinstalla"
     },
     "forms": {
-      "hint": {
-        "invoiceAmountZero": ""
-      },
       "validation": {
         "chainAmount": {
-          "max": ""
-        },
-        "lnInvoice": {
           "max": ""
         },
         "unlock": {
@@ -42,22 +29,15 @@
         }
       }
     },
-    "hardware": {
-      "header": ""
-    },
     "home": {
       "bitcoin": "Bitcoin",
       "blocks_synced": "Blocchi sincronizzati",
       "channel": "Canale",
       "channel_balance": "Saldo del canale",
-      "close_channel": "",
       "conn_details": "Dettagli della connessione",
-      "current_open_channels": "",
       "lightning": "Lightning",
       "network": "Rete",
-      "node_uri": "",
       "pending_balance_local": "",
-      "show_qr": "",
       "ssh": "SSH login",
       "status": "Stato",
       "tor": "Tor",
@@ -106,25 +86,15 @@
       "shutdown": "Spegni"
     },
     "setup": {
-      "blockchain_keep": "",
       "continue": "",
-      "done_recover_ready": "",
       "done_update_ready": "",
-      "final_migration": "",
       "final_update": "",
-      "hdd_delete_short": "",
       "migrate_mynode": "",
-      "nodename_err_chars": "",
       "nodename_input": "",
-      "password_a_details": "",
       "password_b_name": "",
-      "password_c_short": "",
       "password_error_match": "",
-      "recoverblitz": "",
       "runningsetup": "",
-      "setupoptions": "",
       "start_update": "",
-      "sync_headline": "",
       "updateblitz": ""
     },
     "tx": {
@@ -158,8 +128,7 @@
       "scan_qr": "Scannerizza questo codice QR o copia l'indirizzo sottostante per ricevere denaro",
       "send": "Invia",
       "send_lightning": "Invia denaro via Lightning",
-      "send_onchain": "Invia denaro On-chain",
-      "unlock_title": ""
+      "send_onchain": "Invia denaro On-chain"
     }
   }
 }

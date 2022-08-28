@@ -1,13 +1,7 @@
 {
   "translation": {
     "appInfo": {
-      "btcpayserver": {
-        "shortDescription": ""
-      },
       "mempool": {
-        "shortDescription": ""
-      },
-      "specter": {
         "shortDescription": ""
       }
     },
@@ -18,7 +12,6 @@
       "info": "Infó",
       "install": "Installálás",
       "installed": "Installálva",
-      "login_pass_b": "",
       "no_page": "Nincs ilyen elérhető oldal",
       "offline": "offline",
       "online": "online",
@@ -27,14 +20,8 @@
       "uninstall": "Eltávolítás"
     },
     "forms": {
-      "hint": {
-        "invoiceAmountZero": ""
-      },
       "validation": {
         "chainAmount": {
-          "max": ""
-        },
-        "lnInvoice": {
           "max": ""
         },
         "unlock": {
@@ -42,22 +29,15 @@
         }
       }
     },
-    "hardware": {
-      "header": ""
-    },
     "home": {
       "bitcoin": "Bitcoin",
       "blocks_synced": "Szikronizált blokkok",
       "channel": "Csatorna",
       "channel_balance": "Csatorna Egyenleg",
-      "close_channel": "",
       "conn_details": "Kapcsolati adatok",
-      "current_open_channels": "",
       "lightning": "Lightning",
       "network": "Hálózat",
-      "node_uri": "",
       "pending_balance_local": "",
-      "show_qr": "",
       "ssh": "SSH bejelentkezés",
       "status": "Státusz",
       "tor": "Tor",
@@ -105,25 +85,15 @@
       "shutdown": "Leállítás"
     },
     "setup": {
-      "blockchain_keep": "",
       "continue": "",
-      "done_recover_ready": "",
       "done_update_ready": "",
-      "final_migration": "",
       "final_update": "",
-      "hdd_delete_short": "",
       "migrate_mynode": "",
-      "nodename_err_chars": "",
       "nodename_input": "",
-      "password_a_details": "",
       "password_b_name": "",
-      "password_c_short": "",
       "password_error_match": "",
-      "recoverblitz": "",
       "runningsetup": "",
-      "setupoptions": "",
       "start_update": "",
-      "sync_headline": "",
       "updateblitz": ""
     },
     "tx": {
@@ -152,7 +122,6 @@
       "receive": "Fogadás",
       "scan_qr": "Szkennelje be ezt a QR kódot, vagy másolja ki a fizetési címet hogy pénzt fogadhasson",
       "send": "Küldés",
-      "unlock_subtitle": "",
       "wallet_locked": ""
     }
   }
