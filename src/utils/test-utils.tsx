@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, RenderOptions } from "@testing-library/react";
 import {
   AppContext,
   appContextDefault,
@@ -42,12 +42,11 @@ const AllTheProviders: FC<{
 
 const customRender = (
   ui: ReactElement,
-  options?: {
+  options?: Omit<RenderOptions, "wrapper"> & {
     providerOptions?: {
       sseProps?: Partial<SSEContextType>;
       appProps?: Partial<AppContextType>;
     };
-    [key: string]: unknown;
   }
 ) =>
   render(ui, {
