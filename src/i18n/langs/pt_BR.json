@@ -122,7 +122,6 @@
       "local_balance": "Saldo do canal local",
       "network": "Rede",
       "no": "Não",
-      "no_open_channels": "",
       "node_id": "Nome do Node",
       "node_uri": "Node URI",
       "normal": "Normal",
