@@ -23,28 +23,20 @@ const I18nDropdown: FC = () => {
   };
 
   return (
-    <article className="flex justify-between">
-      <label
-        htmlFor="lngSelect"
-        className="mr-2 w-1/2 font-bold dark:text-white"
-      >
-        {t("settings.language")}
-      </label>
-      <select
-        id="lngSelect"
-        ref={selectRef}
-        onChange={dropdownHandler}
-        className="w-auto border bg-white dark:text-black"
-      >
-        {langs.map((lang) => {
-          return (
-            <option key={lang} value={lang}>
-              {t(`language.${lang}`)}
-            </option>
-          );
-        })}
-      </select>
-    </article>
+    <select
+      id="lngSelect"
+      ref={selectRef}
+      onChange={dropdownHandler}
+      className="w-auto border bg-white dark:text-black"
+    >
+      {langs.map((lang) => {
+        return (
+          <option key={lang} value={lang}>
+            {t(`language.${lang}`)}
+          </option>
+        );
+      })}
+    </select>
   );
 };
 
