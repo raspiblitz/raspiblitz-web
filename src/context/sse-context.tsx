@@ -10,7 +10,7 @@ import { SystemStartupInfo } from "../models/system-startup-info";
 import { Transaction } from "../models/transaction.model";
 import { WalletBalance } from "../models/wallet-balance";
 
-interface SSEContextType {
+export interface SSEContextType {
   evtSource: EventSource | null;
   setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
   systemInfo: SystemInfo;
@@ -36,7 +36,7 @@ interface SSEContextType {
   setSystemStartupInfo: Dispatch<SetStateAction<SystemStartupInfo | null>>;
 }
 
-export const SSEContext = createContext<SSEContextType>({
+export const sseContextDefault: SSEContextType = {
   evtSource: null,
   setEvtSource: () => {},
   systemInfo: {} as SystemInfo,
@@ -59,7 +59,9 @@ export const SSEContext = createContext<SSEContextType>({
   setHardwareInfo: () => {},
   systemStartupInfo: {} as SystemStartupInfo,
   setSystemStartupInfo: () => {},
-});
+};
+
+export const SSEContext = createContext<SSEContextType>(sseContextDefault);
 
 // for personal development - change backend with .env file
 const backendserver = process.env.REACT_APP_BACKEND || "http://localhost:8000";

@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import { render, waitFor } from "test-utils";
 import App from "./App";
 import { rest, server } from "./testServer";
@@ -29,11 +28,7 @@ describe("App", () => {
       })
     );
 
-    render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
+    render(<App />);
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalledTimes(1));
   });
 
@@ -50,11 +45,7 @@ describe("App", () => {
         );
       })
     );
-    render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
+    render(<App />);
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalledTimes(0));
   });
 });

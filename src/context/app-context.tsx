@@ -20,7 +20,7 @@ import {
 } from "../utils";
 import { SSEContext } from "./sse-context";
 
-interface AppContextType {
+export interface AppContextType {
   isLoggedIn: boolean;
   darkMode: boolean;
   unit: Unit;
@@ -37,7 +37,7 @@ export enum Unit {
   SAT = "SAT",
 }
 
-export const AppContext = createContext<AppContextType>({
+export const appContextDefault: AppContextType = {
   isLoggedIn: false,
   darkMode: true,
   unit: Unit.SAT,
@@ -47,7 +47,9 @@ export const AppContext = createContext<AppContextType>({
   logout: () => {},
   toggleDarkMode: () => {},
   setWalletLocked: () => {},
-});
+};
+
+export const AppContext = createContext<AppContextType>(appContextDefault);
 
 type Props = {
   children?: React.ReactNode;
