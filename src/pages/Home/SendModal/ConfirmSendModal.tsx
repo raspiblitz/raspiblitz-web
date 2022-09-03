@@ -206,7 +206,7 @@ const ConfirmSendModal: FC<Props> = ({
             onClick={() => close(false)}
             disabled={isLoading}
           >
-            <XIcon />
+            <XIcon className="inline h-6 w-6" />
             &nbsp;{t("settings.cancel")}
           </button>
 
@@ -214,7 +214,7 @@ const ConfirmSendModal: FC<Props> = ({
             className="bd-button flex py-2 px-3"
             type="submit"
             loading={isLoading}
-            icon={<CheckIcon />}
+            icon={<CheckIcon className="inline h-6 w-6" />}
             disabled={!isValid || !isValidLnInvoice}
           >
             <span className="mx-1">{t("settings.confirm")}</span>
