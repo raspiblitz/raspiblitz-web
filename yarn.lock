@@ -1624,12 +1624,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@heroicons/react@npm:1.0.6"
+"@heroicons/react@npm:^2.0.10":
+  version: 2.0.10
+  resolution: "@heroicons/react@npm:2.0.10"
   peerDependencies:
     react: ">= 16"
-  checksum: 372b1eda3ce735ef069777bc96304f70de585ebb71a6d1cedc121bb695f9bca235619112e3ee14e8779e95a03096813cbbe3b755927a54b7580d1ce084fa4096
+  checksum: 40e0fc0289f7b12239e307d887d3cdbf80c5157a42e5b1c313b291800e9a30a191f6310c2dcc08a8a0132b238ff37e62ecd2f6b1696cf81043d48154566b8643
   languageName: node
   linkType: hard
 
@@ -10629,7 +10629,7 @@ __metadata:
   resolution: "raspiblitz-web@workspace:."
   dependencies:
     "@bitcoin-design/bitcoin-icons-react": ^0.1.9
-    "@heroicons/react": ^1.0.6
+    "@heroicons/react": ^2.0.10
     "@testing-library/dom": ^8.17.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.3.0
