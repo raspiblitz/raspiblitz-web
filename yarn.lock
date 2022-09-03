@@ -6530,6 +6530,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql@npm:^15.0.0 || ^16.0.0":
+  version: 16.6.0
+  resolution: "graphql@npm:16.6.0"
+  checksum: bf1d9e3c1938ce3c1a81e909bd3ead1ae4707c577f91cff1ca2eca474bfbc7873d5d7b942e1e9777ff5a8304421dba57a4b76d7a29eb19de8711cb70e3c2415e
+  languageName: node
+  linkType: hard
+
 "gzip-size@npm:^6.0.0":
   version: 6.0.0
   resolution: "gzip-size@npm:6.0.0"
@@ -8839,9 +8846,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^0.45.0":
-  version: 0.45.0
-  resolution: "msw@npm:0.45.0"
+"msw@npm:^0.46.1":
+  version: 0.46.1
+  resolution: "msw@npm:0.46.1"
   dependencies:
     "@mswjs/cookies": ^0.2.2
     "@mswjs/interceptors": ^0.17.2
@@ -8851,6 +8858,7 @@ __metadata:
     chalk: 4.1.1
     chokidar: ^3.4.2
     cookie: ^0.4.2
+    graphql: ^15.0.0 || ^16.0.0
     headers-polyfill: ^3.0.4
     inquirer: ^8.2.0
     is-node-process: ^1.0.1
@@ -8860,19 +8868,16 @@ __metadata:
     path-to-regexp: ^6.2.0
     statuses: ^2.0.0
     strict-event-emitter: ^0.2.0
-    type-fest: ^1.2.2
+    type-fest: ^2.19.0
     yargs: ^17.3.1
   peerDependencies:
-    graphql: ^15.0.0 || ^16.0.0
-    typescript: ">= 4.2.x <= 4.7.x"
+    typescript: ">= 4.2.x <= 4.8.x"
   peerDependenciesMeta:
-    graphql:
-      optional: true
     typescript:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: a615d77d1c754ffddefc888237d6adcf362c495859b3c6ae43437de88be837ffabb55e11893a4290d304383262e19c80d86b2d33ded123a5bfc5c9e97d8f4884
+  checksum: 50c941cb43acf64e888d7bc3642fdc269a553a3bdcddf8cf12e412acf4c732fa16834b0dc1ad54d1e3e04dc9815cb9f25fb79f45a1109fea5dca049c1495eabd
   languageName: node
   linkType: hard
 
@@ -10646,7 +10651,7 @@ __metadata:
     husky: ^8.0.1
     i18next: ^21.9.1
     lint-staged: ^13.0.3
-    msw: ^0.45.0
+    msw: ^0.46.1
     postcss: ^8.4.16
     prettier: ^2.7.1
     prettier-plugin-tailwindcss: ^0.1.13
@@ -12590,10 +12595,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^1.2.2":
-  version: 1.4.0
-  resolution: "type-fest@npm:1.4.0"
-  checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
+"type-fest@npm:^2.19.0":
+  version: 2.19.0
+  resolution: "type-fest@npm:2.19.0"
+  checksum: a4ef07ece297c9fba78fc1bd6d85dff4472fe043ede98bd4710d2615d15776902b595abf62bd78339ed6278f021235fb28a96361f8be86ed754f778973a0d278
   languageName: node
   linkType: hard
 
