@@ -108,7 +108,9 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
           amount={amount}
           address={addr}
           back={() => setConfirm(false)}
-          balance={lnBalance}
+          balance={
+            invoiceType === TxType.LIGHTNING ? lnBalance : onchainBalance
+          }
           close={onClose}
           comment={comment}
           expiry={expiry}

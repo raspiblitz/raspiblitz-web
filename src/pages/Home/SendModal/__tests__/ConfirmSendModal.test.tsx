@@ -9,7 +9,7 @@ import ConfirmSendModal from "../ConfirmSendModal";
 
 const closeSpy = jest.fn();
 
-const basicProps: Props = {
+const basicLnTxProps: Props = {
   amount: 0,
   address:
     "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
@@ -24,12 +24,26 @@ const basicProps: Props = {
   timestamp: 1893456000, // 01 Jan 2030 00:00:00 GMT
 };
 
+const basicOnChainTxProps: Props = {
+  amount: 50,
+  address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+  back: () => {},
+  balance: 100,
+  close: closeSpy,
+  comment: "",
+  expiry: 36000,
+  fee: "1",
+  invoiceAmount: 50,
+  invoiceType: TxType.ONCHAIN,
+  timestamp: 1893456000, // 01 Jan 2030 00:00:00 GMT
+};
+
 describe("ConfirmSendModal", () => {
   describe("ln-invoice with zero amount", () => {
     const setup = () => {
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicProps} />
+          <ConfirmSendModal {...basicLnTxProps} />
         </I18nextProvider>
       );
     };
@@ -121,7 +135,7 @@ describe("ConfirmSendModal", () => {
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal
-            {...basicProps}
+            {...basicLnTxProps}
             timestamp={1640995200} // "Sat Jan 01 2022 08:00:00
             expiry={36000}
           />
@@ -142,7 +156,7 @@ describe("ConfirmSendModal", () => {
     test("show error if amount is bigger than balance", async () => {
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicProps} invoiceAmount={111} />
+          <ConfirmSendModal {...basicLnTxProps} invoiceAmount={111} />
         </I18nextProvider>
       );
 
@@ -157,7 +171,49 @@ describe("ConfirmSendModal", () => {
     test("valid form passes", async () => {
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicProps} invoiceAmount={100} />
+          <ConfirmSendModal {...basicLnTxProps} invoiceAmount={100} />
+        </I18nextProvider>
+      );
+
+      const submitButton = screen.queryByText("wallet.amount");
+      expect(submitButton).not.toBeInTheDocument();
+
+      expect(
+        await screen.findByRole("button", {
+          name: "settings.confirm",
+        })
+      ).toBeDisabled();
+    });
+  });
+
+  describe("on chain tx with amount above zero", () => {
+    test("show error if amount is bigger than balance", async () => {
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal
+            {...basicOnChainTxProps}
+            invoiceAmount={111}
+            amount={111}
+          />
+        </I18nextProvider>
+      );
+
+      expect(
+        await screen.findByText("forms.validation.lnInvoice.max")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "settings.confirm" })
+      ).toBeDisabled();
+    });
+
+    test("valid form passes", async () => {
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ConfirmSendModal
+            {...basicOnChainTxProps}
+            amount={50}
+            invoiceAmount={50}
+          />
         </I18nextProvider>
       );
 
