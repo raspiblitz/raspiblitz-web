@@ -14,7 +14,7 @@ const BottomNav: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="fixed bottom-0 z-10 flex h-16 w-full flex-wrap items-center justify-evenly border-t-2 bg-white shadow-inner transition-colors dark:bg-gray-800 md:hidden">
+    <footer className="fixed bottom-0 z-10 flex h-16 w-full flex-wrap items-center justify-evenly border-t-2 bg-white shadow-inner transition-colors dark:bg-gray-800 lg:hidden">
       <NavLink to="/home" className={(props) => createClassName(props)}>
         <HomeIcon className={navIconClasses} />
         <span className={navLabelClasses}>{t("navigation.home")}</span>

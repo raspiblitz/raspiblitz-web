@@ -11,42 +11,44 @@ import { NavLink } from "react-router-dom";
 import { AppContext } from "../context/app-context";
 
 const navLinkClasses =
-  "flex md:flex-col lg:flex-row items-center justify-center py-4 xl:pl-6 mx-auto w-full dark:text-white opacity-80";
+  "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full dark:text-white opacity-80";
 const navLinkActiveClasses = "text-yellow-500 dark:text-yellow-500 opacity-100";
 const createClassName = ({ isActive }: { isActive: boolean }) =>
   `${navLinkClasses} ${isActive ? navLinkActiveClasses : ""}`;
-const navIconClasses = "inline-block w-10 h-10";
+const navIconClasses = "inline w-10 h-10";
 
 export const SideDrawer: FC = () => {
   const { logout } = useContext(AppContext);
   const { t } = useTranslation();
 
   return (
-    <nav className="content-container fixed mb-16 hidden w-full flex-col justify-between bg-white px-2 pt-8 shadow-lg transition-colors dark:bg-gray-800 md:flex md:w-2/12">
-      <div>
+    <nav className="content-container fixed mb-16 hidden w-full flex-col justify-between bg-white px-2 pt-8 shadow-md transition-colors dark:bg-gray-800 lg:flex lg:w-64">
+      <div className="flex flex-col items-center justify-center">
         <NavLink to="/home" className={(props) => createClassName(props)}>
           <HomeIcon className={navIconClasses} />
-          <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
+          <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.home")}
           </span>
         </NavLink>
         <NavLink to="/apps" className={(props) => createClassName(props)}>
           <ViewGridIcon className={navIconClasses} />
-          <span className="mx-3 flex w-full justify-center text-lg lg:block lg:w-1/2">
+          <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.apps")}
           </span>
         </NavLink>
         <NavLink to="/settings" className={(props) => createClassName(props)}>
           <CogIcon className={navIconClasses} />
-          <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
+          <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.settings")}
           </span>
         </NavLink>
       </div>
 
-      <button onClick={logout} className="bd-button mb-3 h-8 w-full">
-        <LogoutIcon className="inline-block h-5 w-5" />
-        &nbsp;
+      <button
+        onClick={logout}
+        className="bd-button mb-3 flex h-8 w-full items-center justify-center"
+      >
+        <LogoutIcon className="mr-1 inline-block h-5 w-5" />
         {t("navigation.logout")}
       </button>
     </nav>
