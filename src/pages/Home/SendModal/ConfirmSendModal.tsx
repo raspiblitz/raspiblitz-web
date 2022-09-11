@@ -127,99 +127,96 @@ const ConfirmSendModal: FC<Props> = ({
 
   return (
     <form onSubmit={handleSubmit(sendTransactionHandler)}>
-      <div className="break-all">
+      <button
+        onClick={back}
+        className="flex items-center justify-center font-bold outline-none"
+      >
+        <ChevronLeftIcon className="inline-block h-4 w-4" />
+        {t("navigation.back")}
+      </button>
+      <h4 className="my-3 break-normal font-extrabold">
+        {t("tx.confirm_info")}:{" "}
+      </h4>
+
+      <div className="my-2">
+        <h4 className="font-bold">{addressTitle}: </h4>
+        <p className="w-full break-all text-gray-600 dark:text-gray-200">
+          {address}
+        </p>
+        {isInvoiceExpired && (
+          <p className="text-red-500">
+            {t("forms.validation.lnInvoice.expired")}:{" "}
+            {invoiceExpiryDateDecorated}
+          </p>
+        )}
+      </div>
+
+      <div className="my-2">
+        <h4 className="font-bold">{t("wallet.amount")}:</h4>
+        {Number(invoiceAmount) !== 0 && <span>{invoiceAmount} Sat</span>}
+
+        {isInvoiceAmountBiggerThanBalance && (
+          <p className="text-red-500">{t("forms.validation.lnInvoice.max")}</p>
+        )}
+
+        {Number(invoiceAmount) === 0 && (
+          <div>
+            <p>{t("forms.hint.invoiceAmountZero")}</p>
+
+            <AmountInput
+              amount={amountInput}
+              errorMessage={errors.amountInput}
+              register={register("amountInput", {
+                required: t("forms.validation.chainAmount.required"),
+                max: {
+                  value: balance,
+                  message: t("forms.validation.chainAmount.max"),
+                },
+                validate: {
+                  greaterThanZero: (val) =>
+                    stringToNumber(val) > 0 ||
+                    t("forms.validation.chainAmount.required"),
+                },
+                onChange: amountChangeHandler,
+              })}
+            />
+          </div>
+        )}
+      </div>
+
+      {!isLnTx && (
+        <div className="my-2">
+          <h4 className="font-bold">{t("tx.fee")}:</h4> {fee} sat/vByte
+        </div>
+      )}
+
+      {comment && (
+        <div className="my-2">
+          <h4 className="font-bold">{commentHeading}:</h4> {comment}
+        </div>
+      )}
+
+      {error && <Message message={error} />}
+
+      <div className="flex justify-around px-2 py-5">
         <button
-          onClick={back}
-          className="flex items-center justify-center font-bold outline-none"
+          className="flex rounded bg-red-500 py-2 px-3 text-white shadow-xl hover:bg-red-400"
+          onClick={() => close(false)}
+          disabled={isLoading}
         >
-          <ChevronLeftIcon className="inline-block h-4 w-4" />
-          {t("navigation.back")}
+          <XIcon className="inline h-6 w-6" />
+          &nbsp;{t("settings.cancel")}
         </button>
 
-        <h4 className="my-3 break-normal font-extrabold">
-          {t("tx.confirm_info")}:{" "}
-        </h4>
-
-        <div className="my-2">
-          <h4 className="font-bold">{addressTitle}:</h4> {address}
-          <br />
-          {isInvoiceExpired && (
-            <p className="text-red-500">
-              {t("forms.validation.lnInvoice.expired")}:{" "}
-              {invoiceExpiryDateDecorated}
-            </p>
-          )}
-        </div>
-
-        <div className="my-2">
-          <h4 className="font-bold">{t("wallet.amount")}:</h4>
-          {Number(invoiceAmount) !== 0 && <span>{invoiceAmount} Sat</span>}
-
-          {isInvoiceAmountBiggerThanBalance && (
-            <p className="text-red-500">
-              {t("forms.validation.lnInvoice.max")}
-            </p>
-          )}
-
-          {Number(invoiceAmount) === 0 && (
-            <div>
-              <p>{t("forms.hint.invoiceAmountZero")}</p>
-
-              <AmountInput
-                amount={amountInput}
-                errorMessage={errors.amountInput}
-                register={register("amountInput", {
-                  required: t("forms.validation.chainAmount.required"),
-                  max: {
-                    value: balance,
-                    message: t("forms.validation.chainAmount.max"),
-                  },
-                  validate: {
-                    greaterThanZero: (val) =>
-                      stringToNumber(val) > 0 ||
-                      t("forms.validation.chainAmount.required"),
-                  },
-                  onChange: amountChangeHandler,
-                })}
-              />
-            </div>
-          )}
-        </div>
-
-        {!isLnTx && (
-          <div className="my-2">
-            <h4 className="font-bold">{t("tx.fee")}:</h4> {fee} sat/vByte
-          </div>
-        )}
-
-        {comment && (
-          <div className="my-2">
-            <h4 className="font-bold">{commentHeading}:</h4> {comment}
-          </div>
-        )}
-
-        {error && <Message message={error} />}
-
-        <div className="flex justify-around px-2 py-5">
-          <button
-            className="flex rounded bg-red-500 py-2 px-3 text-white shadow-xl hover:bg-red-400"
-            onClick={() => close(false)}
-            disabled={isLoading}
-          >
-            <XIcon className="inline h-6 w-6" />
-            &nbsp;{t("settings.cancel")}
-          </button>
-
-          <ButtonWithSpinner
-            className="bd-button flex py-2 px-3"
-            type="submit"
-            loading={isLoading}
-            icon={<CheckIcon className="inline h-6 w-6" />}
-            disabled={!isValid || !isValidLnInvoice}
-          >
-            <span className="mx-1">{t("settings.confirm")}</span>
-          </ButtonWithSpinner>
-        </div>
+        <ButtonWithSpinner
+          className="bd-button flex py-2 px-3"
+          type="submit"
+          loading={isLoading}
+          icon={<CheckIcon className="inline h-6 w-6" />}
+          disabled={!isValid || !isValidLnInvoice}
+        >
+          <span className="mx-1">{t("settings.confirm")}</span>
+        </ButtonWithSpinner>
       </div>
     </form>
   );
