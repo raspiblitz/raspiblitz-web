@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import { AppContext } from "../context/app-context";
 
 const navLinkClasses =
-  "flex md:flex-col lg:flex-row items-center justify-center py-4 mx-auto w-full dark:text-white opacity-80";
+  "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full dark:text-white opacity-80";
 const navLinkActiveClasses = "text-yellow-500 dark:text-yellow-500 opacity-100";
 const createClassName = ({ isActive }: { isActive: boolean }) =>
   `${navLinkClasses} ${isActive ? navLinkActiveClasses : ""}`;
@@ -26,27 +26,29 @@ export const SideDrawer: FC = () => {
       <div className="flex flex-col items-center justify-center">
         <NavLink to="/home" className={(props) => createClassName(props)}>
           <HomeIcon className={navIconClasses} />
-          <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
+          <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.home")}
           </span>
         </NavLink>
         <NavLink to="/apps" className={(props) => createClassName(props)}>
           <ViewGridIcon className={navIconClasses} />
-          <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
+          <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.apps")}
           </span>
         </NavLink>
         <NavLink to="/settings" className={(props) => createClassName(props)}>
           <CogIcon className={navIconClasses} />
-          <span className="mx-3 flex w-1/2 justify-center text-lg lg:block">
+          <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.settings")}
           </span>
         </NavLink>
       </div>
 
-      <button onClick={logout} className="bd-button mb-3 h-8 w-full">
-        <LogoutIcon className="inline-block h-5 w-5" />
-        &nbsp;
+      <button
+        onClick={logout}
+        className="bd-button mb-3 flex h-8 w-full items-center justify-center"
+      >
+        <LogoutIcon className="mr-1 inline-block h-5 w-5" />
         {t("navigation.logout")}
       </button>
     </nav>
