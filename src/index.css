@@ -44,7 +44,7 @@
 }
 
 .page-container {
-  @apply mb-16 mt-16 h-full w-full overflow-y-auto transition-colors md:ml-auto md:mb-0 md:w-10/12;
+  @apply mb-16 mt-16 h-full w-full overflow-y-auto transition-colors lg:mb-0 lg:w-full lg:pl-64;
 }
 
 /**
