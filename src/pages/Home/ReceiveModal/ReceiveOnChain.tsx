@@ -29,7 +29,7 @@ const ReceiveOnChain: FC<Props> = ({ address }) => {
         >
           <p
             onClick={copyAddress}
-            className="m-2 w-full break-all text-gray-600 dark:text-white"
+            className="w-full break-all text-gray-600 dark:text-gray-200"
           >
             {address}
           </p>
