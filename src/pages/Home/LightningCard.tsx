@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import LoadingBox from "../../components/LoadingBox";
 import { AppContext, Unit } from "../../context/app-context";
 import { SSEContext } from "../../context/sse-context";
-import { convertMSatToBtc, convertToString } from "../../utils/format";
 import { checkPropsUndefined } from "../../utils";
+import { convertMSatToBtc, convertToString } from "../../utils/format";
 
 export const LightningCard: FC = () => {
   const { t } = useTranslation();
@@ -20,8 +20,8 @@ export const LightningCard: FC = () => {
   } = lnInfoLite;
 
   const {
-    channel_pending_open_local_balance: localBalance,
-    channel_pending_open_remote_balance: remoteBalance,
+    channel_local_balance: localBalance,
+    channel_remote_balance: remoteBalance,
     channel_pending_open_local_balance: pendingLocalBalance,
     channel_pending_open_remote_balance: pendingRemoteBalance,
   } = balance;
