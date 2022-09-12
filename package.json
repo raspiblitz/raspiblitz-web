@@ -12,7 +12,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "react-scripts test --coverage --watchAll"
   },
   "config": {
     "port": "3000"
@@ -41,7 +42,11 @@
   "jest": {
     "moduleNameMapper": {
       "^test-utils$": "<rootDir>/src/utils/test-utils.tsx"
-    }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/"
+    ]
   },
   "browserslist": {
     "production": [
