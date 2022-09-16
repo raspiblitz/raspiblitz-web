@@ -1,16 +1,17 @@
 import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import AvailableBalance from "components/AvailableBalance";
 import type { ChangeEvent } from "react";
-import { FC, useContext } from "react";
+import { FC } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { convertMSatToSat } from "utils/format";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../../components/InputField";
 import Message from "../../../components/Message";
-import { AppContext } from "../../../context/app-context";
 
 export type Props = {
-  balanceDecorated: string;
+  lnBalance: number;
   loading: boolean;
   onConfirm: () => void;
   onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -22,12 +23,11 @@ interface IFormInputs {
 
 const SendLn: FC<Props> = ({
   loading,
-  balanceDecorated,
+  lnBalance,
   onConfirm,
   onChangeInvoice,
   error,
 }) => {
-  const { unit } = useContext(AppContext);
   const { t } = useTranslation();
 
   const {
@@ -40,14 +40,13 @@ const SendLn: FC<Props> = ({
 
   const onSubmit: SubmitHandler<IFormInputs> = (_) => onConfirm();
 
+  const convertedBalance = lnBalance ? convertMSatToSat(lnBalance) : 0;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-xl font-bold">{t("wallet.send_lightning")}</h3>
 
-      <p className="my-5">
-        <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
-        {balanceDecorated} {unit}
-      </p>
+      <AvailableBalance balance={convertedBalance!} />
 
       <InputField
         {...register("invoiceInput", {

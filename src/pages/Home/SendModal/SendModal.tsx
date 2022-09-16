@@ -1,16 +1,10 @@
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { createPortal } from "react-dom";
-import SwitchTxType, { TxType } from "../SwitchTxType";
 import ModalDialog from "../../../layouts/ModalDialog";
-import { AppContext, Unit } from "../../../context/app-context";
-import { checkError } from "../../../utils/checkError";
-import {
-  convertMSatToBtc,
-  convertMSatToSat,
-  convertToString,
-} from "../../../utils/format";
-import { instance } from "../../../utils/interceptor";
 import { MODAL_ROOT } from "../../../utils";
+import { checkError } from "../../../utils/checkError";
+import { instance } from "../../../utils/interceptor";
+import SwitchTxType, { TxType } from "../SwitchTxType";
 import ConfirmSendModal from "./ConfirmSendModal";
 import SendLn from "./SendLN";
 import SendOnChain from "./SendOnChain";
@@ -22,8 +16,6 @@ export type Props = {
 };
 
 const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
-  const { unit } = useContext(AppContext);
-
   const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [invoice, setInvoice] = useState("");
   const [confirm, setConfirm] = useState(false);
@@ -94,11 +86,6 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     setInvoice(event.target.value);
   };
 
-  const convertedLnBalance =
-    unit === Unit.BTC
-      ? convertToString(unit, convertMSatToBtc(lnBalance))
-      : convertToString(unit, convertMSatToSat(lnBalance));
-
   // confirm send
   if (confirm) {
     const addr = invoiceType === TxType.LIGHTNING ? invoice : address;
@@ -137,7 +124,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
           loading={loading}
           onChangeInvoice={changeInvoiceHandler}
           onConfirm={confirmLnHandler}
-          balanceDecorated={convertedLnBalance}
+          lnBalance={lnBalance}
           error={error}
         />
       </ModalDialog>,

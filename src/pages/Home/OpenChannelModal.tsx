@@ -1,4 +1,5 @@
 import { LinkIcon } from "@heroicons/react/outline";
+import AvailableBalance from "components/AvailableBalance";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
@@ -12,7 +13,7 @@ import { AppContext } from "../../context/app-context";
 import ModalDialog from "../../layouts/ModalDialog";
 import { MODAL_ROOT } from "../../utils";
 import { checkError } from "../../utils/checkError";
-import { stringToNumber } from "../../utils/format";
+import { convertMSatToSat, stringToNumber } from "../../utils/format";
 import { instance } from "../../utils/interceptor";
 
 interface IFormInputs {
@@ -22,10 +23,11 @@ interface IFormInputs {
 }
 
 type Props = {
+  balance: number;
   onClose: () => void;
 };
 
-const OpenChannelModal: FC<Props> = ({ onClose }) => {
+const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
   const { darkMode } = useContext(AppContext);
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
@@ -67,10 +69,14 @@ const OpenChannelModal: FC<Props> = ({ onClose }) => {
     setAmount(+event.target.value);
   };
 
+  const convertedBalance = balance ? convertMSatToSat(balance) : 0;
+
   return createPortal(
     <ModalDialog close={onClose}>
-      <h2 className="mb-2 text-lg font-bold">{t("home.open_channel")}</h2>
-      <article className="py-8">
+      <h2 className="text-lg font-bold">{t("home.open_channel")}</h2>
+      <article className="my-5">
+        <AvailableBalance balance={convertedBalance!} />
+
         <form onSubmit={handleSubmit(openChannelHandler)}>
           <InputField
             {...register("nodeUri", {
