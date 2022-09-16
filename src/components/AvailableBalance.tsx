@@ -11,8 +11,6 @@ const AvailableBalance: FC<Props> = ({ balance }) => {
   const { unit } = useContext(AppContext);
   const { t } = useTranslation();
 
-  console.log("BALANCE", balance);
-
   const convertedBalance =
     unit === Unit.BTC
       ? convertToString(unit, convertSatToBtc(balance))
