@@ -9,6 +9,7 @@ import LoadingBox from "../../../components/LoadingBox";
 import Message from "../../../components/Message";
 import { AppContext } from "../../../context/app-context";
 import { Transaction } from "../../../models/transaction.model";
+import EmptyTransaction from "./EmptyTransaction";
 import SingleTransaction from "./SingleTransaction";
 
 export type Props = {
@@ -66,9 +67,11 @@ const TransactionCard: FC<Props> = ({
     );
   }
 
+  const filler = MAX_ITEMS - currentPageTxs.length;
+
   return (
     <div className="h-full p-5">
-      <section className="bd-card md:min-h-0 flex min-h-144 flex-col transition-colors">
+      <section className="bd-card flex h-full min-h-144 grow-0 flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 
         {error && <Message message={error} />}
@@ -89,7 +92,7 @@ const TransactionCard: FC<Props> = ({
         )}
 
         {transactions.length > 0 && (
-          <ul className="py-5">
+          <ul className="pt-5">
             {currentPageTxs.map((transaction: Transaction, index: number) => {
               return (
                 <SingleTransaction
@@ -99,6 +102,9 @@ const TransactionCard: FC<Props> = ({
                 />
               );
             })}
+            {[...Array(filler)].map((_, index: number) => (
+              <EmptyTransaction key={index} />
+            ))}
           </ul>
         )}
 

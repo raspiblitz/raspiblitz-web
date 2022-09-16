@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
-import { Transaction } from "../../../models/transaction.model";
 import { AppContext, Unit } from "../../../context/app-context";
+import { Transaction } from "../../../models/transaction.model";
 import {
   convertMSatToBtc,
   convertMSatToSat,
@@ -43,7 +43,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
 
   return (
     <li
-      className="flex flex-col justify-center px-0 py-3 text-center hover:bg-gray-300 dark:hover:bg-gray-500 md:px-4"
+      className="flex h-24 flex-col justify-center px-0 py-2 text-center hover:bg-gray-300 dark:hover:bg-gray-500 md:px-4"
       onClick={onClick}
     >
       <div className="flex w-full items-center justify-center">
