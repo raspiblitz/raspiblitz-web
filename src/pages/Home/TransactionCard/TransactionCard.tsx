@@ -70,7 +70,7 @@ const TransactionCard: FC<Props> = ({
 
   return (
     <div className="h-full p-5">
-      <section className="bd-card flex h-full min-h-144 grow-0 flex-col transition-colors">
+      <section className="bd-card flex min-h-144 flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 
         {error && <Message message={error} />}
