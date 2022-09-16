@@ -9,7 +9,6 @@ import LoadingBox from "../../../components/LoadingBox";
 import Message from "../../../components/Message";
 import { AppContext } from "../../../context/app-context";
 import { Transaction } from "../../../models/transaction.model";
-import EmptyTransaction from "./EmptyTransaction";
 import SingleTransaction from "./SingleTransaction";
 
 export type Props = {
@@ -67,7 +66,7 @@ const TransactionCard: FC<Props> = ({
     );
   }
 
-  const filler = MAX_ITEMS - currentPageTxs.length;
+  const fillEmptyTxAmount = MAX_ITEMS - currentPageTxs.length;
 
   return (
     <div className="h-full p-5">
@@ -102,8 +101,8 @@ const TransactionCard: FC<Props> = ({
                 />
               );
             })}
-            {[...Array(filler)].map((_, index: number) => (
-              <EmptyTransaction key={index} />
+            {[...Array(fillEmptyTxAmount)].map((_, index: number) => (
+              <SingleTransaction key={index} />
             ))}
           </ul>
         )}
