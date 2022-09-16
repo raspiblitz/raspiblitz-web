@@ -1,9 +1,9 @@
 import {
   ClockIcon,
   DotsHorizontalIcon,
+  LightningBoltIcon,
   LinkIcon,
 } from "@heroicons/react/outline";
-import { LightningBoltIcon } from "@heroicons/react/solid";
 import { FC } from "react";
 import {
   TransactionCategory,
