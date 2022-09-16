@@ -20,7 +20,7 @@ describe("App", () => {
         return res(
           ctx.status(200),
           ctx.json({
-            setupPhase: "STARTING",
+            setupPhase: "starting",
             state: "",
             message: "",
           })
@@ -38,7 +38,7 @@ describe("App", () => {
         return res(
           ctx.status(200),
           ctx.json({
-            setupPhase: "DONE",
+            setupPhase: "done",
             state: "",
             message: "",
           })
