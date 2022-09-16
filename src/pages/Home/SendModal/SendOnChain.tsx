@@ -1,16 +1,11 @@
-import type { ChangeEvent, FC } from "react";
-import { useContext } from "react";
+import AvailableBalance from "components/AvailableBalance";
+import { ChangeEvent, FC } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import AmountInput from "../../../components/AmountInput";
 import InputField from "../../../components/InputField";
-import { AppContext, Unit } from "../../../context/app-context";
-import {
-  convertSatToBtc,
-  convertToString,
-  stringToNumber,
-} from "../../../utils/format";
+import { stringToNumber } from "../../../utils/format";
 
 export type Props = {
   address: string;
@@ -44,16 +39,6 @@ const SendOnChain: FC<Props> = ({
   onConfirm,
 }) => {
   const { t } = useTranslation();
-  const { unit } = useContext(AppContext);
-
-  const convertedBalance =
-    unit === Unit.BTC ? convertSatToBtc(balance) : balance;
-
-  const balanceDecorated =
-    unit === Unit.BTC
-      ? convertToString(unit, convertedBalance)
-      : convertToString(unit, balance);
-
   const {
     register,
     handleSubmit,
@@ -68,10 +53,7 @@ const SendOnChain: FC<Props> = ({
     <form className="px-5" onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-xl font-bold">{t("wallet.send_onchain")}</h3>
 
-      <p className="my-5">
-        <span className="font-bold">{t("wallet.balance")}:&nbsp;</span>
-        {balanceDecorated} {unit}
-      </p>
+      <AvailableBalance balance={balance} />
 
       <fieldset className="my-5 flex flex-col items-center justify-center text-center">
         <div className="w-full py-1 md:w-10/12">
@@ -98,7 +80,7 @@ const SendOnChain: FC<Props> = ({
             register={register("amountInput", {
               required: t("forms.validation.chainAmount.required"),
               max: {
-                value: convertedBalance || 0,
+                value: balance || 0,
                 message: t("forms.validation.chainAmount.max"),
               },
               validate: {

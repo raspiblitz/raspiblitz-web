@@ -292,6 +292,7 @@
       "address": "Address",
       "amount": "Amount",
       "balance": "Balance",
+      "available_balance": "Available balance",
       "confirm": "Confirm",
       "copied": "Copied!",
       "copy_clipboard": "Copy to clipboard",

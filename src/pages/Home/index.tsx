@@ -197,7 +197,12 @@ const Home: FC = () => {
       case "RECEIVE":
         return <ReceiveModal onClose={closeModalHandler} />;
       case "OPEN_CHANNEL":
-        return <OpenChannelModal onClose={closeModalHandler} />;
+        return (
+          <OpenChannelModal
+            balance={balance.channel_local_balance!}
+            onClose={closeModalHandler}
+          />
+        );
       case "LIST_CHANNEL":
         return <ListChannelModal onClose={closeModalHandler} />;
       case "UNLOCK":
