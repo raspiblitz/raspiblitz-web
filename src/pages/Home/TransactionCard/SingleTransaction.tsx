@@ -19,9 +19,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
 
   if (!transaction) {
     // Display empty Tx card
-    return (
-      <li className="flex h-24 flex-col justify-center px-0 py-2 text-center hover:bg-gray-300 dark:hover:bg-gray-500 md:px-4"></li>
-    );
+    return <li className="h-24 px-0 py-2 md:px-4"></li>;
   }
 
   const { amount, category, time_stamp, type, comment, status } = transaction;
