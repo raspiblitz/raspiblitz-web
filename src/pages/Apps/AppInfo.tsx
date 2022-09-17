@@ -88,7 +88,7 @@ export const AppInfo: FC<Props> = ({
             className="bd-button flex rounded p-2 disabled:pointer-events-none"
             onClick={onInstall}
           >
-            <PlusIcon />
+            <PlusIcon className="inline h-6 w-6" />
             &nbsp;{t("apps.install")}
           </button>
         )}
@@ -120,7 +120,7 @@ export const AppInfo: FC<Props> = ({
             className={`flex rounded bg-red-500 p-2 text-white shadow-md disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white`}
             onClick={onUninstall}
           >
-            <TrashIcon />
+            <TrashIcon className="inline h-6 w-6" />
             &nbsp;{t("apps.uninstall")}
           </button>
         )}
