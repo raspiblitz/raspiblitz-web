@@ -6,10 +6,10 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
 import { App } from "../../models/app.model";
+import { enableGutter } from "../../utils";
 import { availableApps } from "../../utils/availableApps";
 import { checkError } from "../../utils/checkError";
 import { instance } from "../../utils/interceptor";
-import { enableGutter } from "../../utils";
 import AppCard from "./AppCard";
 import AppInfo from "./AppInfo";
 
@@ -103,7 +103,7 @@ export const Apps: FC = () => {
             })}
           </section>
           <section className="flex h-full flex-wrap">
-            <h2 className="block w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200 ">
+            <h2 className="block w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
               {t("apps.available")}
             </h2>
             {notInstalledApps.map((appStatus: AppStatus) => {

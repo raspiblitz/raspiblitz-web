@@ -35,7 +35,7 @@ const TransactionCard: FC<Props> = ({
   if (walletLocked) {
     return (
       <div className="h-full p-5">
-        <div className="bd-card md:min-h-0 flex min-h-144 flex-col transition-colors">
+        <div className="bd-card min-h-144 flex flex-col transition-colors md:min-h-0">
           <div className="flex h-full items-center justify-center">
             <LockClosedIcon className="h-6 w-6" />
             {t("wallet.wallet_locked")}
@@ -70,7 +70,7 @@ const TransactionCard: FC<Props> = ({
 
   return (
     <div className="h-full p-5">
-      <section className="bd-card flex min-h-144 flex-col transition-colors">
+      <section className="bd-card flex flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 
         {error && <Message message={error} />}

@@ -246,7 +246,7 @@ const Home: FC = () => {
           </article>
         )}
         {isLnImplSelected && (
-          <article className="col-span-2 row-span-4 w-full md:col-span-1 xl:col-span-2">
+          <article className="col-span-2 row-span-3 w-full md:col-span-1 lg:row-span-4 xl:col-span-2">
             <TransactionCard
               isLoading={isLoadingTransactions}
               transactions={transactions}

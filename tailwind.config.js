@@ -9,9 +9,6 @@ module.exports = {
         "bd-yellow-dark": "#F7CB47",
       },
     },
-    minHeight: {
-      144: "36rem",
-    },
     maxWidth: {
       "4/5": "80%",
     },
