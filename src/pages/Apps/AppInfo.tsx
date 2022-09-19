@@ -111,7 +111,7 @@ export const AppInfo: FC<Props> = ({
               loading={true}
               className="bd-button flex rounded p-2 disabled:pointer-events-none"
             >
-              {t("apps.deinstalling")}
+              {t("apps.uninstalling")}
             </ButtonWithSpinner>
           )}
         {(installingApp == null || installingApp.id !== id) && installed && (
