@@ -34,7 +34,7 @@ const TransactionCard: FC<Props> = ({
 
   if (walletLocked) {
     return (
-      <div className="h-full p-5">
+      <div className="h-full py-5 pr-5">
         <div className="bd-card min-h-144 flex flex-col transition-colors md:min-h-0">
           <div className="flex h-full items-center justify-center">
             <LockClosedIcon className="h-6 w-6" />
@@ -69,7 +69,7 @@ const TransactionCard: FC<Props> = ({
   const fillEmptyTxAmount = MAX_ITEMS - currentPageTxs.length;
 
   return (
-    <div className="h-full p-5">
+    <div className="h-full pt-5 pr-5">
       <section className="bd-card flex flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 

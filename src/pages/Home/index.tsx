@@ -7,9 +7,9 @@ import { useInterval } from "../../hooks/use-interval";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
 import { Transaction } from "../../models/transaction.model";
+import { enableGutter } from "../../utils";
 import { checkError } from "../../utils/checkError";
 import { instance } from "../../utils/interceptor";
-import { enableGutter } from "../../utils";
 import AppStatusCard from "./AppStatusCard";
 import BitcoinCard from "./BitcoinCard";
 import ConnectionCard from "./ConnectionCard";
@@ -233,7 +233,7 @@ const Home: FC = () => {
     <>
       {determineModal()}
       <main
-        className={`content-container page-container grid h-full grid-cols-1 gap-2 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
+        className={`content-container page-container grid h-full grid-cols-1 bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
         {isLnImplSelected && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
@@ -257,7 +257,7 @@ const Home: FC = () => {
           </article>
         )}
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
-          <div className={`flex ${height} flex-col p-5 lg:flex-row`}>
+          <div className={`flex ${height} flex-col px-5 lg:flex-row`}>
             <ConnectionCard />
             <HardwareCard />
           </div>
