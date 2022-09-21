@@ -71,7 +71,7 @@
     "rc-tooltip": "^5.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.35.0",
+    "react-hook-form": "^7.36.0",
     "react-i18next": "^11.18.6",
     "react-router-dom": "^6.4.0",
     "react-toastify": "^9.0.8"
