@@ -10657,7 +10657,7 @@ __metadata:
     rc-tooltip: ^5.2.2
     react: ^18.2.0
     react-dom: ^18.2.0
-    react-hook-form: ^7.36.0
+    react-hook-form: ^7.36.1
     react-i18next: ^11.18.6
     react-router-dom: ^6.4.1
     react-scripts: 5.0.1
@@ -10819,12 +10819,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.36.0":
-  version: 7.36.0
-  resolution: "react-hook-form@npm:7.36.0"
+"react-hook-form@npm:^7.36.1":
+  version: 7.36.1
+  resolution: "react-hook-form@npm:7.36.1"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: f863487416b9f73c3d3c682360b7a01819b8dd14ca5430e49473a64ad723b91747e03c00b942741aae677abeb1ad2eea623887610af41a6b1e4ca8ae13ee8028
+  checksum: d41951685fe7d345997c1ac489ccc1a44d11cfa6021b0a39a449029ba3cd8e5824afe5f6464e8ff6fb7c01d1915627b53ec1e1bfee63a6b722b6855794dc0df9
   languageName: node
   linkType: hard
 
