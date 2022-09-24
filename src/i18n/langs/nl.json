@@ -310,7 +310,8 @@
       "unlock_success": "Portemonnee ontgrendeld",
       "unlock_title": "Ontgrendel Portemonnee",
       "unlocking": "Ontgrendelen",
-      "wallet_locked": "Portemonnee vergrendeld"
+      "wallet_locked": "Portemonnee vergrendeld",
+      "available_balance": "Beschikbaar saldo"
     }
   }
 }
