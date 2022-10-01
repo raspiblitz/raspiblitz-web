@@ -6,9 +6,9 @@
       "available": "Aplicaciones disponibles",
       "info": "Información",
       "install": "Instalar",
-      "install_failure": "Instalació de {{appName}} fallida: {{details}}",
+      "install_failure": "Instalación de {{appName}} fallida: {{details}}",
       "install_success": "{{appName}} instalada correctamente",
-      "installed": "Installado",
+      "installed": "Instalado",
       "installing": "Instalando",
       "login_admin_pass_b": "Acceder con usuario 'admin' y contraseña B",
       "login_no_pass": "Acceder sin contraseña",
@@ -28,8 +28,35 @@
     "forms": {
       "validation": {
         "unlock": {
-          "pass_c": "Contraseña C"
+          "pass_c": "Contraseña C",
+          "required": "La contraseña C es necesaria"
+        },
+        "lnInvoice": {
+          "expired": "Factura expirada",
+          "required": "Por favor introduzca una factura Lightning",
+          "max": "Su balance es demasiado pequeño para pagar esta factura",
+          "patternMismatch": "Formato de factura incorrecto"
+        },
+        "amount": {
+          "required": "Por favor introduzca una cantidad"
+        },
+        "chainAddress": {
+          "patternMismatch": "Formato de dirección incorrecto",
+          "required": "Por favor introduzca una dirección de Bitcoin"
+        },
+        "chainAmount": {
+          "max": "Su balance es demasiado pequeño para enviar esta cantidad",
+          "required": "Por favor introduzca una cantidad"
+        },
+        "chainFee": {
+          "required": "Por favor introduzca la cantidad de comisión"
+        },
+        "node_uri": {
+          "required": "Por favor introduzca un URl del nodo"
         }
+      },
+      "hint": {
+        "invoiceAmountZero": "La cantidad de la factura es cero"
       }
     },
     "hardware": {
@@ -80,7 +107,10 @@
       "urgent": "Urgente",
       "version": "Versión",
       "versions": "Versiones",
-      "webui": "WebUI"
+      "webui": "Interfaz de usuario",
+      "blocktime": "Tiempo de bloque",
+      "node_id": "ID del nodo",
+      "no_open_channels": "Actualmente no dispone de canales abiertos"
     },
     "language": {
       "cs": "checo",
@@ -90,7 +120,7 @@
       "fr": "francés",
       "hu": "húngaro",
       "it": "italiano",
-      "nb_NO": "Norvegian",
+      "nb_NO": "Noruego",
       "nl": "holandés",
       "pt_BR": "Portugués (brasileño)",
       "sv": "sueco",
@@ -165,7 +195,49 @@
       "start_update": "¿Te gustaría empezar la actualización y el proceso de recuperación?",
       "updateblitz": "Actualizar mi RaspiBlitz",
       "yes": "Sí",
-      "yes_and_migrate": "Migrar a RaspiBlitz"
+      "yes_and_migrate": "Migrar a RaspiBlitz",
+      "cancel_setup": "De verdad quiere cancelar el proceso de configuración",
+      "done_setup_start": "Comenzar Configuración",
+      "done_update_ready": "OK. Todo está listo para actualizar tu RaspiBlitz.",
+      "done_update_start": "Comenzar Actualización",
+      "password_c_details": "Utilice esta contraseña para desbloquear su Cartera Lightning.",
+      "password_error_match": "Las Contraseñas no son iguales.",
+      "password_repeat": "Repetir",
+      "done_migration_ready": "OK. Todo está listo para migrar a RaspiBlitz.",
+      "done_migration_start": "Comenzar Migración",
+      "cln": "Core Lightning",
+      "final_seedwords": "Por favor escriba sus palabras semilla y guárdelas en un lugar seguro:",
+      "lnd": "LND",
+      "sync_bitcoin_sync": "Progreso de la sincronización",
+      "sync_wallet_unlock": "Desbloquear Cartera",
+      "select_lightning": "Elija su Implementación Lightning:",
+      "password_error_chars": "La contraseña solo debe contener letras y números.",
+      "started": "Comenzado",
+      "nodename_input": "Introducir el nombre del nodo",
+      "password_b_name": "Contraseña B",
+      "password_b_short": "Establezca su nueva Contraseña para las Aplicaciones (Contraseña B)",
+      "password_error_length": "La contraseña debe tener al menos 8 caracteres.",
+      "sync_bitcoin_starting": "Comenzando sincronización",
+      "sync_wallet_info": "Por favor desbloquee su Cartera Lightning (Contraseña C):",
+      "password_a_short": "Establezca su nueva Contraseña de Administrador (Contraseña A)",
+      "done_recover_ready": "OK. Todo está listo para recuperar tu RaspiBlitz.",
+      "done_recover_start": "Comenzar Recuperación",
+      "done_setup_ready": "OK. Todo está listo para configurar tu RaspiBlitz.",
+      "final_do_reboot": "OK, hacer Reinicio final",
+      "final_info_reboot": "Ahora se reiniciará y sincronizará la cadena de bloques.",
+      "final_migration": "La Migración ha finalizado.",
+      "final_recovery": "La Recuperación ha finalizado.",
+      "final_setup": "La Configuración ha finalizado.",
+      "final_update": "La Actualización ha finalizado.",
+      "password_a_details": "Utilice esta contraseña para acceder a su RaspiBlitz.",
+      "password_b_details": "Utilice esta contraseña para las Aplicaciones adicionales que se pueden instalar en su RaspiBlitz.",
+      "password_c_name": "Contraseña C",
+      "password_c_short": "Establezca su nueva Contraseña para la Cartera Lightning (Contraseña C)",
+      "password_error_empty": "La Contraseña no puede estar vacía.",
+      "restarts": "Reinicia",
+      "select_bitcoin": "Solo Bitcoin",
+      "sync_headline": "Sincronización Inicial de RaspiBlitz",
+      "sync_restartinfo": "(la sincronización continuará después de reiniciar)"
     },
     "tx": {
       "comment": "Descripción",
@@ -195,7 +267,7 @@
       "copy_clipboard": "Copiar al portapapeles",
       "create_invoice": "Crear factura",
       "create_invoice_ln": "Crear un recibo Lightning",
-      "fund": "Agrega fondos a tu billetera",
+      "fund": "Agrega fondos a tu billetera on-chain",
       "invoice": "Factura",
       "on_chain": "On-chain",
       "receive": "Recibir",
@@ -208,7 +280,38 @@
       "unlock_success": "Billetera desbloqueada",
       "unlock_title": "Desbloquear billetera",
       "unlocking": "Desbloqueando",
-      "wallet_locked": "Billetera bloqueada"
+      "wallet_locked": "Billetera bloqueada",
+      "available_balance": "Balance disponible"
+    },
+    "appInfo": {
+      "btc-rpc-explorer": {
+        "about": "Este es un explorador auto alojado para la cadena de bloques de Bitcoin, propulsado por solicitudes RPC a tu propio nodo de Bitcoin. Es fácil de utilizar y se puede conectar a otras herramientas (como los servidores Electrum) para conseguir el explorador con todas sus características.",
+        "shortDescription": "Explorador Bitcoin RPC"
+      },
+      "rtl": {
+        "about": "RTL es una interfaz de usuario web con funcionalidades completas, agnóstico con el dispositivo que ayuda a administrar las operaciones del nodo Lightning. RTL está disponible en las implementaiones LND, Core Lightning y Eclair.",
+        "shortDescription": "Una interfaz de usuario web con funcionalidades completas, para LND, Core Lightning y Eclair"
+      },
+      "btcpayserver": {
+        "about": "BTCPay Server es un procesador de pagos de Bitcoin libre y de código abierto que te permite aceptar bitcoin sin comisiones o intermediarios.",
+        "shortDescription": "Acepta pagos en Bitcoin. Procesador de pagos en Bitcoin, libre, de código abierto y auto alojado."
+      },
+      "mempool": {
+        "about": " Un explorador de código abierto desarrollado para la comunidad Bitcoin, que se centra en el emergente mercado de las comisiones de transacción para ayudar nuestra transición a un ecosistema multicapa.",
+        "shortDescription": "Un explorador de código abierto desarrollado para la comunidad Bitcoin"
+      },
+      "thunderhub": {
+        "shortDescription": "Administrador del Nodo Lightning LND en su navegador",
+        "about": "ThunderHub es un administrador de código abierto de nodos LND donde puede administrar y monitorizar su nodo en cualquier dispositivo o navegador. Le permite tomar el control de la red lightning con una experiencia de usuario simple e intuitiva y con las últimas tecnologías."
+      },
+      "lnbits": {
+        "shortDescription": "Sistema de cuentas/carteras de la red de lightning libre y de código abierto",
+        "about": "LNbits es un servidor Python muy simple que se apoya encima de cualquier código, y puede ser utilizado como un sistema de cuentas para mitigar los riesgos de exponer aplicaciones con su balance completo, mediante llaves API únicas para cada cartera."
+      },
+      "specter": {
+        "shortDescription": "Un interfaz gráfico de usuario para escritorio para Bitcoin Core optimizado para utilizar con hardware wallets",
+        "about": "Bitcoin Core tiene un potente interfaz de línea de comandos y un excelente daemon. Utilizando PSBT (Transacciones de Bitcoin Parcialmente Firmadas) y HWI (Interfaz de Hardware Wallet) también permite que funcione con hardware wallets, pero de momento es muy linux. Lo mismo aplica a configuraciones multifirma. La meta de este proyecto es hacer un intergaz gráfico de usuario amigable y cómodo en torno a Bitcoin Core centrándose en las configuraciones multifirma con hardware wallets y dispositivos sin conexión."
+      }
     }
   }
 }
