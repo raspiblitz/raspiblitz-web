@@ -24,7 +24,8 @@ export function convertToString(unit: Unit, num: number | null): string {
     return "-";
   }
   if (unit === Unit.SAT) {
-    return num.toLocaleString(NUM_LOCALE);
+    // remove decimals from sat & convert
+    return (+num.toFixed(0)).toLocaleString(NUM_LOCALE);
   }
   return num.toFixed(8).toString();
 }
@@ -42,7 +43,7 @@ export function formatAmount(value: string, unit: Unit): string {
     // remove all separators to format correctly
     value = value.replace(/,|\./g, "");
     if (value) {
-      value = new Intl.NumberFormat("en-US").format(+value);
+      value = new Intl.NumberFormat(NUM_LOCALE).format(+value);
     }
   } else {
     // remove commas
