@@ -35,7 +35,7 @@ export const ConnectionCard: FC = () => {
     setShowAddress((prev) => !prev);
   };
 
-  if (!sshAddress || !torAddress) {
+  if (!sshAddress) {
     return (
       <div className="h-full w-1/2">
         <LoadingBox />
@@ -92,34 +92,39 @@ export const ConnectionCard: FC = () => {
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
             {`${t("home.webui")} (${t("home.tor")})`}
           </h6>
-          <div className="flex">
-            <a
-              className={`${
-                showAddress
-                  ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
-                  : "text-blur w-10/12"
-              }`}
-              title={`${torAddress}`}
-              href={`//${torAddress}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {showAddress ? torAddress : HIDDEN_TEXT}
-            </a>
-            <Tooltip
-              overlay={
-                <div>
-                  {clippedTor ? t("wallet.copied") : t("wallet.copy_clipboard")}
-                </div>
-              }
-              placement="top"
-            >
-              <ClipboardCopyIcon
-                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                onClick={copyTor}
-              />
-            </Tooltip>
-          </div>
+          {torAddress && (
+            <div className="flex">
+              <a
+                className={`${
+                  showAddress
+                    ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
+                    : "text-blur w-10/12"
+                }`}
+                title={`${torAddress}`}
+                href={`//${torAddress}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {showAddress ? torAddress : HIDDEN_TEXT}
+              </a>
+              <Tooltip
+                overlay={
+                  <div>
+                    {clippedTor
+                      ? t("wallet.copied")
+                      : t("wallet.copy_clipboard")}
+                  </div>
+                }
+                placement="top"
+              >
+                <ClipboardCopyIcon
+                  className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+                  onClick={copyTor}
+                />
+              </Tooltip>
+            </div>
+          )}
+          {!torAddress && <div>{t("home.not_available")}</div>}
         </article>
         <article className="flex flex-col overflow-hidden py-4">
           <h6 className="text-sm text-gray-500 dark:text-gray-200">
