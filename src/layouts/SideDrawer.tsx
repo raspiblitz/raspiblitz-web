@@ -1,5 +1,5 @@
 import {
-  CogIcon,
+  Cog6ToothIcon,
   HomeIcon,
   ArrowRightOnRectangleIcon,
   Squares2X2Icon,
@@ -37,7 +37,7 @@ export const SideDrawer: FC = () => {
           </span>
         </NavLink>
         <NavLink to="/settings" className={(props) => createClassName(props)}>
-          <CogIcon className={navIconClasses} />
+          <Cog6ToothIcon className={navIconClasses} />
           <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.settings")}
           </span>
