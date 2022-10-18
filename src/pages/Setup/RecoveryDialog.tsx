@@ -1,4 +1,4 @@
-import { CloudDownloadIcon, CogIcon } from "@heroicons/react/outline";
+import { CloudArrowDownIcon, CogIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../layouts/SetupContainer";
@@ -38,7 +38,7 @@ const RecoveryDialog: FC<Props> = ({ setupPhase, callback }) => {
             onClick={() => callback(true)}
             className="bd-button my-5 flex items-center px-2"
           >
-            <CloudDownloadIcon className="inline h-6 w-6" />
+            <CloudArrowDownIcon className="inline h-6 w-6" />
             {/* TODO: Better name would be "Start Recovery or something else instead of just yes */}
             <span className="p-2">{t("setup.yes")}</span>
           </button>

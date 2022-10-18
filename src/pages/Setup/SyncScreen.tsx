@@ -2,7 +2,7 @@ import {
   CheckCircleIcon,
   LockOpenIcon,
   XCircleIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

@@ -1,4 +1,4 @@
-import { RefreshIcon } from "@heroicons/react/outline";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../layouts/SetupContainer";
@@ -62,7 +62,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             {t("setup.final_info_reboot")}
           </div>
           <button onClick={() => callback()} className="bd-button p-2">
-            <RefreshIcon className="mr-1 inline h-6 w-6 align-top" />
+            <ArrowPathIcon className="mr-1 inline h-6 w-6 align-top" />
             {t("setup.final_do_reboot")}
           </button>
         </article>

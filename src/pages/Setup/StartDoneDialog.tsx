@@ -1,4 +1,4 @@
-import { ArrowSmRightIcon, XIcon } from "@heroicons/react/outline";
+import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -59,7 +59,7 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
             onClick={handleCancel}
             className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
           >
-            <XIcon className="inline h-6 w-6" />
+            <XMarkIcon className="inline h-6 w-6" />
             <span className="p-2">{t("setup.cancel")}</span>
           </button>
           <button
@@ -67,7 +67,7 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
             className="bd-button flex items-center px-2"
           >
             <span className="p-2 ">{buttonText}</span>
-            <ArrowSmRightIcon className="inline h-6 w-6" />
+            <ArrowSmallRightIcon className="inline h-6 w-6" />
           </button>
         </div>
       </SetupContainer>

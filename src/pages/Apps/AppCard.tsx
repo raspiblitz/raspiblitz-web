@@ -1,9 +1,9 @@
 import {
-  ExternalLinkIcon,
+  ArrowTopRightOnSquareIcon,
   InformationCircleIcon,
   LockOpenIcon,
   PlusIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import Tooltip from "rc-tooltip";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -102,7 +102,7 @@ export const AppCard: FC<Props> = ({
             rel="noreferrer"
             className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
           >
-            <ExternalLinkIcon className="inline h-6 w-6" />
+            <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
             &nbsp;{t("apps.open")}
           </a>
         )}

@@ -1,6 +1,6 @@
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { MenuIcon } from "@heroicons/react/outline";
 import { ReactComponent as RaspiBlitzMobileLogo } from "../assets/RaspiBlitz_Logo_Icon.svg";
 import { ReactComponent as RaspiBlitzLogo } from "../assets/RaspiBlitz_Logo_Main.svg";
 import { ReactComponent as RaspiBlitzLogoDark } from "../assets/RaspiBlitz_Logo_Main_Negative.svg";
@@ -46,7 +46,7 @@ const Header: FC = () => {
       </NavLink>
       <div className="text-xl font-bold">{systemInfo.alias}</div>
       <div className="flex items-center">
-        <MenuIcon
+        <Bars3Icon
           ref={menu}
           onClick={showDropdownHandler}
           className="h-8 w-8"

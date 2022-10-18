@@ -1,9 +1,9 @@
 import {
-  ArrowSmRightIcon,
+  ArrowSmallRightIcon,
   PlusIcon,
-  RefreshIcon,
+  ArrowPathIcon,
   XCircleIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { FC, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "../../layouts/SetupContainer";
@@ -48,7 +48,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
               selected={selected}
               onSelectOption={changeHandler}
             >
-              <RefreshIcon className="mr-1 inline h-6 w-6 align-bottom" />
+              <ArrowPathIcon className="mr-1 inline h-6 w-6 align-bottom" />
               {t("setup.recoverblitz")}
             </SelectOption>
           )}
@@ -102,7 +102,7 @@ const ChooseSetup: FC<Props> = ({ setupPhase, callback }) => {
             disabled={selected === null}
           >
             <span className="p-2">{t("setup.continue")}</span>
-            <ArrowSmRightIcon className="inline h-6 w-6" />
+            <ArrowSmallRightIcon className="inline h-6 w-6" />
           </button>
         </div>
       </form>

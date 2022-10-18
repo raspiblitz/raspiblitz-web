@@ -1,4 +1,4 @@
-import { CloudDownloadIcon, XCircleIcon } from "@heroicons/react/outline";
+import { CloudArrowDownIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -73,7 +73,7 @@ const MigrationDialog: FC<InputData> = ({
               onClick={() => callback(true)}
               className="bd-button rounded p-2"
             >
-              <CloudDownloadIcon className="inline h-6 w-6" />
+              <CloudArrowDownIcon className="inline h-6 w-6" />
               <span className="p-2">{t("setup.yes_and_migrate")}</span>
             </button>
           </article>

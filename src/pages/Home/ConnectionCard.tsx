@@ -1,9 +1,9 @@
 import {
-  ClipboardCopyIcon,
+  ClipboardDocumentCheckIcon,
   EyeIcon,
-  EyeOffIcon,
-  QrcodeIcon,
-} from "@heroicons/react/outline";
+  EyeSlashIcon,
+  QrCodeIcon,
+} from "@heroicons/react/24/outline";
 import { QRCodeSVG } from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap.css";
@@ -76,7 +76,7 @@ export const ConnectionCard: FC = () => {
             placement="top"
           >
             {showAddress ? (
-              <EyeOffIcon
+              <EyeSlashIcon
                 onClick={toggleAddressHandler}
                 className="inline-block h-6 w-6 cursor-pointer align-top"
               />
@@ -117,7 +117,7 @@ export const ConnectionCard: FC = () => {
                 }
                 placement="top"
               >
-                <ClipboardCopyIcon
+                <ClipboardDocumentCheckIcon
                   className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                   onClick={copyTor}
                 />
@@ -152,7 +152,7 @@ export const ConnectionCard: FC = () => {
               }
               placement="top"
             >
-              <ClipboardCopyIcon
+              <ClipboardDocumentCheckIcon
                 className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                 onClick={copySsh}
               />
@@ -188,13 +188,13 @@ export const ConnectionCard: FC = () => {
                 }
                 placement="top"
               >
-                <ClipboardCopyIcon
+                <ClipboardDocumentCheckIcon
                   className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                   onClick={copyNodeId}
                 />
               </Tooltip>
               <Tooltip overlay={<div>{t("home.show_qr")}</div>} placement="top">
-                <QrcodeIcon
+                <QrCodeIcon
                   className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                   onClick={showModalHandler}
                 />

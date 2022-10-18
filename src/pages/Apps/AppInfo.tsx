@@ -1,4 +1,8 @@
-import { ChevronLeftIcon, PlusIcon, TrashIcon } from "@heroicons/react/outline";
+import {
+  ChevronLeftIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AppIcon from "../../components/AppIcon";

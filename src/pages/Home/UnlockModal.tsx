@@ -1,4 +1,4 @@
-import { LockOpenIcon } from "@heroicons/react/outline";
+import { LockOpenIcon } from "@heroicons/react/24/outline";
 import { FC, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";

@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { FC, useState } from "react";
 
 type Props = {

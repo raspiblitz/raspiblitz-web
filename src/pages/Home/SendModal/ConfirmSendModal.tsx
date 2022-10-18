@@ -1,4 +1,8 @@
-import { CheckIcon, ChevronLeftIcon, XIcon } from "@heroicons/react/outline";
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import type { ChangeEvent } from "react";
 import { FC, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -204,7 +208,7 @@ const ConfirmSendModal: FC<Props> = ({
           onClick={() => close(false)}
           disabled={isLoading}
         >
-          <XIcon className="inline h-6 w-6" />
+          <XMarkIcon className="inline h-6 w-6" />
           &nbsp;{t("settings.cancel")}
         </button>
 

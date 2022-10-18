@@ -1,4 +1,4 @@
-import { ClipboardCopyIcon } from "@heroicons/react/outline";
+import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "../../../../context/app-context";
@@ -57,7 +57,7 @@ export const OnchainDetails: FC<Props> = ({ details }) => {
             {details.id}
           </p>
           <div>
-            <ClipboardCopyIcon
+            <ClipboardDocumentCheckIcon
               className="h-5 w-5 hover:text-blue-500"
               onClick={copyId}
             />

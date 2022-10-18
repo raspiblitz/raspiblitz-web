@@ -1,4 +1,4 @@
-import { CogIcon, HomeIcon, ViewGridIcon } from "@heroicons/react/outline";
+import { CogIcon, HomeIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
@@ -20,7 +20,7 @@ const BottomNav: FC = () => {
         <span className={navLabelClasses}>{t("navigation.home")}</span>
       </NavLink>
       <NavLink to="/apps" className={(props) => createClassName(props)}>
-        <ViewGridIcon className={navIconClasses} />
+        <Squares2X2Icon className={navIconClasses} />
         <span className={navLabelClasses}>{t("navigation.apps")}</span>
       </NavLink>
       <NavLink to="/settings" className={(props) => createClassName(props)}>

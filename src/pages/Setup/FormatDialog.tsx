@@ -1,4 +1,8 @@
-import { DatabaseIcon, TrashIcon, XIcon } from "@heroicons/react/outline";
+import {
+  CircleStackIcon,
+  TrashIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -62,7 +66,7 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
                 onClick={() => handleBlockchain(true)}
                 className="bd-button rounded p-2"
               >
-                <DatabaseIcon className="inline h-6 w-6" />
+                <CircleStackIcon className="inline h-6 w-6" />
                 <span className="p-2">{t("setup.blockchain_keep")}</span>
               </button>
             </article>
@@ -88,7 +92,7 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
                 onClick={handleCancel}
                 className="rounded  bg-red-500 p-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
               >
-                <XIcon className="inline h-6 w-6" />
+                <XMarkIcon className="inline h-6 w-6" />
                 <span className="p-2">{t("setup.cancel")}</span>
               </button>
               <button
