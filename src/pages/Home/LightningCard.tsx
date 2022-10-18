@@ -59,7 +59,7 @@ export const LightningCard: FC = () => {
   const channelTotal = activeChannels + inactiveChannels + pendingChannels;
 
   return (
-    <div className="h-full p-5">
+    <div className="h-full">
       <section className="bd-card">
         <h2 className="text-lg font-bold">{t("home.lightning")}</h2>
         <div className="flex overflow-hidden py-4">

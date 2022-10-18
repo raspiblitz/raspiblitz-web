@@ -46,7 +46,7 @@ export const HardwareCard: FC = () => {
   }
 
   return (
-    <div className="bd-card mt-10 w-full transition-colors lg:mt-0 lg:ml-2 lg:w-1/2">
+    <div className="bd-card mt-8 w-full transition-colors lg:mt-0 lg:ml-2 lg:w-1/2">
       <div className="flex items-center text-lg font-bold">
         {t("hardware.header")}
       </div>

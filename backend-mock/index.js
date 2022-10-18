@@ -16,7 +16,10 @@ const lightning = require("./lightning");
 require("dotenv").config();
 
 const app = express();
-app.use(cors(), express.json());
+app.use(
+  cors({ credentials: true, origin: "http://localhost:3000" }),
+  express.json()
+);
 app.use("/api/v1/system", system);
 app.use("/api/v1/setup", setup);
 app.use("/api/v1/apps", apps);

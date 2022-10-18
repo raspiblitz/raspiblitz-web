@@ -30,7 +30,7 @@ export const BitcoinCard: FC = () => {
   const diskSize = (size_on_disk! / 1024 / 1024 / 1024).toFixed(2);
 
   return (
-    <div className="h-full p-5">
+    <div className="h-full">
       <section className="bd-card">
         <h2 className="text-lg font-bold">{t("home.bitcoin")}</h2>
         <div className="flex overflow-hidden py-4">
