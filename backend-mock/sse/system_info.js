@@ -7,7 +7,7 @@ const systemInfo = () => {
     alias: "myBlitz",
     color: "#3399ff",
     platform: "raspiblitz",
-    platform_version: "1.7.2rc1",
+    platform_version: "1.8.0-mock",
     api_version: "v0.5.0beta",
     tor_web_ui:
       "arg6ybal4b7dszmsncsrudcpdfkxadzfdi24ktceodah7tgmdopgpyfd.onion",
