@@ -1,4 +1,4 @@
-import { ArrowSmRightIcon, XIcon } from "@heroicons/react/outline";
+import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -119,7 +119,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                 type="button"
                 className="flex items-center justify-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
               >
-                <XIcon className="inline h-6 w-6" />
+                <XMarkIcon className="inline h-6 w-6" />
                 <span className="p-2">{t("setup.cancel")}</span>
               </button>
               <button
@@ -128,7 +128,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                 className="bd-button flex items-center justify-center px-2 disabled:bg-gray-400"
               >
                 <span className="p-2">{t("setup.ok")}</span>
-                <ArrowSmRightIcon className="inline h-6 w-6" />
+                <ArrowSmallRightIcon className="inline h-6 w-6" />
               </button>
             </article>
           </form>

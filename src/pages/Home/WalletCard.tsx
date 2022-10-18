@@ -3,10 +3,10 @@ import {
   ShareIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import {
-  DownloadIcon,
-  LightningBoltIcon,
+  ArrowDownTrayIcon,
+  BoltIcon,
   LinkIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "../../context/app-context";
@@ -104,7 +104,7 @@ export const WalletCard: FC<Props> = ({
             </article>
             <article className="flex w-full flex-col">
               <h6>
-                <LightningBoltIcon className="mr-1 inline h-5 w-5 align-bottom" />
+                <BoltIcon className="mr-1 inline h-5 w-5 align-bottom" />
                 <span className="inline align-bottom text-sm">
                   {t("home.lightning")}
                 </span>
@@ -121,7 +121,7 @@ export const WalletCard: FC<Props> = ({
             onClick={onReceive}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
           >
-            <DownloadIcon className="mr-1 h-6 w-6" />
+            <ArrowDownTrayIcon className="mr-1 h-6 w-6" />
             <span>{t("wallet.receive")}</span>
           </button>
           <button

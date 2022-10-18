@@ -1,9 +1,9 @@
 import {
-  CogIcon,
+  Cog6ToothIcon,
   HomeIcon,
-  LogoutIcon,
-  ViewGridIcon,
-} from "@heroicons/react/outline";
+  ArrowRightOnRectangleIcon,
+  Squares2X2Icon,
+} from "@heroicons/react/24/outline";
 import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -31,13 +31,13 @@ export const SideDrawer: FC = () => {
           </span>
         </NavLink>
         <NavLink to="/apps" className={(props) => createClassName(props)}>
-          <ViewGridIcon className={navIconClasses} />
+          <Squares2X2Icon className={navIconClasses} />
           <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.apps")}
           </span>
         </NavLink>
         <NavLink to="/settings" className={(props) => createClassName(props)}>
-          <CogIcon className={navIconClasses} />
+          <Cog6ToothIcon className={navIconClasses} />
           <span className="mx-3 w-1/2 justify-center text-lg">
             {t("navigation.settings")}
           </span>
@@ -48,7 +48,7 @@ export const SideDrawer: FC = () => {
         onClick={logout}
         className="bd-button mb-3 flex h-8 w-full items-center justify-center"
       >
-        <LogoutIcon className="mr-1 inline-block h-5 w-5" />
+        <ArrowRightOnRectangleIcon className="mr-1 inline-block h-5 w-5" />
         {t("navigation.logout")}
       </button>
     </nav>

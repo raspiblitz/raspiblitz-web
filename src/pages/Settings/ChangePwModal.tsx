@@ -1,4 +1,4 @@
-import { RefreshIcon, XIcon } from "@heroicons/react/outline";
+import { ArrowPathIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
@@ -115,7 +115,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
             onClick={onClose}
             type="button"
           >
-            <XIcon className="inline h-6 w-6" />
+            <XMarkIcon className="inline h-6 w-6" />
             <span className="p-2">{t("settings.cancel")}</span>
           </button>
           <ButtonWithSpinner
@@ -123,7 +123,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
             className="bd-button flex items-center justify-center px-2"
             disabled={!isValid}
             loading={isLoading}
-            icon={<RefreshIcon className="inline h-6 w-6" />}
+            icon={<ArrowPathIcon className="inline h-6 w-6" />}
           >
             <span className="p-2">{t("settings.change_pw_a")}</span>
           </ButtonWithSpinner>

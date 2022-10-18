@@ -1,4 +1,4 @@
-import { XIcon } from "@heroicons/react/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FC, useCallback, useEffect } from "react";
 import ModalBackground from "./ModalBackground";
 
@@ -48,7 +48,7 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
               closeable ? "" : "invisible"
             }`}
           >
-            <XIcon className="h-full w-full" />
+            <XMarkIcon className="h-full w-full" />
           </button>
         </div>
         <div className="flex h-full flex-col justify-center px-5">

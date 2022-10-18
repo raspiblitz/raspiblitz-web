@@ -1,9 +1,9 @@
 import {
   ClockIcon,
-  DotsHorizontalIcon,
-  LightningBoltIcon,
+  EllipsisHorizontalIcon,
+  BoltIcon,
   LinkIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { FC } from "react";
 import {
   TransactionCategory,
@@ -26,7 +26,7 @@ const CategoryIcon: FC<Props> = ({ category, type, status }) => {
     switch (status) {
       case "in_flight":
         return (
-          <DotsHorizontalIcon
+          <EllipsisHorizontalIcon
             className={`h-7 w-7 rounded-full bg-gray-500 p-1 text-white`}
           />
         );
@@ -37,9 +37,7 @@ const CategoryIcon: FC<Props> = ({ category, type, status }) => {
           />
         );
       case "succeeded":
-        return (
-          <LightningBoltIcon className={`h-7 w-7 rounded-full p-1 ${color}`} />
-        );
+        return <BoltIcon className={`h-7 w-7 rounded-full p-1 ${color}`} />;
     }
   }
 

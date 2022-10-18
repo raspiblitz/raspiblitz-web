@@ -2,7 +2,7 @@ import {
   ArrowDownIcon,
   InformationCircleIcon,
   LockClosedIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoadingBox from "../../../components/LoadingBox";

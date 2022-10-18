@@ -1,4 +1,4 @@
-import { SwitchVerticalIcon } from "@heroicons/react/outline";
+import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -77,7 +77,7 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
           onClick={toggleHandler}
         >
           {unit}
-          <SwitchVerticalIcon className="ml-1 h-5 w-5 text-black dark:text-white" />
+          <ArrowsRightLeftIcon className="ml-1 h-5 w-5 text-black dark:text-white" />
         </span>
       </div>
 

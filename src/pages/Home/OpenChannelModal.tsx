@@ -1,4 +1,4 @@
-import { LinkIcon } from "@heroicons/react/outline";
+import { LinkIcon } from "@heroicons/react/24/outline";
 import AvailableBalance from "components/AvailableBalance";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";

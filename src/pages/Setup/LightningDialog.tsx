@@ -1,4 +1,4 @@
-import { ArrowSmRightIcon, XCircleIcon } from "@heroicons/react/outline";
+import { ArrowSmallRightIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { FC, FormEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CLNLogoDark from "../../assets/core-lightning-dark.png";
@@ -89,7 +89,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
             disabled={selected === null}
           >
             <span className="p-2">{t("setup.continue")}</span>
-            <ArrowSmRightIcon className="inline h-6 w-6" />
+            <ArrowSmallRightIcon className="inline h-6 w-6" />
           </button>
         </div>
       </form>

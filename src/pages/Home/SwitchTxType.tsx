@@ -1,4 +1,4 @@
-import { LightningBoltIcon, LinkIcon } from "@heroicons/react/outline";
+import { BoltIcon, LinkIcon } from "@heroicons/react/24/outline";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -31,7 +31,7 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
         className="switch-button"
         onClick={() => setTxTypeHandler(TxType.LIGHTNING)}
       >
-        <LightningBoltIcon className="mr-1 inline h-6 w-6 align-bottom" />
+        <BoltIcon className="mr-1 inline h-6 w-6 align-bottom" />
         {t("home.lightning")}
       </button>
 
