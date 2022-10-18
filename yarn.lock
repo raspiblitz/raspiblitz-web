@@ -5845,13 +5845,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"event-source-polyfill@npm:1.0.25":
-  version: 1.0.25
-  resolution: "event-source-polyfill@npm:1.0.25"
-  checksum: ed30428cc80eadfd693d267ba4a72dceaae938174cd116081ce38ad62bfd95f199430be7e8341e6f8f1e29489bbd5cfd4b3f6c8d6d463435623f7f91ae5f71b1
-  languageName: node
-  linkType: hard
-
 "eventemitter3@npm:^4.0.0":
   version: 4.0.7
   resolution: "eventemitter3@npm:4.0.7"
@@ -10644,7 +10637,6 @@ __metadata:
     "@types/react-dom": ^18.0.6
     autoprefixer: ^10.4.8
     axios: ^0.27.2
-    event-source-polyfill: 1.0.25
     http-proxy-middleware: ^2.0.6
     husky: ^8.0.1
     i18next: ^21.10.0
