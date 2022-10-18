@@ -1,7 +1,7 @@
-import { EventSourcePolyfill } from "event-source-polyfill";
 import { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { SSEContext, SSE_URL } from "../context/sse-context";
 import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
@@ -11,9 +11,8 @@ import { LnInfoLite } from "../models/ln-info-lite";
 import { SystemInfo } from "../models/system-info";
 import { SystemStartupInfo } from "../models/system-startup-info";
 import { WalletBalance } from "../models/wallet-balance";
-import { SSEContext, SSE_URL } from "../context/sse-context";
+import { setWindowAlias } from "../utils";
 import { availableApps } from "../utils/availableApps";
-import { ACCESS_TOKEN, setWindowAlias } from "../utils";
 
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners
@@ -53,13 +52,7 @@ function useSSE() {
 
   useEffect(() => {
     if (!evtSource) {
-      setEvtSource(
-        new EventSourcePolyfill(SSE_URL, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
-          },
-        })
-      );
+      setEvtSource(new EventSource(SSE_URL, { withCredentials: true }));
     }
 
     const setApps = (event: MessageEvent<string>) => {
