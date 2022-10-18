@@ -69,7 +69,7 @@ const TransactionCard: FC<Props> = ({
   const fillEmptyTxAmount = MAX_ITEMS - currentPageTxs.length;
 
   return (
-    <div className="h-full p-5">
+    <div className="h-full">
       <section className="bd-card flex flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 

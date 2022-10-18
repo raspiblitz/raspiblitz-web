@@ -72,7 +72,7 @@ export const WalletCard: FC<Props> = ({
   }
 
   return (
-    <div className="h-full p-5">
+    <div className="h-full">
       <div className="bd-card h-full transition-colors">
         <section className="flex flex-col flex-wrap p-5 text-black lg:flex-row">
           <div className="relative w-full overflow-hidden rounded-xl bg-yellow-600 bg-gradient-to-b from-yellow-500 p-4 text-white">

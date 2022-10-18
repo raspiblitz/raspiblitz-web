@@ -12,7 +12,7 @@ export const AppStatusCard: FC<Props> = ({ app }) => {
   const appName = availableApps.get(id)?.name;
 
   return (
-    <div className="h-full p-5">
+    <div className="h-full">
       <article className="bd-card flex items-center transition-colors">
         <div className="my-2 flex w-full flex-row items-center">
           {/* Icon */}

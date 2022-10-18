@@ -73,7 +73,7 @@ export const Apps: FC = () => {
   }
 
   return (
-    <main className="content-container page-container bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white">
+    <main className="content-container page-container bg-gray-100 p-5 transition-colors dark:bg-gray-700 dark:text-white lg:pt-8 lg:pb-8 lg:pr-8">
       {isLoading && (
         <section className="content-container flex items-center justify-center">
           <LoadingSpinner color="text-yellow-500" />
@@ -82,44 +82,48 @@ export const Apps: FC = () => {
       {!isLoading && (
         <>
           <section className="flex h-full flex-wrap">
-            <h2 className="w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
+            <h2 className="w-full pt-8 pb-5 text-xl font-bold dark:text-gray-200">
               {t("apps.installed")}
             </h2>
-            {installedApps.map((appStatus: AppStatus) => {
-              return (
-                <article className="w-full p-3 lg:w-1/3" key={appStatus.id}>
-                  <AppCard
-                    appInfo={availableApps.get(appStatus.id)!}
-                    appStatusInfo={appStatus}
-                    installed={true}
-                    installingApp={null}
-                    onInstall={() => installHandler(appStatus.id)}
-                    onOpenDetails={openDetailsHandler}
-                    address={appStatus.address}
-                    hiddenService={appStatus.hiddenService}
-                  />
-                </article>
-              );
-            })}
+            <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
+              {installedApps.map((appStatus: AppStatus) => {
+                return (
+                  <article key={appStatus.id}>
+                    <AppCard
+                      appInfo={availableApps.get(appStatus.id)!}
+                      appStatusInfo={appStatus}
+                      installed={true}
+                      installingApp={null}
+                      onInstall={() => installHandler(appStatus.id)}
+                      onOpenDetails={openDetailsHandler}
+                      address={appStatus.address}
+                      hiddenService={appStatus.hiddenService}
+                    />
+                  </article>
+                );
+              })}
+            </div>
           </section>
           <section className="flex h-full flex-wrap">
-            <h2 className="block w-full px-5 pt-8 pb-5 text-xl font-bold dark:text-gray-200">
+            <h2 className="block w-full pt-8 pb-5 text-xl font-bold dark:text-gray-200">
               {t("apps.available")}
             </h2>
-            {notInstalledApps.map((appStatus: AppStatus) => {
-              return (
-                <article className="w-full p-3 lg:w-1/3" key={appStatus.id}>
-                  <AppCard
-                    appInfo={availableApps.get(appStatus.id)!}
-                    appStatusInfo={appStatus}
-                    installed={false}
-                    installingApp={installingApp}
-                    onInstall={() => installHandler(appStatus.id)}
-                    onOpenDetails={openDetailsHandler}
-                  />
-                </article>
-              );
-            })}
+            <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
+              {notInstalledApps.map((appStatus: AppStatus) => {
+                return (
+                  <article key={appStatus.id}>
+                    <AppCard
+                      appInfo={availableApps.get(appStatus.id)!}
+                      appStatusInfo={appStatus}
+                      installed={false}
+                      installingApp={installingApp}
+                      onInstall={() => installHandler(appStatus.id)}
+                      onOpenDetails={openDetailsHandler}
+                    />
+                  </article>
+                );
+              })}
+            </div>
           </section>
         </>
       )}
