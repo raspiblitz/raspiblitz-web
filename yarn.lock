@@ -6872,12 +6872,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.10.0":
-  version: 21.10.0
-  resolution: "i18next@npm:21.10.0"
+"i18next@npm:^22.0.1":
+  version: 22.0.1
+  resolution: "i18next@npm:22.0.1"
   dependencies:
     "@babel/runtime": ^7.17.2
-  checksum: f997985e2d4d15a62a0936a82ff6420b97f3f971e776fe685bdd50b4de0cb4dc2198bc75efe6b152844794ebd5040d8060d6d152506a687affad534834836d81
+  checksum: f665c67c6c06fde20028c6a758708c5e732cb512d2c2d8e841566671fae2cfda393cbebca007956a2b5e3be481b7c35a34156ce09c6cb7fc8cacb4ae86f933eb
   languageName: node
   linkType: hard
 
@@ -10639,7 +10639,7 @@ __metadata:
     axios: ^0.27.2
     http-proxy-middleware: ^2.0.6
     husky: ^8.0.1
-    i18next: ^21.10.0
+    i18next: ^22.0.1
     lint-staged: ^13.0.3
     msw: ^0.47.4
     postcss: ^8.4.16
