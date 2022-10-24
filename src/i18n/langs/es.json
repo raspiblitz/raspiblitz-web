@@ -110,7 +110,8 @@
       "webui": "Interfaz de usuario",
       "blocktime": "Tiempo de bloque",
       "node_id": "ID del nodo",
-      "no_open_channels": "Actualmente no dispone de canales abiertos"
+      "no_open_channels": "Actualmente no dispone de canales abiertos",
+      "not_available": "No disponible"
     },
     "language": {
       "cs": "checo",
