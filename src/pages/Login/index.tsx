@@ -49,7 +49,7 @@ const Login: FC = () => {
     await instance
       .post("/system/login", { password })
       .then((resp) => {
-        localStorage.setItem(ACCESS_TOKEN, resp.data);
+        localStorage.setItem(ACCESS_TOKEN, resp.data.access_token);
         setIsLoggedIn(true);
         enableGutter();
         if (back) {
