@@ -140,7 +140,8 @@
       "urgent": "Dringend",
       "version": "Versie",
       "versions": "Versies",
-      "webui": "WebUI"
+      "webui": "WebUI",
+      "not_available": "Niet beschikbaar"
     },
     "language": {
       "cs": "Tsjechisch",
