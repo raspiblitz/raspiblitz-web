@@ -12,7 +12,7 @@ Thank you for providing translations! 🙏
 - Portuguese (Brazil) [@Nom4d3](https://github.com/Nom4d3) [@bitcoinheiro](https://github.com/bitcoinheiro) [mbombonato](https://github.com/mbombonato), Felipe Cavalhero Ojeda
 - Hungarian [@karozagorus](https://github.com/karozagorus)
 - Italian: [GiovanniZotta](https://github.com/GiovanniZotta)
-- Spanish: [moses](https://github.com/mosmat) [Sebas Arriola](https://github.com/sebdeveloper6952) drjonesklaus
+- Spanish: [moses](https://github.com/mosmat), [Sebas Arriola](https://github.com/sebdeveloper6952), drjonesklaus, Eduardo Malaspina
 - Dutch: Buddy Busy, [exxo-hub](https://github.com/exxo-hub)
 - Spanish: [@mosmat](https://github.com/mosmat), Fernando Serer
 - Czech: [@foxikk](https://github.com/foxikk)
