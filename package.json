@@ -73,7 +73,7 @@
     "react-hook-form": "^7.38.0",
     "react-i18next": "^11.18.6",
     "react-router-dom": "^6.4.3",
-    "react-toastify": "^9.0.8"
+    "react-toastify": "^9.1.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.17.1",
