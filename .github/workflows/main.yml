@@ -16,15 +16,15 @@ jobs:
 
     steps:
       - name: Checkout Repository
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
       - name: Install dependencies
-      - run: yarn install --immutable
+        run: yarn install --immutable
       - name: Build
-      - run: yarn build
+        run: yarn build
       - name: Run Tests
-      - run: yarn test
+        run: yarn test
