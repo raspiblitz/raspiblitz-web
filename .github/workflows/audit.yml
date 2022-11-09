@@ -24,8 +24,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Run audit
-        run: |
-          yarn
-          yarn dedupe --check
-          yarn npm audit --environment production
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn install
+      - name: Check for duplicate dependencies
+        run: yarn dedupe --check
+      - name: Audit dependencies
+        run: yarn npm audit --environment production
