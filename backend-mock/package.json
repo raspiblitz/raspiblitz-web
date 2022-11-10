@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node index.js"
   },
-  "private": "true",
   "author": {
     "name": "Christoph Stenglein",
     "email": "christoph@cstenglein.com",
@@ -15,8 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1"
   }
 }
