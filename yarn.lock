@@ -8837,9 +8837,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^0.48.0":
-  version: 0.48.0
-  resolution: "msw@npm:0.48.0"
+"msw@npm:^0.48.1":
+  version: 0.48.1
+  resolution: "msw@npm:0.48.1"
   dependencies:
     "@mswjs/cookies": ^0.2.2
     "@mswjs/interceptors": ^0.17.5
@@ -8868,7 +8868,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: a931232d18ad02c8b98ffb5db507824d619860743eab6ecf2c228a403b5a20e2b167d4e0ef6cdd7ca2c0d1e4cc913dce1a690e80d7ef3ec6724d3ee060abc477
+  checksum: fbe255fd7d97058663f4807c570dadd3c83948f3d2675c13932ca22346a2c2a15c4e3681af7408ca96efba258223b933ad2aaed3c881a354118dbd8174d697ba
   languageName: node
   linkType: hard
 
@@ -10641,7 +10641,7 @@ __metadata:
     husky: ^8.0.2
     i18next: ^22.0.4
     lint-staged: ^13.0.3
-    msw: ^0.48.0
+    msw: ^0.48.1
     postcss: ^8.4.16
     prettier: ^2.7.1
     prettier-plugin-tailwindcss: ^0.1.13
