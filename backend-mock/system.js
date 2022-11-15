@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const router = express.Router();
 
 const auth = require("./auth");
@@ -42,6 +43,12 @@ router.post("/reboot", (req, res) => {
 router.post("/shutdown", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send();
+});
+
+router.get("/get-debug-logs-raw", (req, res) => {
+  console.info(`call to ${req.originalUrl}`);
+  const logs = fs.readFileSync("debuglog.txt");
+  res.status(200).send(logs.toString());
 });
 
 module.exports = router;

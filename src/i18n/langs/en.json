@@ -184,7 +184,9 @@
       "old_pw": "Old password",
       "pass_a_changed": "Password A changed successfully",
       "reboot": "Reboot",
-      "shutdown": "Shutdown"
+      "shutdown": "Shutdown",
+      "generate_debug": "Generate Debug Log",
+      "generate": "Generate"
     },
     "setup": {
       "blockchain_delete": "Delete Blockchain",
