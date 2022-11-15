@@ -10,7 +10,7 @@ type Props = {
 const VersionBox: FC<Props> = ({ platformVersion, apiVersion }) => {
   const { t } = useTranslation();
   return (
-    <article className="box-border w-full transition-colors dark:text-white lg:w-1/2">
+    <article className="box-border w-full transition-colors dark:text-white">
       <div className="relative flex flex-col gap-3 rounded bg-white p-5 shadow-xl dark:bg-gray-800">
         <h5 className="font-bold">{t("home.versions")}</h5>
         <article>

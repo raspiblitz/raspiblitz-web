@@ -5,6 +5,7 @@ import useSSE from "../../hooks/use-sse";
 import { enableGutter } from "../../utils";
 import ActionBox from "./ActionBox";
 import ChangePwModal from "./ChangePwModal";
+import DebugLogBox from "./DebugLogBox";
 import I18nBox from "./I18nBox";
 import VersionBox from "./VersionBox";
 
@@ -44,7 +45,7 @@ const Settings: FC = () => {
   };
 
   return (
-    <main className="content-container page-container flex flex-col gap-5 bg-gray-100 pt-8 transition-colors dark:bg-gray-700 dark:text-white lg:gap-8">
+    <main className="content-container page-container grid auto-rows-min gap-5 bg-gray-100 p-5 pt-8 transition-colors dark:bg-gray-700 dark:text-white lg:grid-cols-2 lg:gap-8 lg:pt-8 lg:pb-8 lg:pr-8">
       <I18nBox />
       <ActionBox
         name={t("settings.change_pw_a")}
@@ -65,6 +66,7 @@ const Settings: FC = () => {
         platformVersion={systemInfo.platform_version}
         apiVersion={systemInfo.api_version}
       />
+      <DebugLogBox />
       {showPwModal && <ChangePwModal onClose={hidePwModalHandler} />}
       {confirmReboot && (
         <ConfirmModal
