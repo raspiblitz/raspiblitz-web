@@ -10653,7 +10653,7 @@ __metadata:
     react-i18next: ^11.18.6
     react-router-dom: ^6.4.3
     react-scripts: 5.0.1
-    react-toastify: ^9.0.8
+    react-toastify: ^9.1.1
     tailwindcss: ^3.1.8
     typescript: ~4.8.4
   languageName: unknown
@@ -10957,15 +10957,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^9.0.8":
-  version: 9.0.8
-  resolution: "react-toastify@npm:9.0.8"
+"react-toastify@npm:^9.1.1":
+  version: 9.1.1
+  resolution: "react-toastify@npm:9.1.1"
   dependencies:
     clsx: ^1.1.1
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: d48fa369b3d19c63f9b6b1ecef076911aa97a43bb84ecdb1532e6f32932e3625c1c3e12a4c63e7eb211d33b8aa962e9b9a81ab6a47fef2c51185ce8c9a780336
+  checksum: 2039255539961a9b4d77b2656f120b20abe46cb0c699a7f3c0af23b4ef669d9c4d24dae6b8f4954b5efd83edf6d6e23614a29e94e9ee0d2647741fba9ba2db85
   languageName: node
   linkType: hard
 
