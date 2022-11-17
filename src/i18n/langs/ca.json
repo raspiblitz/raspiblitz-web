@@ -1,13 +1,7 @@
 {
   "translation": {
-    "home": {
-      "channel_closed": ""
-    },
     "settings": {
       "change_pw_a": ""
-    },
-    "setup": {
-      "password_error_match": ""
     },
     "wallet": {
       "unlock_title": ""
