@@ -1,31 +1,19 @@
 {
   "translation": {
     "appInfo": {
-      "btcpayserver": {
-        "shortDescription": ""
-      },
       "mempool": {
-        "shortDescription": ""
-      },
-      "specter": {
         "shortDescription": ""
       }
     },
     "apps": {
       "author": "",
-      "install_failure": "",
       "login_admin_pass_b": "",
-      "no_page": "",
-      "selfsigned_cert": "",
-      "uninstall_success": ""
+      "selfsigned_cert": ""
     },
     "forms": {
       "validation": {
         "chainAddress": {
           "patternMismatch": ""
-        },
-        "chainFee": {
-          "required": ""
         },
         "lnInvoice": {
           "required": ""
@@ -33,73 +21,45 @@
       }
     },
     "hardware": {
-      "cpu_load": "",
       "temp": ""
     },
     "home": {
-      "blocks_synced": "",
       "channel_closed": "",
-      "confirm_channel_close": "",
       "connections": "",
-      "hide": "",
       "network": "",
-      "node_uri": "",
       "pending_balance_local": "",
-      "show_qr": "",
-      "tor": "",
-      "webui": ""
+      "tor": ""
     },
     "language": {
       "en": "",
-      "it": "",
       "sv": ""
     },
-    "login": {
-      "error": ""
-    },
     "navigation": {
-      "back": "",
-      "logout": ""
+      "back": ""
     },
     "settings": {
       "change_pw_a": "",
-      "new_pw": "",
       "shutdown": ""
     },
     "setup": {
-      "blockchain_keep": "",
       "continue": "",
-      "done_recover_ready": "",
       "done_update_ready": "",
-      "final_migration": "",
       "final_update": "",
-      "hdd_delete_short": "",
       "migrate_mynode": "",
-      "nodename_err_chars": "",
       "nodename_input": "",
-      "password_a_details": "",
       "password_b_name": "",
-      "password_c_short": "",
       "password_error_match": "",
-      "recoverblitz": "",
       "runningsetup": "",
-      "setupoptions": "",
       "start_update": "",
-      "sync_headline": "",
       "updateblitz": ""
     },
     "tx": {
-      "comment_placeholder": "",
       "description": "",
-      "mempool": "",
       "tx_details": ""
     },
     "wallet": {
-      "address": "",
       "confirm": "",
-      "create_invoice_ln": "",
       "receive": "",
-      "send_onchain": "",
       "unlock_title": ""
     }
   }
