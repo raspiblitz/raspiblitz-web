@@ -1,39 +1,23 @@
 {
   "translation": {
     "apps": {
-      "author": "",
       "selfsigned_cert": ""
-    },
-    "forms": {
-      "validation": {
-        "lnInvoice": {
-          "required": ""
-        }
-      }
     },
     "home": {
       "channel_closed": "",
-      "network": "",
       "tor": ""
-    },
-    "language": {
-      "sv": ""
     },
     "settings": {
       "change_pw_a": ""
     },
     "setup": {
-      "continue": "",
       "final_update": "",
-      "nodename_input": "",
-      "password_error_match": "",
-      "start_update": ""
+      "password_error_match": ""
     },
     "tx": {
       "description": ""
     },
     "wallet": {
-      "confirm": "",
       "unlock_title": ""
     }
   }
