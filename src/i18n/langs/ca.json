@@ -1,21 +1,13 @@
 {
   "translation": {
-    "apps": {
-      "selfsigned_cert": ""
-    },
     "home": {
-      "channel_closed": "",
-      "tor": ""
+      "channel_closed": ""
     },
     "settings": {
       "change_pw_a": ""
     },
     "setup": {
-      "final_update": "",
       "password_error_match": ""
-    },
-    "tx": {
-      "description": ""
     },
     "wallet": {
       "unlock_title": ""
