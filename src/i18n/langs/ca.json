@@ -1,65 +1,39 @@
 {
   "translation": {
-    "appInfo": {
-      "mempool": {
-        "shortDescription": ""
-      }
-    },
     "apps": {
       "author": "",
-      "login_admin_pass_b": "",
       "selfsigned_cert": ""
     },
     "forms": {
       "validation": {
-        "chainAddress": {
-          "patternMismatch": ""
-        },
         "lnInvoice": {
           "required": ""
         }
       }
     },
-    "hardware": {
-      "temp": ""
-    },
     "home": {
       "channel_closed": "",
-      "connections": "",
       "network": "",
-      "pending_balance_local": "",
       "tor": ""
     },
     "language": {
-      "en": "",
       "sv": ""
     },
-    "navigation": {
-      "back": ""
-    },
     "settings": {
-      "change_pw_a": "",
-      "shutdown": ""
+      "change_pw_a": ""
     },
     "setup": {
       "continue": "",
-      "done_update_ready": "",
       "final_update": "",
-      "migrate_mynode": "",
       "nodename_input": "",
-      "password_b_name": "",
       "password_error_match": "",
-      "runningsetup": "",
-      "start_update": "",
-      "updateblitz": ""
+      "start_update": ""
     },
     "tx": {
-      "description": "",
-      "tx_details": ""
+      "description": ""
     },
     "wallet": {
       "confirm": "",
-      "receive": "",
       "unlock_title": ""
     }
   }
