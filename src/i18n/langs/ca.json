@@ -1,185 +1,106 @@
 {
   "translation": {
     "appInfo": {
-      "btc-rpc-explorer": {
-        "shortDescription": ""
-      },
       "btcpayserver": {
-        "shortDescription": ""
-      },
-      "lnbits": {
         "shortDescription": ""
       },
       "mempool": {
         "shortDescription": ""
       },
-      "rtl": {
-        "shortDescription": ""
-      },
       "specter": {
-        "shortDescription": ""
-      },
-      "thunderhub": {
         "shortDescription": ""
       }
     },
     "apps": {
       "author": "",
-      "info": "",
       "install_failure": "",
-      "installed": "",
       "login_admin_pass_b": "",
-      "login_pass_b": "",
       "no_page": "",
-      "online": "",
       "selfsigned_cert": "",
-      "uninstall": "",
       "uninstall_success": ""
     },
     "forms": {
-      "hint": {
-        "invoiceAmountZero": ""
-      },
       "validation": {
         "chainAddress": {
           "patternMismatch": ""
-        },
-        "chainAmount": {
-          "max": ""
         },
         "chainFee": {
           "required": ""
         },
         "lnInvoice": {
-          "max": "",
           "required": ""
-        },
-        "unlock": {
-          "pass_c": ""
         }
       }
     },
     "hardware": {
       "cpu_load": "",
-      "header": "",
       "temp": ""
     },
     "home": {
-      "bitcoin": "",
       "blocks_synced": "",
-      "channel": "",
       "channel_closed": "",
-      "channel_opened": "",
       "confirm_channel_close": "",
-      "conn_in": "",
       "connections": "",
-      "difficulty": "",
       "hide": "",
-      "list_open_channels": "",
       "network": "",
-      "no_open_channels": "",
       "node_uri": "",
-      "onchain_cln_no_support": "",
       "pending_balance_local": "",
-      "remote_balance": "",
       "show_qr": "",
-      "ssh": "",
       "tor": "",
-      "version": "",
       "webui": ""
     },
     "language": {
-      "cs": "",
       "en": "",
-      "fr": "",
       "it": "",
-      "nl": "",
       "sv": ""
     },
     "login": {
-      "enter_pass": "",
-      "error": "",
-      "login": ""
+      "error": ""
     },
     "navigation": {
       "back": "",
-      "display_sats": "",
       "logout": ""
     },
     "settings": {
-      "cancel": "",
       "change_pw_a": "",
-      "curr_lang": "",
       "new_pw": "",
-      "pass_a_changed": "",
       "shutdown": ""
     },
     "setup": {
-      "blockchain_found_long": "",
       "blockchain_keep": "",
-      "cancel_setup": "",
       "continue": "",
-      "done_migration_ready": "",
       "done_recover_ready": "",
-      "done_setup_ready": "",
       "done_update_ready": "",
-      "final_do_reboot": "",
       "final_migration": "",
-      "final_seedwords": "",
       "final_update": "",
-      "hdd_delete_keep_blockchain": "",
       "hdd_delete_short": "",
-      "lnd": "",
       "migrate_mynode": "",
-      "migrateblitz": "",
       "nodename_err_chars": "",
-      "nodename_err_min_length": "",
       "nodename_input": "",
-      "ok": "",
       "password_a_details": "",
-      "password_a_short": "",
       "password_b_name": "",
-      "password_c_details": "",
       "password_c_short": "",
-      "password_error_empty": "",
       "password_error_match": "",
-      "pleasewait": "",
       "recoverblitz": "",
-      "restarting": "",
       "runningsetup": "",
-      "select_lightning": "",
       "setupoptions": "",
-      "shuttingdown": "",
       "start_update": "",
-      "sync_bitcoin_starting": "",
       "sync_headline": "",
-      "sync_wallet_info": "",
-      "updateblitz": "",
-      "yes_and_migrate": ""
+      "updateblitz": ""
     },
     "tx": {
       "comment_placeholder": "",
-      "confirmations": "",
       "description": "",
-      "fee_rate": "",
       "mempool": "",
-      "transactions": "",
-      "tx_details": "",
-      "unconfirmed": ""
+      "tx_details": ""
     },
     "wallet": {
       "address": "",
-      "balance": "",
       "confirm": "",
-      "copy_clipboard": "",
       "create_invoice_ln": "",
-      "invoice": "",
       "receive": "",
-      "send": "",
       "send_onchain": "",
-      "unlock_subtitle": "",
-      "unlock_title": "",
-      "wallet_locked": ""
+      "unlock_title": ""
     }
   }
 }
