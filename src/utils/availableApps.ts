@@ -43,10 +43,10 @@ export const availableApps = new Map([
     "lnbits",
     {
       id: "lnbits",
-      name: "LNBits",
+      name: "LNbits",
       author: "arcbtc",
       version: "v0.8.0",
-      repository: "https://github.com/lnbits/lnbits-legend",
+      repository: "https://github.com/lnbits/lnbits",
     },
   ],
   [
