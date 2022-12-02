@@ -6872,12 +6872,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^22.0.5":
-  version: 22.0.5
-  resolution: "i18next@npm:22.0.5"
+"i18next@npm:^22.0.6":
+  version: 22.0.6
+  resolution: "i18next@npm:22.0.6"
   dependencies:
     "@babel/runtime": ^7.17.2
-  checksum: fb0233ac096456a1a2f85ebeb08dbec26fe9f86056a5c082b8e86b1eb2b4443fd7c582fafddca86afab43583e9e7a92a2c215a29a7ac1e37eb5cb61b1e0c6173
+  checksum: b9d20b8d6cdd16c38def15d4f1c5906418926412eafa7d582fbd8395618deb177e73bdc709559480de7e1a3281287b69665d6f7c2af8df791f10ea1dfd79cb79
   languageName: node
   linkType: hard
 
@@ -10430,12 +10430,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "prettier@npm:2.7.1"
+"prettier@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "prettier@npm:2.8.0"
   bin:
     prettier: bin-prettier.js
-  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
+  checksum: 72004ce0cc9bb097daf3e3833f62495768724392c1d5b178dd47372337616e9e50ecbb0804f236596223f7b5eb1bbe69cefc8957dca21112c5777e77ef73a564
   languageName: node
   linkType: hard
 
@@ -10638,21 +10638,21 @@ __metadata:
     axios: ^0.27.2
     http-proxy-middleware: ^2.0.6
     husky: ^8.0.2
-    i18next: ^22.0.5
+    i18next: ^22.0.6
     lint-staged: ^13.0.3
     msw: ^0.49.0
     postcss: ^8.4.16
-    prettier: ^2.7.1
+    prettier: ^2.8.0
     prettier-plugin-tailwindcss: ^0.1.13
     qrcode.react: ^3.1.0
     rc-tooltip: ^5.2.2
     react: ^18.2.0
     react-dom: ^18.2.0
-    react-hook-form: ^7.39.4
+    react-hook-form: ^7.40.0
     react-i18next: ^11.18.6
     react-router-dom: ^6.4.3
     react-scripts: 5.0.1
-    react-toastify: ^9.0.8
+    react-toastify: ^9.1.1
     tailwindcss: ^3.1.8
     typescript: ~4.9.3
   languageName: unknown
@@ -10810,12 +10810,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.39.4":
-  version: 7.39.4
-  resolution: "react-hook-form@npm:7.39.4"
+"react-hook-form@npm:^7.40.0":
+  version: 7.40.0
+  resolution: "react-hook-form@npm:7.40.0"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: 767337330a9ce305296adb435e05380fb138308931a0ca20f7a681604acf16a978f14f48d52279fb2eccc690f808622fa4db019835fd0e4fd6a768d2c13b83d0
+  checksum: 8187981c14cc2e016c263a7427ffc5617b126efed97003e259efff1af991d12bef5cb599d824385f760a03a0676eb0d19007aa3ebcc65832cfe819b3802530c5
   languageName: node
   linkType: hard
 
@@ -10956,15 +10956,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^9.0.8":
-  version: 9.0.8
-  resolution: "react-toastify@npm:9.0.8"
+"react-toastify@npm:^9.1.1":
+  version: 9.1.1
+  resolution: "react-toastify@npm:9.1.1"
   dependencies:
     clsx: ^1.1.1
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: d48fa369b3d19c63f9b6b1ecef076911aa97a43bb84ecdb1532e6f32932e3625c1c3e12a4c63e7eb211d33b8aa962e9b9a81ab6a47fef2c51185ce8c9a780336
+  checksum: 2039255539961a9b4d77b2656f120b20abe46cb0c699a7f3c0af23b4ef669d9c4d24dae6b8f4954b5efd83edf6d6e23614a29e94e9ee0d2647741fba9ba2db85
   languageName: node
   linkType: hard
 
