@@ -41,7 +41,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "^test-utils$": "<rootDir>/src/utils/test-utils.tsx"
+      "^test-utils$": "<rootDir>/src/utils/test-utils.tsx",
+      "axios": "axios/dist/node/axios.cjs"
     },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
@@ -63,7 +64,7 @@
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
     "@heroicons/react": "^2.0.13",
-    "axios": "^0.27.2",
+    "axios": "^1.2.0",
     "http-proxy-middleware": "^2.0.6",
     "i18next": "^22.0.6",
     "qrcode.react": "^3.1.0",
