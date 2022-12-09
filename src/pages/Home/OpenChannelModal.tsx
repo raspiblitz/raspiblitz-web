@@ -58,7 +58,7 @@ const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
         }
       )
       .then(() => {
-        toast.success(t("home.channel_opened") as string, { theme });
+        toast.success(t("home.channel_opened"), { theme });
         onClose();
       })
       .catch((err) => setError(checkError(err)))

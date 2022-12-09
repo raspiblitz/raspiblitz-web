@@ -44,7 +44,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
       .then((res) => {
         if (res.data) {
           setWalletLocked(false);
-          toast.success(t("wallet.unlock_success") as string, { theme });
+          toast.success(t("wallet.unlock_success"), { theme });
           onClose();
         }
       })

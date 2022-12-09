@@ -27,9 +27,9 @@ function useSSE() {
   const appInstallSuccessHandler = useCallback(
     (installData: InstallAppData, appName: string) => {
       if (installData.mode === "on") {
-        toast.success(t("apps.install_success", { appName }) as string);
+        toast.success(t("apps.install_success", { appName }));
       } else {
-        toast.success(t("apps.uninstall_success", { appName }) as string);
+        toast.success(t("apps.uninstall_success", { appName }));
       }
     },
     [t]
@@ -42,14 +42,14 @@ function useSSE() {
           t("apps.install_failure", {
             appName,
             details: installData.details,
-          }) as string
+          })
         );
       } else {
         toast.error(
           t("apps.uninstall_failure", {
             appName,
             details: installData.details,
-          }) as string
+          })
         );
       }
     },

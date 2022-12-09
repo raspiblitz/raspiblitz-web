@@ -155,7 +155,7 @@ const Home: FC = () => {
     setShowModal(false);
     setDetailTx(null);
     if (txSent) {
-      toast.success(t("tx.sent") as string, { theme });
+      toast.success(t("tx.sent"), { theme });
     }
   };
 

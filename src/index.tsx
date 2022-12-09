@@ -8,6 +8,14 @@ import "./index.css";
 import AppContextProvider from "./context/app-context";
 import SSEContextProvider from "./context/sse-context";
 
+import "i18next";
+
+declare module "i18next" {
+  interface CustomTypeOptions {
+    returnNull: false;
+  }
+}
+
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 root.render(
