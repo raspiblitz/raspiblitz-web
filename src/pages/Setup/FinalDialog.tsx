@@ -12,7 +12,7 @@ export type Props = {
 
 const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   const { t } = useTranslation();
-  const words = seedWords.split(" ");
+  const words = seedWords.split(", ");
   const partOne = words.slice(0, 8);
   const partTwo = words.slice(8, 16);
   const partThree = words.slice(16, 24);
