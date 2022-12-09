@@ -35,7 +35,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
     instance
       .post("/system/change-password", {}, { params })
       .then(() => {
-        toast.success(t("settings.pass_a_changed") as string);
+        toast.success(t("settings.pass_a_changed"));
         onClose();
       })
       .catch((err) => {

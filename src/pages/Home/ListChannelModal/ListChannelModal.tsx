@@ -53,7 +53,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
         }
       )
       .then(() => {
-        toast.success(t("home.channel_closed") as string, { theme });
+        toast.success(t("home.channel_closed"), { theme });
         updateChannel();
       })
       .catch((err) => {
