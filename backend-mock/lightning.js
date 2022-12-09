@@ -236,6 +236,14 @@ router.post("/unlock-wallet", (req, res) => {
   setTimeout(() => {
     if (req.body.password === "password") {
       WALLET_LOCKED = false;
+
+      util.sendSSE("system_startup_info", {
+        bitcoin: "done",
+        bitcoin_msg: "",
+        lightning: "bootstrapping_after_unlock",
+        lightning_msg: "",
+      });
+
       setTimeout(() => {
         util.sendSSE("system_startup_info", {
           bitcoin: "done",
