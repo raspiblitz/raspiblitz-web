@@ -6,7 +6,7 @@ router.get("/status", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send(
     JSON.stringify({
-      setupPhase: "done",
+      setupPhase: "",
       state: "waitfinal",
       message: "Node Running",
       initialsync: "",
@@ -47,7 +47,7 @@ router.get("/setup-final-info", function (req, res) {
   res.send(
     JSON.stringify({
       seedwordsNEW:
-        "Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry happy day",
+        "Never, gonna, give, you, up, Never, gonna, let, you, down, Never, gonna, run, around, and, desert, you, Never, gonna, make, you, cry, happy, day",
     })
   );
 });
