@@ -133,6 +133,10 @@ const Home: FC = () => {
   useEffect(() => {
     enableGutter();
 
+    if (lightningState === "bootstrapping_after_unlock") {
+      setWalletLocked(false);
+    }
+
     if (lightningState === "locked") {
       setWalletLocked(true);
     }
