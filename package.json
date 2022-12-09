@@ -41,7 +41,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "^test-utils$": "<rootDir>/src/utils/test-utils.tsx"
+      "^test-utils$": "<rootDir>/src/utils/test-utils.tsx",
+      "axios": "axios/dist/node/axios.cjs"
     },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
