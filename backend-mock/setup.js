@@ -6,12 +6,22 @@ router.get("/status", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send(
     JSON.stringify({
-      setupPhase: "",
+      setupPhase: "done",
       state: "waitfinal",
       message: "Node Running",
       initialsync: "",
     })
   );
+
+  // Setupscreen
+  // res.status(200).send(
+  //   JSON.stringify({
+  //     setupPhase: "",
+  //     state: "waitfinal",
+  //     message: "Node Running",
+  //     initialsync: "",
+  //   })
+  // );
 
   // Syncscreen
   // res.status(200).send(
