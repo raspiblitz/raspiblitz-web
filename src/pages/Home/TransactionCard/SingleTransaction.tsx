@@ -49,7 +49,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
 
   return (
     <li
-      className="flex h-24 flex-col justify-center px-0 py-2 text-center hover:bg-gray-300 dark:hover:bg-gray-500 md:px-4"
+      className="flex h-24 cursor-pointer flex-col justify-center px-0 py-2 text-center hover:bg-gray-300 dark:hover:bg-gray-500 md:px-4"
       onClick={onClick}
     >
       <div className="flex w-full items-center justify-center">
