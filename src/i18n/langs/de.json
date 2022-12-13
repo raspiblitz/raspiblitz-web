@@ -19,7 +19,7 @@
       },
       "rtl": {
         "about": "RTL ist ein umfängliches, gerät-unabhängiges, Web user interface um eine Lightning node zu betreiben. RTL ist verfügbar für LND, Core Lightning und Eclair Implementierungen.",
-        "shortDescription": "Eine umfagreiche Webbrowser Applikation für LND, Core Lightning and Eclair"
+        "shortDescription": "Eine voll funktionsfähiger Webbrowser-App für LND, Core Lightning und Eclair"
       },
       "specter": {
         "about": "Bitcoin Core hat ein sehr mächtiges Kommandozeileninterface und einen hervorragenden Hintergrunddienst. Mittels PSBT und HWI arbeitet er auch mit Hardware Wallets. Gleiches gilt für Multisignatur-Setups. Das Ziel dieses Projektes ist, einen bequeme und benutzerfreundliche grafische Oberfläche für Bitcoin Core zu erstellen, die sich auf Multi-Signatur-Setups mit Hardware-Wallets und Offline-Geräten konzentriert.",
@@ -99,8 +99,8 @@
     "home": {
       "active": "Aktiv",
       "bitcoin": "Bitcoin",
-      "blockchain_size": "Blockchain Größe",
-      "blocks_synced": "synchronisierte Blöcke",
+      "blockchain_size": "Blockchain-Größe",
+      "blocks_synced": "Blöcke synchronisiert",
       "blocktime": "Blockzeit",
       "channel": "Kanal",
       "channel_balance": "Kanal Guthaben",
@@ -114,12 +114,12 @@
       "conn_out": "Ausgehend",
       "connections": "Verbindungen",
       "current_open_channels": "Aktuell geöffnete Kanäle",
-      "difficulty": "Schwierigkeitsgrad",
+      "difficulty": "Schwierigkeit",
       "force_close": "Erzwungene Schließung",
       "hide": "Verbergen",
       "lightning": "Lightning",
       "list_open_channels": "Kanalliste",
-      "local_balance": "Guthaben des lokalen Kanals",
+      "local_balance": "Lokales Kanal Guthaben",
       "network": "Netzwerk",
       "no": "Nein",
       "node_id": "Node-ID",
@@ -127,8 +127,8 @@
       "normal": "Normal",
       "onchain_cln_no_support": "Anzeige der on-chain-Transaktionen wird aktuell vom Core Lightning nicht unterstützt",
       "open_channel": "Öffne Kanal",
-      "pending_balance_local": "Ausstehendes Guthaben des lokalen Kanals",
-      "pending_balance_remote": "Ausstehendes Guthaben des remote Kanals",
+      "pending_balance_local": "Ausstehendes lokales Guthaben",
+      "pending_balance_remote": "Ausstehendes Remote-Guthaben",
       "remote_balance": "Guthaben des remote Kanals",
       "show": "Anzeigen",
       "show_qr": "Zeige QR Code an",
@@ -139,7 +139,8 @@
       "urgent": "Dringend",
       "version": "Version",
       "versions": "Versionen",
-      "webui": "Web-UI"
+      "webui": "Web-UI",
+      "no_open_channels": "Du hast derzeit keine offenen Channels"
     },
     "language": {
       "cs": "Tschechisch",
