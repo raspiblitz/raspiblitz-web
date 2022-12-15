@@ -2054,10 +2054,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.0.3":
-  version: 1.0.3
-  resolution: "@remix-run/router@npm:1.0.3"
-  checksum: 7e535f3c24bf6b0a48aff3de70ee74e5402fe93105aa9bd01f275d5d8f5a9a8a7cadec08d18cf5544d4f24bc9d7a091abc1c9d4ea8efb2893e9077f104a51459
+"@remix-run/router@npm:1.0.4":
+  version: 1.0.4
+  resolution: "@remix-run/router@npm:1.0.4"
+  checksum: db6b1e111fb6e7e22c3d274bd6cef3054a0a989245894fde5735efd9cb46d18511e528e813ff50bcbdd7eda1c559f4e76e9d0c54396624e33396168d80b09c42
   languageName: node
   linkType: hard
 
@@ -4380,10 +4380,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorette@npm:^2.0.10, colorette@npm:^2.0.16, colorette@npm:^2.0.17":
-  version: 2.0.17
-  resolution: "colorette@npm:2.0.17"
-  checksum: 693a56d816846e0e213f92c8061b65eb5025030b28a113f90c539fe34c860abc41132c03599af26bcbc213170a31bac1bf2d4c535ccad5ac7b5cb3248f9d98a8
+"colorette@npm:^2.0.10, colorette@npm:^2.0.19":
+  version: 2.0.19
+  resolution: "colorette@npm:2.0.19"
+  checksum: 888cf5493f781e5fcf54ce4d49e9d7d698f96ea2b2ef67906834bb319a392c667f9ec69f4a10e268d2946d13a9503d2d19b3abaaaf174e3451bfe91fb9d82427
   languageName: node
   linkType: hard
 
@@ -4417,10 +4417,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^9.3.0":
-  version: 9.3.0
-  resolution: "commander@npm:9.3.0"
-  checksum: d421ce66fee25792a1470c69aa8d1b86434bf873a96483aa92c8267f81a6f20c6f7c426f5e82f88ac50a8ec4855d3f2787aebcdef8aa559e1080a2337a95a217
+"commander@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "commander@npm:9.4.1"
+  checksum: bfb18e325a5bdf772763c2213d5c7d9e77144d944124e988bcd8e5e65fb6d45d5d4e86b09155d0f2556c9a59c31e428720e57968bcd050b2306e910a0bf3cf13
   languageName: node
   linkType: hard
 
@@ -8291,14 +8291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lilconfig@npm:2.0.5":
-  version: 2.0.5
-  resolution: "lilconfig@npm:2.0.5"
-  checksum: f7bb9e42656f06930ad04e583026f087508ae408d3526b8b54895e934eb2a966b7aafae569656f2c79a29fe6d779b3ec44ba577e80814734c8655d6f71cdf2d1
-  languageName: node
-  linkType: hard
-
-"lilconfig@npm:^2.0.3, lilconfig@npm:^2.0.5, lilconfig@npm:^2.0.6":
+"lilconfig@npm:2.0.6, lilconfig@npm:^2.0.3, lilconfig@npm:^2.0.5, lilconfig@npm:^2.0.6":
   version: 2.0.6
   resolution: "lilconfig@npm:2.0.6"
   checksum: 40a3cd72f103b1be5975f2ac1850810b61d4053e20ab09be8d3aeddfe042187e1ba70b4651a7e70f95efa1642e7dc8b2ae395b317b7d7753b241b43cef7c0f7d
@@ -8312,39 +8305,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^13.0.3":
-  version: 13.0.3
-  resolution: "lint-staged@npm:13.0.3"
+"lint-staged@npm:^13.0.4":
+  version: 13.0.4
+  resolution: "lint-staged@npm:13.0.4"
   dependencies:
     cli-truncate: ^3.1.0
-    colorette: ^2.0.17
-    commander: ^9.3.0
+    colorette: ^2.0.19
+    commander: ^9.4.1
     debug: ^4.3.4
     execa: ^6.1.0
-    lilconfig: 2.0.5
-    listr2: ^4.0.5
+    lilconfig: 2.0.6
+    listr2: ^5.0.5
     micromatch: ^4.0.5
     normalize-path: ^3.0.0
     object-inspect: ^1.12.2
     pidtree: ^0.6.0
     string-argv: ^0.3.1
-    yaml: ^2.1.1
+    yaml: ^2.1.3
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 53d585007df06e162febab6b0836b55016d902586a267823c8a1158529d8c742dc7297e523f7023dff02250bef3eb0d6934f4ec4f9961adfc2ebbed5f54162d0
+  checksum: 4676172df5dc734a7f409ad786a72d39bd2239de8b2e5eb1d99eaa751479f60f7b4ef85c8508698855b51b125a512f395ac6a3c7d2d57de8e8221e0aaaab6f4f
   languageName: node
   linkType: hard
 
-"listr2@npm:^4.0.5":
-  version: 4.0.5
-  resolution: "listr2@npm:4.0.5"
+"listr2@npm:^5.0.5":
+  version: 5.0.6
+  resolution: "listr2@npm:5.0.6"
   dependencies:
     cli-truncate: ^2.1.0
-    colorette: ^2.0.16
+    colorette: ^2.0.19
     log-update: ^4.0.0
     p-map: ^4.0.0
     rfdc: ^1.3.0
-    rxjs: ^7.5.5
+    rxjs: ^7.5.7
     through: ^2.3.8
     wrap-ansi: ^7.0.0
   peerDependencies:
@@ -8352,7 +8345,7 @@ __metadata:
   peerDependenciesMeta:
     enquirer:
       optional: true
-  checksum: 7af31851abe25969ef0581c6db808117e36af15b131401795182427769d9824f451ba9e8aff6ccd25b6a4f6c8796f816292caf08e5f1f9b1775e8e9c313dc6c5
+  checksum: 18975d690988aa2cce18fea9bacfc12c2607948ff9f7b7fd5b3e2b64d059b6e1961f8d06b4e1400d4c6bc18af84c7c145c2d22a1d392464fdb197c53b062e3d5
   languageName: node
   linkType: hard
 
@@ -10647,7 +10640,7 @@ __metadata:
     http-proxy-middleware: ^2.0.6
     husky: ^8.0.2
     i18next: ^22.0.6
-    lint-staged: ^13.0.3
+    lint-staged: ^13.0.4
     msw: ^0.49.0
     postcss: ^8.4.16
     prettier: ^2.8.0
@@ -10657,8 +10650,8 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-hook-form: ^7.40.0
-    react-i18next: ^12.0.0
-    react-router-dom: ^6.4.3
+    react-i18next: ^12.1.1
+    react-router-dom: ^6.4.4
     react-scripts: 5.0.1
     react-toastify: ^9.1.1
     tailwindcss: ^3.1.8
@@ -10827,9 +10820,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^12.0.0":
-  version: 12.0.0
-  resolution: "react-i18next@npm:12.0.0"
+"react-i18next@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "react-i18next@npm:12.1.1"
   dependencies:
     "@babel/runtime": ^7.14.5
     html-parse-stringify: ^3.0.1
@@ -10841,7 +10834,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: f523d7ec5dcb7f5fd36efc9385639d01160071f4dadbbc5a3f1daa64b0f332f709347bdd3bc68f5aefbd72c8742233aa715b308b1ca87179ad501acc19c72068
+  checksum: baeb1957d70281d1a95ef0b94801bc2e6bf17066a49a45f32cd1a706ead3ddce2ab3e7b321e07c43f082efa9987c2d55856a5bdf419d9ad628dbfa9ec87af8ea
   languageName: node
   linkType: hard
 
@@ -10873,27 +10866,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.4.3":
-  version: 6.4.3
-  resolution: "react-router-dom@npm:6.4.3"
+"react-router-dom@npm:^6.4.4":
+  version: 6.4.4
+  resolution: "react-router-dom@npm:6.4.4"
   dependencies:
-    "@remix-run/router": 1.0.3
-    react-router: 6.4.3
+    "@remix-run/router": 1.0.4
+    react-router: 6.4.4
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 67a44d8dc45761a1c88793cac73839bb657168ef61b9473eb39b186b4a3ea1472454fd96f8997dc541cb1e79a723d62f9503cbc9179b63b8f1d634ed6d2b079a
+  checksum: 95f31ae84979b404db7483309e1063fbf724046103dc8b7be7e6df79f7b81e4e63dcdb587f11d8be38e3aaf62b71f9e0d83344ef8d8c5e962de7819c793de781
   languageName: node
   linkType: hard
 
-"react-router@npm:6.4.3":
-  version: 6.4.3
-  resolution: "react-router@npm:6.4.3"
+"react-router@npm:6.4.4":
+  version: 6.4.4
+  resolution: "react-router@npm:6.4.4"
   dependencies:
-    "@remix-run/router": 1.0.3
+    "@remix-run/router": 1.0.4
   peerDependencies:
     react: ">=16.8"
-  checksum: b89c0495c6837b1457915c08c5acc4eb7a2e9e3fae0420faf9bfc6311ecdfe78627cc1034c0e975bccd9aeeb70d1dcc5021322779dd3053d94c47e37339d77eb
+  checksum: d82cc8b8bdf10e02e07d089f9d82987fa161c2f07583c973126f5f8a052c02b3d2339891ddbda1738f877755a407e2c35f0dc1ac52aaa1d2c853774d19753ea7
   languageName: node
   linkType: hard
 
@@ -11375,12 +11368,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.5.5":
-  version: 7.5.5
-  resolution: "rxjs@npm:7.5.5"
+"rxjs@npm:^7.5.5, rxjs@npm:^7.5.7":
+  version: 7.6.0
+  resolution: "rxjs@npm:7.6.0"
   dependencies:
     tslib: ^2.1.0
-  checksum: e034f60805210cce756dd2f49664a8108780b117cf5d0e2281506e9e6387f7b4f1532d974a8c8b09314fa7a16dd2f6cff3462072a5789672b5dcb45c4173f3c6
+  checksum: b3abbbfe1ddfd06fca9314b83cbd13bcddc3320429218136f75c79a4802ac430dd13873364aac1ded54fd457f8c77df332d205a92d8a1c61656565bb718c50af
   languageName: node
   linkType: hard
 
@@ -13534,10 +13527,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "yaml@npm:2.1.1"
-  checksum: f48bb209918aa57cfaf78ef6448d1a1f8187f45c746f933268b7023dc59e5456004611879126c9bb5ea55b0a2b1c2b392dfde436931ece0c703a3d754562bb96
+"yaml@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "yaml@npm:2.1.3"
+  checksum: 91316062324a93f9cb547469092392e7d004ff8f70c40fecb420f042a4870b2181557350da56c92f07bd44b8f7a252b0be26e6ade1f548e1f4351bdd01c9d3c7
   languageName: node
   linkType: hard
 
