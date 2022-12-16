@@ -67,7 +67,7 @@ const App: FC = () => {
       instance
         .post("system/refresh-token", {})
         .then((resp) => {
-          const token = resp.data?.access_token;
+          const token = resp.data;
           if (token) {
             localStorage.setItem(ACCESS_TOKEN, token);
             const payload = parseJwt(token);

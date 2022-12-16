@@ -192,7 +192,7 @@ const Setup: FC = () => {
 
       // remember authorization for later API calls
       if (resp) {
-        localStorage.setItem(ACCESS_TOKEN, resp.data.access_token);
+        localStorage.setItem(ACCESS_TOKEN, resp.data);
       }
 
       // fall back to loop polling until setup finished
