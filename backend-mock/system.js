@@ -9,7 +9,7 @@ router.post("/login", (req, res) => {
   setTimeout(() => {
     if (req.body.password === process.env.WALLET_PASSWORD) {
       const access_token = auth.signToken();
-      res.status(200).send(JSON.stringify({ access_token }));
+      res.status(200).send(access_token);
     } else {
       res.status(401).send();
     }
@@ -31,7 +31,7 @@ router.post("/refresh-token", (req, res) => {
     );
   }
   const access_token = auth.signToken();
-  res.status(200).send(JSON.stringify({ access_token }));
+  res.status(200).send(access_token);
 });
 
 router.post("/reboot", (req, res) => {
