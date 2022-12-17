@@ -8,6 +8,7 @@ export interface AppStatus {
   authMethod?: AuthMethod;
   details?: unknown;
   error: string;
+  version: string;
 }
 
 export enum AuthMethod {
