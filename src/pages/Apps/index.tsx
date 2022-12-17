@@ -63,10 +63,10 @@ export const Apps: FC = () => {
     return (
       <AppInfo
         app={app}
+        appStatusInfo={appInfos}
         installingApp={installingApp}
         onInstall={() => installHandler(app.id)}
         onUninstall={() => uninstallHandler(app.id)}
-        installed={appInfos?.installed}
         onClose={closeDetailsHandler}
       />
     );
@@ -96,8 +96,6 @@ export const Apps: FC = () => {
                       installingApp={null}
                       onInstall={() => installHandler(appStatus.id)}
                       onOpenDetails={openDetailsHandler}
-                      address={appStatus.address}
-                      hiddenService={appStatus.hiddenService}
                     />
                   </article>
                 );
