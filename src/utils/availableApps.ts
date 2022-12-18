@@ -65,4 +65,13 @@ export const availableApps: Map<string, App> = new Map([
       repository: "https://github.com/apotdevin/thunderhub",
     },
   ],
+  [
+    "joinmarket-webui",
+    {
+      id: "joinmarket-webui",
+      name: "Jam",
+      author: "joinmarket-webui Team",
+      repository: "https://github.com/joinmarket-webui/jam",
+    },
+  ],
 ]);
