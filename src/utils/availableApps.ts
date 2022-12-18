@@ -66,11 +66,11 @@ export const availableApps: Map<string, App> = new Map([
     },
   ],
   [
-    "joinmarket-webui",
+    "jam",
     {
-      id: "joinmarket-webui",
+      id: "jam",
       name: "Jam",
-      author: "joinmarket-webui Team",
+      author: "Jam Team",
       repository: "https://github.com/joinmarket-webui/jam",
     },
   ],
