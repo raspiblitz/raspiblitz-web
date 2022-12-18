@@ -185,8 +185,11 @@
       "pass_a_changed": "Password A changed successfully",
       "reboot": "Reboot",
       "shutdown": "Shutdown",
-      "generate_debug": "Generate Debug Log",
-      "generate": "Generate"
+      "generate_debug": "Generate Debug Report",
+      "generate": "Generate",
+      "generating": "Generating",
+      "generating_debug_report": "Generating Debug Report. This can take some time.",
+      "debug_report_done": "Debug Report created!"
     },
     "setup": {
       "blockchain_delete": "Delete Blockchain",
