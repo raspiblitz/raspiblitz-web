@@ -25,11 +25,13 @@ export interface AppContextType {
   darkMode: boolean;
   unit: Unit;
   walletLocked: boolean;
+  isGeneratingReport: boolean;
   toggleUnit: () => void;
   toggleDarkMode: () => void;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   logout: () => void;
   setWalletLocked: Dispatch<SetStateAction<boolean>>;
+  setIsGeneratingReport: Dispatch<SetStateAction<boolean>>;
 }
 
 export enum Unit {
@@ -42,11 +44,13 @@ export const appContextDefault: AppContextType = {
   darkMode: true,
   unit: Unit.SAT,
   walletLocked: false,
+  isGeneratingReport: false,
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
   logout: () => {},
   toggleDarkMode: () => {},
   setWalletLocked: () => {},
+  setIsGeneratingReport: () => {},
 };
 
 export const AppContext = createContext<AppContextType>(appContextDefault);
@@ -63,6 +67,7 @@ const AppContextProvider: FC<Props> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const [walletLocked, setWalletLocked] = useState(false);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const navigate = useNavigate();
 
   const toggleUnitHandler = () => {
@@ -138,11 +143,13 @@ const AppContextProvider: FC<Props> = ({ children }) => {
     darkMode,
     unit,
     walletLocked,
+    isGeneratingReport,
     toggleUnit: toggleUnitHandler,
     setIsLoggedIn,
     logout: logoutHandler,
     toggleDarkMode: toggleDarkModeHandler,
     setWalletLocked,
+    setIsGeneratingReport,
   };
 
   return (
