@@ -45,7 +45,6 @@ describe("AppCard", () => {
         address: "https://bla.com",
       },
     };
-    console.log(props);
     render(<AppCard {...props} installed={true} />);
     expect(await screen.findByText("apps.open")).toBeDefined();
   });
