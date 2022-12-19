@@ -139,7 +139,9 @@
       "urgent": "Urgent",
       "version": "Version",
       "versions": "Versions",
-      "webui": "WebUI"
+      "webui": "WebUI",
+      "no_open_channels": "Vous n'avez actuellement aucun canal ouvert",
+      "not_available": "Non disponible"
     },
     "language": {
       "cs": "tchèque",
@@ -309,7 +311,8 @@
       "unlock_success": "Portefeuille déverrouillé",
       "unlock_title": "Déverrouiller le portefeuille",
       "unlocking": "Déverrouillage",
-      "wallet_locked": "Portefeuille verrouillé"
+      "wallet_locked": "Portefeuille verrouillé",
+      "available_balance": "Balance disponible"
     }
   }
 }
