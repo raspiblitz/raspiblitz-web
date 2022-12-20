@@ -1,3 +1,4 @@
+import { AppContext } from "context/app-context";
 import { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -22,6 +23,7 @@ import { availableApps } from "../utils/availableApps";
 function useSSE() {
   const { t } = useTranslation();
   const sseCtx = useContext(SSEContext);
+  const appCtx = useContext(AppContext);
   const { evtSource, setEvtSource } = sseCtx;
 
   const appInstallSuccessHandler = useCallback(
@@ -195,7 +197,15 @@ function useSSE() {
       });
     };
 
+    const eventErrorHandler = (_: Event) => {
+      // just logout if there is an error and connection was closed
+      if (evtSource?.CLOSED) {
+        appCtx.logout();
+      }
+    };
+
     if (evtSource) {
+      evtSource.addEventListener("error", eventErrorHandler);
       evtSource.addEventListener("system_info", setSystemInfo);
       evtSource.addEventListener("btc_info", setBtcInfo);
       evtSource.addEventListener("ln_info_lite", setLnInfoLite);
@@ -211,6 +221,7 @@ function useSSE() {
     return () => {
       // cleanup
       if (evtSource) {
+        evtSource.removeEventListener("error", eventErrorHandler);
         evtSource.removeEventListener("system_info", setSystemInfo);
         evtSource.removeEventListener("btc_info", setBtcInfo);
         evtSource.removeEventListener("ln_info_lite", setLnInfoLite);
@@ -229,8 +240,9 @@ function useSSE() {
   }, [
     t,
     evtSource,
-    setEvtSource,
+    appCtx,
     sseCtx,
+    setEvtSource,
     appInstallSuccessHandler,
     appInstallErrorHandler,
   ]);

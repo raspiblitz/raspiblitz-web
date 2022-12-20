@@ -2,6 +2,7 @@ import {
   ArrowLeftOnRectangleIcon,
   MoonIcon,
 } from "@heroicons/react/24/outline";
+import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Message from "../../components/Message";
 import { AppContext } from "../../context/app-context";
 import { ACCESS_TOKEN, enableGutter } from "../../utils";
-import { checkError } from "../../utils/checkError";
+import { ApiError, checkError } from "../../utils/checkError";
 import { instance } from "../../utils/interceptor";
 
 const Login: FC = () => {
@@ -64,7 +65,7 @@ const Login: FC = () => {
           navigate(from, { replace: true });
         }
       })
-      .catch((err) => setError(checkError(err)))
+      .catch((err: AxiosError<ApiError>) => setError(checkError(err)))
       .finally(() => {
         setIsLoading(false);
       });
