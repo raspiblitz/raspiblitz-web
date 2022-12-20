@@ -76,7 +76,7 @@ const TransactionCard: FC<Props> = ({
         {error && <Message message={error} />}
 
         {/*TODO: Remove after https://github.com/fusion44/blitz_api/issues/87 is resolved */}
-        {implementation === "CLN" && (
+        {implementation.includes("CLN") && (
           <Message
             message={t("home.onchain_cln_no_support")}
             color="bg-yellow-600"
