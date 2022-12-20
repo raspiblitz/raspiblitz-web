@@ -109,7 +109,7 @@ const Login: FC = () => {
             />
             <button
               type="submit"
-              className="m-4 flex justify-center rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-400"
+              className="m-4 flex items-center justify-center rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-400"
             >
               <ArrowLeftOnRectangleIcon className="mr-1 inline h-6 w-6 rotate-180" />
               <span>{t("login.login")}</span>
