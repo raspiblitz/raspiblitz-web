@@ -4,17 +4,14 @@ import {
   EyeSlashIcon,
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
-import { QRCodeSVG } from "qrcode.react";
 import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap.css";
 import { FC, useContext, useState } from "react";
-import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import LoadingBox from "../../components/LoadingBox";
 import { SSEContext } from "../../context/sse-context";
 import useClipboard from "../../hooks/use-clipboard";
-import ModalDialog from "../../layouts/ModalDialog";
-import { MODAL_ROOT } from "../../utils";
+import QRCodeModal from "./QRCodeModal";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
@@ -25,7 +22,7 @@ export const ConnectionCard: FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   const { tor_web_ui: torAddress, ssh_address: sshAddress } = systemInfo;
-  const { identity_pubkey: nodeId } = lnInfoLite || {};
+  const { identity_uri: nodeId } = lnInfoLite || {};
 
   const [copyTor, clippedTor] = useClipboard(torAddress);
   const [copySsh, clippedSsh] = useClipboard(sshAddress);
@@ -51,23 +48,11 @@ export const ConnectionCard: FC = () => {
     setShowModal(false);
   };
 
-  const qrCodeModal =
-    showModal &&
-    createPortal(
-      <ModalDialog close={closeModalHandler}>
-        <div className="my-5 flex flex-col items-center justify-center">
-          <QRCodeSVG value={nodeId} size={256} />
-          <p className="mt-10 mb-3 text-sm text-gray-500 dark:text-white">
-            {nodeId}
-          </p>
-        </div>
-      </ModalDialog>,
-      MODAL_ROOT
-    );
-
   return (
     <>
-      {qrCodeModal}
+      {showModal && (
+        <QRCodeModal closeModal={closeModalHandler} identityUri={nodeId} />
+      )}
       <div className="bd-card w-full transition-colors lg:mr-2 lg:w-1/2">
         <div className="flex items-center text-lg font-bold">
           {t("home.conn_details")}&nbsp;
