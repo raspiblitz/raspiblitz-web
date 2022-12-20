@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const router = express.Router();
 
 const auth = require("./auth");
@@ -9,7 +10,7 @@ router.post("/login", (req, res) => {
   setTimeout(() => {
     if (req.body.password === process.env.WALLET_PASSWORD) {
       const access_token = auth.signToken();
-      res.status(200).send(JSON.stringify({ access_token }));
+      res.status(200).send(access_token);
     } else {
       res.status(401).send();
     }
@@ -31,7 +32,7 @@ router.post("/refresh-token", (req, res) => {
     );
   }
   const access_token = auth.signToken();
-  res.status(200).send(JSON.stringify({ access_token }));
+  res.status(200).send(access_token);
 });
 
 router.post("/reboot", (req, res) => {
@@ -42,6 +43,12 @@ router.post("/reboot", (req, res) => {
 router.post("/shutdown", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send();
+});
+
+router.get("/get-debug-logs-raw", (req, res) => {
+  console.info(`call to ${req.originalUrl}`);
+  const logs = fs.readFileSync("debuglog.txt");
+  res.status(200).send(logs.toString());
 });
 
 module.exports = router;

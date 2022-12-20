@@ -1,4 +1,6 @@
-export const availableApps = new Map([
+import { App } from "../models/app.model";
+
+export const availableApps: Map<string, App> = new Map([
   [
     "btc-rpc-explorer",
     {
@@ -15,7 +17,6 @@ export const availableApps = new Map([
       id: "rtl",
       name: "Ride the Lightning",
       author: "Shahana Farooqui",
-      version: "v0.12.3",
       repository: "https://github.com/Ride-The-Lightning/RTL",
     },
   ],
@@ -25,7 +26,6 @@ export const availableApps = new Map([
       id: "specter",
       name: "Specter",
       author: "Specter Solutions",
-      version: "v1.8.1",
       repository: "https://github.com/cryptoadvance/specter-desktop",
     },
   ],
@@ -35,7 +35,6 @@ export const availableApps = new Map([
       id: "btcpayserver",
       name: "BTCPay Server",
       author: "BTCPay Server",
-      version: "v1.5.4",
       repository: "https://github.com/btcpayserver/btcpayserver",
     },
   ],
@@ -45,7 +44,6 @@ export const availableApps = new Map([
       id: "lnbits",
       name: "LNbits",
       author: "arcbtc",
-      version: "v0.8.0",
       repository: "https://github.com/lnbits/lnbits",
     },
   ],
@@ -55,7 +53,6 @@ export const availableApps = new Map([
       id: "mempool",
       name: "Mempool.space",
       author: "The Mempool Open Source Project",
-      version: "v2.4.0",
       repository: "https://github.com/mempool/mempool",
     },
   ],
@@ -65,8 +62,16 @@ export const availableApps = new Map([
       id: "thunderhub",
       name: "Thunderhub",
       author: "apotdevin",
-      version: "v0.13.6",
       repository: "https://github.com/apotdevin/thunderhub",
+    },
+  ],
+  [
+    "jam",
+    {
+      id: "jam",
+      name: "Jam",
+      author: "Jam Team",
+      repository: "https://github.com/joinmarket-webui/jam",
     },
   ],
 ]);

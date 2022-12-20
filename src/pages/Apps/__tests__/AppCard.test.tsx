@@ -8,19 +8,18 @@ const app: App = {
   author: "Me",
   name: "someApp",
   repository: "http://example.com",
-  version: "1.0.0",
 };
 
 const appStatus: AppStatus = {
   id: "123",
   installed: false,
-  address: "",
   authMethod: AuthMethod.NONE,
   details: "",
   hiddenService: "",
   httpsForced: "0",
   httpsSelfsigned: "0",
   error: "",
+  version: "1.0.0",
 };
 
 const basicProps: Props = {
@@ -39,7 +38,14 @@ describe("AppCard", () => {
   });
 
   test("display open button if installed & address is available", async () => {
-    render(<AppCard {...basicProps} address={"addr"} installed={true} />);
+    const props = {
+      ...basicProps,
+      appStatusInfo: {
+        ...basicProps.appStatusInfo,
+        address: "https://bla.com",
+      },
+    };
+    render(<AppCard {...props} installed={true} />);
     expect(await screen.findByText("apps.open")).toBeDefined();
   });
 

@@ -17,8 +17,6 @@ export type Props = {
   appStatusInfo: AppStatus;
   installed: boolean;
   installingApp: any | null;
-  address?: string;
-  hiddenService?: string;
   onInstall: (id: string) => void;
   onOpenDetails: (app: App) => void;
 };
@@ -30,7 +28,6 @@ export const AppCard: FC<Props> = ({
   installingApp,
   onInstall,
   onOpenDetails,
-  address,
 }) => {
   const { id, name } = appInfo;
   const { t } = useTranslation();
@@ -95,9 +92,9 @@ export const AppCard: FC<Props> = ({
         </div>
       </div>
       <div className="flex h-2/6 flex-row gap-2 py-2">
-        {installed && address && (
+        {installed && appStatusInfo.address && (
           <a
-            href={address}
+            href={appStatusInfo.address}
             target="_blank"
             rel="noreferrer"
             className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
@@ -106,7 +103,7 @@ export const AppCard: FC<Props> = ({
             &nbsp;{t("apps.open")}
           </a>
         )}
-        {installed && !address && (
+        {installed && !appStatusInfo.address && (
           <button
             disabled={true}
             className="flex w-1/2 cursor-default items-center justify-center rounded bg-gray-400 p-2 text-white shadow-md"

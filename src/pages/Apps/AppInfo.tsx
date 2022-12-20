@@ -3,6 +3,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
+import { AppStatus } from "models/app-status";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AppIcon from "../../components/AppIcon";
@@ -14,8 +15,8 @@ import ImageCarousel from "./ImageCarousel";
 
 export type Props = {
   app: App;
+  appStatusInfo: AppStatus;
   installingApp: any | null;
-  installed: boolean;
   onInstall: () => void;
   onUninstall: () => void;
   onClose: () => void;
@@ -23,8 +24,8 @@ export type Props = {
 
 export const AppInfo: FC<Props> = ({
   app,
+  appStatusInfo,
   installingApp,
-  installed,
   onInstall,
   onUninstall,
   onClose,
@@ -33,7 +34,7 @@ export const AppInfo: FC<Props> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [imgs, setImgs] = useState<string[]>([]);
   const { id, name } = app;
-  const { author, version, repository } = availableApps.get(id)!;
+  const { author, repository } = availableApps.get(id)!;
 
   useEffect(() => {
     setIsLoading(true);
@@ -86,16 +87,17 @@ export const AppInfo: FC<Props> = ({
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
         <AppIcon appId={id} />
         <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
-        {(installingApp == null || installingApp.id !== id) && !installed && (
-          <button
-            disabled={!!installingApp}
-            className="bd-button flex rounded p-2 disabled:pointer-events-none"
-            onClick={onInstall}
-          >
-            <PlusIcon className="inline h-6 w-6" />
-            &nbsp;{t("apps.install")}
-          </button>
-        )}
+        {(installingApp == null || installingApp.id !== id) &&
+          !appStatusInfo.installed && (
+            <button
+              disabled={!!installingApp}
+              className="bd-button flex rounded p-2 disabled:pointer-events-none"
+              onClick={onInstall}
+            >
+              <PlusIcon className="inline h-6 w-6" />
+              &nbsp;{t("apps.install")}
+            </button>
+          )}
         {installingApp &&
           installingApp.id === id &&
           installingApp.mode === "on" && (
@@ -118,16 +120,17 @@ export const AppInfo: FC<Props> = ({
               {t("apps.uninstalling")}
             </ButtonWithSpinner>
           )}
-        {(installingApp == null || installingApp.id !== id) && installed && (
-          <button
-            disabled={!!installingApp}
-            className={`flex rounded bg-red-500 p-2 text-white shadow-md disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white`}
-            onClick={onUninstall}
-          >
-            <TrashIcon className="inline h-6 w-6" />
-            &nbsp;{t("apps.uninstall")}
-          </button>
-        )}
+        {(installingApp == null || installingApp.id !== id) &&
+          appStatusInfo.installed && (
+            <button
+              disabled={!!installingApp}
+              className={`flex rounded bg-red-500 p-2 text-white shadow-md disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white`}
+              onClick={onUninstall}
+            >
+              <TrashIcon className="inline h-6 w-6" />
+              &nbsp;{t("apps.uninstall")}
+            </button>
+          )}
       </section>
 
       <section className="text-center">
@@ -138,7 +141,7 @@ export const AppInfo: FC<Props> = ({
       <section className="flex w-full items-center justify-center p-5">
         <article className="bd-card w-full">
           <h3 className="text-lg">
-            {name} {version}
+            {name} {appStatusInfo.version}
           </h3>
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
             {t("apps.about")}

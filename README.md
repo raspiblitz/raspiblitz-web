@@ -39,7 +39,7 @@ Further info: https://dev.to/arcanis/yarn-2-2-dedupe-faster-lighter-ha5#dedupe-c
 ### Dev install with external RaspiBlitz as Backend (macOS)
 
 - Make sure `nvm` is installed.
-- Run `nvm install 16` or if already installed `nvm use`
+- Run `nvm install 18` or if already installed `nvm use`
 - Install yarn on a fresh nvm: `npm install --global yarn`
 - run `yarn`
 - copy `.env.sample` to `.env` (the .env file will be ignored by git)

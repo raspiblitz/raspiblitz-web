@@ -63,12 +63,7 @@ export const sseContextDefault: SSEContextType = {
 
 export const SSEContext = createContext<SSEContextType>(sseContextDefault);
 
-// for personal development - change backend with .env file
-const backendserver = process.env.REACT_APP_BACKEND || "http://localhost:8000";
-
-export const SSE_URL = window.location.hostname.includes("localhost")
-  ? `${backendserver}/api/sse/subscribe`
-  : "/api/sse/subscribe";
+export const SSE_URL = "/api/sse/subscribe";
 
 type Props = {
   children?: React.ReactNode;
@@ -105,6 +100,7 @@ const SSEContextProvider: FC<Props> = (props) => {
     block_height: 0,
     implementation: null,
     identity_pubkey: "",
+    identity_uri: "",
     num_active_channels: 0,
     num_inactive_channels: 0,
     num_pending_channels: 0,
