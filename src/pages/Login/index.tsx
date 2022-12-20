@@ -1,4 +1,7 @@
-import { MoonIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftOnRectangleIcon,
+  MoonIcon,
+} from "@heroicons/react/24/outline";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -106,9 +109,10 @@ const Login: FC = () => {
             />
             <button
               type="submit"
-              className="m-4 rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-400"
+              className="m-4 flex justify-center rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-400"
             >
-              {t("login.login")}
+              <ArrowLeftOnRectangleIcon className="mr-1 inline h-6 w-6 rotate-180" />
+              <span>{t("login.login")}</span>
             </button>
           </form>
           {error && <Message message={error} />}
