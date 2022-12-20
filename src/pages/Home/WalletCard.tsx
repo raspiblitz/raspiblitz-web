@@ -6,6 +6,7 @@ import {
   ArrowDownTrayIcon,
   BoltIcon,
   LinkIcon,
+  ListBulletIcon,
 } from "@heroicons/react/24/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -143,7 +144,8 @@ export const WalletCard: FC<Props> = ({
             onClick={onCloseChannel}
             className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
           >
-            {t("home.list_open_channels")}
+            <ListBulletIcon className="mr-1 inline h-6 w-6" />
+            <span>{t("home.list_open_channels")}</span>
           </button>
         </section>
       </div>
