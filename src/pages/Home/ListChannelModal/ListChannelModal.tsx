@@ -20,11 +20,12 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
   const { darkMode } = useContext(AppContext);
   const { t } = useTranslation();
   const [openChannels, setOpenChannels] = useState<LightningChannel[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const theme = darkMode ? "dark" : "light";
 
   const updateChannel = useCallback(() => {
+    setIsLoading(true);
     instance
       .get("lightning/list-channels")
       .then((resp) => {
@@ -32,6 +33,9 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
       })
       .catch((err) => {
         setError(checkError(err));
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -72,7 +76,9 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
           <LoadingSpinner />
         </div>
       )}
-      {openChannels.length === 0 && <p>{t("home.no_open_channels")}</p>}
+      {!isLoading && openChannels.length === 0 && (
+        <p>{t("home.no_open_channels")}</p>
+      )}
       {openChannels.length > 0 && (
         <ChannelList
           channel={openChannels}
