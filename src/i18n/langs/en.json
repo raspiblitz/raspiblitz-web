@@ -130,7 +130,7 @@
       "node_id": "NodeID",
       "node_uri": "Node URI",
       "normal": "Normal",
-      "onchain_cln_no_support": "Showing on-chain transactions is currently not supported with Core Lightning",
+      "onchain_cln_no_support": "On-chain transactions made before RaspiBlitz v1.9 may not show up with Core Lightning",
       "open_channel": "Open Channel",
       "pending_balance_local": "Pending Local Balance",
       "pending_balance_remote": "Pending Remote Balance",
