@@ -324,6 +324,10 @@
       "unlock_title": "Unlock Wallet",
       "unlocking": "Unlocking",
       "wallet_locked": "Wallet locked"
+    },
+    "error": {
+      "stack": "Stack trace",
+      "report": "Please report this error to"
     }
   }
 }
