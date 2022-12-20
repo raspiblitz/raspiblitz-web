@@ -20,7 +20,7 @@ const QRCodeModal: FC<Props> = ({ identityUri, closeModal }) => {
     <ModalDialog close={closeModal}>
       <div className="my-5 flex flex-col items-center justify-center">
         <QRCodeSVG value={identityUri} size={256} />
-        <p className="mt-10 mb-3 text-sm text-gray-500 dark:text-white">
+        <p className="my-5 text-sm text-gray-500 dark:text-gray-300">
           {t("home.connect_node")}
         </p>
         <Tooltip
@@ -33,7 +33,7 @@ const QRCodeModal: FC<Props> = ({ identityUri, closeModal }) => {
         >
           <p
             onClick={copyNodeId}
-            className="mt-4 w-full break-all text-black dark:text-white"
+            className="w-full break-all text-gray-600 dark:text-gray-200"
           >
             {identityUri}
           </p>
