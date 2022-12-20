@@ -192,7 +192,8 @@ const Setup: FC = () => {
 
       // remember authorization for later API calls
       if (resp) {
-        localStorage.setItem(ACCESS_TOKEN, resp.data.access_token);
+        // access_token was used in v1.8
+        localStorage.setItem(ACCESS_TOKEN, resp.data.access_token || resp.data);
       }
 
       // fall back to loop polling until setup finished
