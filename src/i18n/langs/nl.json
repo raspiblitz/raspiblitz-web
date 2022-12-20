@@ -28,6 +28,10 @@
       "thunderhub": {
         "about": "ThunderHub is een open-source LND node manager waarmee uw node kunt beheren en monitoren op elk apparaat of browser. Het maakt het mogelijk om controle te krijgen over het lightning netwerk met een simpele en intuitieve UX en de meeste up-to-date tech stack.",
         "shortDescription": "LND Lightning Node Manager in uw Browser"
+      },
+      "jam": {
+        "shortDescription": "Jam - Een web interface voor JoinMarket",
+        "about": "Jam is een web interface voor JoinMarket gericht op gebruiksvriendelijkheid en gebruikersgemak. Het is bedoeld om zinvolle standaardinstellingen te bieden die gemakkelijk te gebruiken zijn voor beginners, terwijl het nog steeds de functies heeft die geavanceerde gebruikers verwachten."
       }
     },
     "apps": {
@@ -126,7 +130,7 @@
       "node_id": "NodeID",
       "node_uri": "Node URI",
       "normal": "Normaal",
-      "onchain_cln_no_support": "Vertonen van on-chain transacties wordt op dit moment niet ondersteund door Core Lightning",
+      "onchain_cln_no_support": "On-chain transacties gemaakt in oudere versies dan RaspiBlitz v1.9 worden mogelijk niet getoond met Core Lightning",
       "open_channel": "Open Kanaal",
       "pending_balance_local": "Lokaal Saldo in behandeling",
       "pending_balance_remote": "Extern Saldo in behandeling",
@@ -141,7 +145,8 @@
       "version": "Versie",
       "versions": "Versies",
       "webui": "WebUI",
-      "not_available": "Niet beschikbaar"
+      "not_available": "Niet beschikbaar",
+      "connect_node": "Deel dit adres met anderen zodat zij kunnen verbinden met je lightning node"
     },
     "language": {
       "cs": "Tsjechisch",
@@ -162,7 +167,8 @@
       "enter_pass_placeholder": "Wachtwoord A",
       "error": "Er is een fout opgetreden",
       "invalid_pass": "Ongeldig wachtwoord",
-      "login": "Inloggen"
+      "login": "Inloggen",
+      "unknown_error": "Onbekende fout. De reactie was: {{code}} {{statusText}}."
     },
     "navigation": {
       "apps": "Apps",
@@ -184,7 +190,12 @@
       "old_pw": "Oude wachtwoord",
       "pass_a_changed": "Wachtwoord A succesvol aangepast",
       "reboot": "Herstart",
-      "shutdown": "Zet uit"
+      "shutdown": "Zet uit",
+      "generating": "Genereren",
+      "generating_debug_report": "Foutopsporingsrapport genereren. Dit kan enige tijd duren.",
+      "generate_debug": "Foutopsporingsrapport genereren",
+      "generate": "Genereer",
+      "debug_report_done": "Foutopsporingsrapport gemaakt!"
     },
     "setup": {
       "blockchain_delete": "Verwijder Blockchain",
@@ -313,6 +324,10 @@
       "unlocking": "Ontgrendelen",
       "wallet_locked": "Portemonnee vergrendeld",
       "available_balance": "Beschikbaar saldo"
+    },
+    "error": {
+      "stack": "Stack traceren",
+      "report": "Meld deze fout a.u.b. aan"
     }
   }
 }
