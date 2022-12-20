@@ -19,7 +19,7 @@
       },
       "rtl": {
         "about": "RTL ist ein umfängliches, gerät-unabhängiges, Web user interface um eine Lightning node zu betreiben. RTL ist verfügbar für LND, Core Lightning und Eclair Implementierungen.",
-        "shortDescription": "Eine voll funktionsfähiger Webbrowser-App für LND, Core Lightning und Eclair"
+        "shortDescription": "Eine voll funktionsfähige Webanwendung für LND, Core Lightning und Eclair"
       },
       "specter": {
         "about": "Bitcoin Core hat ein sehr mächtiges Kommandozeileninterface und einen hervorragenden Hintergrunddienst. Mittels PSBT und HWI arbeitet er auch mit Hardware Wallets. Gleiches gilt für Multisignatur-Setups. Das Ziel dieses Projektes ist, einen bequeme und benutzerfreundliche grafische Oberfläche für Bitcoin Core zu erstellen, die sich auf Multi-Signatur-Setups mit Hardware-Wallets und Offline-Geräten konzentriert.",
