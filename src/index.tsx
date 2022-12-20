@@ -9,6 +9,7 @@ import AppContextProvider from "./context/app-context";
 import SSEContextProvider from "./context/sse-context";
 
 import "i18next";
+import ErrorBoundary from "ErrorBoundary";
 
 declare module "i18next" {
   interface CustomTypeOptions {
@@ -20,14 +21,16 @@ const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <SSEContextProvider>
-        <AppContextProvider>
-          {/* For persistent toasts over all pages */}
-          <ToastContainer />
-          <App />
-        </AppContextProvider>
-      </SSEContextProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <SSEContextProvider>
+          <AppContextProvider>
+            {/* For persistent toasts over all pages */}
+            <ToastContainer />
+            <App />
+          </AppContextProvider>
+        </SSEContextProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   </React.StrictMode>
 );
