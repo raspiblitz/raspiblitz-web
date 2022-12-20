@@ -137,6 +137,7 @@
       "remote_balance": "Remote Channel Balance",
       "show": "Show",
       "show_qr": "Show QR Code",
+      "connect_node": "Share this address with others so they can connect to your lightning node",
       "slow": "Slow",
       "ssh": "SSH login",
       "status": "Status",
