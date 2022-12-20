@@ -63,6 +63,8 @@ describe("checkError", () => {
   it("should display an unknown error on other objects", () => {
     const errorMsg = checkError({
       response: {
+        status: 404,
+        statusText: "Not found",
         data: {
           detail: {
             //@ts-ignore - We want to test undefined behaviour
@@ -71,6 +73,7 @@ describe("checkError", () => {
         },
       },
     });
-    expect(errorMsg).toEqual("An error occurred: Unknown error");
+    // different text bc output is mocked
+    expect(errorMsg).toEqual("An error occurred: An error occurred");
   });
 });

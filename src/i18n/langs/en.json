@@ -165,7 +165,7 @@
     "login": {
       "enter_pass": "Enter password A",
       "enter_pass_placeholder": "Password A",
-      "error": "An error occured",
+      "error": "An error occurred",
       "unknown_error": "Unknown error. The response was: {{code}} {{statusText}}.",
       "invalid_pass": "Invalid password",
       "login": "Log in"
