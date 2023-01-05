@@ -28,6 +28,10 @@
       "thunderhub": {
         "about": "ThunderHub est un gestionnaire de nœuds LND open source où vous pouvez gérer et surveiller votre nœud sur n'importe quel appareil ou navigateur. Il vous permet de prendre le contrôle du réseau Lightning avec une UX simple et intuitive et la technologie la plus récente.",
         "shortDescription": "LND Lightning Node Manager dans votre navigateur"
+      },
+      "jam": {
+        "shortDescription": "Jam - Interface web pour JoinMarket",
+        "about": "Jam est une interface web pour JoinMarket axée sur la convivialité et la facilité d'utilisation. Elle vise à fournir des valeurs par défaut raisonnables et à être facile à utiliser pour les débutants, tout en offrant les fonctionnalités attendues par les utilisateurs avancés."
       }
     },
     "apps": {
@@ -51,7 +55,7 @@
       "selfsigned_cert": "Cette application utilise un certificat HTTPS auto-signé",
       "source": "Code source",
       "uninstall": "Désinstaller",
-      "uninstall_failure": "La désinstallation de {{appName}} a échoué: {{details}}",
+      "uninstall_failure": "La désinstallation de {{appName}} a échoué : {{details}}",
       "uninstall_success": "{{appName}} désinstallé avec succès",
       "uninstalling": "Désinstallation de"
     },
@@ -101,7 +105,7 @@
       "bitcoin": "Bitcoin",
       "blockchain_size": "Taille de la blockchain",
       "blocks_synced": "Blocs synchronisés",
-      "blocktime": "Blocktime",
+      "blocktime": "Date de block",
       "channel": "Canal",
       "channel_balance": "Équilibre du canal",
       "channel_closed": "Canal fermé avec succès",
@@ -125,7 +129,7 @@
       "node_id": "ID du noeud",
       "node_uri": "URI du noeud",
       "normal": "Normal",
-      "onchain_cln_no_support": "L'affichage des transactions sur la chaîne n'est actuellement pas pris en charge par Core Lightning.",
+      "onchain_cln_no_support": "L'affichage des transactions on-chain n'est actuellement pas pris en charge par Core Lightning",
       "open_channel": "Ouvrir un canal",
       "pending_balance_local": "Balance local en attente",
       "pending_balance_remote": "Balance à distance en attente",
@@ -141,7 +145,8 @@
       "versions": "Versions",
       "webui": "WebUI",
       "no_open_channels": "Vous n'avez actuellement aucun canal ouvert",
-      "not_available": "Non disponible"
+      "not_available": "Non disponible",
+      "connect_node": "Partagez cette adresse avec d'autres personnes afin qu'elles puissent se connecter à votre nœud lightning"
     },
     "language": {
       "cs": "tchèque",
@@ -151,7 +156,7 @@
       "fr": "français",
       "hu": "hongrois",
       "it": "Italien",
-      "nb_NO": "Norvegian",
+      "nb_NO": "Norvégien",
       "nl": "Néerlandais",
       "pt_BR": "Portugais (brésilien)",
       "sv": "suédois",
@@ -162,7 +167,8 @@
       "enter_pass_placeholder": "Mot de passe A",
       "error": "Une erreur s'est produite",
       "invalid_pass": "Mot de passe invalide",
-      "login": "Se connecter"
+      "login": "Se connecter",
+      "unknown_error": "Erreur inconnue. La réponse était : {{code}} {{statusText}}."
     },
     "navigation": {
       "apps": "Applis",
@@ -184,7 +190,12 @@
       "old_pw": "Ancien mot de passe",
       "pass_a_changed": "Le mot de passe A a été modifié avec succès",
       "reboot": "Redémarrer",
-      "shutdown": "Éteindre"
+      "shutdown": "Éteindre",
+      "generate": "Générer",
+      "generating": "Génération",
+      "debug_report_done": "Rapport de débogage créé !",
+      "generate_debug": "Générer un rapport de débogage",
+      "generating_debug_report": "Génération du rapport de débogage. Cela peut prendre un certain temps."
     },
     "setup": {
       "blockchain_delete": "Supprimer Blockchain",
@@ -313,6 +324,10 @@
       "unlocking": "Déverrouillage",
       "wallet_locked": "Portefeuille verrouillé",
       "available_balance": "Balance disponible"
+    },
+    "error": {
+      "stack": "trace de la pile",
+      "report": "Veuillez signaler cette erreur à"
     }
   }
 }
