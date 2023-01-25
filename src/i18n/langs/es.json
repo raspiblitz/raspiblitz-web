@@ -87,13 +87,13 @@
       "force_close": "Forzar cierre",
       "hide": "Ocultar",
       "lightning": "Lightning",
-      "list_open_channels": "Listar Canales",
+      "list_open_channels": "Lista de canales",
       "local_balance": "Balance Local",
       "network": "Red",
       "no": "No",
       "node_uri": "URI del nodo",
       "normal": "Normal",
-      "onchain_cln_no_support": "Mostrar transacciones on-chain no está soportado actualmente con Core Lightning",
+      "onchain_cln_no_support": "Las transacciones en cadena realizadas antes de RaspiBlitz v1.9 pueden no aparecer con Core Lightning",
       "open_channel": "Abrir Canal",
       "pending_balance_local": "Balance Local Pendiente",
       "pending_balance_remote": "Balance Remoto Pendiente",
@@ -111,7 +111,8 @@
       "blocktime": "Tiempo de bloque",
       "node_id": "ID del nodo",
       "no_open_channels": "Actualmente no dispone de canales abiertos",
-      "not_available": "No disponible"
+      "not_available": "No disponible",
+      "connect_node": "Comparte esta dirección con otras personas para que puedan conectarse a tu nodo de rayos"
     },
     "language": {
       "cs": "checo",
@@ -130,9 +131,10 @@
     "login": {
       "enter_pass": "Ingrese contraseña A",
       "enter_pass_placeholder": "Contraseña A",
-      "error": "Ocurrió un error",
+      "error": "Se ha producido un error",
       "invalid_pass": "Contraseña Inválida",
-      "login": "Iniciar Sesión"
+      "login": "Iniciar Sesión",
+      "unknown_error": "Error desconocido. La respuesta fue: {{code}} {{statusText}}."
     },
     "navigation": {
       "apps": "Aplicaciones",
@@ -154,7 +156,12 @@
       "old_pw": "Contraseña vieja",
       "pass_a_changed": "Contraseña A modificada correctamente",
       "reboot": "Reiniciar",
-      "shutdown": "Apagar"
+      "shutdown": "Apagar",
+      "generate": "Generar",
+      "debug_report_done": "¡Informe de depuración creado!",
+      "generate_debug": "Generar un informe de depuración",
+      "generating_debug_report": "Generar informe de depuración. Esto puede llevar algún tiempo.",
+      "generating": "Generando"
     },
     "setup": {
       "blockchain_delete": "Borrar la cadena de bloques",
@@ -312,7 +319,15 @@
       "specter": {
         "shortDescription": "Un interfaz gráfico de usuario para escritorio para Bitcoin Core optimizado para utilizar con hardware wallets",
         "about": "Bitcoin Core tiene un potente interfaz de línea de comandos y un excelente daemon. Utilizando PSBT (Transacciones de Bitcoin Parcialmente Firmadas) y HWI (Interfaz de Hardware Wallet) también permite que funcione con hardware wallets, pero de momento es muy linux. Lo mismo aplica a configuraciones multifirma. La meta de este proyecto es hacer un intergaz gráfico de usuario amigable y cómodo en torno a Bitcoin Core centrándose en las configuraciones multifirma con hardware wallets y dispositivos sin conexión."
+      },
+      "jam": {
+        "about": "Jam es una interfaz web para JoinMarket centrada en la facilidad de uso. Su objetivo es proporcionar valores predeterminados sensibles y ser fácil de usar para los principiantes, mientras que todavía tiene las características que los usuarios avanzados esperan.",
+        "shortDescription": "Jam - Una interfaz web para JoinMarket"
       }
+    },
+    "error": {
+      "stack": "Rastreo de pila",
+      "report": "Notifique este error a"
     }
   }
 }
