@@ -5,19 +5,10 @@ export interface HardwareInfo {
   vram_available_bytes: number;
   vram_used_bytes: number;
   vram_usage_percent: number;
-  swap_ram_total_bytes: number;
-  swap_used_bytes: number;
-  swap_usage_bytes: number;
   temperatures_celsius: TemperatureInfo;
   boot_time_timestamp: number;
-  disk_io_read_count: number;
-  disk_io_write_count: number;
-  disk_io_read_bytes: number;
-  disk_io_write_bytes: number;
   disks: DiskInfo[];
   networks: NetworkInfo[];
-  networks_bytes_sent: number;
-  networks_bytes_received: number;
 }
 
 export interface TemperatureInfo {
@@ -32,11 +23,12 @@ export interface DiskInfo {
   partition_total_bytes: number;
   partition_used_bytes: number;
   partition_free_bytes: number;
-  partition_percent: number;
+  partition_percent: number; // free percentage
 }
 
 export interface NetworkInfo {
-  interface_name: string;
-  address?: string;
-  mac_address: string;
+  internet_online: string;
+  tor_web_addr: string;
+  internet_localip: string;
+  internet_localiprange: string;
 }
