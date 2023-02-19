@@ -3,6 +3,7 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
+import { Implementation } from "models/ln-info-lite";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoadingBox from "../../../components/LoadingBox";
@@ -16,7 +17,7 @@ export type Props = {
   showDetails: (index: number) => void;
   isLoading: boolean;
   error: string;
-  implementation: string;
+  implementation: Implementation;
 };
 
 const MAX_ITEMS = 6;
@@ -75,8 +76,8 @@ const TransactionCard: FC<Props> = ({
 
         {error && <Message message={error} />}
 
-        {/*TODO: Remove after https://github.com/fusion44/blitz_api/issues/87 is resolved */}
-        {implementation.includes("CLN") && (
+        {/* TODO: Remove after https://github.com/fusion44/blitz_api/issues/87 is resolved & Version 1.10.0 of RaspiBlitz is out */}
+        {implementation?.includes("CLN") && (
           <Message
             message={t("home.onchain_cln_no_support")}
             color="bg-yellow-600"
