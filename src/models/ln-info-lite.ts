@@ -1,5 +1,5 @@
 export interface LnInfoLite {
-  implementation: "LND_GRPC" | "CLN_GRPC" | "NULL" | "" | null;
+  implementation: Implementation;
   version: string;
   identity_pubkey: string;
   identity_uri: string;
@@ -10,3 +10,5 @@ export interface LnInfoLite {
   synced_to_chain: boolean;
   synced_to_graph: boolean;
 }
+
+export type Implementation = "LND_GRPC" | "CLN_GRPC_BLITZ" | "NULL" | "" | null;

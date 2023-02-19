@@ -90,11 +90,10 @@ const Home: FC = () => {
     }
   }, [t, lightningState, bitcoin, bitcoin_msg, lightning_msg]);
 
-  const isLnImplSelected =
-    implementation === "LND_GRPC" || implementation === "CLN_GRPC";
+  const btcOnlyMode = systemStartupInfo?.lightning === "disabled";
 
   const getTransactions = useCallback(async () => {
-    if (!isLnImplSelected || (lightningState && lightningState !== "done")) {
+    if (btcOnlyMode || (lightningState && lightningState !== "done")) {
       return;
     }
     try {
@@ -114,17 +113,17 @@ const Home: FC = () => {
         setTxError(checkError(err));
       }
     }
-  }, [lightningState, isLnImplSelected, walletLocked, setWalletLocked]);
+  }, [lightningState, btcOnlyMode, walletLocked, setWalletLocked]);
 
   useEffect(() => {
-    if (isLnImplSelected && !walletLocked && isLoadingTransactions) {
+    if (!btcOnlyMode && !walletLocked && isLoadingTransactions) {
       getTransactions().finally(() => {
         setIsLoadingTransactions(false);
       });
     }
   }, [
     implementation,
-    isLnImplSelected,
+    btcOnlyMode,
     isLoadingTransactions,
     walletLocked,
     getTransactions,
@@ -231,7 +230,7 @@ const Home: FC = () => {
   }
 
   const gridRows = 6 + appStatus.length / 4;
-  const height = isLnImplSelected ? "h-full" : "h-full md:h-1/2";
+  const height = btcOnlyMode ? "h-full md:h-1/2" : "h-full";
 
   return (
     <>
@@ -239,7 +238,7 @@ const Home: FC = () => {
       <main
         className={`content-container page-container grid h-full grid-cols-1 gap-5 bg-gray-100 p-5 transition-colors dark:bg-gray-700 dark:text-white lg:gap-8 lg:pt-8 lg:pb-8 lg:pr-8 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
       >
-        {isLnImplSelected && (
+        {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard
               onReceive={() => setShowModal("RECEIVE")}
@@ -249,7 +248,7 @@ const Home: FC = () => {
             />
           </article>
         )}
-        {isLnImplSelected && (
+        {!btcOnlyMode && (
           <article className="col-span-2 row-span-3 w-full md:col-span-1 lg:row-span-4 xl:col-span-2">
             <TransactionCard
               isLoading={isLoadingTransactions}
@@ -271,7 +270,7 @@ const Home: FC = () => {
         >
           <BitcoinCard />
         </article>
-        {isLnImplSelected && (
+        {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
             <LightningCard />
           </article>
