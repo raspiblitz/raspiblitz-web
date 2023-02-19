@@ -38,7 +38,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
         },
       })
       .then((resp) => {
-        setAmount(resp.data.num_satoshis);
+        setAmount(resp.data.num_msat);
         setComment(resp.data.description);
         setTimestamp(resp.data.timestamp);
         setExpiry(resp.data.expiry);
@@ -92,7 +92,6 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
     return (
       <ModalDialog close={() => onClose(false)}>
         <ConfirmSendModal
-          amount={amount}
           address={addr}
           back={() => setConfirm(false)}
           balance={

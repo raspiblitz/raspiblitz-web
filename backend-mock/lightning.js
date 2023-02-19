@@ -47,7 +47,7 @@ router.get("/decode-pay-req", (req, res) => {
           "03fd5eeea1e7ef8bf25124e5bb0f4546e1dd28ce09d6c0d5136f417d74e8afb270",
         payment_hash:
           "9909c5899d66b50e27cff3dc69662487b63356aa3c7fae1d5823a43c3c9fe4ef",
-        num_satoshis: 50000,
+        num_satoshis: 50000, // deprecated
         timestamp: 1656845793,
         expiry: 86400,
         description: "",

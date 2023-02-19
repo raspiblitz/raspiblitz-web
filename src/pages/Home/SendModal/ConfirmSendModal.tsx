@@ -12,7 +12,11 @@ import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithS
 import Message from "../../../components/Message";
 import { AppContext, Unit } from "../../../context/app-context";
 import { checkError } from "../../../utils/checkError";
-import { convertBtcToSat, stringToNumber } from "../../../utils/format";
+import {
+  convertBtcToSat,
+  convertMSatToSat,
+  stringToNumber,
+} from "../../../utils/format";
 import { instance } from "../../../utils/interceptor";
 import { TxType } from "../SwitchTxType";
 interface IFormInputs {
@@ -20,7 +24,6 @@ interface IFormInputs {
 }
 
 export type Props = {
-  amount: number;
   address: string;
   back: () => void;
   balance: number;
@@ -28,6 +31,7 @@ export type Props = {
   comment: string;
   expiry: number;
   fee: string;
+  /** amount in mSat */
   invoiceAmount: number;
   invoiceType: TxType;
   /** epoch time in seconds */
@@ -35,7 +39,6 @@ export type Props = {
 };
 
 const ConfirmSendModal: FC<Props> = ({
-  amount,
   address,
   back,
   balance,
@@ -157,7 +160,9 @@ const ConfirmSendModal: FC<Props> = ({
 
       <div className="my-2">
         <h4 className="font-bold">{t("wallet.amount")}:</h4>
-        {Number(invoiceAmount) !== 0 && <span>{invoiceAmount} Sat</span>}
+        {Number(invoiceAmount) !== 0 && (
+          <span>{convertMSatToSat(invoiceAmount)} Sat</span>
+        )}
 
         {isInvoiceAmountBiggerThanBalance && (
           <p className="text-red-500">{t("forms.validation.lnInvoice.max")}</p>
