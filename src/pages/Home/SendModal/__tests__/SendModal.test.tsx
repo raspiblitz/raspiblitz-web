@@ -160,7 +160,7 @@ describe("SendModal", () => {
       expect(confirmBtn).toBeEnabled();
       await user.click(confirmBtn);
       // Should display confirm modal with amount
-      expect(await screen.findByText("20123 Sat")).toBeInTheDocument();
+      expect(await screen.findByText("20.123 Sat")).toBeInTheDocument();
     });
   });
 });
