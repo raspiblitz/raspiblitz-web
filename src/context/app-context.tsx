@@ -19,6 +19,7 @@ import {
   setWindowAlias,
 } from "../utils";
 import { SSEContext } from "./sse-context";
+import { toast } from "react-toastify";
 
 export interface AppContextType {
   isLoggedIn: boolean;
@@ -95,6 +96,7 @@ const AppContextProvider: FC<Props> = ({ children }) => {
     setIsLoggedIn(false);
     disableGutter();
     setWindowAlias(null);
+    toast.dismiss();
     navigate("/");
   }, [evtSource, setEvtSource, navigate]);
 
