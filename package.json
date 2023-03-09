@@ -63,17 +63,17 @@
   },
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
-    "@heroicons/react": "^2.0.14",
-    "axios": "^1.3.2",
+    "@heroicons/react": "^2.0.16",
+    "axios": "^1.3.4",
     "http-proxy-middleware": "^2.0.6",
-    "i18next": "^22.4.9",
+    "i18next": "^22.4.10",
     "qrcode.react": "^3.1.0",
     "rc-tooltip": "^6.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.0",
-    "react-i18next": "^12.1.5",
-    "react-router-dom": "^6.8.1",
+    "react-hook-form": "^7.43.2",
+    "react-i18next": "^12.2.0",
+    "react-router-dom": "^6.8.2",
     "react-toastify": "^9.1.1"
   },
   "devDependencies": {

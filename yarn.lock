@@ -1624,12 +1624,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^2.0.14":
-  version: 2.0.14
-  resolution: "@heroicons/react@npm:2.0.14"
+"@heroicons/react@npm:^2.0.16":
+  version: 2.0.16
+  resolution: "@heroicons/react@npm:2.0.16"
   peerDependencies:
     react: ">= 16"
-  checksum: d1623865c04e2bedc1ae370ca0a305bb0c775c7db171e29d03afc3032598105b7e8c9290e7d6b34a5f334e2a2c92e8e2aac1c5e89d1ea1fb7073cce6e03a7f16
+  checksum: 1e51bfec722bfd68f27fd4f37a024141938eb4b0058c3eab073a6d1aa08cf4f6deb1e8533ca85473cb16be1d1b528e2d57b8617f8b967e66292bf243daec5dd0
   languageName: node
   linkType: hard
 
@@ -2086,10 +2086,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.3.2":
-  version: 1.3.2
-  resolution: "@remix-run/router@npm:1.3.2"
-  checksum: ee2108b87d4a1241cdea137dd7e1741ee679228bd33fd81e22a6bb2940f81186cefe9a85e26d60cc49bbcc1bdbc57d1954b7d4d62f8a51ef69feddfc899f55fa
+"@remix-run/router@npm:1.3.3":
+  version: 1.3.3
+  resolution: "@remix-run/router@npm:1.3.3"
+  checksum: 9280f1c3e44c0fb84a74b401b5a47022dace06d5da0f26a7a68c7c0e57ad5ef95d30f3c2d333df2db3b63f84de81f7f8caa7e53189a7709d6c3eb466d126ed76
   languageName: node
   linkType: hard
 
@@ -3623,14 +3623,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "axios@npm:1.3.2"
+"axios@npm:^1.3.4":
+  version: 1.3.4
+  resolution: "axios@npm:1.3.4"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 9791af75a6df137b15ef45d13ad11eb357b3860d2496347ee18778db9d0abc2320362a4452f1e070e3160f1dbcc518fcefdc9e005be097e7db39acb22cf608e5
+  checksum: 7440edefcf8498bc3cdf39de00443e8101f249972c83b739c6e880d9d669fea9486372dbe8739e88b3bf8bb1ad15f6106693f206f078f4516fe8fd47b1c3093c
   languageName: node
   linkType: hard
 
@@ -6898,12 +6898,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^22.4.9":
-  version: 22.4.9
-  resolution: "i18next@npm:22.4.9"
+"i18next@npm:^22.4.10":
+  version: 22.4.10
+  resolution: "i18next@npm:22.4.10"
   dependencies:
     "@babel/runtime": ^7.20.6
-  checksum: 8cce4aaced4857e006fab2c9d4adb0eb1375829e459076be79d4d3532b1be6342b7003a720e187098f17bb276bea46df8b3fc2cf21f0f3a230bd519243048d1a
+  checksum: 731423e3fafe4ecaf0fc3c5867b69ae5c35c9021f7b5aad8392a9bf5cf56fbf1503376ba5aa935f2b21e12a97862fa31be0e4b35e98eefb747e2008b5808e35c
   languageName: node
   linkType: hard
 
@@ -10695,7 +10695,7 @@ __metadata:
   resolution: "raspiblitz-web@workspace:."
   dependencies:
     "@bitcoin-design/bitcoin-icons-react": ^0.1.9
-    "@heroicons/react": ^2.0.14
+    "@heroicons/react": ^2.0.16
     "@testing-library/dom": ^8.20.0
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
@@ -10705,10 +10705,10 @@ __metadata:
     "@types/react": ^18.0.27
     "@types/react-dom": ^18.0.10
     autoprefixer: ^10.4.13
-    axios: ^1.3.2
+    axios: ^1.3.4
     http-proxy-middleware: ^2.0.6
     husky: ^8.0.3
-    i18next: ^22.4.9
+    i18next: ^22.4.10
     lint-staged: ^13.1.2
     msw: ^1.0.1
     postcss: ^8.4.21
@@ -10718,9 +10718,9 @@ __metadata:
     rc-tooltip: ^6.0.1
     react: ^18.2.0
     react-dom: ^18.2.0
-    react-hook-form: ^7.43.0
-    react-i18next: ^12.1.5
-    react-router-dom: ^6.8.1
+    react-hook-form: ^7.43.2
+    react-i18next: ^12.2.0
+    react-router-dom: ^6.8.2
     react-scripts: 5.0.1
     react-toastify: ^9.1.1
     tailwindcss: ^3.2.4
@@ -10878,18 +10878,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.43.0":
-  version: 7.43.0
-  resolution: "react-hook-form@npm:7.43.0"
+"react-hook-form@npm:^7.43.2":
+  version: 7.43.2
+  resolution: "react-hook-form@npm:7.43.2"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: f86ef57b4e1d78fa5d76b41d0cbac6fdcaaf5f73f7707f1e8cf01d536c3c7d60493932dbf9af9b128af0608a8963daf5712daf79b01071212d7468897c1e792d
+  checksum: 68d4fb73fec052801d5e7840c3d0afba887676acfdefa33aef342ead0db419cb1a14a0891ed567cea58a78d544d9245445c593e25bc0564a797201cb32c91a01
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^12.1.5":
-  version: 12.1.5
-  resolution: "react-i18next@npm:12.1.5"
+"react-i18next@npm:^12.2.0":
+  version: 12.2.0
+  resolution: "react-i18next@npm:12.2.0"
   dependencies:
     "@babel/runtime": ^7.20.6
     html-parse-stringify: ^3.0.1
@@ -10901,7 +10901,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 90f151dfef237eee4e24d5ca6ddac45869b5025b9173b3cf0403afbc794a448d5ba429105c88e6a539cea1e8ec3f6e18df46d8bee78e7918d79305aa9ec585cb
+  checksum: ed2d6a5bb6746c2ea25cca9531b400d62edef6479631c1113eb7a3c3f6b28d493492171d7dc6d87f61a7d7e9b21d4be3bd7eaf0f7af00392fb546d8c50267345
   languageName: node
   linkType: hard
 
@@ -10933,27 +10933,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.8.1":
-  version: 6.8.1
-  resolution: "react-router-dom@npm:6.8.1"
+"react-router-dom@npm:^6.8.2":
+  version: 6.8.2
+  resolution: "react-router-dom@npm:6.8.2"
   dependencies:
-    "@remix-run/router": 1.3.2
-    react-router: 6.8.1
+    "@remix-run/router": 1.3.3
+    react-router: 6.8.2
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: fb1a9f5c7e4c83536ee7e6493f3c13f6abda66da69f9191fb8b087ab188ecc18a3a32575813a280cbeca67bcb8b0dcb6dbcef7ed599e03f38a44d694f4abcf14
+  checksum: eddc8b88e26c66408df894bdcf95efd6731e21b7cbfd7417cd456f0043916279e0559b06c6cdc19c2a55c6aefc4cc745fa4065d3505e519a95adbef0cc89e77f
   languageName: node
   linkType: hard
 
-"react-router@npm:6.8.1":
-  version: 6.8.1
-  resolution: "react-router@npm:6.8.1"
+"react-router@npm:6.8.2":
+  version: 6.8.2
+  resolution: "react-router@npm:6.8.2"
   dependencies:
-    "@remix-run/router": 1.3.2
+    "@remix-run/router": 1.3.3
   peerDependencies:
     react: ">=16.8"
-  checksum: 8e7cc7a516adeb6060911861af99d9b512893c15ec732cbf8574872919be4f3fe439ffa8c0876d1bcbced880d081bfeda3c01cb505b5a243565d10500ee0ac36
+  checksum: 9e98d03e1f18bfd5a35144a0c675adaf7c46a9ad436efdea2b52ef3a6e501ac6174a67ea90004e1339cd45019d6b1eb370627518320f7af9323ae74e0c6756ad
   languageName: node
   linkType: hard
 
