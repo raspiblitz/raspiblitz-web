@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "axios";
 import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -7,9 +8,9 @@ import { useInterval } from "../../hooks/use-interval";
 import useSSE from "../../hooks/use-sse";
 import { AppStatus } from "../../models/app-status";
 import { Transaction } from "../../models/transaction.model";
+import { enableGutter } from "../../utils";
 import { checkError } from "../../utils/checkError";
 import { instance } from "../../utils/interceptor";
-import { enableGutter } from "../../utils";
 import AppStatusCard from "./AppStatusCard";
 import BitcoinCard from "./BitcoinCard";
 import ConnectionCard from "./ConnectionCard";
@@ -103,11 +104,11 @@ const Home: FC = () => {
         },
       });
       setTransactions(tx.data);
-      if (tx.status === 200 && walletLocked) {
+      if (tx.status === HttpStatusCode.Ok && walletLocked) {
         setWalletLocked(false);
       }
     } catch (err: any) {
-      if (err.response.status === 423) {
+      if (err.response.status === HttpStatusCode.Locked) {
         setWalletLocked(true);
       } else {
         setTxError(checkError(err));

@@ -20,6 +20,7 @@ import SetupMenu from "./SetupMenu";
 import StartDoneDialog from "./StartDoneDialog";
 import SyncScreen from "./SyncScreen";
 import WaitScreen from "./WaitScreen";
+import { HttpStatusCode } from "axios";
 
 enum Screen {
   WAIT,
@@ -68,7 +69,10 @@ const Setup: FC = () => {
     const resp = await instance
       .post("/setup/setup-sync-info", {})
       .catch((err) => {
-        if (err.response.status === 403) {
+        if (
+          err.response.status === HttpStatusCode.Unauthorized ||
+          err.response.status === HttpStatusCode.Forbidden
+        ) {
           navigate("/login?back=/setup");
         } else {
           console.log(`request for sync failed: ${err.response.status}`);
@@ -114,7 +118,10 @@ const Setup: FC = () => {
   // prepare for last round of user interaction dialogs
   const initSetupFinal = useCallback(async () => {
     const resp = await instance.get("/setup/setup-final-info").catch((err) => {
-      if (err.response.status === 403) {
+      if (
+        err.response.status === HttpStatusCode.Forbidden ||
+        err.response.status === HttpStatusCode.Unauthorized
+      ) {
         navigate("/login?back=/setup");
       } else {
         showError(`request for setup start failed: ${err.response.status}`);
@@ -208,7 +215,10 @@ const Setup: FC = () => {
     try {
       // call API to start recovery
       await instance.post("/setup/setup-final-done", {}).catch((err) => {
-        if (err.response.status === 403) {
+        if (
+          err.response.status === HttpStatusCode.Forbidden ||
+          err.response.status === HttpStatusCode.Unauthorized
+        ) {
           navigate("/login?back=/setup");
         } else {
           showError(
