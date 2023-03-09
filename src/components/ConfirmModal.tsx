@@ -6,6 +6,7 @@ import ModalDialog from "../layouts/ModalDialog";
 import { AppContext } from "../context/app-context";
 import { instance } from "../utils/interceptor";
 import { MODAL_ROOT } from "../utils";
+import { HttpStatusCode } from "axios";
 
 export type Props = {
   confirmText: string;
@@ -30,7 +31,7 @@ const ConfirmModal: FC<Props> = ({
   const shutdownHandler = async () => {
     if (confirmEndpoint) {
       const resp = await instance.post(confirmEndpoint);
-      if (resp.status === 200) {
+      if (resp.status === HttpStatusCode.Ok) {
         setIsLoggedIn(false);
         navigate("/login");
       }

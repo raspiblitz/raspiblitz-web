@@ -3,6 +3,7 @@ import {
   LockOpenIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
+import { HttpStatusCode } from "axios";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -62,9 +63,9 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
         data.ln_default_locked = "0";
       })
       .catch((err) => {
-        if (err.response.status === 403) {
+        if (err.response.status === HttpStatusCode.Forbidden) {
           navigate("/login?back=/setup");
-        } else if (err.response.status === 401) {
+        } else if (err.response.status === HttpStatusCode.Unauthorized) {
           setPassword("");
           setRunningUnlock(false);
           setError(`${t("login.error")}: ${t("login.invalid_pass")}`);
