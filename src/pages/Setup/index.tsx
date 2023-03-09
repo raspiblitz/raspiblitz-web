@@ -215,7 +215,10 @@ const Setup: FC = () => {
     try {
       // call API to start recovery
       await instance.post("/setup/setup-final-done", {}).catch((err) => {
-        if (err.response.status === HttpStatusCode.Forbidden) {
+        if (
+          err.response.status === HttpStatusCode.Forbidden ||
+          err.response.status === HttpStatusCode.Unauthorized
+        ) {
           navigate("/login?back=/setup");
         } else {
           showError(
