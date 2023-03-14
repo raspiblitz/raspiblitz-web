@@ -1,13 +1,7 @@
 {
   "translation": {
     "appInfo": {
-      "btcpayserver": {
-        "shortDescription": ""
-      },
       "mempool": {
-        "shortDescription": ""
-      },
-      "specter": {
         "shortDescription": ""
       },
       "jam": {
@@ -15,25 +9,16 @@
       }
     },
     "apps": {
-      "info": "",
       "installed": "",
-      "login_pass_b": "",
-      "online": "",
-      "uninstall": ""
+      "online": ""
     },
     "forms": {
       "hint": {
         "invoiceAmountZero": ""
       },
       "validation": {
-        "chainAmount": {
-          "max": ""
-        },
         "lnInvoice": {
           "max": ""
-        },
-        "unlock": {
-          "pass_c": ""
         }
       }
     },
@@ -41,75 +26,46 @@
       "header": ""
     },
     "home": {
-      "bitcoin": "",
       "channel": "",
-      "channel_opened": "",
       "conn_in": "",
-      "difficulty": "",
       "list_open_channels": "",
-      "no_open_channels": "",
       "onchain_cln_no_support": "",
-      "remote_balance": "",
       "slow": "",
-      "urgent": "",
       "not_available": ""
     },
     "language": {
-      "es": "",
-      "nb_NO": "",
-      "vi": ""
+      "nb_NO": ""
     },
     "login": {
       "unknown_error": ""
     },
     "navigation": {
-      "back": "",
       "logout": ""
     },
     "settings": {
-      "change_pw_a": "",
       "new_pw": "",
-      "shutdown": "",
       "generating_debug_report": ""
     },
     "setup": {
-      "blockchain_found_short": "",
       "cln": "",
-      "done_migration_start": "",
       "done_setup_start": "",
-      "final_info_reboot": "",
       "final_setup": "",
-      "hdd_delete_no_blockchain": "",
       "migrate_citadel": "",
-      "no_and_shutdown": "",
       "nodename_error_empty": "",
-      "other_options": "",
       "password_b_details": "",
-      "password_c_name": "",
       "password_error_length": "",
-      "preparingsetup": "",
       "restarts": "",
-      "setupblitz": "",
       "start_recovery": "",
-      "sync_bitcoin_sync": "",
       "sync_wallet_unlock": ""
     },
     "tx": {
-      "comment": "",
       "date": "",
-      "included_block": "",
-      "transactions_none": "",
-      "value": ""
+      "transactions_none": ""
     },
     "wallet": {
       "available_balance": "",
-      "create_invoice": "",
       "on_chain": "",
-      "send_lightning": "",
       "unlock_success": ""
-    },
-    "error": {
-      "stack": ""
     }
   }
 }
