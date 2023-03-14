@@ -1,13 +1,7 @@
 {
   "translation": {
-    "home": {
-      "channel": ""
-    },
     "navigation": {
       "logout": ""
-    },
-    "setup": {
-      "password_b_details": ""
     },
     "wallet": {
       "on_chain": ""
