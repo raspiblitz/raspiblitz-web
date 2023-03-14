@@ -26,7 +26,7 @@
         "shortDescription": "Uma GUI de desktop para Bitcoin Core otimizada para trabalhar com carteiras de hardware"
       },
       "thunderhub": {
-        "about": "ThunderHub é um gerenciador de nós LND de código aberto onde você pode gerenciar e monitorar seu nó em qualquer dispositivo ou navegador. Ele permite que você assuma o controle da Lightning Network com um UX simples e intuitivo e a pilha de tecnologia mais atualizada.",
+        "about": "ThunderHub é um gerenciador de LND de código aberto onde você pode gerenciar e monitorar seu nó em qualquer dispositivo ou navegador. Ele permite que você assuma o controle da Lightning Network com um UX simples e intuitivo e a pilha de tecnologia mais atualizada.",
         "shortDescription": "LND Lightning Node Manager em seu navegador"
       }
     },
@@ -134,7 +134,7 @@
       "show_qr": "Mostrar QR Code",
       "slow": "Lento",
       "ssh": "Login SSH",
-      "status": "Status",
+      "status": "Estado",
       "tor": "Tor",
       "urgent": "Urgente",
       "version": "Versão",
@@ -210,8 +210,8 @@
       "final_setup": "A configuração está concluída.",
       "final_update": "A atualização está concluída.",
       "hdd_delete": "APAGAR DADOS ANTIGOS",
-      "hdd_delete_keep_blockchain": "Por favor, confirme que você deseja excluir todos os dados anteriores no HDD/SSD e apenas mantenha os dados do blockchain para o seu novo RaspiBlitz.",
-      "hdd_delete_no_blockchain": "Por favor, confirme que deseja excluir todos os dados anteriores no HDD/SSD para iniciar o RaspiBlitz.",
+      "hdd_delete_keep_blockchain": "Por favor, confirme que você deseja apagar todos os dados anteriores no HDD/SSD e apenas mantenha os dados do blockchain para o seu novo RaspiBlitz.",
+      "hdd_delete_no_blockchain": "Por favor, confirme que deseja apagar todos os dados anteriores no HDD/SSD para iniciar o RaspiBlitz.",
       "hdd_delete_short": "Ok para deletar o conteúdo no HDD/SSD?",
       "lightningoutdated": "O nó do qual você deseja migrar usa uma versão do Lightning mais recente que esta RaspiBlitz. Aguarde uma versão atualizada. Você pode desligar e inicializar com seu cartão SD de nó antigo - nenhuma alteração foi feita.",
       "lnd": "LND",
