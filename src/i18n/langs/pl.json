@@ -1,19 +1,13 @@
 {
   "translation": {
-    "apps": {
-      "online": ""
-    },
     "home": {
-      "channel": "",
-      "slow": ""
+      "channel": ""
     },
     "navigation": {
       "logout": ""
     },
     "setup": {
-      "done_setup_start": "",
-      "password_b_details": "",
-      "sync_wallet_unlock": ""
+      "password_b_details": ""
     },
     "wallet": {
       "on_chain": ""
