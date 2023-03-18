@@ -2,332 +2,193 @@
   "translation": {
     "appInfo": {
       "btc-rpc-explorer": {
-        "about": "",
         "shortDescription": ""
       },
       "btcpayserver": {
-        "about": "",
         "shortDescription": ""
       },
       "lnbits": {
-        "about": "",
         "shortDescription": ""
       },
       "mempool": {
-        "about": "",
         "shortDescription": ""
       },
       "rtl": {
-        "about": "",
         "shortDescription": ""
       },
       "specter": {
-        "about": "",
         "shortDescription": ""
       },
       "thunderhub": {
-        "about": "",
         "shortDescription": ""
       },
       "jam": {
-        "about": "",
         "shortDescription": ""
       }
     },
     "apps": {
-      "about": "",
       "author": "",
-      "available": "",
       "info": "",
-      "install": "",
       "install_failure": "",
-      "install_success": "",
       "installed": "",
-      "installing": "",
       "login_admin_pass_b": "",
-      "login_no_pass": "",
       "login_pass_b": "",
-      "login_userdef": "",
       "no_page": "",
-      "offline": "",
       "online": "",
-      "open": "",
       "selfsigned_cert": "",
-      "source": "",
       "uninstall": "",
-      "uninstall_failure": "",
-      "uninstall_success": "",
-      "uninstalling": ""
+      "uninstall_success": ""
     },
     "forms": {
       "hint": {
         "invoiceAmountZero": ""
       },
       "validation": {
-        "amount": {
-          "required": ""
-        },
         "chainAddress": {
-          "patternMismatch": "",
-          "required": ""
+          "patternMismatch": ""
         },
         "chainAmount": {
-          "max": "",
-          "required": ""
+          "max": ""
         },
         "chainFee": {
           "required": ""
         },
         "lnInvoice": {
-          "expired": "",
           "max": "",
-          "patternMismatch": "",
-          "required": ""
-        },
-        "node_uri": {
           "required": ""
         },
         "unlock": {
-          "pass_c": "",
-          "required": ""
+          "pass_c": ""
         }
       }
     },
     "hardware": {
       "cpu_load": "",
-      "disk_usage": "",
       "header": "",
-      "ram_usage": "",
       "temp": ""
     },
     "home": {
-      "active": "",
       "bitcoin": "",
-      "blockchain_size": "",
       "blocks_synced": "",
-      "blocktime": "",
       "channel": "",
-      "channel_balance": "",
       "channel_closed": "",
-      "channel_id": "",
       "channel_opened": "",
-      "close_channel": "",
       "confirm_channel_close": "",
-      "conn_details": "",
       "conn_in": "",
-      "conn_out": "",
       "connections": "",
-      "current_open_channels": "",
       "difficulty": "",
-      "force_close": "",
       "hide": "",
-      "lightning": "",
       "list_open_channels": "",
-      "local_balance": "",
       "network": "",
-      "no": "",
       "no_open_channels": "",
-      "node_id": "",
       "node_uri": "",
-      "normal": "",
       "onchain_cln_no_support": "",
-      "open_channel": "",
       "pending_balance_local": "",
-      "pending_balance_remote": "",
       "remote_balance": "",
-      "show": "",
       "show_qr": "",
-      "connect_node": "",
       "slow": "",
-      "ssh": "",
       "status": "",
-      "tor": "",
       "urgent": "",
-      "version": "",
       "versions": "",
-      "webui": "",
       "not_available": ""
     },
     "language": {
-      "cs": "",
       "de": "",
-      "en": "",
       "es": "",
-      "fr": "",
       "hu": "",
-      "it": "",
       "nb_NO": "",
-      "nl": "",
       "pt_BR": "",
-      "sv": "",
       "vi": ""
     },
     "login": {
-      "enter_pass": "",
       "enter_pass_placeholder": "",
-      "error": "",
       "unknown_error": "",
-      "invalid_pass": "",
       "login": ""
     },
     "navigation": {
-      "apps": "",
       "back": "",
-      "dark_mode": "",
       "display_sats": "",
-      "home": "",
-      "logout": "",
-      "settings": ""
+      "logout": ""
     },
     "settings": {
       "cancel": "",
-      "change": "",
       "change_pw_a": "",
-      "confirm": "",
       "curr_lang": "",
-      "language": "",
       "new_pw": "",
-      "old_pw": "",
       "pass_a_changed": "",
-      "reboot": "",
       "shutdown": "",
-      "generate_debug": "",
       "generate": "",
-      "generating": "",
-      "generating_debug_report": "",
-      "debug_report_done": ""
+      "generating_debug_report": ""
     },
     "setup": {
       "blockchain_delete": "",
-      "blockchain_found_long": "",
       "blockchain_found_short": "",
-      "blockchain_keep": "",
       "cancel": "",
-      "cancel_setup": "",
       "cln": "",
-      "continue": "",
       "convertwarning": "",
-      "done_migration_ready": "",
       "done_migration_start": "",
-      "done_recover_ready": "",
       "done_recover_start": "",
-      "done_setup_ready": "",
       "done_setup_start": "",
-      "done_update_ready": "",
       "done_update_start": "",
-      "final_do_reboot": "",
       "final_info_reboot": "",
-      "final_migration": "",
       "final_recovery": "",
-      "final_seedwords": "",
       "final_setup": "",
-      "final_update": "",
       "hdd_delete": "",
-      "hdd_delete_keep_blockchain": "",
       "hdd_delete_no_blockchain": "",
-      "hdd_delete_short": "",
       "lightningoutdated": "",
-      "lnd": "",
       "migrate_citadel": "",
-      "migrate_mynode": "",
       "migrate_umbrel": "",
-      "migrateblitz": "",
       "no_and_shutdown": "",
-      "nodename_err_chars": "",
       "nodename_err_max_length": "",
-      "nodename_err_min_length": "",
       "nodename_error_empty": "",
-      "nodename_input": "",
       "nodename_name": "",
-      "ok": "",
       "other_options": "",
-      "password_a_details": "",
       "password_a_name": "",
-      "password_a_short": "",
       "password_b_details": "",
-      "password_b_name": "",
       "password_b_short": "",
-      "password_c_details": "",
       "password_c_name": "",
-      "password_c_short": "",
       "password_error_chars": "",
-      "password_error_empty": "",
       "password_error_length": "",
-      "password_error_match": "",
       "password_repeat": "",
-      "pleasewait": "",
       "preparingsetup": "",
-      "recoverblitz": "",
       "restartinfo": "",
-      "restarting": "",
       "restarts": "",
-      "runningsetup": "",
       "select_bitcoin": "",
-      "select_lightning": "",
       "setupblitz": "",
-      "setupoptions": "",
       "setupwait": "",
-      "shuttingdown": "",
       "start_recovery": "",
-      "start_update": "",
       "started": "",
-      "sync_bitcoin_starting": "",
       "sync_bitcoin_sync": "",
-      "sync_headline": "",
       "sync_restartinfo": "",
-      "sync_wallet_info": "",
       "sync_wallet_unlock": "",
-      "updateblitz": "",
-      "yes": "",
-      "yes_and_migrate": ""
+      "yes": ""
     },
     "tx": {
       "comment": "",
-      "comment_placeholder": "",
       "confirm_info": "",
-      "confirmations": "",
       "date": "",
-      "description": "",
       "fee": "",
-      "fee_rate": "",
       "included_block": "",
-      "mempool": "",
       "sent": "",
-      "transactions": "",
       "transactions_none": "",
-      "tx_details": "",
       "txid": "",
-      "unconfirmed": "",
       "value": ""
     },
     "wallet": {
-      "address": "",
       "amount": "",
-      "balance": "",
       "available_balance": "",
-      "confirm": "",
       "copied": "",
-      "copy_clipboard": "",
       "create_invoice": "",
-      "create_invoice_ln": "",
       "fund": "",
-      "invoice": "",
       "on_chain": "",
-      "receive": "",
       "scan_qr": "",
-      "send": "",
       "send_lightning": "",
-      "send_onchain": "",
       "unlock": "",
-      "unlock_subtitle": "",
       "unlock_success": "",
-      "unlock_title": "",
-      "unlocking": "",
-      "wallet_locked": ""
+      "unlocking": ""
     },
     "error": {
-      "stack": "",
-      "report": ""
+      "stack": ""
     }
   }
 }
