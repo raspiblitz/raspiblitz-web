@@ -1,71 +1,46 @@
 {
   "translation": {
     "appInfo": {
-      "mempool": {
-        "shortDescription": ""
-      },
       "jam": {
         "shortDescription": ""
       }
     },
     "apps": {
-      "installed": "",
       "online": ""
     },
     "forms": {
-      "hint": {
-        "invoiceAmountZero": ""
-      },
       "validation": {
         "lnInvoice": {
           "max": ""
         }
       }
     },
-    "hardware": {
-      "header": ""
-    },
     "home": {
       "channel": "",
-      "conn_in": "",
       "list_open_channels": "",
-      "onchain_cln_no_support": "",
-      "slow": "",
-      "not_available": ""
+      "slow": ""
     },
     "language": {
       "nb_NO": ""
-    },
-    "login": {
-      "unknown_error": ""
     },
     "navigation": {
       "logout": ""
     },
     "settings": {
-      "new_pw": "",
       "generating_debug_report": ""
     },
     "setup": {
-      "cln": "",
       "done_setup_start": "",
-      "final_setup": "",
       "migrate_citadel": "",
-      "nodename_error_empty": "",
       "password_b_details": "",
-      "password_error_length": "",
       "restarts": "",
-      "start_recovery": "",
       "sync_wallet_unlock": ""
     },
     "tx": {
-      "date": "",
       "transactions_none": ""
     },
     "wallet": {
-      "available_balance": "",
-      "on_chain": "",
-      "unlock_success": ""
+      "on_chain": ""
     }
   }
 }
