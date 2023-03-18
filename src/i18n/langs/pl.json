@@ -1,43 +1,19 @@
 {
   "translation": {
-    "appInfo": {
-      "jam": {
-        "shortDescription": ""
-      }
-    },
     "apps": {
       "online": ""
     },
-    "forms": {
-      "validation": {
-        "lnInvoice": {
-          "max": ""
-        }
-      }
-    },
     "home": {
       "channel": "",
-      "list_open_channels": "",
       "slow": ""
-    },
-    "language": {
-      "nb_NO": ""
     },
     "navigation": {
       "logout": ""
     },
-    "settings": {
-      "generating_debug_report": ""
-    },
     "setup": {
       "done_setup_start": "",
-      "migrate_citadel": "",
       "password_b_details": "",
-      "restarts": "",
       "sync_wallet_unlock": ""
-    },
-    "tx": {
-      "transactions_none": ""
     },
     "wallet": {
       "on_chain": ""
