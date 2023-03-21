@@ -11,7 +11,8 @@
     "postinstall": "husky install",
     "start": "vite",
     "build": "vite build",
-    "test": "vitest watch",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
     "coverage": "vitest run --coverage"
   },
   "config": {
