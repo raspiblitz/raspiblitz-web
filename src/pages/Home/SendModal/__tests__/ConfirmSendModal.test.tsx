@@ -151,7 +151,7 @@ describe("ConfirmSendModal", () => {
       ).toBeDisabled();
     });
 
-    test.only("show error if amount is bigger than balance", async () => {
+    test("show error if amount is bigger than balance", async () => {
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal {...basicLnTxProps} invoiceAmount={111} />
