@@ -3,7 +3,7 @@ import SwitchTxType, { TxType } from "../SwitchTxType";
 
 describe("SwitchTxType", () => {
   test("txType: lightning", async () => {
-    const handeTxTypeChangeMock = jest.fn();
+    const handeTxTypeChangeMock = vi.fn();
 
     render(
       <SwitchTxType
@@ -24,7 +24,7 @@ describe("SwitchTxType", () => {
   });
 
   test("txType: onchain", async () => {
-    const handeTxTypeChangeMock = jest.fn();
+    const handeTxTypeChangeMock = vi.fn();
 
     render(
       <SwitchTxType

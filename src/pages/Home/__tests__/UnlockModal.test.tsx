@@ -3,7 +3,7 @@ import { render, screen } from "test-utils";
 import { rest, server } from "../../../testServer";
 import UnlockModal from "../UnlockModal";
 
-const handleClose = jest.fn();
+const handleClose = vi.fn();
 
 describe("UnlockModal", () => {
   const setup = () => {

@@ -2,11 +2,11 @@ import { retrieveSettings, saveSettings, SETTINGS_KEY } from "..";
 
 describe("util", () => {
   beforeEach(() => {
-    jest.spyOn(window.localStorage.__proto__, "setItem");
-    window.localStorage.__proto__.setItem = jest.fn();
+    vi.spyOn(window.localStorage.__proto__, "setItem");
+    window.localStorage.__proto__.setItem = vi.fn();
 
-    jest.spyOn(window.localStorage.__proto__, "getItem");
-    window.localStorage.__proto__.getItem = jest.fn(() => null);
+    vi.spyOn(window.localStorage.__proto__, "getItem");
+    window.localStorage.__proto__.getItem = vi.fn(() => null);
   });
 
   test("saveSettings should save settings", () => {
@@ -19,7 +19,7 @@ describe("util", () => {
   });
 
   test("saveSettings should save metge with existing settings", () => {
-    window.localStorage.__proto__.getItem = jest.fn(() =>
+    window.localStorage.__proto__.getItem = vi.fn(() =>
       JSON.stringify({ darkMode: true, lang: "en" })
     );
 
@@ -32,7 +32,7 @@ describe("util", () => {
   });
 
   test("retrieveSettings should retrieve settings if available", () => {
-    window.localStorage.__proto__.getItem = jest.fn(() =>
+    window.localStorage.__proto__.getItem = vi.fn(() =>
       JSON.stringify({ darkMode: true, lang: "en" })
     );
 

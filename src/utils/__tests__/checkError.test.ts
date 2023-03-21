@@ -1,6 +1,6 @@
 import { checkError } from "../checkError";
 
-jest.mock("i18next", () => ({
+vi.mock("i18next", () => ({
   t: () => "An error occurred",
 }));
 

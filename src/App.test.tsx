@@ -1,13 +1,16 @@
-import { render, waitFor } from "test-utils";
+import { I18nextProvider } from "react-i18next";
+import { render, waitFor, screen } from "test-utils";
 import App from "./App";
 import { rest, server } from "./testServer";
+import i18n from "i18n/test_config";
 
-const mockedUsedNavigate = jest.fn();
+const mockedUsedNavigate = vi.fn();
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUsedNavigate,
-}));
+vi.mock("react-router-dom", async () => {
+  const reactRouterDom: any = await vi.importActual("react-router-dom");
+
+  return { ...reactRouterDom, useNavigate: () => mockedUsedNavigate };
+});
 
 describe("App", () => {
   afterEach(() => {
@@ -28,7 +31,11 @@ describe("App", () => {
       })
     );
 
-    render(<App />);
+    render(
+      <I18nextProvider i18n={i18n}>
+        <App />
+      </I18nextProvider>
+    );
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalledTimes(1));
   });
 
@@ -45,7 +52,11 @@ describe("App", () => {
         );
       })
     );
-    render(<App />);
-    await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalledTimes(0));
+    render(
+      <I18nextProvider i18n={i18n}>
+        <App />
+      </I18nextProvider>
+    );
+    expect(await screen.findByText("Log in")).toBeInTheDocument();
   });
 });
