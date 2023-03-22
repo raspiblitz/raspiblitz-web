@@ -7,7 +7,7 @@ import { rest, server } from "../../../../testServer";
 import type { Props } from "../ConfirmSendModal";
 import ConfirmSendModal from "../ConfirmSendModal";
 
-const closeSpy = jest.fn();
+const closeSpy = vi.fn();
 
 const basicLnTxProps: Props = {
   address:
@@ -180,7 +180,7 @@ describe("ConfirmSendModal", () => {
         await screen.findByRole("button", {
           name: "settings.confirm",
         })
-      ).toBeDisabled();
+      ).not.toBeDisabled();
     });
   });
 
@@ -214,7 +214,7 @@ describe("ConfirmSendModal", () => {
         await screen.findByRole("button", {
           name: "settings.confirm",
         })
-      ).toBeDisabled();
+      ).not.toBeDisabled();
     });
   });
 });

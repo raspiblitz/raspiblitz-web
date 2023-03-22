@@ -4,7 +4,7 @@ import { render, screen } from "test-utils";
 import { rest, server } from "../../../../testServer";
 import SendModal, { Props } from "../SendModal";
 
-const handleClose = jest.fn();
+const handleClose = vi.fn();
 const basicProps: Props = {
   lnBalance: 0,
   onchainBalance: 0,

@@ -36,29 +36,21 @@ yarn dedupe
 
 Further info: https://dev.to/arcanis/yarn-2-2-dedupe-faster-lighter-ha5#dedupe-command
 
-### Dev install with external RaspiBlitz as Backend (macOS)
-
-- Make sure `nvm` is installed.
-- Run `nvm install 18` or if already installed `nvm use`
-- Install yarn on a fresh nvm: `npm install --global yarn`
-- run `yarn`
-- copy `.env.sample` to `.env` (the .env file will be ignored by git)
-- change in `.env` the value of `REACT_APP_BACKEND` to your local raspiblitz - for example if your RaspiBlitz is running on local Ip 192.168.1.123 then change value to `http://192.168.1.123:80`
-- with `yarn start` it should now connect to your external raspiblitz
-
 ### Dev workflow
 
 #### Frontend
 
-```sh
+```bash
 yarn install
 yarn start
 ```
 
 #### Backend
 
-For the backend, there currently exist two options:
+For the backend, there currently exist three options:
 
+- Use an existing RaspiBlitz
+  - Easy to setup, but needs a RaspiBlitz
 - Using the provided [Mock backend](#mock-backend)
   - Easy to setup, but limited data
 - Using [blitz_api](#blitz-api) with Polar
@@ -83,22 +75,28 @@ Then go to `http://localhost:3000` and use the password `password`.
 
 This guide uses Polar for easier development, but you can also use a real lightning node.
 
-- First, download [Polar](https://lightningpolar.com/) and get it to run.
+- Download [Polar](https://lightningpolar.com/) and run it.
   - Create at least one bitcoin and one lightning node.
-- Next, clone the [blitz_api](https://github.com/fusion44/blitz_api), install the dependencies.
+- Clone the [blitz_api](https://github.com/fusion44/blitz_api) and install the dependencies.
   - In addition, you will need [redis](https://redis.io/) installed for `blitz_api` to work.
 - Create a `.env` file (see [.env_sample in blitz_api](https://github.com/fusion44/blitz_api/blob/main/.env_sample)) and copy the bitcoin and ln info into it.
   - Important: When definining `shell_script_path` you need to define a directory where a folder called `config.scripts` and a file called `blitz.debug.sh` reside in. Otherwise `blitz_api` may not work (used on the RaspiBlitz for logging)
 - Make the following change in `blitz_api`:
   - In [main/app/main.py](https://github.com/fusion44/blitz_api/blob/main/app/main.py#L48), change the `prefix_format` from `/v{major}` to `/api/v{major}`.
+- Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local `blitz_api` installation.
 
 Now you can start the `blitz_api` and run `yarn start` in raspiblitz-web.
 
 Please do not commit the above changes.
 
-### Linting
+### Use a external RaspiBlitz as Backend
 
-[eslint](https://eslint.org) and [prettier](https://prettier.io) will be used accoring to the [create-react-app docs](https://create-react-app.dev/docs/setting-up-your-editor)
+- (Optional): Make sure `nvm` is installed.
+- (Optional): Run `nvm install 18` or if already installed `nvm use`
+- Install yarn on a fresh nvm: `npm install --global yarn`
+- Install the dependencies with `yarn install`
+- Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local RaspiBlitz - for example if your RaspiBlitz is running on local IP `192.168.1.123` then change the value to `http://192.168.1.123:80`
+- with `yarn start` it should now connect to your external RaspiBlitz
 
 ## Credits & Licenses
 

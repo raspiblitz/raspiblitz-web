@@ -222,7 +222,9 @@ const ConfirmSendModal: FC<Props> = ({
           type="submit"
           loading={isLoading}
           icon={<CheckIcon className="inline h-6 w-6" />}
-          disabled={!isValid || !isValidLnInvoice}
+          disabled={
+            !isValid || !isValidLnInvoice || isInvoiceAmountBiggerThanBalance
+          }
         >
           <span className="mx-1">{t("settings.confirm")}</span>
         </ButtonWithSpinner>
