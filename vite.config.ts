@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import svgrPlugin from "vite-plugin-svgr";
 import viteTsconfigPaths from "vite-tsconfig-paths";
 
-const backendServer = "http://localhost:8000";
+const BACKEND_SERVER = "http://localhost:8000";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: backendServer,
+        target: BACKEND_SERVER,
         changeOrigin: true,
         secure: false,
       },
