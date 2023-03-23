@@ -26,10 +26,12 @@ const appStatus = () => {
     },
     {
       id: "btc-rpc-explorer",
-      installed: false,
+      installed: true,
       version: "v1.0.0",
       status: "offline",
       error: "",
+      address: "http://192.168.1.100:3000",
+      hiddenService: "4pt2ludsdsdns48dwnd2899rqf63pcdwdwdwh7dwaeukn1w.onion",
     },
     {
       id: "btcpayserver",

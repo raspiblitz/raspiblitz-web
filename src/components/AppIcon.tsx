@@ -2,12 +2,13 @@ import type { FC } from "react";
 
 type Props = {
   appId: string;
+  className?: string;
 };
 
-const AppIcon: FC<Props> = ({ appId }) => {
+const AppIcon: FC<Props> = ({ appId, className = "" }) => {
   return (
     <img
-      className="max-h-16"
+      className={`${className}`}
       src={`/assets/apps/logos/${appId}.png`}
       onError={(e) => {
         (e.target as HTMLImageElement).src = "/assets/cloud.svg";

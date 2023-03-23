@@ -11,21 +11,22 @@ export const AppStatusCard: FC<Props> = ({ app }) => {
   const { id } = app;
   const appName = availableApps.get(id)?.name;
 
+  const link = window.location.hostname.endsWith(".onion")
+    ? app.hiddenService
+    : app.address;
+
   return (
-    <div className="h-full">
-      <article className="bd-card flex items-center transition-colors">
-        <div className="my-2 flex w-full flex-row items-center">
-          {/* Icon */}
-          <div className="flex max-h-16 w-1/4 items-center justify-center p-2">
-            <AppIcon appId={id} />
-          </div>
-          {/* Content */}
-          <div className="flex w-3/4 flex-col items-start justify-center pl-5 text-xl">
-            <h4 className="dark:text-white">{appName}</h4>
-          </div>
-        </div>
-      </article>
-    </div>
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex w-full cursor-pointer items-center justify-center py-4 opacity-80 hover:text-yellow-500 dark:text-white dark:hover:text-yellow-500 md:flex-col lg:flex-row"
+    >
+      {/* Icon */}
+      <AppIcon appId={id} className="h-19 inline w-10" />
+      {/* Content */}
+      <span className="mx-3 w-1/2 justify-center text-lg">{appName}</span>
+    </a>
   );
 };
 
