@@ -1,9 +1,11 @@
 import {
+  ArrowRightOnRectangleIcon,
   Cog6ToothIcon,
   HomeIcon,
-  ArrowRightOnRectangleIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
+import { SSEContext } from "context/sse-context";
+import AppStatusCard from "pages/Home/AppStatusCard";
 import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,10 +21,11 @@ const navIconClasses = "inline w-10 h-10";
 
 export const SideDrawer: FC = () => {
   const { logout } = useContext(AppContext);
+  const { appStatus } = useContext(SSEContext);
   const { t } = useTranslation();
 
   return (
-    <nav className="content-container fixed mb-16 hidden w-full flex-col justify-between bg-white px-2 pt-8 shadow-md transition-colors dark:bg-gray-800 lg:flex lg:w-64">
+    <nav className="content-container sidebar fixed hidden w-full flex-col justify-between overflow-y-scroll bg-white px-2 pb-16 pt-8 shadow-md transition-colors dark:bg-gray-800 lg:flex lg:w-64">
       <div className="flex flex-col items-center justify-center">
         <NavLink to="/home" className={(props) => createClassName(props)}>
           <HomeIcon className={navIconClasses} />
@@ -42,15 +45,22 @@ export const SideDrawer: FC = () => {
             {t("navigation.settings")}
           </span>
         </NavLink>
+        {appStatus
+          .filter((app) => app.installed)
+          .map((app) => (
+            <AppStatusCard app={app} key={app.id} />
+          ))}
       </div>
 
-      <button
-        onClick={logout}
-        className="bd-button mb-3 flex h-8 w-full items-center justify-center"
-      >
-        <ArrowRightOnRectangleIcon className="mr-1 inline-block h-5 w-5" />
-        {t("navigation.logout")}
-      </button>
+      <div className="fixed bottom-0 left-2 z-10 w-60 bg-white dark:bg-gray-800">
+        <button
+          onClick={logout}
+          className="bd-button mb-3 flex h-8 w-60 items-center justify-center"
+        >
+          <ArrowRightOnRectangleIcon className="mr-1 inline-block h-5 w-5" />
+          {t("navigation.logout")}
+        </button>
+      </div>
     </nav>
   );
 };
