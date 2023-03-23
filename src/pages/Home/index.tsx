@@ -6,12 +6,10 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { AppContext } from "../../context/app-context";
 import { useInterval } from "../../hooks/use-interval";
 import useSSE from "../../hooks/use-sse";
-import { AppStatus } from "../../models/app-status";
 import { Transaction } from "../../models/transaction.model";
 import { enableGutter } from "../../utils";
 import { checkError } from "../../utils/checkError";
 import { instance } from "../../utils/interceptor";
-import AppStatusCard from "./AppStatusCard";
 import BitcoinCard from "./BitcoinCard";
 import ConnectionCard from "./ConnectionCard";
 import HardwareCard from "./HardwareCard";
@@ -276,18 +274,6 @@ const Home: FC = () => {
             <LightningCard />
           </article>
         )}
-        {appStatus
-          .filter((app: AppStatus) => app.installed)
-          .map((app: AppStatus) => {
-            return (
-              <article
-                key={app.id}
-                className="col-span-2 row-span-1 md:col-span-1"
-              >
-                <AppStatusCard app={app} />
-              </article>
-            );
-          })}
       </main>
     </>
   );
