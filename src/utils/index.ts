@@ -1,3 +1,4 @@
+import { AppStatus } from "models/app-status";
 import { TokenPayload } from "../models/token";
 
 export const ACCESS_TOKEN = "access_token";
@@ -82,4 +83,10 @@ export function setWindowAlias(nodeAlias: string | null): void {
   } else {
     document.title = `RaspiBlitz - ${nodeAlias}`;
   }
+}
+
+export function getHrefFromApp(app: AppStatus) {
+  return window.location.hostname.endsWith(".onion")
+    ? app.hiddenService
+    : app.address;
 }
