@@ -72,7 +72,7 @@ export const AppCard: FC<Props> = ({
       <div className="mt-2 flex h-4/6 w-full flex-row items-center">
         {/* Icon */}
         <div className="flex w-1/4 items-center justify-center p-2">
-          <AppIcon appId={id} />
+          <AppIcon appId={id} className="max-h-12" />
         </div>
         {/* Content */}
         <div className="relative flex w-3/4 flex-col items-start justify-center text-xl">
@@ -83,7 +83,7 @@ export const AppCard: FC<Props> = ({
               overlay={tooltipContent}
               placement="top"
             >
-              <LockOpenIcon className="absolute  top-0 right-0 h-6 w-6" />
+              <LockOpenIcon className="absolute top-0 right-0 h-6 w-6" />
             </Tooltip>
           )}
           <p className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">

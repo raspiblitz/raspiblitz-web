@@ -1,5 +1,6 @@
 import {
   BitcoinCircleIcon,
+  LightningIcon,
   ShareIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import {
@@ -75,7 +76,7 @@ export const WalletCard: FC<Props> = ({
   return (
     <div className="h-full">
       <div className="bd-card h-full transition-colors">
-        <section className="flex flex-col flex-wrap p-5 text-black lg:flex-row">
+        <section className="flex flex-col flex-wrap p-2 text-black lg:flex-row">
           <div className="relative w-full overflow-hidden rounded-xl bg-yellow-600 bg-gradient-to-b from-yellow-500 p-4 text-white">
             <article className="flex w-full flex-col">
               <h6 className="text-xl">{t("wallet.balance")}</h6>
@@ -117,32 +118,33 @@ export const WalletCard: FC<Props> = ({
             <BitcoinCircleIcon className="absolute -bottom-9 -right-9 h-32 w-32 opacity-30" />
           </div>
         </section>
-        <section className="flex justify-around p-2">
+        <section className="flex justify-around gap-2 py-4">
           <button
             onClick={onReceive}
-            className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
+            className="flex h-10 w-1/2 items-center justify-center rounded bg-black text-white hover:bg-gray-700 lg:w-5/12"
           >
             <ArrowDownTrayIcon className="mr-1 h-6 w-6" />
             <span>{t("wallet.receive")}</span>
           </button>
           <button
             onClick={onSend}
-            className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
+            className="flex h-10 w-1/2 items-center justify-center rounded bg-black text-white hover:bg-gray-700 lg:w-5/12"
           >
             <ShareIcon className="mr-1 h-6 w-6" />
             <span>{t("wallet.send")}</span>
           </button>
         </section>
-        <section className="flex justify-around p-2">
+        <section className="flex justify-around gap-2 pb-4">
           <button
             onClick={onOpenChannel}
-            className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
+            className="flex h-10 w-1/2 items-center justify-center rounded bg-black text-white hover:bg-gray-700 lg:w-5/12"
           >
+            <LightningIcon className="mr-1 inline h-6 w-6" />
             {t("home.open_channel")}
           </button>
           <button
             onClick={onCloseChannel}
-            className="flex h-10 w-5/12 items-center justify-center rounded bg-black text-white hover:bg-gray-700"
+            className="flex h-10 w-1/2 items-center justify-center rounded bg-black text-white hover:bg-gray-700 lg:w-5/12"
           >
             <ListBulletIcon className="mr-1 inline h-6 w-6" />
             <span>{t("home.list_open_channels")}</span>

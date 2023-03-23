@@ -1,19 +1,20 @@
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import type { ChangeEvent, FC } from "react";
 import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import Message from "../../../components/Message";
-import ModalDialog from "../../../layouts/ModalDialog";
-import { AppContext, Unit } from "../../../context/app-context";
-import { checkError } from "../../../utils/checkError";
-import { convertBtcToSat, stringToNumber } from "../../../utils/format";
-import { instance } from "../../../utils/interceptor";
-import { MODAL_ROOT } from "../../../utils";
 import AmountInput from "../../../components/AmountInput";
 import InputField from "../../../components/InputField";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import Message from "../../../components/Message";
+import { AppContext, Unit } from "../../../context/app-context";
+import ModalDialog from "../../../layouts/ModalDialog";
+import { MODAL_ROOT } from "../../../utils";
+import { checkError } from "../../../utils/checkError";
+import { convertBtcToSat, stringToNumber } from "../../../utils/format";
+import { instance } from "../../../utils/interceptor";
 import SwitchTxType, { TxType } from "../SwitchTxType";
 import ReceiveOnChain from "./ReceiveOnChain";
 
@@ -158,13 +159,16 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
           {error && <Message message={error} />}
 
           {!address && showLnInvoice && (
-            <button
-              type="submit"
-              className="bd-button my-3 p-3"
-              disabled={submitCount > 0 && !isValid}
-            >
-              {t("wallet.create_invoice")}
-            </button>
+            <div className="flex items-center justify-center">
+              <button
+                type="submit"
+                className="bd-button my-3 flex items-center justify-center p-3"
+                disabled={submitCount > 0 && !isValid}
+              >
+                <PlusCircleIcon className="mr-1 inline h-6 w-6" />
+                <span>{t("wallet.create_invoice")}</span>
+              </button>
+            </div>
           )}
         </fieldset>
       </form>
