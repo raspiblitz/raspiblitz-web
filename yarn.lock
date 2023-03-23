@@ -676,10 +676,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@remix-run/router@npm:1.3.3"
-  checksum: 9280f1c3e44c0fb84a74b401b5a47022dace06d5da0f26a7a68c7c0e57ad5ef95d30f3c2d333df2db3b63f84de81f7f8caa7e53189a7709d6c3eb466d126ed76
+"@remix-run/router@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@remix-run/router@npm:1.4.0"
+  checksum: 707dce35a2b8138005cf19e63f6fd3c4da05b4b892e9e9118e8b727c3b95953efe27307ca2df35084044df30fa1fc367cf0bbc98d1ded9020c82e61e6242caaf
   languageName: node
   linkType: hard
 
@@ -2824,12 +2824,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^22.4.10":
-  version: 22.4.10
-  resolution: "i18next@npm:22.4.10"
+"i18next@npm:^22.4.13":
+  version: 22.4.13
+  resolution: "i18next@npm:22.4.13"
   dependencies:
     "@babel/runtime": ^7.20.6
-  checksum: 731423e3fafe4ecaf0fc3c5867b69ae5c35c9021f7b5aad8392a9bf5cf56fbf1503376ba5aa935f2b21e12a97862fa31be0e4b35e98eefb747e2008b5808e35c
+  checksum: a40ca4ce749854a806a01e3e60ee492f2911b1f7acb6ed338bb023211259ef8c39e914734d10197d3279941459767897ceb1989c8e24cd73730fdf211e079037
   languageName: node
   linkType: hard
 
@@ -4257,9 +4257,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-tailwindcss@npm:^0.2.4":
-  version: 0.2.4
-  resolution: "prettier-plugin-tailwindcss@npm:0.2.4"
+"prettier-plugin-tailwindcss@npm:^0.2.5":
+  version: 0.2.5
+  resolution: "prettier-plugin-tailwindcss@npm:0.2.5"
   peerDependencies:
     "@ianvs/prettier-plugin-sort-imports": "*"
     "@prettier/plugin-php": "*"
@@ -4308,16 +4308,16 @@ __metadata:
       optional: true
     prettier-plugin-twig-melody:
       optional: true
-  checksum: 9f74d1c80e9151636c748baac13e736a81ae47fa2b2aaf66f9e4691a619a565439780c39491dccb1d0df4846a011b1d69c882e733ed20525d93a84c345b8321d
+  checksum: 44ae325d40ad747dd8fb36e1d7986de1919b9bd912993628c18f4743c9287b1add6dd2d951ed336b1031a2ad49c7ba5eb50e4be6d3b9b37e0da7fd137d13ec53
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.4":
-  version: 2.8.4
-  resolution: "prettier@npm:2.8.4"
+"prettier@npm:^2.8.6":
+  version: 2.8.6
+  resolution: "prettier@npm:2.8.6"
   bin:
     prettier: bin-prettier.js
-  checksum: c173064bf3df57b6d93d19aa98753b9b9dd7657212e33b41ada8e2e9f9884066bb9ca0b4005b89b3ab137efffdf8fbe0b462785aba20364798ff4303aadda57e
+  checksum: 8ac94fa67aec0e65743ea15ebf954ef2f1e52638abd129dc04e8b49e8bb3224c0233c98df6b5c98efd31bd2a43866590486559438ee4ead09dc81be389068572
   languageName: node
   linkType: hard
 
@@ -4430,21 +4430,21 @@ __metadata:
     axios: ^1.3.4
     headers-polyfill: ^3.1.2
     husky: ^8.0.3
-    i18next: ^22.4.10
+    i18next: ^22.4.13
     jsdom: ^21.1.1
     lint-staged: ^13.2.0
     msw: ^1.2.0
     postcss: ^8.4.21
-    prettier: ^2.8.4
-    prettier-plugin-tailwindcss: ^0.2.4
+    prettier: ^2.8.6
+    prettier-plugin-tailwindcss: ^0.2.5
     qrcode.react: ^3.1.0
     rc-tooltip: ^6.0.1
     react: ^18.2.0
     react-dom: ^18.2.0
-    react-hook-form: ^7.43.2
+    react-hook-form: ^7.43.7
     react-i18next: ^12.2.0
-    react-router-dom: ^6.8.2
-    react-toastify: ^9.1.1
+    react-router-dom: ^6.9.0
+    react-toastify: ^9.1.2
     tailwindcss: ^3.2.7
     typescript: ~5.0.2
     vite: ^4.2.1
@@ -4539,12 +4539,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.43.2":
-  version: 7.43.2
-  resolution: "react-hook-form@npm:7.43.2"
+"react-hook-form@npm:^7.43.7":
+  version: 7.43.7
+  resolution: "react-hook-form@npm:7.43.7"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: 68d4fb73fec052801d5e7840c3d0afba887676acfdefa33aef342ead0db419cb1a14a0891ed567cea58a78d544d9245445c593e25bc0564a797201cb32c91a01
+  checksum: c1679fc5119f3f910f30424b846f9a05ecbc9cce1c7408e4e8eb907aa5a4366d5228a7b41d818868c85017f2be4e1854a1536ba5c1cddf2c27818bd045df9589
   languageName: node
   linkType: hard
 
@@ -4594,39 +4594,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.8.2":
-  version: 6.8.2
-  resolution: "react-router-dom@npm:6.8.2"
+"react-router-dom@npm:^6.9.0":
+  version: 6.9.0
+  resolution: "react-router-dom@npm:6.9.0"
   dependencies:
-    "@remix-run/router": 1.3.3
-    react-router: 6.8.2
+    "@remix-run/router": 1.4.0
+    react-router: 6.9.0
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: eddc8b88e26c66408df894bdcf95efd6731e21b7cbfd7417cd456f0043916279e0559b06c6cdc19c2a55c6aefc4cc745fa4065d3505e519a95adbef0cc89e77f
+  checksum: 4d593491ab8db5611feda70002c62902baebb84d5c1c5e5b6172496f31f91130deee132bf4240dea634a88cb86c76d6da348f15b9cd5e5197be455efd88edf72
   languageName: node
   linkType: hard
 
-"react-router@npm:6.8.2":
-  version: 6.8.2
-  resolution: "react-router@npm:6.8.2"
+"react-router@npm:6.9.0":
+  version: 6.9.0
+  resolution: "react-router@npm:6.9.0"
   dependencies:
-    "@remix-run/router": 1.3.3
+    "@remix-run/router": 1.4.0
   peerDependencies:
     react: ">=16.8"
-  checksum: 9e98d03e1f18bfd5a35144a0c675adaf7c46a9ad436efdea2b52ef3a6e501ac6174a67ea90004e1339cd45019d6b1eb370627518320f7af9323ae74e0c6756ad
+  checksum: b2a5f42e042bee7a7f116ca7817b0e58359e5353d84887c9fe7a633d7490c03b1e0ae37cd01830c2a381e3d1e7d501bb4751e53cc3d491e25f36582d3f6e0546
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^9.1.1":
-  version: 9.1.1
-  resolution: "react-toastify@npm:9.1.1"
+"react-toastify@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "react-toastify@npm:9.1.2"
   dependencies:
     clsx: ^1.1.1
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: 2039255539961a9b4d77b2656f120b20abe46cb0c699a7f3c0af23b4ef669d9c4d24dae6b8f4954b5efd83edf6d6e23614a29e94e9ee0d2647741fba9ba2db85
+  checksum: 0b21851bbb03592aa6e318ca62622016a6aa37cc52484c4a2fee39ce38c9933993e570c8ad9375f0a7061d3401fd175796b74f851b7d5a711b4802e0a3f9f34a
   languageName: node
   linkType: hard
 
