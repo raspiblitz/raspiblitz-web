@@ -5,7 +5,6 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { SSEContext } from "context/sse-context";
-import { AppStatus } from "models/app-status";
 import AppStatusCard from "pages/Home/AppStatusCard";
 import type { FC } from "react";
 import { useContext } from "react";
