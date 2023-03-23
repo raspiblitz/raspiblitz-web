@@ -85,7 +85,7 @@ export const AppInfo: FC<Props> = ({
 
       {/* Image box with title */}
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
-        <AppIcon appId={id} />
+        <AppIcon appId={id} className="max-h-12" />
         <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
         {(installingApp == null || installingApp.id !== id) &&
           !appStatusInfo.installed && (
