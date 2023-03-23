@@ -69,29 +69,29 @@ export const AppCard: FC<Props> = ({
 
   return (
     <div className="bd-card transition-colors dark:bg-gray-800">
-      <div className="mt-2 flex h-4/6 w-full flex-row items-center">
+      <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
+        {installed && (
+          <Tooltip
+            trigger={["click", "hover"]}
+            overlay={tooltipContent}
+            placement="top"
+          >
+            <LockOpenIcon className="absolute top-0 right-0 h-6 w-6" />
+          </Tooltip>
+        )}
         {/* Icon */}
-        <div className="flex w-1/4 items-center justify-center p-2">
+        <div className="mt-4 flex w-1/4 items-center justify-center p-2">
           <AppIcon appId={id} className="max-h-12" />
         </div>
         {/* Content */}
-        <div className="relative flex w-3/4 flex-col items-start justify-center text-xl">
+        <div className="mt-4 flex w-3/4 flex-col items-start justify-center text-xl">
           <h4>{name}</h4>
-          {installed && (
-            <Tooltip
-              trigger={["click", "hover"]}
-              overlay={tooltipContent}
-              placement="top"
-            >
-              <LockOpenIcon className="absolute top-0 right-0 h-6 w-6" />
-            </Tooltip>
-          )}
           <p className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
             {t(`appInfo.${id}.shortDescription`)}
           </p>
         </div>
       </div>
-      <div className="flex h-2/6 flex-row gap-2 py-2">
+      <div className="flex flex-row gap-2 py-4">
         {installed && appStatusInfo.address && (
           <a
             href={appStatusInfo.address}
