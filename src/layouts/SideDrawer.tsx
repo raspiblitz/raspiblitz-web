@@ -5,6 +5,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { SSEContext } from "context/sse-context";
+import { AppStatus } from "models/app-status";
 import AppStatusCard from "pages/Home/AppStatusCard";
 import type { FC } from "react";
 import { useContext } from "react";
@@ -13,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { AppContext } from "../context/app-context";
 
 const navLinkClasses =
-  "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full dark:text-white opacity-80";
+  "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full dark:text-white opacity-80 hover:text-yellow-500 dark:hover:text-yellow-500";
 const navLinkActiveClasses = "text-yellow-500 dark:text-yellow-500 opacity-100";
 const createClassName = ({ isActive }: { isActive: boolean }) =>
   `${navLinkClasses} ${isActive ? navLinkActiveClasses : ""}`;
