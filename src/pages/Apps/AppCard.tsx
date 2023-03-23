@@ -7,6 +7,7 @@ import {
 import Tooltip from "rc-tooltip";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { getHrefFromApp } from "utils";
 import { AppStatus, AuthMethod } from "../..//models/app-status";
 import { App } from "../..//models/app.model";
 import AppIcon from "../../components/AppIcon";
@@ -94,7 +95,7 @@ export const AppCard: FC<Props> = ({
       <div className="flex flex-row gap-2 py-4">
         {installed && appStatusInfo.address && (
           <a
-            href={appStatusInfo.address}
+            href={getHrefFromApp(appStatusInfo)}
             target="_blank"
             rel="noreferrer"
             className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
