@@ -36,7 +36,7 @@ type ModalType =
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
-  const { balance, lnInfoLite, appStatus, systemStartupInfo } = useSSE();
+  const { balance, lnInfoLite, systemStartupInfo } = useSSE();
   const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -227,15 +227,13 @@ const Home: FC = () => {
       </>
     );
   }
-
-  const gridRows = 6 + appStatus.length / 4;
   const height = btcOnlyMode ? "h-full md:h-1/2" : "h-full";
 
   return (
     <>
       {determineModal()}
       <main
-        className={`content-container page-container grid h-full grid-cols-1 gap-5 bg-gray-100 p-5 transition-colors dark:bg-gray-700 dark:text-white lg:gap-8 lg:pt-8 lg:pb-8 lg:pr-8 grid-rows-${gridRows.toFixed()} md:grid-cols-2 xl:grid-cols-4`}
+        className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 bg-gray-100 p-5 transition-colors dark:bg-gray-700 dark:text-white md:grid-cols-2 lg:gap-8 lg:pt-8 lg:pb-8 lg:pr-8 xl:grid-cols-4`}
       >
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
