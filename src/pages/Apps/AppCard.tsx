@@ -4,9 +4,9 @@ import {
   LockOpenIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import Tooltip from "rc-tooltip";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Tooltip } from "react-tooltip";
 import { getHrefFromApp } from "utils";
 import { AppStatus, AuthMethod } from "../..//models/app-status";
 import { App } from "../..//models/app.model";
@@ -58,27 +58,25 @@ export const AppCard: FC<Props> = ({
     }
   };
 
-  const tooltipContent = (
-    <div>
-      {appStatusInfo.httpsForced === "1" &&
-        appStatusInfo.httpsSelfsigned === "1" && (
-          <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
-        )}
-      {<h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>}
-    </div>
-  );
-
   return (
     <div className="bd-card transition-colors dark:bg-gray-800">
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {installed && (
-          <Tooltip
-            trigger={["click", "hover"]}
-            overlay={tooltipContent}
-            placement="top"
-          >
-            <LockOpenIcon className="absolute top-0 right-0 h-6 w-6" />
-          </Tooltip>
+          <>
+            <LockOpenIcon
+              className="absolute top-0 right-0 h-6 w-6"
+              data-tooltip-id="login-tooltip"
+            />
+            <Tooltip id="login-tooltip">
+              <>
+                {appStatusInfo.httpsForced === "1" &&
+                  appStatusInfo.httpsSelfsigned === "1" && (
+                    <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
+                  )}
+                {<h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>}
+              </>
+            </Tooltip>
+          </>
         )}
         {/* Icon */}
         <div className="mt-4 flex w-1/4 items-center justify-center p-2">

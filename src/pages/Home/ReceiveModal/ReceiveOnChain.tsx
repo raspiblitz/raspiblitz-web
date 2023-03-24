@@ -1,5 +1,5 @@
 import { QRCodeSVG } from "qrcode.react";
-import Tooltip from "rc-tooltip";
+import { Tooltip } from "react-tooltip";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import useClipboard from "../../../hooks/use-clipboard";
@@ -19,20 +19,17 @@ const ReceiveOnChain: FC<Props> = ({ address }) => {
         {t("wallet.scan_qr")}
       </p>
       <article className="mb-5 flex flex-row items-center">
-        <Tooltip
-          overlay={
-            <div>
-              {addressCopied ? t("wallet.copied") : t("wallet.copy_clipboard")}
-            </div>
-          }
-          placement="top"
+        <p
+          onClick={copyAddress}
+          className="w-full break-all text-gray-600 dark:text-gray-200"
+          data-tooltip-id="copy-tooltip"
         >
-          <p
-            onClick={copyAddress}
-            className="w-full break-all text-gray-600 dark:text-gray-200"
-          >
-            {address}
-          </p>
+          {address}
+        </p>
+        <Tooltip id="copy-tooltip">
+          <div>
+            {addressCopied ? t("wallet.copied") : t("wallet.copy_clipboard")}
+          </div>
         </Tooltip>
       </article>
     </>

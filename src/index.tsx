@@ -7,6 +7,7 @@ import "./i18n/config";
 import "./index.css";
 import AppContextProvider from "./context/app-context";
 import SSEContextProvider from "./context/sse-context";
+import "react-tooltip/dist/react-tooltip.css";
 
 import "i18next";
 import ErrorBoundary from "ErrorBoundary";

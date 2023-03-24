@@ -4,8 +4,8 @@ import {
   EyeSlashIcon,
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
-import Tooltip from "rc-tooltip";
-import "rc-tooltip/assets/bootstrap.css";
+
+import { Tooltip } from "react-tooltip";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoadingBox from "../../components/LoadingBox";
@@ -56,21 +56,21 @@ export const ConnectionCard: FC = () => {
       <div className="bd-card w-full transition-colors lg:mr-2 lg:w-1/2">
         <div className="flex items-center text-lg font-bold">
           {t("home.conn_details")}&nbsp;
-          <Tooltip
-            overlay={<div>{showAddress ? t("home.hide") : t("home.show")}</div>}
-            placement="top"
-          >
-            {showAddress ? (
-              <EyeSlashIcon
-                onClick={toggleAddressHandler}
-                className="inline-block h-6 w-6 cursor-pointer align-top"
-              />
-            ) : (
-              <EyeIcon
-                onClick={toggleAddressHandler}
-                className="inline-block h-6 w-6 cursor-pointer align-top"
-              />
-            )}
+          {showAddress ? (
+            <EyeSlashIcon
+              data-tooltip-id="address-tooltip"
+              onClick={toggleAddressHandler}
+              className="inline-block h-6 w-6 cursor-pointer align-top"
+            />
+          ) : (
+            <EyeIcon
+              data-tooltip-id="address-tooltip"
+              onClick={toggleAddressHandler}
+              className="inline-block h-6 w-6 cursor-pointer align-top"
+            />
+          )}
+          <Tooltip id="address-tooltip">
+            {<div>{showAddress ? t("home.hide") : t("home.show")}</div>}
           </Tooltip>
         </div>
         <article className="flex flex-col overflow-hidden py-4">
@@ -92,20 +92,15 @@ export const ConnectionCard: FC = () => {
               >
                 {showAddress ? torAddress : HIDDEN_TEXT}
               </a>
-              <Tooltip
-                overlay={
-                  <div>
-                    {clippedTor
-                      ? t("wallet.copied")
-                      : t("wallet.copy_clipboard")}
-                  </div>
-                }
-                placement="top"
-              >
-                <ClipboardDocumentCheckIcon
-                  className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                  onClick={copyTor}
-                />
+              <ClipboardDocumentCheckIcon
+                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+                onClick={copyTor}
+                data-tooltip-id="tor-tooltip"
+              />
+              <Tooltip id="tor-tooltip">
+                <div>
+                  {clippedTor ? t("wallet.copied") : t("wallet.copy_clipboard")}
+                </div>
               </Tooltip>
             </div>
           )}
@@ -129,18 +124,15 @@ export const ConnectionCard: FC = () => {
             >
               {showAddress ? sshAddress : HIDDEN_TEXT}
             </a>
-            <Tooltip
-              overlay={
-                <div>
-                  {clippedSsh ? t("wallet.copied") : t("wallet.copy_clipboard")}
-                </div>
-              }
-              placement="top"
-            >
-              <ClipboardDocumentCheckIcon
-                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                onClick={copySsh}
-              />
+            <ClipboardDocumentCheckIcon
+              className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+              onClick={copySsh}
+              data-tooltip-id="ssh-tooltip"
+            />
+            <Tooltip id="ssh-tooltip">
+              <div>
+                {clippedSsh ? t("wallet.copied") : t("wallet.copy_clipboard")}
+              </div>
             </Tooltip>
           </div>
         </article>
@@ -163,26 +155,25 @@ export const ConnectionCard: FC = () => {
               >
                 {showAddress ? nodeId : HIDDEN_TEXT}
               </a>
-              <Tooltip
-                overlay={
-                  <div>
-                    {clippedNodeId
-                      ? t("wallet.copied")
-                      : t("wallet.copy_clipboard")}
-                  </div>
-                }
-                placement="top"
-              >
-                <ClipboardDocumentCheckIcon
-                  className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                  onClick={copyNodeId}
-                />
+              <ClipboardDocumentCheckIcon
+                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+                onClick={copyNodeId}
+                data-tooltip-id="node-tooltip"
+              />
+              <Tooltip id="node-tooltip">
+                <div>
+                  {clippedNodeId
+                    ? t("wallet.copied")
+                    : t("wallet.copy_clipboard")}
+                </div>
               </Tooltip>
-              <Tooltip overlay={<div>{t("home.show_qr")}</div>} placement="top">
-                <QrCodeIcon
-                  className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                  onClick={showModalHandler}
-                />
+              <QrCodeIcon
+                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+                onClick={showModalHandler}
+                data-tooltip-id="qr-tooltip"
+              />
+              <Tooltip id="qr-tooltip">
+                <div>{t("home.show_qr")}</div>
               </Tooltip>
             </div>
           </article>

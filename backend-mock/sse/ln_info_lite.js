@@ -7,6 +7,8 @@ const lnInfoLite = () => {
     implementation: "LND_GRPC",
     version: "0.13.0-beta commit=v0.13.0-beta",
     identity_pubkey: "somePubKey@Toraddress:port",
+    identity_uri:
+      "03232323082382032032323jnkjebfjbfejbkjf232232@lubvcdsds2232dssds3232.onion:1234",
     num_pending_channels: 1,
     num_active_channels: 3,
     num_inactive_channels: 2,
