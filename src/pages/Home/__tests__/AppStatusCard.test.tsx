@@ -20,7 +20,6 @@ describe("AppStatusCard", () => {
   });
 
   it("should link to 'hiddenService' if window.location is an onion address", () => {
-    console.log(global.window);
     const oldWindow = global.window;
     global.window = Object.create(window);
     Object.defineProperty(window, "location", {
@@ -32,7 +31,6 @@ describe("AppStatusCard", () => {
     render(<AppStatusCard app={testApp} />);
 
     const appCard = screen.getAllByRole("link");
-    console.log(window.location.hostname);
     expect(appCard[0].getAttribute("href")).toEqual(
       "http://hiddenservice.onion"
     );
