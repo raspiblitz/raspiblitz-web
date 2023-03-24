@@ -27,7 +27,6 @@
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
     "@heroicons/react": "^2.0.16",
     "axios": "^1.3.4",
-    "headers-polyfill": "^3.1.2",
     "i18next": "^22.4.13",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
@@ -39,12 +38,12 @@
     "react-tooltip": "^5.10.1"
   },
   "devDependencies": {
-    "@testing-library/dom": "^9.0.1",
+    "@testing-library/dom": "^9.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/node": "^18.15.5",
-    "@types/react": "^18.0.28",
+    "@types/node": "^18.15.7",
+    "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.7",
@@ -54,9 +53,9 @@
     "husky": "^8.0.3",
     "jsdom": "^21.1.1",
     "lint-staged": "^13.2.0",
-    "msw": "^1.2.0",
+    "msw": "^1.2.1",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.6",
+    "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.5",
     "tailwindcss": "^3.2.7",
     "typescript": "~5.0.2",
@@ -66,8 +65,5 @@
     "vite-tsconfig-paths": "^4.0.7",
     "vitest": "^0.29.7"
   },
-  "packageManager": "yarn@3.4.1",
-  "resolutions": {
-    "headers-polyfill": "3.1.2"
-  }
+  "packageManager": "yarn@3.4.1"
 }
