@@ -1,6 +1,6 @@
 import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AvailableBalance from "components/AvailableBalance";
-import { FC } from "react";
+import { FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -8,28 +8,48 @@ import { convertMSatToSat } from "utils/format";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../../components/InputField";
 import Message from "../../../components/Message";
+import { TxType } from "../SwitchTxType";
+import { SendLnForm } from "./SendModal";
+import { SendOnChainForm } from "./SendOnChain";
 
 export type Props = {
   lnBalance: number;
   loading: boolean;
   onConfirm: (data: LnInvoiceForm) => void;
   error: string;
+  confirmData?: SendOnChainForm | SendLnForm | null;
 };
 
 export interface LnInvoiceForm {
-  invoiceInput: string;
+  invoice: string;
 }
 
-const SendLn: FC<Props> = ({ loading, lnBalance, onConfirm, error }) => {
+const SendLn: FC<Props> = ({
+  loading,
+  lnBalance,
+  onConfirm,
+  error,
+  confirmData,
+}) => {
   const { t } = useTranslation();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm<LnInvoiceForm>({
     mode: "onChange",
   });
+
+  const [updated, setUpdated] = useState(false);
+
+  if (!updated && confirmData?.invoiceType === TxType.LIGHTNING) {
+    setUpdated(true);
+    reset({
+      invoice: confirmData.invoice,
+    });
+  }
 
   const onSubmit: SubmitHandler<LnInvoiceForm> = (data) => onConfirm(data);
 
@@ -42,7 +62,7 @@ const SendLn: FC<Props> = ({ loading, lnBalance, onConfirm, error }) => {
       <AvailableBalance balance={convertedBalance!} />
 
       <InputField
-        {...register("invoiceInput", {
+        {...register("invoice", {
           required: t("forms.validation.lnInvoice.required"),
           pattern: {
             value: /^(lnbc|lntb)\w+/i,
@@ -50,7 +70,7 @@ const SendLn: FC<Props> = ({ loading, lnBalance, onConfirm, error }) => {
           },
         })}
         label={t("wallet.invoice")}
-        errorMessage={errors.invoiceInput}
+        errorMessage={errors.invoice}
         placeholder="lnbc..."
         disabled={loading}
       />

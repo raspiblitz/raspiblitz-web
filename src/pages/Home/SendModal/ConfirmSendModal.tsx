@@ -29,7 +29,7 @@ interface IFormInputs {
 
 export type Props = {
   confirmData: SendOnChainForm | SendLnForm;
-  back: () => void;
+  back: (data: SendOnChainForm | SendLnForm) => void;
   balance: number;
   close: (confirmed: boolean) => void;
 };
@@ -131,7 +131,8 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
   return (
     <form onSubmit={handleSubmit(sendTransactionHandler)}>
       <button
-        onClick={back}
+        type="button"
+        onClick={() => back(confirmData)}
         className="flex items-center justify-center font-bold outline-none"
       >
         <ChevronLeftIcon className="inline-block h-4 w-4" />

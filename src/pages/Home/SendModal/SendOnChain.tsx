@@ -7,10 +7,12 @@ import { stringToNumber } from "utils/format";
 import AmountInput from "../../../components/AmountInput";
 import InputField from "../../../components/InputField";
 import { TxType } from "../SwitchTxType";
+import { SendLnForm } from "./SendModal";
 
 export type Props = {
   balance: number;
   onConfirm: (data: SendOnChainForm) => void;
+  confirmData?: SendOnChainForm | SendLnForm | null;
 };
 
 export interface SendOnChainForm {
@@ -23,24 +25,36 @@ export interface SendOnChainForm {
   spendAll: boolean;
 }
 
-const SendOnChain: FC<Props> = ({ balance, onConfirm }) => {
+const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isValid },
   } = useForm<SendOnChainForm>({
     mode: "onChange",
   });
+  const [updated, setUpdated] = useState(false);
+  const [amount, setAmount] = useState(0);
+
+  if (!updated && confirmData?.invoiceType === TxType.ONCHAIN) {
+    console.log("updating");
+    setUpdated(true);
+    setAmount(confirmData.amount);
+    reset({
+      address: confirmData.address,
+      comment: confirmData.comment,
+      fee: confirmData.fee,
+      spendAll: confirmData.spendAll,
+    });
+  }
 
   const spendAll = watch("spendAll", false);
   const onSubmit: SubmitHandler<SendOnChainForm> = (data) =>
     // overwrite amount to submit number instead of string
     onConfirm({ ...data, invoiceType: TxType.ONCHAIN, amount });
-
-  const [amount, setAmount] = useState(0);
-
   const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);
   };
