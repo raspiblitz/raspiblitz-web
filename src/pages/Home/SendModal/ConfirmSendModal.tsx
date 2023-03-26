@@ -169,7 +169,9 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
 
         {!isLnTx && (
           <span>
-            {formatAmount(confirmData.amount.toString(), Unit.SAT)} Sat
+            {confirmData.spendAll && t("tx.all_onchain")}
+            {!confirmData.spendAll &&
+              `${formatAmount(confirmData.amount.toString(), Unit.SAT)} Sat`}
           </span>
         )}
 
@@ -200,7 +202,6 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
             />
           </div>
         )}
-        {onChainData.spendAll && <div>Spend All</div>}
       </div>
 
       {!isLnTx && (
