@@ -15,60 +15,50 @@ import { checkError } from "../../../utils/checkError";
 import {
   convertBtcToSat,
   convertMSatToSat,
+  formatAmount,
   stringToNumber,
 } from "../../../utils/format";
 import { instance } from "../../../utils/interceptor";
 import { TxType } from "../SwitchTxType";
+import { SendLnForm } from "./SendModal";
+import { SendOnChainForm } from "./SendOnChain";
+
 interface IFormInputs {
   amountInput: string;
 }
 
 export type Props = {
-  address: string;
+  confirmData: SendOnChainForm | SendLnForm;
   back: () => void;
   balance: number;
   close: (confirmed: boolean) => void;
-  comment: string;
-  expiry: number;
-  fee: string;
-  /** amount in mSat */
-  invoiceAmount: number;
-  invoiceType: TxType;
-  /** epoch time in seconds */
-  timestamp: number;
 };
 
-const ConfirmSendModal: FC<Props> = ({
-  address,
-  back,
-  balance,
-  close,
-  comment,
-  expiry,
-  fee,
-  invoiceAmount,
-  invoiceType,
-  timestamp,
-}) => {
+const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
   const [amountInput, setAmountInput] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const isLnTx = invoiceType === TxType.LIGHTNING;
+  const isLnTx = confirmData.invoiceType === TxType.LIGHTNING;
 
   const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAmountInput(+event.target.value);
   };
 
-  const invoiceExpiryDate = (timestamp + expiry) * 1000;
+  const lnData = confirmData as SendLnForm;
+  const onChainData = confirmData as SendOnChainForm;
+
+  const invoiceExpiryDate = isLnTx
+    ? (lnData.timestamp + lnData.expiry) * 1000
+    : 0;
   const invoiceExpiryDateDecorated = new Intl.DateTimeFormat("default", {
     dateStyle: "medium",
     timeStyle: "medium",
   }).format(new Date(invoiceExpiryDate));
-  const isInvoiceExpired: boolean = isLnTx && invoiceExpiryDate < Date.now();
-  const isInvoiceAmountBiggerThanBalance: boolean = invoiceAmount > balance;
-  const isValidLnInvoice: boolean =
+  const isInvoiceExpired = isLnTx && invoiceExpiryDate < Date.now();
+  const isInvoiceAmountBiggerThanBalance = confirmData.amount > balance;
+  const isValidLnInvoice =
     !isLnTx ||
     (isLnTx && !isInvoiceExpired && !isInvoiceAmountBiggerThanBalance);
 
@@ -98,7 +88,9 @@ const ConfirmSendModal: FC<Props> = ({
       }
 
       instance
-        .post(`lightning/send-payment?pay_req=${address}${msatQuery}`)
+        .post(
+          `lightning/send-payment?pay_req=${confirmData?.address}${msatQuery}`
+        )
         .then(() => {
           setIsLoading(false);
           close(true);
@@ -108,11 +100,15 @@ const ConfirmSendModal: FC<Props> = ({
           setIsLoading(false);
         });
     } else {
+      const { spendAll, fee, address, comment, amount } =
+        confirmData as SendOnChainForm;
+      const amountBody = spendAll ? 0 : amount;
       const body = {
-        amount: invoiceAmount === 0 ? amountInput : invoiceAmount,
+        amount: amountBody,
         address,
-        sat_per_vbyte: fee,
+        sat_per_vbyte: +fee,
         label: comment,
+        send_all: spendAll,
         unit,
       };
 
@@ -148,7 +144,7 @@ const ConfirmSendModal: FC<Props> = ({
       <div className="my-2">
         <h4 className="font-bold">{addressTitle}: </h4>
         <p className="w-full break-all text-gray-600 dark:text-gray-200">
-          {address}
+          {confirmData.address}
         </p>
         {isInvoiceExpired && (
           <p className="text-red-500">
@@ -160,15 +156,27 @@ const ConfirmSendModal: FC<Props> = ({
 
       <div className="my-2">
         <h4 className="font-bold">{t("wallet.amount")}:</h4>
-        {Number(invoiceAmount) !== 0 && (
-          <span>{convertMSatToSat(invoiceAmount)} Sat</span>
+        {isLnTx && Number(confirmData.amount) !== 0 && (
+          <span>
+            {formatAmount(
+              convertMSatToSat(+confirmData.amount)?.toString()!,
+              Unit.SAT
+            )}{" "}
+            Sat
+          </span>
+        )}
+
+        {!isLnTx && (
+          <span>
+            {formatAmount(confirmData.amount.toString(), Unit.SAT)} Sat
+          </span>
         )}
 
         {isInvoiceAmountBiggerThanBalance && (
           <p className="text-red-500">{t("forms.validation.lnInvoice.max")}</p>
         )}
 
-        {Number(invoiceAmount) === 0 && (
+        {Number(confirmData.amount) === 0 && !onChainData.spendAll && (
           <div>
             <p>{t("forms.hint.invoiceAmountZero")}</p>
 
@@ -191,17 +199,19 @@ const ConfirmSendModal: FC<Props> = ({
             />
           </div>
         )}
+        {onChainData.spendAll && <div>Spend All</div>}
       </div>
 
       {!isLnTx && (
         <div className="my-2">
-          <h4 className="font-bold">{t("tx.fee")}:</h4> {fee} sat/vByte
+          <h4 className="font-bold">{t("tx.fee")}:</h4> {confirmData.fee}{" "}
+          sat/vByte
         </div>
       )}
 
-      {comment && (
+      {confirmData.comment && (
         <div className="my-2">
-          <h4 className="font-bold">{commentHeading}:</h4> {comment}
+          <h4 className="font-bold">{commentHeading}:</h4> {confirmData.comment}
         </div>
       )}
 

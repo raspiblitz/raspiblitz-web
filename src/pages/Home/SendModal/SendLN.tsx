@@ -1,6 +1,5 @@
 import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AvailableBalance from "components/AvailableBalance";
-import type { ChangeEvent } from "react";
 import { FC } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -13,32 +12,26 @@ import Message from "../../../components/Message";
 export type Props = {
   lnBalance: number;
   loading: boolean;
-  onConfirm: () => void;
-  onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
+  onConfirm: (data: LnInvoiceForm) => void;
   error: string;
 };
-interface IFormInputs {
+
+export interface LnInvoiceForm {
   invoiceInput: string;
 }
 
-const SendLn: FC<Props> = ({
-  loading,
-  lnBalance,
-  onConfirm,
-  onChangeInvoice,
-  error,
-}) => {
+const SendLn: FC<Props> = ({ loading, lnBalance, onConfirm, error }) => {
   const { t } = useTranslation();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<IFormInputs>({
+  } = useForm<LnInvoiceForm>({
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<IFormInputs> = (_) => onConfirm();
+  const onSubmit: SubmitHandler<LnInvoiceForm> = (data) => onConfirm(data);
 
   const convertedBalance = lnBalance ? convertMSatToSat(lnBalance) : 0;
 
@@ -55,7 +48,6 @@ const SendLn: FC<Props> = ({
             value: /^(lnbc|lntb)\w+/i,
             message: t("forms.validation.lnInvoice.patternMismatch"),
           },
-          onChange: onChangeInvoice,
         })}
         label={t("wallet.invoice")}
         errorMessage={errors.invoiceInput}

@@ -13,9 +13,15 @@ export type Props = {
   amount?: number;
   register: UseFormRegisterReturn;
   errorMessage?: FieldError;
+  disabled?: boolean;
 };
 
-const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
+const AmountInput: FC<Props> = ({
+  amount,
+  register,
+  errorMessage,
+  disabled = false,
+}) => {
   const { t } = useTranslation();
   const [amountInput, setAmountInput] = useState<string>(
     amount ? `${amount}` : ""
@@ -71,6 +77,7 @@ const AmountInput: FC<Props> = ({ amount, register, errorMessage }) => {
           type="text"
           value={amountInput}
           onChange={onChangeHandler}
+          disabled={disabled}
         />
         <span
           className="ml-6 flex w-4/12 items-center justify-center rounded p-1 shadow-md dark:bg-gray-600"

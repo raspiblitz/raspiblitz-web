@@ -1,4 +1,6 @@
-import { ChangeEvent, FC, useState } from "react";
+import { AxiosResponse } from "axios";
+import { DecodePayRequest } from "models/decode-pay-req";
+import { FC, useState } from "react";
 import { createPortal } from "react-dom";
 import ModalDialog from "../../../layouts/ModalDialog";
 import { MODAL_ROOT } from "../../../utils";
@@ -6,8 +8,8 @@ import { checkError } from "../../../utils/checkError";
 import { instance } from "../../../utils/interceptor";
 import SwitchTxType, { TxType } from "../SwitchTxType";
 import ConfirmSendModal from "./ConfirmSendModal";
-import SendLn from "./SendLN";
-import SendOnChain from "./SendOnChain";
+import SendLn, { LnInvoiceForm } from "./SendLN";
+import SendOnChain, { SendOnChainForm } from "./SendOnChain";
 
 export type Props = {
   lnBalance: number;
@@ -15,34 +17,43 @@ export type Props = {
   onClose: (confirmed: boolean) => void;
 };
 
+export interface SendLnForm {
+  invoiceType: TxType.LIGHTNING;
+  address: string;
+  amount: number;
+  comment: string;
+  timestamp: number;
+  expiry: number;
+}
+
 const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
-  const [invoice, setInvoice] = useState("");
-  const [confirm, setConfirm] = useState(false);
-  const [address, setAddress] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [fee, setFee] = useState("");
-  const [comment, setComment] = useState("");
-  const [timestamp, setTimestamp] = useState(0);
-  const [expiry, setExpiry] = useState(0);
+  const [confirmData, setConfirmData] = useState<
+    SendOnChainForm | SendLnForm | null
+  >(null);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const confirmLnHandler = async () => {
+  const confirmLnHandler = async (data: LnInvoiceForm) => {
     setIsLoading(true);
     setError("");
     await instance
       .get("/lightning/decode-pay-req", {
         params: {
-          pay_req: invoice,
+          pay_req: data.invoiceInput,
         },
       })
-      .then((resp) => {
-        setAmount(resp.data.num_msat);
-        setComment(resp.data.description);
-        setTimestamp(resp.data.timestamp);
-        setExpiry(resp.data.expiry);
-        setConfirm(true);
+      .then((resp: AxiosResponse<DecodePayRequest>) => {
+        const { payment_addr, num_msat, description, timestamp, expiry } =
+          resp.data;
+        setConfirmData({
+          invoiceType: TxType.LIGHTNING,
+          address: payment_addr,
+          amount: num_msat,
+          timestamp,
+          expiry,
+          comment: description,
+        });
       })
       .catch((err) => {
         setError(checkError(err));
@@ -52,58 +63,27 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
       });
   };
 
-  const confirmOnChainHandler = () => {
-    setConfirm(true);
+  const confirmOnChainHandler = (data: SendOnChainForm) => {
+    console.log(data);
+    setConfirmData(data);
   };
 
   const changeTransactionHandler = (txType: TxType) => {
     setInvoiceType(txType);
-    setInvoice("");
-    setAddress("");
-    setAmount(0);
-    setFee("");
-    setComment("");
     setError("");
   };
 
-  const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
-  };
-
-  const changeAddressHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddress(event.target.value);
-  };
-
-  const changeCommentHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setComment(event.target.value);
-  };
-
-  const changeFeeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setFee(event.target.value);
-  };
-
-  const changeInvoiceHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setInvoice(event.target.value);
-  };
-
   // confirm send
-  if (confirm) {
-    const addr = invoiceType === TxType.LIGHTNING ? invoice : address;
+  if (confirmData) {
     return (
       <ModalDialog close={() => onClose(false)}>
         <ConfirmSendModal
-          address={addr}
-          back={() => setConfirm(false)}
+          confirmData={confirmData}
+          back={() => setConfirmData(null)}
           balance={
             invoiceType === TxType.LIGHTNING ? lnBalance : onchainBalance
           }
           close={onClose}
-          comment={comment}
-          expiry={expiry}
-          fee={fee}
-          invoiceAmount={amount}
-          invoiceType={invoiceType}
-          timestamp={timestamp}
         />
       </ModalDialog>
     );
@@ -121,7 +101,6 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
 
         <SendLn
           loading={loading}
-          onChangeInvoice={changeInvoiceHandler}
           onConfirm={confirmLnHandler}
           lnBalance={lnBalance}
           error={error}
@@ -140,18 +119,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
         disabled={loading}
       />
 
-      <SendOnChain
-        address={address}
-        amount={amount}
-        balance={onchainBalance}
-        comment={comment}
-        fee={fee}
-        onChangeAmount={changeAmountHandler}
-        onChangeAddress={changeAddressHandler}
-        onChangeComment={changeCommentHandler}
-        onChangeFee={changeFeeHandler}
-        onConfirm={confirmOnChainHandler}
-      />
+      <SendOnChain balance={onchainBalance} onConfirm={confirmOnChainHandler} />
     </ModalDialog>,
     MODAL_ROOT
   );
