@@ -264,7 +264,8 @@
       "tx_details": "Detalles de la Transacción",
       "txid": "Id. de la Transacción",
       "unconfirmed": "Sin confirmar",
-      "value": "Precio"
+      "value": "Precio",
+      "spend_all": "Gastar todos los fondos"
     },
     "wallet": {
       "address": "Dirección",
