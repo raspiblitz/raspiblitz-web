@@ -293,6 +293,7 @@
       "included_block": "Included in Block",
       "mempool": "View on mempool",
       "sent": "Transaction sent!",
+      "spend_all": "Spend all funds",
       "transactions": "Transactions",
       "transactions_none": "No transactions yet, time to make your first one",
       "tx_details": "Transaction Details",

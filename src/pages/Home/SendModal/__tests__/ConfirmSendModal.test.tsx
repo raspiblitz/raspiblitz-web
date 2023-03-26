@@ -1,39 +1,41 @@
-import { render, screen, waitFor } from "test-utils";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
-import { TxType } from "../../SwitchTxType";
+import { render, screen, waitFor } from "test-utils";
 import i18n from "../../../../i18n/test_config";
 import { rest, server } from "../../../../testServer";
+import { TxType } from "../../SwitchTxType";
 import type { Props } from "../ConfirmSendModal";
 import ConfirmSendModal from "../ConfirmSendModal";
+import { SendLnForm } from "../SendModal";
+import { SendOnChainForm } from "../SendOnChain";
 
 const closeSpy = vi.fn();
 
 const basicLnTxProps: Props = {
-  address:
-    "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
+  confirmData: {
+    address:
+      "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
+    invoiceType: TxType.LIGHTNING,
+    comment: "",
+    expiry: 36000,
+    amount: 0,
+    timestamp: 1893456000, // 01 Jan 2030 00:00:00 GMT
+  } as SendLnForm,
   back: () => {},
   balance: 100,
   close: closeSpy,
-  comment: "",
-  expiry: 36000,
-  fee: "",
-  invoiceAmount: 0,
-  invoiceType: TxType.LIGHTNING,
-  timestamp: 1893456000, // 01 Jan 2030 00:00:00 GMT
 };
 
 const basicOnChainTxProps: Props = {
-  address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+  confirmData: {
+    address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+    fee: "1",
+    amount: 50000,
+    invoiceType: TxType.ONCHAIN,
+  } as SendOnChainForm,
   back: () => {},
   balance: 100,
   close: closeSpy,
-  comment: "",
-  expiry: 36000,
-  fee: "1",
-  invoiceAmount: 50,
-  invoiceType: TxType.ONCHAIN,
-  timestamp: 1893456000, // 01 Jan 2030 00:00:00 GMT
 };
 
 describe("ConfirmSendModal", () => {
@@ -130,13 +132,14 @@ describe("ConfirmSendModal", () => {
 
   describe("ln-invoice with amount above zero", () => {
     test("show error if invoice is expired", async () => {
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        timestamp: 1640995200, // Sat Jan 01 2022 08:00:00
+        expiry: 36000,
+      };
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal
-            {...basicLnTxProps}
-            timestamp={1640995200} // "Sat Jan 01 2022 08:00:00
-            expiry={36000}
-          />
+          <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
         </I18nextProvider>
       );
 
@@ -152,9 +155,13 @@ describe("ConfirmSendModal", () => {
     });
 
     test("show error if amount is bigger than balance", async () => {
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        amount: 111,
+      };
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicLnTxProps} invoiceAmount={111} />
+          <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
         </I18nextProvider>
       );
 
@@ -167,9 +174,13 @@ describe("ConfirmSendModal", () => {
     });
 
     test("valid form passes", async () => {
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        amount: 100,
+      };
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicLnTxProps} invoiceAmount={100} />
+          <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
         </I18nextProvider>
       );
 
@@ -186,9 +197,16 @@ describe("ConfirmSendModal", () => {
 
   describe("on chain tx with amount above zero", () => {
     test("show error if amount is bigger than balance", async () => {
+      const confirmData = {
+        ...basicOnChainTxProps.confirmData,
+        amount: 111,
+      };
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicOnChainTxProps} invoiceAmount={111} />
+          <ConfirmSendModal
+            {...basicOnChainTxProps}
+            confirmData={confirmData}
+          />
         </I18nextProvider>
       );
 
@@ -201,9 +219,16 @@ describe("ConfirmSendModal", () => {
     });
 
     test("valid form passes", async () => {
+      const confirmData = {
+        ...basicOnChainTxProps.confirmData,
+        amount: 50,
+      };
       render(
         <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicOnChainTxProps} invoiceAmount={50} />
+          <ConfirmSendModal
+            {...basicOnChainTxProps}
+            confirmData={confirmData}
+          />
         </I18nextProvider>
       );
 

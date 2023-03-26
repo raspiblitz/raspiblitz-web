@@ -1,7 +1,6 @@
 import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import AvailableBalance from "components/AvailableBalance";
-import type { ChangeEvent } from "react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -9,36 +8,50 @@ import { convertMSatToSat } from "utils/format";
 import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "../../../components/InputField";
 import Message from "../../../components/Message";
+import { TxType } from "../SwitchTxType";
+import { SendLnForm } from "./SendModal";
+import { SendOnChainForm } from "./SendOnChain";
 
 export type Props = {
   lnBalance: number;
   loading: boolean;
-  onConfirm: () => void;
-  onChangeInvoice: (event: ChangeEvent<HTMLInputElement>) => void;
+  onConfirm: (data: LnInvoiceForm) => void;
   error: string;
+  confirmData?: SendOnChainForm | SendLnForm | null;
 };
-interface IFormInputs {
-  invoiceInput: string;
+
+export interface LnInvoiceForm {
+  invoice: string;
 }
 
 const SendLn: FC<Props> = ({
   loading,
   lnBalance,
   onConfirm,
-  onChangeInvoice,
   error,
+  confirmData,
 }) => {
   const { t } = useTranslation();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
-  } = useForm<IFormInputs>({
+  } = useForm<LnInvoiceForm>({
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<IFormInputs> = (_) => onConfirm();
+  const [updated, setUpdated] = useState(false);
+
+  if (!updated && confirmData?.invoiceType === TxType.LIGHTNING) {
+    setUpdated(true);
+    reset({
+      invoice: confirmData.invoice,
+    });
+  }
+
+  const onSubmit: SubmitHandler<LnInvoiceForm> = (data) => onConfirm(data);
 
   const convertedBalance = lnBalance ? convertMSatToSat(lnBalance) : 0;
 
@@ -49,16 +62,15 @@ const SendLn: FC<Props> = ({
       <AvailableBalance balance={convertedBalance!} />
 
       <InputField
-        {...register("invoiceInput", {
+        {...register("invoice", {
           required: t("forms.validation.lnInvoice.required"),
           pattern: {
             value: /^(lnbc|lntb)\w+/i,
             message: t("forms.validation.lnInvoice.patternMismatch"),
           },
-          onChange: onChangeInvoice,
         })}
         label={t("wallet.invoice")}
-        errorMessage={errors.invoiceInput}
+        errorMessage={errors.invoice}
         placeholder="lnbc..."
         disabled={loading}
       />
