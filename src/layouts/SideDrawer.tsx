@@ -25,7 +25,7 @@ export const SideDrawer: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <nav className="content-container sidebar fixed hidden w-full flex-col justify-between overflow-y-scroll bg-white px-2 pb-16 pt-8 shadow-md transition-colors dark:bg-gray-800 lg:flex lg:w-64">
+    <nav className="content-container sidebar fixed hidden w-full flex-col justify-between overflow-y-auto bg-white px-2 pb-16 pt-8 shadow-md transition-colors dark:bg-gray-800 lg:flex lg:w-64">
       <div className="flex flex-col items-center justify-center">
         <NavLink to="/home" className={(props) => createClassName(props)}>
           <HomeIcon className={navIconClasses} />
