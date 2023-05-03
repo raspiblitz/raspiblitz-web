@@ -17,7 +17,9 @@
       "tx_details": "Detalhes da transação",
       "txid": "ID da transação",
       "unconfirmed": "Não confirmado",
-      "value": "Valor"
+      "value": "Valor",
+      "spend_all": "Gastar todos os fundos on-chain",
+      "all_onchain": "Todos os fundos on-chain"
     },
     "appInfo": {
       "btc-rpc-explorer": {
@@ -47,6 +49,10 @@
       "thunderhub": {
         "about": "ThunderHub é um gestor de LND de código aberto onde pode gerir e monitorar o seu nó em qualquer aparelho ou navegador. Permite que assuma o controle da Lightning Network com um UX simples e intuitivo e a pilha de tecnologia mais atualizada.",
         "shortDescription": "LND Lightning Node Manager no seu navegador"
+      },
+      "jam": {
+        "about": "Jam é uma interface web para o JoinMarket focada em ser uma interface amigável e de fácil utilização. Sua meta é prover padrões coerentes e ser de fácil utilização para usuários iniciantes, mesmo mantendo as ferramentas avançadas que usuários mais experientes esperam.",
+        "shortDescription": "Jam - Uma interface web para o JoinMarket"
       }
     },
     "apps": {
@@ -156,7 +162,12 @@
       "urgent": "Urgente",
       "version": "Versão",
       "versions": "Versões",
-      "webui": "Interface de utilizador"
+      "webui": "Interface de utilizador",
+      "list_open_channels": "Lista de Canais",
+      "no_open_channels": "Você não possui canais abertos neste momento",
+      "onchain_cln_no_support": "Transações On-chain feitas em versões anteriores ao RaspiBlitz v1.9 podem não aparecer com a Core Lightning",
+      "not_available": "Indisponível",
+      "connect_node": "Compartilhe este endereço para que outras pessoas possam se conectar ao seu node lightning"
     },
     "language": {
       "cs": "Tcheco",
@@ -176,10 +187,12 @@
       "enter_pass": "Digite a palavra-passe A",
       "enter_pass_placeholder": "Palavra-passe A",
       "invalid_pass": "Palavra-passe inválida",
-      "login": "Acessar"
+      "login": "Acessar",
+      "error": "Ocorreu um erro",
+      "unknown_error": "Erro desconhecido. A resposta foi: {{code}} {{statusText}}."
     },
     "navigation": {
-      "apps": "Apps",
+      "apps": "Aplicativos",
       "back": "Voltar",
       "dark_mode": "Modo escuro",
       "display_sats": "Exibir SATS",
@@ -198,7 +211,12 @@
       "old_pw": "Palavra-passe antiga",
       "pass_a_changed": "Palavra-passe A alterada com sucesso",
       "reboot": "Reiniciar",
-      "shutdown": "Desligar"
+      "shutdown": "Desligar",
+      "generate_debug": "Gerar Relatório de Debug",
+      "generate": "Gerar",
+      "generating": "Gerando",
+      "generating_debug_report": "Gerando Relatório de Debug. Pode levar algum tempo.",
+      "debug_report_done": "Relatório de Debug criado!"
     },
     "setup": {
       "blockchain_delete": "Deletar Blockchain",
@@ -281,7 +299,8 @@
       "sync_wallet_unlock": "Desbloquear carteira",
       "updateblitz": "Atualizar o meu RaspiBlitz",
       "yes": "Sim",
-      "yes_and_migrate": "Migrar para RaspiBlitz"
+      "yes_and_migrate": "Migrar para RaspiBlitz",
+      "cln": "Core Lightning"
     },
     "wallet": {
       "address": "Endereço",
@@ -305,7 +324,12 @@
       "unlock_success": "Carteira Desbloqueada",
       "unlock_title": "Carteira desbloqueada",
       "unlocking": "Desbloqueio",
-      "wallet_locked": "Carteira bloqueada"
+      "wallet_locked": "Carteira bloqueada",
+      "available_balance": "Balanço disponível"
+    },
+    "error": {
+      "stack": "Rastreamento de Stack",
+      "report": "Favor reportar este erro para"
     }
   }
 }
