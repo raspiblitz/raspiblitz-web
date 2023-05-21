@@ -22,7 +22,8 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
     return <li className="h-24 px-0 py-2 md:px-4"></li>;
   }
 
-  const { amount, category, time_stamp, type, comment, status } = transaction;
+  const { amount, category, time_stamp, type, comment, status, num_confs } =
+    transaction;
 
   const sendingTx = type === "send";
   const sign = sendingTx ? "" : "+";
@@ -54,7 +55,12 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
     >
       <div className="flex w-full items-center justify-center">
         <div className="w-2/12">
-          <CategoryIcon category={category} type={type} status={status} />
+          <CategoryIcon
+            category={category}
+            type={type}
+            status={status}
+            confirmations={num_confs ? num_confs : undefined}
+          />
         </div>
         <time className="w-5/12 text-sm" dateTime={isoString}>
           {formattedDate}
