@@ -29,7 +29,16 @@ export default defineConfig({
     setupFiles: ["./src/setupTests.ts"],
     coverage: {
       reporter: ["text", "html"],
-      exclude: ["node_modules/", "src/setupTests.ts"],
+      all: true,
+      include: ["src"],
+      exclude: [
+        "src/setupTests.ts",
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.d.ts",
+        "src/testServer.ts",
+        "src/utils/test-utils.tsx",
+      ],
     },
   },
 });
