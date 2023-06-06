@@ -10,7 +10,7 @@ Thank you for providing translations! 🙏
 - French: J. Lavoie, [@bitpaint](https://github.com/bitpaint)
 - German: J.Lavoie, Me, [@escapedcat](https://github.com/escapedcat), [@ViktorReinhold](https://github.com/ViktorReinhold), [@jungusemlevve](https://github.com/jungusemlevve)
 - Portuguese (Brazil) [@Nom4d3](https://github.com/Nom4d3) [@bitcoinheiro](https://github.com/bitcoinheiro) [mbombonato](https://github.com/mbombonato), Felipe Cavalhero Ojeda, [@SantosSi](https://github.com/SantosSi)
-- Portuguese [@SantosSi](https://github.com/SantosSi)
+- Portuguese [@SantosSi](https://github.com/SantosSi), [@snoo](https://github.com/MineStackRepeat)
 - Hungarian [@karozagorus](https://github.com/karozagorus)
 - Italian: [GiovanniZotta](https://github.com/GiovanniZotta)
 - Spanish: [moses](https://github.com/mosmat), [Sebas Arriola](https://github.com/sebdeveloper6952), drjonesklaus, Eduardo Malaspina, [gallegonovato](https://github.com/gallegonovato)
