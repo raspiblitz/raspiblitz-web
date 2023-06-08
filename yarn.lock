@@ -2526,9 +2526,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:^0.31.4":
-  version: 0.31.4
-  resolution: "@vitest/coverage-c8@npm:0.31.4"
+"@vitest/coverage-c8@npm:^0.32.0":
+  version: 0.32.0
+  resolution: "@vitest/coverage-c8@npm:0.32.0"
   dependencies:
     "@ampproject/remapping": ^2.2.1
     c8: ^7.13.0
@@ -2537,7 +2537,7 @@ __metadata:
     std-env: ^3.3.2
   peerDependencies:
     vitest: ">=0.30.0 <1"
-  checksum: 81a462adf47456b46a6a71d868dc0654fff2f6d4d685877145fc966d8ec8508e4ebb1ae90f62f2903d449b5a7cdf8d76e7dc6b0f117921787a629fb727dd974a
+  checksum: 8a31e08ef373f643b3823f412a3b01239b38dfc212653bcbebc56ead5fd8ee0f744232c62ebb5297604e1ddda249797d8b01fde47d96512ecac4e57c112d668a
   languageName: node
   linkType: hard
 
@@ -6855,7 +6855,7 @@ __metadata:
     "@types/react": ^18.2.8
     "@types/react-dom": ^18.2.4
     "@vitejs/plugin-react": ^4.0.0
-    "@vitest/coverage-c8": ^0.31.4
+    "@vitest/coverage-c8": ^0.32.0
     autoprefixer: ^10.4.14
     axios: ^1.4.0
     eslint: ^8.42.0
