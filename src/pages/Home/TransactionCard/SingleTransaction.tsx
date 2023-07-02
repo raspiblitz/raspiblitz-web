@@ -50,7 +50,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
 
   return (
     <li
-      className="flex h-24 cursor-pointer flex-col justify-center px-0 py-2 text-center hover:bg-gray-300 dark:hover:bg-gray-500 md:px-4"
+      className="flex h-24 cursor-pointer flex-col justify-center border-b border-gray-200 px-0 py-2 text-center hover:bg-gray-100 dark:border-gray-400 dark:hover:bg-gray-700 md:px-4"
       onClick={onClick}
     >
       <div className="flex w-full items-center justify-center">
@@ -62,19 +62,16 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
             confirmations={num_confs ? num_confs : undefined}
           />
         </div>
-        <time className="w-5/12 text-sm" dateTime={isoString}>
+        <time className="w-5/12 text-left text-sm" dateTime={isoString}>
           {formattedDate}
         </time>
-        <p className={`inline-block w-8/12 ${color}`}>
+        <p className={`inline-block w-8/12 text-right ${color}`}>
           {sign}
           {formattedAmount} {unit}
         </p>
       </div>
       <div className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center italic">
         {comment || "Transaction"}
-      </div>
-      <div className="mx-auto h-1 w-full pt-4">
-        <div className="border border-b border-gray-200 dark:border-gray-400" />
       </div>
     </li>
   );

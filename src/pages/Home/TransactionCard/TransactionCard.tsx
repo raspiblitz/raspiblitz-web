@@ -113,13 +113,13 @@ const TransactionCard: FC<Props> = ({
             <button
               onClick={pageBackwardHandler}
               disabled={page === 0}
-              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50"
+              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50 disabled:hover:bg-black"
             >
               <ArrowDownIcon className="h-6 w-6 rotate-90 transform" />
             </button>
 
             <button
-              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50"
+              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50 disabled:hover:bg-black"
               onClick={pageForwardHandler}
               disabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
             >
