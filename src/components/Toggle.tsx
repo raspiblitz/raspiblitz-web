@@ -12,7 +12,9 @@ const Toggle: FC<Props> = ({ toggleText, active, toggleFn }) => {
 
   return (
     <div className="flex w-full items-center justify-center" onClick={toggleFn}>
-      <div className="w-2/3">{toggleText}&nbsp;</div>
+      <div className="w-2/3 cursor-default pl-8 text-left">
+        {toggleText}&nbsp;
+      </div>
       <div className="w-1/3">
         <div
           className={`flex h-3 w-10 items-center rounded-full duration-300 ease-in-out ${color}`}

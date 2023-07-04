@@ -49,7 +49,7 @@ const Header: FC = () => {
         <Bars3Icon
           ref={menu}
           onClick={showDropdownHandler}
-          className="h-8 w-8"
+          className="h-8 w-8 cursor-pointer hover:text-yellow-400"
         />
         {showDropdown && <DropdownMenu ref={dropdown} />}
       </div>

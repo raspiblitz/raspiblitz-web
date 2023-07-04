@@ -143,10 +143,10 @@ export const ConnectionCard: FC = () => {
             </h6>
             <div className="flex">
               <a
-                className={`${
+                className={`w-8/12 ${
                   showAddress
-                    ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
-                    : "text-blur w-10/12"
+                    ? "overflow-hidden overflow-ellipsis text-blue-400 underline"
+                    : "text-blur"
                 }`}
                 title={`${nodeId}`}
                 href={`ssh://${nodeId}`}
@@ -155,6 +155,14 @@ export const ConnectionCard: FC = () => {
               >
                 {showAddress ? nodeId : HIDDEN_TEXT}
               </a>
+              <QrCodeIcon
+                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+                onClick={showModalHandler}
+                data-tooltip-id="qr-tooltip"
+              />
+              <Tooltip id="qr-tooltip">
+                <div>{t("home.show_qr")}</div>
+              </Tooltip>
               <ClipboardDocumentCheckIcon
                 className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
                 onClick={copyNodeId}
@@ -166,14 +174,6 @@ export const ConnectionCard: FC = () => {
                     ? t("wallet.copied")
                     : t("wallet.copy_clipboard")}
                 </div>
-              </Tooltip>
-              <QrCodeIcon
-                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
-                onClick={showModalHandler}
-                data-tooltip-id="qr-tooltip"
-              />
-              <Tooltip id="qr-tooltip">
-                <div>{t("home.show_qr")}</div>
               </Tooltip>
             </div>
           </article>
