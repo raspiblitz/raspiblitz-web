@@ -64,7 +64,7 @@ export const AppCard: FC<Props> = ({
         {installed && (
           <>
             <LockOpenIcon
-              className="absolute top-0 right-0 h-6 w-6"
+              className="absolute right-0 top-0 h-6 w-6"
               data-tooltip-id="login-tooltip"
             />
             <Tooltip id="login-tooltip">

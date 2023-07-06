@@ -1,10 +1,7 @@
 ---
 name: Issue
 about: Create an issue
-title: ''
+title: ""
 labels: check
-assignees: ''
-
+assignees: ""
 ---
-
-
