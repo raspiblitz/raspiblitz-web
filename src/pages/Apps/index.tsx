@@ -73,7 +73,7 @@ export const Apps: FC = () => {
   }
 
   return (
-    <main className="content-container page-container bg-gray-100 p-5 transition-colors dark:bg-gray-700 dark:text-white lg:pt-8 lg:pb-8 lg:pr-8">
+    <main className="content-container page-container bg-gray-100 p-5 transition-colors dark:bg-gray-700 dark:text-white lg:pb-8 lg:pr-8 lg:pt-8">
       {isLoading && (
         <section className="content-container flex items-center justify-center">
           <LoadingSpinner color="text-yellow-500" />
@@ -82,7 +82,7 @@ export const Apps: FC = () => {
       {!isLoading && (
         <>
           <section className="flex h-full flex-wrap">
-            <h2 className="w-full pt-8 pb-5 text-xl font-bold dark:text-gray-200">
+            <h2 className="w-full pb-5 pt-8 text-xl font-bold dark:text-gray-200">
               {t("apps.installed")}
             </h2>
             <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
@@ -103,7 +103,7 @@ export const Apps: FC = () => {
             </div>
           </section>
           <section className="flex h-full flex-wrap">
-            <h2 className="block w-full pt-8 pb-5 text-xl font-bold dark:text-gray-200">
+            <h2 className="block w-full pb-5 pt-8 text-xl font-bold dark:text-gray-200">
               {t("apps.available")}
             </h2>
             <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">

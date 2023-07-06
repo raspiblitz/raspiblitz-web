@@ -22,7 +22,7 @@ const ImageCarousel: FC<Props> = ({ imgs }) => {
 
   return (
     <div className="relative inline-block">
-      <div className="absolute left-0 right-0 bottom-0 mb-5 flex justify-center gap-5 p-0">
+      <div className="absolute bottom-0 left-0 right-0 mb-5 flex justify-center gap-5 p-0">
         {imgs.map((_, index) => {
           if (activeImg === index) {
             return (

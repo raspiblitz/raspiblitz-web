@@ -221,7 +221,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
 
       <div className="flex justify-around px-2 py-5">
         <button
-          className="flex rounded bg-red-500 py-2 px-3 text-white shadow-xl hover:bg-red-400"
+          className="flex rounded bg-red-500 px-3 py-2 text-white shadow-xl hover:bg-red-400"
           onClick={() => close(false)}
           disabled={isLoading}
         >
@@ -230,7 +230,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
         </button>
 
         <ButtonWithSpinner
-          className="bd-button flex py-2 px-3"
+          className="bd-button flex px-3 py-2"
           type="submit"
           loading={isLoading}
           icon={<CheckIcon className="inline h-6 w-6" />}
