@@ -4936,12 +4936,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.2.7":
-  version: 23.2.7
-  resolution: "i18next@npm:23.2.7"
+"i18next@npm:^23.2.8":
+  version: 23.2.8
+  resolution: "i18next@npm:23.2.8"
   dependencies:
     "@babel/runtime": ^7.22.5
-  checksum: b5fdf0d7a8bda38fde39b5968fe637ccc22e7d2157f729008b4d34fb8474df93d82bcbdfabe51bf1286176669409aad3fe68b0934cadeb9f9b95f45ddf74fc79
+  checksum: 6f01943cc8bf3e9315773fecbed2a8bcede4575dd505badea12c8f07b69936f5d0474dc6a724b123bedc8a3db4e12dca1e377d807eda90f1bd53d8f66b4694fb
   languageName: node
   linkType: hard
 
@@ -6813,7 +6813,7 @@ __metadata:
     eslint: ^8.44.0
     eslint-config-react-app: ^7.0.1
     husky: ^8.0.3
-    i18next: ^23.2.7
+    i18next: ^23.2.8
     jsdom: ^22.1.0
     lint-staged: ^13.2.3
     msw: ^1.2.2
