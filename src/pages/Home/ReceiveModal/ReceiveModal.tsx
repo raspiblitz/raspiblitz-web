@@ -10,7 +10,7 @@ import InputField from "../../../components/InputField";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import Message from "../../../components/Message";
 import { AppContext, Unit } from "../../../context/app-context";
-import ModalDialog from "../../../layouts/ModalDialog";
+import Modal from "../../../layouts/Modal";
 import { MODAL_ROOT } from "../../../utils";
 import { checkError } from "../../../utils/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../utils/format";
@@ -104,11 +104,11 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
     generateInvoiceHandler();
 
   return createPortal(
-    <ModalDialog close={onClose}>
-      <div className="text-xl font-bold">
-        {showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
-      </div>
-
+    <Modal
+      close={onClose}
+      showFooter={!address}
+      title={showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
+    >
       <div className="my-3">
         <SwitchTxType
           invoiceType={invoiceType}
@@ -174,7 +174,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
       </form>
 
       {address && <ReceiveOnChain address={address} />}
-    </ModalDialog>,
+    </Modal>,
     MODAL_ROOT
   );
 };

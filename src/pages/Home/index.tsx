@@ -156,6 +156,7 @@ const Home: FC = () => {
   const closeModalHandler = (txSent?: boolean) => {
     setShowModal(false);
     setDetailTx(null);
+
     if (txSent) {
       toast.success(t("tx.sent"), { theme });
     }

@@ -41,16 +41,17 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
   return (
     <ModalBackground>
       <div className="xl:max-w-screen-sm flex h-screen max-h-full w-screen flex-col overflow-y-auto rounded-lg bg-white pb-4 text-center shadow-xl dark:bg-gray-800 dark:text-white md:h-auto md:w-4/5 lg:w-1/2 xl:mx-5 xl:w-2/5">
-        <div className="flex pr-2 pt-1">
+        <div className="relative">
           <button
             onClick={closeModal}
-            className={`ml-auto mt-1 flex h-7 w-7 items-end ${
+            className={`aboslute right-2 top-2 h-7 w-7 ${
               closeable ? "" : "invisible"
             }`}
           >
             <XMarkIcon className="h-full w-full" />
           </button>
         </div>
+
         <div className="flex h-full flex-col justify-center px-5">
           {children}
         </div>
