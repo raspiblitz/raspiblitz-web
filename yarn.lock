@@ -2535,9 +2535,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "@vitejs/plugin-react@npm:4.0.2"
+"@vitejs/plugin-react@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "@vitejs/plugin-react@npm:4.0.3"
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/plugin-transform-react-jsx-self": ^7.22.5
@@ -2545,7 +2545,7 @@ __metadata:
     react-refresh: ^0.14.0
   peerDependencies:
     vite: ^4.2.0
-  checksum: 07eeb28ad0f60dc6289367e64a58cd6d0b0d856a227ef6ea17e7af3f548d7940707ec56ad296f2c34cb7aab2fc4d76473d1a05c148277136ce0bfe294ce13bf4
+  checksum: dd9136aec8f30b0251b88f390c60b8ee5472454884c4f82720725c213f8988bf8e202cc2430e575a268d413c1dc7257a51b342ac431a43c02d923de932c5707c
   languageName: node
   linkType: hard
 
@@ -4936,12 +4936,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.2.8":
-  version: 23.2.8
-  resolution: "i18next@npm:23.2.8"
+"i18next@npm:^23.2.11":
+  version: 23.2.11
+  resolution: "i18next@npm:23.2.11"
   dependencies:
     "@babel/runtime": ^7.22.5
-  checksum: 6f01943cc8bf3e9315773fecbed2a8bcede4575dd505badea12c8f07b69936f5d0474dc6a724b123bedc8a3db4e12dca1e377d807eda90f1bd53d8f66b4694fb
+  checksum: ce4d16db9404a2a1fd929029ff0106dd92c7d719b6157e4551516ef2ab2917688a5ad712326f5869829614b01601839aa2900f40296b6c4a1efa9b802491477f
   languageName: node
   linkType: hard
 
@@ -6806,14 +6806,14 @@ __metadata:
     "@types/node": ^20.4.1
     "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
-    "@vitejs/plugin-react": ^4.0.2
+    "@vitejs/plugin-react": ^4.0.3
     "@vitest/coverage-v8": ^0.33.0
     autoprefixer: ^10.4.14
     axios: ^1.4.0
     eslint: ^8.44.0
     eslint-config-react-app: ^7.0.1
     husky: ^8.0.3
-    i18next: ^23.2.8
+    i18next: ^23.2.11
     jsdom: ^22.1.0
     lint-staged: ^13.2.3
     msw: ^1.2.2
