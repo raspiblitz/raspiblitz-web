@@ -120,7 +120,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
         className="flex w-full flex-col items-center"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <fieldset className="mb-5 w-4/5">
+        <fieldset className="mb-5 sm:w-96">
           {isLoading && (
             <div className="p-5">
               <LoadingSpinner />
@@ -158,7 +158,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
 
           {error && <Message message={error} />}
 
-          {!address && showLnInvoice && (
+          {showLnInvoice && !address && (
             <div className="flex items-center justify-center">
               <button
                 type="submit"

@@ -9,8 +9,8 @@ module.exports = {
         "bd-yellow-dark": "#F7CB47",
       },
     },
-    maxWidth: {
-      "4/5": "80%",
-    },
+    // maxWidth: {
+    //   "4/5": "80%",
+    // },
   },
 };
