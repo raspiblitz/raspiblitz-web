@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import ConfirmModal from "../../components/ConfirmModal";
 import useSSE from "../../hooks/use-sse";
 import { enableGutter } from "../../utils";
@@ -124,8 +124,23 @@ const Settings: FC = () => {
           confirmEndpoint="/system/shutdown"
         />
       )}
+
       <ActionBox
-        name={t("settings.alby.title")}
+        name={
+          <Trans
+            i18nKey={"settings.alby.title"}
+            t={t}
+            components={[
+              // eslint-disable-next-line jsx-a11y/anchor-has-content
+              <a
+                className="underline"
+                target="_blank"
+                rel="noreferrer"
+                href="https://getalby.com"
+              ></a>,
+            ]}
+          />
+        }
         actionName={t("settings.alby.label")}
         action={addAlbyAccountHandler}
       />

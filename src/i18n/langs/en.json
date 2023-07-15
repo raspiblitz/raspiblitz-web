@@ -198,7 +198,7 @@
       "debug_report_done": "Debug Report created!",
       "connection_info_error": "Could not get connection info",
       "alby": {
-        "title": "Add LND account to Alby",
+        "title": "Add LND account to <0>Alby</0>",
         "label": "Add account",
         "connection": {
           "hint": "Please install the Alby extension first",
