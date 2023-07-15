@@ -195,7 +195,17 @@
       "generate": "Generate",
       "generating": "Generating",
       "generating_debug_report": "Generating Debug Report. This can take some time.",
-      "debug_report_done": "Debug Report created!"
+      "debug_report_done": "Debug Report created!",
+      "connection_info_error": "Could not get connection info",
+      "alby": {
+        "title": "Add LND account to Alby",
+        "label": "Add account",
+        "connection": {
+          "hint": "Please install the Alby extension first",
+          "success": "Raspiblitz account was added to Alby",
+          "error": "Adding Raspiblitz to Alby didn't work, please try again"
+        }
+      }
     },
     "setup": {
       "blockchain_delete": "Delete Blockchain",
