@@ -32,6 +32,10 @@
       "jam": {
         "about": "Jam is a web interface for JoinMarket focusing on user-friendliness and ease-of-use. It aims to provide sensible defaults and be easy to use for beginners while still having the features advanced users expect.",
         "shortDescription": "Jam - A web interface for JoinMarket"
+      },
+      "alby": {
+        "about": "Alby is a browser extension...MORE TEXT",
+        "shortDescription": "Alby - A browser extension FOR..."
       }
     }
   }

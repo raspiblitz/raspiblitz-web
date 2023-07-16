@@ -32,6 +32,20 @@
       "jam": {
         "about": "Jam is a web interface for JoinMarket focusing on user-friendliness and ease-of-use. It aims to provide sensible defaults and be easy to use for beginners while still having the features advanced users expect.",
         "shortDescription": "Jam - A web interface for JoinMarket"
+      },
+      "alby": {
+        "about": "Alby is a browser extension...MORE TEXT",
+        "shortDescription": "Alby - A browser extension FOR...",
+        "action": {
+          "install": "Install Alby",
+          "addAccount": "Connect",
+          "connection_info_error": "Could not get connection info",
+          "connection": {
+            "hint": "Please install the Alby extension first",
+            "success": "Raspiblitz account was added to Alby",
+            "error": "Adding Raspiblitz to Alby didn't work, please try again"
+          }
+        }
       }
     },
     "apps": {
@@ -195,17 +209,7 @@
       "generate": "Generate",
       "generating": "Generating",
       "generating_debug_report": "Generating Debug Report. This can take some time.",
-      "debug_report_done": "Debug Report created!",
-      "connection_info_error": "Could not get connection info",
-      "alby": {
-        "title": "Add LND account to <0>Alby</0>",
-        "label": "Add account",
-        "connection": {
-          "hint": "Please install the Alby extension first",
-          "success": "Raspiblitz account was added to Alby",
-          "error": "Adding Raspiblitz to Alby didn't work, please try again"
-        }
-      }
+      "debug_report_done": "Debug Report created!"
     },
     "setup": {
       "blockchain_delete": "Delete Blockchain",
