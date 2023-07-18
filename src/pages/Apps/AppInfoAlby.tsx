@@ -69,14 +69,17 @@ export const AppInfo: FC<Props> = ({ app, onClose }) => {
 
     const { lnd_admin_macaroon, lnd_rest_onion } = resp.data;
 
-    if (!window.alby) {
+    const albyProvider = window.alby;
+
+    if (!albyProvider) {
       toast.error(t(`appInfo.${id}.action.connection.hint`));
+      return;
     }
 
     try {
-      await window.alby.enable();
+      await albyProvider.enable();
 
-      const result = await window.alby.addAccount({
+      const result = await albyProvider.addAccount({
         name: "⚡️ Raspiblitz",
         connector: "lnd",
         config: {
