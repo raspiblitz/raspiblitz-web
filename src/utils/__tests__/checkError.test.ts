@@ -7,6 +7,7 @@ vi.mock("i18next", () => ({
 describe("checkError", () => {
   it("should display the message with basic detail object", () => {
     const errorMsg = checkError({
+      // @ts-ignore
       response: {
         data: {
           detail: "old password format invalid",
@@ -18,6 +19,7 @@ describe("checkError", () => {
 
   it("should display the message with detail.msg object", () => {
     const errorMsg = checkError({
+      // @ts-ignore
       response: {
         data: {
           detail: [
@@ -40,6 +42,7 @@ describe("checkError", () => {
 
   it("should display the message with detail as an array", () => {
     const errorMsg = checkError({
+      // @ts-ignore
       response: {
         data: {
           detail: [

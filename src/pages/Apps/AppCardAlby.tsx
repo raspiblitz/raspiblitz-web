@@ -1,7 +1,6 @@
 import { InformationCircleIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { AppStatus } from "../..//models/app-status";
 import { App } from "../..//models/app.model";
 import AppIcon from "../../components/AppIcon";
 import { toast } from "react-toastify";
@@ -9,7 +8,6 @@ import { instance } from "../../utils/interceptor";
 
 export type Props = {
   appInfo: App;
-  appStatusInfo: AppStatus;
   onOpenDetails: (app: App) => void;
 };
 
