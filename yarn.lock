@@ -6635,16 +6635,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-tailwindcss@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "prettier-plugin-tailwindcss@npm:0.3.0"
+"prettier-plugin-tailwindcss@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "prettier-plugin-tailwindcss@npm:0.4.1"
   peerDependencies:
     "@ianvs/prettier-plugin-sort-imports": "*"
     "@prettier/plugin-pug": "*"
     "@shopify/prettier-plugin-liquid": "*"
     "@shufo/prettier-plugin-blade": "*"
     "@trivago/prettier-plugin-sort-imports": "*"
-    prettier: ">=2.2.0"
+    prettier: ^2.2 || ^3.0
     prettier-plugin-astro: "*"
     prettier-plugin-css-order: "*"
     prettier-plugin-import-sort: "*"
@@ -6686,7 +6686,7 @@ __metadata:
       optional: true
     prettier-plugin-twig-melody:
       optional: true
-  checksum: 007c09558433dac0c81d42fd9695f8ed17be56be2e446a03e2557f01ae8e26bb11945780f9afa4e6e90b861aad3fbfac6a65d381804273d5539e7d26b0a270c9
+  checksum: 9bdf3b7c270cc544f6bc38bbb869d3a97afc93de5005eee7272a36f374488731349c9362d2bbe4c83bd2a14b8a7c96cd25b9b682d1bea6dccc5bf08b2d02096c
   languageName: node
   linkType: hard
 
@@ -6819,7 +6819,7 @@ __metadata:
     msw: ^1.2.2
     postcss: ^8.4.25
     prettier: ^2.8.8
-    prettier-plugin-tailwindcss: ^0.3.0
+    prettier-plugin-tailwindcss: ^0.4.1
     qrcode.react: ^3.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
