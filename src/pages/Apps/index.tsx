@@ -13,7 +13,6 @@ import { instance } from "../../utils/interceptor";
 import AppCard from "./AppCard";
 import AppCardAlby from "./AppCardAlby";
 import AppInfo from "./AppInfo";
-import AppInfoAlby from "./AppInfoAlby";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
@@ -61,22 +60,17 @@ export const Apps: FC = () => {
   };
 
   if (showDetails && app) {
-    let appInfos;
-    if (app.id === "alby") {
-      return <AppInfoAlby app={app} onClose={closeDetailsHandler} />;
-    } else {
-      appInfos = appStatus.find((a) => a.id === app.id)!;
-      return (
-        <AppInfo
-          app={app}
-          appStatusInfo={appInfos}
-          installingApp={installingApp}
-          onInstall={() => installHandler(app.id)}
-          onUninstall={() => uninstallHandler(app.id)}
-          onClose={closeDetailsHandler}
-        />
-      );
-    }
+    const appInfos = appStatus.find((a) => a.id === app.id)!;
+    return (
+      <AppInfo
+        app={app}
+        appStatusInfo={appInfos}
+        installingApp={installingApp}
+        onInstall={() => installHandler(app.id)}
+        onUninstall={() => uninstallHandler(app.id)}
+        onClose={closeDetailsHandler}
+      />
+    );
   }
 
   return (
@@ -130,10 +124,7 @@ export const Apps: FC = () => {
               })}
 
               <article>
-                <AppCardAlby
-                  appInfo={availableApps.get("alby")!}
-                  onOpenDetails={openDetailsHandler}
-                />
+                <AppCardAlby appInfo={availableApps.get("alby")!} />
               </article>
             </div>
           </section>

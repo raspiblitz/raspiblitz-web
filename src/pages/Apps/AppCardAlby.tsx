@@ -1,4 +1,4 @@
-import { InformationCircleIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { App } from "../..//models/app.model";
@@ -8,10 +8,9 @@ import { instance } from "../../utils/interceptor";
 
 export type Props = {
   appInfo: App;
-  onOpenDetails: (app: App) => void;
 };
 
-export const AppCard: FC<Props> = ({ appInfo, onOpenDetails }) => {
+export const AppCardAlby: FC<Props> = ({ appInfo }) => {
   const { id, name } = appInfo;
   const { t } = useTranslation();
 
@@ -94,17 +93,9 @@ export const AppCard: FC<Props> = ({ appInfo, onOpenDetails }) => {
             {t(`appInfo.${id}.action.install`)}
           </a>
         )}
-
-        <button
-          className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
-          onClick={() => onOpenDetails(appInfo)}
-        >
-          <InformationCircleIcon className="inline h-6 w-6" />
-          &nbsp;{t("apps.info")}
-        </button>
       </div>
     </div>
   );
 };
 
-export default AppCard;
+export default AppCardAlby;
