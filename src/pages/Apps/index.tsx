@@ -124,7 +124,7 @@ export const Apps: FC = () => {
               })}
 
               <article>
-                <AppCardAlby appInfo={availableApps.get("alby")!} />
+                <AppCardAlby />
               </article>
             </div>
           </section>

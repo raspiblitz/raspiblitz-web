@@ -74,13 +74,4 @@ export const availableApps: Map<string, App> = new Map([
       repository: "https://github.com/joinmarket-webui/jam",
     },
   ],
-  [
-    "alby",
-    {
-      id: "alby",
-      name: "Alby",
-      author: "Alby Team",
-      repository: "https://github.com/getAlby/lightning-browser-extension",
-    },
-  ],
 ]);

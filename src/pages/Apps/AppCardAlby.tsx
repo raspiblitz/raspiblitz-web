@@ -1,17 +1,16 @@
 import { PlusIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { App } from "../..//models/app.model";
 import AppIcon from "../../components/AppIcon";
 import { toast } from "react-toastify";
 import { instance } from "../../utils/interceptor";
 
-export type Props = {
-  appInfo: App;
-};
+export const AppCardAlby: FC = () => {
+  const { id, name } = {
+    id: "alby",
+    name: "Alby",
+  };
 
-export const AppCardAlby: FC<Props> = ({ appInfo }) => {
-  const { id, name } = appInfo;
   const { t } = useTranslation();
 
   const addAlbyAccountHandler = async () => {
