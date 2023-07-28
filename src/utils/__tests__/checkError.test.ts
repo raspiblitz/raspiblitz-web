@@ -7,7 +7,7 @@ vi.mock("i18next", () => ({
 describe("checkError", () => {
   it("should display the message with basic detail object", () => {
     const errorMsg = checkError({
-      // @ts-ignore
+      // @ts-ignore response is not a full "AxiosResponse<ApiError, any>" type currently
       response: {
         data: {
           detail: "old password format invalid",
@@ -19,7 +19,7 @@ describe("checkError", () => {
 
   it("should display the message with detail.msg object", () => {
     const errorMsg = checkError({
-      // @ts-ignore
+      // @ts-ignore response is not a full "AxiosResponse<ApiError, any>" type currently
       response: {
         data: {
           detail: [
