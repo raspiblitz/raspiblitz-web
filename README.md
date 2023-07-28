@@ -130,3 +130,5 @@ Please do not commit the above changes.
   - [MIT License (?)](https://github.com/lightningnetwork/lnd/blob/master/LICENSE)
 - Core Lightning Logo from [Blockstream](https://blockstream.com/)
   - [Blockstream Corporate Brand Guideline](https://blockstream.com/brand-assets/)
+- Alby Logo from [Alby media repo](https://github.com/getAlby/media)
+  - License unclear
