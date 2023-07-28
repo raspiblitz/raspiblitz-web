@@ -1,4 +1,4 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { App } from "../..//models/app.model";
@@ -72,13 +72,13 @@ export const AppCardAlby: FC<Props> = ({ appInfo }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-row gap-2 py-4">
+      <div className="flex flex-row justify-center gap-2 py-4">
         {window.alby && (
           <button
             className="bd-button flex w-1/2 items-center justify-center p-2 disabled:pointer-events-none"
             onClick={addAlbyAccountHandler}
           >
-            <PlusIcon className="inline h-6 w-6" />
+            <LinkIcon className="inline h-6 w-6" />
             &nbsp;{t(`appInfo.${id}.action.addAccount`)}
           </button>
         )}
@@ -90,6 +90,7 @@ export const AppCardAlby: FC<Props> = ({ appInfo }) => {
             rel="noreferrer"
             href="https://getalby.com"
           >
+            <PlusIcon className="inline h-6 w-6" />
             {t(`appInfo.${id}.action.install`)}
           </a>
         )}
