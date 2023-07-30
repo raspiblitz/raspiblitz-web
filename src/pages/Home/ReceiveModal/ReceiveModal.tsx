@@ -94,7 +94,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, submitCount },
+    formState: { errors },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -121,10 +121,6 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
         />
       </div>
 
-      {/* <form
-        className="flex w-full flex-col items-center"
-        onSubmit={handleSubmit(onSubmit)}
-      > */}
       <fieldset className="mb-5 sm:w-96">
         {isLoading && (
           <div className="p-5">
@@ -162,22 +158,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
         )}
 
         {error && <Message message={error} />}
-
-        {/* {showLnInvoice && !address && (
-          <div className="flex items-center justify-center">
-            <button
-              type="submit"
-              className="bd-button my-3 flex items-center justify-center p-3"
-              disabled={submitCount > 0 && !isValid}
-            >
-              <PlusCircleIcon className="mr-1 inline h-6 w-6" />
-              <span>{t("wallet.create_invoice")}</span>
-            </button>
-          </div>
-        )} */}
       </fieldset>
-
-      {/* </form> */}
 
       {address && <ReceiveAddress address={address} />}
     </Modal>,

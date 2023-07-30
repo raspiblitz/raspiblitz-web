@@ -1,21 +1,21 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { FC, useCallback, useEffect } from "react";
+import { FC } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   children?: React.ReactNode;
-  closeable?: boolean;
+  // closeable?: boolean;
   closeFunc: () => void;
   backFunc?: () => void;
-  submitFunc: any;
+  submitFunc?: () => void;
   title: string;
   submitTitle?: string;
 };
 
 // export default function Modal() {
 const Modal: FC<Props> = ({
-  closeable = true,
+  // closeable = true,
   closeFunc,
   backFunc,
   children,
@@ -62,7 +62,7 @@ const Modal: FC<Props> = ({
                 <form
                   onSubmit={(event) => {
                     event.preventDefault();
-                    submitFunc();
+                    submitFunc && submitFunc();
                   }}
                 >
                   <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
