@@ -1,4 +1,3 @@
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import type { ChangeEvent, FC } from "react";
 import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
@@ -16,7 +15,7 @@ import { checkError } from "../../../utils/checkError";
 import { convertBtcToSat, stringToNumber } from "../../../utils/format";
 import { instance } from "../../../utils/interceptor";
 import SwitchTxType, { TxType } from "../SwitchTxType";
-import ReceiveOnChain from "./ReceiveOnChain";
+import ReceiveAddress from "./ReceiveAddress";
 
 interface IFormInputs {
   amountInput: string;
@@ -103,11 +102,17 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
   const onSubmit: SubmitHandler<IFormInputs> = (_data) =>
     generateInvoiceHandler();
 
+  const onBack = () => setAddress("");
+
   return createPortal(
     <Modal
-      close={onClose}
-      showFooter={!address}
+      closeFunc={onClose(false)}
+      submitFunc={handleSubmit(onSubmit)}
+      backFunc={address && lnInvoice ? onBack : undefined}
       title={showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
+      submitTitle={
+        showLnInvoice && !address ? t("wallet.create_invoice") : undefined
+      }
     >
       <div className="my-3">
         <SwitchTxType
@@ -116,66 +121,67 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
         />
       </div>
 
-      <form
+      {/* <form
         className="flex w-full flex-col items-center"
         onSubmit={handleSubmit(onSubmit)}
-      >
-        <fieldset className="mb-5 sm:w-96">
-          {isLoading && (
-            <div className="p-5">
-              <LoadingSpinner />
-            </div>
-          )}
+      > */}
+      <fieldset className="mb-5 sm:w-96">
+        {isLoading && (
+          <div className="p-5">
+            <LoadingSpinner />
+          </div>
+        )}
 
-          {showLnInvoice && !address && (
-            <div className="flex flex-col justify-center pb-5 text-center">
-              <AmountInput
-                amount={amount}
-                register={register("amountInput", {
-                  required: t("forms.validation.chainAmount.required"),
-                  validate: {
-                    greaterThanZero: (val) =>
-                      stringToNumber(val) > 0 ||
-                      t("forms.validation.chainAmount.required"),
-                  },
-                  onChange: amountChangeHandler,
+        {showLnInvoice && !address && (
+          <div className="flex flex-col justify-center pb-5 text-center">
+            <AmountInput
+              amount={amount}
+              register={register("amountInput", {
+                required: t("forms.validation.chainAmount.required"),
+                validate: {
+                  greaterThanZero: (val) =>
+                    stringToNumber(val) > 0 ||
+                    t("forms.validation.chainAmount.required"),
+                },
+                onChange: amountChangeHandler,
+              })}
+              errorMessage={errors.amountInput}
+            />
+
+            <div className="mt-2 flex flex-col justify-center">
+              <InputField
+                {...register("commentInput", {
+                  onChange: commentChangeHandler,
                 })}
-                errorMessage={errors.amountInput}
+                label={t("tx.comment")}
+                value={comment}
+                placeholder={t("tx.comment_placeholder")}
               />
-
-              <div className="mt-2 flex flex-col justify-center">
-                <InputField
-                  {...register("commentInput", {
-                    onChange: commentChangeHandler,
-                  })}
-                  label={t("tx.comment")}
-                  value={comment}
-                  placeholder={t("tx.comment_placeholder")}
-                />
-              </div>
             </div>
-          )}
+          </div>
+        )}
 
-          {error && <Message message={error} />}
+        {error && <Message message={error} />}
 
-          {showLnInvoice && !address && (
-            <div className="flex items-center justify-center">
-              <button
-                type="submit"
-                className="bd-button my-3 flex items-center justify-center p-3"
-                disabled={submitCount > 0 && !isValid}
-              >
-                <PlusCircleIcon className="mr-1 inline h-6 w-6" />
-                <span>{t("wallet.create_invoice")}</span>
-              </button>
-            </div>
-          )}
-        </fieldset>
-      </form>
+        {/* {showLnInvoice && !address && (
+          <div className="flex items-center justify-center">
+            <button
+              type="submit"
+              className="bd-button my-3 flex items-center justify-center p-3"
+              disabled={submitCount > 0 && !isValid}
+            >
+              <PlusCircleIcon className="mr-1 inline h-6 w-6" />
+              <span>{t("wallet.create_invoice")}</span>
+            </button>
+          </div>
+        )} */}
+      </fieldset>
 
-      {address && <ReceiveOnChain address={address} />}
+      {/* </form> */}
+
+      {address && <ReceiveAddress address={address} />}
     </Modal>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

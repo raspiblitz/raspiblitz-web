@@ -8,7 +8,7 @@ type Props = {
   address: string;
 };
 
-const ReceiveOnChain: FC<Props> = ({ address }) => {
+const ReceiveAddress: FC<Props> = ({ address }) => {
   const { t } = useTranslation();
   const [copyAddress, addressCopied] = useClipboard(address);
 
@@ -36,4 +36,4 @@ const ReceiveOnChain: FC<Props> = ({ address }) => {
   );
 };
 
-export default ReceiveOnChain;
+export default ReceiveAddress;
