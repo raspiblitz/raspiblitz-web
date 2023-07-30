@@ -33,7 +33,7 @@ const Modal: FC<Props> = ({
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={closeFunc}
+        onClose={() => closeFunc()}
       >
         <Transition.Child
           as={Fragment}
@@ -69,7 +69,7 @@ const Modal: FC<Props> = ({
                     <button
                       type="button"
                       className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      onClick={closeFunc}
+                      onClick={() => closeFunc()}
                     >
                       <span className="sr-only">Close</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -119,7 +119,7 @@ const Modal: FC<Props> = ({
                       <button
                         type="reset"
                         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                        onClick={closeFunc}
+                        onClick={() => closeFunc()}
                         ref={cancelButtonRef}
                       >
                         Cancel

@@ -106,7 +106,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
 
   return createPortal(
     <Modal
-      closeFunc={onClose(false)}
+      closeFunc={onClose}
       submitFunc={handleSubmit(onSubmit)}
       backFunc={address && lnInvoice ? onBack : undefined}
       title={showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
