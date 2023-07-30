@@ -3,7 +3,7 @@ declare global {
   // https://github.com/getAlby/lightning-browser-extension/blob/master/src/extension/providers/alby/index.ts#L3
   interface Window {
     alby?: {
-      enable: () => Promise<{ enabled: boolean }>;
+      enable: () => Promise<void>;
       addAccount: (params: {
         name: string;
         connector: string;
