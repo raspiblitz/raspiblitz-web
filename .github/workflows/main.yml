@@ -28,3 +28,5 @@ jobs:
         run: yarn build
       - name: Run Tests
         run: yarn test
+      - name: Run Typecheck
+        run: yarn tsc

@@ -32,6 +32,20 @@
       "jam": {
         "about": "Jam is a web interface for JoinMarket focusing on user-friendliness and ease-of-use. It aims to provide sensible defaults and be easy to use for beginners while still having the features advanced users expect.",
         "shortDescription": "Jam - A web interface for JoinMarket"
+      },
+      "alby": {
+        "about": "Alby Browser Extension",
+        "shortDescription": "Connect your RaspiBlitz LND node and use Bitcoin & Nostr apps with the Alby Extension",
+        "action": {
+          "install": "Install Alby",
+          "addAccount": "Connect",
+          "connection_info_error": "Could not get connection info",
+          "connection": {
+            "hint": "Please install the Alby extension first",
+            "success": "Raspiblitz account was added to Alby",
+            "error": "Adding Raspiblitz to Alby didn't work, please try again"
+          }
+        }
       }
     },
     "apps": {

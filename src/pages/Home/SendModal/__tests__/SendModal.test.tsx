@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import { UserEvent } from "@testing-library/user-event/dist/types/setup";
+import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import { render, screen } from "test-utils";
 import { rest, server } from "../../../../testServer";
 import SendModal, { Props } from "../SendModal";
@@ -115,6 +115,7 @@ describe("SendModal", () => {
   describe("SendOnChain", () => {
     let user: UserEvent;
     // switch to onchain modal
+
     beforeEach(async () => {
       user = userEvent.setup();
       setup();

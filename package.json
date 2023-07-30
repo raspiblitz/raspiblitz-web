@@ -11,6 +11,7 @@
     "postinstall": "husky install",
     "start": "vite",
     "build": "vite build",
+    "tsc": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "coverage": "vitest run --coverage"

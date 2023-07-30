@@ -11,6 +11,7 @@ import { availableApps } from "../../utils/availableApps";
 import { checkError } from "../../utils/checkError";
 import { instance } from "../../utils/interceptor";
 import AppCard from "./AppCard";
+import AppCardAlby from "./AppCardAlby";
 import AppInfo from "./AppInfo";
 
 export const Apps: FC = () => {
@@ -121,6 +122,10 @@ export const Apps: FC = () => {
                   </article>
                 );
               })}
+
+              <article>
+                <AppCardAlby />
+              </article>
             </div>
           </section>
         </>
