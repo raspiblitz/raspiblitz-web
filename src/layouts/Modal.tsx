@@ -2,6 +2,8 @@ import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { FC } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useTranslation } from "react-i18next";
+import { log } from "console";
 
 type Props = {
   children?: React.ReactNode;
@@ -13,7 +15,6 @@ type Props = {
   submitTitle?: string;
 };
 
-// export default function Modal() {
 const Modal: FC<Props> = ({
   // closeable = true,
   closeFunc,
@@ -23,7 +24,7 @@ const Modal: FC<Props> = ({
   submitTitle,
   submitFunc,
 }) => {
-  // const [open, setOpen] = useState(true);
+  const { t } = useTranslation();
 
   const cancelButtonRef = useRef(null);
 
@@ -61,6 +62,7 @@ const Modal: FC<Props> = ({
               <Dialog.Panel className="relative transform  overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <form
                   onSubmit={(event) => {
+                    console.log("submit");
                     event.preventDefault();
                     submitFunc && submitFunc();
                   }}
@@ -68,10 +70,10 @@ const Modal: FC<Props> = ({
                   <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                     <button
                       type="button"
-                      className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="rounded-md bg-white dark:bg-zinc-900 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       onClick={() => closeFunc()}
                     >
-                      <span className="sr-only">Close</span>
+                      <span className="sr-only">{t("navigation.cancel")}</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
@@ -90,7 +92,7 @@ const Modal: FC<Props> = ({
                     </div>
                   </div>
 
-                  <div className="bg-gray-50 px-4 py-3 sm:flex justify-between sm:px-6">
+                  <div className="bg-gray-50 dark:bg-zinc-900 px-4 py-3 sm:flex justify-between sm:px-6">
                     {backFunc ? (
                       <button
                         type="reset"
@@ -98,7 +100,7 @@ const Modal: FC<Props> = ({
                         onClick={backFunc}
                         ref={cancelButtonRef}
                       >
-                        BACK
+                        {t("navigation.back")}
                       </button>
                     ) : (
                       <span>
@@ -110,7 +112,7 @@ const Modal: FC<Props> = ({
                       {submitTitle && (
                         <button
                           type="submit"
-                          className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                          className="inline-flex w-full bg-yellow-500 hover:bg-yellow-400 justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                         >
                           {submitTitle}
                         </button>
@@ -118,11 +120,11 @@ const Modal: FC<Props> = ({
 
                       <button
                         type="reset"
-                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                        className="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-sm sm:mt-0 sm:w-auto dark:text-white dark:bg-gray-500"
                         onClick={() => closeFunc()}
                         ref={cancelButtonRef}
                       >
-                        Cancel
+                        {t("navigation.cancel")}
                       </button>
                     </div>
                   </div>

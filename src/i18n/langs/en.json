@@ -191,7 +191,8 @@
       "display_sats": "Display SATS",
       "home": "Home",
       "logout": "Log out",
-      "settings": "Settings"
+      "settings": "Settings",
+      "cancel": "Cancel"
     },
     "settings": {
       "cancel": "Cancel",
