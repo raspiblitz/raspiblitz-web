@@ -1,9 +1,8 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { FC } from "react";
+import type { FC } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
-import { log } from "console";
 
 type Props = {
   children?: React.ReactNode;
@@ -12,7 +11,7 @@ type Props = {
   backFunc?: () => void;
   submitFunc?: () => void;
   title: string;
-  submitTitle?: string;
+  submitLabel?: string;
 };
 
 const Modal: FC<Props> = ({
@@ -21,7 +20,7 @@ const Modal: FC<Props> = ({
   backFunc,
   children,
   title,
-  submitTitle,
+  submitLabel,
   submitFunc,
 }) => {
   const { t } = useTranslation();
@@ -62,7 +61,6 @@ const Modal: FC<Props> = ({
               <Dialog.Panel className="relative transform  overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <form
                   onSubmit={(event) => {
-                    console.log("submit");
                     event.preventDefault();
                     submitFunc && submitFunc();
                   }}
@@ -87,6 +85,7 @@ const Modal: FC<Props> = ({
                         >
                           {title}
                         </Dialog.Title>
+
                         <div className="mt-2">{children}</div>
                       </div>
                     </div>
@@ -109,12 +108,12 @@ const Modal: FC<Props> = ({
                     )}
 
                     <div className="sm:flex sm:flex-row-reverse">
-                      {submitTitle && (
+                      {submitLabel && (
                         <button
                           type="submit"
                           className="inline-flex w-full bg-yellow-500 hover:bg-yellow-400 justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                         >
-                          {submitTitle}
+                          {submitLabel}
                         </button>
                       )}
 

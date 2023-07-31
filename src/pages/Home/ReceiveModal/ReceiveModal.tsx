@@ -110,7 +110,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
       submitFunc={handleSubmit(onSubmit)}
       backFunc={address && lnInvoice ? onBack : undefined}
       title={showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
-      submitTitle={
+      submitLabel={
         showLnInvoice && !address ? t("wallet.create_invoice") : undefined
       }
     >
