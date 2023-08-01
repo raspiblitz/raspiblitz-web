@@ -86,7 +86,8 @@ export function setWindowAlias(nodeAlias: string | null): void {
 }
 
 export function getHrefFromApp(app: AppStatus) {
+  console.log(app.hiddenService);
   return window.location.hostname.endsWith(".onion")
-    ? app.hiddenService
-    : app.address;
+    ? `https://${app.hiddenService}` // add https prefix to hidden service to use HTTP/2 and make it a absolute link instead of relative
+    : app.address; // address always has the "http(s)" prefix included
 }
