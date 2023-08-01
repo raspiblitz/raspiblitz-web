@@ -7,7 +7,7 @@ const testApp: AppStatus = {
   installed: true,
   version: "1.0.0",
   address: "http://127.0.0.1",
-  hiddenService: "http://hiddenservice.onion",
+  hiddenService: "hiddenservice.onion",
   error: "",
 };
 
@@ -32,7 +32,7 @@ describe("AppStatusCard", () => {
 
     const appCard = screen.getAllByRole("link");
     expect(appCard[0].getAttribute("href")).toEqual(
-      "http://hiddenservice.onion"
+      "https://hiddenservice.onion",
     );
     global.window = oldWindow;
   });
