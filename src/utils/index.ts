@@ -86,7 +86,7 @@ export function setWindowAlias(nodeAlias: string | null): void {
 }
 
 export function getHrefFromApp(app: AppStatus) {
-  const authUrl = app.authMethod?.startsWith("/") || "";
+  const authUrl = app.authMethod?.startsWith("/") ? app.authMethod : "";
   return window.location.hostname.endsWith(".onion")
     ? `https://${app.hiddenService}${authUrl}` // add https prefix to hidden service to use HTTP/2 and make it a absolute link instead of relative
     : `${app.address}${authUrl}`; // address always has the "http(s)" prefix included
