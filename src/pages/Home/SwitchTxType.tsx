@@ -26,6 +26,7 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
   return (
     <div className="my-3">
       <button
+        type="button"
         name="lightning"
         disabled={invoiceType === TxType.LIGHTNING}
         className="switch-button"
@@ -36,6 +37,7 @@ const SwitchTxType: FC<Props> = ({ invoiceType, onTxTypeChange, disabled }) => {
       </button>
 
       <button
+        type="button"
         name="onchain"
         disabled={invoiceType === TxType.ONCHAIN}
         className="switch-button"
