@@ -91,7 +91,7 @@ const Modal: FC<Props> = ({
                     </div>
                   </div>
 
-                  <div className="bg-gray-50 dark:bg-zinc-900 px-4 py-3 sm:flex justify-between sm:px-6">
+                  <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 sm:flex justify-between sm:px-6">
                     {backFunc ? (
                       <button
                         type="reset"
