@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import Message from "../../../components/Message";
-import ModalDialog from "../../../layouts/ModalDialog";
+import Modal from "../../../layouts/Modal";
 import { LightningChannel } from "../../../models/lightning-channel";
 import { AppContext } from "../../../context/app-context";
 import { checkError } from "../../../utils/checkError";
@@ -54,7 +54,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
             channel_id: channelId,
             force_close: forceClose,
           },
-        }
+        },
       )
       .then(() => {
         toast.success(t("home.channel_closed"), { theme });
@@ -67,10 +67,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
   };
 
   return createPortal(
-    <ModalDialog close={onClose}>
-      <h2 className="mb-2 text-lg font-bold">
-        {t("home.current_open_channels")}
-      </h2>
+    <Modal closeFunc={onClose} title={t("home.current_open_channels")}>
       {isLoading && (
         <div className="my-2 flex justify-center">
           <LoadingSpinner />
@@ -87,8 +84,8 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
         />
       )}
       {error && <Message message={error} />}
-    </ModalDialog>,
-    MODAL_ROOT
+    </Modal>,
+    MODAL_ROOT,
   );
 };
 
