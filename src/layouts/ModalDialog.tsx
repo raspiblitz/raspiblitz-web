@@ -44,7 +44,7 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
         <div className="relative">
           <button
             onClick={closeModal}
-            className={`aboslute right-2 top-2 h-7 w-7 ${
+            className={`absolute right-2 top-2 h-7 w-7 ${
               closeable ? "" : "invisible"
             }`}
           >
