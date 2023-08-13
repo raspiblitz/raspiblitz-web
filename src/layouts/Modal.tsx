@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import type { FC } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
+import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 
 type Props = {
   children?: React.ReactNode;
@@ -12,10 +13,12 @@ type Props = {
   submitFunc?: () => void;
   title: string;
   submitLabel?: string;
+  isLoading?: boolean;
 };
 
 const Modal: FC<Props> = ({
   // closeable = true,
+  isLoading = false,
   closeFunc,
   backFunc,
   children,
@@ -109,12 +112,13 @@ const Modal: FC<Props> = ({
 
                     <div className="sm:flex sm:flex-row-reverse">
                       {submitLabel && (
-                        <button
+                        <ButtonWithSpinner
                           type="submit"
+                          loading={isLoading}
                           className="inline-flex w-full bg-yellow-500 hover:bg-yellow-400 justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                         >
                           {submitLabel}
-                        </button>
+                        </ButtonWithSpinner>
                       )}
 
                       <button
