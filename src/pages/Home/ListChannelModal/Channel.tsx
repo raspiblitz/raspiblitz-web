@@ -45,11 +45,11 @@ const Channel: FC<Props> = ({
   };
 
   return (
-    <li className="bg-gray-200 p-3 shadow-inner hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600">
-      <div
-        className="flex justify-between border-b border-gray-500 pb-2"
-        onClick={clickHandler}
-      >
+    <li
+      onClick={clickHandler}
+      className="cursor-pointer bg-gray-200 p-3 shadow-inner hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 border-b border-gray-500"
+    >
+      <div className="flex justify-between">
         <span>{channel.peer_alias}</span>
         {showDetails && <ChevronUpIcon className="h-6 w-6" />}
         {!showDetails && <ChevronDownIcon className="h-6 w-6" />}
