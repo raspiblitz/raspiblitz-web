@@ -81,7 +81,7 @@ const Modal: FC<Props> = ({
 
                   <div className="bg-white px-4 pb-4 pt-5 dark:bg-gray-800 dark:text-white sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
-                      <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                      <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                         <Dialog.Title
                           as="h3"
                           className="text-lg font-semibold leading-6 text-gray-900 dark:text-white"
