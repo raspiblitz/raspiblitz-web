@@ -24,7 +24,7 @@ const AmountInput: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const [amountInput, setAmountInput] = useState<string>(
-    amount ? `${amount}` : ""
+    amount ? `${amount}` : "",
   );
   const { unit, toggleUnit } = useContext(AppContext);
 
@@ -32,7 +32,7 @@ const AmountInput: FC<Props> = ({
     let formattedValue = amountInput;
     if (unit === Unit.BTC && formattedValue) {
       formattedValue = new Intl.NumberFormat("en-US").format(
-        convertBtcToSat(+formattedValue)
+        convertBtcToSat(+formattedValue),
       );
     } else {
       // remove separators
@@ -69,6 +69,7 @@ const AmountInput: FC<Props> = ({
       <label className="label-underline" htmlFor={register.name}>
         {t("wallet.amount")}
       </label>
+
       <div className="flex">
         <input
           {...register}
@@ -79,13 +80,15 @@ const AmountInput: FC<Props> = ({
           onChange={onChangeHandler}
           disabled={disabled}
         />
-        <span
+
+        <button
+          type="button"
           className="ml-6 flex w-4/12 items-center justify-center rounded p-1 shadow-md dark:bg-gray-600"
           onClick={toggleHandler}
         >
           {unit}
           <ArrowsRightLeftIcon className="ml-1 h-5 w-5 text-black dark:text-white" />
-        </span>
+        </button>
       </div>
 
       <p
