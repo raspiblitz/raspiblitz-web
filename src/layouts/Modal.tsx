@@ -68,7 +68,7 @@ const Modal: FC<Props> = ({
                   <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                     <button
                       type="button"
-                      className="rounded-md bg-white dark:bg-zinc-900 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="rounded-md bg-gray-300 dark:bg-zinc-900 text-black dark:text-white  hover:text-gray-500 hover:dark:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       onClick={() => closeFunc()}
                     >
                       <span className="sr-only">{t("navigation.cancel")}</span>
