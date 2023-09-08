@@ -248,7 +248,7 @@
       "sync_restartinfo": "(la sincronización continuará después de reiniciar)"
     },
     "tx": {
-      "comment": "Descripción",
+      "comment": "Comentario",
       "comment_placeholder": "Comentario opcional",
       "confirm_info": "Por favor confirma la siguiente transacción",
       "confirmations": "Confirmaciones",
@@ -325,6 +325,20 @@
       "jam": {
         "about": "Jam es una interfaz web para JoinMarket centrada en la facilidad de uso. Su objetivo es proporcionar valores predeterminados sensibles y ser fácil de usar para los principiantes, mientras que todavía tiene las características que los usuarios avanzados esperan.",
         "shortDescription": "Jam - Una interfaz web para JoinMarket"
+      },
+      "alby": {
+        "action": {
+          "install": "Instalar Alby",
+          "connection_info_error": "No se ha podido obtener información de la conexión",
+          "connection": {
+            "hint": "Por favor, instala primero la extensión Alby",
+            "success": "La cuenta Raspiblitz se añadió a Alby",
+            "error": "Al añadir Raspiblitz a Alby fallo, por favor inténtalo de nuevo"
+          },
+          "addAccount": "Conectar"
+        },
+        "about": "Extensión del navegador Alby",
+        "shortDescription": "Conecta tu nodo RaspiBlitz LND y utiliza aplicaciones Bitcoin y Nostr con la extensión Alby"
       }
     },
     "error": {
