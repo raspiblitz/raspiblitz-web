@@ -143,7 +143,7 @@
       "urgent": "Urgent",
       "version": "Version",
       "versions": "Versions",
-      "webui": "WebUI",
+      "webui": "UI Web",
       "no_open_channels": "Vous n'avez actuellement aucun canal ouvert",
       "not_available": "Non disponible",
       "connect_node": "Partagez cette adresse avec d'autres personnes afin qu'elles puissent se connecter à votre nœud lightning"
@@ -298,7 +298,9 @@
       "tx_details": "Détails de la transaction",
       "txid": "Identifiant de transaction",
       "unconfirmed": "Non confirmée",
-      "value": "Valeur"
+      "value": "Valeur",
+      "spend_all": "Dépenser tout les fonds on-chain",
+      "all_onchain": "Tout les fonds on-chain"
     },
     "wallet": {
       "address": "Adresse",
