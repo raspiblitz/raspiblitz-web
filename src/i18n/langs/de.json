@@ -28,6 +28,24 @@
       "thunderhub": {
         "about": "ThunderHub ist ein LND-Knotenmanager als Open-Source-Software, mit dem Sie Ihren Knoten auf jedem Gerät oder Browser verwalten und überwachen können. Er ermöglicht, die Kontrolle über die Lightning-Node über eine einfache und intuitive Oberfläche und mit den aktuellsten Technologien auszuüben.",
         "shortDescription": "LND Lightning Node Manager in deinem Browser"
+      },
+      "jam": {
+        "shortDescription": "Jam - Eine Webschnittstelle für JoinMarket",
+        "about": "Jam ist eine Weboberfläche für JoinMarket, die sich auf Benutzerfreundlichkeit konzentriert. Sie soll sinnvolle Standardeinstellungen bieten und für Anfänger einfach zu bedienen sein, aber dennoch die Funktionen bieten, die fortgeschrittene Nutzer erwarten."
+      },
+      "alby": {
+        "action": {
+          "install": "Alby installieren",
+          "connection_info_error": "Konnte keine Verbindungsinformationen erhalten",
+          "connection": {
+            "hint": "Bitte installieren Sie zuerst die Alby-Erweiterung",
+            "success": "Raspiblitz Konto wurde zu Alby hinzugefügt",
+            "error": "Das Hinzufügen von Raspiblitz zu Alby hat nicht funktioniert, bitte versuchen Sie es erneut"
+          },
+          "addAccount": "Verbinden"
+        },
+        "about": "Alby Browser-Erweiterung",
+        "shortDescription": "Verbinden Sie Ihre RaspiBlitz LND Node und nutzen Sie Bitcoin & Nostr Anwendungen mit der Alby Extension"
       }
     },
     "apps": {
@@ -125,7 +143,7 @@
       "node_id": "Node-ID",
       "node_uri": "URI der Node",
       "normal": "Normal",
-      "onchain_cln_no_support": "Anzeige der on-chain-Transaktionen wird aktuell vom Core Lightning nicht unterstützt",
+      "onchain_cln_no_support": "On-Chain-Transaktionen, die vor RaspiBlitz v1.9 durchgeführt wurden, werden möglicherweise nicht in Core Lightning angezeigt.",
       "open_channel": "Öffne Kanal",
       "pending_balance_local": "Ausstehendes lokales Guthaben",
       "pending_balance_remote": "Ausstehendes Remote-Guthaben",
@@ -140,7 +158,9 @@
       "version": "Version",
       "versions": "Versionen",
       "webui": "Web-UI",
-      "no_open_channels": "Du hast derzeit keine offenen Channels"
+      "no_open_channels": "Du hast derzeit keine offenen Channels",
+      "not_available": "Nicht Verfügbar",
+      "connect_node": "Geben Sie diese Adresse an andere weiter, damit diese sich mit Ihrer lightning node verbinden können"
     },
     "language": {
       "cs": "Tschechisch",
@@ -159,9 +179,10 @@
     "login": {
       "enter_pass": "Passwort A eingeben",
       "enter_pass_placeholder": "Passwort A",
-      "error": "Ein Fehler ist aufgetreten",
+      "error": "Es ist ein Fehler aufgetreten",
       "invalid_pass": "Ungültiges Passwort",
-      "login": "Anmelden"
+      "login": "Anmelden",
+      "unknown_error": "Unbekannter Fehler. Die Antwort war: {{code}} {{statusText}}."
     },
     "navigation": {
       "apps": "Anwendungen",
@@ -183,7 +204,12 @@
       "old_pw": "Altes Passwort",
       "pass_a_changed": "Passwort A wurde erfolgreich geändert",
       "reboot": "Neu starten",
-      "shutdown": "Herunterfahren"
+      "shutdown": "Herunterfahren",
+      "generating": "Erstellen",
+      "generating_debug_report": "Erstellen des Debug-Berichts. Dies kann einige Zeit in Anspruch nehmen.",
+      "debug_report_done": "Debug-Bericht erstellt!",
+      "generate_debug": "Debug-Bericht erstellen",
+      "generate": "Erstellen"
     },
     "setup": {
       "blockchain_delete": "Blockchain löschen",
@@ -286,7 +312,9 @@
       "tx_details": "Transaktionsdetails",
       "txid": "Transaktions ID",
       "unconfirmed": "Unbestätigt",
-      "value": "Wert"
+      "value": "Wert",
+      "spend_all": "Alle On-Chain-Gelder ausgeben",
+      "all_onchain": "Alle On-Chain-Gelder"
     },
     "wallet": {
       "address": "Adresse",
@@ -310,7 +338,12 @@
       "unlock_success": "Wallet entsperrt",
       "unlock_title": "Wallet entsperren",
       "unlocking": "Entsperre",
-      "wallet_locked": "Wallet gesperrt"
+      "wallet_locked": "Wallet gesperrt",
+      "available_balance": "Verfügbares Guthaben"
+    },
+    "error": {
+      "report": "Bitte melden Sie diesen Fehler an",
+      "stack": "Stapelspur"
     }
   }
 }
