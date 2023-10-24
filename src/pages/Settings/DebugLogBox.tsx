@@ -7,6 +7,9 @@ import { toast } from "react-toastify";
 import { checkError } from "utils/checkError";
 import { instance } from "utils/interceptor";
 
+/**
+ * Displays a button to generate a debug report which is downloaded as a file
+ */
 const DebugLogBox: FC = () => {
   const { t } = useTranslation();
   const { isGeneratingReport, setIsGeneratingReport } = useContext(AppContext);
