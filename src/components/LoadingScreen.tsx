@@ -1,8 +1,8 @@
 import { FC, useContext } from "react";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 import { AppContext } from "../context/app-context";
-import { ReactComponent as RaspiBlitzLogo } from "../assets/RaspiBlitz_Logo_Main.svg";
-import { ReactComponent as RaspiBlitzLogoDark } from "../assets/RaspiBlitz_Logo_Main_Negative.svg";
+import RaspiBlitzLogo from "../assets/RaspiBlitz_Logo_Main.svg?react";
+import RaspiBlitzLogoDark from "../assets/RaspiBlitz_Logo_Main_Negative.svg?react";
 
 const LoadingScreen: FC = () => {
   const appCtx = useContext(AppContext);
