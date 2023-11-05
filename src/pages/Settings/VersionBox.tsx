@@ -7,6 +7,9 @@ type Props = {
   apiVersion: string;
 };
 
+/**
+ * Displays the versions of RaspiBlitz, the WebUI and the Blitz-API
+ */
 const VersionBox: FC<Props> = ({ platformVersion, apiVersion }) => {
   const { t } = useTranslation();
   return (

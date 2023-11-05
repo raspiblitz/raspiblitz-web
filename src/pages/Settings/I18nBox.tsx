@@ -2,6 +2,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import I18nDropdown from "../../components/I18nDropdown";
 
+/**
+ * Displays the current language and allows the user to change it.
+ */
 const I18nBox: FC = () => {
   const { t } = useTranslation();
 

@@ -47,7 +47,7 @@ const customRender = (
       sseProps?: Partial<SSEContextType>;
       appProps?: Partial<AppContextType>;
     };
-  }
+  },
 ) =>
   render(ui, {
     wrapper: (props: any) => (
