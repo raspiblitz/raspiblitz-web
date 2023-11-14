@@ -21,12 +21,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          cache: "npm"
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm ci
       - name: Build
-        run: yarn build
+        run: npm run build
       - name: Run Tests
-        run: yarn test
+        run: npm run test
       - name: Run Typecheck
-        run: yarn tsc
+        run: npm run tsc
