@@ -19,30 +19,21 @@ Big thanks to our translators, which you can find in this [README](src/i18n/READ
 ### Dependencies
 
 - [Node.js](https://nodejs.org/en/download/)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install/)
 - [nvm](https://github.com/nvm-sh/nvm#intro) is suppported but not required
 
 #### Update npm dependencies
 
 ```sh
-yarn upgrade-interactive
+npm update
 ```
-
-If you notice several versions of a dep in the `yarn.lock`-file:
-
-```sh
-yarn dedupe
-```
-
-Further info: https://dev.to/arcanis/yarn-2-2-dedupe-faster-lighter-ha5#dedupe-command
 
 ### Dev workflow
 
 #### Frontend
 
 ```bash
-yarn install
-yarn start
+npm install
+npm run start
 ```
 
 #### Backend
@@ -65,8 +56,8 @@ Open another terminal
 
 ```sh
 cd backend-mock
-yarn install
-yarn start
+npm install
+npm run start
 ```
 
 Then go to `http://localhost:3000` and use the password `password`.
@@ -85,18 +76,17 @@ This guide uses Polar for easier development, but you can also use a real lightn
   - In [main/app/main.py](https://github.com/fusion44/blitz_api/blob/main/app/main.py#L48), change the `prefix_format` from `/v{major}` to `/api/v{major}`.
 - Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local `blitz_api` installation.
 
-Now you can start the `blitz_api` and run `yarn start` in raspiblitz-web.
+Now you can start the `blitz_api` and run `npm run start` in raspiblitz-web.
 
 Please do not commit the above changes.
 
 ### Use a external RaspiBlitz as Backend
 
 - (Optional): Make sure `nvm` is installed.
-- (Optional): Run `nvm install 18` or if already installed `nvm use`
-- Install yarn on a fresh nvm: `npm install --global yarn`
-- Install the dependencies with `yarn install`
+- (Optional): Run `nvm install 20` or if already installed `nvm use`
+- Install the dependencies with `npm install`
 - Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local RaspiBlitz - for example if your RaspiBlitz is running on local IP `192.168.1.123` then change the value to `http://192.168.1.123:80`
-- with `yarn start` it should now connect to your external RaspiBlitz
+- with `npm run start` it should now connect to your external RaspiBlitz
 
 ## Credits & Licenses
 
