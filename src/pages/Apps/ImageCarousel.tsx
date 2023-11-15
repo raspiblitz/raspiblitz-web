@@ -3,59 +3,63 @@ import { FC, useState } from "react";
 
 type Props = {
   imgs: string[];
+  video?: JSX.Element;
 };
 
-const ImageCarousel: FC<Props> = ({ imgs }) => {
-  const [activeImg, setActiveImg] = useState<number>(0);
+const ImageCarousel: FC<Props> = ({ imgs, video }) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const back = () => {
-    setActiveImg((prev) => (prev - 1 < 0 ? imgs.length - 1 : prev - 1));
+    const length = video ? imgs.length : imgs.length - 1;
+    setActiveIndex((prev) => (prev - 1 < 0 ? length : prev - 1));
   };
 
   const next = () => {
-    setActiveImg((prev) => (prev + 1 >= imgs.length ? 0 : prev + 1));
+    const length = video ? imgs.length + 1 : imgs.length;
+    setActiveIndex((prev) => (prev + 1 >= length ? 0 : prev + 1));
   };
 
   const switchImgHandler = (index: number) => {
-    setActiveImg(index);
+    setActiveIndex(index);
   };
 
   return (
     <div className="relative inline-block">
-      <div className="absolute bottom-0 left-0 right-0 mb-5 flex justify-center gap-5 p-0">
-        {imgs.map((_, index) => {
-          if (activeImg === index) {
+      <div className="absolute z-20 bottom-0 left-0 right-0 mb-5 flex justify-center gap-5 p-0">
+        {((video && activeIndex !== 0) || !video) &&
+          imgs.map((_, index) => {
+            const idx = video ? activeIndex - 1 : activeIndex;
+            if (idx === index) {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  className="z-10 h-3 w-10 border border-black bg-white"
+                  onClick={() => switchImgHandler(index)}
+                ></button>
+              );
+            }
+
             return (
               <button
                 key={index}
                 type="button"
-                className="z-10 h-3 w-10 border border-black bg-white"
+                className="z-10 h-3 w-10 border border-black bg-white opacity-30 hover:opacity-75"
                 onClick={() => switchImgHandler(index)}
               ></button>
             );
-          }
-
-          return (
-            <button
-              key={index}
-              type="button"
-              className="z-10 h-3 w-10 border border-black bg-white opacity-30 hover:opacity-75"
-              onClick={() => switchImgHandler(index)}
-            ></button>
-          );
-        })}
+          })}
       </div>
-      <div className="overflow-hidden px-5">
-        {imgs.map((img, index) => {
-          if (index === activeImg) {
-            return (
-              <img key={index} src={img} alt={"" + index} className="block" />
-            );
-          }
-          return (
-            <img key={index} src={img} alt={"" + index} className="hidden" />
-          );
-        })}
+      <div className="overflow-hidden px-5 relative z-10">
+        {video && activeIndex === 0 ? (
+          video
+        ) : (
+          <img
+            src={imgs[video ? activeIndex - 1 : activeIndex]}
+            alt={"" + activeIndex}
+            className="block"
+          />
+        )}
       </div>
       <div className="absolute bottom-0 left-0 right-0 mx-5 flex h-full justify-between">
         <button

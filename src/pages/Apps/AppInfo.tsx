@@ -36,6 +36,13 @@ export const AppInfo: FC<Props> = ({
   const { id, name } = app;
   const { author, repository } = availableApps.get(id)!;
 
+  const video =
+    id === "mempool" ? (
+      <video width="2000" height="1000" controls>
+        <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
+      </video>
+    ) : undefined;
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -134,7 +141,7 @@ export const AppInfo: FC<Props> = ({
       </section>
 
       <section className="text-center">
-        {!isLoading && <ImageCarousel imgs={imgs} />}
+        {!isLoading && <ImageCarousel imgs={imgs} video={video} />}
       </section>
 
       {/* App Description */}
