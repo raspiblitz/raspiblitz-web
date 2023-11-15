@@ -38,7 +38,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="fixed top-0 z-10 mx-auto flex h-16 w-full items-center justify-between border-b border-gray-300 bg-white px-8 shadow-md transition-colors dark:bg-gray-800 dark:text-gray-300">
+    <header className="fixed top-0 z-50 mx-auto flex h-16 w-full items-center justify-between border-b border-gray-300 bg-white px-8 shadow-md transition-colors dark:bg-gray-800 dark:text-gray-300">
       <NavLink to="/">
         <RaspiBlitzMobileLogo className="h-8 w-8 text-black dark:text-white md:hidden" />
         {!darkMode && <RaspiBlitzLogo className="hidden h-8 md:block" />}
