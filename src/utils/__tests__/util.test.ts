@@ -14,26 +14,26 @@ describe("util", () => {
 
     expect(localStorage.setItem).toHaveBeenCalledWith(
       SETTINGS_KEY,
-      JSON.stringify({ darkMode: false, lang: "de" })
+      JSON.stringify({ darkMode: false, lang: "de" }),
     );
   });
 
   test("saveSettings should save metge with existing settings", () => {
     window.localStorage.__proto__.getItem = vi.fn(() =>
-      JSON.stringify({ darkMode: true, lang: "en" })
+      JSON.stringify({ darkMode: true, lang: "en" }),
     );
 
     saveSettings({ lang: "de" });
 
     expect(localStorage.setItem).toHaveBeenCalledWith(
       SETTINGS_KEY,
-      JSON.stringify({ darkMode: true, lang: "de" })
+      JSON.stringify({ darkMode: true, lang: "de" }),
     );
   });
 
   test("retrieveSettings should retrieve settings if available", () => {
     window.localStorage.__proto__.getItem = vi.fn(() =>
-      JSON.stringify({ darkMode: true, lang: "en" })
+      JSON.stringify({ darkMode: true, lang: "en" }),
     );
 
     const settings = retrieveSettings();

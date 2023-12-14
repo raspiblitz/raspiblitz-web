@@ -34,7 +34,7 @@ function useSSE() {
         toast.success(t("apps.uninstall_success", { appName }));
       }
     },
-    [t]
+    [t],
   );
 
   const appInstallErrorHandler = useCallback(
@@ -44,18 +44,18 @@ function useSSE() {
           t("apps.install_failure", {
             appName,
             details: installData.details,
-          })
+          }),
         );
       } else {
         toast.error(
           t("apps.uninstall_failure", {
             appName,
             details: installData.details,
-          })
+          }),
         );
       }
     },
-    [t]
+    [t],
   );
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function useSSE() {
         } else {
           return prev.map(
             (old: App) =>
-              apps.find((newApp: App) => old.id === newApp.id) || old
+              apps.find((newApp: App) => old.id === newApp.id) || old,
           );
         }
       });
@@ -124,7 +124,7 @@ function useSSE() {
         {
           isLoading: true,
           autoClose: false,
-        }
+        },
       );
       sseCtx.setInstallingApp(installAppData);
     };
@@ -233,7 +233,7 @@ function useSSE() {
         evtSource.removeEventListener("hardware_info", setHardwareInfo);
         evtSource.removeEventListener(
           "system_startup_info",
-          setSystemStartupInfo
+          setSystemStartupInfo,
         );
       }
     };

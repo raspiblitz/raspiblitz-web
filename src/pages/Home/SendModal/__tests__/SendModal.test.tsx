@@ -1,7 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import { render, screen } from "test-utils";
-import { rest, server } from "../../../../testServer";
+import { HttpResponse, http, server } from "../../../../testServer";
 import SendModal, { Props } from "../SendModal";
 
 const handleClose = vi.fn();
@@ -69,11 +69,11 @@ describe("SendModal", () => {
 
     it("should send the decode request correctly", async () => {
       server.use(
-        rest.get("/api/v1/lightning/decode-pay-req", (req, res, ctx) => {
-          if (req.url.searchParams.get("pay_req")) {
-            return res(
-              ctx.status(200),
-              ctx.json({
+        http.get("/api/v1/lightning/decode-pay-req", ({ request }) => {
+          const url = new URL(request.url);
+          if (url.searchParams.get("pay_req")) {
+            return HttpResponse.json(
+              {
                 destination:
                   "0323dbd695d801553837f9907100f304abd153932bb000a3a7ea9132ff3e7437a1",
                 payment_hash:
@@ -90,12 +90,13 @@ describe("SendModal", () => {
                   "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
                 num_msat: 20000,
                 features: [],
-              })
+              },
+              { status: 200 },
             );
           } else {
-            return res(ctx.status(500));
+            return new HttpResponse(null, { status: 500 });
           }
-        })
+        }),
       );
       const user = userEvent.setup();
       setup();

@@ -34,7 +34,7 @@ export const LightningCard: FC = () => {
   const indexCommit = version.indexOf("commit");
   const versionString = version?.slice(
     0,
-    indexCommit === -1 ? version.length : indexCommit
+    indexCommit === -1 ? version.length : indexCommit,
   );
 
   const convertedLocalBalance =

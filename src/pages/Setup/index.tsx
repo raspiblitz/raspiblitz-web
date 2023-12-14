@@ -89,7 +89,7 @@ const Setup: FC = () => {
     const resp = await instance
       .get("/setup/setup-start-info")
       .catch((error) =>
-        showError(`request for init setup data failed: ${error}`)
+        showError(`request for init setup data failed: ${error}`),
       );
 
     if (resp) {
@@ -222,7 +222,7 @@ const Setup: FC = () => {
           navigate("/login?back=/setup");
         } else {
           showError(
-            `request for final setup done failed: ${err.response.status}`
+            `request for final setup done failed: ${err.response.status}`,
           );
         }
       });
@@ -231,7 +231,7 @@ const Setup: FC = () => {
       setupMonitoringLoop();
     } catch {
       showError(
-        "reboot request failed - but that can also happen when shutdown happened"
+        "reboot request failed - but that can also happen when shutdown happened",
       );
     }
   };
@@ -244,7 +244,7 @@ const Setup: FC = () => {
 
     await instance.get("/setup/shutdown").catch(() => {
       showError(
-        "shutdown request failed - but that can also happen when shutdown happened"
+        "shutdown request failed - but that can also happen when shutdown happened",
       );
     });
   };
@@ -295,7 +295,7 @@ const Setup: FC = () => {
 
   const callbackFormatDialog = (
     deleteData: boolean,
-    keepBlockchainData: boolean
+    keepBlockchainData: boolean,
   ) => {
     // on cancel jump back to setup menu
     if (!deleteData) {
@@ -415,7 +415,7 @@ const Setup: FC = () => {
       // start setup shutdown (if user wants to cancel whole setup)
       await instance.post("/system/shutdown").catch(() => {
         console.log(
-          "shutdown request failed - but that can also happen when shutdown happened"
+          "shutdown request failed - but that can also happen when shutdown happened",
         );
       });
     }

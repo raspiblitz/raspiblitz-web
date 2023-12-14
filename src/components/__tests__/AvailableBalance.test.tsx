@@ -25,7 +25,7 @@ describe("AvailableBalance", () => {
         <AppContext.Provider value={{ ...contextValues, unit: Unit.SAT }}>
           <AvailableBalance balance={500_000_000} />
         </AppContext.Provider>
-      </I18nextProvider>
+      </I18nextProvider>,
     );
 
     expect(screen.getByText("wallet.available_balance:")).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe("AvailableBalance", () => {
         <AppContext.Provider value={{ ...contextValues, unit: Unit.BTC }}>
           <AvailableBalance balance={500_000_000} />
         </AppContext.Provider>
-      </I18nextProvider>
+      </I18nextProvider>,
     );
 
     expect(screen.getByText("wallet.available_balance:")).toBeInTheDocument();

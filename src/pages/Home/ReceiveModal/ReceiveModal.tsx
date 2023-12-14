@@ -175,7 +175,7 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
 
       {address && <ReceiveOnChain address={address} />}
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

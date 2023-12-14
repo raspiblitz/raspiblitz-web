@@ -18,7 +18,7 @@ const InputField = forwardRef(
       value,
       ...rest
     }: InputFieldProps,
-    ref: Ref<HTMLInputElement>
+    ref: Ref<HTMLInputElement>,
   ) => {
     return (
       <>
@@ -60,7 +60,7 @@ const InputField = forwardRef(
         </p>
       </>
     );
-  }
+  },
 );
 
 export default InputField;

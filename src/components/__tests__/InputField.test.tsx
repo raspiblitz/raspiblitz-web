@@ -26,7 +26,7 @@ describe("InputField", () => {
       <InputField
         {...basicProps}
         errorMessage={{ type: "required", message: "Banana required!" }}
-      />
+      />,
     );
 
     const input = await screen.findByLabelText("Banana Label");
@@ -46,7 +46,7 @@ describe("InputField", () => {
       <InputField
         {...basicProps}
         inputRightElement={<button>Click me!</button>}
-      />
+      />,
     );
 
     expect(screen.getByText("Click me!")).toBeInTheDocument();

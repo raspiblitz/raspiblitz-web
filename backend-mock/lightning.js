@@ -7,14 +7,14 @@ let WALLET_LOCKED = true;
 
 router.post("/add-invoice", (req, res) => {
   console.info(
-    `call to /api/v1/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`
+    `call to /api/v1/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`,
   );
   res.send(
     // LND invoice
     JSON.stringify({
       payment_request:
         "lnbcrt500u1p3vza0ppp5nyyutzvav66suf7070wxje3ys7mrx44283l6u82cywjrc0ylunhsdqqcqzpgxqyz5vqsp5j5wdagc9nwxsqu9z2r562nznwqlgw760tr8nkx7ty3ahrks73lgq9qyyssqjf0r2apc84cvcyrp4w3rt3ymm44hl2kveavjsmjee9xdc35s8a6j3zyzqckkpyehgxpvuyqe4q9r5uejaqysg6vslr2wdt82wg4jm7cqp3xxp9",
-    })
+    }),
     // CLN invoice
     // JSON.stringify({
     //   payment_request:
@@ -36,7 +36,7 @@ router.post("/send-coins", (req, res) => {
 router.get("/decode-pay-req", (req, res) => {
   console.info(
     "call to /api/v1/lightning/decode-pay-req with invoice",
-    req.query["pay_req"]
+    req.query["pay_req"],
   );
 
   setTimeout(() => {
@@ -85,7 +85,7 @@ router.get("/decode-pay-req", (req, res) => {
           },
         ],
         currency: "",
-      })
+      }),
     );
   }, 1500);
 
@@ -135,7 +135,7 @@ router.get("/decode-pay-req", (req, res) => {
 
 router.post("/send-payment", (req, res) => {
   console.info(
-    `call to ${req.originalUrl} with invoice ${req.query["pay_req"]}`
+    `call to ${req.originalUrl} with invoice ${req.query["pay_req"]}`,
   );
 
   return res.status(200).send(
@@ -209,7 +209,7 @@ router.post("/send-payment", (req, res) => {
       ],
       payment_index: 3,
       failure_reason: "FAILURE_REASON_NONE",
-    })
+    }),
   );
 });
 
@@ -223,14 +223,14 @@ router.get("/list-all-tx", (req, res) => {
 
 router.post("/new-address", (req, res) => {
   console.info(
-    `call to /api/v1/lightning/new-address with type ${req.body.type}`
+    `call to /api/v1/lightning/new-address with type ${req.body.type}`,
   );
   return res.status(200).send("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz");
 });
 
 router.post("/unlock-wallet", (req, res) => {
   console.info(
-    `call to /api/v1/lightning/unlock-wallet with type ${req.body.password}`
+    `call to /api/v1/lightning/unlock-wallet with type ${req.body.password}`,
   );
   // simulate loading time
   setTimeout(() => {
@@ -285,7 +285,7 @@ router.get("/list-channels", (req, res) => {
         balance_remote: 200_000_000,
         balance_capacity: 300_000_000,
       },
-    ])
+    ]),
   );
 });
 

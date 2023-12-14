@@ -36,7 +36,7 @@ describe("checkError", () => {
       },
     });
     expect(errorMsg).toEqual(
-      "An error occurred: ensure this value has at least 8 characters"
+      "An error occurred: ensure this value has at least 8 characters",
     );
   });
 
@@ -59,7 +59,7 @@ describe("checkError", () => {
       },
     });
     expect(errorMsg).toEqual(
-      "An error occurred: value is not a valid enumeration member; permitted: 'p2wkh', 'np2wkh'"
+      "An error occurred: value is not a valid enumeration member; permitted: 'p2wkh', 'np2wkh'",
     );
   });
 

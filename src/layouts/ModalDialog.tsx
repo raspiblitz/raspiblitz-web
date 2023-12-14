@@ -26,7 +26,7 @@ const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
         closeModal();
       }
     },
-    [closeModal, closeable]
+    [closeModal, closeable],
   );
 
   useEffect(() => {

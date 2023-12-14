@@ -37,7 +37,7 @@ const QRCodeModal: FC<Props> = ({ identityUri, closeModal }) => {
         </Tooltip>
       </div>
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

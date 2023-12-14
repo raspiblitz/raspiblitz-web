@@ -9,7 +9,7 @@ describe("SwitchTxType", () => {
       <SwitchTxType
         invoiceType={TxType.LIGHTNING}
         onTxTypeChange={handeTxTypeChangeMock}
-      />
+      />,
     );
 
     const buttonLn = screen.getByText("home.lightning");
@@ -30,7 +30,7 @@ describe("SwitchTxType", () => {
       <SwitchTxType
         invoiceType={TxType.ONCHAIN}
         onTxTypeChange={handeTxTypeChangeMock}
-      />
+      />,
     );
 
     const buttonLn = screen.getByText("home.lightning");

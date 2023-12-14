@@ -24,7 +24,7 @@ const AmountInput: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const [amountInput, setAmountInput] = useState<string>(
-    amount ? `${amount}` : ""
+    amount ? `${amount}` : "",
   );
   const { unit, toggleUnit } = useContext(AppContext);
 
@@ -32,7 +32,7 @@ const AmountInput: FC<Props> = ({
     let formattedValue = amountInput;
     if (unit === Unit.BTC && formattedValue) {
       formattedValue = new Intl.NumberFormat("en-US").format(
-        convertBtcToSat(+formattedValue)
+        convertBtcToSat(+formattedValue),
       );
     } else {
       // remove separators
