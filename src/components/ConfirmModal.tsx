@@ -57,7 +57,7 @@ const ConfirmModal: FC<Props> = ({
         )}
       </div>
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

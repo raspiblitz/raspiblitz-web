@@ -11,7 +11,7 @@ let currClientId = 0;
  */
 const sendSSE = (event, data) => {
   clients.forEach((client) =>
-    client.response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`)
+    client.response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`),
   );
 };
 

@@ -25,7 +25,7 @@ const ImageCarousel: FC<Props> = ({ imgs, video }) => {
 
   return (
     <div className="relative inline-block">
-      <div className="absolute z-20 bottom-0 left-0 right-0 mb-5 flex justify-center gap-5 p-0">
+      <div className="absolute bottom-0 left-0 right-0 z-20 mb-5 flex justify-center gap-5 p-0">
         {((video && activeIndex !== 0) || !video) &&
           imgs.map((_, index) => {
             const idx = video ? activeIndex - 1 : activeIndex;
@@ -50,7 +50,7 @@ const ImageCarousel: FC<Props> = ({ imgs, video }) => {
             );
           })}
       </div>
-      <div className="overflow-hidden px-5 relative z-10">
+      <div className="relative z-10 overflow-hidden px-5">
         {video && activeIndex === 0 ? (
           video
         ) : (

@@ -30,7 +30,7 @@ export const TransactionDetailModal: FC<Props> = ({ transaction, close }) => {
         {category === "ln" && <LNDetails details={transaction} />}
       </section>
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

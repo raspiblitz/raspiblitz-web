@@ -99,7 +99,7 @@ export const WalletCard: FC<Props> = ({
                   {onChainUnconfirmed !== 0 &&
                     `(${unconfirmedSign}${convertToString(
                       unit,
-                      convertedOnchainBalanceUnconfirmed
+                      convertedOnchainBalanceUnconfirmed,
                     )})`}
                 </span>
               </p>

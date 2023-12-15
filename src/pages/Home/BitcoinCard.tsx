@@ -55,7 +55,7 @@ export const BitcoinCard: FC = () => {
             <p>
               {`${connections_in} ${t("home.conn_in")}`} /{" "}
               <span className="inline-block">{`${connections_out} ${t(
-                "home.conn_out"
+                "home.conn_out",
               )}`}</span>
             </p>
           </article>

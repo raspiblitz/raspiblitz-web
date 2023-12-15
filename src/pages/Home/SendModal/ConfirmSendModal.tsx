@@ -89,7 +89,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
 
       instance
         .post(
-          `lightning/send-payment?pay_req=${confirmData?.address}${msatQuery}`
+          `lightning/send-payment?pay_req=${confirmData?.address}${msatQuery}`,
         )
         .then(() => {
           setIsLoading(false);
@@ -161,7 +161,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
           <span>
             {formatAmount(
               convertMSatToSat(+confirmData.amount)?.toString()!,
-              Unit.SAT
+              Unit.SAT,
             )}{" "}
             Sat
           </span>

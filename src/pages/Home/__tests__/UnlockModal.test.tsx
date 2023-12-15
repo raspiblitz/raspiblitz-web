@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "test-utils";
-import { rest, server } from "../../../testServer";
+import { http, server, HttpResponse } from "../../../testServer";
 import UnlockModal from "../UnlockModal";
 
 const handleClose = vi.fn();
@@ -34,9 +34,9 @@ describe("UnlockModal", () => {
 
   test("should show text on wrong password", async () => {
     server.use(
-      rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
-        return res(ctx.status(401));
-      })
+      http.post("/api/v1/lightning/unlock-wallet", () => {
+        return new HttpResponse(null, { status: 401 });
+      }),
     );
 
     const user = userEvent.setup();
@@ -51,9 +51,9 @@ describe("UnlockModal", () => {
 
   test("should display unlocking text on unlock", async () => {
     server.use(
-      rest.post("/api/v1/lightning/unlock-wallet", (_, res, ctx) => {
-        return res(ctx.status(200));
-      })
+      http.post("/api/v1/lightning/unlock-wallet", () => {
+        return new HttpResponse(null, { status: 200 });
+      }),
     );
 
     const user = userEvent.setup();

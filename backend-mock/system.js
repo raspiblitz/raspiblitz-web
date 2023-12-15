@@ -28,7 +28,7 @@ router.post("/refresh-token", (req, res) => {
     return res.status(401).send(
       JSON.stringify({
         detail: "Not authenticated",
-      })
+      }),
     );
   }
   const access_token = auth.signToken();

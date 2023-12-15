@@ -37,7 +37,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
   };
 
   const changePasswordRepeatHandler = (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>,
   ) => {
     setPasswordRepeat(event.target.value);
   };

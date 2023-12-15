@@ -10,7 +10,7 @@ router.get("/status", function (req, res) {
       state: "waitfinal",
       message: "Node Running",
       initialsync: "",
-    })
+    }),
   );
 
   // Setupscreen
@@ -43,7 +43,7 @@ router.get("/setup-start-info", function (req, res) {
       hddGotBlockchain: "0",
       hddGotMigrationData: null,
       migrationMode: null,
-    })
+    }),
   );
 });
 
@@ -58,7 +58,7 @@ router.get("/setup-final-info", function (req, res) {
     JSON.stringify({
       seedwordsNEW:
         "Never, gonna, give, you, up, Never, gonna, let, you, down, Never, gonna, run, around, and, desert, you, Never, gonna, make, you, cry, happy, day",
-    })
+    }),
   );
 });
 
@@ -86,7 +86,7 @@ router.post("/setup-sync-info", function (req, res) {
       ln_default_ready: "1",
       ln_default_locked: "1",
       system_count_start_lightning: "3",
-    })
+    }),
   );
 });
 

@@ -33,5 +33,5 @@ root.render(
         </SSEContextProvider>
       </BrowserRouter>
     </ErrorBoundary>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

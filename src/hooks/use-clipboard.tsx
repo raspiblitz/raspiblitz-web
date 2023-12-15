@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function useClipboard(text: string): [() => void, boolean] {
   const [clipped, setClipped] = useState(false);
   const [timer, setTimer] = useState<ReturnType<typeof setTimeout> | null>(
-    null
+    null,
   );
   useEffect(() => {
     return () => {

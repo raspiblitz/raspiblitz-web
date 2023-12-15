@@ -115,7 +115,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
           error={error}
         />
       </ModalDialog>,
-      MODAL_ROOT
+      MODAL_ROOT,
     );
   }
 
@@ -134,7 +134,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
         onConfirm={confirmOnChainHandler}
       />
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

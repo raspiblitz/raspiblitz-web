@@ -1,7 +1,7 @@
 import { I18nextProvider } from "react-i18next";
 import { render, waitFor, screen } from "test-utils";
 import App from "./App";
-import { rest, server } from "./testServer";
+import { http, server, HttpResponse } from "./testServer";
 import i18n from "i18n/test_config";
 
 const mockedUsedNavigate = vi.fn();
@@ -19,43 +19,43 @@ describe("App", () => {
 
   test("should route to /setup if setup is not done", async () => {
     server.use(
-      rest.get("/api/v1/setup/status", (_, res, ctx) => {
-        return res(
-          ctx.status(200),
-          ctx.json({
+      http.get("/api/v1/setup/status", () => {
+        return HttpResponse.json(
+          {
             setupPhase: "starting",
             state: "",
             message: "",
-          })
+          },
+          { status: 200 },
         );
-      })
+      }),
     );
 
     render(
       <I18nextProvider i18n={i18n}>
         <App />
-      </I18nextProvider>
+      </I18nextProvider>,
     );
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalledTimes(1));
   });
 
   test("should route to /login if setup is done", async () => {
     server.use(
-      rest.get("/api/v1/setup/status", (_, res, ctx) => {
-        return res(
-          ctx.status(200),
-          ctx.json({
+      http.get("/api/v1/setup/status", () => {
+        return HttpResponse.json(
+          {
             setupPhase: "done",
             state: "",
             message: "",
-          })
+          },
+          { status: 200 },
         );
-      })
+      }),
     );
     render(
       <I18nextProvider i18n={i18n}>
         <App />
-      </I18nextProvider>
+      </I18nextProvider>,
     );
     expect(await screen.findByText("Log in")).toBeInTheDocument();
   });

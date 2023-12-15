@@ -130,7 +130,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
         </article>
       </form>
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

@@ -91,7 +91,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
 
       {passwordWrong && <Message message={t("login.invalid_pass")} />}
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

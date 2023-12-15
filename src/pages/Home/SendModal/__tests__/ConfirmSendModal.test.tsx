@@ -2,7 +2,7 @@ import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import { render, screen, waitFor } from "test-utils";
 import i18n from "../../../../i18n/test_config";
-import { rest, server } from "../../../../testServer";
+import { http, server, HttpResponse } from "../../../../testServer";
 import { TxType } from "../../SwitchTxType";
 import type { Props } from "../ConfirmSendModal";
 import ConfirmSendModal from "../ConfirmSendModal";
@@ -44,7 +44,7 @@ describe("ConfirmSendModal", () => {
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal {...basicLnTxProps} />
-        </I18nextProvider>
+        </I18nextProvider>,
       );
     };
 
@@ -62,7 +62,7 @@ describe("ConfirmSendModal", () => {
       await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
       expect(
-        await screen.findByText("forms.validation.chainAmount.max")
+        await screen.findByText("forms.validation.chainAmount.max"),
       ).toBeInTheDocument();
     });
 
@@ -80,7 +80,7 @@ describe("ConfirmSendModal", () => {
       await waitFor(() => expect(amountInput).toHaveClass("input-error"));
 
       expect(
-        screen.getByText("forms.validation.chainAmount.required")
+        screen.getByText("forms.validation.chainAmount.required"),
       ).toBeInTheDocument();
     });
 
@@ -89,32 +89,33 @@ describe("ConfirmSendModal", () => {
       setup();
 
       const amountInput = screen.getByLabelText(
-        "wallet.amount"
+        "wallet.amount",
       ) as HTMLInputElement;
 
       await user.type(amountInput, "100");
       await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
 
       expect(
-        screen.getByRole("button", { name: "settings.confirm" })
+        screen.getByRole("button", { name: "settings.confirm" }),
       ).not.toBeDisabled();
     });
 
     test("amountInput correctly sends mSat", async () => {
       server.use(
-        rest.post("/api/v1/lightning/send-payment", (req, res, ctx) => {
-          if (req.url.searchParams.get("amount_msat") === "10000") {
-            return res(ctx.status(200));
+        http.post("/api/v1/lightning/send-payment", ({ request }) => {
+          const url = new URL(request.url);
+          if (url.searchParams.get("amount_msat") === "10000") {
+            return new HttpResponse(null, { status: 200 });
           } else {
-            return res(ctx.status(500));
+            return new HttpResponse(null, { status: 500 });
           }
-        })
+        }),
       );
       const user = userEvent.setup();
       setup();
 
       const amountInput = screen.getByLabelText(
-        "wallet.amount"
+        "wallet.amount",
       ) as HTMLInputElement;
 
       await user.type(amountInput, "10");
@@ -140,17 +141,17 @@ describe("ConfirmSendModal", () => {
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
-        </I18nextProvider>
+        </I18nextProvider>,
       );
 
       expect(
         screen.getByText(
           "forms.validation.lnInvoice.expired",
-          { exact: false } /* exclude displayed date */
-        )
+          { exact: false } /* exclude displayed date */,
+        ),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("button", { name: "settings.confirm" })
+        screen.getByRole("button", { name: "settings.confirm" }),
       ).toBeDisabled();
     });
 
@@ -162,14 +163,14 @@ describe("ConfirmSendModal", () => {
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
-        </I18nextProvider>
+        </I18nextProvider>,
       );
 
       expect(
-        await screen.findByText("forms.validation.lnInvoice.max")
+        await screen.findByText("forms.validation.lnInvoice.max"),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("button", { name: "settings.confirm" })
+        screen.getByRole("button", { name: "settings.confirm" }),
       ).toBeDisabled();
     });
 
@@ -181,7 +182,7 @@ describe("ConfirmSendModal", () => {
       render(
         <I18nextProvider i18n={i18n}>
           <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
-        </I18nextProvider>
+        </I18nextProvider>,
       );
 
       const submitButton = screen.queryByText("wallet.amount");
@@ -190,7 +191,7 @@ describe("ConfirmSendModal", () => {
       expect(
         await screen.findByRole("button", {
           name: "settings.confirm",
-        })
+        }),
       ).not.toBeDisabled();
     });
   });
@@ -207,14 +208,14 @@ describe("ConfirmSendModal", () => {
             {...basicOnChainTxProps}
             confirmData={confirmData}
           />
-        </I18nextProvider>
+        </I18nextProvider>,
       );
 
       expect(
-        await screen.findByText("forms.validation.lnInvoice.max")
+        await screen.findByText("forms.validation.lnInvoice.max"),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("button", { name: "settings.confirm" })
+        screen.getByRole("button", { name: "settings.confirm" }),
       ).toBeDisabled();
     });
 
@@ -229,7 +230,7 @@ describe("ConfirmSendModal", () => {
             {...basicOnChainTxProps}
             confirmData={confirmData}
           />
-        </I18nextProvider>
+        </I18nextProvider>,
       );
 
       const submitButton = screen.queryByText("wallet.amount");
@@ -238,7 +239,7 @@ describe("ConfirmSendModal", () => {
       expect(
         await screen.findByRole("button", {
           name: "settings.confirm",
-        })
+        }),
       ).not.toBeDisabled();
     });
   });

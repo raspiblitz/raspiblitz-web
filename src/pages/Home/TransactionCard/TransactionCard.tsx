@@ -63,7 +63,7 @@ const TransactionCard: FC<Props> = ({
   if (transactions.length > MAX_ITEMS) {
     currentPageTxs = transactions.slice(
       page * MAX_ITEMS,
-      page * MAX_ITEMS + MAX_ITEMS
+      page * MAX_ITEMS + MAX_ITEMS,
     );
   }
 

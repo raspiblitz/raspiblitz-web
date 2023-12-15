@@ -54,7 +54,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
             channel_id: channelId,
             force_close: forceClose,
           },
-        }
+        },
       )
       .then(() => {
         toast.success(t("home.channel_closed"), { theme });
@@ -88,7 +88,7 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
       )}
       {error && <Message message={error} />}
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

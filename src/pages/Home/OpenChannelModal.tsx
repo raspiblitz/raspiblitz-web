@@ -55,7 +55,7 @@ const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
             node_URI: data.nodeUri,
             target_confs: +data.feeRate,
           },
-        }
+        },
       )
       .then(() => {
         toast.success(t("home.channel_opened"), { theme });
@@ -127,7 +127,7 @@ const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
         {error && <Message message={error} />}
       </article>
     </ModalDialog>,
-    MODAL_ROOT
+    MODAL_ROOT,
   );
 };
 

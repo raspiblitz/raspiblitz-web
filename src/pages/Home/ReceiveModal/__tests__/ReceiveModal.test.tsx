@@ -1,13 +1,15 @@
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "test-utils";
-import { rest, server } from "../../../../testServer";
+import { http, server, HttpResponse } from "../../../../testServer";
 import ReceiveModal from "../ReceiveModal";
 
 beforeAll(() => {
   server.use(
-    rest.post("/api/v1/lightning/new-address", (_, res, ctx) => {
-      return res(ctx.body("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz"));
-    })
+    http.post("/api/v1/lightning/new-address", () => {
+      return new HttpResponse("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz", {
+        status: 200,
+      });
+    }),
   );
 });
 
