@@ -19,7 +19,7 @@ Big thanks to our translators, which you can find in this [README](src/i18n/READ
 ### Dependencies
 
 - [Node.js](https://nodejs.org/en/download/)
-- [nvm](https://github.com/nvm-sh/nvm#intro) is suppported but not required
+- [nvm](https://github.com/nvm-sh/nvm#intro) is supported but not required.
 
 #### Update npm dependencies
 
