@@ -8,6 +8,7 @@ import type { Props } from "../ConfirmSendModal";
 import ConfirmSendModal from "../ConfirmSendModal";
 import { SendLnForm } from "../SendModal";
 import { SendOnChainForm } from "../SendOnChain";
+import { toast } from "react-toastify";
 
 const closeSpy = vi.fn();
 
@@ -127,7 +128,7 @@ describe("ConfirmSendModal", () => {
 
       await user.click(confirmBtn);
 
-      expect(closeSpy).toHaveBeenCalledWith(true);
+      expect(closeSpy).toHaveBeenCalled();
     });
   });
 

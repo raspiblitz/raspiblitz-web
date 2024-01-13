@@ -1,11 +1,11 @@
-import { AxiosResponse } from "axios";
-import { DecodePayRequest } from "@/models/decode-pay-req";
-import { FC, useState } from "react";
-import { createPortal } from "react-dom";
 import ModalDialog from "@/layouts/ModalDialog";
+import { DecodePayRequest } from "@/models/decode-pay-req";
 import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
+import { AxiosResponse } from "axios";
+import { FC, useState } from "react";
+import { createPortal } from "react-dom";
 import SwitchTxType, { TxType } from "../SwitchTxType";
 import ConfirmSendModal from "./ConfirmSendModal";
 import SendLn, { LnInvoiceForm } from "./SendLN";
@@ -14,7 +14,7 @@ import SendOnChain, { SendOnChainForm } from "./SendOnChain";
 export type Props = {
   lnBalance: number;
   onchainBalance: number;
-  onClose: (confirmed: boolean) => void;
+  onClose: () => void;
 };
 
 export interface SendLnForm {
@@ -84,7 +84,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   // confirm send
   if (!isBack && confirmData) {
     return (
-      <ModalDialog close={() => onClose(false)}>
+      <ModalDialog close={() => onClose()}>
         <ConfirmSendModal
           confirmData={confirmData}
           back={backHandler}
@@ -100,7 +100,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   // Send LN
   if (invoiceType === TxType.LIGHTNING) {
     return createPortal(
-      <ModalDialog close={() => onClose(false)} closeable={!loading}>
+      <ModalDialog close={() => onClose()} closeable={!loading}>
         <SwitchTxType
           invoiceType={invoiceType}
           onTxTypeChange={changeTransactionHandler}
@@ -121,7 +121,7 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
 
   // Send On-Chain
   return createPortal(
-    <ModalDialog close={() => onClose(false)}>
+    <ModalDialog close={() => onClose()}>
       <SwitchTxType
         invoiceType={invoiceType}
         onTxTypeChange={changeTransactionHandler}

@@ -3,6 +3,7 @@ import {
   ChevronLeftIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { toast } from "react-toastify";
 import type { ChangeEvent } from "react";
 import { FC, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -31,12 +32,12 @@ export type Props = {
   confirmData: SendOnChainForm | SendLnForm;
   back: (data: SendOnChainForm | SendLnForm) => void;
   balance: number;
-  close: (confirmed: boolean) => void;
+  close: () => void;
 };
 
 const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
   const { t } = useTranslation();
-  const { unit } = useContext(AppContext);
+  const { unit, darkMode } = useContext(AppContext);
   const [amountInput, setAmountInput] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -93,7 +94,8 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
         )
         .then(() => {
           setIsLoading(false);
-          close(true);
+          toast.success(t("tx.sent"), { theme: darkMode ? "dark" : "light" });
+          close();
         })
         .catch((err) => {
           setError(checkError(err));
@@ -116,7 +118,8 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
         .post("lightning/send-coins", body)
         .then(() => {
           setIsLoading(false);
-          close(true);
+          toast.success(t("tx.sent"), { theme: darkMode ? "dark" : "light" });
+          close();
         })
         .catch((err) => {
           setError(checkError(err));
@@ -222,7 +225,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
       <div className="flex justify-around px-2 py-5">
         <button
           className="flex rounded bg-red-500 px-3 py-2 text-white shadow-xl hover:bg-red-400"
-          onClick={() => close(false)}
+          onClick={() => close()}
           disabled={isLoading}
         >
           <XMarkIcon className="inline h-6 w-6" />
