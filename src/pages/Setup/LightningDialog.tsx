@@ -1,12 +1,12 @@
 import { ArrowSmallRightIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { FC, FormEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import CLNLogoDark from "../../assets/core-lightning-dark.png";
-import CLNLogoLight from "../../assets/core-lightning-light.png";
-import LNDLogo from "../../assets/lnd.png";
-import { AppContext } from "../../context/app-context";
-import SetupContainer from "../../layouts/SetupContainer";
-import { SetupLightning } from "../../models/setup.model";
+import CLNLogoDark from "@/assets/core-lightning-dark.png";
+import CLNLogoLight from "@/assets/core-lightning-light.png";
+import LNDLogo from "@/assets/lnd.png";
+import { AppContext } from "@/context/app-context";
+import SetupContainer from "@/layouts/SetupContainer";
+import { SetupLightning } from "@/models/setup.model";
 import SelectOption from "./SelectOption";
 
 export interface InputData {

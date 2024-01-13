@@ -37,12 +37,16 @@ router.post("/refresh-token", (req, res) => {
 
 router.post("/reboot", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
-  res.status(200).send();
+  setTimeout(() => {
+    res.status(200).send();
+  }, 2000);
 });
 
 router.post("/shutdown", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
-  res.status(200).send();
+  setTimeout(() => {
+    res.status(200).send();
+  }, 2000);
 });
 
 router.get("/get-debug-logs-raw", (req, res) => {

@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { LightningChannel } from "../../../models/lightning-channel";
+import { LightningChannel } from "@/models/lightning-channel";
 import Channel from "./Channel";
 
 type Props = {

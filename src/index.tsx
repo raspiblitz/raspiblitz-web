@@ -10,7 +10,7 @@ import SSEContextProvider from "./context/sse-context";
 import "react-tooltip/dist/react-tooltip.css";
 
 import "i18next";
-import ErrorBoundary from "ErrorBoundary";
+import ErrorBoundary from "@/ErrorBoundary";
 
 declare module "i18next" {
   interface CustomTypeOptions {

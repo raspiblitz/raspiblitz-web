@@ -17,7 +17,7 @@ import {
   retrieveSettings,
   saveSettings,
   setWindowAlias,
-} from "../utils";
+} from "@/utils";
 import { SSEContext } from "./sse-context";
 import { toast } from "react-toastify";
 

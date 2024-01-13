@@ -8,12 +8,12 @@ import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "../../components/InputField";
-import Message from "../../components/Message";
-import SetupContainer from "../../layouts/SetupContainer";
-import { checkError } from "../../utils/checkError";
-import { instance } from "../../utils/interceptor";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "@/components/InputField";
+import Message from "@/components/Message";
+import SetupContainer from "@/layouts/SetupContainer";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 import ProgressCircle from "./ProgressCircle";
 
 export interface InputData {

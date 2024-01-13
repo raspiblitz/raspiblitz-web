@@ -8,9 +8,9 @@ import {
 import { Tooltip } from "react-tooltip";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import LoadingBox from "../../components/LoadingBox";
-import { SSEContext } from "../../context/sse-context";
-import useClipboard from "../../hooks/use-clipboard";
+import LoadingBox from "@/components/LoadingBox";
+import { SSEContext } from "@/context/sse-context";
+import useClipboard from "@/hooks/use-clipboard";
 import QRCodeModal from "./QRCodeModal";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";

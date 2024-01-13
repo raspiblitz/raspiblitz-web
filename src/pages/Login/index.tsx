@@ -6,15 +6,15 @@ import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import RaspiBlitzLogo from "../../assets/RaspiBlitz_Logo_Main.svg?react";
-import RaspiBlitzLogoDark from "../../assets/RaspiBlitz_Logo_Main_Negative.svg?react";
-import I18nDropdown from "../../components/I18nDropdown";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import Message from "../../components/Message";
-import { AppContext } from "../../context/app-context";
-import { ACCESS_TOKEN, enableGutter } from "../../utils";
-import { ApiError, checkError } from "../../utils/checkError";
-import { instance } from "../../utils/interceptor";
+import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
+import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import I18nDropdown from "@/components/I18nDropdown";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import Message from "@/components/Message";
+import { AppContext } from "@/context/app-context";
+import { ACCESS_TOKEN, enableGutter } from "@/utils";
+import { ApiError, checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 
 const Login: FC = () => {
   const { t } = useTranslation();

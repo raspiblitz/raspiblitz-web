@@ -1,3 +1,8 @@
+import AppIcon from "@/components/AppIcon";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import { AppStatus, AuthMethod } from "@/models/app-status";
+import { App } from "@/models/app.model";
+import { getHrefFromApp } from "@/utils";
 import {
   ArrowTopRightOnSquareIcon,
   InformationCircleIcon,
@@ -7,11 +12,6 @@ import {
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
-import { getHrefFromApp } from "utils";
-import { AppStatus, AuthMethod } from "../..//models/app-status";
-import { App } from "../..//models/app.model";
-import AppIcon from "../../components/AppIcon";
-import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
 
 export type Props = {
   appInfo: App;

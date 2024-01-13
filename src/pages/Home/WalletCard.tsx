@@ -11,13 +11,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { AppContext, Unit } from "../../context/app-context";
-import { SSEContext } from "../../context/sse-context";
+import { AppContext, Unit } from "@/context/app-context";
+import { SSEContext } from "@/context/sse-context";
 import {
   convertMSatToBtc,
   convertSatToBtc,
   convertToString,
-} from "../../utils/format";
+} from "@/utils/format";
 
 type Props = {
   onReceive: () => void;

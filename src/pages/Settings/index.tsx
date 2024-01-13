@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import useSSE from "../../hooks/use-sse";
-import { enableGutter } from "../../utils";
+import useSSE from "@/hooks/use-sse";
+import { enableGutter } from "@/utils";
 import ActionBox from "./ActionBox";
 import ChangePwModal from "./ChangePwModal";
 import DebugLogBox from "./DebugLogBox";
@@ -53,11 +53,7 @@ const Settings: FC = () => {
         action={() => setShowShutdownModal(true)}
         showChild={showShutdownModal}
       >
-        <ShutdownModal
-          confirmText={t("settings.shutdown") + "?"}
-          onClose={() => setShowShutdownModal(false)}
-          confirmEndpoint="/system/shutdown"
-        />
+        <ShutdownModal onClose={() => setShowShutdownModal(false)} />
       </ActionBox>
       <VersionBox
         platformVersion={systemInfo.platform_version}

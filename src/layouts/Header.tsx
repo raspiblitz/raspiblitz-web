@@ -1,11 +1,11 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import RaspiBlitzMobileLogo from "../assets/RaspiBlitz_Logo_Icon.svg?react";
-import RaspiBlitzLogo from "../assets/RaspiBlitz_Logo_Main.svg?react";
-import RaspiBlitzLogoDark from "../assets/RaspiBlitz_Logo_Main_Negative.svg?react";
-import { AppContext } from "../context/app-context";
-import { SSEContext } from "../context/sse-context";
+import RaspiBlitzMobileLogo from "@/assets/RaspiBlitz_Logo_Icon.svg?react";
+import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
+import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import { AppContext } from "@/context/app-context";
+import { SSEContext } from "@/context/sse-context";
 import DropdownMenu from "./DropdownMenu";
 
 const Header: FC = () => {

@@ -1,4 +1,4 @@
-import { App } from "../models/app.model";
+import { App } from "@/models/app.model";
 
 export const availableApps: Map<string, App> = new Map([
   [

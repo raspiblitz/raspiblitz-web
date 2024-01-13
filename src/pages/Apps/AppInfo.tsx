@@ -3,14 +3,14 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { AppStatus } from "models/app-status";
+import { AppStatus } from "@/models/app-status";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import AppIcon from "../../components/AppIcon";
-import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { App } from "../../models/app.model";
-import { availableApps } from "../../utils/availableApps";
+import AppIcon from "@/components/AppIcon";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { App } from "@/models/app.model";
+import { availableApps } from "@/utils/availableApps";
 import ImageCarousel from "./ImageCarousel";
 
 export type Props = {
@@ -48,9 +48,9 @@ export const AppInfo: FC<Props> = ({
 
     async function loadAppImages() {
       const promises = await Promise.allSettled([
-        import(`../../assets/apps/preview/${id}/1.png`),
-        import(`../../assets/apps/preview/${id}/2.png`),
-        import(`../../assets/apps/preview/${id}/3.png`),
+        import(`@/assets/apps/preview/${id}/1.png`),
+        import(`@/assets/apps/preview/${id}/2.png`),
+        import(`@/assets/apps/preview/${id}/3.png`),
       ]);
 
       promises.forEach((promise, i) => {

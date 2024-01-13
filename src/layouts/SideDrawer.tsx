@@ -4,13 +4,13 @@ import {
   HomeIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
-import { SSEContext } from "context/sse-context";
-import AppStatusCard from "pages/Home/AppStatusCard";
+import { SSEContext } from "@/context/sse-context";
+import AppStatusCard from "@/pages/Home/AppStatusCard";
 import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { AppContext } from "../context/app-context";
+import { AppContext } from "@/context/app-context";
 
 const navLinkClasses =
   "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full dark:text-white opacity-80 hover:text-yellow-500 dark:hover:text-yellow-500";

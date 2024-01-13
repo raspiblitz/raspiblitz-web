@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import packageJson from "../../../package.json";
+import packageJson from "package.json";
 
 type Props = {
   platformVersion: string;
