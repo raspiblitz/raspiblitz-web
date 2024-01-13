@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const btcInfo = require("./sse/btc_info");
-const lnInfoLite = require("./sse/ln_info_lite");
+const lnInfo = require("./sse/ln_info");
 const installedAppStatus = require("./sse/installed_app_status");
 const systemInfo = require("./sse/system_info");
 const hardwareInfo = require("./sse/hardware_info");
@@ -60,7 +60,7 @@ const eventsHandler = (request, response) => {
   systemInfo.systemInfo();
   hardwareInfo.hardwareInfo();
   btcInfo.btcInfo();
-  lnInfoLite.lnInfoLite();
+  lnInfo.lnInfo();
   installedAppStatus.appStatus();
   walletBalance.walletBalance();
 
