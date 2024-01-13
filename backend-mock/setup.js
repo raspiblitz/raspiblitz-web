@@ -13,6 +13,16 @@ router.get("/status", function (req, res) {
     }),
   );
 
+  // basic setup
+  // res.status(200).send(
+  //   JSON.stringify({
+  //     setupPhase: "",
+  //     state: "waitsetup",
+  //     message: "Node Running",
+  //     initialsync: "",
+  //   }),
+  // );
+
   // Setupscreen
   // res.status(200).send(
   //   JSON.stringify({

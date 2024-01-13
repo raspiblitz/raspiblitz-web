@@ -17,12 +17,12 @@ const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
 export const ConnectionCard: FC = () => {
   const { t } = useTranslation();
-  const { systemInfo, lnInfoLite } = useContext(SSEContext);
+  const { systemInfo, lnInfo } = useContext(SSEContext);
   const [showAddress, setShowAddress] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   const { tor_web_ui: torAddress, ssh_address: sshAddress } = systemInfo;
-  const { identity_uri: nodeId } = lnInfoLite || {};
+  const { identity_uri: nodeId } = lnInfo || {};
 
   const [copyTor, clippedTor] = useClipboard(torAddress);
   const [copySsh, clippedSsh] = useClipboard(sshAddress);

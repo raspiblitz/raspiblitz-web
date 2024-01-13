@@ -36,7 +36,7 @@ type ModalType =
 const Home: FC = () => {
   const { t } = useTranslation();
   const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
-  const { balance, lnInfoLite, systemStartupInfo } = useSSE();
+  const { balance, lnInfo, systemStartupInfo } = useSSE();
   const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -45,7 +45,7 @@ const Home: FC = () => {
 
   const theme = darkMode ? "dark" : "light";
 
-  const { implementation } = lnInfoLite;
+  const { implementation } = lnInfo;
   const {
     lightning: lightningState,
     bitcoin,

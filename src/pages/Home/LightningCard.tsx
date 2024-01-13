@@ -9,7 +9,7 @@ import { convertMSatToBtc, convertToString } from "../../utils/format";
 export const LightningCard: FC = () => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
-  const { lnInfoLite, balance } = useContext(SSEContext);
+  const { lnInfo, balance } = useContext(SSEContext);
 
   const {
     num_active_channels: activeChannels,
@@ -17,7 +17,7 @@ export const LightningCard: FC = () => {
     num_pending_channels: pendingChannels,
     version,
     implementation,
-  } = lnInfoLite;
+  } = lnInfo;
 
   const {
     channel_local_balance: localBalance,
@@ -26,7 +26,7 @@ export const LightningCard: FC = () => {
     channel_pending_open_remote_balance: pendingRemoteBalance,
   } = balance;
 
-  if (checkPropsUndefined({ lnInfoLite, balance })) {
+  if (checkPropsUndefined({ lnInfo, balance })) {
     return <LoadingBox />;
   }
 

@@ -4,7 +4,7 @@ import { AppStatus } from "../models/app-status";
 import { App } from "../models/app.model";
 import { BtcInfo } from "../models/btc-info";
 import { HardwareInfo } from "../models/hardware-info";
-import { LnInfoLite } from "../models/ln-info-lite";
+import { LnInfo } from "../models/ln-info";
 import { SystemInfo } from "../models/system-info";
 import { SystemStartupInfo } from "../models/system-startup-info";
 import { Transaction } from "../models/transaction.model";
@@ -17,8 +17,8 @@ export interface SSEContextType {
   setSystemInfo: Dispatch<SetStateAction<SystemInfo>>;
   btcInfo: BtcInfo;
   setBtcInfo: Dispatch<SetStateAction<BtcInfo>>;
-  lnInfoLite: LnInfoLite;
-  setLnStatus: Dispatch<SetStateAction<LnInfoLite>>;
+  lnInfo: LnInfo;
+  setLnInfo: Dispatch<SetStateAction<LnInfo>>;
   balance: WalletBalance;
   setBalance: Dispatch<SetStateAction<WalletBalance>>;
 
@@ -44,8 +44,8 @@ export const sseContextDefault: SSEContextType = {
   btcInfo: {} as BtcInfo,
   setBtcInfo: () => {},
   balance: {} as WalletBalance,
-  lnInfoLite: {} as LnInfoLite,
-  setLnStatus: () => {},
+  lnInfo: {} as LnInfo,
+  setLnInfo: () => {},
   setBalance: () => {},
   appStatus: [],
   setAppStatus: () => {},
@@ -96,7 +96,13 @@ const SSEContextProvider: FC<Props> = (props) => {
     verification_progress: 0,
     version: 0,
   });
-  const [lnInfoLite, setLnInfoLite] = useState<LnInfoLite>({
+  const [lnInfo, setLnInfo] = useState<LnInfo>({
+    alias: "",
+    best_header_timestamp: 0,
+    block_hash: "",
+    color: "",
+    commit_hash: "",
+    num_peers: 0,
     block_height: 0,
     implementation: null,
     identity_pubkey: "",
@@ -107,6 +113,9 @@ const SSEContextProvider: FC<Props> = (props) => {
     synced_to_chain: false,
     synced_to_graph: false,
     version: "",
+    chains: [],
+    uris: [],
+    features: [],
   });
   const [balance, setBalance] = useState<WalletBalance>({
     onchain_total_balance: null,
@@ -134,8 +143,8 @@ const SSEContextProvider: FC<Props> = (props) => {
     setSystemInfo,
     btcInfo,
     setBtcInfo,
-    lnInfoLite,
-    setLnStatus: setLnInfoLite,
+    lnInfo: lnInfo,
+    setLnInfo: setLnInfo,
     balance,
     setBalance,
     appStatus,
