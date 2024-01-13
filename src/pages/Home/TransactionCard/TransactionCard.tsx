@@ -3,7 +3,7 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Implementation } from "models/ln-info";
+import { Implementation } from "@/models/ln-info";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoadingBox from "@/components/LoadingBox";
