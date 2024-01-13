@@ -35,15 +35,13 @@ type ModalType =
 
 const Home: FC = () => {
   const { t } = useTranslation();
-  const { darkMode, walletLocked, setWalletLocked } = useContext(AppContext);
+  const { walletLocked, setWalletLocked } = useContext(AppContext);
   const { balance, lnInfo, systemStartupInfo } = useSSE();
   const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
   const [txError, setTxError] = useState("");
-
-  const theme = darkMode ? "dark" : "light";
 
   const { implementation } = lnInfo;
   const {
@@ -153,12 +151,9 @@ const Home: FC = () => {
 
   useInterval(getTransactions, 20000);
 
-  const closeModalHandler = (txSent?: boolean) => {
+  const closeModalHandler = () => {
     setShowModal(false);
     setDetailTx(null);
-    if (txSent) {
-      toast.success(t("tx.sent"), { theme });
-    }
   };
 
   const showDetailHandler = (index: number) => {
