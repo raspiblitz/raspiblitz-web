@@ -48,9 +48,9 @@ export const AppInfo: FC<Props> = ({
 
     async function loadAppImages() {
       const promises = await Promise.allSettled([
-        import(`@/assets/apps/preview/${id}/1.png`),
-        import(`@/assets/apps/preview/${id}/2.png`),
-        import(`@/assets/apps/preview/${id}/3.png`),
+        import(`../../assets/apps/preview/${id}/1.png`),
+        import(`../../assets/apps/preview/${id}/2.png`),
+        import(`../../assets/apps/preview/${id}/3.png`),
       ]);
 
       promises.forEach((promise, i) => {
