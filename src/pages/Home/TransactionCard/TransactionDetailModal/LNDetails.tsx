@@ -1,14 +1,14 @@
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { AppContext, Unit } from "../../../../context/app-context";
-import useClipboard from "../../../../hooks/use-clipboard";
-import { Transaction } from "../../../../models/transaction.model";
+import { AppContext, Unit } from "@/context/app-context";
+import useClipboard from "@/hooks/use-clipboard";
+import { Transaction } from "@/models/transaction.model";
 import {
   convertMSatToBtc,
   convertMSatToSat,
   convertToString,
-} from "../../../../utils/format";
+} from "@/utils/format";
 import KeyValueDisplay from "./KeyValueDisplay";
 
 export type Props = {

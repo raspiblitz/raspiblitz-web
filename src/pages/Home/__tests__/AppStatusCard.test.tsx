@@ -1,5 +1,5 @@
-import { AppStatus } from "models/app-status";
-import AppStatusCard from "pages/Home/AppStatusCard";
+import { AppStatus } from "@/models/app-status";
+import AppStatusCard from "@/pages/Home/AppStatusCard";
 import { render, screen } from "test-utils";
 
 const testApp: AppStatus = {

@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 import { MoonIcon } from "@heroicons/react/24/outline";
-import I18nDropdown from "../components/I18nDropdown";
-import { AppContext } from "../context/app-context";
+import I18nDropdown from "@/components/I18nDropdown";
+import { AppContext } from "@/context/app-context";
 
 type Props = {
   children?: React.ReactNode;

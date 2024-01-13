@@ -18,7 +18,7 @@ import {
   TransactionCategory,
   TransactionStatus,
   TransactionType,
-} from "../../../models/transaction.model";
+} from "@/models/transaction.model";
 
 export type Props = {
   category: TransactionCategory;

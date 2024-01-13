@@ -1,8 +1,8 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import SetupContainer from "../../layouts/SetupContainer";
-import { SetupPhase } from "../../models/setup.model";
+import SetupContainer from "@/layouts/SetupContainer";
+import { SetupPhase } from "@/models/setup.model";
 
 export type Props = {
   setupPhase: SetupPhase;

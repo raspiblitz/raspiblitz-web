@@ -1,14 +1,14 @@
 import type { FC } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import { AppStatus } from "../models/app-status";
-import { App } from "../models/app.model";
-import { BtcInfo } from "../models/btc-info";
-import { HardwareInfo } from "../models/hardware-info";
-import { LnInfo } from "../models/ln-info";
-import { SystemInfo } from "../models/system-info";
-import { SystemStartupInfo } from "../models/system-startup-info";
-import { Transaction } from "../models/transaction.model";
-import { WalletBalance } from "../models/wallet-balance";
+import { AppStatus } from "@/models/app-status";
+import { App } from "@/models/app.model";
+import { BtcInfo } from "@/models/btc-info";
+import { HardwareInfo } from "@/models/hardware-info";
+import { LnInfo } from "@/models/ln-info";
+import { SystemInfo } from "@/models/system-info";
+import { SystemStartupInfo } from "@/models/system-startup-info";
+import { Transaction } from "@/models/transaction.model";
+import { WalletBalance } from "@/models/wallet-balance";
 
 export interface SSEContextType {
   evtSource: EventSource | null;

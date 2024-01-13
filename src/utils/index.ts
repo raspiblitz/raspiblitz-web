@@ -1,5 +1,5 @@
-import { AppStatus } from "models/app-status";
-import { TokenPayload } from "../models/token";
+import { AppStatus } from "@/models/app-status";
+import { TokenPayload } from "@/models/token";
 
 export const ACCESS_TOKEN = "access_token";
 // refresh 10min before expiry

@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios";
-import { DecodePayRequest } from "models/decode-pay-req";
+import { DecodePayRequest } from "@/models/decode-pay-req";
 import { FC, useState } from "react";
 import { createPortal } from "react-dom";
-import ModalDialog from "../../../layouts/ModalDialog";
-import { MODAL_ROOT } from "../../../utils";
-import { checkError } from "../../../utils/checkError";
-import { instance } from "../../../utils/interceptor";
+import ModalDialog from "@/layouts/ModalDialog";
+import { MODAL_ROOT } from "@/utils";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 import SwitchTxType, { TxType } from "../SwitchTxType";
 import ConfirmSendModal from "./ConfirmSendModal";
 import SendLn, { LnInvoiceForm } from "./SendLN";

@@ -1,8 +1,8 @@
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import { forwardRef, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import Toggle from "../components/Toggle";
-import { AppContext, Unit } from "../context/app-context";
+import Toggle from "@/components/Toggle";
+import { AppContext, Unit } from "@/context/app-context";
 
 const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useTranslation();

@@ -1,11 +1,11 @@
-import useClipboard from "hooks/use-clipboard";
-import ModalDialog from "layouts/ModalDialog";
+import useClipboard from "@/hooks/use-clipboard";
+import ModalDialog from "@/layouts/ModalDialog";
 import { QRCodeSVG } from "qrcode.react";
 import { Tooltip } from "react-tooltip";
 import { FC } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { MODAL_ROOT } from "utils";
+import { MODAL_ROOT } from "@/utils";
 
 type Props = {
   identityUri: string;

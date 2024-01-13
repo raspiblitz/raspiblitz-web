@@ -1,6 +1,6 @@
 import { render, screen } from "test-utils";
-import { AppStatus, AuthMethod } from "../../../models/app-status";
-import { App } from "../../../models/app.model";
+import { AppStatus, AuthMethod } from "@/models/app-status";
+import { App } from "@/models/app.model";
 import { AppCard, Props } from "../AppCard";
 
 const app: App = {

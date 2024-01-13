@@ -1,11 +1,11 @@
-import AvailableBalance from "components/AvailableBalance";
+import AvailableBalance from "@/components/AvailableBalance";
 import { ChangeEvent, FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { stringToNumber } from "utils/format";
-import AmountInput from "../../../components/AmountInput";
-import InputField from "../../../components/InputField";
+import { stringToNumber } from "@/utils/format";
+import AmountInput from "@/components/AmountInput";
+import InputField from "@/components/InputField";
 import { TxType } from "../SwitchTxType";
 import { SendLnForm } from "./SendModal";
 

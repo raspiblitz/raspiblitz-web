@@ -2,9 +2,9 @@ import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import ConfirmModal from "../../components/ConfirmModal";
-import InputField from "../../components/InputField";
-import SetupContainer from "../../layouts/SetupContainer";
+import ConfirmModal from "@/components/ConfirmModal";
+import InputField from "@/components/InputField";
+import SetupContainer from "@/layouts/SetupContainer";
 
 export type Props = {
   callback: (nodename: string | null) => void;

@@ -1,19 +1,19 @@
-import { AppContext } from "context/app-context";
+import { AppContext } from "@/context/app-context";
 import { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { SSEContext, SSE_URL } from "../context/sse-context";
-import { AppStatus } from "../models/app-status";
-import { App } from "../models/app.model";
-import { BtcInfo } from "../models/btc-info";
-import { HardwareInfo } from "../models/hardware-info";
-import { InstallAppData } from "../models/install-app";
-import { LnInfo } from "../models/ln-info";
-import { SystemInfo } from "../models/system-info";
-import { SystemStartupInfo } from "../models/system-startup-info";
-import { WalletBalance } from "../models/wallet-balance";
-import { setWindowAlias } from "../utils";
-import { availableApps } from "../utils/availableApps";
+import { SSEContext, SSE_URL } from "@/context/sse-context";
+import { AppStatus } from "@/models/app-status";
+import { App } from "@/models/app.model";
+import { BtcInfo } from "@/models/btc-info";
+import { HardwareInfo } from "@/models/hardware-info";
+import { InstallAppData } from "@/models/install-app";
+import { LnInfo } from "@/models/ln-info";
+import { SystemInfo } from "@/models/system-info";
+import { SystemStartupInfo } from "@/models/system-startup-info";
+import { WalletBalance } from "@/models/wallet-balance";
+import { setWindowAlias } from "@/utils";
+import { availableApps } from "@/utils/availableApps";
 
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners

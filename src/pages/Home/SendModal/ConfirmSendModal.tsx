@@ -7,18 +7,18 @@ import type { ChangeEvent } from "react";
 import { FC, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import AmountInput from "../../../components/AmountInput";
-import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
-import Message from "../../../components/Message";
-import { AppContext, Unit } from "../../../context/app-context";
-import { checkError } from "../../../utils/checkError";
+import AmountInput from "@/components/AmountInput";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import Message from "@/components/Message";
+import { AppContext, Unit } from "@/context/app-context";
+import { checkError } from "@/utils/checkError";
 import {
   convertBtcToSat,
   convertMSatToSat,
   formatAmount,
   stringToNumber,
-} from "../../../utils/format";
-import { instance } from "../../../utils/interceptor";
+} from "@/utils/format";
+import { instance } from "@/utils/interceptor";
 import { TxType } from "../SwitchTxType";
 import { SendLnForm } from "./SendModal";
 import { SendOnChainForm } from "./SendOnChain";

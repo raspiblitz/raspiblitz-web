@@ -1,20 +1,20 @@
 import { LinkIcon } from "@heroicons/react/24/outline";
-import AvailableBalance from "components/AvailableBalance";
+import AvailableBalance from "@/components/AvailableBalance";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import AmountInput from "../../components/AmountInput";
-import ButtonWithSpinner from "../../components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "../../components/InputField";
-import Message from "../../components/Message";
-import { AppContext } from "../../context/app-context";
-import ModalDialog from "../../layouts/ModalDialog";
-import { MODAL_ROOT } from "../../utils";
-import { checkError } from "../../utils/checkError";
-import { convertMSatToSat, stringToNumber } from "../../utils/format";
-import { instance } from "../../utils/interceptor";
+import AmountInput from "@/components/AmountInput";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "@/components/InputField";
+import Message from "@/components/Message";
+import { AppContext } from "@/context/app-context";
+import ModalDialog from "@/layouts/ModalDialog";
+import { MODAL_ROOT } from "@/utils";
+import { checkError } from "@/utils/checkError";
+import { convertMSatToSat, stringToNumber } from "@/utils/format";
+import { instance } from "@/utils/interceptor";
 
 interface IFormInputs {
   nodeUri: string;

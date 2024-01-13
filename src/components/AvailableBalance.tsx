@@ -1,7 +1,7 @@
-import { AppContext, Unit } from "context/app-context";
+import { AppContext, Unit } from "@/context/app-context";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { convertSatToBtc, convertToString } from "utils/format";
+import { convertSatToBtc, convertToString } from "@/utils/format";
 
 type Props = {
   balance: number;

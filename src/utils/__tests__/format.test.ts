@@ -1,4 +1,4 @@
-import { Unit } from "../../context/app-context";
+import { Unit } from "@/context/app-context";
 import {
   convertBtcToSat,
   convertMSatToBtc,

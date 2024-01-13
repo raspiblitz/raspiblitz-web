@@ -1,13 +1,13 @@
 import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import AvailableBalance from "components/AvailableBalance";
+import AvailableBalance from "@/components/AvailableBalance";
 import { FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { convertMSatToSat } from "utils/format";
-import ButtonWithSpinner from "../../../components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "../../../components/InputField";
-import Message from "../../../components/Message";
+import { convertMSatToSat } from "@/utils/format";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "@/components/InputField";
+import Message from "@/components/Message";
 import { TxType } from "../SwitchTxType";
 import { SendLnForm } from "./SendModal";
 import { SendOnChainForm } from "./SendOnChain";

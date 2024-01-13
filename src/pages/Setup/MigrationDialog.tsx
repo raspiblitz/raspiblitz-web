@@ -1,9 +1,9 @@
 import { CloudArrowDownIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ConfirmModal from "../../components/ConfirmModal";
-import SetupContainer from "../../layouts/SetupContainer";
-import { SetupMigrationMode, SetupMigrationOS } from "../../models/setup.model";
+import ConfirmModal from "@/components/ConfirmModal";
+import SetupContainer from "@/layouts/SetupContainer";
+import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;

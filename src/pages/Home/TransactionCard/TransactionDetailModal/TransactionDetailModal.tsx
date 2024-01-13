@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import ModalDialog from "../../../../layouts/ModalDialog";
-import { Transaction } from "../../../../models/transaction.model";
-import { MODAL_ROOT } from "../../../../utils";
+import ModalDialog from "@/layouts/ModalDialog";
+import { Transaction } from "@/models/transaction.model";
+import { MODAL_ROOT } from "@/utils";
 import LNDetails from "./LNDetails";
 import OnchainDetails from "./OnchainDetails";
 
