@@ -1,4 +1,4 @@
-import useSSE from "@/hooks/use-sse";
+import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { AppStatus } from "@/models/app-status";
 import { App } from "@/models/app.model";
@@ -6,7 +6,7 @@ import { enableGutter } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import AppCardAlby from "./AppCardAlby";
@@ -15,8 +15,7 @@ import AppList from "./AppList";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-
-  const { appStatus, installingApp } = useSSE();
+  const { appStatus, installingApp } = useContext(SSEContext);
 
   const [showDetails, setShowDetails] = useState(false);
   const [app, setApp] = useState<App | null>(null);

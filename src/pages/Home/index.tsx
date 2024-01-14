@@ -22,6 +22,7 @@ import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionDetailModal from "./TransactionCard/TransactionDetailModal/TransactionDetailModal";
 import UnlockModal from "./UnlockModal";
 import WalletCard from "./WalletCard";
+import { SSEContext } from "@/context/sse-context";
 
 const startupToastId = "startup-toast";
 
@@ -36,7 +37,7 @@ type ModalType =
 const Home: FC = () => {
   const { t } = useTranslation();
   const { walletLocked, setWalletLocked } = useContext(AppContext);
-  const { balance, lnInfo, systemStartupInfo } = useSSE();
+  const { balance, lnInfo, systemStartupInfo } = useContext(SSEContext);
   const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
