@@ -3,7 +3,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Layout from "./layouts/Layout";
-import LoadingScreen from "./components/LoadingScreen";
+import LoadingScreen from "./layouts/LoadingScreen";
 import RequireAuth from "./components/RequireAuth";
 import RequireSetup from "./components/RequireSetup";
 import SkeletonLoadingScreen from "./layouts/SkeletonLoadingScreen";

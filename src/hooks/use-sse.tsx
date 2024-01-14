@@ -18,6 +18,7 @@ import { availableApps } from "@/utils/availableApps";
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners
  * to the single events to update the SSEContext
+ * Only use once per page, otherwise you will have multiple connections; use useContext(SSEContext) instead
  * @returns the infos from the SSEContext
  */
 function useSSE() {

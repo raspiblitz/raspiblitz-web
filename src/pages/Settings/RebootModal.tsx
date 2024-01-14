@@ -1,60 +1,59 @@
-import { FC, useContext } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { AppContext } from "@/context/app-context";
+import ModalDialog from "@/layouts/ModalDialog";
+import { MODAL_ROOT } from "@/utils";
+import { instance } from "@/utils/interceptor";
+import { HttpStatusCode } from "axios";
+import { FC, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import ModalDialog from "@/layouts/ModalDialog";
-import { AppContext } from "@/context/app-context";
-import { instance } from "@/utils/interceptor";
-import { MODAL_ROOT } from "@/utils";
-import { HttpStatusCode } from "axios";
 
 export type Props = {
-  confirmText: string;
-  confirmEndpoint?: string; // TODO #345 remove
-  onConfirm?: () => void;
   onClose: () => void;
 };
 
-const btnClasses =
-  "w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
+const confirmEndpoint = "/system/reboot";
 
-const RebootModal: FC<Props> = ({
-  confirmText,
-  confirmEndpoint,
-  onConfirm,
-  onClose,
-}) => {
+const RebootModal: FC<Props> = ({ onClose }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const { setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const shutdownHandler = async () => {
-    if (confirmEndpoint) {
-      const resp = await instance.post(confirmEndpoint);
-      if (resp.status === HttpStatusCode.Ok) {
-        setIsLoggedIn(false);
-        navigate("/login");
-      }
+  const rebootHandler = async () => {
+    setIsLoading(true);
+    const resp = await instance.post(confirmEndpoint);
+    if (resp.status === HttpStatusCode.Ok) {
+      setIsLoading(false);
+      setIsLoggedIn(false);
+      navigate("/login");
     }
   };
 
   return createPortal(
     <ModalDialog close={onClose}>
-      {confirmText}
+      {isLoading && (
+        <div className="my-2 flex justify-center">
+          <LoadingSpinner />
+        </div>
+      )}
+      <p>{t("settings.reboot") + "?"}</p>
       <div className="flex flex-col p-3 xl:flex-row">
-        <button className={btnClasses} onClick={onClose}>
+        <button
+          className="m-2 h-10 w-full rounded bg-gray-500 text-center text-white hover:bg-gray-400 disabled:bg-gray-500 xl:w-1/2"
+          onClick={onClose}
+          disabled={isLoading}
+        >
           {t("settings.cancel")}
         </button>
-        {onConfirm && (
-          <button className={btnClasses} onClick={onConfirm}>
-            {t("settings.confirm")}
-          </button>
-        )}
-        {!onConfirm && (
-          <button className={btnClasses} onClick={shutdownHandler}>
-            {t("settings.confirm")}
-          </button>
-        )}
+        <button
+          className="m-2 h-10 w-full rounded bg-gray-500 text-center text-white hover:bg-gray-400 disabled:bg-gray-500 xl:w-1/2"
+          onClick={rebootHandler}
+          disabled={isLoading}
+        >
+          {t("settings.confirm")}
+        </button>
       </div>
     </ModalDialog>,
     MODAL_ROOT,

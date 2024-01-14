@@ -1,8 +1,4 @@
-import { HttpStatusCode } from "axios";
-import { FC, useCallback, useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { AppContext } from "@/context/app-context";
 import { useInterval } from "@/hooks/use-interval";
 import useSSE from "@/hooks/use-sse";
@@ -10,6 +6,10 @@ import { Transaction } from "@/models/transaction.model";
 import { enableGutter } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
+import { HttpStatusCode } from "axios";
+import { FC, useCallback, useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import BitcoinCard from "./BitcoinCard";
 import ConnectionCard from "./ConnectionCard";
 import HardwareCard from "./HardwareCard";
@@ -214,11 +214,7 @@ const Home: FC = () => {
     return (
       <>
         {determineModal()}
-        <main
-          className={`content-container page-container flex h-full items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700 dark:text-white`}
-        >
-          <LoadingSpinner />
-        </main>
+        <PageLoadingScreen />
       </>
     );
   }

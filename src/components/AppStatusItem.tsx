@@ -8,7 +8,7 @@ type Props = {
   app: AppStatus;
 };
 
-export const AppStatusCard: FC<Props> = ({ app }) => {
+export const AppStatusItem: FC<Props> = ({ app }) => {
   const { id } = app;
   const appName = availableApps.get(id)?.name;
 
@@ -27,4 +27,4 @@ export const AppStatusCard: FC<Props> = ({ app }) => {
   );
 };
 
-export default AppStatusCard;
+export default AppStatusItem;

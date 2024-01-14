@@ -1,8 +1,9 @@
+import { TFunction } from "i18next";
 import { Component, ErrorInfo, ReactNode } from "react";
 import { withTranslation } from "react-i18next";
 
 interface Props {
-  t: any;
+  t: TFunction<[string, string], undefined>;
   children: ReactNode;
 }
 
