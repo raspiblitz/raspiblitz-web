@@ -1,9 +1,8 @@
 import { AppStatus } from "@/models/app-status";
+import { App } from "@/models/app.model";
 import { availableApps } from "@/utils/availableApps";
-import { t } from "i18next";
 import { FC } from "react";
 import AppCard from "./AppCard";
-import { App } from "@/models/app.model";
 
 type Props = {
   title: string;

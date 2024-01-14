@@ -1,7 +1,7 @@
-import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { AppContext } from "@/context/app-context";
+import { SSEContext } from "@/context/sse-context";
 import { useInterval } from "@/hooks/use-interval";
-import useSSE from "@/hooks/use-sse";
+import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { Transaction } from "@/models/transaction.model";
 import { enableGutter } from "@/utils";
 import { checkError } from "@/utils/checkError";
@@ -22,7 +22,6 @@ import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionDetailModal from "./TransactionCard/TransactionDetailModal/TransactionDetailModal";
 import UnlockModal from "./UnlockModal";
 import WalletCard from "./WalletCard";
-import { SSEContext } from "@/context/sse-context";
 
 const startupToastId = "startup-toast";
 
