@@ -1,7 +1,6 @@
+import { enableGutter } from "@/utils";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import useSSE from "@/hooks/use-sse";
-import { enableGutter } from "@/utils";
 import ActionBox from "./ActionBox";
 import ChangePwModal from "./ChangePwModal";
 import DebugLogBox from "./DebugLogBox";
@@ -18,7 +17,6 @@ const Settings: FC = () => {
   const [showShutdownModal, setShowShutdownModal] = useState(false);
   const [showRebootModal, setShowRebootModal] = useState(false);
   const [showPwModal, setShowPwModal] = useState(false);
-  const { systemInfo } = useSSE();
 
   useEffect(() => {
     enableGutter();
@@ -41,11 +39,7 @@ const Settings: FC = () => {
         action={() => setShowRebootModal(true)}
         showChild={showRebootModal}
       >
-        <RebootModal
-          confirmText={t("settings.reboot") + "?"}
-          onClose={() => setShowRebootModal(false)}
-          confirmEndpoint="/system/reboot"
-        />
+        <RebootModal onClose={() => setShowRebootModal(false)} />
       </ActionBox>
       <ActionBox
         name={t("settings.shutdown")}
@@ -55,10 +49,7 @@ const Settings: FC = () => {
       >
         <ShutdownModal onClose={() => setShowShutdownModal(false)} />
       </ActionBox>
-      <VersionBox
-        platformVersion={systemInfo.platform_version}
-        apiVersion={systemInfo.api_version}
-      />
+      <VersionBox />
       <DebugLogBox />
     </main>
   );

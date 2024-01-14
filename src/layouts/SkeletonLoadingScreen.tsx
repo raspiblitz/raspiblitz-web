@@ -1,6 +1,7 @@
 import { FC } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
+// Loading Screen wher sidebar is visible but not usable
 const SkeletonLoadingScreen: FC = () => {
   return (
     <>

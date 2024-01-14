@@ -59,7 +59,7 @@ export const AppCard: FC<Props> = ({
   };
 
   return (
-    <div className="bd-card transition-colors dark:bg-gray-800">
+    <article className="bd-card transition-colors dark:bg-gray-800">
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {installed && (
           <>
@@ -145,7 +145,7 @@ export const AppCard: FC<Props> = ({
           &nbsp;{t("apps.info")}
         </button>
       </div>
-    </div>
+    </article>
   );
 };
 

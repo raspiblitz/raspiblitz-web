@@ -18,6 +18,7 @@ import { availableApps } from "@/utils/availableApps";
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners
  * to the single events to update the SSEContext
+ * Use useContext(SSEContext) to get the data, is only used in Layout.tsx
  * @returns the infos from the SSEContext
  */
 function useSSE() {

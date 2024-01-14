@@ -1,11 +1,11 @@
 import {
-  ArrowRightOnRectangleIcon,
+  ArrowRightStartOnRectangleIcon,
   Cog6ToothIcon,
   HomeIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { SSEContext } from "@/context/sse-context";
-import AppStatusCard from "@/pages/Home/AppStatusCard";
+import AppStatusItem from "@/components/AppStatusItem";
 import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -48,7 +48,7 @@ export const SideDrawer: FC = () => {
         {appStatus
           .filter((app) => app.installed)
           .map((app) => (
-            <AppStatusCard app={app} key={app.id} />
+            <AppStatusItem app={app} key={app.id} />
           ))}
       </div>
 
@@ -57,7 +57,7 @@ export const SideDrawer: FC = () => {
           onClick={logout}
           className="bd-button mb-3 flex h-8 w-60 items-center justify-center"
         >
-          <ArrowRightOnRectangleIcon className="mr-1 inline-block h-5 w-5" />
+          <ArrowRightStartOnRectangleIcon className="mr-1 inline-block h-5 w-5" />
           {t("navigation.logout")}
         </button>
       </div>

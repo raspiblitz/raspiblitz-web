@@ -1,5 +1,5 @@
 import { PlusIcon, LinkIcon } from "@heroicons/react/24/outline";
-import { FC } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import AppIcon from "@/components/AppIcon";
 import { toast } from "react-toastify";
@@ -57,7 +57,7 @@ export const AppCardAlby: FC = () => {
   };
 
   return (
-    <div className="bd-card transition-colors dark:bg-gray-800">
+    <article className="bd-card transition-colors dark:bg-gray-800">
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {/* Icon */}
         <div className="mt-4 flex w-1/4 items-center justify-center p-2">
@@ -94,7 +94,7 @@ export const AppCardAlby: FC = () => {
           </a>
         )}
       </div>
-    </div>
+    </article>
   );
 };
 

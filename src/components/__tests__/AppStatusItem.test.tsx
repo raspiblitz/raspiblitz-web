@@ -1,5 +1,5 @@
 import { AppStatus } from "@/models/app-status";
-import AppStatusCard from "@/pages/Home/AppStatusCard";
+import AppStatusItem from "../AppStatusItem";
 import { render, screen } from "test-utils";
 
 const testApp: AppStatus = {
@@ -11,9 +11,9 @@ const testApp: AppStatus = {
   error: "",
 };
 
-describe("AppStatusCard", () => {
+describe("AppStatusItem", () => {
   it("should link to 'address'", () => {
-    render(<AppStatusCard app={testApp} />);
+    render(<AppStatusItem app={testApp} />);
 
     const appCard = screen.getAllByRole("link");
     expect(appCard[0].getAttribute("href")).toEqual("http://127.0.0.1");
@@ -28,7 +28,7 @@ describe("AppStatusCard", () => {
       },
       writable: true,
     });
-    render(<AppStatusCard app={testApp} />);
+    render(<AppStatusItem app={testApp} />);
 
     const appCard = screen.getAllByRole("link");
     expect(appCard[0].getAttribute("href")).toEqual(

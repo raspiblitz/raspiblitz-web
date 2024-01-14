@@ -1,16 +1,16 @@
+import AppIcon from "@/components/AppIcon";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import PageLoadingScreen from "@/layouts/PageLoadingScreen";
+import { AppStatus } from "@/models/app-status";
+import { App } from "@/models/app.model";
+import { availableApps } from "@/utils/availableApps";
 import {
   ChevronLeftIcon,
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { AppStatus } from "@/models/app-status";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import AppIcon from "@/components/AppIcon";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { App } from "@/models/app.model";
-import { availableApps } from "@/utils/availableApps";
 import ImageCarousel from "./ImageCarousel";
 
 export type Props = {
@@ -70,11 +70,7 @@ export const AppInfo: FC<Props> = ({
   }, [id]);
 
   if (isLoading) {
-    return (
-      <main className="page-container content-container flex w-full items-center justify-center bg-gray-100 dark:bg-gray-700 dark:text-white">
-        <LoadingSpinner />
-      </main>
-    );
+    return <PageLoadingScreen />;
   }
 
   return (
