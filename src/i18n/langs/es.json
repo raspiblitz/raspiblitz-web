@@ -161,7 +161,10 @@
       "debug_report_done": "¡Informe de depuración creado!",
       "generate_debug": "Generar un informe de depuración",
       "generating_debug_report": "Generar informe de depuración. Esto puede llevar algún tiempo.",
-      "generating": "Generando"
+      "generating": "Generando",
+      "shutdown_confirm": "¿Apagar tu RaspiBlitz?",
+      "shutdown_info": "Cuando se completa el apagado, la luz de actividad se vuelve roja y la pantalla LCD se vuelve blanca.",
+      "shutdown_info_disconnect_power": "A continuación, espere 5 segundos y desconecte la alimentación."
     },
     "setup": {
       "blockchain_delete": "Borrar la cadena de bloques",
