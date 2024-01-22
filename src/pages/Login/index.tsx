@@ -78,7 +78,7 @@ const Login: FC = () => {
         onClick={toggleDarkMode}
       />
       <div className="fixed right-16 top-4 flex h-8 w-72 items-center justify-around">
-        <article className="flex justify-between">
+        <article className="flex items-center">
           <label
             htmlFor="lngSelect"
             className="mr-2 w-1/2 font-bold dark:text-white"

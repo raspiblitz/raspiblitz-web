@@ -1,20 +1,28 @@
-import { LinkIcon } from "@heroicons/react/24/outline";
-import AvailableBalance from "@/components/AvailableBalance";
-import { ChangeEvent, FC, useContext, useState } from "react";
-import { createPortal } from "react-dom";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import AmountInput from "@/components/AmountInput";
+import AvailableBalance from "@/components/AvailableBalance";
 import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "@/components/InputField";
 import Message from "@/components/Message";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { AppContext } from "@/context/app-context";
 import ModalDialog from "@/layouts/ModalDialog";
 import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
+import { LinkIcon } from "@heroicons/react/24/outline";
+import { ChangeEvent, FC, useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 interface IFormInputs {
   nodeUri: string;
@@ -36,6 +44,7 @@ const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
   const theme = darkMode ? "dark" : "light";
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors, isValid },
@@ -98,20 +107,31 @@ const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
               onChange: changeAmountHandler,
             })}
           />
-          <div className="flex justify-around py-8 md:mx-auto md:w-1/2">
+          <div className="flex items-center justify-around py-8 md:mx-auto md:w-1/2">
             <label htmlFor="targetConf" className="font-bold">
               {t("tx.fee_rate")}
             </label>
-            <select
-              id="targetConf"
-              defaultValue={4}
-              {...register("feeRate")}
-              className="rounded bg-yellow-500 p-1 text-white"
-            >
-              <option value={1}>{t("home.urgent")}</option>
-              <option value={4}>{t("home.normal")}</option>
-              <option value={20}>{t("home.slow")}</option>
-            </select>
+            <Controller
+              control={control}
+              name="feeRate"
+              defaultValue="4"
+              render={({ field: { ref, ...field } }) => {
+                return (
+                  <Select {...field} onValueChange={field.onChange}>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="1">{t("home.urgent")}</SelectItem>
+                        <SelectItem value="4">{t("home.normal")}</SelectItem>
+                        <SelectItem value="20">{t("home.slow")}</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                );
+              }}
+            />
           </div>
 
           <ButtonWithSpinner

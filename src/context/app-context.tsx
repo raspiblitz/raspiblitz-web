@@ -105,9 +105,13 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setDarkMode(settings.darkMode);
       }
 
-      if (settings.lang) {
-        i18n.changeLanguage(settings.lang);
-      }
+      const setLanguage = async () => {
+        if (settings.lang) {
+          await i18n.changeLanguage(settings.lang);
+        }
+      };
+
+      setLanguage();
     }
 
     // check for dark mode

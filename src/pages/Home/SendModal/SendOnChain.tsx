@@ -40,7 +40,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   const [amount, setAmount] = useState(0);
 
   if (!updated && confirmData?.invoiceType === TxType.ONCHAIN) {
-    console.log("updating");
     setUpdated(true);
     setAmount(confirmData.amount);
     reset({
