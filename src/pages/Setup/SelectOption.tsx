@@ -1,17 +1,16 @@
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 
 type Props = {
   id: string;
   radioGroup: string;
   value: string;
   selected: string | null;
-  children?: React.ReactNode;
   // Can be LightningDialog or SetupPhase
   // TODO: Move both to something better than enums
   onSelectOption: (value: any) => void;
 };
 
-const SelectOption: FC<Props> = ({
+const SelectOption: FC<PropsWithChildren<Props>> = ({
   children,
   id,
   radioGroup,

@@ -1,18 +1,17 @@
-import type { FC, ReactElement, ReactNode } from "react";
+import type { FC, PropsWithChildren, ReactElement } from "react";
 
 export type Props = {
   name: string | ReactElement;
   actionName: string;
   action: () => void;
   showChild: boolean;
-  children: ReactNode;
 };
 
 /**
  * displays a box with a title and a button which triggers an action (e.g. reboot)
  * has a child component which is displayed if showChild is true
  */
-const ActionBox: FC<Props> = ({
+const ActionBox: FC<PropsWithChildren<Props>> = ({
   name,
   action,
   actionName,

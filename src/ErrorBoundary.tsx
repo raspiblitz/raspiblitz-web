@@ -1,10 +1,9 @@
 import { TFunction } from "i18next";
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, PropsWithChildren } from "react";
 import { withTranslation } from "react-i18next";
 
 interface Props {
   t: TFunction<[string, string], undefined>;
-  children: ReactNode;
 }
 
 interface State {
@@ -13,7 +12,7 @@ interface State {
   errorInfo?: ErrorInfo;
 }
 
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
   public state: State = {
     hasError: false,
   };

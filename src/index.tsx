@@ -1,16 +1,16 @@
-import React from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-tooltip/dist/react-tooltip.css";
 import App from "./App";
-import "./i18n/config";
-import "./index.css";
 import AppContextProvider from "./context/app-context";
 import SSEContextProvider from "./context/sse-context";
-import "react-tooltip/dist/react-tooltip.css";
+import "./i18n/config";
+import "./index.css";
 
-import "i18next";
 import ErrorBoundary from "@/ErrorBoundary";
+import "i18next";
 
 declare module "i18next" {
   interface CustomTypeOptions {
@@ -21,7 +21,7 @@ declare module "i18next" {
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
         <SSEContextProvider>
@@ -33,5 +33,5 @@ root.render(
         </SSEContextProvider>
       </BrowserRouter>
     </ErrorBoundary>
-  </React.StrictMode>,
+  </StrictMode>,
 );

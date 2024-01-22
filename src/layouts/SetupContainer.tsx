@@ -1,13 +1,9 @@
-import { FC, useContext } from "react";
-import { MoonIcon } from "@heroicons/react/24/outline";
 import I18nDropdown from "@/components/I18nDropdown";
 import { AppContext } from "@/context/app-context";
+import { MoonIcon } from "@heroicons/react/24/outline";
+import { FC, PropsWithChildren, useContext } from "react";
 
-type Props = {
-  children?: React.ReactNode;
-};
-
-const SetupContainer: FC<Props> = ({ children }) => {
+const SetupContainer: FC<PropsWithChildren> = ({ children }) => {
   const { toggleDarkMode } = useContext(AppContext);
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700">
