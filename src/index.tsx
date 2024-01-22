@@ -27,7 +27,7 @@ root.render(
         <SSEContextProvider>
           <AppContextProvider>
             {/* For persistent toasts over all pages */}
-            <ToastContainer />
+            <ToastContainer stacked closeOnClick />
             <App />
           </AppContextProvider>
         </SSEContextProvider>
