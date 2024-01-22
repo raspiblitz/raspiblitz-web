@@ -1,15 +1,3 @@
-import type { FC } from "react";
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import {
   ACCESS_TOKEN,
   disableGutter,
@@ -18,8 +6,20 @@ import {
   saveSettings,
   setWindowAlias,
 } from "@/utils";
-import { SSEContext } from "./sse-context";
+import type { FC, PropsWithChildren } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SSEContext } from "./sse-context";
 
 export interface AppContextType {
   isLoggedIn: boolean;
@@ -56,11 +56,7 @@ export const appContextDefault: AppContextType = {
 
 export const AppContext = createContext<AppContextType>(appContextDefault);
 
-type Props = {
-  children?: React.ReactNode;
-};
-
-const AppContextProvider: FC<Props> = ({ children }) => {
+const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const { i18n } = useTranslation();
   const { evtSource, setEvtSource } = useContext(SSEContext);
 

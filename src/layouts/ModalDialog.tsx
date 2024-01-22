@@ -1,5 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { FC, useCallback, useEffect } from "react";
+import { FC, PropsWithChildren, useCallback, useEffect } from "react";
 import ModalBackground from "./ModalBackground";
 
 export const disableScroll = {
@@ -8,12 +8,15 @@ export const disableScroll = {
 };
 
 type Props = {
-  children?: React.ReactNode;
   closeable?: boolean;
   close: () => void;
 };
 
-const ModalDialog: FC<Props> = ({ closeable = true, close, children }) => {
+const ModalDialog: FC<PropsWithChildren<Props>> = ({
+  closeable = true,
+  close,
+  children,
+}) => {
   const closeModal = useCallback(() => {
     close();
     disableScroll.off();

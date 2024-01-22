@@ -1,10 +1,10 @@
-import type { ButtonHTMLAttributes, FC } from "react";
+import type { ButtonHTMLAttributes, FC, ReactElement } from "react";
 import ButtonSpinner from "./ButtonSpinner/ButtonSpinner";
 
 type Props = {
   className?: string;
   loading?: boolean;
-  icon?: React.ReactElement;
+  icon?: ReactElement;
 } & ButtonHTMLAttributes<unknown>;
 
 const ButtonWithSpinner: FC<Props> = ({

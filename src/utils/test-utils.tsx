@@ -1,4 +1,3 @@
-import { render, RenderOptions } from "@testing-library/react";
 import {
   AppContext,
   appContextDefault,
@@ -9,16 +8,22 @@ import {
   sseContextDefault,
   SSEContextType,
 } from "@/context/sse-context";
-import React, { FC, ReactElement } from "react";
+import i18n from "@/i18n/test_config";
+import { render, RenderOptions } from "@testing-library/react";
+import { FC, PropsWithChildren, ReactElement } from "react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
-import i18n from "@/i18n/test_config";
 
-const AllTheProviders: FC<{
-  children: React.ReactNode;
+type Props = {
   sseProps: SSEContextType;
   appProps: AppContextType;
-}> = ({ children, appProps, sseProps }) => {
+};
+
+const AllTheProviders: FC<PropsWithChildren<Props>> = ({
+  children,
+  appProps,
+  sseProps,
+}) => {
   return (
     <BrowserRouter>
       <SSEContext.Provider

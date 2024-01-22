@@ -1,5 +1,3 @@
-import type { FC } from "react";
-import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AppStatus } from "@/models/app-status";
 import { App } from "@/models/app.model";
 import { BtcInfo } from "@/models/btc-info";
@@ -9,6 +7,8 @@ import { SystemInfo } from "@/models/system-info";
 import { SystemStartupInfo } from "@/models/system-startup-info";
 import { Transaction } from "@/models/transaction.model";
 import { WalletBalance } from "@/models/wallet-balance";
+import type { FC, PropsWithChildren } from "react";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 
 export interface SSEContextType {
   evtSource: EventSource | null;
@@ -65,11 +65,7 @@ export const SSEContext = createContext<SSEContextType>(sseContextDefault);
 
 export const SSE_URL = "/api/sse/subscribe";
 
-type Props = {
-  children?: React.ReactNode;
-};
-
-const SSEContextProvider: FC<Props> = (props) => {
+const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
