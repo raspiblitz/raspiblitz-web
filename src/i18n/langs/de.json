@@ -209,7 +209,10 @@
       "generating_debug_report": "Erstellen des Debug-Berichts. Dies kann einige Zeit in Anspruch nehmen.",
       "debug_report_done": "Debug-Bericht erstellt!",
       "generate_debug": "Debug-Bericht erstellen",
-      "generate": "Erstellen"
+      "generate": "Erstellen",
+      "shutdown_confirm": "RaspiBlitz herunterfahren?",
+      "shutdown_info": "Wenn der Ausschalt Vorgang abgeschlossen ist, leutet die Acitivity LED rot und das LCD Display weiß.",
+      "shutdown_info_disconnect_power": "Anschließend 5 Sekdunden warten und dann vom Strom trennen."
     },
     "setup": {
       "blockchain_delete": "Blockchain löschen",
