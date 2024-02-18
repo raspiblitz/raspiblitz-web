@@ -33,6 +33,14 @@
         "about": "Jam is a web interface for JoinMarket focusing on user-friendliness and ease-of-use. It aims to provide sensible defaults and be easy to use for beginners while still having the features advanced users expect.",
         "shortDescription": "Jam - A web interface for JoinMarket"
       },
+      "electrs": {
+        "about": "Electrs is an efficient re-implementation of Electrum Server in Rust. It indexes the entire Bitcoin blockchain, and allows your Lightning node to query it for on-chain transactions.",
+        "shortDescription": "Efficient re-implementation of Electrum Server in Rust",
+        "initialSync": "The index database needs to be created before Electrum Server can be used. This can take hours / days depending on your RaspiBlitz. Please check back later.",
+        "connectLocal": "Connect to Electrum Server over Local Network",
+        "connectTor": "Connect to Electrum Server over Tor",
+        "connectionInfo": "Use these addresses to connect your apps to your Bitcoin node. You can use the local connection if you are on the same network or the Tor address if you are using Tor."
+      },
       "alby": {
         "about": "Alby Browser Extension",
         "shortDescription": "Connect your RaspiBlitz LND node and use Bitcoin & Nostr apps with the Alby Extension",

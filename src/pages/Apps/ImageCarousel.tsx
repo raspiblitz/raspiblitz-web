@@ -23,6 +23,10 @@ const ImageCarousel: FC<Props> = ({ imgs, video }) => {
     setActiveIndex(index);
   };
 
+  if (!imgs.length) {
+    return <></>;
+  }
+
   return (
     <div className="relative inline-block">
       <div className="absolute bottom-0 left-0 right-0 z-20 mb-5 flex justify-center gap-5 p-0">

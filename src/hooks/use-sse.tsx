@@ -106,7 +106,7 @@ function useSSE() {
     const setInstall = (event: MessageEvent<string>) => {
       toast.dismiss();
       const installAppData = JSON.parse(event.data) as InstallAppData;
-      const appName = availableApps.get(installAppData.id)?.name || "";
+      const appName = availableApps[installAppData.id]?.name || "";
       if (installAppData.result === "fail") {
         appInstallErrorHandler(installAppData, appName);
         sseCtx.setInstallingApp(null);
