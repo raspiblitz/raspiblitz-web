@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
 export type Props = {
@@ -19,7 +20,6 @@ export type Props = {
   installed: boolean;
   installingApp: any | null;
   onInstall: (id: string) => void;
-  onOpenDetails: (app: App) => void;
 };
 
 export const AppCard: FC<Props> = ({
@@ -28,11 +28,11 @@ export const AppCard: FC<Props> = ({
   installed,
   installingApp,
   onInstall,
-  onOpenDetails,
 }) => {
   const { id, name } = appInfo;
   const { t } = useTranslation();
   const [isInstallWaiting, setInstallWaiting] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setInstallWaiting(false);
@@ -102,12 +102,21 @@ export const AppCard: FC<Props> = ({
             &nbsp;{t("apps.open")}
           </a>
         )}
-        {installed && !appStatusInfo.address && (
+        {installed && !appStatusInfo.address && !appInfo.customComponent && (
           <button
             disabled={true}
             className="flex w-1/2 cursor-default items-center justify-center rounded bg-gray-400 p-2 text-white shadow-md"
           >
             {t("apps.no_page")}
+          </button>
+        )}
+        {installed && appInfo.customComponent && (
+          <button
+            onClick={() => navigate(`/apps/${appInfo.id}`)}
+            className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
+          >
+            <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+            &nbsp;{t("apps.open")}
           </button>
         )}
         {(installingApp === null ||
@@ -139,7 +148,7 @@ export const AppCard: FC<Props> = ({
           )}
         <button
           className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
-          onClick={() => onOpenDetails(appInfo)}
+          onClick={() => navigate(`/apps/${appInfo.id}/info`)}
         >
           <InformationCircleIcon className="inline h-6 w-6" />
           &nbsp;{t("apps.info")}

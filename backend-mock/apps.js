@@ -23,6 +23,21 @@ router.post("/uninstall/:id", (req, res) => {
   res.status(200).send();
 });
 
+router.get("/status_advanced/electrs", (req, res) => {
+  console.info("call to /api/v1/apps/status_advanced/electrs");
+  res.status(200).send(
+    JSON.stringify({
+      version: "v0.10.2",
+      localIP: "192.168.0.1",
+      publicIP: "127.0.0.1",
+      portTCP: "50001",
+      portSSL: "50002",
+      TORaddress: "myTorURL.onion",
+      initialSyncDone: true,
+    }),
+  );
+});
+
 const installApp = () => {
   console.info("call to installApp");
 

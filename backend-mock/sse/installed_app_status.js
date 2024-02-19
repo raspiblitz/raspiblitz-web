@@ -47,6 +47,20 @@ const appStatus = () => {
       status: "offline",
       error: "",
     },
+    {
+      id: "jam",
+      installed: false,
+      version: "v1.0.0",
+      status: "offline",
+      error: "",
+    },
+    {
+      id: "electrs",
+      installed: true,
+      version: "v1.0.0",
+      status: "offline",
+      error: "",
+    },
   ]);
 };
 
