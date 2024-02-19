@@ -15,7 +15,7 @@ import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { Button } from "@nextui-org/button";
 const Login: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
@@ -109,13 +109,11 @@ const Login: FC = () => {
               ref={passwordInput}
               type="password"
             />
-            <button
-              type="submit"
-              className="m-4 flex items-center justify-center rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-400"
-            >
+
+            <Button type="submit" color="secondary">
               <ArrowLeftEndOnRectangleIcon className="mr-1 inline h-6 w-6 rotate-180" />
               <span>{t("login.login")}</span>
-            </button>
+            </Button>
           </form>
           {error && <Message message={error} />}
         </>

@@ -13,6 +13,7 @@ import { SetupPhase } from "./models/setup.model";
 import Login from "./pages/Login";
 import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./utils";
 import { instance } from "./utils/interceptor";
+import { NextUIProvider } from "@nextui-org/react";
 
 const LazySetup = lazy(() => import("./pages/Setup"));
 const LazyHome = lazy(() => import("./pages/Home"));
@@ -91,56 +92,58 @@ const App: FC = () => {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/setup"
-        element={
-          <Suspense fallback={<LoadingScreen />}>
-            <RequireSetup needsSetup={needsSetup}>
-              <LazySetup />
-            </RequireSetup>
-          </Suspense>
-        }
-      />
-      <Route
-        path="/home"
-        element={
-          <Suspense fallback={<SkeletonLoadingScreen />}>
-            <RequireAuth>
-              <Layout>
-                <LazyHome />
-              </Layout>
-            </RequireAuth>
-          </Suspense>
-        }
-      />
-      <Route
-        path="/apps"
-        element={
-          <Suspense fallback={<SkeletonLoadingScreen />}>
-            <RequireAuth>
-              <Layout>
-                <LazyApps />
-              </Layout>
-            </RequireAuth>
-          </Suspense>
-        }
-      />
-      <Route
-        path="/settings"
-        element={
-          <Suspense fallback={<SkeletonLoadingScreen />}>
-            <RequireAuth>
-              <Layout>
-                <LazySettings />
-              </Layout>
-            </RequireAuth>
-          </Suspense>
-        }
-      />
-    </Routes>
+    <NextUIProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/setup"
+          element={
+            <Suspense fallback={<LoadingScreen />}>
+              <RequireSetup needsSetup={needsSetup}>
+                <LazySetup />
+              </RequireSetup>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <Suspense fallback={<SkeletonLoadingScreen />}>
+              <RequireAuth>
+                <Layout>
+                  <LazyHome />
+                </Layout>
+              </RequireAuth>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/apps"
+          element={
+            <Suspense fallback={<SkeletonLoadingScreen />}>
+              <RequireAuth>
+                <Layout>
+                  <LazyApps />
+                </Layout>
+              </RequireAuth>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <Suspense fallback={<SkeletonLoadingScreen />}>
+              <RequireAuth>
+                <Layout>
+                  <LazySettings />
+                </Layout>
+              </RequireAuth>
+            </Suspense>
+          }
+        />
+      </Routes>
+    </NextUIProvider>
   );
 };
 
