@@ -19,14 +19,6 @@
   @apply my-2 block text-left text-sm font-bold text-gray-700 dark:text-white;
 }
 
-.input-underline {
-  @apply mt-0 block w-full border-0 border-b-2 border-gray-200 bg-transparent px-0.5 text-black outline-none focus:border-yellow-500 focus:ring-0 dark:text-white;
-}
-
-.input-error {
-  @apply input-underline border-red-500 focus:border-red-500;
-}
-
 .bd-card {
   @apply flex h-full flex-col justify-center rounded-md bg-white px-6 py-4 text-black shadow-xl transition-colors dark:bg-gray-800 dark:text-white;
 }

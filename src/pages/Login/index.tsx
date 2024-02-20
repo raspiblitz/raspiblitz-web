@@ -16,6 +16,8 @@ import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/react";
+
 const Login: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
@@ -101,10 +103,10 @@ const Login: FC = () => {
             className="items-left flex flex-col justify-center py-5"
             onSubmit={loginHandler}
           >
-            <label className="label-underline">{t("login.enter_pass")}</label>
-            <input
+            <Input
               autoFocus
-              className="input-underline my-5 w-8/12 md:w-96"
+              label={t("login.enter_pass")}
+              className="my-5 w-8/12 md:w-96"
               placeholder={t("login.enter_pass_placeholder")}
               ref={passwordInput}
               type="password"
