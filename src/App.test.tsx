@@ -19,7 +19,7 @@ describe("App", () => {
 
   test("should route to /setup if setup is not done", async () => {
     server.use(
-      http.get("/api/v1/setup/status", () => {
+      http.get("/api/setup/status", () => {
         return HttpResponse.json(
           {
             setupPhase: "starting",
@@ -41,7 +41,7 @@ describe("App", () => {
 
   test("should route to /login if setup is done", async () => {
     server.use(
-      http.get("/api/v1/setup/status", () => {
+      http.get("/api/setup/status", () => {
         return HttpResponse.json(
           {
             setupPhase: "done",
