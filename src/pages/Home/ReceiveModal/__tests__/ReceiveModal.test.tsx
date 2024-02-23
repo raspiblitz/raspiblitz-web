@@ -5,7 +5,7 @@ import ReceiveModal from "../ReceiveModal";
 
 beforeAll(() => {
   server.use(
-    http.post("/api/v1/lightning/new-address", () => {
+    http.post("/api/lightning/new-address", () => {
       return new HttpResponse("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz", {
         status: 200,
       });
