@@ -91,7 +91,7 @@ export const AppCard: FC<Props> = ({
         </div>
       </div>
       <div className="flex flex-row gap-2 py-4">
-        {installed && appStatusInfo.address && (
+        {installed && appStatusInfo.address && !appInfo.customComponent && (
           <a
             href={getHrefFromApp(appStatusInfo)}
             target="_blank"
