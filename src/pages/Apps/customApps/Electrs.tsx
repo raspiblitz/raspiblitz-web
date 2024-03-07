@@ -83,6 +83,7 @@ const Electrs: FC = () => {
       </section>
       <section className="bd-card mx-5 flex flex-col gap-4 px-5 lg:flex-row">
         <article className="lg:w-1/2">
+          {!initialSyncDone && <p>{t("appInfo.electrs.initialSync")}</p>}
           {initialSyncDone && (
             <>
               <article className="mt-4 flex flex-col gap-4">
@@ -103,36 +104,37 @@ const Electrs: FC = () => {
               <p className="mt-4 text-sm">
                 {t("appInfo.electrs.connectionInfo")}
               </p>
+              <article className="lg:w-1/2">
+                <div className="flex justify-center">
+                  <button
+                    className="switch-button"
+                    onClick={() => changeQR("local")}
+                  >
+                    Local
+                  </button>
+                  <button
+                    className="switch-button"
+                    onClick={() => changeQR("tor")}
+                  >
+                    {" "}
+                    Tor
+                  </button>
+                </div>
+                {QRAddress && (
+                  <QRCodeSVG
+                    role={"img"}
+                    className="mx-auto mt-4 border-2 border-white"
+                    value={QRAddress}
+                    size={256}
+                  />
+                )}
+                {!QRAddress && (
+                  <p className="mt-4 text-center">Address not available</p>
+                )}
+              </article>
             </>
           )}
         </article>
-        {initialSyncDone && (
-          <article className="lg:w-1/2">
-            <div className="flex justify-center">
-              <button
-                className="switch-button"
-                onClick={() => changeQR("local")}
-              >
-                Local
-              </button>
-              <button className="switch-button" onClick={() => changeQR("tor")}>
-                {" "}
-                Tor
-              </button>
-            </div>
-            {QRAddress && (
-              <QRCodeSVG
-                role={"img"}
-                className="mx-auto mt-4 border-2 border-white"
-                value={QRAddress}
-                size={256}
-              />
-            )}
-            {!QRAddress && (
-              <p className="mt-4 text-center">Address not available</p>
-            )}
-          </article>
-        )}
       </section>
     </main>
   );
