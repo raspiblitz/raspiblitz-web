@@ -92,6 +92,7 @@
       "fund": "Töltse fel a tárcáját",
       "on_chain": "Láncon",
       "receive": "Fogadás",
+      "refresh": "Cím frissítése",
       "scan_qr": "Szkennelje be ezt a QR kódot, vagy másolja ki a fizetési címet hogy pénzt fogadhasson",
       "send": "Küldés"
     }

@@ -97,6 +97,7 @@
       "invoice": "Invoice",
       "on_chain": "On-chain",
       "receive": "Ricevi",
+      "refresh": "Aggiorna indirizzo",
       "scan_qr": "Scannerizza questo codice QR o copia l'indirizzo sottostante per ricevere denaro",
       "send": "Invia",
       "send_lightning": "Invia denaro via Lightning",

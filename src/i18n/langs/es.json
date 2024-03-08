@@ -284,6 +284,7 @@
       "invoice": "Factura",
       "on_chain": "On-chain",
       "receive": "Recibir",
+      "refresh": "Actualizar dirección",
       "scan_qr": "Escánea este código QR o copia la dirección de abajo para solicitar los fondos",
       "send": "Enviar",
       "send_lightning": "Envía fondos vía Lightning",
