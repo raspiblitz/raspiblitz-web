@@ -170,6 +170,7 @@
       "invoice": "Faktura",
       "on_chain": "On-chain",
       "receive": "Motta",
+      "refresh": "Oppdater adresse",
       "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta midler",
       "send": "Send",
       "send_lightning": "Send midler over Lyn",

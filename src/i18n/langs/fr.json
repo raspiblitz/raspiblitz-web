@@ -315,6 +315,7 @@
       "invoice": "Facture",
       "on_chain": "On-chain",
       "receive": "Recevoir",
+      "refresh": "Actualiser l'adresse",
       "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
       "send": "Envoyer",
       "send_lightning": "Envoyer de l'argent avec Lightning",

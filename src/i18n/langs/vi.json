@@ -300,6 +300,7 @@
       "invoice": "Hóa đơn",
       "on_chain": "Trên chuỗi khối",
       "receive": "Nhận",
+      "refresh": "Làm mới địa chỉ",
       "scan_qr": "Quét mã QR hoặc sao chép địa chỉ bên dưới để nhận vốn",
       "send": "Gửi",
       "send_lightning": "Gửi vốn qua Lightning",

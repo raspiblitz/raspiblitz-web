@@ -313,6 +313,7 @@
       "invoice": "Rekening",
       "on_chain": "On-chain",
       "receive": "Ontvang",
+      "refresh": "Adres vernieuwen",
       "scan_qr": "Scan deze QR code of kopieer onderstaand adres om tegoeden te ontvangen",
       "send": "Stuur",
       "send_lightning": "Stuur tegoeden via Lightning",

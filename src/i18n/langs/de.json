@@ -332,6 +332,7 @@
       "invoice": "Rechnung",
       "on_chain": "On-chain",
       "receive": "Erhalten",
+      "refresh": "Adresse aktualisieren",
       "scan_qr": "Scannen Sie diesen QR-Code oder kopieren Sie die unten stehende Adresse, um das Geld zu erhalten",
       "send": "Senden",
       "send_lightning": "Geld via Lightning versenden",
