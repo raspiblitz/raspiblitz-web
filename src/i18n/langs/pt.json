@@ -188,6 +188,7 @@
       "enter_pass_placeholder": "Palavra-passe A",
       "invalid_pass": "Palavra-passe inválida",
       "login": "Acessar",
+      "caps_lock": "O Caps Lock está ATIVO",
       "error": "Ocorreu um erro",
       "unknown_error": "Erro desconhecido. A resposta foi: {{code}} {{statusText}}."
     },

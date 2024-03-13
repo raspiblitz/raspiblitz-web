@@ -160,7 +160,8 @@
       "enter_pass_placeholder": "Senha A",
       "error": "Ocorreu um erro",
       "invalid_pass": "Senha inválida",
-      "login": "Acessar"
+      "login": "Acessar",
+      "caps_lock": "O Caps Lock está ATIVADO"
     },
     "navigation": {
       "apps": "Aplicativos",

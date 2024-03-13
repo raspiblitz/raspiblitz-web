@@ -1,9 +1,11 @@
 import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import CapsLockWarning from "@/components/CapsLockWarning";
 import I18nDropdown from "@/components/I18nDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import Message from "@/components/Message";
 import { AppContext } from "@/context/app-context";
+import useCapsLock from "@/hooks/use-caps-lock";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
@@ -24,6 +26,7 @@ const Login: FC = () => {
     useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
+  const { isCapsLockOn, keyHandlers } = useCapsLock();
 
   const location = useLocation();
   const from =
@@ -108,7 +111,9 @@ const Login: FC = () => {
               placeholder={t("login.enter_pass_placeholder")}
               ref={passwordInput}
               type="password"
+              {...keyHandlers}
             />
+            {isCapsLockOn && <CapsLockWarning />}
             <button
               type="submit"
               className="m-4 flex items-center justify-center rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-400"

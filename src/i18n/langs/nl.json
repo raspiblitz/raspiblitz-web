@@ -168,6 +168,7 @@
       "error": "Er is een fout opgetreden",
       "invalid_pass": "Ongeldig wachtwoord",
       "login": "Inloggen",
+      "caps_lock": "Caps Lock staat AAN",
       "unknown_error": "Onbekende fout. De reactie was: {{code}} {{statusText}}."
     },
     "navigation": {

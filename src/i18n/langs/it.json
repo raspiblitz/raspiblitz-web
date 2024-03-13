@@ -46,7 +46,8 @@
       "enter_pass_placeholder": "Password A",
       "error": "C'è stato un errore",
       "invalid_pass": "Password non valida",
-      "login": "Log in"
+      "login": "Log in",
+      "caps_lock": "Il Blocco Maiuscole è ATTIVO"
     },
     "navigation": {
       "apps": "Applicazioni",

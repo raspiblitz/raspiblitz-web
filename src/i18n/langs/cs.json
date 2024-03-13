@@ -160,7 +160,8 @@
       "enter_pass_placeholder": "Heslo A",
       "error": "Došlo k chybě",
       "invalid_pass": "Neplatné heslo",
-      "login": "Přihlášení"
+      "login": "Přihlášení",
+      "caps_lock": "El Bloq Majús està ACTIVAT"
     },
     "navigation": {
       "apps": "Aplikace",
