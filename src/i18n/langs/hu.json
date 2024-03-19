@@ -46,7 +46,8 @@
       "enter_pass_placeholder": "Jelszó A",
       "error": "Hiba történt",
       "invalid_pass": "Helytelen jelszó",
-      "login": "Bejelentkezés"
+      "login": "Bejelentkezés",
+      "caps_lock": "A Caps Lock BE van kapcsolva"
     },
     "navigation": {
       "apps": "Appok",

@@ -182,6 +182,7 @@
       "error": "Es ist ein Fehler aufgetreten",
       "invalid_pass": "Ungültiges Passwort",
       "login": "Anmelden",
+      "caps_lock": "Die Feststelltaste ist AKTIVIERT",
       "unknown_error": "Unbekannter Fehler. Die Antwort war: {{code}} {{statusText}}."
     },
     "navigation": {

@@ -116,7 +116,8 @@
       "enter_pass_placeholder": "Passord A",
       "error": "En feil inntraff",
       "invalid_pass": "Ugyldig passord",
-      "login": "Logg inn"
+      "login": "Logg inn",
+      "caps_lock": "Caps Lock er PÅ"
     },
     "navigation": {
       "apps": "Programmer",

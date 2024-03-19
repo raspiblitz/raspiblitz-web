@@ -168,6 +168,7 @@
       "error": "Une erreur s'est produite",
       "invalid_pass": "Mot de passe invalide",
       "login": "Se connecter",
+      "caps_lock": "Le Verrouillage des Majuscules est ACTIVÉ",
       "unknown_error": "Erreur inconnue. La réponse était : {{code}} {{statusText}}."
     },
     "navigation": {

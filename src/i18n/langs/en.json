@@ -190,7 +190,8 @@
       "error": "An error occurred",
       "unknown_error": "Unknown error. The response was: {{code}} {{statusText}}.",
       "invalid_pass": "Invalid password",
-      "login": "Log in"
+      "login": "Log in",
+      "caps_lock": "Caps Lock is ON"
     },
     "navigation": {
       "apps": "Apps",

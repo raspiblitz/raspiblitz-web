@@ -160,7 +160,8 @@
       "enter_pass_placeholder": "Lösenord A",
       "error": "Ett fel inträffade",
       "invalid_pass": "Ogiltigt lösenord",
-      "login": "Logga in"
+      "login": "Logga in",
+      "caps_lock": "Caps Lock är PÅSLAGET"
     },
     "navigation": {
       "apps": "Appar",
