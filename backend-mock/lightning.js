@@ -7,7 +7,7 @@ let WALLET_LOCKED = true;
 
 router.post("/add-invoice", (req, res) => {
   console.info(
-    `call to /api/v1/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`,
+    `call to /api/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`,
   );
   res.send(
     // LND invoice
@@ -35,7 +35,7 @@ router.post("/send-coins", (req, res) => {
 
 router.get("/decode-pay-req", (req, res) => {
   console.info(
-    "call to /api/v1/lightning/decode-pay-req with invoice",
+    "call to /api/lightning/decode-pay-req with invoice",
     req.query["pay_req"],
   );
 
@@ -222,15 +222,13 @@ router.get("/list-all-tx", (req, res) => {
 });
 
 router.post("/new-address", (req, res) => {
-  console.info(
-    `call to /api/v1/lightning/new-address with type ${req.body.type}`,
-  );
+  console.info(`call to /api/lightning/new-address with type ${req.body.type}`);
   return res.status(200).send("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz");
 });
 
 router.post("/unlock-wallet", (req, res) => {
   console.info(
-    `call to /api/v1/lightning/unlock-wallet with type ${req.body.password}`,
+    `call to /api/lightning/unlock-wallet with type ${req.body.password}`,
   );
   // simulate loading time
   setTimeout(() => {

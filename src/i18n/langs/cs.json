@@ -160,7 +160,8 @@
       "enter_pass_placeholder": "Heslo A",
       "error": "Došlo k chybě",
       "invalid_pass": "Neplatné heslo",
-      "login": "Přihlášení"
+      "login": "Přihlášení",
+      "caps_lock": "El Bloq Majús està ACTIVAT"
     },
     "navigation": {
       "apps": "Aplikace",
@@ -300,6 +301,7 @@
       "invoice": "Faktura",
       "on_chain": "On-chain",
       "receive": "Přijmout",
+      "refresh": "Obnovit adresu",
       "scan_qr": "Naskenujte tento QR kód nebo zkopírujte níže uvedenou adresu pro zaslání finančních prostředků",
       "send": "Odeslat",
       "send_lightning": "Odeslat prostředky přes Lightning",

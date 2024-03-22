@@ -160,7 +160,8 @@
       "enter_pass_placeholder": "Mật khẩu A",
       "error": "Báo lỗi",
       "invalid_pass": "Sai mật khẩu",
-      "login": "Đăng nhập"
+      "login": "Đăng nhập",
+      "caps_lock": "Caps Lock đang BẬT"
     },
     "navigation": {
       "apps": "Ứng dụng",
@@ -300,6 +301,7 @@
       "invoice": "Hóa đơn",
       "on_chain": "Trên chuỗi khối",
       "receive": "Nhận",
+      "refresh": "Làm mới địa chỉ",
       "scan_qr": "Quét mã QR hoặc sao chép địa chỉ bên dưới để nhận vốn",
       "send": "Gửi",
       "send_lightning": "Gửi vốn qua Lightning",

@@ -10,6 +10,8 @@ import ModalDialog from "@/layouts/ModalDialog";
 import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
+import useCapsLock from "@/hooks/use-caps-lock";
+import CapsLockWarning from "@/components/CapsLockWarning";
 
 export type Props = {
   onClose: () => void;
@@ -24,6 +26,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { isCapsLockOn, keyHandlers } = useCapsLock();
 
   const changePwHandler = () => {
     setIsLoading(true);
@@ -87,6 +90,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
             value={oldPassword}
             label={t("settings.old_pw")}
             errorMessage={errors.oldPassword}
+            {...keyHandlers}
           />
         </article>
         <article className="w-full py-2 md:w-10/12">
@@ -107,7 +111,9 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
             value={newPassword}
             label={t("settings.new_pw")}
             errorMessage={errors.newPassword}
+            {...keyHandlers}
           />
+          {isCapsLockOn && <CapsLockWarning />}
         </article>
         <article className="flex w-full flex-col justify-around gap-6 pt-8 text-white md:w-2/3 xl:flex-row">
           <button

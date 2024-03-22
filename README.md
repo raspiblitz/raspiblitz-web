@@ -93,7 +93,7 @@ Please do not commit the above changes.
 ### Icons
 
 - RaspiBlitz Icon from [RaspiBlitz](https://github.com/rootzoll/raspiblitz)
-  - [MIT License](https://github.com/rootzoll/raspiblitz/blob/v1.7/LICENSE)
+  - [MIT License](https://github.com/rootzoll/raspiblitz/blob/v1.10/LICENSE)
 - Other icons from [Hero Icons](https://heroicons.com/) & [BitcoinDesign Icons](https://github.com/bitcoindesign/bitcoin-icons)
   - [MIT License Hero Icons](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE)
   - [MIT License Bitcoin-Icons](https://github.com/BitcoinDesign/Bitcoin-Icons/blob/main/LICENSE)

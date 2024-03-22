@@ -20,10 +20,10 @@ app.use(
   cors({ credentials: true, origin: "http://localhost:3000" }),
   express.json(),
 );
-app.use("/api/v1/system", system);
-app.use("/api/v1/setup", setup);
-app.use("/api/v1/apps", apps);
-app.use("/api/v1/lightning", lightning);
+app.use("/api/system", system);
+app.use("/api/setup", setup);
+app.use("/api/apps", apps);
+app.use("/api/lightning", lightning);
 
 const PORT = 8000;
 

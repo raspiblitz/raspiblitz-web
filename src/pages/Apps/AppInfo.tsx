@@ -1,43 +1,35 @@
 import AppIcon from "@/components/AppIcon";
 import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { AppStatus } from "@/models/app-status";
-import { App } from "@/models/app.model";
 import { availableApps } from "@/utils/availableApps";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 import {
   ChevronLeftIcon,
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import ImageCarousel from "./ImageCarousel";
 
-export type Props = {
-  app: App;
-  appStatusInfo: AppStatus;
-  installingApp: any | null;
-  onInstall: () => void;
-  onUninstall: () => void;
-  onClose: () => void;
-};
-
-export const AppInfo: FC<Props> = ({
-  app,
-  appStatusInfo,
-  installingApp,
-  onInstall,
-  onUninstall,
-  onClose,
-}) => {
+export const AppInfo: FC = () => {
+  const navigate = useNavigate();
+  const { appId } = useParams();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
+  const { appStatus, installingApp } = useContext(SSEContext);
   const [imgs, setImgs] = useState<string[]>([]);
-  const { id, name } = app;
-  const { author, repository } = availableApps.get(id)!;
+  const { name } = availableApps[appId!];
+  const { author, repository } = availableApps[appId!];
+  const { installed, version } =
+    appStatus.find((app) => app.id === appId) || {};
 
   const video =
-    id === "mempool" ? (
+    appId === "mempool" ? (
       <video width="2000" height="1000" controls>
         <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
       </video>
@@ -48,9 +40,9 @@ export const AppInfo: FC<Props> = ({
 
     async function loadAppImages() {
       const promises = await Promise.allSettled([
-        import(`../../assets/apps/preview/${id}/1.png`),
-        import(`../../assets/apps/preview/${id}/2.png`),
-        import(`../../assets/apps/preview/${id}/3.png`),
+        import(`../../assets/apps/preview/${appId}/1.png`),
+        import(`../../assets/apps/preview/${appId}/2.png`),
+        import(`../../assets/apps/preview/${appId}/3.png`),
       ]);
 
       promises.forEach((promise, i) => {
@@ -67,10 +59,29 @@ export const AppInfo: FC<Props> = ({
     }
 
     loadAppImages();
-  }, [id]);
+  }, [appId]);
+
+  const installHandler = () => {
+    instance.post(`apps/install/${appId}`).catch((err) => {
+      toast.error(checkError(err));
+    });
+  };
+
+  const uninstallHandler = () => {
+    instance
+      .post(`apps/uninstall/${appId}`, { keepData: true })
+      .catch((err) => {
+        toast.error(checkError(err));
+      });
+  };
 
   if (isLoading) {
     return <PageLoadingScreen />;
+  }
+
+  if (!appId) {
+    navigate("/apps");
+    return <></>;
   }
 
   return (
@@ -78,7 +89,7 @@ export const AppInfo: FC<Props> = ({
       {/* Back Button */}
       <section className="w-full px-5 py-9 dark:text-gray-200">
         <button
-          onClick={onClose}
+          onClick={() => navigate("/apps")}
           className="flex items-center text-xl font-bold outline-none"
         >
           <ChevronLeftIcon className="inline-block h-5 w-5" />
@@ -88,21 +99,21 @@ export const AppInfo: FC<Props> = ({
 
       {/* Image box with title */}
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
-        <AppIcon appId={id} className="max-h-12" />
+        <AppIcon appId={appId} className="max-h-12" />
         <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
-        {(installingApp == null || installingApp.id !== id) &&
-          !appStatusInfo.installed && (
+        {(installingApp == null || installingApp.appId !== appId) &&
+          !installed && (
             <button
               disabled={!!installingApp}
               className="bd-button flex rounded p-2 disabled:pointer-events-none"
-              onClick={onInstall}
+              onClick={installHandler}
             >
               <PlusIcon className="inline h-6 w-6" />
               &nbsp;{t("apps.install")}
             </button>
           )}
         {installingApp &&
-          installingApp.id === id &&
+          installingApp.appId === appId &&
           installingApp.mode === "on" && (
             <ButtonWithSpinner
               disabled
@@ -113,7 +124,7 @@ export const AppInfo: FC<Props> = ({
             </ButtonWithSpinner>
           )}
         {installingApp &&
-          installingApp.id === id &&
+          installingApp.appId === appId &&
           installingApp.mode === "off" && (
             <ButtonWithSpinner
               disabled
@@ -123,12 +134,12 @@ export const AppInfo: FC<Props> = ({
               {t("apps.uninstalling")}
             </ButtonWithSpinner>
           )}
-        {(installingApp == null || installingApp.id !== id) &&
-          appStatusInfo.installed && (
+        {(installingApp == null || installingApp.appId !== appId) &&
+          installed && (
             <button
               disabled={!!installingApp}
               className={`flex rounded bg-red-500 p-2 text-white shadow-md disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white`}
-              onClick={onUninstall}
+              onClick={uninstallHandler}
             >
               <TrashIcon className="inline h-6 w-6" />
               &nbsp;{t("apps.uninstall")}
@@ -144,12 +155,12 @@ export const AppInfo: FC<Props> = ({
       <section className="flex w-full items-center justify-center p-5">
         <article className="bd-card w-full">
           <h3 className="text-lg">
-            {name} {appStatusInfo.version}
+            {name} {version}
           </h3>
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
             {t("apps.about")}
           </h4>
-          <p>{t(`appInfo.${id}.about`)}</p>
+          <p>{t(`appInfo.${appId}.about`)}</p>
           <h4 className="my-2 text-gray-500 dark:text-gray-300">
             {t("apps.author")}
           </h4>
@@ -159,6 +170,8 @@ export const AppInfo: FC<Props> = ({
           </h4>
           <a
             href={repository}
+            target="_blank"
+            rel="noreferrer noopener"
             className="text-blue-400 underline dark:text-blue-300"
           >
             {repository}

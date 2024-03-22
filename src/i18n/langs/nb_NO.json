@@ -116,7 +116,8 @@
       "enter_pass_placeholder": "Passord A",
       "error": "En feil inntraff",
       "invalid_pass": "Ugyldig passord",
-      "login": "Logg inn"
+      "login": "Logg inn",
+      "caps_lock": "Caps Lock er PÅ"
     },
     "navigation": {
       "apps": "Programmer",
@@ -170,6 +171,7 @@
       "invoice": "Faktura",
       "on_chain": "On-chain",
       "receive": "Motta",
+      "refresh": "Oppdater adresse",
       "scan_qr": "Skann denne QR-koden eller kopier adressen nedenfor for å motta midler",
       "send": "Send",
       "send_lightning": "Send midler over Lyn",

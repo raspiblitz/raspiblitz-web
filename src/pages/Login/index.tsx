@@ -111,8 +111,7 @@ const Login: FC = () => {
             />
 
             <Button type="submit" color="secondary">
-              <ArrowLeftEndOnRectangleIcon className="mr-1 inline h-6 w-6 rotate-180" />
-              <span>{t("login.login")}</span>
+              {t("login.login")}
             </Button>
           </form>
           {error && <Message message={error} />}

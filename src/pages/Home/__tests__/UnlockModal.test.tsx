@@ -34,7 +34,7 @@ describe("UnlockModal", () => {
 
   test("should show text on wrong password", async () => {
     server.use(
-      http.post("/api/v1/lightning/unlock-wallet", () => {
+      http.post("/api/lightning/unlock-wallet", () => {
         return new HttpResponse(null, { status: 401 });
       }),
     );
@@ -51,7 +51,7 @@ describe("UnlockModal", () => {
 
   test("should display unlocking text on unlock", async () => {
     server.use(
-      http.post("/api/v1/lightning/unlock-wallet", () => {
+      http.post("/api/lightning/unlock-wallet", () => {
         return new HttpResponse(null, { status: 200 });
       }),
     );
