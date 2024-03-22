@@ -28,7 +28,9 @@
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@heroicons/react": "^2.0.18",
+    "@nextui-org/react": "^2.2.9",
     "axios": "^1.5.1",
+    "framer-motion": "^11.0.5",
     "i18next": "^23.6.0",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
