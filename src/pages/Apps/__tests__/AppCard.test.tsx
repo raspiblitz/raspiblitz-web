@@ -28,7 +28,6 @@ const basicProps: Props = {
   appStatusInfo: appStatus,
   installed: false,
   onInstall: () => {},
-  onOpenDetails: () => {},
 };
 
 describe("AppCard", () => {

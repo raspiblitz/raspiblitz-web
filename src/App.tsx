@@ -13,11 +13,13 @@ import { SetupPhase } from "./models/setup.model";
 import Login from "./pages/Login";
 import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./utils";
 import { instance } from "./utils/interceptor";
+import AppPage from "./pages/Apps/AppPage";
 
 const LazySetup = lazy(() => import("./pages/Setup"));
 const LazyHome = lazy(() => import("./pages/Home"));
 const LazyApps = lazy(() => import("./pages/Apps"));
 const LazySettings = lazy(() => import("./pages/Settings"));
+const LazyAppInfo = lazy(() => import("./pages/Apps/AppInfo"));
 
 const App: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -135,6 +137,30 @@ const App: FC = () => {
             <RequireAuth>
               <Layout>
                 <LazySettings />
+              </Layout>
+            </RequireAuth>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/apps/:appId/info"
+        element={
+          <Suspense fallback={<SkeletonLoadingScreen />}>
+            <RequireAuth>
+              <Layout>
+                <LazyAppInfo />
+              </Layout>
+            </RequireAuth>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/apps/:appId"
+        element={
+          <Suspense fallback={<SkeletonLoadingScreen />}>
+            <RequireAuth>
+              <Layout>
+                <AppPage />
               </Layout>
             </RequireAuth>
           </Suspense>

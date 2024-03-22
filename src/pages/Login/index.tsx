@@ -1,9 +1,11 @@
 import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import CapsLockWarning from "@/components/CapsLockWarning";
 import I18nDropdown from "@/components/I18nDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import Message from "@/components/Message";
 import { AppContext } from "@/context/app-context";
+import useCapsLock from "@/hooks/use-caps-lock";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
@@ -26,6 +28,7 @@ const Login: FC = () => {
     useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
+  const { isCapsLockOn, keyHandlers } = useCapsLock();
 
   const location = useLocation();
   const from =
@@ -102,11 +105,12 @@ const Login: FC = () => {
               placeholder={t("login.enter_pass_placeholder")}
               ref={passwordInput}
               type="password"
+              {...keyHandlers}
             />
 
+            {isCapsLockOn && <CapsLockWarning />}
             <Button type="submit" color="secondary">
-              <ArrowLeftEndOnRectangleIcon className="mr-1 inline h-6 w-6 rotate-180" />
-              <span>{t("login.login")}</span>
+              {t("login.login")}
             </Button>
           </form>
           {error && <Message message={error} />}

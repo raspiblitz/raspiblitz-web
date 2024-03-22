@@ -46,7 +46,8 @@
       "enter_pass_placeholder": "Password A",
       "error": "C'è stato un errore",
       "invalid_pass": "Password non valida",
-      "login": "Log in"
+      "login": "Log in",
+      "caps_lock": "Il Blocco Maiuscole è ATTIVO"
     },
     "navigation": {
       "apps": "Applicazioni",
@@ -97,6 +98,7 @@
       "invoice": "Invoice",
       "on_chain": "On-chain",
       "receive": "Ricevi",
+      "refresh": "Aggiorna indirizzo",
       "scan_qr": "Scannerizza questo codice QR o copia l'indirizzo sottostante per ricevere denaro",
       "send": "Invia",
       "send_lightning": "Invia denaro via Lightning",

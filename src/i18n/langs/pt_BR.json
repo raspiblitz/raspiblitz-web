@@ -160,7 +160,8 @@
       "enter_pass_placeholder": "Senha A",
       "error": "Ocorreu um erro",
       "invalid_pass": "Senha inválida",
-      "login": "Acessar"
+      "login": "Acessar",
+      "caps_lock": "O Caps Lock está ATIVADO"
     },
     "navigation": {
       "apps": "Aplicativos",
@@ -300,6 +301,7 @@
       "invoice": "Fatura",
       "on_chain": "On-chain",
       "receive": "Receber",
+      "refresh": "Atualizar endereço",
       "scan_qr": "Leia este código QR ou copie o endereço abaixo para receber fundos",
       "send": "Enviar",
       "send_lightning": "Enviar fundos via Lightning",

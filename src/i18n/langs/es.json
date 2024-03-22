@@ -134,6 +134,7 @@
       "error": "Se ha producido un error",
       "invalid_pass": "Contraseña Inválida",
       "login": "Iniciar Sesión",
+      "caps_lock": "El Bloqueo de Mayúsculas está ACTIVADO",
       "unknown_error": "Error desconocido. La respuesta fue: {{code}} {{statusText}}."
     },
     "navigation": {
@@ -284,6 +285,7 @@
       "invoice": "Factura",
       "on_chain": "On-chain",
       "receive": "Recibir",
+      "refresh": "Actualizar dirección",
       "scan_qr": "Escánea este código QR o copia la dirección de abajo para solicitar los fondos",
       "send": "Enviar",
       "send_lightning": "Envía fondos vía Lightning",

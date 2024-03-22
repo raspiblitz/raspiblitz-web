@@ -1,24 +1,19 @@
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { AppStatus } from "@/models/app-status";
-import { App } from "@/models/app.model";
 import { enableGutter } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import type { FC } from "react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import AppCardAlby from "./AppCardAlby";
-import AppInfo from "./AppInfo";
 import AppList from "./AppList";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { appStatus, installingApp } = useContext(SSEContext);
-
-  const [showDetails, setShowDetails] = useState(false);
-  const [app, setApp] = useState<App | null>(null);
+  const { appStatus } = useContext(SSEContext);
 
   useEffect(() => {
     enableGutter();
@@ -38,36 +33,6 @@ export const Apps: FC = () => {
     });
   };
 
-  const uninstallHandler = (id: string) => {
-    instance.post(`apps/uninstall/${id}`, { keepData: true }).catch((err) => {
-      toast.error(checkError(err));
-    });
-  };
-
-  const openDetailsHandler = (app: App) => {
-    setApp(app);
-    setShowDetails(true);
-  };
-
-  const closeDetailsHandler = () => {
-    setApp(null);
-    setShowDetails(false);
-  };
-
-  if (showDetails && app) {
-    const appInfos = appStatus.find((a) => a.id === app.id)!;
-    return (
-      <AppInfo
-        app={app}
-        appStatusInfo={appInfos}
-        installingApp={installingApp}
-        onInstall={() => installHandler(app.id)}
-        onUninstall={() => uninstallHandler(app.id)}
-        onClose={closeDetailsHandler}
-      />
-    );
-  }
-
   // in case no App data received yet => show loading screen
   if (appStatus.length === 0) {
     return <PageLoadingScreen />;
@@ -80,13 +45,11 @@ export const Apps: FC = () => {
           apps={installedApps}
           title={t("apps.installed")}
           onInstall={installHandler}
-          onOpenDetails={openDetailsHandler}
         />
         <AppList
           apps={notInstalledApps}
           title={t("apps.available")}
           onInstall={installHandler}
-          onOpenDetails={openDetailsHandler}
         />
         <section className="flex h-full flex-wrap pt-8">
           <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">

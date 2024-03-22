@@ -3,7 +3,7 @@ const router = express.Router();
 const util = require("./sse/util");
 
 router.post("/install/:id", (req, res) => {
-  console.info("call to /api/v1/apps/install for app", req.params.id);
+  console.info("call to /api/apps/install for app", req.params.id);
   // send information that btc-pay is currently installing
   util.sendSSE("install", {
     id: "rtl",
@@ -18,9 +18,24 @@ router.post("/install/:id", (req, res) => {
 });
 
 router.post("/uninstall/:id", (req, res) => {
-  console.info("call to /api/v1/apps/uninstall for app", req.params.id);
+  console.info("call to /api/apps/uninstall for app", req.params.id);
   // TODO: Create the same example as install but with uninstall
   res.status(200).send();
+});
+
+router.get("/status_advanced/electrs", (req, res) => {
+  console.info("call to /api/apps/status_advanced/electrs");
+  res.status(200).send(
+    JSON.stringify({
+      version: "v0.10.2",
+      localIP: "192.168.0.1",
+      publicIP: "127.0.0.1",
+      portTCP: "50001",
+      portSSL: "50002",
+      TORaddress: "myTorURL.onion",
+      initialSyncDone: true,
+    }),
+  );
 });
 
 const installApp = () => {

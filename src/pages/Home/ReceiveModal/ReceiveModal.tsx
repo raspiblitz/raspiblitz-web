@@ -173,7 +173,14 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
         </fieldset>
       </form>
 
-      {address && <ReceiveOnChain address={address} />}
+      {address && (
+        <ReceiveOnChain
+          address={address}
+          setAddress={setAddress}
+          setIsLoading={setIsLoading}
+          setError={setError}
+        />
+      )}
     </ModalDialog>,
     MODAL_ROOT,
   );

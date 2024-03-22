@@ -46,7 +46,8 @@
       "enter_pass_placeholder": "Jelszó A",
       "error": "Hiba történt",
       "invalid_pass": "Helytelen jelszó",
-      "login": "Bejelentkezés"
+      "login": "Bejelentkezés",
+      "caps_lock": "A Caps Lock BE van kapcsolva"
     },
     "navigation": {
       "apps": "Appok",
@@ -92,6 +93,7 @@
       "fund": "Töltse fel a tárcáját",
       "on_chain": "Láncon",
       "receive": "Fogadás",
+      "refresh": "Cím frissítése",
       "scan_qr": "Szkennelje be ezt a QR kódot, vagy másolja ki a fizetési címet hogy pénzt fogadhasson",
       "send": "Küldés"
     }

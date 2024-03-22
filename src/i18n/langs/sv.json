@@ -160,7 +160,8 @@
       "enter_pass_placeholder": "Lösenord A",
       "error": "Ett fel inträffade",
       "invalid_pass": "Ogiltigt lösenord",
-      "login": "Logga in"
+      "login": "Logga in",
+      "caps_lock": "Caps Lock är PÅSLAGET"
     },
     "navigation": {
       "apps": "Appar",
@@ -300,6 +301,7 @@
       "invoice": "Faktura",
       "on_chain": "On-chain",
       "receive": "Mottag",
+      "refresh": "Uppdatera adress",
       "scan_qr": "Scanna QR-koden eller kopiera adressen nedan för att ta emot medel",
       "send": "Skicka",
       "send_lightning": "Skicka medel över Lightning",

@@ -12,6 +12,8 @@ import { AppContext } from "@/context/app-context";
 import ModalDialog, { disableScroll } from "@/layouts/ModalDialog";
 import { MODAL_ROOT } from "@/utils";
 import { instance } from "@/utils/interceptor";
+import useCapsLock from "@/hooks/use-caps-lock";
+import CapsLockWarning from "@/components/CapsLockWarning";
 
 interface IFormInputs {
   passwordInput: string;
@@ -26,6 +28,7 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
   const { setWalletLocked, darkMode } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
+  const { isCapsLockOn, keyHandlers } = useCapsLock();
   const theme = darkMode ? "dark" : "light";
 
   const {
@@ -76,7 +79,9 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
             placeholder={t("forms.validation.unlock.pass_c")}
             type="password"
             disabled={isLoading}
+            {...keyHandlers}
           />
+          {isCapsLockOn && <CapsLockWarning />}
           <ButtonWithSpinner
             type="submit"
             className="bd-button my-5 p-3"

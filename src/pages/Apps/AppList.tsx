@@ -1,5 +1,4 @@
 import { AppStatus } from "@/models/app-status";
-import { App } from "@/models/app.model";
 import { availableApps } from "@/utils/availableApps";
 import { FC } from "react";
 import AppCard from "./AppCard";
@@ -8,10 +7,9 @@ type Props = {
   title: string;
   apps: AppStatus[];
   onInstall: (id: string) => void;
-  onOpenDetails: (app: App) => void;
 };
 
-const AppList: FC<Props> = ({ title, apps, onInstall, onOpenDetails }) => {
+const AppList: FC<Props> = ({ title, apps, onInstall }) => {
   return (
     <section className="flex h-full flex-wrap">
       <h2 className="w-full pb-5 pt-8 text-xl font-bold dark:text-gray-200">
@@ -22,12 +20,11 @@ const AppList: FC<Props> = ({ title, apps, onInstall, onOpenDetails }) => {
           return (
             <AppCard
               key={appStatus.id}
-              appInfo={availableApps.get(appStatus.id)!}
+              appInfo={availableApps[appStatus.id]!}
               appStatusInfo={appStatus}
               installed={appStatus.installed}
               installingApp={null}
               onInstall={onInstall}
-              onOpenDetails={onOpenDetails}
             />
           );
         })}

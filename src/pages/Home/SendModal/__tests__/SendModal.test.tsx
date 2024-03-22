@@ -69,7 +69,7 @@ describe("SendModal", () => {
 
     it("should send the decode request correctly", async () => {
       server.use(
-        http.get("/api/v1/lightning/decode-pay-req", ({ request }) => {
+        http.get("/api/lightning/decode-pay-req", ({ request }) => {
           const url = new URL(request.url);
           if (url.searchParams.get("pay_req")) {
             return HttpResponse.json(
