@@ -11,6 +11,7 @@ import "./index.css";
 
 import ErrorBoundary from "@/ErrorBoundary";
 import "i18next";
+import { NextUIProvider } from "@nextui-org/react";
 
 declare module "i18next" {
   interface CustomTypeOptions {
@@ -26,9 +27,11 @@ root.render(
       <BrowserRouter>
         <SSEContextProvider>
           <AppContextProvider>
-            {/* For persistent toasts over all pages */}
-            <ToastContainer stacked closeOnClick />
-            <App />
+            <NextUIProvider>
+              {/* For persistent toasts over all pages */}
+              <ToastContainer stacked closeOnClick />
+              <App />
+            </NextUIProvider>
           </AppContextProvider>
         </SSEContextProvider>
       </BrowserRouter>
