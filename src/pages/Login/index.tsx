@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/react";
+import useCapsLock from "@/hooks/use-caps-lock";
+import CapsLockWarning from "@/components/CapsLockWarning";
 
 const Login: FC = () => {
   const { t } = useTranslation();
@@ -23,6 +25,7 @@ const Login: FC = () => {
     useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
+  const { isCapsLockOn } = useCapsLock();
 
   const location = useLocation();
   const from =
