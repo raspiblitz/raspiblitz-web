@@ -7,15 +7,16 @@ import { AppContext } from "@/context/app-context";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import {
-  ArrowLeftEndOnRectangleIcon,
-  MoonIcon,
-} from "@heroicons/react/24/outline";
+import { MoonIcon } from "@heroicons/react/24/outline";
 import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/react";
+import useCapsLock from "@/hooks/use-caps-lock";
+import CapsLockWarning from "@/components/CapsLockWarning";
+
 const Login: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,7 @@ const Login: FC = () => {
     useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
+  const { isCapsLockOn } = useCapsLock();
 
   const location = useLocation();
   const from =
@@ -78,15 +80,7 @@ const Login: FC = () => {
         onClick={toggleDarkMode}
       />
       <div className="fixed right-16 top-4 flex h-8 w-72 items-center justify-around">
-        <article className="flex justify-between">
-          <label
-            htmlFor="lngSelect"
-            className="mr-2 w-1/2 font-bold dark:text-white"
-          >
-            {t("settings.language")}
-          </label>
-          <I18nDropdown />
-        </article>
+        <I18nDropdown />
       </div>
       {!darkMode && <RaspiBlitzLogo className="my-2 block h-10" />}
       {darkMode && <RaspiBlitzLogoDark className="my-2 block h-10" />}
@@ -101,15 +95,16 @@ const Login: FC = () => {
             className="items-left flex flex-col justify-center py-5"
             onSubmit={loginHandler}
           >
-            <label className="label-underline">{t("login.enter_pass")}</label>
-            <input
+            <Input
               autoFocus
-              className="input-underline my-5 w-8/12 md:w-96"
+              label={t("login.enter_pass")}
+              className="my-5 w-8/12 md:w-96"
               placeholder={t("login.enter_pass_placeholder")}
               ref={passwordInput}
               type="password"
             />
 
+            {isCapsLockOn && <CapsLockWarning />}
             <Button type="submit" color="secondary">
               {t("login.login")}
             </Button>
