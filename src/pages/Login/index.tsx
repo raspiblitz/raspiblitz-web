@@ -1,18 +1,13 @@
 import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
-import CapsLockWarning from "@/components/CapsLockWarning";
 import I18nDropdown from "@/components/I18nDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import Message from "@/components/Message";
 import { AppContext } from "@/context/app-context";
-import useCapsLock from "@/hooks/use-caps-lock";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import {
-  ArrowLeftEndOnRectangleIcon,
-  MoonIcon,
-} from "@heroicons/react/24/outline";
+import { MoonIcon } from "@heroicons/react/24/outline";
 import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -28,7 +23,6 @@ const Login: FC = () => {
     useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
-  const { isCapsLockOn, keyHandlers } = useCapsLock();
 
   const location = useLocation();
   const from =
@@ -105,7 +99,6 @@ const Login: FC = () => {
               placeholder={t("login.enter_pass_placeholder")}
               ref={passwordInput}
               type="password"
-              {...keyHandlers}
             />
 
             {isCapsLockOn && <CapsLockWarning />}
