@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import I18nDropdown from "@/components/I18nDropdown";
+import I18nSelect from "@/components/I18nDropdown";
 
 /**
  * Displays the current language and allows the user to change it.
@@ -15,7 +15,7 @@ const I18nBox: FC = () => {
           <h4 className="flex w-1/2 items-center font-bold xl:w-2/3">
             {t("settings.curr_lang")}
           </h4>
-          <I18nDropdown />
+          <I18nSelect />
         </div>
       </article>
     </div>
