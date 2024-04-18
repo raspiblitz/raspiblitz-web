@@ -60,3 +60,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.remove-radio > span {
+  visibility: hidden;
+}

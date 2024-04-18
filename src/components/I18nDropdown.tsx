@@ -1,43 +1,38 @@
-import { ChangeEvent, FC, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { resources } from "@/i18n/config";
 import { saveSettings } from "@/utils";
+import { Select, SelectItem } from "@nextui-org/react";
+import { ChangeEvent, FC } from "react";
+import { useTranslation } from "react-i18next";
 
-const I18nDropdown: FC = () => {
+const I18nSelect: FC = () => {
   const { t, i18n } = useTranslation();
-  const selectRef = useRef<HTMLSelectElement>(null);
 
   const langs = Object.keys(resources);
 
-  useEffect(() => {
-    if (selectRef.current) {
-      selectRef.current.value = i18n.language;
+  const selectLangHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (event.target.value === i18n.language) {
+      return;
     }
-  }, [i18n]);
 
-  const dropdownHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (event.target.value !== i18n.language) {
-      i18n.changeLanguage(selectRef.current?.value);
-      saveSettings({ lang: i18n.language });
-    }
+    i18n.changeLanguage(event.target.value);
+    saveSettings({ lang: i18n.language });
   };
 
   return (
-    <select
+    <Select
       id="lngSelect"
-      ref={selectRef}
-      onChange={dropdownHandler}
-      className="w-auto border bg-white dark:text-black"
+      defaultSelectedKeys={[i18n.language]}
+      onChange={selectLangHandler}
     >
       {langs.map((lang) => {
         return (
-          <option key={lang} value={lang}>
+          <SelectItem key={lang} value={lang}>
             {t(`language.${lang}`)}
-          </option>
+          </SelectItem>
         );
       })}
-    </select>
+    </Select>
   );
 };
 
-export default I18nDropdown;
+export default I18nSelect;

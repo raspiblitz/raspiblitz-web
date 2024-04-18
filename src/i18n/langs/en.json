@@ -224,6 +224,10 @@
       "debug_report_done": "Debug Report created!"
     },
     "setup": {
+      "setupmenu": {
+        "lets_setup": "Let's setup your RaspiBlitz",
+        "setup_time": "The total setup process takes about 20 minutes"
+      },
       "blockchain_delete": "Delete Blockchain",
       "blockchain_found_long": "On your HDD/SSD existing blockchain data was found.",
       "blockchain_found_short": "Blockchain found on HDD/SSD",
