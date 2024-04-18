@@ -186,6 +186,13 @@
       "shutdown": "Vypnout"
     },
     "setup": {
+      "input_node": {
+        "err_only_chars": "Název uzlu by měl obsahovat pouze znaky a čísla.",
+        "err_max_length": "Název uzlu může mít maximálně 32 znaků.",
+        "err_min_length": "Nodename musí být dlouhý alespoň 4 znaky.",
+        "err_empty": "Název uzlu nemůže být prázdný.",
+        "nodename_name": "Název uzlu"
+      },
       "blockchain_delete": "Smazat Blockchain",
       "blockchain_found_long": "Na vašem HDD/SSD byla nalezena existující data blockchainu.",
       "blockchain_found_short": "Blockchain nalezen na HDD/SSD",
@@ -217,12 +224,6 @@
       "migrate_umbrel": "Chcete migrovat z UMBREL do RaspiBlitz?",
       "migrateblitz": "Migrovat na RaspiBlitz",
       "no_and_shutdown": "Ne a Vypnout",
-      "nodename_err_chars": "Název uzlu by měl obsahovat pouze znaky a čísla.",
-      "nodename_err_max_length": "Název uzlu může mít maximálně 32 znaků.",
-      "nodename_err_min_length": "Nodename musí být dlouhý alespoň 4 znaky.",
-      "nodename_error_empty": "Název uzlu nemůže být prázdný.",
-      "nodename_input": "Zadejte název uzlu",
-      "nodename_name": "Název uzlu",
       "ok": "OK",
       "other_options": "Další možnosti",
       "password_a_details": "Použijte toto heslo pro přihlášení do vašeho RaspiBlitz.",
