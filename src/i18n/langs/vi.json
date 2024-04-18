@@ -186,6 +186,13 @@
       "shutdown": "Tắt nguồn"
     },
     "setup": {
+      "input_node": {
+        "err_only_chars": "Tên Node chỉ bao gồm chữ và số.",
+        "err_max_length": "Tên Node có nhiều nhất 32 ký tự.",
+        "err_min_length": "Tên Node cần có ít nhất 4 ký tự.",
+        "err_empty": "Tên Node không thể bỏ trống.",
+        "nodename_name": "Tên Node"
+      },
       "blockchain_delete": "Xóa chuỗi",
       "blockchain_found_long": "Dữ liệu chuỗi khối đã có trên ổ cứng HDD/SSD.",
       "blockchain_found_short": "Chuỗi khối đã tìm thấy trên ổ cứng HDD/SSD",
@@ -217,12 +224,6 @@
       "migrate_umbrel": "Bạn muốn lưu chuyển dữ liệu từ UMBREL qua RaspiBlitz?",
       "migrateblitz": "Lưu chuyển dữ liệu qua RaspiBlitz",
       "no_and_shutdown": "Không và tắt máy",
-      "nodename_err_chars": "Tên Node chỉ bao gồm chữ và số.",
-      "nodename_err_max_length": "Tên Node có nhiều nhất 32 ký tự.",
-      "nodename_err_min_length": "Tên Node cần có ít nhất 4 ký tự.",
-      "nodename_error_empty": "Tên Node không thể bỏ trống.",
-      "nodename_input": "Nhập tên Node",
-      "nodename_name": "Tên Node",
       "ok": "Đồng ý",
       "other_options": "Lựa chọn khác",
       "password_a_details": "Sử dụng mật khẩu này để đăng nhập vào RaspiBlitz của bạn.",

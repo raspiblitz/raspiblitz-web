@@ -1,5 +1,3 @@
-import { FC, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   SetupLightning,
   SetupMigrationMode,
@@ -7,11 +5,14 @@ import {
   SetupPhase,
   SetupStatus,
 } from "@/models/setup.model";
-import { instance } from "@/utils/interceptor";
 import { ACCESS_TOKEN } from "@/utils";
+import { instance } from "@/utils/interceptor";
+import { HttpStatusCode } from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FinalDialog from "./FinalDialog";
 import FormatDialog from "./FormatDialog";
-import InputNodename from "./InputNodename";
+import InputNodeName from "./InputNodeName";
 import InputPassword from "./InputPassword";
 import LightningDialog from "./LightningDialog";
 import MigrationDialog from "./MigrationDialog";
@@ -20,7 +21,6 @@ import SetupMenu from "./SetupMenu";
 import StartDoneDialog from "./StartDoneDialog";
 import SyncScreen from "./SyncScreen";
 import WaitScreen from "./WaitScreen";
-import { HttpStatusCode } from "axios";
 
 enum Screen {
   WAIT,
@@ -38,7 +38,7 @@ enum Screen {
   SYNC,
 }
 
-const Setup: FC = () => {
+export default function Setup() {
   // init with waiting screen
   const [page, setPage] = useState(Screen.WAIT);
 
@@ -473,7 +473,7 @@ const Setup: FC = () => {
         <InputPassword passwordType="c" callback={callbackInputPasswordC} />
       );
     case Screen.INPUT_NODENAME:
-      return <InputNodename callback={callbackInputNodename} />;
+      return <InputNodeName callback={callbackInputNodename} />;
     case Screen.FINAL:
       return (
         <FinalDialog
@@ -490,6 +490,4 @@ const Setup: FC = () => {
         <WaitScreen status={waitScreenStatus} message={waitScreenMessage} />
       );
   }
-};
-
-export default Setup;
+}

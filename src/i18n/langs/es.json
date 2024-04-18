@@ -168,6 +168,13 @@
       "shutdown_info_disconnect_power": "A continuación, espere 5 segundos y desconecte la alimentación."
     },
     "setup": {
+      "input_node": {
+        "err_only_chars": "El nombre del nodo debería contener solo caracteres y números.",
+        "err_max_length": "El nombre del nodo debe ser como máximo de 32 caracteres.",
+        "err_min_length": "El nombre del nodo debe ser al menos de 4 caracteres.",
+        "err_empty": "El nombre del nodo no puede estar vacío.",
+        "nodename_name": "Nombre del nodo"
+      },
       "blockchain_delete": "Borrar la cadena de bloques",
       "blockchain_found_long": "Se han encontrado datos existentes de la cadena de bloques en tu disco duro / SSD.",
       "blockchain_found_short": "Cadena de bloques encontrada en el disco duro / SSD",
@@ -181,11 +188,6 @@
       "migrate_umbrel": "¿Quieres migrar de UMBREL a RaspiBlitz?",
       "migrateblitz": "Migrar mi RaspiBlitz",
       "no_and_shutdown": "No y apagar",
-      "nodename_err_chars": "El nombre del nodo debería contener solo caracteres y números.",
-      "nodename_err_max_length": "El nombre del nodo debe ser como máximo de 32 caracteres.",
-      "nodename_err_min_length": "El nombre del nodo debe ser al menos de 4 caracteres.",
-      "nodename_error_empty": "El nombre del nodo no puede estar vacío.",
-      "nodename_name": "Nombre del nodo",
       "ok": "OK",
       "other_options": "Otras opciones",
       "password_a_name": "Contraseña A",
@@ -221,7 +223,6 @@
       "select_lightning": "Elija su Implementación Lightning:",
       "password_error_chars": "La contraseña solo debe contener letras y números.",
       "started": "Comenzado",
-      "nodename_input": "Introducir el nombre del nodo",
       "password_b_name": "Contraseña B",
       "password_b_short": "Establezca su nueva Contraseña para las Aplicaciones (Contraseña B)",
       "password_error_length": "La contraseña debe tener al menos 8 caracteres.",
