@@ -234,6 +234,14 @@
         "keep_blockchain": "Keep Blockchain data",
         "delete_confirm": "Yes, delete all data"
       },
+      "input_node": {
+        "header": "What should we call your node?",
+        "err_only_chars": "Nodename should just contain characters & numbers.",
+        "err_max_length": "Node name must be at most 32 characters long.",
+        "err_min_length": "Node name needs to be at least 4 characters long.",
+        "err_empty": "Node name cannot be empty.",
+        "label": "Node Name"
+      },
       "blockchain_delete": "Delete Blockchain",
       "blockchain_found_long": "On your HDD/SSD existing blockchain data was found.",
       "blockchain_found_short": "Blockchain found on HDD/SSD",
@@ -265,12 +273,6 @@
       "migrate_umbrel": "Do you want to migrate from UMBREL to RaspiBlitz?",
       "migrateblitz": "Migrate to RaspiBlitz",
       "no_and_shutdown": "No and Shutdown",
-      "nodename_err_chars": "Nodename should just contain characters & numbers.",
-      "nodename_err_max_length": "Nodename must be at most 32 characters long.",
-      "nodename_err_min_length": "Nodename needs to be at least 4 characters long.",
-      "nodename_error_empty": "Nodename cannot be empty.",
-      "nodename_input": "Input Nodename",
-      "nodename_name": "Node Name",
       "ok": "OK",
       "other_options": "Other Options",
       "password_a_details": "Use this password for login to your RaspiBlitz.",

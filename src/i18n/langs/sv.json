@@ -186,6 +186,13 @@
       "shutdown": "Stäng av"
     },
     "setup": {
+      "input_node": {
+        "err_only_chars": "Nodnamn ska innehålla karaktärer och siffror.",
+        "err_max_length": "Nodnamn måste vara maximalt 32 karaktärer långt.",
+        "err_min_length": "Nodnamn måste vara minst 4 karaktärer långt.",
+        "err_empty": "Nodnamn kan inte vara tomt.",
+        "nodename_name": "Nodnamn"
+      },
       "blockchain_delete": "Radera blockkedja",
       "blockchain_found_long": "Existerande blockkedjedata hittad på din HDD/SSD.",
       "blockchain_found_short": "Blockchain hittad på HDD/SSD",
@@ -217,12 +224,6 @@
       "migrate_umbrel": "Vill du migrera ifrån Umbrel till RaspiBlitz?",
       "migrateblitz": "Migrera till RaspiBlitz",
       "no_and_shutdown": "Nej och stäng av",
-      "nodename_err_chars": "Nodnamn ska innehålla karaktärer och siffror.",
-      "nodename_err_max_length": "Nodnamn måste vara maximalt 32 karaktärer långt.",
-      "nodename_err_min_length": "Nodnamn måste vara minst 4 karaktärer långt.",
-      "nodename_error_empty": "Nodnamn kan inte vara tomt.",
-      "nodename_input": "Ange nodnamn",
-      "nodename_name": "Nodnamn",
       "ok": "OK",
       "other_options": "Andra alternativ",
       "password_a_details": "Använd ditt lösenord för att logga in på din RaspiBlitz.",

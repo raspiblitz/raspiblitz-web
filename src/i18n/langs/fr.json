@@ -199,6 +199,13 @@
       "generating_debug_report": "Génération du rapport de débogage. Cela peut prendre un certain temps."
     },
     "setup": {
+      "input_node": {
+        "err_only_chars": "Le nom de noeud ne doit contenir que des caractères et des chiffres.",
+        "err_max_length": "Le nom de noeud doit comporter au maximum 32 caractères.",
+        "err_min_length": "Le nom du nœud doit comporter au moins 4 caractères.",
+        "err_empty": "Le nom de noeud ne peut pas être vide.",
+        "nodename_name": "Nom du nœud"
+      },
       "blockchain_delete": "Supprimer Blockchain",
       "blockchain_found_long": "Sur votre disque dur/SSD, des données blockchain existantes ont été trouvées.",
       "blockchain_found_short": "Blockchain trouvée sur le HDD/SSD",
@@ -230,12 +237,6 @@
       "migrate_umbrel": "Voulez-vous convertir UMBREL en RaspiBlitz ?",
       "migrateblitz": "Migrer vers RaspiBlitz",
       "no_and_shutdown": "Non et arrêt",
-      "nodename_err_chars": "Le nom de noeud ne doit contenir que des caractères et des chiffres.",
-      "nodename_err_max_length": "Le nom de noeud doit comporter au maximum 32 caractères.",
-      "nodename_err_min_length": "Le nom du nœud doit comporter au moins 4 caractères.",
-      "nodename_error_empty": "Le nom de noeud ne peut pas être vide.",
-      "nodename_input": "Nom du noeud d'entrée",
-      "nodename_name": "Nom du nœud",
       "ok": "OK",
       "other_options": "Autres options",
       "password_a_details": "Utilisez ce mot de passe pour vous connecter à votre RaspiBlitz.",
