@@ -1,7 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-
 const { nextui } = require("@nextui-org/react");
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -20,5 +19,18 @@ module.exports = {
       "4/5": "80%",
     },
   },
-  plugins: [nextui()],
+  plugins: [nextui(
+    {
+      addCommonColors: true,
+      themes: {
+        light: {},
+        dark: {
+          colors: {
+            primary: "#4785FF",
+            secondary: "#BBC6DC"
+          }
+        },
+      },
+    }
+  )],
 };
