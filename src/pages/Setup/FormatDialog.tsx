@@ -1,41 +1,22 @@
-import {
-  CircleStackIcon,
-  TrashIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
+import { Button, Checkbox } from "@nextui-org/react";
+import { FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export type Props = {
   containsBlockchain: boolean;
   callback: (deleteData: boolean, keepBlockchainData: boolean) => void;
 };
 
-const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
+export default function FormatDialog({ containsBlockchain, callback }: Props) {
   const { t } = useTranslation();
-
-  const [step, setStep] = useState(0);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const keepBlockchain = useRef(true);
+  const [keepBlockchain, setKeepBlockchain] = useState(containsBlockchain);
 
-  useEffect(() => {
-    keepBlockchain.current = containsBlockchain;
-    setStep(containsBlockchain ? 1 : 2);
-  }, [containsBlockchain]);
-
-  const handleBlockchain = (keep: boolean) => {
-    keepBlockchain.current = keep;
-    setStep(2);
-  };
-
-  const handleCancel = () => {
-    setShowConfirmModal(true);
-  };
-
-  const hideConfirm = () => {
-    setShowConfirmModal(false);
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    callback(true, keepBlockchain);
   };
 
   return (
@@ -43,71 +24,49 @@ const FormatDialog: FC<Props> = ({ containsBlockchain, callback }) => {
       {showConfirmModal && (
         <ConfirmModal
           confirmText={`${t("setup.cancel_setup")}?`}
-          onClose={hideConfirm}
-          onConfirm={() => callback(false, keepBlockchain.current)}
+          onClose={() => setShowConfirmModal(false)}
+          onConfirm={() => callback(false, false)}
         />
       )}
       <SetupContainer>
-        {step === 1 && (
-          <section className="flex h-full flex-col items-center justify-center p-8">
-            <h2 className="m-2 text-center text-lg font-bold">
-              {t("setup.blockchain_found_short")}
-            </h2>
-            <p className="text-sm">{t("setup.blockchain_found_long")}</p>
-            <article className="mt-10 flex flex-col items-center justify-center gap-10 md:flex-row">
-              <button
-                onClick={() => handleBlockchain(false)}
-                className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
-              >
-                <TrashIcon className="inline h-6 w-6" />
-                <span className="p-2">{t("setup.blockchain_delete")}</span>
-              </button>
-              <button
-                onClick={() => handleBlockchain(true)}
-                className="bd-button rounded p-2"
-              >
-                <CircleStackIcon className="inline h-6 w-6" />
-                <span className="p-2">{t("setup.blockchain_keep")}</span>
-              </button>
-            </article>
-          </section>
-        )}
-        {step === 2 && (
-          <section className="flex h-full flex-col items-center justify-center p-8">
-            <h2 className="m-2 text-center text-lg font-bold">
-              {t("setup.hdd_delete_short")}
-            </h2>
-            {keepBlockchain.current && (
-              <p className="text-center text-sm">
-                {t("setup.hdd_delete_keep_blockchain")}
-              </p>
-            )}
-            {!keepBlockchain.current && (
-              <p className="text-center text-sm">
-                {t("setup.hdd_delete_no_blockchain")}
-              </p>
-            )}
-            <article className="mt-10 flex flex-col items-center justify-center gap-10 md:flex-row">
-              <button
-                onClick={handleCancel}
-                className="rounded  bg-red-500 p-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
-              >
-                <XMarkIcon className="inline h-6 w-6" />
-                <span className="p-2">{t("setup.cancel")}</span>
-              </button>
-              <button
-                onClick={() => callback(true, keepBlockchain.current)}
-                className="bd-button rounded p-2"
-              >
-                <TrashIcon className="inline h-6 w-6" />
-                <span className="p-2">{t("setup.hdd_delete")}</span>
-              </button>
-            </article>
-          </section>
-        )}
+        <form
+          className="flex h-full flex-col items-center justify-center gap-8 p-8"
+          onSubmit={submitHandler}
+        >
+          <h1 className="m-2 text-center text-3xl font-bold">
+            {t("setup.format.delete_drive")}
+          </h1>
+          <article className="mt-2 rounded-xl border border-warning-500 bg-warning-500/5 p-4 font-semibold text-warning-500">
+            {t("setup.format.warn")}
+          </article>
+          {containsBlockchain && (
+            <Checkbox
+              id="keepBlockchain"
+              onValueChange={setKeepBlockchain}
+              isSelected={keepBlockchain}
+            >
+              {t("setup.format.keep_blockchain")}
+            </Checkbox>
+          )}
+          <article className="flex flex-col items-center justify-center gap-10">
+            <Button
+              type="submit"
+              color="primary"
+              className="rounded-full px-8 py-6 font-semibold"
+            >
+              {t("setup.format.delete_confirm")}
+            </Button>
+            <Button
+              type="button"
+              color="danger"
+              variant="light"
+              onClick={() => setShowConfirmModal(true)}
+            >
+              {t("setup.cancel")}
+            </Button>
+          </article>
+        </form>
       </SetupContainer>
     </>
   );
-};
-
-export default FormatDialog;
+}
