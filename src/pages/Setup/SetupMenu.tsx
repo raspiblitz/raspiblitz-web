@@ -91,15 +91,13 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
               ></CustomRadio>
             </RadioGroup>
           </div>
-          <div className="mt-auto">
-            <Button
-              type="submit"
-              className="mt-8 flex items-center rounded-full bg-primary px-4 py-6 font-semibold"
-              disabled={selected === null}
-            >
-              <span className="p-2">{t("setup.continue")}</span>
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            color="primary"
+            className="mt-8 rounded-full px-8 py-6 font-semibold"
+          >
+            {t("setup.continue")}
+          </Button>
         </form>
       </section>
     </SetupContainer>

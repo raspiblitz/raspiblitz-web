@@ -228,6 +228,12 @@
         "lets_setup": "Let's setup your RaspiBlitz",
         "setup_time": "The total setup process takes about 20 minutes"
       },
+      "format": {
+        "delete_drive": "Would you like to proceed deleting all data on your drive?",
+        "warn": "Please back up any important data as this will wipe your drive!",
+        "keep_blockchain": "Keep Blockchain data",
+        "delete_confirm": "Yes, delete all data"
+      },
       "blockchain_delete": "Delete Blockchain",
       "blockchain_found_long": "On your HDD/SSD existing blockchain data was found.",
       "blockchain_found_short": "Blockchain found on HDD/SSD",
@@ -252,10 +258,6 @@
       "final_seedwords": "Please write down your seed words and store at a safe place:",
       "final_setup": "Setup is finished.",
       "final_update": "Update is finished.",
-      "hdd_delete": "DELETE OLD DATA",
-      "hdd_delete_keep_blockchain": "Please confirm that you want to delete all previous data on the HDD/SSD and just keep the blockchain data for your fresh RaspiBlitz.",
-      "hdd_delete_no_blockchain": "Please confirm that you want to delete all previous data on the HDD/SSD to start RaspiBlitz.",
-      "hdd_delete_short": "OK to delete all data on HDD/SSD?",
       "lightningoutdated": "The node you want to migrate from uses a newer Lightning version than this RaspiBlitz. Please wait for an updated release. You can shutdown and startup with your old node sd card - no changes were made.",
       "lnd": "LND",
       "migrate_citadel": "Do you want to migrate from CITADEL to RaspiBlitz?",
