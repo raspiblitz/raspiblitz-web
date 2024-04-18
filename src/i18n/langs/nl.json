@@ -199,6 +199,13 @@
       "debug_report_done": "Foutopsporingsrapport gemaakt!"
     },
     "setup": {
+      "input_node": {
+        "err_only_chars": "Naam van de Node mag alleen letters & nummers bevatten.",
+        "err_max_length": "Naam van de Node mag maximaal 32 tekens lang zijn.",
+        "err_min_length": "Naam van de Node moet minstens 4 tekens langs zijn.",
+        "err_empty": "Naam van de Node kan niet leeg zijn.",
+        "nodename_name": "Naam van de Node"
+      },
       "blockchain_delete": "Verwijder Blockchain",
       "blockchain_found_long": "Op uw HDD/SSD is bestaande blockchain data gevonden.",
       "blockchain_found_short": "Blockchain gevonden op HDD/SSD",
@@ -230,12 +237,6 @@
       "migrate_umbrel": "Wilt u migreren van UMBREL naar RaspiBlitz?",
       "migrateblitz": "Migreer naar RaspiBlitz",
       "no_and_shutdown": "Nee en afsluiten",
-      "nodename_err_chars": "Naam van de Node mag alleen letters & nummers bevatten.",
-      "nodename_err_max_length": "Naam van de Node mag maximaal 32 tekens lang zijn.",
-      "nodename_err_min_length": "Naam van de Node moet minstens 4 tekens langs zijn.",
-      "nodename_error_empty": "Naam van de Node kan niet leeg zijn.",
-      "nodename_input": "Geef de naam van de Node",
-      "nodename_name": "Naam van de Node",
       "ok": "OK",
       "other_options": "Andere opties",
       "password_a_details": "Gebruik dit wachtwoord om in te loggen op uw RaspiBlitz.",

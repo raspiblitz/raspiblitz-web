@@ -186,6 +186,13 @@
       "shutdown": "Desligar"
     },
     "setup": {
+      "input_node": {
+        "err_only_chars": "Nome do Node deve conter apenas caracteres e números.",
+        "err_max_length": "Nome do Node deve ter no máximo 32 caracteres.",
+        "err_min_length": "Nome do node deve ter ao menos 4 caracteres.",
+        "err_empty": "Nome do Node não pode ficar vazio.",
+        "nodename_name": "Nome do Node"
+      },
       "blockchain_delete": "Deletar Blockchain",
       "blockchain_found_long": "No seu HDD/SSD foram encontrados dados de blockchain existentes.",
       "blockchain_found_short": "Blockchain encontrado em HDD/SSD",
@@ -217,12 +224,6 @@
       "migrate_umbrel": "Deseja migrar do UMBREL para o RaspiBlitz?",
       "migrateblitz": "Migrar para RaspiBlitz",
       "no_and_shutdown": "Não e Desligar",
-      "nodename_err_chars": "Nome do Node deve conter apenas caracteres e números.",
-      "nodename_err_max_length": "Nome do Node deve ter no máximo 32 caracteres.",
-      "nodename_err_min_length": "Nome do node deve ter ao menos 4 caracteres.",
-      "nodename_error_empty": "Nome do Node não pode ficar vazio.",
-      "nodename_input": "Nome do Node de entrada",
-      "nodename_name": "Nome do Node",
       "ok": "ok",
       "other_options": "Outras opções",
       "password_a_details": "Use esta senha para fazer login no seu RaspiBlitz.",
