@@ -4,7 +4,8 @@
   "description": "A Mock backend for raspiblitz-web",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "npm run start"
   },
   "author": {
     "name": "Christoph Stenglein",

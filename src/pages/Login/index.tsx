@@ -1,21 +1,18 @@
 import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
-import I18nDropdown from "@/components/I18nDropdown";
+import I18nSelect from "@/components/I18nDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import Message from "@/components/Message";
 import { AppContext } from "@/context/app-context";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import {
-  ArrowLeftEndOnRectangleIcon,
-  MoonIcon,
-} from "@heroicons/react/24/outline";
+import { MoonIcon } from "@heroicons/react/24/outline";
+import { Button } from "@nextui-org/button";
 import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from "@nextui-org/button";
 const Login: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
@@ -85,7 +82,7 @@ const Login: FC = () => {
           >
             {t("settings.language")}
           </label>
-          <I18nDropdown />
+          <I18nSelect />
         </article>
       </div>
       {!darkMode && <RaspiBlitzLogo className="my-2 block h-10" />}
