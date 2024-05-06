@@ -64,7 +64,9 @@ export default function CustomRadio({
 
         <div>
           <p className="text-xl font-semibold">{text}</p>
-          {!!description && <p className="text-sm">{description}</p>}
+          {!!description && (
+            <p className="mt-2 text-sm text-secondary">{description}</p>
+          )}
         </div>
       </div>
     </Radio>

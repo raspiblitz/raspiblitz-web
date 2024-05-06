@@ -7,6 +7,7 @@ import { AppContext } from "@/context/app-context";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
 import { Button, RadioGroup } from "@nextui-org/react";
+import BitcoinLogo from "@/assets/bitcoin-logo.svg";
 
 import CustomRadio from "./CustomRadio";
 
@@ -18,7 +19,7 @@ export type SelectFn = (value: string) => void;
 const images = {
   [SetupLightning.CLIGHTNING]: { dark: CLLogoDark, light: CLLogoLight },
   [SetupLightning.LND]: { dark: LNDLogo, light: LNDLogo },
-  [SetupLightning.NONE]: { dark: "", light: "" },
+  [SetupLightning.NONE]: { dark: BitcoinLogo, light: BitcoinLogo },
   [SetupLightning.NULL]: { dark: "", light: "" },
 };
 
