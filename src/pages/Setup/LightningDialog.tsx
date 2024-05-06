@@ -43,9 +43,11 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
         <h1 className="m-2 text-center text-3xl font-bold">
           {t("setup.select_lightning")}
         </h1>
+        {/* 
+        TODO: https://github.com/raspiblitz/raspiblitz-web/issues/702
         <p className="m-2 text-center text-secondary">
-          What the differcne?! TODO
-        </p>
+          What the difference? Watch this <a href="https://youtube.com/XXXXXX">short video</a> to learn more.
+        </p> */}
         <form
           className="flex h-full flex-col flex-wrap items-center justify-center"
           onSubmit={submitHandler}
