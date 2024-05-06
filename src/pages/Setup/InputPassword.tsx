@@ -70,16 +70,15 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
       )}
       <SetupContainer>
         <section className="flex h-full flex-col items-center justify-center p-8">
-          <h2 className="text-center text-lg font-bold">
+          <h1 className="m-2 text-center text-3xl font-semibold">
             {t(`setup.password_${passwordType}_short`)}
-          </h2>
-
-          <p className="text-center text-sm italic">
+          </h1>
+          <p className="m-2 text-center text-secondary">
             {t(`setup.password_${passwordType}_details`)}
           </p>
 
           <form onSubmit={handleSubmit(continueHandler)} className="w-full">
-            <fieldset className="w-full">
+            <fieldset className="flex w-full flex-col gap-4">
               <Input
                 className="w-full"
                 type="password"

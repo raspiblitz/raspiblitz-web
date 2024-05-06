@@ -45,9 +45,10 @@ export default function InputNodeName({ callback }: Props) {
       )}
       <SetupContainer>
         <section className="flex h-full flex-col items-center justify-center p-8">
-          <h1 className="m-2 text-center text-3xl font-bold">
+          <h1 className="m-2 text-center text-3xl font-semibold">
             {t("setup.input_node.header")}
           </h1>
+
           <form onSubmit={handleSubmit(continueHandler)} className="w-full">
             <fieldset className="w-full">
               <Input
