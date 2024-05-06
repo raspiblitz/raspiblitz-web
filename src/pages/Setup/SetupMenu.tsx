@@ -25,7 +25,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    callback(selected as SetupPhase);
+    callback(selected);
   };
 
   return (
