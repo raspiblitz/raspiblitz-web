@@ -414,7 +414,7 @@ export default function Setup() {
     if (action === "shutdown") {
       // start setup shutdown (if user wants to cancel whole setup)
       await instance.post("/system/shutdown").catch(() => {
-        console.log(
+        console.error(
           "shutdown request failed - but that can also happen when shutdown happened",
         );
       });

@@ -1,9 +1,9 @@
-import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Button, Input } from "@nextui-org/react";
+
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ConfirmModal from "@/components/ConfirmModal";
-import InputField from "@/components/InputField";
 import SetupContainer from "@/layouts/SetupContainer";
 
 export type Props = {
@@ -73,15 +73,19 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
           <h2 className="text-center text-lg font-bold">
             {t(`setup.password_${passwordType}_short`)}
           </h2>
-          <span className="text-center text-sm italic">
+
+          <p className="text-center text-sm italic">
             {t(`setup.password_${passwordType}_details`)}
-          </span>
-          <form
-            onSubmit={handleSubmit(continueHandler)}
-            className="flex h-full w-full flex-col py-1 md:w-10/12"
-          >
-            <article className="m-auto md:w-1/2">
-              <InputField
+          </p>
+
+          <form onSubmit={handleSubmit(continueHandler)} className="w-full">
+            <fieldset className="w-full">
+              <Input
+                className="w-full"
+                type="password"
+                label={t(`setup.password_${passwordType}_name`)}
+                isInvalid={!!errors.passfirst}
+                errorMessage={errors.passfirst?.message}
                 {...register("passfirst", {
                   required: t("setup.password_error_empty"),
                   onChange: changePasswordHandler,
@@ -94,42 +98,39 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                     message: t("setup.password_error_length"),
                   },
                 })}
-                type="password"
-                label={t(`setup.password_${passwordType}_name`)}
-                errorMessage={errors.passfirst}
               />
-              <InputField
+
+              <Input
+                className="w-full"
+                type="password"
+                label={`${t("setup.password_repeat")} ${t(`setup.password_${passwordType}_name`)}`}
+                isInvalid={!!errors.passrepeat}
+                errorMessage={errors.passrepeat?.message}
                 {...register("passrepeat", {
                   required: t("setup.password_error_empty"),
                   onChange: changePasswordRepeatHandler,
                   validate: validatePassRepeat,
                 })}
-                type="password"
-                label={
-                  t("setup.password_repeat") +
-                  " " +
-                  t(`setup.password_${passwordType}_name`)
-                }
-                errorMessage={errors.passrepeat}
               />
-            </article>
-            <article className="mt-10 flex flex-col items-center justify-center gap-10 md:flex-row">
-              <button
-                onClick={handleCancel}
-                type="button"
-                className="flex items-center justify-center rounded  bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
-              >
-                <XMarkIcon className="inline h-6 w-6" />
-                <span className="p-2">{t("setup.cancel")}</span>
-              </button>
-              <button
-                disabled={!isValid}
+            </fieldset>
+
+            <article className="flex flex-col items-center justify-center gap-10">
+              <Button
                 type="submit"
-                className="bd-button flex items-center justify-center px-2 disabled:bg-gray-400"
+                isDisabled={!isValid}
+                color="primary"
+                className="mt-8 rounded-full px-8 py-6 font-semibold"
               >
-                <span className="p-2">{t("setup.ok")}</span>
-                <ArrowSmallRightIcon className="inline h-6 w-6" />
-              </button>
+                {t("setup.continue")}
+              </Button>
+              <Button
+                type="button"
+                color="danger"
+                variant="light"
+                onClick={handleCancel}
+              >
+                {t("setup.cancel")}
+              </Button>
             </article>
           </form>
         </section>
