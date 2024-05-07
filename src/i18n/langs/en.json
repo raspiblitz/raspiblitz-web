@@ -248,7 +248,7 @@
       "blockchain_keep": "Keep Blockchain",
       "cancel": "Cancel",
       "cancel_setup": "Do you really want to cancel the setup process",
-      "cl": "Bitcoin Full Node with Core Lightning Implementation",
+      "cl": "Bitcoin Full Node with Core Lightning",
       "cl_description": "Core Lightning (formerly known as c-lightning) is a Lightning Network implementation by Blockstream focused on performance and extendibility for developers and advanced users.",
       "continue": "Continue",
       "convertwarning": "RaspiBlitz can only convert your Blockchain and Lightning data (funds + channels) at the moment. Data from additional installed apps might get deleted in the migraton process.",
