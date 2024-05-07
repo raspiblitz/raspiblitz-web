@@ -300,7 +300,7 @@
       "runningsetup": "Running Setup",
       "none": "Bitcoin Full Node Without Lightning",
       "none_description": "Running a Bitcoin full node without any Lightning Network implementation involves participating directly in the Bitcoin network by validating transactions and blocks.",
-      "select_lightning": "Which lightning implementaion would you liek to install",
+      "select_lightning": "Which lightning implementaion would you like to install",
       "select_lightning_help": "What the difference? <0>Learn more</0> about each implementation.",
       "setupblitz": "Setup a fresh RaspiBlitz",
       "setupoptions": "Setup Options",
