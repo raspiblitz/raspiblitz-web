@@ -42,12 +42,19 @@ export default function CustomRadio({
         {!!image && (
           <div
             className={cn(
-              "items-center",
+              "flex items-center",
               "h-16 w-16 shrink-0",
               imageBaseClasses,
             )}
           >
-            <Image width={64} height={64} alt={`${text} image`} src={image} />
+            <Image
+              width={46}
+              height={46}
+              alt={`${text} image`}
+              src={image}
+              radius="none"
+              className="max-w-10 max-h-auto"
+            />
           </div>
         )}
 
@@ -65,7 +72,9 @@ export default function CustomRadio({
         <div>
           <p className="text-xl font-semibold">{text}</p>
           {!!description && (
-            <p className="mt-2 text-sm text-secondary">{description}</p>
+            <p className="mt-2 text-sm leading-6 text-secondary">
+              {description}
+            </p>
           )}
         </div>
       </div>

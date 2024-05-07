@@ -1,13 +1,14 @@
 import { FC, FormEvent, useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
-import CLLogoDark from "@/assets/core-lightning-dark.png";
-import CLLogoLight from "@/assets/core-lightning-light.png";
+
+import CLLogoDark from "@/assets/core_lightning_logo_only.png";
+import CLLogoLight from "@/assets/core_lightning_logo_only.png";
 import LNDLogo from "@/assets/lnd.png";
 import { AppContext } from "@/context/app-context";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
 import { Button, RadioGroup } from "@nextui-org/react";
 import BitcoinLogo from "@/assets/bitcoin-logo.svg";
+import { Trans, useTranslation } from "react-i18next";
 
 import CustomRadio from "./CustomRadio";
 
@@ -43,11 +44,23 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
         <h1 className="m-2 text-center text-3xl font-bold">
           {t("setup.select_lightning")}
         </h1>
-        {/* 
-        TODO: https://github.com/raspiblitz/raspiblitz-web/issues/702
+
         <p className="m-2 text-center text-secondary">
-          What the difference? Watch this <a href="https://youtube.com/XXXXXX">short video</a> to learn more.
-        </p> */}
+          <Trans
+            i18nKey={"setup.select_lightning_help"}
+            t={t}
+            components={[
+              // eslint-disable-next-line jsx-a11y/anchor-has-content
+              <a
+                href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
+                className="text-primary underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              ></a>,
+            ]}
+          />
+        </p>
+
         <form
           className="flex h-full flex-col flex-wrap items-center justify-center"
           onSubmit={submitHandler}
