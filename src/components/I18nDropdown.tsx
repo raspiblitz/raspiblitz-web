@@ -21,6 +21,7 @@ const I18nSelect: FC = () => {
   return (
     <Select
       id="lngSelect"
+      aria-label="Select language"
       defaultSelectedKeys={[i18n.language]}
       onChange={selectLangHandler}
     >
