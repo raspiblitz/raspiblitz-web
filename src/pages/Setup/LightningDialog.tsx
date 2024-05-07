@@ -1,9 +1,7 @@
-import { FC, FormEvent, useContext, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 
-import CLLogoDark from "@/assets/core_lightning_logo_only.png";
-import CLLogoLight from "@/assets/core_lightning_logo_only.png";
+import CLLogo from "@/assets/core_lightning_logo_only.png";
 import LNDLogo from "@/assets/lnd.png";
-import { AppContext } from "@/context/app-context";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
 import { Button, RadioGroup } from "@nextui-org/react";
@@ -18,14 +16,13 @@ export interface InputData {
 export type SelectFn = (value: string) => void;
 
 const images = {
-  [SetupLightning.CLIGHTNING]: { dark: CLLogoDark, light: CLLogoLight },
-  [SetupLightning.LND]: { dark: LNDLogo, light: LNDLogo },
-  [SetupLightning.NONE]: { dark: BitcoinLogo, light: BitcoinLogo },
-  [SetupLightning.NULL]: { dark: "", light: "" },
+  [SetupLightning.CLIGHTNING]: CLLogo,
+  [SetupLightning.LND]: LNDLogo,
+  [SetupLightning.NONE]: BitcoinLogo,
+  [SetupLightning.NULL]: "",
 };
 
 const LightningDialog: FC<InputData> = ({ callback }) => {
-  const { darkMode } = useContext(AppContext);
   const { t } = useTranslation();
   const [selected, setSelected] = useState<SetupLightning | undefined>(
     undefined,
@@ -83,7 +80,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
                   value={lightning}
                   text={t(`setup.${lightning}`)}
                   description={t(`setup.${lightning}_description`)}
-                  image={images[lightning][darkMode ? "dark" : "light"]}
+                  image={images[lightning]}
                 ></CustomRadio>
               ))}
             </RadioGroup>
