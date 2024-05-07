@@ -2,9 +2,10 @@ import { Button, Input } from "@nextui-org/react";
 
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
+import { Trans, useTranslation } from "react-i18next";
 
 export type Props = {
   passwordType: "a" | "b" | "c";
@@ -71,10 +72,22 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
       <SetupContainer>
         <section className="flex h-full flex-col items-center justify-center p-8">
           <h1 className="m-2 text-center text-3xl font-semibold">
-            {t(`setup.password_${passwordType}_short`)}
+            <Trans
+              i18nKey={`setup.password_${passwordType}_short`}
+              t={t}
+              components={[
+                <strong className="font-semibold text-primary"></strong>, // if needed, create a component for this
+              ]}
+            />
           </h1>
           <p className="m-2 text-center text-secondary">
-            {t(`setup.password_${passwordType}_details`)}
+            <Trans
+              i18nKey={`setup.password_${passwordType}_details`}
+              t={t}
+              components={[
+                <strong className="font-semibold text-primary"></strong>, // if needed, create a component for this
+              ]}
+            />
           </p>
 
           <form onSubmit={handleSubmit(continueHandler)} className="w-full">
@@ -124,7 +137,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
               </Button>
               <Button
                 type="button"
-                color="danger"
+                color="secondary"
                 variant="light"
                 onClick={handleCancel}
               >
