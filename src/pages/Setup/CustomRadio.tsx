@@ -12,7 +12,7 @@ type Props = {
   description?: string;
 };
 
-const imageBaseClasses = "my-1 mr-3 flex rounded-lg bg-white bg-opacity-5 p-2";
+const imageBaseClasses = "mr-3 flex rounded-lg bg-white bg-opacity-5 p-2";
 
 export default function CustomRadio({
   id,
@@ -36,6 +36,7 @@ export default function CustomRadio({
           "flex-row-reverse max-w-[800px] cursor-pointer rounded-lg gap-4 border-2 border-white/5 pr-4",
           "data-[selected=true]:border-primary",
         ),
+        labelWrapper: "m-0",
       }}
     >
       <div className={cn("flex flex-row pr-2", !description && "items-center")}>
