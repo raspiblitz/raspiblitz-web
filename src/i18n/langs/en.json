@@ -268,7 +268,7 @@
       "final_setup": "Setup is finished.",
       "final_update": "Update is finished.",
       "lightningoutdated": "The node you want to migrate from uses a newer Lightning version than this RaspiBlitz. Please wait for an updated release. You can shutdown and startup with your old node sd card - no changes were made.",
-      "lnd": "Bitcoin Full Node with Lightning LND Implementation",
+      "lnd": "Bitcoin Full Node with LND",
       "lnd_description": "Adding the Lightning Network Daemon (LND), developed by Lightning Labs, to a Bitcoin full node introduces capabilities for faster and cheaper transactions. LND is one of the most popular and user-friendly implementations of the Lightning Network.",
       "migrate_citadel": "Do you want to migrate from CITADEL to RaspiBlitz?",
       "migrate_mynode": "Do you want to migrate from MYNODE to RaspiBlitz?",
