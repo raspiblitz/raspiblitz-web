@@ -4,24 +4,24 @@ const router = express.Router();
 // setupPhase is "done" if setup is finished, otherwise step in the setup process
 router.get("/status", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
-  // res.status(200).send(
-  //   JSON.stringify({
-  //     setupPhase: "done",
-  //     state: "waitfinal",
-  //     message: "Node Running",
-  //     initialsync: "",
-  //   }),
-  // );
-
-  // basic setup
   res.status(200).send(
     JSON.stringify({
-      setupPhase: "",
-      state: "waitsetup",
+      setupPhase: "done",
+      state: "waitfinal",
       message: "Node Running",
       initialsync: "",
     }),
   );
+
+  // basic setup
+  // res.status(200).send(
+  //   JSON.stringify({
+  //     setupPhase: "",
+  //     state: "waitsetup",
+  //     message: "Node Running",
+  //     initialsync: "",
+  //   }),
+  // );
 
   // Setupscreen
   // res.status(200).send(
@@ -49,7 +49,7 @@ router.get("/setup-start-info", function (req, res) {
   res.status(200).send(
     JSON.stringify({
       // send something else than "done" to route to setup
-      setupPhase: "setup",
+      setupPhase: "recovery",
       hddGotBlockchain: "0",
       hddGotMigrationData: null,
       migrationMode: null,
