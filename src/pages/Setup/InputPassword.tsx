@@ -17,6 +17,12 @@ interface IFormInputs {
   passrepeat: string;
 }
 
+const passwordColors = {
+  a: "text-danger",
+  b: "text-primary",
+  c: "text-warning",
+};
+
 const InputPassword: FC<Props> = ({ passwordType, callback }) => {
   const { t } = useTranslation();
 
@@ -76,7 +82,9 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
               i18nKey={`setup.password_${passwordType}_short`}
               t={t}
               components={[
-                <strong className="font-semibold text-primary"></strong>, // if needed, create a component for this
+                <strong
+                  className={`font-semibold ${passwordColors[passwordType]}`}
+                ></strong>, // if needed, create a component for this
               ]}
             />
           </h1>
@@ -85,7 +93,9 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
               i18nKey={`setup.password_${passwordType}_details`}
               t={t}
               components={[
-                <strong className="font-semibold text-primary"></strong>, // if needed, create a component for this
+                <strong
+                  className={`font-semibold ${passwordColors[passwordType]}`}
+                ></strong>, // if needed, create a component for this
               ]}
             />
           </p>
