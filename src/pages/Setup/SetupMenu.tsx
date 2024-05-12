@@ -31,12 +31,13 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
   return (
     <SetupContainer>
       <section className="flex flex-col items-center justify-center">
-        <h1 className="m-2 text-center text-3xl font-bold">
+        <h1 className="m-2 text-center text-3xl font-semibold">
           {t("setup.setupmenu.lets_setup")}
         </h1>
         <p className="m-2 text-center text-secondary">
           {t("setup.setupmenu.setup_time")}
         </p>
+
         <form
           className="flex h-full flex-col flex-wrap items-center justify-center"
           onSubmit={submitHandler}
