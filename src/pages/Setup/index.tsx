@@ -128,7 +128,7 @@ export default function Setup() {
       }
     });
     if (resp) {
-      console.log(resp);
+      console.info(resp);
       setSeedwords(resp.data.seedwordsNEW);
       setPage(Screen.FINAL);
     }
@@ -146,6 +146,7 @@ export default function Setup() {
         initSetupStart();
         return;
       }
+
       if (resp.data.state === SetupStatus.WAITFINAL) {
         initSetupFinal();
         return;
