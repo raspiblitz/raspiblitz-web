@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupStatus } from "@/models/setup.model";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { Spinner } from "@nextui-org/react";
 
 export type Props = {
   status: SetupStatus;
@@ -18,17 +18,17 @@ const WaitScreen: FC<Props> = ({ status, message }) => {
   let details = "";
   switch (status) {
     case SetupStatus.WAIT:
-      headline = `... ${t("setup.pleasewait")} ...`;
+      headline = `${t("setup.pleasewait")}...`;
       break;
     case SetupStatus.SHUTDOWN:
-      headline = `... ${t("setup.shuttingdown")} ...`;
+      headline = `${t("setup.shuttingdown")}...`;
       break;
     case SetupStatus.REBOOT:
-      headline = `... ${t("setup.restarting")} ...`;
+      headline = `${t("setup.restarting")}...`;
       details = `(${t("setup.restartinfo")})`;
       break;
     case SetupStatus.WAITPROVISION:
-      headline = `... ${t("setup.preparingsetup")} ...`;
+      headline = `${t("setup.preparingsetup")}...`;
       details = `(${t("setup.setupwait")})`;
       break;
     case SetupStatus.PROVISION:
@@ -43,9 +43,9 @@ const WaitScreen: FC<Props> = ({ status, message }) => {
   return (
     <SetupContainer>
       <section className="flex flex-col items-center justify-center">
-        <h2 className="my-2 font-bold">{headline}</h2>
-        <p className="my-2 text-sm italic">{details}</p>
-        <LoadingSpinner />
+        <Spinner size="lg" />
+        <h2 className="mb-2 mt-8 text-3xl font-bold">{headline}</h2>
+        <p className="my-2 text-sm">{details}</p>
       </section>
     </SetupContainer>
   );
