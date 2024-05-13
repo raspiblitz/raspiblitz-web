@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
+import { Alert } from "@/components/Alert";
+import { Button } from "@nextui-org/react";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;
@@ -30,16 +32,17 @@ const MigrationDialog: FC<InputData> = ({
   if (migrationMode === SetupMigrationMode.OUTDATED) {
     return (
       <SetupContainer>
-        <section className="mx-auto flex w-full flex-col items-center justify-center md:w-3/4">
-          <span className="my-5 text-center">
-            {t("setup.lightningoutdated")}
-          </span>
-          <button
+        <section className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-y-8">
+          <Alert as="h4">{t("setup.lightningoutdated")}</Alert>
+
+          <Button
+            type="button"
             onClick={() => callback(false)}
-            className="rounded bg-red-500 p-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+            color="primary"
+            className="rounded-full px-8 py-6 font-semibold"
           >
             {t("settings.shutdown")}
-          </button>
+          </Button>
         </section>
       </SetupContainer>
     );
@@ -54,28 +57,34 @@ const MigrationDialog: FC<InputData> = ({
           onConfirm={() => callback(false)}
         />
       )}
+
       <SetupContainer>
-        <section className="flex h-full flex-col items-center justify-center p-8">
-          <h2 className="m-2 text-center text-lg font-bold">
-            {t(`setup.migrate_${migrationOS}`)}
+        <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
+          <h2 className="text-center text-2xl font-semibold">
+            {t(`setup.migrate_to_os`, {
+              os: `${migrationOS[0].toUpperCase()}${migrationOS.slice(1)}`,
+            })}
           </h2>
-          <div className="text-center text-sm">{t("setup.convertwarning")}</div>
-          <article className="mt-10 flex flex-col items-center justify-center gap-10 md:flex-row">
-            <button
+
+          <p className="text-center text-base">{t("setup.convertwarning")}</p>
+
+          <article className="flex flex-col items-center justify-center gap-10">
+            <Button
+              type="button"
               onClick={handleCancel}
-              className="rounded  bg-red-500 p-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
+              color="primary"
+              className="rounded-full px-8 py-6 font-semibold"
             >
-              <XCircleIcon className="inline h-7 w-7 align-top" />
-              <span className="p-2">{t("setup.no_and_shutdown")}</span>
-            </button>
-            &nbsp;
-            <button
+              {t("setup.no_and_shutdown")}
+            </Button>
+            <Button
+              type="button"
+              color="secondary"
+              variant="light"
               onClick={() => callback(true)}
-              className="bd-button rounded p-2"
             >
-              <CloudArrowDownIcon className="inline h-6 w-6" />
-              <span className="p-2">{t("setup.yes_and_migrate")}</span>
-            </button>
+              {t("setup.yes_and_migrate")}
+            </Button>
           </article>
         </section>
       </SetupContainer>
