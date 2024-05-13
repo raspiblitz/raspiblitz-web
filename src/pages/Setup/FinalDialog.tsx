@@ -1,8 +1,10 @@
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { Button, Checkbox } from "@nextui-org/react";
+import { useForm, Controller } from "react-hook-form";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -10,63 +12,72 @@ export type Props = {
   callback: () => void;
 };
 
+interface IFormInputs {
+  confirm: boolean;
+}
+
 const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   const { t } = useTranslation();
   const words = seedWords.split(", ");
-  const partOne = words.slice(0, 8);
-  const partTwo = words.slice(8, 16);
-  const partThree = words.slice(16, 24);
+
+  const {
+    handleSubmit,
+    control,
+    formState: { isValid },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
 
   return (
     <SetupContainer>
-      <section className="flex h-full flex-col items-center justify-center md:p-8">
-        <h2 className="text-center text-lg font-bold">
-          {t(`setup.final_${setupPhase || "setup"}`)}
-        </h2>
-        {seedWords && (
-          <article className="my-auto flex flex-col items-center justify-center">
-            <h4 className="my-2 font-bold">{t("setup.final_seedwords")}</h4>
-            <div className="flex flex-row gap-4 md:gap-10">
-              <div className="flex flex-col">
-                {partOne.map((word, i) => {
-                  return (
-                    <div key={i} className="input-underline py-2">
-                      {i + 1} {word}
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="flex flex-col">
-                {partTwo.map((word, i) => {
-                  return (
-                    <div key={i} className="input-underline py-2">
-                      {i + 9} {word}
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="flex flex-col">
-                {partThree.map((word, i) => {
-                  return (
-                    <div key={i} className="input-underline py-2">
-                      {i + 17} {word}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </article>
-        )}
-        <article className="justify-cente mt-4 flex flex-col items-center">
-          <div className="my-4 text-center text-sm">
-            {t("setup.final_info_reboot")}
+      <form onSubmit={handleSubmit(callback)}>
+        <section className="flex h-full flex-col items-center justify-center gap-y-10 lg:p-8">
+          <div className="text-center">
+            <CheckCircleIcon className="inline-block h-24 w-auto stroke-1 text-success" />
+            <h1 className="text-center text-3xl font-bold">
+              {t(`setup.final_${setupPhase || "setup"}`)}
+            </h1>
           </div>
-          <button onClick={() => callback()} className="bd-button p-2">
-            <ArrowPathIcon className="mr-1 inline h-6 w-6 align-top" />
-            {t("setup.final_do_reboot")}
-          </button>
-        </article>
-      </section>
+
+          <h4 className="rounded-xl border border-warning bg-yellow-900 p-4 text-center font-semibold text-warning lg:w-2/5">
+            {t("setup.final_seedwords")}
+          </h4>
+
+          {seedWords && (
+            <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-default pl-20 pt-3 font-bold lowercase lg:w-2/5">
+              {words.map((word, i) => {
+                return (
+                  <li key={i} className="my-3 pl-2">
+                    {word}
+                  </li>
+                );
+              })}
+            </ol>
+          )}
+
+          <Controller
+            control={control}
+            name="confirm"
+            rules={{ required: true }}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox onChange={onChange} isSelected={value}>
+                {t("setup.final_info_reboot")}
+              </Checkbox>
+            )}
+          />
+
+          <article className="justify-cente flex flex-col items-center">
+            <Button
+              type="submit"
+              isDisabled={!isValid}
+              color="primary"
+              className="rounded-full px-8 py-6 font-semibold"
+            >
+              {t("setup.final_do_reboot")}
+            </Button>
+          </article>
+        </section>
+      </form>
     </SetupContainer>
   );
 };
