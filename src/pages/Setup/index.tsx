@@ -158,7 +158,7 @@ export default function Setup() {
           showSyncScreen();
         } else {
           // ok ready & inital sync done -> go to dashboard
-          console.log("READY --> DASHBOARD");
+          console.info("READY --> DASHBOARD");
           navigate("/");
           return;
         }
