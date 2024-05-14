@@ -5,6 +5,7 @@ import { SetupPhase } from "@/models/setup.model";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Button, Checkbox } from "@nextui-org/react";
 import { useForm, Controller } from "react-hook-form";
+import { Alert } from "@/components/Alert";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -31,7 +32,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   return (
     <SetupContainer>
       <form onSubmit={handleSubmit(callback)}>
-        <section className="flex h-full flex-col items-center justify-center gap-y-10 lg:p-8">
+        <section className="flex h-full flex-col items-center justify-center gap-y-10 lg:w-2/5 lg:p-8">
           <div className="text-center">
             <CheckCircleIcon className="inline-block h-24 w-auto stroke-1 text-success" />
             <h1 className="text-center text-3xl font-bold">
@@ -39,12 +40,10 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             </h1>
           </div>
 
-          <h4 className="rounded-xl border border-warning bg-yellow-900 p-4 text-center font-semibold text-warning lg:w-2/5">
-            {t("setup.final_seedwords")}
-          </h4>
+          <Alert as="h4">{t("setup.final_seedwords")}</Alert>
 
           {seedWords && (
-            <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-default pl-20 pt-3 font-bold lowercase lg:w-2/5">
+            <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-default pl-20 pt-3 font-bold lowercase">
               {words.map((word, i) => {
                 return (
                   <li key={i} className="my-3 pl-2">
