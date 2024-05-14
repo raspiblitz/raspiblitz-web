@@ -15,22 +15,19 @@ module.exports = {
         "bd-yellow-dark": "#F7CB47",
       },
     },
-    maxWidth: {
-      "4/5": "80%",
-    },
   },
-  plugins: [nextui(
-    {
+  plugins: [
+    nextui({
       addCommonColors: true,
       themes: {
         light: {},
         dark: {
           colors: {
             primary: "#4785FF",
-            secondary: "#BBC6DC"
-          }
+            secondary: "#BBC6DC",
+          },
         },
       },
-    }
-  )],
+    }),
+  ],
 };
