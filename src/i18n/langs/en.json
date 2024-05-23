@@ -294,7 +294,7 @@
       "setupoptions": "Setup Options",
       "setupwait": "setup will take some minutes",
       "shuttingdown": "shutting down",
-      "start_recovery": "Would you like start the recovery process?",
+      "start_recovery": "Would you like to start the recovery process?",
       "start_update": "Would you like to start the update and recovery process?",
       "started": "Started",
       "sync_bitcoin_starting": "Starting sync",
