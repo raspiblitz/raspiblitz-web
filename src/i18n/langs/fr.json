@@ -149,18 +149,18 @@
       "connect_node": "Partagez cette adresse avec d'autres personnes afin qu'elles puissent se connecter à votre nœud lightning"
     },
     "language": {
-      "cs": "tchèque",
+      "cs": "Tchèque",
       "de": "Allemand",
       "en": "Anglais",
       "es": "Espagnol",
-      "fr": "français",
-      "hu": "hongrois",
+      "fr": "Français",
+      "hu": "Hongrois",
       "it": "Italien",
       "nb_NO": "Norvégien",
       "nl": "Néerlandais",
       "pt_BR": "Portugais (brésilien)",
-      "sv": "suédois",
-      "vi": "vietnamien"
+      "sv": "Suédois",
+      "vi": "Vietnamien"
     },
     "login": {
       "enter_pass": "Entrez le mot de passe A",
