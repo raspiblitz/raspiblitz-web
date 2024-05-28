@@ -1,20 +1,31 @@
 import {
   CheckCircleIcon,
+  LockClosedIcon,
   LockOpenIcon,
   XCircleIcon,
+  PowerIcon,
 } from "@heroicons/react/24/outline";
 import { HttpStatusCode } from "axios";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "@/components/InputField";
-import Message from "@/components/Message";
+import { Alert } from "@/components/Alert";
 import SetupContainer from "@/layouts/SetupContainer";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import ProgressCircle from "./ProgressCircle";
+
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Input,
+  Progress,
+} from "@nextui-org/react";
 
 export interface InputData {
   data: SyncData | any;
@@ -41,6 +52,7 @@ interface IFormInputs {
 const SyncScreen: FC<InputData> = ({ data, callback }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [password, setPassword] = useState("");
   const [runningUnlock, setRunningUnlock] = useState(false);
@@ -80,7 +92,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -90,86 +102,141 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
   const lnWalletLocked = lnEnabled && data.ln_default_locked === "1";
   const lnWalletUnlocked = lnEnabled && data.ln_default_locked === "0";
 
+  const btcDefaultReady = data.btc_default_ready === "1";
+  const btcDefaultSyncPercentage = +data.btc_default_sync_percentage;
+
   return (
-    <SetupContainer>
-      <section className="flex h-full flex-col items-center justify-center md:p-8">
-        <h2 className="text-center text-lg font-bold">
-          {t("setup.sync_headline")}
-        </h2>
-        <div className="flex h-full w-full flex-col py-1 md:w-10/12">
-          <article className="my-auto flex flex-col items-center justify-between md:flex-row">
-            <div className="my-8 flex w-full justify-center md:my-0 md:w-1/2">
-              <ProgressCircle
-                progress={+data.btc_default_sync_percentage}
-                starting={data.btc_default_ready !== "1"}
-              />
-            </div>
-            <div className="flex w-full flex-col justify-center md:w-1/2">
-              {lnWalletUnlocked && (
-                <article>
-                  <h6 className="text-sm text-gray-500 dark:text-gray-300">
-                    {t("home.lightning")}
-                  </h6>
-                  <div className="flex justify-around">
-                    <p className="flex gap-2">
-                      {t("setup.started")}:
-                      {data.ln_default_ready === "1" ? (
-                        <CheckCircleIcon className="inline h-6 w-6" />
-                      ) : (
-                        <XCircleIcon className="inline h-6 w-6" />
-                      )}
-                    </p>
-                    <p className="flex">
-                      {t("setup.restarts")}: {data.system_count_start_lightning}
-                    </p>
-                  </div>
-                </article>
-              )}
-              {lnWalletLocked && (
-                <form
-                  className="flex flex-col justify-center"
-                  onSubmit={handleSubmit(unlockWallet)}
-                >
-                  <InputField
-                    {...register("passwordInput", {
-                      required: t("setup.password_error_empty"),
-                      onChange: changePasswordHandler,
-                    })}
-                    type="password"
-                    label={t("setup.sync_wallet_info")}
-                    disabled={runningUnlock}
-                    errorMessage={errors.passwordInput}
-                    value={password}
-                  />
-                  <ButtonWithSpinner
+    <>
+      {lnWalletLocked && (
+        <Modal
+          isOpen={isOpen}
+          isDismissable={false}
+          onOpenChange={onOpenChange}
+        >
+          <form
+            className="flex flex-col justify-center"
+            onSubmit={handleSubmit(unlockWallet)}
+          >
+            <ModalContent>
+              <>
+                <ModalHeader className="flex flex-col gap-1">
+                  {t("wallet.unlock_subtitle")}
+                </ModalHeader>
+                <ModalBody>
+                  <>
+                    <Input
+                      {...register("passwordInput", {
+                        required: t("setup.password_error_empty"),
+                        onChange: changePasswordHandler,
+                      })}
+                      type="password"
+                      label={t("setup.sync_wallet_info")}
+                      disabled={runningUnlock}
+                      isInvalid={!!errors.passwordInput}
+                      errorMessage={errors.passwordInput?.message}
+                      value={password}
+                    />
+
+                    {error && <Alert color="danger">{error}</Alert>}
+                  </>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
                     type="submit"
-                    onClick={unlockWallet}
-                    loading={runningUnlock}
-                    disabled={!isValid}
-                    icon={<LockOpenIcon className="mx-1 inline h-6 w-6" />}
-                    className="bd-button my-5 p-2"
+                    color="primary"
+                    isLoading={runningUnlock}
+                    className="rounded-full px-8 py-6 font-semibold"
                   >
                     {t("setup.sync_wallet_unlock")}
-                  </ButtonWithSpinner>
-                </form>
-              )}
-              {lnWalletLocked && error && <Message message={error} />}
+                  </Button>
+                </ModalFooter>
+              </>
+            </ModalContent>
+          </form>
+        </Modal>
+      )}
+
+      <SetupContainer>
+        <section className="flex h-full w-96 max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
+          <h2 className="text-center text-2xl font-semibold">
+            {t("setup.sync_headline")}
+          </h2>
+
+          <div className="w-full">
+            <Progress
+              label={
+                btcDefaultReady
+                  ? `${t("setup.sync_bitcoin_sync")}: ${btcDefaultSyncPercentage}%`
+                  : `${t("setup.sync_bitcoin_starting")}...`
+              }
+              value={btcDefaultSyncPercentage}
+              isStriped
+            />
+
+            <div className="mt-6">
+              <Alert color="info" as="div">
+                {lnWalletUnlocked && (
+                  <>
+                    <p>
+                      <LockOpenIcon className="inline h-6 w-auto text-success" />{" "}
+                      {t("wallet.unlock_success")}
+                    </p>
+                    <div className="mt-2">
+                      {data.ln_default_ready === "1" ? (
+                        <>
+                          <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
+                          {t("home.lightning")} {t("setup.started")}
+                        </>
+                      ) : (
+                        <>
+                          <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
+                          {t("home.lightning")} {t("setup.not_started")}
+                        </>
+                      )}
+                      <p>
+                        ({t("setup.restarts")}:{" "}
+                        {data.system_count_start_lightning})
+                      </p>
+                    </div>
+                  </>
+                )}
+
+                {lnWalletLocked && (
+                  <>
+                    <p>
+                      <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
+                      {t("wallet.wallet_locked")}
+                    </p>
+                    <Button
+                      onPress={onOpen}
+                      color="primary"
+                      className="my-2 rounded-full px-3 py-2 font-semibold"
+                    >
+                      {t("wallet.unlock_title")}
+                    </Button>
+                    <p>{t("wallet.wallet_unlock_info")}</p>
+                  </>
+                )}
+              </Alert>
             </div>
-          </article>
-          <article className="mx-auto flex flex-col justify-center">
-            <button
+          </div>
+
+          <article className="flex flex-col items-center justify-center gap-10">
+            <Button
+              type="button"
               onClick={() => callback("shutdown", null)}
-              className="bd-button my-5 p-2"
+              color="primary"
+              className="rounded-full px-8 py-6 font-semibold"
+              title={t("setup.sync_restartinfo")}
+              variant="light"
+              startContent={<PowerIcon className="inline h-6 w-auto" />}
             >
               {t("settings.shutdown")}
-            </button>
-            <p className="text-center text-sm italic">
-              {t("setup.sync_restartinfo")}
-            </p>
+            </Button>
           </article>
-        </div>
-      </section>
-    </SetupContainer>
+        </section>
+      </SetupContainer>
+    </>
   );
 };
 

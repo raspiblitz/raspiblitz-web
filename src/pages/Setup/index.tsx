@@ -75,7 +75,7 @@ export default function Setup() {
         ) {
           navigate("/login?back=/setup");
         } else {
-          console.log(`request for sync failed: ${err.response.status}`);
+          console.error(`request for sync failed: ${err.response.status}`);
         }
       });
     if (resp) {
@@ -139,7 +139,7 @@ export default function Setup() {
     try {
       // get state of node from API
       const resp = await instance.get("/setup/status");
-      console.log(resp);
+      console.info(resp);
 
       // special cases for user interaction (exit loop)
       if (resp.data.state === SetupStatus.WAITSETUP) {
@@ -169,7 +169,7 @@ export default function Setup() {
         setPage(Screen.WAIT);
       }
     } catch {
-      console.log("status request failed - device is off or in reboot?");
+      console.error("status request failed - device is off or in reboot?");
     }
 
     // loop poll
@@ -180,7 +180,7 @@ export default function Setup() {
 
   // will be called when component ready
   useEffect(() => {
-    console.info("kick-off monitoring loop: " + new Date().toISOString());
+    console.info(`kick-off monitoring loop: ${new Date().toISOString()}`);
     setupMonitoringLoop();
   }, [setupMonitoringLoop]);
 
@@ -354,7 +354,7 @@ export default function Setup() {
     setPasswordA(password!);
 
     // based on setupPhase ... continue to a different next screen
-    console.log(setupPhase);
+    console.info(setupPhase);
     switch (setupPhase) {
       case SetupPhase.RECOVERY:
       case SetupPhase.UPDATE:
