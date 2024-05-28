@@ -3,6 +3,7 @@ import {
   LockClosedIcon,
   LockOpenIcon,
   XCircleIcon,
+  PowerIcon,
 } from "@heroicons/react/24/outline";
 import { HttpStatusCode } from "axios";
 import { ChangeEvent, FC, useState } from "react";
@@ -229,6 +230,8 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
               color="primary"
               className="rounded-full px-8 py-6 font-semibold"
               title={t("setup.sync_restartinfo")}
+              variant="light"
+              startContent={<PowerIcon className="inline h-6 w-auto" />}
             >
               {t("settings.shutdown")}
             </Button>
