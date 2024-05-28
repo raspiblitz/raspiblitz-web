@@ -11,6 +11,7 @@ const colors = {
   success: "text-success border-success bg-green-900",
   warning: "text-warning border-warning bg-red-900",
   danger: "text-danger border-danger bg-yellow-900",
+  info: "text-primary border-primary bg-blue-900",
 };
 
 type Colors = keyof typeof colors;

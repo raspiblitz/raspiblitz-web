@@ -171,38 +171,45 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
               isStriped
             />
 
-            {lnWalletUnlocked && (
-              <p className="mt-6">
-                {data.ln_default_ready === "1" ? (
+            <div className="mt-6">
+              <Alert color="info" as="div">
+                {lnWalletUnlocked && (
                   <>
-                    <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
-                    {t("home.lightning")} {t("setup.started")}
-                  </>
-                ) : (
-                  <>
-                    <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
-                    {t("home.lightning")} {t("setup.not_started")}
+                    {data.ln_default_ready === "1" ? (
+                      <>
+                        <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
+                        {t("home.lightning")} {t("setup.started")}
+                      </>
+                    ) : (
+                      <>
+                        <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
+                        {t("home.lightning")} {t("setup.not_started")}
+                      </>
+                    )}
+                    , {t("setup.restarts")}: {data.system_count_start_lightning}
                   </>
                 )}
-                , {t("setup.restarts")}: {data.system_count_start_lightning}
-              </p>
-            )}
 
-            {lnWalletLocked && (
-              <p className="mt-6">
-                <LockClosedIcon className="inline h-4 w-auto text-danger" />{" "}
-                Wallet is locked{" "}
-                <Button
-                  onPress={onOpen}
-                  color="primary"
-                  variant="bordered"
-                  size="sm"
-                  className="rounded-full px-3 py-2 font-semibold"
-                >
-                  Unlock now
-                </Button>
-              </p>
-            )}
+                {lnWalletLocked && (
+                  <>
+                    <p>
+                      <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
+                      Lightning Wallet is locked
+                    </p>
+                    <Button
+                      onPress={onOpen}
+                      color="primary"
+                      variant="bordered"
+                      size="sm"
+                      className="my-2 rounded-full px-3 py-2 font-semibold"
+                    >
+                      Unlock now
+                    </Button>
+                    <p>Unlocking is optional. Unlocking does/helps with...</p>
+                  </>
+                )}
+              </Alert>
+            </div>
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10">
