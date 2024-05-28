@@ -1,6 +1,7 @@
 import {
   CheckCircleIcon,
   LockClosedIcon,
+  LockOpenIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { HttpStatusCode } from "axios";
@@ -118,7 +119,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
             <ModalContent>
               <>
                 <ModalHeader className="flex flex-col gap-1">
-                  Unlock w....
+                  {t("wallet.unlock_subtitle")}
                 </ModalHeader>
                 <ModalBody>
                   <>
@@ -175,18 +176,27 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
               <Alert color="info" as="div">
                 {lnWalletUnlocked && (
                   <>
-                    {data.ln_default_ready === "1" ? (
-                      <>
-                        <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
-                        {t("home.lightning")} {t("setup.started")}
-                      </>
-                    ) : (
-                      <>
-                        <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
-                        {t("home.lightning")} {t("setup.not_started")}
-                      </>
-                    )}
-                    , {t("setup.restarts")}: {data.system_count_start_lightning}
+                    <p>
+                      <LockOpenIcon className="inline h-6 w-auto text-success" />{" "}
+                      {t("wallet.unlock_success")}
+                    </p>
+                    <div className="mt-2">
+                      {data.ln_default_ready === "1" ? (
+                        <>
+                          <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
+                          {t("home.lightning")} {t("setup.started")}
+                        </>
+                      ) : (
+                        <>
+                          <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
+                          {t("home.lightning")} {t("setup.not_started")}
+                        </>
+                      )}
+                      <p>
+                        ({t("setup.restarts")}:{" "}
+                        {data.system_count_start_lightning})
+                      </p>
+                    </div>
                   </>
                 )}
 
@@ -194,7 +204,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                   <>
                     <p>
                       <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
-                      Lightning Wallet is locked
+                      {t("wallet.wallet_locked")}
                     </p>
                     <Button
                       onPress={onOpen}
@@ -203,9 +213,9 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                       size="sm"
                       className="my-2 rounded-full px-3 py-2 font-semibold"
                     >
-                      Unlock now
+                      {t("wallet.unlock_title")}
                     </Button>
-                    <p>Unlocking is optional. Unlocking does/helps with...</p>
+                    <p>{t("wallet.wallet_unlock_info")}</p>
                   </>
                 )}
               </Alert>
