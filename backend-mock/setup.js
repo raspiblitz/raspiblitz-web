@@ -4,22 +4,22 @@ const router = express.Router();
 // setupPhase is "done" if setup is finished, otherwise step in the setup process
 router.get("/status", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
-  // res.status(200).send(
-  //   JSON.stringify({
-  //     setupPhase: "done",
-  //     state: "waitfinal",
-  //     message: "Node Running",
-  //     initialsync: "",
-  //   }),
-  // );
+  res.status(200).send(
+    JSON.stringify({
+      setupPhase: "done",
+      state: "waitfinal",
+      message: "Node Running",
+      initialsync: "",
+    }),
+  );
 
   // basic setup
   // res.status(200).send(
   //   JSON.stringify({
-  //     setupPhase: "MigrationDialog",
+  //     setupPhase: "",
   //     state: "waitsetup",
   //     message: "Node Running",
-  //     initialsync: "running",
+  //     initialsync: "",
   //   }),
   // );
 
@@ -34,14 +34,14 @@ router.get("/status", function (req, res) {
   // );
 
   // Syncscreen
-  res.status(200).send(
-    JSON.stringify({
-      setupPhase: "",
-      state: "ready",
-      message: "Node Running",
-      initialsync: "running",
-    }),
-  );
+  // res.status(200).send(
+  //   JSON.stringify({
+  //     setupPhase: "",
+  //     state: "ready",
+  //     message: "Node Running",
+  //     initialsync: "running",
+  //   })
+  // );
 });
 
 router.get("/setup-start-info", function (req, res) {
@@ -49,10 +49,10 @@ router.get("/setup-start-info", function (req, res) {
   res.status(200).send(
     JSON.stringify({
       // send something else than "done" to route to setup
-      setupPhase: "migration",
-      hddGotBlockchain: "1",
-      hddGotMigrationData: "umbrel",
-      migrationMode: "outdatedLightning",
+      setupPhase: "recovery",
+      hddGotBlockchain: "0",
+      hddGotMigrationData: null,
+      migrationMode: null,
     }),
   );
 });
