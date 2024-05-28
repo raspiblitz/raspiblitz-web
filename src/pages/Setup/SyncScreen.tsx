@@ -210,8 +210,6 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                     <Button
                       onPress={onOpen}
                       color="primary"
-                      variant="bordered"
-                      size="sm"
                       className="my-2 rounded-full px-3 py-2 font-semibold"
                     >
                       {t("wallet.unlock_title")}
