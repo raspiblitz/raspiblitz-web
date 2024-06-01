@@ -1,39 +1,69 @@
 {
-  description = "My flake with dream2nix packages";
+  description = "A mobile-first responsive Web UI for the RaspiBlitz";
 
   inputs = {
-    dream2nix.url = "github:nix-community/dream2nix";
-    nixpkgs.follows = "dream2nix/nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs =
-    inputs @ { self
-    , dream2nix
-    , nixpkgs
-    , ...
-    }:
-    let
-      system = "x86_64-linux";
-    in
-    {
-      # All packages defined in ./packages/<name> are automatically added to the flake outputs
-      # e.g., 'packages/hello/default.nix' becomes '.#packages.hello'
-      packages.${system}.default = dream2nix.lib.evalModules {
-        packageSets.nixpkgs = inputs.dream2nix.inputs.nixpkgs.legacyPackages.${system};
-        modules = [
-          ./default.nix
-          {
-            paths.projectRoot = ./.;
-            # can be changed to ".git" or "flake.nix" to get rid of .project-root
-            paths.projectRootFile = "flake.nix";
-            paths.package = ./.;
-          }
-        ];
-      };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-utils,
+  }: let
+    name = "blitz-web";
 
-      devShells.default = {
-        buildInputs = [ nixpkgs.nodejs_22 ];
+    systems =
+      flake-utils.lib.eachDefaultSystem
+      (system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        packages = {
+          default = self.packages.${system}.${name};
+          ${name} =
+            pkgs.buildNpmPackage
+            {
+              name = "${name}";
+              buildInputs = [pkgs.nodejs_22];
+              src = ./.;
 
+              npmDepsHash = "sha256-DT5+1KH06cMLHgMMPIiL1LMfxoOM4i15Z1MQok/eLS8=";
+
+              preBuild = ''
+                sed -i "s(const BACKEND_SERVER = "http://localhost:8000";(const BACKEND_SERVER = "http://127.0.0.1";(" vite.config.ts
+              '';
+
+              installPhase = ''
+                mkdir $out
+                npm run build
+                cp -r build/* $out
+              '';
+            };
+        };
+
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [self.packages.${system}.${name}];
+          packages = with pkgs; [nodejs_22 alejandra];
+        };
+      });
+
+    overlays.overlays = {
+      default = final: prev: {
+        ${name} = self.packages.${prev.stdenv.hostPlatform.system}.${name};
       };
     };
+
+    module = {
+      nixosModules.default = {
+        pkgs,
+        lib,
+        config,
+        ...
+      }: {
+        imports = [./modules/raspiblitz-web.nix];
+        nixpkgs.overlays = [self.overlays.default];
+      };
+    };
+  in
+    systems // overlays // module;
 }
