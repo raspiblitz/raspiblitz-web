@@ -1,8 +1,8 @@
-import { CloudArrowDownIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
+import { Button } from "@nextui-org/react";
 
 export type Props = {
   setupPhase: SetupPhase;
@@ -24,26 +24,25 @@ const RecoveryDialog: FC<Props> = ({ setupPhase, callback }) => {
 
   return (
     <SetupContainer>
-      <div className="flex h-full flex-col items-center justify-center">
-        <h2 className="text-center text-lg font-bold">{headline}</h2>
-        <div className="flex">
-          <button
-            onClick={() => callback(false)}
-            className="m-5 flex items-center rounded px-2 hover:bg-gray-400"
-          >
-            <Cog6ToothIcon className="inline h-6 w-6 align-middle" />
-            <span className="p-2 align-middle">{t("setup.other_options")}</span>
-          </button>
-          <button
+      <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
+        <h2 className="text-center text-2xl font-semibold">{headline}</h2>
+        <article className="flex flex-col items-center justify-center gap-10">
+          <Button
             onClick={() => callback(true)}
-            className="bd-button my-5 flex items-center px-2"
+            color="primary"
+            className="rounded-full px-8 py-6 font-semibold"
           >
-            <CloudArrowDownIcon className="inline h-6 w-6" />
-            {/* TODO: Better name would be "Start Recovery or something else instead of just yes */}
-            <span className="p-2">{t("setup.yes")}</span>
-          </button>
-        </div>
-      </div>
+            {t("setup.yes")}
+          </Button>
+          <Button
+            onClick={() => callback(false)}
+            color="secondary"
+            variant="light"
+          >
+            {t("setup.other_options")}
+          </Button>
+        </article>
+      </section>
     </SetupContainer>
   );
 };
