@@ -92,11 +92,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
               ></CustomRadio>
             </RadioGroup>
           </div>
-          <Button
-            type="submit"
-            color="primary"
-            className="mt-8 rounded-full px-8 py-6 font-semibold"
-          >
+          <Button type="submit" color="primary">
             {t("setup.continue")}
           </Button>
         </form>

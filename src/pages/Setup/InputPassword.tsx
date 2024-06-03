@@ -135,12 +135,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
             </fieldset>
 
             <article className="flex flex-col items-center justify-center gap-10">
-              <Button
-                type="submit"
-                isDisabled={!isValid}
-                color="primary"
-                className="mt-8 rounded-full px-8 py-6 font-semibold"
-              >
+              <Button type="submit" isDisabled={!isValid} color="primary">
                 {t("setup.continue")}
               </Button>
               <Button
