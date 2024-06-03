@@ -66,12 +66,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
           />
 
           <article className="justify-cente flex flex-col items-center">
-            <Button
-              type="submit"
-              isDisabled={!isValid}
-              color="primary"
-              className="rounded-full px-8 py-6 font-semibold"
-            >
+            <Button type="submit" isDisabled={!isValid} color="primary">
               {t("setup.final_do_reboot")}
             </Button>
           </article>
