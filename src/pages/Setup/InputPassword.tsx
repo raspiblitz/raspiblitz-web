@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Input } from "@nextui-org/react";
 import { ChangeEvent, FC, useState } from "react";
@@ -76,7 +77,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
       )}
       <SetupContainer>
         <section className="flex h-full flex-col items-center justify-center p-8">
-          <h1 className="m-2 text-center text-3xl font-semibold">
+          <Headline>
             <Trans
               i18nKey={`setup.password_${passwordType}_short`}
               t={t}
@@ -86,7 +87,8 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                 ></strong>, // if needed, create a component for this
               ]}
             />
-          </h1>
+          </Headline>
+
           <p className="m-2 text-center text-secondary">
             <Trans
               i18nKey={`setup.password_${passwordType}_details`}

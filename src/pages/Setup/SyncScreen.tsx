@@ -1,4 +1,5 @@
 import { Alert } from "@/components/Alert";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
@@ -156,9 +157,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
 
       <SetupContainer>
         <section className="flex h-full w-96 max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
-          <h2 className="text-center text-2xl font-semibold">
-            {t("setup.sync_headline")}
-          </h2>
+          <Headline>{t("setup.sync_headline")}</Headline>
 
           <div className="w-full">
             <Progress

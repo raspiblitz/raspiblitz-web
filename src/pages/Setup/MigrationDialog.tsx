@@ -1,6 +1,7 @@
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
 import { FC, useState } from "react";
@@ -54,11 +55,11 @@ const MigrationDialog: FC<InputData> = ({
 
       <SetupContainer>
         <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
-          <h2 className="text-center text-2xl font-semibold">
+          <Headline>
             {t(`setup.migrate_to_os`, {
               os: `${migrationOS[0].toUpperCase()}${migrationOS.slice(1)}`,
             })}
-          </h2>
+          </Headline>
 
           <p className="text-center text-base">{t("setup.convertwarning")}</p>
 

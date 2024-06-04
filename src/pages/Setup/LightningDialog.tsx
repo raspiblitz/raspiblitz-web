@@ -3,6 +3,7 @@ import BitcoinLogo from "@/assets/bitcoin-logo.svg";
 import CLLogo from "@/assets/core_lightning_logo_only.png";
 import LNDLogo from "@/assets/lnd.png";
 import { Button } from "@/components/Button";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
 import { RadioGroup } from "@nextui-org/react";
@@ -37,9 +38,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
   return (
     <SetupContainer>
       <section className="flex flex-col items-center justify-center">
-        <h1 className="m-2 text-center text-3xl font-bold">
-          {t("setup.select_lightning")}
-        </h1>
+        <Headline>{t("setup.select_lightning")}</Headline>
 
         <p className="m-2 text-center text-secondary">
           <Trans
