@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Input } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
@@ -46,11 +47,12 @@ export default function InputNodeName({ callback }: Props) {
       )}
       <SetupContainer>
         <section className="flex h-full flex-col items-center justify-center p-8">
-          <h1 className="m-2 text-center text-3xl font-semibold">
-            {t("setup.input_node.header")}
-          </h1>
+          <Headline>{t("setup.input_node.header")}</Headline>
 
-          <form onSubmit={handleSubmit(continueHandler)} className="w-full">
+          <form
+            onSubmit={handleSubmit(continueHandler)}
+            className="mt-2 w-full"
+          >
             <fieldset className="w-full">
               <Input
                 className="w-full"
@@ -78,7 +80,7 @@ export default function InputNodeName({ callback }: Props) {
               />
             </fieldset>
 
-            <article className="flex flex-col items-center justify-center gap-10">
+            <article className="flex flex-col items-center justify-center gap-10 pt-10">
               <Button type="submit" isDisabled={!isValid} color="primary">
                 {t("setup.continue")}
               </Button>
