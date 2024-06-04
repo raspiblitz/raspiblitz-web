@@ -1,11 +1,9 @@
-import { Input } from "@nextui-org/react";
 import { Button } from "@/components/Button";
-
-import { ChangeEvent, FC, useState } from "react";
-import { useForm } from "react-hook-form";
-
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
+import { Input } from "@nextui-org/react";
+import { ChangeEvent, FC, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 
 export type Props = {
