@@ -2,14 +2,11 @@ import CustomRadio from "./CustomRadio";
 import BitcoinLogo from "@/assets/bitcoin-logo.svg";
 import CLLogo from "@/assets/core_lightning_logo_only.png";
 import LNDLogo from "@/assets/lnd.png";
+import { Button } from "@/components/Button";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
-
 import { RadioGroup } from "@nextui-org/react";
 import { FC, FormEvent, useState } from "react";
-
-import { Button } from "@/components/Button";
-
 import { Trans, useTranslation } from "react-i18next";
 
 export interface InputData {

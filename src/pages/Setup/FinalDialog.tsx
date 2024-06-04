@@ -1,12 +1,12 @@
+import { Alert } from "@/components/Alert";
+import { Button } from "@/components/Button";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import { Checkbox } from "@nextui-org/react";
+import { FC } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Alert } from "@/components/Alert";
-import { Button } from "@/components/Button";
+import { useTranslation } from "react-i18next";
 
 export type Props = {
   setupPhase: SetupPhase;

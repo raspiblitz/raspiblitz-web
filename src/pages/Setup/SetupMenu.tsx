@@ -1,9 +1,7 @@
 import CustomRadio from "./CustomRadio";
+import { Button } from "@/components/Button";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
-import { RadioGroup } from "@nextui-org/react";
-import { Button } from "@/components/Button";
-
 import {
   ArrowUturnLeftIcon,
   ArrowUpCircleIcon,
@@ -11,6 +9,7 @@ import {
   ArrowDownTrayIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
+import { RadioGroup } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
