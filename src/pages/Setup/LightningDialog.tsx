@@ -2,9 +2,10 @@ import CustomRadio from "./CustomRadio";
 import BitcoinLogo from "@/assets/bitcoin-logo.svg";
 import CLLogo from "@/assets/core_lightning_logo_only.png";
 import LNDLogo from "@/assets/lnd.png";
+import { Button } from "@/components/Button";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
-import { Button, RadioGroup } from "@nextui-org/react";
+import { RadioGroup } from "@nextui-org/react";
 import { FC, FormEvent, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -84,11 +85,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
             </RadioGroup>
           </div>
 
-          <Button
-            type="submit"
-            color="primary"
-            className="mt-8 rounded-full px-8 py-6 font-semibold"
-          >
+          <Button type="submit" color="primary">
             {t("setup.continue")}
           </Button>
         </form>

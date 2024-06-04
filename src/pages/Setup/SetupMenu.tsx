@@ -1,4 +1,5 @@
 import CustomRadio from "./CustomRadio";
+import { Button } from "@/components/Button";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import {
@@ -8,7 +9,7 @@ import {
   ArrowDownTrayIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
-import { Button, RadioGroup } from "@nextui-org/react";
+import { RadioGroup } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -92,11 +93,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
               ></CustomRadio>
             </RadioGroup>
           </div>
-          <Button
-            type="submit"
-            color="primary"
-            className="mt-8 rounded-full px-8 py-6 font-semibold"
-          >
+          <Button type="submit" color="primary">
             {t("setup.continue")}
           </Button>
         </form>

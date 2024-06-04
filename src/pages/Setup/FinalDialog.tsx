@@ -1,8 +1,9 @@
 import { Alert } from "@/components/Alert";
+import { Button } from "@/components/Button";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
-import { Button, Checkbox } from "@nextui-org/react";
+import { Checkbox } from "@nextui-org/react";
 import { FC } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -66,12 +67,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
           />
 
           <article className="justify-cente flex flex-col items-center">
-            <Button
-              type="submit"
-              isDisabled={!isValid}
-              color="primary"
-              className="rounded-full px-8 py-6 font-semibold"
-            >
+            <Button type="submit" isDisabled={!isValid} color="primary">
               {t("setup.final_do_reboot")}
             </Button>
           </article>

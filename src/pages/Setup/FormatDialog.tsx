@@ -1,6 +1,7 @@
+import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Button, Checkbox } from "@nextui-org/react";
+import { Checkbox } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -49,11 +50,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
             </Checkbox>
           )}
           <article className="flex flex-col items-center justify-center gap-10">
-            <Button
-              type="submit"
-              color="primary"
-              className="rounded-full px-8 py-6 font-semibold"
-            >
+            <Button type="submit" color="primary">
               {t("setup.format.delete_confirm")}
             </Button>
             <Button

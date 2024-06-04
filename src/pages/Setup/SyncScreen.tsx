@@ -144,7 +144,6 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                     type="submit"
                     color="primary"
                     isLoading={runningUnlock}
-                    className="rounded-full px-8 py-6 font-semibold"
                   >
                     {t("setup.sync_wallet_unlock")}
                   </Button>
@@ -206,11 +205,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                       <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
                       {t("wallet.wallet_locked")}
                     </p>
-                    <Button
-                      onPress={onOpen}
-                      color="primary"
-                      className="my-2 rounded-full px-3 py-2 font-semibold"
-                    >
+                    <Button onPress={onOpen} color="primary">
                       {t("wallet.unlock_title")}
                     </Button>
                     <p>{t("wallet.wallet_unlock_info")}</p>
@@ -225,7 +220,6 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
               type="button"
               onClick={() => callback("shutdown", null)}
               color="primary"
-              className="rounded-full px-8 py-6 font-semibold"
               title={t("setup.sync_restartinfo")}
               variant="light"
               startContent={<PowerIcon className="inline h-6 w-auto" />}

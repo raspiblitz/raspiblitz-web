@@ -1,8 +1,8 @@
 import { Alert } from "@/components/Alert";
+import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
-import { Button } from "@nextui-org/react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -34,12 +34,7 @@ const MigrationDialog: FC<InputData> = ({
         <section className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-y-8">
           <Alert as="h4">{t("setup.lightningoutdated")}</Alert>
 
-          <Button
-            type="button"
-            onClick={() => callback(false)}
-            color="primary"
-            className="rounded-full px-8 py-6 font-semibold"
-          >
+          <Button type="button" onClick={() => callback(false)} color="primary">
             {t("settings.shutdown")}
           </Button>
         </section>
@@ -68,12 +63,7 @@ const MigrationDialog: FC<InputData> = ({
           <p className="text-center text-base">{t("setup.convertwarning")}</p>
 
           <article className="flex flex-col items-center justify-center gap-10">
-            <Button
-              type="button"
-              onClick={handleCancel}
-              color="primary"
-              className="rounded-full px-8 py-6 font-semibold"
-            >
+            <Button type="button" onClick={handleCancel} color="primary">
               {t("setup.no_and_shutdown")}
             </Button>
             <Button
