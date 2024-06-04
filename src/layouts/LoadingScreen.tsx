@@ -1,8 +1,8 @@
-import { FC, useContext } from "react";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
-import { AppContext } from "@/context/app-context";
 import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import { AppContext } from "@/context/app-context";
+import { FC, useContext } from "react";
 
 // Loading Screen for the initial loading of the app
 const LoadingScreen: FC = () => {

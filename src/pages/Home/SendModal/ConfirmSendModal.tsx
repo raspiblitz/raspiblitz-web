@@ -1,13 +1,6 @@
-import {
-  CheckIcon,
-  ChevronLeftIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { toast } from "react-toastify";
-import type { ChangeEvent } from "react";
-import { FC, useContext, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { TxType } from "../SwitchTxType";
+import { SendLnForm } from "./SendModal";
+import { SendOnChainForm } from "./SendOnChain";
 import AmountInput from "@/components/AmountInput";
 import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import Message from "@/components/Message";
@@ -20,9 +13,16 @@ import {
   stringToNumber,
 } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { TxType } from "../SwitchTxType";
-import { SendLnForm } from "./SendModal";
-import { SendOnChainForm } from "./SendOnChain";
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import type { ChangeEvent } from "react";
+import { FC, useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 interface IFormInputs {
   amountInput: string;

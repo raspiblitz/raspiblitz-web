@@ -1,17 +1,17 @@
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import CapsLockWarning from "@/components/CapsLockWarning";
+import InputField from "@/components/InputField";
+import useCapsLock from "@/hooks/use-caps-lock";
+import ModalDialog from "@/layouts/ModalDialog";
+import { MODAL_ROOT } from "@/utils";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 import { ArrowPathIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, FC, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "@/components/InputField";
-import ModalDialog from "@/layouts/ModalDialog";
-import { MODAL_ROOT } from "@/utils";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
-import useCapsLock from "@/hooks/use-caps-lock";
-import CapsLockWarning from "@/components/CapsLockWarning";
 
 export type Props = {
   onClose: () => void;

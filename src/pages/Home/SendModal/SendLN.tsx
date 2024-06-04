@@ -1,16 +1,16 @@
-import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { TxType } from "../SwitchTxType";
+import { SendLnForm } from "./SendModal";
+import { SendOnChainForm } from "./SendOnChain";
 import AvailableBalance from "@/components/AvailableBalance";
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import InputField from "@/components/InputField";
+import Message from "@/components/Message";
+import { convertMSatToSat } from "@/utils/format";
+import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { convertMSatToSat } from "@/utils/format";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "@/components/InputField";
-import Message from "@/components/Message";
-import { TxType } from "../SwitchTxType";
-import { SendLnForm } from "./SendModal";
-import { SendOnChainForm } from "./SendOnChain";
 
 export type Props = {
   lnBalance: number;

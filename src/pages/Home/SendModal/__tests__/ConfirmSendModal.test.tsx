@@ -1,14 +1,14 @@
-import userEvent from "@testing-library/user-event";
-import { I18nextProvider } from "react-i18next";
-import { render, screen, waitFor } from "test-utils";
-import i18n from "@/i18n/test_config";
-import { http, server, HttpResponse } from "@/testServer";
 import { TxType } from "../../SwitchTxType";
 import type { Props } from "../ConfirmSendModal";
 import ConfirmSendModal from "../ConfirmSendModal";
 import { SendLnForm } from "../SendModal";
 import { SendOnChainForm } from "../SendOnChain";
+import i18n from "@/i18n/test_config";
+import { http, server, HttpResponse } from "@/testServer";
+import userEvent from "@testing-library/user-event";
+import { I18nextProvider } from "react-i18next";
 import { toast } from "react-toastify";
+import { render, screen, waitFor } from "test-utils";
 
 const closeSpy = vi.fn();
 

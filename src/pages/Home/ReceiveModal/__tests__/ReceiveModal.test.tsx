@@ -1,7 +1,7 @@
+import ReceiveModal from "../ReceiveModal";
+import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "test-utils";
-import { http, server, HttpResponse } from "@/testServer";
-import ReceiveModal from "../ReceiveModal";
 
 beforeEach(() => {
   server.use(

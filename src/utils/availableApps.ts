@@ -1,5 +1,5 @@
-import Electrs from "@/pages/Apps/customApps/Electrs";
 import { App } from "@/models/app.model";
+import Electrs from "@/pages/Apps/customApps/Electrs";
 
 export const availableApps: { [name: string]: App } = {
   "btc-rpc-explorer": {

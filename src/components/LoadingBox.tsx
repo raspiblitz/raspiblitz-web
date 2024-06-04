@@ -1,5 +1,5 @@
-import type { FC } from "react";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+import type { FC } from "react";
 
 export const LoadingBox: FC = () => (
   <div className="h-full p-5">

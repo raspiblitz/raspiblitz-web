@@ -1,3 +1,14 @@
+import FinalDialog from "./FinalDialog";
+import FormatDialog from "./FormatDialog";
+import InputNodeName from "./InputNodeName";
+import InputPassword from "./InputPassword";
+import LightningDialog from "./LightningDialog";
+import MigrationDialog from "./MigrationDialog";
+import RecoveryDialog from "./RecoveryDialog";
+import SetupMenu from "./SetupMenu";
+import StartDoneDialog from "./StartDoneDialog";
+import SyncScreen from "./SyncScreen";
+import WaitScreen from "./WaitScreen";
 import {
   SetupLightning,
   SetupMigrationMode,
@@ -10,17 +21,6 @@ import { instance } from "@/utils/interceptor";
 import { HttpStatusCode } from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FinalDialog from "./FinalDialog";
-import FormatDialog from "./FormatDialog";
-import InputNodeName from "./InputNodeName";
-import InputPassword from "./InputPassword";
-import LightningDialog from "./LightningDialog";
-import MigrationDialog from "./MigrationDialog";
-import RecoveryDialog from "./RecoveryDialog";
-import SetupMenu from "./SetupMenu";
-import StartDoneDialog from "./StartDoneDialog";
-import SyncScreen from "./SyncScreen";
-import WaitScreen from "./WaitScreen";
 
 enum Screen {
   WAIT,
