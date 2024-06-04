@@ -2,9 +2,9 @@ import { Alert } from "@/components/Alert";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
-import { Button } from "@nextui-org/react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/Button";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;
