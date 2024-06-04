@@ -1,10 +1,10 @@
 import { Alert } from "@/components/Alert";
+import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/Button";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;

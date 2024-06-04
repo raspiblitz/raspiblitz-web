@@ -1,8 +1,8 @@
+import { Button } from "@/components/Button";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/Button";
 
 export type Props = {
   setupPhase: SetupPhase;

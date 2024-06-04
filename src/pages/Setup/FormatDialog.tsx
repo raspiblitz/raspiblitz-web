@@ -1,8 +1,7 @@
+import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Checkbox } from "@nextui-org/react";
-import { Button } from "@/components/Button";
-
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
