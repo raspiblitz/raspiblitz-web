@@ -1,3 +1,4 @@
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupStatus } from "@/models/setup.model";
 import { Spinner } from "@nextui-org/react";
@@ -44,7 +45,9 @@ const WaitScreen: FC<Props> = ({ status, message }) => {
     <SetupContainer>
       <section className="flex flex-col items-center justify-center">
         <Spinner size="lg" />
-        <h2 className="mb-2 mt-8 text-3xl font-bold">{headline}</h2>
+
+        <Headline>{headline}</Headline>
+
         <p className="my-2 text-sm">{details}</p>
       </section>
     </SetupContainer>
