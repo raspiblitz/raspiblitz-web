@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { Button } from "@nextui-org/react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 export type Props = {
   setupPhase: SetupPhase;

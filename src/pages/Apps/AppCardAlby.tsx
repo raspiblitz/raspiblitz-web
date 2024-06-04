@@ -1,9 +1,9 @@
+import AppIcon from "@/components/AppIcon";
+import { instance } from "@/utils/interceptor";
 import { PlusIcon, LinkIcon } from "@heroicons/react/24/outline";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import AppIcon from "@/components/AppIcon";
 import { toast } from "react-toastify";
-import { instance } from "@/utils/interceptor";
 
 export const AppCardAlby: FC = () => {
   const { id, name } = {

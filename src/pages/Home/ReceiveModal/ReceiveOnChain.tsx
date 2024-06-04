@@ -1,12 +1,12 @@
-import { QRCodeSVG } from "qrcode.react";
-import { Tooltip } from "react-tooltip";
-import { Dispatch, FC, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
 import useClipboard from "@/hooks/use-clipboard";
+import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { RefreshIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { ApiError, checkError } from "@/utils/checkError";
 import { AxiosError } from "axios";
+import { QRCodeSVG } from "qrcode.react";
+import { Dispatch, FC, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
+import { Tooltip } from "react-tooltip";
 
 type Props = {
   address: string;

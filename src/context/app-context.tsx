@@ -1,3 +1,4 @@
+import { SSEContext } from "./sse-context";
 import {
   ACCESS_TOKEN,
   disableGutter,
@@ -19,7 +20,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { SSEContext } from "./sse-context";
 
 export interface AppContextType {
   isLoggedIn: boolean;

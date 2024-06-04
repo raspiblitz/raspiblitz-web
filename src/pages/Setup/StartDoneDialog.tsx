@@ -1,9 +1,9 @@
-import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
+import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export type Props = {
   setupPhase: SetupPhase;

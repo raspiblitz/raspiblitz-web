@@ -1,8 +1,8 @@
+import SendModal, { Props } from "../SendModal";
+import { HttpResponse, http, server } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import { render, screen } from "test-utils";
-import { HttpResponse, http, server } from "@/testServer";
-import SendModal, { Props } from "../SendModal";
 
 const handleClose = vi.fn();
 const basicProps: Props = {

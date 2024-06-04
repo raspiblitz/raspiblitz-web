@@ -1,3 +1,4 @@
+import CustomRadio from "./CustomRadio";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { Button, RadioGroup } from "@nextui-org/react";
@@ -10,7 +11,6 @@ import {
 } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import CustomRadio from "./CustomRadio";
 
 export type Props = {
   setupPhase: SetupPhase;

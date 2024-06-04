@@ -1,3 +1,4 @@
+import ImageCarousel from "./ImageCarousel";
 import AppIcon from "@/components/AppIcon";
 import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import { SSEContext } from "@/context/sse-context";
@@ -14,7 +15,6 @@ import { FC, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import ImageCarousel from "./ImageCarousel";
 
 export const AppInfo: FC = () => {
   const navigate = useNavigate();

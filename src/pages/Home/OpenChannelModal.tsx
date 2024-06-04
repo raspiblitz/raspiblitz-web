@@ -1,11 +1,5 @@
-import { LinkIcon } from "@heroicons/react/24/outline";
-import AvailableBalance from "@/components/AvailableBalance";
-import { ChangeEvent, FC, useContext, useState } from "react";
-import { createPortal } from "react-dom";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import AmountInput from "@/components/AmountInput";
+import AvailableBalance from "@/components/AvailableBalance";
 import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "@/components/InputField";
 import Message from "@/components/Message";
@@ -15,6 +9,12 @@ import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
+import { LinkIcon } from "@heroicons/react/24/outline";
+import { ChangeEvent, FC, useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 interface IFormInputs {
   nodeUri: string;

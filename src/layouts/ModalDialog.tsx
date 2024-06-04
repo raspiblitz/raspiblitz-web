@@ -1,6 +1,6 @@
+import ModalBackground from "./ModalBackground";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FC, PropsWithChildren, useCallback, useEffect } from "react";
-import ModalBackground from "./ModalBackground";
 
 export const disableScroll = {
   on: () => document.body.classList.add("overflow-y-hidden"),

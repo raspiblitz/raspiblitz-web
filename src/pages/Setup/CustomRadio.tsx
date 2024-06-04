@@ -1,6 +1,7 @@
+import { Image } from "@nextui-org/image";
 import { Radio, cn } from "@nextui-org/react";
 import { ReactNode } from "react";
-import { Image } from "@nextui-org/image";
+
 type Props = {
   id: string;
   radioGroup: string;

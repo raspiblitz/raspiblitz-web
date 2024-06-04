@@ -1,3 +1,7 @@
+import SwitchTxType, { TxType } from "../SwitchTxType";
+import ConfirmSendModal from "./ConfirmSendModal";
+import SendLn, { LnInvoiceForm } from "./SendLN";
+import SendOnChain, { SendOnChainForm } from "./SendOnChain";
 import ModalDialog from "@/layouts/ModalDialog";
 import { DecodePayRequest } from "@/models/decode-pay-req";
 import { MODAL_ROOT } from "@/utils";
@@ -6,10 +10,6 @@ import { instance } from "@/utils/interceptor";
 import { AxiosResponse } from "axios";
 import { FC, useState } from "react";
 import { createPortal } from "react-dom";
-import SwitchTxType, { TxType } from "../SwitchTxType";
-import ConfirmSendModal from "./ConfirmSendModal";
-import SendLn, { LnInvoiceForm } from "./SendLN";
-import SendOnChain, { SendOnChainForm } from "./SendOnChain";
 
 export type Props = {
   lnBalance: number;
