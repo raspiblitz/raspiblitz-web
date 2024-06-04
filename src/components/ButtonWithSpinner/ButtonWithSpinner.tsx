@@ -1,5 +1,5 @@
-import type { ButtonHTMLAttributes, FC, ReactElement } from "react";
 import ButtonSpinner from "./ButtonSpinner/ButtonSpinner";
+import type { ButtonHTMLAttributes, FC, ReactElement } from "react";
 
 type Props = {
   className?: string;

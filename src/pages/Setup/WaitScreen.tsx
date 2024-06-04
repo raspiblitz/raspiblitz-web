@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupStatus } from "@/models/setup.model";
 import { Spinner } from "@nextui-org/react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 export type Props = {
   status: SetupStatus;

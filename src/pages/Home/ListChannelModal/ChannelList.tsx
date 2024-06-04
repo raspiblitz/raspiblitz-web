@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
-import { LightningChannel } from "@/models/lightning-channel";
 import Channel from "./Channel";
+import { LightningChannel } from "@/models/lightning-channel";
+import { FC, useState } from "react";
 
 type Props = {
   isLoading: boolean;

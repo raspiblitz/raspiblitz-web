@@ -1,11 +1,11 @@
-import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
-import { FC, useContext } from "react";
-import { useTranslation } from "react-i18next";
+import KeyValueDisplay from "./KeyValueDisplay";
 import { AppContext, Unit } from "@/context/app-context";
 import useClipboard from "@/hooks/use-clipboard";
 import { Transaction } from "@/models/transaction.model";
 import { convertSatToBtc, convertToString } from "@/utils/format";
-import KeyValueDisplay from "./KeyValueDisplay";
+import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
+import { FC, useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 export type Props = {
   details: Transaction;

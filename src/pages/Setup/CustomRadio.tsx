@@ -1,6 +1,7 @@
+import { Image } from "@nextui-org/image";
 import { Radio, cn } from "@nextui-org/react";
 import { ReactNode } from "react";
-import { Image } from "@nextui-org/image";
+
 type Props = {
   id: string;
   radioGroup: string;
@@ -54,7 +55,7 @@ export default function CustomRadio({
               alt={`${text} image`}
               src={image}
               radius="none"
-              className="max-w-10 max-h-auto"
+              className="max-h-auto max-w-10"
             />
           </div>
         )}
@@ -63,6 +64,7 @@ export default function CustomRadio({
           <div
             className={cn(
               imageBaseClasses,
+              "[&_svg]:h-6 [&_svg]:w-auto",
               iconColor ? iconColor : "text-white",
             )}
           >

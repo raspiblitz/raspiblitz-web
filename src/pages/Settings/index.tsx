@@ -1,6 +1,3 @@
-import { enableGutter } from "@/utils";
-import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import ActionBox from "./ActionBox";
 import ChangePwModal from "./ChangePwModal";
 import DebugLogBox from "./DebugLogBox";
@@ -8,6 +5,9 @@ import I18nBox from "./I18nBox";
 import RebootModal from "./RebootModal";
 import ShutdownModal from "./ShutdownModal";
 import VersionBox from "./VersionBox";
+import { enableGutter } from "@/utils";
+import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 /**
  * Displays the settings page.

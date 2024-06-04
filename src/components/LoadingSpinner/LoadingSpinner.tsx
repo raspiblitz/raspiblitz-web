@@ -1,5 +1,5 @@
-import type { FC } from "react";
 import "./LoadingSpinner.css";
+import type { FC } from "react";
 
 type Props = {
   color?: string;

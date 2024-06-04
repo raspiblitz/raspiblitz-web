@@ -1,17 +1,16 @@
+import QRCodeModal from "./QRCodeModal";
+import LoadingBox from "@/components/LoadingBox";
+import { SSEContext } from "@/context/sse-context";
+import useClipboard from "@/hooks/use-clipboard";
 import {
   ClipboardDocumentCheckIcon,
   EyeIcon,
   EyeSlashIcon,
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
-
-import { Tooltip } from "react-tooltip";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import LoadingBox from "@/components/LoadingBox";
-import { SSEContext } from "@/context/sse-context";
-import useClipboard from "@/hooks/use-clipboard";
-import QRCodeModal from "./QRCodeModal";
+import { Tooltip } from "react-tooltip";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 

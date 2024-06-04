@@ -1,10 +1,5 @@
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import type { ChangeEvent, FC } from "react";
-import { useContext, useState } from "react";
-import { createPortal } from "react-dom";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import SwitchTxType, { TxType } from "../SwitchTxType";
+import ReceiveOnChain from "./ReceiveOnChain";
 import AmountInput from "@/components/AmountInput";
 import InputField from "@/components/InputField";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
@@ -15,8 +10,13 @@ import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { convertBtcToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import SwitchTxType, { TxType } from "../SwitchTxType";
-import ReceiveOnChain from "./ReceiveOnChain";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import type { ChangeEvent, FC } from "react";
+import { useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface IFormInputs {
   amountInput: string;

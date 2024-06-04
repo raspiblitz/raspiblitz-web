@@ -1,5 +1,5 @@
-import axios from "axios";
 import { ACCESS_TOKEN } from "./index";
+import axios from "axios";
 
 export const instance = axios.create({ baseURL: "/api" });
 

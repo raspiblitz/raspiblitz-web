@@ -1,15 +1,3 @@
-import { AppContext } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
-import { useInterval } from "@/hooks/use-interval";
-import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { Transaction } from "@/models/transaction.model";
-import { enableGutter } from "@/utils";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
-import { HttpStatusCode } from "axios";
-import { FC, useCallback, useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import BitcoinCard from "./BitcoinCard";
 import ConnectionCard from "./ConnectionCard";
 import HardwareCard from "./HardwareCard";
@@ -22,6 +10,18 @@ import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionDetailModal from "./TransactionCard/TransactionDetailModal/TransactionDetailModal";
 import UnlockModal from "./UnlockModal";
 import WalletCard from "./WalletCard";
+import { AppContext } from "@/context/app-context";
+import { SSEContext } from "@/context/sse-context";
+import { useInterval } from "@/hooks/use-interval";
+import PageLoadingScreen from "@/layouts/PageLoadingScreen";
+import { Transaction } from "@/models/transaction.model";
+import { enableGutter } from "@/utils";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
+import { HttpStatusCode } from "axios";
+import { FC, useCallback, useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const startupToastId = "startup-toast";
 

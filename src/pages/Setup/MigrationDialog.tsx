@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Alert } from "@/components/Alert";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
-import { Alert } from "@/components/Alert";
 import { Button } from "@nextui-org/react";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface InputData {
   migrationOS: SetupMigrationOS;
