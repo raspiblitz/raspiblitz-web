@@ -1,5 +1,6 @@
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
@@ -36,9 +37,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
         <section className="flex h-full flex-col items-center justify-center gap-y-10 lg:w-2/5 lg:p-8">
           <div className="text-center">
             <CheckCircleIcon className="inline-block h-24 w-auto stroke-1 text-success" />
-            <h1 className="text-center text-3xl font-bold">
-              {t(`setup.final_${setupPhase || "setup"}`)}
-            </h1>
+            <Headline>{t(`setup.final_${setupPhase || "setup"}`)}</Headline>
           </div>
 
           <Alert as="h4">{t("setup.final_seedwords")}</Alert>

@@ -1,5 +1,6 @@
 import CustomRadio from "./CustomRadio";
 import { Button } from "@/components/Button";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import {
@@ -32,9 +33,8 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
   return (
     <SetupContainer>
       <section className="flex flex-col items-center justify-center">
-        <h1 className="m-2 text-center text-3xl font-semibold">
-          {t("setup.setupmenu.lets_setup")}
-        </h1>
+        <Headline>{t("setup.setupmenu.lets_setup")}</Headline>
+
         <p className="m-2 text-center text-secondary">
           {t("setup.setupmenu.setup_time")}
         </p>
