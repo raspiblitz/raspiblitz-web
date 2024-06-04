@@ -1,11 +1,11 @@
+import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Checkbox } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Headline } from "@/components/Headline";
-import { Alert } from "@/components/Alert";
 
 export type Props = {
   containsBlockchain: boolean;

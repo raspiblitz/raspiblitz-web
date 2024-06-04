@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
+import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { Headline } from "@/components/Headline";
-import { Button } from "@/components/Button";
 export type Props = {
   setupPhase: SetupPhase;
   callback: (cancel: boolean) => void;
