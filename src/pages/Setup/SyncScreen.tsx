@@ -1,3 +1,7 @@
+import { Alert } from "@/components/Alert";
+import SetupContainer from "@/layouts/SetupContainer";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 import {
   CheckCircleIcon,
   LockClosedIcon,
@@ -5,16 +9,6 @@ import {
   XCircleIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
-import { HttpStatusCode } from "axios";
-import { ChangeEvent, FC, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Alert } from "@/components/Alert";
-import SetupContainer from "@/layouts/SetupContainer";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
-
 import {
   Modal,
   ModalContent,
@@ -26,6 +20,11 @@ import {
   Input,
   Progress,
 } from "@nextui-org/react";
+import { HttpStatusCode } from "axios";
+import { ChangeEvent, FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export interface InputData {
   data: SyncData | any;

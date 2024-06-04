@@ -1,3 +1,12 @@
+import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import CapsLockWarning from "@/components/CapsLockWarning";
+import InputField from "@/components/InputField";
+import Message from "@/components/Message";
+import { AppContext } from "@/context/app-context";
+import useCapsLock from "@/hooks/use-caps-lock";
+import ModalDialog, { disableScroll } from "@/layouts/ModalDialog";
+import { MODAL_ROOT } from "@/utils";
+import { instance } from "@/utils/interceptor";
 import { LockOpenIcon } from "@heroicons/react/24/outline";
 import { FC, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
@@ -5,15 +14,6 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
-import InputField from "@/components/InputField";
-import Message from "@/components/Message";
-import { AppContext } from "@/context/app-context";
-import ModalDialog, { disableScroll } from "@/layouts/ModalDialog";
-import { MODAL_ROOT } from "@/utils";
-import { instance } from "@/utils/interceptor";
-import useCapsLock from "@/hooks/use-caps-lock";
-import CapsLockWarning from "@/components/CapsLockWarning";
 
 interface IFormInputs {
   passwordInput: string;

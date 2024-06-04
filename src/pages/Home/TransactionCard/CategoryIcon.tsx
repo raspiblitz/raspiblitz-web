@@ -1,9 +1,8 @@
 import {
-  ClockIcon,
-  EllipsisHorizontalIcon,
-  BoltIcon,
-  LinkIcon,
-} from "@heroicons/react/24/outline";
+  TransactionCategory,
+  TransactionStatus,
+  TransactionType,
+} from "@/models/transaction.model";
 import {
   Confirmations0Icon,
   Confirmations1Icon,
@@ -13,12 +12,13 @@ import {
   Confirmations5Icon,
   Confirmations6Icon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import type { FC } from "react";
 import {
-  TransactionCategory,
-  TransactionStatus,
-  TransactionType,
-} from "@/models/transaction.model";
+  ClockIcon,
+  EllipsisHorizontalIcon,
+  BoltIcon,
+  LinkIcon,
+} from "@heroicons/react/24/outline";
+import type { FC } from "react";
 
 export type Props = {
   category: TransactionCategory;

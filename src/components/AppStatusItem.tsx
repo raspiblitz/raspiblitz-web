@@ -1,8 +1,8 @@
-import type { FC } from "react";
-import { getHrefFromApp } from "@/utils";
 import AppIcon from "@/components/AppIcon";
 import { AppStatus } from "@/models/app-status";
+import { getHrefFromApp } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
+import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Props = {

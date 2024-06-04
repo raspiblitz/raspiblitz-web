@@ -1,7 +1,7 @@
+import AppCard from "./AppCard";
 import { AppStatus } from "@/models/app-status";
 import { availableApps } from "@/utils/availableApps";
 import { FC } from "react";
-import AppCard from "./AppCard";
 
 type Props = {
   title: string;

@@ -1,16 +1,16 @@
+import SingleTransaction from "./SingleTransaction";
+import LoadingBox from "@/components/LoadingBox";
+import Message from "@/components/Message";
+import { AppContext } from "@/context/app-context";
+import { Implementation } from "@/models/ln-info";
+import { Transaction } from "@/models/transaction.model";
 import {
   ArrowDownIcon,
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Implementation } from "@/models/ln-info";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import LoadingBox from "@/components/LoadingBox";
-import Message from "@/components/Message";
-import { AppContext } from "@/context/app-context";
-import { Transaction } from "@/models/transaction.model";
-import SingleTransaction from "./SingleTransaction";
 
 export type Props = {
   transactions: Transaction[];

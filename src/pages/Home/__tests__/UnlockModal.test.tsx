@@ -1,7 +1,7 @@
+import UnlockModal from "../UnlockModal";
+import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "test-utils";
-import { http, server, HttpResponse } from "@/testServer";
-import UnlockModal from "../UnlockModal";
 
 const handleClose = vi.fn();
 

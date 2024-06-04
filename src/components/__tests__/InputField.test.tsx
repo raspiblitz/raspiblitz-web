@@ -1,7 +1,6 @@
-import { render, screen, waitFor } from "test-utils";
-
 import type { InputFieldProps } from "../InputField";
 import InputField from "../InputField";
+import { render, screen, waitFor } from "test-utils";
 
 const basicProps: InputFieldProps = {
   label: "Banana Label",

@@ -1,6 +1,3 @@
-import { FC, lazy, Suspense, useContext, useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import RequireAuth from "./components/RequireAuth";
 import RequireSetup from "./components/RequireSetup";
@@ -10,10 +7,13 @@ import Layout from "./layouts/Layout";
 import LoadingScreen from "./layouts/LoadingScreen";
 import SkeletonLoadingScreen from "./layouts/SkeletonLoadingScreen";
 import { SetupPhase } from "./models/setup.model";
+import AppPage from "./pages/Apps/AppPage";
 import Login from "./pages/Login";
 import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./utils";
 import { instance } from "./utils/interceptor";
-import AppPage from "./pages/Apps/AppPage";
+import { FC, lazy, Suspense, useContext, useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const LazySetup = lazy(() => import("./pages/Setup"));
 const LazyHome = lazy(() => import("./pages/Home"));

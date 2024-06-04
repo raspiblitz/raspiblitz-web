@@ -1,11 +1,11 @@
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import { AppContext } from "@/context/app-context";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
 
 /**
  * Displays a button to generate a debug report which is downloaded as a file
