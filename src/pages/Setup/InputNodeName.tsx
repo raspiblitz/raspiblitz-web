@@ -80,7 +80,7 @@ export default function InputNodeName({ callback }: Props) {
               />
             </fieldset>
 
-            <article className="flex flex-col items-center justify-center gap-10">
+            <article className="flex flex-col items-center justify-center gap-10 pt-10">
               <Button type="submit" isDisabled={!isValid} color="primary">
                 {t("setup.continue")}
               </Button>

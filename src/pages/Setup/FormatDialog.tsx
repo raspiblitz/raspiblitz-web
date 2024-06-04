@@ -4,6 +4,8 @@ import SetupContainer from "@/layouts/SetupContainer";
 import { Checkbox } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Headline } from "@/components/Headline";
+import { Alert } from "@/components/Alert";
 
 export type Props = {
   containsBlockchain: boolean;
@@ -34,12 +36,9 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
           className="flex h-full flex-col items-center justify-center gap-8 p-8"
           onSubmit={submitHandler}
         >
-          <h1 className="m-2 text-center text-3xl font-bold">
-            {t("setup.format.delete_drive")}
-          </h1>
-          <article className="mt-2 rounded-xl border border-warning-500 bg-warning-500/5 p-4 font-semibold text-warning-500">
-            {t("setup.format.warn")}
-          </article>
+          <Headline>{t("setup.format.delete_drive")}</Headline>
+          <Alert color="warning">{t("setup.format.warn")}</Alert>
+
           {containsBlockchain && (
             <Checkbox
               id="keepBlockchain"
@@ -49,10 +48,12 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
               {t("setup.format.keep_blockchain")}
             </Checkbox>
           )}
-          <article className="flex flex-col items-center justify-center gap-10">
+
+          <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button type="submit" color="primary">
               {t("setup.format.delete_confirm")}
             </Button>
+
             <Button
               type="button"
               color="danger"

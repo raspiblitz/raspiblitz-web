@@ -214,7 +214,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
             </div>
           </div>
 
-          <article className="flex flex-col items-center justify-center gap-10">
+          <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button
               type="button"
               onClick={() => callback("shutdown", null)}

@@ -28,7 +28,7 @@ const RecoveryDialog: FC<Props> = ({ setupPhase, callback }) => {
       <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
         <Headline>{headline}</Headline>
 
-        <article className="flex flex-col items-center justify-center gap-10">
+        <article className="flex flex-col items-center justify-center gap-10 pt-10">
           <Button onClick={() => callback(true)} color="primary">
             {t("setup.yes")}
           </Button>

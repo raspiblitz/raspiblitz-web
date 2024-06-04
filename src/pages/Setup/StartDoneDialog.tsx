@@ -1,10 +1,11 @@
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ConfirmModal from "@/components/ConfirmModal";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
-import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
 
+import { Headline } from "@/components/Headline";
+import { Button } from "@/components/Button";
 export type Props = {
   setupPhase: SetupPhase;
   callback: (cancel: boolean) => void;
@@ -53,23 +54,16 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
         />
       )}
       <SetupContainer>
-        <h2 className="text-center text-lg font-bold">{headline}</h2>
-        <div className="mt-5 flex justify-center gap-2">
-          <button
-            onClick={handleCancel}
-            className="flex items-center rounded bg-red-500 px-2 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-400"
-          >
-            <XMarkIcon className="inline h-6 w-6" />
-            <span className="p-2">{t("setup.cancel")}</span>
-          </button>
-          <button
-            onClick={() => callback(false)}
-            className="bd-button flex items-center px-2"
-          >
-            <span className="p-2 ">{buttonText}</span>
-            <ArrowSmallRightIcon className="inline h-6 w-6" />
-          </button>
-        </div>
+        <Headline>{headline}</Headline>
+
+        <article className="flex flex-col items-center justify-center gap-10 pt-10">
+          <Button onClick={() => callback(false)} color="primary">
+            {buttonText}
+          </Button>
+          <Button onClick={handleCancel} variant="light">
+            {t("setup.cancel")}
+          </Button>
+        </article>
       </SetupContainer>
     </>
   );

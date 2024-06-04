@@ -6,8 +6,8 @@ router.get("/status", function (req, res) {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send(
     JSON.stringify({
-      setupPhase: "recovery",
-      state: "waitsetup",
+      setupPhase: "done",
+      state: "waitfinal",
       message: "Node Running",
       initialsync: "",
     }),

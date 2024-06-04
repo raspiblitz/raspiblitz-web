@@ -63,7 +63,7 @@ const MigrationDialog: FC<InputData> = ({
 
           <p className="text-center text-base">{t("setup.convertwarning")}</p>
 
-          <article className="flex flex-col items-center justify-center gap-10">
+          <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button type="button" onClick={handleCancel} color="primary">
               {t("setup.no_and_shutdown")}
             </Button>
