@@ -1,34 +1,47 @@
-import ModalDialog from "@/layouts/ModalDialog";
-import { MODAL_ROOT } from "@/utils";
-import { FC } from "react";
-import { createPortal } from "react-dom";
+import { Button } from "@/components/Button";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@nextui-org/react";
+import type { UseDisclosureReturn } from "@nextui-org/use-disclosure";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
   confirmText: string;
   onConfirm: () => void;
-  onClose: () => void;
+  disclosure: UseDisclosureReturn;
 };
 
-const btnClasses =
-  "w-full xl:w-1/2 text-center h-10 m-2 bg-yellow-500 hover:bg-yellow-400 rounded text-white";
-
-const ConfirmModal: FC<Props> = ({ confirmText, onConfirm, onClose }) => {
+export const ConfirmModal = ({ confirmText, onConfirm, disclosure }: Props) => {
   const { t } = useTranslation();
+  const { isOpen, onOpenChange, onClose } = disclosure;
 
-  return createPortal(
-    <ModalDialog close={onClose}>
-      {confirmText}
-      <div className="flex flex-col p-3 xl:flex-row">
-        <button className={btnClasses} onClick={onClose}>
-          {t("settings.cancel")}
-        </button>
-        <button className={btnClasses} onClick={onConfirm}>
-          {t("settings.confirm")}
-        </button>
-      </div>
-    </ModalDialog>,
-    MODAL_ROOT,
+  return (
+    <>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                {t("settings.confirm")}
+              </ModalHeader>
+              <ModalBody>{confirmText}</ModalBody>
+              <ModalFooter>
+                <Button variant="light" onClick={onClose}>
+                  {t("settings.cancel")}
+                </Button>
+                <Button color="primary" onClick={onConfirm}>
+                  {t("settings.confirm")}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

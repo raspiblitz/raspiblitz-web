@@ -1,4 +1,5 @@
 import { Alert } from "@/components/Alert";
+import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { checkError } from "@/utils/checkError";
@@ -16,7 +17,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   useDisclosure,
   Input,
   Progress,
@@ -199,7 +199,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                 )}
 
                 {lnWalletLocked && (
-                  <>
+                  <div className="flex flex-col gap-4">
                     <p>
                       <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
                       {t("wallet.wallet_locked")}
@@ -208,7 +208,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                       {t("wallet.unlock_title")}
                     </Button>
                     <p>{t("wallet.wallet_unlock_info")}</p>
-                  </>
+                  </div>
                 )}
               </Alert>
             </div>

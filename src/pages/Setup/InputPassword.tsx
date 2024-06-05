@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Input } from "@nextui-org/react";
+import { Input, useDisclosure } from "@nextui-org/react";
 import { ChangeEvent, FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -28,7 +28,6 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
 
   const [password, setPassword] = useState("");
   const [, setPasswordRepeat] = useState("");
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const {
     register,
@@ -58,23 +57,16 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
     reset();
   };
 
-  const handleCancel = () => {
-    setShowConfirmModal(true);
-  };
-
-  const hideConfirm = () => {
-    setShowConfirmModal(false);
-  };
+  const confirmModal = useDisclosure();
 
   return (
     <>
-      {showConfirmModal && (
-        <ConfirmModal
-          confirmText={`${t("setup.cancel_setup")}?`}
-          onClose={hideConfirm}
-          onConfirm={() => callback(null)}
-        />
-      )}
+      <ConfirmModal
+        disclosure={confirmModal}
+        confirmText={`${t("setup.cancel_setup")}?`}
+        onConfirm={() => callback(null)}
+      />
+
       <SetupContainer>
         <section className="flex h-full flex-col items-center justify-center p-8">
           <Headline>
@@ -145,7 +137,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                 type="button"
                 color="secondary"
                 variant="light"
-                onClick={handleCancel}
+                onClick={() => confirmModal.onOpen()}
               >
                 {t("setup.cancel")}
               </Button>
