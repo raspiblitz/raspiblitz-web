@@ -3,7 +3,8 @@ import ConfirmModal from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
-import { FC, useState } from "react";
+import { useDisclosure } from "@nextui-org/react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
@@ -13,7 +14,7 @@ export type Props = {
 
 const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
   const { t } = useTranslation();
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const confirmModal = useDisclosure();
 
   let headline: string;
   let buttonText: string;
@@ -36,23 +37,14 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
       buttonText = t("setup.done_setup_start");
   }
 
-  const handleCancel = () => {
-    setShowConfirmModal(true);
-  };
-
-  const hideConfirm = () => {
-    setShowConfirmModal(false);
-  };
-
   return (
     <>
-      {showConfirmModal && (
-        <ConfirmModal
-          confirmText={`${t("setup.cancel_setup")}?`}
-          onClose={hideConfirm}
-          onConfirm={() => callback(true)}
-        />
-      )}
+      <ConfirmModal
+        disclosure={confirmModal}
+        confirmText={`${t("setup.cancel_setup")}?`}
+        onConfirm={() => callback(true)}
+      />
+
       <SetupContainer>
         <Headline>{headline}</Headline>
 
@@ -60,7 +52,7 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
           <Button onClick={() => callback(false)} color="primary">
             {buttonText}
           </Button>
-          <Button onClick={handleCancel} variant="light">
+          <Button onClick={() => confirmModal.onOpen()} variant="light">
             {t("setup.cancel")}
           </Button>
         </article>

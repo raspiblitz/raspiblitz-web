@@ -43,12 +43,14 @@ const WaitScreen: FC<Props> = ({ status, message }) => {
 
   return (
     <SetupContainer>
-      <section className="flex flex-col items-center justify-center">
+      <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
         <Spinner size="lg" />
 
-        <Headline>{headline}</Headline>
+        <div>
+          <Headline>{headline}</Headline>
 
-        <p className="my-2 text-sm">{details}</p>
+          <p className="my-2 text-sm">{details}</p>
+        </div>
       </section>
     </SetupContainer>
   );
