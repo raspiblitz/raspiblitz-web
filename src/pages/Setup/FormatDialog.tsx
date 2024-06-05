@@ -1,9 +1,9 @@
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Checkbox } from "@nextui-org/react";
+import { Checkbox, useDisclosure } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,7 +14,6 @@ export type Props = {
 
 export default function FormatDialog({ containsBlockchain, callback }: Props) {
   const { t } = useTranslation();
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [keepBlockchain, setKeepBlockchain] = useState(containsBlockchain);
 
   const submitHandler = (e: FormEvent) => {
@@ -22,15 +21,16 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
     callback(true, keepBlockchain);
   };
 
+  const confirmModal = useDisclosure();
+
   return (
     <>
-      {showConfirmModal && (
-        <ConfirmModal
-          confirmText={`${t("setup.cancel_setup")}?`}
-          onClose={() => setShowConfirmModal(false)}
-          onConfirm={() => callback(false, false)}
-        />
-      )}
+      <ConfirmModal
+        disclosure={confirmModal}
+        confirmText={`${t("setup.cancel_setup")}?`}
+        onConfirm={() => callback(false, false)}
+      />
+
       <SetupContainer>
         <form
           className="flex h-full flex-col items-center justify-center gap-8 p-8"
@@ -58,7 +58,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
               type="button"
               color="danger"
               variant="light"
-              onClick={() => setShowConfirmModal(true)}
+              onClick={() => confirmModal.onOpen()}
             >
               {t("setup.cancel")}
             </Button>
