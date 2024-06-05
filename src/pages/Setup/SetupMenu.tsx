@@ -32,12 +32,14 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
 
   return (
     <SetupContainer>
-      <section className="flex flex-col items-center justify-center">
-        <Headline>{t("setup.setupmenu.lets_setup")}</Headline>
+      <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
+        <div>
+          <Headline>{t("setup.setupmenu.lets_setup")}</Headline>
 
-        <p className="m-2 text-center text-secondary">
-          {t("setup.setupmenu.setup_time")}
-        </p>
+          <p className="m-2 text-center text-secondary">
+            {t("setup.setupmenu.setup_time")}
+          </p>
+        </div>
 
         <form
           className="flex h-full flex-col flex-wrap items-center justify-center"
@@ -93,9 +95,12 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
               ></CustomRadio>
             </RadioGroup>
           </div>
-          <Button type="submit" color="primary">
-            {t("setup.continue")}
-          </Button>
+
+          <article className="flex flex-col items-center justify-center gap-10 pt-10">
+            <Button type="submit" color="primary">
+              {t("setup.continue")}
+            </Button>
+          </article>
         </form>
       </section>
     </SetupContainer>

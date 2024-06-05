@@ -37,24 +37,26 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
 
   return (
     <SetupContainer>
-      <section className="flex flex-col items-center justify-center">
-        <Headline>{t("setup.select_lightning")}</Headline>
+      <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
+        <div>
+          <Headline>{t("setup.select_lightning")}</Headline>
 
-        <p className="m-2 text-center text-secondary">
-          <Trans
-            i18nKey={"setup.select_lightning_help"}
-            t={t}
-            components={[
-              // eslint-disable-next-line jsx-a11y/anchor-has-content
-              <a
-                href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
-                className="text-primary underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              ></a>,
-            ]}
-          />
-        </p>
+          <p className="m-2 text-center text-secondary">
+            <Trans
+              i18nKey={"setup.select_lightning_help"}
+              t={t}
+              components={[
+                // eslint-disable-next-line jsx-a11y/anchor-has-content
+                <a
+                  href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
+                  className="text-primary underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                ></a>,
+              ]}
+            />
+          </p>
+        </div>
 
         <form
           className="flex h-full flex-col flex-wrap items-center justify-center"

@@ -1,8 +1,8 @@
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Input } from "@nextui-org/react";
+import { Input, useDisclosure } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,7 @@ interface IFormInputs {
 
 export default function InputNodeName({ callback }: Props) {
   const [inputNodeName, setInputNodeName] = useState("");
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
   const { t } = useTranslation();
 
   const changeNodenameHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,15 +36,16 @@ export default function InputNodeName({ callback }: Props) {
     mode: "onChange",
   });
 
+  const confirmModal = useDisclosure();
+
   return (
     <>
-      {showConfirmModal && (
-        <ConfirmModal
-          confirmText={`${t("setup.cancel_setup")}?`}
-          onClose={() => setShowConfirmModal(false)}
-          onConfirm={() => callback(null)}
-        />
-      )}
+      <ConfirmModal
+        disclosure={confirmModal}
+        confirmText={`${t("setup.cancel_setup")}?`}
+        onConfirm={() => callback(null)}
+      />
+
       <SetupContainer>
         <section className="flex h-full flex-col items-center justify-center p-8">
           <Headline>{t("setup.input_node.header")}</Headline>
@@ -88,7 +89,7 @@ export default function InputNodeName({ callback }: Props) {
                 type="button"
                 color="danger"
                 variant="light"
-                onClick={() => setShowConfirmModal(true)}
+                onClick={() => confirmModal.onOpen()}
               >
                 {t("setup.cancel")}
               </Button>
