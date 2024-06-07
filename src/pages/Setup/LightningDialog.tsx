@@ -86,9 +86,11 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
             </RadioGroup>
           </div>
 
-          <Button type="submit" color="primary">
-            {t("setup.continue")}
-          </Button>
+          <article className="flex flex-col items-center justify-center gap-10 pt-10">
+            <Button type="submit" color="primary">
+              {t("setup.continue")}
+            </Button>
+          </article>
         </form>
       </section>
     </SetupContainer>
