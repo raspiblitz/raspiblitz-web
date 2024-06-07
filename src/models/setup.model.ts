@@ -1,41 +1,41 @@
 export enum SetupPhase {
-  NULL = "",
   DONE = "done",
-  SETUP = "setup",
-  RECOVERY = "recovery",
-  UPDATE = "update",
   MIGRATION = "migration",
+  NULL = "",
+  RECOVERY = "recovery",
+  SETUP = "setup",
+  UPDATE = "update",
 }
 
 export enum SetupStatus {
-  NULL = "",
-  WAIT = "wait",
   ERROR = "error",
-  WAITSETUP = "waitsetup",
-  WAITFINAL = "waitfinal",
-  WAITPROVISION = "waitprovision",
+  NULL = "",
   PROVISION = "provision",
   READY = "ready",
-  SHUTDOWN = "shutdown",
   REBOOT = "reboot",
+  SHUTDOWN = "shutdown",
+  WAIT = "wait",
+  WAITFINAL = "waitfinal",
+  WAITPROVISION = "waitprovision",
+  WAITSETUP = "waitsetup",
 }
 
 export enum SetupLightning {
-  NULL = "",
-  NONE = "none",
-  LND = "lnd",
   CLIGHTNING = "cl",
+  LND = "lnd",
+  NONE = "none",
+  NULL = "",
 }
 
 export enum SetupMigrationOS {
-  NULL = "",
-  UMBREL = "umbrel",
   CITADEL = "citadel",
   MYNODE = "mynode",
+  NULL = "",
+  UMBREL = "umbrel",
 }
 
 export enum SetupMigrationMode {
-  NULL = "",
   NORMAL = "normal",
+  NULL = "",
   OUTDATED = "outdatedLightning",
 }

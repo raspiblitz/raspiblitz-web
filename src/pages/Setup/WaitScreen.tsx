@@ -49,7 +49,7 @@ const WaitScreen: FC<Props> = ({ status, message }) => {
         <div>
           <Headline>{headline}</Headline>
 
-          <p className="my-2 text-sm">{details}</p>
+          <p className="m-2 text-center text-secondary">{details}</p>
         </div>
       </section>
     </SetupContainer>

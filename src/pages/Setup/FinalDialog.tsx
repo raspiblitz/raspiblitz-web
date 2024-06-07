@@ -33,7 +33,10 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
 
   return (
     <SetupContainer>
-      <form onSubmit={handleSubmit(callback)}>
+      <form
+        onSubmit={handleSubmit(callback)}
+        className="flex flex-col items-center"
+      >
         <section className="flex h-full flex-col items-center justify-center gap-y-10 lg:w-2/5 lg:p-8">
           <div className="text-center">
             <CheckCircleIcon className="inline-block h-24 w-auto stroke-1 text-success" />
