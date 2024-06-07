@@ -26,7 +26,9 @@ const MigrationDialog: FC<InputData> = ({
     return (
       <SetupContainer>
         <section className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-y-8">
-          <Alert as="h4">{t("setup.lightningoutdated")}</Alert>
+          <Alert color="warning" as="h4">
+            {t("setup.lightningoutdated")}
+          </Alert>
 
           <Button type="button" onClick={() => callback(false)} color="primary">
             {t("settings.shutdown")}
@@ -53,7 +55,9 @@ const MigrationDialog: FC<InputData> = ({
               })}
             </Headline>
 
-            <p className="text-center text-base">{t("setup.convertwarning")}</p>
+            <p className="m-2 text-center text-secondary">
+              {t("setup.convertwarning")}
+            </p>
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
