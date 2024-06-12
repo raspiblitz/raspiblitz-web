@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 
 export type Props = {
-  passwordType: "a" | "b" | "c";
+  passwordType: PasswordColors;
   callback: (password: string | null) => void;
 };
 
@@ -22,6 +22,8 @@ const passwordColors = {
   b: "text-primary",
   c: "text-warning",
 };
+
+type PasswordColors = keyof typeof passwordColors;
 
 const InputPassword: FC<Props> = ({ passwordType, callback }) => {
   const { t } = useTranslation();
