@@ -3,12 +3,12 @@ import ConfirmModal from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Input, useDisclosure } from "@nextui-org/react";
-import { ChangeEvent, FC, useState } from "react";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 
 export type Props = {
-  passwordType: "a" | "b" | "c";
+  passwordType: PasswordColors;
   callback: (password: string | null) => void;
 };
 
@@ -23,38 +23,27 @@ const passwordColors = {
   c: "text-warning",
 };
 
+type PasswordColors = keyof typeof passwordColors;
+
 const InputPassword: FC<Props> = ({ passwordType, callback }) => {
   const { t } = useTranslation();
-
-  const [password, setPassword] = useState("");
-  const [, setPasswordRepeat] = useState("");
 
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
 
-  const changePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const changePasswordRepeatHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
-    setPasswordRepeat(event.target.value);
-  };
-
-  const validatePassRepeat = (repeatPw: string): string | undefined => {
-    return repeatPw === password ? undefined : t("setup.password_error_match");
-  };
-
-  const continueHandler = () => {
-    callback(password);
-    reset();
+  const continueHandler = (data: IFormInputs) => {
+    callback(data.passfirst);
+    reset({
+      passfirst: "",
+      passrepeat: "",
+    });
   };
 
   const confirmModal = useDisclosure();
@@ -103,7 +92,6 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                 errorMessage={errors.passfirst?.message}
                 {...register("passfirst", {
                   required: t("setup.password_error_empty"),
-                  onChange: changePasswordHandler,
                   pattern: {
                     value: /^[a-zA-Z0-9.-]*$/,
                     message: t("setup.password_error_chars"),
@@ -123,8 +111,9 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
                 errorMessage={errors.passrepeat?.message}
                 {...register("passrepeat", {
                   required: t("setup.password_error_empty"),
-                  onChange: changePasswordRepeatHandler,
-                  validate: validatePassRepeat,
+                  validate: (value) =>
+                    value === watch("passfirst") ||
+                    t("setup.password_error_match"),
                 })}
               />
             </fieldset>
