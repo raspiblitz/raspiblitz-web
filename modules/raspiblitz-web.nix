@@ -33,8 +33,8 @@ in {
 
         location = mkOption {
           type = types.str;
-          example = "/webui";
-          default = "/webui";
+          example = "/";
+          default = "/";
           description = "The location to serve the webui fronted from.";
         };
 
@@ -48,23 +48,22 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.static-web-server = {
+    services.nginx = mkIf cfg.nginx.enable {
       enable = true;
-      root = "${pkgs.${name}}";
-      listen = "[::]:80";
-    };
+      virtualHosts.${cfg.nginx.hostName} = {
+        forceSSL = false;
+        enableACME = false;
 
-    # services.nginx = mkIf cfg.nginx.enable {
-    #   enable = true;
-    #   virtualHosts.${cfg.nginx.hostName} = {
-    #     forceSSL = false;
-    #     enableACME = false;
-    #
-    #     locations."${cfg.nginx.location}" = {
-    #       root = "${pkgs.${name}}";
-    #     };
-    #   };
-    # };
+        locations."${cfg.nginx.location}" = {
+          root = "${pkgs.${name}}";
+          extraConfig = ''
+            # Forward any unknown urls to the UI.
+            # Client side routing of react will fail otherwise.
+            try_files $uri /index.html;
+          '';
+        };
+      };
+    };
 
     networking.firewall = mkIf cfg.nginx.openFirewall {
       allowedTCPPorts = [80];
