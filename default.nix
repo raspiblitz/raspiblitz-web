@@ -1,7 +1,8 @@
-{ lib
-, config
-, dream2nix
-, ...
+{
+  lib,
+  config,
+  dream2nix,
+  ...
 }: {
   imports = [
     dream2nix.modules.dream2nix.nodejs-package-lock-v3
@@ -12,7 +13,7 @@
     src = ./build;
   };
 
-  deps = { nixpkgs, ... }: {
+  deps = {nixpkgs, ...}: {
     inherit
       (nixpkgs)
       stdenv
