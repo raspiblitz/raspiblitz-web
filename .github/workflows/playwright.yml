@@ -17,11 +17,11 @@ jobs:
       run: npm ci
     - name: Install backend dependencies
       run: |
-        cd backend
+        cd backend-mock
         npm ci
     - name: Start backend
       run: |
-        cd backend
+        cd backend-mock
         npm start
     - name: Start frontend
       run: npm start
