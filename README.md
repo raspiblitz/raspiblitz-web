@@ -70,11 +70,11 @@ Then go to `http://localhost:3000` and use the password `password`.
 
 #### E2E tests
 
-Run chormium tests only:\
-`npx playwright test --project=chromium`
+Run tests headless:\
+`npx playwright test`
 
 Run test with UI:\
-`npx playwright test --project=chromium --ui`
+`npx playwright test --ui`
 
 ##### Blitz API
 
