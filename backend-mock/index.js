@@ -21,7 +21,7 @@ app.use(
   express.json(),
 );
 app.get("/index.html", (req, res) => {
-  // only to saitsfy playwright webserver check
+  // only to satisfy playwright webserver check
   res.send("ok");
 });
 app.use("/api/system", system);
