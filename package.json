@@ -11,6 +11,7 @@
   "scripts": {
     "start": "vite",
     "dev": "npm run start",
+    "backend": "npm start --prefix ./backend-mock",
     "build": "vite build",
     "tsc": "tsc --noEmit",
     "test": "vitest run --exclude 'tests'",

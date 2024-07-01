@@ -19,16 +19,10 @@ jobs:
       run: |
         cd backend-mock
         npm ci
-    - name: Start backend
-      run: |
-        cd backend-mock
-        npm start
-    - name: Start frontend
-      run: npm start
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test --project=chromium
+      run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: always()
       with:

@@ -20,6 +20,10 @@ app.use(
   cors({ credentials: true, origin: "http://localhost:3000" }),
   express.json(),
 );
+app.get("/index.html", (req, res) => {
+  // only to saitsfy playwright webserver check
+  res.send("ok");
+});
 app.use("/api/system", system);
 app.use("/api/setup", setup);
 app.use("/api/apps", apps);
