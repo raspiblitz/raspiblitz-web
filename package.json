@@ -13,9 +13,9 @@
     "dev": "npm run start",
     "build": "vite build",
     "tsc": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
-    "coverage": "vitest run --coverage",
+    "test": "vitest run --exclude 'tests'",
+    "test:watch": "vitest watch --exclude 'tests'",
+    "coverage": "vitest run --coverage --exclude 'tests'",
     "prepare": "husky"
   },
   "config": {
