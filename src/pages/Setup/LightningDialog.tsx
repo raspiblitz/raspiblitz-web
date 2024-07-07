@@ -36,7 +36,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
   };
 
   return (
-    <SetupContainer>
+    <SetupContainer currentStep={3}>
       <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
         <div>
           <Headline>{t("setup.select_lightning")}</Headline>
