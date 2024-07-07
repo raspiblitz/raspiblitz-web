@@ -31,7 +31,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
         onConfirm={() => callback(false, false)}
       />
 
-      <SetupContainer>
+      <SetupContainer currentStep={1}>
         <form
           className="flex h-full flex-col items-center justify-center gap-8 p-8"
           onSubmit={submitHandler}

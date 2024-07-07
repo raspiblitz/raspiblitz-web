@@ -46,7 +46,7 @@ export default function InputNodeName({ callback }: Props) {
         onConfirm={() => callback(null)}
       />
 
-      <SetupContainer>
+      <SetupContainer currentStep={2}>
         <section className="flex h-full flex-col items-center justify-center p-8">
           <Headline>{t("setup.input_node.header")}</Headline>
 

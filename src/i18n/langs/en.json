@@ -224,6 +224,13 @@
       "debug_report_done": "Debug Report created!"
     },
     "setup": {
+      "step": {
+        "step": "Step",
+        "step_1_description": "Prepare Drive",
+        "step_2_description": "Node Name",
+        "step_3_description": "Node Type",
+        "step_4_description": "Set Passwords"
+      },
       "setupmenu": {
         "lets_setup": "Let's setup your RaspiBlitz",
         "setup_time": "The total setup process takes about 20 minutes"

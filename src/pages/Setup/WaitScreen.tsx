@@ -42,7 +42,7 @@ const WaitScreen: FC<Props> = ({ status, message }) => {
   }
 
   return (
-    <SetupContainer>
+    <SetupContainer currentStep={null}>
       <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
         <Spinner size="lg" />
 
