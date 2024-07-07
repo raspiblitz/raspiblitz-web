@@ -62,6 +62,20 @@ npm run start
 
 Then go to `http://localhost:3000` and use the password `password`.
 
+### Testing
+
+#### Unit tests
+
+`npm test`
+
+#### E2E tests
+
+Run tests headless:\
+`npx playwright test`
+
+Run test with UI:\
+`npx playwright test --ui`
+
 ##### Blitz API
 
 This guide uses Polar for easier development, but you can also use a real lightning node.

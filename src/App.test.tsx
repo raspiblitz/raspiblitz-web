@@ -52,11 +52,12 @@ describe("App", () => {
         );
       }),
     );
+
     render(
       <I18nextProvider i18n={i18n}>
         <App />
       </I18nextProvider>,
     );
-    expect(await screen.findByText("Log in")).toBeInTheDocument();
+    expect(await screen.findByText("login.login")).toBeInTheDocument();
   });
 });
