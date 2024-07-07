@@ -45,7 +45,7 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
         onConfirm={() => callback(true)}
       />
 
-      <SetupContainer>
+      <SetupContainer currentStep={null}>
         <Headline>{headline}</Headline>
 
         <article className="flex flex-col items-center justify-center gap-10 pt-10">

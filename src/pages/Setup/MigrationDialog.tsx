@@ -24,7 +24,7 @@ const MigrationDialog: FC<InputData> = ({
 
   if (migrationMode === SetupMigrationMode.OUTDATED) {
     return (
-      <SetupContainer>
+      <SetupContainer currentStep={1}>
         <section className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-y-8">
           <Alert color="warning" as="h4">
             {t("setup.lightningoutdated")}
@@ -46,7 +46,7 @@ const MigrationDialog: FC<InputData> = ({
         onConfirm={() => callback(false)}
       />
 
-      <SetupContainer>
+      <SetupContainer currentStep={1}>
         <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
           <div>
             <Headline>
