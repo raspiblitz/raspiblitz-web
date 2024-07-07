@@ -32,7 +32,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   });
 
   return (
-    <SetupContainer>
+    <SetupContainer currentStep={null}>
       <form
         onSubmit={handleSubmit(callback)}
         className="flex flex-col items-center"

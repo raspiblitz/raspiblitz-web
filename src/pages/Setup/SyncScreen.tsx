@@ -155,7 +155,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
         </Modal>
       )}
 
-      <SetupContainer>
+      <SetupContainer currentStep={null}>
         <section className="flex h-full w-96 max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
           <Headline>{t("setup.sync_headline")}</Headline>
 

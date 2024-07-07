@@ -56,7 +56,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
         onConfirm={() => callback(null)}
       />
 
-      <SetupContainer>
+      <SetupContainer currentStep={4}>
         <section className="flex h-full flex-col items-center justify-center p-8">
           <Headline>
             <Trans
