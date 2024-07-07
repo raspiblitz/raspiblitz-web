@@ -1,13 +1,13 @@
 import { test } from "@playwright/test";
 
-test("happy path setup", async ({ page }) => {
+test("simple setup path", async ({ page }) => {
   await page.goto("http://localhost:3000");
 
   // setup choice
   await page.getByLabel("Fresh Setup").click({ force: true }); // label is somehow covered
   await page.getByRole("button", { name: "Continue" }).click();
 
-  // delete data ingo
+  // delete data info
   await page.getByRole("button", { name: "Yes, delete all data" }).click();
 
   // node name
