@@ -3,7 +3,7 @@ import { test } from "@playwright/test";
 test("happy path setup", async ({ page }) => {
   await page.goto("http://localhost:3000");
 
-  // setup coice
+  // setup choice
   await page.getByLabel("Fresh Setup").click({ force: true }); // label is somehow covered
   await page.getByRole("button", { name: "Continue" }).click();
 
