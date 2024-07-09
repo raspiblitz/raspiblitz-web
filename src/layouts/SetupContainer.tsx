@@ -11,7 +11,7 @@ export default function SetupContainer({
   children,
 }: PropsWithChildren<Props>) {
   return (
-    <main className="flex h-screen w-screen flex-col items-center justify-center bg-primary-900 transition-colors text-white">
+    <main className="flex min-h-screen h-full w-screen flex-col items-center justify-center bg-primary-900 transition-colors text-white">
       <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
         <I18nSelect />
       </div>

@@ -68,7 +68,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             )}
           />
 
-          <article className="justify-cente flex flex-col items-center">
+          <article className="justify-center flex flex-col items-center pb-4">
             <Button type="submit" isDisabled={!isValid} color="primary">
               {t("setup.final_do_reboot")}
             </Button>
