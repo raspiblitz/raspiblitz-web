@@ -2,7 +2,6 @@ import useClipboard from "@/hooks/use-clipboard";
 import ModalDialog from "@/layouts/ModalDialog";
 import { MODAL_ROOT } from "@/utils";
 import { QRCodeSVG } from "qrcode.react";
-import { FC } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
@@ -12,7 +11,7 @@ type Props = {
   closeModal: () => void;
 };
 
-const QRCodeModal: FC<Props> = ({ identityUri, closeModal }) => {
+export default function QRCodeModal({ identityUri, closeModal }: Props) {
   const { t } = useTranslation();
   const [copyNodeId, clippedNodeId] = useClipboard(identityUri);
 
@@ -20,13 +19,11 @@ const QRCodeModal: FC<Props> = ({ identityUri, closeModal }) => {
     <ModalDialog close={closeModal}>
       <div className="my-5 flex flex-col items-center justify-center">
         <QRCodeSVG value={identityUri} size={256} />
-        <p className="my-5 text-sm text-gray-500 dark:text-gray-300">
-          {t("home.connect_node")}
-        </p>
+        <p className="my-5 text-sm text-gray-300">{t("home.connect_node")}</p>
         <p
           onClick={copyNodeId}
           data-tooltip-id="copy-tooltip"
-          className="w-full break-all text-gray-600 dark:text-gray-200"
+          className="w-full break-all text-gray-200"
         >
           {identityUri}
         </p>
@@ -39,6 +36,4 @@ const QRCodeModal: FC<Props> = ({ identityUri, closeModal }) => {
     </ModalDialog>,
     MODAL_ROOT,
   );
-};
-
-export default QRCodeModal;
+}

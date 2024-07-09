@@ -57,7 +57,7 @@ export const AppCardAlby: FC = () => {
   };
 
   return (
-    <article className="bd-card transition-colors dark:bg-gray-800">
+    <article className="bd-card transition-colors bg-gray-800">
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {/* Icon */}
         <div className="mt-4 flex w-1/4 items-center justify-center p-2">
@@ -66,7 +66,7 @@ export const AppCardAlby: FC = () => {
         {/* Content */}
         <div className="mt-4 flex w-3/4 flex-col items-start justify-center text-xl">
           <h4>{name}</h4>
-          <p className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
+          <p className="overflow-ellipsis text-base text-gray-200">
             {t(`appInfo.${id}.shortDescription`)}
           </p>
         </div>

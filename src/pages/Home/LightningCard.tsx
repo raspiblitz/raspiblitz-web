@@ -64,29 +64,23 @@ export const LightningCard: FC = () => {
         <h2 className="text-lg font-bold">{t("home.lightning")}</h2>
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
-              {t("home.version")}
-            </h6>
+            <h6 className="text-sm text-gray-200">{t("home.version")}</h6>
             <p>{`${implementation || "-"} ${versionString}`}</p>
           </article>
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
-              {t("home.channel")}
-            </h6>
+            <h6 className="text-sm text-gray-200">{t("home.channel")}</h6>
             <p>{`${activeChannels} / ${channelTotal}`}</p>
           </article>
         </div>
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
-              {t("home.local_balance")}
-            </h6>
+            <h6 className="text-sm text-gray-200">{t("home.local_balance")}</h6>
             <p>
               {convertToString(unit, convertedLocalBalance)} {unit}
             </p>
           </article>
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+            <h6 className="text-sm text-gray-200">
               {t("home.remote_balance")}
             </h6>
             <p>
@@ -96,7 +90,7 @@ export const LightningCard: FC = () => {
         </div>
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+            <h6 className="text-sm text-gray-200">
               {t("home.pending_balance_local")}
             </h6>
             <p>
@@ -104,7 +98,7 @@ export const LightningCard: FC = () => {
             </p>
           </article>
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
+            <h6 className="text-sm text-gray-200">
               {t("home.pending_balance_remote")}
             </h6>
             <p>

@@ -1,4 +1,3 @@
-import RaspiBlitzLogo from "@/assets/RaspiBlitz_Logo_Main.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
 import I18nSelect from "@/components/I18nDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
@@ -7,7 +6,6 @@ import { AppContext } from "@/context/app-context";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { MoonIcon } from "@heroicons/react/24/outline";
 import { Button } from "@nextui-org/button";
 import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
@@ -18,8 +16,7 @@ const Login: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const { isLoggedIn, setIsLoggedIn, darkMode, toggleDarkMode } =
-    useContext(AppContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
   const passwordInput = useRef<HTMLInputElement>(null);
 
@@ -70,24 +67,19 @@ const Login: FC = () => {
   };
 
   return (
-    <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-100 transition-colors dark:bg-gray-700">
-      <MoonIcon
-        className="text-dark fixed right-4 top-4 h-8 dark:text-yellow-500"
-        onClick={toggleDarkMode}
-      />
+    <main className="flex h-screen w-screen flex-col items-center justify-center transition-colors bg-gray-700">
       <div className="fixed right-16 top-4 flex h-8 w-72 items-center justify-around">
         <article className="flex justify-between">
           <label
             htmlFor="lngSelect"
-            className="mr-2 w-1/2 font-bold dark:text-white"
+            className="mr-2 w-1/2 font-bold text-white"
           >
             {t("settings.language")}
           </label>
           <I18nSelect />
         </article>
       </div>
-      {!darkMode && <RaspiBlitzLogo className="my-2 block h-10" />}
-      {darkMode && <RaspiBlitzLogoDark className="my-2 block h-10" />}
+      <RaspiBlitzLogoDark className="my-2 block h-10" />
       {isLoading && (
         <div className="py-5">
           <LoadingSpinner color="text-yellow-500" />

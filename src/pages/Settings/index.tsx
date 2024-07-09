@@ -23,7 +23,7 @@ const Settings: FC = () => {
   }, []);
 
   return (
-    <main className="content-container page-container grid auto-rows-min gap-5 bg-gray-100 p-5 pt-8 transition-colors dark:bg-gray-700 dark:text-white lg:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8">
+    <main className="content-container page-container grid auto-rows-min gap-5 p-5 pt-8 transition-colors bg-gray-700 text-white lg:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8">
       <I18nBox />
       <ActionBox
         name={t("settings.change_pw_a")}

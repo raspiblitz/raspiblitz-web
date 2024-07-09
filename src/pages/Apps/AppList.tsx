@@ -12,7 +12,7 @@ type Props = {
 const AppList: FC<Props> = ({ title, apps, onInstall }) => {
   return (
     <section className="flex h-full flex-wrap">
-      <h2 className="w-full pb-5 pt-8 text-xl font-bold dark:text-gray-200">
+      <h2 className="w-full pb-5 pt-8 text-xl font-bold text-gray-200">
         {title}
       </h2>
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">

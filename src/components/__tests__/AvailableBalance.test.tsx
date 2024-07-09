@@ -6,12 +6,10 @@ import { render, screen } from "test-utils";
 
 const contextValues: AppContextType = {
   isLoggedIn: false,
-  darkMode: false,
   unit: Unit.SAT,
   walletLocked: false,
   isGeneratingReport: false,
   toggleUnit: vi.fn(),
-  toggleDarkMode: vi.fn(),
   setIsLoggedIn: vi.fn(),
   logout: vi.fn(),
   setWalletLocked: vi.fn(),

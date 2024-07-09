@@ -73,7 +73,7 @@ export const ConnectionCard: FC = () => {
           </Tooltip>
         </div>
         <article className="flex flex-col overflow-hidden py-4">
-          <h6 className="text-sm text-gray-500 dark:text-gray-200">
+          <h6 className="text-sm text-gray-200">
             {`${t("home.webui")} (${t("home.tor")})`}
           </h6>
           {torAddress && (
@@ -106,7 +106,7 @@ export const ConnectionCard: FC = () => {
           {!torAddress && <div>{t("home.not_available")}</div>}
         </article>
         <article className="flex flex-col overflow-hidden py-4">
-          <h6 className="text-sm text-gray-500 dark:text-gray-200">
+          <h6 className="text-sm text-gray-200">
             {`${t("home.webui")} (${t("home.ssh")})`}
           </h6>
           <div className="flex">
@@ -137,9 +137,7 @@ export const ConnectionCard: FC = () => {
         </article>
         {nodeId && (
           <article className="flex flex-col overflow-hidden py-4">
-            <h6 className="text-sm text-gray-500 dark:text-gray-200">
-              {t("home.node_id")}
-            </h6>
+            <h6 className="text-sm text-gray-200">{t("home.node_id")}</h6>
             <div className="flex">
               <a
                 className={`w-8/12 ${

@@ -59,7 +59,7 @@ export const AppCard: FC<Props> = ({
   };
 
   return (
-    <article className="bd-card transition-colors dark:bg-gray-800">
+    <article className="bd-card transition-colors bg-gray-800">
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {installed && (
           <>
@@ -85,7 +85,7 @@ export const AppCard: FC<Props> = ({
         {/* Content */}
         <div className="mt-4 flex w-3/4 flex-col items-start justify-center text-xl">
           <h4>{name}</h4>
-          <p className="overflow-ellipsis text-base text-gray-500 dark:text-gray-200">
+          <p className="overflow-ellipsis text-base text-gray-200">
             {t(`appInfo.${id}.shortDescription`)}
           </p>
         </div>
@@ -147,7 +147,7 @@ export const AppCard: FC<Props> = ({
             </ButtonWithSpinner>
           )}
         <button
-          className="flex w-1/2 items-center justify-center rounded p-2 shadow-md hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black"
+          className="flex w-1/2 items-center justify-center rounded p-2 shadow-md bg-gray-500 hover:bg-gray-300 hover:text-black"
           onClick={() => navigate(`/apps/${appInfo.id}/info`)}
         >
           <InformationCircleIcon className="inline h-6 w-6" />

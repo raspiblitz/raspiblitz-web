@@ -19,7 +19,7 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
     return (
       <span
         onClick={() => navigate(`/apps/${id}`)}
-        className="flex w-full cursor-pointer items-center justify-center py-4 opacity-80 hover:text-yellow-500 dark:text-white dark:hover:text-yellow-500 md:flex-col lg:flex-row"
+        className="flex w-full cursor-pointer items-center justify-center py-4 opacity-80 text-white hover:text-yellow-500 md:flex-col lg:flex-row"
       >
         {/* Icon */}
         <AppIcon appId={id} className="h-19 inline w-10" />
@@ -34,7 +34,7 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
       href={getHrefFromApp(app)}
       target={"_blank"}
       rel={"noopener noreferrer"}
-      className="flex w-full cursor-pointer items-center justify-center py-4 opacity-80 hover:text-yellow-500 dark:text-white dark:hover:text-yellow-500 md:flex-col lg:flex-row"
+      className="flex w-full cursor-pointer items-center justify-center py-4 opacity-80 text-white hover:text-yellow-500 md:flex-col lg:flex-row"
     >
       {/* Icon */}
       <AppIcon appId={id} className="h-19 inline w-10" />
