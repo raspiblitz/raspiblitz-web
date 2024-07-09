@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Input, useDisclosure } from "@nextui-org/react";
+import { Input, useDisclosure, cn } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -57,6 +57,9 @@ export default function InputNodeName({ callback }: Props) {
             <fieldset className="w-full">
               <Input
                 className="w-full"
+                classNames={{
+                  inputWrapper: "bg-default group-data-[focus=true]:bg-default",
+                }}
                 type="text"
                 label={t("setup.input_node.label")}
                 placeholder="e.g. MyRaspiBlitz"

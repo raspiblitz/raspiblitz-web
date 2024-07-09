@@ -86,6 +86,9 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
             <fieldset className="flex w-full flex-col gap-4">
               <Input
                 className="w-full"
+                classNames={{
+                  inputWrapper: "bg-default group-data-[focus=true]:bg-default",
+                }}
                 type="password"
                 label={t(`setup.password_${passwordType}_name`)}
                 isInvalid={!!errors.passfirst}
@@ -105,6 +108,9 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
 
               <Input
                 className="w-full"
+                classNames={{
+                  inputWrapper: "bg-default group-data-[focus=true]:bg-default",
+                }}
                 type="password"
                 label={`${t("setup.password_repeat")} ${t(`setup.password_${passwordType}_name`)}`}
                 isInvalid={!!errors.passrepeat}

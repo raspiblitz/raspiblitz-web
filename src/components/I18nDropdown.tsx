@@ -24,6 +24,9 @@ const I18nSelect: FC = () => {
       aria-label="Select language"
       defaultSelectedKeys={[i18n.language]}
       onChange={selectLangHandler}
+      classNames={{
+        trigger: "bg-default",
+      }}
     >
       {langs.map((lang) => {
         return (
