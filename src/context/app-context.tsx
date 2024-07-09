@@ -4,14 +4,13 @@ import {
   disableGutter,
   parseJwt,
   retrieveSettings,
-  saveSettings,
   setWindowAlias,
 } from "@/utils";
 import type { FC, PropsWithChildren } from "react";
 import {
+  createContext,
   Dispatch,
   SetStateAction,
-  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -23,12 +22,10 @@ import { toast } from "react-toastify";
 
 export interface AppContextType {
   isLoggedIn: boolean;
-  darkMode: boolean;
   unit: Unit;
   walletLocked: boolean;
   isGeneratingReport: boolean;
   toggleUnit: () => void;
-  toggleDarkMode: () => void;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   logout: () => void;
   setWalletLocked: Dispatch<SetStateAction<boolean>>;
@@ -42,14 +39,12 @@ export enum Unit {
 
 export const appContextDefault: AppContextType = {
   isLoggedIn: false,
-  darkMode: true,
   unit: Unit.SAT,
   walletLocked: false,
   isGeneratingReport: false,
   toggleUnit: () => {},
   setIsLoggedIn: () => {},
   logout: () => {},
-  toggleDarkMode: () => {},
   setWalletLocked: () => {},
   setIsGeneratingReport: () => {},
 };
@@ -62,23 +57,12 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const [unit, setUnit] = useState<Unit>(Unit.SAT);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
   const [walletLocked, setWalletLocked] = useState(false);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const navigate = useNavigate();
 
   const toggleUnitHandler = () => {
     setUnit((prevUnit: Unit) => (prevUnit === Unit.SAT ? Unit.BTC : Unit.SAT));
-  };
-
-  const toggleDarkModeHandler = () => {
-    setDarkMode((prevMode: boolean) => {
-      const newMode = !prevMode;
-
-      saveSettings({ darkMode: newMode });
-
-      return newMode;
-    });
   };
 
   const logoutHandler = useCallback(() => {
@@ -101,21 +85,9 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
     // check for settings in storage and set
     if (settings) {
-      if (settings.darkMode) {
-        setDarkMode(settings.darkMode);
-      }
-
       if (settings.lang) {
         i18n.changeLanguage(settings.lang);
       }
-    }
-
-    // check for dark mode
-    const documentEl = document.documentElement.classList;
-    if (darkMode) {
-      documentEl.add("dark");
-    } else {
-      documentEl.remove("dark");
     }
 
     // if authenticated log in automatically
@@ -134,18 +106,16 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         console.info(`Token invalid - removed.`);
       }
     }
-  }, [darkMode, i18n]);
+  }, [i18n]);
 
   const contextValue: AppContextType = {
     isLoggedIn,
-    darkMode,
     unit,
     walletLocked,
     isGeneratingReport,
     toggleUnit: toggleUnitHandler,
     setIsLoggedIn,
     logout: logoutHandler,
-    toggleDarkMode: toggleDarkModeHandler,
     setWalletLocked,
     setIsGeneratingReport,
   };

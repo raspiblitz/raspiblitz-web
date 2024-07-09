@@ -85,9 +85,9 @@ export const AppInfo: FC = () => {
   }
 
   return (
-    <main className="page-container content-container w-full bg-gray-100 dark:bg-gray-700 dark:text-white">
+    <main className="page-container content-container w-full bg-gray-700 text-white">
       {/* Back Button */}
-      <section className="w-full px-5 py-9 dark:text-gray-200">
+      <section className="w-full px-5 py-9 text-gray-200">
         <button
           onClick={() => navigate("/apps")}
           className="flex items-center text-xl font-bold outline-none"
@@ -100,7 +100,7 @@ export const AppInfo: FC = () => {
       {/* Image box with title */}
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
         <AppIcon appId={appId} className="max-h-12" />
-        <h1 className="px-5 text-2xl dark:text-white">{name}</h1>
+        <h1 className="px-5 text-2xl text-white">{name}</h1>
         {(installingApp == null || installingApp.appId !== appId) &&
           !installed && (
             <button
@@ -157,22 +157,16 @@ export const AppInfo: FC = () => {
           <h3 className="text-lg">
             {name} {version}
           </h3>
-          <h4 className="my-2 text-gray-500 dark:text-gray-300">
-            {t("apps.about")}
-          </h4>
+          <h4 className="my-2 text-gray-300">{t("apps.about")}</h4>
           <p>{t(`appInfo.${appId}.about`)}</p>
-          <h4 className="my-2 text-gray-500 dark:text-gray-300">
-            {t("apps.author")}
-          </h4>
+          <h4 className="my-2 text-gray-300">{t("apps.author")}</h4>
           <p>{author}</p>
-          <h4 className="my-2 text-gray-500 dark:text-gray-300">
-            {t("apps.source")}
-          </h4>
+          <h4 className="my-2 text-gray-300">{t("apps.source")}</h4>
           <a
             href={repository}
             target="_blank"
             rel="noreferrer noopener"
-            className="text-blue-400 underline dark:text-blue-300"
+            className="underline text-blue-300"
           >
             {repository}
           </a>

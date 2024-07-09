@@ -76,11 +76,11 @@ const AmountInput: FC<Props> = ({
           disabled={disabled}
         />
         <span
-          className="ml-6 flex w-4/12 items-center justify-center rounded p-1 shadow-md dark:bg-gray-600"
+          className="ml-6 flex w-4/12 items-center justify-center rounded p-1 shadow-md bg-gray-600"
           onClick={toggleHandler}
         >
           {unit}
-          <ArrowsRightLeftIcon className="ml-1 h-5 w-5 text-black dark:text-white" />
+          <ArrowsRightLeftIcon className="ml-1 h-5 w-5 text-white" />
         </span>
       </div>
 

@@ -8,7 +8,7 @@ import ModalDialog, { disableScroll } from "@/layouts/ModalDialog";
 import { MODAL_ROOT } from "@/utils";
 import { instance } from "@/utils/interceptor";
 import { LockOpenIcon } from "@heroicons/react/24/outline";
-import { FC, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -23,13 +23,13 @@ type Props = {
   onClose: () => void;
 };
 
-const UnlockModal: FC<Props> = ({ onClose }) => {
+const theme = "dark";
+export default function UnlockModal({ onClose }: Props) {
   const { t } = useTranslation();
-  const { setWalletLocked, darkMode } = useContext(AppContext);
+  const { setWalletLocked } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
   const { isCapsLockOn, keyHandlers } = useCapsLock();
-  const theme = darkMode ? "dark" : "light";
 
   const {
     register,
@@ -98,6 +98,4 @@ const UnlockModal: FC<Props> = ({ onClose }) => {
     </ModalDialog>,
     MODAL_ROOT,
   );
-};
-
-export default UnlockModal;
+}

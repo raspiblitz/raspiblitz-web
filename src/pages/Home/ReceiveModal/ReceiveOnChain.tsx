@@ -44,13 +44,11 @@ const ReceiveOnChain: FC<Props> = ({
   return (
     <>
       <QRCodeSVG role={"img"} className="mx-auto" value={address} size={256} />
-      <p className="my-5 text-sm text-gray-500 dark:text-gray-300">
-        {t("wallet.scan_qr")}
-      </p>
+      <p className="my-5 text-sm text-gray-300">{t("wallet.scan_qr")}</p>
       <article className="mb-5 flex flex-row items-center">
         <p
           onClick={copyAddress}
-          className="w-full break-all text-gray-600 dark:text-gray-200"
+          className="w-full break-all text-gray-200"
           data-tooltip-id="copy-tooltip"
         >
           {address}

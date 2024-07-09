@@ -18,7 +18,6 @@ export const MODAL_ROOT =
 
 export interface SavedSettings {
   lang: string;
-  darkMode: boolean;
 }
 
 /**
@@ -41,8 +40,7 @@ export function saveSettings(settings: Partial<SavedSettings>): void {
 export function retrieveSettings(): SavedSettings | null {
   const settingString = localStorage.getItem(SETTINGS_KEY);
   if (settingString) {
-    const settings: SavedSettings = JSON.parse(settingString);
-    return settings;
+    return JSON.parse(settingString);
   }
 
   return null;

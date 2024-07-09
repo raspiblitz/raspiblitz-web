@@ -38,9 +38,7 @@ export const LNDetails: FC<Props> = ({ details }) => {
   return (
     <section className="my-4 flex flex-col py-3">
       <article className="m-2 flex overflow-hidden border-b-2 border-gray-400 py-1 text-left">
-        <h6 className="w-1/2 text-gray-500 dark:text-gray-200">
-          {t("tx.txid")}
-        </h6>
+        <h6 className="w-1/2 text-gray-200">{t("tx.txid")}</h6>
         <p className="mx-2 w-1/2 overflow-hidden overflow-x-auto">
           {details.id}
         </p>

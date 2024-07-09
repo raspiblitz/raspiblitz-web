@@ -49,29 +49,21 @@ export const HardwareCard: FC = () => {
       </h5>
       <article className="flex flex-row overflow-hidden py-4">
         <div className="flex w-1/2 flex-col">
-          <h6 className="text-sm text-gray-500 dark:text-gray-200">
-            {t("hardware.cpu_load")}
-          </h6>
+          <h6 className="text-sm text-gray-200">{t("hardware.cpu_load")}</h6>
           <p className="flex">{cpuPercent} %</p>
         </div>
         <div className="flex w-1/2 flex-col">
-          <h6 className="text-sm text-gray-500 dark:text-gray-200">
-            {t("hardware.temp")}
-          </h6>
+          <h6 className="text-sm text-gray-200">{t("hardware.temp")}</h6>
           <p className="flex">{systemTemp} °C</p>
         </div>
       </article>
       <article className="flex flex-row overflow-hidden py-4">
         <div className="flex w-1/2 flex-col">
-          <h6 className="text-sm text-gray-500 dark:text-gray-200">
-            {t("hardware.ram_usage")}
-          </h6>
+          <h6 className="text-sm text-gray-200">{t("hardware.ram_usage")}</h6>
           <p className="flex">{vramUsagePercent} %</p>
         </div>
         <div className="flex w-1/2 flex-col">
-          <h6 className="text-sm text-gray-500 dark:text-gray-200">
-            {t("hardware.disk_usage")}
-          </h6>
+          <h6 className="text-sm text-gray-200">{t("hardware.disk_usage")}</h6>
           <p className="flex">
             {hddUsedGB} / {hddTotalGB} GB ({hddPercentUsed} %)
           </p>

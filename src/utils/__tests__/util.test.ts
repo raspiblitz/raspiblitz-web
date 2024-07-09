@@ -10,35 +10,34 @@ describe("util", () => {
   });
 
   test("saveSettings should save settings", () => {
-    saveSettings({ darkMode: false, lang: "de" });
+    saveSettings({ lang: "de" });
 
     expect(localStorage.setItem).toHaveBeenCalledWith(
       SETTINGS_KEY,
-      JSON.stringify({ darkMode: false, lang: "de" }),
+      JSON.stringify({ lang: "de" }),
     );
   });
 
   test("saveSettings should save metge with existing settings", () => {
     window.localStorage.__proto__.getItem = vi.fn(() =>
-      JSON.stringify({ darkMode: true, lang: "en" }),
+      JSON.stringify({ lang: "en" }),
     );
 
     saveSettings({ lang: "de" });
 
     expect(localStorage.setItem).toHaveBeenCalledWith(
       SETTINGS_KEY,
-      JSON.stringify({ darkMode: true, lang: "de" }),
+      JSON.stringify({ lang: "de" }),
     );
   });
 
   test("retrieveSettings should retrieve settings if available", () => {
     window.localStorage.__proto__.getItem = vi.fn(() =>
-      JSON.stringify({ darkMode: true, lang: "en" }),
+      JSON.stringify({ lang: "en" }),
     );
 
     const settings = retrieveSettings();
 
-    expect(settings?.darkMode).toBeTruthy();
     expect(settings?.lang).toBe("en");
   });
 

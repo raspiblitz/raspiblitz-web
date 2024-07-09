@@ -3,14 +3,13 @@ import AvailableBalance from "@/components/AvailableBalance";
 import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import InputField from "@/components/InputField";
 import Message from "@/components/Message";
-import { AppContext } from "@/context/app-context";
 import ModalDialog from "@/layouts/ModalDialog";
 import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
 import { LinkIcon } from "@heroicons/react/24/outline";
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -26,14 +25,13 @@ type Props = {
   balance: number;
   onClose: () => void;
 };
+const theme = "dark";
 
-const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
-  const { darkMode } = useContext(AppContext);
+export default function OpenChannelModal({ balance, onClose }: Props) {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [amount, setAmount] = useState<number | undefined>(undefined);
-  const theme = darkMode ? "dark" : "light";
 
   const {
     register,
@@ -129,6 +127,4 @@ const OpenChannelModal: FC<Props> = ({ balance, onClose }) => {
     </ModalDialog>,
     MODAL_ROOT,
   );
-};
-
-export default OpenChannelModal;
+}

@@ -37,7 +37,7 @@ export type Props = {
 
 const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
   const { t } = useTranslation();
-  const { unit, darkMode } = useContext(AppContext);
+  const { unit } = useContext(AppContext);
   const [amountInput, setAmountInput] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -94,7 +94,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
         )
         .then(() => {
           setIsLoading(false);
-          toast.success(t("tx.sent"), { theme: darkMode ? "dark" : "light" });
+          toast.success(t("tx.sent"), { theme: "dark" });
           close();
         })
         .catch((err) => {
@@ -118,7 +118,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
         .post("lightning/send-coins", body)
         .then(() => {
           setIsLoading(false);
-          toast.success(t("tx.sent"), { theme: darkMode ? "dark" : "light" });
+          toast.success(t("tx.sent"), { theme: "dark" });
           close();
         })
         .catch((err) => {
@@ -147,9 +147,7 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
 
       <div className="my-2">
         <h4 className="font-bold">{addressTitle}: </h4>
-        <p className="w-full break-all text-gray-600 dark:text-gray-200">
-          {confirmData.address}
-        </p>
+        <p className="w-full break-all text-gray-200">{confirmData.address}</p>
         {isInvoiceExpired && (
           <p className="text-red-500">
             {t("forms.validation.lnInvoice.expired")}:{" "}

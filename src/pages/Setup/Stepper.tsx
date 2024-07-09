@@ -13,7 +13,7 @@ export default function Stepper({ currentStep }: Props) {
   return (
     <div
       className={cn(
-        "w-full",
+        "w-full lg:block hidden",
         "after:block after:relative after:bottom-5 after:border after:border-gray-700 after:content-['']",
       )}
     >
