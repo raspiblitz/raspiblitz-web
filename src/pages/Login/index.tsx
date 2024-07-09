@@ -68,16 +68,8 @@ const Login: FC = () => {
 
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center transition-colors bg-gray-700">
-      <div className="fixed right-16 top-4 flex h-8 w-72 items-center justify-around">
-        <article className="flex justify-between">
-          <label
-            htmlFor="lngSelect"
-            className="mr-2 w-1/2 font-bold text-white"
-          >
-            {t("settings.language")}
-          </label>
-          <I18nSelect />
-        </article>
+      <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
+        <I18nSelect />
       </div>
       <RaspiBlitzLogoDark className="my-2 block h-10" />
       {isLoading && (
@@ -100,7 +92,7 @@ const Login: FC = () => {
               type="password"
             />
 
-            <Button type="submit" color="secondary">
+            <Button type="submit" color="primary">
               {t("login.login")}
             </Button>
           </form>

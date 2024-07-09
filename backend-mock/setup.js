@@ -65,6 +65,16 @@ router.get("/status", function (req, res) {
   // //     initialsync: "",
   // //   }),
   // // );
+
+  // // Dashboard
+  /*    res.status(200).send(
+        JSON.stringify({
+            setupPhase: "done",
+            state: "waitfinal",
+            message: "Node Running",
+            initialsync: "",
+        }),
+    );*/
 });
 
 router.get("/setup-start-info", function (req, res) {
