@@ -19,11 +19,13 @@ export default function SetupContainer({
         className="fixed right-4 top-4 h-8 text-white"
         onClick={toggleDarkMode}
       />
+
       <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
         <I18nSelect />
       </div>
+
       {currentStep !== null && (
-        <div className="fixed top-12 flex items-center justify-around">
+        <div className="fixed top-12 flex items-center justify-around w-1/3">
           <Stepper currentStep={currentStep} />
         </div>
       )}
