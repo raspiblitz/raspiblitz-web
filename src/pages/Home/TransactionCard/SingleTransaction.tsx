@@ -50,7 +50,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
 
   return (
     <li
-      className="flex h-24 cursor-pointer flex-col justify-center border-b border-gray-200 px-0 py-2 text-center hover:bg-gray-100 dark:border-gray-400 dark:hover:bg-gray-700 md:px-4"
+      className="flex h-24 cursor-pointer flex-col justify-center border-b px-0 py-2 text-center border-gray-400 hover:bg-gray-700 md:px-4"
       onClick={onClick}
     >
       <div className="flex w-full items-center justify-center">

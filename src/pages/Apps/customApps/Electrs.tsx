@@ -70,9 +70,9 @@ const Electrs: FC = () => {
   }
 
   return (
-    <main className="page-container content-container w-full bg-gray-100 dark:bg-gray-700 dark:text-white lg:pr-8">
+    <main className="page-container content-container w-full bg-gray-700 text-white lg:pr-8">
       {/* Back Button */}
-      <section className="w-full px-5 py-9 dark:text-gray-200">
+      <section className="w-full px-5 py-9 text-gray-200">
         <button
           onClick={() => navigate("/apps")}
           className="flex items-center text-xl font-bold outline-none"

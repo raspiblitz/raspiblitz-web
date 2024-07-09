@@ -1,13 +1,12 @@
 import ChannelList from "./ChannelList";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import Message from "@/components/Message";
-import { AppContext } from "@/context/app-context";
 import ModalDialog from "@/layouts/ModalDialog";
 import { LightningChannel } from "@/models/lightning-channel";
 import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { FC, useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -16,13 +15,12 @@ type Props = {
   onClose: () => void;
 };
 
-const ListChannelModal: FC<Props> = ({ onClose }) => {
-  const { darkMode } = useContext(AppContext);
+const theme = "dark";
+export default function ListChannelModal({ onClose }: Props) {
   const { t } = useTranslation();
   const [openChannels, setOpenChannels] = useState<LightningChannel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const theme = darkMode ? "dark" : "light";
 
   const updateChannel = useCallback(() => {
     setIsLoading(true);
@@ -90,6 +88,4 @@ const ListChannelModal: FC<Props> = ({ onClose }) => {
     </ModalDialog>,
     MODAL_ROOT,
   );
-};
-
-export default ListChannelModal;
+}
