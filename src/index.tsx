@@ -18,6 +18,11 @@ declare module "i18next" {
   }
 }
 
+// see https://vitejs.dev/guide/build#load-error-handling
+window.addEventListener("vite:preloadError", (event) => {
+  window.location.reload();
+});
+
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 root.render(

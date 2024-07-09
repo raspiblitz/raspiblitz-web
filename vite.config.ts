@@ -12,6 +12,12 @@ export default defineConfig({
   plugins: [react(), viteTsconfigPaths(), svgr(), eslint()],
   build: {
     outDir: "build",
+    rollupOptions: {
+      output: {
+        // see https://github.com/vitejs/vite/issues/11804#issuecomment-2009619365
+        chunkFileNames: 'chunk-[hash].js'
+      }
+    }
   },
   resolve: {
     alias: {
