@@ -17,7 +17,7 @@ export default function SetupContainer({
       </div>
 
       {currentStep !== null && (
-        <div className="fixed top-12 flex items-center justify-around w-1/3">
+        <div className="fixed mb-4 top-12 flex items-center justify-around w-1/3">
           <Stepper currentStep={currentStep} />
         </div>
       )}

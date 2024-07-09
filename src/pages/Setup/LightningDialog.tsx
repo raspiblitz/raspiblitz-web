@@ -13,6 +13,7 @@ import { Trans, useTranslation } from "react-i18next";
 export interface InputData {
   callback: (lightningSelect: SetupLightning) => void;
 }
+
 export type SelectFn = (value: string) => void;
 
 const images = {
@@ -37,7 +38,7 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
 
   return (
     <SetupContainer currentStep={3}>
-      <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
+      <section className="flex max-w-3xl flex-col items-center justify-center gap-y-8 lg:px-8 mt-16 lg:mt-32 lg:pb-1 lg:pt-0">
         <div>
           <Headline>{t("setup.select_lightning")}</Headline>
 
@@ -87,7 +88,11 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
-            <Button type="submit" color="primary">
+            <Button
+              type="submit"
+              color="primary"
+              isDisabled={selected === undefined}
+            >
               {t("setup.continue")}
             </Button>
           </article>
