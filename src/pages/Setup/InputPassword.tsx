@@ -3,7 +3,6 @@ import ConfirmModal from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Input, useDisclosure } from "@nextui-org/react";
-import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -25,7 +24,7 @@ const passwordColors = {
 
 type PasswordColors = keyof typeof passwordColors;
 
-const InputPassword: FC<Props> = ({ passwordType, callback }) => {
+export default function InputPassword({ passwordType, callback }: Props) {
   const { t } = useTranslation();
 
   const {
@@ -40,10 +39,7 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
 
   const continueHandler = (data: IFormInputs) => {
     callback(data.passfirst);
-    reset({
-      passfirst: "",
-      passrepeat: "",
-    });
+    reset();
   };
 
   const confirmModal = useDisclosure();
@@ -136,6 +132,4 @@ const InputPassword: FC<Props> = ({ passwordType, callback }) => {
       </SetupContainer>
     </>
   );
-};
-
-export default InputPassword;
+}
