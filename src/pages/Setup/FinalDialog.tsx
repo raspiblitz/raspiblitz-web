@@ -22,6 +22,7 @@ interface IFormInputs {
 const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   const { t } = useTranslation();
   const words = seedWords.split(", ");
+  const isSetupRecovery = setupPhase === SetupPhase.RECOVERY;
 
   const {
     handleSubmit,
@@ -43,7 +44,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             <Headline>{t(`setup.final_${setupPhase || "setup"}`)}</Headline>
           </div>
 
-          <Alert as="h4">{t("setup.final_seedwords")}</Alert>
+          {seedWords && <Alert as="h4">{t("setup.final_seedwords")}</Alert>}
 
           {seedWords && (
             <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
@@ -57,19 +58,25 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             </ol>
           )}
 
-          <Controller
-            control={control}
-            name="confirm"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Checkbox onChange={onChange} isSelected={value}>
-                {t("setup.final_info_reboot")}
-              </Checkbox>
-            )}
-          />
+          {!isSetupRecovery && (
+            <Controller
+              control={control}
+              name="confirm"
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <Checkbox onChange={onChange} isSelected={value}>
+                  {t("setup.final_info_reboot")}
+                </Checkbox>
+              )}
+            />
+          )}
 
           <article className="justify-center flex flex-col items-center pb-4">
-            <Button type="submit" isDisabled={!isValid} color="primary">
+            <Button
+              type="submit"
+              isDisabled={!isValid || !isSetupRecovery}
+              color="primary"
+            >
               {t("setup.final_do_reboot")}
             </Button>
           </article>
