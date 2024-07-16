@@ -125,16 +125,20 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                 <ModalBody>
                   <>
                     <Input
-                      {...register("passwordInput", {
-                        required: t("setup.password_error_empty"),
-                        onChange: changePasswordHandler,
-                      })}
+                      classNames={{
+                        inputWrapper:
+                          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                      }}
                       type="password"
                       label={t("setup.sync_wallet_info")}
                       disabled={runningUnlock}
                       isInvalid={!!errors.passwordInput}
                       errorMessage={errors.passwordInput?.message}
                       value={password}
+                      {...register("passwordInput", {
+                        required: t("setup.password_error_empty"),
+                        onChange: changePasswordHandler,
+                      })}
                     />
 
                     {error && <Alert color="danger">{error}</Alert>}

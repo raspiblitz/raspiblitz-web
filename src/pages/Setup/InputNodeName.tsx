@@ -57,6 +57,10 @@ export default function InputNodeName({ callback }: Props) {
             <fieldset className="w-full">
               <Input
                 className="w-full"
+                classNames={{
+                  inputWrapper:
+                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                }}
                 type="text"
                 label={t("setup.input_node.label")}
                 placeholder="e.g. MyRaspiBlitz"
