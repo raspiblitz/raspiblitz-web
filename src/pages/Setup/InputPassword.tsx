@@ -83,7 +83,8 @@ export default function InputPassword({ passwordType, callback }: Props) {
               <Input
                 className="w-full"
                 classNames={{
-                  inputWrapper: "bg-default group-data-[focus=true]:bg-default",
+                  inputWrapper:
+                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
                 }}
                 type="password"
                 label={t(`setup.password_${passwordType}_name`)}
@@ -105,7 +106,8 @@ export default function InputPassword({ passwordType, callback }: Props) {
               <Input
                 className="w-full"
                 classNames={{
-                  inputWrapper: "bg-default group-data-[focus=true]:bg-default",
+                  inputWrapper:
+                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
                 }}
                 type="password"
                 label={`${t("setup.password_repeat")} ${t(`setup.password_${passwordType}_name`)}`}

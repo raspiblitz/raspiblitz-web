@@ -25,7 +25,7 @@ const I18nSelect: FC = () => {
       defaultSelectedKeys={[i18n.language]}
       onChange={selectLangHandler}
       classNames={{
-        trigger: "bg-default",
+        trigger: "bg-tertiary",
       }}
     >
       {langs.map((lang) => {

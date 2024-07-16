@@ -127,7 +127,7 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
                     <Input
                       classNames={{
                         inputWrapper:
-                          "bg-default group-data-[focus=true]:bg-default",
+                          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
                       }}
                       type="password"
                       label={t("setup.sync_wallet_info")}
