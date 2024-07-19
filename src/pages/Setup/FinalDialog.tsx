@@ -44,9 +44,9 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             <Headline>{t(`setup.final_${setupPhase || "setup"}`)}</Headline>
           </div>
 
-          {seedWords && <Alert as="h4">{t("setup.final_seedwords")}</Alert>}
+          {!!seedWords && <Alert as="h4">{t("setup.final_seedwords")}</Alert>}
 
-          {seedWords && (
+          {!!seedWords && (
             <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
               {words.map((word, i) => {
                 return (
