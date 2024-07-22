@@ -1,6 +1,26 @@
 import { test } from "@playwright/test";
 
 test("simple setup path", async ({ page }) => {
+  await page.route("**/api/setup/status", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      state: "waitsetup",
+      message: "Node Running",
+      initialsync: "",
+    };
+    await route.fulfill({ json });
+  });
+
+  await page.route("**/api/setup/setup-start-info", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      hddGotBlockchain: "0",
+      hddGotMigrationData: null,
+      migrationMode: null,
+    };
+    await route.fulfill({ json });
+  });
+
   await page.goto("http://localhost:3000");
 
   // setup choice
@@ -42,6 +62,77 @@ test("simple setup path", async ({ page }) => {
     .fill("wallet12345");
   await page.getByRole("button", { name: "Continue" }).click();
 
+  // wait for "final" api calls
+
+  await page.route("**/api/setup/setup-start-done", async (route) => {
+    const json = "STATUS";
+    await route.fulfill({ json });
+  });
+
+  await page.route("**/api/setup/status", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      state: "waitsetup",
+      message: "Node Running",
+      initialsync: "",
+    };
+    await route.fulfill({ json });
+  });
   // ready to setup
   await page.getByRole("button", { name: "Start setup" }).click();
+  await page.route("**/api/setup/status", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      state: "waitsetup",
+      message: "Node Running",
+      initialsync: "",
+    };
+    await route.fulfill({ json });
+  });
+  await page.route("**/api/setup/setup-start-info", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      hddGotBlockchain: "0",
+      hddGotMigrationData: null,
+      migrationMode: null,
+    };
+    await route.fulfill({ json });
+  });
+  await page.route("**/api/setup/status", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      state: "waitsetup",
+      message: "Node Running",
+      initialsync: "",
+    };
+    await route.fulfill({ json });
+  });
+  await page.route("**/api/setup/setup-start-info", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      hddGotBlockchain: "0",
+      hddGotMigrationData: null,
+      migrationMode: null,
+    };
+    await route.fulfill({ json });
+  });
+  await page.route("**/api/setup/status", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      state: "waitsetup",
+      message: "Node Running",
+      initialsync: "",
+    };
+    await route.fulfill({ json });
+  });
+
+  await page.route("**/api/setup/setup-start-info", async (route) => {
+    const json = {
+      setupPhase: "setup",
+      hddGotBlockchain: "0",
+      hddGotMigrationData: null,
+      migrationMode: null,
+    };
+    await route.fulfill({ json });
+  });
 });
