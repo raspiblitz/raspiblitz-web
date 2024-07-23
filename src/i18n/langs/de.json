@@ -286,7 +286,7 @@
       "start_recovery": "Möchtest du die Wiederherstellung starten?",
       "start_update": "Möchtest du den Prozess für Update und Wiederherstellung starten?",
       "started": "Gestartet",
-      "sync_bitcoin_starting": "Start der Snchronisation",
+      "sync_bitcoin_starting": "Start der Synchronisation",
       "sync_bitcoin_sync": "Synchronisationsprozess",
       "sync_headline": "Initiale Synchronisation des RaspiBlitz",
       "sync_restartinfo": "(Synchronisation wird nach dem nächsten Neustart fortgeführt)",
