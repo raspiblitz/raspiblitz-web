@@ -21,8 +21,7 @@ interface IFormInputs {
 
 const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
   const { t } = useTranslation();
-  const words = seedWords.split(", ");
-  const isSetupRecovery = setupPhase === SetupPhase.RECOVERY;
+  const words = seedWords?.split(", ");
 
   const {
     handleSubmit,
@@ -58,7 +57,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
             </ol>
           )}
 
-          {!isSetupRecovery && (
+          {!!seedWords && (
             <Controller
               control={control}
               name="confirm"
@@ -74,7 +73,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
           <article className="justify-center flex flex-col items-center pb-4">
             <Button
               type="submit"
-              isDisabled={!isValid || !isSetupRecovery}
+              isDisabled={!isValid && !!seedWords}
               color="primary"
             >
               {t("setup.final_do_reboot")}
