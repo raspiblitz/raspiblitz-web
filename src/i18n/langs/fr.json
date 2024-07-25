@@ -32,6 +32,20 @@
       "jam": {
         "shortDescription": "Jam - Interface web pour JoinMarket",
         "about": "Jam est une interface web pour JoinMarket axée sur la convivialité et la facilité d'utilisation. Elle vise à fournir des valeurs par défaut raisonnables et à être facile à utiliser pour les débutants, tout en offrant les fonctionnalités attendues par les utilisateurs avancés."
+      },
+      "alby": {
+        "action": {
+          "connection": {
+            "success": "Le compte Raspiblitz a été ajouté à Alby",
+            "hint": "Veuillez d'abord installer l'extension Alby",
+            "error": "L'ajout de Raspiblitz à Alby n'a pas fonctionné, veuillez réessayer"
+          },
+          "install": "Installer Alby",
+          "addAccount": "Connecter",
+          "connection_info_error": "Impossible d'obtenir les informations de connexion"
+        },
+        "about": "Extension du navigateur Alby",
+        "shortDescription": "Connectez votre nœud RaspiBlitz LND et utilisez les applications Bitcoin & Nostr avec l'extension Alby"
       }
     },
     "apps": {
@@ -196,7 +210,10 @@
       "generating": "Génération",
       "debug_report_done": "Rapport de débogage créé !",
       "generate_debug": "Générer un rapport de débogage",
-      "generating_debug_report": "Génération du rapport de débogage. Cela peut prendre un certain temps."
+      "generating_debug_report": "Génération du rapport de débogage. Cela peut prendre un certain temps.",
+      "shutdown_confirm": "Arrêter votre RaspiBlitz ?",
+      "shutdown_info": "Une fois l'arrêt terminé, le voyant d'activité devient rouge et l'écran LCD devient blanc.",
+      "shutdown_info_disconnect_power": "Attendez ensuite 5 secondes et débranchez l'alimentation."
     },
     "setup": {
       "input_node": {
