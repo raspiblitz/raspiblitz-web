@@ -172,8 +172,7 @@
         "err_only_chars": "El nombre del nodo debería contener solo caracteres y números.",
         "err_max_length": "El nombre del nodo debe ser como máximo de 32 caracteres.",
         "err_min_length": "El nombre del nodo debe ser al menos de 4 caracteres.",
-        "err_empty": "El nombre del nodo no puede estar vacío.",
-        "nodename_name": "Nombre del nodo"
+        "err_empty": "El nombre del nodo no puede estar vacío."
       },
       "blockchain_delete": "Borrar la cadena de bloques",
       "blockchain_found_long": "Se han encontrado datos existentes de la cadena de bloques en tu disco duro / SSD.",
@@ -183,9 +182,6 @@
       "continue": "Continuar",
       "convertwarning": "RaspiBlitz solo puede convertir tus datos Blockchain y Lightning (fondos y canales) de momento. Los datos de aplicaciones adicionales se podrían perder en el proceso de migración.",
       "lightningoutdated": "El nodo desde el que quieres migrar usa una versión posterior que esta RaspiBlitz. Por favor, espera a una versión actualizada. Puedes apagar y encender con la tarjeta sd anterior de tu nodo - no se han realizado cambios.",
-      "migrate_citadel": "¿Quieres migrar de CITADEL a RaspiBlitz?",
-      "migrate_mynode": "¿Quieres migrar de MYNODE a RaspiBlitz?",
-      "migrate_umbrel": "¿Quieres migrar de UMBREL a RaspiBlitz?",
       "migrateblitz": "Migrar mi RaspiBlitz",
       "no_and_shutdown": "No y apagar",
       "ok": "OK",
@@ -215,7 +211,6 @@
       "password_repeat": "Repetir",
       "done_migration_ready": "OK. Todo está listo para migrar a RaspiBlitz.",
       "done_migration_start": "Comenzar Migración",
-      "cln": "Core Lightning",
       "final_seedwords": "Por favor escriba sus palabras semilla y guárdelas en un lugar seguro:",
       "lnd": "LND",
       "sync_bitcoin_sync": "Progreso de la sincronización",
@@ -244,7 +239,6 @@
       "password_c_short": "Establezca su nueva Contraseña para la Cartera Lightning (Contraseña C)",
       "password_error_empty": "La Contraseña no puede estar vacía.",
       "restarts": "Reinicia",
-      "select_bitcoin": "Solo Bitcoin",
       "sync_headline": "Sincronización Inicial de RaspiBlitz",
       "sync_restartinfo": "(la sincronización continuará después de reiniciar)"
     },
