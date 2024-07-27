@@ -39,60 +39,46 @@ enum Screen {
 }
 
 export default function Setup() {
-  // init with waiting screen
   const [page, setPage] = useState(Screen.WAIT);
-
   const [syncData, setSyncData] = useState(null);
   const [waitScreenStatus, setWaitScreenStatus] = useState(SetupStatus.WAIT);
   const [waitScreenMessage, setWaitScreenMessage] = useState("");
-
   const [setupPhaseOnStart, setSetupPhaseOnStart] = useState(SetupPhase.NULL);
   const [setupPhase, setSetupPhase] = useState(SetupPhase.NULL);
   const [gotBlockchain, setGotBlockchain] = useState(false);
-
   const [keepBlockchain, setKeepBlockchain] = useState(true);
   const [migrationOS, setMigrationOS] = useState(SetupMigrationOS.NULL);
   const [migrationMode, setMigrationMode] = useState(SetupMigrationMode.NULL);
   const [lightning, setLightning] = useState(SetupLightning.NULL);
-
   const [hostname, setHostname] = useState("");
   const [passwordA, setPasswordA] = useState("");
   const [passwordB, setPasswordB] = useState("");
   const [passwordC, setPasswordC] = useState("");
-  const [seedwords, setSeedwords] = useState("");
-
+  const [seedWords, setSeedWords] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // ### SYNC SCREEN ###
   const showSyncScreen = useCallback(async () => {
-    // call API to start recovery
-    const resp = await instance
-      .post("/setup/setup-sync-info", {})
-      .catch((err) => {
-        if (
-          err.response.status === HttpStatusCode.Unauthorized ||
-          err.response.status === HttpStatusCode.Forbidden
-        ) {
-          navigate("/login?back=/setup");
-        } else {
-          console.error(`request for sync failed: ${err.response.status}`);
-        }
-      });
-    if (resp) {
+    try {
+      const resp = await instance.post("/setup/setup-sync-info", {});
       setSyncData(resp.data);
       setPage(Screen.SYNC);
+    } catch (err) {
+      const error = err as { response: { status: number } };
+      if (
+        [HttpStatusCode.Unauthorized, HttpStatusCode.Forbidden].includes(
+          error.response.status,
+        )
+      ) {
+        navigate("/login?back=/setup");
+      } else {
+        console.error(`request for sync failed: ${error.response.status}`);
+      }
     }
   }, [navigate]);
 
-  // prepare for first round of user interaction dialogs
   const initSetupStart = useCallback(async () => {
-    const resp = await instance
-      .get("/setup/setup-start-info")
-      .catch((error) =>
-        showError(`request for init setup data failed: ${error}`),
-      );
-
-    if (resp) {
+    try {
+      const resp = await instance.get("/setup/setup-start-info");
       setGotBlockchain(resp.data.hddGotBlockchain === "1");
       setSetupPhaseOnStart(resp.data.setupPhase);
       setMigrationOS(resp.data.hddGotMigrationData);
@@ -110,60 +96,54 @@ export default function Setup() {
           setPage(Screen.SETUP);
           break;
         default:
-          showError("unkown setupphase on init");
+          showError("unknown setup phase on init");
       }
+    } catch (error) {
+      showError(`request for init setup data failed: ${error}`);
     }
   }, []);
 
-  // prepare for last round of user interaction dialogs
   const initSetupFinal = useCallback(async () => {
-    const resp = await instance.get("/setup/setup-final-info").catch((err) => {
+    try {
+      const resp = await instance.get("/setup/setup-final-info");
+      setSeedWords(resp.data?.seedwordsNEW || null);
+      setPage(Screen.FINAL);
+    } catch (err) {
+      const error = err as { response: { status: number } };
       if (
-        err.response.status === HttpStatusCode.Forbidden ||
-        err.response.status === HttpStatusCode.Unauthorized
+        [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(
+          error.response.status,
+        )
       ) {
         navigate("/login?back=/setup");
       } else {
-        showError(`request for setup start failed: ${err.response.status}`);
+        showError(`request for setup start failed: ${error.response.status}`);
       }
-    });
-    if (resp) {
-      console.info(resp);
-      setSeedwords(resp.data.seedwordsNEW);
-      setPage(Screen.FINAL);
     }
   }, [navigate]);
 
-  // will loop pull status until user interaction is needed
   const setupMonitoringLoop = useCallback(async () => {
     try {
-      // get state of node from API
       const resp = await instance.get("/setup/status");
-      console.info(resp);
 
-      // special cases for user interaction (exit loop)
       if (resp.data.state === SetupStatus.WAITSETUP) {
-        initSetupStart();
+        await initSetupStart();
         return;
       }
 
       if (resp.data.state === SetupStatus.WAITFINAL) {
-        initSetupFinal();
+        await initSetupFinal();
         return;
       }
 
       if (resp.data.state === SetupStatus.READY) {
         if (resp.data.initialsync === "running") {
-          // initial sync still running
-          showSyncScreen();
+          await showSyncScreen();
         } else {
-          // ok ready & inital sync done -> go to dashboard
-          console.info("READY --> DASHBOARD");
           navigate("/");
           return;
         }
       } else {
-        // update waiting screen
         setWaitScreenStatus(resp.data.state);
         setWaitScreenMessage(resp.data.message);
         setPage(Screen.WAIT);
@@ -172,22 +152,16 @@ export default function Setup() {
       console.error("status request failed - device is off or in reboot?");
     }
 
-    // loop poll
-    setTimeout(() => {
-      setupMonitoringLoop();
-    }, 4000);
+    setTimeout(setupMonitoringLoop, 4000);
   }, [initSetupFinal, initSetupStart, navigate, showSyncScreen]);
 
-  // will be called when component ready
   useEffect(() => {
-    console.info(`kick-off monitoring loop: ${new Date().toISOString()}`);
     setupMonitoringLoop();
   }, [setupMonitoringLoop]);
 
   const setupStart = async () => {
     try {
       const forceFreshSetup = setupPhase === SetupPhase.SETUP;
-      // call API to start recovery
       const resp = await instance.post("/setup/setup-start-done", {
         hostname,
         forceFreshSetup,
@@ -198,56 +172,48 @@ export default function Setup() {
         passwordC,
       });
 
-      // remember authorization for later API calls
       if (resp) {
-        // access_token was used in v1.8
         localStorage.setItem(ACCESS_TOKEN, resp.data.access_token || resp.data);
       }
 
-      // fall back to loop polling until setup finished
-      setupMonitoringLoop();
+      await setupMonitoringLoop();
     } catch {
       showError("request for setup start failed");
     }
   };
 
-  // kick-off final reboot
   const setupFinalReboot = async () => {
     try {
-      // call API to start recovery
-      await instance.post("/setup/setup-final-done", {}).catch((err) => {
-        if (
-          err.response.status === HttpStatusCode.Forbidden ||
-          err.response.status === HttpStatusCode.Unauthorized
-        ) {
-          navigate("/login?back=/setup");
-        } else {
-          showError(
-            `request for final setup done failed: ${err.response.status}`,
-          );
-        }
-      });
-
-      // fall back to loop polling until setup finished
-      setupMonitoringLoop();
-    } catch {
-      showError(
-        "reboot request failed - but that can also happen when shutdown happened",
-      );
+      await instance.post("/setup/setup-final-done", {});
+      await setupMonitoringLoop();
+    } catch (err) {
+      const error = err as { response: { status: number } };
+      if (
+        [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(
+          error.response.status,
+        )
+      ) {
+        navigate("/login?back=/setup");
+      } else {
+        showError(
+          `request for final setup done failed: ${error.response.status}`,
+        );
+      }
     }
   };
 
-  // start setup shutdown (if user wants to cancel whole setup)
   const setupShutdown = async () => {
     setWaitScreenStatus(SetupStatus.WAIT);
     setWaitScreenMessage("");
     setPage(Screen.WAIT);
 
-    await instance.get("/setup/shutdown").catch(() => {
+    try {
+      await instance.get("/setup/shutdown");
+    } catch {
       showError(
         "shutdown request failed - but that can also happen when shutdown happened",
       );
-    });
+    }
   };
 
   const showError = (message: string) => {
@@ -257,31 +223,24 @@ export default function Setup() {
   };
 
   const callbackRecoveryDialog = (startRecovery: boolean) => {
-    if (startRecovery) {
-      setSetupPhase(setupPhaseOnStart);
-      setPage(Screen.INPUT_A);
-    } else {
-      setPage(Screen.SETUP);
-    }
+    setPage(startRecovery ? Screen.INPUT_A : Screen.SETUP);
   };
 
-  const callbackMigrationDialog = (start: boolean) => {
+  const callbackMigrationDialog = async (start: boolean) => {
     if (start) {
       setSetupPhase(SetupPhase.MIGRATION);
       setPage(Screen.INPUT_A);
     } else {
-      setupShutdown();
+      await setupShutdown();
     }
   };
 
-  const callbackSetupMenu = (setupmode: SetupPhase) => {
-    // remember what setup the user wants
+  const callbackSetupMenu = async (setupmode: SetupPhase) => {
     setSetupPhase(setupmode);
 
-    // switch to the next screen based on user selection
     switch (setupmode) {
       case SetupPhase.NULL:
-        setupShutdown();
+        await setupShutdown();
         break;
       case SetupPhase.RECOVERY:
       case SetupPhase.UPDATE:
@@ -298,16 +257,12 @@ export default function Setup() {
     deleteData: boolean,
     keepBlockchainData: boolean,
   ) => {
-    // on cancel jump back to setup menu
     if (!deleteData) {
       setPage(Screen.SETUP);
       return;
     }
 
-    // store for later
     setKeepBlockchain(keepBlockchainData);
-
-    // next step is always password A
     setPage(Screen.INPUT_NODENAME);
   };
 
@@ -317,26 +272,20 @@ export default function Setup() {
       return;
     }
 
-    // store for later
     setLightning(lightning);
-
     setPage(Screen.INPUT_A);
   };
 
   const callbackInputNodename = (nodename: string | null) => {
-    // on cancel jump back to setup menu
     if (!nodename) {
       setPage(Screen.SETUP);
       return;
     }
 
-    // store for later
     setHostname(nodename);
-
     setPage(Screen.LIGHTNING);
   };
 
-  // on cancel jump back to setup menu
   const checkPasswordCancel = (password: string | null): boolean => {
     if (!password) {
       setPage(Screen.SETUP);
@@ -346,15 +295,10 @@ export default function Setup() {
   };
 
   const callbackInputPasswordA = (password: string | null) => {
-    if (checkPasswordCancel(password)) {
-      return;
-    }
+    if (checkPasswordCancel(password)) return;
 
-    // store password for later
     setPasswordA(password!);
 
-    // based on setupPhase ... continue to a different next screen
-    console.info(setupPhase);
     switch (setupPhase) {
       case SetupPhase.RECOVERY:
       case SetupPhase.UPDATE:
@@ -365,16 +309,13 @@ export default function Setup() {
         setPage(Screen.INPUT_B);
         break;
       default:
-        showError("unkown follow up state: passworda");
+        showError("unknown follow up state: passwordA");
     }
   };
 
   const callbackInputPasswordB = (password: string | null) => {
-    if (checkPasswordCancel(password)) {
-      return;
-    }
+    if (checkPasswordCancel(password)) return;
 
-    // store password for later
     setPasswordB(password!);
 
     // based on setupPhase ... continue to a different next screen
@@ -384,41 +325,34 @@ export default function Setup() {
       return;
     }
 
-    // all other cases - get password c
     setPage(Screen.INPUT_C);
   };
 
   const callbackInputPasswordC = (password: string | null) => {
-    if (checkPasswordCancel(password)) {
-      return;
-    }
+    if (checkPasswordCancel(password)) return;
 
-    // store password for later
     setPasswordC(password!);
-
-    // now finish setup
     setPage(Screen.START_DONE);
   };
 
-  const callbackStartDoneDialog = (cancel: boolean) => {
-    // on cancel jump back to setup menu
+  const callbackStartDoneDialog = async (cancel: boolean) => {
     if (cancel) {
       setPage(Screen.SETUP);
       return;
     }
 
-    // no kick-off setup with all those data
-    setupStart();
+    await setupStart();
   };
 
-  const callbackSyncScreen = async (action: string, data: any) => {
+  const callbackSyncScreen = async (action: string) => {
     if (action === "shutdown") {
-      // start setup shutdown (if user wants to cancel whole setup)
-      await instance.post("/system/shutdown").catch(() => {
+      try {
+        await instance.post("/system/shutdown");
+      } catch {
         console.error(
           "shutdown request failed - but that can also happen when shutdown happened",
         );
-      });
+      }
     }
   };
 
@@ -479,7 +413,7 @@ export default function Setup() {
       return (
         <FinalDialog
           setupPhase={setupPhase}
-          seedWords={seedwords}
+          seedWords={seedWords}
           callback={setupFinalReboot}
         />
       );

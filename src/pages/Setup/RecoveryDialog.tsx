@@ -2,32 +2,26 @@ import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-export type Props = {
+type Props = {
   setupPhase: SetupPhase;
   callback: (start: boolean) => void;
 };
 
-const RecoveryDialog: FC<Props> = ({ setupPhase, callback }) => {
+export default function RecoveryDialog({ setupPhase, callback }: Props) {
   const { t } = useTranslation();
 
-  let headline: string = "";
-  switch (setupPhase) {
-    case SetupPhase.RECOVERY:
-      headline = t("setup.start_recovery");
-      break;
-    case SetupPhase.UPDATE:
-      headline = t("setup.start_update");
-      break;
-  }
+  const getHeadlineText = () => {
+    if (setupPhase === SetupPhase.RECOVERY) return t("setup.start_recovery");
+    if (setupPhase === SetupPhase.UPDATE) return t("setup.start_update");
+    return "";
+  };
 
   return (
     <SetupContainer currentStep={1}>
       <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
-        <Headline>{headline}</Headline>
-
+        <Headline>{getHeadlineText()}</Headline>
         <article className="flex flex-col items-center justify-center gap-10 pt-10">
           <Button onClick={() => callback(true)} color="primary">
             {t("setup.yes")}
@@ -43,6 +37,4 @@ const RecoveryDialog: FC<Props> = ({ setupPhase, callback }) => {
       </section>
     </SetupContainer>
   );
-};
-
-export default RecoveryDialog;
+}
