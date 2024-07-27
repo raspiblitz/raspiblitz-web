@@ -3,11 +3,10 @@ require("dotenv").config();
 
 const signToken = () => {
   console.info("call to signToken");
-  const token = jwt.sign(
+  return jwt.sign(
     { user_id: "admin", expires: Date.now() + 630_000 },
-    process.env.JWT_SECRET,
+    process.env.JWT_SECRET || "secret",
   );
-  return token;
 };
 
 module.exports = { signToken };
