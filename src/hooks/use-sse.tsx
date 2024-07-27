@@ -198,11 +198,9 @@ function useSSE() {
       });
     };
 
-    const eventErrorHandler = (_: Event) => {
-      // just logout if there is an error and connection was closed
-      if (evtSource?.CLOSED) {
-        appCtx.logout();
-      }
+    const eventErrorHandler = (event: Event) => {
+      // inform the user about the error
+      toast.error("An SSE error occurred", { toastId: "sse-error" });
     };
 
     if (evtSource) {

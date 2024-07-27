@@ -97,6 +97,12 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         const payload = parseJwt(token);
         if (payload.expires > Date.now()) {
           setIsLoggedIn(true);
+          if (
+            window.location.pathname === "/" ||
+            window.location.pathname === "/login"
+          ) {
+            return navigate("/home");
+          }
         } else {
           localStorage.removeItem(ACCESS_TOKEN);
           console.info(`Token expired at ${payload.expires}.`);
@@ -106,7 +112,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         console.info(`Token invalid - removed.`);
       }
     }
-  }, [i18n]);
+  }, [i18n, navigate]);
 
   const contextValue: AppContextType = {
     isLoggedIn,
