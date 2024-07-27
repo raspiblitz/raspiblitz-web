@@ -11,6 +11,7 @@
   "scripts": {
     "start": "vite",
     "dev": "npm run start",
+    "dev:local": "concurrently \"npm run backend\" \"npm run start\"",
     "backend": "npm start --prefix ./backend-mock",
     "build": "vite build",
     "tsc": "tsc --noEmit",
@@ -57,6 +58,7 @@
     "@vitejs/plugin-react": "^4.1.0",
     "@vitest/coverage-v8": "^1.0.4",
     "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
     "eslint": "^8.52.0",
     "eslint-config-react-app": "^7.0.1",
     "husky": "^9.0.3",

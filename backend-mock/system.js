@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const router = express.Router();
+require("dotenv").config();
 
 const auth = require("./auth");
 

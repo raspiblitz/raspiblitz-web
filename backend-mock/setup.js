@@ -7,74 +7,74 @@ router.get("/status", function (req, res) {
 
   // FINAL
   /*    res.status(200).send(
-            JSON.stringify({
-                setupPhase: "",
-                state: "waitfinal",
-                message: "Node Running",
-                initialsync: "",
-            }),
-        );*/
+              JSON.stringify({
+                  setupPhase: "",
+                  state: "waitfinal",
+                  message: "Node Running",
+                  initialsync: "",
+              }),
+          );*/
 
   // SETUP (combine with "setup-start-info" call)
   // further these screens will be reached during the setup: FORMAT, INPUT_NODENAME, LIGHTNING, INPUT_A, INPUT_B, INPUT_C, START_DONE
+  /*  res.status(200).send(
+        JSON.stringify({
+          setupPhase: "setup",
+          state: "waitsetup",
+          message: "Node Running",
+          initialsync: "",
+        }),
+      );*/
+
+  // MIGRATION (combine with "setup-start-info" call)
+  /*    res.status(200).send(
+              JSON.stringify({
+                  setupPhase: "migration",
+                  state: "waitsetup",
+                  message: "Node Running",
+                  initialsync: "",
+              }),
+          );*/
+
+  // RECOVERY (combine with "setup-start-info" call)
+  /*    res.status(200).send(
+              JSON.stringify({
+                  setupPhase: "recovery",
+                  state: "waitsetup",
+                  message: "Node Running",
+                  initialsync: "",
+              }),
+          );*/
+
+  // SYNC
+  /*    res.status(200).send(
+              JSON.stringify({
+                  setupPhase: "",
+                  state: "ready",
+                  message: "Node Running",
+                  initialsync: "running",
+              }),
+          );*/
+
+  // WAIT
+  /*    res.status(200).send(
+              JSON.stringify({
+                  setupPhase: "setup",
+                  state: "wait",
+                  message: "This is a message",
+                  initialsync: "",
+              }),
+          );*/
+
+  // Dashboard
   res.status(200).send(
     JSON.stringify({
-      setupPhase: "setup",
-      state: "waitsetup",
+      setupPhase: "done",
+      state: "waitfinal",
       message: "Node Running",
       initialsync: "",
     }),
   );
-
-  // MIGRATION (combine with "setup-start-info" call)
-  /*    res.status(200).send(
-            JSON.stringify({
-                setupPhase: "migration",
-                state: "waitsetup",
-                message: "Node Running",
-                initialsync: "",
-            }),
-        );*/
-
-  // RECOVERY (combine with "setup-start-info" call)
-  /*    res.status(200).send(
-            JSON.stringify({
-                setupPhase: "recovery",
-                state: "waitsetup",
-                message: "Node Running",
-                initialsync: "",
-            }),
-        );*/
-
-  // SYNC
-  /*    res.status(200).send(
-            JSON.stringify({
-                setupPhase: "",
-                state: "ready",
-                message: "Node Running",
-                initialsync: "running",
-            }),
-        );*/
-
-  // WAIT
-  /*    res.status(200).send(
-            JSON.stringify({
-                setupPhase: "setup",
-                state: "wait",
-                message: "This is a message",
-                initialsync: "",
-            }),
-        );*/
-
-  // Dashboard
-  /*    res.status(200).send(
-          JSON.stringify({
-              setupPhase: "done",
-              state: "waitfinal",
-              message: "Node Running",
-              initialsync: "",
-          }),
-      );*/
 });
 
 router.get("/setup-start-info", function (req, res) {
@@ -93,23 +93,23 @@ router.get("/setup-start-info", function (req, res) {
 
   // MIGRATION
   /*    res.status(200).send(
-            JSON.stringify({
-                setupPhase: "migration",
-                hddGotBlockchain: "1",
-                hddGotMigrationData: "umbrel",
-                migrationMode: "normal", // or "outdatedLightning" to get info-text
-            }),
-        );*/
+              JSON.stringify({
+                  setupPhase: "migration",
+                  hddGotBlockchain: "1",
+                  hddGotMigrationData: "umbrel",
+                  migrationMode: "normal", // or "outdatedLightning" to get info-text
+              }),
+          );*/
 
   // RECOVERY
   /*    res.status(200).send(
-            JSON.stringify({
-                setupPhase: "recovery",
-                hddGotBlockchain: "0",
-                hddGotMigrationData: null,
-                migrationMode: null,
-            }),
-        );*/
+              JSON.stringify({
+                  setupPhase: "recovery",
+                  hddGotBlockchain: "0",
+                  hddGotMigrationData: null,
+                  migrationMode: null,
+              }),
+          );*/
 });
 
 router.post("/setup-start-done", function (req, res) {
