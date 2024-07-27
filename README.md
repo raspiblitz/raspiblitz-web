@@ -29,6 +29,20 @@ npm update
 
 ### Dev workflow
 
+### Simple dev setup
+
+```bash
+npm install
+cd backend-mock
+npm install
+cd ..
+npm run dev:local
+```
+
+The `npm run dev:local` command starts the frontend and the backend mock server.
+
+The backend mock server restarts automatically when you change a file in the `backend-mock` folder.
+
 #### Frontend
 
 ```bash
