@@ -7,10 +7,10 @@ import Layout from "./layouts/Layout";
 import LoadingScreen from "./layouts/LoadingScreen";
 import SkeletonLoadingScreen from "./layouts/SkeletonLoadingScreen";
 import { SetupPhase } from "./models/setup.model";
-import AppPage from "./pages/Apps/AppPage";
-import Login from "./pages/Login";
 import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./utils";
 import { instance } from "./utils/interceptor";
+import AppPage from "@/pages/Apps/AppPage";
+import Login from "@/pages/Login";
 import { FC, lazy, Suspense, useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,7 +27,6 @@ const App: FC = () => {
   const [needsSetup, setNeedsSetup] = useState(false);
   const { isLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
-
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -35,22 +34,24 @@ const App: FC = () => {
       async function check() {
         setFirstCall(false);
         if (pathname.startsWith("/login")) {
+          setIsLoading(false);
           return;
         }
         await instance.get("/setup/status").then((resp) => {
           const setupPhase = resp.data.setupPhase;
-          const initialsync = resp.data.initialsync;
-          if (setupPhase !== SetupPhase.DONE || initialsync === "running") {
+          const initialSync = resp.data.initialsync;
+          if (setupPhase !== SetupPhase.DONE || initialSync === "running") {
             setNeedsSetup(true);
             navigate("/setup");
           } else {
             setNeedsSetup(false);
           }
+          setIsLoading(false);
         });
       }
+
       check();
     }
-    setIsLoading(false);
   }, [isLoggedIn, firstCall, navigate, pathname]);
 
   useEffect(() => {
@@ -86,7 +87,7 @@ const App: FC = () => {
       const payload = parseJwt(token);
       refresh(REFRESH_TIME(payload.expires));
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   if (isLoading) {
     return <LoadingScreen />;
