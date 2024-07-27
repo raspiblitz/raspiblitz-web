@@ -2,15 +2,14 @@ import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupStatus } from "@/models/setup.model";
 import { Spinner } from "@nextui-org/react";
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-export type Props = {
+type Props = {
   status: SetupStatus;
   message: string;
 };
 
-const WaitScreen: FC<Props> = ({ status, message }) => {
+export default function WaitScreen({ status, message }: Props) {
   const { t } = useTranslation();
 
   // optimize for certain states like
@@ -54,6 +53,4 @@ const WaitScreen: FC<Props> = ({ status, message }) => {
       </section>
     </SetupContainer>
   );
-};
-
-export default WaitScreen;
+}

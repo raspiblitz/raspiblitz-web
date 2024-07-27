@@ -7,12 +7,12 @@ import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
 import { RadioGroup } from "@nextui-org/react";
-import { FC, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-export interface InputData {
+type Props = {
   callback: (lightningSelect: SetupLightning) => void;
-}
+};
 
 export type SelectFn = (value: string) => void;
 
@@ -23,7 +23,7 @@ const images = {
   [SetupLightning.NULL]: "",
 };
 
-const LightningDialog: FC<InputData> = ({ callback }) => {
+export default function LightningDialog({ callback }: Props) {
   const { t } = useTranslation();
   const [selected, setSelected] = useState<SetupLightning | undefined>(
     undefined,
@@ -100,6 +100,4 @@ const LightningDialog: FC<InputData> = ({ callback }) => {
       </section>
     </SetupContainer>
   );
-};
-
-export default LightningDialog;
+}

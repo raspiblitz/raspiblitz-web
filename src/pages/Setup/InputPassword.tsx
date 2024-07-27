@@ -6,7 +6,7 @@ import { Input, useDisclosure } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 
-export type Props = {
+type Props = {
   passwordType: PasswordColors;
   callback: (password: string | null) => void;
 };
