@@ -1,5 +1,5 @@
 import { AppContext } from "@/context/app-context";
-import { SSEContext, SSE_URL } from "@/context/sse-context";
+import { SSE_URL, SSEContext } from "@/context/sse-context";
 import { AppStatus } from "@/models/app-status";
 import { App } from "@/models/app.model";
 import { BtcInfo } from "@/models/btc-info";
@@ -98,8 +98,7 @@ function useSSE() {
       const t = JSON.parse(event.data);
       sseCtx.setTransactions((prev) => {
         // add the newest transaction to the beginning
-        const current = [t, ...prev];
-        return current;
+        return [t, ...prev];
       });
     };
 
@@ -198,9 +197,8 @@ function useSSE() {
       });
     };
 
-    const eventErrorHandler = (event: Event) => {
-      // inform the user about the error
-      toast.error("An SSE error occurred", { toastId: "sse-error" });
+    const eventErrorHandler = (_event: Event) => {
+      appCtx.logout();
     };
 
     if (evtSource) {

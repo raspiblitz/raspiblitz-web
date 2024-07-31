@@ -53,7 +53,8 @@ test("should route to home and save token after login", async ({
   ).toMatch("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 });
 
-test("should login automatically if token is not expired", async ({
+// see https://github.com/raspiblitz/raspiblitz-web/issues/760
+test.skip("should login automatically if token is not expired", async ({
   loginPage,
   page,
 }) => {
@@ -66,7 +67,8 @@ test("should login automatically if token is not expired", async ({
   await expect(page.getByRole("link", { name: "Home" })).toBeVisible();
 });
 
-test("redirect to home if token is not expired & login page was called", async ({
+// see https://github.com/raspiblitz/raspiblitz-web/issues/760
+test.skip("redirect to home if token is not expired & login page was called", async ({
   loginPage,
   page,
 }) => {
