@@ -205,7 +205,7 @@
     "settings": {
       "cancel": "Cancel",
       "change": "Change",
-      "change_pw_a": "Change password A",
+      "change_pw_a": "Change Node Password (A)",
       "confirm": "Confirm",
       "curr_lang": "Current language",
       "language": "Language",
