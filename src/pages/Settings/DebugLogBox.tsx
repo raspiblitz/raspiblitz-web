@@ -1,8 +1,7 @@
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import { Button } from "@/components/Button";
 import { AppContext } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -46,16 +45,16 @@ const DebugLogBox: FC = () => {
           <h4 className="flex w-1/2 items-center font-bold xl:w-2/3">
             {t("settings.generate_debug")}
           </h4>
-          <ButtonWithSpinner
-            loading={isGeneratingReport}
+          <Button
+            isLoading={isGeneratingReport}
             onClick={onClickHandler}
-            icon={<DocumentTextIcon className="mr-1 inline h-5 w-5" />}
-            className="bd-button w-1/2 py-1 xl:w-1/3"
+            color="secondary"
+            variant="flat"
           >
             {isGeneratingReport
               ? t("settings.generating")
               : t("settings.generate")}
-          </ButtonWithSpinner>
+          </Button>
         </div>
       </article>
     </div>
