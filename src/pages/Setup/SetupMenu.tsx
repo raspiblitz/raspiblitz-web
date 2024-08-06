@@ -14,7 +14,7 @@ import { RadioGroup } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export type Props = {
+type Props = {
   setupPhase: SetupPhase;
   callback: (setupmode: SetupPhase) => void;
 };

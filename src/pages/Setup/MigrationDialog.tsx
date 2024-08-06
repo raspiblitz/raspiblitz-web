@@ -5,20 +5,19 @@ import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
 import { useDisclosure } from "@nextui-org/react";
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-export interface InputData {
+type Props = {
   migrationOS: SetupMigrationOS;
   migrationMode: SetupMigrationMode;
   callback: (migrate: boolean) => void;
-}
+};
 
-const MigrationDialog: FC<InputData> = ({
+export default function MigrationDialog({
   migrationOS,
   migrationMode,
   callback,
-}) => {
+}: Props) {
   const { t } = useTranslation();
   const confirmModal = useDisclosure();
 
@@ -81,6 +80,4 @@ const MigrationDialog: FC<InputData> = ({
       </SetupContainer>
     </>
   );
-};
-
-export default MigrationDialog;
+}
