@@ -13,9 +13,15 @@ export type Props = {
   confirmText: string;
   onConfirm: () => void;
   disclosure: UseDisclosureReturn;
+  isLoading?: boolean;
 };
 
-export const ConfirmModal = ({ confirmText, onConfirm, disclosure }: Props) => {
+export const ConfirmModal = ({
+  confirmText,
+  onConfirm,
+  disclosure,
+  isLoading,
+}: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpenChange, onClose } = disclosure;
 
@@ -30,10 +36,15 @@ export const ConfirmModal = ({ confirmText, onConfirm, disclosure }: Props) => {
               </ModalHeader>
               <ModalBody>{confirmText}</ModalBody>
               <ModalFooter>
-                <Button variant="light" onClick={onClose}>
+                <Button variant="light" onClick={onClose} disabled={isLoading}>
                   {t("settings.cancel")}
                 </Button>
-                <Button color="primary" onClick={onConfirm}>
+                <Button
+                  color="primary"
+                  onClick={onConfirm}
+                  disabled={isLoading}
+                  isLoading={isLoading}
+                >
                   {t("settings.confirm")}
                 </Button>
               </ModalFooter>
