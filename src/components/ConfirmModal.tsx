@@ -10,12 +10,20 @@ import type { UseDisclosureReturn } from "@nextui-org/use-disclosure";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
-  confirmText: string;
+  headline: string;
+  body?: string;
   onConfirm: () => void;
   disclosure: UseDisclosureReturn;
+  isLoading?: boolean;
 };
 
-export const ConfirmModal = ({ confirmText, onConfirm, disclosure }: Props) => {
+export const ConfirmModal = ({
+  headline,
+  body,
+  onConfirm,
+  disclosure,
+  isLoading,
+}: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpenChange, onClose } = disclosure;
 
@@ -26,14 +34,21 @@ export const ConfirmModal = ({ confirmText, onConfirm, disclosure }: Props) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {t("settings.confirm")}
+                {headline}
               </ModalHeader>
-              <ModalBody>{confirmText}</ModalBody>
+
+              {!!body && <ModalBody>{body}</ModalBody>}
+
               <ModalFooter>
-                <Button variant="light" onClick={onClose}>
+                <Button variant="light" onClick={onClose} disabled={isLoading}>
                   {t("settings.cancel")}
                 </Button>
-                <Button color="primary" onClick={onConfirm}>
+                <Button
+                  color="primary"
+                  onClick={onConfirm}
+                  disabled={isLoading}
+                  isLoading={isLoading}
+                >
                   {t("settings.confirm")}
                 </Button>
               </ModalFooter>
