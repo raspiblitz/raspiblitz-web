@@ -10,14 +10,16 @@ import type { UseDisclosureReturn } from "@nextui-org/use-disclosure";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
-  confirmText: string;
+  headline: string;
+  body?: string;
   onConfirm: () => void;
   disclosure: UseDisclosureReturn;
   isLoading?: boolean;
 };
 
 export const ConfirmModal = ({
-  confirmText,
+  headline,
+  body,
   onConfirm,
   disclosure,
   isLoading,
@@ -32,9 +34,11 @@ export const ConfirmModal = ({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {t("settings.confirm")}
+                {headline}
               </ModalHeader>
-              <ModalBody>{confirmText}</ModalBody>
+
+              {!!body && <ModalBody>{body}</ModalBody>}
+
               <ModalFooter>
                 <Button variant="light" onClick={onClose} disabled={isLoading}>
                   {t("settings.cancel")}

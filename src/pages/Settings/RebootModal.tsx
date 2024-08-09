@@ -31,7 +31,7 @@ const RebootModal: FC = () => {
     <>
       <ConfirmModal
         disclosure={confirmModal}
-        confirmText={t("settings.reboot")}
+        headline={t("settings.reboot")}
         onConfirm={rebootHandler}
         isLoading={isLoading}
       />
