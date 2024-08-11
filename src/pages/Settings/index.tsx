@@ -9,13 +9,10 @@ import { enableGutter } from "@/utils";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-/**
- * Displays the settings page.
- */
 const Settings: FC = () => {
   const { t } = useTranslation();
+
   const [showShutdownModal, setShowShutdownModal] = useState(false);
-  const [showRebootModal, setShowRebootModal] = useState(false);
   const [showPwModal, setShowPwModal] = useState(false);
 
   useEffect(() => {
@@ -33,14 +30,7 @@ const Settings: FC = () => {
       >
         <ChangePwModal onClose={() => setShowPwModal(false)} />
       </ActionBox>
-      <ActionBox
-        name={t("settings.reboot")}
-        actionName={t("settings.reboot")}
-        action={() => setShowRebootModal(true)}
-        showChild={showRebootModal}
-      >
-        <RebootModal onClose={() => setShowRebootModal(false)} />
-      </ActionBox>
+      <RebootModal />
       <ActionBox
         name={t("settings.shutdown")}
         actionName={t("settings.shutdown")}

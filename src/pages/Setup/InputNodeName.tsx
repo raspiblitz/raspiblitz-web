@@ -42,7 +42,7 @@ export default function InputNodeName({ callback }: Props) {
     <>
       <ConfirmModal
         disclosure={confirmModal}
-        confirmText={`${t("setup.cancel_setup")}?`}
+        headline={`${t("setup.cancel_setup")}?`}
         onConfirm={() => callback(null)}
       />
 
