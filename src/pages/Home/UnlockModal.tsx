@@ -29,7 +29,7 @@ export default function UnlockModal({ onClose }: Props) {
   const { setWalletLocked } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
-  const { isCapsLockOn, keyHandlers } = useCapsLock();
+  const { isCapsLockEnabled, keyHandlers } = useCapsLock();
 
   const {
     register,
@@ -81,7 +81,7 @@ export default function UnlockModal({ onClose }: Props) {
             disabled={isLoading}
             {...keyHandlers}
           />
-          {isCapsLockOn && <CapsLockWarning />}
+          {isCapsLockEnabled && <CapsLockWarning />}
           <ButtonWithSpinner
             type="submit"
             className="bd-button my-5 p-3"
