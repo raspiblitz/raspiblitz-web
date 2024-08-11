@@ -57,89 +57,90 @@ const ChangePwModal: FC = () => {
     mode: "onChange",
   });
 
-  const Form = () => (
-    <form onSubmit={handleSubmit(changePwHandler)}>
-      <ModalBody>
-        {isCapsLockEnabled && <CapsLockWarning />}
-
-        <fieldset className="flex w-full flex-col gap-4">
-          <Input
-            className="w-full"
-            classNames={{
-              inputWrapper:
-                "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-            }}
-            type="password"
-            label={t("settings.old_pw")}
-            isInvalid={!!errors.oldPassword}
-            errorMessage={errors.oldPassword?.message}
-            {...register("oldPassword", {
-              required: t("setup.password_error_empty"),
-              pattern: {
-                value: /^[a-zA-Z0-9.-]*$/,
-                message: t("setup.password_error_chars"),
-              },
-              minLength: {
-                value: 8,
-                message: t("setup.password_error_length"),
-              },
-            })}
-            {...keyHandlers}
-          />
-
-          <Input
-            className="w-full"
-            classNames={{
-              inputWrapper:
-                "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-            }}
-            type="password"
-            label={t("settings.new_pw")}
-            isInvalid={!!errors.newPassword}
-            errorMessage={errors.newPassword?.message}
-            {...register("newPassword", {
-              required: t("setup.password_error_empty"),
-              pattern: {
-                value: /^[a-zA-Z0-9.-]*$/,
-                message: t("setup.password_error_chars"),
-              },
-              minLength: {
-                value: 8,
-                message: t("setup.password_error_length"),
-              },
-            })}
-            {...keyHandlers}
-          />
-        </fieldset>
-      </ModalBody>
-
-      <ModalFooter>
-        <Button
-          variant="light"
-          onClick={() => confirmModal.onClose()}
-          disabled={isLoading}
-        >
-          {t("settings.cancel")}
-        </Button>
-        <Button
-          color="primary"
-          type="submit"
-          disabled={isLoading || !isValid}
-          isLoading={isLoading}
-        >
-          {t("settings.confirm")}
-        </Button>
-      </ModalFooter>
-    </form>
-  );
-
   return (
     <>
       <ConfirmModal
         disclosure={confirmModal}
         headline={t("settings.change_pw_a")}
         isLoading={isLoading}
-        isFormModal={<Form />}
+        isFormModal={
+          <form onSubmit={handleSubmit(changePwHandler)}>
+            <ModalBody>
+              {isCapsLockEnabled && <CapsLockWarning />}
+
+              <fieldset className="flex w-full flex-col gap-4">
+                <Input
+                  className="w-full"
+                  classNames={{
+                    inputWrapper:
+                      "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                  }}
+                  type="password"
+                  label={t("settings.old_pw")}
+                  isInvalid={!!errors.oldPassword}
+                  errorMessage={errors.oldPassword?.message}
+                  {...register("oldPassword", {
+                    required: t("setup.password_error_empty"),
+                    pattern: {
+                      value: /^[a-zA-Z0-9.-]*$/,
+                      message: t("setup.password_error_chars"),
+                    },
+                    minLength: {
+                      value: 8,
+                      message: t("setup.password_error_length"),
+                    },
+                  })}
+                  {...keyHandlers}
+                />
+
+                <Input
+                  className="w-full"
+                  classNames={{
+                    inputWrapper:
+                      "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                  }}
+                  type="password"
+                  label={t("settings.new_pw")}
+                  isInvalid={!!errors.newPassword}
+                  errorMessage={errors.newPassword?.message}
+                  {...register("newPassword", {
+                    required: t("setup.password_error_empty"),
+                    pattern: {
+                      value: /^[a-zA-Z0-9.-]*$/,
+                      message: t("setup.password_error_chars"),
+                    },
+                    minLength: {
+                      value: 8,
+                      message: t("setup.password_error_length"),
+                    },
+                  })}
+                  {...keyHandlers}
+                />
+              </fieldset>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                variant="light"
+                onClick={() => {
+                  confirmModal.onClose();
+                  reset();
+                }}
+                disabled={isLoading}
+              >
+                {t("settings.cancel")}
+              </Button>
+              <Button
+                color="primary"
+                type="submit"
+                disabled={isLoading || !isValid}
+                isLoading={isLoading}
+              >
+                {t("settings.confirm")}
+              </Button>
+            </ModalFooter>
+          </form>
+        }
       />
 
       <ActionBox
