@@ -7,11 +7,12 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import type { UseDisclosureReturn } from "@nextui-org/use-disclosure";
+import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
   headline: string;
-  body?: string;
+  body?: ReactNode;
   onConfirm: () => void;
   disclosure: UseDisclosureReturn;
   isLoading?: boolean;
