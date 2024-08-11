@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next";
 const Settings: FC = () => {
   const { t } = useTranslation();
 
-  const [showShutdownModal, setShowShutdownModal] = useState(false);
   const [showPwModal, setShowPwModal] = useState(false);
 
   useEffect(() => {
@@ -31,14 +30,7 @@ const Settings: FC = () => {
         <ChangePwModal onClose={() => setShowPwModal(false)} />
       </ActionBox>
       <RebootModal />
-      <ActionBox
-        name={t("settings.shutdown")}
-        actionName={t("settings.shutdown")}
-        action={() => setShowShutdownModal(true)}
-        showChild={showShutdownModal}
-      >
-        <ShutdownModal onClose={() => setShowShutdownModal(false)} />
-      </ActionBox>
+      <ShutdownModal />
       <VersionBox />
       <DebugLogBox />
     </main>
