@@ -12,15 +12,12 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
-export type Props = {
-  onClose: () => void;
-};
 interface IFormInputs {
   oldPassword: string;
   newPassword: string;
 }
 
-const ChangePwModal: FC<Props> = ({ onClose }) => {
+const ChangePwModal: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const confirmModal = useDisclosure();
@@ -40,7 +37,7 @@ const ChangePwModal: FC<Props> = ({ onClose }) => {
       .post("/system/change-password", {}, { params })
       .then(() => {
         toast.success(t("settings.pass_a_changed"));
-        onClose();
+        confirmModal.onClose();
       })
       .catch((err) => {
         toast.error(checkError(err));

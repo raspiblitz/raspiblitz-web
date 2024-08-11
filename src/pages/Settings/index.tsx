@@ -6,11 +6,8 @@ import ShutdownModal from "./ShutdownModal";
 import VersionBox from "./VersionBox";
 import { enableGutter } from "@/utils";
 import { FC, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 const Settings: FC = () => {
-  const { t } = useTranslation();
-
   useEffect(() => {
     enableGutter();
   }, []);
