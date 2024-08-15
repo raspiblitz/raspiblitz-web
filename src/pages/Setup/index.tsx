@@ -16,27 +16,12 @@ import {
   SetupPhase,
   SetupStatus,
 } from "@/models/setup.model";
+import { Screen } from "@/models/setup.model";
 import { ACCESS_TOKEN } from "@/utils";
 import { instance } from "@/utils/interceptor";
 import { HttpStatusCode } from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-enum Screen {
-  FINAL,
-  FORMAT,
-  INPUT_A,
-  INPUT_B,
-  INPUT_C,
-  INPUT_NODENAME,
-  LIGHTNING,
-  MIGRATION,
-  RECOVERY,
-  SETUP,
-  START_DONE,
-  SYNC,
-  WAIT,
-}
 
 export default function Setup() {
   const [page, setPage] = useState(Screen.WAIT);
