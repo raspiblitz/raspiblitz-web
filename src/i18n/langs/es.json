@@ -172,7 +172,9 @@
         "err_only_chars": "El nombre del nodo debería contener solo caracteres y números.",
         "err_max_length": "El nombre del nodo debe ser como máximo de 32 caracteres.",
         "err_min_length": "El nombre del nodo debe ser al menos de 4 caracteres.",
-        "err_empty": "El nombre del nodo no puede estar vacío."
+        "err_empty": "El nombre del nodo no puede estar vacío.",
+        "header": "¿Cómo deberíamos llamar a tu nodo?",
+        "label": "Nombre de nodo"
       },
       "blockchain_delete": "Borrar la cadena de bloques",
       "blockchain_found_long": "Se han encontrado datos existentes de la cadena de bloques en tu disco duro / SSD.",
@@ -240,7 +242,31 @@
       "password_error_empty": "La Contraseña no puede estar vacía.",
       "restarts": "Reinicia",
       "sync_headline": "Sincronización Inicial de RaspiBlitz",
-      "sync_restartinfo": "(la sincronización continuará después de reiniciar)"
+      "sync_restartinfo": "(la sincronización continuará después de reiniciar)",
+      "format": {
+        "warn": "¡Haga una copia de seguridad de los datos importantes, ya que esto borrará su disco!",
+        "delete_drive": "¿Le gustaría continuar eliminando todos los datos de su disco?",
+        "keep_blockchain": "Mantener datos de Blockchain"
+      },
+      "lnd_description": "Agregar el demonio Lightning Network (LND), desarrollado por Lightning Labs, a un nodo completo de Bitcoin introduce capacidades para transacciones más rápidas y económicas. LAND es una de las implementaciones más populares y fáciles de usar de Lightning Network.",
+      "none": "Nodo Completo de Bitcoin Sin Lightning",
+      "none_description": "Ejecutar un nodo completo de Bitcoin sin ninguna implementación de Lightning Network implica participar directamente en la red de Bitcoin validando transacciones y bloques.",
+      "select_lightning_help": "¿Cuál es la diferencia? < 0>Obtenga más información</0> sobre cada implementación.",
+      "not_started": "no comenzó",
+      "step": {
+        "step": "Paso",
+        "step_1_description": "Prepare la Unidad",
+        "step_2_description": "Nombre del nodo",
+        "step_3_description": "Tipo de nodo",
+        "step_4_description": "Establecer Contraseñas"
+      },
+      "setupmenu": {
+        "lets_setup": "Configuremos su RaspiBlitz",
+        "setup_time": "El proceso de configuración total tarda unos 20 minutos"
+      },
+      "cl": "Nodo Completo de Bitcoin con Implementación Básica de Lightning",
+      "cl_description": "Core Lightning (anteriormente conocido como c-lightning) es una implementación de Lightning Network de Blockstream centrada en el rendimiento y la extensibilidad para desarrolladores y usuarios avanzados.",
+      "migrate_to_os": "¿Quieres migrar desde {{os}} a RaspiBlitz?"
     },
     "tx": {
       "comment": "Comentario",
@@ -287,7 +313,8 @@
       "unlock_title": "Desbloquear billetera",
       "unlocking": "Desbloqueando",
       "wallet_locked": "Billetera bloqueada",
-      "available_balance": "Balance disponible"
+      "available_balance": "Balance disponible",
+      "wallet_unlock_info": "Para evitar tiempo de sincronización adicional para su nodo Lightning, desbloquee también su billetera Lightning."
     },
     "appInfo": {
       "btc-rpc-explorer": {
@@ -335,6 +362,14 @@
         },
         "about": "Extensión del navegador Alby",
         "shortDescription": "Conecta tu nodo RaspiBlitz LND y utiliza aplicaciones Bitcoin y Nostr con la extensión Alby"
+      },
+      "electrs": {
+        "about": "Electrs es una reimplementación eficiente de Electrum Server en Rust. Indexa toda la cadena de bloques de Bitcoin y permite que su nodo Lightning lo consulte para transacciones en cadena.",
+        "shortDescription": "Reimplementación eficiente del servidor Electrum en Rust",
+        "initialSync": "La base de datos de índices debe crearse antes de poder utilizar Electrum Server. Esto puede llevar horas / días dependiendo de su RaspiBlitz. Por favor, vuelva a consultar más tarde.",
+        "connectLocal": "Conéctese al Servidor Electrum a través de la Red Local",
+        "connectTor": "Conéctese al servidor Electrum a través de Tor",
+        "connectionInfo": "Use estas direcciones para conectar sus aplicaciones a su nodo Bitcoin. Puedes usar la conexión local si estás en la misma red o la dirección Tor si estás usando Tor."
       }
     },
     "error": {
