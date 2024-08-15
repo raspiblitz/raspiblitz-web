@@ -10,13 +10,13 @@ import StartDoneDialog from "./StartDoneDialog";
 import SyncScreen from "./SyncScreen";
 import WaitScreen from "./WaitScreen";
 import {
+  initialState,
+  Screen,
   SetupLightning,
-  SetupMigrationMode,
-  SetupMigrationOS,
   SetupPhase,
+  SetupState,
   SetupStatus,
 } from "@/models/setup.model";
-import { Screen } from "@/models/setup.model";
 import { ACCESS_TOKEN } from "@/utils";
 import { instance } from "@/utils/interceptor";
 import { HttpStatusCode } from "axios";
@@ -24,29 +24,28 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Setup() {
-  const [page, setPage] = useState(Screen.WAIT);
-  const [syncData, setSyncData] = useState(null);
-  const [waitScreenStatus, setWaitScreenStatus] = useState(SetupStatus.WAIT);
-  const [waitScreenMessage, setWaitScreenMessage] = useState("");
-  const [setupPhaseOnStart, setSetupPhaseOnStart] = useState(SetupPhase.NULL);
-  const [setupPhase, setSetupPhase] = useState(SetupPhase.NULL);
-  const [gotBlockchain, setGotBlockchain] = useState(false);
-  const [keepBlockchain, setKeepBlockchain] = useState(true);
-  const [migrationOS, setMigrationOS] = useState(SetupMigrationOS.NULL);
-  const [migrationMode, setMigrationMode] = useState(SetupMigrationMode.NULL);
-  const [lightning, setLightning] = useState(SetupLightning.NULL);
-  const [hostname, setHostname] = useState("");
-  const [passwordA, setPasswordA] = useState("");
-  const [passwordB, setPasswordB] = useState("");
-  const [passwordC, setPasswordC] = useState("");
-  const [seedWords, setSeedWords] = useState<string | null>(null);
+  const [state, setState] = useState<SetupState>(initialState);
   const navigate = useNavigate();
+
+  const updateState = useCallback((newState: Partial<SetupState>) => {
+    setState((prevState: SetupState) => ({ ...prevState, ...newState }));
+  }, []);
+
+  const showError = useCallback(
+    (message: string) => {
+      updateState({
+        waitScreenStatus: SetupStatus.ERROR,
+        waitScreenMessage: message,
+        page: Screen.WAIT,
+      });
+    },
+    [updateState],
+  );
 
   const showSyncScreen = useCallback(async () => {
     try {
       const resp = await instance.post("/setup/setup-sync-info", {});
-      setSyncData(resp.data);
-      setPage(Screen.SYNC);
+      updateState({ syncData: resp.data, page: Screen.SYNC });
     } catch (err) {
       const error = err as { response: { status: number } };
       if (
@@ -59,26 +58,28 @@ export default function Setup() {
         console.error(`request for sync failed: ${error.response.status}`);
       }
     }
-  }, [navigate]);
+  }, [updateState, navigate]);
 
   const initSetupStart = useCallback(async () => {
     try {
       const resp = await instance.get("/setup/setup-start-info");
-      setGotBlockchain(resp.data.hddGotBlockchain === "1");
-      setSetupPhaseOnStart(resp.data.setupPhase);
-      setMigrationOS(resp.data.hddGotMigrationData);
-      setMigrationMode(resp.data.migrationMode);
+      updateState({
+        gotBlockchain: resp.data.hddGotBlockchain === "1",
+        setupPhaseOnStart: resp.data.setupPhase,
+        migrationOS: resp.data.hddGotMigrationData,
+        migrationMode: resp.data.migrationMode,
+      });
 
       switch (resp.data.setupPhase) {
         case SetupPhase.RECOVERY:
         case SetupPhase.UPDATE:
-          setPage(Screen.RECOVERY);
+          updateState({ page: Screen.RECOVERY });
           break;
         case SetupPhase.MIGRATION:
-          setPage(Screen.MIGRATION);
+          updateState({ page: Screen.MIGRATION });
           break;
         case SetupPhase.SETUP:
-          setPage(Screen.SETUP);
+          updateState({ page: Screen.SETUP });
           break;
         default:
           showError("unknown setup phase on init");
@@ -86,13 +87,12 @@ export default function Setup() {
     } catch (error) {
       showError(`request for init setup data failed: ${error}`);
     }
-  }, []);
+  }, [showError, updateState]);
 
   const initSetupFinal = useCallback(async () => {
     try {
       const resp = await instance.get("/setup/setup-final-info");
-      setSeedWords(resp.data?.seedwordsNEW || null);
-      setPage(Screen.FINAL);
+      updateState({ seedWords: resp.data.seedwordsNEW, page: Screen.FINAL });
     } catch (err) {
       const error = err as { response: { status: number } };
       if (
@@ -105,7 +105,7 @@ export default function Setup() {
         showError(`request for setup start failed: ${error.response.status}`);
       }
     }
-  }, [navigate]);
+  }, [showError, updateState, navigate]);
 
   const setupMonitoringLoop = useCallback(async () => {
     try {
@@ -129,16 +129,18 @@ export default function Setup() {
           return;
         }
       } else {
-        setWaitScreenStatus(resp.data.state);
-        setWaitScreenMessage(resp.data.message);
-        setPage(Screen.WAIT);
+        updateState({
+          waitScreenStatus: resp.data.state,
+          waitScreenMessage: resp.data.message,
+          page: Screen.WAIT,
+        });
       }
     } catch {
       console.error("status request failed - device is off or in reboot?");
     }
 
     setTimeout(setupMonitoringLoop, 4000);
-  }, [initSetupFinal, initSetupStart, navigate, showSyncScreen]);
+  }, [initSetupFinal, initSetupStart, updateState, navigate, showSyncScreen]);
 
   useEffect(() => {
     setupMonitoringLoop();
@@ -146,15 +148,15 @@ export default function Setup() {
 
   const setupStart = async () => {
     try {
-      const forceFreshSetup = setupPhase === SetupPhase.SETUP;
+      const forceFreshSetup = state.setupPhase === SetupPhase.SETUP;
       const resp = await instance.post("/setup/setup-start-done", {
-        hostname,
+        hostname: state.hostname,
         forceFreshSetup,
-        keepBlockchain,
-        lightning,
-        passwordA,
-        passwordB,
-        passwordC,
+        keepBlockchain: state.keepBlockchain,
+        lightning: state.lightning,
+        passwordA: state.passwordA,
+        passwordB: state.passwordB,
+        passwordC: state.passwordC,
       });
 
       if (resp) {
@@ -188,9 +190,11 @@ export default function Setup() {
   };
 
   const setupShutdown = async () => {
-    setWaitScreenStatus(SetupStatus.WAIT);
-    setWaitScreenMessage("");
-    setPage(Screen.WAIT);
+    updateState({
+      waitScreenStatus: SetupStatus.WAIT,
+      waitScreenMessage: "",
+      page: Screen.WAIT,
+    });
 
     try {
       await instance.get("/setup/shutdown");
@@ -201,27 +205,20 @@ export default function Setup() {
     }
   };
 
-  const showError = (message: string) => {
-    setWaitScreenStatus(SetupStatus.ERROR);
-    setWaitScreenMessage(message);
-    setPage(Screen.WAIT);
-  };
-
   const callbackRecoveryDialog = (startRecovery: boolean) => {
-    setPage(startRecovery ? Screen.INPUT_A : Screen.SETUP);
+    updateState({ page: startRecovery ? Screen.INPUT_A : Screen.SETUP });
   };
 
   const callbackMigrationDialog = async (start: boolean) => {
     if (start) {
-      setSetupPhase(SetupPhase.MIGRATION);
-      setPage(Screen.INPUT_A);
+      updateState({ setupPhase: SetupPhase.MIGRATION, page: Screen.INPUT_A });
     } else {
       await setupShutdown();
     }
   };
 
   const callbackSetupMenu = async (setupmode: SetupPhase) => {
-    setSetupPhase(setupmode);
+    updateState({ setupPhase: setupmode });
 
     switch (setupmode) {
       case SetupPhase.NULL:
@@ -230,10 +227,10 @@ export default function Setup() {
       case SetupPhase.RECOVERY:
       case SetupPhase.UPDATE:
       case SetupPhase.MIGRATION:
-        setPage(Screen.INPUT_A);
+        updateState({ page: Screen.INPUT_A });
         break;
       case SetupPhase.SETUP:
-        setPage(Screen.FORMAT);
+        updateState({ page: Screen.FORMAT });
         break;
     }
   };
@@ -243,37 +240,37 @@ export default function Setup() {
     keepBlockchainData: boolean,
   ) => {
     if (!deleteData) {
-      setPage(Screen.SETUP);
+      updateState({ page: Screen.SETUP });
       return;
     }
 
-    setKeepBlockchain(keepBlockchainData);
-    setPage(Screen.INPUT_NODENAME);
+    updateState({
+      keepBlockchain: keepBlockchainData,
+      page: Screen.INPUT_NODENAME,
+    });
   };
 
   const callbackLightning = (lightning: SetupLightning) => {
     if (!lightning) {
-      setPage(Screen.SETUP);
+      updateState({ page: Screen.SETUP });
       return;
     }
 
-    setLightning(lightning);
-    setPage(Screen.INPUT_A);
+    updateState({ lightning, page: Screen.INPUT_A });
   };
 
   const callbackInputNodename = (nodename: string | null) => {
     if (!nodename) {
-      setPage(Screen.SETUP);
+      updateState({ page: Screen.SETUP });
       return;
     }
 
-    setHostname(nodename);
-    setPage(Screen.LIGHTNING);
+    updateState({ hostname: nodename, page: Screen.LIGHTNING });
   };
 
   const checkPasswordCancel = (password: string | null): boolean => {
     if (!password) {
-      setPage(Screen.SETUP);
+      updateState({ page: Screen.SETUP });
       return true;
     }
     return false;
@@ -282,16 +279,16 @@ export default function Setup() {
   const callbackInputPasswordA = (password: string | null) => {
     if (checkPasswordCancel(password)) return;
 
-    setPasswordA(password!);
+    updateState({ passwordA: password! });
 
-    switch (setupPhase) {
+    switch (state.setupPhase) {
       case SetupPhase.RECOVERY:
       case SetupPhase.UPDATE:
-        setPage(Screen.START_DONE);
+        updateState({ page: Screen.START_DONE });
         break;
       case SetupPhase.SETUP:
       case SetupPhase.MIGRATION:
-        setPage(Screen.INPUT_B);
+        updateState({ page: Screen.INPUT_B });
         break;
       default:
         showError("unknown follow up state: passwordA");
@@ -301,28 +298,27 @@ export default function Setup() {
   const callbackInputPasswordB = (password: string | null) => {
     if (checkPasswordCancel(password)) return;
 
-    setPasswordB(password!);
+    updateState({ passwordB: password! });
 
     // based on setupPhase ... continue to a different next screen
-    if (lightning === SetupLightning.NONE) {
+    if (state.lightning === SetupLightning.NONE) {
       // without lightning no password c is needed - finish setup
-      setPage(Screen.START_DONE);
+      updateState({ page: Screen.START_DONE });
       return;
     }
 
-    setPage(Screen.INPUT_C);
+    updateState({ page: Screen.INPUT_C });
   };
 
   const callbackInputPasswordC = (password: string | null) => {
     if (checkPasswordCancel(password)) return;
 
-    setPasswordC(password!);
-    setPage(Screen.START_DONE);
+    updateState({ passwordC: password!, page: Screen.START_DONE });
   };
 
   const callbackStartDoneDialog = async (cancel: boolean) => {
     if (cancel) {
-      setPage(Screen.SETUP);
+      updateState({ page: Screen.SETUP });
       return;
     }
 
@@ -341,40 +337,40 @@ export default function Setup() {
     }
   };
 
-  switch (page) {
+  switch (state.page) {
     case Screen.SETUP:
       return (
         <SetupMenu
-          setupPhase={setupPhaseOnStart}
+          setupPhase={state.setupPhaseOnStart}
           callback={callbackSetupMenu}
         />
       );
     case Screen.START_DONE:
       return (
         <StartDoneDialog
-          setupPhase={setupPhase}
+          setupPhase={state.setupPhase}
           callback={callbackStartDoneDialog}
         />
       );
     case Screen.FORMAT:
       return (
         <FormatDialog
-          containsBlockchain={gotBlockchain}
+          containsBlockchain={state.gotBlockchain}
           callback={callbackFormatDialog}
         />
       );
     case Screen.RECOVERY:
       return (
         <RecoveryDialog
-          setupPhase={setupPhaseOnStart}
+          setupPhase={state.setupPhaseOnStart}
           callback={callbackRecoveryDialog}
         />
       );
     case Screen.MIGRATION:
       return (
         <MigrationDialog
-          migrationOS={migrationOS}
-          migrationMode={migrationMode}
+          migrationOS={state.migrationOS}
+          migrationMode={state.migrationMode}
           callback={callbackMigrationDialog}
         />
       );
@@ -397,17 +393,20 @@ export default function Setup() {
     case Screen.FINAL:
       return (
         <FinalDialog
-          setupPhase={setupPhase}
-          seedWords={seedWords}
+          setupPhase={state.setupPhase}
+          seedWords={state.seedWords}
           callback={setupFinalReboot}
         />
       );
     case Screen.SYNC:
-      return <SyncScreen data={syncData} callback={callbackSyncScreen} />;
+      return <SyncScreen data={state.syncData} callback={callbackSyncScreen} />;
     case Screen.WAIT:
     default:
       return (
-        <WaitScreen status={waitScreenStatus} message={waitScreenMessage} />
+        <WaitScreen
+          status={state.waitScreenStatus}
+          message={state.waitScreenMessage}
+        />
       );
   }
 }
