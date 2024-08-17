@@ -149,7 +149,7 @@
     "settings": {
       "cancel": "Cancelar",
       "change": "Cambiar",
-      "change_pw_a": "Cambiar contraseña A",
+      "change_pw_a": "Cambiar contraseña de nodo (A)",
       "confirm": "Confirmar",
       "curr_lang": "Lenguaje actual",
       "language": "Lenguaje",
@@ -246,7 +246,8 @@
       "format": {
         "warn": "¡Haga una copia de seguridad de los datos importantes, ya que esto borrará su disco!",
         "delete_drive": "¿Le gustaría continuar eliminando todos los datos de su disco?",
-        "keep_blockchain": "Mantener datos de Blockchain"
+        "keep_blockchain": "Mantener datos de Blockchain",
+        "delete_confirm": "Sí, borrar todos los datos"
       },
       "lnd_description": "Agregar el demonio Lightning Network (LND), desarrollado por Lightning Labs, a un nodo completo de Bitcoin introduce capacidades para transacciones más rápidas y económicas. LAND es una de las implementaciones más populares y fáciles de usar de Lightning Network.",
       "none": "Nodo Completo de Bitcoin Sin Lightning",
