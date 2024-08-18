@@ -40,9 +40,7 @@ export const ConfirmModal = ({
                 {headline}
               </ModalHeader>
 
-              {!!isFormModal ? (
-                isFormModal
-              ) : (
+              {isFormModal || (
                 <>
                   {!!body && <ModalBody>{body}</ModalBody>}
 
