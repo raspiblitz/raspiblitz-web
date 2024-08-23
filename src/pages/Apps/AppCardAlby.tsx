@@ -1,6 +1,10 @@
 import AppIcon from "@/components/AppIcon";
 import { instance } from "@/utils/interceptor";
-import { PlusIcon, LinkIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowTopRightOnSquareIcon,
+  LinkIcon,
+} from "@heroicons/react/24/outline";
+import { Link, Button } from "@nextui-org/react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -63,6 +67,7 @@ export const AppCardAlby: FC = () => {
         <div className="mt-4 flex w-1/4 items-center justify-center p-2">
           <AppIcon appId={id} className="max-h-12" />
         </div>
+
         {/* Content */}
         <div className="mt-4 flex w-3/4 flex-col items-start justify-center text-xl">
           <h4>{name}</h4>
@@ -71,27 +76,31 @@ export const AppCardAlby: FC = () => {
           </p>
         </div>
       </div>
-      <div className="flex flex-row justify-center gap-2 py-4">
+
+      <div className="flex flex-row gap-2 py-4">
         {window.alby && (
-          <button
-            className="bd-button flex w-1/2 items-center justify-center p-2 disabled:pointer-events-none"
+          <Button
             onClick={addAlbyAccountHandler}
+            color="primary"
+            startContent={<LinkIcon className="inline h-6 w-6" />}
           >
-            <LinkIcon className="inline h-6 w-6" />
-            &nbsp;{t(`appInfo.${id}.action.addAccount`)}
-          </button>
+            {t(`appInfo.${id}.action.addAccount`)}
+          </Button>
         )}
 
         {!window.alby && (
-          <a
-            className="bd-button flex w-1/2 items-center justify-center p-2 disabled:pointer-events-none"
+          <Button
+            as={Link}
             target="_blank"
             rel="noreferrer"
             href="https://getalby.com"
+            color="primary"
+            startContent={
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+            }
           >
-            <PlusIcon className="inline h-6 w-6" />
             {t(`appInfo.${id}.action.install`)}
-          </a>
+          </Button>
         )}
       </div>
     </article>

@@ -45,7 +45,7 @@
         "about": "Alby Browser Extension",
         "shortDescription": "Connect your RaspiBlitz LND node and use Bitcoin & Nostr apps with the Alby Extension",
         "action": {
-          "install": "Install Alby",
+          "install": "Install",
           "addAccount": "Connect",
           "connection_info_error": "Could not get connection info",
           "connection": {

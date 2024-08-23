@@ -1,5 +1,4 @@
 import AppIcon from "@/components/AppIcon";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import { AppStatus, AuthMethod } from "@/models/app-status";
 import { App } from "@/models/app.model";
 import { getHrefFromApp } from "@/utils";
@@ -9,10 +8,10 @@ import {
   LockOpenIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
+import { Link, Button, Tooltip } from "@nextui-org/react";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Tooltip } from "react-tooltip";
 
 export type Props = {
   appInfo: App;
@@ -43,7 +42,7 @@ export const AppCard: FC<Props> = ({
     onInstall(id);
   };
 
-  const setAuthMethodText = (authMethod: AuthMethod | undefined): string => {
+  const setAuthMethodText = (authMethod?: AuthMethod): string => {
     switch (authMethod) {
       case AuthMethod.NONE:
         return t("apps.login_no_pass");
@@ -63,25 +62,31 @@ export const AppCard: FC<Props> = ({
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {installed && (
           <>
-            <LockOpenIcon
-              className="absolute right-0 top-0 h-6 w-6"
-              data-tooltip-id="login-tooltip"
-            />
-            <Tooltip id="login-tooltip">
-              <>
-                {appStatusInfo.httpsForced === "1" &&
-                  appStatusInfo.httpsSelfsigned === "1" && (
-                    <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
-                  )}
-                {<h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>}
-              </>
+            <Tooltip
+              showArrow={true}
+              content={
+                <>
+                  {appStatusInfo.httpsForced === "1" &&
+                    appStatusInfo.httpsSelfsigned === "1" && (
+                      <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
+                    )}
+                  {<h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>}
+                </>
+              }
+            >
+              <LockOpenIcon
+                className="absolute right-0 top-0 h-6 w-6"
+                data-tooltip-id={`login-tooltip-${id}`}
+              />
             </Tooltip>
           </>
         )}
+
         {/* Icon */}
         <div className="mt-4 flex w-1/4 items-center justify-center p-2">
           <AppIcon appId={id} className="max-h-12" />
         </div>
+
         {/* Content */}
         <div className="mt-4 flex w-3/4 flex-col items-start justify-center text-xl">
           <h4>{name}</h4>
@@ -90,69 +95,70 @@ export const AppCard: FC<Props> = ({
           </p>
         </div>
       </div>
+
       <div className="flex flex-row gap-2 py-4">
         {installed && appStatusInfo.address && !appInfo.customComponent && (
-          <a
+          <Button
+            as={Link}
             href={getHrefFromApp(appStatusInfo)}
             target="_blank"
             rel="noreferrer"
-            className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
+            color="primary"
+            startContent={
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+            }
           >
-            <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
-            &nbsp;{t("apps.open")}
-          </a>
+            {t("apps.open")}
+          </Button>
         )}
+
         {installed && !appStatusInfo.address && !appInfo.customComponent && (
-          <button
-            disabled={true}
-            className="flex w-1/2 cursor-default items-center justify-center rounded bg-gray-400 p-2 text-white shadow-md"
-          >
-            {t("apps.no_page")}
-          </button>
+          <Button disabled>{t("apps.no_page")}</Button>
         )}
+
         {installed && appInfo.customComponent && (
-          <button
+          <Button
             onClick={() => navigate(`/apps/${appInfo.id}`)}
-            className="flex w-1/2 items-center justify-center rounded bg-yellow-500 p-2 text-white shadow-md hover:bg-yellow-400"
+            color="primary"
+            startContent={
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+            }
           >
-            <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
-            &nbsp;{t("apps.open")}
-          </button>
+            {t("apps.open")}
+          </Button>
         )}
+
         {(installingApp === null ||
           installingApp.id !== id ||
           installingApp.result === "fail") &&
           !installed && (
-            <button
+            <Button
               disabled={
                 isInstallWaiting ||
                 (installingApp !== null && installingApp?.result !== "fail")
               }
-              className="bd-button flex w-1/2 items-center justify-center p-2 disabled:pointer-events-none"
               onClick={() => installButtonPressed(id)}
+              color="primary"
+              startContent={<PlusIcon className="inline h-6 w-6" />}
             >
-              <PlusIcon className="inline h-6 w-6" />
-              &nbsp;{t("apps.install")}
-            </button>
+              {t("apps.install")}
+            </Button>
           )}
+
         {installingApp &&
           installingApp.id === id &&
           installingApp.result === "running" && (
-            <ButtonWithSpinner
-              disabled
-              loading={true}
-              className="bd-button flex w-1/2 items-center justify-center  p-2 disabled:pointer-events-none"
-            >
+            <Button disabled isLoading={true}>
               {t("apps.installing")}
-            </ButtonWithSpinner>
+            </Button>
           )}
-        <button
-          className="flex w-1/2 items-center justify-center rounded p-2 shadow-md bg-gray-500 hover:bg-gray-300 hover:text-black"
+
+        <Button
           onClick={() => navigate(`/apps/${appInfo.id}/info`)}
+          startContent={<InformationCircleIcon className="inline h-6 w-6" />}
         >
-          <InformationCircleIcon className="inline h-6 w-6" />
-          &nbsp;{t("apps.info")}
-        </button>
+          {t("apps.info")}
+        </Button>
       </div>
     </article>
   );
