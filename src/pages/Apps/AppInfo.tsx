@@ -1,6 +1,5 @@
 import ImageCarousel from "./ImageCarousel";
 import AppIcon from "@/components/AppIcon";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { availableApps } from "@/utils/availableApps";
@@ -11,6 +10,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
+import { Link, Button } from "@nextui-org/react";
 import { FC, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -88,62 +88,59 @@ export const AppInfo: FC = () => {
     <main className="page-container content-container w-full bg-gray-700 text-white">
       {/* Back Button */}
       <section className="w-full px-5 py-9 text-gray-200">
-        <button
+        <Button
           onClick={() => navigate("/apps")}
-          className="flex items-center text-xl font-bold outline-none"
+          variant="light"
+          color="primary"
+          startContent={<ChevronLeftIcon className="inline-block h-5 w-5" />}
         >
-          <ChevronLeftIcon className="inline-block h-5 w-5" />
           {t("navigation.back")}
-        </button>
+        </Button>
       </section>
 
       {/* Image box with title */}
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
         <AppIcon appId={appId} className="max-h-12" />
         <h1 className="px-5 text-2xl text-white">{name}</h1>
+
         {(installingApp == null || installingApp.appId !== appId) &&
           !installed && (
-            <button
+            <Button
               disabled={!!installingApp}
-              className="bd-button flex rounded p-2 disabled:pointer-events-none"
+              color="primary"
               onClick={installHandler}
+              startContent={<PlusIcon className="inline h-6 w-6" />}
             >
-              <PlusIcon className="inline h-6 w-6" />
-              &nbsp;{t("apps.install")}
-            </button>
+              {t("apps.install")}
+            </Button>
           )}
+
         {installingApp &&
           installingApp.appId === appId &&
           installingApp.mode === "on" && (
-            <ButtonWithSpinner
-              disabled
-              loading={true}
-              className="bd-button flex rounded p-2 text-white disabled:pointer-events-none"
-            >
+            <Button disabled isLoading={true} color="primary">
               {t("apps.installing")}
-            </ButtonWithSpinner>
+            </Button>
           )}
+
         {installingApp &&
           installingApp.appId === appId &&
           installingApp.mode === "off" && (
-            <ButtonWithSpinner
-              disabled
-              loading={true}
-              className="bd-button flex rounded p-2 disabled:pointer-events-none"
-            >
+            <Button disabled isLoading={true} color="primary">
               {t("apps.uninstalling")}
-            </ButtonWithSpinner>
+            </Button>
           )}
+
         {(installingApp == null || installingApp.appId !== appId) &&
           installed && (
-            <button
+            <Button
               disabled={!!installingApp}
-              className={`flex rounded bg-red-500 p-2 text-white shadow-md disabled:pointer-events-none disabled:bg-gray-400 disabled:text-white`}
+              color="danger"
               onClick={uninstallHandler}
+              startContent={<TrashIcon className="inline h-6 w-6" />}
             >
-              <TrashIcon className="inline h-6 w-6" />
-              &nbsp;{t("apps.uninstall")}
-            </button>
+              {t("apps.uninstall")}
+            </Button>
           )}
       </section>
 
@@ -157,19 +154,22 @@ export const AppInfo: FC = () => {
           <h3 className="text-lg">
             {name} {version}
           </h3>
+
           <h4 className="my-2 text-gray-300">{t("apps.about")}</h4>
           <p>{t(`appInfo.${appId}.about`)}</p>
+
           <h4 className="my-2 text-gray-300">{t("apps.author")}</h4>
           <p>{author}</p>
           <h4 className="my-2 text-gray-300">{t("apps.source")}</h4>
-          <a
+
+          <Link
             href={repository}
             target="_blank"
             rel="noreferrer noopener"
-            className="underline text-blue-300"
+            underline="always"
           >
             {repository}
-          </a>
+          </Link>
         </article>
       </section>
     </main>
