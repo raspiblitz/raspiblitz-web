@@ -5,13 +5,12 @@ import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Checkbox } from "@nextui-org/react";
-import { FC } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
   setupPhase: SetupPhase;
-  seedWords: string;
+  seedWords: string | null;
   callback: () => void;
 };
 
@@ -19,9 +18,12 @@ interface IFormInputs {
   confirm: boolean;
 }
 
-const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
+export default function FinalDialog({
+  setupPhase,
+  seedWords,
+  callback,
+}: Props) {
   const { t } = useTranslation();
-  const words = seedWords?.split(", ");
 
   const {
     handleSubmit,
@@ -47,7 +49,7 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
 
           {!!seedWords && (
             <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
-              {words.map((word, i) => {
+              {seedWords.split(", ").map((word, i) => {
                 return (
                   <li key={i} className="my-3 pl-2">
                     {word}
@@ -83,6 +85,4 @@ const FinalDialog: FC<Props> = ({ setupPhase, seedWords, callback }) => {
       </form>
     </SetupContainer>
   );
-};
-
-export default FinalDialog;
+}

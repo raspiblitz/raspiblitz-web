@@ -4,7 +4,6 @@ import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import { useDisclosure } from "@nextui-org/react";
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
@@ -12,7 +11,7 @@ export type Props = {
   callback: (cancel: boolean) => void;
 };
 
-const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
+export default function StartDoneDialog({ setupPhase, callback }: Props) {
   const { t } = useTranslation();
   const confirmModal = useDisclosure();
 
@@ -59,6 +58,4 @@ const StartDoneDialog: FC<Props> = ({ setupPhase, callback }) => {
       </SetupContainer>
     </>
   );
-};
-
-export default StartDoneDialog;
+}

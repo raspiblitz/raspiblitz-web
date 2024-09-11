@@ -8,32 +8,32 @@ import {
   CheckCircleIcon,
   LockClosedIcon,
   LockOpenIcon,
-  XCircleIcon,
   PowerIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
   Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   Progress,
+  useDisclosure,
 } from "@nextui-org/react";
 import { HttpStatusCode } from "axios";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-export interface InputData {
+type Props = {
   data: SyncData | any;
   callback: (action: string, data: any) => void;
-}
+};
 
 interface SyncData {
-  initialsync: string;
+  initialSync: string;
   btc_default: string;
   btc_default_ready: string;
   btc_default_sync_percentage: string;
@@ -49,7 +49,7 @@ interface IFormInputs {
   passwordInput: string;
 }
 
-const SyncScreen: FC<InputData> = ({ data, callback }) => {
+export default function SyncScreen({ data, callback }: Props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -234,6 +234,4 @@ const SyncScreen: FC<InputData> = ({ data, callback }) => {
       </SetupContainer>
     </>
   );
-};
-
-export default SyncScreen;
+}
