@@ -1,24 +1,24 @@
 import { KeyboardEvent, useState } from "react";
 
 const useCapsLock = () => {
-  const [isCapsLockOn, setIsCapsLockOn] = useState(false);
+  const [isCapsLockEnabled, setIsCapsLockEnabled] = useState(false);
 
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.getModifierState("CapsLock")) {
-      setIsCapsLockOn(true);
+      setIsCapsLockEnabled(true);
     }
   };
 
   const onKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (isCapsLockOn) {
+    if (isCapsLockEnabled) {
       if (!event.getModifierState("CapsLock")) {
-        setIsCapsLockOn(false);
+        setIsCapsLockEnabled(false);
       }
     }
   };
 
   return {
-    isCapsLockOn,
+    isCapsLockEnabled,
     keyHandlers: {
       onKeyDown,
       onKeyUp,

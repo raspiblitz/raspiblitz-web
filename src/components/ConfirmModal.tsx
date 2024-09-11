@@ -13,9 +13,10 @@ import { useTranslation } from "react-i18next";
 export type Props = {
   headline: string;
   body?: ReactNode;
-  onConfirm: () => void;
+  onConfirm?: () => void;
   disclosure: UseDisclosureReturn;
   isLoading?: boolean;
+  isFormModal?: ReactNode;
 };
 
 export const ConfirmModal = ({
@@ -24,6 +25,7 @@ export const ConfirmModal = ({
   onConfirm,
   disclosure,
   isLoading,
+  isFormModal,
 }: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpenChange, onClose } = disclosure;
@@ -38,21 +40,29 @@ export const ConfirmModal = ({
                 {headline}
               </ModalHeader>
 
-              {!!body && <ModalBody>{body}</ModalBody>}
+              {isFormModal || (
+                <>
+                  {!!body && <ModalBody>{body}</ModalBody>}
 
-              <ModalFooter>
-                <Button variant="light" onClick={onClose} disabled={isLoading}>
-                  {t("settings.cancel")}
-                </Button>
-                <Button
-                  color="primary"
-                  onClick={onConfirm}
-                  disabled={isLoading}
-                  isLoading={isLoading}
-                >
-                  {t("settings.confirm")}
-                </Button>
-              </ModalFooter>
+                  <ModalFooter>
+                    <Button
+                      variant="light"
+                      onClick={onClose}
+                      disabled={isLoading}
+                    >
+                      {t("settings.cancel")}
+                    </Button>
+                    <Button
+                      color="primary"
+                      onClick={onConfirm}
+                      disabled={isLoading}
+                      isLoading={isLoading}
+                    >
+                      {t("settings.confirm")}
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
             </>
           )}
         </ModalContent>
