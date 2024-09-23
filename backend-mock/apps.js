@@ -32,7 +32,9 @@ router.get("/status_advanced/electrs", (req, res) => {
       publicIP: "127.0.0.1",
       portTCP: "50001",
       portSSL: "50002",
-      TORaddress: "myTorURL.onion",
+      // not a real onion address
+      TORaddress:
+        "gr7l4dtesftz3t48p2nhbpzwhs5fm2t4fgnavh9v0tdvp80z2jzg5xw1@rzqwnilfge21ma7gr9v40zf7btz4u8rmz7353ua4vtl77yb328vqfl6369az0nv8.onion",
       initialSyncDone: true,
     }),
   );
