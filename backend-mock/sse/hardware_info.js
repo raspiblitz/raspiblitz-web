@@ -1,9 +1,9 @@
 const util = require("./util");
 
-const hardwareInfo = () => {
+const hardwareInfo = (ws) => {
   console.info("sending hardware_info");
 
-  util.sendSSE("hardware_info", {
+  util.sendData(ws, "hardware_info", {
     cpu_overall_percent: 1.57,
     cpu_per_cpu_percent: [1.64, 1.54, 1.54],
     vram_total_bytes: 3844000000,

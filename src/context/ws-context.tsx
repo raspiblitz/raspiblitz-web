@@ -8,11 +8,17 @@ import { SystemStartupInfo } from "@/models/system-startup-info";
 import { Transaction } from "@/models/transaction.model";
 import { WalletBalance } from "@/models/wallet-balance";
 import type { FC, PropsWithChildren } from "react";
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 
-export interface SSEContextType {
-  evtSource: EventSource | null;
-  setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
+export interface WebSocketContextType {
+  websocket: WebSocket | null;
   systemInfo: SystemInfo;
   setSystemInfo: Dispatch<SetStateAction<SystemInfo>>;
   btcInfo: BtcInfo;
@@ -21,7 +27,6 @@ export interface SSEContextType {
   setLnInfo: Dispatch<SetStateAction<LnInfo>>;
   balance: WalletBalance;
   setBalance: Dispatch<SetStateAction<WalletBalance>>;
-
   appStatus: AppStatus[];
   setAppStatus: Dispatch<SetStateAction<AppStatus[]>>;
   availableApps: App[];
@@ -36,9 +41,8 @@ export interface SSEContextType {
   setSystemStartupInfo: Dispatch<SetStateAction<SystemStartupInfo | null>>;
 }
 
-export const sseContextDefault: SSEContextType = {
-  evtSource: null,
-  setEvtSource: () => {},
+export const websocketContextDefault: WebSocketContextType = {
+  websocket: null,
   systemInfo: {} as SystemInfo,
   setSystemInfo: () => {},
   btcInfo: {} as BtcInfo,
@@ -61,12 +65,13 @@ export const sseContextDefault: SSEContextType = {
   setSystemStartupInfo: () => {},
 };
 
-export const SSEContext = createContext<SSEContextType>(sseContextDefault);
+export const WebSocketContext = createContext<WebSocketContextType>(
+  websocketContextDefault,
+);
 
-export const SSE_URL = "/api/sse/subscribe";
+export const WEBSOCKET_URL = "ws://your-websocket-server-url"; // Replace with your WebSocket server URL
 
-const SSEContextProvider: FC<PropsWithChildren> = (props) => {
-  const [evtSource, setEvtSource] = useState<EventSource | null>(null);
+const WebSocketContextProvider: FC<PropsWithChildren> = (props) => {
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
     color: "",
@@ -132,15 +137,77 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [systemStartupInfo, setSystemStartupInfo] =
     useState<SystemStartupInfo | null>(null);
 
-  const contextValue: SSEContextType = {
-    evtSource,
-    setEvtSource,
+  const websocketRef = useRef<WebSocket | null>(null);
+
+  useEffect(() => {
+    const ws = new WebSocket(WEBSOCKET_URL);
+
+    ws.onopen = () => {
+      console.log("WebSocket connected");
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      switch (data.type) {
+        case "system_info":
+          setSystemInfo((prevState) => ({ ...prevState, ...data.data }));
+          break;
+        case "btc_info":
+          setBtcInfo((prevState) => ({ ...prevState, ...data.data }));
+          break;
+        case "ln_info":
+          setLnInfo((prevState) => ({ ...prevState, ...data.data }));
+          break;
+        case "wallet_balance":
+          setBalance((prevState) => ({ ...prevState, ...data.data }));
+          break;
+        case "app_status":
+          setAppStatus(data.data);
+          break;
+        case "available_apps":
+          setAvailableApps(data.data);
+          break;
+        case "transaction":
+          setTransactions((prevState) => [data.data, ...prevState]);
+          break;
+        case "installing_app":
+          setInstallingApp(data.data);
+          break;
+        case "hardware_info":
+          setHardwareInfo(data.data);
+          break;
+        case "system_startup_info":
+          setSystemStartupInfo(data.data);
+          break;
+        default:
+          console.warn("Unknown message type:", data.type);
+      }
+    };
+
+    ws.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    ws.onclose = () => {
+      console.log("WebSocket disconnected");
+    };
+
+    websocketRef.current = ws;
+
+    return () => {
+      ws.close();
+    };
+  }, []);
+
+  const contextValue: WebSocketContextType = {
+    websocket: websocketRef.current,
     systemInfo,
     setSystemInfo,
     btcInfo,
     setBtcInfo,
-    lnInfo: lnInfo,
-    setLnInfo: setLnInfo,
+    lnInfo,
+    setLnInfo,
     balance,
     setBalance,
     appStatus,
@@ -158,10 +225,10 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   };
 
   return (
-    <SSEContext.Provider value={contextValue}>
+    <WebSocketContext.Provider value={contextValue}>
       {props.children}
-    </SSEContext.Provider>
+    </WebSocketContext.Provider>
   );
 };
 
-export default SSEContextProvider;
+export default WebSocketContextProvider;

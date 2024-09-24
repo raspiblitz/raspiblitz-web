@@ -1,8 +1,8 @@
 const util = require("./util");
 
-const appStatus = () => {
+const appStatus = (ws) => {
   console.info("sending installed_app_status");
-  util.sendSSE("installed_app_status", [
+  util.sendData(ws, "installed_app_status", [
     {
       id: "rtl",
       installed: false,

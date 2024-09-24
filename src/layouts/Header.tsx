@@ -1,13 +1,13 @@
 import DropdownMenu from "./DropdownMenu";
 import RaspiBlitzMobileLogo from "@/assets/RaspiBlitz_Logo_Icon.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {
-  const { systemInfo } = useContext(SSEContext);
+  const { systemInfo } = useContext(WebSocketContext);
   const dropdown = useRef<HTMLDivElement>(null);
   const menu = useRef<SVGSVGElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);

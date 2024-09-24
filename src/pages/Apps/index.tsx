@@ -1,6 +1,6 @@
 import AppCardAlby from "./AppCardAlby";
 import AppList from "./AppList";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { AppStatus } from "@/models/app-status";
 import { enableGutter } from "@/utils";
@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(WebSocketContext);
 
   useEffect(() => {
     enableGutter();

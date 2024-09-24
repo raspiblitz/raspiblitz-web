@@ -1,9 +1,9 @@
 const util = require("./util");
 
-const systemInfo = () => {
+const systemInfo = (ws) => {
   console.info("sending system_info");
 
-  util.sendSSE("system_info", {
+  util.sendData(ws, "system_info", {
     alias: "myBlitz",
     color: "#3399ff",
     platform: "raspiblitz",

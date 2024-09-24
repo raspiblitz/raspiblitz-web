@@ -1,6 +1,6 @@
 import ImageCarousel from "./ImageCarousel";
 import AppIcon from "@/components/AppIcon";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { availableApps } from "@/utils/availableApps";
 import { checkError } from "@/utils/checkError";
@@ -10,7 +10,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { Link, Button } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 import { FC, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,7 +21,7 @@ export const AppInfo: FC = () => {
   const { appId } = useParams();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus, installingApp } = useContext(SSEContext);
+  const { appStatus, installingApp } = useContext(WebSocketContext);
   const [imgs, setImgs] = useState<string[]>([]);
   const { name } = availableApps[appId!];
   const { author, repository } = availableApps[appId!];

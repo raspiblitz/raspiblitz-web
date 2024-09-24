@@ -1,6 +1,6 @@
 import LoadingBox from "@/components/LoadingBox";
 import { AppContext, Unit } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import { checkPropsUndefined } from "@/utils";
 import { convertMSatToBtc, convertToString } from "@/utils/format";
 import { FC, useContext } from "react";
@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 export const LightningCard: FC = () => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
-  const { lnInfo, balance } = useContext(SSEContext);
+  const { lnInfo, balance } = useContext(WebSocketContext);
 
   const {
     num_active_channels: activeChannels,

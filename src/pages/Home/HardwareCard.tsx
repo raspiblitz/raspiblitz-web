@@ -1,5 +1,5 @@
 import LoadingBox from "@/components/LoadingBox";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +11,7 @@ const bytesToGB = (bytes: number | undefined): string => {
 
 export const HardwareCard: FC = () => {
   const { t } = useTranslation();
-  const { hardwareInfo } = useContext(SSEContext);
+  const { hardwareInfo } = useContext(WebSocketContext);
 
   if (!hardwareInfo) {
     return (

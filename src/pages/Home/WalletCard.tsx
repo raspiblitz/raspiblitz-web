@@ -1,5 +1,5 @@
 import { AppContext, Unit } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import {
   convertMSatToBtc,
   convertSatToBtc,
@@ -34,7 +34,7 @@ export const WalletCard: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
-  const { balance } = useContext(SSEContext);
+  const { balance } = useContext(WebSocketContext);
 
   const {
     onchain_total_balance: onchainBalance,

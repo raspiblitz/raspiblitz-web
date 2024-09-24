@@ -1,9 +1,9 @@
 const util = require("./util");
 
-const lnInfo = () => {
+const lnInfo = (ws) => {
   console.info("sending ln_info");
 
-  util.sendSSE("ln_info", {
+  util.sendData(ws, "ln_info", {
     implementation: "LND_GRPC",
     version: "0.17.3-beta commit=v0.17.3-beta",
     commit_hash: "13aa7f99248c7ee63989d3b62e0cbfe86d7b0964",

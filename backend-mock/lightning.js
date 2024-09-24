@@ -3,7 +3,7 @@ const router = express.Router();
 const transactions = require("./transactions");
 const util = require("./sse/util");
 
-let WALLET_LOCKED = true;
+let WALLET_LOCKED = false;
 
 router.post("/add-invoice", (req, res) => {
   console.info(

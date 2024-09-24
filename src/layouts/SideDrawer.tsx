@@ -1,6 +1,6 @@
 import AppStatusItem from "@/components/AppStatusItem";
 import { AppContext } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import {
   ArrowRightStartOnRectangleIcon,
   Cog6ToothIcon,
@@ -21,7 +21,7 @@ const navIconClasses = "inline w-10 h-10";
 
 export const SideDrawer: FC = () => {
   const { logout } = useContext(AppContext);
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(WebSocketContext);
   const { t } = useTranslation();
 
   return (
