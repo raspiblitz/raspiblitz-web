@@ -19,7 +19,7 @@ require("dotenv").config();
 const app = express();
 const server = createServer(app);
 
-const wss = new WebSocket.Server({ server, path: "/websocket" });
+const wss = new WebSocket.Server({ server, path: "/ws" });
 
 app.use(
   cors({ credentials: true, origin: "http://localhost:3000" }),
@@ -38,9 +38,7 @@ const PORT = 8000;
 
 server.listen(PORT, () => {
   console.info(`Server listening on http://localhost:${PORT}`);
-  console.info(
-    `WebSocket server is running on ws://localhost:${PORT}/websocket`,
-  );
+  console.info(`WebSocket server is running on ws://localhost:${PORT}/ws`);
 });
 
 /**
@@ -48,7 +46,7 @@ server.listen(PORT, () => {
  */
 
 wss.on("connection", (ws) => {
-  console.info("WebSocket connection established on /websocket");
+  console.info("WebSocket connection established on /ws");
 
   // Handle incoming messages
   ws.on("message", (message) => {

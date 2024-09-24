@@ -15,7 +15,7 @@ import { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
-const WEBSOCKET_URL = "/websocket";
+export const WEBSOCKET_URL = "/ws";
 
 function useWebSocket() {
   const { t } = useTranslation();

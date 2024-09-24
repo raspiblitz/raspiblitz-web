@@ -32,7 +32,7 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      "/websocket": {
+      "/ws": {
         target: "ws://localhost:8000",
         changeOrigin: true,
         secure: false,

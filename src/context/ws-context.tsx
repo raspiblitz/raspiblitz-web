@@ -1,3 +1,4 @@
+import { WEBSOCKET_URL } from "@/hooks/use-ws";
 import { AppStatus } from "@/models/app-status";
 import { App } from "@/models/app.model";
 import { BtcInfo } from "@/models/btc-info";
@@ -68,8 +69,6 @@ export const websocketContextDefault: WebSocketContextType = {
 export const WebSocketContext = createContext<WebSocketContextType>(
   websocketContextDefault,
 );
-
-export const WEBSOCKET_URL = "ws://your-websocket-server-url"; // Replace with your WebSocket server URL
 
 const WebSocketContextProvider: FC<PropsWithChildren> = (props) => {
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({

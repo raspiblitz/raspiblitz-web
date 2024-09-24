@@ -105,7 +105,7 @@ const Home: FC = () => {
       }
     } catch (err: any) {
       if (err.response.status === HttpStatusCode.Locked) {
-        setWalletLocked(false);
+        setWalletLocked(true);
       } else {
         setTxError(checkError(err));
       }
