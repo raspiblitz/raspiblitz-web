@@ -90,7 +90,6 @@ export const AppInfo: FC = () => {
       <section className="w-full px-5 py-9 text-gray-200">
         <Button
           onClick={() => navigate("/apps")}
-          variant="light"
           color="primary"
           startContent={<ChevronLeftIcon className="inline-block h-5 w-5" />}
         >

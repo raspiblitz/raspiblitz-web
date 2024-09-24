@@ -1,16 +1,25 @@
+import { Headline } from "@/components/Headline";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { AxiosResponse } from "axios";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Snippet,
+  Tab,
+  Tabs,
+} from "@nextui-org/react";
 import { QRCodeSVG } from "qrcode.react";
-import { FC, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-const Electrs: FC = () => {
+const Electrs = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { appStatus } = useContext(SSEContext);
@@ -18,18 +27,20 @@ const Electrs: FC = () => {
   const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(
     null,
   );
-  const [QRAddress, setQRAddress] = useState<string | null>(null);
-  const [showTorConn, setShowTorConn] = useState<boolean>(false);
-  const [showLocalConn, setShowLocalConn] = useState<boolean>(false);
+  const [QRAddressLocal, setQRAddressLocal] = useState<string | null>(null);
+  const [QRAddressTor, setQRAddressTor] = useState<string | null>(null);
 
   useEffect(() => {
     if (!appData) {
       instance
         .get("apps/status_advanced/electrs")
-        .then((resp: AxiosResponse<AdvancedAppStatusElectron>) => {
+        .then((resp) => {
           setAppData(resp.data);
           if (resp.data?.TORaddress && resp.data?.portSSL) {
-            setQRAddress(`${resp.data.TORaddress}:${resp.data.portSSL}:s`);
+            setQRAddressTor(`${resp.data.TORaddress}:${resp.data.portSSL}:s`);
+          }
+          if (resp.data?.localIP && resp.data?.portSSL) {
+            setQRAddressLocal(`${resp.data.localIP}:${resp.data.portSSL}:s`);
           }
           setIsLoading(false);
         })
@@ -47,95 +58,97 @@ const Electrs: FC = () => {
 
   if (appStatus.find((app) => app.id === "electrs")?.installed === false) {
     navigate("/apps");
-    return <></>;
-  }
-
-  const changeQR = (type: "local" | "tor") => {
-    switch (type) {
-      case "local":
-        setQRAddress(`${localIP}:${portSSL}:s`);
-        break;
-      case "tor":
-        setQRAddress(`${TORaddress}:${portSSL}:s`);
-        break;
-    }
-  };
-
-  if (!showTorConn && TORaddress && portSSL) {
-    setShowTorConn(true);
-  }
-
-  if (!showLocalConn && localIP && portSSL) {
-    setShowLocalConn(true);
+    return null;
   }
 
   return (
-    <main className="page-container content-container w-full bg-gray-700 text-white lg:pr-8">
+    <main className="page-container content-container w-full bg-gray-700 text-white flex flex-col items-center">
       {/* Back Button */}
       <section className="w-full px-5 py-9 text-gray-200">
-        <button
+        <Button
           onClick={() => navigate("/apps")}
-          className="flex items-center text-xl font-bold outline-none"
+          color="primary"
+          startContent={<ChevronLeftIcon className="inline-block h-5 w-5" />}
         >
-          <ChevronLeftIcon className="inline-block h-5 w-5" />
           {t("navigation.back")}
-        </button>
+        </Button>
       </section>
-      <section className="bd-card mx-5 flex flex-col gap-4 px-5 lg:flex-row">
-        <article className="lg:w-1/2">
-          {!initialSyncDone && <p>{t("appInfo.electrs.initialSync")}</p>}
-          {initialSyncDone && (
+
+      <Card className="bd-card w-full md:w-11/12">
+        <CardHeader>
+          <Headline as="h3" size="xl">
+            Electrs Version <span className="font-bold">{version}</span>
+          </Headline>
+        </CardHeader>
+        <CardBody className="flex">
+          {!initialSyncDone ? (
+            <span>{t("appInfo.electrs.initialSync")}</span>
+          ) : (
             <>
-              <article className="mt-4 flex flex-col gap-4">
-                <h2>Electrs Version {version}</h2>
-                {showTorConn && (
-                  <>
-                    <p>{t("appInfo.electrs.connectLocal")}:</p>
-                    <p>{`${localIP}:${portSSL}:s`}</p>
-                  </>
-                )}
-                {showTorConn && (
-                  <>
-                    <p>{t("appInfo.electrs.connectTor")}:</p>
-                    <p>{`${TORaddress}:${portSSL}:s`}</p>
-                  </>
-                )}
-              </article>
-              <p className="mt-4 text-sm">
+              <span className="mb-4">
                 {t("appInfo.electrs.connectionInfo")}
-              </p>
-              <article className="lg:w-1/2">
-                <div className="flex justify-center">
-                  <button
-                    className="switch-button"
-                    onClick={() => changeQR("local")}
-                  >
-                    Local
-                  </button>
-                  <button
-                    className="switch-button"
-                    onClick={() => changeQR("tor")}
-                  >
-                    {" "}
-                    Tor
-                  </button>
-                </div>
-                {QRAddress && (
-                  <QRCodeSVG
-                    role={"img"}
-                    className="mx-auto mt-4 border-2 border-white"
-                    value={QRAddress}
-                    size={256}
-                  />
-                )}
-                {!QRAddress && (
-                  <p className="mt-4 text-center">Address not available</p>
-                )}
-              </article>
+              </span>
+              <Tabs
+                aria-label="Connection Options"
+                color="primary"
+                size="lg"
+                className="justify-center"
+              >
+                <Tab key="local" title="Local Connection">
+                  <span>{t("appInfo.electrs.connectLocal")}: </span>
+                  {QRAddressLocal ? (
+                    <div className="flex flex-col justify-center items-center mt-4 gap-4">
+                      <QRCodeSVG
+                        value={QRAddressLocal}
+                        size={256}
+                        className="border-2 border-white"
+                      />
+                      <Snippet
+                        classNames={{
+                          base: "max-w-[80%] text-white",
+                          pre: "text-ellipsis",
+                        }}
+                        symbol=""
+                        color="primary"
+                        variant="solid"
+                      >{`${localIP}:${portSSL}:s`}</Snippet>
+                    </div>
+                  ) : (
+                    <span className="text-center mt-4">
+                      {t("appInfo.electrs.not_available")}
+                    </span>
+                  )}
+                </Tab>
+                <Tab key="tor" title="Tor">
+                  <span>{t("appInfo.electrs.connectTor")}:</span>
+                  {QRAddressTor ? (
+                    <div className="flex flex-col justify-center items-center mt-4 gap-4">
+                      <QRCodeSVG
+                        value={QRAddressTor}
+                        size={256}
+                        className="border-2 border-white "
+                      />
+                      <Snippet
+                        classNames={{
+                          base: "max-w-[80%] text-white",
+                          pre: "overflow-hidden text-ellipsis",
+                        }}
+                        symbol=""
+                        color="primary"
+                        variant="solid"
+                      >{`${TORaddress}:${portSSL}:s`}</Snippet>
+                    </div>
+                  ) : (
+                    <span className="text-center mt-4">
+                      {t("appInfo.electrs.not_available")}
+                    </span>
+                  )}
+                </Tab>
+              </Tabs>
             </>
           )}
-        </article>
-      </section>
+        </CardBody>
+      </Card>
     </main>
   );
 };
