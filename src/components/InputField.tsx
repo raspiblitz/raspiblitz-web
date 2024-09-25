@@ -17,7 +17,7 @@ const InputField = forwardRef(
       type,
       value,
       ...rest
-    }: InputFieldProps,
+    }: Omit<InputFieldProps, "ref">,
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
