@@ -20,6 +20,7 @@ const app = express();
 const server = createServer(app);
 
 const wss = new WebSocket.Server({ server, path: "/ws" });
+let ws = null;
 
 app.use(
   cors({ credentials: true, origin: "http://localhost:3000" }),
@@ -46,6 +47,7 @@ server.listen(PORT, () => {
  */
 
 wss.on("connection", (ws) => {
+  this.ws = ws;
   console.info("WebSocket connection established on /ws");
 
   // Handle incoming messages
@@ -78,3 +80,5 @@ wss.on("connection", (ws) => {
   // Send initial data to the client
   sendData();
 });
+
+module.exports = { ws };

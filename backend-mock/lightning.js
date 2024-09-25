@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const transactions = require("./transactions");
 const util = require("./sse/util");
+const index = require("./index");
 
 let WALLET_LOCKED = true;
 
@@ -235,7 +236,7 @@ router.post("/unlock-wallet", (req, res) => {
     if (req.body.password === "password") {
       WALLET_LOCKED = false;
 
-      util.sendSSE("system_startup_info", {
+      util.sendData(index.ws, "system_startup_info", {
         bitcoin: "done",
         bitcoin_msg: "",
         lightning: "bootstrapping_after_unlock",
@@ -243,7 +244,7 @@ router.post("/unlock-wallet", (req, res) => {
       });
 
       setTimeout(() => {
-        util.sendSSE("system_startup_info", {
+        util.sendData(index.ws, "system_startup_info", {
           bitcoin: "done",
           bitcoin_msg: "",
           lightning: "done",

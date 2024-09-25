@@ -10,12 +10,12 @@ import { Transaction } from "@/models/transaction.model";
 import { WalletBalance } from "@/models/wallet-balance";
 import type { FC, PropsWithChildren } from "react";
 import {
+  createContext,
   Dispatch,
   SetStateAction,
-  createContext,
-  useState,
-  useRef,
   useEffect,
+  useRef,
+  useState,
 } from "react";
 
 export interface WebSocketContextType {
@@ -71,6 +71,7 @@ export const WebSocketContext = createContext<WebSocketContextType>(
 );
 
 const WebSocketContextProvider: FC<PropsWithChildren> = (props) => {
+  const [ws, setWs] = useState<WebSocket | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
     color: "",
@@ -149,35 +150,56 @@ const WebSocketContextProvider: FC<PropsWithChildren> = (props) => {
       const data = JSON.parse(event.data);
 
       switch (data.type) {
+        case "apps":
+          setAvailableApps((prev) => {
+            const apps = data.payload;
+            if (prev.length === 0) {
+              return apps;
+            } else {
+              return prev.map(
+                (old) =>
+                  apps.find((newApp: { id: string }) => old.id === newApp.id) ||
+                  old,
+              );
+            }
+          });
+          break;
+        case "installed_app_status":
+          setAppStatus((prev) => {
+            const status = data.data;
+            if (prev.length === 0) {
+              return status;
+            } else {
+              const currentIds = status.map((item: { id: any }) => item.id);
+              return prev
+                .filter((item) => !currentIds.includes(item.id))
+                .concat(status);
+            }
+          });
+          break;
+        case "transactions":
+          setTransactions((prev) => [data.data, ...prev]);
+          break;
+        case "install":
+          // handle install message
+          break;
         case "system_info":
-          setSystemInfo((prevState) => ({ ...prevState, ...data.data }));
+          setSystemInfo((prev) => ({ ...prev, ...data.data }));
           break;
         case "btc_info":
-          setBtcInfo((prevState) => ({ ...prevState, ...data.data }));
+          setBtcInfo((prev) => ({ ...prev, ...data.data }));
           break;
         case "ln_info":
-          setLnInfo((prevState) => ({ ...prevState, ...data.data }));
+          setLnInfo((prev) => ({ ...prev, ...data.data }));
           break;
         case "wallet_balance":
-          setBalance((prevState) => ({ ...prevState, ...data.data }));
-          break;
-        case "app_status":
-          setAppStatus(data.data);
-          break;
-        case "available_apps":
-          setAvailableApps(data.data);
-          break;
-        case "transaction":
-          setTransactions((prevState) => [data.data, ...prevState]);
-          break;
-        case "installing_app":
-          setInstallingApp(data.data);
+          setBalance((prev) => ({ ...prev, ...data.data }));
           break;
         case "hardware_info":
-          setHardwareInfo(data.data);
+          setHardwareInfo((prev) => ({ ...prev, ...data.data }));
           break;
         case "system_startup_info":
-          setSystemStartupInfo(data.data);
+          setSystemStartupInfo((prev) => ({ ...prev, ...data.data }));
           break;
         default:
           console.warn("Unknown message type:", data.type);
@@ -186,13 +208,14 @@ const WebSocketContextProvider: FC<PropsWithChildren> = (props) => {
 
     ws.onerror = (error) => {
       console.error("WebSocket error:", error);
+      // handle error
     };
 
     ws.onclose = () => {
       console.log("WebSocket disconnected");
     };
 
-    websocketRef.current = ws;
+    setWs(ws);
 
     return () => {
       ws.close();
