@@ -1,4 +1,4 @@
-import { SSEContext } from "./sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import {
   ACCESS_TOKEN,
   disableGutter,
@@ -53,7 +53,7 @@ export const AppContext = createContext<AppContextType>(appContextDefault);
 
 const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const { i18n } = useTranslation();
-  const { evtSource, setEvtSource } = useContext(SSEContext);
+  const { websocket } = useContext(WebSocketContext);
 
   const [unit, setUnit] = useState<Unit>(Unit.SAT);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -69,16 +69,15 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
     localStorage.removeItem(ACCESS_TOKEN);
 
     // close EventSource on logout
-    if (evtSource) {
-      evtSource.close();
-      setEvtSource(null);
+    if (websocket) {
+      websocket.close();
     }
     setIsLoggedIn(false);
     disableGutter();
     setWindowAlias(null);
     toast.dismiss();
     navigate("/");
-  }, [evtSource, setEvtSource, navigate]);
+  }, [websocket, navigate]);
 
   useEffect(() => {
     const settings = retrieveSettings();

@@ -1,12 +1,12 @@
 import LoadingBox from "@/components/LoadingBox";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import { checkPropsUndefined } from "@/utils";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 export const BitcoinCard: FC = () => {
   const { t } = useTranslation();
-  const { btcInfo, systemInfo } = useContext(SSEContext);
+  const { btcInfo, systemInfo } = useContext(WebSocketContext);
 
   if (checkPropsUndefined({ btcInfo, systemInfo })) {
     return <LoadingBox />;

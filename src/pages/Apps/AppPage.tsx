@@ -1,4 +1,4 @@
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { getHrefFromApp } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
@@ -9,7 +9,7 @@ export const AppInfo: FC = () => {
   const navigate = useNavigate();
   const { appId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(WebSocketContext);
   const { customComponent } = availableApps[appId!];
 
   const app = appStatus.find((app) => app.id === appId);

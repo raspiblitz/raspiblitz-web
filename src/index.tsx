@@ -1,9 +1,9 @@
 import App from "./App";
 import AppContextProvider from "./context/app-context";
-import SSEContextProvider from "./context/sse-context";
 import "./i18n/config";
 import "./index.css";
 import ErrorBoundary from "@/ErrorBoundary";
+import WebSocketContextProvider from "@/context/ws-context";
 import { NextUIProvider } from "@nextui-org/react";
 import "i18next";
 import { StrictMode } from "react";
@@ -29,7 +29,7 @@ root.render(
   <StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
-        <SSEContextProvider>
+        <WebSocketContextProvider>
           <AppContextProvider>
             <NextUIProvider>
               {/* For persistent toasts over all pages */}
@@ -37,7 +37,7 @@ root.render(
               <App />
             </NextUIProvider>
           </AppContextProvider>
-        </SSEContextProvider>
+        </WebSocketContextProvider>
       </BrowserRouter>
     </ErrorBoundary>
   </StrictMode>,

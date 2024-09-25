@@ -4,10 +4,10 @@ import {
   AppContextType,
 } from "@/context/app-context";
 import {
-  SSEContext,
-  sseContextDefault,
-  SSEContextType,
-} from "@/context/sse-context";
+  WebSocketContext,
+  websocketContextDefault,
+  WebSocketContextType,
+} from "@/context/ws-context";
 import i18n from "@/i18n/test_config";
 import { render, RenderOptions } from "@testing-library/react";
 import { FC, PropsWithChildren, ReactElement } from "react";
@@ -15,7 +15,7 @@ import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 
 type Props = {
-  sseProps: SSEContextType;
+  sseProps: WebSocketContextType;
   appProps: AppContextType;
 };
 
@@ -26,9 +26,9 @@ const AllTheProviders: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <BrowserRouter>
-      <SSEContext.Provider
+      <WebSocketContext.Provider
         value={{
-          ...sseContextDefault,
+          ...websocketContextDefault,
           ...sseProps,
         }}
       >
@@ -40,7 +40,7 @@ const AllTheProviders: FC<PropsWithChildren<Props>> = ({
         >
           <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
         </AppContext.Provider>
-      </SSEContext.Provider>
+      </WebSocketContext.Provider>
     </BrowserRouter>
   );
 };
@@ -49,7 +49,7 @@ const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, "wrapper"> & {
     providerOptions?: {
-      sseProps?: Partial<SSEContextType>;
+      sseProps?: Partial<WebSocketContextType>;
       appProps?: Partial<AppContextType>;
     };
   },

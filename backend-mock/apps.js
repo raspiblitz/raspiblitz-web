@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const util = require("./sse/util");
+const index = require("./index");
 
 router.post("/install/:id", (req, res) => {
   console.info("call to /api/apps/install for app", req.params.id);
   // send information that btc-pay is currently installing
-  util.sendSSE("install", {
+  util.sendData(index.ws, "install", {
     id: "rtl",
     mode: "on",
     result: "running",
@@ -44,7 +45,7 @@ const installApp = () => {
   console.info("call to installApp");
 
   // inform Frontend that app finished installing
-  util.sendSSE("install", {
+  util.sendData(index.ws, "install", {
     id: "rtl",
     mode: "on",
     result: "win",
@@ -53,7 +54,7 @@ const installApp = () => {
     details: "OK",
   });
 
-  util.sendSSE("installed_app_status", [
+  util.sendData(index.ws, "installed_app_status", [
     { id: "lnbits", installed: false, status: "offline", error: "" },
     { id: "thunderhub", installed: false, status: "offline", error: "" },
     { id: "btcpayserver", installed: false, status: "offline", error: "" },

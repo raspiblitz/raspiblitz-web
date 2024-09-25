@@ -1,6 +1,6 @@
 import QRCodeModal from "./QRCodeModal";
 import LoadingBox from "@/components/LoadingBox";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import useClipboard from "@/hooks/use-clipboard";
 import {
   ClipboardDocumentCheckIcon,
@@ -16,7 +16,7 @@ const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
 export const ConnectionCard: FC = () => {
   const { t } = useTranslation();
-  const { systemInfo, lnInfo } = useContext(SSEContext);
+  const { systemInfo, lnInfo } = useContext(WebSocketContext);
   const [showAddress, setShowAddress] = useState(true);
   const [showModal, setShowModal] = useState(false);
 

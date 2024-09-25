@@ -1,4 +1,4 @@
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import packageJson from "package.json";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
  */
 const VersionBox: FC = () => {
   const { t } = useTranslation();
-  const { systemInfo } = useContext(SSEContext);
+  const { systemInfo } = useContext(WebSocketContext);
 
   const { platform_version, api_version } = systemInfo;
 

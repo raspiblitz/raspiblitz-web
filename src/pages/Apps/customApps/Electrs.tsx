@@ -1,5 +1,5 @@
 import { Headline } from "@/components/Headline";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
 import { checkError } from "@/utils/checkError";
@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 const Electrs = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(WebSocketContext);
   const [isLoading, setIsLoading] = useState(true);
   const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(
     null,

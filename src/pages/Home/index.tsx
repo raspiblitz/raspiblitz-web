@@ -11,7 +11,7 @@ import TransactionDetailModal from "./TransactionCard/TransactionDetailModal/Tra
 import UnlockModal from "./UnlockModal";
 import WalletCard from "./WalletCard";
 import { AppContext } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { WebSocketContext } from "@/context/ws-context";
 import { useInterval } from "@/hooks/use-interval";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { Transaction } from "@/models/transaction.model";
@@ -36,7 +36,7 @@ type ModalType =
 const Home: FC = () => {
   const { t } = useTranslation();
   const { walletLocked, setWalletLocked } = useContext(AppContext);
-  const { balance, lnInfo, systemStartupInfo } = useContext(SSEContext);
+  const { balance, lnInfo, systemStartupInfo } = useContext(WebSocketContext);
   const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);

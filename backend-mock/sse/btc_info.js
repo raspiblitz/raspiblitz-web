@@ -1,9 +1,9 @@
 const util = require("./util");
 
-const btcInfo = () => {
+const btcInfo = (ws) => {
   console.info("sending btc_info");
 
-  util.sendSSE("btc_info", {
+  util.sendData(ws, "btc_info", {
     blocks: 25,
     headers: 25,
     verification_progress: 0.9999983702720613,
