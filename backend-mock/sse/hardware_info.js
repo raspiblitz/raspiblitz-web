@@ -6,6 +6,7 @@ const hardwareInfo = () => {
   util.sendSSE("hardware_info", {
     cpu_overall_percent: 1.57,
     cpu_per_cpu_percent: [1.64, 1.54, 1.54],
+    // 4gb RAM
     vram_total_bytes: 3844000000,
     vram_available_bytes: 2611000000,
     vram_used_bytes: 1233000000,
