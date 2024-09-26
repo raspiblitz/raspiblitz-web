@@ -3,11 +3,19 @@ import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "test-utils";
 
-const handleClose = vi.fn();
+const mockedDisclosure = {
+  isOpen: true,
+  onOpen: vi.fn(),
+  onClose: vi.fn(),
+  onOpenChange: vi.fn(),
+  isControlled: false,
+  getButtonProps: vi.fn(),
+  getDisclosureProps: vi.fn(),
+};
 
 describe("UnlockModal", () => {
   const setup = () => {
-    render(<UnlockModal onClose={handleClose} />);
+    render(<UnlockModal disclosure={mockedDisclosure} />);
   };
 
   test("renders", () => {

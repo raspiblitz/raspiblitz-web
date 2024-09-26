@@ -21,8 +21,7 @@ interface IFormInputs {
 
 export default function UnlockModal({
   disclosure,
-  onConfirm,
-}: Pick<ConfirmModalProps, "disclosure" | "onConfirm">) {
+}: Pick<ConfirmModalProps, "disclosure">) {
   const { t } = useTranslation();
   const { setWalletLocked } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +59,6 @@ export default function UnlockModal({
       headline={t("wallet.unlock_subtitle")}
       body={t("wallet.unlock_subtitle")}
       disclosure={disclosure}
-      onConfirm={onConfirm}
       isFormModal={
         <form onSubmit={handleSubmit(unlockHandler)}>
           <ModalBody>
