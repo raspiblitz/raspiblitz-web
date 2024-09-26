@@ -30,9 +30,13 @@ function useSSE() {
   const appInstallSuccessHandler = useCallback(
     (installData: InstallAppData, appName: string) => {
       if (installData.mode === "on") {
-        toast.success(t("apps.install_success", { appName }));
+        toast.success(t("apps.install_success", { appName }), {
+          theme: "dark",
+        });
       } else {
-        toast.success(t("apps.uninstall_success", { appName }));
+        toast.success(t("apps.uninstall_success", { appName }), {
+          theme: "dark",
+        });
       }
     },
     [t],

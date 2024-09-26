@@ -36,7 +36,7 @@ const ChangePwModal: FC = () => {
     instance
       .post("/system/change-password", {}, { params })
       .then(() => {
-        toast.success(t("settings.pass_a_changed"));
+        toast.success(t("settings.pass_a_changed"), { theme: "dark" });
         confirmModal.onClose();
       })
       .catch((err) => {

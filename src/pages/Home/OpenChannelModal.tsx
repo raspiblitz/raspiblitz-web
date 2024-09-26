@@ -25,7 +25,6 @@ type Props = {
   balance: number;
   onClose: () => void;
 };
-const theme = "dark";
 
 export default function OpenChannelModal({ balance, onClose }: Props) {
   const { t } = useTranslation();
@@ -56,7 +55,7 @@ export default function OpenChannelModal({ balance, onClose }: Props) {
         },
       )
       .then(() => {
-        toast.success(t("home.channel_opened"), { theme });
+        toast.success(t("home.channel_opened"), { theme: "dark" });
         onClose();
       })
       .catch((err) => setError(checkError(err)))

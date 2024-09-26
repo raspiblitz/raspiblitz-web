@@ -13,6 +13,7 @@ import WalletCard from "./WalletCard";
 import { AppContext } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import { useInterval } from "@/hooks/use-interval";
+import { useModalManager } from "@/hooks/use-modalmanager";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { Transaction } from "@/models/transaction.model";
 import { enableGutter } from "@/utils";
@@ -25,6 +26,7 @@ import { toast } from "react-toastify";
 
 const startupToastId = "startup-toast";
 
+// todo: get this from use-modalmanager
 type ModalType =
   | "SEND"
   | "RECEIVE"
@@ -34,6 +36,8 @@ type ModalType =
   | "UNLOCK";
 
 const Home: FC = () => {
+  const { activeModal, disclosure, openModal, closeModal } = useModalManager();
+
   const { t } = useTranslation();
   const { walletLocked, setWalletLocked } = useContext(AppContext);
   const { balance, lnInfo, systemStartupInfo } = useContext(SSEContext);
@@ -151,6 +155,18 @@ const Home: FC = () => {
 
   useInterval(getTransactions, 20000);
 
+  useEffect(() => {
+    // This is just an example. Replace with your actual state checks
+    if (showModal === "UNLOCK") {
+      openModal("unlock");
+    }
+    // // } else if (hasPendingSend) {
+    // //   openModal('send')
+    // // } else if (hasPendingReceive) {
+    // //   openModal('receive')
+    // }
+  }, [showModal, openModal]);
+
   const closeModalHandler = () => {
     setShowModal(false);
     setDetailTx(null);
@@ -174,55 +190,119 @@ const Home: FC = () => {
     setShowModal(false);
   }
 
-  const determineModal = () => {
-    switch (showModal) {
-      case "DETAIL":
-        return (
-          <TransactionDetailModal
-            transaction={detailTx!}
-            close={closeModalHandler}
-          />
-        );
-      case "SEND":
-        return (
-          <SendModal
-            onchainBalance={balance.onchain_confirmed_balance!}
-            lnBalance={balance.channel_local_balance!}
-            onClose={closeModalHandler}
-          />
-        );
-      case "RECEIVE":
-        return <ReceiveModal onClose={closeModalHandler} />;
-      case "OPEN_CHANNEL":
-        return (
-          <OpenChannelModal
-            balance={balance.channel_local_balance!}
-            onClose={closeModalHandler}
-          />
-        );
-      case "LIST_CHANNEL":
-        return <ListChannelModal onClose={closeModalHandler} />;
-      case "UNLOCK":
-        return <UnlockModal onClose={closeModalHandler} />;
-      case false:
-      default:
-        return undefined;
-    }
-  };
+  // const determineModal = () => {
+  //   switch (showModal) {
+  //     case "DETAIL":
+  //       return (
+  //         <TransactionDetailModal
+  //           transaction={detailTx!}
+  //           close={closeModalHandler}
+  //         />
+  //       );
+  //     case "SEND":
+  //       return (
+  //         <SendModal
+  //           onchainBalance={balance.onchain_confirmed_balance!}
+  //           lnBalance={balance.channel_local_balance!}
+  //           onClose={closeModalHandler}
+  //         />
+  //       );
+  //     case "RECEIVE":
+  //       return <ReceiveModal onClose={closeModalHandler} />;
+  //     case "OPEN_CHANNEL":
+  //       return (
+  //         <OpenChannelModal
+  //           balance={balance.channel_local_balance!}
+  //           onClose={closeModalHandler}
+  //         />
+  //       );
+  //     case "LIST_CHANNEL":
+  //       return <ListChannelModal onClose={closeModalHandler} />;
+  //     case "UNLOCK":
+  //       // confirmModal.onOpen();
+  //       return (
+  //         // <UnlockModal onClose={closeModalHandler} />
+  //         <UnlockModal disclosure={confirmModal} />
+  //       );
+  //     case false:
+  //     default:
+  //       return undefined;
+  //   }
+  // };
+
+  // const triggerModal = () => {
+  //   switch (showModal) {
+  //     case "DETAIL":
+  //       return (
+  //         <TransactionDetailModal
+  //           transaction={detailTx!}
+  //           close={closeModalHandler}
+  //         />
+  //       );
+  //     case "SEND":
+  //       return (
+  //         <SendModal
+  //           onchainBalance={balance.onchain_confirmed_balance!}
+  //           lnBalance={balance.channel_local_balance!}
+  //           onClose={closeModalHandler}
+  //         />
+  //       );
+  //     case "RECEIVE":
+  //       return <ReceiveModal onClose={closeModalHandler} />;
+  //     case "OPEN_CHANNEL":
+  //       return (
+  //         <OpenChannelModal
+  //           balance={balance.channel_local_balance!}
+  //           onClose={closeModalHandler}
+  //         />
+  //       );
+  //     case "LIST_CHANNEL":
+  //       return <ListChannelModal onClose={closeModalHandler} />;
+  //     case "UNLOCK":
+  //       // confirmModal.onOpen();
+  //       console.log("unlock");
+  //       openModal("unlock");
+  //       return null;
+  //     // return (
+  //     //   // <UnlockModal onClose={closeModalHandler} />
+  //     //   <UnlockModal disclosure={confirmModal} />
+  //     // );
+  //     case false:
+  //     default:
+  //       return undefined;
+  //   }
+  // };
+
+  const modalComponent = () => (
+    <>
+      {activeModal === "unlock" && <UnlockModal disclosure={disclosure} />}
+      {activeModal === "send" && (
+        // <SendModal disclosure={disclosure} onConfirm={handleSend} />
+        <>YO1</>
+      )}
+      {activeModal === "receive" && (
+        // <ReceiveModal disclosure={disclosure} onConfirm={handleReceive} />
+        <>YO2</>
+      )}
+    </>
+  );
 
   if (implementation === null && lightningState !== "disabled") {
     return (
       <>
-        {determineModal()}
+        {/* {determineModal()} */}
+        {modalComponent()}
         <PageLoadingScreen />
       </>
     );
   }
+
   const height = btcOnlyMode ? "h-full md:h-1/2" : "h-full";
 
   return (
     <>
-      {determineModal()}
+      {/* {determineModal()} */}
+      {modalComponent()}
       <main
         className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 p-5 transition-colors bg-gray-700 text-white md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
       >
