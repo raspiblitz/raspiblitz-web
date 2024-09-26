@@ -10,8 +10,8 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { Link, Button } from "@nextui-org/react";
-import { FC, useContext, useEffect, useState } from "react";
+import { Button, Link } from "@nextui-org/react";
+import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,19 +21,12 @@ export const AppInfo: FC = () => {
   const { appId } = useParams();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus, installingApp } = useContext(SSEContext);
+  const { appStatus, installingApp, hardwareInfo } = useContext(SSEContext);
   const [imgs, setImgs] = useState<string[]>([]);
   const { name } = availableApps[appId!];
   const { author, repository } = availableApps[appId!];
   const { installed, version } =
     appStatus.find((app) => app.id === appId) || {};
-
-  const video =
-    appId === "mempool" ? (
-      <video width="2000" height="1000" controls>
-        <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
-      </video>
-    ) : undefined;
 
   useEffect(() => {
     setIsLoading(true);
@@ -61,19 +54,19 @@ export const AppInfo: FC = () => {
     loadAppImages();
   }, [appId]);
 
-  const installHandler = () => {
+  const installHandler = useCallback(() => {
     instance.post(`apps/install/${appId}`).catch((err) => {
       toast.error(checkError(err));
     });
-  };
+  }, [appId]);
 
-  const uninstallHandler = () => {
+  const uninstallHandler = useCallback(() => {
     instance
       .post(`apps/uninstall/${appId}`, { keepData: true })
       .catch((err) => {
         toast.error(checkError(err));
       });
-  };
+  }, [appId]);
 
   if (isLoading) {
     return <PageLoadingScreen />;
@@ -83,6 +76,19 @@ export const AppInfo: FC = () => {
     navigate("/apps");
     return <></>;
   }
+
+  const video =
+    appId === "mempool" ? (
+      <video width="2000" height="1000" controls>
+        <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
+      </video>
+    ) : undefined;
+
+  // show warning if btcpay & ram below 8GB (in bytes); since the ram is always a bit less than 8gb, we use 7_000_000_000 (~7gb) instead
+  const showBtcPayWarning =
+    appId === "btcpayserver" &&
+    hardwareInfo &&
+    hardwareInfo.vram_total_bytes < 7_000_000_000;
 
   return (
     <main className="page-container content-container w-full bg-gray-700 text-white">
@@ -142,6 +148,12 @@ export const AppInfo: FC = () => {
             </Button>
           )}
       </section>
+
+      {showBtcPayWarning && (
+        <p className="text-center text-warning py-2">
+          {t("appInfo.btcpayserver.ram_warning")}
+        </p>
+      )}
 
       <section className="text-center">
         {!isLoading && <ImageCarousel imgs={imgs} video={video} />}
