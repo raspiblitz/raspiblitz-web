@@ -16,7 +16,7 @@ export type Props = {
   onConfirm?: () => void;
   disclosure: UseDisclosureReturn;
   isLoading?: boolean;
-  isFormModal?: ReactNode;
+  customContent?: ReactNode;
 };
 
 export const ConfirmModal = ({
@@ -25,7 +25,7 @@ export const ConfirmModal = ({
   onConfirm,
   disclosure,
   isLoading,
-  isFormModal,
+  customContent,
 }: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpenChange, onClose } = disclosure;
@@ -40,7 +40,7 @@ export const ConfirmModal = ({
                 {headline}
               </ModalHeader>
 
-              {isFormModal || (
+              {customContent || (
                 <>
                   {!!body && <ModalBody>{body}</ModalBody>}
 

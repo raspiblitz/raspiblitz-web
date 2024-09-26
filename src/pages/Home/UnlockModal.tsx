@@ -59,7 +59,7 @@ export default function UnlockModal({
       headline={t("wallet.unlock_subtitle")}
       body={t("wallet.unlock_subtitle")}
       disclosure={disclosure}
-      isFormModal={
+      customContent={
         <form onSubmit={handleSubmit(unlockHandler)}>
           <ModalBody>
             {isCapsLockEnabled && <CapsLockWarning />}
@@ -77,7 +77,6 @@ export default function UnlockModal({
                 disabled={isLoading}
                 {...keyHandlers}
               />
-              {isCapsLockEnabled && <CapsLockWarning />}
             </fieldset>
 
             {isServerError && (

@@ -63,7 +63,7 @@ const ChangePwModal: FC = () => {
         disclosure={confirmModal}
         headline={t("settings.change_pw_a")}
         isLoading={isLoading}
-        isFormModal={
+        customContent={
           <form onSubmit={handleSubmit(changePwHandler)}>
             <ModalBody>
               {isCapsLockEnabled && <CapsLockWarning />}

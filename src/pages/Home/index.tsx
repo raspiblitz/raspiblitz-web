@@ -13,7 +13,7 @@ import WalletCard from "./WalletCard";
 import { AppContext } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import { useInterval } from "@/hooks/use-interval";
-import { useModalManager } from "@/hooks/use-modalmanager";
+import { useModalManager, type ModalType } from "@/hooks/use-modalmanager";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { Transaction } from "@/models/transaction.model";
 import { enableGutter } from "@/utils";
@@ -27,13 +27,6 @@ import { toast } from "react-toastify";
 const startupToastId = "startup-toast";
 
 // todo: get this from use-modalmanager
-type ModalType =
-  | "SEND"
-  | "RECEIVE"
-  | "DETAIL"
-  | "OPEN_CHANNEL"
-  | "LIST_CHANNEL"
-  | "UNLOCK";
 
 const Home: FC = () => {
   const { activeModal, disclosure, openModal, closeModal } = useModalManager();
@@ -156,9 +149,11 @@ const Home: FC = () => {
   useInterval(getTransactions, 20000);
 
   useEffect(() => {
-    // This is just an example. Replace with your actual state checks
     if (showModal === "UNLOCK") {
-      openModal("unlock");
+      openModal("UNLOCK");
+    }
+    if (showModal === "LIST_CHANNEL") {
+      openModal("LIST_CHANNEL");
     }
     // // } else if (hasPendingSend) {
     // //   openModal('send')
@@ -170,6 +165,8 @@ const Home: FC = () => {
   const closeModalHandler = () => {
     setShowModal(false);
     setDetailTx(null);
+    disclosure.onClose();
+    closeModal();
   };
 
   const showDetailHandler = (index: number) => {
@@ -275,12 +272,21 @@ const Home: FC = () => {
 
   const modalComponent = () => (
     <>
-      {activeModal === "unlock" && <UnlockModal disclosure={disclosure} />}
-      {activeModal === "send" && (
+      {activeModal === "UNLOCK" && (
+        <UnlockModal
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+      {activeModal === "LIST_CHANNEL" && (
+        <ListChannelModal
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+      {activeModal === "SEND" && (
         // <SendModal disclosure={disclosure} onConfirm={handleSend} />
         <>YO1</>
       )}
-      {activeModal === "receive" && (
+      {activeModal === "RECEIVE" && (
         // <ReceiveModal disclosure={disclosure} onConfirm={handleReceive} />
         <>YO2</>
       )}

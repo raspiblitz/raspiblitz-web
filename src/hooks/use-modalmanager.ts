@@ -2,7 +2,14 @@ import { useDisclosure } from "@nextui-org/use-disclosure";
 import { useState } from "react";
 
 // make this enum or object tyoe enum?
-type ModalType = "unlock" | "send" | "receive" | null;
+export type ModalType =
+  | "SEND"
+  | "RECEIVE"
+  | "DETAIL"
+  | "OPEN_CHANNEL"
+  | "LIST_CHANNEL"
+  | "UNLOCK"
+  | null;
 
 export function useModalManager() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
