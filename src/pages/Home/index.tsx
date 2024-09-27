@@ -187,89 +187,6 @@ const Home: FC = () => {
     setShowModal(false);
   }
 
-  // const determineModal = () => {
-  //   switch (showModal) {
-  //     case "DETAIL":
-  //       return (
-  //         <TransactionDetailModal
-  //           transaction={detailTx!}
-  //           close={closeModalHandler}
-  //         />
-  //       );
-  //     case "SEND":
-  //       return (
-  //         <SendModal
-  //           onchainBalance={balance.onchain_confirmed_balance!}
-  //           lnBalance={balance.channel_local_balance!}
-  //           onClose={closeModalHandler}
-  //         />
-  //       );
-  //     case "RECEIVE":
-  //       return <ReceiveModal onClose={closeModalHandler} />;
-  //     case "OPEN_CHANNEL":
-  //       return (
-  //         <OpenChannelModal
-  //           balance={balance.channel_local_balance!}
-  //           onClose={closeModalHandler}
-  //         />
-  //       );
-  //     case "LIST_CHANNEL":
-  //       return <ListChannelModal onClose={closeModalHandler} />;
-  //     case "UNLOCK":
-  //       // confirmModal.onOpen();
-  //       return (
-  //         // <UnlockModal onClose={closeModalHandler} />
-  //         <UnlockModal disclosure={confirmModal} />
-  //       );
-  //     case false:
-  //     default:
-  //       return undefined;
-  //   }
-  // };
-
-  // const triggerModal = () => {
-  //   switch (showModal) {
-  //     case "DETAIL":
-  //       return (
-  //         <TransactionDetailModal
-  //           transaction={detailTx!}
-  //           close={closeModalHandler}
-  //         />
-  //       );
-  //     case "SEND":
-  //       return (
-  //         <SendModal
-  //           onchainBalance={balance.onchain_confirmed_balance!}
-  //           lnBalance={balance.channel_local_balance!}
-  //           onClose={closeModalHandler}
-  //         />
-  //       );
-  //     case "RECEIVE":
-  //       return <ReceiveModal onClose={closeModalHandler} />;
-  //     case "OPEN_CHANNEL":
-  //       return (
-  //         <OpenChannelModal
-  //           balance={balance.channel_local_balance!}
-  //           onClose={closeModalHandler}
-  //         />
-  //       );
-  //     case "LIST_CHANNEL":
-  //       return <ListChannelModal onClose={closeModalHandler} />;
-  //     case "UNLOCK":
-  //       // confirmModal.onOpen();
-  //       console.log("unlock");
-  //       openModal("unlock");
-  //       return null;
-  //     // return (
-  //     //   // <UnlockModal onClose={closeModalHandler} />
-  //     //   <UnlockModal disclosure={confirmModal} />
-  //     // );
-  //     case false:
-  //     default:
-  //       return undefined;
-  //   }
-  // };
-
   const modalComponent = () => (
     <>
       {activeModal === "UNLOCK" && (
@@ -282,6 +199,13 @@ const Home: FC = () => {
           disclosure={{ ...disclosure, onClose: closeModalHandler }}
         />
       )}
+      {activeModal === "OPEN_CHANNEL" && (
+        <>YO4</>
+        //         <OpenChannelModal
+        //           balance={balance.channel_local_balance!}
+        //           onClose={closeModalHandler}
+        //         />
+      )}
       {activeModal === "SEND" && (
         // <SendModal disclosure={disclosure} onConfirm={handleSend} />
         <>YO1</>
@@ -290,13 +214,19 @@ const Home: FC = () => {
         // <ReceiveModal disclosure={disclosure} onConfirm={handleReceive} />
         <>YO2</>
       )}
+      {activeModal === "DETAIL" && (
+        <>YO3</>
+        //         <TransactionDetailModal
+        //           transaction={detailTx!}
+        //           close={closeModalHandler}
+        //         />
+      )}
     </>
   );
 
   if (implementation === null && lightningState !== "disabled") {
     return (
       <>
-        {/* {determineModal()} */}
         {modalComponent()}
         <PageLoadingScreen />
       </>
@@ -307,7 +237,6 @@ const Home: FC = () => {
 
   return (
     <>
-      {/* {determineModal()} */}
       {modalComponent()}
       <main
         className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 p-5 transition-colors bg-gray-700 text-white md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
@@ -322,6 +251,7 @@ const Home: FC = () => {
             />
           </article>
         )}
+
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-3 w-full md:col-span-1 lg:row-span-4 xl:col-span-2">
             <TransactionCard
@@ -333,17 +263,20 @@ const Home: FC = () => {
             />
           </article>
         )}
+
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <div className={`flex ${height} flex-col lg:flex-row`}>
             <ConnectionCard />
             <HardwareCard />
           </div>
         </article>
+
         <article
           className={`${height} col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2`}
         >
           <BitcoinCard />
         </article>
+
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
             <LightningCard />
