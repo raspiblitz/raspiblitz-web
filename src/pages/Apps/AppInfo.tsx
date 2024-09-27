@@ -1,4 +1,5 @@
 import ImageCarousel from "./ImageCarousel";
+import { Alert } from "@/components/Alert";
 import AppIcon from "@/components/AppIcon";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
@@ -150,9 +151,9 @@ export const AppInfo: FC = () => {
       </section>
 
       {showBtcPayWarning && (
-        <p className="text-center text-warning py-2">
-          {t("appInfo.btcpayserver.ram_warning")}
-        </p>
+        <div className="m-5">
+          <Alert color="warning">{t("appInfo.btcpayserver.ram_warning")}</Alert>
+        </div>
       )}
 
       <section className="text-center">
