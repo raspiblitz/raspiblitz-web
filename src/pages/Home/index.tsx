@@ -161,8 +161,6 @@ const Home: FC = () => {
       openModal("OPEN_CHANNEL");
     }
     if (showModal === "SEND") {
-      console.log("SEND888888");
-
       openModal("SEND");
     }
     if (showModal === "RECEIVE") {
@@ -224,8 +222,9 @@ const Home: FC = () => {
         />
       )}
       {activeModal === "RECEIVE" && (
-        // <ReceiveModal disclosure={disclosure} onConfirm={handleReceive} />
-        <>YO2</>
+        <ReceiveModal
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
       )}
       {activeModal === "DETAIL" && (
         <>YO3</>
@@ -254,7 +253,6 @@ const Home: FC = () => {
       <main
         className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 p-5 transition-colors bg-gray-700 text-white md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
       >
-        <p>{activeModal}</p>
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard

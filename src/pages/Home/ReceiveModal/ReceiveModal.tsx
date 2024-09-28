@@ -1,19 +1,20 @@
 import SwitchTxType, { TxType } from "../SwitchTxType";
 import ReceiveOnChain from "./ReceiveOnChain";
+import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
+import { Button } from "@/components/Button";
+import ConfirmModal, {
+  type Props as ConfirmModalProps,
+} from "@/components/ConfirmModal";
 import InputField from "@/components/InputField";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import Message from "@/components/Message";
 import { AppContext, Unit } from "@/context/app-context";
-import ModalDialog from "@/layouts/ModalDialog";
-import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { convertBtcToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { ModalFooter, ModalBody } from "@nextui-org/react";
 import type { ChangeEvent, FC } from "react";
 import { useContext, useState } from "react";
-import { createPortal } from "react-dom";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -23,11 +24,9 @@ interface IFormInputs {
   commentInput: string;
 }
 
-type Props = {
-  onClose: () => void;
-};
-
-const ReceiveModal: FC<Props> = ({ onClose }) => {
+const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
+  disclosure,
+}) => {
   const { unit } = useContext(AppContext);
   const { t } = useTranslation();
   const [invoiceType, setInvoiceType] = useState(TxType.LIGHTNING);
@@ -103,86 +102,87 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
   const onSubmit: SubmitHandler<IFormInputs> = (_data) =>
     generateInvoiceHandler();
 
-  return createPortal(
-    <ModalDialog close={onClose}>
-      <div className="text-xl font-bold">
-        {showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
-      </div>
+  return (
+    <ConfirmModal
+      headline={
+        showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")
+      }
+      disclosure={disclosure}
+      customContent={
+        <>
+          <div className="my-3">
+            <SwitchTxType
+              invoiceType={invoiceType}
+              onTxTypeChange={changeInvoiceHandler}
+            />
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <ModalBody>
+              <fieldset className="flex w-full flex-col gap-4">
+                {isLoading && (
+                  <div className="p-5">
+                    <LoadingSpinner />
+                  </div>
+                )}
 
-      <div className="my-3">
-        <SwitchTxType
-          invoiceType={invoiceType}
-          onTxTypeChange={changeInvoiceHandler}
-        />
-      </div>
+                {showLnInvoice && !address && (
+                  <div className="flex flex-col justify-center pb-5 text-center">
+                    <AmountInput
+                      amount={amount}
+                      register={register("amountInput", {
+                        required: t("forms.validation.chainAmount.required"),
+                        validate: {
+                          greaterThanZero: (val) =>
+                            stringToNumber(val) > 0 ||
+                            t("forms.validation.chainAmount.required"),
+                        },
+                        onChange: amountChangeHandler,
+                      })}
+                      errorMessage={errors.amountInput}
+                    />
 
-      <form
-        className="flex w-full flex-col items-center"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <fieldset className="mb-5 w-4/5">
-          {isLoading && (
-            <div className="p-5">
-              <LoadingSpinner />
-            </div>
+                    <div className="mt-2 flex flex-col justify-center">
+                      <InputField
+                        {...register("commentInput", {
+                          onChange: commentChangeHandler,
+                        })}
+                        label={t("tx.comment")}
+                        value={comment}
+                        placeholder={t("tx.comment_placeholder")}
+                      />
+                    </div>
+                  </div>
+                )}
+              </fieldset>
+
+              {error && <Alert color="danger">{error}</Alert>}
+            </ModalBody>
+
+            {!address && showLnInvoice && (
+              <ModalFooter>
+                <Button
+                  color="primary"
+                  type="submit"
+                  disabled={isLoading || (!isValid && submitCount > 0)}
+                  isLoading={isLoading}
+                >
+                  {t("wallet.create_invoice")}
+                </Button>
+              </ModalFooter>
+            )}
+          </form>
+
+          {address && (
+            <ReceiveOnChain
+              address={address}
+              setAddress={setAddress}
+              setIsLoading={setIsLoading}
+              setError={setError}
+            />
           )}
-
-          {showLnInvoice && !address && (
-            <div className="flex flex-col justify-center pb-5 text-center">
-              <AmountInput
-                amount={amount}
-                register={register("amountInput", {
-                  required: t("forms.validation.chainAmount.required"),
-                  validate: {
-                    greaterThanZero: (val) =>
-                      stringToNumber(val) > 0 ||
-                      t("forms.validation.chainAmount.required"),
-                  },
-                  onChange: amountChangeHandler,
-                })}
-                errorMessage={errors.amountInput}
-              />
-
-              <div className="mt-2 flex flex-col justify-center">
-                <InputField
-                  {...register("commentInput", {
-                    onChange: commentChangeHandler,
-                  })}
-                  label={t("tx.comment")}
-                  value={comment}
-                  placeholder={t("tx.comment_placeholder")}
-                />
-              </div>
-            </div>
-          )}
-
-          {error && <Message message={error} />}
-
-          {!address && showLnInvoice && (
-            <div className="flex items-center justify-center">
-              <button
-                type="submit"
-                className="bd-button my-3 flex items-center justify-center p-3"
-                disabled={submitCount > 0 && !isValid}
-              >
-                <PlusCircleIcon className="mr-1 inline h-6 w-6" />
-                <span>{t("wallet.create_invoice")}</span>
-              </button>
-            </div>
-          )}
-        </fieldset>
-      </form>
-
-      {address && (
-        <ReceiveOnChain
-          address={address}
-          setAddress={setAddress}
-          setIsLoading={setIsLoading}
-          setError={setError}
-        />
-      )}
-    </ModalDialog>,
-    MODAL_ROOT,
+        </>
+      }
+    />
   );
 };
 
