@@ -57,11 +57,12 @@ export default function UnlockModal({
   return (
     <ConfirmModal
       headline={t("wallet.unlock_subtitle")}
-      body={t("wallet.unlock_subtitle")}
       disclosure={disclosure}
       customContent={
         <form onSubmit={handleSubmit(unlockHandler)}>
           <ModalBody>
+            <p>{t("wallet.unlock_subtitle")}</p>
+
             {isCapsLockEnabled && <CapsLockWarning />}
 
             <fieldset className="flex w-full flex-col gap-4">

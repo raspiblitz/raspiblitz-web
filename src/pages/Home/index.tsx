@@ -155,6 +155,9 @@ const Home: FC = () => {
     if (showModal === "LIST_CHANNEL") {
       openModal("LIST_CHANNEL");
     }
+    if (showModal === "OPEN_CHANNEL") {
+      openModal("OPEN_CHANNEL");
+    }
     // // } else if (hasPendingSend) {
     // //   openModal('send')
     // // } else if (hasPendingReceive) {
@@ -200,11 +203,10 @@ const Home: FC = () => {
         />
       )}
       {activeModal === "OPEN_CHANNEL" && (
-        <>YO4</>
-        //         <OpenChannelModal
-        //           balance={balance.channel_local_balance!}
-        //           onClose={closeModalHandler}
-        //         />
+        <OpenChannelModal
+          balance={balance.channel_local_balance!}
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
       )}
       {activeModal === "SEND" && (
         // <SendModal disclosure={disclosure} onConfirm={handleSend} />
