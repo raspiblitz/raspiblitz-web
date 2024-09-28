@@ -149,6 +149,8 @@ const Home: FC = () => {
   useInterval(getTransactions, 20000);
 
   useEffect(() => {
+    console.log("showModal", showModal);
+
     if (showModal === "UNLOCK") {
       openModal("UNLOCK");
     }
@@ -158,11 +160,17 @@ const Home: FC = () => {
     if (showModal === "OPEN_CHANNEL") {
       openModal("OPEN_CHANNEL");
     }
-    // // } else if (hasPendingSend) {
-    // //   openModal('send')
-    // // } else if (hasPendingReceive) {
-    // //   openModal('receive')
-    // }
+    if (showModal === "SEND") {
+      console.log("SEND888888");
+
+      openModal("SEND");
+    }
+    if (showModal === "RECEIVE") {
+      openModal("RECEIVE");
+    }
+    if (showModal === "DETAIL") {
+      openModal("DETAIL");
+    }
   }, [showModal, openModal]);
 
   const closeModalHandler = () => {
@@ -209,8 +217,11 @@ const Home: FC = () => {
         />
       )}
       {activeModal === "SEND" && (
-        // <SendModal disclosure={disclosure} onConfirm={handleSend} />
-        <>YO1</>
+        <SendModal
+          onchainBalance={balance.onchain_confirmed_balance!}
+          lnBalance={balance.channel_local_balance!}
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
       )}
       {activeModal === "RECEIVE" && (
         // <ReceiveModal disclosure={disclosure} onConfirm={handleReceive} />
@@ -243,6 +254,7 @@ const Home: FC = () => {
       <main
         className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 p-5 transition-colors bg-gray-700 text-white md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
       >
+        <p>{activeModal}</p>
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard

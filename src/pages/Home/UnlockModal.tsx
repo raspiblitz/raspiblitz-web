@@ -56,7 +56,7 @@ export default function UnlockModal({
 
   return (
     <ConfirmModal
-      headline={t("wallet.unlock_subtitle")}
+      headline={t("wallet.unlock_title")}
       disclosure={disclosure}
       customContent={
         <form onSubmit={handleSubmit(unlockHandler)}>

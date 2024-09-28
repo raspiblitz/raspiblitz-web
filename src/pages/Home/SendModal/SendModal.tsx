@@ -2,20 +2,19 @@ import SwitchTxType, { TxType } from "../SwitchTxType";
 import ConfirmSendModal from "./ConfirmSendModal";
 import SendLn, { LnInvoiceForm } from "./SendLN";
 import SendOnChain, { SendOnChainForm } from "./SendOnChain";
-import ModalDialog from "@/layouts/ModalDialog";
+import ConfirmModal, {
+  type Props as ConfirmModalProps,
+} from "@/components/ConfirmModal";
 import { DecodePayRequest } from "@/models/decode-pay-req";
-import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { AxiosResponse } from "axios";
 import { FC, useState } from "react";
-import { createPortal } from "react-dom";
 
-export type Props = {
+interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   lnBalance: number;
   onchainBalance: number;
-  onClose: () => void;
-};
+}
 
 export interface SendLnForm {
   invoiceType: TxType.LIGHTNING;
@@ -27,7 +26,7 @@ export interface SendLnForm {
   expiry: number;
 }
 
-const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
+const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
   const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [confirmData, setConfirmData] = useState<
     SendOnChainForm | SendLnForm | null
@@ -84,57 +83,71 @@ const SendModal: FC<Props> = ({ lnBalance, onClose, onchainBalance }) => {
   // confirm send
   if (!isBack && confirmData) {
     return (
-      <ModalDialog close={() => onClose()}>
-        <ConfirmSendModal
-          confirmData={confirmData}
-          back={backHandler}
-          balance={
-            invoiceType === TxType.LIGHTNING ? lnBalance : onchainBalance
-          }
-          close={onClose}
-        />
-      </ModalDialog>
+      <ConfirmModal
+        headline="SEND"
+        disclosure={disclosure}
+        customContent={
+          <ConfirmSendModal
+            confirmData={confirmData}
+            back={backHandler}
+            balance={
+              invoiceType === TxType.LIGHTNING ? lnBalance : onchainBalance
+            }
+            close={disclosure.onClose}
+          />
+        }
+      />
     );
   }
 
   // Send LN
   if (invoiceType === TxType.LIGHTNING) {
-    return createPortal(
-      <ModalDialog close={() => onClose()} closeable={!loading}>
-        <SwitchTxType
-          invoiceType={invoiceType}
-          onTxTypeChange={changeTransactionHandler}
-          disabled={loading}
-        />
+    return (
+      <ConfirmModal
+        headline="SEND"
+        disclosure={disclosure}
+        customContent={
+          <>
+            <SwitchTxType
+              invoiceType={invoiceType}
+              onTxTypeChange={changeTransactionHandler}
+              disabled={loading}
+            />
 
-        <SendLn
-          loading={loading}
-          onConfirm={confirmLnHandler}
-          lnBalance={lnBalance}
-          confirmData={confirmData}
-          error={error}
-        />
-      </ModalDialog>,
-      MODAL_ROOT,
+            <SendLn
+              loading={loading}
+              onConfirm={confirmLnHandler}
+              lnBalance={lnBalance}
+              confirmData={confirmData}
+              error={error}
+            />
+          </>
+        }
+      />
     );
   }
 
   // Send On-Chain
-  return createPortal(
-    <ModalDialog close={() => onClose()}>
-      <SwitchTxType
-        invoiceType={invoiceType}
-        onTxTypeChange={changeTransactionHandler}
-        disabled={loading}
-      />
+  return (
+    <ConfirmModal
+      headline="SEND"
+      disclosure={disclosure}
+      customContent={
+        <>
+          <SwitchTxType
+            invoiceType={invoiceType}
+            onTxTypeChange={changeTransactionHandler}
+            disabled={loading}
+          />
 
-      <SendOnChain
-        balance={onchainBalance}
-        confirmData={confirmData}
-        onConfirm={confirmOnChainHandler}
-      />
-    </ModalDialog>,
-    MODAL_ROOT,
+          <SendOnChain
+            balance={onchainBalance}
+            confirmData={confirmData}
+            onConfirm={confirmOnChainHandler}
+          />
+        </>
+      }
+    />
   );
 };
 
