@@ -104,7 +104,7 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
   if (invoiceType === TxType.LIGHTNING) {
     return (
       <ConfirmModal
-        headline="SEND"
+        headline="SEND" /////////////////////////????? TODO!!!!!!
         disclosure={disclosure}
         customContent={
           <>

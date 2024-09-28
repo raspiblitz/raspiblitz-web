@@ -227,11 +227,10 @@ const Home: FC = () => {
         />
       )}
       {activeModal === "DETAIL" && (
-        <>YO3</>
-        //         <TransactionDetailModal
-        //           transaction={detailTx!}
-        //           close={closeModalHandler}
-        //         />
+        <TransactionDetailModal
+          transaction={detailTx!}
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
       )}
     </>
   );
