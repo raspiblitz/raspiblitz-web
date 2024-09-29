@@ -63,3 +63,13 @@ const customRender = (
 
 export * from "@testing-library/react";
 export { customRender as render };
+
+export const mockedDisclosure = {
+  isOpen: true,
+  onOpen: vi.fn(),
+  onClose: vi.fn(),
+  onOpenChange: vi.fn(),
+  isControlled: false,
+  getButtonProps: vi.fn(),
+  getDisclosureProps: vi.fn(),
+};

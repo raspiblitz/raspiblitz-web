@@ -1,17 +1,7 @@
 import UnlockModal from "../UnlockModal";
 import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "test-utils";
-
-const mockedDisclosure = {
-  isOpen: true,
-  onOpen: vi.fn(),
-  onClose: vi.fn(),
-  onOpenChange: vi.fn(),
-  isControlled: false,
-  getButtonProps: vi.fn(),
-  getDisclosureProps: vi.fn(),
-};
+import { render, screen, mockedDisclosure } from "test-utils";
 
 describe("UnlockModal", () => {
   const setup = () => {

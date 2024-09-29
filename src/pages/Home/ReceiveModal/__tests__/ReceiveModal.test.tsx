@@ -1,7 +1,7 @@
 import ReceiveModal from "../ReceiveModal";
 import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "test-utils";
+import { render, screen, mockedDisclosure } from "test-utils";
 
 beforeEach(() => {
   server.use(
@@ -16,7 +16,7 @@ beforeEach(() => {
 describe("ReceiveModal", () => {
   test("Retrieves new on-chain address on click of on-chain button", async () => {
     const user = userEvent.setup();
-    render(<ReceiveModal onClose={() => {}} />);
+    render(<ReceiveModal disclosure={mockedDisclosure} />);
 
     const onChainBtn = await screen.findByText("wallet.on_chain");
 
@@ -27,7 +27,7 @@ describe("ReceiveModal", () => {
 
   test("Retrieves a new address upon clicking the refresh button", async () => {
     const user = userEvent.setup();
-    render(<ReceiveModal onClose={() => {}} />);
+    render(<ReceiveModal disclosure={mockedDisclosure} />);
 
     const onChainBtn = screen.getByRole("button", { name: "wallet.on_chain" });
 

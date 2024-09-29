@@ -11,7 +11,7 @@ import { instance } from "@/utils/interceptor";
 import { AxiosResponse } from "axios";
 import { FC, useState } from "react";
 
-interface Props extends Pick<ConfirmModalProps, "disclosure"> {
+export interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   lnBalance: number;
   onchainBalance: number;
 }
