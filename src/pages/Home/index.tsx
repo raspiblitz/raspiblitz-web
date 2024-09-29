@@ -26,27 +26,38 @@ import { toast } from "react-toastify";
 
 const startupToastId = "startup-toast";
 
-// todo: get this from use-modalmanager
-
 const Home: FC = () => {
   const { activeModal, disclosure, openModal, closeModal } = useModalManager();
 
   const { t } = useTranslation();
   const { walletLocked, setWalletLocked } = useContext(AppContext);
   const { balance, lnInfo, systemStartupInfo } = useContext(SSEContext);
-  const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
   const [txError, setTxError] = useState("");
 
   const { implementation } = lnInfo;
+
   const {
     lightning: lightningState,
     bitcoin,
     bitcoin_msg,
     lightning_msg,
   } = systemStartupInfo || {};
+
+  useEffect(() => {
+    if (walletLocked && activeModal !== "UNLOCK") {
+      openModal("UNLOCK");
+    } else if (!walletLocked && activeModal === "UNLOCK") {
+      closeModal();
+    }
+  }, [walletLocked, activeModal, openModal, closeModal]);
+
+  const closeModalHandler = useCallback(() => {
+    setDetailTx(null);
+    closeModal();
+  }, [closeModal]);
 
   useEffect(() => {
     const statusToastContent = (
@@ -146,59 +157,20 @@ const Home: FC = () => {
     setIsLoadingTransactions,
   ]);
 
-  useInterval(getTransactions, 20000);
-
-  useEffect(() => {
-    console.log("showModal", showModal);
-
-    if (showModal === "UNLOCK") {
-      openModal("UNLOCK");
-    }
-    if (showModal === "LIST_CHANNEL") {
-      openModal("LIST_CHANNEL");
-    }
-    if (showModal === "OPEN_CHANNEL") {
-      openModal("OPEN_CHANNEL");
-    }
-    if (showModal === "SEND") {
-      openModal("SEND");
-    }
-    if (showModal === "RECEIVE") {
-      openModal("RECEIVE");
-    }
-    if (showModal === "DETAIL") {
+  const showDetailHandler = useCallback(
+    (index: number) => {
+      const tx = transactions.find((tx) => tx.index === index);
+      if (!tx) {
+        console.error("Could not find transaction with index ", index);
+        return;
+      }
+      setDetailTx(tx);
       openModal("DETAIL");
-    }
-  }, [showModal, openModal]);
+    },
+    [transactions, openModal],
+  );
 
-  const closeModalHandler = () => {
-    setShowModal(false);
-    setDetailTx(null);
-    disclosure.onClose();
-    closeModal();
-  };
-
-  const showDetailHandler = (index: number) => {
-    const tx = transactions.find((tx) => tx.index === index);
-    if (!tx) {
-      console.error("Could not find transaction with index ", index);
-      return;
-    }
-    setDetailTx(tx);
-    setShowModal("DETAIL");
-  };
-
-  if (walletLocked && showModal !== "UNLOCK") {
-    console.log("1");
-
-    setShowModal("UNLOCK");
-  }
-
-  if (!walletLocked && showModal === "UNLOCK") {
-    console.log("2");
-
-    setShowModal(false);
-  }
+  useInterval(getTransactions, 20000);
 
   const modalComponent = () => (
     <>
@@ -259,10 +231,10 @@ const Home: FC = () => {
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard
-              onReceive={() => setShowModal("RECEIVE")}
-              onSend={() => setShowModal("SEND")}
-              onOpenChannel={() => setShowModal("OPEN_CHANNEL")}
-              onCloseChannel={() => setShowModal("LIST_CHANNEL")}
+              onReceive={() => openModal("RECEIVE")}
+              onSend={() => openModal("SEND")}
+              onOpenChannel={() => openModal("OPEN_CHANNEL")}
+              onCloseChannel={() => openModal("LIST_CHANNEL")}
             />
           </article>
         )}
