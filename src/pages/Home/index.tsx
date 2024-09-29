@@ -189,10 +189,14 @@ const Home: FC = () => {
   };
 
   if (walletLocked && showModal !== "UNLOCK") {
+    console.log("1");
+
     setShowModal("UNLOCK");
   }
 
   if (!walletLocked && showModal === "UNLOCK") {
+    console.log("2");
+
     setShowModal(false);
   }
 
