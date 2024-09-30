@@ -8,7 +8,6 @@ import InputField from "@/components/InputField";
 import { AppContext } from "@/context/app-context";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { instance } from "@/utils/interceptor";
-import { ModalFooter, ModalBody } from "@nextui-org/react";
 import { useContext, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -58,45 +57,45 @@ export default function UnlockModal({
     <ConfirmModal
       headline={t("wallet.unlock_title")}
       disclosure={disclosure}
-      customContent={
-        <form onSubmit={handleSubmit(unlockHandler)}>
-          <ModalBody>
-            <p>{t("wallet.unlock_subtitle")}</p>
+      custom
+    >
+      <form onSubmit={handleSubmit(unlockHandler)}>
+        <ConfirmModal.Body>
+          <p>{t("wallet.unlock_subtitle")}</p>
 
-            {isCapsLockEnabled && <CapsLockWarning />}
+          {isCapsLockEnabled && <CapsLockWarning />}
 
-            <fieldset className="flex w-full flex-col gap-4">
-              <InputField
-                {...register("passwordInput", {
-                  required: t("forms.validation.unlock.required"),
-                })}
-                autoFocus
-                errorMessage={errors.passwordInput}
-                label={t("forms.validation.unlock.pass_c")}
-                placeholder={t("forms.validation.unlock.pass_c")}
-                type="password"
-                disabled={isLoading}
-                {...keyHandlers}
-              />
-            </fieldset>
+          <fieldset className="flex w-full flex-col gap-4">
+            <InputField
+              {...register("passwordInput", {
+                required: t("forms.validation.unlock.required"),
+              })}
+              autoFocus
+              errorMessage={errors.passwordInput}
+              label={t("forms.validation.unlock.pass_c")}
+              placeholder={t("forms.validation.unlock.pass_c")}
+              type="password"
+              disabled={isLoading}
+              {...keyHandlers}
+            />
+          </fieldset>
 
-            {isServerError && (
-              <Alert color="danger">{t("login.invalid_pass")}</Alert>
-            )}
-          </ModalBody>
+          {isServerError && (
+            <Alert color="danger">{t("login.invalid_pass")}</Alert>
+          )}
+        </ConfirmModal.Body>
 
-          <ModalFooter>
-            <Button
-              color="primary"
-              type="submit"
-              disabled={isLoading || !isValid}
-              isLoading={isLoading}
-            >
-              {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
-            </Button>
-          </ModalFooter>
-        </form>
-      }
-    />
+        <ConfirmModal.Footer>
+          <Button
+            color="primary"
+            type="submit"
+            disabled={isLoading || !isValid}
+            isLoading={isLoading}
+          >
+            {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
+          </Button>
+        </ConfirmModal.Footer>
+      </form>
+    </ConfirmModal>
   );
 }

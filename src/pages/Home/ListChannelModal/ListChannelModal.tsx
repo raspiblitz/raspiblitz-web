@@ -7,7 +7,6 @@ import Message from "@/components/Message";
 import { LightningChannel } from "@/models/lightning-channel";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { ModalBody } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -67,25 +66,25 @@ export default function ListChannelModal({
   return (
     <ConfirmModal
       headline={t("home.current_open_channels")}
-      customContent={
-        <ModalBody>
-          {isLoading && <Spinner size="lg" />}
-
-          {!isLoading && openChannels.length === 0 && (
-            <Alert color="info">{t("home.no_open_channels")}</Alert>
-          )}
-
-          {openChannels.length > 0 && (
-            <ChannelList
-              channel={openChannels}
-              onDelete={deleteChannelHandler}
-              isLoading={isLoading}
-            />
-          )}
-          {error && <Message message={error} />}
-        </ModalBody>
-      }
       disclosure={disclosure}
-    />
+      custom
+    >
+      <ConfirmModal.Body>
+        {isLoading && <Spinner size="lg" />}
+
+        {!isLoading && openChannels.length === 0 && (
+          <Alert color="info">{t("home.no_open_channels")}</Alert>
+        )}
+
+        {openChannels.length > 0 && (
+          <ChannelList
+            channel={openChannels}
+            onDelete={deleteChannelHandler}
+            isLoading={isLoading}
+          />
+        )}
+        {error && <Message message={error} />}
+      </ConfirmModal.Body>
+    </ConfirmModal>
   );
 }

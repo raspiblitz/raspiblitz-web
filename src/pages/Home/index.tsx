@@ -13,7 +13,7 @@ import WalletCard from "./WalletCard";
 import { AppContext } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import { useInterval } from "@/hooks/use-interval";
-import { useModalManager, type ModalType } from "@/hooks/use-modalmanager";
+import { useModalManager } from "@/hooks/use-modalmanager";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { Transaction } from "@/models/transaction.model";
 import { enableGutter } from "@/utils";

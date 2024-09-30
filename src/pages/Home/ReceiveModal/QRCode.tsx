@@ -1,4 +1,3 @@
-import { Button } from "@/components/Button";
 import useClipboard from "@/hooks/use-clipboard";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
@@ -46,7 +45,6 @@ const ReceiveOnChain: FC<Props> = ({
     <>
       <QRCodeSVG role={"img"} className="mx-auto" value={address} size={256} />
       <p className="my-5 text-sm text-gray-300">{t("wallet.scan_qr")}</p>
-
       <article className="mb-5 flex flex-row items-center">
         <p
           onClick={copyAddress}
@@ -61,11 +59,17 @@ const ReceiveOnChain: FC<Props> = ({
           </div>
         </Tooltip>
       </article>
-
       <div>
-        <Button color="primary" onClick={refreshAddressHandler}>
-          {t("wallet.refresh")}
-        </Button>
+        <button
+          name="refresh-address"
+          className="switch-button"
+          onClick={refreshAddressHandler}
+        >
+          <span className="flex">
+            <RefreshIcon className="mr-1 h-6 w-6" />
+            {t("wallet.refresh")}
+          </span>
+        </button>
       </div>
     </>
   );

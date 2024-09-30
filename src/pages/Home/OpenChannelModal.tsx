@@ -9,7 +9,6 @@ import InputField from "@/components/InputField";
 import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { ModalFooter, ModalBody } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -68,67 +67,72 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
   const convertedBalance = balance ? convertMSatToSat(balance) : 0;
 
   return (
-    <ConfirmModal
-      headline={t("home.open_channel")}
-      disclosure={disclosure}
-      customContent={
-        <form onSubmit={handleSubmit(openChannelHandler)}>
-          <ModalBody>
-            <AvailableBalance balance={convertedBalance!} />
+    <ConfirmModal disclosure={disclosure} custom>
+      <form onSubmit={handleSubmit(openChannelHandler)}>
+        <ConfirmModal.Header>{t("home.open_channel")}</ConfirmModal.Header>
+        <ConfirmModal.Body>
+          <AvailableBalance balance={convertedBalance!} />
 
-            <fieldset className="flex w-full flex-col gap-4">
-              <InputField
-                {...register("nodeUri", {
-                  required: t("forms.validation.node_uri.required"),
-                })}
-                label={t("home.node_uri")}
-                errorMessage={errors.nodeUri}
-              />
-              <AmountInput
-                amount={amount}
-                errorMessage={errors.fundingAmount}
-                register={register("fundingAmount", {
-                  required: t("forms.validation.amount.required"),
-                  validate: {
-                    greaterThanZero: (val) =>
-                      stringToNumber(val) > 0 ||
-                      t("forms.validation.amount.required"),
-                  },
-                  onChange: changeAmountHandler,
-                })}
-              />
-              <div className="flex justify-around py-8 md:mx-auto md:w-1/2">
-                <label htmlFor="targetConf" className="font-bold">
-                  {t("tx.fee_rate")}
-                </label>
-                <select
-                  id="targetConf"
-                  defaultValue={4}
-                  {...register("feeRate")}
-                  className="rounded bg-yellow-500 p-1 text-white"
-                >
-                  <option value={1}>{t("home.urgent")}</option>
-                  <option value={4}>{t("home.normal")}</option>
-                  <option value={20}>{t("home.slow")}</option>
-                </select>
-              </div>
-            </fieldset>
+          <fieldset className="flex w-full flex-col gap-4">
+            <InputField
+              {...register("nodeUri", {
+                required: t("forms.validation.node_uri.required"),
+              })}
+              label={t("home.node_uri")}
+              errorMessage={errors.nodeUri}
+            />
+            <AmountInput
+              amount={amount}
+              errorMessage={errors.fundingAmount}
+              register={register("fundingAmount", {
+                required: t("forms.validation.amount.required"),
+                validate: {
+                  greaterThanZero: (val) =>
+                    stringToNumber(val) > 0 ||
+                    t("forms.validation.amount.required"),
+                },
+                onChange: changeAmountHandler,
+              })}
+            />
+            <div className="flex justify-around py-8 md:mx-auto md:w-1/2">
+              <label htmlFor="targetConf" className="font-bold">
+                {t("tx.fee_rate")}
+              </label>
+              <select
+                id="targetConf"
+                defaultValue={4}
+                {...register("feeRate")}
+                className="rounded bg-yellow-500 p-1 text-white"
+              >
+                <option value={1}>{t("home.urgent")}</option>
+                <option value={4}>{t("home.normal")}</option>
+                <option value={20}>{t("home.slow")}</option>
+              </select>
+            </div>
+          </fieldset>
 
-            {error && <Alert color="danger">{error}</Alert>}
-          </ModalBody>
+          {error && <Alert color="danger">{error}</Alert>}
+        </ConfirmModal.Body>
 
-          <ModalFooter>
-            <Button
-              color="primary"
-              type="submit"
-              disabled={isLoading || !isValid}
-              isLoading={isLoading}
-            >
-              {t("home.open_channel")}
-            </Button>
-          </ModalFooter>
-        </form>
-      }
-    />
+        <ConfirmModal.Footer>
+          <Button
+            variant="light"
+            onClick={disclosure.onClose}
+            disabled={isLoading}
+          >
+            {t("settings.cancel")}
+          </Button>
+
+          <Button
+            color="primary"
+            type="submit"
+            disabled={isLoading || !isValid}
+            isLoading={isLoading}
+          >
+            {t("home.open_channel")}
+          </Button>
+        </ConfirmModal.Footer>
+      </form>
+    </ConfirmModal>
   );
 }

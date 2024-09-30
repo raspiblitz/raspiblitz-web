@@ -4,7 +4,6 @@ import ConfirmModal, {
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import { Transaction } from "@/models/transaction.model";
-import { ModalBody } from "@nextui-org/react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -26,16 +25,13 @@ export const TransactionDetailModal: FC<Props> = ({
   const { category } = transaction;
 
   return (
-    <ConfirmModal
-      disclosure={disclosure}
-      headline={t("tx.tx_details")}
-      customContent={
-        <ModalBody>
-          {category === "onchain" && <OnchainDetails details={transaction} />}
-          {category === "ln" && <LNDetails details={transaction} />}
-        </ModalBody>
-      }
-    />
+    <ConfirmModal disclosure={disclosure} custom>
+      <ConfirmModal.Header>{t("tx.tx_details")}</ConfirmModal.Header>
+      <ConfirmModal.Body>
+        {category === "onchain" && <OnchainDetails details={transaction} />}
+        {category === "ln" && <LNDetails details={transaction} />}
+      </ConfirmModal.Body>
+    </ConfirmModal>
   );
 };
 

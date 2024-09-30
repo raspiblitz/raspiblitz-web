@@ -7,68 +7,76 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import type { UseDisclosureReturn } from "@nextui-org/use-disclosure";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
-  headline: string;
-  body?: ReactNode;
-  onConfirm?: () => void;
   disclosure: UseDisclosureReturn;
+  headline?: string;
+  children?: ReactNode;
+  onConfirm?: () => void;
+  confirmText?: string;
+  cancelText?: string;
   isLoading?: boolean;
-  customContent?: ReactNode;
+} & ({ custom: true } | { custom?: false; body?: ReactNode });
+
+type ConfirmModalComponent = {
+  (props: Props): JSX.Element;
+  Header: typeof ModalHeader;
+  Body: typeof ModalBody;
+  Footer: typeof ModalFooter;
 };
 
-export const ConfirmModal = ({
-  headline,
-  body,
-  onConfirm,
+const ConfirmModal: ConfirmModalComponent = ({
   disclosure,
-  isLoading,
-  customContent,
-}: Props) => {
+  headline,
+  children,
+  onConfirm,
+  confirmText,
+  cancelText,
+  isLoading = false,
+  ...props
+}) => {
   const { t } = useTranslation();
   const { isOpen, onOpenChange, onClose } = disclosure;
 
+  const renderContent = () => {
+    if ("custom" in props && props.custom) {
+      return children;
+    }
+
+    return (
+      <>
+        {headline && <ModalHeader>{headline}</ModalHeader>}
+
+        <ModalBody>{children || props.body}</ModalBody>
+
+        <ModalFooter>
+          <Button variant="light" onClick={onClose} disabled={isLoading}>
+            {cancelText || t("settings.cancel")}
+          </Button>
+          <Button
+            color="primary"
+            onClick={onConfirm}
+            disabled={isLoading || !onConfirm}
+            isLoading={isLoading}
+          >
+            {confirmText || t("settings.confirm")}
+          </Button>
+        </ModalFooter>
+      </>
+    );
+  };
+
   return (
-    <>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                {headline}
-              </ModalHeader>
-
-              {customContent || (
-                <>
-                  {!!body && <ModalBody>{body}</ModalBody>}
-
-                  <ModalFooter>
-                    <Button
-                      variant="light"
-                      onClick={onClose}
-                      disabled={isLoading}
-                    >
-                      {t("settings.cancel")}
-                    </Button>
-                    <Button
-                      color="primary"
-                      onClick={onConfirm}
-                      disabled={isLoading}
-                      isLoading={isLoading}
-                    >
-                      {t("settings.confirm")}
-                    </Button>
-                  </ModalFooter>
-                </>
-              )}
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose}>
+      <ModalContent>{renderContent()}</ModalContent>
+    </Modal>
   );
 };
+
+ConfirmModal.Header = ModalHeader;
+ConfirmModal.Body = ModalBody;
+ConfirmModal.Footer = ModalFooter;
 
 export default ConfirmModal;

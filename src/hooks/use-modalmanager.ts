@@ -1,7 +1,6 @@
 import { useDisclosure } from "@nextui-org/use-disclosure";
 import { useState } from "react";
 
-// make this enum or object tyoe enum?
 export type ModalType =
   | "SEND"
   | "RECEIVE"
