@@ -1,4 +1,5 @@
 import { TxType } from "../SwitchTxType";
+import QRCode from "./QRCode";
 import ReceiveLN, { type IFormInputs } from "./ReceiveLN";
 import ConfirmModal, {
   type Props as ConfirmModalProps,
@@ -77,7 +78,6 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
     setInvoiceType(key as TxType);
 
     if ((key as TxType) == TxType.ONCHAIN && !address) {
-      console.log("handleTabChange - check", key);
       generateOnChainAddressHandler();
     }
   };
@@ -102,10 +102,10 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
           </Tab>
           <Tab key={TxType.ONCHAIN} title={t("wallet.fund")}>
             <ConfirmModal.Body>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+              <QRCode
+                address={address}
+                onRefreshHandler={generateOnChainAddressHandler}
+              />
             </ConfirmModal.Body>
           </Tab>
         </Tabs>
