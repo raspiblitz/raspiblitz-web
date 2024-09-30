@@ -1,6 +1,7 @@
 import { TxType } from "../SwitchTxType";
 import QRCode from "./QRCode";
 import ReceiveLN, { type IFormInputs } from "./ReceiveLN";
+import { Alert } from "@/components/Alert";
 import ConfirmModal, {
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
@@ -26,14 +27,14 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   const [address, setAddress] = useState("");
 
   const generateInvoiceHandler = (data: IFormInputs) => {
-    console.log("generateInvoiceHandler", data);
-
     const { commentInput, amountInput } = {
       ...data,
       amountInput: Number(data.amountInput),
     };
 
+    setInvoice("");
     setIsLoading(true);
+
     const mSatAmount =
       unit === Unit.BTC
         ? convertBtcToSat(amountInput) * 1000
@@ -55,8 +56,7 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   };
 
   const generateOnChainAddressHandler = async () => {
-    console.log("generateOnChainAddressHandler");
-
+    setAddress("");
     setIsLoading(true);
 
     await instance
@@ -77,7 +77,8 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   const handleTabChange = (key: React.Key) => {
     setInvoiceType(key as TxType);
 
-    if ((key as TxType) == TxType.ONCHAIN && !address) {
+    // eslint-disable-next-line eqeqeq
+    if (key == TxType.ONCHAIN && !address) {
       generateOnChainAddressHandler();
     }
   };
@@ -95,7 +96,9 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
         >
           <Tab key={TxType.LIGHTNING} title={t("wallet.create_invoice_ln")}>
             {invoice ? (
-              <QRCode address={invoice} />
+              <ConfirmModal.Body>
+                <QRCode address={invoice} />
+              </ConfirmModal.Body>
             ) : (
               <ReceiveLN
                 onSubmitHandler={generateInvoiceHandler}
@@ -106,10 +109,14 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
           </Tab>
           <Tab key={TxType.ONCHAIN} title={t("wallet.fund")}>
             <ConfirmModal.Body>
-              <QRCode
-                address={address}
-                onRefreshHandler={generateOnChainAddressHandler}
-              />
+              {!address && error && <Alert color="danger">{error}</Alert>}
+
+              {address && !error && (
+                <QRCode
+                  address={address}
+                  onRefreshHandler={generateOnChainAddressHandler}
+                />
+              )}
             </ConfirmModal.Body>
           </Tab>
         </Tabs>
