@@ -94,11 +94,15 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
           onSelectionChange={handleTabChange}
         >
           <Tab key={TxType.LIGHTNING} title={t("wallet.create_invoice_ln")}>
-            <ReceiveLN
-              onSubmitHandler={generateInvoiceHandler}
-              isLoading={isLoading}
-              error={error}
-            />
+            {invoice ? (
+              <QRCode address={invoice} />
+            ) : (
+              <ReceiveLN
+                onSubmitHandler={generateInvoiceHandler}
+                isLoading={isLoading}
+                error={error}
+              />
+            )}
           </Tab>
           <Tab key={TxType.ONCHAIN} title={t("wallet.fund")}>
             <ConfirmModal.Body>

@@ -35,11 +35,13 @@ const ReceiveOnChain: FC<Props> = ({ address, onRefreshHandler }) => {
         </Tooltip>
       </article>
 
-      <div>
-        <Button variant="light" onClick={onRefreshHandler}>
-          {t("wallet.refresh")}
-        </Button>
-      </div>
+      {onRefreshHandler && (
+        <div>
+          <Button variant="light" onClick={onRefreshHandler}>
+            {t("wallet.refresh")}
+          </Button>
+        </div>
+      )}
     </>
   );
 };
