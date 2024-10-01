@@ -1,7 +1,8 @@
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import CapsLockWarning from "@/components/CapsLockWarning";
-import ConfirmModal, {
+import {
+  ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import InputField from "@/components/InputField";

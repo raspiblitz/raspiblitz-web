@@ -1,7 +1,7 @@
 import ActionBox from "./ActionBox";
 import { Button } from "@/components/Button";
 import CapsLockWarning from "@/components/CapsLockWarning";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";

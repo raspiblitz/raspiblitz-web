@@ -2,7 +2,8 @@ import { TxType } from "../SwitchTxType";
 import ConfirmSend from "./ConfirmSend";
 import SendLn, { LnInvoiceForm } from "./SendLN";
 import SendOnChain, { SendOnChainForm } from "./SendOnChain";
-import ConfirmModal, {
+import {
+  ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import { DecodePayRequest } from "@/models/decode-pay-req";

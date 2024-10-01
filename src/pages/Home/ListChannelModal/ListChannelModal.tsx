@@ -1,6 +1,7 @@
 import ChannelList from "./ChannelList";
 import { Alert } from "@/components/Alert";
-import ConfirmModal, {
+import {
+  ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import Message from "@/components/Message";

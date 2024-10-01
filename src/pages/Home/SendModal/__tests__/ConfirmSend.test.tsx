@@ -3,7 +3,7 @@ import type { Props } from "../ConfirmSend";
 import ConfirmSend from "../ConfirmSend";
 import { SendLnForm } from "../SendModal";
 import type { SendOnChainForm } from "../SendOnChain";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import { render, screen, waitFor, mockedDisclosure } from "test-utils";

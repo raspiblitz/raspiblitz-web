@@ -3,7 +3,7 @@ import { SendLnForm } from "./SendModal";
 import AmountInput from "@/components/AmountInput";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import InputField from "@/components/InputField";
 import { stringToNumber } from "@/utils/format";
 import { ChangeEvent, FC, useState } from "react";

@@ -1,5 +1,5 @@
 import ActionBox from "./ActionBox";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { AppContext } from "@/context/app-context";
 import { instance } from "@/utils/interceptor";
 import { useDisclosure } from "@nextui-org/react";

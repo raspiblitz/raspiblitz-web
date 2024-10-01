@@ -4,7 +4,7 @@ import { SendOnChainForm } from "./SendOnChain";
 import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import {

@@ -1,6 +1,7 @@
 import LNDetails from "./LNDetails";
 import OnchainDetails from "./OnchainDetails";
-import ConfirmModal, {
+import {
+  ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import { Transaction } from "@/models/transaction.model";

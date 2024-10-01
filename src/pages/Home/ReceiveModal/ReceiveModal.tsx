@@ -2,7 +2,8 @@ import { TxType } from "../SwitchTxType";
 import QRCode from "./QRCode";
 import ReceiveLN, { type IFormInputs } from "./ReceiveLN";
 import { Alert } from "@/components/Alert";
-import ConfirmModal, {
+import {
+  ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import { AppContext, Unit } from "@/context/app-context";

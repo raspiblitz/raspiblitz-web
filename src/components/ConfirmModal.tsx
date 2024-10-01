@@ -27,7 +27,11 @@ type ConfirmModalComponent = {
   Footer: typeof ModalFooter;
 };
 
-const ConfirmModal: ConfirmModalComponent = ({
+export const ConfirmModalHeader = ModalHeader;
+export const ConfirmModalBody = ModalBody;
+export const ConfirmModalFooter = ModalFooter;
+
+export const ConfirmModal: ConfirmModalComponent = ({
   disclosure,
   headline,
   children,
@@ -47,11 +51,11 @@ const ConfirmModal: ConfirmModalComponent = ({
 
     return (
       <>
-        {headline && <ModalHeader>{headline}</ModalHeader>}
+        {headline && <ConfirmModalHeader>{headline}</ConfirmModalHeader>}
 
-        <ModalBody>{children || props.body}</ModalBody>
+        <ConfirmModalBody>{children || props.body}</ConfirmModalBody>
 
-        <ModalFooter>
+        <ConfirmModalFooter>
           <Button onClick={onClose} disabled={isLoading}>
             {cancelText || t("settings.cancel")}
           </Button>
@@ -63,7 +67,7 @@ const ConfirmModal: ConfirmModalComponent = ({
           >
             {confirmText || t("settings.confirm")}
           </Button>
-        </ModalFooter>
+        </ConfirmModalFooter>
       </>
     );
   };
@@ -75,8 +79,6 @@ const ConfirmModal: ConfirmModalComponent = ({
   );
 };
 
-ConfirmModal.Header = ModalHeader;
-ConfirmModal.Body = ModalBody;
-ConfirmModal.Footer = ModalFooter;
-
-export default ConfirmModal;
+ConfirmModal.Header = ConfirmModalHeader;
+ConfirmModal.Body = ConfirmModalBody;
+ConfirmModal.Footer = ConfirmModalFooter;

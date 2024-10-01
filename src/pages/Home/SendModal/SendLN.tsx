@@ -4,7 +4,7 @@ import { SendOnChainForm } from "./SendOnChain";
 import { Alert } from "@/components/Alert";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import InputField from "@/components/InputField";
 import { convertMSatToSat } from "@/utils/format";
 import { FC, useState } from "react";
