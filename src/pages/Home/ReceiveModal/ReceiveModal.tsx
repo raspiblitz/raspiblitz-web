@@ -90,7 +90,7 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
 
         <Tabs
           className="mx-6"
-          aria-label="Invoice type"
+          aria-label={t("wallet.receive_aria_options")}
           selectedKey={invoiceType}
           onSelectionChange={handleTabChange}
         >

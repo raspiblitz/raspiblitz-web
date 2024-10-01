@@ -362,6 +362,7 @@
       "invoice": "Invoice",
       "on_chain": "On-chain",
       "receive": "Receive",
+      "receive_aria_options": "Receive options Lightning or On-chain",
       "refresh": "Refresh address",
       "scan_qr": "Scan this QR code or copy the address below to receive funds",
       "send": "Send",
