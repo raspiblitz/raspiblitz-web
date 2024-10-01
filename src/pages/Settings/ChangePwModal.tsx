@@ -121,7 +121,6 @@ const ChangePwModal: FC = () => {
 
             <ModalFooter>
               <Button
-                variant="light"
                 onClick={() => {
                   confirmModal.onClose();
                   reset();

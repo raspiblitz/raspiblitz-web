@@ -115,11 +115,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
         </ConfirmModal.Body>
 
         <ConfirmModal.Footer>
-          <Button
-            variant="light"
-            onClick={disclosure.onClose}
-            disabled={isLoading}
-          >
+          <Button onClick={disclosure.onClose} disabled={isLoading}>
             {t("settings.cancel")}
           </Button>
 

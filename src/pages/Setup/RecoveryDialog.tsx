@@ -26,11 +26,7 @@ export default function RecoveryDialog({ setupPhase, callback }: Props) {
           <Button onClick={() => callback(true)} color="primary">
             {t("setup.yes")}
           </Button>
-          <Button
-            onClick={() => callback(false)}
-            color="secondary"
-            variant="light"
-          >
+          <Button onClick={() => callback(false)} color="secondary">
             {t("setup.other_options")}
           </Button>
         </article>

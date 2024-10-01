@@ -133,7 +133,6 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       <ConfirmModal.Header>
         <Button
           type="button"
-          variant="light"
           onClick={() => back(confirmData)}
           startContent={<ChevronLeftIcon className="inline-block h-4 w-4" />}
         >
@@ -228,7 +227,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       </ConfirmModal.Body>
 
       <ConfirmModal.Footer>
-        <Button variant="light" onClick={() => close()} disabled={isLoading}>
+        <Button onClick={() => close()} disabled={isLoading}>
           {t("settings.cancel")}
         </Button>
 

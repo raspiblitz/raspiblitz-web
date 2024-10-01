@@ -52,7 +52,7 @@ const ConfirmModal: ConfirmModalComponent = ({
         <ModalBody>{children || props.body}</ModalBody>
 
         <ModalFooter>
-          <Button variant="light" onClick={onClose} disabled={isLoading}>
+          <Button onClick={onClose} disabled={isLoading}>
             {cancelText || t("settings.cancel")}
           </Button>
           <Button

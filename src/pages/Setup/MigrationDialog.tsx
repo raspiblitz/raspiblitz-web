@@ -70,7 +70,6 @@ export default function MigrationDialog({
             <Button
               type="button"
               color="secondary"
-              variant="light"
               onClick={() => callback(true)}
             >
               {t("setup.yes_and_migrate")}
