@@ -18,7 +18,7 @@ describe("ReceiveModal", () => {
     const user = userEvent.setup();
     render(<ReceiveModal disclosure={mockedDisclosure} />);
 
-    const onChainBtn = await screen.findByText("wallet.on_chain");
+    const onChainBtn = screen.getByRole("tab", { name: "wallet.fund" });
 
     await user.click(onChainBtn);
 
@@ -29,7 +29,7 @@ describe("ReceiveModal", () => {
     const user = userEvent.setup();
     render(<ReceiveModal disclosure={mockedDisclosure} />);
 
-    const onChainBtn = screen.getByRole("button", { name: "wallet.on_chain" });
+    const onChainBtn = screen.getByRole("tab", { name: "wallet.fund" });
 
     await user.click(onChainBtn);
 
