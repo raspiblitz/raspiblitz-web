@@ -19,16 +19,7 @@ describe("SendModal", () => {
     setup();
 
     const addressInput = screen.getByLabelText("wallet.invoice");
-    const lnTypeBtn = screen.getByRole("button", {
-      name: "home.lightning",
-    });
-    const onChainBtn = screen.getByRole("button", {
-      name: "wallet.on_chain",
-    });
-
     expect(addressInput).toBeInTheDocument();
-    expect(lnTypeBtn).toBeDisabled();
-    expect(onChainBtn).not.toBeDisabled();
   });
 
   describe("SendLN", () => {
@@ -89,6 +80,7 @@ describe("SendModal", () => {
           }
         }),
       );
+
       const user = userEvent.setup();
       setup();
 
@@ -112,8 +104,8 @@ describe("SendModal", () => {
       user = userEvent.setup();
       setup();
 
-      const onChainBtn = screen.getByRole("button", {
-        name: "wallet.on_chain",
+      const onChainBtn = screen.getByRole("tab", {
+        name: "wallet.send_onchain",
       });
 
       await user.click(onChainBtn);

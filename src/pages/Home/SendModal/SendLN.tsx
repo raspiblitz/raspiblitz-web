@@ -1,12 +1,12 @@
 import { TxType } from "../SwitchTxType";
 import { SendLnForm } from "./SendModal";
 import { SendOnChainForm } from "./SendOnChain";
+import { Alert } from "@/components/Alert";
 import AvailableBalance from "@/components/AvailableBalance";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
+import { Button } from "@/components/Button";
+import ConfirmModal from "@/components/ConfirmModal";
 import InputField from "@/components/InputField";
-import Message from "@/components/Message";
 import { convertMSatToSat } from "@/utils/format";
-import { ShareIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 
 export type Props = {
   lnBalance: number;
-  loading: boolean;
+  isLoading: boolean;
   onConfirm: (data: LnInvoiceForm) => void;
   error: string;
   confirmData?: SendOnChainForm | SendLnForm | null;
@@ -25,7 +25,7 @@ export interface LnInvoiceForm {
 }
 
 const SendLn: FC<Props> = ({
-  loading,
+  isLoading,
   lnBalance,
   onConfirm,
   error,
@@ -57,35 +57,36 @@ const SendLn: FC<Props> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-xl font-bold">{t("wallet.send_lightning")}</h3>
+      <ConfirmModal.Body>
+        <AvailableBalance balance={convertedBalance!} />
 
-      <AvailableBalance balance={convertedBalance!} />
+        <InputField
+          {...register("invoice", {
+            required: t("forms.validation.lnInvoice.required"),
+            pattern: {
+              value: /^(lnbc|lntb)\w+/i,
+              message: t("forms.validation.lnInvoice.patternMismatch"),
+            },
+          })}
+          label={t("wallet.invoice")}
+          errorMessage={errors.invoice}
+          placeholder="lnbc..."
+          disabled={isLoading}
+        />
 
-      <InputField
-        {...register("invoice", {
-          required: t("forms.validation.lnInvoice.required"),
-          pattern: {
-            value: /^(lnbc|lntb)\w+/i,
-            message: t("forms.validation.lnInvoice.patternMismatch"),
-          },
-        })}
-        label={t("wallet.invoice")}
-        errorMessage={errors.invoice}
-        placeholder="lnbc..."
-        disabled={loading}
-      />
+        {error && <Alert color="danger">{error}</Alert>}
+      </ConfirmModal.Body>
 
-      {error && <Message message={error} />}
-
-      <ButtonWithSpinner
-        type="submit"
-        className="bd-button my-8 p-3"
-        loading={loading}
-        disabled={!isValid || loading}
-        icon={<ShareIcon className="mr-2 h-6 w-6" />}
-      >
-        {t("wallet.send")}
-      </ButtonWithSpinner>
+      <ConfirmModal.Footer>
+        <Button
+          color="primary"
+          type="submit"
+          disabled={isLoading || !isValid}
+          isLoading={isLoading}
+        >
+          {t("wallet.send")}
+        </Button>
+      </ConfirmModal.Footer>
     </form>
   );
 };

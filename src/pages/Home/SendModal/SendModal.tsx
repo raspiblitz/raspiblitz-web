@@ -1,5 +1,5 @@
-import SwitchTxType, { TxType } from "../SwitchTxType";
-import ConfirmSendModal from "./ConfirmSendModal";
+import { TxType } from "../SwitchTxType";
+import ConfirmSend from "./ConfirmSend";
 import SendLn, { LnInvoiceForm } from "./SendLN";
 import SendOnChain, { SendOnChainForm } from "./SendOnChain";
 import ConfirmModal, {
@@ -8,8 +8,10 @@ import ConfirmModal, {
 import { DecodePayRequest } from "@/models/decode-pay-req";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
+import { Tabs, Tab } from "@nextui-org/tabs";
 import { AxiosResponse } from "axios";
 import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   lnBalance: number;
@@ -27,13 +29,21 @@ export interface SendLnForm {
 }
 
 const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
+  const { t } = useTranslation();
+
   const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [confirmData, setConfirmData] = useState<
     SendOnChainForm | SendLnForm | null
   >(null);
   const [isBack, setIsBack] = useState(false);
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handleTabChange = (key: React.Key) => {
+    setInvoiceType(key as TxType);
+    setConfirmData(null);
+    setError("");
+  };
 
   const confirmLnHandler = async (data: LnInvoiceForm) => {
     setIsLoading(true);
@@ -74,80 +84,56 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
     setConfirmData(data);
   };
 
-  const changeTransactionHandler = (txType: TxType): void => {
-    setInvoiceType(txType);
-    setConfirmData(null);
-    setError("");
-  };
-
-  // confirm send
-  if (!isBack && confirmData) {
-    return (
-      <ConfirmModal
-        headline="SEND"
-        disclosure={disclosure}
-        customContent={
-          <ConfirmSendModal
-            confirmData={confirmData}
-            back={backHandler}
-            balance={
-              invoiceType === TxType.LIGHTNING ? lnBalance : onchainBalance
-            }
-            close={disclosure.onClose}
-          />
-        }
-      />
-    );
-  }
-
-  // Send LN
-  if (invoiceType === TxType.LIGHTNING) {
-    return (
-      <ConfirmModal
-        headline="SEND" /////////////////////////????? TODO!!!!!!
-        disclosure={disclosure}
-        customContent={
-          <>
-            <SwitchTxType
-              invoiceType={invoiceType}
-              onTxTypeChange={changeTransactionHandler}
-              disabled={loading}
-            />
-
-            <SendLn
-              loading={loading}
-              onConfirm={confirmLnHandler}
-              lnBalance={lnBalance}
-              confirmData={confirmData}
-              error={error}
-            />
-          </>
-        }
-      />
-    );
-  }
-
-  // Send On-Chain
   return (
-    <ConfirmModal
-      headline="SEND"
-      disclosure={disclosure}
-      customContent={
-        <>
-          <SwitchTxType
-            invoiceType={invoiceType}
-            onTxTypeChange={changeTransactionHandler}
-            disabled={loading}
-          />
+    <ConfirmModal disclosure={disclosure} custom>
+      <>
+        <ConfirmModal.Header>{t("wallet.send")}</ConfirmModal.Header>
 
-          <SendOnChain
-            balance={onchainBalance}
-            confirmData={confirmData}
-            onConfirm={confirmOnChainHandler}
-          />
-        </>
-      }
-    />
+        <div className="mx-6">
+          <Tabs
+            fullWidth
+            aria-label={t("wallet.receive_aria_options")}
+            selectedKey={invoiceType}
+            onSelectionChange={handleTabChange}
+          >
+            <Tab key={TxType.LIGHTNING} title={t("wallet.send_lightning")}>
+              {!isBack && confirmData ? (
+                <ConfirmSend
+                  confirmData={confirmData}
+                  back={backHandler}
+                  balance={lnBalance}
+                  close={disclosure.onClose}
+                />
+              ) : (
+                <SendLn
+                  isLoading={isLoading}
+                  onConfirm={confirmLnHandler}
+                  lnBalance={lnBalance}
+                  confirmData={confirmData}
+                  error={error}
+                />
+              )}
+            </Tab>
+            <Tab key={TxType.ONCHAIN} title={t("wallet.send_onchain")}>
+              {!isBack && confirmData ? (
+                <ConfirmSend
+                  confirmData={confirmData}
+                  back={backHandler}
+                  balance={lnBalance}
+                  close={disclosure.onClose}
+                />
+              ) : (
+                <SendOnChain
+                  balance={onchainBalance}
+                  confirmData={confirmData}
+                  onConfirm={confirmOnChainHandler}
+                />
+              )}
+            </Tab>
+          </Tabs>
+        </div>
+      </>
+    </ConfirmModal>
   );
 };
 
