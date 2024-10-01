@@ -61,12 +61,12 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   };
 
   return (
-    <form className="px-5" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <ConfirmModal.Body>
         <AvailableBalance balance={balance} />
 
-        <fieldset className="my-5 flex flex-col items-center justify-center text-center">
-          <div className="w-full py-1 md:w-10/12">
+        <fieldset className="flex flex-col items-center justify-center text-center">
+          <div className="w-full py-1">
             <InputField
               {...register("address", {
                 required: t("forms.validation.chainAddress.required"),
@@ -82,7 +82,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
           </div>
 
           {!spendAll && (
-            <div className="w-full pt-1 md:w-10/12">
+            <div className="w-full pt-1">
               <AmountInput
                 errorMessage={errors?.amount}
                 disabled={spendAll}
@@ -105,7 +105,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
             </div>
           )}
 
-          <div className="flex w-full justify-start gap-2 pb-1 md:w-10/12">
+          <div className="flex w-full justify-start gap-2 pb-1">
             <InputField
               {...register("spendAll", {})}
               label={t("tx.spend_all")}
@@ -114,7 +114,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
             />
           </div>
 
-          <div className="w-full py-1 md:w-10/12">
+          <div className="w-full py-1">
             <InputField
               {...register("fee", {
                 required: t("forms.validation.chainFee.required"),
@@ -126,7 +126,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
             />
           </div>
 
-          <div className="w-full py-1 md:w-10/12">
+          <div className="w-full py-1">
             <InputField
               {...register("comment")}
               label={t("tx.comment")}
