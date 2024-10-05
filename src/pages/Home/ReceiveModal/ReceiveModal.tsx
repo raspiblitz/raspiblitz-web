@@ -1,86 +1,52 @@
-import SwitchTxType, { TxType } from "../SwitchTxType";
-import ReceiveOnChain from "./ReceiveOnChain";
-import AmountInput from "@/components/AmountInput";
-import InputField from "@/components/InputField";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import Message from "@/components/Message";
+import { TxType } from "../SwitchTxType";
+import QRCode from "./QRCode";
+import ReceiveLN, { type IFormInputs } from "./ReceiveLN";
+import { Alert } from "@/components/Alert";
+import {
+  ConfirmModal,
+  type Props as ConfirmModalProps,
+} from "@/components/ConfirmModal";
 import { AppContext, Unit } from "@/context/app-context";
-import ModalDialog from "@/layouts/ModalDialog";
-import { MODAL_ROOT } from "@/utils";
 import { checkError } from "@/utils/checkError";
-import { convertBtcToSat, stringToNumber } from "@/utils/format";
+import { convertBtcToSat } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import type { ChangeEvent, FC } from "react";
+import { Tabs, Tab } from "@nextui-org/tabs";
+import type { FC } from "react";
 import { useContext, useState } from "react";
-import { createPortal } from "react-dom";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-interface IFormInputs {
-  amountInput: string;
-  commentInput: string;
-}
-
-type Props = {
-  onClose: () => void;
-};
-
-const ReceiveModal: FC<Props> = ({ onClose }) => {
-  const { unit } = useContext(AppContext);
+const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
+  disclosure,
+}) => {
   const { t } = useTranslation();
-  const [invoiceType, setInvoiceType] = useState(TxType.LIGHTNING);
-  const [address, setAddress] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [comment, setComment] = useState("");
+  const { unit } = useContext(AppContext);
+
+  const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [invoice, setInvoice] = useState("");
+  const [address, setAddress] = useState("");
 
-  const lnInvoice = invoiceType === TxType.LIGHTNING;
+  const generateInvoiceHandler = (data: IFormInputs) => {
+    const { commentInput, amountInput } = {
+      ...data,
+      amountInput: Number(data.amountInput),
+    };
 
-  const changeInvoiceHandler = async (txType: TxType) => {
-    setAddress("");
-    setAmount(0);
-    setComment("");
-    setError("");
-
-    setInvoiceType(txType);
-
-    if (txType === TxType.ONCHAIN) {
-      setIsLoading(true);
-      await instance
-        .post("lightning/new-address", {
-          type: "p2wkh",
-        })
-        .then((resp) => {
-          setAddress(resp.data);
-        })
-        .catch((err) => {
-          setError(checkError(err));
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
-  };
-
-  const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setComment(event.target.value);
-  };
-
-  const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
-  };
-
-  const generateInvoiceHandler = () => {
+    setInvoice("");
     setIsLoading(true);
+
     const mSatAmount =
-      unit === Unit.BTC ? convertBtcToSat(amount) * 1000 : amount * 1000;
+      unit === Unit.BTC
+        ? convertBtcToSat(amountInput) * 1000
+        : amountInput * 1000;
+
     instance
-      .post(`lightning/add-invoice?value_msat=${mSatAmount}&memo=${comment}`)
+      .post(
+        `lightning/add-invoice?value_msat=${mSatAmount}&memo=${commentInput}`,
+      )
       .then((resp) => {
-        setAddress(resp.data.payment_request);
+        setInvoice(resp.data.payment_request);
       })
       .catch((err) => {
         setError(checkError(err));
@@ -90,99 +56,79 @@ const ReceiveModal: FC<Props> = ({ onClose }) => {
       });
   };
 
-  const showLnInvoice = lnInvoice && !isLoading;
+  const generateOnChainAddressHandler = async () => {
+    setAddress("");
+    setIsLoading(true);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid, submitCount },
-  } = useForm<IFormInputs>({
-    mode: "onChange",
-  });
+    await instance
+      .post("lightning/new-address", {
+        type: "p2wkh",
+      })
+      .then((resp) => {
+        setAddress(resp.data);
+      })
+      .catch((err) => {
+        setError(checkError(err));
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
-  const onSubmit: SubmitHandler<IFormInputs> = (_data) =>
-    generateInvoiceHandler();
+  const handleTabChange = (key: React.Key) => {
+    setInvoiceType(key as TxType);
+    setError("");
 
-  return createPortal(
-    <ModalDialog close={onClose}>
-      <div className="text-xl font-bold">
-        {showLnInvoice ? t("wallet.create_invoice_ln") : t("wallet.fund")}
-      </div>
+    // eslint-disable-next-line eqeqeq
+    if (key == TxType.ONCHAIN && !address) {
+      generateOnChainAddressHandler();
+    }
+  };
 
-      <div className="my-3">
-        <SwitchTxType
-          invoiceType={invoiceType}
-          onTxTypeChange={changeInvoiceHandler}
-        />
-      </div>
+  return (
+    <ConfirmModal disclosure={disclosure} custom>
+      <>
+        <ConfirmModal.Header>{t("wallet.receive")}</ConfirmModal.Header>
 
-      <form
-        className="flex w-full flex-col items-center"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <fieldset className="mb-5 w-4/5">
-          {isLoading && (
-            <div className="p-5">
-              <LoadingSpinner />
-            </div>
-          )}
-
-          {showLnInvoice && !address && (
-            <div className="flex flex-col justify-center pb-5 text-center">
-              <AmountInput
-                amount={amount}
-                register={register("amountInput", {
-                  required: t("forms.validation.chainAmount.required"),
-                  validate: {
-                    greaterThanZero: (val) =>
-                      stringToNumber(val) > 0 ||
-                      t("forms.validation.chainAmount.required"),
-                  },
-                  onChange: amountChangeHandler,
-                })}
-                errorMessage={errors.amountInput}
-              />
-
-              <div className="mt-2 flex flex-col justify-center">
-                <InputField
-                  {...register("commentInput", {
-                    onChange: commentChangeHandler,
-                  })}
-                  label={t("tx.comment")}
-                  value={comment}
-                  placeholder={t("tx.comment_placeholder")}
+        <div className="mx-6">
+          <Tabs
+            classNames={{
+              tabList: "flex-col md:flex-row",
+            }}
+            fullWidth
+            aria-label={t("wallet.receive_aria_options")}
+            selectedKey={invoiceType}
+            onSelectionChange={handleTabChange}
+          >
+            <Tab key={TxType.LIGHTNING} title={t("wallet.create_invoice_ln")}>
+              {invoice ? (
+                <ConfirmModal.Body>
+                  <QRCode address={invoice} />
+                </ConfirmModal.Body>
+              ) : (
+                <ReceiveLN
+                  onSubmitHandler={generateInvoiceHandler}
+                  isLoading={isLoading}
+                  error={error}
                 />
-              </div>
-            </div>
-          )}
+              )}
+            </Tab>
+            <Tab key={TxType.ONCHAIN} title={t("wallet.fund")}>
+              <ConfirmModal.Body>
+                {!address && error && <Alert color="danger">{error}</Alert>}
 
-          {error && <Message message={error} />}
-
-          {!address && showLnInvoice && (
-            <div className="flex items-center justify-center">
-              <button
-                type="submit"
-                className="bd-button my-3 flex items-center justify-center p-3"
-                disabled={submitCount > 0 && !isValid}
-              >
-                <PlusCircleIcon className="mr-1 inline h-6 w-6" />
-                <span>{t("wallet.create_invoice")}</span>
-              </button>
-            </div>
-          )}
-        </fieldset>
-      </form>
-
-      {address && (
-        <ReceiveOnChain
-          address={address}
-          setAddress={setAddress}
-          setIsLoading={setIsLoading}
-          setError={setError}
-        />
-      )}
-    </ModalDialog>,
-    MODAL_ROOT,
+                {address && !error && (
+                  <QRCode
+                    address={address}
+                    onRefreshHandler={generateOnChainAddressHandler}
+                  />
+                )}
+              </ConfirmModal.Body>
+            </Tab>
+          </Tabs>
+        </div>
+      </>
+    </ConfirmModal>
   );
 };
 

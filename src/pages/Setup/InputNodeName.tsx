@@ -92,7 +92,6 @@ export default function InputNodeName({ callback }: Props) {
               <Button
                 type="button"
                 color="danger"
-                variant="light"
                 onClick={() => confirmModal.onOpen()}
               >
                 {t("setup.cancel")}

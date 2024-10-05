@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
@@ -51,7 +51,7 @@ export default function StartDoneDialog({ setupPhase, callback }: Props) {
           <Button onClick={() => callback(false)} color="primary">
             {buttonText}
           </Button>
-          <Button onClick={() => confirmModal.onOpen()} variant="light">
+          <Button onClick={() => confirmModal.onOpen()}>
             {t("setup.cancel")}
           </Button>
         </article>

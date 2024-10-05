@@ -51,12 +51,18 @@ export const AppCardAlby: FC = () => {
       });
 
       if (result.success) {
-        toast.success(t(`appInfo.${id}.action.connection.success`));
+        toast.success(t(`appInfo.${id}.action.connection.success`), {
+          theme: "dark",
+        });
       } else {
-        toast.error(t(`appInfo.${id}.action.connection.error`));
+        toast.error(t(`appInfo.${id}.action.connection.error`), {
+          theme: "dark",
+        });
       }
     } catch (e) {
-      toast.error(t(`appInfo.${id}.action.connection.error`));
+      toast.error(t(`appInfo.${id}.action.connection.error`), {
+        theme: "dark",
+      });
     }
   };
 

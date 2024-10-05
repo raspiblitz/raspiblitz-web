@@ -224,7 +224,6 @@ export default function SyncScreen({ data, callback }: Props) {
               onClick={() => callback("shutdown", null)}
               color="primary"
               title={t("setup.sync_restartinfo")}
-              variant="light"
               startContent={<PowerIcon className="inline h-6 w-auto" />}
             >
               {t("settings.shutdown")}

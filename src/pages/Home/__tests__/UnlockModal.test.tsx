@@ -1,13 +1,11 @@
 import UnlockModal from "../UnlockModal";
 import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "test-utils";
-
-const handleClose = vi.fn();
+import { render, screen, mockedDisclosure } from "test-utils";
 
 describe("UnlockModal", () => {
   const setup = () => {
-    render(<UnlockModal onClose={handleClose} />);
+    render(<UnlockModal disclosure={mockedDisclosure} />);
   };
 
   test("renders", () => {

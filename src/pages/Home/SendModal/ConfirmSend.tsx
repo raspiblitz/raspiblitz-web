@@ -1,9 +1,10 @@
 import { TxType } from "../SwitchTxType";
 import { SendLnForm } from "./SendModal";
 import { SendOnChainForm } from "./SendOnChain";
+import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
-import Message from "@/components/Message";
+import { Button } from "@/components/Button";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import {
@@ -13,11 +14,7 @@ import {
   stringToNumber,
 } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import {
-  CheckIcon,
-  ChevronLeftIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import type { ChangeEvent } from "react";
 import { FC, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -35,7 +32,7 @@ export type Props = {
   close: () => void;
 };
 
-const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
+const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
   const [amountInput, setAmountInput] = useState(0);
@@ -133,117 +130,120 @@ const ConfirmSendModal: FC<Props> = ({ confirmData, back, balance, close }) => {
 
   return (
     <form onSubmit={handleSubmit(sendTransactionHandler)}>
-      <button
-        type="button"
-        onClick={() => back(confirmData)}
-        className="flex items-center justify-center font-bold outline-none"
-      >
-        <ChevronLeftIcon className="inline-block h-4 w-4" />
-        {t("navigation.back")}
-      </button>
-      <h4 className="my-3 break-normal font-extrabold">
-        {t("tx.confirm_info")}:{" "}
-      </h4>
+      <ConfirmModal.Header>
+        <Button
+          type="button"
+          onClick={() => back(confirmData)}
+          startContent={<ChevronLeftIcon className="inline-block h-4 w-4" />}
+        >
+          {t("navigation.back")}
+        </Button>
+      </ConfirmModal.Header>
 
-      <div className="my-2">
-        <h4 className="font-bold">{addressTitle}: </h4>
-        <p className="w-full break-all text-gray-200">{confirmData.address}</p>
-        {isInvoiceExpired && (
-          <p className="text-red-500">
-            {t("forms.validation.lnInvoice.expired")}:{" "}
-            {invoiceExpiryDateDecorated}
+      <ConfirmModal.Body>
+        <h4 className="my-3 break-normal font-extrabold">
+          {t("tx.confirm_info")}:{" "}
+        </h4>
+
+        <div className="my-2">
+          <h4 className="font-bold">{addressTitle}: </h4>
+          <p className="w-full break-all text-gray-200">
+            {confirmData.address}
           </p>
-        )}
-      </div>
+          {isInvoiceExpired && (
+            <p className="text-red-500">
+              {t("forms.validation.lnInvoice.expired")}:{" "}
+              {invoiceExpiryDateDecorated}
+            </p>
+          )}
+        </div>
 
-      <div className="my-2">
-        <h4 className="font-bold">{t("wallet.amount")}:</h4>
-        {isLnTx && Number(confirmData.amount) !== 0 && (
-          <span>
-            {formatAmount(
-              convertMSatToSat(+confirmData.amount)?.toString()!,
-              Unit.SAT,
-            )}{" "}
-            Sat
-          </span>
-        )}
+        <div className="my-2">
+          <h4 className="font-bold">{t("wallet.amount")}:</h4>
+          {isLnTx && Number(confirmData.amount) !== 0 && (
+            <span>
+              {formatAmount(
+                convertMSatToSat(+confirmData.amount)?.toString()!,
+                Unit.SAT,
+              )}{" "}
+              Sat
+            </span>
+          )}
+
+          {!isLnTx && (
+            <span>
+              {confirmData.spendAll && t("tx.all_onchain")}
+              {!confirmData.spendAll &&
+                `${formatAmount(confirmData.amount.toString(), Unit.SAT)} Sat`}
+            </span>
+          )}
+
+          {isInvoiceAmountBiggerThanBalance && (
+            <p className="text-red-500">
+              {t("forms.validation.lnInvoice.max")}
+            </p>
+          )}
+
+          {Number(confirmData.amount) === 0 && !onChainData.spendAll && (
+            <div>
+              <p>{t("forms.hint.invoiceAmountZero")}</p>
+
+              <AmountInput
+                amount={amountInput}
+                errorMessage={errors.amountInput}
+                register={register("amountInput", {
+                  required: t("forms.validation.chainAmount.required"),
+                  max: {
+                    value: balance,
+                    message: t("forms.validation.chainAmount.max"),
+                  },
+                  validate: {
+                    greaterThanZero: (val) =>
+                      stringToNumber(val) > 0 ||
+                      t("forms.validation.chainAmount.required"),
+                  },
+                  onChange: amountChangeHandler,
+                })}
+              />
+            </div>
+          )}
+        </div>
 
         {!isLnTx && (
-          <span>
-            {confirmData.spendAll && t("tx.all_onchain")}
-            {!confirmData.spendAll &&
-              `${formatAmount(confirmData.amount.toString(), Unit.SAT)} Sat`}
-          </span>
-        )}
-
-        {isInvoiceAmountBiggerThanBalance && (
-          <p className="text-red-500">{t("forms.validation.lnInvoice.max")}</p>
-        )}
-
-        {Number(confirmData.amount) === 0 && !onChainData.spendAll && (
-          <div>
-            <p>{t("forms.hint.invoiceAmountZero")}</p>
-
-            <AmountInput
-              amount={amountInput}
-              errorMessage={errors.amountInput}
-              register={register("amountInput", {
-                required: t("forms.validation.chainAmount.required"),
-                max: {
-                  value: balance,
-                  message: t("forms.validation.chainAmount.max"),
-                },
-                validate: {
-                  greaterThanZero: (val) =>
-                    stringToNumber(val) > 0 ||
-                    t("forms.validation.chainAmount.required"),
-                },
-                onChange: amountChangeHandler,
-              })}
-            />
+          <div className="my-2">
+            <h4 className="font-bold">{t("tx.fee")}:</h4> {confirmData.fee}{" "}
+            sat/vByte
           </div>
         )}
-      </div>
 
-      {!isLnTx && (
-        <div className="my-2">
-          <h4 className="font-bold">{t("tx.fee")}:</h4> {confirmData.fee}{" "}
-          sat/vByte
-        </div>
-      )}
+        {confirmData.comment && (
+          <div className="my-2">
+            <h4 className="font-bold">{commentHeading}:</h4>{" "}
+            {confirmData.comment}
+          </div>
+        )}
 
-      {confirmData.comment && (
-        <div className="my-2">
-          <h4 className="font-bold">{commentHeading}:</h4> {confirmData.comment}
-        </div>
-      )}
+        {error && <Alert color="danger">{error}</Alert>}
+      </ConfirmModal.Body>
 
-      {error && <Message message={error} />}
+      <ConfirmModal.Footer>
+        <Button onClick={() => close()} disabled={isLoading}>
+          {t("settings.cancel")}
+        </Button>
 
-      <div className="flex justify-around px-2 py-5">
-        <button
-          className="flex rounded bg-red-500 px-3 py-2 text-white shadow-xl hover:bg-red-400"
-          onClick={() => close()}
-          disabled={isLoading}
-        >
-          <XMarkIcon className="inline h-6 w-6" />
-          &nbsp;{t("settings.cancel")}
-        </button>
-
-        <ButtonWithSpinner
-          className="bd-button flex px-3 py-2"
+        <Button
+          color="primary"
           type="submit"
-          loading={isLoading}
-          icon={<CheckIcon className="inline h-6 w-6" />}
           disabled={
             !isValid || !isValidLnInvoice || isInvoiceAmountBiggerThanBalance
           }
+          isLoading={isLoading}
         >
-          <span className="mx-1">{t("settings.confirm")}</span>
-        </ButtonWithSpinner>
-      </div>
+          {t("settings.confirm")}
+        </Button>
+      </ConfirmModal.Footer>
     </form>
   );
 };
 
-export default ConfirmSendModal;
+export default ConfirmSend;

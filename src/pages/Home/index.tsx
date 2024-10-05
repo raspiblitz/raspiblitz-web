@@ -13,6 +13,7 @@ import WalletCard from "./WalletCard";
 import { AppContext } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import { useInterval } from "@/hooks/use-interval";
+import { useModalManager } from "@/hooks/use-modalmanager";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { Transaction } from "@/models/transaction.model";
 import { enableGutter } from "@/utils";
@@ -25,31 +26,38 @@ import { toast } from "react-toastify";
 
 const startupToastId = "startup-toast";
 
-type ModalType =
-  | "SEND"
-  | "RECEIVE"
-  | "DETAIL"
-  | "OPEN_CHANNEL"
-  | "LIST_CHANNEL"
-  | "UNLOCK";
-
 const Home: FC = () => {
+  const { activeModal, disclosure, openModal, closeModal } = useModalManager();
+
   const { t } = useTranslation();
   const { walletLocked, setWalletLocked } = useContext(AppContext);
   const { balance, lnInfo, systemStartupInfo } = useContext(SSEContext);
-  const [showModal, setShowModal] = useState<ModalType | false>(false);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
   const [txError, setTxError] = useState("");
 
   const { implementation } = lnInfo;
+
   const {
     lightning: lightningState,
     bitcoin,
     bitcoin_msg,
     lightning_msg,
   } = systemStartupInfo || {};
+
+  useEffect(() => {
+    if (walletLocked && activeModal !== "UNLOCK") {
+      openModal("UNLOCK");
+    } else if (!walletLocked && activeModal === "UNLOCK") {
+      closeModal();
+    }
+  }, [walletLocked, activeModal, openModal, closeModal]);
+
+  const closeModalHandler = useCallback(() => {
+    setDetailTx(null);
+    closeModal();
+  }, [closeModal]);
 
   useEffect(() => {
     const statusToastContent = (
@@ -149,93 +157,88 @@ const Home: FC = () => {
     setIsLoadingTransactions,
   ]);
 
+  const showDetailHandler = useCallback(
+    (index: number) => {
+      const tx = transactions.find((tx) => tx.index === index);
+      if (!tx) {
+        console.error("Could not find transaction with index ", index);
+        return;
+      }
+      setDetailTx(tx);
+      openModal("DETAIL");
+    },
+    [transactions, openModal],
+  );
+
   useInterval(getTransactions, 20000);
 
-  const closeModalHandler = () => {
-    setShowModal(false);
-    setDetailTx(null);
-  };
-
-  const showDetailHandler = (index: number) => {
-    const tx = transactions.find((tx) => tx.index === index);
-    if (!tx) {
-      console.error("Could not find transaction with index ", index);
-      return;
-    }
-    setDetailTx(tx);
-    setShowModal("DETAIL");
-  };
-
-  if (walletLocked && showModal !== "UNLOCK") {
-    setShowModal("UNLOCK");
-  }
-
-  if (!walletLocked && showModal === "UNLOCK") {
-    setShowModal(false);
-  }
-
-  const determineModal = () => {
-    switch (showModal) {
-      case "DETAIL":
-        return (
-          <TransactionDetailModal
-            transaction={detailTx!}
-            close={closeModalHandler}
-          />
-        );
-      case "SEND":
-        return (
-          <SendModal
-            onchainBalance={balance.onchain_confirmed_balance!}
-            lnBalance={balance.channel_local_balance!}
-            onClose={closeModalHandler}
-          />
-        );
-      case "RECEIVE":
-        return <ReceiveModal onClose={closeModalHandler} />;
-      case "OPEN_CHANNEL":
-        return (
-          <OpenChannelModal
-            balance={balance.channel_local_balance!}
-            onClose={closeModalHandler}
-          />
-        );
-      case "LIST_CHANNEL":
-        return <ListChannelModal onClose={closeModalHandler} />;
-      case "UNLOCK":
-        return <UnlockModal onClose={closeModalHandler} />;
-      case false:
-      default:
-        return undefined;
-    }
-  };
+  const modalComponent = () => (
+    <>
+      {activeModal === "UNLOCK" && (
+        <UnlockModal
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+      {activeModal === "LIST_CHANNEL" && (
+        <ListChannelModal
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+      {activeModal === "OPEN_CHANNEL" && (
+        <OpenChannelModal
+          balance={balance.channel_local_balance!}
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+      {activeModal === "SEND" && (
+        <SendModal
+          onchainBalance={balance.onchain_confirmed_balance!}
+          lnBalance={balance.channel_local_balance!}
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+      {activeModal === "RECEIVE" && (
+        <ReceiveModal
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+      {activeModal === "DETAIL" && (
+        <TransactionDetailModal
+          transaction={detailTx!}
+          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+        />
+      )}
+    </>
+  );
 
   if (implementation === null && lightningState !== "disabled") {
     return (
       <>
-        {determineModal()}
+        {modalComponent()}
         <PageLoadingScreen />
       </>
     );
   }
+
   const height = btcOnlyMode ? "h-full md:h-1/2" : "h-full";
 
   return (
     <>
-      {determineModal()}
+      {modalComponent()}
       <main
         className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 p-5 transition-colors bg-gray-700 text-white md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
       >
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard
-              onReceive={() => setShowModal("RECEIVE")}
-              onSend={() => setShowModal("SEND")}
-              onOpenChannel={() => setShowModal("OPEN_CHANNEL")}
-              onCloseChannel={() => setShowModal("LIST_CHANNEL")}
+              onReceive={() => openModal("RECEIVE")}
+              onSend={() => openModal("SEND")}
+              onOpenChannel={() => openModal("OPEN_CHANNEL")}
+              onCloseChannel={() => openModal("LIST_CHANNEL")}
             />
           </article>
         )}
+
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-3 w-full md:col-span-1 lg:row-span-4 xl:col-span-2">
             <TransactionCard
@@ -247,17 +250,20 @@ const Home: FC = () => {
             />
           </article>
         )}
+
         <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
           <div className={`flex ${height} flex-col lg:flex-row`}>
             <ConnectionCard />
             <HardwareCard />
           </div>
         </article>
+
         <article
           className={`${height} col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2`}
         >
           <BitcoinCard />
         </article>
+
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2">
             <LightningCard />

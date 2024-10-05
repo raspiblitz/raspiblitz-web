@@ -1,14 +1,12 @@
 import { TxType } from "../../SwitchTxType";
-import type { Props } from "../ConfirmSendModal";
-import ConfirmSendModal from "../ConfirmSendModal";
+import type { Props } from "../ConfirmSend";
+import ConfirmSend from "../ConfirmSend";
 import { SendLnForm } from "../SendModal";
-import { SendOnChainForm } from "../SendOnChain";
-import i18n from "@/i18n/test_config";
+import type { SendOnChainForm } from "../SendOnChain";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { http, server, HttpResponse } from "@/testServer";
 import userEvent from "@testing-library/user-event";
-import { I18nextProvider } from "react-i18next";
-import { toast } from "react-toastify";
-import { render, screen, waitFor } from "test-utils";
+import { render, screen, waitFor, mockedDisclosure } from "test-utils";
 
 const closeSpy = vi.fn();
 
@@ -39,13 +37,13 @@ const basicOnChainTxProps: Props = {
   close: closeSpy,
 };
 
-describe("ConfirmSendModal", () => {
+describe("ConfirmSend", () => {
   describe("ln-invoice with zero amount", () => {
     const setup = () => {
       render(
-        <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicLnTxProps} />
-        </I18nextProvider>,
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} />
+        </ConfirmModal>,
       );
     };
 
@@ -54,7 +52,6 @@ describe("ConfirmSendModal", () => {
       setup();
 
       let amountInput = screen.getByLabelText("wallet.amount");
-
       await user.clear(amountInput);
       await user.type(amountInput, "999");
 
@@ -139,10 +136,11 @@ describe("ConfirmSendModal", () => {
         timestamp: 1640995200, // Sat Jan 01 2022 08:00:00
         expiry: 36000,
       };
+
       render(
-        <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
-        </I18nextProvider>,
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
       );
 
       expect(
@@ -162,11 +160,10 @@ describe("ConfirmSendModal", () => {
         amount: 111,
       };
       render(
-        <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
-        </I18nextProvider>,
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
       );
-
       expect(
         await screen.findByText("forms.validation.lnInvoice.max"),
       ).toBeInTheDocument();
@@ -180,15 +177,16 @@ describe("ConfirmSendModal", () => {
         ...basicLnTxProps.confirmData,
         amount: 100,
       };
+
       render(
-        <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal {...basicLnTxProps} confirmData={confirmData} />
-        </I18nextProvider>,
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
       );
 
       const submitButton = screen.queryByText("wallet.amount");
-      expect(submitButton).not.toBeInTheDocument();
 
+      expect(submitButton).not.toBeInTheDocument();
       expect(
         await screen.findByRole("button", {
           name: "settings.confirm",
@@ -203,13 +201,11 @@ describe("ConfirmSendModal", () => {
         ...basicOnChainTxProps.confirmData,
         amount: 111,
       };
+
       render(
-        <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal
-            {...basicOnChainTxProps}
-            confirmData={confirmData}
-          />
-        </I18nextProvider>,
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicOnChainTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
       );
 
       expect(
@@ -225,18 +221,16 @@ describe("ConfirmSendModal", () => {
         ...basicOnChainTxProps.confirmData,
         amount: 50,
       };
+
       render(
-        <I18nextProvider i18n={i18n}>
-          <ConfirmSendModal
-            {...basicOnChainTxProps}
-            confirmData={confirmData}
-          />
-        </I18nextProvider>,
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicOnChainTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
       );
 
       const submitButton = screen.queryByText("wallet.amount");
-      expect(submitButton).not.toBeInTheDocument();
 
+      expect(submitButton).not.toBeInTheDocument();
       expect(
         await screen.findByRole("button", {
           name: "settings.confirm",

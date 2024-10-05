@@ -1,12 +1,12 @@
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import { Alert } from "@/components/Alert";
 import I18nSelect from "@/components/I18nDropdown";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import Message from "@/components/Message";
 import { AppContext } from "@/context/app-context";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { Button } from "@nextui-org/button";
+import { Spinner } from "@nextui-org/react";
 import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -71,12 +71,11 @@ const Login: FC = () => {
       <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
         <I18nSelect />
       </div>
+
       <RaspiBlitzLogoDark className="my-2 block h-10" />
-      {isLoading && (
-        <div className="py-5">
-          <LoadingSpinner color="text-yellow-500" />
-        </div>
-      )}
+
+      {isLoading && <Spinner size="lg" />}
+
       {!isLoading && (
         <>
           <form
@@ -96,7 +95,8 @@ const Login: FC = () => {
               {t("login.login")}
             </Button>
           </form>
-          {error && <Message message={error} />}
+
+          {error && <Alert color="danger">{error}</Alert>}
         </>
       )}
     </main>

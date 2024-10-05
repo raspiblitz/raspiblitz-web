@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Input, useDisclosure } from "@nextui-org/react";
@@ -129,7 +129,6 @@ export default function InputPassword({ passwordType, callback }: Props) {
               <Button
                 type="button"
                 color="secondary"
-                variant="light"
                 onClick={() => confirmModal.onOpen()}
               >
                 {t("setup.cancel")}

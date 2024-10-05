@@ -1,14 +1,13 @@
-import SendModal, { Props } from "../SendModal";
+import SendModal, { type Props } from "../SendModal";
 import { HttpResponse, http, server } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { render, screen } from "test-utils";
+import { render, screen, mockedDisclosure } from "test-utils";
 
-const handleClose = vi.fn();
 const basicProps: Props = {
   lnBalance: 0,
   onchainBalance: 0,
-  onClose: handleClose,
+  disclosure: mockedDisclosure,
 };
 
 const setup = () => {
@@ -20,24 +19,7 @@ describe("SendModal", () => {
     setup();
 
     const addressInput = screen.getByLabelText("wallet.invoice");
-    const lnTypeBtn = screen.getByRole("button", {
-      name: "home.lightning",
-    });
-    const onChainBtn = screen.getByRole("button", {
-      name: "wallet.on_chain",
-    });
-
     expect(addressInput).toBeInTheDocument();
-    expect(lnTypeBtn).toBeDisabled();
-    expect(onChainBtn).not.toBeDisabled();
-  });
-
-  it("should close on click of X button", async () => {
-    const user = userEvent.setup();
-    setup();
-    const closeBtn = screen.getByRole("button", { name: "" });
-    await user.click(closeBtn);
-    expect(handleClose).toHaveBeenCalled();
   });
 
   describe("SendLN", () => {
@@ -98,6 +80,7 @@ describe("SendModal", () => {
           }
         }),
       );
+
       const user = userEvent.setup();
       setup();
 
@@ -121,8 +104,8 @@ describe("SendModal", () => {
       user = userEvent.setup();
       setup();
 
-      const onChainBtn = screen.getByRole("button", {
-        name: "wallet.on_chain",
+      const onChainBtn = screen.getByRole("tab", {
+        name: "wallet.send_onchain",
       });
 
       await user.click(onChainBtn);

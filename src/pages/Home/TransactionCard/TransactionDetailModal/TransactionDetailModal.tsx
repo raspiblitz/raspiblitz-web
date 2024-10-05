@@ -1,18 +1,21 @@
 import LNDetails from "./LNDetails";
 import OnchainDetails from "./OnchainDetails";
-import ModalDialog from "@/layouts/ModalDialog";
+import {
+  ConfirmModal,
+  type Props as ConfirmModalProps,
+} from "@/components/ConfirmModal";
 import { Transaction } from "@/models/transaction.model";
-import { MODAL_ROOT } from "@/utils";
 import { FC } from "react";
-import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 
-type Props = {
+interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   transaction: Transaction;
-  close: () => void;
-};
+}
 
-export const TransactionDetailModal: FC<Props> = ({ transaction, close }) => {
+export const TransactionDetailModal: FC<Props> = ({
+  transaction,
+  disclosure,
+}) => {
   const { t } = useTranslation();
 
   // prevent error when closing via 'Esc' key
@@ -22,15 +25,14 @@ export const TransactionDetailModal: FC<Props> = ({ transaction, close }) => {
 
   const { category } = transaction;
 
-  return createPortal(
-    <ModalDialog close={close}>
-      <section className="flex flex-col">
-        <h4 className="font-extrabold">{t("tx.tx_details")}</h4>
+  return (
+    <ConfirmModal disclosure={disclosure} custom>
+      <ConfirmModal.Header>{t("tx.tx_details")}</ConfirmModal.Header>
+      <ConfirmModal.Body>
         {category === "onchain" && <OnchainDetails details={transaction} />}
         {category === "ln" && <LNDetails details={transaction} />}
-      </section>
-    </ModalDialog>,
-    MODAL_ROOT,
+      </ConfirmModal.Body>
+    </ConfirmModal>
   );
 };
 

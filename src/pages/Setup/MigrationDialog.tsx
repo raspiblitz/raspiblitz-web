@@ -1,6 +1,6 @@
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
@@ -70,7 +70,6 @@ export default function MigrationDialog({
             <Button
               type="button"
               color="secondary"
-              variant="light"
               onClick={() => callback(true)}
             >
               {t("setup.yes_and_migrate")}
