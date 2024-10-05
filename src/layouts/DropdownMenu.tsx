@@ -16,7 +16,7 @@ const DropdownMenu = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div
       ref={ref}
-      className="absolute right-5 top-14 z-10 flex w-56 rounded-lg border shadow-lg  border-gray-300 bg-gray-800"
+      className="absolute right-5 top-14 z-10 flex w-56 rounded-lg border border-gray-300 bg-gray-800 shadow-lg"
     >
       <div className="flex w-full flex-col items-center justify-center text-center">
         <div className="w-full py-4">

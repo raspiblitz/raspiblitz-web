@@ -30,11 +30,7 @@ const InputField = forwardRef(
           <input
             {...rest}
             autoFocus={autoFocus}
-            className={`
-               ${errorMessage ? "input-error" : "input-underline"}
-               ${textAlign === "right" || type === "number" ? "text-right" : ""}
-               ${inputRightAddon || inputRightElement ? "w-7/12" : ""}
-               `}
+            className={` ${errorMessage ? "input-error" : "input-underline"} ${textAlign === "right" || type === "number" ? "text-right" : ""} ${inputRightAddon || inputRightElement ? "w-7/12" : ""} `}
             id={name}
             name={name}
             onChange={onChange}
@@ -52,9 +48,7 @@ const InputField = forwardRef(
         </div>
 
         <p
-          className={`
-        text-left text-sm text-red-500
-        ${errorMessage ? "" : "invisible"}`}
+          className={`text-left text-sm text-red-500 ${errorMessage ? "" : "invisible"}`}
         >
           {errorMessage?.message || "error"}
         </p>

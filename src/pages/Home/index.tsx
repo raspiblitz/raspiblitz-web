@@ -226,7 +226,7 @@ const Home: FC = () => {
     <>
       {modalComponent()}
       <main
-        className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 p-5 transition-colors bg-gray-700 text-white md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
+        className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 bg-gray-700 p-5 text-white transition-colors md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
       >
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">

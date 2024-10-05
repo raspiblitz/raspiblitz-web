@@ -39,7 +39,7 @@ export default function FinalDialog({
         onSubmit={handleSubmit(callback)}
         className="flex flex-col items-center"
       >
-        <section className="flex h-full flex-col items-center justify-center gap-y-10 lg:w-3/5 lg:p-8 pt-8">
+        <section className="flex h-full flex-col items-center justify-center gap-y-10 pt-8 lg:w-3/5 lg:p-8">
           <div className="text-center">
             <CheckCircleIcon className="inline-block h-24 w-auto stroke-1 text-success" />
             <Headline>{t(`setup.final_${setupPhase || "setup"}`)}</Headline>
@@ -72,7 +72,7 @@ export default function FinalDialog({
             />
           )}
 
-          <article className="justify-center flex flex-col items-center pb-4">
+          <article className="flex flex-col items-center justify-center pb-4">
             <Button
               type="submit"
               isDisabled={!isValid && !!seedWords}

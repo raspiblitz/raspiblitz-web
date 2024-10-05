@@ -43,7 +43,7 @@ const ModalDialog: FC<PropsWithChildren<Props>> = ({
 
   return (
     <ModalBackground>
-      <div className="xl:max-w-screen-sm flex h-screen max-h-full w-screen flex-col overflow-y-auto rounded-lg pb-8 text-center shadow-xl bg-gray-800 text-white md:h-auto md:w-4/5 lg:w-1/2 xl:mx-5 xl:w-2/5">
+      <div className="flex h-screen max-h-full w-screen flex-col overflow-y-auto rounded-lg bg-gray-800 pb-8 text-center text-white shadow-xl md:h-auto md:w-4/5 lg:w-1/2 xl:mx-5 xl:w-2/5 xl:max-w-screen-sm">
         <div className="flex pr-2 pt-1">
           <button
             onClick={closeModal}

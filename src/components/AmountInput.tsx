@@ -76,7 +76,7 @@ const AmountInput: FC<Props> = ({
           disabled={disabled}
         />
         <span
-          className="ml-6 flex w-4/12 items-center justify-center rounded p-1 shadow-md bg-gray-600"
+          className="ml-6 flex w-4/12 items-center justify-center rounded bg-gray-600 p-1 shadow-md"
           onClick={toggleHandler}
         >
           {unit}
@@ -85,9 +85,7 @@ const AmountInput: FC<Props> = ({
       </div>
 
       <p
-        className={`
-        text-left text-sm text-red-500
-        ${errorMessage ? "" : "invisible"}`}
+        className={`text-left text-sm text-red-500 ${errorMessage ? "" : "invisible"}`}
       >
         {errorMessage?.message || "error"}
       </p>

@@ -39,7 +39,7 @@ export const Apps: FC = () => {
   }
 
   return (
-    <main className="content-container page-container p-5 transition-colors bg-gray-700 text-white lg:pb-8 lg:pr-8 lg:pt-8">
+    <main className="content-container page-container bg-gray-700 p-5 text-white transition-colors lg:pb-8 lg:pr-8 lg:pt-8">
       <>
         <AppList
           apps={installedApps}

@@ -35,7 +35,7 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 z-50 mx-auto flex h-16 w-full items-center justify-between border-b border-gray-300 px-8 shadow-md transition-colors bg-gray-800 text-gray-300">
+    <header className="fixed top-0 z-50 mx-auto flex h-16 w-full items-center justify-between border-b border-gray-300 bg-gray-800 px-8 text-gray-300 shadow-md transition-colors">
       <NavLink to="/">
         <RaspiBlitzMobileLogo className="h-8 w-8 text-white md:hidden" />
         <RaspiBlitzLogoDark className="hidden h-8 md:block" />

@@ -13,8 +13,8 @@ export default function SetupContainer({
   children,
 }: PropsWithChildren<Props>) {
   return (
-    <main className="flex min-h-screen h-full w-screen flex-col items-center justify-center bg-primary-900 transition-colors text-white">
-      <div className="fixed md:right-16 top-16 md:top-8 flex h-8 w-48 md:w-96 md:flex-row flex-col-reverse gap-6 md:gap-4 justify-center items-center">
+    <main className="flex h-full min-h-screen w-screen flex-col items-center justify-center bg-primary-900 text-white transition-colors">
+      <div className="fixed top-16 flex h-8 w-48 flex-col-reverse items-center justify-center gap-6 md:right-16 md:top-8 md:w-96 md:flex-row md:gap-4">
         <Button
           as="a"
           href="https://docs.raspiblitz.org/"
@@ -22,8 +22,8 @@ export default function SetupContainer({
           rel="noreferrer"
           color="primary"
           variant="ghost"
-          className="p-4 w-full"
-          startContent={<BookOpenIcon className="w-5 h-5" />}
+          className="w-full p-4"
+          startContent={<BookOpenIcon className="h-5 w-5" />}
         >
           Documentation
         </Button>
@@ -31,7 +31,7 @@ export default function SetupContainer({
       </div>
 
       {currentStep !== null && (
-        <div className="fixed mb-4 top-24 flex items-center justify-around w-1/3">
+        <div className="fixed top-24 mb-4 flex w-1/3 items-center justify-around">
           <Stepper currentStep={currentStep} />
         </div>
       )}

@@ -13,20 +13,20 @@ export default function Stepper({ currentStep }: Props) {
   return (
     <div
       className={cn(
-        "w-full lg:block hidden",
-        "after:block after:relative after:bottom-5 after:border after:border-gray-700 after:content-['']",
+        "hidden w-full lg:block",
+        "after:relative after:bottom-5 after:block after:border after:border-gray-700 after:content-['']",
       )}
     >
-      <ul className="lg:flex hidden justify-between items-center relative z-10">
+      <ul className="relative z-10 hidden items-center justify-between lg:flex">
         {Array.from({ length: NUMBER_OF_STEPS }).map((_, index: number) => (
-          <li className="list-none px-4 bg-primary-900" key={index}>
+          <li className="list-none bg-primary-900 px-4" key={index}>
             <span
               className={cn(
-                "text-center flex flex-col",
+                "flex flex-col text-center",
                 index >= currentStep && "opacity-30",
               )}
             >
-              <span className="font-bold whitespace-nowrap">
+              <span className="whitespace-nowrap font-bold">
                 {t(`setup.step.step`)} {index + 1}
               </span>
               <span className="text-sm text-secondary">

@@ -6,7 +6,7 @@ const CapsLockWarning = () => {
   const { t } = useTranslation();
   return (
     <Alert as="p" color="warning">
-      <ExclamationTriangleIcon className="size-4 inline" />
+      <ExclamationTriangleIcon className="inline size-4" />
       &nbsp;
       {t("login.caps_lock")}
     </Alert>

@@ -67,7 +67,7 @@ const Login: FC = () => {
   };
 
   return (
-    <main className="flex h-screen w-screen flex-col items-center justify-center transition-colors bg-gray-700">
+    <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-700 transition-colors">
       <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
         <I18nSelect />
       </div>
