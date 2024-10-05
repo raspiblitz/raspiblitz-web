@@ -13,8 +13,8 @@ const VersionBox: FC = () => {
   const { platform_version, api_version } = systemInfo;
 
   return (
-    <article className="box-border w-full transition-colors text-white">
-      <div className="relative flex flex-col gap-3 rounded p-5 shadow-xl bg-gray-800">
+    <article className="box-border w-full text-white transition-colors">
+      <div className="relative flex flex-col gap-3 rounded bg-gray-800 p-5 shadow-xl">
         <h5 className="font-bold">{t("home.versions")}</h5>
         <article>
           <p>

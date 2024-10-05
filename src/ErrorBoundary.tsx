@@ -31,7 +31,7 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
     if (this.state.hasError) {
       const { t } = this.props;
       return (
-        <main className="flex h-screen w-screen flex-col items-center justify-center gap-5 p-10 transition-colors bg-gray-700 text-white">
+        <main className="flex h-screen w-screen flex-col items-center justify-center gap-5 bg-gray-700 p-10 text-white transition-colors">
           <h1 className="text-xl font-bold">{t("login.error")} 😓</h1>
           <section>
             <p className="rounded bg-red-500 p-2 text-center text-white">

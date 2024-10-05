@@ -62,7 +62,7 @@ const Electrs = () => {
   }
 
   return (
-    <main className="page-container content-container w-full bg-gray-700 text-white flex flex-col items-center">
+    <main className="page-container content-container flex w-full flex-col items-center bg-gray-700 text-white">
       {/* Back Button */}
       <section className="w-full px-5 py-9 text-gray-200">
         <Button
@@ -97,7 +97,7 @@ const Electrs = () => {
                 <Tab key="local" title="Local Connection">
                   <span>{t("appInfo.electrs.connectLocal")}: </span>
                   {QRAddressLocal ? (
-                    <div className="flex flex-col justify-center items-center mt-4 gap-4">
+                    <div className="mt-4 flex flex-col items-center justify-center gap-4">
                       <QRCodeSVG
                         value={QRAddressLocal}
                         size={256}
@@ -114,7 +114,7 @@ const Electrs = () => {
                       >{`${localIP}:${portSSL}:s`}</Snippet>
                     </div>
                   ) : (
-                    <span className="text-center mt-4">
+                    <span className="mt-4 text-center">
                       {t("appInfo.electrs.not_available")}
                     </span>
                   )}
@@ -122,11 +122,11 @@ const Electrs = () => {
                 <Tab key="tor" title="Tor">
                   <span>{t("appInfo.electrs.connectTor")}:</span>
                   {QRAddressTor ? (
-                    <div className="flex flex-col justify-center items-center mt-4 gap-4">
+                    <div className="mt-4 flex flex-col items-center justify-center gap-4">
                       <QRCodeSVG
                         value={QRAddressTor}
                         size={256}
-                        className="border-2 border-white "
+                        className="border-2 border-white"
                       />
                       <Snippet
                         classNames={{
@@ -139,7 +139,7 @@ const Electrs = () => {
                       >{`${TORaddress}:${portSSL}:s`}</Snippet>
                     </div>
                   ) : (
-                    <span className="text-center mt-4">
+                    <span className="mt-4 text-center">
                       {t("appInfo.electrs.not_available")}
                     </span>
                   )}
