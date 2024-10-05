@@ -92,6 +92,9 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
 
         <div className="mx-6">
           <Tabs
+            classNames={{
+              tabList: "flex-col md:flex-row",
+            }}
             fullWidth
             aria-label={t("wallet.receive_aria_options")}
             selectedKey={invoiceType}
