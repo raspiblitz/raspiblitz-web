@@ -177,7 +177,7 @@ export const AppInfo: FC = () => {
           <Link
             href={repository}
             target="_blank"
-            rel="noreferrer noopener"
+            rel="noreferrer"
             underline="always"
           >
             {repository}
