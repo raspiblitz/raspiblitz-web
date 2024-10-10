@@ -38,7 +38,7 @@ export default function LightningDialog({ callback }: Props) {
 
   return (
     <SetupContainer currentStep={3}>
-      <section className="mt-16 flex max-w-3xl flex-col items-center justify-center gap-y-8 lg:mt-32 lg:px-8 lg:pb-1 lg:pt-0">
+      <section className="mt-40 flex max-w-3xl flex-col items-center justify-center lg:mt-36 lg:px-8 lg:pb-1 lg:pt-0">
         <div>
           <Headline>{t("setup.select_lightning")}</Headline>
 
