@@ -12,7 +12,7 @@ export const alignment = {
   left: "text-left",
   center: "text-center",
   right: "text-right",
-};
+} as const;
 
 export type Alignment = keyof typeof alignment;
 
@@ -24,17 +24,16 @@ export const fontSizes = {
   xl: "text-xl",
   base: "text-base",
   sm: "text-sm",
-};
+} as const;
 
 export type FontSizes = keyof typeof fontSizes;
 
 export const Headline = ({
-  as = "h1",
+  as: Component = "h1",
   size = "3xl",
   align = "center",
   children,
 }: HeadlineProps) => {
-  const Component = as;
   return (
     <Component
       className={twMerge(
