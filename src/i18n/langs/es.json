@@ -217,7 +217,7 @@
       "lnd": "Nodo completo Bitcoin con implementación Lightning LND",
       "sync_bitcoin_sync": "Progreso de la sincronización",
       "sync_wallet_unlock": "Desbloquear Cartera",
-      "select_lightning": "¿Qué aplicación de lightning\n deseas instalar?",
+      "select_lightning": "¿Qué aplicación de lightning\n  desea instalar",
       "password_error_chars": "La contraseña solo debe contener letras y números.",
       "started": "Comenzado",
       "password_b_name": "Contraseña de las aplicaciones",
@@ -315,7 +315,8 @@
       "unlocking": "Desbloqueando",
       "wallet_locked": "Cartera Lightning bloqueada",
       "available_balance": "Balance disponible",
-      "wallet_unlock_info": "Para evitar tiempo de sincronización adicional para su nodo Lightning, desbloquee también su billetera Lightning."
+      "wallet_unlock_info": "Para evitar tiempo de sincronización adicional para su nodo Lightning, desbloquee también su billetera Lightning.",
+      "receive_aria_options": "Opciones de recepción Lightning o On-chain"
     },
     "appInfo": {
       "btc-rpc-explorer": {
@@ -328,7 +329,8 @@
       },
       "btcpayserver": {
         "about": "BTCPay Server es un procesador de pagos de Bitcoin libre y de código abierto que te permite aceptar bitcoin sin comisiones o intermediarios.",
-        "shortDescription": "Acepta pagos en Bitcoin. Procesador de pagos en Bitcoin, libre, de código abierto y auto alojado."
+        "shortDescription": "Acepta pagos en Bitcoin. Procesador de pagos en Bitcoin, libre, de código abierto y auto alojado.",
+        "ram_warning": "Su sistema tiene menos de los 8 GB de RAM recomendados para ejecutar BTCPayServer en RaspiBlitz. Esto podría provocar inestabilidad si procede con la instalación."
       },
       "mempool": {
         "about": " Un explorador de código abierto desarrollado para la comunidad Bitcoin, que se centra en el emergente mercado de las comisiones de transacción para ayudar nuestra transición a un ecosistema multicapa.",
@@ -352,7 +354,7 @@
       },
       "alby": {
         "action": {
-          "install": "Instalar Alby",
+          "install": "Instalar",
           "connection_info_error": "No se ha podido obtener información de la conexión",
           "connection": {
             "hint": "Por favor, instala primero la extensión Alby",
@@ -368,9 +370,10 @@
         "about": "Electrs es una reimplementación eficiente de Electrum Server en Rust. Indexa toda la cadena de bloques de Bitcoin y permite que su nodo Lightning lo consulte para transacciones en cadena.",
         "shortDescription": "Reimplementación eficiente del servidor Electrum en Rust",
         "initialSync": "La base de datos de índices debe crearse antes de poder utilizar Electrum Server. Esto puede llevar horas / días dependiendo de su RaspiBlitz. Por favor, vuelva a consultar más tarde.",
-        "connectLocal": "Conéctese al Servidor Electrum a través de la Red Local",
+        "connectLocal": "Conectar al servidor Electrum a través de su red local",
         "connectTor": "Conéctese al servidor Electrum a través de Tor",
-        "connectionInfo": "Use estas direcciones para conectar sus aplicaciones a su nodo Bitcoin. Puedes usar la conexión local si estás en la misma red o la dirección Tor si estás usando Tor."
+        "connectionInfo": "Estas direcciones le permiten conectar su cartera u otras aplicaciones a su nodo utilizando Electrs. Use la conexión local si está en la misma red que su nodo o la dirección Tor para acceso remoto con mayor privacidad.",
+        "not_available": "dirección no disponible"
       }
     },
     "error": {
