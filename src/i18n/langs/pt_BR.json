@@ -28,6 +28,27 @@
       "thunderhub": {
         "about": "ThunderHub é um gerenciador de LND de código aberto onde você pode gerenciar e monitorar seu nó em qualquer dispositivo ou navegador. Ele permite que você assuma o controle da Lightning Network com um UX simples e intuitivo e a pilha de tecnologia mais atualizada.",
         "shortDescription": "LND Lightning Node Manager em seu navegador"
+      },
+      "electrs": {
+        "shortDescription": "Reimplenentação eficiente do servidor Electrum em Rust",
+        "initialSync": "Para utilizar o servidor Electrum é necessário criar o índice do banco de dados. Isso pode levar houras ou até dias dependendo do seu hardware. Verifique mais tarde.",
+        "connectTor": "Conectar ao servidor Electrum via Tor",
+        "connectionInfo": "Utilize estes endereços para conectar seus aplicativos ao seu node Bitcoin. É possível usar a rede local, se estiver na mesma rede, ou o endereço .onion se estiver utilizando Tor.",
+        "connectLocal": "Conectar ao servidor Electrum na Rede Local"
+      },
+      "alby": {
+        "about": "Alby - Extensão para Navegador",
+        "action": {
+          "connection": {
+            "hint": "Primeiro é necessário instalar a extensão Alby",
+            "success": "A conta do Raspiblitz foi adicionada à Alby",
+            "error": "Não foi possível adicionar a conta Rasbiblitz à Alby, tente novamente"
+          },
+          "install": "Instalar Alby",
+          "addAccount": "Conectar",
+          "connection_info_error": "Não foi possível obter as informações da conexão"
+        },
+        "shortDescription": "Conecte seu node LND para utilizar apps Bitcoin e Nostr com a Extensão Alby"
       }
     },
     "apps": {
