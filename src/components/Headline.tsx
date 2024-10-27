@@ -5,7 +5,16 @@ export interface HeadlineProps {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   children: ReactNode;
   size?: FontSizes;
+  align?: Alignment;
 }
+
+export const alignment = {
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+} as const;
+
+export type Alignment = keyof typeof alignment;
 
 export const fontSizes = {
   "5xl": "text-5xl",
@@ -15,21 +24,22 @@ export const fontSizes = {
   xl: "text-xl",
   base: "text-base",
   sm: "text-sm",
-};
+} as const;
 
 export type FontSizes = keyof typeof fontSizes;
 
 export const Headline = ({
-  as = "h1",
+  as: Component = "h1",
   size = "3xl",
+  align = "center",
   children,
 }: HeadlineProps) => {
-  const Component = as;
   return (
     <Component
       className={twMerge(
         fontSizes[size],
-        "semibold whitespace-pre-line text-center",
+        alignment[align],
+        "whitespace-pre-line font-semibold",
       )}
     >
       {children}
