@@ -1,6 +1,7 @@
 import Channel from "./Channel";
 import { LightningChannel } from "@/models/lightning-channel";
-import { FC, useState } from "react";
+import { Accordion, AccordionItem } from "@nextui-org/react";
+import { FC } from "react";
 
 type Props = {
   isLoading: boolean;
@@ -9,30 +10,18 @@ type Props = {
 };
 
 const ChannelList: FC<Props> = ({ isLoading, channel, onDelete }) => {
-  const [showDetails, setShowDetails] = useState<string | null>(null);
-
-  const toggleDetailHandler = (channelId: string) => {
-    setShowDetails((prev) => {
-      if (prev === channelId) {
-        return null;
-      }
-      return channelId;
-    });
-  };
-
   return (
-    <ul className="py-8">
+    <Accordion>
       {channel.map((c) => (
-        <Channel
+        <AccordionItem
           key={c.channel_id}
-          channel={c}
-          showDetails={c.channel_id === showDetails}
-          isLoading={isLoading}
-          onClick={toggleDetailHandler}
-          onDelete={onDelete}
-        />
+          aria-label={`Channel: ${c.peer_alias}`}
+          title={c.peer_alias}
+        >
+          <Channel channel={c} isLoading={isLoading} onDelete={onDelete} />
+        </AccordionItem>
       ))}
-    </ul>
+    </Accordion>
   );
 };
 
