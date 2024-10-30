@@ -1,5 +1,5 @@
-import LoadingBox from "@/components/LoadingBox";
 import { SSEContext } from "@/context/sse-context";
+import { Spinner } from "@nextui-org/react";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -15,8 +15,13 @@ export const HardwareCard: FC = () => {
 
   if (!hardwareInfo) {
     return (
-      <div className="h-full w-1/2">
-        <LoadingBox />
+      <div className="bd-card mt-8 w-full transition-colors lg:ml-2 lg:mt-0 lg:w-1/2">
+        <h5 className="flex items-center text-lg font-bold">
+          {t("hardware.header")}
+        </h5>
+        <article className="flex flex-row overflow-hidden py-4">
+          <Spinner size="lg" />
+        </article>
       </div>
     );
   }

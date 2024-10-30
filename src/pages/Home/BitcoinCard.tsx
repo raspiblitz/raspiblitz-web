@@ -1,6 +1,6 @@
-import LoadingBox from "@/components/LoadingBox";
 import { SSEContext } from "@/context/sse-context";
 import { checkPropsUndefined } from "@/utils";
+import { Spinner } from "@nextui-org/react";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +9,14 @@ export const BitcoinCard: FC = () => {
   const { btcInfo, systemInfo } = useContext(SSEContext);
 
   if (checkPropsUndefined({ btcInfo, systemInfo })) {
-    return <LoadingBox />;
+    return (
+      <div className="h-full">
+        <section className="bd-card">
+          <h2 className="text-lg font-bold">{t("home.bitcoin")}</h2>
+          <Spinner size="lg" />
+        </section>
+      </div>
+    );
   }
 
   const {
@@ -33,6 +40,7 @@ export const BitcoinCard: FC = () => {
     <div className="h-full">
       <section className="bd-card">
         <h2 className="text-lg font-bold">{t("home.bitcoin")}</h2>
+
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
             <h6 className="text-sm text-gray-200">{t("home.version")}</h6>

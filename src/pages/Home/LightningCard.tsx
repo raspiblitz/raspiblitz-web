@@ -1,8 +1,8 @@
-import LoadingBox from "@/components/LoadingBox";
 import { AppContext, Unit } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import { checkPropsUndefined } from "@/utils";
 import { convertMSatToBtc, convertToString } from "@/utils/format";
+import { Spinner } from "@nextui-org/react";
 import { FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -27,7 +27,14 @@ export const LightningCard: FC = () => {
   } = balance;
 
   if (checkPropsUndefined({ lnInfo, balance })) {
-    return <LoadingBox />;
+    return (
+      <div className="h-full">
+        <section className="bd-card">
+          <h2 className="text-lg font-bold">{t("home.lightning")}</h2>
+          <Spinner size="lg" />
+        </section>
+      </div>
+    );
   }
 
   // remove 'commit=...' from version string if exists

@@ -90,6 +90,8 @@ const Channel: FC<Props> = ({
             >
               {t("home.close_channel")}
             </button>
+
+            {/*TODO should be confirm modal*/}
             {confirm && (
               <div className="flex flex-col justify-center gap-4">
                 <span>{t("home.confirm_channel_close")}</span>
