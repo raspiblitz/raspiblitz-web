@@ -1,6 +1,5 @@
 import SingleTransaction from "./SingleTransaction";
 import { Alert } from "@/components/Alert";
-import LoadingBox from "@/components/LoadingBox";
 import { AppContext } from "@/context/app-context";
 import { Implementation } from "@/models/ln-info";
 import { Transaction } from "@/models/transaction.model";
@@ -9,6 +8,7 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
+import { Spinner } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -47,10 +47,6 @@ const TransactionCard: FC<Props> = ({
     );
   }
 
-  if (isLoading) {
-    return <LoadingBox />;
-  }
-
   const pageForwardHandler = () => {
     setPage((p) => p + 1);
   };
@@ -74,6 +70,8 @@ const TransactionCard: FC<Props> = ({
     <div className="h-full">
       <section className="bd-card flex flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
+
+        {isLoading && <Spinner size="lg" />}
 
         {error && <Alert color="danger">{error}</Alert>}
 
