@@ -9,6 +9,7 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
+import { Button } from "@nextui-org/react";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -110,21 +111,23 @@ const TransactionCard: FC<Props> = ({
 
         {transactions.length > 0 && (
           <div className="mt-auto flex justify-around py-5">
-            <button
+            <Button
+              isIconOnly
+              aria-label="page backward"
               onClick={pageBackwardHandler}
-              disabled={page === 0}
-              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50 disabled:hover:bg-black"
+              isDisabled={page === 0}
             >
               <ArrowDownIcon className="h-6 w-6 rotate-90 transform" />
-            </button>
+            </Button>
 
-            <button
-              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50 disabled:hover:bg-black"
+            <Button
+              isIconOnly
+              aria-label="page forward"
               onClick={pageForwardHandler}
-              disabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
+              isDisabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
             >
               <ArrowDownIcon className="h-6 w-6 -rotate-90 transform" />
-            </button>
+            </Button>
           </div>
         )}
       </section>
