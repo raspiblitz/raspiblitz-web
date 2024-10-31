@@ -1,8 +1,10 @@
+import { Alert } from "@/components/Alert";
 import { AppContext, Unit } from "@/context/app-context";
 import { LightningChannel } from "@/models/lightning-channel";
 import { convertSatToBtc, convertToString } from "@/utils/format";
+import { Checkbox } from "@nextui-org/checkbox";
 import { Button } from "@nextui-org/react";
-import { FC, useContext, useRef, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -12,10 +14,10 @@ type Props = {
 };
 
 const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
-  const { unit } = useContext(AppContext);
   const { t } = useTranslation();
+  const { unit } = useContext(AppContext);
   const [confirm, setConfirm] = useState(false);
-  const forceCloseEl = useRef<HTMLInputElement>(null);
+  const [isForceClose, setIsForceClose] = useState(false);
 
   const convertedLocal =
     unit === Unit.SAT
@@ -27,7 +29,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
       : convertSatToBtc(channel.balance_remote);
 
   const closeChannelHandler = () => {
-    onDelete(channel.channel_id, forceCloseEl.current?.checked || false);
+    onDelete(channel.channel_id, isForceClose);
   };
 
   return (
@@ -68,29 +70,38 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
           {t("home.close_channel")}
         </Button>
 
-        {/*TODO should be confirm modal*/}
+        {/* TODO should be confirm modal maybe? */}
         {confirm && (
-          <div className="flex flex-col justify-center gap-4">
-            <span>{t("home.confirm_channel_close")}</span>
+          <Alert color="danger" className="mt-4">
+            <div className="flex flex-col justify-center gap-4">
+              <p>{t("home.confirm_channel_close")}</p>
 
-            <div className="flex items-center justify-center gap-2">
-              <label htmlFor="forceClose">{t("home.force_close")}</label>
-              <input id="forceClose" type="checkbox" ref={forceCloseEl} />
-            </div>
+              <div className="flex items-center justify-center gap-2">
+                <Checkbox
+                  isSelected={isForceClose}
+                  onValueChange={setIsForceClose}
+                >
+                  {t("home.force_close")}
+                </Checkbox>
+              </div>
 
-            <div className="flex justify-center gap-4">
-              <Button onClick={() => setConfirm(false)} isDisabled={isLoading}>
-                {t("setup.cancel")}
-              </Button>
-              <Button
-                color="primary"
-                isLoading={isLoading}
-                onClick={closeChannelHandler}
-              >
-                {t("setup.yes")}
-              </Button>
+              <div className="flex justify-center gap-4">
+                <Button
+                  onClick={() => setConfirm(false)}
+                  isDisabled={isLoading}
+                >
+                  {t("setup.cancel")}
+                </Button>
+                <Button
+                  color="primary"
+                  isLoading={isLoading}
+                  onClick={closeChannelHandler}
+                >
+                  {t("setup.yes")}
+                </Button>
+              </div>
             </div>
-          </div>
+          </Alert>
         )}
       </article>
     </section>
