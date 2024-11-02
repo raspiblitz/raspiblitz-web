@@ -173,6 +173,7 @@ function getInitialPage(
   setupPhase: SetupPhase,
   updateState: UpdateState,
 ): Screen {
+  updateState({ setupPhase });
   switch (setupPhase) {
     case SetupPhase.RECOVERY:
     case SetupPhase.UPDATE:
