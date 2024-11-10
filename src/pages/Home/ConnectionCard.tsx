@@ -1,5 +1,4 @@
 import QRCodeModal from "./QRCodeModal";
-import LoadingBox from "@/components/LoadingBox";
 import { SSEContext } from "@/context/sse-context";
 import useClipboard from "@/hooks/use-clipboard";
 import {
@@ -8,6 +7,7 @@ import {
   EyeSlashIcon,
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
+import { Spinner } from "@nextui-org/react";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
@@ -33,8 +33,8 @@ export const ConnectionCard: FC = () => {
 
   if (!sshAddress) {
     return (
-      <div className="h-full w-1/2">
-        <LoadingBox />
+      <div className="bd-card w-full transition-colors lg:mr-2 lg:w-1/2">
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -52,6 +52,7 @@ export const ConnectionCard: FC = () => {
       {showModal && (
         <QRCodeModal closeModal={closeModalHandler} identityUri={nodeId} />
       )}
+
       <div className="bd-card w-full transition-colors lg:mr-2 lg:w-1/2">
         <div className="flex items-center text-lg font-bold">
           {t("home.conn_details")}&nbsp;
@@ -72,6 +73,7 @@ export const ConnectionCard: FC = () => {
             {<div>{showAddress ? t("home.hide") : t("home.show")}</div>}
           </Tooltip>
         </div>
+
         <article className="flex flex-col overflow-hidden py-4">
           <h6 className="text-sm text-gray-200">
             {`${t("home.webui")} (${t("home.tor")})`}
@@ -103,8 +105,10 @@ export const ConnectionCard: FC = () => {
               </Tooltip>
             </div>
           )}
+
           {!torAddress && <div>{t("home.not_available")}</div>}
         </article>
+
         <article className="flex flex-col overflow-hidden py-4">
           <h6 className="text-sm text-gray-200">
             {`${t("home.webui")} (${t("home.ssh")})`}
@@ -135,6 +139,7 @@ export const ConnectionCard: FC = () => {
             </Tooltip>
           </div>
         </article>
+
         {nodeId && (
           <article className="flex flex-col overflow-hidden py-4">
             <h6 className="text-sm text-gray-200">{t("home.node_id")}</h6>

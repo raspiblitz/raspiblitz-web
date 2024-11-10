@@ -1,8 +1,8 @@
-import ButtonWithSpinner from "@/components/ButtonWithSpinner/ButtonWithSpinner";
 import { AppContext, Unit } from "@/context/app-context";
 import { LightningChannel } from "@/models/lightning-channel";
 import { convertSatToBtc, convertToString } from "@/utils/format";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import { Button } from "@nextui-org/react";
 import { FC, useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -54,6 +54,7 @@ const Channel: FC<Props> = ({
         {showDetails && <ChevronUpIcon className="h-6 w-6" />}
         {!showDetails && <ChevronDownIcon className="h-6 w-6" />}
       </div>
+
       {showDetails && (
         <section className="flex flex-col gap-4 py-4">
           <article className="flex flex-col items-center justify-center md:flex-row md:justify-around">
@@ -82,36 +83,40 @@ const Channel: FC<Props> = ({
               </p>
             </div>
           </article>
+
           <article>
-            <button
-              className="bd-button mb-3 p-2"
-              disabled={confirm}
+            <Button
+              color="primary"
+              isDisabled={confirm}
               onClick={() => setConfirm(true)}
             >
               {t("home.close_channel")}
-            </button>
+            </Button>
+
+            {/*TODO should be confirm modal*/}
             {confirm && (
               <div className="flex flex-col justify-center gap-4">
                 <span>{t("home.confirm_channel_close")}</span>
+
                 <div className="flex items-center justify-center gap-2">
                   <label htmlFor="forceClose">{t("home.force_close")}</label>
                   <input id="forceClose" type="checkbox" ref={forceCloseEl} />
                 </div>
+
                 <div className="flex justify-center gap-4">
-                  <button
+                  <Button
                     onClick={() => setConfirm(false)}
-                    disabled={isLoading}
-                    className="bd-button-red p-2"
+                    isDisabled={isLoading}
                   >
                     {t("setup.cancel")}
-                  </button>
-                  <ButtonWithSpinner
-                    loading={isLoading}
-                    className="bd-button p-2"
+                  </Button>
+                  <Button
+                    color="primary"
+                    isLoading={isLoading}
                     onClick={closeChannelHandler}
                   >
                     {t("setup.yes")}
-                  </ButtonWithSpinner>
+                  </Button>
                 </div>
               </div>
             )}
