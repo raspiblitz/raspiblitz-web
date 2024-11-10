@@ -1,36 +1,37 @@
-import DropdownMenu from "./DropdownMenu";
 import RaspiBlitzMobileLogo from "@/assets/RaspiBlitz_Logo_Icon.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import { AppContext, Unit } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
+import {
+  SatoshiV1Icon,
+  BitcoinCircleIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { useContext, useEffect, useRef, useState } from "react";
+import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/react";
+import { type Key, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {
+  const { t } = useTranslation();
   const { systemInfo } = useContext(SSEContext);
-  const dropdown = useRef<HTMLDivElement>(null);
-  const menu = useRef<SVGSVGElement>(null);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const { unit, logout, toggleUnit } = useContext(AppContext);
 
-  useEffect(() => {
-    document.addEventListener("mousedown", clickOutsideHandler);
-    return () => {
-      document.removeEventListener("mousedown", clickOutsideHandler);
-    };
-  }, [dropdown]);
+  const unitActive = unit === Unit.SAT;
 
-  const showDropdownHandler = () => {
-    setShowDropdown((prev) => !prev);
-  };
+  const handleDropDownAction = (key: Key) => {
+    if (key === "logout") {
+      logout();
+    }
 
-  const clickOutsideHandler = (event: MouseEvent) => {
-    if (
-      menu.current &&
-      dropdown.current &&
-      !dropdown.current.contains(event.target as Node) &&
-      !menu.current.contains(event.target as Node)
-    ) {
-      setShowDropdown(false);
+    if (key === "toggle_sats") {
+      toggleUnit();
     }
   };
 
@@ -40,14 +41,45 @@ export default function Header() {
         <RaspiBlitzMobileLogo className="h-8 w-8 text-white md:hidden" />
         <RaspiBlitzLogoDark className="hidden h-8 md:block" />
       </NavLink>
+
       <div className="text-xl font-bold">{systemInfo.alias}</div>
+
       <div className="flex items-center">
-        <Bars3Icon
-          ref={menu}
-          onClick={showDropdownHandler}
-          className="h-8 w-8 cursor-pointer hover:text-yellow-400"
-        />
-        {showDropdown && <DropdownMenu ref={dropdown} />}
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Bars3Icon className="h-8 w-8 cursor-pointer hover:text-yellow-400" />
+          </DropdownTrigger>
+
+          <DropdownMenu
+            aria-label="Header Actions"
+            variant="flat"
+            onAction={(key) => handleDropDownAction(key)}
+          >
+            <DropdownItem
+              key="toggle_sats"
+              startContent={
+                unitActive ? (
+                  <BitcoinCircleIcon className="inline h-4 w-4" />
+                ) : (
+                  <SatoshiV1Icon className="inline h-4 w-4" />
+                )
+              }
+            >
+              {unitActive
+                ? t("navigation.display_btc")
+                : t("navigation.display_sats")}
+            </DropdownItem>
+            <DropdownItem
+              key="logout"
+              color="danger"
+              startContent={
+                <ArrowRightStartOnRectangleIcon className="inline h-4 w-4" />
+              }
+            >
+              {t("navigation.logout")}
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </div>
     </header>
   );
