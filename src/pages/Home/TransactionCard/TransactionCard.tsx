@@ -1,6 +1,5 @@
 import SingleTransaction from "./SingleTransaction";
-import LoadingBox from "@/components/LoadingBox";
-import Message from "@/components/Message";
+import { Alert } from "@/components/Alert";
 import { AppContext } from "@/context/app-context";
 import { Implementation } from "@/models/ln-info";
 import { Transaction } from "@/models/transaction.model";
@@ -9,6 +8,8 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
+import { Spinner } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -46,10 +47,6 @@ const TransactionCard: FC<Props> = ({
     );
   }
 
-  if (isLoading) {
-    return <LoadingBox />;
-  }
-
   const pageForwardHandler = () => {
     setPage((p) => p + 1);
   };
@@ -74,14 +71,13 @@ const TransactionCard: FC<Props> = ({
       <section className="bd-card flex flex-col transition-colors">
         <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
 
-        {error && <Message message={error} />}
+        {isLoading && <Spinner size="lg" />}
+
+        {error && <Alert color="danger">{error}</Alert>}
 
         {/* TODO: Remove after https://github.com/fusion44/blitz_api/issues/87 is resolved & Version 1.10.0 of RaspiBlitz is out */}
         {implementation?.includes("CLN") && (
-          <Message
-            message={t("home.onchain_cln_no_support")}
-            color="bg-yellow-600"
-          />
+          <Alert color="warning">{t("home.onchain_cln_no_support")}</Alert>
         )}
 
         {!error && transactions.length === 0 && (
@@ -110,21 +106,23 @@ const TransactionCard: FC<Props> = ({
 
         {transactions.length > 0 && (
           <div className="mt-auto flex justify-around py-5">
-            <button
+            <Button
+              isIconOnly
+              aria-label="page backward"
               onClick={pageBackwardHandler}
-              disabled={page === 0}
-              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50 disabled:hover:bg-black"
+              isDisabled={page === 0}
             >
               <ArrowDownIcon className="h-6 w-6 rotate-90 transform" />
-            </button>
+            </Button>
 
-            <button
-              className="flex rounded bg-black p-2 text-white hover:bg-gray-700 disabled:opacity-50 disabled:hover:bg-black"
+            <Button
+              isIconOnly
+              aria-label="page forward"
               onClick={pageForwardHandler}
-              disabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
+              isDisabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
             >
               <ArrowDownIcon className="h-6 w-6 -rotate-90 transform" />
-            </button>
+            </Button>
           </div>
         )}
       </section>
