@@ -72,7 +72,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
 
         {/* TODO should be confirm modal maybe? */}
         {confirm && (
-          <Alert color="danger" className="mt-4">
+          <Alert color="danger" className="mt-4" as="div">
             <div className="flex flex-col justify-center gap-4">
               <p>{t("home.confirm_channel_close")}</p>
 
