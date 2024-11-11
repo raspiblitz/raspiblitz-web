@@ -5,6 +5,7 @@ export interface Props extends HTMLAttributes<HTMLElement> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div";
   children: ReactNode;
   color?: Colors;
+  className?: string;
 }
 
 const colors = {
@@ -16,7 +17,12 @@ const colors = {
 
 type Colors = keyof typeof colors;
 
-export const Alert = ({ as = "p", color = "success", children }: Props) => {
+export const Alert = ({
+  as = "p",
+  color = "success",
+  className,
+  children,
+}: Props) => {
   const Component = as;
 
   return (
@@ -24,6 +30,7 @@ export const Alert = ({ as = "p", color = "success", children }: Props) => {
       className={twMerge(
         "rounded-xl border p-4 text-center font-semibold",
         colors[color],
+        className,
       )}
     >
       {children}

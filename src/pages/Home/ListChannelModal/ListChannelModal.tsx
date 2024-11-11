@@ -4,7 +4,6 @@ import {
   ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
-import Message from "@/components/Message";
 import { LightningChannel } from "@/models/lightning-channel";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
@@ -84,7 +83,7 @@ export default function ListChannelModal({
             isLoading={isLoading}
           />
         )}
-        {error && <Message message={error} />}
+        {error && <Alert color="danger">{error}</Alert>}
       </ConfirmModal.Body>
     </ConfirmModal>
   );
