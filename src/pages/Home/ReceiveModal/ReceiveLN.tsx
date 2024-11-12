@@ -2,8 +2,8 @@ import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
-import InputField from "@/components/InputField";
 import { stringToNumber } from "@/utils/format";
+import { Input } from "@nextui-org/react";
 import type { ChangeEvent, FC } from "react";
 import { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
@@ -65,7 +65,15 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
             />
 
             <div className="mt-2 flex flex-col justify-center">
-              <InputField
+              <Input
+                className="w-full"
+                classNames={{
+                  inputWrapper:
+                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                }}
+                type="text"
+                isInvalid={!!errors.commentInput}
+                errorMessage={errors.commentInput?.message}
                 {...register("commentInput", {
                   onChange: commentChangeHandler,
                 })}
