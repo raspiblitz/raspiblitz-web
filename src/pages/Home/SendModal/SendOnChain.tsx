@@ -4,8 +4,8 @@ import AmountInput from "@/components/AmountInput";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
-import InputField from "@/components/InputField";
-import { stringToNumber } from "@/utils/format";
+import { Checkbox } from "@nextui-org/checkbox";
+import { Input } from "@nextui-org/react";
 import { ChangeEvent, FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -67,7 +67,12 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
 
         <fieldset className="flex flex-col items-center justify-center text-center">
           <div className="w-full py-1">
-            <InputField
+            <Input
+              className="w-full"
+              classNames={{
+                inputWrapper:
+                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+              }}
               {...register("address", {
                 required: t("forms.validation.chainAddress.required"),
                 pattern: {
@@ -77,7 +82,8 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
               })}
               placeholder="bc1..."
               label={t("wallet.address")}
-              errorMessage={errors.address}
+              isInvalid={!!errors.address}
+              errorMessage={errors.address?.message}
             />
           </div>
 
@@ -95,9 +101,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
                   },
                   validate: {
                     greaterThanZero: (val) =>
-                      //@ts-ignore
-                      stringToNumber(val) > 0 ||
-                      t("forms.validation.chainAmount.required"),
+                      val > 0 || t("forms.validation.chainAmount.required"),
                   },
                   onChange: changeAmountHandler,
                 })}
@@ -106,28 +110,42 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
           )}
 
           <div className="flex w-full justify-start gap-2 pb-1">
-            <InputField
-              {...register("spendAll", {})}
-              label={t("tx.spend_all")}
-              errorMessage={errors.spendAll}
-              type="checkbox"
-            />
+            <Checkbox {...register("spendAll", {})}>
+              {t("tx.spend_all")}
+            </Checkbox>
           </div>
 
           <div className="w-full py-1">
-            <InputField
+            <Input
+              className="w-full"
+              classNames={{
+                inputWrapper:
+                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+              }}
               {...register("fee", {
                 required: t("forms.validation.chainFee.required"),
               })}
               label={t("tx.fee")}
-              errorMessage={errors.fee}
-              inputRightAddon="sat / vByte"
+              isInvalid={!!errors.fee}
+              errorMessage={errors.fee?.message}
               type="number"
+              endContent={
+                <div className="pointer-events-none flex items-center">
+                  <span className="whitespace-nowrap text-small text-default-400">
+                    sat / vByte
+                  </span>
+                </div>
+              }
             />
           </div>
 
           <div className="w-full py-1">
-            <InputField
+            <Input
+              className="w-full"
+              classNames={{
+                inputWrapper:
+                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+              }}
               {...register("comment")}
               label={t("tx.comment")}
               placeholder={t("tx.comment_placeholder")}
