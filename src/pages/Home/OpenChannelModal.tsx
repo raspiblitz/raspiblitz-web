@@ -6,10 +6,10 @@ import {
   ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
-import InputField from "@/components/InputField";
 import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
+import { Input } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -75,13 +75,21 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
           <AvailableBalance balance={convertedBalance!} />
 
           <fieldset className="flex w-full flex-col gap-4">
-            <InputField
+            <Input
+              className="w-full"
+              classNames={{
+                inputWrapper:
+                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+              }}
+              type="text"
+              label={t("home.node_uri")}
+              isInvalid={!!errors.nodeUri}
+              errorMessage={errors.nodeUri?.message}
               {...register("nodeUri", {
                 required: t("forms.validation.node_uri.required"),
               })}
-              label={t("home.node_uri")}
-              errorMessage={errors.nodeUri}
             />
+
             <AmountInput
               amount={amount}
               errorMessage={errors.fundingAmount}
