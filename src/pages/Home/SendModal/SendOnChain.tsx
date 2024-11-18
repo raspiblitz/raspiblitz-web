@@ -4,10 +4,7 @@ import AmountInput from "@/components/AmountInput";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
-<<<<<<< HEAD
 import { stringToNumber } from "@/utils/format";
-=======
->>>>>>> 3d85598 (feat(home): use nextui input and checkbox)
 import { Checkbox } from "@nextui-org/checkbox";
 import { Input } from "@nextui-org/react";
 import { ChangeEvent, FC, useState } from "react";
@@ -105,7 +102,9 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
                   },
                   validate: {
                     greaterThanZero: (val) =>
-                      val > 0 || t("forms.validation.chainAmount.required"),
+                      //@ts-ignore
+                      stringToNumber(val) > 0 ||
+                      t("forms.validation.chainAmount.required"),
                   },
                   onChange: changeAmountHandler,
                 })}
