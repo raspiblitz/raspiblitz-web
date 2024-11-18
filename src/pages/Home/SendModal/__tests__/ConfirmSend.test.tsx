@@ -56,8 +56,9 @@ describe("ConfirmSend", () => {
       await user.type(amountInput, "999");
 
       amountInput = await screen.findByLabelText("wallet.amount");
+      screen.debug(amountInput);
 
-      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
+      await waitFor(() => expect(amountInput).toHaveAttribute("aria-invalid"));
 
       expect(
         await screen.findByText("forms.validation.chainAmount.max"),
@@ -75,7 +76,7 @@ describe("ConfirmSend", () => {
 
       amountInput = await screen.findByLabelText("wallet.amount");
 
-      await waitFor(() => expect(amountInput).toHaveClass("input-error"));
+      await waitFor(() => expect(amountInput).toHaveAttribute("aria-invalid"));
 
       expect(
         screen.getByText("forms.validation.chainAmount.required"),
@@ -91,7 +92,9 @@ describe("ConfirmSend", () => {
       ) as HTMLInputElement;
 
       await user.type(amountInput, "100");
-      await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
+      await waitFor(() =>
+        expect(amountInput).not.toHaveAttribute("aria-invalid"),
+      );
 
       expect(
         screen.getByRole("button", { name: "settings.confirm" }),
@@ -117,7 +120,9 @@ describe("ConfirmSend", () => {
       ) as HTMLInputElement;
 
       await user.type(amountInput, "10");
-      await waitFor(() => expect(amountInput).not.toHaveClass("input-error"));
+      await waitFor(() =>
+        expect(amountInput).not.toHaveAttribute("aria-invalid"),
+      );
 
       const confirmBtn = screen.getByRole("button", {
         name: "settings.confirm",

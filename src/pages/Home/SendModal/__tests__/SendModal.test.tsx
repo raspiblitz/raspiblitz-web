@@ -2,11 +2,11 @@ import SendModal, { type Props } from "../SendModal";
 import { HttpResponse, http, server } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { render, screen, mockedDisclosure, waitFor } from "test-utils";
+import { render, screen, mockedDisclosure } from "test-utils";
 
 const basicProps: Props = {
   lnBalance: 0,
-  onchainBalance: 0,
+  onchainBalance: 21,
   disclosure: mockedDisclosure,
 };
 
@@ -130,62 +130,22 @@ describe("SendModal", () => {
       expect(amountInput).toHaveValue("20,123");
     });
 
-    // it("test a valid form pass", async () => {
-    //   const addressInput = await screen.findByLabelText("wallet.address");
-    //   const amountInput = await screen.findByLabelText("wallet.amount");
-    //   const feeInput = await screen.findByLabelText("tx.fee");
-    //   await user.type(addressInput, "bc1q12345");
-    //   await user.type(amountInput, "20123");
-    //   await user.type(feeInput, "200");
-
-    //   await user.tab();
-
-    //   // Add custom wait to get correct form state in next re-rendering
-
-    //   const confirmBtn = screen.getByRole("button", {
-    //     name: "wallet.confirm",
-    //   });
-    //   await new Promise((resolve) => setTimeout(resolve, 0));
-
-    //   expect(confirmBtn).toBeInTheDocument();
-
-    //   console.log("confirmBtn", confirmBtn);
-
-    //   // // Trigger blur events to ensure validation runs
-    //   // await user.tab();
-
-    //   // // Wait for the button to be enabled
-    //   // await waitFor(() => expect(confirmBtn).toBeEnabled(), { timeout: 2000 });
-
-    //   // // expect(confirmBtn).toBeEnabled();
-    //   // await user.click(confirmBtn);
-    //   // // Should display confirm modal with amount
-    //   // expect(await screen.findByText("20,123 Sat")).toBeInTheDocument();
-    // });
-
-    it.only("test a valid form pass", async () => {
+    it("test a valid form pass", async () => {
       const user = userEvent.setup();
 
-      const addressInput = await screen.findByLabelText("wallet.address");
-      const amountInput = await screen.findByLabelText("wallet.amount");
-      const feeInput = await screen.findByLabelText("tx.fee");
+      const addressInput = screen.getByLabelText("wallet.address");
+      const amountInput = screen.getByLabelText("wallet.amount");
+      const feeInput = screen.getByLabelText("tx.fee");
 
       await user.type(addressInput, "bc1q12345");
-      // console.log("addressInput", addressInput);
-
       await user.type(amountInput, "1");
       await user.type(feeInput, "1");
-
-      await user.tab();
 
       const confirmBtn = screen.getByRole("button", {
         name: "wallet.confirm",
       });
 
-      // await new Promise((resolve) => setTimeout(resolve, 0));
-
-      // expect(confirmBtn).toBeInTheDocument();
-      await waitFor(() => expect(confirmBtn).toBeEnabled());
+      expect(confirmBtn).toBeInTheDocument();
 
       await user.click(confirmBtn);
     });

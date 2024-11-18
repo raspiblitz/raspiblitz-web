@@ -30,6 +30,9 @@ export interface SendOnChainForm {
 
 const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   const { t } = useTranslation();
+  const [updated, setUpdated] = useState(false);
+  const [amount, setAmount] = useState(0);
+
   const {
     register,
     handleSubmit,
@@ -39,8 +42,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   } = useForm<SendOnChainForm>({
     mode: "onChange",
   });
-  const [updated, setUpdated] = useState(false);
-  const [amount, setAmount] = useState(0);
 
   useEffect(() => {
     console.log("Form state:", {
@@ -48,7 +49,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
       amount: watch("amount"),
       fee: watch("fee"),
       isValid,
-      errors,
     });
   }, [watch, isValid]);
 
@@ -64,9 +64,11 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   }
 
   const spendAll = watch("spendAll", false);
+
   const onSubmit: SubmitHandler<SendOnChainForm> = (data) =>
     // overwrite amount to submit number instead of string
     onConfirm({ ...data, invoiceType: TxType.ONCHAIN, amount });
+
   const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);
   };
@@ -98,13 +100,12 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
           </div>
 
           {!spendAll && (
-            <div className="w-full pt-1">
+            <div className="w-full pt-1" role="foo">
               <AmountInput
                 errorMessage={errors?.amount}
                 disabled={spendAll}
                 amount={amount}
                 register={register("amount", {
-                  valueAsNumber: true,
                   required: t("forms.validation.chainAmount.required"),
                   max: {
                     value: balance || 0,
@@ -112,7 +113,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
                   },
                   validate: {
                     greaterThanZero: (val) =>
-                      //@ts-ignore
+                      // @ts-expect-error is will be returned as formatted string and needs to be converted to number
                       stringToNumber(val) > 0 ||
                       t("forms.validation.chainAmount.required"),
                   },
@@ -140,7 +141,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
               label={t("tx.fee")}
               isInvalid={!!errors.fee}
               errorMessage={errors.fee?.message}
-              type="number"
+              // type="number"
               endContent={
                 <div className="pointer-events-none flex items-center">
                   <span className="whitespace-nowrap text-small text-default-400">
