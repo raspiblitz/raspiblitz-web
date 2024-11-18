@@ -3,8 +3,13 @@ import { convertBtcToSat, convertSatToBtc, formatAmount } from "@/utils/format";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { Input } from "@nextui-org/react";
 import { ChangeEvent, FC, useContext, useState } from "react";
-import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import type {
+  FieldError,
+  UseFormRegisterReturn,
+  Controller,
+} from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 
 export type Props = {
   amount?: number;
@@ -62,43 +67,35 @@ const AmountInput: FC<Props> = ({
   };
 
   return (
-    <>
-      <Input
-        {...register}
-        label={t("wallet.amount")}
-        id={register.name}
-        type="text"
-        className="w-full"
-        classNames={{
-          inputWrapper:
-            "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-        }}
-        value={amountInput}
-        onChange={onChangeHandler}
-        isDisabled={disabled}
-        isInvalid={!!errorMessage}
-        errorMessage={errorMessage?.message}
-        endContent={
-          <button
-            className="focus:outline-none"
-            type="button"
-            onClick={toggleHandler}
-            aria-label="toggle password visibility"
-          >
-            <span className="whitespace-nowrap text-small text-default-400">
-              {unit}
-              <ArrowsRightLeftIcon className="ml-1 inline-block h-5 w-5" />
-            </span>
-          </button>
-        }
-      />
-
-      <p
-        className={`text-left text-sm text-red-500 ${errorMessage ? "" : "invisible"}`}
-      >
-        {errorMessage?.message || "error"}
-      </p>
-    </>
+    <Input
+      {...register}
+      label={t("wallet.amount")}
+      id={register.name}
+      type="text"
+      className="w-full"
+      classNames={{
+        inputWrapper:
+          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+      }}
+      value={amountInput}
+      onChange={onChangeHandler}
+      isDisabled={disabled}
+      isInvalid={!!errorMessage}
+      errorMessage={errorMessage?.message}
+      endContent={
+        <button
+          className="focus:outline-none"
+          type="button"
+          onClick={toggleHandler}
+          aria-label="toggle password visibility"
+        >
+          <span className="whitespace-nowrap text-small text-default-400">
+            {unit}
+            <ArrowsRightLeftIcon className="ml-1 inline-block h-5 w-5" />
+          </span>
+        </button>
+      }
+    />
   );
 };
 
