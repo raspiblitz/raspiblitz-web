@@ -69,7 +69,6 @@ export default function UnlockModal({
           <fieldset className="flex w-full flex-col gap-4">
             <Input
               autoFocus
-              className="w-full"
               classNames={{
                 inputWrapper:
                   "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
