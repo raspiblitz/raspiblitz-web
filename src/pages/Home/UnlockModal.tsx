@@ -68,6 +68,7 @@ export default function UnlockModal({
 
           <fieldset className="flex w-full flex-col gap-4">
             <Input
+              autoFocus
               className="w-full"
               classNames={{
                 inputWrapper:
