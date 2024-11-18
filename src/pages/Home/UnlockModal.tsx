@@ -31,6 +31,7 @@ export default function UnlockModal({
   const {
     register,
     handleSubmit,
+    setFocus,
     formState: { errors, isValid },
   } = useForm<IFormInputs>({ mode: "onChange" });
 
@@ -51,6 +52,7 @@ export default function UnlockModal({
       .catch((_) => {
         setIsLoading(false);
         setIsServerError(true);
+        setFocus("passwordInput");
       });
   };
 
