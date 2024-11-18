@@ -119,9 +119,6 @@ describe("SendModal", () => {
     it("should show error on wrong addrees input", async () => {
       const addressInput = await screen.findByLabelText("wallet.address");
       await user.type(addressInput, "bccccccc");
-
-      console.log(addressInput);
-
       expect(addressInput).toHaveAttribute("aria-invalid", "true");
     });
 

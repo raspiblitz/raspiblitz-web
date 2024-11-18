@@ -120,7 +120,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
 
           <div className="w-full py-1">
             <Input
-              className="w-full"
               classNames={{
                 inputWrapper:
                   "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
@@ -144,7 +143,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
 
           <div className="w-full py-1">
             <Input
-              className="w-full"
               classNames={{
                 inputWrapper:
                   "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
