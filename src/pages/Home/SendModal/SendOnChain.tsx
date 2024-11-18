@@ -7,7 +7,7 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import { stringToNumber } from "@/utils/format";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Input } from "@nextui-org/react";
-import { ChangeEvent, type FC, useState, useEffect } from "react";
+import { ChangeEvent, type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -42,15 +42,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   } = useForm<SendOnChainForm>({
     mode: "onChange",
   });
-
-  useEffect(() => {
-    console.log("Form state:", {
-      address: watch("address"),
-      amount: watch("amount"),
-      fee: watch("fee"),
-      isValid,
-    });
-  }, [watch, isValid]);
 
   if (!updated && confirmData?.invoiceType === TxType.ONCHAIN) {
     setUpdated(true);
@@ -100,7 +91,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
           </div>
 
           {!spendAll && (
-            <div className="w-full pt-1" role="foo">
+            <div className="w-full pt-1">
               <AmountInput
                 errorMessage={errors?.amount}
                 disabled={spendAll}
@@ -141,7 +132,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
               label={t("tx.fee")}
               isInvalid={!!errors.fee}
               errorMessage={errors.fee?.message}
-              // type="number"
+              type="number"
               endContent={
                 <div className="pointer-events-none flex items-center">
                   <span className="whitespace-nowrap text-small text-default-400">

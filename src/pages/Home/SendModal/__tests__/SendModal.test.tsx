@@ -131,23 +131,23 @@ describe("SendModal", () => {
     });
 
     it("test a valid form pass", async () => {
-      const user = userEvent.setup();
-
       const addressInput = screen.getByLabelText("wallet.address");
       const amountInput = screen.getByLabelText("wallet.amount");
       const feeInput = screen.getByLabelText("tx.fee");
 
       await user.type(addressInput, "bc1q12345");
-      await user.type(amountInput, "1");
-      await user.type(feeInput, "1");
+      await user.type(amountInput, "20123");
+      await user.type(feeInput, "200");
 
       const confirmBtn = screen.getByRole("button", {
         name: "wallet.confirm",
       });
 
-      expect(confirmBtn).toBeInTheDocument();
-
+      expect(confirmBtn).toBeEnabled();
       await user.click(confirmBtn);
+
+      // Should display confirm modal with amount
+      expect(await screen.findByText("20,123 Sat")).toBeInTheDocument();
     });
   });
 });
