@@ -7,7 +7,7 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import { stringToNumber } from "@/utils/format";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Input } from "@nextui-org/react";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, type FC, useState, useEffect } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -42,6 +42,16 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   const [updated, setUpdated] = useState(false);
   const [amount, setAmount] = useState(0);
 
+  useEffect(() => {
+    console.log("Form state:", {
+      address: watch("address"),
+      amount: watch("amount"),
+      fee: watch("fee"),
+      isValid,
+      errors,
+    });
+  }, [watch, isValid]);
+
   if (!updated && confirmData?.invoiceType === TxType.ONCHAIN) {
     setUpdated(true);
     setAmount(confirmData.amount);
@@ -69,7 +79,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
         <fieldset className="flex flex-col items-center justify-center text-center">
           <div className="w-full py-1">
             <Input
-              className="w-full"
               classNames={{
                 inputWrapper:
                   "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
@@ -95,6 +104,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
                 disabled={spendAll}
                 amount={amount}
                 register={register("amount", {
+                  valueAsNumber: true,
                   required: t("forms.validation.chainAmount.required"),
                   max: {
                     value: balance || 0,
