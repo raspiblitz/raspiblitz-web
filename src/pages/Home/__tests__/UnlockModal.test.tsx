@@ -12,7 +12,7 @@ describe("UnlockModal", () => {
     setup();
 
     const input = screen.getByPlaceholderText("forms.validation.unlock.pass_c");
-    expect(input).toHaveClass("input-underline");
+    expect(input).toHaveFocus();
     expect(input).toBeInTheDocument();
   });
 

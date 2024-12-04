@@ -45,7 +45,7 @@ describe("SendModal", () => {
       });
       const addressInput = screen.getByLabelText("wallet.invoice");
       await user.type(addressInput, "bla");
-      expect(addressInput).toHaveClass("input-error");
+      expect(addressInput).toHaveAttribute("aria-invalid", "true");
       expect(sendBtn).toBeDisabled();
     });
 
@@ -119,7 +119,7 @@ describe("SendModal", () => {
     it("should show error on wrong addrees input", async () => {
       const addressInput = await screen.findByLabelText("wallet.address");
       await user.type(addressInput, "bccccccc");
-      expect(addressInput).toHaveClass("input-error");
+      expect(addressInput).toHaveAttribute("aria-invalid", "true");
     });
 
     it("should format amount correctly", async () => {

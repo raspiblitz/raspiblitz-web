@@ -5,8 +5,8 @@ import { Alert } from "@/components/Alert";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
-import InputField from "@/components/InputField";
 import { convertMSatToSat } from "@/utils/format";
+import { Input } from "@nextui-org/react";
 import { FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -60,7 +60,18 @@ const SendLn: FC<Props> = ({
       <ConfirmModal.Body>
         <AvailableBalance balance={convertedBalance!} />
 
-        <InputField
+        <Input
+          className="w-full"
+          classNames={{
+            inputWrapper:
+              "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+          }}
+          type="text"
+          isInvalid={!!errors.invoice}
+          errorMessage={errors.invoice?.message}
+          label={t("wallet.invoice")}
+          placeholder="lnbc..."
+          disabled={isLoading}
           {...register("invoice", {
             required: t("forms.validation.lnInvoice.required"),
             pattern: {
@@ -68,10 +79,6 @@ const SendLn: FC<Props> = ({
               message: t("forms.validation.lnInvoice.patternMismatch"),
             },
           })}
-          label={t("wallet.invoice")}
-          errorMessage={errors.invoice}
-          placeholder="lnbc..."
-          disabled={isLoading}
         />
 
         {error && <Alert color="danger">{error}</Alert>}

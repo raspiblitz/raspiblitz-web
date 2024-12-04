@@ -5,10 +5,10 @@ import {
   ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
-import InputField from "@/components/InputField";
 import { AppContext } from "@/context/app-context";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { instance } from "@/utils/interceptor";
+import { Input } from "@nextui-org/react";
 import { useContext, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -67,16 +67,21 @@ export default function UnlockModal({
           {isCapsLockEnabled && <CapsLockWarning />}
 
           <fieldset className="flex w-full flex-col gap-4">
-            <InputField
+            <Input
+              autoFocus
+              classNames={{
+                inputWrapper:
+                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+              }}
+              disabled={isLoading}
+              type="password"
+              label={t("forms.validation.unlock.pass_c")}
+              placeholder={t("forms.validation.unlock.pass_c")}
+              isInvalid={!!errors.passwordInput}
+              errorMessage={errors.passwordInput?.message}
               {...register("passwordInput", {
                 required: t("forms.validation.unlock.required"),
               })}
-              autoFocus
-              errorMessage={errors.passwordInput}
-              label={t("forms.validation.unlock.pass_c")}
-              placeholder={t("forms.validation.unlock.pass_c")}
-              type="password"
-              disabled={isLoading}
               {...keyHandlers}
             />
           </fieldset>
