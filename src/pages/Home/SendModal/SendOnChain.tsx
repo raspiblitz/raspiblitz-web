@@ -7,7 +7,7 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import { stringToNumber } from "@/utils/format";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Input } from "@nextui-org/react";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -30,6 +30,9 @@ export interface SendOnChainForm {
 
 const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   const { t } = useTranslation();
+  const [updated, setUpdated] = useState(false);
+  const [amount, setAmount] = useState(0);
+
   const {
     register,
     handleSubmit,
@@ -39,8 +42,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   } = useForm<SendOnChainForm>({
     mode: "onChange",
   });
-  const [updated, setUpdated] = useState(false);
-  const [amount, setAmount] = useState(0);
 
   if (!updated && confirmData?.invoiceType === TxType.ONCHAIN) {
     setUpdated(true);
@@ -54,9 +55,11 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   }
 
   const spendAll = watch("spendAll", false);
+
   const onSubmit: SubmitHandler<SendOnChainForm> = (data) =>
     // overwrite amount to submit number instead of string
     onConfirm({ ...data, invoiceType: TxType.ONCHAIN, amount });
+
   const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);
   };
@@ -69,7 +72,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
         <fieldset className="flex flex-col items-center justify-center text-center">
           <div className="w-full py-1">
             <Input
-              className="w-full"
               classNames={{
                 inputWrapper:
                   "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
@@ -102,7 +104,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
                   },
                   validate: {
                     greaterThanZero: (val) =>
-                      //@ts-ignore
+                      // @ts-expect-error is will be returned as formatted string and needs to be converted to number
                       stringToNumber(val) > 0 ||
                       t("forms.validation.chainAmount.required"),
                   },

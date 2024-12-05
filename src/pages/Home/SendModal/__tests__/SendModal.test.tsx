@@ -6,7 +6,7 @@ import { render, screen, mockedDisclosure } from "test-utils";
 
 const basicProps: Props = {
   lnBalance: 0,
-  onchainBalance: 0,
+  onchainBalance: 21,
   disclosure: mockedDisclosure,
 };
 
@@ -131,9 +131,10 @@ describe("SendModal", () => {
     });
 
     it("test a valid form pass", async () => {
-      const addressInput = await screen.findByLabelText("wallet.address");
-      const amountInput = await screen.findByLabelText("wallet.amount");
-      const feeInput = await screen.findByLabelText("tx.fee");
+      const addressInput = screen.getByLabelText("wallet.address");
+      const amountInput = screen.getByLabelText("wallet.amount");
+      const feeInput = screen.getByLabelText("tx.fee");
+
       await user.type(addressInput, "bc1q12345");
       await user.type(amountInput, "20123");
       await user.type(feeInput, "200");
@@ -144,6 +145,7 @@ describe("SendModal", () => {
 
       expect(confirmBtn).toBeEnabled();
       await user.click(confirmBtn);
+
       // Should display confirm modal with amount
       expect(await screen.findByText("20,123 Sat")).toBeInTheDocument();
     });

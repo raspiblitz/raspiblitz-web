@@ -1,6 +1,7 @@
 import { AppContext, Unit } from "@/context/app-context";
 import { convertBtcToSat, convertSatToBtc, formatAmount } from "@/utils/format";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
+import { Input } from "@nextui-org/react";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -61,35 +62,34 @@ const AmountInput: FC<Props> = ({
   };
 
   return (
-    <>
-      <label className="label-underline" htmlFor={register.name}>
-        {t("wallet.amount")}
-      </label>
-      <div className="flex">
-        <input
-          {...register}
-          id={register.name}
-          className={`${errorMessage ? "input-error" : "input-underline"}`}
-          type="text"
-          value={amountInput}
-          onChange={onChangeHandler}
-          disabled={disabled}
-        />
-        <span
-          className="ml-6 flex w-4/12 items-center justify-center rounded bg-gray-600 p-1 shadow-md"
+    <Input
+      {...register}
+      label={t("wallet.amount")}
+      id={register.name}
+      type="text"
+      classNames={{
+        inputWrapper:
+          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+      }}
+      value={amountInput}
+      onChange={onChangeHandler}
+      isDisabled={disabled}
+      isInvalid={!!errorMessage}
+      errorMessage={errorMessage?.message}
+      endContent={
+        <button
+          className="focus:outline-none"
+          type="button"
           onClick={toggleHandler}
+          aria-label="toggle password visibility"
         >
-          {unit}
-          <ArrowsRightLeftIcon className="ml-1 h-5 w-5 text-white" />
-        </span>
-      </div>
-
-      <p
-        className={`text-left text-sm text-red-500 ${errorMessage ? "" : "invisible"}`}
-      >
-        {errorMessage?.message || "error"}
-      </p>
-    </>
+          <span className="whitespace-nowrap text-small text-default-400">
+            {unit}
+            <ArrowsRightLeftIcon className="ml-1 inline-block h-5 w-5" />
+          </span>
+        </button>
+      }
+    />
   );
 };
 
