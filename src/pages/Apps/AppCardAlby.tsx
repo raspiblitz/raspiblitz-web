@@ -59,7 +59,8 @@ export const AppCardAlby: FC = () => {
           theme: "dark",
         });
       }
-    } catch (e) {
+    } catch (error) {
+      console.error(error);
       toast.error(t(`appInfo.${id}.action.connection.error`), {
         theme: "dark",
       });

@@ -1,8 +1,7 @@
-import globals from "globals";
 import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
-
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default [
   { languageOptions: { globals: globals.browser } },
@@ -13,10 +12,8 @@ export default [
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     rules: {
       "react/react-in-jsx-scope": "off",
-      "react/jsx-uses-react": "off"
+      "react/jsx-uses-react": "off",
     },
-    ignores: [
-      ".backend-mock/"
-    ]
+    ignores: [".backend-mock/"],
   },
 ];
