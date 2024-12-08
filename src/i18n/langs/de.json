@@ -1,345 +1,345 @@
 {
-  "translation": {
-    "appInfo": {
-      "btc-rpc-explorer": {
-        "about": "Dies ist ein selbst gehosteter Explorer für die Bitcoin-Blockchain, der von RPC-Aufrufen an deine eigene Bitcoin-Node gesteuert wird. Er ist einfach auszuführen und kann mit anderen Tools (wie Electrum-Servern) verbunden werden, um einen voll ausgestatteten Explorer zu erhalten.",
-        "shortDescription": "Bitcoin RPC-Explorer"
-      },
-      "btcpayserver": {
-        "about": "BTCPay Server ist ein freier, open-source Bitcoin payment processor, welcher es Dir möglich macht, Bitcoin ohne Gebühren oder via Vermittler zu empfangen.",
-        "shortDescription": "Nehme Bezahlungen via Bitcoin an. Ein freier, open-source & selbst-gehosteter Bitcoin payment processor."
-      },
-      "lnbits": {
-        "about": "LNbits ist ein sehr einfacher Python-Server, der auf allen möglichen Zahlungsquellen sitzt und als Kontosystem über eindeutiger API-Schlüssel für jede Wallet verwendet werden kann, um das Risiko zu mindern, dass das gesamte Guthaben einzelnen Apps ausgesetzt wird.",
-        "shortDescription": "Freie open-source lightning-network wallet/accounts System"
-      },
-      "mempool": {
-        "about": " Ein Open-Source-Explorer, der für die Bitcoin-Community entwickelt wurde und sich auf den aufstrebenden Markt für Transaktionsgebühren konzentriert, um unseren Übergang zu einem Ökosystem mit mehreren Ebenen zu unterstützen.",
-        "shortDescription": "Ein open-source Explorer entwickelt für die Bitcoin Community"
-      },
-      "rtl": {
-        "about": "RTL ist ein umfängliches, gerät-unabhängiges, Web user interface um eine Lightning node zu betreiben. RTL ist verfügbar für LND, Core Lightning und Eclair Implementierungen.",
-        "shortDescription": "Eine voll funktionsfähige Webanwendung für LND, Core Lightning und Eclair"
-      },
-      "specter": {
-        "about": "Bitcoin Core hat ein sehr mächtiges Kommandozeileninterface und einen hervorragenden Hintergrunddienst. Mittels PSBT und HWI arbeitet er auch mit Hardware Wallets. Gleiches gilt für Multisignatur-Setups. Das Ziel dieses Projektes ist, einen bequeme und benutzerfreundliche grafische Oberfläche für Bitcoin Core zu erstellen, die sich auf Multi-Signatur-Setups mit Hardware-Wallets und Offline-Geräten konzentriert.",
-        "shortDescription": "Eine Desktop GUI für Bitcoin Core, optimiert für hardware wallets"
-      },
-      "thunderhub": {
-        "about": "ThunderHub ist ein LND-Knotenmanager als Open-Source-Software, mit dem Sie Ihren Knoten auf jedem Gerät oder Browser verwalten und überwachen können. Er ermöglicht, die Kontrolle über die Lightning-Node über eine einfache und intuitive Oberfläche und mit den aktuellsten Technologien auszuüben.",
-        "shortDescription": "LND Lightning Node Manager in deinem Browser"
-      },
-      "jam": {
-        "shortDescription": "Jam - Eine Webschnittstelle für JoinMarket",
-        "about": "Jam ist eine Weboberfläche für JoinMarket, die sich auf Benutzerfreundlichkeit konzentriert. Sie soll sinnvolle Standardeinstellungen bieten und für Anfänger einfach zu bedienen sein, aber dennoch die Funktionen bieten, die fortgeschrittene Nutzer erwarten."
-      },
-      "alby": {
-        "action": {
-          "install": "Alby installieren",
-          "connection_info_error": "Konnte keine Verbindungsinformationen erhalten",
-          "connection": {
-            "hint": "Bitte installieren Sie zuerst die Alby-Erweiterung",
-            "success": "Raspiblitz Konto wurde zu Alby hinzugefügt",
-            "error": "Das Hinzufügen von Raspiblitz zu Alby hat nicht funktioniert, bitte versuchen Sie es erneut"
-          },
-          "addAccount": "Verbinden"
-        },
-        "about": "Alby Browser-Erweiterung",
-        "shortDescription": "Verbinden Sie Ihre RaspiBlitz LND Node und nutzen Sie Bitcoin & Nostr Anwendungen mit der Alby Extension"
-      }
-    },
-    "apps": {
-      "about": "Über",
-      "author": "Autor",
-      "available": "Verfügbare Anwendungen",
-      "info": "Infos",
-      "install": "Installieren",
-      "install_failure": "Installation von {{appName}} fehlgeschlagen: {{details}}",
-      "install_success": "{{appName}} erfolgreich installiert",
-      "installed": "Installiert",
-      "installing": "Installiere",
-      "login_admin_pass_b": "Anmenden mit Benutzer 'admin' und Passwort B",
-      "login_no_pass": "Anmelden ohne Passwort",
-      "login_pass_b": "Anmelden mit Passwort B",
-      "login_userdef": "Anmelden mit benutzerdefiniertem Passwort",
-      "no_page": "Keine Seite verfügbar",
-      "offline": "offline",
-      "online": "online",
-      "open": "Öffnen",
-      "selfsigned_cert": "Diese Anwendung verwendet ein selbst-signiertes HTTPS-Zertifikat",
-      "source": "Quellcode",
-      "uninstall": "Deinstallieren",
-      "uninstall_failure": "Deinstallation von {{appName}} fehlgeschlagen: {{details}}",
-      "uninstall_success": "{{appName}} erfolgreich deinstalliert",
-      "uninstalling": "Deinstalliere"
-    },
-    "forms": {
-      "hint": {
-        "invoiceAmountZero": "Rechnungssumme ist null"
-      },
-      "validation": {
-        "amount": {
-          "required": "Bitte gib einen Betrag ein"
-        },
-        "chainAddress": {
-          "patternMismatch": "Falsches Adress format",
-          "required": "Bitte gib eine Bitcoin Adresse ein"
-        },
-        "chainAmount": {
-          "max": "Dein Guthaben reicht nicht aus, um diesen Bertrag zu verschicken",
-          "required": "Bitte gib einen Betrag ein"
-        },
-        "chainFee": {
-          "required": "Bitte gib eine Gebühr ein"
-        },
-        "lnInvoice": {
-          "expired": "Rechnung ist abgelaufen",
-          "max": "Dein Guthaben reicht nicht aus, um diese Rechnung zu bezahlen",
-          "patternMismatch": "Falsches invoice format",
-          "required": "Bitte gib eine Lightning invoice ein"
-        },
-        "node_uri": {
-          "required": "Bitte gib eine Node URI ein"
-        },
-        "unlock": {
-          "pass_c": "Passwort C",
-          "required": "Passwort C wird benötigt"
-        }
-      }
-    },
-    "hardware": {
-      "cpu_load": "CPU Auslastung",
-      "disk_usage": "Verbrauchter Speicherplatz",
-      "header": "Hardware Details",
-      "ram_usage": "Arbeitsspeicher Nutzung",
-      "temp": "Temperatur"
-    },
-    "home": {
-      "active": "Aktiv",
-      "bitcoin": "Bitcoin",
-      "blockchain_size": "Blockchain-Größe",
-      "blocks_synced": "Blöcke synchronisiert",
-      "blocktime": "Blockzeit",
-      "channel": "Kanal",
-      "channel_balance": "Kanal Guthaben",
-      "channel_closed": "Kanal erfolgreich geschlossen",
-      "channel_id": "Kanal ID",
-      "channel_opened": "Kanal erfolgreich geöffnet",
-      "close_channel": "Kanal schließen",
-      "confirm_channel_close": "Bestätigung Kanal zu schließen",
-      "conn_details": "Verbindungsdetails",
-      "conn_in": "Eingehend",
-      "conn_out": "Ausgehend",
-      "connections": "Verbindungen",
-      "current_open_channels": "Aktuell geöffnete Kanäle",
-      "difficulty": "Schwierigkeit",
-      "force_close": "Erzwungene Schließung",
-      "hide": "Verbergen",
-      "lightning": "Lightning",
-      "list_open_channels": "Kanalliste",
-      "local_balance": "Lokales Kanal Guthaben",
-      "network": "Netzwerk",
-      "no": "Nein",
-      "node_id": "Node-ID",
-      "node_uri": "URI der Node",
-      "normal": "Normal",
-      "onchain_cln_no_support": "On-Chain-Transaktionen, die vor RaspiBlitz v1.9 durchgeführt wurden, werden möglicherweise nicht in Core Lightning angezeigt.",
-      "open_channel": "Öffne Kanal",
-      "pending_balance_local": "Ausstehendes lokales Guthaben",
-      "pending_balance_remote": "Ausstehendes Remote-Guthaben",
-      "remote_balance": "Guthaben des remote Kanals",
-      "show": "Anzeigen",
-      "show_qr": "Zeige QR Code an",
-      "slow": "Langsam",
-      "ssh": "SSH-Anmeldung",
-      "status": "Status",
-      "tor": "Tor",
-      "urgent": "Dringend",
-      "version": "Version",
-      "versions": "Versionen",
-      "webui": "Web-UI",
-      "no_open_channels": "Du hast derzeit keine offenen Channels",
-      "not_available": "Nicht Verfügbar",
-      "connect_node": "Geben Sie diese Adresse an andere weiter, damit diese sich mit Ihrer lightning node verbinden können"
-    },
-    "language": {
-      "cs": "Tschechisch",
-      "de": "Deutsch",
-      "en": "Englisch",
-      "es": "Spanisch",
-      "fr": "Französisch",
-      "hu": "ungarisch",
-      "it": "Italienisch",
-      "nb_NO": "Norvegisch",
-      "nl": "Niederländisch",
-      "pt_BR": "Portugiesisch (Brasilianisch)",
-      "sv": "Schwedisch",
-      "vi": "Vietnamesisch"
-    },
-    "login": {
-      "enter_pass": "Passwort A eingeben",
-      "enter_pass_placeholder": "Passwort A",
-      "error": "Es ist ein Fehler aufgetreten",
-      "invalid_pass": "Ungültiges Passwort",
-      "login": "Anmelden",
-      "caps_lock": "Die Feststelltaste ist AKTIVIERT",
-      "unknown_error": "Unbekannter Fehler. Die Antwort war: {{code}} {{statusText}}."
-    },
-    "navigation": {
-      "apps": "Anwendungen",
-      "back": "Zurück",
-      "dark_mode": "Dunkler Modus",
-      "display_sats": "SATS anzeigen",
-      "home": "Startseite",
-      "logout": "Abmelden",
-      "settings": "Einstellungen"
-    },
-    "settings": {
-      "cancel": "Abbrechen",
-      "change": "Ändern",
-      "change_pw_a": "Passwort A ändern",
-      "confirm": "Bestätigen",
-      "curr_lang": "Aktuelle Sprache",
-      "language": "Sprache",
-      "new_pw": "Neues Passwort",
-      "old_pw": "Altes Passwort",
-      "pass_a_changed": "Passwort A wurde erfolgreich geändert",
-      "reboot": "Neu starten",
-      "shutdown": "Herunterfahren",
-      "generating": "Erstellen",
-      "generating_debug_report": "Erstellen des Debug-Berichts. Dies kann einige Zeit in Anspruch nehmen.",
-      "debug_report_done": "Debug-Bericht erstellt!",
-      "generate_debug": "Debug-Bericht erstellen",
-      "generate": "Erstellen",
-      "shutdown_confirm": "RaspiBlitz herunterfahren?",
-      "shutdown_info": "Wenn das Herunterfahren abgeschlossen ist, leuchtet die Betriebs LED rot und das LCD Display wird weiß.",
-      "shutdown_info_disconnect_power": "Anschließend 5 Sekunden warten und dann vom Strom trennen."
-    },
-    "setup": {
-      "input_node": {
-        "err_only_chars": "Der Name der Node darf nur aus Buchstaben und Zahlen bestehen.",
-        "err_max_length": "Der Name der Node darf maximal 32 Zeichen lang sein.",
-        "err_min_length": "Der Name der Node muss mindestens 4 Zeichen lang sein.",
-        "err_empty": "Der Name der Node darf nicht leer sein."
-      },
-      "blockchain_delete": "Blockchain löschen",
-      "blockchain_found_long": "Auf deiner HDD/SSD wurde eine existierende Blockchain gefunden.",
-      "blockchain_found_short": "Blockchain auf HDD/SSD gefunden",
-      "blockchain_keep": "Blockchain behalten",
-      "cancel": "Abbrechen",
-      "cancel_setup": "Willst du wirklich die Installation abbrechen",
-      "continue": "Fortfahren",
-      "convertwarning": "RaspiBlitz kann derzeit nur deine Daten für die Blockchain und Lightning (Guthaben und Kanäle) übernehmen. Daten von zusätzlich installierten Apps können bei der Migration verloren gehen.",
-      "done_migration_ready": "OK. Alles ist bereit für die Migration zu RaspiBlitz.",
-      "done_migration_start": "Starte Migration",
-      "done_recover_ready": "OK. Alles ist bereit für die Wiederherstellung deines RaspiBlitz.",
-      "done_recover_start": "Starte Wiederherstellung",
-      "done_setup_ready": "OK. Alles ist bereit für die Installation deines RaspiBlitz.",
-      "done_setup_start": "Starte Installation",
-      "done_update_ready": "OK. Alles ist bereit für das Update deines RaspiBlitz.",
-      "done_update_start": "Starte Update",
-      "final_do_reboot": "OK, führe den letzten Neustart durch",
-      "final_info_reboot": "Nach einem Neustart synchronisiert die Blockchain.",
-      "final_migration": "Die Migration wurde durchgeführt.",
-      "final_recovery": "Die Wiederherstellung wurde durchgeführt.",
-      "final_seedwords": "Bitte schreibe die Worte deines Seed auf und verwahre sie an einem sicheren Ort:",
-      "final_setup": "Die Installation wurde durchgeführt.",
-      "final_update": "Das Update wurde durchgeführt.",
-      "lightningoutdated": "Die Node, auf die du migrieren möchtest, nutzt eine neuere Lightning Version als dieser RaspiBlitz. Bitte warte auf ein aktualisiertes Release. Du kannst herunterfahren und mit der alten Node SD-Karte neu starten – es wurden keine Änderungen vorgenommen.",
-      "lnd": "LND",
-      "migrateblitz": "Migriere zu RaspiBlitz",
-      "no_and_shutdown": "Nein und herunterfahren",
-      "ok": "OK",
-      "other_options": "Andere Optionen",
-      "password_a_details": "Nutze dieses Passwort für den Login zum RaspiBlitz.",
-      "password_a_name": "Passwort A",
-      "password_a_short": "Setze dein neues Admin-Passwort (Passwort A)",
-      "password_b_details": "Nutze dieses Passwort für zusätzliche Apps auf dem RaspiBlitz.",
-      "password_b_name": "Passwort B",
-      "password_b_short": "Setze dein neues App-Passwort (Passwort B)",
-      "password_c_details": "Nutze dieses Passwort beim Unlocken der Lightning Wallet.",
-      "password_c_name": "Passwort C",
-      "password_c_short": "Setze dein neues Lightning-Wallet-Passwort (Passwort C)",
-      "password_error_chars": "Das Passwort darf lediglich aus Buchstaben und Zahlen bestehen.",
-      "password_error_empty": "Das Passwort darf nicht leer sein.",
-      "password_error_length": "Das Passwort muss mindestens 8 Zeichen lang sein.",
-      "password_error_match": "Die Passworte stimmen nicht überein.",
-      "password_repeat": "Wiederholen",
-      "pleasewait": "bitte warten",
-      "preparingsetup": "bereite Einrichtung vor",
-      "recoverblitz": "Meinen RaspiBlitz wiederherstellen",
-      "restartinfo": "bitte warten bis RaspiBlitz sich wieder meldet",
-      "restarting": "starte neu",
-      "restarts": "Neustarts",
-      "runningsetup": "Einrichtung läuft",
-      "select_lightning": "Wähle deine Lightning Implementation:",
-      "setupblitz": "Konfiguriere einen frischen RaspiBlitz",
-      "setupoptions": "Setup Optionen",
-      "setupwait": "Einrichtung wird einige Minuten dauern",
-      "shuttingdown": "schalte aus",
-      "start_recovery": "Möchtest du die Wiederherstellung starten?",
-      "start_update": "Möchtest du den Prozess für Update und Wiederherstellung starten?",
-      "started": "Gestartet",
-      "sync_bitcoin_starting": "Start der Synchronisation",
-      "sync_bitcoin_sync": "Synchronisationsprozess",
-      "sync_headline": "Initiale Synchronisation des RaspiBlitz",
-      "sync_restartinfo": "(Synchronisation wird nach dem nächsten Neustart fortgeführt)",
-      "sync_wallet_info": "Bitte unlocke deine Lightning Wallet (Passwort C):",
-      "sync_wallet_unlock": "Unlocke Wallet",
-      "updateblitz": "Meinen RaspiBlitz updaten",
-      "yes": "Ja",
-      "yes_and_migrate": "Migriere zu RaspiBlitz"
-    },
-    "tx": {
-      "comment": "Kommentar",
-      "comment_placeholder": "Optionaler Kommentar",
-      "confirm_info": "Bitte bestätige die diese Transaktion",
-      "confirmations": "Bestätigungen",
-      "date": "Datum",
-      "description": "Beschreibung",
-      "fee": "Gebühr",
-      "fee_rate": "Gebühr Kurs",
-      "included_block": "Im Block inkludiert",
-      "mempool": "Auf mempool anzeigen",
-      "sent": "Transaktion gesendet!",
-      "transactions": "Transaktionen",
-      "transactions_none": "Noch keine Transaktionen. Wird Zeit, deine erste zu machen",
-      "tx_details": "Transaktionsdetails",
-      "txid": "Transaktions ID",
-      "unconfirmed": "Unbestätigt",
-      "value": "Wert",
-      "spend_all": "Alle On-Chain-Gelder ausgeben",
-      "all_onchain": "Alle On-Chain-Gelder"
-    },
-    "wallet": {
-      "address": "Adresse",
-      "amount": "Betrag",
-      "balance": "Guthaben",
-      "confirm": "Bestätigen",
-      "copied": "Kopiert!",
-      "copy_clipboard": "In Zwischenablage kopieren",
-      "create_invoice": "Rechnung erstellen",
-      "create_invoice_ln": "Lightning Rechnung erstellen",
-      "fund": "Übertrage auf deine On-chain Wallet",
-      "invoice": "Rechnung",
-      "on_chain": "On-chain",
-      "receive": "Erhalten",
-      "refresh": "Adresse aktualisieren",
-      "scan_qr": "Scannen Sie diesen QR-Code oder kopieren Sie die unten stehende Adresse, um das Geld zu erhalten",
-      "send": "Senden",
-      "send_lightning": "Geld via Lightning versenden",
-      "send_onchain": "Betrag on-chain senden",
-      "unlock": "Entsperren",
-      "unlock_subtitle": "Entsperre deine Wallet",
-      "unlock_success": "Wallet entsperrt",
-      "unlock_title": "Wallet entsperren",
-      "unlocking": "Entsperre",
-      "wallet_locked": "Wallet gesperrt",
-      "available_balance": "Verfügbares Guthaben"
-    },
-    "error": {
-      "report": "Bitte melden Sie diesen Fehler an",
-      "stack": "Stapelspur"
-    }
-  }
+	"translation": {
+		"appInfo": {
+			"btc-rpc-explorer": {
+				"about": "Dies ist ein selbst gehosteter Explorer für die Bitcoin-Blockchain, der von RPC-Aufrufen an deine eigene Bitcoin-Node gesteuert wird. Er ist einfach auszuführen und kann mit anderen Tools (wie Electrum-Servern) verbunden werden, um einen voll ausgestatteten Explorer zu erhalten.",
+				"shortDescription": "Bitcoin RPC-Explorer"
+			},
+			"btcpayserver": {
+				"about": "BTCPay Server ist ein freier, open-source Bitcoin payment processor, welcher es Dir möglich macht, Bitcoin ohne Gebühren oder via Vermittler zu empfangen.",
+				"shortDescription": "Nehme Bezahlungen via Bitcoin an. Ein freier, open-source & selbst-gehosteter Bitcoin payment processor."
+			},
+			"lnbits": {
+				"about": "LNbits ist ein sehr einfacher Python-Server, der auf allen möglichen Zahlungsquellen sitzt und als Kontosystem über eindeutiger API-Schlüssel für jede Wallet verwendet werden kann, um das Risiko zu mindern, dass das gesamte Guthaben einzelnen Apps ausgesetzt wird.",
+				"shortDescription": "Freie open-source lightning-network wallet/accounts System"
+			},
+			"mempool": {
+				"about": " Ein Open-Source-Explorer, der für die Bitcoin-Community entwickelt wurde und sich auf den aufstrebenden Markt für Transaktionsgebühren konzentriert, um unseren Übergang zu einem Ökosystem mit mehreren Ebenen zu unterstützen.",
+				"shortDescription": "Ein open-source Explorer entwickelt für die Bitcoin Community"
+			},
+			"rtl": {
+				"about": "RTL ist ein umfängliches, gerät-unabhängiges, Web user interface um eine Lightning node zu betreiben. RTL ist verfügbar für LND, Core Lightning und Eclair Implementierungen.",
+				"shortDescription": "Eine voll funktionsfähige Webanwendung für LND, Core Lightning und Eclair"
+			},
+			"specter": {
+				"about": "Bitcoin Core hat ein sehr mächtiges Kommandozeileninterface und einen hervorragenden Hintergrunddienst. Mittels PSBT und HWI arbeitet er auch mit Hardware Wallets. Gleiches gilt für Multisignatur-Setups. Das Ziel dieses Projektes ist, einen bequeme und benutzerfreundliche grafische Oberfläche für Bitcoin Core zu erstellen, die sich auf Multi-Signatur-Setups mit Hardware-Wallets und Offline-Geräten konzentriert.",
+				"shortDescription": "Eine Desktop GUI für Bitcoin Core, optimiert für hardware wallets"
+			},
+			"thunderhub": {
+				"about": "ThunderHub ist ein LND-Knotenmanager als Open-Source-Software, mit dem Sie Ihren Knoten auf jedem Gerät oder Browser verwalten und überwachen können. Er ermöglicht, die Kontrolle über die Lightning-Node über eine einfache und intuitive Oberfläche und mit den aktuellsten Technologien auszuüben.",
+				"shortDescription": "LND Lightning Node Manager in deinem Browser"
+			},
+			"jam": {
+				"shortDescription": "Jam - Eine Webschnittstelle für JoinMarket",
+				"about": "Jam ist eine Weboberfläche für JoinMarket, die sich auf Benutzerfreundlichkeit konzentriert. Sie soll sinnvolle Standardeinstellungen bieten und für Anfänger einfach zu bedienen sein, aber dennoch die Funktionen bieten, die fortgeschrittene Nutzer erwarten."
+			},
+			"alby": {
+				"action": {
+					"install": "Alby installieren",
+					"connection_info_error": "Konnte keine Verbindungsinformationen erhalten",
+					"connection": {
+						"hint": "Bitte installieren Sie zuerst die Alby-Erweiterung",
+						"success": "Raspiblitz Konto wurde zu Alby hinzugefügt",
+						"error": "Das Hinzufügen von Raspiblitz zu Alby hat nicht funktioniert, bitte versuchen Sie es erneut"
+					},
+					"addAccount": "Verbinden"
+				},
+				"about": "Alby Browser-Erweiterung",
+				"shortDescription": "Verbinden Sie Ihre RaspiBlitz LND Node und nutzen Sie Bitcoin & Nostr Anwendungen mit der Alby Extension"
+			}
+		},
+		"apps": {
+			"about": "Über",
+			"author": "Autor",
+			"available": "Verfügbare Anwendungen",
+			"info": "Infos",
+			"install": "Installieren",
+			"install_failure": "Installation von {{appName}} fehlgeschlagen: {{details}}",
+			"install_success": "{{appName}} erfolgreich installiert",
+			"installed": "Installiert",
+			"installing": "Installiere",
+			"login_admin_pass_b": "Anmenden mit Benutzer 'admin' und Passwort B",
+			"login_no_pass": "Anmelden ohne Passwort",
+			"login_pass_b": "Anmelden mit Passwort B",
+			"login_userdef": "Anmelden mit benutzerdefiniertem Passwort",
+			"no_page": "Keine Seite verfügbar",
+			"offline": "offline",
+			"online": "online",
+			"open": "Öffnen",
+			"selfsigned_cert": "Diese Anwendung verwendet ein selbst-signiertes HTTPS-Zertifikat",
+			"source": "Quellcode",
+			"uninstall": "Deinstallieren",
+			"uninstall_failure": "Deinstallation von {{appName}} fehlgeschlagen: {{details}}",
+			"uninstall_success": "{{appName}} erfolgreich deinstalliert",
+			"uninstalling": "Deinstalliere"
+		},
+		"forms": {
+			"hint": {
+				"invoiceAmountZero": "Rechnungssumme ist null"
+			},
+			"validation": {
+				"amount": {
+					"required": "Bitte gib einen Betrag ein"
+				},
+				"chainAddress": {
+					"patternMismatch": "Falsches Adress format",
+					"required": "Bitte gib eine Bitcoin Adresse ein"
+				},
+				"chainAmount": {
+					"max": "Dein Guthaben reicht nicht aus, um diesen Bertrag zu verschicken",
+					"required": "Bitte gib einen Betrag ein"
+				},
+				"chainFee": {
+					"required": "Bitte gib eine Gebühr ein"
+				},
+				"lnInvoice": {
+					"expired": "Rechnung ist abgelaufen",
+					"max": "Dein Guthaben reicht nicht aus, um diese Rechnung zu bezahlen",
+					"patternMismatch": "Falsches invoice format",
+					"required": "Bitte gib eine Lightning invoice ein"
+				},
+				"node_uri": {
+					"required": "Bitte gib eine Node URI ein"
+				},
+				"unlock": {
+					"pass_c": "Passwort C",
+					"required": "Passwort C wird benötigt"
+				}
+			}
+		},
+		"hardware": {
+			"cpu_load": "CPU Auslastung",
+			"disk_usage": "Verbrauchter Speicherplatz",
+			"header": "Hardware Details",
+			"ram_usage": "Arbeitsspeicher Nutzung",
+			"temp": "Temperatur"
+		},
+		"home": {
+			"active": "Aktiv",
+			"bitcoin": "Bitcoin",
+			"blockchain_size": "Blockchain-Größe",
+			"blocks_synced": "Blöcke synchronisiert",
+			"blocktime": "Blockzeit",
+			"channel": "Kanal",
+			"channel_balance": "Kanal Guthaben",
+			"channel_closed": "Kanal erfolgreich geschlossen",
+			"channel_id": "Kanal ID",
+			"channel_opened": "Kanal erfolgreich geöffnet",
+			"close_channel": "Kanal schließen",
+			"confirm_channel_close": "Bestätigung Kanal zu schließen",
+			"conn_details": "Verbindungsdetails",
+			"conn_in": "Eingehend",
+			"conn_out": "Ausgehend",
+			"connections": "Verbindungen",
+			"current_open_channels": "Aktuell geöffnete Kanäle",
+			"difficulty": "Schwierigkeit",
+			"force_close": "Erzwungene Schließung",
+			"hide": "Verbergen",
+			"lightning": "Lightning",
+			"list_open_channels": "Kanalliste",
+			"local_balance": "Lokales Kanal Guthaben",
+			"network": "Netzwerk",
+			"no": "Nein",
+			"node_id": "Node-ID",
+			"node_uri": "URI der Node",
+			"normal": "Normal",
+			"onchain_cln_no_support": "On-Chain-Transaktionen, die vor RaspiBlitz v1.9 durchgeführt wurden, werden möglicherweise nicht in Core Lightning angezeigt.",
+			"open_channel": "Öffne Kanal",
+			"pending_balance_local": "Ausstehendes lokales Guthaben",
+			"pending_balance_remote": "Ausstehendes Remote-Guthaben",
+			"remote_balance": "Guthaben des remote Kanals",
+			"show": "Anzeigen",
+			"show_qr": "Zeige QR Code an",
+			"slow": "Langsam",
+			"ssh": "SSH-Anmeldung",
+			"status": "Status",
+			"tor": "Tor",
+			"urgent": "Dringend",
+			"version": "Version",
+			"versions": "Versionen",
+			"webui": "Web-UI",
+			"no_open_channels": "Du hast derzeit keine offenen Channels",
+			"not_available": "Nicht Verfügbar",
+			"connect_node": "Geben Sie diese Adresse an andere weiter, damit diese sich mit Ihrer lightning node verbinden können"
+		},
+		"language": {
+			"cs": "Tschechisch",
+			"de": "Deutsch",
+			"en": "Englisch",
+			"es": "Spanisch",
+			"fr": "Französisch",
+			"hu": "ungarisch",
+			"it": "Italienisch",
+			"nb_NO": "Norvegisch",
+			"nl": "Niederländisch",
+			"pt_BR": "Portugiesisch (Brasilianisch)",
+			"sv": "Schwedisch",
+			"vi": "Vietnamesisch"
+		},
+		"login": {
+			"enter_pass": "Passwort A eingeben",
+			"enter_pass_placeholder": "Passwort A",
+			"error": "Es ist ein Fehler aufgetreten",
+			"invalid_pass": "Ungültiges Passwort",
+			"login": "Anmelden",
+			"caps_lock": "Die Feststelltaste ist AKTIVIERT",
+			"unknown_error": "Unbekannter Fehler. Die Antwort war: {{code}} {{statusText}}."
+		},
+		"navigation": {
+			"apps": "Anwendungen",
+			"back": "Zurück",
+			"dark_mode": "Dunkler Modus",
+			"display_sats": "SATS anzeigen",
+			"home": "Startseite",
+			"logout": "Abmelden",
+			"settings": "Einstellungen"
+		},
+		"settings": {
+			"cancel": "Abbrechen",
+			"change": "Ändern",
+			"change_pw_a": "Passwort A ändern",
+			"confirm": "Bestätigen",
+			"curr_lang": "Aktuelle Sprache",
+			"language": "Sprache",
+			"new_pw": "Neues Passwort",
+			"old_pw": "Altes Passwort",
+			"pass_a_changed": "Passwort A wurde erfolgreich geändert",
+			"reboot": "Neu starten",
+			"shutdown": "Herunterfahren",
+			"generating": "Erstellen",
+			"generating_debug_report": "Erstellen des Debug-Berichts. Dies kann einige Zeit in Anspruch nehmen.",
+			"debug_report_done": "Debug-Bericht erstellt!",
+			"generate_debug": "Debug-Bericht erstellen",
+			"generate": "Erstellen",
+			"shutdown_confirm": "RaspiBlitz herunterfahren?",
+			"shutdown_info": "Wenn das Herunterfahren abgeschlossen ist, leuchtet die Betriebs LED rot und das LCD Display wird weiß.",
+			"shutdown_info_disconnect_power": "Anschließend 5 Sekunden warten und dann vom Strom trennen."
+		},
+		"setup": {
+			"input_node": {
+				"err_only_chars": "Der Name der Node darf nur aus Buchstaben und Zahlen bestehen.",
+				"err_max_length": "Der Name der Node darf maximal 32 Zeichen lang sein.",
+				"err_min_length": "Der Name der Node muss mindestens 4 Zeichen lang sein.",
+				"err_empty": "Der Name der Node darf nicht leer sein."
+			},
+			"blockchain_delete": "Blockchain löschen",
+			"blockchain_found_long": "Auf deiner HDD/SSD wurde eine existierende Blockchain gefunden.",
+			"blockchain_found_short": "Blockchain auf HDD/SSD gefunden",
+			"blockchain_keep": "Blockchain behalten",
+			"cancel": "Abbrechen",
+			"cancel_setup": "Willst du wirklich die Installation abbrechen",
+			"continue": "Fortfahren",
+			"convertwarning": "RaspiBlitz kann derzeit nur deine Daten für die Blockchain und Lightning (Guthaben und Kanäle) übernehmen. Daten von zusätzlich installierten Apps können bei der Migration verloren gehen.",
+			"done_migration_ready": "OK. Alles ist bereit für die Migration zu RaspiBlitz.",
+			"done_migration_start": "Starte Migration",
+			"done_recover_ready": "OK. Alles ist bereit für die Wiederherstellung deines RaspiBlitz.",
+			"done_recover_start": "Starte Wiederherstellung",
+			"done_setup_ready": "OK. Alles ist bereit für die Installation deines RaspiBlitz.",
+			"done_setup_start": "Starte Installation",
+			"done_update_ready": "OK. Alles ist bereit für das Update deines RaspiBlitz.",
+			"done_update_start": "Starte Update",
+			"final_do_reboot": "OK, führe den letzten Neustart durch",
+			"final_info_reboot": "Nach einem Neustart synchronisiert die Blockchain.",
+			"final_migration": "Die Migration wurde durchgeführt.",
+			"final_recovery": "Die Wiederherstellung wurde durchgeführt.",
+			"final_seedwords": "Bitte schreibe die Worte deines Seed auf und verwahre sie an einem sicheren Ort:",
+			"final_setup": "Die Installation wurde durchgeführt.",
+			"final_update": "Das Update wurde durchgeführt.",
+			"lightningoutdated": "Die Node, auf die du migrieren möchtest, nutzt eine neuere Lightning Version als dieser RaspiBlitz. Bitte warte auf ein aktualisiertes Release. Du kannst herunterfahren und mit der alten Node SD-Karte neu starten – es wurden keine Änderungen vorgenommen.",
+			"lnd": "LND",
+			"migrateblitz": "Migriere zu RaspiBlitz",
+			"no_and_shutdown": "Nein und herunterfahren",
+			"ok": "OK",
+			"other_options": "Andere Optionen",
+			"password_a_details": "Nutze dieses Passwort für den Login zum RaspiBlitz.",
+			"password_a_name": "Passwort A",
+			"password_a_short": "Setze dein neues Admin-Passwort (Passwort A)",
+			"password_b_details": "Nutze dieses Passwort für zusätzliche Apps auf dem RaspiBlitz.",
+			"password_b_name": "Passwort B",
+			"password_b_short": "Setze dein neues App-Passwort (Passwort B)",
+			"password_c_details": "Nutze dieses Passwort beim Unlocken der Lightning Wallet.",
+			"password_c_name": "Passwort C",
+			"password_c_short": "Setze dein neues Lightning-Wallet-Passwort (Passwort C)",
+			"password_error_chars": "Das Passwort darf lediglich aus Buchstaben und Zahlen bestehen.",
+			"password_error_empty": "Das Passwort darf nicht leer sein.",
+			"password_error_length": "Das Passwort muss mindestens 8 Zeichen lang sein.",
+			"password_error_match": "Die Passworte stimmen nicht überein.",
+			"password_repeat": "Wiederholen",
+			"pleasewait": "bitte warten",
+			"preparingsetup": "bereite Einrichtung vor",
+			"recoverblitz": "Meinen RaspiBlitz wiederherstellen",
+			"restartinfo": "bitte warten bis RaspiBlitz sich wieder meldet",
+			"restarting": "starte neu",
+			"restarts": "Neustarts",
+			"runningsetup": "Einrichtung läuft",
+			"select_lightning": "Wähle deine Lightning Implementation:",
+			"setupblitz": "Konfiguriere einen frischen RaspiBlitz",
+			"setupoptions": "Setup Optionen",
+			"setupwait": "Einrichtung wird einige Minuten dauern",
+			"shuttingdown": "schalte aus",
+			"start_recovery": "Möchtest du die Wiederherstellung starten?",
+			"start_update": "Möchtest du den Prozess für Update und Wiederherstellung starten?",
+			"started": "Gestartet",
+			"sync_bitcoin_starting": "Start der Synchronisation",
+			"sync_bitcoin_sync": "Synchronisationsprozess",
+			"sync_headline": "Initiale Synchronisation des RaspiBlitz",
+			"sync_restartinfo": "(Synchronisation wird nach dem nächsten Neustart fortgeführt)",
+			"sync_wallet_info": "Bitte unlocke deine Lightning Wallet (Passwort C):",
+			"sync_wallet_unlock": "Unlocke Wallet",
+			"updateblitz": "Meinen RaspiBlitz updaten",
+			"yes": "Ja",
+			"yes_and_migrate": "Migriere zu RaspiBlitz"
+		},
+		"tx": {
+			"comment": "Kommentar",
+			"comment_placeholder": "Optionaler Kommentar",
+			"confirm_info": "Bitte bestätige die diese Transaktion",
+			"confirmations": "Bestätigungen",
+			"date": "Datum",
+			"description": "Beschreibung",
+			"fee": "Gebühr",
+			"fee_rate": "Gebühr Kurs",
+			"included_block": "Im Block inkludiert",
+			"mempool": "Auf mempool anzeigen",
+			"sent": "Transaktion gesendet!",
+			"transactions": "Transaktionen",
+			"transactions_none": "Noch keine Transaktionen. Wird Zeit, deine erste zu machen",
+			"tx_details": "Transaktionsdetails",
+			"txid": "Transaktions ID",
+			"unconfirmed": "Unbestätigt",
+			"value": "Wert",
+			"spend_all": "Alle On-Chain-Gelder ausgeben",
+			"all_onchain": "Alle On-Chain-Gelder"
+		},
+		"wallet": {
+			"address": "Adresse",
+			"amount": "Betrag",
+			"balance": "Guthaben",
+			"confirm": "Bestätigen",
+			"copied": "Kopiert!",
+			"copy_clipboard": "In Zwischenablage kopieren",
+			"create_invoice": "Rechnung erstellen",
+			"create_invoice_ln": "Lightning Rechnung erstellen",
+			"fund": "Übertrage auf deine On-chain Wallet",
+			"invoice": "Rechnung",
+			"on_chain": "On-chain",
+			"receive": "Erhalten",
+			"refresh": "Adresse aktualisieren",
+			"scan_qr": "Scannen Sie diesen QR-Code oder kopieren Sie die unten stehende Adresse, um das Geld zu erhalten",
+			"send": "Senden",
+			"send_lightning": "Geld via Lightning versenden",
+			"send_onchain": "Betrag on-chain senden",
+			"unlock": "Entsperren",
+			"unlock_subtitle": "Entsperre deine Wallet",
+			"unlock_success": "Wallet entsperrt",
+			"unlock_title": "Wallet entsperren",
+			"unlocking": "Entsperre",
+			"wallet_locked": "Wallet gesperrt",
+			"available_balance": "Verfügbares Guthaben"
+		},
+		"error": {
+			"report": "Bitte melden Sie diesen Fehler an",
+			"stack": "Stapelspur"
+		}
+	}
 }

@@ -11,82 +11,82 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 export interface IFormInputs {
-  amountInput: string;
-  commentInput: string;
+	amountInput: string;
+	commentInput: string;
 }
 
 export type Props = {
-  isLoading: boolean;
-  error: string;
-  onSubmitHandler: (data: IFormInputs) => void;
+	isLoading: boolean;
+	error: string;
+	onSubmitHandler: (data: IFormInputs) => void;
 };
 
 const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  const [amount, setAmount] = useState(0);
-  const [comment, setComment] = useState("");
+	const [amount, setAmount] = useState(0);
+	const [comment, setComment] = useState("");
 
-  const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setComment(event.target.value);
-  };
+	const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		setComment(event.target.value);
+	};
 
-  const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
-  };
+	const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		setAmount(+event.target.value);
+	};
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid, submitCount },
-  } = useForm<IFormInputs>({
-    mode: "onChange",
-  });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid, submitCount },
+	} = useForm<IFormInputs>({
+		mode: "onChange",
+	});
 
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => onSubmitHandler(data);
+	const onSubmit: SubmitHandler<IFormInputs> = (data) => onSubmitHandler(data);
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ConfirmModal.Body>
-        <fieldset className="flex w-full flex-col gap-4">
-          <div className="flex flex-col justify-center pb-5 text-center">
-            <AmountInput
-              amount={amount}
-              register={register("amountInput", {
-                required: t("forms.validation.chainAmount.required"),
-                validate: {
-                  greaterThanZero: (val) =>
-                    stringToNumber(val) > 0 ||
-                    t("forms.validation.chainAmount.required"),
-                },
-                onChange: amountChangeHandler,
-              })}
-              errorMessage={errors.amountInput}
-            />
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<ConfirmModal.Body>
+				<fieldset className="flex w-full flex-col gap-4">
+					<div className="flex flex-col justify-center pb-5 text-center">
+						<AmountInput
+							amount={amount}
+							register={register("amountInput", {
+								required: t("forms.validation.chainAmount.required"),
+								validate: {
+									greaterThanZero: (val) =>
+										stringToNumber(val) > 0 ||
+										t("forms.validation.chainAmount.required"),
+								},
+								onChange: amountChangeHandler,
+							})}
+							errorMessage={errors.amountInput}
+						/>
 
-            <div className="mt-2 flex flex-col justify-center">
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="text"
-                isInvalid={!!errors.commentInput}
-                errorMessage={errors.commentInput?.message}
-                {...register("commentInput", {
-                  onChange: commentChangeHandler,
-                })}
-                label={t("tx.comment")}
-                value={comment}
-                placeholder={t("tx.comment_placeholder")}
-              />
-            </div>
-          </div>
-        </fieldset>
+						<div className="mt-2 flex flex-col justify-center">
+							<Input
+								className="w-full"
+								classNames={{
+									inputWrapper:
+										"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+								}}
+								type="text"
+								isInvalid={!!errors.commentInput}
+								errorMessage={errors.commentInput?.message}
+								{...register("commentInput", {
+									onChange: commentChangeHandler,
+								})}
+								label={t("tx.comment")}
+								value={comment}
+								placeholder={t("tx.comment_placeholder")}
+							/>
+						</div>
+					</div>
+				</fieldset>
 
-        {error && <Alert color="danger">{error}</Alert>}
-      </ConfirmModal.Body>
+				{error && <Alert color="danger">{error}</Alert>}
+			</ConfirmModal.Body>
 
       <ConfirmModal.Footer>
         <Button

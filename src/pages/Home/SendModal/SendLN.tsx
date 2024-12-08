@@ -1,64 +1,65 @@
-import { TxType } from "../SwitchTxType";
-import { SendLnForm } from "./SendModal";
-import { SendOnChainForm } from "./SendOnChain";
 import { Alert } from "@/components/Alert";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { convertMSatToSat } from "@/utils/format";
 import { Input } from "@nextui-org/react";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { TxType } from "../SwitchTxType";
+import type { SendLnForm } from "./SendModal";
+import type { SendOnChainForm } from "./SendOnChain";
 
 export type Props = {
-  lnBalance: number;
-  isLoading: boolean;
-  onConfirm: (data: LnInvoiceForm) => void;
-  error: string;
-  confirmData?: SendOnChainForm | SendLnForm | null;
+	lnBalance: number;
+	isLoading: boolean;
+	onConfirm: (data: LnInvoiceForm) => void;
+	error: string;
+	confirmData?: SendOnChainForm | SendLnForm | null;
 };
 
 export interface LnInvoiceForm {
-  invoice: string;
+	invoice: string;
 }
 
 const SendLn: FC<Props> = ({
-  isLoading,
-  lnBalance,
-  onConfirm,
-  error,
-  confirmData,
+	isLoading,
+	lnBalance,
+	onConfirm,
+	error,
+	confirmData,
 }) => {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isValid },
-  } = useForm<LnInvoiceForm>({
-    mode: "onChange",
-  });
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors, isValid },
+	} = useForm<LnInvoiceForm>({
+		mode: "onChange",
+	});
 
-  const [updated, setUpdated] = useState(false);
+	const [updated, setUpdated] = useState(false);
 
-  if (!updated && confirmData?.invoiceType === TxType.LIGHTNING) {
-    setUpdated(true);
-    reset({
-      invoice: confirmData.invoice,
-    });
-  }
+	if (!updated && confirmData?.invoiceType === TxType.LIGHTNING) {
+		setUpdated(true);
+		reset({
+			invoice: confirmData.invoice,
+		});
+	}
 
-  const onSubmit: SubmitHandler<LnInvoiceForm> = (data) => onConfirm(data);
+	const onSubmit: SubmitHandler<LnInvoiceForm> = (data) => onConfirm(data);
 
-  const convertedBalance = lnBalance ? convertMSatToSat(lnBalance) : 0;
+	const convertedBalance = lnBalance ? convertMSatToSat(lnBalance) : 0;
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ConfirmModal.Body>
-        <AvailableBalance balance={convertedBalance!} />
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<ConfirmModal.Body>
+				{/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
+				<AvailableBalance balance={convertedBalance!} />
 
         <Input
           className="w-full"
@@ -77,12 +78,12 @@ const SendLn: FC<Props> = ({
             pattern: {
               value: /^(lnbc|lntb)\w+/i,
               message: t("forms.validation.lnInvoice.patternMismatch"),
-            },
+					},
           })}
         />
 
-        {error && <Alert color="danger">{error}</Alert>}
-      </ConfirmModal.Body>
+				{error && <Alert color="danger">{error}</Alert>}
+			</ConfirmModal.Body>
 
       <ConfirmModal.Footer>
         <Button

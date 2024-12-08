@@ -1,345 +1,345 @@
 {
-  "translation": {
-    "appInfo": {
-      "btc-rpc-explorer": {
-        "about": "Il s'agit d'un explorateur auto-hébergé pour la blockchain Bitcoin, piloté par des appels RPC vers votre propre nœud Bitcoin. Il est facile à exécuter et peut être connecté à d'autres outils (comme les serveurs Electrum) pour obtenir un explorateur complet.",
-        "shortDescription": "Explorateur Bitcoin RPC"
-      },
-      "btcpayserver": {
-        "about": "BTCPay Server est un processeur de paiement Bitcoin gratuit et open-source qui vous permet d'accepter des bitcoins sans frais ni intermédiaires.",
-        "shortDescription": "Acceptez les paiements Bitcoin. Processeur de paiement Bitcoin gratuit, open-source et auto-hébergé."
-      },
-      "lnbits": {
-        "about": "LNbits est un serveur Python très simple qui se trouve au-dessus de n'importe quelle source de financement et peut être utilisé comme système de comptes pour atténuer le risque d'exposer les applications à votre solde complet, via des clés API uniques pour chaque portefeuille.",
-        "shortDescription": "Système de portefeuille/comptes Lightning-network gratuit et open source"
-      },
-      "mempool": {
-        "about": " Un explorateur open source développé pour la communauté Bitcoin, axé sur le marché émergent des frais de transaction pour faciliter notre transition vers un écosystème multicouche.",
-        "shortDescription": "Un explorateur open-source développé pour la communauté Bitcoin"
-      },
-      "rtl": {
-        "about": "RTL est une interface utilisateur web complète, indépendante de l'appareil, qui permet de gérer les opérations des nœuds Lightning. RTL est disponible sur les implémentations LND, Core Lightning et Eclair.",
-        "shortDescription": "Une application web complète pour LND, Core Lightning et Eclair"
-      },
-      "specter": {
-        "about": "Bitcoin Core possède une interface de ligne de commande très puissante et un merveilleux daemon. En utilisant PSBT et HWI, il peut également fonctionner avec des portefeuilles matériels. Il en va de même pour les configurations multisignatures. L'objectif de ce projet est de créer une interface graphique pratique et conviviale autour de Bitcoin Core, en mettant l'accent sur la configuration multisignature avec des portefeuilles matériels et des appareils en air gap.",
-        "shortDescription": "Une interface graphique pour Bitcoin Core optimisée pour fonctionner avec des portefeuilles matériels"
-      },
-      "thunderhub": {
-        "about": "ThunderHub est un gestionnaire de nœuds LND open source où vous pouvez gérer et surveiller votre nœud sur n'importe quel appareil ou navigateur. Il vous permet de prendre le contrôle du réseau Lightning avec une UX simple et intuitive et la technologie la plus récente.",
-        "shortDescription": "LND Lightning Node Manager dans votre navigateur"
-      },
-      "jam": {
-        "shortDescription": "Jam - Interface web pour JoinMarket",
-        "about": "Jam est une interface web pour JoinMarket axée sur la convivialité et la facilité d'utilisation. Elle vise à fournir des valeurs par défaut raisonnables et à être facile à utiliser pour les débutants, tout en offrant les fonctionnalités attendues par les utilisateurs avancés."
-      },
-      "alby": {
-        "action": {
-          "connection": {
-            "success": "Le compte Raspiblitz a été ajouté à Alby",
-            "hint": "Veuillez d'abord installer l'extension Alby",
-            "error": "L'ajout de Raspiblitz à Alby n'a pas fonctionné, veuillez réessayer"
-          },
-          "install": "Installer Alby",
-          "addAccount": "Connecter",
-          "connection_info_error": "Impossible d'obtenir les informations de connexion"
-        },
-        "about": "Extension du navigateur Alby",
-        "shortDescription": "Connectez votre nœud RaspiBlitz LND et utilisez les applications Bitcoin & Nostr avec l'extension Alby"
-      }
-    },
-    "apps": {
-      "about": "À propos",
-      "author": "Auteur",
-      "available": "Applications disponibles",
-      "info": "Infos",
-      "install": "Installer",
-      "install_failure": "L'installation de {{appName}} a échoué : {{details}}",
-      "install_success": "{{appName}} a été installé avec succès",
-      "installed": "Installé",
-      "installing": "Installation",
-      "login_admin_pass_b": "Connectez-vous avec l'utilisateur 'admin' et le mot de passe B",
-      "login_no_pass": "Connexion sans mot de passe",
-      "login_pass_b": "Connectez-vous avec le mot de passe B",
-      "login_userdef": "Connexion avec un mot de passe défini par l'utilisateur",
-      "no_page": "Aucune page disponible",
-      "offline": "hors ligne",
-      "online": "en ligne",
-      "open": "Ouvrir",
-      "selfsigned_cert": "Cette application utilise un certificat HTTPS auto-signé",
-      "source": "Code source",
-      "uninstall": "Désinstaller",
-      "uninstall_failure": "La désinstallation de {{appName}} a échoué : {{details}}",
-      "uninstall_success": "{{appName}} désinstallé avec succès",
-      "uninstalling": "Désinstallation de"
-    },
-    "forms": {
-      "hint": {
-        "invoiceAmountZero": "Le montant de la facture est nul"
-      },
-      "validation": {
-        "amount": {
-          "required": "Veuillez saisir un montant"
-        },
-        "chainAddress": {
-          "patternMismatch": "Format d'adresse incorrect",
-          "required": "Veuillez saisir une adresse Bitcoin"
-        },
-        "chainAmount": {
-          "max": "Votre solde est trop bas pour envoyer ce montant",
-          "required": "Veuillez saisir un montant"
-        },
-        "chainFee": {
-          "required": "Veuillez saisir un montant de frais"
-        },
-        "lnInvoice": {
-          "expired": "Facture expirée",
-          "max": "Votre solde insuffisant pour payer cette facture",
-          "patternMismatch": "Format de facture incorrect",
-          "required": "Veuillez saisir une facture Lightning"
-        },
-        "node_uri": {
-          "required": "Veuillez entrer un URI de nœud"
-        },
-        "unlock": {
-          "pass_c": "Mot de passe C",
-          "required": "Le mot de passe C est requis"
-        }
-      }
-    },
-    "hardware": {
-      "cpu_load": "Charge du processeur",
-      "disk_usage": "Espace disque utilisé",
-      "header": "Détails sur le matériel",
-      "ram_usage": "Utilisation de la mémoire vive",
-      "temp": "Température"
-    },
-    "home": {
-      "active": "Actif",
-      "bitcoin": "Bitcoin",
-      "blockchain_size": "Taille de la blockchain",
-      "blocks_synced": "Blocs synchronisés",
-      "blocktime": "Date de block",
-      "channel": "Canal",
-      "channel_balance": "Équilibre du canal",
-      "channel_closed": "Canal fermé avec succès",
-      "channel_id": "ID du canal",
-      "channel_opened": "Canal ouvert avec succès",
-      "close_channel": "Fermer le canal",
-      "confirm_channel_close": "Confirmer la fermeture du canal",
-      "conn_details": "Détails de la connexion",
-      "conn_in": "Entrant",
-      "conn_out": "Sortant",
-      "connections": "Connexions",
-      "current_open_channels": "Canaux actuellement ouverts",
-      "difficulty": "Difficulté",
-      "force_close": "Fermeture forcée",
-      "hide": "Cacher",
-      "lightning": "Lightning",
-      "list_open_channels": "Liste de canaux",
-      "local_balance": "Balance locale du canal",
-      "network": "Réseau",
-      "no": "Non",
-      "node_id": "ID du noeud",
-      "node_uri": "URI du noeud",
-      "normal": "Normal",
-      "onchain_cln_no_support": "L'affichage des transactions on-chain n'est actuellement pas pris en charge par Core Lightning",
-      "open_channel": "Ouvrir un canal",
-      "pending_balance_local": "Balance local en attente",
-      "pending_balance_remote": "Balance à distance en attente",
-      "remote_balance": "Balance distante du canal",
-      "show": "Afficher",
-      "show_qr": "Afficher QR Code",
-      "slow": "Lent",
-      "ssh": "Connexion SSH",
-      "status": "État",
-      "tor": "Tor",
-      "urgent": "Urgent",
-      "version": "Version",
-      "versions": "Versions",
-      "webui": "UI Web",
-      "no_open_channels": "Vous n'avez actuellement aucun canal ouvert",
-      "not_available": "Non disponible",
-      "connect_node": "Partagez cette adresse avec d'autres personnes afin qu'elles puissent se connecter à votre nœud lightning"
-    },
-    "language": {
-      "cs": "Tchèque",
-      "de": "Allemand",
-      "en": "Anglais",
-      "es": "Espagnol",
-      "fr": "Français",
-      "hu": "Hongrois",
-      "it": "Italien",
-      "nb_NO": "Norvégien",
-      "nl": "Néerlandais",
-      "pt_BR": "Portugais (brésilien)",
-      "sv": "Suédois",
-      "vi": "Vietnamien"
-    },
-    "login": {
-      "enter_pass": "Entrez le mot de passe A",
-      "enter_pass_placeholder": "Mot de passe A",
-      "error": "Une erreur s'est produite",
-      "invalid_pass": "Mot de passe invalide",
-      "login": "Se connecter",
-      "caps_lock": "Le Verrouillage des Majuscules est ACTIVÉ",
-      "unknown_error": "Erreur inconnue. La réponse était : {{code}} {{statusText}}."
-    },
-    "navigation": {
-      "apps": "Applis",
-      "back": "Retour",
-      "dark_mode": "Mode sombre",
-      "display_sats": "Afficher SATS",
-      "home": "Accueil",
-      "logout": "Se déconnecter",
-      "settings": "Paramètres"
-    },
-    "settings": {
-      "cancel": "Annuler",
-      "change": "Changer",
-      "change_pw_a": "Changer le mot de passe A",
-      "confirm": "Confirmer",
-      "curr_lang": "Langue actuelle",
-      "language": "Langue",
-      "new_pw": "Nouveau mot de passe",
-      "old_pw": "Ancien mot de passe",
-      "pass_a_changed": "Le mot de passe A a été modifié avec succès",
-      "reboot": "Redémarrer",
-      "shutdown": "Éteindre",
-      "generate": "Générer",
-      "generating": "Génération",
-      "debug_report_done": "Rapport de débogage créé !",
-      "generate_debug": "Générer un rapport de débogage",
-      "generating_debug_report": "Génération du rapport de débogage. Cela peut prendre un certain temps.",
-      "shutdown_confirm": "Arrêter votre RaspiBlitz ?",
-      "shutdown_info": "Une fois l'arrêt terminé, le voyant d'activité devient rouge et l'écran LCD devient blanc.",
-      "shutdown_info_disconnect_power": "Attendez ensuite 5 secondes et débranchez l'alimentation."
-    },
-    "setup": {
-      "input_node": {
-        "err_only_chars": "Le nom de noeud ne doit contenir que des caractères et des chiffres.",
-        "err_max_length": "Le nom de noeud doit comporter au maximum 32 caractères.",
-        "err_min_length": "Le nom du nœud doit comporter au moins 4 caractères.",
-        "err_empty": "Le nom de noeud ne peut pas être vide."
-      },
-      "blockchain_delete": "Supprimer Blockchain",
-      "blockchain_found_long": "Sur votre disque dur/SSD, des données blockchain existantes ont été trouvées.",
-      "blockchain_found_short": "Blockchain trouvée sur le HDD/SSD",
-      "blockchain_keep": "Conserver la blockchain",
-      "cancel": "Annuler",
-      "cancel_setup": "Voulez-vous vraiment annuler le processus de configuration",
-      "continue": "Continuer",
-      "convertwarning": "RaspiBlitz peut seulement convertir vos données Blockchain et Lightning (fonds + canaux) pour le moment. Les données des autres applications installées peuvent être supprimées lors du processus de migration.",
-      "done_migration_ready": "OK. Tout est prêt pour migrer vers RaspiBlitz.",
-      "done_migration_start": "Commencer la migration",
-      "done_recover_ready": "OK. Tout est prêt pour récupérer votre RaspiBlitz.",
-      "done_recover_start": "Commencez la récupération",
-      "done_setup_ready": "OK. Tout est prêt pour installer votre RaspiBlitz.",
-      "done_setup_start": "Démarrer l'installation",
-      "done_update_ready": "OK. Tout est prêt pour mettre à jour votre RaspiBlitz.",
-      "done_update_start": "Commencer la mise à jour",
-      "final_do_reboot": "OK, faites le redémarrage final",
-      "final_info_reboot": "va maintenant redémarrer et synchroniser la blockchain.",
-      "final_migration": "La migration est terminée.",
-      "final_recovery": "La récupération est terminée.",
-      "final_seedwords": "Veuillez noter vos mots-clés et les conserver dans un endroit sûr :",
-      "final_setup": "L'installation est terminée.",
-      "final_update": "La mise à jour est terminée.",
-      "lightningoutdated": "Le nœud à partir duquel vous voulez migrer utilise une version Lightning plus récente que ce RaspiBlitz. Veuillez attendre une version mise à jour. Vous pouvez arrêter et démarrer avec la carte sd de votre ancien nœud - aucun changement n'a été fait.",
-      "lnd": "LND",
-      "migrateblitz": "Migrer vers RaspiBlitz",
-      "no_and_shutdown": "Non et arrêt",
-      "ok": "OK",
-      "other_options": "Autres options",
-      "password_a_details": "Utilisez ce mot de passe pour vous connecter à votre RaspiBlitz.",
-      "password_a_name": "Mot de passe A",
-      "password_a_short": "Définissez votre nouveau mot de passe d'administrateur (mot de passe A)",
-      "password_b_details": "Utilisez ce mot de passe pour les applications supplémentaires que vous pouvez installer sur votre RaspiBlitz.",
-      "password_b_name": "Mot de passe B",
-      "password_b_short": "Définissez votre nouveau mot de passe d'application (mot de passe B)",
-      "password_c_details": "Utilisez ce mot de passe pour déverrouiller votre Wallet Lightning .",
-      "password_c_name": "Mot de passe C",
-      "password_c_short": "Définissez votre nouveau mot de passe \"Lightning-Wallet\" (mot de passe C)",
-      "password_error_chars": "Le mot de passe ne doit contenir que des caractères et des chiffres.",
-      "password_error_empty": "Le mot de passe ne peut pas être vide.",
-      "password_error_length": "Le mot de passe doit comporter au moins 8 caractères.",
-      "password_error_match": "Les mots de passe ne correspondent pas.",
-      "password_repeat": "Répéter",
-      "pleasewait": "veuillez patienter",
-      "preparingsetup": "préparation de l'installation",
-      "recoverblitz": "Récupération de mon RaspiBlitz",
-      "restartinfo": "veuillez attendre que RaspiBlitz réponde à nouveau",
-      "restarting": "redémarrage",
-      "restarts": "Redémarre",
-      "runningsetup": "Lancer l'installation",
-      "select_lightning": "Choisissez votre Implementaion Lightning :",
-      "setupblitz": "Configurer un nouveau RaspiBlitz",
-      "setupoptions": "Options d'installation",
-      "setupwait": "L'installation prendra quelques minutes",
-      "shuttingdown": "mise hors tension",
-      "start_recovery": "Voulez-vous commencer le processus de récupération ?",
-      "start_update": "Voulez-vous lancer le processus de mise à jour et de récupération ?",
-      "started": "Démarré",
-      "sync_bitcoin_starting": "Démarrage de la synchronisation",
-      "sync_bitcoin_sync": "Progrès de la synchronisation",
-      "sync_headline": "Synchronisation initiale de RaspiBlitz",
-      "sync_restartinfo": "(la synchronisation se poursuivra au prochain redémarrage)",
-      "sync_wallet_info": "Veuillez déverrouiller votre Lightning Wallet (mot de passe C) :",
-      "sync_wallet_unlock": "Déverrouiller le portefeuille",
-      "updateblitz": "Mettre à jour mon RaspiBlitz",
-      "yes": "Oui",
-      "yes_and_migrate": "Migrer vers RaspiBlitz"
-    },
-    "tx": {
-      "comment": "Commentaire",
-      "comment_placeholder": "Commentaire facultatif",
-      "confirm_info": "Veuillez confirmer la transaction suivante",
-      "confirmations": "Confirmations",
-      "date": "Date",
-      "description": "Description",
-      "fee": "Frais",
-      "fee_rate": "Taux de frais",
-      "included_block": "Inclus dans le block",
-      "mempool": "Voir dans mempool",
-      "sent": "Transaction envoyée !",
-      "transactions": "Transactions",
-      "transactions_none": "Aucune transaction pour le moment, il est temps de faire la première",
-      "tx_details": "Détails de la transaction",
-      "txid": "Identifiant de transaction",
-      "unconfirmed": "Non confirmée",
-      "value": "Valeur",
-      "spend_all": "Dépenser tout les fonds on-chain",
-      "all_onchain": "Tout les fonds on-chain"
-    },
-    "wallet": {
-      "address": "Adresse",
-      "amount": "Montant",
-      "balance": "Balance",
-      "confirm": "Confirmer",
-      "copied": "Copié !",
-      "copy_clipboard": "Copier dans le presse-papier",
-      "create_invoice": "Créer une facture",
-      "create_invoice_ln": "Créer une facture Lightning",
-      "fund": "Approvisionner votre porte-monnaie on-chain",
-      "invoice": "Facture",
-      "on_chain": "On-chain",
-      "receive": "Recevoir",
-      "refresh": "Actualiser l'adresse",
-      "scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
-      "send": "Envoyer",
-      "send_lightning": "Envoyer de l'argent avec Lightning",
-      "send_onchain": "Envoyer de l'argent On-chain",
-      "unlock": "Déverrouiller",
-      "unlock_subtitle": "Déverrouillez votre portefeuille",
-      "unlock_success": "Portefeuille déverrouillé",
-      "unlock_title": "Déverrouiller le portefeuille",
-      "unlocking": "Déverrouillage",
-      "wallet_locked": "Portefeuille verrouillé",
-      "available_balance": "Balance disponible"
-    },
-    "error": {
-      "stack": "trace de la pile",
-      "report": "Veuillez signaler cette erreur à"
-    }
-  }
+	"translation": {
+		"appInfo": {
+			"btc-rpc-explorer": {
+				"about": "Il s'agit d'un explorateur auto-hébergé pour la blockchain Bitcoin, piloté par des appels RPC vers votre propre nœud Bitcoin. Il est facile à exécuter et peut être connecté à d'autres outils (comme les serveurs Electrum) pour obtenir un explorateur complet.",
+				"shortDescription": "Explorateur Bitcoin RPC"
+			},
+			"btcpayserver": {
+				"about": "BTCPay Server est un processeur de paiement Bitcoin gratuit et open-source qui vous permet d'accepter des bitcoins sans frais ni intermédiaires.",
+				"shortDescription": "Acceptez les paiements Bitcoin. Processeur de paiement Bitcoin gratuit, open-source et auto-hébergé."
+			},
+			"lnbits": {
+				"about": "LNbits est un serveur Python très simple qui se trouve au-dessus de n'importe quelle source de financement et peut être utilisé comme système de comptes pour atténuer le risque d'exposer les applications à votre solde complet, via des clés API uniques pour chaque portefeuille.",
+				"shortDescription": "Système de portefeuille/comptes Lightning-network gratuit et open source"
+			},
+			"mempool": {
+				"about": " Un explorateur open source développé pour la communauté Bitcoin, axé sur le marché émergent des frais de transaction pour faciliter notre transition vers un écosystème multicouche.",
+				"shortDescription": "Un explorateur open-source développé pour la communauté Bitcoin"
+			},
+			"rtl": {
+				"about": "RTL est une interface utilisateur web complète, indépendante de l'appareil, qui permet de gérer les opérations des nœuds Lightning. RTL est disponible sur les implémentations LND, Core Lightning et Eclair.",
+				"shortDescription": "Une application web complète pour LND, Core Lightning et Eclair"
+			},
+			"specter": {
+				"about": "Bitcoin Core possède une interface de ligne de commande très puissante et un merveilleux daemon. En utilisant PSBT et HWI, il peut également fonctionner avec des portefeuilles matériels. Il en va de même pour les configurations multisignatures. L'objectif de ce projet est de créer une interface graphique pratique et conviviale autour de Bitcoin Core, en mettant l'accent sur la configuration multisignature avec des portefeuilles matériels et des appareils en air gap.",
+				"shortDescription": "Une interface graphique pour Bitcoin Core optimisée pour fonctionner avec des portefeuilles matériels"
+			},
+			"thunderhub": {
+				"about": "ThunderHub est un gestionnaire de nœuds LND open source où vous pouvez gérer et surveiller votre nœud sur n'importe quel appareil ou navigateur. Il vous permet de prendre le contrôle du réseau Lightning avec une UX simple et intuitive et la technologie la plus récente.",
+				"shortDescription": "LND Lightning Node Manager dans votre navigateur"
+			},
+			"jam": {
+				"shortDescription": "Jam - Interface web pour JoinMarket",
+				"about": "Jam est une interface web pour JoinMarket axée sur la convivialité et la facilité d'utilisation. Elle vise à fournir des valeurs par défaut raisonnables et à être facile à utiliser pour les débutants, tout en offrant les fonctionnalités attendues par les utilisateurs avancés."
+			},
+			"alby": {
+				"action": {
+					"connection": {
+						"success": "Le compte Raspiblitz a été ajouté à Alby",
+						"hint": "Veuillez d'abord installer l'extension Alby",
+						"error": "L'ajout de Raspiblitz à Alby n'a pas fonctionné, veuillez réessayer"
+					},
+					"install": "Installer Alby",
+					"addAccount": "Connecter",
+					"connection_info_error": "Impossible d'obtenir les informations de connexion"
+				},
+				"about": "Extension du navigateur Alby",
+				"shortDescription": "Connectez votre nœud RaspiBlitz LND et utilisez les applications Bitcoin & Nostr avec l'extension Alby"
+			}
+		},
+		"apps": {
+			"about": "À propos",
+			"author": "Auteur",
+			"available": "Applications disponibles",
+			"info": "Infos",
+			"install": "Installer",
+			"install_failure": "L'installation de {{appName}} a échoué : {{details}}",
+			"install_success": "{{appName}} a été installé avec succès",
+			"installed": "Installé",
+			"installing": "Installation",
+			"login_admin_pass_b": "Connectez-vous avec l'utilisateur 'admin' et le mot de passe B",
+			"login_no_pass": "Connexion sans mot de passe",
+			"login_pass_b": "Connectez-vous avec le mot de passe B",
+			"login_userdef": "Connexion avec un mot de passe défini par l'utilisateur",
+			"no_page": "Aucune page disponible",
+			"offline": "hors ligne",
+			"online": "en ligne",
+			"open": "Ouvrir",
+			"selfsigned_cert": "Cette application utilise un certificat HTTPS auto-signé",
+			"source": "Code source",
+			"uninstall": "Désinstaller",
+			"uninstall_failure": "La désinstallation de {{appName}} a échoué : {{details}}",
+			"uninstall_success": "{{appName}} désinstallé avec succès",
+			"uninstalling": "Désinstallation de"
+		},
+		"forms": {
+			"hint": {
+				"invoiceAmountZero": "Le montant de la facture est nul"
+			},
+			"validation": {
+				"amount": {
+					"required": "Veuillez saisir un montant"
+				},
+				"chainAddress": {
+					"patternMismatch": "Format d'adresse incorrect",
+					"required": "Veuillez saisir une adresse Bitcoin"
+				},
+				"chainAmount": {
+					"max": "Votre solde est trop bas pour envoyer ce montant",
+					"required": "Veuillez saisir un montant"
+				},
+				"chainFee": {
+					"required": "Veuillez saisir un montant de frais"
+				},
+				"lnInvoice": {
+					"expired": "Facture expirée",
+					"max": "Votre solde insuffisant pour payer cette facture",
+					"patternMismatch": "Format de facture incorrect",
+					"required": "Veuillez saisir une facture Lightning"
+				},
+				"node_uri": {
+					"required": "Veuillez entrer un URI de nœud"
+				},
+				"unlock": {
+					"pass_c": "Mot de passe C",
+					"required": "Le mot de passe C est requis"
+				}
+			}
+		},
+		"hardware": {
+			"cpu_load": "Charge du processeur",
+			"disk_usage": "Espace disque utilisé",
+			"header": "Détails sur le matériel",
+			"ram_usage": "Utilisation de la mémoire vive",
+			"temp": "Température"
+		},
+		"home": {
+			"active": "Actif",
+			"bitcoin": "Bitcoin",
+			"blockchain_size": "Taille de la blockchain",
+			"blocks_synced": "Blocs synchronisés",
+			"blocktime": "Date de block",
+			"channel": "Canal",
+			"channel_balance": "Équilibre du canal",
+			"channel_closed": "Canal fermé avec succès",
+			"channel_id": "ID du canal",
+			"channel_opened": "Canal ouvert avec succès",
+			"close_channel": "Fermer le canal",
+			"confirm_channel_close": "Confirmer la fermeture du canal",
+			"conn_details": "Détails de la connexion",
+			"conn_in": "Entrant",
+			"conn_out": "Sortant",
+			"connections": "Connexions",
+			"current_open_channels": "Canaux actuellement ouverts",
+			"difficulty": "Difficulté",
+			"force_close": "Fermeture forcée",
+			"hide": "Cacher",
+			"lightning": "Lightning",
+			"list_open_channels": "Liste de canaux",
+			"local_balance": "Balance locale du canal",
+			"network": "Réseau",
+			"no": "Non",
+			"node_id": "ID du noeud",
+			"node_uri": "URI du noeud",
+			"normal": "Normal",
+			"onchain_cln_no_support": "L'affichage des transactions on-chain n'est actuellement pas pris en charge par Core Lightning",
+			"open_channel": "Ouvrir un canal",
+			"pending_balance_local": "Balance local en attente",
+			"pending_balance_remote": "Balance à distance en attente",
+			"remote_balance": "Balance distante du canal",
+			"show": "Afficher",
+			"show_qr": "Afficher QR Code",
+			"slow": "Lent",
+			"ssh": "Connexion SSH",
+			"status": "État",
+			"tor": "Tor",
+			"urgent": "Urgent",
+			"version": "Version",
+			"versions": "Versions",
+			"webui": "UI Web",
+			"no_open_channels": "Vous n'avez actuellement aucun canal ouvert",
+			"not_available": "Non disponible",
+			"connect_node": "Partagez cette adresse avec d'autres personnes afin qu'elles puissent se connecter à votre nœud lightning"
+		},
+		"language": {
+			"cs": "Tchèque",
+			"de": "Allemand",
+			"en": "Anglais",
+			"es": "Espagnol",
+			"fr": "Français",
+			"hu": "Hongrois",
+			"it": "Italien",
+			"nb_NO": "Norvégien",
+			"nl": "Néerlandais",
+			"pt_BR": "Portugais (brésilien)",
+			"sv": "Suédois",
+			"vi": "Vietnamien"
+		},
+		"login": {
+			"enter_pass": "Entrez le mot de passe A",
+			"enter_pass_placeholder": "Mot de passe A",
+			"error": "Une erreur s'est produite",
+			"invalid_pass": "Mot de passe invalide",
+			"login": "Se connecter",
+			"caps_lock": "Le Verrouillage des Majuscules est ACTIVÉ",
+			"unknown_error": "Erreur inconnue. La réponse était : {{code}} {{statusText}}."
+		},
+		"navigation": {
+			"apps": "Applis",
+			"back": "Retour",
+			"dark_mode": "Mode sombre",
+			"display_sats": "Afficher SATS",
+			"home": "Accueil",
+			"logout": "Se déconnecter",
+			"settings": "Paramètres"
+		},
+		"settings": {
+			"cancel": "Annuler",
+			"change": "Changer",
+			"change_pw_a": "Changer le mot de passe A",
+			"confirm": "Confirmer",
+			"curr_lang": "Langue actuelle",
+			"language": "Langue",
+			"new_pw": "Nouveau mot de passe",
+			"old_pw": "Ancien mot de passe",
+			"pass_a_changed": "Le mot de passe A a été modifié avec succès",
+			"reboot": "Redémarrer",
+			"shutdown": "Éteindre",
+			"generate": "Générer",
+			"generating": "Génération",
+			"debug_report_done": "Rapport de débogage créé !",
+			"generate_debug": "Générer un rapport de débogage",
+			"generating_debug_report": "Génération du rapport de débogage. Cela peut prendre un certain temps.",
+			"shutdown_confirm": "Arrêter votre RaspiBlitz ?",
+			"shutdown_info": "Une fois l'arrêt terminé, le voyant d'activité devient rouge et l'écran LCD devient blanc.",
+			"shutdown_info_disconnect_power": "Attendez ensuite 5 secondes et débranchez l'alimentation."
+		},
+		"setup": {
+			"input_node": {
+				"err_only_chars": "Le nom de noeud ne doit contenir que des caractères et des chiffres.",
+				"err_max_length": "Le nom de noeud doit comporter au maximum 32 caractères.",
+				"err_min_length": "Le nom du nœud doit comporter au moins 4 caractères.",
+				"err_empty": "Le nom de noeud ne peut pas être vide."
+			},
+			"blockchain_delete": "Supprimer Blockchain",
+			"blockchain_found_long": "Sur votre disque dur/SSD, des données blockchain existantes ont été trouvées.",
+			"blockchain_found_short": "Blockchain trouvée sur le HDD/SSD",
+			"blockchain_keep": "Conserver la blockchain",
+			"cancel": "Annuler",
+			"cancel_setup": "Voulez-vous vraiment annuler le processus de configuration",
+			"continue": "Continuer",
+			"convertwarning": "RaspiBlitz peut seulement convertir vos données Blockchain et Lightning (fonds + canaux) pour le moment. Les données des autres applications installées peuvent être supprimées lors du processus de migration.",
+			"done_migration_ready": "OK. Tout est prêt pour migrer vers RaspiBlitz.",
+			"done_migration_start": "Commencer la migration",
+			"done_recover_ready": "OK. Tout est prêt pour récupérer votre RaspiBlitz.",
+			"done_recover_start": "Commencez la récupération",
+			"done_setup_ready": "OK. Tout est prêt pour installer votre RaspiBlitz.",
+			"done_setup_start": "Démarrer l'installation",
+			"done_update_ready": "OK. Tout est prêt pour mettre à jour votre RaspiBlitz.",
+			"done_update_start": "Commencer la mise à jour",
+			"final_do_reboot": "OK, faites le redémarrage final",
+			"final_info_reboot": "va maintenant redémarrer et synchroniser la blockchain.",
+			"final_migration": "La migration est terminée.",
+			"final_recovery": "La récupération est terminée.",
+			"final_seedwords": "Veuillez noter vos mots-clés et les conserver dans un endroit sûr :",
+			"final_setup": "L'installation est terminée.",
+			"final_update": "La mise à jour est terminée.",
+			"lightningoutdated": "Le nœud à partir duquel vous voulez migrer utilise une version Lightning plus récente que ce RaspiBlitz. Veuillez attendre une version mise à jour. Vous pouvez arrêter et démarrer avec la carte sd de votre ancien nœud - aucun changement n'a été fait.",
+			"lnd": "LND",
+			"migrateblitz": "Migrer vers RaspiBlitz",
+			"no_and_shutdown": "Non et arrêt",
+			"ok": "OK",
+			"other_options": "Autres options",
+			"password_a_details": "Utilisez ce mot de passe pour vous connecter à votre RaspiBlitz.",
+			"password_a_name": "Mot de passe A",
+			"password_a_short": "Définissez votre nouveau mot de passe d'administrateur (mot de passe A)",
+			"password_b_details": "Utilisez ce mot de passe pour les applications supplémentaires que vous pouvez installer sur votre RaspiBlitz.",
+			"password_b_name": "Mot de passe B",
+			"password_b_short": "Définissez votre nouveau mot de passe d'application (mot de passe B)",
+			"password_c_details": "Utilisez ce mot de passe pour déverrouiller votre Wallet Lightning .",
+			"password_c_name": "Mot de passe C",
+			"password_c_short": "Définissez votre nouveau mot de passe \"Lightning-Wallet\" (mot de passe C)",
+			"password_error_chars": "Le mot de passe ne doit contenir que des caractères et des chiffres.",
+			"password_error_empty": "Le mot de passe ne peut pas être vide.",
+			"password_error_length": "Le mot de passe doit comporter au moins 8 caractères.",
+			"password_error_match": "Les mots de passe ne correspondent pas.",
+			"password_repeat": "Répéter",
+			"pleasewait": "veuillez patienter",
+			"preparingsetup": "préparation de l'installation",
+			"recoverblitz": "Récupération de mon RaspiBlitz",
+			"restartinfo": "veuillez attendre que RaspiBlitz réponde à nouveau",
+			"restarting": "redémarrage",
+			"restarts": "Redémarre",
+			"runningsetup": "Lancer l'installation",
+			"select_lightning": "Choisissez votre Implementaion Lightning :",
+			"setupblitz": "Configurer un nouveau RaspiBlitz",
+			"setupoptions": "Options d'installation",
+			"setupwait": "L'installation prendra quelques minutes",
+			"shuttingdown": "mise hors tension",
+			"start_recovery": "Voulez-vous commencer le processus de récupération ?",
+			"start_update": "Voulez-vous lancer le processus de mise à jour et de récupération ?",
+			"started": "Démarré",
+			"sync_bitcoin_starting": "Démarrage de la synchronisation",
+			"sync_bitcoin_sync": "Progrès de la synchronisation",
+			"sync_headline": "Synchronisation initiale de RaspiBlitz",
+			"sync_restartinfo": "(la synchronisation se poursuivra au prochain redémarrage)",
+			"sync_wallet_info": "Veuillez déverrouiller votre Lightning Wallet (mot de passe C) :",
+			"sync_wallet_unlock": "Déverrouiller le portefeuille",
+			"updateblitz": "Mettre à jour mon RaspiBlitz",
+			"yes": "Oui",
+			"yes_and_migrate": "Migrer vers RaspiBlitz"
+		},
+		"tx": {
+			"comment": "Commentaire",
+			"comment_placeholder": "Commentaire facultatif",
+			"confirm_info": "Veuillez confirmer la transaction suivante",
+			"confirmations": "Confirmations",
+			"date": "Date",
+			"description": "Description",
+			"fee": "Frais",
+			"fee_rate": "Taux de frais",
+			"included_block": "Inclus dans le block",
+			"mempool": "Voir dans mempool",
+			"sent": "Transaction envoyée !",
+			"transactions": "Transactions",
+			"transactions_none": "Aucune transaction pour le moment, il est temps de faire la première",
+			"tx_details": "Détails de la transaction",
+			"txid": "Identifiant de transaction",
+			"unconfirmed": "Non confirmée",
+			"value": "Valeur",
+			"spend_all": "Dépenser tout les fonds on-chain",
+			"all_onchain": "Tout les fonds on-chain"
+		},
+		"wallet": {
+			"address": "Adresse",
+			"amount": "Montant",
+			"balance": "Balance",
+			"confirm": "Confirmer",
+			"copied": "Copié !",
+			"copy_clipboard": "Copier dans le presse-papier",
+			"create_invoice": "Créer une facture",
+			"create_invoice_ln": "Créer une facture Lightning",
+			"fund": "Approvisionner votre porte-monnaie on-chain",
+			"invoice": "Facture",
+			"on_chain": "On-chain",
+			"receive": "Recevoir",
+			"refresh": "Actualiser l'adresse",
+			"scan_qr": "Scannez ce code QR ou copiez l'adresse ci-dessous pour recevoir des fonds",
+			"send": "Envoyer",
+			"send_lightning": "Envoyer de l'argent avec Lightning",
+			"send_onchain": "Envoyer de l'argent On-chain",
+			"unlock": "Déverrouiller",
+			"unlock_subtitle": "Déverrouillez votre portefeuille",
+			"unlock_success": "Portefeuille déverrouillé",
+			"unlock_title": "Déverrouiller le portefeuille",
+			"unlocking": "Déverrouillage",
+			"wallet_locked": "Portefeuille verrouillé",
+			"available_balance": "Balance disponible"
+		},
+		"error": {
+			"stack": "trace de la pile",
+			"report": "Veuillez signaler cette erreur à"
+		}
+	}
 }

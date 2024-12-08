@@ -8,59 +8,59 @@
 @tailwind utilities;
 
 .scrollbar-stable {
-  scrollbar-gutter: stable;
+	scrollbar-gutter: stable;
 }
 
 /**
-  * Custom Tailwind class CSS
-**/
+ * Custom Tailwind class CSS
+ **/
 
 .label-underline {
-  @apply my-2 block text-left text-sm font-bold text-white;
+	@apply my-2 block text-left text-sm font-bold text-white;
 }
 
 .input-underline {
-  @apply mt-0 block w-full border-0 border-b-2 border-gray-200 bg-transparent px-0.5 text-white outline-none focus:border-yellow-500 focus:ring-0;
+	@apply mt-0 block w-full border-0 border-b-2 border-gray-200 bg-transparent px-0.5 text-white outline-none focus:border-yellow-500 focus:ring-0;
 }
 
 .input-error {
-  @apply input-underline border-red-500 focus:border-red-500;
+	@apply input-underline border-red-500 focus:border-red-500;
 }
 
 .bd-card {
-  @apply flex h-full flex-col justify-center rounded-md bg-gray-800 px-6 py-4 text-white shadow-xl transition-colors;
+	@apply flex h-full flex-col justify-center rounded-md bg-gray-800 px-6 py-4 text-white shadow-xl transition-colors;
 }
 
 .bd-button {
-  @apply rounded bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-500;
+	@apply rounded bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-500;
 }
 
 .bd-button-red {
-  @apply rounded bg-red-500 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-500;
+	@apply rounded bg-red-500 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-500;
 }
 
 .switch-button {
-  @apply m-2 rounded-lg bg-gray-500 px-3 py-1 text-white shadow-md hover:bg-yellow-400 hover:text-white disabled:cursor-default disabled:bg-yellow-500 disabled:text-white;
+	@apply m-2 rounded-lg bg-gray-500 px-3 py-1 text-white shadow-md hover:bg-yellow-400 hover:text-white disabled:cursor-default disabled:bg-yellow-500 disabled:text-white;
 }
 
 .page-container {
-  @apply mb-16 mt-16 h-full w-full overflow-y-auto transition-colors lg:mb-0 lg:w-full lg:pl-72;
+	@apply mb-16 mt-16 h-full w-full overflow-y-auto transition-colors lg:mb-0 lg:w-full lg:pl-72;
 }
 
 /**
-  * Remove up/down arrows from number intput
-**/
+ * Remove up/down arrows from number intput
+ **/
 
 input[type="number"] {
-  -moz-appearance: textfield;
+	-moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 .remove-radio > span {
-  visibility: hidden;
+	visibility: hidden;
 }

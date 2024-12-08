@@ -1,308 +1,308 @@
 {
-  "translation": {
-    "appInfo": {
-      "btc-rpc-explorer": {
-        "about": "Detta är en självhostad utforskare för Bitcoinkedjan, drivs genom RPC-anrop till din egna Bitcoinnod. Det är enkelt att köra och kan anslutas till andra verktig (som Electrum servrar) för att åstadkomma en fullfjädrad utforskare.",
-        "shortDescription": "Bitcoin RPC Explorer"
-      },
-      "btcpayserver": {
-        "about": "BTCPay Server är en gratis och öppen källkods Bitcoin-betalningsprocessor som låter dig acceptera bitcoin utan avgifter eller mellanhänder.",
-        "shortDescription": "Acceptera Bitcoinbetalningar. Gratis, öppen källkod och självhostad Bitcoinbetalningsprocessor."
-      },
-      "lnbits": {
-        "about": "LNBits är en väldigt enkel Python-server som sitter ovanpå valfri inkomstkälla och kan användas som redovisningssystem för att mildra risken för att utsätta applikationer för din fulla balans, via unika API-nycklar för varje plånbok.",
-        "shortDescription": "Gratis och öppen källkod Lightningnätverks plånbok/redovisningssystem"
-      },
-      "mempool": {
-        "about": " En opensourceutforskare utvecklad för Bitcoincommunityt. Med fokus på den stundande marknaden för transaktionsavgifter för att underlätta övergången till ett ekosystem i flera lager.",
-        "shortDescription": "En opensourceutforskare utvecklad för Bitcoincommunityt"
-      },
-      "rtl": {
-        "about": "RLT är ett fullständigt, enhetsoberoende webbgränssnitt för att administrera Lightningnoder. RTL finns tillgängligt för LND, Core Lightning och Eclair.",
-        "shortDescription": "En fullständig webbläsar-app för LND, Core Lightning och Eclair"
-      },
-      "specter": {
-        "about": "Bitcoin Core har ett väldigt kraftfullt kommandopromptgränssnitt och en underbar serverdaemon. Med hjälp av PSBT och HWI kan det också användas med hårdvaruplånböcker, men för närvarande är det för linux-aktigt. Samma sak gäller multisignatur-upplägg. Målet med detta projekt är att skapa ett smidigt och användarvänligt gränssnit runt Bitcoin Core med fokus på multisignatur-upplägg med hårdvaruplånböcker och enheter med airgap.",
-        "shortDescription": "Ett skrivbordsgränssnitt för Bitcoin Core optimerad för att hantera hårdvaruplånböcker"
-      },
-      "thunderhub": {
-        "about": "ThunderHub är en öppen källkods LND-nodhanterare där du kan hantera och övervaka din nod från valfri enhet och läsare. Den möjliggör dig att ta kontroll över lightningnätverket med ett enkelt och intuitivt gränssnitt med den senast uppdaterade tekniken.",
-        "shortDescription": "LND Lightningnodhanterare i din läsare"
-      }
-    },
-    "apps": {
-      "about": "Om",
-      "author": "Upphovsman",
-      "available": "Tillgängliga appar",
-      "info": "Information",
-      "install": "Installera",
-      "install_failure": "Installationen av {{appName}} misslyckades: {{details}}",
-      "install_success": "{{appName}} installerades framgångsrikt",
-      "installed": "Installerad",
-      "installing": "Installerar",
-      "login_admin_pass_b": "Logga in med användarnamn 'admin' och lösenord B",
-      "login_no_pass": "Logga in utan lösenord",
-      "login_pass_b": "Logga in med lösenord B",
-      "login_userdef": "Logga in med användardefinierat lösenord",
-      "no_page": "Ingen sida tillgänglig",
-      "offline": "offline",
-      "online": "online",
-      "open": "Öppna",
-      "selfsigned_cert": "Denna app använder självsignerat HTTPS-certifikat",
-      "source": "Källkod",
-      "uninstall": "Avinstallera",
-      "uninstall_failure": "Avinstallationen av{{appName}} misslyckades: {{details}}",
-      "uninstall_success": "{{appName}} avinstallerades framgångsrikt",
-      "uninstalling": "Avinstallerar"
-    },
-    "forms": {
-      "hint": {
-        "invoiceAmountZero": "Fakturabeloppet är noll"
-      },
-      "validation": {
-        "amount": {
-          "required": "Var god ange ett belopp"
-        },
-        "chainAddress": {
-          "patternMismatch": "Fel adressformat",
-          "required": "Var god ange en Bitcoinadress"
-        },
-        "chainAmount": {
-          "max": "Din balans är för låg för att skicka detta belopp",
-          "required": "Var god ange belopp"
-        },
-        "chainFee": {
-          "required": "Var god ange en avgift"
-        },
-        "lnInvoice": {
-          "expired": "Fakturan har löpt ut",
-          "max": "Din balans är för låg för att betala fakturan",
-          "patternMismatch": "Fel fakturaformat",
-          "required": "Var god ange en Lightningfaktura"
-        },
-        "node_uri": {
-          "required": "Var god ange en nod-URI"
-        },
-        "unlock": {
-          "pass_c": "Lösenord C",
-          "required": "Lösenord C krävs"
-        }
-      }
-    },
-    "hardware": {
-      "cpu_load": "CPU-belastning",
-      "disk_usage": "Använt diskutrymme",
-      "header": "Hårdvarudetaljer",
-      "ram_usage": "RAM-användning",
-      "temp": "Temperatur"
-    },
-    "home": {
-      "active": "Aktiv",
-      "bitcoin": "Bitcoin",
-      "blockchain_size": "Blockchainstorlek",
-      "blocks_synced": "Block synkroniserade",
-      "blocktime": "Blocktid",
-      "channel": "Kanal",
-      "channel_balance": "Kanalbalans",
-      "channel_closed": "Kanalstängning lyckades",
-      "channel_id": "Kanal-ID",
-      "channel_opened": "Kanalöppning lyckades",
-      "close_channel": "Stäng kanal",
-      "confirm_channel_close": "Bekräfta kanalstängning",
-      "conn_details": "Anslutningsdetaljer",
-      "conn_in": "Inkommande",
-      "conn_out": "Utgående",
-      "connections": "Anslutningar",
-      "current_open_channels": "Nuvarande öppna kanaler",
-      "difficulty": "Svårighet",
-      "force_close": "Tvångsstäng",
-      "hide": "Göm",
-      "lightning": "Lightning",
-      "list_open_channels": "Lista kanaler",
-      "local_balance": "Lokal kanalbalans",
-      "network": "Nätverk",
-      "no": "Nej",
-      "node_id": "NodeID",
-      "node_uri": "Nod URI",
-      "normal": "Normal",
-      "onchain_cln_no_support": "Core Lightning stödjer just nu inte visning av on-chaintransaktioner",
-      "open_channel": "Öppna kanal",
-      "pending_balance_local": "Förestående lokal balans",
-      "pending_balance_remote": "Förestående fjärrbalans",
-      "remote_balance": "Fjärrkanalbalans",
-      "show": "Visa",
-      "show_qr": "Visa QR-kod",
-      "slow": "Långsam",
-      "ssh": "SSH login",
-      "status": "Status",
-      "tor": "Tor",
-      "urgent": "Brådskande",
-      "version": "Version",
-      "versions": "Versioner",
-      "webui": "WebUI"
-    },
-    "language": {
-      "cs": "Tjeckiska",
-      "de": "Tyska",
-      "en": "Engelska",
-      "es": "Spanska",
-      "fr": "franska",
-      "hu": "ungerska",
-      "it": "italienska",
-      "nb_NO": "Norvegian",
-      "nl": "Nederländska",
-      "pt_BR": "Portugisiska (Brasilien)",
-      "sv": "Svenska",
-      "vi": "Vietnamesiska"
-    },
-    "login": {
-      "enter_pass": "Ange lösenord A",
-      "enter_pass_placeholder": "Lösenord A",
-      "error": "Ett fel inträffade",
-      "invalid_pass": "Ogiltigt lösenord",
-      "login": "Logga in",
-      "caps_lock": "Caps Lock är PÅSLAGET"
-    },
-    "navigation": {
-      "apps": "Appar",
-      "back": "Tillbaka",
-      "dark_mode": "Mörkt tema",
-      "display_sats": "Visa SATS",
-      "home": "Hem",
-      "logout": "Logga ut",
-      "settings": "Inställningar"
-    },
-    "settings": {
-      "cancel": "Avbryt",
-      "change": "Ändra",
-      "change_pw_a": "Ändra lösenord A",
-      "confirm": "Bekräfta",
-      "curr_lang": "Nuvarande språk",
-      "language": "Språk",
-      "new_pw": "Nytt lösenord",
-      "old_pw": "Gammalt lösenord",
-      "pass_a_changed": "Lösenord A ändrades framgångsrikt",
-      "reboot": "Starta om",
-      "shutdown": "Stäng av"
-    },
-    "setup": {
-      "input_node": {
-        "err_only_chars": "Nodnamn ska innehålla karaktärer och siffror.",
-        "err_max_length": "Nodnamn måste vara maximalt 32 karaktärer långt.",
-        "err_min_length": "Nodnamn måste vara minst 4 karaktärer långt.",
-        "err_empty": "Nodnamn kan inte vara tomt."
-      },
-      "blockchain_delete": "Radera blockkedja",
-      "blockchain_found_long": "Existerande blockkedjedata hittad på din HDD/SSD.",
-      "blockchain_found_short": "Blockchain hittad på HDD/SSD",
-      "blockchain_keep": "Behåll blockkedja",
-      "cancel": "Avbryt",
-      "cancel_setup": "Vill du verkligen avbryta installationsprocessen",
-      "continue": "Fortsätt",
-      "convertwarning": "RaspiBlitz kan endast konvertera din Blockchain- och Lightningdata (medel + kanaler) för närvarande. Data från andra installerade appar kan raderas i migrationsprocessen.",
-      "done_migration_ready": "OK. Allting är redo för att migrera din RaspiBlitz.",
-      "done_migration_start": "Starta migrering",
-      "done_recover_ready": "OK. Allting är redo för att återställa din RaspiBlitz.",
-      "done_recover_start": "Starta återställning",
-      "done_setup_ready": "OK. Allting är redo för att installera din RaspiBlitz.",
-      "done_setup_start": "Starta installation",
-      "done_update_ready": "OK. Allting är redo för att uppdatera din RaspiBlitz.",
-      "done_update_start": "Starta uppdatering",
-      "final_do_reboot": "Ok, utför slutgiltiga omstarten",
-      "final_info_reboot": "Kommer nu starta om och synkronisera blockkedjan.",
-      "final_migration": "Migrationen är klar.",
-      "final_recovery": "Återställning klar.",
-      "final_seedwords": "Var god skriv ner seedorden och spara på en säker plats:",
-      "final_setup": "Installationen är klar.",
-      "final_update": "Uppdatering klar.",
-      "lightningoutdated": "Noden du vill migrera ifrån använder en nyare Lightnng-version än denna RaspiBlitz. Var god vänta för en uppdaterad release. Du kan stänga av och starta upp med din gamla nods SD-kort - inga förändringar har utförts.",
-      "lnd": "LND",
-      "migrateblitz": "Migrera till RaspiBlitz",
-      "no_and_shutdown": "Nej och stäng av",
-      "ok": "OK",
-      "other_options": "Andra alternativ",
-      "password_a_details": "Använd ditt lösenord för att logga in på din RaspiBlitz.",
-      "password_a_name": "Lösenord A",
-      "password_a_short": "Ställ in ditt nya adminlösenord (Lösenord A)",
-      "password_b_details": "Använd detta lösenord för ytterligare appar du kan installera på din RaspiBlitz.",
-      "password_b_name": "Lösenord B",
-      "password_b_short": "Ställ in ditt nya app-lösenord (Lösenord B)",
-      "password_c_details": "Använd detta lösenord för att låsa upp din Lightningplånbok.",
-      "password_c_name": "Lösenord C",
-      "password_c_short": "Ställ in ditt nya Lightningwalletlösenord (Lösenord C)",
-      "password_error_chars": "Lösenordet ska bara innehålla karaktärer och nummer.",
-      "password_error_empty": "Lösenord kan inte vara tomt.",
-      "password_error_length": "Lösenordet måste vara åtminstone 8 karaktärer långt.",
-      "password_error_match": "Lösenorden matchar inte.",
-      "password_repeat": "Upprepa",
-      "pleasewait": "var god vänta",
-      "preparingsetup": "förbereder installering",
-      "recoverblitz": "Återställ min RaspiBlitz",
-      "restartinfo": "var god vänta tills RaspiBlitz svarar igen",
-      "restarting": "startar om",
-      "restarts": "Startar om",
-      "runningsetup": "Kör installation",
-      "select_lightning": "Välj din Lightningimplementation:",
-      "setupblitz": "Installera en färsk RaspiBlitz",
-      "setupoptions": "Installationsinställningar",
-      "setupwait": "installation kommer ta några minuter",
-      "shuttingdown": "stänger ner",
-      "start_recovery": "Vill du starta återställningsprocessen?",
-      "start_update": "Vill du starta uppdatering- och återställningsprocessen?",
-      "started": "Startad",
-      "sync_bitcoin_starting": "Startar synkronisering",
-      "sync_bitcoin_sync": "Synkroniseringsstatus",
-      "sync_headline": "RaspiBlitz initial synkronisering",
-      "sync_restartinfo": "(synkronisering fortsätter nästa omstart)",
-      "sync_wallet_info": "Var god lås upp din Lightningwallet (Lösenord C):",
-      "sync_wallet_unlock": "Lås upp plånbok",
-      "updateblitz": "Uppdatera min RaspiBlitz",
-      "yes": "Ja",
-      "yes_and_migrate": "Migrera till RaspiBlitz"
-    },
-    "tx": {
-      "comment": "Kommentar",
-      "comment_placeholder": "Valfri kommentar",
-      "confirm_info": "Var god bekräfta följande transaktion",
-      "confirmations": "Bekräftelser",
-      "date": "Datum",
-      "description": "Beskrivning",
-      "fee": "Avgift",
-      "fee_rate": "Avgiftnivå",
-      "included_block": "Inkluderad i block",
-      "mempool": "Visa i mempoolen",
-      "sent": "Transaktion skickad!",
-      "transactions": "Transaktioner",
-      "transactions_none": "Inga transaktioner ännu, det är dags att utföra din första",
-      "tx_details": "Transaktionsdetaljer",
-      "txid": "Transaktions-ID",
-      "unconfirmed": "Obekräftad",
-      "value": "Värde"
-    },
-    "wallet": {
-      "address": "Adress",
-      "amount": "Belopp",
-      "balance": "Balans",
-      "confirm": "Bekräfta",
-      "copied": "Kopierat!",
-      "copy_clipboard": "Kopiera till urklipp",
-      "create_invoice": "Skapa faktura",
-      "create_invoice_ln": "Skapa en Lightningfaktura",
-      "fund": "Ladda på din on-chainplånbok",
-      "invoice": "Faktura",
-      "on_chain": "On-chain",
-      "receive": "Mottag",
-      "refresh": "Uppdatera adress",
-      "scan_qr": "Scanna QR-koden eller kopiera adressen nedan för att ta emot medel",
-      "send": "Skicka",
-      "send_lightning": "Skicka medel över Lightning",
-      "send_onchain": "Skicka medel On-chain",
-      "unlock": "Lås upp",
-      "unlock_subtitle": "Lås upp din plånbok",
-      "unlock_success": "Plånbok upplåst",
-      "unlock_title": "Lås upp plånbok",
-      "unlocking": "Låser upp",
-      "wallet_locked": "Plånbok låst"
-    }
-  }
+	"translation": {
+		"appInfo": {
+			"btc-rpc-explorer": {
+				"about": "Detta är en självhostad utforskare för Bitcoinkedjan, drivs genom RPC-anrop till din egna Bitcoinnod. Det är enkelt att köra och kan anslutas till andra verktig (som Electrum servrar) för att åstadkomma en fullfjädrad utforskare.",
+				"shortDescription": "Bitcoin RPC Explorer"
+			},
+			"btcpayserver": {
+				"about": "BTCPay Server är en gratis och öppen källkods Bitcoin-betalningsprocessor som låter dig acceptera bitcoin utan avgifter eller mellanhänder.",
+				"shortDescription": "Acceptera Bitcoinbetalningar. Gratis, öppen källkod och självhostad Bitcoinbetalningsprocessor."
+			},
+			"lnbits": {
+				"about": "LNBits är en väldigt enkel Python-server som sitter ovanpå valfri inkomstkälla och kan användas som redovisningssystem för att mildra risken för att utsätta applikationer för din fulla balans, via unika API-nycklar för varje plånbok.",
+				"shortDescription": "Gratis och öppen källkod Lightningnätverks plånbok/redovisningssystem"
+			},
+			"mempool": {
+				"about": " En opensourceutforskare utvecklad för Bitcoincommunityt. Med fokus på den stundande marknaden för transaktionsavgifter för att underlätta övergången till ett ekosystem i flera lager.",
+				"shortDescription": "En opensourceutforskare utvecklad för Bitcoincommunityt"
+			},
+			"rtl": {
+				"about": "RLT är ett fullständigt, enhetsoberoende webbgränssnitt för att administrera Lightningnoder. RTL finns tillgängligt för LND, Core Lightning och Eclair.",
+				"shortDescription": "En fullständig webbläsar-app för LND, Core Lightning och Eclair"
+			},
+			"specter": {
+				"about": "Bitcoin Core har ett väldigt kraftfullt kommandopromptgränssnitt och en underbar serverdaemon. Med hjälp av PSBT och HWI kan det också användas med hårdvaruplånböcker, men för närvarande är det för linux-aktigt. Samma sak gäller multisignatur-upplägg. Målet med detta projekt är att skapa ett smidigt och användarvänligt gränssnit runt Bitcoin Core med fokus på multisignatur-upplägg med hårdvaruplånböcker och enheter med airgap.",
+				"shortDescription": "Ett skrivbordsgränssnitt för Bitcoin Core optimerad för att hantera hårdvaruplånböcker"
+			},
+			"thunderhub": {
+				"about": "ThunderHub är en öppen källkods LND-nodhanterare där du kan hantera och övervaka din nod från valfri enhet och läsare. Den möjliggör dig att ta kontroll över lightningnätverket med ett enkelt och intuitivt gränssnitt med den senast uppdaterade tekniken.",
+				"shortDescription": "LND Lightningnodhanterare i din läsare"
+			}
+		},
+		"apps": {
+			"about": "Om",
+			"author": "Upphovsman",
+			"available": "Tillgängliga appar",
+			"info": "Information",
+			"install": "Installera",
+			"install_failure": "Installationen av {{appName}} misslyckades: {{details}}",
+			"install_success": "{{appName}} installerades framgångsrikt",
+			"installed": "Installerad",
+			"installing": "Installerar",
+			"login_admin_pass_b": "Logga in med användarnamn 'admin' och lösenord B",
+			"login_no_pass": "Logga in utan lösenord",
+			"login_pass_b": "Logga in med lösenord B",
+			"login_userdef": "Logga in med användardefinierat lösenord",
+			"no_page": "Ingen sida tillgänglig",
+			"offline": "offline",
+			"online": "online",
+			"open": "Öppna",
+			"selfsigned_cert": "Denna app använder självsignerat HTTPS-certifikat",
+			"source": "Källkod",
+			"uninstall": "Avinstallera",
+			"uninstall_failure": "Avinstallationen av{{appName}} misslyckades: {{details}}",
+			"uninstall_success": "{{appName}} avinstallerades framgångsrikt",
+			"uninstalling": "Avinstallerar"
+		},
+		"forms": {
+			"hint": {
+				"invoiceAmountZero": "Fakturabeloppet är noll"
+			},
+			"validation": {
+				"amount": {
+					"required": "Var god ange ett belopp"
+				},
+				"chainAddress": {
+					"patternMismatch": "Fel adressformat",
+					"required": "Var god ange en Bitcoinadress"
+				},
+				"chainAmount": {
+					"max": "Din balans är för låg för att skicka detta belopp",
+					"required": "Var god ange belopp"
+				},
+				"chainFee": {
+					"required": "Var god ange en avgift"
+				},
+				"lnInvoice": {
+					"expired": "Fakturan har löpt ut",
+					"max": "Din balans är för låg för att betala fakturan",
+					"patternMismatch": "Fel fakturaformat",
+					"required": "Var god ange en Lightningfaktura"
+				},
+				"node_uri": {
+					"required": "Var god ange en nod-URI"
+				},
+				"unlock": {
+					"pass_c": "Lösenord C",
+					"required": "Lösenord C krävs"
+				}
+			}
+		},
+		"hardware": {
+			"cpu_load": "CPU-belastning",
+			"disk_usage": "Använt diskutrymme",
+			"header": "Hårdvarudetaljer",
+			"ram_usage": "RAM-användning",
+			"temp": "Temperatur"
+		},
+		"home": {
+			"active": "Aktiv",
+			"bitcoin": "Bitcoin",
+			"blockchain_size": "Blockchainstorlek",
+			"blocks_synced": "Block synkroniserade",
+			"blocktime": "Blocktid",
+			"channel": "Kanal",
+			"channel_balance": "Kanalbalans",
+			"channel_closed": "Kanalstängning lyckades",
+			"channel_id": "Kanal-ID",
+			"channel_opened": "Kanalöppning lyckades",
+			"close_channel": "Stäng kanal",
+			"confirm_channel_close": "Bekräfta kanalstängning",
+			"conn_details": "Anslutningsdetaljer",
+			"conn_in": "Inkommande",
+			"conn_out": "Utgående",
+			"connections": "Anslutningar",
+			"current_open_channels": "Nuvarande öppna kanaler",
+			"difficulty": "Svårighet",
+			"force_close": "Tvångsstäng",
+			"hide": "Göm",
+			"lightning": "Lightning",
+			"list_open_channels": "Lista kanaler",
+			"local_balance": "Lokal kanalbalans",
+			"network": "Nätverk",
+			"no": "Nej",
+			"node_id": "NodeID",
+			"node_uri": "Nod URI",
+			"normal": "Normal",
+			"onchain_cln_no_support": "Core Lightning stödjer just nu inte visning av on-chaintransaktioner",
+			"open_channel": "Öppna kanal",
+			"pending_balance_local": "Förestående lokal balans",
+			"pending_balance_remote": "Förestående fjärrbalans",
+			"remote_balance": "Fjärrkanalbalans",
+			"show": "Visa",
+			"show_qr": "Visa QR-kod",
+			"slow": "Långsam",
+			"ssh": "SSH login",
+			"status": "Status",
+			"tor": "Tor",
+			"urgent": "Brådskande",
+			"version": "Version",
+			"versions": "Versioner",
+			"webui": "WebUI"
+		},
+		"language": {
+			"cs": "Tjeckiska",
+			"de": "Tyska",
+			"en": "Engelska",
+			"es": "Spanska",
+			"fr": "franska",
+			"hu": "ungerska",
+			"it": "italienska",
+			"nb_NO": "Norvegian",
+			"nl": "Nederländska",
+			"pt_BR": "Portugisiska (Brasilien)",
+			"sv": "Svenska",
+			"vi": "Vietnamesiska"
+		},
+		"login": {
+			"enter_pass": "Ange lösenord A",
+			"enter_pass_placeholder": "Lösenord A",
+			"error": "Ett fel inträffade",
+			"invalid_pass": "Ogiltigt lösenord",
+			"login": "Logga in",
+			"caps_lock": "Caps Lock är PÅSLAGET"
+		},
+		"navigation": {
+			"apps": "Appar",
+			"back": "Tillbaka",
+			"dark_mode": "Mörkt tema",
+			"display_sats": "Visa SATS",
+			"home": "Hem",
+			"logout": "Logga ut",
+			"settings": "Inställningar"
+		},
+		"settings": {
+			"cancel": "Avbryt",
+			"change": "Ändra",
+			"change_pw_a": "Ändra lösenord A",
+			"confirm": "Bekräfta",
+			"curr_lang": "Nuvarande språk",
+			"language": "Språk",
+			"new_pw": "Nytt lösenord",
+			"old_pw": "Gammalt lösenord",
+			"pass_a_changed": "Lösenord A ändrades framgångsrikt",
+			"reboot": "Starta om",
+			"shutdown": "Stäng av"
+		},
+		"setup": {
+			"input_node": {
+				"err_only_chars": "Nodnamn ska innehålla karaktärer och siffror.",
+				"err_max_length": "Nodnamn måste vara maximalt 32 karaktärer långt.",
+				"err_min_length": "Nodnamn måste vara minst 4 karaktärer långt.",
+				"err_empty": "Nodnamn kan inte vara tomt."
+			},
+			"blockchain_delete": "Radera blockkedja",
+			"blockchain_found_long": "Existerande blockkedjedata hittad på din HDD/SSD.",
+			"blockchain_found_short": "Blockchain hittad på HDD/SSD",
+			"blockchain_keep": "Behåll blockkedja",
+			"cancel": "Avbryt",
+			"cancel_setup": "Vill du verkligen avbryta installationsprocessen",
+			"continue": "Fortsätt",
+			"convertwarning": "RaspiBlitz kan endast konvertera din Blockchain- och Lightningdata (medel + kanaler) för närvarande. Data från andra installerade appar kan raderas i migrationsprocessen.",
+			"done_migration_ready": "OK. Allting är redo för att migrera din RaspiBlitz.",
+			"done_migration_start": "Starta migrering",
+			"done_recover_ready": "OK. Allting är redo för att återställa din RaspiBlitz.",
+			"done_recover_start": "Starta återställning",
+			"done_setup_ready": "OK. Allting är redo för att installera din RaspiBlitz.",
+			"done_setup_start": "Starta installation",
+			"done_update_ready": "OK. Allting är redo för att uppdatera din RaspiBlitz.",
+			"done_update_start": "Starta uppdatering",
+			"final_do_reboot": "Ok, utför slutgiltiga omstarten",
+			"final_info_reboot": "Kommer nu starta om och synkronisera blockkedjan.",
+			"final_migration": "Migrationen är klar.",
+			"final_recovery": "Återställning klar.",
+			"final_seedwords": "Var god skriv ner seedorden och spara på en säker plats:",
+			"final_setup": "Installationen är klar.",
+			"final_update": "Uppdatering klar.",
+			"lightningoutdated": "Noden du vill migrera ifrån använder en nyare Lightnng-version än denna RaspiBlitz. Var god vänta för en uppdaterad release. Du kan stänga av och starta upp med din gamla nods SD-kort - inga förändringar har utförts.",
+			"lnd": "LND",
+			"migrateblitz": "Migrera till RaspiBlitz",
+			"no_and_shutdown": "Nej och stäng av",
+			"ok": "OK",
+			"other_options": "Andra alternativ",
+			"password_a_details": "Använd ditt lösenord för att logga in på din RaspiBlitz.",
+			"password_a_name": "Lösenord A",
+			"password_a_short": "Ställ in ditt nya adminlösenord (Lösenord A)",
+			"password_b_details": "Använd detta lösenord för ytterligare appar du kan installera på din RaspiBlitz.",
+			"password_b_name": "Lösenord B",
+			"password_b_short": "Ställ in ditt nya app-lösenord (Lösenord B)",
+			"password_c_details": "Använd detta lösenord för att låsa upp din Lightningplånbok.",
+			"password_c_name": "Lösenord C",
+			"password_c_short": "Ställ in ditt nya Lightningwalletlösenord (Lösenord C)",
+			"password_error_chars": "Lösenordet ska bara innehålla karaktärer och nummer.",
+			"password_error_empty": "Lösenord kan inte vara tomt.",
+			"password_error_length": "Lösenordet måste vara åtminstone 8 karaktärer långt.",
+			"password_error_match": "Lösenorden matchar inte.",
+			"password_repeat": "Upprepa",
+			"pleasewait": "var god vänta",
+			"preparingsetup": "förbereder installering",
+			"recoverblitz": "Återställ min RaspiBlitz",
+			"restartinfo": "var god vänta tills RaspiBlitz svarar igen",
+			"restarting": "startar om",
+			"restarts": "Startar om",
+			"runningsetup": "Kör installation",
+			"select_lightning": "Välj din Lightningimplementation:",
+			"setupblitz": "Installera en färsk RaspiBlitz",
+			"setupoptions": "Installationsinställningar",
+			"setupwait": "installation kommer ta några minuter",
+			"shuttingdown": "stänger ner",
+			"start_recovery": "Vill du starta återställningsprocessen?",
+			"start_update": "Vill du starta uppdatering- och återställningsprocessen?",
+			"started": "Startad",
+			"sync_bitcoin_starting": "Startar synkronisering",
+			"sync_bitcoin_sync": "Synkroniseringsstatus",
+			"sync_headline": "RaspiBlitz initial synkronisering",
+			"sync_restartinfo": "(synkronisering fortsätter nästa omstart)",
+			"sync_wallet_info": "Var god lås upp din Lightningwallet (Lösenord C):",
+			"sync_wallet_unlock": "Lås upp plånbok",
+			"updateblitz": "Uppdatera min RaspiBlitz",
+			"yes": "Ja",
+			"yes_and_migrate": "Migrera till RaspiBlitz"
+		},
+		"tx": {
+			"comment": "Kommentar",
+			"comment_placeholder": "Valfri kommentar",
+			"confirm_info": "Var god bekräfta följande transaktion",
+			"confirmations": "Bekräftelser",
+			"date": "Datum",
+			"description": "Beskrivning",
+			"fee": "Avgift",
+			"fee_rate": "Avgiftnivå",
+			"included_block": "Inkluderad i block",
+			"mempool": "Visa i mempoolen",
+			"sent": "Transaktion skickad!",
+			"transactions": "Transaktioner",
+			"transactions_none": "Inga transaktioner ännu, det är dags att utföra din första",
+			"tx_details": "Transaktionsdetaljer",
+			"txid": "Transaktions-ID",
+			"unconfirmed": "Obekräftad",
+			"value": "Värde"
+		},
+		"wallet": {
+			"address": "Adress",
+			"amount": "Belopp",
+			"balance": "Balans",
+			"confirm": "Bekräfta",
+			"copied": "Kopierat!",
+			"copy_clipboard": "Kopiera till urklipp",
+			"create_invoice": "Skapa faktura",
+			"create_invoice_ln": "Skapa en Lightningfaktura",
+			"fund": "Ladda på din on-chainplånbok",
+			"invoice": "Faktura",
+			"on_chain": "On-chain",
+			"receive": "Mottag",
+			"refresh": "Uppdatera adress",
+			"scan_qr": "Scanna QR-koden eller kopiera adressen nedan för att ta emot medel",
+			"send": "Skicka",
+			"send_lightning": "Skicka medel över Lightning",
+			"send_onchain": "Skicka medel On-chain",
+			"unlock": "Lås upp",
+			"unlock_subtitle": "Lås upp din plånbok",
+			"unlock_success": "Plånbok upplåst",
+			"unlock_title": "Lås upp plånbok",
+			"unlocking": "Låser upp",
+			"wallet_locked": "Plånbok låst"
+		}
+	}
 }

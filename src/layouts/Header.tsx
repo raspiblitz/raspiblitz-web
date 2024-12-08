@@ -3,53 +3,53 @@ import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react
 import { AppContext, Unit } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import {
-  SatoshiV1Icon,
-  BitcoinCircleIcon,
+	BitcoinCircleIcon,
+	SatoshiV1Icon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
+	Dropdown,
+	DropdownItem,
+	DropdownMenu,
+	DropdownTrigger,
 } from "@nextui-org/react";
 import { type Key, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {
-  const { t } = useTranslation();
-  const { systemInfo } = useContext(SSEContext);
-  const { unit, logout, toggleUnit } = useContext(AppContext);
+	const { t } = useTranslation();
+	const { systemInfo } = useContext(SSEContext);
+	const { unit, logout, toggleUnit } = useContext(AppContext);
 
-  const unitActive = unit === Unit.SAT;
+	const unitActive = unit === Unit.SAT;
 
-  const handleDropDownAction = (key: Key) => {
-    if (key === "logout") {
-      logout();
-    }
+	const handleDropDownAction = (key: Key) => {
+		if (key === "logout") {
+			logout();
+		}
 
-    if (key === "toggle_sats") {
-      toggleUnit();
-    }
-  };
+		if (key === "toggle_sats") {
+			toggleUnit();
+		}
+	};
 
-  return (
-    <header className="fixed top-0 z-50 mx-auto flex h-16 w-full items-center justify-between border-b border-gray-300 bg-gray-800 px-8 text-gray-300 shadow-md transition-colors">
-      <NavLink to="/">
-        <RaspiBlitzMobileLogo className="h-8 w-8 text-white md:hidden" />
-        <RaspiBlitzLogoDark className="hidden h-8 md:block" />
-      </NavLink>
+	return (
+		<header className="fixed top-0 z-50 mx-auto flex h-16 w-full items-center justify-between border-b border-gray-300 bg-gray-800 px-8 text-gray-300 shadow-md transition-colors">
+			<NavLink to="/">
+				<RaspiBlitzMobileLogo className="h-8 w-8 text-white md:hidden" />
+				<RaspiBlitzLogoDark className="hidden h-8 md:block" />
+			</NavLink>
 
-      <div className="text-xl font-bold">{systemInfo.alias}</div>
+			<div className="text-xl font-bold">{systemInfo.alias}</div>
 
-      <div className="flex items-center">
-        <Dropdown placement="bottom-end">
-          <DropdownTrigger>
-            <Bars3Icon className="h-8 w-8 cursor-pointer hover:text-yellow-400" />
-          </DropdownTrigger>
+			<div className="flex items-center">
+				<Dropdown placement="bottom-end">
+					<DropdownTrigger>
+						<Bars3Icon className="h-8 w-8 cursor-pointer hover:text-yellow-400" />
+					</DropdownTrigger>
 
           <DropdownMenu
             aria-label="Header Actions"

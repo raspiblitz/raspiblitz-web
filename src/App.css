@@ -1,40 +1,42 @@
 .content-container {
-  min-height: calc(100vh - theme("spacing.16"));
+	/* biome-ignore lint/correctness/noUnknownFunction: <explanation> */
+	min-height: calc(100vh - theme("spacing.16"));
 }
 
 .sidebar {
-  max-height: calc(100vh - theme("spacing.16"));
+	/* biome-ignore lint/correctness/noUnknownFunction: <explanation> */
+	max-height: calc(100vh - theme("spacing.16"));
 }
 
 /* Custom Scrollbar Chrome */
 ::-webkit-scrollbar {
-  width: 5px;
+	width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: darkgray;
-  border-radius: 25px;
+	background: darkgray;
+	border-radius: 25px;
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #ccc;
-  border-radius: 10px;
+	box-shadow: inset 0 0 5px #ccc;
+	border-radius: 10px;
 }
 
 /* Custom Scrollbar Firefox */
 
 div,
 ul {
-  scrollbar-width: thin;
+	scrollbar-width: thin;
 }
 
 /* Blur Hidden Text */
 
 .text-blur {
-  color: transparent;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  user-select: none;
-  pointer-events: none;
-  cursor: default;
-  overflow: hidden;
+	color: transparent;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	user-select: none;
+	pointer-events: none;
+	cursor: default;
+	overflow: hidden;
 }
