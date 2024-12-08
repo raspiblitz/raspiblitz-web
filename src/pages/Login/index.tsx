@@ -101,7 +101,7 @@ const Login: FC = () => {
 								inputWrapper:
 									"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
 							}}
-							disabled={isLoading}
+							isDisabled={isLoading}
 							type="password"
 							label={t("login.enter_pass")}
 							placeholder={t("login.enter_pass_placeholder")}

@@ -88,18 +88,18 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
 				{error && <Alert color="danger">{error}</Alert>}
 			</ConfirmModal.Body>
 
-      <ConfirmModal.Footer>
-        <Button
-          color="primary"
-          type="submit"
-          isDisabled={isLoading || (!isValid && submitCount > 0)}
-          isLoading={isLoading}
-        >
-          {t("wallet.create_invoice")}
-        </Button>
-      </ConfirmModal.Footer>
-    </form>
-  );
+			<ConfirmModal.Footer>
+				<Button
+					color="primary"
+					type="submit"
+					isDisabled={isLoading || (!isValid && submitCount > 0)}
+					isLoading={isLoading}
+				>
+					{t("wallet.create_invoice")}
+				</Button>
+			</ConfirmModal.Footer>
+		</form>
+	);
 };
 
 export default ReceiveLN;

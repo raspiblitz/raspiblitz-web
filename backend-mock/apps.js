@@ -1,15 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const util = require('./sse/util');
+const util = require("./sse/util");
 
-router.post('/install/:id', (req, res) => {
-  console.info('call to /api/apps/install for app', req.params.id);
+router.post("/install/:id", (req, res) => {
+  console.info("call to /api/apps/install for app", req.params.id);
   // send information that btc-pay is currently installing
-  util.sendSSE('install', {
-    id: 'rtl',
-    mode: 'on',
-    result: 'running',
-    details: '',
+  util.sendSSE("install", {
+    id: "rtl",
+    mode: "on",
+    result: "running",
+    details: "",
   });
   setTimeout(() => {
     installApp();
@@ -17,59 +17,59 @@ router.post('/install/:id', (req, res) => {
   res.status(200).send();
 });
 
-router.post('/uninstall/:id', (req, res) => {
-  console.info('call to /api/apps/uninstall for app', req.params.id);
+router.post("/uninstall/:id", (req, res) => {
+  console.info("call to /api/apps/uninstall for app", req.params.id);
   // TODO: Create the same example as install but with uninstall
   res.status(200).send();
 });
 
-router.get('/status_advanced/electrs', (req, res) => {
-  console.info('call to /api/apps/status_advanced/electrs');
+router.get("/status_advanced/electrs", (req, res) => {
+  console.info("call to /api/apps/status_advanced/electrs");
   res.status(200).send(
     JSON.stringify({
-      version: 'v0.10.2',
-      localIP: '192.168.0.1',
-      publicIP: '127.0.0.1',
-      portTCP: '50001',
-      portSSL: '50002',
+      version: "v0.10.2",
+      localIP: "192.168.0.1",
+      publicIP: "127.0.0.1",
+      portTCP: "50001",
+      portSSL: "50002",
       // not a real onion address
       TORaddress:
-        'gr7l4dtesftz3t48p2nhbpzwhs5fm2t4fgnavh9v0tdvp80z2jzg5xw1@rzqwnilfge21ma7gr9v40zf7btz4u8rmz7353ua4vtl77yb328vqfl6369az0nv8.onion',
+        "gr7l4dtesftz3t48p2nhbpzwhs5fm2t4fgnavh9v0tdvp80z2jzg5xw1@rzqwnilfge21ma7gr9v40zf7btz4u8rmz7353ua4vtl77yb328vqfl6369az0nv8.onion",
       initialSyncDone: true,
     }),
   );
 });
 
 const installApp = () => {
-  console.info('call to installApp');
+  console.info("call to installApp");
 
   // inform Frontend that app finished installing
-  util.sendSSE('install', {
-    id: 'rtl',
-    mode: 'on',
-    result: 'win',
-    httpsForced: '0',
-    httpsSelfsigned: '1',
-    details: 'OK',
+  util.sendSSE("install", {
+    id: "rtl",
+    mode: "on",
+    result: "win",
+    httpsForced: "0",
+    httpsSelfsigned: "1",
+    details: "OK",
   });
 
-  util.sendSSE('installed_app_status', [
-    { id: 'lnbits', installed: false, status: 'offline', error: '' },
-    { id: 'thunderhub', installed: false, status: 'offline', error: '' },
-    { id: 'btcpayserver', installed: false, status: 'offline', error: '' },
-    { id: 'mempool', installed: false, status: 'offline', error: '' },
-    { id: 'btc-rpc-explorer', installed: false, status: 'offline', error: '' },
+  util.sendSSE("installed_app_status", [
+    { id: "lnbits", installed: false, status: "offline", error: "" },
+    { id: "thunderhub", installed: false, status: "offline", error: "" },
+    { id: "btcpayserver", installed: false, status: "offline", error: "" },
+    { id: "mempool", installed: false, status: "offline", error: "" },
+    { id: "btc-rpc-explorer", installed: false, status: "offline", error: "" },
     {
-      id: 'rtl',
+      id: "rtl",
       installed: true,
-      status: 'online',
-      address: 'http://192.168.1.100:3000',
-      httpsForced: '0',
-      httpsSelfsigned: '1',
-      hiddenService: '4pt2ludsdsdns48dwnd2899rqf63pcdwdwdwh7dwaeukn1w.onion',
-      authMethod: 'password_b',
+      status: "online",
+      address: "http://192.168.1.100:3000",
+      httpsForced: "0",
+      httpsSelfsigned: "1",
+      hiddenService: "4pt2ludsdsdns48dwnd2899rqf63pcdwdwdwh7dwaeukn1w.onion",
+      authMethod: "password_b",
       details: {},
-      error: '',
+      error: "",
     },
   ]);
 };

@@ -1,33 +1,33 @@
-const express = require('express');
-const cors = require('cors');
-const btcInfo = require('./sse/btc_info');
-const lnInfo = require('./sse/ln_info');
-const installedAppStatus = require('./sse/installed_app_status');
-const systemInfo = require('./sse/system_info');
-const hardwareInfo = require('./sse/hardware_info');
-const walletBalance = require('./sse/wallet_balance');
-const systemStartupInfo = require('./sse/system_startup_info');
-const util = require('./sse/util');
-const setup = require('./setup');
-const system = require('./system');
-const apps = require('./apps');
-const lightning = require('./lightning');
+const express = require("express");
+const cors = require("cors");
+const btcInfo = require("./sse/btc_info");
+const lnInfo = require("./sse/ln_info");
+const installedAppStatus = require("./sse/installed_app_status");
+const systemInfo = require("./sse/system_info");
+const hardwareInfo = require("./sse/hardware_info");
+const walletBalance = require("./sse/wallet_balance");
+const systemStartupInfo = require("./sse/system_startup_info");
+const util = require("./sse/util");
+const setup = require("./setup");
+const system = require("./system");
+const apps = require("./apps");
+const lightning = require("./lightning");
 
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 app.use(
-  cors({ credentials: true, origin: 'http://localhost:3000' }),
+  cors({ credentials: true, origin: "http://localhost:3000" }),
   express.json(),
 );
-app.get('/index.html', (req, res) => {
+app.get("/index.html", (req, res) => {
   // only to satisfy playwright webserver check
-  res.send('ok');
+  res.send("ok");
 });
-app.use('/api/system', system);
-app.use('/api/setup', setup);
-app.use('/api/apps', apps);
-app.use('/api/lightning', lightning);
+app.use("/api/system", system);
+app.use("/api/setup", setup);
+app.use("/api/apps", apps);
+app.use("/api/lightning", lightning);
 
 const PORT = 8000;
 
@@ -41,11 +41,11 @@ app.listen(PORT, () => {
  * Main SSE Handler
  */
 const eventsHandler = (request, response) => {
-  console.info('call to /api/sse/subscribe');
+  console.info("call to /api/sse/subscribe");
   const headers = {
-    'Content-Type': 'text/event-stream',
-    'Connection': 'keep-alive',
-    'Cache-Control': 'no-cache',
+    "Content-Type": "text/event-stream",
+    Connection: "keep-alive",
+    "Cache-Control": "no-cache",
   };
   response.writeHead(200, headers);
 
@@ -68,7 +68,7 @@ const eventsHandler = (request, response) => {
   installedAppStatus.appStatus();
   walletBalance.walletBalance();
 
-  request.on('close', () => {
+  request.on("close", () => {
     // do nothing
   });
 };
@@ -76,4 +76,4 @@ const eventsHandler = (request, response) => {
 /**
  * SSE Handler call
  */
-app.get('/api/sse/subscribe', eventsHandler);
+app.get("/api/sse/subscribe", eventsHandler);
