@@ -1,9 +1,9 @@
-const util = require('./util');
+const util = require("./util");
 
 const btcInfo = () => {
-  console.info('sending btc_info');
+  console.info("sending btc_info");
 
-  util.sendSSE('btc_info', {
+  util.sendSSE("btc_info", {
     blocks: 25,
     headers: 25,
     verification_progress: 0.9999983702720613,
@@ -11,29 +11,29 @@ const btcInfo = () => {
     size_on_disk: 427431959018,
     networks: [
       {
-        name: 'ipv4',
+        name: "ipv4",
         limited: false,
         reachable: true,
-        proxy: '',
+        proxy: "",
         proxy_randomize_credentials: false,
       },
       {
-        name: 'ipv6',
+        name: "ipv6",
         limited: false,
         reachable: true,
-        proxy: '',
+        proxy: "",
         proxy_randomize_credentials: false,
       },
       {
-        name: 'onion',
+        name: "onion",
         limited: true,
         reachable: false,
-        proxy: '',
+        proxy: "",
         proxy_randomize_credentials: false,
       },
     ],
     version: 210100,
-    subversion: '/Satoshi:0.21.1/',
+    subversion: "/Satoshi:0.21.1/",
     connections_in: 16,
     connections_out: 3,
   });
