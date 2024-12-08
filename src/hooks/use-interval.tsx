@@ -7,19 +7,19 @@ import { useEffect, useRef } from "react";
  * @param delay delay in milliseconds
  */
 export const useInterval = (callback: () => unknown, delay: number) => {
-  const savedCallback = useRef<() => unknown>();
+	const savedCallback = useRef<() => unknown>();
 
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+	useEffect(() => {
+		savedCallback.current = callback;
+	}, [callback]);
 
-  useEffect(() => {
-    const tick = () => {
-      savedCallback.current?.();
-    };
-    const id = setInterval(tick, delay);
-    return () => {
-      clearInterval(id);
-    };
-  }, [delay]);
+	useEffect(() => {
+		const tick = () => {
+			savedCallback.current?.();
+		};
+		const id = setInterval(tick, delay);
+		return () => {
+			clearInterval(id);
+		};
+	}, [delay]);
 };
