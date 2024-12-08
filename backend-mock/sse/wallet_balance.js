@@ -1,9 +1,9 @@
-const util = require("./util");
+const util = require('./util');
 
 const walletBalance = () => {
-  console.info("sending wallet_balance");
+  console.info('sending wallet_balance');
 
-  util.sendSSE("wallet_balance", {
+  util.sendSSE('wallet_balance', {
     onchain_confirmed_balance: 742363,
     onchain_total_balance: 742363,
     onchain_unconfirmed_balance: 200000000,

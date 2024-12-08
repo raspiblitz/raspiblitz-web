@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const transactions = require("./transactions");
-const util = require("./sse/util");
+const transactions = require('./transactions');
+const util = require('./sse/util');
 
 let WALLET_LOCKED = true;
 
-router.post("/add-invoice", (req, res) => {
+router.post('/add-invoice', (req, res) => {
   console.info(
     `call to /api/lightning/add-invoice with value ${req.query.value_msat} and memo ${req.query.memo}`,
   );
@@ -13,7 +13,7 @@ router.post("/add-invoice", (req, res) => {
     // LND invoice
     JSON.stringify({
       payment_request:
-        "lnbcrt500u1p3vza0ppp5nyyutzvav66suf7070wxje3ys7mrx44283l6u82cywjrc0ylunhsdqqcqzpgxqyz5vqsp5j5wdagc9nwxsqu9z2r562nznwqlgw760tr8nkx7ty3ahrks73lgq9qyyssqjf0r2apc84cvcyrp4w3rt3ymm44hl2kveavjsmjee9xdc35s8a6j3zyzqckkpyehgxpvuyqe4q9r5uejaqysg6vslr2wdt82wg4jm7cqp3xxp9",
+        'lnbcrt500u1p3vza0ppp5nyyutzvav66suf7070wxje3ys7mrx44283l6u82cywjrc0ylunhsdqqcqzpgxqyz5vqsp5j5wdagc9nwxsqu9z2r562nznwqlgw760tr8nkx7ty3ahrks73lgq9qyyssqjf0r2apc84cvcyrp4w3rt3ymm44hl2kveavjsmjee9xdc35s8a6j3zyzqckkpyehgxpvuyqe4q9r5uejaqysg6vslr2wdt82wg4jm7cqp3xxp9',
     }),
     // CLN invoice
     // JSON.stringify({
@@ -23,20 +23,20 @@ router.post("/add-invoice", (req, res) => {
   );
 });
 
-router.post("/send-coins", (req, res) => {
+router.post('/send-coins', (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   res.status(200).send({
-    txid: "txid",
-    address: "11234",
+    txid: 'txid',
+    address: '11234',
     amount: 120202,
-    label: "someLabel",
+    label: 'someLabel',
   });
 });
 
-router.get("/decode-pay-req", (req, res) => {
+router.get('/decode-pay-req', (req, res) => {
   console.info(
-    "call to /api/lightning/decode-pay-req with invoice",
-    req.query["pay_req"],
+    'call to /api/lightning/decode-pay-req with invoice',
+    req.query['pay_req'],
   );
 
   setTimeout(() => {
@@ -44,25 +44,25 @@ router.get("/decode-pay-req", (req, res) => {
     return res.status(200).send(
       JSON.stringify({
         destination:
-          "03fd5eeea1e7ef8bf25124e5bb0f4546e1dd28ce09d6c0d5136f417d74e8afb270",
+          '03fd5eeea1e7ef8bf25124e5bb0f4546e1dd28ce09d6c0d5136f417d74e8afb270',
         payment_hash:
-          "9909c5899d66b50e27cff3dc69662487b63356aa3c7fae1d5823a43c3c9fe4ef",
+          '9909c5899d66b50e27cff3dc69662487b63356aa3c7fae1d5823a43c3c9fe4ef',
         num_satoshis: 50000, // deprecated
         timestamp: 4072013501,
         expiry: 86400,
-        description: "",
-        description_hash: "",
-        fallback_addr: "",
+        description: '',
+        description_hash: '',
+        fallback_addr: '',
         cltv_expiry: 40,
         route_hints: [],
         payment_addr:
-          "951cdea3059b8d0070a250e9a54c53703e877b4f58cf3b1bcb247b71da1e8fd0",
+          '951cdea3059b8d0070a250e9a54c53703e877b4f58cf3b1bcb247b71da1e8fd0',
         num_msat: 50000000,
         features: [
           {
             key: 14,
             value: {
-              name: "payment-addr",
+              name: 'payment-addr',
               is_required: true,
               is_known: true,
             },
@@ -70,7 +70,7 @@ router.get("/decode-pay-req", (req, res) => {
           {
             key: 9,
             value: {
-              name: "tlv-onion",
+              name: 'tlv-onion',
               is_required: false,
               is_known: true,
             },
@@ -78,13 +78,13 @@ router.get("/decode-pay-req", (req, res) => {
           {
             key: 17,
             value: {
-              name: "multi-path-payments",
+              name: 'multi-path-payments',
               is_required: false,
               is_known: true,
             },
           },
         ],
-        currency: "",
+        currency: '',
       }),
     );
   }, 1500);
@@ -133,27 +133,27 @@ router.get("/decode-pay-req", (req, res) => {
   // }));
 });
 
-router.post("/send-payment", (req, res) => {
+router.post('/send-payment', (req, res) => {
   console.info(
-    `call to ${req.originalUrl} with invoice ${req.query["pay_req"]}`,
+    `call to ${req.originalUrl} with invoice ${req.query['pay_req']}`,
   );
 
   return res.status(200).send(
     JSON.stringify({
       payment_hash:
-        "b56e1d38dd4b7a04dec7ad87f5ab403bda96a28d4c70dea1d208e8c39b1e8500",
+        'b56e1d38dd4b7a04dec7ad87f5ab403bda96a28d4c70dea1d208e8c39b1e8500',
       payment_preimage:
-        "df6160dc0f0760c9b3e279a462145fd4e3fef507230c1967a030592f2ae457af",
+        'df6160dc0f0760c9b3e279a462145fd4e3fef507230c1967a030592f2ae457af',
       value_msat: 1000000,
       payment_request:
-        "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
-      status: "succeeded",
+        'lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww',
+      status: 'succeeded',
       fee_msat: 0,
       creation_time_ns: 1636004563364389000,
       htlcs: [
         {
           attempt_id: 1000,
-          status: "succeeded",
+          status: 'succeeded',
           route: {
             total_time_lock: 178,
             total_fees: 0,
@@ -168,7 +168,7 @@ router.post("/send-payment", (req, res) => {
                 amt_to_forward_msat: 1000000,
                 fee_msat: 0,
                 pub_key:
-                  "038b6e605d2e2a3f49aed0d3140eb47ae45b011481ef4669f874bdcc2d7baf6d14",
+                  '038b6e605d2e2a3f49aed0d3140eb47ae45b011481ef4669f874bdcc2d7baf6d14',
                 tlv_payload: true,
               },
             ],
@@ -183,8 +183,8 @@ router.post("/send-payment", (req, res) => {
           failure: {
             code: 0,
             channel_update: {
-              signature: "",
-              chain_hash: "",
+              signature: '',
+              chain_hash: '',
               chan_id: 0,
               timestamp: 0,
               message_flags: 0,
@@ -194,26 +194,26 @@ router.post("/send-payment", (req, res) => {
               base_fee: 0,
               fee_rate: 0,
               htlc_maximum_msat: 0,
-              extra_opaque_data: "",
+              extra_opaque_data: '',
             },
             htlc_msat: 0,
-            onion_sha_256: "",
+            onion_sha_256: '',
             cltv_expiry: 0,
             flags: 0,
             failure_source_index: 0,
             height: 0,
           },
           preimage:
-            "df6160dc0f0760c9b3e279a462145fd4e3fef507230c1967a030592f2ae457af",
+            'df6160dc0f0760c9b3e279a462145fd4e3fef507230c1967a030592f2ae457af',
         },
       ],
       payment_index: 3,
-      failure_reason: "FAILURE_REASON_NONE",
+      failure_reason: 'FAILURE_REASON_NONE',
     }),
   );
 });
 
-router.get("/list-all-tx", (req, res) => {
+router.get('/list-all-tx', (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   if (WALLET_LOCKED) {
     return res.status(423).send();
@@ -221,33 +221,33 @@ router.get("/list-all-tx", (req, res) => {
   return res.status(200).send(JSON.stringify(transactions.listTransactions()));
 });
 
-router.post("/new-address", (req, res) => {
+router.post('/new-address', (req, res) => {
   console.info(`call to /api/lightning/new-address with type ${req.body.type}`);
-  return res.status(200).send("bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz");
+  return res.status(200).send('bcrt1qvh74klc36lefsdgq5r2d44vwxxzkdsch0hhyrz');
 });
 
-router.post("/unlock-wallet", (req, res) => {
+router.post('/unlock-wallet', (req, res) => {
   console.info(
     `call to /api/lightning/unlock-wallet with type ${req.body.password}`,
   );
   // simulate loading time
   setTimeout(() => {
-    if (req.body.password === "password") {
+    if (req.body.password === 'password') {
       WALLET_LOCKED = false;
 
-      util.sendSSE("system_startup_info", {
-        bitcoin: "done",
-        bitcoin_msg: "",
-        lightning: "bootstrapping_after_unlock",
-        lightning_msg: "",
+      util.sendSSE('system_startup_info', {
+        bitcoin: 'done',
+        bitcoin_msg: '',
+        lightning: 'bootstrapping_after_unlock',
+        lightning_msg: '',
       });
 
       setTimeout(() => {
-        util.sendSSE("system_startup_info", {
-          bitcoin: "done",
-          bitcoin_msg: "",
-          lightning: "done",
-          lightning_msg: "",
+        util.sendSSE('system_startup_info', {
+          bitcoin: 'done',
+          bitcoin_msg: '',
+          lightning: 'done',
+          lightning_msg: '',
         });
       }, 3000);
       return res.status(200).send(true);
@@ -256,29 +256,29 @@ router.post("/unlock-wallet", (req, res) => {
   }, 1000);
 });
 
-router.post("/open-channel", (req, res) => {
+router.post('/open-channel', (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   return res.status(200).send();
 });
 
-router.get("/list-channels", (req, res) => {
+router.get('/list-channels', (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   return res.send(
     JSON.stringify([
       {
-        channel_id: "bla",
+        channel_id: 'bla',
         active: true,
-        peer_publickey: "sndsdnsknwwn",
-        peer_alias: "MY_NICE_CHANNEL",
+        peer_publickey: 'sndsdnsknwwn',
+        peer_alias: 'MY_NICE_CHANNEL',
         balance_local: 1_000_000,
         balance_remote: 5_000_000,
         balance_capacity: 6_000_000,
       },
       {
-        channel_id: "id2",
+        channel_id: 'id2',
         active: true,
-        peer_publickey: "myPubKey",
-        peer_alias: "MY PEER ALIAS",
+        peer_publickey: 'myPubKey',
+        peer_alias: 'MY PEER ALIAS',
         balance_local: 100_000_000,
         balance_remote: 200_000_000,
         balance_capacity: 300_000_000,
@@ -287,7 +287,7 @@ router.get("/list-channels", (req, res) => {
   );
 });
 
-router.post("/close-channel", (req, res) => {
+router.post('/close-channel', (req, res) => {
   console.info(`call to ${req.originalUrl}`);
   return res.status(200).send();
 });
