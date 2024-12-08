@@ -131,7 +131,7 @@ export default function SyncScreen({ data, callback }: Props) {
                       }}
                       type="password"
                       label={t("setup.sync_wallet_info")}
-                      disabled={runningUnlock}
+                      isDisabled={runningUnlock}
                       isInvalid={!!errors.passwordInput}
                       errorMessage={errors.passwordInput?.message}
                       value={password}

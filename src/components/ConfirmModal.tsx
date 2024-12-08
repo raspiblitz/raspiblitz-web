@@ -56,13 +56,13 @@ export const ConfirmModal: ConfirmModalComponent = ({
         <ConfirmModalBody>{children || props.body}</ConfirmModalBody>
 
         <ConfirmModalFooter>
-          <Button onClick={onClose} disabled={isLoading}>
+          <Button onClick={onClose} isDisabled={isLoading}>
             {cancelText || t("settings.cancel")}
           </Button>
           <Button
             color="primary"
             onClick={onConfirm}
-            disabled={isLoading || !onConfirm}
+            isDisabled={isLoading || !onConfirm}
             isLoading={isLoading}
           >
             {confirmText || t("settings.confirm")}

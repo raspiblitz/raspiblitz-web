@@ -227,14 +227,14 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       </ConfirmModal.Body>
 
       <ConfirmModal.Footer>
-        <Button onClick={() => close()} disabled={isLoading}>
+        <Button onClick={() => close()} isDisabled={isLoading}>
           {t("settings.cancel")}
         </Button>
 
         <Button
           color="primary"
           type="submit"
-          disabled={
+          isDisabled={
             !isValid || !isValidLnInvoice || isInvoiceAmountBiggerThanBalance
           }
           isLoading={isLoading}
