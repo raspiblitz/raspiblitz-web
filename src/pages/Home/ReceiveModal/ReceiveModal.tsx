@@ -79,7 +79,6 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
     setInvoiceType(key as TxType);
     setError("");
 
-    // eslint-disable-next-line eqeqeq
     if (key == TxType.ONCHAIN && !address) {
       generateOnChainAddressHandler();
     }

@@ -50,7 +50,7 @@ export function formatAmount(value: string, unit: Unit): string {
     value = value.replace(/,/g, "");
     // replace ".." with "."
     value = value.replace(/\.\./g, ".");
-    let output = value.split(".");
+    const output = value.split(".");
     // limit to max 8 decimal places
     if (output[1]?.length > 8) {
       output[1] = output[1].substring(0, 8);

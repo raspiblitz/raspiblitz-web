@@ -47,8 +47,8 @@ export default function LightningDialog({ callback }: Props) {
               i18nKey={"setup.select_lightning_help"}
               t={t}
               components={[
-                // eslint-disable-next-line jsx-a11y/anchor-has-content
                 <a
+                  key="link"
                   href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
                   className="text-primary underline"
                   target="_blank"

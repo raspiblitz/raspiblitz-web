@@ -40,7 +40,7 @@ export const ConfirmModal: ConfirmModalComponent = ({
   cancelText,
   isLoading = false,
   ...props
-}) => {
+}: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpenChange, onClose } = disclosure;
 

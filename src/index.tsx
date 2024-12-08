@@ -19,7 +19,7 @@ declare module "i18next" {
 }
 
 // see https://vitejs.dev/guide/build#load-error-handling
-window.addEventListener("vite:preloadError", (event) => {
+window.addEventListener("vite:preloadError", (_event) => {
   window.location.reload();
 });
 

@@ -19,7 +19,7 @@
     "test:watch": "vitest watch --exclude 'tests'",
     "coverage": "vitest run --coverage --exclude 'tests'",
     "prepare": "husky",
-    "lint": "eslint src/"
+    "lint": "eslint src"
   },
   "config": {
     "port": "3000"
