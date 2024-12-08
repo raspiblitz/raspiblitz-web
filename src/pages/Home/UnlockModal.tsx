@@ -73,7 +73,7 @@ export default function UnlockModal({
                 inputWrapper:
                   "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
               }}
-              disabled={isLoading}
+              isDisabled={isLoading}
               type="password"
               label={t("forms.validation.unlock.pass_c")}
               placeholder={t("forms.validation.unlock.pass_c")}
@@ -95,7 +95,7 @@ export default function UnlockModal({
           <Button
             color="primary"
             type="submit"
-            disabled={isLoading || !isValid}
+            isDisabled={isLoading || !isValid}
             isLoading={isLoading}
           >
             {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
