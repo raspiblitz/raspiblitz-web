@@ -1,8 +1,8 @@
-import App from "./App";
-import { http, server, HttpResponse } from "./testServer";
+import App from "@/App";
 import i18n from "@/i18n/test_config";
 import { I18nextProvider } from "react-i18next";
-import { render, waitFor, screen } from "test-utils";
+import { render, screen, waitFor } from "test-utils";
+import { http, HttpResponse, server } from "./testServer";
 
 const mockedUsedNavigate = vi.fn();
 
