@@ -50,6 +50,8 @@ export const SideDrawer: FC = () => {
         {/* Beginning of the documentation icon feature */}
         <NavLink
           to="https://docs.raspiblitz.org/docs/intro"
+          target="_blank"
+          rel="noopener noreferrer"
           className={(props) => createClassName(props)}
         >
           {/* <AppStatusItem></AppStatusItem> */}

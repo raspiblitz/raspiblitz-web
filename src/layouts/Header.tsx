@@ -75,6 +75,9 @@ export default function Header() {
             <DropdownItem
               key="documentation"
               href="https://docs.raspiblitz.org/docs/intro"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="warning"
               startContent={<BookOpenIcon className="h-5 w-5" />}
             >
               Documentation
