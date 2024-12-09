@@ -2,6 +2,7 @@ import AppIcon from "@/components/AppIcon";
 import AppStatusItem from "@/components/AppStatusItem";
 import { AppContext } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
 import {
   ArrowRightStartOnRectangleIcon,
   Cog6ToothIcon,
@@ -46,25 +47,15 @@ export const SideDrawer: FC = () => {
             {t("navigation.settings")}
           </span>
         </NavLink>
-
-        {/* Beginning of the documentation icon feature */}
         <NavLink
           to="https://docs.raspiblitz.org/docs/intro"
           target="_blank"
           rel="noopener noreferrer"
           className={(props) => createClassName(props)}
         >
-          {/* <AppStatusItem></AppStatusItem> */}
-          <img
-            className={`h-19 inline w-10`}
-            src={`./logo192.png`}
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "/assets/cloud.svg";
-            }}
-            alt={`RaspiBlitz Logo`}
-          />
+          <BookOpenIcon className={navIconClasses} />
           <span className="mx-3 w-1/2 justify-center text-lg">
-            Documentation
+            {t("navigation.documentation")}
           </span>
         </NavLink>
 

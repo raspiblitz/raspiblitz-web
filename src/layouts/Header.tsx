@@ -70,8 +70,6 @@ export default function Header() {
                 ? t("navigation.display_btc")
                 : t("navigation.display_sats")}
             </DropdownItem>
-
-            {/* Adding the documentation redirecting */}
             <DropdownItem
               key="documentation"
               href="https://docs.raspiblitz.org/docs/intro"
@@ -80,7 +78,7 @@ export default function Header() {
               color="warning"
               startContent={<BookOpenIcon className="h-5 w-5" />}
             >
-              Documentation
+              {t("navigation.documentation")}
             </DropdownItem>
 
             <DropdownItem
