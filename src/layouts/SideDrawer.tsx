@@ -1,6 +1,8 @@
+import AppIcon from "@/components/AppIcon";
 import AppStatusItem from "@/components/AppStatusItem";
 import { AppContext } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
 import {
   ArrowRightStartOnRectangleIcon,
   Cog6ToothIcon,
@@ -45,6 +47,18 @@ export const SideDrawer: FC = () => {
             {t("navigation.settings")}
           </span>
         </NavLink>
+        <NavLink
+          to="https://docs.raspiblitz.org/docs/intro"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={(props) => createClassName(props)}
+        >
+          <BookOpenIcon className={navIconClasses} />
+          <span className="mx-3 w-1/2 justify-center text-lg">
+            {t("navigation.documentation")}
+          </span>
+        </NavLink>
+
         {appStatus
           .filter((app) => app.installed)
           .map((app) => (
