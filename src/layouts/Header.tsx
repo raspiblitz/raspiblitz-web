@@ -6,6 +6,7 @@ import {
   SatoshiV1Icon,
   BitcoinCircleIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import {
@@ -69,6 +70,16 @@ export default function Header() {
                 ? t("navigation.display_btc")
                 : t("navigation.display_sats")}
             </DropdownItem>
+
+            {/* Adding the documentation redirecting */}
+            <DropdownItem
+              key="documentation"
+              href="https://docs.raspiblitz.org/docs/intro"
+              startContent={<BookOpenIcon className="h-5 w-5" />}
+            >
+              Documentation
+            </DropdownItem>
+
             <DropdownItem
               key="logout"
               color="danger"
