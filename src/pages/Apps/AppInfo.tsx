@@ -112,7 +112,7 @@ export const AppInfo: FC = () => {
         {(installingApp == null || installingApp.appId !== appId) &&
           !installed && (
             <Button
-              disabled={!!installingApp}
+              isDisabled={!!installingApp}
               color="primary"
               onClick={installHandler}
               startContent={<PlusIcon className="inline h-6 w-6" />}
@@ -140,7 +140,7 @@ export const AppInfo: FC = () => {
         {(installingApp == null || installingApp.appId !== appId) &&
           installed && (
             <Button
-              disabled={!!installingApp}
+              isDisabled={!!installingApp}
               color="danger"
               onClick={uninstallHandler}
               startContent={<TrashIcon className="inline h-6 w-6" />}

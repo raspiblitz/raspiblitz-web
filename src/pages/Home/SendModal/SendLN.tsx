@@ -71,7 +71,7 @@ const SendLn: FC<Props> = ({
           errorMessage={errors.invoice?.message}
           label={t("wallet.invoice")}
           placeholder="lnbc..."
-          disabled={isLoading}
+          isDisabled={isLoading}
           {...register("invoice", {
             required: t("forms.validation.lnInvoice.required"),
             pattern: {
@@ -88,7 +88,7 @@ const SendLn: FC<Props> = ({
         <Button
           color="primary"
           type="submit"
-          disabled={isLoading || !isValid}
+          isDisabled={isLoading || !isValid}
           isLoading={isLoading}
         >
           {t("wallet.send")}
