@@ -61,6 +61,13 @@ const appStatus = () => {
       status: "offline",
       error: "",
     },
+    {
+      id: "albyhub",
+      installed: false,
+      version: "v1.0.0",
+      status: "offline",
+      error: "",
+    },
   ]);
 };
 
