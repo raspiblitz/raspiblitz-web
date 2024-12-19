@@ -57,4 +57,10 @@ export const availableApps: { [name: string]: App } = {
     repository: "https://github.com/romanz/electrs",
     customComponent: Electrs,
   },
+  albyhub: {
+    id: "albyhub",
+    name: "Alby Hub",
+    author: "Alby",
+    repository: "https://github.com/getAlby/hub",
+  },
 };

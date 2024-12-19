@@ -43,6 +43,10 @@
         "connectionInfo": "These addresses allow you to connect your wallet or other applications to your node using Electrs. Use the local connection if you are on the same network as your node or the Tor address for remote access with enhanced privacy.",
         "not_available": "address not available"
       },
+      "albyhub": {
+        "about": "Alby Hub allows you to control your Lightning node or wallet from any other application that supports NWC. Connect apps like Damus or Amethyst to your node.",
+        "shortDescription": "Alby Hub - Your Own Center for Internet Money"
+      },
       "alby": {
         "about": "Alby Browser Extension",
         "shortDescription": "Connect your RaspiBlitz LND node and use Bitcoin & Nostr apps with the Alby Extension",
