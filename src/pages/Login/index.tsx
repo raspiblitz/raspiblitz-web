@@ -7,10 +7,17 @@ import { ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { Button } from "@nextui-org/button";
 import { Spinner } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import { AxiosError } from "axios";
 import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+
+interface IFormInputs {
+  passwordInput: string;
+}
 
 const Login: FC = () => {
   const { t } = useTranslation();
@@ -18,13 +25,18 @@ const Login: FC = () => {
   const [error, setError] = useState("");
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
-  const passwordInput = useRef<HTMLInputElement>(null);
 
   const location = useLocation();
   const from =
     (location.state as { from?: Location })?.from?.pathname || "/home";
   const queryParams = new URLSearchParams(window.location.search);
   const back = queryParams.get("back");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IFormInputs>({ mode: "onChange" });
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -38,15 +50,14 @@ const Login: FC = () => {
     }
   }, [navigate, from, isLoggedIn, back]);
 
-  const loginHandler = async (e: FormEvent) => {
-    e.preventDefault();
-
+  const loginHandler: SubmitHandler<IFormInputs> = async (data: {
+    passwordInput: string;
+  }) => {
     setError("");
     setIsLoading(true);
 
-    const password = passwordInput.current?.value;
     await instance
-      .post("/system/login", { password })
+      .post("/system/login", { password: data.passwordInput })
       .then((resp) => {
         // access_token was used in v1.8
         localStorage.setItem(ACCESS_TOKEN, resp.data.access_token || resp.data);
@@ -80,20 +91,36 @@ const Login: FC = () => {
         <>
           <form
             className="items-left flex flex-col justify-center py-5"
-            onSubmit={loginHandler}
+            onSubmit={handleSubmit(loginHandler)}
           >
-            <label className="label-underline">{t("login.enter_pass")}</label>
-            <input
+            <Input
               autoFocus
-              className="input-underline my-5 w-8/12 md:w-96"
-              placeholder={t("login.enter_pass_placeholder")}
-              ref={passwordInput}
+              className="w-8/12 md:w-96"
+              classNames={{
+                inputWrapper:
+                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+              }}
+              disabled={isLoading}
               type="password"
+              label={t("login.enter_pass")}
+              placeholder={t("login.enter_pass_placeholder")}
+              isInvalid={!!errors.passwordInput}
+              errorMessage={errors.passwordInput?.message}
+              {...register("passwordInput", {
+                required: t("forms.validation.login.required"),
+              })}
             />
 
-            <Button type="submit" color="primary">
-              {t("login.login")}
-            </Button>
+            <article className="flex flex-col items-center justify-center gap-10 pt-10">
+              <Button
+                color="primary"
+                type="submit"
+                isDisabled={isLoading || !isValid}
+                isLoading={isLoading}
+              >
+                {t("login.login")}
+              </Button>
+            </article>
           </form>
 
           {error && <Alert color="danger">{error}</Alert>}

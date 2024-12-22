@@ -118,6 +118,9 @@
         "unlock": {
           "pass_c": "Password C",
           "required": "Password C is required"
+        },
+        "login": {
+          "required": "Password A is required"
         }
       }
     },
