@@ -133,7 +133,7 @@ export const AppCard: FC<Props> = ({
           installingApp.result === "fail") &&
           !installed && (
             <Button
-              disabled={
+              isDisabled={
                 isInstallWaiting ||
                 (installingApp !== null && installingApp?.result !== "fail")
               }

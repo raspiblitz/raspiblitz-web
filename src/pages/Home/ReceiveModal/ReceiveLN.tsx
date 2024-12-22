@@ -92,7 +92,7 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
         <Button
           color="primary"
           type="submit"
-          disabled={isLoading || (!isValid && submitCount > 0)}
+          isDisabled={isLoading || (!isValid && submitCount > 0)}
           isLoading={isLoading}
         >
           {t("wallet.create_invoice")}
