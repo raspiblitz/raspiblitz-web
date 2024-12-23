@@ -61,42 +61,42 @@ const SendLn: FC<Props> = ({
 				{/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
 				<AvailableBalance balance={convertedBalance!} />
 
-        <Input
-          className="w-full"
-          classNames={{
-            inputWrapper:
-              "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-          }}
-          type="text"
-          isInvalid={!!errors.invoice}
-          errorMessage={errors.invoice?.message}
-          label={t("wallet.invoice")}
-          placeholder="lnbc..."
-          isDisabled={isLoading}
-          {...register("invoice", {
-            required: t("forms.validation.lnInvoice.required"),
-            pattern: {
-              value: /^(lnbc|lntb)\w+/i,
-              message: t("forms.validation.lnInvoice.patternMismatch"),
-					},
-          })}
-        />
+				<Input
+					className="w-full"
+					classNames={{
+						inputWrapper:
+							"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+					}}
+					type="text"
+					isInvalid={!!errors.invoice}
+					errorMessage={errors.invoice?.message}
+					label={t("wallet.invoice")}
+					placeholder="lnbc..."
+					isDisabled={isLoading}
+					{...register("invoice", {
+						required: t("forms.validation.lnInvoice.required"),
+						pattern: {
+							value: /^(lnbc|lntb)\w+/i,
+							message: t("forms.validation.lnInvoice.patternMismatch"),
+						},
+					})}
+				/>
 
 				{error && <Alert color="danger">{error}</Alert>}
 			</ConfirmModal.Body>
 
-      <ConfirmModal.Footer>
-        <Button
-          color="primary"
-          type="submit"
-          isDisabled={isLoading || !isValid}
-          isLoading={isLoading}
-        >
-          {t("wallet.send")}
-        </Button>
-      </ConfirmModal.Footer>
-    </form>
-  );
+			<ConfirmModal.Footer>
+				<Button
+					color="primary"
+					type="submit"
+					isDisabled={isLoading || !isValid}
+					isLoading={isLoading}
+				>
+					{t("wallet.send")}
+				</Button>
+			</ConfirmModal.Footer>
+		</form>
+	);
 };
 
 export default SendLn;

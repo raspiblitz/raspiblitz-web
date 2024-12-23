@@ -127,22 +127,22 @@ export const AppCard: FC<Props> = ({
 					</Button>
 				)}
 
-        {(installingApp === null ||
-          installingApp.id !== id ||
-          installingApp.result === "fail") &&
-          !installed && (
-            <Button
-              isDisabled={
-                isInstallWaiting ||
-                (installingApp !== null && installingApp?.result !== "fail")
-              }
-              onClick={() => installButtonPressed(id)}
-              color="primary"
-              startContent={<PlusIcon className="inline h-6 w-6" />}
-            >
-              {t("apps.install")}
-            </Button>
-          )}
+				{(installingApp === null ||
+					installingApp.id !== id ||
+					installingApp.result === "fail") &&
+					!installed && (
+						<Button
+							isDisabled={
+								isInstallWaiting ||
+								(installingApp !== null && installingApp?.result !== "fail")
+							}
+							onClick={() => installButtonPressed(id)}
+							color="primary"
+							startContent={<PlusIcon className="inline h-6 w-6" />}
+						>
+							{t("apps.install")}
+						</Button>
+					)}
 
 				{installingApp &&
 					installingApp.id === id &&

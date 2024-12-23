@@ -107,41 +107,41 @@ export default function SyncScreen({ data, callback }: Props) {
 	const btcDefaultReady = data.btc_default_ready === "1";
 	const btcDefaultSyncPercentage = +data.btc_default_sync_percentage;
 
-  return (
-    <>
-      {lnWalletLocked && (
-        <Modal
-          isOpen={isOpen}
-          isDismissable={false}
-          onOpenChange={onOpenChange}
-        >
-          <form
-            className="flex flex-col justify-center"
-            onSubmit={handleSubmit(unlockWallet)}
-          >
-            <ModalContent>
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                  {t("wallet.unlock_subtitle")}
-                </ModalHeader>
-                <ModalBody>
-                  <>
-                    <Input
-                      classNames={{
-                        inputWrapper:
-                          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                      }}
-                      type="password"
-                      label={t("setup.sync_wallet_info")}
-                      isDisabled={runningUnlock}
-                      isInvalid={!!errors.passwordInput}
-                      errorMessage={errors.passwordInput?.message}
-                      value={password}
-                      {...register("passwordInput", {
-                        required: t("setup.password_error_empty"),
-                        onChange: changePasswordHandler,
-                      })}
-                    />
+	return (
+		<>
+			{lnWalletLocked && (
+				<Modal
+					isOpen={isOpen}
+					isDismissable={false}
+					onOpenChange={onOpenChange}
+				>
+					<form
+						className="flex flex-col justify-center"
+						onSubmit={handleSubmit(unlockWallet)}
+					>
+						<ModalContent>
+							<>
+								<ModalHeader className="flex flex-col gap-1">
+									{t("wallet.unlock_subtitle")}
+								</ModalHeader>
+								<ModalBody>
+									<>
+										<Input
+											classNames={{
+												inputWrapper:
+													"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+											}}
+											type="password"
+											label={t("setup.sync_wallet_info")}
+											isDisabled={runningUnlock}
+											isInvalid={!!errors.passwordInput}
+											errorMessage={errors.passwordInput?.message}
+											value={password}
+											{...register("passwordInput", {
+												required: t("setup.password_error_empty"),
+												onChange: changePasswordHandler,
+											})}
+										/>
 
 										{error && <Alert color="danger">{error}</Alert>}
 									</>

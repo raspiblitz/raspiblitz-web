@@ -12,26 +12,26 @@ import AppCardAlby from "./AppCardAlby";
 import AppList from "./AppList";
 
 export const Apps: FC = () => {
-  const { t } = useTranslation(["translation", "apps"]);
-  const { lnInfo } = useContext(SSEContext);
-  let { appStatus } = useContext(SSEContext);
+	const { t } = useTranslation(["translation", "apps"]);
+	const { lnInfo } = useContext(SSEContext);
+	let { appStatus } = useContext(SSEContext);
 
 	useEffect(() => {
 		enableGutter();
 	}, []);
 
-  // alby hub only works on LND currently, so we filter the entry out on non LND nodes
-  if (lnInfo.implementation !== "LND_GRPC") {
-    appStatus = appStatus.filter((app: AppStatus) => app.id !== "albyhub");
-  }
+	// alby hub only works on LND currently, so we filter the entry out on non LND nodes
+	if (lnInfo.implementation !== "LND_GRPC") {
+		appStatus = appStatus.filter((app: AppStatus) => app.id !== "albyhub");
+	}
 
-  // on every render sort installed & uninstalled app keys
-  const installedApps = appStatus.filter((app: AppStatus) => {
-    return app.installed;
-  });
-  const notInstalledApps = appStatus.filter((app: AppStatus) => {
-    return !app.installed;
-  });
+	// on every render sort installed & uninstalled app keys
+	const installedApps = appStatus.filter((app: AppStatus) => {
+		return app.installed;
+	});
+	const notInstalledApps = appStatus.filter((app: AppStatus) => {
+		return !app.installed;
+	});
 
 	const installHandler = (id: string) => {
 		instance.post(`apps/install/${id}`).catch((err) => {

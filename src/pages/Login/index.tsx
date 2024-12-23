@@ -9,10 +9,10 @@ import { Button } from "@nextui-org/button";
 import { Spinner } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
 import type { AxiosError } from "axios";
 import { type FC, useContext, useEffect, useState } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -44,6 +44,7 @@ const Login: FC = () => {
 			if (back) {
 				console.info(`back(${back})`);
 				return navigate(back, { replace: true });
+				// biome-ignore lint/style/noUselessElse: <explanation>
 			} else {
 				console.info(`from(${from})`);
 				return navigate(from || "/home", { replace: true });

@@ -124,21 +124,21 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
 					{error && <Alert color="danger">{error}</Alert>}
 				</ConfirmModal.Body>
 
-        <ConfirmModal.Footer>
-          <Button onClick={disclosure.onClose} isDisabled={isLoading}>
-            {t("settings.cancel")}
-          </Button>
+				<ConfirmModal.Footer>
+					<Button onClick={disclosure.onClose} isDisabled={isLoading}>
+						{t("settings.cancel")}
+					</Button>
 
-          <Button
-            color="primary"
-            type="submit"
-            isDisabled={isLoading || !isValid}
-            isLoading={isLoading}
-          >
-            {t("home.open_channel")}
-          </Button>
-        </ConfirmModal.Footer>
-      </form>
-    </ConfirmModal>
-  );
+					<Button
+						color="primary"
+						type="submit"
+						isDisabled={isLoading || !isValid}
+						isLoading={isLoading}
+					>
+						{t("home.open_channel")}
+					</Button>
+				</ConfirmModal.Footer>
+			</form>
+		</ConfirmModal>
+	);
 }

@@ -119,27 +119,27 @@ const ChangePwModal: FC = () => {
 						</fieldset>
 					</ConfirmModal.Body>
 
-          <ConfirmModal.Footer>
-            <Button
-              onClick={() => {
-                confirmModal.onClose();
-                reset();
-              }}
-              isDisabled={isLoading}
-            >
-              {t("settings.cancel")}
-            </Button>
-            <Button
-              color="primary"
-              type="submit"
-              isDisabled={isLoading || !isValid}
-              isLoading={isLoading}
-            >
-              {t("settings.confirm")}
-            </Button>
-          </ConfirmModal.Footer>
-        </form>
-      </ConfirmModal>
+					<ConfirmModal.Footer>
+						<Button
+							onClick={() => {
+								confirmModal.onClose();
+								reset();
+							}}
+							isDisabled={isLoading}
+						>
+							{t("settings.cancel")}
+						</Button>
+						<Button
+							color="primary"
+							type="submit"
+							isDisabled={isLoading || !isValid}
+							isLoading={isLoading}
+						>
+							{t("settings.confirm")}
+						</Button>
+					</ConfirmModal.Footer>
+				</form>
+			</ConfirmModal>
 
 			<ActionBox
 				name={t("settings.change_pw_a")}

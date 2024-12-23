@@ -66,42 +66,42 @@ export default function UnlockModal({
 
 					{isCapsLockEnabled && <CapsLockWarning />}
 
-          <fieldset className="flex w-full flex-col gap-4">
-            <Input
-              autoFocus
-              classNames={{
-                inputWrapper:
-                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-              }}
-              isDisabled={isLoading}
-              type="password"
-              label={t("forms.validation.unlock.pass_c")}
-              placeholder={t("forms.validation.unlock.pass_c")}
-              isInvalid={!!errors.passwordInput}
-              errorMessage={errors.passwordInput?.message}
-              {...register("passwordInput", {
-                required: t("forms.validation.unlock.required"),
-              })}
-              {...keyHandlers}
-            />
-          </fieldset>
+					<fieldset className="flex w-full flex-col gap-4">
+						<Input
+							autoFocus
+							classNames={{
+								inputWrapper:
+									"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+							}}
+							isDisabled={isLoading}
+							type="password"
+							label={t("forms.validation.unlock.pass_c")}
+							placeholder={t("forms.validation.unlock.pass_c")}
+							isInvalid={!!errors.passwordInput}
+							errorMessage={errors.passwordInput?.message}
+							{...register("passwordInput", {
+								required: t("forms.validation.unlock.required"),
+							})}
+							{...keyHandlers}
+						/>
+					</fieldset>
 
 					{isServerError && (
 						<Alert color="danger">{t("login.invalid_pass")}</Alert>
 					)}
 				</ConfirmModal.Body>
 
-        <ConfirmModal.Footer>
-          <Button
-            color="primary"
-            type="submit"
-            isDisabled={isLoading || !isValid}
-            isLoading={isLoading}
-          >
-            {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
-          </Button>
-        </ConfirmModal.Footer>
-      </form>
-    </ConfirmModal>
-  );
+				<ConfirmModal.Footer>
+					<Button
+						color="primary"
+						type="submit"
+						isDisabled={isLoading || !isValid}
+						isLoading={isLoading}
+					>
+						{isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
+					</Button>
+				</ConfirmModal.Footer>
+			</form>
+		</ConfirmModal>
+	);
 }

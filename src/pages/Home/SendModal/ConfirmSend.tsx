@@ -227,24 +227,24 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
 				{error && <Alert color="danger">{error}</Alert>}
 			</ConfirmModal.Body>
 
-      <ConfirmModal.Footer>
-        <Button onClick={() => close()} isDisabled={isLoading}>
-          {t("settings.cancel")}
-        </Button>
+			<ConfirmModal.Footer>
+				<Button onClick={() => close()} isDisabled={isLoading}>
+					{t("settings.cancel")}
+				</Button>
 
-        <Button
-          color="primary"
-          type="submit"
-          isDisabled={
-            !isValid || !isValidLnInvoice || isInvoiceAmountBiggerThanBalance
-          }
-          isLoading={isLoading}
-        >
-          {t("settings.confirm")}
-        </Button>
-      </ConfirmModal.Footer>
-    </form>
-  );
+				<Button
+					color="primary"
+					type="submit"
+					isDisabled={
+						!isValid || !isValidLnInvoice || isInvoiceAmountBiggerThanBalance
+					}
+					isLoading={isLoading}
+				>
+					{t("settings.confirm")}
+				</Button>
+			</ConfirmModal.Footer>
+		</form>
+	);
 };
 
 export default ConfirmSend;

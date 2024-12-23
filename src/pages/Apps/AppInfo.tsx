@@ -112,17 +112,17 @@ export const AppInfo: FC = () => {
 				<AppIcon appId={appId} className="max-h-12" />
 				<h1 className="px-5 text-2xl text-white">{name}</h1>
 
-        {(installingApp == null || installingApp.appId !== appId) &&
-          !installed && (
-            <Button
-              isDisabled={!!installingApp}
-              color="primary"
-              onClick={installHandler}
-              startContent={<PlusIcon className="inline h-6 w-6" />}
-            >
-              {t("apps.install")}
-            </Button>
-          )}
+				{(installingApp == null || installingApp.appId !== appId) &&
+					!installed && (
+						<Button
+							isDisabled={!!installingApp}
+							color="primary"
+							onClick={installHandler}
+							startContent={<PlusIcon className="inline h-6 w-6" />}
+						>
+							{t("apps.install")}
+						</Button>
+					)}
 
 				{installingApp &&
 					installingApp.appId === appId &&
@@ -140,18 +140,18 @@ export const AppInfo: FC = () => {
 						</Button>
 					)}
 
-        {(installingApp == null || installingApp.appId !== appId) &&
-          installed && (
-            <Button
-              isDisabled={!!installingApp}
-              color="danger"
-              onClick={uninstallHandler}
-              startContent={<TrashIcon className="inline h-6 w-6" />}
-            >
-              {t("apps.uninstall")}
-            </Button>
-          )}
-      </section>
+				{(installingApp == null || installingApp.appId !== appId) &&
+					installed && (
+						<Button
+							isDisabled={!!installingApp}
+							color="danger"
+							onClick={uninstallHandler}
+							startContent={<TrashIcon className="inline h-6 w-6" />}
+						>
+							{t("apps.uninstall")}
+						</Button>
+					)}
+			</section>
 
 			{showBtcPayWarning && (
 				<div className="m-5">

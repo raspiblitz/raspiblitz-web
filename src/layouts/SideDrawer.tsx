@@ -26,45 +26,45 @@ export const SideDrawer: FC = () => {
 	const { appStatus } = useContext(SSEContext);
 	const { t } = useTranslation();
 
-  return (
-    <nav className="content-container sidebar fixed hidden w-full flex-col justify-between overflow-y-auto bg-gray-800 px-2 pb-16 pt-8 shadow-md transition-colors lg:flex lg:w-64">
-      <div className="flex flex-col items-center justify-center">
-        <NavLink to="/home" className={(props) => createClassName(props)}>
-          <HomeIcon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.home")}
-          </span>
-        </NavLink>
-        <NavLink to="/apps" className={(props) => createClassName(props)}>
-          <Squares2X2Icon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.apps")}
-          </span>
-        </NavLink>
-        <NavLink to="/settings" className={(props) => createClassName(props)}>
-          <Cog6ToothIcon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.settings")}
-          </span>
-        </NavLink>
-        <NavLink
-          to="https://docs.raspiblitz.org/docs/intro"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={(props) => createClassName(props)}
-        >
-          <BookOpenIcon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.documentation")}
-          </span>
-        </NavLink>
+	return (
+		<nav className="content-container sidebar fixed hidden w-full flex-col justify-between overflow-y-auto bg-gray-800 px-2 pb-16 pt-8 shadow-md transition-colors lg:flex lg:w-64">
+			<div className="flex flex-col items-center justify-center">
+				<NavLink to="/home" className={(props) => createClassName(props)}>
+					<HomeIcon className={navIconClasses} />
+					<span className="mx-3 w-1/2 justify-center text-lg">
+						{t("navigation.home")}
+					</span>
+				</NavLink>
+				<NavLink to="/apps" className={(props) => createClassName(props)}>
+					<Squares2X2Icon className={navIconClasses} />
+					<span className="mx-3 w-1/2 justify-center text-lg">
+						{t("navigation.apps")}
+					</span>
+				</NavLink>
+				<NavLink to="/settings" className={(props) => createClassName(props)}>
+					<Cog6ToothIcon className={navIconClasses} />
+					<span className="mx-3 w-1/2 justify-center text-lg">
+						{t("navigation.settings")}
+					</span>
+				</NavLink>
+				<NavLink
+					to="https://docs.raspiblitz.org/docs/intro"
+					target="_blank"
+					rel="noopener noreferrer"
+					className={(props) => createClassName(props)}
+				>
+					<BookOpenIcon className={navIconClasses} />
+					<span className="mx-3 w-1/2 justify-center text-lg">
+						{t("navigation.documentation")}
+					</span>
+				</NavLink>
 
-        {appStatus
-          .filter((app) => app.installed)
-          .map((app) => (
-            <AppStatusItem app={app} key={app.id} />
-          ))}
-      </div>
+				{appStatus
+					.filter((app) => app.installed)
+					.map((app) => (
+						<AppStatusItem app={app} key={app.id} />
+					))}
+			</div>
 
 			<div className="fixed bottom-0 left-2 z-10 w-60 bg-gray-800">
 				<button
