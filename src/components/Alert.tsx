@@ -2,38 +2,38 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 export interface Props extends HTMLAttributes<HTMLElement> {
-	as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div";
-	children: ReactNode;
-	color?: Colors;
-	className?: string;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div";
+  children: ReactNode;
+  color?: Colors;
+  className?: string;
 }
 
 const colors = {
-	success: "text-success border-success bg-green-900",
-	warning: "text-warning border-warning bg-yellow-900",
-	danger: "text-danger border-danger bg-red-900",
-	info: "text-primary border-primary bg-blue-900",
+  success: "text-success border-success bg-green-900",
+  warning: "text-warning border-warning bg-yellow-900",
+  danger: "text-danger border-danger bg-red-900",
+  info: "text-primary border-primary bg-blue-900",
 };
 
 type Colors = keyof typeof colors;
 
 export const Alert = ({
-	as = "p",
-	color = "success",
-	className,
-	children,
+  as = "p",
+  color = "success",
+  className,
+  children,
 }: Props) => {
-	const Component = as;
+  const Component = as;
 
-	return (
-		<Component
-			className={twMerge(
-				"rounded-xl border p-4 text-center font-semibold",
-				colors[color],
-				className,
-			)}
-		>
-			{children}
-		</Component>
-	);
+  return (
+    <Component
+      className={twMerge(
+        "rounded-xl border p-4 text-center font-semibold",
+        colors[color],
+        className,
+      )}
+    >
+      {children}
+    </Component>
+  );
 };

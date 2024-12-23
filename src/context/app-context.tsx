@@ -1,19 +1,19 @@
 import {
-	ACCESS_TOKEN,
-	disableGutter,
-	parseJwt,
-	retrieveSettings,
-	setWindowAlias,
+  ACCESS_TOKEN,
+  disableGutter,
+  parseJwt,
+  retrieveSettings,
+  setWindowAlias,
 } from "@/utils";
 import type { FC, PropsWithChildren } from "react";
 import {
-	type Dispatch,
-	type SetStateAction,
-	createContext,
-	useCallback,
-	useContext,
-	useEffect,
-	useState,
+  type Dispatch,
+  type SetStateAction,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -21,114 +21,114 @@ import { toast } from "react-toastify";
 import { SSEContext } from "./sse-context";
 
 export interface AppContextType {
-	isLoggedIn: boolean;
-	unit: Unit;
-	walletLocked: boolean;
-	isGeneratingReport: boolean;
-	toggleUnit: () => void;
-	setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-	logout: () => void;
-	setWalletLocked: Dispatch<SetStateAction<boolean>>;
-	setIsGeneratingReport: Dispatch<SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  unit: Unit;
+  walletLocked: boolean;
+  isGeneratingReport: boolean;
+  toggleUnit: () => void;
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  logout: () => void;
+  setWalletLocked: Dispatch<SetStateAction<boolean>>;
+  setIsGeneratingReport: Dispatch<SetStateAction<boolean>>;
 }
 
 export enum Unit {
-	BTC = "BTC",
-	SAT = "SAT",
+  BTC = "BTC",
+  SAT = "SAT",
 }
 
 export const appContextDefault: AppContextType = {
-	isLoggedIn: false,
-	unit: Unit.SAT,
-	walletLocked: false,
-	isGeneratingReport: false,
-	toggleUnit: () => {},
-	setIsLoggedIn: () => {},
-	logout: () => {},
-	setWalletLocked: () => {},
-	setIsGeneratingReport: () => {},
+  isLoggedIn: false,
+  unit: Unit.SAT,
+  walletLocked: false,
+  isGeneratingReport: false,
+  toggleUnit: () => {},
+  setIsLoggedIn: () => {},
+  logout: () => {},
+  setWalletLocked: () => {},
+  setIsGeneratingReport: () => {},
 };
 
 export const AppContext = createContext<AppContextType>(appContextDefault);
 
 const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
-	const { i18n } = useTranslation();
-	const { evtSource, setEvtSource } = useContext(SSEContext);
+  const { i18n } = useTranslation();
+  const { evtSource, setEvtSource } = useContext(SSEContext);
 
-	const [unit, setUnit] = useState<Unit>(Unit.SAT);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [walletLocked, setWalletLocked] = useState(false);
-	const [isGeneratingReport, setIsGeneratingReport] = useState(false);
-	const navigate = useNavigate();
+  const [unit, setUnit] = useState<Unit>(Unit.SAT);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [walletLocked, setWalletLocked] = useState(false);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
+  const navigate = useNavigate();
 
-	const toggleUnitHandler = () => {
-		setUnit((prevUnit: Unit) => (prevUnit === Unit.SAT ? Unit.BTC : Unit.SAT));
-	};
+  const toggleUnitHandler = () => {
+    setUnit((prevUnit: Unit) => (prevUnit === Unit.SAT ? Unit.BTC : Unit.SAT));
+  };
 
-	const logoutHandler = useCallback(() => {
-		localStorage.removeItem(ACCESS_TOKEN);
+  const logoutHandler = useCallback(() => {
+    localStorage.removeItem(ACCESS_TOKEN);
 
-		// close EventSource on logout
-		if (evtSource) {
-			evtSource.close();
-			setEvtSource(null);
-		}
-		setIsLoggedIn(false);
-		disableGutter();
-		setWindowAlias(null);
-		toast.dismiss();
-		navigate("/");
-	}, [evtSource, setEvtSource, navigate]);
+    // close EventSource on logout
+    if (evtSource) {
+      evtSource.close();
+      setEvtSource(null);
+    }
+    setIsLoggedIn(false);
+    disableGutter();
+    setWindowAlias(null);
+    toast.dismiss();
+    navigate("/");
+  }, [evtSource, setEvtSource, navigate]);
 
-	useEffect(() => {
-		const settings = retrieveSettings();
+  useEffect(() => {
+    const settings = retrieveSettings();
 
-		// check for settings in storage and set
-		if (settings) {
-			if (settings.lang) {
-				i18n.changeLanguage(settings.lang);
-			}
-		}
+    // check for settings in storage and set
+    if (settings) {
+      if (settings.lang) {
+        i18n.changeLanguage(settings.lang);
+      }
+    }
 
-		// if authenticated log in automatically
-		const token = localStorage.getItem(ACCESS_TOKEN);
-		if (token) {
-			try {
-				const payload = parseJwt(token);
-				if (payload.expires > Date.now()) {
-					setIsLoggedIn(true);
-					if (
-						window.location.pathname === "/" ||
-						window.location.pathname === "/login"
-					) {
-						return navigate("/home");
-					}
-				} else {
-					localStorage.removeItem(ACCESS_TOKEN);
-					console.info(`Token expired at ${payload.expires}.`);
-				}
-			} catch {
-				localStorage.removeItem(ACCESS_TOKEN);
-				console.info("Token invalid - removed");
-			}
-		}
-	}, [i18n, navigate]);
+    // if authenticated log in automatically
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    if (token) {
+      try {
+        const payload = parseJwt(token);
+        if (payload.expires > Date.now()) {
+          setIsLoggedIn(true);
+          if (
+            window.location.pathname === "/" ||
+            window.location.pathname === "/login"
+          ) {
+            return navigate("/home");
+          }
+        } else {
+          localStorage.removeItem(ACCESS_TOKEN);
+          console.info(`Token expired at ${payload.expires}.`);
+        }
+      } catch {
+        localStorage.removeItem(ACCESS_TOKEN);
+        console.info("Token invalid - removed");
+      }
+    }
+  }, [i18n, navigate]);
 
-	const contextValue: AppContextType = {
-		isLoggedIn,
-		unit,
-		walletLocked,
-		isGeneratingReport,
-		toggleUnit: toggleUnitHandler,
-		setIsLoggedIn,
-		logout: logoutHandler,
-		setWalletLocked,
-		setIsGeneratingReport,
-	};
+  const contextValue: AppContextType = {
+    isLoggedIn,
+    unit,
+    walletLocked,
+    isGeneratingReport,
+    toggleUnit: toggleUnitHandler,
+    setIsLoggedIn,
+    logout: logoutHandler,
+    setWalletLocked,
+    setIsGeneratingReport,
+  };
 
-	return (
-		<AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
-	);
+  return (
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
+  );
 };
 
 export default AppContextProvider;

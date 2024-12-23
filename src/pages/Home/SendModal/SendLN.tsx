@@ -13,90 +13,90 @@ import type { SendLnForm } from "./SendModal";
 import type { SendOnChainForm } from "./SendOnChain";
 
 export type Props = {
-	lnBalance: number;
-	isLoading: boolean;
-	onConfirm: (data: LnInvoiceForm) => void;
-	error: string;
-	confirmData?: SendOnChainForm | SendLnForm | null;
+  lnBalance: number;
+  isLoading: boolean;
+  onConfirm: (data: LnInvoiceForm) => void;
+  error: string;
+  confirmData?: SendOnChainForm | SendLnForm | null;
 };
 
 export interface LnInvoiceForm {
-	invoice: string;
+  invoice: string;
 }
 
 const SendLn: FC<Props> = ({
-	isLoading,
-	lnBalance,
-	onConfirm,
-	error,
-	confirmData,
+  isLoading,
+  lnBalance,
+  onConfirm,
+  error,
+  confirmData,
 }) => {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
 
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors, isValid },
-	} = useForm<LnInvoiceForm>({
-		mode: "onChange",
-	});
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<LnInvoiceForm>({
+    mode: "onChange",
+  });
 
-	const [updated, setUpdated] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
-	if (!updated && confirmData?.invoiceType === TxType.LIGHTNING) {
-		setUpdated(true);
-		reset({
-			invoice: confirmData.invoice,
-		});
-	}
+  if (!updated && confirmData?.invoiceType === TxType.LIGHTNING) {
+    setUpdated(true);
+    reset({
+      invoice: confirmData.invoice,
+    });
+  }
 
-	const onSubmit: SubmitHandler<LnInvoiceForm> = (data) => onConfirm(data);
+  const onSubmit: SubmitHandler<LnInvoiceForm> = (data) => onConfirm(data);
 
-	const convertedBalance = lnBalance ? convertMSatToSat(lnBalance) : 0;
+  const convertedBalance = lnBalance ? convertMSatToSat(lnBalance) : 0;
 
-	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<ConfirmModal.Body>
-				{/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
-				<AvailableBalance balance={convertedBalance!} />
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <ConfirmModal.Body>
+        {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
+        <AvailableBalance balance={convertedBalance!} />
 
-				<Input
-					className="w-full"
-					classNames={{
-						inputWrapper:
-							"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-					}}
-					type="text"
-					isInvalid={!!errors.invoice}
-					errorMessage={errors.invoice?.message}
-					label={t("wallet.invoice")}
-					placeholder="lnbc..."
-					isDisabled={isLoading}
-					{...register("invoice", {
-						required: t("forms.validation.lnInvoice.required"),
-						pattern: {
-							value: /^(lnbc|lntb)\w+/i,
-							message: t("forms.validation.lnInvoice.patternMismatch"),
-						},
-					})}
-				/>
+        <Input
+          className="w-full"
+          classNames={{
+            inputWrapper:
+              "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+          }}
+          type="text"
+          isInvalid={!!errors.invoice}
+          errorMessage={errors.invoice?.message}
+          label={t("wallet.invoice")}
+          placeholder="lnbc..."
+          isDisabled={isLoading}
+          {...register("invoice", {
+            required: t("forms.validation.lnInvoice.required"),
+            pattern: {
+              value: /^(lnbc|lntb)\w+/i,
+              message: t("forms.validation.lnInvoice.patternMismatch"),
+            },
+          })}
+        />
 
-				{error && <Alert color="danger">{error}</Alert>}
-			</ConfirmModal.Body>
+        {error && <Alert color="danger">{error}</Alert>}
+      </ConfirmModal.Body>
 
-			<ConfirmModal.Footer>
-				<Button
-					color="primary"
-					type="submit"
-					isDisabled={isLoading || !isValid}
-					isLoading={isLoading}
-				>
-					{t("wallet.send")}
-				</Button>
-			</ConfirmModal.Footer>
-		</form>
-	);
+      <ConfirmModal.Footer>
+        <Button
+          color="primary"
+          type="submit"
+          isDisabled={isLoading || !isValid}
+          isLoading={isLoading}
+        >
+          {t("wallet.send")}
+        </Button>
+      </ConfirmModal.Footer>
+    </form>
+  );
 };
 
 export default SendLn;

@@ -15,25 +15,25 @@ import "react-i18next";
 import { initReactI18next } from "react-i18next";
 
 export const resources = {
-	cs,
-	de,
-	en,
-	nb_NO,
-	nl,
-	fr,
-	hu,
-	pt_BR,
-	it,
-	es,
-	sv,
-	vi,
+  cs,
+  de,
+  en,
+  nb_NO,
+  nl,
+  fr,
+  hu,
+  pt_BR,
+  it,
+  es,
+  sv,
+  vi,
 };
 
 i18n.use(initReactI18next).init({
-	lng: "en",
-	fallbackLng: "en",
-	resources,
-	returnNull: false,
+  lng: "en",
+  fallbackLng: "en",
+  resources,
+  returnNull: false,
 });
 
 export default i18n;

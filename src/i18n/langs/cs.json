@@ -1,308 +1,308 @@
 {
-	"translation": {
-		"appInfo": {
-			"btc-rpc-explorer": {
-				"about": "Jedná se o samostatně hostovaný průzkumník pro blockchain Bitcoinu, který je řízen voláními RPC na váš vlastní uzel Bitcoinu. Snadno se spouští a lze jej připojit k dalším nástrojům (jako jsou servery Electrum) a získat tak plnohodnotný průzkumník.",
-				"shortDescription": "Bitcoin RPC Explorer"
-			},
-			"btcpayserver": {
-				"about": "BTCPay Server je bezplatný a open source bitcoinový platební procesor, který vám umožňuje přijímat bitcoiny bez poplatků nebo zprostředkovatelů.",
-				"shortDescription": "Přijímejte platby v bitcoinech. Bezplatný, open-source a samostatně hostovaný procesor pro platby Bitcoinem."
-			},
-			"lnbits": {
-				"about": "LNbits je velmi jednoduchý server v jazyce Python, který je umístěn nad jakýmkoli zdrojem financování a může být použit jako systém účtů ke zmírnění rizika vystavení aplikací vašemu plnému zůstatku prostřednictvím jedinečných klíčů API pro každou peněženku.",
-				"shortDescription": "Bezplatný a open source systém peněženek/účtů lightning"
-			},
-			"mempool": {
-				"about": " Průzkumník s otevřeným zdrojovým kódem vyvinutý pro komunitu bitcoinů se zaměřením na vznikající trh transakčních poplatků, který nám pomůže přejít na vícevrstvý ekosystém.",
-				"shortDescription": "Průzkumník s otevřeným zdrojovým kódem vyvinutý pro komunitu Bitcoinu"
-			},
-			"rtl": {
-				"about": "RTL je plně funkční webové uživatelské rozhraní bez ohledu na zařízení, které pomáhá spravovat operace uzlu Lightning. RTL je k dispozici v implementacích LND, Core Lightning a Eclair.",
-				"shortDescription": "Plnohodnotná aplikace webového prohlížeče pro LND, Core Lightning a Eclair"
-			},
-			"specter": {
-				"about": "Bitcoin Core má velmi výkonné rozhraní příkazového řádku a skvělého démona. Pomocí PSBT a HWI dokáže pracovat i s hardwarovými peněženkami, ale v současné době je to příliš linuxové. Totéž platí pro nastavení s více podpisy. Cílem tohoto projektu je vytvořit pohodlné a uživatelsky přívětivé grafické rozhraní kolem Bitcoin Core se zaměřením na multisignature nastavení s hardwarovými peněženkami a airgapped zařízeními.",
-				"shortDescription": "Grafické uživatelské rozhraní pro Bitcoin Core optimalizované pro práci s hardwarovými peněženkami"
-			},
-			"thunderhub": {
-				"about": "ThunderHub je správce uzlů LND s otevřeným zdrojovým kódem, ve kterém můžete spravovat a monitorovat svůj uzel na libovolném zařízení nebo v prohlížeči. Umožňuje vám převzít kontrolu nad sítí lightning s jednoduchým a intuitivním uživatelským rozhraním a nejmodernějším technologickým stackem.",
-				"shortDescription": "LND Lightning Node Manager v prohlížeči"
-			}
-		},
-		"apps": {
-			"about": "O projektu",
-			"author": "Autor",
-			"available": "Dostupné aplikace",
-			"info": "Info",
-			"install": "Nainstalovat",
-			"install_failure": "Instalace {{appName}} se nezdařila: {{details}}",
-			"install_success": "{{appName}} úspěšně nainstalováno",
-			"installed": "Nainstalováno",
-			"installing": "Instalace",
-			"login_admin_pass_b": "Přihlaste se pomocí Uživatel 'admin' a Heslem B",
-			"login_no_pass": "Přihlášení bez hesla",
-			"login_pass_b": "Přihlášení pomocí hesla B",
-			"login_userdef": "Přihlášení pomocí hesla definovaného uživatelem",
-			"no_page": "Stránka není k dispozici",
-			"offline": "offline",
-			"online": "online",
-			"open": "Otevřít",
-			"selfsigned_cert": "Tato aplikace používá certifikát HTTPS s vlastním podpisem",
-			"source": "Zdrojový kód",
-			"uninstall": "Odinstalovat",
-			"uninstall_failure": "Odinstalování {{appName}} se nezdařilo: {{details}}",
-			"uninstall_success": "Úspěšně odinstalováno {{appName}}",
-			"uninstalling": "Odinstalování"
-		},
-		"forms": {
-			"hint": {
-				"invoiceAmountZero": "Fakturovaná částka je nulová"
-			},
-			"validation": {
-				"amount": {
-					"required": "Zadejte prosím částku"
-				},
-				"chainAddress": {
-					"patternMismatch": "Nesprávný formát adresy",
-					"required": "Zadejte prosím bitcoinovou adresu"
-				},
-				"chainAmount": {
-					"max": "Váš zůstatek je příliš nízký na to, abyste mohli tuto částku odeslat",
-					"required": "Zadejte prosím částku"
-				},
-				"chainFee": {
-					"required": "Zadejte prosím výši poplatku"
-				},
-				"lnInvoice": {
-					"expired": "Platnost faktury vypršela",
-					"max": "Váš zůstatek je příliš nízký na zaplacení této faktury",
-					"patternMismatch": "Nesprávný formát faktury",
-					"required": "Zadejte prosím Lightning fakturu"
-				},
-				"node_uri": {
-					"required": "Zadejte identifikátor URI uzlu"
-				},
-				"unlock": {
-					"pass_c": "Heslo C",
-					"required": "Je vyžadováno heslo C"
-				}
-			}
-		},
-		"hardware": {
-			"cpu_load": "Zatížení CPU",
-			"disk_usage": "Využité místo na disku",
-			"header": "Informace o hardwaru",
-			"ram_usage": "Využití paměti RAM",
-			"temp": "Teplota"
-		},
-		"home": {
-			"active": "Aktivní",
-			"bitcoin": "Bitcoin",
-			"blockchain_size": "Velikost blockchainu",
-			"blocks_synced": "Bloky jsou synchronizované",
-			"blocktime": "Blocktime",
-			"channel": "Kanál",
-			"channel_balance": "Zůstatek kanálu",
-			"channel_closed": "Kanál byl úspěšně uzavřen",
-			"channel_id": "ID kanálu",
-			"channel_opened": "Kanál byl úspěšně otevřen",
-			"close_channel": "Zavřít kanál",
-			"confirm_channel_close": "Potvrdit uzavření kanálu",
-			"conn_details": "Podrobnosti o připojení",
-			"conn_in": "Příchozí",
-			"conn_out": "Odchozí",
-			"connections": "Připojení",
-			"current_open_channels": "Současné otevřené kanály",
-			"difficulty": "Obtížnost",
-			"force_close": "Vynutit zavření",
-			"hide": "Skrýt",
-			"lightning": "Lightning",
-			"list_open_channels": "Seznam kanálů",
-			"local_balance": "Lokální zůstatek kanálu",
-			"network": "Síť",
-			"no": "Ne",
-			"node_id": "NodeID",
-			"node_uri": "URI uzlu",
-			"normal": "Normální",
-			"onchain_cln_no_support": "Zobrazování on-chain transakcí není v současné době v aplikaci Core Lightning podporováno",
-			"open_channel": "Otevřít kanál",
-			"pending_balance_local": "Čekající lokální zůstatek",
-			"pending_balance_remote": "Čekající vzdálený zůstatek",
-			"remote_balance": "Vzdálený zůstatek kanálu",
-			"show": "Zobrazit",
-			"show_qr": "Zobrazit QR kód",
-			"slow": "Pomalé",
-			"ssh": "Přihlášení přes SSH",
-			"status": "Stav",
-			"tor": "Tor",
-			"urgent": "Urgentní",
-			"version": "Verze",
-			"versions": "Verze",
-			"webui": "WebUI"
-		},
-		"language": {
-			"cs": "český",
-			"de": "Němčina",
-			"en": "Angličtina",
-			"es": "Španělština",
-			"fr": "francouzština",
-			"hu": "Maďarština",
-			"it": "italský",
-			"nb_NO": "Norsko",
-			"nl": "holandský",
-			"pt_BR": "portugalština (brazilština)",
-			"sv": "švédský",
-			"vi": "Vietnamci"
-		},
-		"login": {
-			"enter_pass": "Zadejte heslo A",
-			"enter_pass_placeholder": "Heslo A",
-			"error": "Došlo k chybě",
-			"invalid_pass": "Neplatné heslo",
-			"login": "Přihlášení",
-			"caps_lock": "El Bloq Majús està ACTIVAT"
-		},
-		"navigation": {
-			"apps": "Aplikace",
-			"back": "Zpět",
-			"dark_mode": "Tmavý režim",
-			"display_sats": "Zobrazit SATS",
-			"home": "Domů",
-			"logout": "Odhlásit se",
-			"settings": "Nastavení"
-		},
-		"settings": {
-			"cancel": "Zrušit",
-			"change": "Změnit",
-			"change_pw_a": "Změna hesla A",
-			"confirm": "Potvrdit",
-			"curr_lang": "Současný jazyk",
-			"language": "Jazyk",
-			"new_pw": "Nové heslo",
-			"old_pw": "Staré heslo",
-			"pass_a_changed": "Heslo A bylo úspěšně změněno",
-			"reboot": "Restartovat",
-			"shutdown": "Vypnout"
-		},
-		"setup": {
-			"input_node": {
-				"err_only_chars": "Název uzlu by měl obsahovat pouze znaky a čísla.",
-				"err_max_length": "Název uzlu může mít maximálně 32 znaků.",
-				"err_min_length": "Nodename musí být dlouhý alespoň 4 znaky.",
-				"err_empty": "Název uzlu nemůže být prázdný."
-			},
-			"blockchain_delete": "Smazat Blockchain",
-			"blockchain_found_long": "Na vašem HDD/SSD byla nalezena existující data blockchainu.",
-			"blockchain_found_short": "Blockchain nalezen na HDD/SSD",
-			"blockchain_keep": "Zachovat Blockchain",
-			"cancel": "Zrušit",
-			"cancel_setup": "Opravdu chcete zrušit proces nastavení?",
-			"continue": "Pokračovat",
-			"convertwarning": "RaspiBlitz může v tuto chvíli převádět pouze data Blockchainu a Lightningu (prostředky + kanály). Data z dalších nainstalovaných aplikací mohou být v procesu migrace smazána.",
-			"done_migration_ready": "OK. Vše je připraveno k migraci na RaspiBlitz.",
-			"done_migration_start": "Spustit migraci",
-			"done_recover_ready": "OK. Vše je připraveno k obnovení vašeho RaspiBlitz.",
-			"done_recover_start": "Zahájit obnovení",
-			"done_setup_ready": "OK. Vše je připraveno k nastavení vašeho RaspiBlitz.",
-			"done_setup_start": "Spustit nastavení",
-			"done_update_ready": "OK. Vše je připraveno k aktualizaci vašeho RaspiBlitz.",
-			"done_update_start": "Spustit aktualizaci",
-			"final_do_reboot": "OK, proveďte finální restart",
-			"final_info_reboot": "Nyní se restartuje a synchronizuje blockchain.",
-			"final_migration": "Migrace je dokončena.",
-			"final_recovery": "Obnova je dokončena.",
-			"final_seedwords": "Zapište si, prosím, svá seed slova a uložte je na bezpečném místě:",
-			"final_setup": "Nastavení je dokončeno.",
-			"final_update": "Aktualizace je dokončena.",
-			"lightningoutdated": "Uzel, ze kterého chcete migrovat, používá novější verzi Lightning než tento RaspiBlitz. Počkejte prosím na aktualizovanou verzi. Můžete vypnout a spustit uzel se starou SD kartou - nebyly provedeny žádné změny.",
-			"lnd": "LND",
-			"migrateblitz": "Migrovat na RaspiBlitz",
-			"no_and_shutdown": "Ne a Vypnout",
-			"ok": "OK",
-			"other_options": "Další možnosti",
-			"password_a_details": "Použijte toto heslo pro přihlášení do vašeho RaspiBlitz.",
-			"password_a_name": "Heslo A",
-			"password_a_short": "Nastavení nového hesla správce (Heslo A)",
-			"password_b_details": "Toto heslo použijte pro další aplikace, které můžete do RaspiBlitz nainstalovat.",
-			"password_b_name": "Heslo B",
-			"password_b_short": "Nastavení nového hesla aplikace (Heslo B)",
-			"password_c_details": "Toto heslo použijte k odemknutí Lightning Peněženky.",
-			"password_c_name": "Heslo C",
-			"password_c_short": "Nastavení nového hesla Heslo-Peněženky-Lightning (Heslo C)",
-			"password_error_chars": "Heslo by mělo obsahovat pouze znaky a čísla.",
-			"password_error_empty": "Heslo nesmí být prázdné.",
-			"password_error_length": "Heslo musí mít alespoň 8 znaků.",
-			"password_error_match": "Hesla se neshodují.",
-			"password_repeat": "Opakovat",
-			"pleasewait": "prosím, čekejte",
-			"preparingsetup": "příprava nastavení",
-			"recoverblitz": "Obnovit můj RaspiBlitz",
-			"restartinfo": "počkejte prosím, až RaspiBlitz znovu odpoví",
-			"restarting": "restartování",
-			"restarts": "Restartuje se",
-			"runningsetup": "Spuštění nastavení",
-			"select_lightning": "Vyberte si svou Lightning implementaci:",
-			"setupblitz": "Nastavení nového RaspiBlitz",
-			"setupoptions": "Možnosti nastavení",
-			"setupwait": "nastavení zabere několik minut",
-			"shuttingdown": "vypínání",
-			"start_recovery": "Chcete zahájit proces obnovy?",
-			"start_update": "Chcete zahájit proces aktualizace a obnovení?",
-			"started": "Zahájeno",
-			"sync_bitcoin_starting": "Spuštění synchronizace",
-			"sync_bitcoin_sync": "Průběh synchronizace",
-			"sync_headline": "Počáteční synchronizace RaspiBlitz",
-			"sync_restartinfo": "(synchronizace bude pokračovat při dalším restartu)",
-			"sync_wallet_info": "Odemkněte svou peněženku Lightning (heslo C):",
-			"sync_wallet_unlock": "Odemknout peněženku",
-			"updateblitz": "Aktualizovat můj RaspiBlitz",
-			"yes": "Ano",
-			"yes_and_migrate": "Migrovat na RaspiBlitz"
-		},
-		"tx": {
-			"comment": "Komentář",
-			"comment_placeholder": "Volitelný komentář",
-			"confirm_info": "Potvrďte prosím následující transakci",
-			"confirmations": "Potvrzení",
-			"date": "Datum",
-			"description": "Popis",
-			"fee": "Poplatek",
-			"fee_rate": "Výše poplatku",
-			"included_block": "Zahrnuto v bloku",
-			"mempool": "Zobrazit v mempoolu",
-			"sent": "Transakce odeslána!",
-			"transactions": "Transakce",
-			"transactions_none": "Zatím žádné transakce, je čas provést první",
-			"tx_details": "Podrobnosti o transakci",
-			"txid": "ID transakce",
-			"unconfirmed": "Nepotvrzeno",
-			"value": "Hodnota"
-		},
-		"wallet": {
-			"address": "Adresa",
-			"amount": "Částka",
-			"balance": "Zůstatek",
-			"confirm": "Potvrdit",
-			"copied": "Zkopírováno!",
-			"copy_clipboard": "Zkopírovat do schránky",
-			"create_invoice": "Vytvořit fakturu",
-			"create_invoice_ln": "Vytvořit Lightning fakturu",
-			"fund": "Financujte svou on-chain peněženku",
-			"invoice": "Faktura",
-			"on_chain": "On-chain",
-			"receive": "Přijmout",
-			"refresh": "Obnovit adresu",
-			"scan_qr": "Naskenujte tento QR kód nebo zkopírujte níže uvedenou adresu pro zaslání finančních prostředků",
-			"send": "Odeslat",
-			"send_lightning": "Odeslat prostředky přes Lightning",
-			"send_onchain": "Odeslat prostředky On-chain",
-			"unlock": "Odemknout",
-			"unlock_subtitle": "Odemkněte svou peněženku",
-			"unlock_success": "Peněženka odemčena",
-			"unlock_title": "Odemknout peněženku",
-			"unlocking": "Odemykání",
-			"wallet_locked": "Peněženka uzamčena"
-		}
-	}
+  "translation": {
+    "appInfo": {
+      "btc-rpc-explorer": {
+        "about": "Jedná se o samostatně hostovaný průzkumník pro blockchain Bitcoinu, který je řízen voláními RPC na váš vlastní uzel Bitcoinu. Snadno se spouští a lze jej připojit k dalším nástrojům (jako jsou servery Electrum) a získat tak plnohodnotný průzkumník.",
+        "shortDescription": "Bitcoin RPC Explorer"
+      },
+      "btcpayserver": {
+        "about": "BTCPay Server je bezplatný a open source bitcoinový platební procesor, který vám umožňuje přijímat bitcoiny bez poplatků nebo zprostředkovatelů.",
+        "shortDescription": "Přijímejte platby v bitcoinech. Bezplatný, open-source a samostatně hostovaný procesor pro platby Bitcoinem."
+      },
+      "lnbits": {
+        "about": "LNbits je velmi jednoduchý server v jazyce Python, který je umístěn nad jakýmkoli zdrojem financování a může být použit jako systém účtů ke zmírnění rizika vystavení aplikací vašemu plnému zůstatku prostřednictvím jedinečných klíčů API pro každou peněženku.",
+        "shortDescription": "Bezplatný a open source systém peněženek/účtů lightning"
+      },
+      "mempool": {
+        "about": " Průzkumník s otevřeným zdrojovým kódem vyvinutý pro komunitu bitcoinů se zaměřením na vznikající trh transakčních poplatků, který nám pomůže přejít na vícevrstvý ekosystém.",
+        "shortDescription": "Průzkumník s otevřeným zdrojovým kódem vyvinutý pro komunitu Bitcoinu"
+      },
+      "rtl": {
+        "about": "RTL je plně funkční webové uživatelské rozhraní bez ohledu na zařízení, které pomáhá spravovat operace uzlu Lightning. RTL je k dispozici v implementacích LND, Core Lightning a Eclair.",
+        "shortDescription": "Plnohodnotná aplikace webového prohlížeče pro LND, Core Lightning a Eclair"
+      },
+      "specter": {
+        "about": "Bitcoin Core má velmi výkonné rozhraní příkazového řádku a skvělého démona. Pomocí PSBT a HWI dokáže pracovat i s hardwarovými peněženkami, ale v současné době je to příliš linuxové. Totéž platí pro nastavení s více podpisy. Cílem tohoto projektu je vytvořit pohodlné a uživatelsky přívětivé grafické rozhraní kolem Bitcoin Core se zaměřením na multisignature nastavení s hardwarovými peněženkami a airgapped zařízeními.",
+        "shortDescription": "Grafické uživatelské rozhraní pro Bitcoin Core optimalizované pro práci s hardwarovými peněženkami"
+      },
+      "thunderhub": {
+        "about": "ThunderHub je správce uzlů LND s otevřeným zdrojovým kódem, ve kterém můžete spravovat a monitorovat svůj uzel na libovolném zařízení nebo v prohlížeči. Umožňuje vám převzít kontrolu nad sítí lightning s jednoduchým a intuitivním uživatelským rozhraním a nejmodernějším technologickým stackem.",
+        "shortDescription": "LND Lightning Node Manager v prohlížeči"
+      }
+    },
+    "apps": {
+      "about": "O projektu",
+      "author": "Autor",
+      "available": "Dostupné aplikace",
+      "info": "Info",
+      "install": "Nainstalovat",
+      "install_failure": "Instalace {{appName}} se nezdařila: {{details}}",
+      "install_success": "{{appName}} úspěšně nainstalováno",
+      "installed": "Nainstalováno",
+      "installing": "Instalace",
+      "login_admin_pass_b": "Přihlaste se pomocí Uživatel 'admin' a Heslem B",
+      "login_no_pass": "Přihlášení bez hesla",
+      "login_pass_b": "Přihlášení pomocí hesla B",
+      "login_userdef": "Přihlášení pomocí hesla definovaného uživatelem",
+      "no_page": "Stránka není k dispozici",
+      "offline": "offline",
+      "online": "online",
+      "open": "Otevřít",
+      "selfsigned_cert": "Tato aplikace používá certifikát HTTPS s vlastním podpisem",
+      "source": "Zdrojový kód",
+      "uninstall": "Odinstalovat",
+      "uninstall_failure": "Odinstalování {{appName}} se nezdařilo: {{details}}",
+      "uninstall_success": "Úspěšně odinstalováno {{appName}}",
+      "uninstalling": "Odinstalování"
+    },
+    "forms": {
+      "hint": {
+        "invoiceAmountZero": "Fakturovaná částka je nulová"
+      },
+      "validation": {
+        "amount": {
+          "required": "Zadejte prosím částku"
+        },
+        "chainAddress": {
+          "patternMismatch": "Nesprávný formát adresy",
+          "required": "Zadejte prosím bitcoinovou adresu"
+        },
+        "chainAmount": {
+          "max": "Váš zůstatek je příliš nízký na to, abyste mohli tuto částku odeslat",
+          "required": "Zadejte prosím částku"
+        },
+        "chainFee": {
+          "required": "Zadejte prosím výši poplatku"
+        },
+        "lnInvoice": {
+          "expired": "Platnost faktury vypršela",
+          "max": "Váš zůstatek je příliš nízký na zaplacení této faktury",
+          "patternMismatch": "Nesprávný formát faktury",
+          "required": "Zadejte prosím Lightning fakturu"
+        },
+        "node_uri": {
+          "required": "Zadejte identifikátor URI uzlu"
+        },
+        "unlock": {
+          "pass_c": "Heslo C",
+          "required": "Je vyžadováno heslo C"
+        }
+      }
+    },
+    "hardware": {
+      "cpu_load": "Zatížení CPU",
+      "disk_usage": "Využité místo na disku",
+      "header": "Informace o hardwaru",
+      "ram_usage": "Využití paměti RAM",
+      "temp": "Teplota"
+    },
+    "home": {
+      "active": "Aktivní",
+      "bitcoin": "Bitcoin",
+      "blockchain_size": "Velikost blockchainu",
+      "blocks_synced": "Bloky jsou synchronizované",
+      "blocktime": "Blocktime",
+      "channel": "Kanál",
+      "channel_balance": "Zůstatek kanálu",
+      "channel_closed": "Kanál byl úspěšně uzavřen",
+      "channel_id": "ID kanálu",
+      "channel_opened": "Kanál byl úspěšně otevřen",
+      "close_channel": "Zavřít kanál",
+      "confirm_channel_close": "Potvrdit uzavření kanálu",
+      "conn_details": "Podrobnosti o připojení",
+      "conn_in": "Příchozí",
+      "conn_out": "Odchozí",
+      "connections": "Připojení",
+      "current_open_channels": "Současné otevřené kanály",
+      "difficulty": "Obtížnost",
+      "force_close": "Vynutit zavření",
+      "hide": "Skrýt",
+      "lightning": "Lightning",
+      "list_open_channels": "Seznam kanálů",
+      "local_balance": "Lokální zůstatek kanálu",
+      "network": "Síť",
+      "no": "Ne",
+      "node_id": "NodeID",
+      "node_uri": "URI uzlu",
+      "normal": "Normální",
+      "onchain_cln_no_support": "Zobrazování on-chain transakcí není v současné době v aplikaci Core Lightning podporováno",
+      "open_channel": "Otevřít kanál",
+      "pending_balance_local": "Čekající lokální zůstatek",
+      "pending_balance_remote": "Čekající vzdálený zůstatek",
+      "remote_balance": "Vzdálený zůstatek kanálu",
+      "show": "Zobrazit",
+      "show_qr": "Zobrazit QR kód",
+      "slow": "Pomalé",
+      "ssh": "Přihlášení přes SSH",
+      "status": "Stav",
+      "tor": "Tor",
+      "urgent": "Urgentní",
+      "version": "Verze",
+      "versions": "Verze",
+      "webui": "WebUI"
+    },
+    "language": {
+      "cs": "český",
+      "de": "Němčina",
+      "en": "Angličtina",
+      "es": "Španělština",
+      "fr": "francouzština",
+      "hu": "Maďarština",
+      "it": "italský",
+      "nb_NO": "Norsko",
+      "nl": "holandský",
+      "pt_BR": "portugalština (brazilština)",
+      "sv": "švédský",
+      "vi": "Vietnamci"
+    },
+    "login": {
+      "enter_pass": "Zadejte heslo A",
+      "enter_pass_placeholder": "Heslo A",
+      "error": "Došlo k chybě",
+      "invalid_pass": "Neplatné heslo",
+      "login": "Přihlášení",
+      "caps_lock": "El Bloq Majús està ACTIVAT"
+    },
+    "navigation": {
+      "apps": "Aplikace",
+      "back": "Zpět",
+      "dark_mode": "Tmavý režim",
+      "display_sats": "Zobrazit SATS",
+      "home": "Domů",
+      "logout": "Odhlásit se",
+      "settings": "Nastavení"
+    },
+    "settings": {
+      "cancel": "Zrušit",
+      "change": "Změnit",
+      "change_pw_a": "Změna hesla A",
+      "confirm": "Potvrdit",
+      "curr_lang": "Současný jazyk",
+      "language": "Jazyk",
+      "new_pw": "Nové heslo",
+      "old_pw": "Staré heslo",
+      "pass_a_changed": "Heslo A bylo úspěšně změněno",
+      "reboot": "Restartovat",
+      "shutdown": "Vypnout"
+    },
+    "setup": {
+      "input_node": {
+        "err_only_chars": "Název uzlu by měl obsahovat pouze znaky a čísla.",
+        "err_max_length": "Název uzlu může mít maximálně 32 znaků.",
+        "err_min_length": "Nodename musí být dlouhý alespoň 4 znaky.",
+        "err_empty": "Název uzlu nemůže být prázdný."
+      },
+      "blockchain_delete": "Smazat Blockchain",
+      "blockchain_found_long": "Na vašem HDD/SSD byla nalezena existující data blockchainu.",
+      "blockchain_found_short": "Blockchain nalezen na HDD/SSD",
+      "blockchain_keep": "Zachovat Blockchain",
+      "cancel": "Zrušit",
+      "cancel_setup": "Opravdu chcete zrušit proces nastavení?",
+      "continue": "Pokračovat",
+      "convertwarning": "RaspiBlitz může v tuto chvíli převádět pouze data Blockchainu a Lightningu (prostředky + kanály). Data z dalších nainstalovaných aplikací mohou být v procesu migrace smazána.",
+      "done_migration_ready": "OK. Vše je připraveno k migraci na RaspiBlitz.",
+      "done_migration_start": "Spustit migraci",
+      "done_recover_ready": "OK. Vše je připraveno k obnovení vašeho RaspiBlitz.",
+      "done_recover_start": "Zahájit obnovení",
+      "done_setup_ready": "OK. Vše je připraveno k nastavení vašeho RaspiBlitz.",
+      "done_setup_start": "Spustit nastavení",
+      "done_update_ready": "OK. Vše je připraveno k aktualizaci vašeho RaspiBlitz.",
+      "done_update_start": "Spustit aktualizaci",
+      "final_do_reboot": "OK, proveďte finální restart",
+      "final_info_reboot": "Nyní se restartuje a synchronizuje blockchain.",
+      "final_migration": "Migrace je dokončena.",
+      "final_recovery": "Obnova je dokončena.",
+      "final_seedwords": "Zapište si, prosím, svá seed slova a uložte je na bezpečném místě:",
+      "final_setup": "Nastavení je dokončeno.",
+      "final_update": "Aktualizace je dokončena.",
+      "lightningoutdated": "Uzel, ze kterého chcete migrovat, používá novější verzi Lightning než tento RaspiBlitz. Počkejte prosím na aktualizovanou verzi. Můžete vypnout a spustit uzel se starou SD kartou - nebyly provedeny žádné změny.",
+      "lnd": "LND",
+      "migrateblitz": "Migrovat na RaspiBlitz",
+      "no_and_shutdown": "Ne a Vypnout",
+      "ok": "OK",
+      "other_options": "Další možnosti",
+      "password_a_details": "Použijte toto heslo pro přihlášení do vašeho RaspiBlitz.",
+      "password_a_name": "Heslo A",
+      "password_a_short": "Nastavení nového hesla správce (Heslo A)",
+      "password_b_details": "Toto heslo použijte pro další aplikace, které můžete do RaspiBlitz nainstalovat.",
+      "password_b_name": "Heslo B",
+      "password_b_short": "Nastavení nového hesla aplikace (Heslo B)",
+      "password_c_details": "Toto heslo použijte k odemknutí Lightning Peněženky.",
+      "password_c_name": "Heslo C",
+      "password_c_short": "Nastavení nového hesla Heslo-Peněženky-Lightning (Heslo C)",
+      "password_error_chars": "Heslo by mělo obsahovat pouze znaky a čísla.",
+      "password_error_empty": "Heslo nesmí být prázdné.",
+      "password_error_length": "Heslo musí mít alespoň 8 znaků.",
+      "password_error_match": "Hesla se neshodují.",
+      "password_repeat": "Opakovat",
+      "pleasewait": "prosím, čekejte",
+      "preparingsetup": "příprava nastavení",
+      "recoverblitz": "Obnovit můj RaspiBlitz",
+      "restartinfo": "počkejte prosím, až RaspiBlitz znovu odpoví",
+      "restarting": "restartování",
+      "restarts": "Restartuje se",
+      "runningsetup": "Spuštění nastavení",
+      "select_lightning": "Vyberte si svou Lightning implementaci:",
+      "setupblitz": "Nastavení nového RaspiBlitz",
+      "setupoptions": "Možnosti nastavení",
+      "setupwait": "nastavení zabere několik minut",
+      "shuttingdown": "vypínání",
+      "start_recovery": "Chcete zahájit proces obnovy?",
+      "start_update": "Chcete zahájit proces aktualizace a obnovení?",
+      "started": "Zahájeno",
+      "sync_bitcoin_starting": "Spuštění synchronizace",
+      "sync_bitcoin_sync": "Průběh synchronizace",
+      "sync_headline": "Počáteční synchronizace RaspiBlitz",
+      "sync_restartinfo": "(synchronizace bude pokračovat při dalším restartu)",
+      "sync_wallet_info": "Odemkněte svou peněženku Lightning (heslo C):",
+      "sync_wallet_unlock": "Odemknout peněženku",
+      "updateblitz": "Aktualizovat můj RaspiBlitz",
+      "yes": "Ano",
+      "yes_and_migrate": "Migrovat na RaspiBlitz"
+    },
+    "tx": {
+      "comment": "Komentář",
+      "comment_placeholder": "Volitelný komentář",
+      "confirm_info": "Potvrďte prosím následující transakci",
+      "confirmations": "Potvrzení",
+      "date": "Datum",
+      "description": "Popis",
+      "fee": "Poplatek",
+      "fee_rate": "Výše poplatku",
+      "included_block": "Zahrnuto v bloku",
+      "mempool": "Zobrazit v mempoolu",
+      "sent": "Transakce odeslána!",
+      "transactions": "Transakce",
+      "transactions_none": "Zatím žádné transakce, je čas provést první",
+      "tx_details": "Podrobnosti o transakci",
+      "txid": "ID transakce",
+      "unconfirmed": "Nepotvrzeno",
+      "value": "Hodnota"
+    },
+    "wallet": {
+      "address": "Adresa",
+      "amount": "Částka",
+      "balance": "Zůstatek",
+      "confirm": "Potvrdit",
+      "copied": "Zkopírováno!",
+      "copy_clipboard": "Zkopírovat do schránky",
+      "create_invoice": "Vytvořit fakturu",
+      "create_invoice_ln": "Vytvořit Lightning fakturu",
+      "fund": "Financujte svou on-chain peněženku",
+      "invoice": "Faktura",
+      "on_chain": "On-chain",
+      "receive": "Přijmout",
+      "refresh": "Obnovit adresu",
+      "scan_qr": "Naskenujte tento QR kód nebo zkopírujte níže uvedenou adresu pro zaslání finančních prostředků",
+      "send": "Odeslat",
+      "send_lightning": "Odeslat prostředky přes Lightning",
+      "send_onchain": "Odeslat prostředky On-chain",
+      "unlock": "Odemknout",
+      "unlock_subtitle": "Odemkněte svou peněženku",
+      "unlock_success": "Peněženka odemčena",
+      "unlock_title": "Odemknout peněženku",
+      "unlocking": "Odemykání",
+      "wallet_locked": "Peněženka uzamčena"
+    }
+  }
 }

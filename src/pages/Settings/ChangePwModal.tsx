@@ -12,143 +12,143 @@ import { toast } from "react-toastify";
 import ActionBox from "./ActionBox";
 
 interface IFormInputs {
-	oldPassword: string;
-	newPassword: string;
+  oldPassword: string;
+  newPassword: string;
 }
 
 const ChangePwModal: FC = () => {
-	const { t } = useTranslation();
-	const [isLoading, setIsLoading] = useState(false);
-	const confirmModal = useDisclosure();
+  const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+  const confirmModal = useDisclosure();
 
-	const { isCapsLockEnabled, keyHandlers } = useCapsLock();
+  const { isCapsLockEnabled, keyHandlers } = useCapsLock();
 
-	const changePwHandler = (data: IFormInputs) => {
-		setIsLoading(true);
+  const changePwHandler = (data: IFormInputs) => {
+    setIsLoading(true);
 
-		const params = {
-			type: "a",
-			old_password: data.oldPassword,
-			new_password: data.newPassword,
-		};
+    const params = {
+      type: "a",
+      old_password: data.oldPassword,
+      new_password: data.newPassword,
+    };
 
-		instance
-			.post("/system/change-password", {}, { params })
-			.then(() => {
-				toast.success(t("settings.pass_a_changed"), { theme: "dark" });
-				confirmModal.onClose();
-			})
-			.catch((err) => {
-				toast.error(checkError(err));
-			})
-			.finally(() => {
-				setIsLoading(false);
-				reset();
-			});
-	};
+    instance
+      .post("/system/change-password", {}, { params })
+      .then(() => {
+        toast.success(t("settings.pass_a_changed"), { theme: "dark" });
+        confirmModal.onClose();
+      })
+      .catch((err) => {
+        toast.error(checkError(err));
+      })
+      .finally(() => {
+        setIsLoading(false);
+        reset();
+      });
+  };
 
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors, isValid },
-	} = useForm<IFormInputs>({
-		mode: "onChange",
-	});
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
 
-	return (
-		<>
-			<ConfirmModal
-				disclosure={confirmModal}
-				headline={t("settings.change_pw_a")}
-				isLoading={isLoading}
-				custom
-			>
-				<form onSubmit={handleSubmit(changePwHandler)}>
-					<ConfirmModal.Body>
-						{isCapsLockEnabled && <CapsLockWarning />}
+  return (
+    <>
+      <ConfirmModal
+        disclosure={confirmModal}
+        headline={t("settings.change_pw_a")}
+        isLoading={isLoading}
+        custom
+      >
+        <form onSubmit={handleSubmit(changePwHandler)}>
+          <ConfirmModal.Body>
+            {isCapsLockEnabled && <CapsLockWarning />}
 
-						<fieldset className="flex w-full flex-col gap-4">
-							<Input
-								className="w-full"
-								classNames={{
-									inputWrapper:
-										"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-								}}
-								type="password"
-								label={t("settings.old_pw")}
-								isInvalid={!!errors.oldPassword}
-								errorMessage={errors.oldPassword?.message}
-								{...register("oldPassword", {
-									required: t("setup.password_error_empty"),
-									pattern: {
-										value: /^[a-zA-Z0-9.-]*$/,
-										message: t("setup.password_error_chars"),
-									},
-									minLength: {
-										value: 8,
-										message: t("setup.password_error_length"),
-									},
-								})}
-								{...keyHandlers}
-							/>
+            <fieldset className="flex w-full flex-col gap-4">
+              <Input
+                className="w-full"
+                classNames={{
+                  inputWrapper:
+                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                }}
+                type="password"
+                label={t("settings.old_pw")}
+                isInvalid={!!errors.oldPassword}
+                errorMessage={errors.oldPassword?.message}
+                {...register("oldPassword", {
+                  required: t("setup.password_error_empty"),
+                  pattern: {
+                    value: /^[a-zA-Z0-9.-]*$/,
+                    message: t("setup.password_error_chars"),
+                  },
+                  minLength: {
+                    value: 8,
+                    message: t("setup.password_error_length"),
+                  },
+                })}
+                {...keyHandlers}
+              />
 
-							<Input
-								className="w-full"
-								classNames={{
-									inputWrapper:
-										"bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-								}}
-								type="password"
-								label={t("settings.new_pw")}
-								isInvalid={!!errors.newPassword}
-								errorMessage={errors.newPassword?.message}
-								{...register("newPassword", {
-									required: t("setup.password_error_empty"),
-									pattern: {
-										value: /^[a-zA-Z0-9.-]*$/,
-										message: t("setup.password_error_chars"),
-									},
-									minLength: {
-										value: 8,
-										message: t("setup.password_error_length"),
-									},
-								})}
-								{...keyHandlers}
-							/>
-						</fieldset>
-					</ConfirmModal.Body>
+              <Input
+                className="w-full"
+                classNames={{
+                  inputWrapper:
+                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                }}
+                type="password"
+                label={t("settings.new_pw")}
+                isInvalid={!!errors.newPassword}
+                errorMessage={errors.newPassword?.message}
+                {...register("newPassword", {
+                  required: t("setup.password_error_empty"),
+                  pattern: {
+                    value: /^[a-zA-Z0-9.-]*$/,
+                    message: t("setup.password_error_chars"),
+                  },
+                  minLength: {
+                    value: 8,
+                    message: t("setup.password_error_length"),
+                  },
+                })}
+                {...keyHandlers}
+              />
+            </fieldset>
+          </ConfirmModal.Body>
 
-					<ConfirmModal.Footer>
-						<Button
-							onClick={() => {
-								confirmModal.onClose();
-								reset();
-							}}
-							isDisabled={isLoading}
-						>
-							{t("settings.cancel")}
-						</Button>
-						<Button
-							color="primary"
-							type="submit"
-							isDisabled={isLoading || !isValid}
-							isLoading={isLoading}
-						>
-							{t("settings.confirm")}
-						</Button>
-					</ConfirmModal.Footer>
-				</form>
-			</ConfirmModal>
+          <ConfirmModal.Footer>
+            <Button
+              onClick={() => {
+                confirmModal.onClose();
+                reset();
+              }}
+              isDisabled={isLoading}
+            >
+              {t("settings.cancel")}
+            </Button>
+            <Button
+              color="primary"
+              type="submit"
+              isDisabled={isLoading || !isValid}
+              isLoading={isLoading}
+            >
+              {t("settings.confirm")}
+            </Button>
+          </ConfirmModal.Footer>
+        </form>
+      </ConfirmModal>
 
-			<ActionBox
-				name={t("settings.change_pw_a")}
-				actionName={t("settings.change")}
-				action={() => confirmModal.onOpen()}
-				showChild={false}
-			/>
-		</>
-	);
+      <ActionBox
+        name={t("settings.change_pw_a")}
+        actionName={t("settings.change")}
+        action={() => confirmModal.onOpen()}
+        showChild={false}
+      />
+    </>
+  );
 };
 
 export default ChangePwModal;

@@ -1,326 +1,326 @@
 {
-	"translation": {
-		"appInfo": {
-			"btc-rpc-explorer": {
-				"about": "Dit is een self-hosted verkenner voor de Bitcoin blockchain, aangestuurd door RPC verzoeken naar uw Bitcoin node. Het is eenvoudig om te draaien en kan verbonden worden met ander gereedschap (zoals Electrum servers) om een volledige uitgeruste verkenner te zijn.",
-				"shortDescription": "Bitcoin RPC Verkenner"
-			},
-			"btcpayserver": {
-				"about": "BTCPay Server is een vrije en open-source Bitcoin betalings verwerker die het mogelijk maakt om Bitcoin te accepteren zonder vergoedingen of tussenpersonen.",
-				"shortDescription": "Accepteer Bitcoin betalingen. Vrij, open-source & self-hosted, Bitcoin betaling verwerker."
-			},
-			"lnbits": {
-				"about": "LNbits is een zeer simpele Python server dat bovenaan de top staat van elke financieringsbron en kan worden gebruikt als een boekhoudingssysteem om het risico te verkleinen dat applicaties worden blootgesteld aan uw volledige saldo, via unieke API sleutels voor elke wallet.",
-				"shortDescription": "Vrije en open-source lightning-netwerk wallet/boekhouding systeem"
-			},
-			"mempool": {
-				"about": " Een open-source verkenner ontwikkeld voor de Bitcoin gemeenschap, gericht op de opkomende transactiekosten-markt om te helpen met onze transitie in het multi-layer ecosysteem.",
-				"shortDescription": "Een open-source verkenner ontwikkeld voor de Bitcoin gemeenschap"
-			},
-			"rtl": {
-				"about": "RTL is een volledige functionerende, apparaat onafhankelijke, web user interface om te helpen met het beheren van Lightning node operaties. RTL is beschikbaar op LND, Core Lightning en Eclair implementaties.",
-				"shortDescription": "Een volledig functionerende web browser voor LND, Core Lightning en Eclair"
-			},
-			"specter": {
-				"about": "Bitcoin Core heeft een krachtige command line interface en een geweldige achtergronddienst. Door gebruik te maken van PSBT en HWI kan het ook het ook werken met hardware wallets, maar is op dit moment nog \"too linux-way\". Hetzelfde geldt voor multisignature installaties. Het doel van dit project is om een praktische en een gebruiksvriendelijk GUI rond Bitcoin Core te maken met een focus op multisignature installaties met hardware wallets en airgapped apparaten.",
-				"shortDescription": "Een desktop GUI voor Bitcoin Core geoptimaliseerd om met hardware wallets te werken"
-			},
-			"thunderhub": {
-				"about": "ThunderHub is een open-source LND node manager waarmee uw node kunt beheren en monitoren op elk apparaat of browser. Het maakt het mogelijk om controle te krijgen over het lightning netwerk met een simpele en intuitieve UX en de meeste up-to-date tech stack.",
-				"shortDescription": "LND Lightning Node Manager in uw Browser"
-			},
-			"jam": {
-				"shortDescription": "Jam - Een web interface voor JoinMarket",
-				"about": "Jam is een web interface voor JoinMarket gericht op gebruiksvriendelijkheid en gebruikersgemak. Het is bedoeld om zinvolle standaardinstellingen te bieden die gemakkelijk te gebruiken zijn voor beginners, terwijl het nog steeds de functies heeft die geavanceerde gebruikers verwachten."
-			}
-		},
-		"apps": {
-			"about": "Over",
-			"author": "Auteur",
-			"available": "Beschikbare Apps",
-			"info": "Info",
-			"install": "Installeer",
-			"install_failure": "Installatie van {{appName}} mislukt: {{details}}",
-			"install_success": "{{appName}} succesvol geïnstalleerd",
-			"installed": "Geïnstalleerd",
-			"installing": "Installeren",
-			"login_admin_pass_b": "Inloggen met Gebruiker 'admin' & Wachtwoord B",
-			"login_no_pass": "Inloggen zonder wachtwoord",
-			"login_pass_b": "Inloggen met Wachtwoord B",
-			"login_userdef": "Inloggen met gebruiker-gedefinieerd Wachtwoord",
-			"no_page": "Geen pagina beschikbaar",
-			"offline": "offline",
-			"online": "online",
-			"open": "Open",
-			"selfsigned_cert": "Deze app gebruikt een self-signed HTTPS certificaat",
-			"source": "Broncode",
-			"uninstall": "Verwijder",
-			"uninstall_failure": "De-installatie van {{appName}} mislukt: {{details}}",
-			"uninstall_success": "{{appName}} succesvol gedeïnstalleerd",
-			"uninstalling": "De-installeren"
-		},
-		"forms": {
-			"hint": {
-				"invoiceAmountZero": "Bedrag van de rekening is nul"
-			},
-			"validation": {
-				"amount": {
-					"required": "Vul een bedrag in"
-				},
-				"chainAddress": {
-					"patternMismatch": "Adresfout",
-					"required": "Vul alsjeblieft een Bitcoin adres in"
-				},
-				"chainAmount": {
-					"max": "Je balans is te laag",
-					"required": "Vul alsjeblieft een bedrag in"
-				},
-				"chainFee": {
-					"required": "Vul alsjeblieft een vergoeding in"
-				},
-				"lnInvoice": {
-					"expired": "Factuur verlopen",
-					"max": "Je balans is te laag om deze rekening te betalen",
-					"patternMismatch": "Verkeerd factuur formaat",
-					"required": "Voer alsjeblieft een Lightning factuur in"
-				},
-				"node_uri": {
-					"required": "Geef a.u.b. een node URI in"
-				},
-				"unlock": {
-					"pass_c": "Wachtwoord C",
-					"required": "Wachtwoord C is vereist"
-				}
-			}
-		},
-		"hardware": {
-			"cpu_load": "CPU Belasting",
-			"disk_usage": "Disk ruimte gebruikt",
-			"header": "Hardware Details",
-			"ram_usage": "RAM gebruik",
-			"temp": "Temperatuur"
-		},
-		"home": {
-			"active": "Actief",
-			"bitcoin": "Bitcoin",
-			"blockchain_size": "Grootte van de Blockchain",
-			"blocks_synced": "Blokken gesynchroniseerd",
-			"blocktime": "Bloktijd",
-			"channel": "Kanaal",
-			"channel_balance": "Saldo van kanaal",
-			"channel_closed": "Kanaal succesvol gesloten",
-			"channel_id": "Kanaal ID",
-			"channel_opened": "Kanaal succesvol geopend",
-			"close_channel": "Gesloten Kanalen",
-			"confirm_channel_close": "Kanaal sluiten bevestigen",
-			"conn_details": "Details van de Verbinding",
-			"conn_in": "Inkomend",
-			"conn_out": "Uitgaand",
-			"connections": "Verbindingen",
-			"current_open_channels": "Huidige open Kanalen",
-			"difficulty": "Moeilijkheid",
-			"force_close": "Geforceerd sluiten",
-			"hide": "Verberg",
-			"lightning": "Lightning",
-			"list_open_channels": "Kanalen opsommen",
-			"local_balance": "Lokaal Saldo van Kanaal",
-			"network": "Netwerk",
-			"no": "Nee",
-			"no_open_channels": "U hebt op dit moment geen open kanalen",
-			"node_id": "NodeID",
-			"node_uri": "Node URI",
-			"normal": "Normaal",
-			"onchain_cln_no_support": "On-chain transacties gemaakt in oudere versies dan RaspiBlitz v1.9 worden mogelijk niet getoond met Core Lightning",
-			"open_channel": "Open Kanaal",
-			"pending_balance_local": "Lokaal Saldo in behandeling",
-			"pending_balance_remote": "Extern Saldo in behandeling",
-			"remote_balance": "Saldo van Extern Kanaal",
-			"show": "Toon",
-			"show_qr": "QR Code laten zien",
-			"slow": "Langzaam",
-			"ssh": "SSH login",
-			"status": "Status",
-			"tor": "Tor",
-			"urgent": "Dringend",
-			"version": "Versie",
-			"versions": "Versies",
-			"webui": "WebUI",
-			"not_available": "Niet beschikbaar",
-			"connect_node": "Deel dit adres met anderen zodat zij kunnen verbinden met je lightning node"
-		},
-		"language": {
-			"cs": "Tsjechisch",
-			"de": "Duits",
-			"en": "Engels",
-			"es": "Spaans",
-			"fr": "Frans",
-			"hu": "Hongaars",
-			"it": "Italiaans",
-			"nb_NO": "Noors",
-			"nl": "Nederlands",
-			"pt_BR": "Portugees (Braziliaans)",
-			"sv": "Zweeds",
-			"vi": "Vietnamees"
-		},
-		"login": {
-			"enter_pass": "Vul Wachtwoord A in",
-			"enter_pass_placeholder": "Wachtwoord A",
-			"error": "Er is een fout opgetreden",
-			"invalid_pass": "Ongeldig wachtwoord",
-			"login": "Inloggen",
-			"caps_lock": "Caps Lock staat AAN",
-			"unknown_error": "Onbekende fout. De reactie was: {{code}} {{statusText}}."
-		},
-		"navigation": {
-			"apps": "Apps",
-			"back": "Terug",
-			"dark_mode": "Donkere modus",
-			"display_sats": "Toon SATS",
-			"home": "Home",
-			"logout": "Uitloggen",
-			"settings": "Instellingen"
-		},
-		"settings": {
-			"cancel": "Annuleer",
-			"change": "Aanpassen",
-			"change_pw_a": "Verander wachtwoord A",
-			"confirm": "Bevestig",
-			"curr_lang": "Huidige taal",
-			"language": "Taal",
-			"new_pw": "Nieuw wachtwoord",
-			"old_pw": "Oude wachtwoord",
-			"pass_a_changed": "Wachtwoord A succesvol aangepast",
-			"reboot": "Herstart",
-			"shutdown": "Zet uit",
-			"generating": "Genereren",
-			"generating_debug_report": "Foutopsporingsrapport genereren. Dit kan enige tijd duren.",
-			"generate_debug": "Foutopsporingsrapport genereren",
-			"generate": "Genereer",
-			"debug_report_done": "Foutopsporingsrapport gemaakt!"
-		},
-		"setup": {
-			"input_node": {
-				"err_only_chars": "Naam van de Node mag alleen letters & nummers bevatten.",
-				"err_max_length": "Naam van de Node mag maximaal 32 tekens lang zijn.",
-				"err_min_length": "Naam van de Node moet minstens 4 tekens langs zijn.",
-				"err_empty": "Naam van de Node kan niet leeg zijn."
-			},
-			"blockchain_delete": "Verwijder Blockchain",
-			"blockchain_found_long": "Op uw HDD/SSD is bestaande blockchain data gevonden.",
-			"blockchain_found_short": "Blockchain gevonden op HDD/SSD",
-			"blockchain_keep": "Behoud Blockchain",
-			"cancel": "Annuleren",
-			"cancel_setup": "Wilt u echt het installatie proces annuleren",
-			"continue": "Doorgaan",
-			"convertwarning": "RaspiBlitz kan op dit moment alleen je Blockchain en Lightning data (tegoeden + kanalen) omzetten. Data van extra geïnstalleerde apps kunnen worden verwijderd in het migratieproces.",
-			"done_migration_ready": "Ok. Alles is klaar om uw RaspiBlitz te migreren.",
-			"done_migration_start": "Start Migratie",
-			"done_recover_ready": "Ok. Alles is klaar om uw RaspiBlitz te herstellen.",
-			"done_recover_start": "Start Herstel",
-			"done_setup_ready": "OK. Alles is klaar om RaspiBlitz te installeren.",
-			"done_setup_start": "Start Installatie",
-			"done_update_ready": "Ok. Alles is klaar om uw RaspiBlitz te updaten.",
-			"done_update_start": "Start Update",
-			"final_do_reboot": "OK, doe een laatste Herstart",
-			"final_info_reboot": "Gaat nu herstarten en de blockchain synchroniseren.",
-			"final_migration": "Migratie is klaar.",
-			"final_recovery": "Herstel is klaar.",
-			"final_seedwords": "Schrijf uw seed woorden op en bewaar ze op een veilige plaats:",
-			"final_setup": "Installatie is klaar.",
-			"final_update": "Update is klaar.",
-			"lightningoutdated": "De node die wordt gemigreerd gebruikt een nieuwere Lightning versie dan deze RaspiBlitz. Wacht a.u.b. op een nieuwere release. U kunt afsluiten en opstarten met de oude sd kaart - er zijn geen veranderingen gemaakt.",
-			"lnd": "LND",
-			"migrateblitz": "Migreer naar RaspiBlitz",
-			"no_and_shutdown": "Nee en afsluiten",
-			"ok": "OK",
-			"other_options": "Andere opties",
-			"password_a_details": "Gebruik dit wachtwoord om in te loggen op uw RaspiBlitz.",
-			"password_a_name": "Wachtwoord A",
-			"password_a_short": "Stel uw nieuwe Admin-Wachtwoord in (Password A)",
-			"password_b_details": "Gebruik dit wachtwoord voor aanvullende Apps die u kan installeren op uw RaspiBlitz.",
-			"password_b_name": "Wachtwoord B",
-			"password_b_short": "Stel uw nieuwe App-Wachtwoord in (Password B)",
-			"password_c_details": "Gebruik dit wachtwoord om uw Lightning Wallet te ontgrendelen.",
-			"password_c_name": "Wachtwoord C",
-			"password_c_short": "Stel uw nieuwe Lightning-Wallet-Wachtwoord in (Password C)",
-			"password_error_chars": "Wachtwoord dient letters & nummers te bevatten.",
-			"password_error_empty": "Wachtwoord kan niet leeg zijn.",
-			"password_error_length": "Wachtwoord moet uit minstens 8 tekens bestaan.",
-			"password_error_match": "Wachtwoorden komen niet overeen.",
-			"password_repeat": "Herhaal",
-			"pleasewait": "wacht a.u.b.",
-			"preparingsetup": "setup voorbereiden",
-			"recoverblitz": "Herstel mijn RaspiBlitz",
-			"restartinfo": "wacht a.u.b. totdat RaspiBlitz opnieuw antwoord",
-			"restarting": "opnieuw starten",
-			"restarts": "Herstart",
-			"runningsetup": "Setup actief",
-			"select_lightning": "Kies uw Lightning Implementatie:",
-			"setupblitz": "Installeer een verse RaspiBlitz",
-			"setupoptions": "Installatie Opties",
-			"setupwait": "setup duurt een paar minuten",
-			"shuttingdown": "afsluiten",
-			"start_recovery": "Wilt u het herstel proces starten?",
-			"start_update": "Wilt u de update en het herstel proces starten?",
-			"started": "Gestart",
-			"sync_bitcoin_starting": "Synchronisatie gestart",
-			"sync_bitcoin_sync": "Synchronisatie Voortgang",
-			"sync_headline": "Raspiblitz initiële Syncronisatie",
-			"sync_restartinfo": "(synchronisatie gaat door bij volgende herstart)",
-			"sync_wallet_info": "Ontgrendel a.u.b. uw Lightning Wallet (Wachtwoord C):",
-			"sync_wallet_unlock": "Ontgrendel Wallet",
-			"updateblitz": "Update mijn RaspiBlitz",
-			"yes": "Ja",
-			"yes_and_migrate": "Migreren naar RaspiBlitz"
-		},
-		"tx": {
-			"comment": "Opmerking",
-			"comment_placeholder": "Opmerking (optioneel)",
-			"confirm_info": "Bevestig alsjeblieft de volgende transactie",
-			"confirmations": "Bevestigingen",
-			"date": "Datum",
-			"description": "Omschrijving",
-			"fee": "Vergoeding",
-			"fee_rate": "Tarief",
-			"included_block": "Toegevoegd aan Blok",
-			"mempool": "Bekijk in mempool",
-			"sent": "Transactie verstuurd!",
-			"transactions": "Transacties",
-			"transactions_none": "Nog geen transactie hier; tijd om je eerste te maken",
-			"tx_details": "Transactie Details",
-			"txid": "Transactie ID",
-			"unconfirmed": "Onbevestigd",
-			"value": "Waarde"
-		},
-		"wallet": {
-			"address": "Adres",
-			"amount": "Bedrag",
-			"balance": "Balans",
-			"confirm": "Bevestig",
-			"copied": "Gekopieerd!",
-			"copy_clipboard": "Kopieer naar klembord",
-			"create_invoice": "Creëer factuur",
-			"create_invoice_ln": "Creëer Lightning factuur",
-			"fund": "Stort geld op uw on-chain portemonnee",
-			"invoice": "Rekening",
-			"on_chain": "On-chain",
-			"receive": "Ontvang",
-			"refresh": "Adres vernieuwen",
-			"scan_qr": "Scan deze QR code of kopieer onderstaand adres om tegoeden te ontvangen",
-			"send": "Stuur",
-			"send_lightning": "Stuur tegoeden via Lightning",
-			"send_onchain": "Stuur tegoeden On-chain",
-			"unlock": "Deblokkeer",
-			"unlock_subtitle": "Ontgrendel je Portemonnee",
-			"unlock_success": "Portemonnee ontgrendeld",
-			"unlock_title": "Ontgrendel Portemonnee",
-			"unlocking": "Ontgrendelen",
-			"wallet_locked": "Portemonnee vergrendeld",
-			"available_balance": "Beschikbaar saldo"
-		},
-		"error": {
-			"stack": "Stack traceren",
-			"report": "Meld deze fout a.u.b. aan"
-		}
-	}
+  "translation": {
+    "appInfo": {
+      "btc-rpc-explorer": {
+        "about": "Dit is een self-hosted verkenner voor de Bitcoin blockchain, aangestuurd door RPC verzoeken naar uw Bitcoin node. Het is eenvoudig om te draaien en kan verbonden worden met ander gereedschap (zoals Electrum servers) om een volledige uitgeruste verkenner te zijn.",
+        "shortDescription": "Bitcoin RPC Verkenner"
+      },
+      "btcpayserver": {
+        "about": "BTCPay Server is een vrije en open-source Bitcoin betalings verwerker die het mogelijk maakt om Bitcoin te accepteren zonder vergoedingen of tussenpersonen.",
+        "shortDescription": "Accepteer Bitcoin betalingen. Vrij, open-source & self-hosted, Bitcoin betaling verwerker."
+      },
+      "lnbits": {
+        "about": "LNbits is een zeer simpele Python server dat bovenaan de top staat van elke financieringsbron en kan worden gebruikt als een boekhoudingssysteem om het risico te verkleinen dat applicaties worden blootgesteld aan uw volledige saldo, via unieke API sleutels voor elke wallet.",
+        "shortDescription": "Vrije en open-source lightning-netwerk wallet/boekhouding systeem"
+      },
+      "mempool": {
+        "about": " Een open-source verkenner ontwikkeld voor de Bitcoin gemeenschap, gericht op de opkomende transactiekosten-markt om te helpen met onze transitie in het multi-layer ecosysteem.",
+        "shortDescription": "Een open-source verkenner ontwikkeld voor de Bitcoin gemeenschap"
+      },
+      "rtl": {
+        "about": "RTL is een volledige functionerende, apparaat onafhankelijke, web user interface om te helpen met het beheren van Lightning node operaties. RTL is beschikbaar op LND, Core Lightning en Eclair implementaties.",
+        "shortDescription": "Een volledig functionerende web browser voor LND, Core Lightning en Eclair"
+      },
+      "specter": {
+        "about": "Bitcoin Core heeft een krachtige command line interface en een geweldige achtergronddienst. Door gebruik te maken van PSBT en HWI kan het ook het ook werken met hardware wallets, maar is op dit moment nog \"too linux-way\". Hetzelfde geldt voor multisignature installaties. Het doel van dit project is om een praktische en een gebruiksvriendelijk GUI rond Bitcoin Core te maken met een focus op multisignature installaties met hardware wallets en airgapped apparaten.",
+        "shortDescription": "Een desktop GUI voor Bitcoin Core geoptimaliseerd om met hardware wallets te werken"
+      },
+      "thunderhub": {
+        "about": "ThunderHub is een open-source LND node manager waarmee uw node kunt beheren en monitoren op elk apparaat of browser. Het maakt het mogelijk om controle te krijgen over het lightning netwerk met een simpele en intuitieve UX en de meeste up-to-date tech stack.",
+        "shortDescription": "LND Lightning Node Manager in uw Browser"
+      },
+      "jam": {
+        "shortDescription": "Jam - Een web interface voor JoinMarket",
+        "about": "Jam is een web interface voor JoinMarket gericht op gebruiksvriendelijkheid en gebruikersgemak. Het is bedoeld om zinvolle standaardinstellingen te bieden die gemakkelijk te gebruiken zijn voor beginners, terwijl het nog steeds de functies heeft die geavanceerde gebruikers verwachten."
+      }
+    },
+    "apps": {
+      "about": "Over",
+      "author": "Auteur",
+      "available": "Beschikbare Apps",
+      "info": "Info",
+      "install": "Installeer",
+      "install_failure": "Installatie van {{appName}} mislukt: {{details}}",
+      "install_success": "{{appName}} succesvol geïnstalleerd",
+      "installed": "Geïnstalleerd",
+      "installing": "Installeren",
+      "login_admin_pass_b": "Inloggen met Gebruiker 'admin' & Wachtwoord B",
+      "login_no_pass": "Inloggen zonder wachtwoord",
+      "login_pass_b": "Inloggen met Wachtwoord B",
+      "login_userdef": "Inloggen met gebruiker-gedefinieerd Wachtwoord",
+      "no_page": "Geen pagina beschikbaar",
+      "offline": "offline",
+      "online": "online",
+      "open": "Open",
+      "selfsigned_cert": "Deze app gebruikt een self-signed HTTPS certificaat",
+      "source": "Broncode",
+      "uninstall": "Verwijder",
+      "uninstall_failure": "De-installatie van {{appName}} mislukt: {{details}}",
+      "uninstall_success": "{{appName}} succesvol gedeïnstalleerd",
+      "uninstalling": "De-installeren"
+    },
+    "forms": {
+      "hint": {
+        "invoiceAmountZero": "Bedrag van de rekening is nul"
+      },
+      "validation": {
+        "amount": {
+          "required": "Vul een bedrag in"
+        },
+        "chainAddress": {
+          "patternMismatch": "Adresfout",
+          "required": "Vul alsjeblieft een Bitcoin adres in"
+        },
+        "chainAmount": {
+          "max": "Je balans is te laag",
+          "required": "Vul alsjeblieft een bedrag in"
+        },
+        "chainFee": {
+          "required": "Vul alsjeblieft een vergoeding in"
+        },
+        "lnInvoice": {
+          "expired": "Factuur verlopen",
+          "max": "Je balans is te laag om deze rekening te betalen",
+          "patternMismatch": "Verkeerd factuur formaat",
+          "required": "Voer alsjeblieft een Lightning factuur in"
+        },
+        "node_uri": {
+          "required": "Geef a.u.b. een node URI in"
+        },
+        "unlock": {
+          "pass_c": "Wachtwoord C",
+          "required": "Wachtwoord C is vereist"
+        }
+      }
+    },
+    "hardware": {
+      "cpu_load": "CPU Belasting",
+      "disk_usage": "Disk ruimte gebruikt",
+      "header": "Hardware Details",
+      "ram_usage": "RAM gebruik",
+      "temp": "Temperatuur"
+    },
+    "home": {
+      "active": "Actief",
+      "bitcoin": "Bitcoin",
+      "blockchain_size": "Grootte van de Blockchain",
+      "blocks_synced": "Blokken gesynchroniseerd",
+      "blocktime": "Bloktijd",
+      "channel": "Kanaal",
+      "channel_balance": "Saldo van kanaal",
+      "channel_closed": "Kanaal succesvol gesloten",
+      "channel_id": "Kanaal ID",
+      "channel_opened": "Kanaal succesvol geopend",
+      "close_channel": "Gesloten Kanalen",
+      "confirm_channel_close": "Kanaal sluiten bevestigen",
+      "conn_details": "Details van de Verbinding",
+      "conn_in": "Inkomend",
+      "conn_out": "Uitgaand",
+      "connections": "Verbindingen",
+      "current_open_channels": "Huidige open Kanalen",
+      "difficulty": "Moeilijkheid",
+      "force_close": "Geforceerd sluiten",
+      "hide": "Verberg",
+      "lightning": "Lightning",
+      "list_open_channels": "Kanalen opsommen",
+      "local_balance": "Lokaal Saldo van Kanaal",
+      "network": "Netwerk",
+      "no": "Nee",
+      "no_open_channels": "U hebt op dit moment geen open kanalen",
+      "node_id": "NodeID",
+      "node_uri": "Node URI",
+      "normal": "Normaal",
+      "onchain_cln_no_support": "On-chain transacties gemaakt in oudere versies dan RaspiBlitz v1.9 worden mogelijk niet getoond met Core Lightning",
+      "open_channel": "Open Kanaal",
+      "pending_balance_local": "Lokaal Saldo in behandeling",
+      "pending_balance_remote": "Extern Saldo in behandeling",
+      "remote_balance": "Saldo van Extern Kanaal",
+      "show": "Toon",
+      "show_qr": "QR Code laten zien",
+      "slow": "Langzaam",
+      "ssh": "SSH login",
+      "status": "Status",
+      "tor": "Tor",
+      "urgent": "Dringend",
+      "version": "Versie",
+      "versions": "Versies",
+      "webui": "WebUI",
+      "not_available": "Niet beschikbaar",
+      "connect_node": "Deel dit adres met anderen zodat zij kunnen verbinden met je lightning node"
+    },
+    "language": {
+      "cs": "Tsjechisch",
+      "de": "Duits",
+      "en": "Engels",
+      "es": "Spaans",
+      "fr": "Frans",
+      "hu": "Hongaars",
+      "it": "Italiaans",
+      "nb_NO": "Noors",
+      "nl": "Nederlands",
+      "pt_BR": "Portugees (Braziliaans)",
+      "sv": "Zweeds",
+      "vi": "Vietnamees"
+    },
+    "login": {
+      "enter_pass": "Vul Wachtwoord A in",
+      "enter_pass_placeholder": "Wachtwoord A",
+      "error": "Er is een fout opgetreden",
+      "invalid_pass": "Ongeldig wachtwoord",
+      "login": "Inloggen",
+      "caps_lock": "Caps Lock staat AAN",
+      "unknown_error": "Onbekende fout. De reactie was: {{code}} {{statusText}}."
+    },
+    "navigation": {
+      "apps": "Apps",
+      "back": "Terug",
+      "dark_mode": "Donkere modus",
+      "display_sats": "Toon SATS",
+      "home": "Home",
+      "logout": "Uitloggen",
+      "settings": "Instellingen"
+    },
+    "settings": {
+      "cancel": "Annuleer",
+      "change": "Aanpassen",
+      "change_pw_a": "Verander wachtwoord A",
+      "confirm": "Bevestig",
+      "curr_lang": "Huidige taal",
+      "language": "Taal",
+      "new_pw": "Nieuw wachtwoord",
+      "old_pw": "Oude wachtwoord",
+      "pass_a_changed": "Wachtwoord A succesvol aangepast",
+      "reboot": "Herstart",
+      "shutdown": "Zet uit",
+      "generating": "Genereren",
+      "generating_debug_report": "Foutopsporingsrapport genereren. Dit kan enige tijd duren.",
+      "generate_debug": "Foutopsporingsrapport genereren",
+      "generate": "Genereer",
+      "debug_report_done": "Foutopsporingsrapport gemaakt!"
+    },
+    "setup": {
+      "input_node": {
+        "err_only_chars": "Naam van de Node mag alleen letters & nummers bevatten.",
+        "err_max_length": "Naam van de Node mag maximaal 32 tekens lang zijn.",
+        "err_min_length": "Naam van de Node moet minstens 4 tekens langs zijn.",
+        "err_empty": "Naam van de Node kan niet leeg zijn."
+      },
+      "blockchain_delete": "Verwijder Blockchain",
+      "blockchain_found_long": "Op uw HDD/SSD is bestaande blockchain data gevonden.",
+      "blockchain_found_short": "Blockchain gevonden op HDD/SSD",
+      "blockchain_keep": "Behoud Blockchain",
+      "cancel": "Annuleren",
+      "cancel_setup": "Wilt u echt het installatie proces annuleren",
+      "continue": "Doorgaan",
+      "convertwarning": "RaspiBlitz kan op dit moment alleen je Blockchain en Lightning data (tegoeden + kanalen) omzetten. Data van extra geïnstalleerde apps kunnen worden verwijderd in het migratieproces.",
+      "done_migration_ready": "Ok. Alles is klaar om uw RaspiBlitz te migreren.",
+      "done_migration_start": "Start Migratie",
+      "done_recover_ready": "Ok. Alles is klaar om uw RaspiBlitz te herstellen.",
+      "done_recover_start": "Start Herstel",
+      "done_setup_ready": "OK. Alles is klaar om RaspiBlitz te installeren.",
+      "done_setup_start": "Start Installatie",
+      "done_update_ready": "Ok. Alles is klaar om uw RaspiBlitz te updaten.",
+      "done_update_start": "Start Update",
+      "final_do_reboot": "OK, doe een laatste Herstart",
+      "final_info_reboot": "Gaat nu herstarten en de blockchain synchroniseren.",
+      "final_migration": "Migratie is klaar.",
+      "final_recovery": "Herstel is klaar.",
+      "final_seedwords": "Schrijf uw seed woorden op en bewaar ze op een veilige plaats:",
+      "final_setup": "Installatie is klaar.",
+      "final_update": "Update is klaar.",
+      "lightningoutdated": "De node die wordt gemigreerd gebruikt een nieuwere Lightning versie dan deze RaspiBlitz. Wacht a.u.b. op een nieuwere release. U kunt afsluiten en opstarten met de oude sd kaart - er zijn geen veranderingen gemaakt.",
+      "lnd": "LND",
+      "migrateblitz": "Migreer naar RaspiBlitz",
+      "no_and_shutdown": "Nee en afsluiten",
+      "ok": "OK",
+      "other_options": "Andere opties",
+      "password_a_details": "Gebruik dit wachtwoord om in te loggen op uw RaspiBlitz.",
+      "password_a_name": "Wachtwoord A",
+      "password_a_short": "Stel uw nieuwe Admin-Wachtwoord in (Password A)",
+      "password_b_details": "Gebruik dit wachtwoord voor aanvullende Apps die u kan installeren op uw RaspiBlitz.",
+      "password_b_name": "Wachtwoord B",
+      "password_b_short": "Stel uw nieuwe App-Wachtwoord in (Password B)",
+      "password_c_details": "Gebruik dit wachtwoord om uw Lightning Wallet te ontgrendelen.",
+      "password_c_name": "Wachtwoord C",
+      "password_c_short": "Stel uw nieuwe Lightning-Wallet-Wachtwoord in (Password C)",
+      "password_error_chars": "Wachtwoord dient letters & nummers te bevatten.",
+      "password_error_empty": "Wachtwoord kan niet leeg zijn.",
+      "password_error_length": "Wachtwoord moet uit minstens 8 tekens bestaan.",
+      "password_error_match": "Wachtwoorden komen niet overeen.",
+      "password_repeat": "Herhaal",
+      "pleasewait": "wacht a.u.b.",
+      "preparingsetup": "setup voorbereiden",
+      "recoverblitz": "Herstel mijn RaspiBlitz",
+      "restartinfo": "wacht a.u.b. totdat RaspiBlitz opnieuw antwoord",
+      "restarting": "opnieuw starten",
+      "restarts": "Herstart",
+      "runningsetup": "Setup actief",
+      "select_lightning": "Kies uw Lightning Implementatie:",
+      "setupblitz": "Installeer een verse RaspiBlitz",
+      "setupoptions": "Installatie Opties",
+      "setupwait": "setup duurt een paar minuten",
+      "shuttingdown": "afsluiten",
+      "start_recovery": "Wilt u het herstel proces starten?",
+      "start_update": "Wilt u de update en het herstel proces starten?",
+      "started": "Gestart",
+      "sync_bitcoin_starting": "Synchronisatie gestart",
+      "sync_bitcoin_sync": "Synchronisatie Voortgang",
+      "sync_headline": "Raspiblitz initiële Syncronisatie",
+      "sync_restartinfo": "(synchronisatie gaat door bij volgende herstart)",
+      "sync_wallet_info": "Ontgrendel a.u.b. uw Lightning Wallet (Wachtwoord C):",
+      "sync_wallet_unlock": "Ontgrendel Wallet",
+      "updateblitz": "Update mijn RaspiBlitz",
+      "yes": "Ja",
+      "yes_and_migrate": "Migreren naar RaspiBlitz"
+    },
+    "tx": {
+      "comment": "Opmerking",
+      "comment_placeholder": "Opmerking (optioneel)",
+      "confirm_info": "Bevestig alsjeblieft de volgende transactie",
+      "confirmations": "Bevestigingen",
+      "date": "Datum",
+      "description": "Omschrijving",
+      "fee": "Vergoeding",
+      "fee_rate": "Tarief",
+      "included_block": "Toegevoegd aan Blok",
+      "mempool": "Bekijk in mempool",
+      "sent": "Transactie verstuurd!",
+      "transactions": "Transacties",
+      "transactions_none": "Nog geen transactie hier; tijd om je eerste te maken",
+      "tx_details": "Transactie Details",
+      "txid": "Transactie ID",
+      "unconfirmed": "Onbevestigd",
+      "value": "Waarde"
+    },
+    "wallet": {
+      "address": "Adres",
+      "amount": "Bedrag",
+      "balance": "Balans",
+      "confirm": "Bevestig",
+      "copied": "Gekopieerd!",
+      "copy_clipboard": "Kopieer naar klembord",
+      "create_invoice": "Creëer factuur",
+      "create_invoice_ln": "Creëer Lightning factuur",
+      "fund": "Stort geld op uw on-chain portemonnee",
+      "invoice": "Rekening",
+      "on_chain": "On-chain",
+      "receive": "Ontvang",
+      "refresh": "Adres vernieuwen",
+      "scan_qr": "Scan deze QR code of kopieer onderstaand adres om tegoeden te ontvangen",
+      "send": "Stuur",
+      "send_lightning": "Stuur tegoeden via Lightning",
+      "send_onchain": "Stuur tegoeden On-chain",
+      "unlock": "Deblokkeer",
+      "unlock_subtitle": "Ontgrendel je Portemonnee",
+      "unlock_success": "Portemonnee ontgrendeld",
+      "unlock_title": "Ontgrendel Portemonnee",
+      "unlocking": "Ontgrendelen",
+      "wallet_locked": "Portemonnee vergrendeld",
+      "available_balance": "Beschikbaar saldo"
+    },
+    "error": {
+      "stack": "Stack traceren",
+      "report": "Meld deze fout a.u.b. aan"
+    }
+  }
 }

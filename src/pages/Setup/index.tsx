@@ -6,20 +6,20 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Setup() {
-	const [state, setState] = useState<SetupState>(initialState);
-	const navigate = useNavigate();
+  const [state, setState] = useState<SetupState>(initialState);
+  const navigate = useNavigate();
 
-	const updateState = useCallback((newState: Partial<SetupState>) => {
-		setState((prevState: SetupState) => ({ ...prevState, ...newState }));
-	}, []);
+  const updateState = useCallback((newState: Partial<SetupState>) => {
+    setState((prevState: SetupState) => ({ ...prevState, ...newState }));
+  }, []);
 
-	useEffect(() => {
-		setupMonitoringLoop(updateState, navigate);
-	}, [updateState, navigate]);
+  useEffect(() => {
+    setupMonitoringLoop(updateState, navigate);
+  }, [updateState, navigate]);
 
-	return (
-		<SetupProvider state={state} updateState={updateState} navigate={navigate}>
-			<SetupScreenRenderer />
-		</SetupProvider>
-	);
+  return (
+    <SetupProvider state={state} updateState={updateState} navigate={navigate}>
+      <SetupScreenRenderer />
+    </SetupProvider>
+  );
 }

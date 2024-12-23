@@ -1,393 +1,393 @@
 {
-	"translation": {
-		"appInfo": {
-			"btc-rpc-explorer": {
-				"about": "This is a self-hosted explorer for the Bitcoin blockchain, driven by RPC calls to your own Bitcoin node. It is easy to run and can be connected to other tools (like Electrum servers) to achieve a full-featured explorer.",
-				"shortDescription": "Bitcoin RPC Explorer"
-			},
-			"btcpayserver": {
-				"about": "BTCPay Server is a free and open-source Bitcoin payment processor which allows you to accept bitcoin without fees or intermediaries.",
-				"shortDescription": "Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor.",
-				"ram_warning": "Your system has less than the recommended 8GB of RAM to run BTCPayServer on RaspiBlitz. This could lead to instability if you proceed with the installation."
-			},
-			"lnbits": {
-				"about": "LNbits is a very simple Python server that sits on top of any funding source, and can be used as an accounts system to mitigate the risk of exposing applications to your full balance, via unique API keys for each wallet.",
-				"shortDescription": "Free and open-source lightning-network wallet/accounts system"
-			},
-			"mempool": {
-				"about": " An open-source explorer developed for the Bitcoin community, focusing on the emerging transaction fee market to help our transition into a multi-layer ecosystem.",
-				"shortDescription": "An open-source explorer developed for the Bitcoin community"
-			},
-			"rtl": {
-				"about": "RTL is a full function, device agnostic, web user interface to help manage Lightning node operations. RTL is available on LND, Core Lightning and Eclair implementations.",
-				"shortDescription": "A full function web browser app for LND, Core Lightning and Eclair"
-			},
-			"specter": {
-				"about": "Bitcoin Core has a very powerful command line interface and a wonderful daemon. Using PSBT and HWI it can also work with hardware wallets, but at the moment it is too linux-way. The same applies to multisignature setups. The goal of this project is to make a convenient and user-friendly GUI around Bitcoin Core with a focus on multisignature setup with hardware wallets and airgapped devices.",
-				"shortDescription": "A desktop GUI for Bitcoin Core optimised to work with hardware wallets"
-			},
-			"thunderhub": {
-				"about": "ThunderHub is an open-source LND node manager where you can manage and monitor your node on any device or browser. It allows you to take control of the lightning network with a simple and intuitive UX and the most up-to-date tech stack.",
-				"shortDescription": "LND Lightning Node Manager in your Browser"
-			},
-			"jam": {
-				"about": "Jam is a web interface for JoinMarket focusing on user-friendliness and ease-of-use. It aims to provide sensible defaults and be easy to use for beginners while still having the features advanced users expect.",
-				"shortDescription": "Jam - A web interface for JoinMarket"
-			},
-			"electrs": {
-				"about": "Electrs is an efficient re-implementation of Electrum Server in Rust. It indexes the entire Bitcoin blockchain, and allows your Lightning node to query it for on-chain transactions.",
-				"shortDescription": "Efficient re-implementation of Electrum Server in Rust",
-				"initialSync": "The index database needs to be created before Electrum Server can be used. This can take hours / days depending on your RaspiBlitz. Please check back later.",
-				"connectLocal": "Connect to Electrum Server over your Local Network",
-				"connectTor": "Connect to Electrum Server over Tor",
-				"connectionInfo": "These addresses allow you to connect your wallet or other applications to your node using Electrs. Use the local connection if you are on the same network as your node or the Tor address for remote access with enhanced privacy.",
-				"not_available": "address not available"
-			},
-			"albyhub": {
-				"about": "Alby Hub allows you to control your Lightning node or wallet from any other application that supports NWC. Connect apps like Damus or Amethyst to your node.",
-				"shortDescription": "Alby Hub - Your Own Center for Internet Money"
-			},
-			"alby": {
-				"about": "Alby Browser Extension",
-				"shortDescription": "Connect your RaspiBlitz LND node and use Bitcoin & Nostr apps with the Alby Extension",
-				"action": {
-					"install": "Install",
-					"addAccount": "Connect",
-					"connection_info_error": "Could not get connection info",
-					"connection": {
-						"hint": "Please install the Alby extension first",
-						"success": "Raspiblitz account was added to Alby",
-						"error": "Adding Raspiblitz to Alby didn't work, please try again"
-					}
-				}
-			}
-		},
-		"apps": {
-			"about": "About",
-			"author": "Author",
-			"available": "Available Apps",
-			"info": "Info",
-			"install": "Install",
-			"install_failure": "Installation of {{appName}} failed: {{details}}",
-			"install_success": "{{appName}} installed successfully",
-			"installed": "Installed",
-			"installing": "Installing",
-			"login_admin_pass_b": "Login with User 'admin' & Password B",
-			"login_no_pass": "Login without Password",
-			"login_pass_b": "Login with Password B",
-			"login_userdef": "Login with user-defined Password",
-			"no_page": "No page available",
-			"offline": "offline",
-			"online": "online",
-			"open": "Open",
-			"selfsigned_cert": "This app uses a self-signed HTTPS certificate",
-			"source": "Source code",
-			"uninstall": "Uninstall",
-			"uninstall_failure": "Uninstall of {{appName}} failed: {{details}}",
-			"uninstall_success": "Successfully uninstalled {{appName}}",
-			"uninstalling": "Uninstalling"
-		},
-		"forms": {
-			"hint": {
-				"invoiceAmountZero": "Invoice amount is zero"
-			},
-			"validation": {
-				"amount": {
-					"required": "Please input an amount"
-				},
-				"chainAddress": {
-					"patternMismatch": "Wrong address format",
-					"required": "Please input a Bitcoin address"
-				},
-				"chainAmount": {
-					"max": "Your balance is too low to send this amount",
-					"required": "Please input an amount"
-				},
-				"chainFee": {
-					"required": "Please input a fee amount"
-				},
-				"lnInvoice": {
-					"expired": "Invoice expired",
-					"max": "Your balance is too low to pay this invoice",
-					"patternMismatch": "Wrong invoice format",
-					"required": "Please input a Lightning invoice"
-				},
-				"node_uri": {
-					"required": "Please input a node URI"
-				},
-				"unlock": {
-					"pass_c": "Password C",
-					"required": "Password C is required"
-				},
-				"login": {
-					"required": "Password A is required"
-				}
-			}
-		},
-		"hardware": {
-			"cpu_load": "CPU Load",
-			"disk_usage": "Disk Space used",
-			"header": "Hardware Details",
-			"ram_usage": "RAM Usage",
-			"temp": "Temperature"
-		},
-		"home": {
-			"active": "Active",
-			"bitcoin": "Bitcoin",
-			"blockchain_size": "Blockchain Size",
-			"blocks_synced": "Blocks synced",
-			"blocktime": "Blocktime",
-			"channel": "Channel",
-			"channel_balance": "Channel Balance",
-			"channel_closed": "Channel closed successfully",
-			"channel_id": "Channel ID",
-			"channel_opened": "Channel opened successfully",
-			"close_channel": "Close Channel",
-			"confirm_channel_close": "Confirm Channel close",
-			"conn_details": "Connection Details",
-			"conn_in": "Incoming",
-			"conn_out": "Outgoing",
-			"connections": "Connections",
-			"current_open_channels": "Current open Channels",
-			"difficulty": "Difficulty",
-			"force_close": "Force close",
-			"hide": "Hide",
-			"lightning": "Lightning",
-			"list_open_channels": "List Channel",
-			"local_balance": "Local Channel Balance",
-			"network": "Network",
-			"no": "No",
-			"no_open_channels": "You currently have no open channels",
-			"node_id": "NodeID",
-			"node_uri": "Node URI",
-			"normal": "Normal",
-			"onchain_cln_no_support": "On-chain transactions made before RaspiBlitz v1.9 may not show up with Core Lightning",
-			"open_channel": "Open Channel",
-			"pending_balance_local": "Pending Local Balance",
-			"pending_balance_remote": "Pending Remote Balance",
-			"remote_balance": "Remote Channel Balance",
-			"show": "Show",
-			"show_qr": "Show QR Code",
-			"connect_node": "Share this address with others so they can connect to your lightning node",
-			"slow": "Slow",
-			"ssh": "SSH login",
-			"status": "Status",
-			"tor": "Tor",
-			"urgent": "Urgent",
-			"version": "Version",
-			"versions": "Versions",
-			"webui": "WebUI",
-			"not_available": "Not available"
-		},
-		"language": {
-			"cs": "Czech",
-			"de": "German",
-			"en": "English",
-			"es": "Spanish",
-			"fr": "French",
-			"hu": "Hungarian",
-			"it": "Italian",
-			"nb_NO": "Norvegian",
-			"nl": "Dutch",
-			"pt_BR": "Portuguese (Brazilian)",
-			"sv": "Swedish",
-			"vi": "Vietnamese"
-		},
-		"login": {
-			"enter_pass": "Enter password A",
-			"enter_pass_placeholder": "Password A",
-			"error": "An error occurred",
-			"unknown_error": "Unknown error. The response was: {{code}} {{statusText}}.",
-			"invalid_pass": "Invalid password",
-			"login": "Log in",
-			"caps_lock": "Caps Lock is ON"
-		},
-		"navigation": {
-			"apps": "Apps",
-			"back": "Back",
-			"dark_mode": "Dark Mode",
-			"display_sats": "Display SATS",
-			"display_btc": "Display BTC",
-			"home": "Home",
-			"logout": "Log out",
-			"documentation": "Documentation",
-			"settings": "Settings"
-		},
-		"settings": {
-			"cancel": "Cancel",
-			"change": "Change",
-			"change_pw_a": "Change Node Password (A)",
-			"confirm": "Confirm",
-			"curr_lang": "Current language",
-			"language": "Language",
-			"new_pw": "New password",
-			"old_pw": "Old password",
-			"pass_a_changed": "Password A changed successfully",
-			"reboot": "Reboot",
-			"shutdown": "Shutdown",
-			"shutdown_confirm": "Shutdown your RaspiBlitz?",
-			"shutdown_info": "When shutdown is complete the activity light turns red and the LCD turns white.",
-			"shutdown_info_disconnect_power": "Then wait 5 seconds and disconnect power.",
-			"generate_debug": "Generate Debug Report",
-			"generate": "Generate",
-			"generating": "Generating",
-			"generating_debug_report": "Generating Debug Report. This can take some time.",
-			"debug_report_done": "Debug Report created!"
-		},
-		"setup": {
-			"step": {
-				"step": "Step",
-				"step_1_description": "Prepare Drive",
-				"step_2_description": "Node Name",
-				"step_3_description": "Node Type",
-				"step_4_description": "Set Passwords"
-			},
-			"setupmenu": {
-				"lets_setup": "Let's setup your RaspiBlitz",
-				"setup_time": "The total setup process takes about 20 minutes"
-			},
-			"format": {
-				"delete_drive": "Would you like to proceed deleting all data on your drive?",
-				"warn": "Please back up any important data as this will wipe your drive!",
-				"keep_blockchain": "Keep Blockchain data",
-				"delete_confirm": "Yes, delete all data"
-			},
-			"input_node": {
-				"header": "What should we call your node?",
-				"err_only_chars": "Nodename should just contain characters & numbers.",
-				"err_max_length": "Node name must be at most 32 characters long.",
-				"err_min_length": "Node name needs to be at least 4 characters long.",
-				"err_empty": "Node name cannot be empty.",
-				"label": "Node Name"
-			},
-			"blockchain_delete": "Delete Blockchain",
-			"blockchain_found_long": "On your HDD/SSD existing blockchain data was found.",
-			"blockchain_found_short": "Blockchain found on HDD/SSD",
-			"blockchain_keep": "Keep Blockchain",
-			"cancel": "Cancel",
-			"cancel_setup": "Do you really want to cancel the setup process",
-			"cl": "Bitcoin Full Node with Core Lightning Implementation",
-			"cl_description": "Core Lightning (formerly known as c-lightning) is a Lightning Network implementation by Blockstream focused on performance and extendibility for developers and advanced users.",
-			"continue": "Continue",
-			"convertwarning": "RaspiBlitz can only convert your Blockchain and Lightning data (funds + channels) at the moment. Data from additional installed apps might get deleted in the migraton process.",
-			"done_migration_ready": "OK. Everything is ready to migrate to RaspiBlitz.",
-			"done_migration_start": "Start Migration",
-			"done_recover_ready": "OK. Everything is ready to recover your RaspiBlitz.",
-			"done_recover_start": "Start Recovery",
-			"done_setup_ready": "OK. Everything is ready to setup your RaspiBlitz.",
-			"done_setup_start": "Start Setup",
-			"done_update_ready": "OK. Everything is ready to update your RaspiBlitz.",
-			"done_update_start": "Start Update",
-			"final_do_reboot": "OK, do final Reboot",
-			"final_info_reboot": "I have written down my seed words and their correct order",
-			"final_migration": "Migration is finished.",
-			"final_recovery": "Recovery is finished.",
-			"final_seedwords": "Please write down your seed words. These can be used to recover your lightning wallet. The order in which they appear matters. Never share your seed words with anyone, and keep them safe!",
-			"final_setup": "Configuration complete!",
-			"final_update": "Update is finished.",
-			"lightningoutdated": "The node you want to migrate from uses a newer Lightning version than this RaspiBlitz. Please wait for an updated release. You can shutdown and startup with your old node sd card - no changes were made.",
-			"lnd": "Bitcoin Full Node with Lightning LND Implementation",
-			"lnd_description": "Adding the Lightning Network Daemon (LND), developed by Lightning Labs, to a Bitcoin full node introduces capabilities for faster and cheaper transactions. LND is one of the most popular and user-friendly implementations of the Lightning Network.",
-			"migrate_to_os": "Do you want to migrate from {{os}} to RaspiBlitz?",
-			"migrateblitz": "Migrate",
-			"no_and_shutdown": "No and Shutdown",
-			"ok": "OK",
-			"other_options": "Other Options",
-			"password_a_details": "Also known as <0>Password A</0>. Use this password for login to your RaspiBlitz.",
-			"password_a_name": "Node Password",
-			"password_a_short": "Set your <0>Node</0> password",
-			"password_b_details": "Also known as <0>Password B</0>. Some apps require a password to install.",
-			"password_b_name": "Apps Password",
-			"password_b_short": "Set your <0>Apps</0> password",
-			"password_c_details": "Also known as <0>Password C</0>. This will be used to access your lightning or bitcoin wallet.",
-			"password_c_name": "Wallet Password",
-			"password_c_short": "Set your <0>Wallet</0> Password",
-			"password_error_chars": "Password should just contain characters & numbers.",
-			"password_error_empty": "Password cannot be empty.",
-			"password_error_length": "Password needs to be at least 8 characters long.",
-			"password_error_match": "Passwords do not match.",
-			"password_repeat": "Repeat",
-			"pleasewait": "Please wait",
-			"preparingsetup": "Preparing setup",
-			"recoverblitz": "Recover",
-			"restartinfo": "Please wait until RaspiBlitz answers again",
-			"restarting": "Restarting",
-			"restarts": "Restarts",
-			"runningsetup": "Running Setup",
-			"none": "Bitcoin Full Node Without Lightning",
-			"none_description": "Running a Bitcoin full node without any Lightning Network implementation involves participating directly in the Bitcoin network by validating transactions and blocks.",
-			"select_lightning": "Which lightning implementation\n would you like to install",
-			"select_lightning_help": "What the difference? <0>Learn more</0> about each implementation.",
-			"setupblitz": "Fresh Setup",
-			"setupoptions": "Setup Options",
-			"setupwait": "Setup will take some minutes",
-			"shuttingdown": "Shutting down",
-			"start_recovery": "Would you like to start the recovery process?",
-			"start_update": "Would you like to start the update and recovery process?",
-			"started": "started",
-			"not_started": "did not start",
-			"sync_bitcoin_starting": "Starting sync",
-			"sync_bitcoin_sync": "Sync Progress",
-			"sync_headline": "Initial Sync in Progress",
-			"sync_restartinfo": "(sync will continue on next restart)",
-			"sync_wallet_info": "Please unlock your Lightning Wallet (Password C):",
-			"sync_wallet_unlock": "Unlock Wallet",
-			"updateblitz": "Update",
-			"yes": "Yes",
-			"yes_and_migrate": "Migrate to RaspiBlitz"
-		},
-		"tx": {
-			"comment": "Comment",
-			"comment_placeholder": "Optional comment",
-			"confirm_info": "Please confirm the following transaction",
-			"confirmations": "Confirmations",
-			"date": "Date",
-			"description": "Description",
-			"fee": "Fee",
-			"fee_rate": "Fee rate",
-			"included_block": "Included in Block",
-			"mempool": "View on mempool",
-			"sent": "Transaction sent!",
-			"spend_all": "Spend all on-chain funds",
-			"all_onchain": "All on-chain funds",
-			"transactions": "Transactions",
-			"transactions_none": "No transactions yet, time to make your first one",
-			"tx_details": "Transaction Details",
-			"txid": "Transaction ID",
-			"unconfirmed": "Unconfirmed",
-			"value": "Value"
-		},
-		"wallet": {
-			"address": "Address",
-			"amount": "Amount",
-			"balance": "Balance",
-			"available_balance": "Available balance",
-			"confirm": "Confirm",
-			"copied": "Copied!",
-			"copy_clipboard": "Copy to clipboard",
-			"create_invoice": "Create invoice",
-			"create_invoice_ln": "Create a Lightning invoice",
-			"fund": "Fund your on-chain wallet",
-			"invoice": "Invoice",
-			"on_chain": "On-chain",
-			"receive": "Receive",
-			"receive_aria_options": "Receive options Lightning or On-chain",
-			"refresh": "Refresh address",
-			"scan_qr": "Scan this QR code or copy the address below to receive funds",
-			"send": "Send",
-			"send_lightning": "Send funds over Lightning",
-			"send_onchain": "Send funds On-chain",
-			"unlock": "Unlock",
-			"unlock_subtitle": "Unlock your Lightning wallet",
-			"unlock_success": "Lightning wallet unlocked",
-			"unlock_title": "Unlock Wallet",
-			"unlocking": "Unlocking",
-			"wallet_locked": "Lightning wallet locked",
-			"wallet_unlock_info": "To prevent additional sync time for your Lightning node, please also unlock your Lightning wallet."
-		},
-		"error": {
-			"stack": "Stack trace",
-			"report": "Please report this error to"
-		}
-	}
+  "translation": {
+    "appInfo": {
+      "btc-rpc-explorer": {
+        "about": "This is a self-hosted explorer for the Bitcoin blockchain, driven by RPC calls to your own Bitcoin node. It is easy to run and can be connected to other tools (like Electrum servers) to achieve a full-featured explorer.",
+        "shortDescription": "Bitcoin RPC Explorer"
+      },
+      "btcpayserver": {
+        "about": "BTCPay Server is a free and open-source Bitcoin payment processor which allows you to accept bitcoin without fees or intermediaries.",
+        "shortDescription": "Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin payment processor.",
+        "ram_warning": "Your system has less than the recommended 8GB of RAM to run BTCPayServer on RaspiBlitz. This could lead to instability if you proceed with the installation."
+      },
+      "lnbits": {
+        "about": "LNbits is a very simple Python server that sits on top of any funding source, and can be used as an accounts system to mitigate the risk of exposing applications to your full balance, via unique API keys for each wallet.",
+        "shortDescription": "Free and open-source lightning-network wallet/accounts system"
+      },
+      "mempool": {
+        "about": " An open-source explorer developed for the Bitcoin community, focusing on the emerging transaction fee market to help our transition into a multi-layer ecosystem.",
+        "shortDescription": "An open-source explorer developed for the Bitcoin community"
+      },
+      "rtl": {
+        "about": "RTL is a full function, device agnostic, web user interface to help manage Lightning node operations. RTL is available on LND, Core Lightning and Eclair implementations.",
+        "shortDescription": "A full function web browser app for LND, Core Lightning and Eclair"
+      },
+      "specter": {
+        "about": "Bitcoin Core has a very powerful command line interface and a wonderful daemon. Using PSBT and HWI it can also work with hardware wallets, but at the moment it is too linux-way. The same applies to multisignature setups. The goal of this project is to make a convenient and user-friendly GUI around Bitcoin Core with a focus on multisignature setup with hardware wallets and airgapped devices.",
+        "shortDescription": "A desktop GUI for Bitcoin Core optimised to work with hardware wallets"
+      },
+      "thunderhub": {
+        "about": "ThunderHub is an open-source LND node manager where you can manage and monitor your node on any device or browser. It allows you to take control of the lightning network with a simple and intuitive UX and the most up-to-date tech stack.",
+        "shortDescription": "LND Lightning Node Manager in your Browser"
+      },
+      "jam": {
+        "about": "Jam is a web interface for JoinMarket focusing on user-friendliness and ease-of-use. It aims to provide sensible defaults and be easy to use for beginners while still having the features advanced users expect.",
+        "shortDescription": "Jam - A web interface for JoinMarket"
+      },
+      "electrs": {
+        "about": "Electrs is an efficient re-implementation of Electrum Server in Rust. It indexes the entire Bitcoin blockchain, and allows your Lightning node to query it for on-chain transactions.",
+        "shortDescription": "Efficient re-implementation of Electrum Server in Rust",
+        "initialSync": "The index database needs to be created before Electrum Server can be used. This can take hours / days depending on your RaspiBlitz. Please check back later.",
+        "connectLocal": "Connect to Electrum Server over your Local Network",
+        "connectTor": "Connect to Electrum Server over Tor",
+        "connectionInfo": "These addresses allow you to connect your wallet or other applications to your node using Electrs. Use the local connection if you are on the same network as your node or the Tor address for remote access with enhanced privacy.",
+        "not_available": "address not available"
+      },
+      "albyhub": {
+        "about": "Alby Hub allows you to control your Lightning node or wallet from any other application that supports NWC. Connect apps like Damus or Amethyst to your node.",
+        "shortDescription": "Alby Hub - Your Own Center for Internet Money"
+      },
+      "alby": {
+        "about": "Alby Browser Extension",
+        "shortDescription": "Connect your RaspiBlitz LND node and use Bitcoin & Nostr apps with the Alby Extension",
+        "action": {
+          "install": "Install",
+          "addAccount": "Connect",
+          "connection_info_error": "Could not get connection info",
+          "connection": {
+            "hint": "Please install the Alby extension first",
+            "success": "Raspiblitz account was added to Alby",
+            "error": "Adding Raspiblitz to Alby didn't work, please try again"
+          }
+        }
+      }
+    },
+    "apps": {
+      "about": "About",
+      "author": "Author",
+      "available": "Available Apps",
+      "info": "Info",
+      "install": "Install",
+      "install_failure": "Installation of {{appName}} failed: {{details}}",
+      "install_success": "{{appName}} installed successfully",
+      "installed": "Installed",
+      "installing": "Installing",
+      "login_admin_pass_b": "Login with User 'admin' & Password B",
+      "login_no_pass": "Login without Password",
+      "login_pass_b": "Login with Password B",
+      "login_userdef": "Login with user-defined Password",
+      "no_page": "No page available",
+      "offline": "offline",
+      "online": "online",
+      "open": "Open",
+      "selfsigned_cert": "This app uses a self-signed HTTPS certificate",
+      "source": "Source code",
+      "uninstall": "Uninstall",
+      "uninstall_failure": "Uninstall of {{appName}} failed: {{details}}",
+      "uninstall_success": "Successfully uninstalled {{appName}}",
+      "uninstalling": "Uninstalling"
+    },
+    "forms": {
+      "hint": {
+        "invoiceAmountZero": "Invoice amount is zero"
+      },
+      "validation": {
+        "amount": {
+          "required": "Please input an amount"
+        },
+        "chainAddress": {
+          "patternMismatch": "Wrong address format",
+          "required": "Please input a Bitcoin address"
+        },
+        "chainAmount": {
+          "max": "Your balance is too low to send this amount",
+          "required": "Please input an amount"
+        },
+        "chainFee": {
+          "required": "Please input a fee amount"
+        },
+        "lnInvoice": {
+          "expired": "Invoice expired",
+          "max": "Your balance is too low to pay this invoice",
+          "patternMismatch": "Wrong invoice format",
+          "required": "Please input a Lightning invoice"
+        },
+        "node_uri": {
+          "required": "Please input a node URI"
+        },
+        "unlock": {
+          "pass_c": "Password C",
+          "required": "Password C is required"
+        },
+        "login": {
+          "required": "Password A is required"
+        }
+      }
+    },
+    "hardware": {
+      "cpu_load": "CPU Load",
+      "disk_usage": "Disk Space used",
+      "header": "Hardware Details",
+      "ram_usage": "RAM Usage",
+      "temp": "Temperature"
+    },
+    "home": {
+      "active": "Active",
+      "bitcoin": "Bitcoin",
+      "blockchain_size": "Blockchain Size",
+      "blocks_synced": "Blocks synced",
+      "blocktime": "Blocktime",
+      "channel": "Channel",
+      "channel_balance": "Channel Balance",
+      "channel_closed": "Channel closed successfully",
+      "channel_id": "Channel ID",
+      "channel_opened": "Channel opened successfully",
+      "close_channel": "Close Channel",
+      "confirm_channel_close": "Confirm Channel close",
+      "conn_details": "Connection Details",
+      "conn_in": "Incoming",
+      "conn_out": "Outgoing",
+      "connections": "Connections",
+      "current_open_channels": "Current open Channels",
+      "difficulty": "Difficulty",
+      "force_close": "Force close",
+      "hide": "Hide",
+      "lightning": "Lightning",
+      "list_open_channels": "List Channel",
+      "local_balance": "Local Channel Balance",
+      "network": "Network",
+      "no": "No",
+      "no_open_channels": "You currently have no open channels",
+      "node_id": "NodeID",
+      "node_uri": "Node URI",
+      "normal": "Normal",
+      "onchain_cln_no_support": "On-chain transactions made before RaspiBlitz v1.9 may not show up with Core Lightning",
+      "open_channel": "Open Channel",
+      "pending_balance_local": "Pending Local Balance",
+      "pending_balance_remote": "Pending Remote Balance",
+      "remote_balance": "Remote Channel Balance",
+      "show": "Show",
+      "show_qr": "Show QR Code",
+      "connect_node": "Share this address with others so they can connect to your lightning node",
+      "slow": "Slow",
+      "ssh": "SSH login",
+      "status": "Status",
+      "tor": "Tor",
+      "urgent": "Urgent",
+      "version": "Version",
+      "versions": "Versions",
+      "webui": "WebUI",
+      "not_available": "Not available"
+    },
+    "language": {
+      "cs": "Czech",
+      "de": "German",
+      "en": "English",
+      "es": "Spanish",
+      "fr": "French",
+      "hu": "Hungarian",
+      "it": "Italian",
+      "nb_NO": "Norvegian",
+      "nl": "Dutch",
+      "pt_BR": "Portuguese (Brazilian)",
+      "sv": "Swedish",
+      "vi": "Vietnamese"
+    },
+    "login": {
+      "enter_pass": "Enter password A",
+      "enter_pass_placeholder": "Password A",
+      "error": "An error occurred",
+      "unknown_error": "Unknown error. The response was: {{code}} {{statusText}}.",
+      "invalid_pass": "Invalid password",
+      "login": "Log in",
+      "caps_lock": "Caps Lock is ON"
+    },
+    "navigation": {
+      "apps": "Apps",
+      "back": "Back",
+      "dark_mode": "Dark Mode",
+      "display_sats": "Display SATS",
+      "display_btc": "Display BTC",
+      "home": "Home",
+      "logout": "Log out",
+      "documentation": "Documentation",
+      "settings": "Settings"
+    },
+    "settings": {
+      "cancel": "Cancel",
+      "change": "Change",
+      "change_pw_a": "Change Node Password (A)",
+      "confirm": "Confirm",
+      "curr_lang": "Current language",
+      "language": "Language",
+      "new_pw": "New password",
+      "old_pw": "Old password",
+      "pass_a_changed": "Password A changed successfully",
+      "reboot": "Reboot",
+      "shutdown": "Shutdown",
+      "shutdown_confirm": "Shutdown your RaspiBlitz?",
+      "shutdown_info": "When shutdown is complete the activity light turns red and the LCD turns white.",
+      "shutdown_info_disconnect_power": "Then wait 5 seconds and disconnect power.",
+      "generate_debug": "Generate Debug Report",
+      "generate": "Generate",
+      "generating": "Generating",
+      "generating_debug_report": "Generating Debug Report. This can take some time.",
+      "debug_report_done": "Debug Report created!"
+    },
+    "setup": {
+      "step": {
+        "step": "Step",
+        "step_1_description": "Prepare Drive",
+        "step_2_description": "Node Name",
+        "step_3_description": "Node Type",
+        "step_4_description": "Set Passwords"
+      },
+      "setupmenu": {
+        "lets_setup": "Let's setup your RaspiBlitz",
+        "setup_time": "The total setup process takes about 20 minutes"
+      },
+      "format": {
+        "delete_drive": "Would you like to proceed deleting all data on your drive?",
+        "warn": "Please back up any important data as this will wipe your drive!",
+        "keep_blockchain": "Keep Blockchain data",
+        "delete_confirm": "Yes, delete all data"
+      },
+      "input_node": {
+        "header": "What should we call your node?",
+        "err_only_chars": "Nodename should just contain characters & numbers.",
+        "err_max_length": "Node name must be at most 32 characters long.",
+        "err_min_length": "Node name needs to be at least 4 characters long.",
+        "err_empty": "Node name cannot be empty.",
+        "label": "Node Name"
+      },
+      "blockchain_delete": "Delete Blockchain",
+      "blockchain_found_long": "On your HDD/SSD existing blockchain data was found.",
+      "blockchain_found_short": "Blockchain found on HDD/SSD",
+      "blockchain_keep": "Keep Blockchain",
+      "cancel": "Cancel",
+      "cancel_setup": "Do you really want to cancel the setup process",
+      "cl": "Bitcoin Full Node with Core Lightning Implementation",
+      "cl_description": "Core Lightning (formerly known as c-lightning) is a Lightning Network implementation by Blockstream focused on performance and extendibility for developers and advanced users.",
+      "continue": "Continue",
+      "convertwarning": "RaspiBlitz can only convert your Blockchain and Lightning data (funds + channels) at the moment. Data from additional installed apps might get deleted in the migraton process.",
+      "done_migration_ready": "OK. Everything is ready to migrate to RaspiBlitz.",
+      "done_migration_start": "Start Migration",
+      "done_recover_ready": "OK. Everything is ready to recover your RaspiBlitz.",
+      "done_recover_start": "Start Recovery",
+      "done_setup_ready": "OK. Everything is ready to setup your RaspiBlitz.",
+      "done_setup_start": "Start Setup",
+      "done_update_ready": "OK. Everything is ready to update your RaspiBlitz.",
+      "done_update_start": "Start Update",
+      "final_do_reboot": "OK, do final Reboot",
+      "final_info_reboot": "I have written down my seed words and their correct order",
+      "final_migration": "Migration is finished.",
+      "final_recovery": "Recovery is finished.",
+      "final_seedwords": "Please write down your seed words. These can be used to recover your lightning wallet. The order in which they appear matters. Never share your seed words with anyone, and keep them safe!",
+      "final_setup": "Configuration complete!",
+      "final_update": "Update is finished.",
+      "lightningoutdated": "The node you want to migrate from uses a newer Lightning version than this RaspiBlitz. Please wait for an updated release. You can shutdown and startup with your old node sd card - no changes were made.",
+      "lnd": "Bitcoin Full Node with Lightning LND Implementation",
+      "lnd_description": "Adding the Lightning Network Daemon (LND), developed by Lightning Labs, to a Bitcoin full node introduces capabilities for faster and cheaper transactions. LND is one of the most popular and user-friendly implementations of the Lightning Network.",
+      "migrate_to_os": "Do you want to migrate from {{os}} to RaspiBlitz?",
+      "migrateblitz": "Migrate",
+      "no_and_shutdown": "No and Shutdown",
+      "ok": "OK",
+      "other_options": "Other Options",
+      "password_a_details": "Also known as <0>Password A</0>. Use this password for login to your RaspiBlitz.",
+      "password_a_name": "Node Password",
+      "password_a_short": "Set your <0>Node</0> password",
+      "password_b_details": "Also known as <0>Password B</0>. Some apps require a password to install.",
+      "password_b_name": "Apps Password",
+      "password_b_short": "Set your <0>Apps</0> password",
+      "password_c_details": "Also known as <0>Password C</0>. This will be used to access your lightning or bitcoin wallet.",
+      "password_c_name": "Wallet Password",
+      "password_c_short": "Set your <0>Wallet</0> Password",
+      "password_error_chars": "Password should just contain characters & numbers.",
+      "password_error_empty": "Password cannot be empty.",
+      "password_error_length": "Password needs to be at least 8 characters long.",
+      "password_error_match": "Passwords do not match.",
+      "password_repeat": "Repeat",
+      "pleasewait": "Please wait",
+      "preparingsetup": "Preparing setup",
+      "recoverblitz": "Recover",
+      "restartinfo": "Please wait until RaspiBlitz answers again",
+      "restarting": "Restarting",
+      "restarts": "Restarts",
+      "runningsetup": "Running Setup",
+      "none": "Bitcoin Full Node Without Lightning",
+      "none_description": "Running a Bitcoin full node without any Lightning Network implementation involves participating directly in the Bitcoin network by validating transactions and blocks.",
+      "select_lightning": "Which lightning implementation\n would you like to install",
+      "select_lightning_help": "What the difference? <0>Learn more</0> about each implementation.",
+      "setupblitz": "Fresh Setup",
+      "setupoptions": "Setup Options",
+      "setupwait": "Setup will take some minutes",
+      "shuttingdown": "Shutting down",
+      "start_recovery": "Would you like to start the recovery process?",
+      "start_update": "Would you like to start the update and recovery process?",
+      "started": "started",
+      "not_started": "did not start",
+      "sync_bitcoin_starting": "Starting sync",
+      "sync_bitcoin_sync": "Sync Progress",
+      "sync_headline": "Initial Sync in Progress",
+      "sync_restartinfo": "(sync will continue on next restart)",
+      "sync_wallet_info": "Please unlock your Lightning Wallet (Password C):",
+      "sync_wallet_unlock": "Unlock Wallet",
+      "updateblitz": "Update",
+      "yes": "Yes",
+      "yes_and_migrate": "Migrate to RaspiBlitz"
+    },
+    "tx": {
+      "comment": "Comment",
+      "comment_placeholder": "Optional comment",
+      "confirm_info": "Please confirm the following transaction",
+      "confirmations": "Confirmations",
+      "date": "Date",
+      "description": "Description",
+      "fee": "Fee",
+      "fee_rate": "Fee rate",
+      "included_block": "Included in Block",
+      "mempool": "View on mempool",
+      "sent": "Transaction sent!",
+      "spend_all": "Spend all on-chain funds",
+      "all_onchain": "All on-chain funds",
+      "transactions": "Transactions",
+      "transactions_none": "No transactions yet, time to make your first one",
+      "tx_details": "Transaction Details",
+      "txid": "Transaction ID",
+      "unconfirmed": "Unconfirmed",
+      "value": "Value"
+    },
+    "wallet": {
+      "address": "Address",
+      "amount": "Amount",
+      "balance": "Balance",
+      "available_balance": "Available balance",
+      "confirm": "Confirm",
+      "copied": "Copied!",
+      "copy_clipboard": "Copy to clipboard",
+      "create_invoice": "Create invoice",
+      "create_invoice_ln": "Create a Lightning invoice",
+      "fund": "Fund your on-chain wallet",
+      "invoice": "Invoice",
+      "on_chain": "On-chain",
+      "receive": "Receive",
+      "receive_aria_options": "Receive options Lightning or On-chain",
+      "refresh": "Refresh address",
+      "scan_qr": "Scan this QR code or copy the address below to receive funds",
+      "send": "Send",
+      "send_lightning": "Send funds over Lightning",
+      "send_onchain": "Send funds On-chain",
+      "unlock": "Unlock",
+      "unlock_subtitle": "Unlock your Lightning wallet",
+      "unlock_success": "Lightning wallet unlocked",
+      "unlock_title": "Unlock Wallet",
+      "unlocking": "Unlocking",
+      "wallet_locked": "Lightning wallet locked",
+      "wallet_unlock_info": "To prevent additional sync time for your Lightning node, please also unlock your Lightning wallet."
+    },
+    "error": {
+      "stack": "Stack trace",
+      "report": "Please report this error to"
+    }
+  }
 }

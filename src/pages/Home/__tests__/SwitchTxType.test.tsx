@@ -2,45 +2,45 @@ import { render, screen } from "test-utils";
 import SwitchTxType, { TxType } from "../SwitchTxType";
 
 describe("SwitchTxType", () => {
-	test("txType: lightning", async () => {
-		const handeTxTypeChangeMock = vi.fn();
+  test("txType: lightning", async () => {
+    const handeTxTypeChangeMock = vi.fn();
 
-		render(
-			<SwitchTxType
-				invoiceType={TxType.LIGHTNING}
-				onTxTypeChange={handeTxTypeChangeMock}
-			/>,
-		);
+    render(
+      <SwitchTxType
+        invoiceType={TxType.LIGHTNING}
+        onTxTypeChange={handeTxTypeChangeMock}
+      />,
+    );
 
-		const buttonLn = screen.getByText("home.lightning");
-		const buttonOnChain = screen.getByText("wallet.on_chain");
+    const buttonLn = screen.getByText("home.lightning");
+    const buttonOnChain = screen.getByText("wallet.on_chain");
 
-		expect(buttonLn).toBeDisabled();
-		expect(buttonOnChain).not.toBeDisabled();
-		buttonOnChain.click();
+    expect(buttonLn).toBeDisabled();
+    expect(buttonOnChain).not.toBeDisabled();
+    buttonOnChain.click();
 
-		expect(handeTxTypeChangeMock).toHaveBeenCalledTimes(1);
-		expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.ONCHAIN);
-	});
+    expect(handeTxTypeChangeMock).toHaveBeenCalledTimes(1);
+    expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.ONCHAIN);
+  });
 
-	test("txType: onchain", async () => {
-		const handeTxTypeChangeMock = vi.fn();
+  test("txType: onchain", async () => {
+    const handeTxTypeChangeMock = vi.fn();
 
-		render(
-			<SwitchTxType
-				invoiceType={TxType.ONCHAIN}
-				onTxTypeChange={handeTxTypeChangeMock}
-			/>,
-		);
+    render(
+      <SwitchTxType
+        invoiceType={TxType.ONCHAIN}
+        onTxTypeChange={handeTxTypeChangeMock}
+      />,
+    );
 
-		const buttonLn = screen.getByText("home.lightning");
-		const buttonOnChain = screen.getByText("wallet.on_chain");
+    const buttonLn = screen.getByText("home.lightning");
+    const buttonOnChain = screen.getByText("wallet.on_chain");
 
-		expect(buttonLn).not.toBeDisabled();
-		expect(buttonOnChain).toBeDisabled();
-		buttonLn.click();
+    expect(buttonLn).not.toBeDisabled();
+    expect(buttonOnChain).toBeDisabled();
+    buttonLn.click();
 
-		expect(handeTxTypeChangeMock).toHaveBeenCalledTimes(1);
-		expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.LIGHTNING);
-	});
+    expect(handeTxTypeChangeMock).toHaveBeenCalledTimes(1);
+    expect(handeTxTypeChangeMock).toHaveBeenCalledWith(TxType.LIGHTNING);
+  });
 });
