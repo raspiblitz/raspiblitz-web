@@ -1,8 +1,7 @@
-import SingleTransaction from "./SingleTransaction";
 import { Alert } from "@/components/Alert";
 import { AppContext } from "@/context/app-context";
-import { Implementation } from "@/models/ln-info";
-import { Transaction } from "@/models/transaction.model";
+import type { Implementation } from "@/models/ln-info";
+import type { Transaction } from "@/models/transaction.model";
 import {
   ArrowDownIcon,
   InformationCircleIcon,
@@ -10,8 +9,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { Spinner } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
-import { FC, useContext, useState } from "react";
+import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import SingleTransaction from "./SingleTransaction";
 
 export type Props = {
   transactions: Transaction[];
@@ -83,7 +83,8 @@ const TransactionCard: FC<Props> = ({
         {!error && transactions.length === 0 && (
           <div className="flex h-full items-center justify-center">
             <InformationCircleIcon className="h-6 w-6" />
-            &nbsp;{t("tx.transactions_none")}
+            &nbsp;
+            {t("tx.transactions_none")}
           </div>
         )}
 
@@ -92,13 +93,15 @@ const TransactionCard: FC<Props> = ({
             {currentPageTxs.map((transaction: Transaction, index: number) => {
               return (
                 <SingleTransaction
-                  onClick={() => showDetails(transaction.index)}
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   key={index}
+                  onClick={() => showDetails(transaction.index)}
                   transaction={transaction}
                 />
               );
             })}
             {[...Array(fillEmptyTxAmount)].map((_, index: number) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               <SingleTransaction key={index} />
             ))}
           </ul>

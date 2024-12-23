@@ -1,5 +1,5 @@
-import { TFunction } from "i18next";
-import { Component, ErrorInfo, PropsWithChildren } from "react";
+import type { TFunction } from "i18next";
+import { Component, type ErrorInfo, type PropsWithChildren } from "react";
 import { withTranslation } from "react-i18next";
 
 interface Props {
@@ -17,7 +17,7 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
     hasError: false,
   };
 
-  public static getDerivedStateFromError(_: Error): State {
+  public static getDerivedStateFromError(_error: Error): State {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
@@ -35,7 +35,7 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
           <h1 className="text-xl font-bold">{t("login.error")} 😓</h1>
           <section>
             <p className="rounded bg-red-500 p-2 text-center text-white">
-              {this.state.error?.name}: {this.state.error?.message}
+              {this.state.error?.name}:{this.state.error?.message}
             </p>
             <p className="mt-2">
               {t("error.report")}{" "}

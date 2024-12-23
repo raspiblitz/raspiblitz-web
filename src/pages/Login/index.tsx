@@ -3,13 +3,14 @@ import { Alert } from "@/components/Alert";
 import I18nSelect from "@/components/I18nDropdown";
 import { AppContext } from "@/context/app-context";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
-import { ApiError, checkError } from "@/utils/checkError";
+import { type ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { Button } from "@nextui-org/button";
 import { Spinner } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-import { AxiosError } from "axios";
-import { FC, FormEvent, useContext, useEffect, useRef, useState } from "react";
+
+import type { AxiosError } from "axios";
+import { type FC, useContext, useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -41,10 +42,11 @@ const Login: FC = () => {
   useEffect(() => {
     if (isLoggedIn) {
       if (back) {
-        console.log(`back(${back})`);
+        console.info(`back(${back})`);
         return navigate(back, { replace: true });
+        // biome-ignore lint/style/noUselessElse: <explanation>
       } else {
-        console.log(`from(${from})`);
+        console.info(`from(${from})`);
         return navigate(from || "/home", { replace: true });
       }
     }
@@ -64,10 +66,10 @@ const Login: FC = () => {
         setIsLoggedIn(true);
         enableGutter();
         if (back) {
-          console.log(`back(${back})`);
+          console.info(`back(${back})`);
           navigate(back, { replace: true });
         } else {
-          console.log(`from(${from})`);
+          console.info(`from(${from})`);
           navigate(from, { replace: true });
         }
       })
@@ -100,7 +102,7 @@ const Login: FC = () => {
                 inputWrapper:
                   "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
               }}
-              disabled={isLoading}
+              isDisabled={isLoading}
               type="password"
               label={t("login.enter_pass")}
               placeholder={t("login.enter_pass_placeholder")}

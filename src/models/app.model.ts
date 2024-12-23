@@ -1,10 +1,10 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 export interface App {
   id: string;
   name: string;
   author: string;
   repository: string;
-  // allow any props
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   customComponent?: FC<any>;
 }

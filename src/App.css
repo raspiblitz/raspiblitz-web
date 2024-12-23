@@ -1,8 +1,10 @@
 .content-container {
+  /* biome-ignore lint/correctness/noUnknownFunction: <explanation> */
   min-height: calc(100vh - theme("spacing.16"));
 }
 
 .sidebar {
+  /* biome-ignore lint/correctness/noUnknownFunction: <explanation> */
   max-height: calc(100vh - theme("spacing.16"));
 }
 

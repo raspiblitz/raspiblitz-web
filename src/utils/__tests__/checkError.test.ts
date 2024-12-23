@@ -7,7 +7,7 @@ vi.mock("i18next", () => ({
 describe("checkError", () => {
   it("should display the message with basic detail object", () => {
     const errorMsg = checkError({
-      // @ts-ignore response is not a full "AxiosResponse<ApiError, any>" type currently
+      // @ts-expect-error response is not a full "AxiosResponse<ApiError, any>" type currently
       response: {
         data: {
           detail: "old password format invalid",
@@ -19,7 +19,7 @@ describe("checkError", () => {
 
   it("should display the message with detail.msg object", () => {
     const errorMsg = checkError({
-      // @ts-ignore response is not a full "AxiosResponse<ApiError, any>" type currently
+      // @ts-expect-error response is not a full "AxiosResponse<ApiError, any>" type currently
       response: {
         data: {
           detail: [
@@ -42,7 +42,7 @@ describe("checkError", () => {
 
   it("should display the message with detail as an array", () => {
     const errorMsg = checkError({
-      // @ts-ignore
+      // @ts-expect-error we expect an error with a detailed response object
       response: {
         data: {
           detail: [
@@ -70,7 +70,7 @@ describe("checkError", () => {
         statusText: "Not found",
         data: {
           detail: {
-            //@ts-ignore - We want to test undefined behaviour
+            // @ts-expect-error - We want to test undefined behaviour
             test: "test",
           },
         },

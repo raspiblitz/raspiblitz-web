@@ -2,7 +2,7 @@ import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { SetupPhase } from "@/models/setup.model";
+import type { SetupPhase } from "@/models/setup.model";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Checkbox } from "@nextui-org/react";
 import { Controller, useForm } from "react-hook-form";
@@ -49,9 +49,10 @@ export default function FinalDialog({
 
           {!!seedWords && (
             <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
-              {seedWords.split(", ").map((word, i) => {
+              {seedWords.split(", ").map((word, index) => {
                 return (
-                  <li key={i} className="my-3 pl-2">
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                  <li key={index} className="my-3 pl-2">
                     {word}
                   </li>
                 );

@@ -3,7 +3,7 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Input, useDisclosure } from "@nextui-org/react";
-import { ChangeEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 

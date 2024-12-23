@@ -4,7 +4,7 @@ import {
   ArrowTopRightOnSquareIcon,
   LinkIcon,
 } from "@heroicons/react/24/outline";
-import { Link, Button } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -59,7 +59,8 @@ export const AppCardAlby: FC = () => {
           theme: "dark",
         });
       }
-    } catch (e) {
+    } catch (error) {
+      console.error(error);
       toast.error(t(`appInfo.${id}.action.connection.error`), {
         theme: "dark",
       });

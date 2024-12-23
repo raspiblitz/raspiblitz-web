@@ -1,6 +1,6 @@
 import { AppContext, Unit } from "@/context/app-context";
 import { convertSatToBtc, convertToString } from "@/utils/format";
-import { FC, useContext } from "react";
+import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -18,7 +18,10 @@ const AvailableBalance: FC<Props> = ({ balance }) => {
 
   return (
     <p className="my-5">
-      <span className="font-bold">{t("wallet.available_balance")}:&nbsp;</span>
+      <span className="font-bold">
+        {t("wallet.available_balance")}
+        :&nbsp;
+      </span>
       {convertedBalance} {unit}
     </p>
   );

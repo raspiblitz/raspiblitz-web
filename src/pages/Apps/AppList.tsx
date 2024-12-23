@@ -1,7 +1,7 @@
-import AppCard from "./AppCard";
-import { AppStatus } from "@/models/app-status";
+import type { AppStatus } from "@/models/app-status";
 import { availableApps } from "@/utils/availableApps";
-import { FC } from "react";
+import type { FC } from "react";
+import AppCard from "./AppCard";
 
 type Props = {
   title: string;
@@ -20,6 +20,7 @@ const AppList: FC<Props> = ({ title, apps, onInstall }) => {
           return (
             <AppCard
               key={appStatus.id}
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
               appInfo={availableApps[appStatus.id]!}
               appStatusInfo={appStatus}
               installed={appStatus.installed}

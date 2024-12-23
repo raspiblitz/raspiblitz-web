@@ -1,4 +1,3 @@
-import ImageCarousel from "./ImageCarousel";
 import { Alert } from "@/components/Alert";
 import AppIcon from "@/components/AppIcon";
 import { SSEContext } from "@/context/sse-context";
@@ -12,10 +11,11 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { Button, Link } from "@nextui-org/react";
-import { FC, useCallback, useContext, useEffect, useState } from "react";
+import { type FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import ImageCarousel from "./ImageCarousel";
 
 export const AppInfo: FC = () => {
   const navigate = useNavigate();
@@ -24,7 +24,9 @@ export const AppInfo: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus, installingApp, hardwareInfo } = useContext(SSEContext);
   const [imgs, setImgs] = useState<string[]>([]);
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const { name } = availableApps[appId!];
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const { author, repository } = availableApps[appId!];
   const { installed, version } =
     appStatus.find((app) => app.id === appId) || {};
@@ -80,6 +82,7 @@ export const AppInfo: FC = () => {
 
   const video =
     appId === "mempool" ? (
+      // biome-ignore lint/a11y/useMediaCaption: <explanation>
       <video width="2000" height="1000" controls>
         <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
       </video>

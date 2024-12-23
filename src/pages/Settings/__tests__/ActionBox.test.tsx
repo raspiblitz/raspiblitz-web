@@ -1,5 +1,5 @@
+import { fireEvent, render } from "test-utils";
 import ActionBox from "../ActionBox";
-import { render, fireEvent } from "test-utils";
 
 describe("ActionBox component", () => {
   it("renders the name prop", () => {

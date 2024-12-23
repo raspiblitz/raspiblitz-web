@@ -1,4 +1,3 @@
-import CustomRadio from "./CustomRadio";
 import BitcoinLogo from "@/assets/bitcoin-logo.svg";
 import CLLogo from "@/assets/core_lightning_logo_only.png";
 import LNDLogo from "@/assets/lnd.png";
@@ -7,8 +6,9 @@ import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
 import { RadioGroup } from "@nextui-org/react";
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import CustomRadio from "./CustomRadio";
 
 type Props = {
   callback: (lightningSelect: SetupLightning) => void;
@@ -44,16 +44,17 @@ export default function LightningDialog({ callback }: Props) {
 
           <p className="m-2 text-center text-secondary">
             <Trans
-              i18nKey={"setup.select_lightning_help"}
+              i18nKey="setup.select_lightning_help"
               t={t}
               components={[
-                // eslint-disable-next-line jsx-a11y/anchor-has-content
+                // biome-ignore lint/a11y/useAnchorContent: <explanation>
                 <a
+                  key="link"
                   href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
                   className="text-primary underline"
                   target="_blank"
                   rel="noreferrer"
-                ></a>,
+                />,
               ]}
             />
           </p>
@@ -82,7 +83,7 @@ export default function LightningDialog({ callback }: Props) {
                   text={t(`setup.${lightning}`)}
                   description={t(`setup.${lightning}_description`)}
                   image={images[lightning]}
-                ></CustomRadio>
+                />
               ))}
             </RadioGroup>
           </div>

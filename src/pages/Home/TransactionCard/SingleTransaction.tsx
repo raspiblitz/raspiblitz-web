@@ -1,13 +1,13 @@
-import CategoryIcon from "./CategoryIcon";
 import { AppContext, Unit } from "@/context/app-context";
-import { Transaction } from "@/models/transaction.model";
+import type { Transaction } from "@/models/transaction.model";
 import {
   convertMSatToBtc,
   convertMSatToSat,
   convertSatToBtc,
   convertToString,
 } from "@/utils/format";
-import { FC, useContext } from "react";
+import { type FC, useContext } from "react";
+import CategoryIcon from "./CategoryIcon";
 
 export type Props = {
   transaction?: Transaction;
@@ -19,7 +19,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
 
   if (!transaction) {
     // Display empty Tx card
-    return <li className="h-24 px-0 py-2 md:px-4"></li>;
+    return <li className="h-24 px-0 py-2 md:px-4" />;
   }
 
   const { amount, category, time_stamp, type, comment, status, num_confs } =
@@ -28,7 +28,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
   const sendingTx = type === "send";
   const sign = sendingTx ? "" : "+";
 
-  let formattedAmount;
+  let formattedAmount: string;
 
   if (category === "onchain") {
     formattedAmount =
@@ -52,6 +52,11 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
     <li
       className="flex h-24 cursor-pointer flex-col justify-center border-b border-gray-400 px-0 py-2 text-center hover:bg-gray-700 md:px-4"
       onClick={onClick}
+      onKeyUp={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          onClick?.();
+        }
+      }}
     >
       <div className="flex w-full items-center justify-center">
         <div className="w-2/12">

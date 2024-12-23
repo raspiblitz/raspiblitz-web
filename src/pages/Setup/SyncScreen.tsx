@@ -22,13 +22,15 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { HttpStatusCode } from "axios";
-import { ChangeEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   data: SyncData | any;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   callback: (action: string, data: any) => void;
 };
 

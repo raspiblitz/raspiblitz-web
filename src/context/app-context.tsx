@@ -1,4 +1,3 @@
-import { SSEContext } from "./sse-context";
 import {
   ACCESS_TOKEN,
   disableGutter,
@@ -8,9 +7,9 @@ import {
 } from "@/utils";
 import type { FC, PropsWithChildren } from "react";
 import {
+  type Dispatch,
+  type SetStateAction,
   createContext,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useContext,
   useEffect,
@@ -19,6 +18,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SSEContext } from "./sse-context";
 
 export interface AppContextType {
   isLoggedIn: boolean;
@@ -109,7 +109,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         }
       } catch {
         localStorage.removeItem(ACCESS_TOKEN);
-        console.info(`Token invalid - removed.`);
+        console.info("Token invalid - removed");
       }
     }
   }, [i18n, navigate]);

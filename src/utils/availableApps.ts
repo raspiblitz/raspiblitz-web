@@ -1,4 +1,4 @@
-import { App } from "@/models/app.model";
+import type { App } from "@/models/app.model";
 import Electrs from "@/pages/Apps/customApps/Electrs";
 
 export const availableApps: { [name: string]: App } = {

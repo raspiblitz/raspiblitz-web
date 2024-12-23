@@ -1,11 +1,11 @@
+import { enableGutter } from "@/utils";
+import { type FC, useEffect } from "react";
 import ChangePwModal from "./ChangePwModal";
 import DebugLogBox from "./DebugLogBox";
 import I18nBox from "./I18nBox";
 import RebootModal from "./RebootModal";
 import ShutdownModal from "./ShutdownModal";
 import VersionBox from "./VersionBox";
-import { enableGutter } from "@/utils";
-import { FC, useEffect } from "react";
 
 const Settings: FC = () => {
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { initialState, SetupState } from "@/models/setup.model";
+import { type SetupState, initialState } from "@/models/setup.model";
 import SetupProvider from "@/pages/Setup/SetupContext";
 import SetupScreenRenderer from "@/pages/Setup/SetupScreenRenderer";
 import { setupMonitoringLoop } from "@/pages/Setup/setup-functions";

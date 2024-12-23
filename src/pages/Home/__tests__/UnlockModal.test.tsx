@@ -1,7 +1,7 @@
-import UnlockModal from "../UnlockModal";
-import { http, server, HttpResponse } from "@/testServer";
+import { http, HttpResponse, server } from "@/testServer";
 import userEvent from "@testing-library/user-event";
-import { render, screen, mockedDisclosure } from "test-utils";
+import { mockedDisclosure, render, screen } from "test-utils";
+import UnlockModal from "../UnlockModal";
 
 describe("UnlockModal", () => {
   const setup = () => {

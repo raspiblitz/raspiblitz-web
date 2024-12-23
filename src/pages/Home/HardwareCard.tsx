@@ -1,6 +1,6 @@
 import { SSEContext } from "@/context/sse-context";
 import { Spinner } from "@nextui-org/react";
-import { FC, useContext } from "react";
+import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 const PI_NUM_CORES = 4;
@@ -70,7 +70,7 @@ export const HardwareCard: FC = () => {
         <div className="flex w-1/2 flex-col">
           <h6 className="text-sm text-gray-200">{t("hardware.disk_usage")}</h6>
           <p className="flex">
-            {hddUsedGB} / {hddTotalGB} GB ({hddPercentUsed} %)
+            {hddUsedGB} /{hddTotalGB} GB ({hddPercentUsed} %)
           </p>
         </div>
       </article>

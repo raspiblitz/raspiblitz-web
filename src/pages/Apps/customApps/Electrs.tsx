@@ -1,7 +1,7 @@
 import { Headline } from "@/components/Headline";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
+import type { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
@@ -111,7 +111,9 @@ const Electrs = () => {
                         symbol=""
                         color="primary"
                         variant="solid"
-                      >{`${localIP}:${portSSL}:s`}</Snippet>
+                      >
+                        {`${localIP}:${portSSL}:s`}
+                      </Snippet>
                     </div>
                   ) : (
                     <span className="mt-4 text-center">
@@ -136,7 +138,9 @@ const Electrs = () => {
                         symbol=""
                         color="primary"
                         variant="solid"
-                      >{`${TORaddress}:${portSSL}:s`}</Snippet>
+                      >
+                        {`${TORaddress}:${portSSL}:s`}
+                      </Snippet>
                     </div>
                   ) : (
                     <span className="mt-4 text-center">

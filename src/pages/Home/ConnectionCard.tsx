@@ -1,4 +1,3 @@
-import QRCodeModal from "./QRCodeModal";
 import { SSEContext } from "@/context/sse-context";
 import useClipboard from "@/hooks/use-clipboard";
 import {
@@ -8,9 +7,10 @@ import {
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
 import { Spinner } from "@nextui-org/react";
-import { FC, useContext, useState } from "react";
+import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
+import QRCodeModal from "./QRCodeModal";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
@@ -55,7 +55,8 @@ export const ConnectionCard: FC = () => {
 
       <div className="bd-card w-full transition-colors lg:mr-2 lg:w-1/2">
         <div className="flex items-center text-lg font-bold">
-          {t("home.conn_details")}&nbsp;
+          {t("home.conn_details")}
+          &nbsp;
           {showAddress ? (
             <EyeSlashIcon
               data-tooltip-id="address-tooltip"
@@ -70,7 +71,7 @@ export const ConnectionCard: FC = () => {
             />
           )}
           <Tooltip id="address-tooltip">
-            {<div>{showAddress ? t("home.hide") : t("home.show")}</div>}
+            <div>{showAddress ? t("home.hide") : t("home.show")}</div>
           </Tooltip>
         </div>
 

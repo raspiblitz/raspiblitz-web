@@ -1,7 +1,7 @@
-import { AppCard, Props } from "../AppCard";
-import { AppStatus, AuthMethod } from "@/models/app-status";
-import { App } from "@/models/app.model";
+import { type AppStatus, AuthMethod } from "@/models/app-status";
+import type { App } from "@/models/app.model";
 import { render, screen } from "test-utils";
+import { AppCard, type Props } from "../AppCard";
 
 const app: App = {
   id: "123",

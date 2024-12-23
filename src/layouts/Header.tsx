@@ -3,17 +3,17 @@ import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react
 import { AppContext, Unit } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import {
-  SatoshiV1Icon,
   BitcoinCircleIcon,
+  SatoshiV1Icon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import {
   Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
   DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
 } from "@nextui-org/react";
 import { type Key, useContext } from "react";
 import { useTranslation } from "react-i18next";

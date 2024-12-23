@@ -1,6 +1,6 @@
-import DebugLogBox from "../DebugLogBox";
 import { toast } from "react-toastify";
 import { fireEvent, render, screen } from "test-utils";
+import DebugLogBox from "../DebugLogBox";
 
 vitest.mock("react-toastify", () => ({
   toast: {

@@ -68,6 +68,7 @@ export const SideDrawer: FC = () => {
 
       <div className="fixed bottom-0 left-2 z-10 w-60 bg-gray-800">
         <button
+          type="button"
           onClick={logout}
           className="bd-button mb-3 flex h-8 w-60 items-center justify-center"
         >

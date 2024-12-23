@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 import { t } from "i18next";
 
 export interface ApiError {

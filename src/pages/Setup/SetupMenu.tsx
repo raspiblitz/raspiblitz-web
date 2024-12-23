@@ -1,18 +1,18 @@
-import CustomRadio from "./CustomRadio";
 import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
 import {
-  ArrowUturnLeftIcon,
-  ArrowUpCircleIcon,
-  ArrowsRightLeftIcon,
   ArrowDownTrayIcon,
+  ArrowUpCircleIcon,
+  ArrowUturnLeftIcon,
+  ArrowsRightLeftIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
 import { RadioGroup } from "@nextui-org/react";
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import CustomRadio from "./CustomRadio";
 
 type Props = {
   setupPhase: SetupPhase;
@@ -58,7 +58,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
                   value={SetupPhase.RECOVERY}
                   icon={<ArrowUturnLeftIcon />}
                   text={t("setup.recoverblitz")}
-                ></CustomRadio>
+                />
               )}
               {setupPhase === SetupPhase.UPDATE && (
                 <CustomRadio
@@ -67,7 +67,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
                   value={SetupPhase.UPDATE}
                   icon={<ArrowUpCircleIcon />}
                   text={t("setup.updateblitz")}
-                ></CustomRadio>
+                />
               )}
               {setupPhase === SetupPhase.MIGRATION && (
                 <CustomRadio
@@ -76,7 +76,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
                   value={SetupPhase.MIGRATION}
                   icon={<ArrowsRightLeftIcon />}
                   text={t("setup.migrateblitz")}
-                ></CustomRadio>
+                />
               )}
               <CustomRadio
                 id="setup"
@@ -84,7 +84,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
                 value={SetupPhase.SETUP}
                 icon={<ArrowDownTrayIcon />}
                 text={t("setup.setupblitz")}
-              ></CustomRadio>
+              />
               <CustomRadio
                 id="shutdown"
                 radioGroup="setup"
@@ -92,7 +92,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
                 icon={<PowerIcon />}
                 iconColor="text-red-500"
                 text={t("settings.shutdown")}
-              ></CustomRadio>
+              />
             </RadioGroup>
           </div>
 

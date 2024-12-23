@@ -1,7 +1,7 @@
 import { SSEContext } from "@/context/sse-context";
 import { checkPropsUndefined } from "@/utils";
 import { Spinner } from "@nextui-org/react";
-import { FC, useContext } from "react";
+import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 export const BitcoinCard: FC = () => {
@@ -29,11 +29,14 @@ export const BitcoinCard: FC = () => {
     size_on_disk,
   } = btcInfo;
 
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const syncPercentage = (verification_progress! * 100).toFixed(2);
 
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const shownVersion = subversion!.replace(/\//g, "").split(":")[1];
 
   // size_on_disk is in byte => convert to GB - 1024 ^ 2 = 1048576
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const diskSize = (size_on_disk! / 1024 / 1024 / 1024).toFixed(2);
 
   return (
@@ -56,9 +59,9 @@ export const BitcoinCard: FC = () => {
             <h6 className="text-sm text-gray-200">{t("home.connections")}</h6>
             <p>
               {`${connections_in} ${t("home.conn_in")}`} /{" "}
-              <span className="inline-block">{`${connections_out} ${t(
-                "home.conn_out",
-              )}`}</span>
+              <span className="inline-block">
+                {`${connections_out} ${t("home.conn_out")}`}
+              </span>
             </p>
           </article>
           <article className="w-1/2">

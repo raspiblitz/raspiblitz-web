@@ -1,5 +1,5 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 
 type Props = {
   imgs: string[];
@@ -36,21 +36,23 @@ const ImageCarousel: FC<Props> = ({ imgs, video }) => {
             if (idx === index) {
               return (
                 <button
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   key={index}
                   type="button"
                   className="z-10 h-3 w-10 border border-black bg-white"
                   onClick={() => switchImgHandler(index)}
-                ></button>
+                />
               );
             }
 
             return (
               <button
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 key={index}
                 type="button"
                 className="z-10 h-3 w-10 border border-black bg-white opacity-30 hover:opacity-75"
                 onClick={() => switchImgHandler(index)}
-              ></button>
+              />
             );
           })}
       </div>
@@ -60,19 +62,21 @@ const ImageCarousel: FC<Props> = ({ imgs, video }) => {
         ) : (
           <img
             src={imgs[video ? activeIndex - 1 : activeIndex]}
-            alt={"" + activeIndex}
+            alt={`${activeIndex}`}
             className="block"
           />
         )}
       </div>
       <div className="absolute bottom-0 left-0 right-0 mx-5 flex h-full justify-between">
         <button
+          type="button"
           onClick={back}
           className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
         >
           <ChevronLeftIcon className="h-8 w-8 text-gray-700" />
         </button>
         <button
+          type="button"
           onClick={next}
           className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
         >

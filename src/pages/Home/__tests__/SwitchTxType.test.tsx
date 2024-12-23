@@ -1,5 +1,5 @@
-import SwitchTxType, { TxType } from "../SwitchTxType";
 import { render, screen } from "test-utils";
+import SwitchTxType, { TxType } from "../SwitchTxType";
 
 describe("SwitchTxType", () => {
   test("txType: lightning", async () => {

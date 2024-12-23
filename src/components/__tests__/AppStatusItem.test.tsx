@@ -1,6 +1,6 @@
-import AppStatusItem from "../AppStatusItem";
-import { AppStatus } from "@/models/app-status";
+import type { AppStatus } from "@/models/app-status";
 import { render, screen } from "test-utils";
+import AppStatusItem from "../AppStatusItem";
 
 const testApp: AppStatus = {
   id: "specter",

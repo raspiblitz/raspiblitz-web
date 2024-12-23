@@ -22,6 +22,7 @@ export default function QRCodeModal({ identityUri, closeModal }: Props) {
         <p className="my-5 text-sm text-gray-300">{t("home.connect_node")}</p>
         <p
           onClick={copyNodeId}
+          onKeyUp={(e) => e.key === "Enter" && copyNodeId()}
           data-tooltip-id="copy-tooltip"
           className="w-full break-all text-gray-200"
         >

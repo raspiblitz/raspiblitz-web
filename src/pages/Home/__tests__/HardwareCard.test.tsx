@@ -1,6 +1,6 @@
-import HardwareCard from "../HardwareCard";
-import { HardwareInfo } from "@/models/hardware-info";
+import type { HardwareInfo } from "@/models/hardware-info";
 import { render, screen } from "test-utils";
+import HardwareCard from "../HardwareCard";
 
 const basicHardwareInfo: HardwareInfo = {
   cpu_overall_percent: 1.87,

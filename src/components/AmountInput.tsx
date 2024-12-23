@@ -2,7 +2,7 @@ import { AppContext, Unit } from "@/context/app-context";
 import { convertBtcToSat, convertSatToBtc, formatAmount } from "@/utils/format";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { Input } from "@nextui-org/react";
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { type ChangeEvent, type FC, useContext, useState } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -37,7 +37,8 @@ const AmountInput: FC<Props> = ({
       if (formattedValue) {
         formattedValue = new Intl.NumberFormat("en-US", {
           minimumFractionDigits: 8,
-        }).format(convertSatToBtc(parseInt(formattedValue))!);
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        }).format(convertSatToBtc(Number.parseInt(formattedValue))!);
       }
     }
     setAmountInput(formattedValue);

@@ -1,4 +1,3 @@
-import ActionBox from "./ActionBox";
 import { Button } from "@/components/Button";
 import CapsLockWarning from "@/components/CapsLockWarning";
 import { ConfirmModal } from "@/components/ConfirmModal";
@@ -10,6 +9,7 @@ import { type FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import ActionBox from "./ActionBox";
 
 interface IFormInputs {
   oldPassword: string;

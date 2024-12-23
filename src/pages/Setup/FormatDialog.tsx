@@ -4,7 +4,7 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { Checkbox, useDisclosure } from "@nextui-org/react";
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Props = {
