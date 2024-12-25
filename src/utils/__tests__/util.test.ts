@@ -1,4 +1,4 @@
-import { retrieveSettings, saveSettings, SETTINGS_KEY } from "@/utils";
+import { SETTINGS_KEY, retrieveSettings, saveSettings } from "@/utils";
 
 describe("util", () => {
   beforeEach(() => {

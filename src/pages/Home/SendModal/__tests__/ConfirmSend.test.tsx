@@ -1,12 +1,12 @@
+import { ConfirmModal } from "@/components/ConfirmModal";
+import { http, HttpResponse, server } from "@/testServer";
+import userEvent from "@testing-library/user-event";
+import { mockedDisclosure, render, screen, waitFor } from "test-utils";
 import { TxType } from "../../SwitchTxType";
 import type { Props } from "../ConfirmSend";
 import ConfirmSend from "../ConfirmSend";
-import { SendLnForm } from "../SendModal";
+import type { SendLnForm } from "../SendModal";
 import type { SendOnChainForm } from "../SendOnChain";
-import { ConfirmModal } from "@/components/ConfirmModal";
-import { http, server, HttpResponse } from "@/testServer";
-import userEvent from "@testing-library/user-event";
-import { render, screen, waitFor, mockedDisclosure } from "test-utils";
 
 const closeSpy = vi.fn();
 
@@ -107,6 +107,7 @@ describe("ConfirmSend", () => {
           const url = new URL(request.url);
           if (url.searchParams.get("amount_msat") === "10000") {
             return new HttpResponse(null, { status: 200 });
+            // biome-ignore lint/style/noUselessElse: <explanation>
           } else {
             return new HttpResponse(null, { status: 500 });
           }

@@ -1,8 +1,8 @@
-import SendModal, { type Props } from "../SendModal";
-import { HttpResponse, http, server } from "@/testServer";
+import { http, HttpResponse, server } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { render, screen, mockedDisclosure } from "test-utils";
+import { mockedDisclosure, render, screen } from "test-utils";
+import SendModal, { type Props } from "../SendModal";
 
 const basicProps: Props = {
   lnBalance: 0,
@@ -75,6 +75,7 @@ describe("SendModal", () => {
               },
               { status: 200 },
             );
+            // biome-ignore lint/style/noUselessElse: <explanation>
           } else {
             return new HttpResponse(null, { status: 500 });
           }

@@ -1,5 +1,5 @@
 import I18nSelect from "@/components/I18nDropdown";
-import { FC } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 /**

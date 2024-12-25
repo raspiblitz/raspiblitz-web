@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import I18nSelect from "@/components/I18nDropdown";
 import Stepper from "@/pages/Setup/Stepper";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 type Props = {
   currentStep: number | null;

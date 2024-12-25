@@ -1,7 +1,7 @@
-import Channel from "./Channel";
-import { LightningChannel } from "@/models/lightning-channel";
+import type { LightningChannel } from "@/models/lightning-channel";
 import { Accordion, AccordionItem } from "@nextui-org/react";
-import { FC } from "react";
+import type { FC } from "react";
+import Channel from "./Channel";
 
 type Props = {
   isLoading: boolean;

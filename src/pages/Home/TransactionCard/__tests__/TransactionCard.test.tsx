@@ -1,6 +1,6 @@
+import { render, screen } from "test-utils";
 import type { Props } from "../TransactionCard";
 import TransactionCard from "../TransactionCard";
-import { render, screen } from "test-utils";
 
 const props: Props = {
   transactions: [],

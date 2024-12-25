@@ -1,16 +1,16 @@
 import {
   AppContext,
+  type AppContextType,
   appContextDefault,
-  AppContextType,
 } from "@/context/app-context";
 import {
   SSEContext,
+  type SSEContextType,
   sseContextDefault,
-  SSEContextType,
 } from "@/context/sse-context";
 import i18n from "@/i18n/test_config";
-import { render, RenderOptions } from "@testing-library/react";
-import { FC, PropsWithChildren, ReactElement } from "react";
+import { type RenderOptions, render } from "@testing-library/react";
+import type { FC, PropsWithChildren, ReactElement } from "react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 
@@ -55,6 +55,7 @@ const customRender = (
   },
 ) =>
   render(ui, {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     wrapper: (props: any) => (
       <AllTheProviders {...props} {...options?.providerOptions} />
     ),

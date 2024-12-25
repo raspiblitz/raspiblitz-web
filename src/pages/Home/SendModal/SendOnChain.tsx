@@ -1,5 +1,3 @@
-import { TxType } from "../SwitchTxType";
-import { SendLnForm } from "./SendModal";
 import AmountInput from "@/components/AmountInput";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
@@ -7,10 +5,12 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import { stringToNumber } from "@/utils/format";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Input } from "@nextui-org/react";
-import { ChangeEvent, type FC, useState } from "react";
+import { type ChangeEvent, type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { TxType } from "../SwitchTxType";
+import type { SendLnForm } from "./SendModal";
 
 export type Props = {
   balance: number;

@@ -3,7 +3,10 @@ import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
+import {
+  SetupMigrationMode,
+  type SetupMigrationOS,
+} from "@/models/setup.model";
 import { useDisclosure } from "@nextui-org/react";
 import { useTranslation } from "react-i18next";
 
@@ -49,7 +52,7 @@ export default function MigrationDialog({
         <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
           <div>
             <Headline>
-              {t(`setup.migrate_to_os`, {
+              {t("setup.migrate_to_os", {
                 os: `${migrationOS[0].toUpperCase()}${migrationOS.slice(1)}`,
               })}
             </Headline>

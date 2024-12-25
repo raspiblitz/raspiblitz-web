@@ -1,7 +1,7 @@
 import { Button } from "@/components/Button";
 import useClipboard from "@/hooks/use-clipboard";
 import { QRCodeSVG } from "qrcode.react";
-import { FC } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
 
@@ -23,6 +23,9 @@ const ReceiveOnChain: FC<Props> = ({ address, onRefreshHandler }) => {
       <article className="mb-5 flex flex-row items-center">
         <p
           onClick={copyAddress}
+          onKeyUp={(e) => {
+            if (e.key === "Enter") copyAddress();
+          }}
           className="w-full break-all text-gray-200"
           data-tooltip-id="copy-tooltip"
         >

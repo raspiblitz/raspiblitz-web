@@ -1,10 +1,10 @@
 import { Alert } from "@/components/Alert";
 import { AppContext, Unit } from "@/context/app-context";
-import { LightningChannel } from "@/models/lightning-channel";
+import type { LightningChannel } from "@/models/lightning-channel";
 import { convertSatToBtc, convertToString } from "@/utils/format";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Button } from "@nextui-org/react";
-import { FC, useContext, useState } from "react";
+import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {

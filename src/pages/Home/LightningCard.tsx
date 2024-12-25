@@ -3,7 +3,7 @@ import { SSEContext } from "@/context/sse-context";
 import { checkPropsUndefined } from "@/utils";
 import { convertMSatToBtc, convertToString } from "@/utils/format";
 import { Spinner } from "@nextui-org/react";
-import { FC, useContext } from "react";
+import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 export const LightningCard: FC = () => {
@@ -47,21 +47,26 @@ export const LightningCard: FC = () => {
   const convertedLocalBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(localBalance || 0)
-      : localBalance! / 1000;
+      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        localBalance! / 1000;
   const convertedRemoteBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(remoteBalance || 0)
-      : remoteBalance! / 1000;
+      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        remoteBalance! / 1000;
 
   const convertedLocalPendingBalance =
     unit === Unit.BTC
-      ? convertMSatToBtc(pendingLocalBalance! || 0)
-      : pendingLocalBalance! / 1000;
+      ? // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        convertMSatToBtc(pendingLocalBalance! || 0)
+      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        pendingLocalBalance! / 1000;
 
   const convertedRemotePendingBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(pendingRemoteBalance || 0)
-      : pendingRemoteBalance! / 1000;
+      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        pendingRemoteBalance! / 1000;
 
   const channelTotal = activeChannels + inactiveChannels + pendingChannels;
 

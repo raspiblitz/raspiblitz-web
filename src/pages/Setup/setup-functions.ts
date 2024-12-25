@@ -1,13 +1,13 @@
 import {
   Screen,
   SetupPhase,
-  SetupState,
+  type SetupState,
   SetupStatus,
 } from "@/models/setup.model";
 import { ACCESS_TOKEN } from "@/utils";
 import { instance } from "@/utils/interceptor";
 import { HttpStatusCode } from "axios";
-import { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction } from "react-router-dom";
 
 type UpdateState = (newState: Partial<SetupState>) => void;
 
@@ -51,7 +51,9 @@ export async function setupMonitoringLoop(
       });
     }
   } catch (error) {
-    console.error("status request failed - device is off or in reboot?");
+    console.error(
+      `status request failed - device is off or in reboot?: ${error}`,
+    );
   }
 
   setTimeout(() => setupMonitoringLoop(updateState, navigate), 4000);
@@ -123,6 +125,7 @@ export async function setupStart(
 
     await setupMonitoringLoop(updateState, navigate);
   } catch (error) {
+    console.error(`request for setup start failed: ${error}`);
     showError("request for setup start failed", updateState);
   }
 }
@@ -162,6 +165,7 @@ export async function setupShutdown(updateState: UpdateState): Promise<void> {
   try {
     await instance.get("/setup/shutdown");
   } catch (error) {
+    console.error(`shutdown request failed: ${error}`);
     showError(
       "shutdown request failed - but that can also happen when shutdown happened",
       updateState,

@@ -1,3 +1,16 @@
+import { AppContext } from "@/context/app-context";
+import { SSEContext } from "@/context/sse-context";
+import { useInterval } from "@/hooks/use-interval";
+import { useModalManager } from "@/hooks/use-modalmanager";
+import PageLoadingScreen from "@/layouts/PageLoadingScreen";
+import type { Transaction } from "@/models/transaction.model";
+import { enableGutter } from "@/utils";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
+import { HttpStatusCode } from "axios";
+import { type FC, useCallback, useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import BitcoinCard from "./BitcoinCard";
 import ConnectionCard from "./ConnectionCard";
 import HardwareCard from "./HardwareCard";
@@ -10,19 +23,6 @@ import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionDetailModal from "./TransactionCard/TransactionDetailModal/TransactionDetailModal";
 import UnlockModal from "./UnlockModal";
 import WalletCard from "./WalletCard";
-import { AppContext } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
-import { useInterval } from "@/hooks/use-interval";
-import { useModalManager } from "@/hooks/use-modalmanager";
-import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { Transaction } from "@/models/transaction.model";
-import { enableGutter } from "@/utils";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
-import { HttpStatusCode } from "axios";
-import { FC, useCallback, useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 
 const startupToastId = "startup-toast";
 
@@ -111,6 +111,7 @@ const Home: FC = () => {
       if (tx.status === HttpStatusCode.Ok && walletLocked) {
         setWalletLocked(false);
       }
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (err: any) {
       if (err.response.status === HttpStatusCode.Locked) {
         setWalletLocked(true);
@@ -126,13 +127,7 @@ const Home: FC = () => {
         setIsLoadingTransactions(false);
       });
     }
-  }, [
-    implementation,
-    btcOnlyMode,
-    isLoadingTransactions,
-    walletLocked,
-    getTransactions,
-  ]);
+  }, [btcOnlyMode, isLoadingTransactions, walletLocked, getTransactions]);
 
   useEffect(() => {
     enableGutter();
@@ -149,13 +144,7 @@ const Home: FC = () => {
       setIsLoadingTransactions(true);
       setTxError("");
     }
-  }, [
-    t,
-    lightningState,
-    walletLocked,
-    setWalletLocked,
-    setIsLoadingTransactions,
-  ]);
+  }, [lightningState, walletLocked, setWalletLocked]);
 
   const showDetailHandler = useCallback(
     (index: number) => {
@@ -186,13 +175,16 @@ const Home: FC = () => {
       )}
       {activeModal === "OPEN_CHANNEL" && (
         <OpenChannelModal
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           balance={balance.channel_local_balance!}
           disclosure={{ ...disclosure, onClose: closeModalHandler }}
         />
       )}
       {activeModal === "SEND" && (
         <SendModal
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           onchainBalance={balance.onchain_confirmed_balance!}
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           lnBalance={balance.channel_local_balance!}
           disclosure={{ ...disclosure, onClose: closeModalHandler }}
         />
@@ -204,6 +196,7 @@ const Home: FC = () => {
       )}
       {activeModal === "DETAIL" && (
         <TransactionDetailModal
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           transaction={detailTx!}
           disclosure={{ ...disclosure, onClose: closeModalHandler }}
         />
@@ -225,9 +218,7 @@ const Home: FC = () => {
   return (
     <>
       {modalComponent()}
-      <main
-        className={`content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 bg-gray-700 p-5 text-white transition-colors md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4`}
-      >
+      <main className="content-container page-container grid h-full grid-cols-1 grid-rows-1 gap-5 bg-gray-700 p-5 text-white transition-colors md:grid-cols-2 lg:gap-8 lg:pb-8 lg:pr-8 lg:pt-8 xl:grid-cols-4">
         {!btcOnlyMode && (
           <article className="col-span-2 row-span-2 md:col-span-1 xl:col-span-2">
             <WalletCard

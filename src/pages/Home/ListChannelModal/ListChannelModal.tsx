@@ -1,16 +1,16 @@
-import ChannelList from "./ChannelList";
 import { Alert } from "@/components/Alert";
 import {
   ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
-import { LightningChannel } from "@/models/lightning-channel";
+import type { LightningChannel } from "@/models/lightning-channel";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import { Spinner } from "@nextui-org/react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import ChannelList from "./ChannelList";
 
 const theme = "dark";
 export default function ListChannelModal({

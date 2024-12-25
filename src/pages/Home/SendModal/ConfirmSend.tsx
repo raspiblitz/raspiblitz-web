@@ -1,6 +1,3 @@
-import { TxType } from "../SwitchTxType";
-import { SendLnForm } from "./SendModal";
-import { SendOnChainForm } from "./SendOnChain";
 import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
 import { Button } from "@/components/Button";
@@ -16,10 +13,13 @@ import {
 import { instance } from "@/utils/interceptor";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import type { ChangeEvent } from "react";
-import { FC, useContext, useState } from "react";
+import { type FC, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { TxType } from "../SwitchTxType";
+import type { SendLnForm } from "./SendModal";
+import type { SendOnChainForm } from "./SendOnChain";
 
 interface IFormInputs {
   amountInput: string;
@@ -163,6 +163,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
           {isLnTx && Number(confirmData.amount) !== 0 && (
             <span>
               {formatAmount(
+                // biome-ignore lint/style/noNonNullAssertion: <explanation>
                 convertMSatToSat(+confirmData.amount)?.toString()!,
                 Unit.SAT,
               )}{" "}

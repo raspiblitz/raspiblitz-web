@@ -1,12 +1,13 @@
-import App from "./App";
-import { http, server, HttpResponse } from "./testServer";
+import App from "@/App";
 import i18n from "@/i18n/test_config";
 import { I18nextProvider } from "react-i18next";
-import { render, waitFor, screen } from "test-utils";
+import { render, screen, waitFor } from "test-utils";
+import { http, HttpResponse, server } from "./testServer";
 
 const mockedUsedNavigate = vi.fn();
 
 vi.mock("react-router-dom", async () => {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const reactRouterDom: any = await vi.importActual("react-router-dom");
 
   return { ...reactRouterDom, useNavigate: () => mockedUsedNavigate };

@@ -2,7 +2,7 @@ import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { getHrefFromApp } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
-import { FC, useContext, useEffect, useState } from "react";
+import { type FC, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const AppInfo: FC = () => {
@@ -10,6 +10,7 @@ export const AppInfo: FC = () => {
   const { appId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus } = useContext(SSEContext);
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const { customComponent } = availableApps[appId!];
 
   const app = appStatus.find((app) => app.id === appId);

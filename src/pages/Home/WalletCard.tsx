@@ -18,7 +18,7 @@ import {
   LinkIcon,
   ListBulletIcon,
 } from "@heroicons/react/24/outline";
-import { FC, useContext } from "react";
+import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -97,7 +97,8 @@ export const WalletCard: FC<Props> = ({
               </Headline>
               <p className="break-before-auto break-words text-lg font-bold">
                 <span>
-                  {convertToString(unit, convertedOnchainBalance)} {unit}&nbsp;
+                  {convertToString(unit, convertedOnchainBalance)} {unit}
+                  &nbsp;
                 </span>
                 <span className="block md:inline-block">
                   {onChainUnconfirmed !== 0 &&

@@ -1,14 +1,14 @@
 import { AppContext } from "@/context/app-context";
-import { SSE_URL, SSEContext } from "@/context/sse-context";
-import { AppStatus } from "@/models/app-status";
-import { App } from "@/models/app.model";
-import { BtcInfo } from "@/models/btc-info";
-import { HardwareInfo } from "@/models/hardware-info";
-import { InstallAppData } from "@/models/install-app";
-import { LnInfo } from "@/models/ln-info";
-import { SystemInfo } from "@/models/system-info";
-import { SystemStartupInfo } from "@/models/system-startup-info";
-import { WalletBalance } from "@/models/wallet-balance";
+import { SSEContext, SSE_URL } from "@/context/sse-context";
+import type { AppStatus } from "@/models/app-status";
+import type { App } from "@/models/app.model";
+import type { BtcInfo } from "@/models/btc-info";
+import type { HardwareInfo } from "@/models/hardware-info";
+import type { InstallAppData } from "@/models/install-app";
+import type { LnInfo } from "@/models/ln-info";
+import type { SystemInfo } from "@/models/system-info";
+import type { SystemStartupInfo } from "@/models/system-startup-info";
+import type { WalletBalance } from "@/models/wallet-balance";
 import { setWindowAlias } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
 import { useCallback, useContext, useEffect } from "react";
@@ -73,6 +73,7 @@ function useSSE() {
         const apps = JSON.parse(event.data);
         if (prev.length === 0) {
           return apps;
+          // biome-ignore lint/style/noUselessElse: <explanation>
         } else {
           return prev.map(
             (old: App) =>
@@ -87,6 +88,7 @@ function useSSE() {
         const status: AppStatus[] = JSON.parse(event.data);
         if (prev.length === 0) {
           return status;
+          // biome-ignore lint/style/noUselessElse: <explanation>
         } else {
           const currentIds = status.map((item) => item.id);
 

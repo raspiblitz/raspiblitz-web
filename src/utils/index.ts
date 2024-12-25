@@ -1,5 +1,5 @@
-import { AppStatus } from "@/models/app-status";
-import { TokenPayload } from "@/models/token";
+import type { AppStatus } from "@/models/app-status";
+import type { TokenPayload } from "@/models/token";
 
 export const ACCESS_TOKEN = "access_token";
 // refresh 10min before expiry
@@ -53,6 +53,7 @@ export function retrieveSettings(): SavedSettings | null {
  */
 export function checkPropsUndefined(props: object): boolean {
   let someUndefined = false;
+  // biome-ignore lint/complexity/noForEach: <explanation>
   Object.values(props).forEach((prop) => {
     if (prop === null || prop === undefined) {
       someUndefined = true;

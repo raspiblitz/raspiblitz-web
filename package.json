@@ -19,14 +19,14 @@
     "test:watch": "vitest watch --exclude 'tests'",
     "coverage": "vitest run --coverage --exclude 'tests'",
     "prepare": "husky",
-    "lint": "eslint src/"
+    "lint": "biome check src"
   },
   "config": {
     "port": "3000"
   },
   "lint-staged": {
     "{src,backend-mock}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
+      "biome check --write"
     ]
   },
   "dependencies": {
@@ -47,7 +47,7 @@
     "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.12.0",
+    "@biomejs/biome": "1.9.4",
     "@playwright/test": "^1.47.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
@@ -61,8 +61,6 @@
     "@vitest/coverage-v8": "^2.1.1",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.0.1",
-    "eslint": "^9.12.0",
-    "eslint-plugin-react": "^7.37.1",
     "globals": "^15.10.0",
     "husky": "^9.1.6",
     "jsdom": "^25.0.1",

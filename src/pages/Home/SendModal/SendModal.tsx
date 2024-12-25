@@ -1,18 +1,18 @@
-import { TxType } from "../SwitchTxType";
-import ConfirmSend from "./ConfirmSend";
-import SendLn, { LnInvoiceForm } from "./SendLN";
-import SendOnChain, { SendOnChainForm } from "./SendOnChain";
 import {
   ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
-import { DecodePayRequest } from "@/models/decode-pay-req";
+import type { DecodePayRequest } from "@/models/decode-pay-req";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { Tabs, Tab } from "@nextui-org/tabs";
-import { AxiosResponse } from "axios";
-import { FC, useState } from "react";
+import { Tab, Tabs } from "@nextui-org/tabs";
+import type { AxiosResponse } from "axios";
+import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { TxType } from "../SwitchTxType";
+import ConfirmSend from "./ConfirmSend";
+import SendLn, { type LnInvoiceForm } from "./SendLN";
+import SendOnChain, { type SendOnChainForm } from "./SendOnChain";
 
 export interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   lnBalance: number;

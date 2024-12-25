@@ -36,30 +36,35 @@ export function convertToString(unit: Unit, num: number | null): string {
  * @param unit The unit (BTC / SAT) , see also {@link Unit}
  * @returns the formatted value
  */
+// TODO: add test for this function to format.test.ts
 export function formatAmount(value: string, unit: Unit): string {
   // replace every character except numbers and separators
-  value = value.replace(/[^0-9.,]/, "");
+  let formattedValue = value.replace(/[^0-9.,]/, "");
+
   if (unit === Unit.SAT) {
     // remove all separators to format correctly
-    value = value.replace(/,|\./g, "");
-    if (value) {
-      value = new Intl.NumberFormat(NUM_LOCALE).format(+value);
+    formattedValue = formattedValue.replace(/,|\./g, "");
+    if (formattedValue) {
+      formattedValue = new Intl.NumberFormat(NUM_LOCALE).format(
+        +formattedValue,
+      );
     }
   } else {
     // remove commas
-    value = value.replace(/,/g, "");
+    formattedValue = formattedValue.replace(/,/g, "");
     // replace ".." with "."
-    value = value.replace(/\.\./g, ".");
-    let output = value.split(".");
+    formattedValue = formattedValue.replace(/\.\./g, ".");
+    const output = formattedValue.split(".");
     // limit to max 8 decimal places
     if (output[1]?.length > 8) {
       output[1] = output[1].substring(0, 8);
     }
     // formatting which respects separator
     // makes either "x.y" or "y"
-    value = output.shift() + (output.length ? "." + output.join("") : "");
+    formattedValue =
+      output.shift() + (output.length ? `.${output.join("")}` : "");
   }
-  return value;
+  return formattedValue;
 }
 
 /**

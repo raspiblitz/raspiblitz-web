@@ -1,8 +1,6 @@
-import AppCardAlby from "./AppCardAlby";
-import AppList from "./AppList";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { AppStatus } from "@/models/app-status";
+import type { AppStatus } from "@/models/app-status";
 import { enableGutter } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
@@ -10,6 +8,8 @@ import type { FC } from "react";
 import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import AppCardAlby from "./AppCardAlby";
+import AppList from "./AppList";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);

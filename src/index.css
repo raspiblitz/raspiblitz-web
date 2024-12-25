@@ -12,8 +12,8 @@
 }
 
 /**
-  * Custom Tailwind class CSS
-**/
+ * Custom Tailwind class CSS
+ **/
 
 .label-underline {
   @apply my-2 block text-left text-sm font-bold text-white;
@@ -48,8 +48,8 @@
 }
 
 /**
-  * Remove up/down arrows from number intput
-**/
+ * Remove up/down arrows from number intput
+ **/
 
 input[type="number"] {
   -moz-appearance: textfield;

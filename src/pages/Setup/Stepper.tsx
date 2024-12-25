@@ -19,6 +19,7 @@ export default function Stepper({ currentStep }: Props) {
     >
       <ul className="relative z-10 hidden items-center justify-between lg:flex">
         {Array.from({ length: NUMBER_OF_STEPS }).map((_, index: number) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <li className="list-none bg-primary-900 px-4" key={index}>
             <span
               className={cn(
@@ -27,7 +28,7 @@ export default function Stepper({ currentStep }: Props) {
               )}
             >
               <span className="whitespace-nowrap font-bold">
-                {t(`setup.step.step`)} {index + 1}
+                {t("setup.step.step")} {index + 1}
               </span>
               <span className="text-sm text-secondary">
                 {t(`setup.step.step_${index + 1}_description`)}

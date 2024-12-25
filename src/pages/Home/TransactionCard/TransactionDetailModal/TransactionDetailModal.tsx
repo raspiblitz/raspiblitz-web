@@ -1,12 +1,12 @@
-import LNDetails from "./LNDetails";
-import OnchainDetails from "./OnchainDetails";
 import {
   ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
-import { Transaction } from "@/models/transaction.model";
-import { FC } from "react";
+import type { Transaction } from "@/models/transaction.model";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
+import LNDetails from "./LNDetails";
+import OnchainDetails from "./OnchainDetails";
 
 interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   transaction: Transaction;

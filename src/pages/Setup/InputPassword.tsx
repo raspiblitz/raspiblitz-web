@@ -60,8 +60,9 @@ export default function InputPassword({ passwordType, callback }: Props) {
               t={t}
               components={[
                 <strong
+                  key="passwordType"
                   className={`font-semibold ${passwordColors[passwordType]}`}
-                ></strong>, // if needed, create a component for this
+                />, // if needed, create a component for this
               ]}
             />
           </Headline>
@@ -72,8 +73,9 @@ export default function InputPassword({ passwordType, callback }: Props) {
               t={t}
               components={[
                 <strong
+                  key="passwordType"
                   className={`font-semibold ${passwordColors[passwordType]}`}
-                ></strong>, // if needed, create a component for this
+                />, // if needed, create a component for this
               ]}
             />
           </p>

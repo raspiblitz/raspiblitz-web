@@ -1,3 +1,5 @@
+import { Screen } from "@/models/setup.model";
+import { useSetup } from "@/pages/Setup/SetupContext";
 import FinalDialog from "./FinalDialog";
 import FormatDialog from "./FormatDialog";
 import InputNodeName from "./InputNodeName";
@@ -9,9 +11,6 @@ import SetupMenu from "./SetupMenu";
 import StartDoneDialog from "./StartDoneDialog";
 import SyncScreen from "./SyncScreen";
 import WaitScreen from "./WaitScreen";
-import { Screen } from "@/models/setup.model";
-import { useSetup } from "@/pages/Setup/SetupContext";
-import React from "react";
 
 export default function SetupScreenRenderer() {
   const { state, callbacks } = useSetup();
@@ -81,7 +80,7 @@ export default function SetupScreenRenderer() {
       return (
         <SyncScreen data={state.syncData} callback={callbacks.onSyncScreen} />
       );
-    case Screen.WAIT:
+    // case Screen.WAIT: UNUSED
     default:
       return (
         <WaitScreen

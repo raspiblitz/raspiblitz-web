@@ -1,6 +1,6 @@
-import ModalBackground from "./ModalBackground";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { FC, PropsWithChildren, useCallback, useEffect } from "react";
+import { type FC, type PropsWithChildren, useCallback, useEffect } from "react";
+import ModalBackground from "./ModalBackground";
 
 export const disableScroll = {
   on: () => document.body.classList.add("overflow-y-hidden"),
@@ -39,13 +39,14 @@ const ModalDialog: FC<PropsWithChildren<Props>> = ({
       window.removeEventListener("keydown", closeOnEsc);
       disableScroll.off();
     };
-  }, [closeable, close, closeModal, closeOnEsc]);
+  }, [closeOnEsc]);
 
   return (
     <ModalBackground>
       <div className="flex h-screen max-h-full w-screen flex-col overflow-y-auto rounded-lg bg-gray-800 pb-8 text-center text-white shadow-xl md:h-auto md:w-4/5 lg:w-1/2 xl:mx-5 xl:w-2/5 xl:max-w-screen-sm">
         <div className="flex pr-2 pt-1">
           <button
+            type="button"
             onClick={closeModal}
             className={`ml-auto mt-1 flex h-7 w-7 items-end ${
               closeable ? "" : "invisible"

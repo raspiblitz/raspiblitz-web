@@ -1,14 +1,19 @@
-import { AppStatus } from "@/models/app-status";
-import { App } from "@/models/app.model";
-import { BtcInfo } from "@/models/btc-info";
-import { HardwareInfo } from "@/models/hardware-info";
-import { LnInfo } from "@/models/ln-info";
-import { SystemInfo } from "@/models/system-info";
-import { SystemStartupInfo } from "@/models/system-startup-info";
-import { Transaction } from "@/models/transaction.model";
-import { WalletBalance } from "@/models/wallet-balance";
+import type { AppStatus } from "@/models/app-status";
+import type { App } from "@/models/app.model";
+import type { BtcInfo } from "@/models/btc-info";
+import type { HardwareInfo } from "@/models/hardware-info";
+import type { LnInfo } from "@/models/ln-info";
+import type { SystemInfo } from "@/models/system-info";
+import type { SystemStartupInfo } from "@/models/system-startup-info";
+import type { Transaction } from "@/models/transaction.model";
+import type { WalletBalance } from "@/models/wallet-balance";
 import type { FC, PropsWithChildren } from "react";
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  createContext,
+  useState,
+} from "react";
 
 export interface SSEContextType {
   evtSource: EventSource | null;
@@ -28,7 +33,9 @@ export interface SSEContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   installingApp: any | null;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   setInstallingApp: Dispatch<SetStateAction<any | null>>;
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
@@ -127,6 +134,7 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [installingApp, setInstallingApp] = useState<any | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] =

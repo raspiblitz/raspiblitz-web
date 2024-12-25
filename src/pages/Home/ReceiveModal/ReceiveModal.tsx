@@ -1,6 +1,3 @@
-import { TxType } from "../SwitchTxType";
-import QRCode from "./QRCode";
-import ReceiveLN, { type IFormInputs } from "./ReceiveLN";
 import { Alert } from "@/components/Alert";
 import {
   ConfirmModal,
@@ -10,10 +7,13 @@ import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import { convertBtcToSat } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { Tabs, Tab } from "@nextui-org/tabs";
+import { Tab, Tabs } from "@nextui-org/tabs";
 import type { FC } from "react";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { TxType } from "../SwitchTxType";
+import QRCode from "./QRCode";
+import ReceiveLN, { type IFormInputs } from "./ReceiveLN";
 
 const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   disclosure,
@@ -79,7 +79,7 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
     setInvoiceType(key as TxType);
     setError("");
 
-    // eslint-disable-next-line eqeqeq
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if (key == TxType.ONCHAIN && !address) {
       generateOnChainAddressHandler();
     }

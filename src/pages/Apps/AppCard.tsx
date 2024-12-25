@@ -1,6 +1,6 @@
 import AppIcon from "@/components/AppIcon";
-import { AppStatus, AuthMethod } from "@/models/app-status";
-import { App } from "@/models/app.model";
+import { type AppStatus, AuthMethod } from "@/models/app-status";
+import type { App } from "@/models/app.model";
 import { getHrefFromApp } from "@/utils";
 import {
   ArrowTopRightOnSquareIcon,
@@ -8,8 +8,8 @@ import {
   LockOpenIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import { Link, Button, Tooltip } from "@nextui-org/react";
-import { FC, useEffect, useState } from "react";
+import { Button, Link, Tooltip } from "@nextui-org/react";
+import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ export type Props = {
   appInfo: App;
   appStatusInfo: AppStatus;
   installed: boolean;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   installingApp: any | null;
   onInstall: (id: string) => void;
 };
@@ -61,25 +62,23 @@ export const AppCard: FC<Props> = ({
     <article className="bd-card bg-gray-800 transition-colors">
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {installed && (
-          <>
-            <Tooltip
-              showArrow={true}
-              content={
-                <>
-                  {appStatusInfo.httpsForced === "1" &&
-                    appStatusInfo.httpsSelfsigned === "1" && (
-                      <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
-                    )}
-                  {<h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>}
-                </>
-              }
-            >
-              <LockOpenIcon
-                className="absolute right-0 top-0 h-6 w-6"
-                data-tooltip-id={`login-tooltip-${id}`}
-              />
-            </Tooltip>
-          </>
+          <Tooltip
+            showArrow={true}
+            content={
+              <>
+                {appStatusInfo.httpsForced === "1" &&
+                  appStatusInfo.httpsSelfsigned === "1" && (
+                    <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
+                  )}
+                <h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>
+              </>
+            }
+          >
+            <LockOpenIcon
+              className="absolute right-0 top-0 h-6 w-6"
+              data-tooltip-id={`login-tooltip-${id}`}
+            />
+          </Tooltip>
         )}
 
         {/* Icon */}

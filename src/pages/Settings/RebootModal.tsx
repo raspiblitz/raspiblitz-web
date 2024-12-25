@@ -1,12 +1,12 @@
-import ActionBox from "./ActionBox";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { AppContext } from "@/context/app-context";
 import { instance } from "@/utils/interceptor";
 import { useDisclosure } from "@nextui-org/react";
 import { HttpStatusCode } from "axios";
-import { FC, useContext, useState } from "react";
+import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import ActionBox from "./ActionBox";
 
 const confirmEndpoint = "/system/reboot";
 

@@ -10,7 +10,7 @@ import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
 import { Input } from "@nextui-org/react";
-import { ChangeEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -72,6 +72,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
       <form onSubmit={handleSubmit(openChannelHandler)}>
         <ConfirmModal.Header>{t("home.open_channel")}</ConfirmModal.Header>
         <ConfirmModal.Body>
+          {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
           <AvailableBalance balance={convertedBalance!} />
 
           <fieldset className="flex w-full flex-col gap-4">

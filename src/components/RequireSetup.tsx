@@ -1,17 +1,17 @@
-import { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 
 type Props = {
   needsSetup: boolean;
 };
 
-//see https://reactrouter.com/docs/en/v6/examples/auth
+// see https://reactrouter.com/docs/en/v6/examples/auth
 const RequireSetup: FC<PropsWithChildren<Props>> = ({
   needsSetup,
   children,
 }) => {
   if (!needsSetup) {
-    return <Navigate to={"/home"} replace />;
+    return <Navigate to="/home" replace />;
   }
 
   return children;

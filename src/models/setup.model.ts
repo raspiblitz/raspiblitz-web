@@ -41,23 +41,24 @@ export enum SetupMigrationMode {
 }
 
 export enum Screen {
-  FINAL,
-  FORMAT,
-  INPUT_A,
-  INPUT_B,
-  INPUT_C,
-  INPUT_NODENAME,
-  LIGHTNING,
-  MIGRATION,
-  RECOVERY,
-  SETUP,
-  START_DONE,
-  SYNC,
-  WAIT,
+  FINAL = 0,
+  FORMAT = 1,
+  INPUT_A = 2,
+  INPUT_B = 3,
+  INPUT_C = 4,
+  INPUT_NODENAME = 5,
+  LIGHTNING = 6,
+  MIGRATION = 7,
+  RECOVERY = 8,
+  SETUP = 9,
+  START_DONE = 10,
+  SYNC = 11,
+  WAIT = 12,
 }
 
 export interface SetupState {
   page: Screen;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   syncData: any | null;
   waitScreenStatus: SetupStatus;
   waitScreenMessage: string;

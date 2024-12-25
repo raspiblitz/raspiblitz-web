@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from "react";
+import { type KeyboardEvent, useState } from "react";
 
 const useCapsLock = () => {
   const [isCapsLockEnabled, setIsCapsLockEnabled] = useState(false);
