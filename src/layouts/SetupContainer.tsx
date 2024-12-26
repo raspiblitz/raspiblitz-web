@@ -3,6 +3,7 @@ import I18nSelect from "@/components/I18nDropdown";
 import Stepper from "@/pages/Setup/Stepper";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import type { PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   currentStep: number | null;
@@ -12,6 +13,8 @@ export default function SetupContainer({
   currentStep,
   children,
 }: PropsWithChildren<Props>) {
+  const { t } = useTranslation();
+
   return (
     <main className="flex h-full min-h-screen w-screen flex-col items-center justify-center bg-primary-900 text-white transition-colors">
       <div className="fixed top-16 flex h-8 w-48 flex-col-reverse items-center justify-center gap-6 md:right-16 md:top-6 md:w-96 md:flex-row md:gap-4">
@@ -25,7 +28,7 @@ export default function SetupContainer({
           className="w-full p-4"
           startContent={<BookOpenIcon className="h-5 w-5" />}
         >
-          Documentation
+          {t("navigation.documentation")}
         </Button>
         <I18nSelect />
       </div>
