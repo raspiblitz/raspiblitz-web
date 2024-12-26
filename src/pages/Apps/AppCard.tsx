@@ -11,7 +11,7 @@ import {
 import { Button, Link, Tooltip } from "@nextui-org/react";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export type Props = {
   appInfo: App;

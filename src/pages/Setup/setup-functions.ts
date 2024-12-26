@@ -7,7 +7,7 @@ import {
 import { ACCESS_TOKEN } from "@/utils";
 import { instance } from "@/utils/interceptor";
 import { HttpStatusCode } from "axios";
-import type { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction } from "react-router";
 
 type UpdateState = (newState: Partial<SetupState>) => void;
 

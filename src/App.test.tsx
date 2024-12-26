@@ -6,9 +6,9 @@ import { http, HttpResponse, server } from "./testServer";
 
 const mockedUsedNavigate = vi.fn();
 
-vi.mock("react-router-dom", async () => {
+vi.mock("react-router", async () => {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const reactRouterDom: any = await vi.importActual("react-router-dom");
+  const reactRouterDom: any = await vi.importActual("react-router");
 
   return { ...reactRouterDom, useNavigate: () => mockedUsedNavigate };
 });

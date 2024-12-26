@@ -12,7 +12,7 @@ import i18n from "@/i18n/test_config";
 import { type RenderOptions, render } from "@testing-library/react";
 import type { FC, PropsWithChildren, ReactElement } from "react";
 import { I18nextProvider } from "react-i18next";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 
 type Props = {
   sseProps: SSEContextType;

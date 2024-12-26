@@ -12,7 +12,7 @@ import {
 import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 const navLinkClasses =
   "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full text-white opacity-80 hover:text-yellow-500";
