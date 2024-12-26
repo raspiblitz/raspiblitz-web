@@ -101,7 +101,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
             window.location.pathname === "/" ||
             window.location.pathname === "/login"
           ) {
-            return navigate("/home");
+            navigate("/home");
           }
         } else {
           localStorage.removeItem(ACCESS_TOKEN);

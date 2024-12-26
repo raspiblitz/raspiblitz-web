@@ -43,11 +43,10 @@ const Login: FC = () => {
     if (isLoggedIn) {
       if (back) {
         console.info(`back(${back})`);
-        return navigate(back, { replace: true });
-        // biome-ignore lint/style/noUselessElse: <explanation>
+        navigate(back, { replace: true });
       } else {
         console.info(`from(${from})`);
-        return navigate(from || "/home", { replace: true });
+        navigate(from || "/home", { replace: true });
       }
     }
   }, [navigate, from, isLoggedIn, back]);
