@@ -33,10 +33,9 @@
     "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@heroicons/react": "^2.2.0",
     "@nextui-org/react": "^2.3.3",
-    "axios": "^1.7.7",
-    "framer-motion": "^11.7.0",
+    "axios": "^1.7.9",
     "i18next": "^24.2.0",
-    "qrcode.react": "^4.0.1",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
@@ -44,7 +43,7 @@
     "react-router-dom": "^6.26.2",
     "react-toastify": "^10.0.4",
     "react-tooltip": "^5.28.0",
-    "tailwind-merge": "^2.5.2"
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
