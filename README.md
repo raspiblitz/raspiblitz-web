@@ -19,7 +19,7 @@ Big thanks to our translators, which you can find in this [README](src/i18n/READ
 ### Dependencies
 
 - [Node.js](https://nodejs.org/en/download/)
-- [nvm](https://github.com/nvm-sh/nvm#intro) is supported but not required.
+- [asdf](https://asdf-vm.com/) is supported but not required.
 
 #### Update npm dependencies
 
@@ -110,8 +110,8 @@ Please do not commit the above changes.
 
 ### Use a external RaspiBlitz as Backend
 
-- (Optional): Make sure `nvm` is installed.
-- (Optional): Run `nvm install 20` or if already installed `nvm use`
+- (Optional): Make sure [asdf](https://asdf-vm.com/) is installed
+- (Optional): Run `asdf install nodejs latest:20`
 - Install the dependencies with `npm install`
 - Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local RaspiBlitz - for example if your RaspiBlitz is running on local IP `192.168.1.123` then change the value to `http://192.168.1.123:80`
 - with `npm run start` it should now connect to your external RaspiBlitz
