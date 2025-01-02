@@ -17,7 +17,7 @@ import {
 import { QRCodeSVG } from "qrcode.react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const Electrs = () => {
   const navigate = useNavigate();

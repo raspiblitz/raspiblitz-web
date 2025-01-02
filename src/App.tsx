@@ -13,7 +13,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 import Layout from "./layouts/Layout";
 import LoadingScreen from "./layouts/LoadingScreen";
 import SkeletonLoadingScreen from "./layouts/SkeletonLoadingScreen";

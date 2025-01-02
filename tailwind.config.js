@@ -6,14 +6,7 @@ export const content = [
   "./public/index.html",
   "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
 ];
-export const theme = {
-  extend: {
-    colors: {
-      "bd-yellow-light": "#F7CB47",
-      "bd-yellow-dark": "#F7CB47",
-    },
-  },
-};
+
 export const plugins = [
   nextui({
     addCommonColors: true,

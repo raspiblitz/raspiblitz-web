@@ -14,7 +14,7 @@ import { type FC, useContext, useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 interface IFormInputs {
   passwordInput: string;
@@ -43,11 +43,10 @@ const Login: FC = () => {
     if (isLoggedIn) {
       if (back) {
         console.info(`back(${back})`);
-        return navigate(back, { replace: true });
-        // biome-ignore lint/style/noUselessElse: <explanation>
+        navigate(back, { replace: true });
       } else {
         console.info(`from(${from})`);
-        return navigate(from || "/home", { replace: true });
+        navigate(from || "/home", { replace: true });
       }
     }
   }, [navigate, from, isLoggedIn, back]);

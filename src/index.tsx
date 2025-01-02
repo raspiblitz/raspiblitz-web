@@ -8,7 +8,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import "i18next";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 import { ToastContainer } from "react-toastify";
 import "react-tooltip/dist/react-tooltip.css";
 

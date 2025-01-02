@@ -16,7 +16,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { SSEContext } from "./sse-context";
 
@@ -101,7 +101,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
             window.location.pathname === "/" ||
             window.location.pathname === "/login"
           ) {
-            return navigate("/home");
+            navigate("/home");
           }
         } else {
           localStorage.removeItem(ACCESS_TOKEN);

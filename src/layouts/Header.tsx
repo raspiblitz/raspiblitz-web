@@ -17,7 +17,7 @@ import {
 } from "@nextui-org/react";
 import { type Key, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -70,12 +70,12 @@ export default function Header() {
                 ? t("navigation.display_btc")
                 : t("navigation.display_sats")}
             </DropdownItem>
+
             <DropdownItem
               key="documentation"
               href="https://docs.raspiblitz.org/docs/intro"
               target="_blank"
               rel="noopener noreferrer"
-              color="warning"
               startContent={<BookOpenIcon className="h-5 w-5" />}
             >
               {t("navigation.documentation")}
