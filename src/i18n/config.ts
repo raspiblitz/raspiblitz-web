@@ -8,6 +8,7 @@ import hu from "./langs/hu.json";
 import it from "./langs/it.json";
 import nb_NO from "./langs/nb_NO.json";
 import nl from "./langs/nl.json";
+import pt from "./langs/pt.json";
 import pt_BR from "./langs/pt_BR.json";
 import sv from "./langs/sv.json";
 import vi from "./langs/vi.json";
@@ -22,6 +23,7 @@ export const resources = {
   nl,
   fr,
   hu,
+  pt,
   pt_BR,
   it,
   es,
