@@ -1,7 +1,7 @@
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupStatus } from "@/models/setup.model";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
 type Props = {

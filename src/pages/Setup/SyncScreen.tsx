@@ -20,7 +20,7 @@ import {
   ModalHeader,
   Progress,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { HttpStatusCode } from "axios";
 import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";

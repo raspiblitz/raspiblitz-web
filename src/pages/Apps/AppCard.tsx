@@ -8,7 +8,7 @@ import {
   LockOpenIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Link, Tooltip } from "@nextui-org/react";
+import { Button, Link, Tooltip } from "@heroui/react";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";

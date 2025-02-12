@@ -7,7 +7,7 @@ import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import { convertBtcToSat } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { Tab, Tabs } from "@nextui-org/tabs";
+import { Tab, Tabs } from "@heroui/tabs";
 import type { FC } from "react";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";

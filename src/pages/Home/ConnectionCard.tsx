@@ -6,7 +6,7 @@ import {
   EyeSlashIcon,
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";

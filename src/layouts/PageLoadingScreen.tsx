@@ -1,4 +1,4 @@
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 import type { FC } from "react";
 
 // Loading Screen where sidebar is visible and usable

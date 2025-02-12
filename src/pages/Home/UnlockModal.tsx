@@ -8,7 +8,7 @@ import {
 import { AppContext } from "@/context/app-context";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { instance } from "@/utils/interceptor";
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 import { useContext, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";

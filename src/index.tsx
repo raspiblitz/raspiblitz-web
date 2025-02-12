@@ -4,7 +4,7 @@ import SSEContextProvider from "./context/sse-context";
 import "./i18n/config";
 import "./index.css";
 import ErrorBoundary from "@/ErrorBoundary";
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import "i18next";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -31,11 +31,11 @@ root.render(
       <BrowserRouter>
         <SSEContextProvider>
           <AppContextProvider>
-            <NextUIProvider>
+            <HeroUIProvider>
               {/* For persistent toasts over all pages */}
               <ToastContainer stacked closeOnClick />
               <App />
-            </NextUIProvider>
+            </HeroUIProvider>
           </AppContextProvider>
         </SSEContextProvider>
       </BrowserRouter>

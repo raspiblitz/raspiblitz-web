@@ -5,8 +5,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from "@nextui-org/react";
-import type { UseDisclosureReturn } from "@nextui-org/use-disclosure";
+} from "@heroui/react";
+import type { UseDisclosureReturn } from "@heroui/use-disclosure";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 

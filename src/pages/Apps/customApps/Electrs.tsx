@@ -13,7 +13,7 @@ import {
   Snippet,
   Tab,
   Tabs,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { QRCodeSVG } from "qrcode.react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

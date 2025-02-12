@@ -3,7 +3,7 @@ import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { convertMSatToSat } from "@/utils/format";
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 import { type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";

@@ -2,8 +2,8 @@ import { Alert } from "@/components/Alert";
 import { AppContext, Unit } from "@/context/app-context";
 import type { LightningChannel } from "@/models/lightning-channel";
 import { convertSatToBtc, convertToString } from "@/utils/format";
-import { Checkbox } from "@nextui-org/checkbox";
-import { Button } from "@nextui-org/react";
+import { Checkbox } from "@heroui/checkbox";
+import { Button } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 

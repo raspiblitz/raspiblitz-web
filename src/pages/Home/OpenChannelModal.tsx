@@ -9,7 +9,7 @@ import {
 import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

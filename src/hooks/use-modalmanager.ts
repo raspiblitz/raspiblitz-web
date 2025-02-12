@@ -1,4 +1,4 @@
-import { useDisclosure } from "@nextui-org/use-disclosure";
+import { useDisclosure } from "@heroui/use-disclosure";
 import { useState } from "react";
 
 export type ModalType =

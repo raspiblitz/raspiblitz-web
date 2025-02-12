@@ -7,7 +7,7 @@ import {
   SetupMigrationMode,
   type SetupMigrationOS,
 } from "@/models/setup.model";
-import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
 type Props = {

@@ -9,7 +9,7 @@ import {
   ArrowsRightLeftIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
-import { RadioGroup } from "@nextui-org/react";
+import { RadioGroup } from "@heroui/react";
 import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CustomRadio from "./CustomRadio";

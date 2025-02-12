@@ -3,8 +3,8 @@ import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { stringToNumber } from "@/utils/format";
-import { Checkbox } from "@nextui-org/checkbox";
-import { Input } from "@nextui-org/react";
+import { Checkbox } from "@heroui/checkbox";
+import { Input } from "@heroui/react";
 import { type ChangeEvent, type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -57,7 +57,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   const spendAll = watch("spendAll", false);
 
   const onSubmit: SubmitHandler<SendOnChainForm> = (data) =>
-    // overwrite amount to submit number instead of string
     onConfirm({ ...data, invoiceType: TxType.ONCHAIN, amount });
 
   const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {

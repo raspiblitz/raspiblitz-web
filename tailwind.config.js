@@ -1,14 +1,14 @@
-import { nextui } from "@nextui-org/react";
+import { heroui } from "@heroui/react";
 
 /** @type {import('tailwindcss').Config} */
 export const content = [
   "./src/**/*.{js,jsx,ts,tsx}",
   "./public/index.html",
-  "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+  "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
 ];
 
 export const plugins = [
-  nextui({
+  heroui({
     addCommonColors: true,
     themes: {
       light: {},

@@ -7,8 +7,8 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Spinner } from "@nextui-org/react";
-import { Button } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SingleTransaction from "./SingleTransaction";

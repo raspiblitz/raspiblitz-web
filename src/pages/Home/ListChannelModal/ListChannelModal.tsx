@@ -6,7 +6,7 @@ import {
 import type { LightningChannel } from "@/models/lightning-channel";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
