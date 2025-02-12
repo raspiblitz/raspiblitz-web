@@ -57,7 +57,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
             <Button
               type="button"
               color="danger"
-              onClick={() => confirmModal.onOpen()}
+              onPress={() => confirmModal.onOpen()}
             >
               {t("setup.cancel")}
             </Button>

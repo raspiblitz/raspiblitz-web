@@ -99,7 +99,7 @@ export const AppInfo: FC = () => {
       {/* Back Button */}
       <section className="w-full px-5 py-9 text-gray-200">
         <Button
-          onClick={() => navigate("/apps")}
+          onPress={() => navigate("/apps")}
           color="primary"
           startContent={<ChevronLeftIcon className="inline-block h-5 w-5" />}
         >
@@ -117,7 +117,7 @@ export const AppInfo: FC = () => {
             <Button
               isDisabled={!!installingApp}
               color="primary"
-              onClick={installHandler}
+              onPress={installHandler}
               startContent={<PlusIcon className="inline h-6 w-6" />}
             >
               {t("apps.install")}
@@ -145,7 +145,7 @@ export const AppInfo: FC = () => {
             <Button
               isDisabled={!!installingApp}
               color="danger"
-              onClick={uninstallHandler}
+              onPress={uninstallHandler}
               startContent={<TrashIcon className="inline h-6 w-6" />}
             >
               {t("apps.uninstall")}

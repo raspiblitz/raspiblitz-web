@@ -133,7 +133,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       <ConfirmModal.Header>
         <Button
           type="button"
-          onClick={() => back(confirmData)}
+          onPress={() => back(confirmData)}
           startContent={<ChevronLeftIcon className="inline-block h-4 w-4" />}
         >
           {t("navigation.back")}
@@ -228,7 +228,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       </ConfirmModal.Body>
 
       <ConfirmModal.Footer>
-        <Button onClick={() => close()} isDisabled={isLoading}>
+        <Button onPress={() => close()} isDisabled={isLoading}>
           {t("settings.cancel")}
         </Button>
 

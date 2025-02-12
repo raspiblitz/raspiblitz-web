@@ -66,7 +66,7 @@ const Electrs = () => {
       {/* Back Button */}
       <section className="w-full px-5 py-9 text-gray-200">
         <Button
-          onClick={() => navigate("/apps")}
+          onPress={() => navigate("/apps")}
           color="primary"
           startContent={<ChevronLeftIcon className="inline-block h-5 w-5" />}
         >

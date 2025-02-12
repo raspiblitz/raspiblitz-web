@@ -87,7 +87,7 @@ export const AppCardAlby: FC = () => {
       <div className="flex flex-row gap-2 py-4">
         {window.alby && (
           <Button
-            onClick={addAlbyAccountHandler}
+            onPress={addAlbyAccountHandler}
             color="primary"
             startContent={<LinkIcon className="inline h-6 w-6" />}
           >

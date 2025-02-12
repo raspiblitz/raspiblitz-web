@@ -121,7 +121,7 @@ const ChangePwModal: FC = () => {
 
           <ConfirmModal.Footer>
             <Button
-              onClick={() => {
+              onPress={() => {
                 confirmModal.onClose();
                 reset();
               }}

@@ -28,7 +28,7 @@ const ActionBox: FC<PropsWithChildren<Props>> = ({
             <h4 className="flex w-1/2 items-center font-bold xl:w-2/3">
               {name}
             </h4>
-            <Button onClick={action} color="secondary" variant="flat">
+            <Button onPress={action} color="secondary" variant="flat">
               {actionName}
             </Button>
           </div>

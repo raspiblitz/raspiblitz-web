@@ -112,7 +112,7 @@ const TransactionCard: FC<Props> = ({
             <Button
               isIconOnly
               aria-label="page backward"
-              onClick={pageBackwardHandler}
+              onPress={pageBackwardHandler}
               isDisabled={page === 0}
             >
               <ArrowDownIcon className="h-6 w-6 rotate-90 transform" />
@@ -121,7 +121,7 @@ const TransactionCard: FC<Props> = ({
             <Button
               isIconOnly
               aria-label="page forward"
-              onClick={pageForwardHandler}
+              onPress={pageForwardHandler}
               isDisabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
             >
               <ArrowDownIcon className="h-6 w-6 -rotate-90 transform" />

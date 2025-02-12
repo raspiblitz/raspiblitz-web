@@ -65,7 +65,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
         <Button
           color="primary"
           isDisabled={confirm}
-          onClick={() => setConfirm(true)}
+          onPress={() => setConfirm(true)}
         >
           {t("home.close_channel")}
         </Button>
@@ -87,15 +87,15 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
 
               <div className="flex justify-center gap-4">
                 <Button
-                  onClick={() => setConfirm(false)}
+                  onPress={() => setConfirm(false)}
                   isDisabled={isLoading}
                 >
                   {t("setup.cancel")}
                 </Button>
                 <Button
+                  onPress={closeChannelHandler}
                   color="primary"
                   isLoading={isLoading}
-                  onClick={closeChannelHandler}
                 >
                   {t("setup.yes")}
                 </Button>
