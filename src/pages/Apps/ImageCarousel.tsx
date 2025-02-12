@@ -3,7 +3,7 @@ import { type FC, useState } from "react";
 
 type Props = {
   imgs: string[];
-  video?: JSX.Element;
+  video?: React.JSX.Element;
 };
 
 const ImageCarousel: FC<Props> = ({ imgs, video }) => {
