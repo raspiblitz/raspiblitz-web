@@ -3,5 +3,14 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/*.code-search": true
-  }
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
 }
