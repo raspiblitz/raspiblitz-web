@@ -48,9 +48,8 @@ const DebugLogBox: FC = () => {
           </h4>
           <Button
             isLoading={isGeneratingReport}
-            onClick={onClickHandler}
-            color="secondary"
-            variant="flat"
+            onPress={onClickHandler}
+            color="primary"
           >
             {isGeneratingReport
               ? t("settings.generating")
