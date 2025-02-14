@@ -21,7 +21,7 @@ export type Props = {
 } & ({ custom: true } | { custom?: false; body?: ReactNode });
 
 type ConfirmModalComponent = {
-  (props: Props): JSX.Element;
+  (props: Props): React.JSX.Element;
   Header: typeof ModalHeader;
   Body: typeof ModalBody;
   Footer: typeof ModalFooter;
