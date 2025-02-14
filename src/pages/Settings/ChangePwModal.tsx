@@ -65,6 +65,7 @@ const ChangePwModal: FC = () => {
         custom
       >
         <form onSubmit={handleSubmit(changePwHandler)}>
+          <ConfirmModal.Header>{t("settings.change_pw_a")}</ConfirmModal.Header>
           <ConfirmModal.Body>
             {isCapsLockEnabled && <CapsLockWarning />}
 

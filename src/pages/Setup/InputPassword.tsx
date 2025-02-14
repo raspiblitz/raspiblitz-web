@@ -131,7 +131,7 @@ export default function InputPassword({ passwordType, callback }: Props) {
               <Button
                 type="button"
                 color="secondary"
-                onClick={() => confirmModal.onOpen()}
+                onPress={() => confirmModal.onOpen()}
               >
                 {t("setup.cancel")}
               </Button>
