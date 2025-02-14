@@ -5,7 +5,7 @@ import {
 import type { DecodePayRequest } from "@/models/decode-pay-req";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { Tab, Tabs } from "@nextui-org/tabs";
+import { Tab, Tabs } from "@heroui/tabs";
 import type { AxiosResponse } from "axios";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";

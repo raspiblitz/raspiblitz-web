@@ -7,7 +7,7 @@ import {
   SetupMigrationMode,
   type SetupMigrationOS,
 } from "@/models/setup.model";
-import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -32,7 +32,7 @@ export default function MigrationDialog({
             {t("setup.lightningoutdated")}
           </Alert>
 
-          <Button type="button" onClick={() => callback(false)} color="primary">
+          <Button type="button" onPress={() => callback(false)} color="primary">
             {t("settings.shutdown")}
           </Button>
         </section>
@@ -65,7 +65,7 @@ export default function MigrationDialog({
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button
               type="button"
-              onClick={() => confirmModal.onOpen()}
+              onPress={() => confirmModal.onOpen()}
               color="primary"
             >
               {t("setup.no_and_shutdown")}
@@ -73,7 +73,7 @@ export default function MigrationDialog({
             <Button
               type="button"
               color="secondary"
-              onClick={() => callback(true)}
+              onPress={() => callback(true)}
             >
               {t("setup.yes_and_migrate")}
             </Button>

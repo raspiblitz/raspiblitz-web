@@ -5,9 +5,9 @@ import { AppContext } from "@/context/app-context";
 import { ACCESS_TOKEN, enableGutter } from "@/utils";
 import { type ApiError, checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { Button } from "@nextui-org/button";
-import { Spinner } from "@nextui-org/react";
-import { Input } from "@nextui-org/react";
+import { Button } from "@heroui/button";
+import { Spinner } from "@heroui/react";
+import { Input } from "@heroui/react";
 
 import type { AxiosError } from "axios";
 import { type FC, useContext, useEffect, useState } from "react";

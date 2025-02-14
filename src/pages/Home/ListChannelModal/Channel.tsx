@@ -2,8 +2,8 @@ import { Alert } from "@/components/Alert";
 import { AppContext, Unit } from "@/context/app-context";
 import type { LightningChannel } from "@/models/lightning-channel";
 import { convertSatToBtc, convertToString } from "@/utils/format";
-import { Checkbox } from "@nextui-org/checkbox";
-import { Button } from "@nextui-org/react";
+import { Checkbox } from "@heroui/checkbox";
+import { Button } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -65,7 +65,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
         <Button
           color="primary"
           isDisabled={confirm}
-          onClick={() => setConfirm(true)}
+          onPress={() => setConfirm(true)}
         >
           {t("home.close_channel")}
         </Button>
@@ -87,15 +87,15 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
 
               <div className="flex justify-center gap-4">
                 <Button
-                  onClick={() => setConfirm(false)}
+                  onPress={() => setConfirm(false)}
                   isDisabled={isLoading}
                 >
                   {t("setup.cancel")}
                 </Button>
                 <Button
+                  onPress={closeChannelHandler}
                   color="primary"
                   isLoading={isLoading}
-                  onClick={closeChannelHandler}
                 >
                   {t("setup.yes")}
                 </Button>

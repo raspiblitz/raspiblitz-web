@@ -1,4 +1,4 @@
-import { cn } from "@nextui-org/react";
+import { cn } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
 const NUMBER_OF_STEPS = 4;

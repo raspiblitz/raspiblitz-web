@@ -3,7 +3,7 @@ import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Checkbox, useDisclosure } from "@nextui-org/react";
+import { Checkbox, useDisclosure } from "@heroui/react";
 import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -57,7 +57,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
             <Button
               type="button"
               color="danger"
-              onClick={() => confirmModal.onOpen()}
+              onPress={() => confirmModal.onOpen()}
             >
               {t("setup.cancel")}
             </Button>

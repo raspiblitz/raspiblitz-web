@@ -7,8 +7,8 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Spinner } from "@nextui-org/react";
-import { Button } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SingleTransaction from "./SingleTransaction";
@@ -112,7 +112,7 @@ const TransactionCard: FC<Props> = ({
             <Button
               isIconOnly
               aria-label="page backward"
-              onClick={pageBackwardHandler}
+              onPress={pageBackwardHandler}
               isDisabled={page === 0}
             >
               <ArrowDownIcon className="h-6 w-6 rotate-90 transform" />
@@ -121,7 +121,7 @@ const TransactionCard: FC<Props> = ({
             <Button
               isIconOnly
               aria-label="page forward"
-              onClick={pageForwardHandler}
+              onPress={pageForwardHandler}
               isDisabled={page * MAX_ITEMS + MAX_ITEMS >= transactions.length}
             >
               <ArrowDownIcon className="h-6 w-6 -rotate-90 transform" />

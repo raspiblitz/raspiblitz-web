@@ -6,7 +6,7 @@ import SendModal, { type Props } from "../SendModal";
 
 const basicProps: Props = {
   lnBalance: 0,
-  onchainBalance: 21,
+  onchainBalance: 21000,
   disclosure: mockedDisclosure,
 };
 

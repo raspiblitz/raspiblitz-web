@@ -1,7 +1,7 @@
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { AppContext } from "@/context/app-context";
 import { instance } from "@/utils/interceptor";
-import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@heroui/react";
 import { HttpStatusCode } from "axios";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";

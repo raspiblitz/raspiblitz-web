@@ -1,5 +1,5 @@
 import type { LightningChannel } from "@/models/lightning-channel";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { Accordion, AccordionItem } from "@heroui/react";
 import type { FC } from "react";
 import Channel from "./Channel";
 

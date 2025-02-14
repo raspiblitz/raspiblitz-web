@@ -8,7 +8,7 @@ import {
   LockOpenIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Link, Tooltip } from "@nextui-org/react";
+import { Button, Link, Tooltip } from "@heroui/react";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -117,7 +117,7 @@ export const AppCard: FC<Props> = ({
 
         {installed && appInfo.customComponent && (
           <Button
-            onClick={() => navigate(`/apps/${appInfo.id}`)}
+            onPress={() => navigate(`/apps/${appInfo.id}`)}
             color="primary"
             startContent={
               <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
@@ -136,7 +136,7 @@ export const AppCard: FC<Props> = ({
                 isInstallWaiting ||
                 (installingApp !== null && installingApp?.result !== "fail")
               }
-              onClick={() => installButtonPressed(id)}
+              onPress={() => installButtonPressed(id)}
               color="primary"
               startContent={<PlusIcon className="inline h-6 w-6" />}
             >
@@ -153,7 +153,7 @@ export const AppCard: FC<Props> = ({
           )}
 
         <Button
-          onClick={() => navigate(`/apps/${appInfo.id}/info`)}
+          onPress={() => navigate(`/apps/${appInfo.id}/info`)}
           startContent={<InformationCircleIcon className="inline h-6 w-6" />}
         >
           {t("apps.info")}

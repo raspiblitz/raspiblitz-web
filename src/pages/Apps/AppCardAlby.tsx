@@ -4,7 +4,7 @@ import {
   ArrowTopRightOnSquareIcon,
   LinkIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Link } from "@nextui-org/react";
+import { Button, Link } from "@heroui/react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -87,7 +87,7 @@ export const AppCardAlby: FC = () => {
       <div className="flex flex-row gap-2 py-4">
         {window.alby && (
           <Button
-            onClick={addAlbyAccountHandler}
+            onPress={addAlbyAccountHandler}
             color="primary"
             startContent={<LinkIcon className="inline h-6 w-6" />}
           >

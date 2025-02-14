@@ -1,5 +1,5 @@
-import { Image } from "@nextui-org/image";
-import { Radio, cn } from "@nextui-org/react";
+import { Image } from "@heroui/image";
+import { Radio, cn } from "@heroui/react";
 import type { ReactNode } from "react";
 
 type Props = {

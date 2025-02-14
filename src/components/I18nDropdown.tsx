@@ -1,6 +1,6 @@
 import { resources } from "@/i18n/config";
 import { saveSettings } from "@/utils";
-import { Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem } from "@heroui/react";
 import type { ChangeEvent, FC } from "react";
 import { useTranslation } from "react-i18next";
 

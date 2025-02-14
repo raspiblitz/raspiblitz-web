@@ -20,7 +20,7 @@ import {
   ModalHeader,
   Progress,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { HttpStatusCode } from "axios";
 import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -223,7 +223,7 @@ export default function SyncScreen({ data, callback }: Props) {
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button
               type="button"
-              onClick={() => callback("shutdown", null)}
+              onPress={() => callback("shutdown", null)}
               color="primary"
               title={t("setup.sync_restartinfo")}
               startContent={<PowerIcon className="inline h-6 w-auto" />}

@@ -5,7 +5,7 @@ import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
-import { RadioGroup } from "@nextui-org/react";
+import { RadioGroup } from "@heroui/react";
 import { type FormEvent, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import CustomRadio from "./CustomRadio";

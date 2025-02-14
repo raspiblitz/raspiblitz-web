@@ -4,7 +4,7 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { Input, useDisclosure } from "@nextui-org/react";
+import { Input, useDisclosure } from "@heroui/react";
 import { type FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -121,7 +121,7 @@ const ChangePwModal: FC = () => {
 
           <ConfirmModal.Footer>
             <Button
-              onClick={() => {
+              onPress={() => {
                 confirmModal.onClose();
                 reset();
               }}

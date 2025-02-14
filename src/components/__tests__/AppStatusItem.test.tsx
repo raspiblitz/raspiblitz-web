@@ -20,13 +20,13 @@ describe("AppStatusItem", () => {
   });
 
   it("should link to 'hiddenService' if window.location is an onion address", () => {
-    const oldWindow = global.window;
-    global.window = Object.create(window);
+    const oldWindow = window;
     Object.defineProperty(window, "location", {
       value: {
         hostname: "http://someplace.onion",
       },
       writable: true,
+      configurable: true,
     });
     render(<AppStatusItem app={testApp} />);
 
@@ -34,6 +34,12 @@ describe("AppStatusItem", () => {
     expect(appCard[0].getAttribute("href")).toEqual(
       "https://hiddenservice.onion",
     );
-    global.window = oldWindow;
+
+    // Restore original window.location
+    Object.defineProperty(window, "location", {
+      value: oldWindow.location,
+      writable: true,
+      configurable: true,
+    });
   });
 });

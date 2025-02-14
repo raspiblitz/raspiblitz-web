@@ -23,10 +23,10 @@ export default function RecoveryDialog({ setupPhase, callback }: Props) {
       <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
         <Headline>{getHeadlineText()}</Headline>
         <article className="flex flex-col items-center justify-center gap-10 pt-10">
-          <Button onClick={() => callback(true)} color="primary">
+          <Button onPress={() => callback(true)} color="primary">
             {t("setup.yes")}
           </Button>
-          <Button onClick={() => callback(false)} color="secondary">
+          <Button onPress={() => callback(false)} color="secondary">
             {t("setup.other_options")}
           </Button>
         </article>

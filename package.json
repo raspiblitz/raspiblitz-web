@@ -32,7 +32,7 @@
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@heroicons/react": "^2.2.0",
-    "@nextui-org/react": "^2.3.6",
+    "@heroui/react": "^2.6.13",
     "axios": "^1.7.9",
     "i18next": "^24.2.2",
     "qrcode.react": "^4.2.0",

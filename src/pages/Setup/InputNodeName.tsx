@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Input, useDisclosure } from "@nextui-org/react";
+import { Input, useDisclosure } from "@heroui/react";
 import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -92,7 +92,7 @@ export default function InputNodeName({ callback }: Props) {
               <Button
                 type="button"
                 color="danger"
-                onClick={() => confirmModal.onOpen()}
+                onPress={() => confirmModal.onOpen()}
               >
                 {t("setup.cancel")}
               </Button>

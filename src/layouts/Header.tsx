@@ -14,7 +14,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { type Key, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";

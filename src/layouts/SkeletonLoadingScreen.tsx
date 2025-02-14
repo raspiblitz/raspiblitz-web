@@ -1,4 +1,4 @@
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 
 // Loading Screen when sidebar is visible but not usable
 export default function SkeletonLoadingScreen() {

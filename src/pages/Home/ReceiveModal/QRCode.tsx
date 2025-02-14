@@ -40,7 +40,7 @@ const ReceiveOnChain: FC<Props> = ({ address, onRefreshHandler }) => {
 
       {onRefreshHandler && (
         <div>
-          <Button onClick={onRefreshHandler}>{t("wallet.refresh")}</Button>
+          <Button onPress={onRefreshHandler}>{t("wallet.refresh")}</Button>
         </div>
       )}
     </>
