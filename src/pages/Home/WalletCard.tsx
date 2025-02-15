@@ -76,11 +76,14 @@ export const WalletCard: FC<Props> = ({
   }
 
   return (
-    <div className="h-full">
+    <div className="h-full" data-testid="wallet-card">
       <div className="bd-card h-full transition-colors">
         <section className="flex flex-col flex-wrap p-2 text-black lg:flex-row">
           <div className="relative w-full overflow-hidden rounded-xl bg-yellow-600 bg-gradient-to-b from-yellow-500 p-4 text-white">
-            <article className="flex w-full flex-col">
+            <article
+              data-testid="total-balance"
+              className="flex w-full flex-col"
+            >
               <Headline as="h6" align="left">
                 {t("wallet.balance")}
               </Headline>
@@ -88,7 +91,10 @@ export const WalletCard: FC<Props> = ({
                 {convertToString(unit, totalBalance)} {unit}
               </p>
             </article>
-            <article className="flex w-full flex-col">
+            <article
+              data-testid="onchain-balance"
+              className="flex w-full flex-col"
+            >
               <Headline as="h5" align="left">
                 <LinkIcon className="mr-1 inline h-5 w-5 rotate-45 transform align-bottom" />
                 <span className="inline align-bottom text-sm">
@@ -109,7 +115,10 @@ export const WalletCard: FC<Props> = ({
                 </span>
               </p>
             </article>
-            <article className="flex w-full flex-col">
+            <article
+              data-testid="lightning-balance"
+              className="flex w-full flex-col"
+            >
               <Headline as="h5" align="left">
                 <BoltIcon className="mr-1 inline h-5 w-5 align-bottom" />
                 <span className="inline align-bottom text-sm">
@@ -123,7 +132,10 @@ export const WalletCard: FC<Props> = ({
             <BitcoinCircleIcon className="absolute -bottom-9 -right-9 h-32 w-32 opacity-30" />
           </div>
         </section>
-        <section className="grid grid-cols-2 justify-around gap-4 p-2">
+        <section
+          data-testid="wallet-actions"
+          className="grid grid-cols-2 justify-around gap-4 p-2"
+        >
           <Button
             onPress={onReceive}
             startContent={<ArrowDownTrayIcon className="h-6 w-6" />}
