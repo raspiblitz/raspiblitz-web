@@ -20,7 +20,7 @@ const DebugLogBox: FC = () => {
         isLoading: true,
       });
       const resp = await instance.get("/system/get-debug-logs-raw");
-      const data = await resp.data.raw_data;
+      const data = await resp.data;
 
       // Download file
       const blob = new Blob([data], { type: "text/plain" });

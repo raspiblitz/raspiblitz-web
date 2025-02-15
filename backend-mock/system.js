@@ -1,5 +1,5 @@
 const express = require("express");
-const fs = require("fs");
+const fs = require("node:fs");
 const router = express.Router();
 require("dotenv").config();
 
@@ -28,8 +28,8 @@ router.post("/refresh-token", (req, res) => {
   if (!req.headers.authorization) {
     return res.status(401).send(
       JSON.stringify({
-        detail: "Not authenticated",
-      }),
+        detail: "Not authenticated"
+      })
     );
   }
   const access_token = auth.signToken();
@@ -52,8 +52,8 @@ router.post("/shutdown", (req, res) => {
 
 router.get("/get-debug-logs-raw", (req, res) => {
   console.info(`call to ${req.originalUrl}`);
-  const logs = fs.readFileSync("debuglog.txt");
-  res.status(200).send(logs.toString());
+  const logs = fs.readFileSync("debuglog.txt", { encoding: "utf-8" });
+  res.status(200).send(logs);
 });
 
 router.get("/connection-info", (req, res) => {
@@ -74,7 +74,7 @@ router.get("/connection-info", (req, res) => {
       "lndconnect://7hyube57cxcd47lcgrihujaevtsqlgd5ga34l637rgsyvd32x6.onion:8080?macaroon=AgEDbG5kAvgBAwoQubxXRuD1L0Qb4r87daHB7BIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaIQoIbWFjYXJvb24SCGdlbmVyYXRlEgRyZWFkEgV3cml0ZRoWCgdtZXNzYWdlEgRyZWFkEgV3cml0ZRoXCghvZmZjaGFgoHb25jaGFpbhIEcmVhZBIFd3JpdGUaFAoFcGVlcnMSBHJlYWQSBXdyaXRlGhgKBnNpZ25lchIIZ2VuZXJhdGUSBHJlYWQAAAYg0JENEUVinuZ2_WNIBJJuRB6Mcw-SrgwQ5XMu4g621t4&cert=MIICCjCCAbCgAwIBAgIQVPRBsMUoM7D52cEtv-fqijAKBggqhkjOPQQDAjA1MR8wHQYDVQQKExZsbmQgYXV0b2dlbmVyYXRlZCBjZXJ0MRIwEAYDVQQDEwlsb2NhbGhvc3QwHhcNMjEwODI3MTk0MzQwWhcNMjIxMDIyMTk0MzQwWjA1MR8wHQYDVQQKExZsbmQgYXV0b2dlbmVyYXRlZCBjZXJ0MRIwEAYDVQQDEwlsb2NhbGhvc3QwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ-JBVL664HLX4oOxH_SLpZaXD70X1GEBoBSAI_1w7-5McXUiOnUERy0ARFA0N6m5NKfkP-4a0XnyVo4GhMIGeMwICpDATBgNVHSUEDDAKBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH_MB0GA1UdDgQWBBQ9FhnK1QrVpVp4NhtjJf25gXBbhzBHBgNVHREEQDA-gglsb2NhbGhvc3SCBHVuaXiCCnVuaXhwYWNrZXSCB2J1ZmNvbm6HBH8AAAGHEAAAAAAAAAAAAAAAAAAAAAEwCgYIKoZIzj0EAwIDSAAwRQIhAJrm3xdxPLstD8_FkaUJhSHF7Sutz-4GvRJQ_czHv2h6AiA86wbwGx_LbJPtqcBGnw69blsPzfFIo",
     cl_rest_zeus_connection_string: "",
     cl_rest_macaroon: "",
-    cl_rest_onion: "",
+    cl_rest_onion: ""
   };
   res.status(200).send(lndInfo);
 });
