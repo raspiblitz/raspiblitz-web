@@ -58,6 +58,7 @@
     "@vitest/coverage-v8": "^3.0.5",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.2",
+    "eventsource": "^3.0.5",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "jsdom": "^26.0.0",
