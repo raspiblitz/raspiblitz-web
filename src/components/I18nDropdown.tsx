@@ -29,11 +29,7 @@ const I18nSelect: FC = () => {
       }}
     >
       {langs.map((lang) => {
-        return (
-          <SelectItem key={lang} value={lang}>
-            {t(`language.${lang}`)}
-          </SelectItem>
-        );
+        return <SelectItem key={lang}>{t(`language.${lang}`)}</SelectItem>;
       })}
     </Select>
   );
