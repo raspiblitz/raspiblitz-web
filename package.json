@@ -41,7 +41,7 @@
     "react-hook-form": "^7.54.2",
     "react-i18next": "^15.4.1",
     "react-router": "^7.2.0",
-    "react-toastify": "^11.0.3",
+    "react-toastify": "^11.0.5",
     "react-tooltip": "^5.28.0",
     "tailwind-merge": "^2.6.0"
   },
@@ -62,7 +62,7 @@
     "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "lint-staged": "^15.4.3",
-    "msw": "^2.7.1",
+    "msw": "^2.7.3",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.7.3",
