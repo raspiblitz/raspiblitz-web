@@ -20,12 +20,30 @@ Big thanks to our translators, which you can find in this [README](src/i18n/READ
 
 - [Node.js](https://nodejs.org/en/download/)
 - [asdf](https://asdf-vm.com/) is supported but not required.
+- [Nix](https://nixos.org/download.html) with [Flakes](https://nixos.wiki/wiki/Flakes) enabled (optional, for devenv.sh or NixOS builds)
 
 #### Update npm dependencies
 
 ```sh
 npm update
 ```
+
+### Development with devenv.sh
+
+This project supports [devenv.sh](https://devenv.sh/), a developer environment tool built on Nix.
+
+#### Setup
+
+1. Install devenv.sh by following the instructions at https://devenv.sh/getting-started/
+2. Run `devenv shell` to enter the development environment
+3. Devenv will install the npm dependencies automatically when entering the shell. To change this behaviour, change `javascript.npm.install.enable = true;` to `false` and run `npm install` after entering the shell.
+
+#### Benefits of using devenv.sh
+
+- Consistent development environment across all contributors
+- Automatically installs the correct version of Node.js and other dependencies
+- Includes development tools like TypeScript, ESLint, and Nix utilities
+- Works on any platform that supports Nix (Linux, macOS, WSL)
 
 ### Dev workflow
 
