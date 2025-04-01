@@ -1,14 +1,40 @@
+export interface AppStatusQueryResponse {
+  // successful queries
+  data: AppStatus[];
+  // failed queries
+  errors: AppQueryError[];
+  // unix timestamp (UTC) when the data was fetched
+  timestamp: number;
+}
+
 export interface AppStatus {
-  id: string;
+  id: AppId;
   installed: boolean;
   address?: string;
-  httpsForced?: "0" | "1";
-  httpsSelfsigned?: "0" | "1";
+  httpsForced?: boolean;
+  httpsSelfsigned?: boolean;
   hiddenService?: string;
   authMethod?: AuthMethod;
   details?: unknown;
-  error: string;
+  error?: string;
   version: string;
+}
+
+export interface AppQueryError {
+  id: AppId;
+  error: string;
+}
+
+export enum AppId {
+  ALBYHUB = "albyhub",
+  BTCPAYSERVER = "btcpayserver",
+  BTC_RPC_EXPLORER = "btc-rpc-explorer",
+  ELECTRS = "electrs",
+  JAM = "jam",
+  LNBITS = "lnbits",
+  MEMPOOL = "mempool",
+  RTL = "rtl",
+  THUNDERHUB = "thunderhub",
 }
 
 export enum AuthMethod {

@@ -11,6 +11,7 @@
 # production
 /build
 dist
+/result
 
 # misc
 .env
@@ -35,3 +36,6 @@ yarn-error.log*
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# devenv
+.devenv*

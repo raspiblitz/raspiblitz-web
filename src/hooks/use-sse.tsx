@@ -1,6 +1,6 @@
 import { AppContext } from "@/context/app-context";
 import { SSEContext, SSE_URL } from "@/context/sse-context";
-import type { AppStatus } from "@/models/app-status";
+import type { AppStatus, AppStatusQueryResponse } from "@/models/app-status";
 import type { App } from "@/models/app.model";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
@@ -84,18 +84,21 @@ function useSSE() {
     };
 
     const setAppStatus = (event: MessageEvent<string>) => {
-      sseCtx.setAppStatus((prev: AppStatus[]) => {
-        const status: AppStatus[] = JSON.parse(event.data);
-        if (prev.length === 0) {
+      sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
+        const status: AppStatusQueryResponse = JSON.parse(event.data);
+        if (prev === undefined || prev.data.length === 0) {
           return status;
           // biome-ignore lint/style/noUselessElse: <explanation>
         } else {
-          const currentIds = status.map((item) => item.id);
+          const currentIds = status.data.map((item) => item.id);
 
           // remove items which get updated and concat arrays
-          return prev
+          prev.data = prev.data
             .filter((item) => !currentIds.includes(item.id))
-            .concat(status);
+            .concat(status.data);
+          prev.errors = status.errors;
+          prev.timestamp = status.timestamp;
+          return prev;
         }
       });
     };
@@ -203,6 +206,18 @@ function useSSE() {
       });
     };
 
+    const appStateUpdating = (_event: MessageEvent<string>) => {
+      // Notify the UI that the app state is updating
+      const customEvent = new Event("app_state_updating");
+      window.dispatchEvent(customEvent);
+    };
+
+    const appStateUpdateSuccess = (_event: MessageEvent<string>) => {
+      // Notify the UI that the app state was updated successfully
+      const customEvent = new Event("app_state_updating_success");
+      window.dispatchEvent(customEvent);
+    };
+
     const eventErrorHandler = (_event: Event) => {
       appCtx.logout();
     };
@@ -219,6 +234,11 @@ function useSSE() {
       evtSource.addEventListener("install", setInstall);
       evtSource.addEventListener("hardware_info", setHardwareInfo);
       evtSource.addEventListener("system_startup_info", setSystemStartupInfo);
+      evtSource.addEventListener("app_state_updating", appStateUpdating);
+      evtSource.addEventListener(
+        "app_state_updating_success",
+        appStateUpdateSuccess,
+      );
     }
 
     return () => {
@@ -237,6 +257,11 @@ function useSSE() {
         evtSource.removeEventListener(
           "system_startup_info",
           setSystemStartupInfo,
+        );
+        evtSource.removeEventListener("app_state_updating", appStateUpdating);
+        evtSource.removeEventListener(
+          "app_state_updating_success",
+          appStateUpdateSuccess,
         );
       }
     };

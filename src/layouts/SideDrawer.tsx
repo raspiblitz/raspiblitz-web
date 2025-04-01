@@ -59,7 +59,7 @@ export const SideDrawer: FC = () => {
           </span>
         </NavLink>
 
-        {appStatus
+        {appStatus?.data
           .filter((app) => app.installed)
           .map((app) => (
             <AppStatusItem app={app} key={app.id} />
