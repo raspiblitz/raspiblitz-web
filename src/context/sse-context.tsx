@@ -1,4 +1,4 @@
-import type { AppStatus } from "@/models/app-status";
+import type { AppStatus, AppStatusQueryResponse } from "@/models/app-status";
 import type { App } from "@/models/app.model";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
@@ -27,8 +27,8 @@ export interface SSEContextType {
   balance: WalletBalance;
   setBalance: Dispatch<SetStateAction<WalletBalance>>;
 
-  appStatus: AppStatus[];
-  setAppStatus: Dispatch<SetStateAction<AppStatus[]>>;
+  appStatus: AppStatusQueryResponse;
+  setAppStatus: Dispatch<SetStateAction<AppStatusQueryResponse>>;
   availableApps: App[];
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
@@ -54,7 +54,7 @@ export const sseContextDefault: SSEContextType = {
   lnInfo: {} as LnInfo,
   setLnInfo: () => {},
   setBalance: () => {},
-  appStatus: [],
+  appStatus: { data: [], errors: [], timestamp: 0 } as AppStatusQueryResponse,
   setAppStatus: () => {},
   availableApps: [],
   setAvailableApps: () => {},
@@ -131,7 +131,11 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
     channel_unsettled_local_balance: null,
     channel_unsettled_remote_balance: null,
   });
-  const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
+  const [appStatus, setAppStatus] = useState<AppStatusQueryResponse>({
+    data: [],
+    errors: [],
+    age: 0,
+  });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>

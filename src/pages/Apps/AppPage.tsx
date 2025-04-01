@@ -13,7 +13,7 @@ export const AppInfo: FC = () => {
   // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const { customComponent } = availableApps[appId!];
 
-  const app = appStatus.find((app) => app.id === appId);
+  const app = appStatus.data.find((app) => app.id === appId);
 
   useEffect(() => {
     setIsLoading(true);

@@ -27,6 +27,7 @@
   packages = [
     pkgs.typescript
     pkgs.eslint_d
+    pkgs.biome
     pkgs.vscode-js-debug
     pkgs.statix
     pkgs.alejandra
