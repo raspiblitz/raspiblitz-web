@@ -56,7 +56,7 @@ const Electrs = () => {
 
   const { TORaddress, portSSL, localIP, version, initialSyncDone } = appData;
 
-  if (appStatus.find((app) => app.id === "electrs")?.installed === false) {
+  if (appStatus.data.find((app) => app.id === "electrs")?.installed === false) {
     navigate("/apps");
     return null;
   }
