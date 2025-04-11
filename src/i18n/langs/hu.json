@@ -194,7 +194,7 @@
       "vi": "vietnámi"
     },
     "login": {
-      "enter_pass": "írd be az A jelszót",
+      "enter_pass": "Add meg az A jelszót",
       "enter_pass_placeholder": "Jelszó A",
       "error": "Hiba történt",
       "invalid_pass": "Helytelen jelszó",
@@ -215,7 +215,7 @@
     "settings": {
       "cancel": "Mégsem",
       "change": "Váltópénz",
-      "change_pw_a": Jelszó A módosítása",
+      "change_pw_a": "Jelszó A módosítása",
       "confirm": "Megerősítés",
       "curr_lang": "Jelenlegi nyelv",
       "language": "Nyelv",
