@@ -23,7 +23,7 @@
         "shortDescription": "Teljes funkcionalitású webes böngésző alkalmazás LND, Core Lightning és Eclair számára"
       },
       "specter": {
-        "about": "A Bitcoin Core nagyon erőteljes parancssori felülettel és csodálatos démonnal rendelkezik. A PSBT és HWI segítségével hardveres pénztárcákkal is működhet, de jelenleg túlságosan linux-szerű. Ugyanez vonatkozik a többaláírásos beállításokra is. A projekt célja egy kényelmes és felhasználóbarát GUI létrehozása a Bitcoin Core köré, különös tekintettel a hardveres pénztárcákkal és légrés-eszközökkel történő többaláírásos beállításra.",
+        "about": "A Bitcoin Core átfogó parancssori felülettel és stabil háttérfolyamattal rendelkezik. A PSBT és HWI segítségével hardveres pénztárcákkal is működhet, de jelenleg túlságosan linux-szerű. Ugyanez vonatkozik a többaláírásos beállításokra is. A Specter projekt célja egy kényelmes és felhasználóbarát GUI létrehozása a Bitcoin Core köré, különös tekintettel a hardveres pénztárcákkal és légréssel szeparált eszközökkel történő többaláírásos beállításra.",
         "shortDescription": "Asztali GUI a Bitcoin Core számára, hardveres pénztárcákkal való működésre optimalizálva"
       },
       "thunderhub": {
@@ -194,7 +194,7 @@
       "vi": "vietnámi"
     },
     "login": {
-      "enter_pass": "írd be az jelszó A-t",
+      "enter_pass": "írd be az A jelszót",
       "enter_pass_placeholder": "Jelszó A",
       "error": "Hiba történt",
       "invalid_pass": "Helytelen jelszó",
@@ -215,7 +215,7 @@
     "settings": {
       "cancel": "Mégsem",
       "change": "Váltópénz",
-      "change_pw_a": "Csomópont jelszó (A) módosítása",
+      "change_pw_a": Jelszó A módosítása",
       "confirm": "Megerősítés",
       "curr_lang": "Jelenlegi nyelv",
       "language": "Nyelv",
