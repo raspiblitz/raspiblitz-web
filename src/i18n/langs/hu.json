@@ -16,7 +16,7 @@
     },
     "home": {
       "bitcoin": "Bitcoin",
-      "blocks_synced": "Szikronizált blokkok",
+      "blocks_synced": "Szinkronizált blokkok",
       "channel": "Csatorna",
       "channel_balance": "Csatorna Egyenleg",
       "conn_details": "Kapcsolati adatok",
@@ -32,17 +32,17 @@
       "de": "német",
       "en": "angol",
       "es": "spanyol",
-      "fr": "Francia",
-      "hu": "Magyar",
+      "fr": "francia",
+      "hu": "magyar",
       "it": "olasz",
-      "nb_NO": "Norvegian",
+      "nb_NO": "norvég",
       "nl": "holland",
-      "pt_BR": "Portugál (brazil)",
+      "pt_BR": "portugál (brazil)",
       "sv": "svéd",
-      "vi": "vietnami"
+      "vi": "vietnámi"
     },
     "login": {
-      "enter_pass": "Irjd be a jelszót A",
+      "enter_pass": "írd be az jelszó A-t",
       "enter_pass_placeholder": "Jelszó A",
       "error": "Hiba történt",
       "invalid_pass": "Helytelen jelszó",
@@ -60,7 +60,7 @@
     "settings": {
       "cancel": "Mégsem",
       "change": "Váltópénz",
-      "change_pw_a": "Jelszó változtatása A",
+      "change_pw_a": "Jelszó A változtatása",
       "confirm": "Megerősítés",
       "curr_lang": "Jelenlegi nyelv",
       "language": "Nyelv",
@@ -79,8 +79,8 @@
       "included_block": "A blokkba bekerült",
       "mempool": "Megtekintés a mempool-on",
       "transactions": "Tranzakciók",
-      "tx_details": "Tranzakciós Adatok",
-      "txid": "Tranzakciós Azonosító",
+      "tx_details": "Tranzakciós adatok",
+      "txid": "Tranzakciós azonosító",
       "value": "Érték"
     },
     "wallet": {
@@ -89,7 +89,7 @@
       "balance": "Egyenleg",
       "copied": "Másolva!",
       "copy_clipboard": "Vágólapra másolás",
-      "create_invoice_ln": "Villám Számla Létrehozása",
+      "create_invoice_ln": "Lightning számla létrehozása",
       "fund": "Töltse fel a tárcáját",
       "on_chain": "Láncon",
       "receive": "Fogadás",
