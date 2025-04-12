@@ -1,48 +1,200 @@
 {
   "translation": {
+    "appInfo": {
+      "btc-rpc-explorer": {
+        "about": "Ez egy saját üzemeltetésű böngésző a Bitcoin blokklánchoz, amely az Ön saját Bitcoin csomópontjához intézett RPC-hívásokon alapul. Könnyen futtatható és más eszközökhöz (például Electrum szerverekhez) csatlakoztatható egy teljes funkcionalitású böngésző létrehozásához.",
+        "shortDescription": "Bitcoin RPC Böngésző"
+      },
+      "btcpayserver": {
+        "about": "A BTCPay Server egy ingyenes és nyílt forráskódú Bitcoin fizetésfeldolgozó, amely lehetővé teszi a bitcoin elfogadását díjak vagy közvetítők nélkül.",
+        "shortDescription": "Fogadjon el Bitcoin fizetéseket. Ingyenes, nyílt forráskódú és saját üzemeltetésű Bitcoin fizetésfeldolgozó.",
+        "ram_warning": "Rendszerében kevesebb, mint az ajánlott 8 GB RAM van a BTCPayServer RaspiBlitz-en való futtatásához. Ez instabilitáshoz vezethet, ha folytatja a telepítést."
+      },
+      "lnbits": {
+        "about": "Az LNbits egy nagyon egyszerű Python szerver, amely bármilyen finanszírozási forrásra épül, és fiókrendszerként használható az alkalmazások teljes egyenlegnek való kitettségének kockázatának csökkentésére, minden pénztárcához egyedi API-kulcsok révén.",
+        "shortDescription": "Ingyenes és nyílt forráskódú lightning-network pénztárca/fiókrendszer"
+      },
+      "mempool": {
+        "about": "Egy nyílt forráskódú böngésző, amelyet a Bitcoin közösség számára fejlesztettek, a kialakuló tranzakciós díjpiacra összpontosítva, hogy segítse átmenetünket egy többrétegű ökoszisztémába.",
+        "shortDescription": "Egy nyílt forráskódú böngésző, amelyet a Bitcoin közösség számára fejlesztettek"
+      },
+      "rtl": {
+        "about": "Az RTL egy teljes funkcionalitású, eszközfüggetlen webes felhasználói felület a Lightning csomópont műveletek kezelésére. Az RTL elérhető LND, Core Lightning és Eclair implementációkban.",
+        "shortDescription": "Teljes funkcionalitású webes böngésző alkalmazás LND, Core Lightning és Eclair számára"
+      },
+      "specter": {
+        "about": "A Bitcoin Core átfogó parancssori felülettel és stabil háttérfolyamattal rendelkezik. A PSBT és HWI segítségével hardveres pénztárcákkal is működhet, de jelenleg túlságosan linux-szerű. Ugyanez vonatkozik a többaláírásos beállításokra is. A Specter projekt célja egy kényelmes és felhasználóbarát GUI létrehozása a Bitcoin Core köré, különös tekintettel a hardveres pénztárcákkal és légréssel szeparált eszközökkel történő többaláírásos beállításra.",
+        "shortDescription": "Asztali GUI a Bitcoin Core számára, hardveres pénztárcákkal való működésre optimalizálva"
+      },
+      "thunderhub": {
+        "about": "A ThunderHub egy nyílt forráskódú LND csomópont-kezelő, amellyel bármilyen eszközön vagy böngészőben kezelheti és figyelemmel kísérheti csomópontját. Lehetővé teszi a lightning hálózat irányítását egyszerű és intuitív felhasználói élménnyel és a legfrissebb technológiai készlettel.",
+        "shortDescription": "LND Lightning csomópont-kezelő a böngészőjében"
+      },
+      "jam": {
+        "about": "A Jam egy webes felület a JoinMarket számára, amely a felhasználóbarátságra és a könnyű használatra összpontosít. Célja, hogy észszerű alapértelmezett beállításokat biztosítson és könnyen használható legyen kezdők számára, miközben rendelkezik a haladó felhasználók által elvárt funkciókkal.",
+        "shortDescription": "Jam - Webes felület a JoinMarket számára"
+      },
+      "electrs": {
+        "about": "Az Electrs az Electrum Server hatékony újraimplementálása Rust nyelven. Indexeli a teljes Bitcoin blokkláncot, és lehetővé teszi Lightning csomópontja számára, hogy lekérdezze a láncon lévő tranzakciókat.",
+        "shortDescription": "Az Electrum Server hatékony újraimplementálása Rust nyelven",
+        "initialSync": "Az index adatbázist létre kell hozni, mielőtt az Electrum Server használható lenne. Ez órákig/napokig tarthat a RaspiBlitz-étől függően. Kérjük, nézzen vissza később.",
+        "connectLocal": "Csatlakozás az Electrum Serverhez a helyi hálózaton keresztül",
+        "connectTor": "Csatlakozás az Electrum Serverhez Tor-on keresztül",
+        "connectionInfo": "Ezek a címek lehetővé teszik, hogy pénztárcáját vagy más alkalmazásokat csatlakoztasson csomópontjához az Electrs használatával. Használja a helyi kapcsolatot, ha ugyanazon a hálózaton van, mint a csomópontja, vagy a Tor címet a fokozott adatvédelemmel történő távoli hozzáféréshez.",
+        "not_available": "cím nem elérhető"
+      },
+      "albyhub": {
+        "about": "Az Alby Hub lehetővé teszi Lightning csomópontja vagy pénztárcája irányítását bármely más alkalmazásból, amely támogatja az NWC-t. Csatlakoztasson olyan alkalmazásokat, mint a Damus vagy az Amethyst a csomópontjához.",
+        "shortDescription": "Alby Hub - Az Ön saját központja az internetes pénzhez"
+      },
+      "alby": {
+        "about": "Alby böngésző bővítmény",
+        "shortDescription": "Csatlakoztassa RaspiBlitz LND csomópontját és használjon Bitcoin és Nostr alkalmazásokat az Alby bővítménnyel",
+        "action": {
+          "install": "Telepítés",
+          "addAccount": "Csatlakozás",
+          "connection_info_error": "Nem sikerült lekérni a kapcsolati információkat",
+          "connection": {
+            "hint": "Kérjük, először telepítse az Alby bővítményt",
+            "success": "A Raspiblitz fiók hozzá lett adva az Alby-hoz",
+            "error": "A Raspiblitz Alby-hoz való hozzáadása nem működött, kérjük, próbálja újra"
+          }
+        }
+      }
+    },
     "apps": {
       "about": "Részletek",
       "author": "Készítő",
       "available": "Elérhető Applikációk",
       "info": "Infó",
       "install": "Installálás",
+      "install_failure": "{{appName}} telepítése sikertelen: {{details}}",
+      "install_success": "{{appName}} sikeresen telepítve",
       "installed": "Installálva",
+      "installing": "Telepítés folyamatban",
+      "login_admin_pass_b": "Bejelentkezés 'admin' felhasználóval és B jelszóval",
+      "login_no_pass": "Bejelentkezés jelszó nélkül",
+      "login_pass_b": "Bejelentkezés B jelszóval",
+      "login_userdef": "Bejelentkezés felhasználó által meghatározott jelszóval",
       "no_page": "Nincs ilyen elérhető oldal",
       "offline": "offline",
       "online": "online",
       "open": "Megnyit",
+      "selfsigned_cert": "Ez az alkalmazás önaláírt HTTPS tanúsítványt használ",
       "source": "Forráskód",
-      "uninstall": "Eltávolítás"
+      "uninstall": "Eltávolítás",
+      "uninstall_failure": "{{appName}} eltávolítása sikertelen: {{details}}",
+      "uninstall_success": "{{appName}} sikeresen eltávolítva",
+      "uninstalling": "Eltávolítás folyamatban"
+    },
+    "forms": {
+      "hint": {
+        "invoiceAmountZero": "A számla összege nulla"
+      },
+      "validation": {
+        "amount": {
+          "required": "Kérjük, adjon meg egy összeget"
+        },
+        "chainAddress": {
+          "patternMismatch": "Helytelen cím formátum",
+          "required": "Kérjük, adjon meg egy Bitcoin címet"
+        },
+        "chainAmount": {
+          "max": "Az egyenlege túl alacsony ehhez az összeghez",
+          "required": "Kérjük, adjon meg egy összeget"
+        },
+        "chainFee": {
+          "required": "Kérjük, adjon meg egy díj összeget"
+        },
+        "lnInvoice": {
+          "expired": "A számla lejárt",
+          "max": "Az egyenlege túl alacsony a számla kifizetéséhez",
+          "patternMismatch": "Helytelen számla formátum",
+          "required": "Kérjük, adjon meg egy Lightning számlát"
+        },
+        "node_uri": {
+          "required": "Kérjük, adjon meg egy csomópont URI-t"
+        },
+        "unlock": {
+          "pass_c": "C jelszó",
+          "required": "C jelszó szükséges"
+        },
+        "login": {
+          "required": "A jelszó szükséges"
+        }
+      }
+    },
+    "hardware": {
+      "cpu_load": "CPU terhelés",
+      "disk_usage": "Felhasznált lemezterület",
+      "header": "Hardver részletek",
+      "ram_usage": "RAM használat",
+      "temp": "Hőmérséklet"
     },
     "home": {
+      "active": "Aktív",
       "bitcoin": "Bitcoin",
-      "blocks_synced": "Szikronizált blokkok",
+      "blockchain_size": "Blokklánc mérete",
+      "blocks_synced": "Szinkronizált blokkok",
+      "blocktime": "Blokk idő",
       "channel": "Csatorna",
       "channel_balance": "Csatorna Egyenleg",
+      "channel_closed": "Csatorna sikeresen lezárva",
+      "channel_id": "Csatorna azonosító",
+      "channel_opened": "Csatorna sikeresen megnyitva",
+      "close_channel": "Csatorna lezárása",
+      "confirm_channel_close": "Csatorna lezárás megerősítése",
       "conn_details": "Kapcsolati adatok",
+      "conn_in": "Bejövő",
+      "conn_out": "Kimenő",
+      "connections": "Kapcsolatok",
+      "current_open_channels": "Jelenleg nyitott csatornák",
+      "difficulty": "Nehézség",
+      "force_close": "Kényszerített lezárás",
+      "hide": "Elrejtés",
       "lightning": "Lightning",
+      "list_open_channels": "Csatorna listázása",
+      "local_balance": "Helyi csatorna egyenleg",
       "network": "Hálózat",
+      "no": "Nem",
+      "no_open_channels": "Jelenleg nincsenek nyitott csatornái",
+      "node_id": "Csomópont azonosító",
+      "node_uri": "Csomópont URI",
+      "normal": "Normál",
+      "onchain_cln_no_support": "A RaspiBlitz v1.9 előtt végrehajtott láncon lévő tranzakciók nem feltétlenül jelennek meg a Core Lightning-gal",
+      "open_channel": "Csatorna megnyitása",
+      "pending_balance_local": "Függőben lévő helyi egyenleg",
+      "pending_balance_remote": "Függőben lévő távoli egyenleg",
+      "remote_balance": "Távoli csatorna egyenleg",
+      "show": "Mutatás",
+      "show_qr": "QR kód mutatása",
+      "connect_node": "Ossza meg ezt a címet másokkal, hogy csatlakozhassanak a lightning csomópontjához",
+      "slow": "Lassú",
       "ssh": "SSH bejelentkezés",
       "status": "Státusz",
       "tor": "Tor",
-      "version": "Verzió"
+      "urgent": "Sürgős",
+      "version": "Verzió",
+      "versions": "Verziók",
+      "webui": "WebUI",
+      "not_available": "Nem elérhető"
     },
     "language": {
       "cs": "cseh",
       "de": "német",
       "en": "angol",
       "es": "spanyol",
-      "fr": "Francia",
-      "hu": "Magyar",
+      "fr": "francia",
+      "hu": "magyar",
       "it": "olasz",
-      "nb_NO": "Norvegian",
+      "nb_NO": "norvég",
       "nl": "holland",
-      "pt_BR": "Portugál (brazil)",
+      "pt_BR": "portugál (brazil)",
       "sv": "svéd",
-      "vi": "vietnami"
+      "vi": "vietnámi"
     },
     "login": {
-      "enter_pass": "Irjd be a jelszót A",
+      "enter_pass": "Add meg az A jelszót",
       "enter_pass_placeholder": "Jelszó A",
       "error": "Hiba történt",
       "invalid_pass": "Helytelen jelszó",
@@ -54,23 +206,139 @@
       "back": "Vissza",
       "dark_mode": "Sötét Mód",
       "display_sats": "Mutass Satot",
+      "display_btc": "BTC megjelenítése",
       "home": "Főmenü",
+      "logout": "Kijelentkezés",
+      "documentation": "Dokumentáció",
       "settings": "Beállítások"
     },
     "settings": {
       "cancel": "Mégsem",
       "change": "Váltópénz",
-      "change_pw_a": "Jelszó változtatása A",
+      "change_pw_a": "Jelszó A módosítása",
       "confirm": "Megerősítés",
       "curr_lang": "Jelenlegi nyelv",
       "language": "Nyelv",
       "new_pw": "Új jelszó",
       "old_pw": "Régi jelszó",
+      "pass_a_changed": "A jelszó sikeresen módosítva",
       "reboot": "Újraindítás",
-      "shutdown": "Leállítás"
+      "shutdown": "Leállítás",
+      "shutdown_confirm": "Leállítja a RaspiBlitz-et?",
+      "shutdown_info": "Amikor a leállítás befejeződik, az aktivitás jelzőfény pirosra vált, és az LCD fehérre vált.",
+      "shutdown_info_disconnect_power": "Ezután várjon 5 másodpercet, és húzza ki a tápellátást.",
+      "generate_debug": "Hibakeresési jelentés létrehozása",
+      "generate": "Létrehozás",
+      "generating": "Létrehozás folyamatban",
+      "generating_debug_report": "Hibakeresési jelentés létrehozása. Ez eltarthat egy ideig.",
+      "debug_report_done": "Hibakeresési jelentés létrehozva!"
+    },
+    "setup": {
+      "step": {
+        "step": "Lépés",
+        "step_1_description": "Meghajtó előkészítése",
+        "step_2_description": "Csomópont neve",
+        "step_3_description": "Csomópont típusa",
+        "step_4_description": "Jelszavak beállítása"
+      },
+      "setupmenu": {
+        "lets_setup": "Állítsuk be a RaspiBlitz-et",
+        "setup_time": "A teljes beállítási folyamat körülbelül 20 percet vesz igénybe"
+      },
+      "format": {
+        "delete_drive": "Szeretné folytatni a meghajtón lévő összes adat törlését?",
+        "warn": "Kérjük, készítsen biztonsági másolatot minden fontos adatról, mivel ez törölni fogja a meghajtót!",
+        "keep_blockchain": "Blokklánc adatok megtartása",
+        "delete_confirm": "Igen, töröljön minden adatot"
+      },
+      "input_node": {
+        "header": "Hogyan nevezzük el a csomópontját?",
+        "err_only_chars": "A csomópont neve csak karaktereket és számokat tartalmazhat.",
+        "err_max_length": "A csomópont neve legfeljebb 32 karakter hosszú lehet.",
+        "err_min_length": "A csomópont nevének legalább 4 karakter hosszúnak kell lennie.",
+        "err_empty": "A csomópont neve nem lehet üres.",
+        "label": "Csomópont neve"
+      },
+      "blockchain_delete": "Blokklánc törlése",
+      "blockchain_found_long": "A HDD/SSD-n meglévő blokklánc adatokat találtunk.",
+      "blockchain_found_short": "Blokklánc található a HDD/SSD-n",
+      "blockchain_keep": "Blokklánc megtartása",
+      "cancel": "Mégsem",
+      "cancel_setup": "Biztos benne, hogy meg akarja szakítani a telepítési folyamatot",
+      "cl": "Bitcoin teljes csomópont Core Lightning implementációval",
+      "cl_description": "A Core Lightning (korábban c-lightning) a Blockstream által készített Lightning Network implementáció, amely a teljesítményre és a fejlesztők és haladó felhasználók számára történő bővíthetőségre összpontosít.",
+      "continue": "Folytatás",
+      "convertwarning": "A RaspiBlitz jelenleg csak a Blokklánc és Lightning adatait (pénzeszközök + csatornák) tudja konvertálni. A további telepített alkalmazások adatai törlődhetnek a migrációs folyamat során.",
+      "done_migration_ready": "OK. Minden kész a RaspiBlitz-re történő migráláshoz.",
+      "done_migration_start": "Migráció indítása",
+      "done_recover_ready": "OK. Minden kész a RaspiBlitz helyreállításához.",
+      "done_recover_start": "Helyreállítás indítása",
+      "done_setup_ready": "OK. Minden kész a RaspiBlitz beállításához.",
+      "done_setup_start": "Beállítás indítása",
+      "done_update_ready": "OK. Minden kész a RaspiBlitz frissítéséhez.",
+      "done_update_start": "Frissítés indítása",
+      "final_do_reboot": "OK, végső újraindítás",
+      "final_info_reboot": "Leírtam a seed szavaimat és azok helyes sorrendjét",
+      "final_migration": "A migráció befejeződött.",
+      "final_recovery": "A helyreállítás befejeződött.",
+      "final_seedwords": "Kérjük, írja le a seed szavait. Ezek felhasználhatók a lightning pénztárcája helyreállításához. A megjelenésük sorrendje számít. Soha ne ossza meg a seed szavait senkivel, és tartsa őket biztonságban!",
+      "final_setup": "Konfiguráció befejezve!",
+      "final_update": "A frissítés befejeződött.",
+      "lightningoutdated": "A migrálni kívánt csomópont újabb Lightning verziót használ, mint ez a RaspiBlitz. Kérjük, várjon egy frissített kiadásra. Leállíthatja és elindíthatja a régi csomópont sd kártyájával - nem történtek változtatások.",
+      "lnd": "Bitcoin teljes csomópont Lightning LND implementációval",
+      "lnd_description": "A Lightning Labs által fejlesztett Lightning Network Daemon (LND) hozzáadása egy Bitcoin teljes csomóponthoz gyorsabb és olcsóbb tranzakciók lehetőségét vezeti be. Az LND a Lightning Network egyik legnépszerűbb és legfelhasználóbarátabb implementációja.",
+      "migrate_to_os": "Szeretné migrálni {{os}}-ről RaspiBlitz-re?",
+      "migrateblitz": "Migrálás",
+      "no_and_shutdown": "Nem és leállítás",
+      "ok": "OK",
+      "other_options": "Egyéb lehetőségek",
+      "password_a_details": "Más néven <0>A jelszó</0>. Használja ezt a jelszót a RaspiBlitz-be való bejelentkezéshez.",
+      "password_a_name": "Csomópont jelszó",
+      "password_a_short": "Állítsa be a <0>Csomópont</0> jelszót",
+      "password_b_details": "Más néven <0>B jelszó</0>. Néhány alkalmazás telepítéséhez jelszó szükséges.",
+      "password_b_name": "Alkalmazások jelszó",
+      "password_b_short": "Állítsa be az <0>Alkalmazások</0> jelszót",
+      "password_c_details": "Más néven <0>C jelszó</0>. Ezt használja a lightning vagy bitcoin pénztárcájához való hozzáféréshez.",
+      "password_c_name": "Pénztárca jelszó",
+      "password_c_short": "Állítsa be a <0>Pénztárca</0> jelszót",
+      "password_error_chars": "A jelszó csak karaktereket és számokat tartalmazhat.",
+      "password_error_empty": "A jelszó nem lehet üres.",
+      "password_error_length": "A jelszónak legalább 8 karakter hosszúnak kell lennie.",
+      "password_error_match": "A jelszavak nem egyeznek.",
+      "password_repeat": "Ismétlés",
+      "pleasewait": "Kérjük, várjon",
+      "preparingsetup": "Beállítás előkészítése",
+      "recoverblitz": "Helyreállítás",
+      "restartinfo": "Kérjük, várjon, amíg a RaspiBlitz újra válaszol",
+      "restarting": "Újraindítás",
+      "restarts": "Újraindítások",
+      "runningsetup": "Beállítás futtatása",
+      "none": "Bitcoin teljes csomópont Lightning nélkül",
+      "none_description": "Egy Bitcoin teljes csomópont Lightning Network implementáció nélküli futtatása közvetlen részvételt jelent a Bitcoin hálózatban a tranzakciók és blokkok validálásával.",
+      "select_lightning": "Melyik lightning implementációt szeretné telepíteni",
+      "select_lightning_help": "Mi a különbség? <0>Tudjon meg többet</0> minden egyes implementációról.",
+      "setupblitz": "Új telepítés",
+      "setupoptions": "Beállítási lehetőségek",
+      "setupwait": "A beállítás néhány percet vesz igénybe",
+      "shuttingdown": "Leállítás",
+      "start_recovery": "Szeretné elindítani a helyreállítási folyamatot?",
+      "start_update": "Szeretné elindítani a frissítési és helyreállítási folyamatot?",
+      "started": "elindult",
+      "not_started": "nem indult el",
+      "sync_bitcoin_starting": "Szinkronizálás indítása",
+      "sync_bitcoin_sync": "Szinkronizálási folyamat",
+      "sync_headline": "Kezdeti szinkronizálás folyamatban",
+      "sync_restartinfo": "(a szinkronizálás folytatódik a következő újraindításkor)",
+      "sync_wallet_info": "Kérjük, oldja fel a Lightning pénztárcáját (C jelszó):",
+      "sync_wallet_unlock": "Pénztárca feloldása",
+      "updateblitz": "Frissítés",
+      "yes": "Igen",
+      "yes_and_migrate": "Migrálás a RaspiBlitz-re"
     },
     "tx": {
       "comment": "Megjegyzés",
+      "comment_placeholder": "Opcionális megjegyzés",
+      "confirm_info": "Kérjük, erősítse meg a következő tranzakciót",
       "confirmations": "Konfirmációk",
       "date": "Dátum",
       "description": "Leírás",
@@ -78,24 +346,47 @@
       "fee_rate": "Díj ráta",
       "included_block": "A blokkba bekerült",
       "mempool": "Megtekintés a mempool-on",
+      "sent": "Tranzakció elküldve!",
+      "spend_all": "Költse el az összes láncon lévő pénzeszközt",
+      "all_onchain": "Minden láncon lévő pénzeszköz",
       "transactions": "Tranzakciók",
-      "tx_details": "Tranzakciós Adatok",
-      "txid": "Tranzakciós Azonosító",
+      "transactions_none": "Még nincsenek tranzakciók, ideje az elsőt létrehozni",
+      "tx_details": "Tranzakciós adatok",
+      "txid": "Tranzakciós azonosító",
+      "unconfirmed": "Megerősítetlen",
       "value": "Érték"
     },
     "wallet": {
       "address": "Cím",
       "amount": "Összeg",
       "balance": "Egyenleg",
+      "available_balance": "Elérhető egyenleg",
+      "confirm": "Megerősítés",
       "copied": "Másolva!",
       "copy_clipboard": "Vágólapra másolás",
-      "create_invoice_ln": "Villám Számla Létrehozása",
+      "create_invoice": "Számla létrehozása",
+      "create_invoice_ln": "Lightning számla létrehozása",
       "fund": "Töltse fel a tárcáját",
+      "invoice": "Számla",
       "on_chain": "Láncon",
       "receive": "Fogadás",
+      "receive_aria_options": "Fogadási lehetőségek Lightning vagy Láncon",
       "refresh": "Cím frissítése",
       "scan_qr": "Szkennelje be ezt a QR kódot, vagy másolja ki a fizetési címet hogy pénzt fogadhasson",
-      "send": "Küldés"
+      "send": "Küldés",
+      "send_lightning": "Pénz küldése Lightning-on keresztül",
+      "send_onchain": "Pénz küldése Láncon",
+      "unlock": "Feloldás",
+      "unlock_subtitle": "Oldja fel a Lightning pénztárcáját",
+      "unlock_success": "Lightning pénztárca feloldva",
+      "unlock_title": "Pénztárca feloldása",
+      "unlocking": "Feloldás folyamatban",
+      "wallet_locked": "Lightning pénztárca zárolva",
+      "wallet_unlock_info": "A Lightning csomópont további szinkronizálási idejének elkerülése érdekében kérjük, oldja fel a Lightning pénztárcáját is."
+    },
+    "error": {
+      "stack": "Stack nyomkövetés",
+      "report": "Kérjük, jelentse ezt a hibát a következő címen"
     }
   }
 }
