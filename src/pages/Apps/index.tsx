@@ -1,3 +1,4 @@
+import InstallationStatusCard from "@/components/installation/InstallationStatusCard";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import type { AppStatus } from "@/models/app-status";
@@ -14,7 +15,7 @@ import AppStatusRefresh from "./AppStatusRefresh";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { lnInfo, appStatus } = useContext(SSEContext);
+  const { lnInfo, appStatus, installationStatus } = useContext(SSEContext);
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
@@ -92,6 +93,24 @@ export const Apps: FC = () => {
     });
   };
 
+  // Get active installations
+  const activeInstalls = Object.entries(installationStatus)
+    .filter(([_, status]) => status.inProgress)
+    .map(([id, _]) => id);
+
+  // Get recent completed installations (last 10 minutes)
+  const recentCompletions = Object.entries(installationStatus)
+    .filter(([_, status]) => {
+      if (status.inProgress) return false;
+
+      const latestMessage = status.messages[status.messages.length - 1];
+      const timestamp = latestMessage?.timestamp || 0;
+      const tenMinutesAgo = Date.now() - 10 * 60 * 1000;
+
+      return timestamp > tenMinutesAgo;
+    })
+    .map(([id, _]) => id);
+
   // in case no App data received yet => show loading screen
   if (appStatus.data.length === 0) {
     return <PageLoadingScreen />;
@@ -101,6 +120,34 @@ export const Apps: FC = () => {
     <main className="content-container page-container bg-gray-700 p-5 text-white transition-colors lg:pb-8 lg:pr-8 lg:pt-8">
       <>
         <AppStatusRefresh />
+
+        {/* Active Installations */}
+        {activeInstalls.length > 0 && (
+          <section className="mb-6">
+            <h2 className="text-xl font-semibold mb-4">
+              {t("apps.active_installations")}
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {activeInstalls.map((appId) => (
+                <InstallationStatusCard key={appId} appId={appId} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Recent Completions */}
+        {recentCompletions.length > 0 && (
+          <section className="mb-6">
+            <h2 className="text-xl font-semibold mb-4">
+              {t("apps.recent_completions")}
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {recentCompletions.map((appId) => (
+                <InstallationStatusCard key={appId} appId={appId} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <AppList
           apps={installedApps}

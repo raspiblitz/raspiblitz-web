@@ -2,6 +2,7 @@ import type { AppStatus, AppStatusQueryResponse } from "@/models/app-status";
 import type { App } from "@/models/app.model";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
+import type { InstallationStatus } from "@/models/installation-status";
 import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
@@ -41,6 +42,8 @@ export interface SSEContextType {
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
   systemStartupInfo: SystemStartupInfo | null;
   setSystemStartupInfo: Dispatch<SetStateAction<SystemStartupInfo | null>>;
+  installationStatus: InstallationStatus;
+  setInstallationStatus: Dispatch<SetStateAction<InstallationStatus>>;
 }
 
 export const sseContextDefault: SSEContextType = {
@@ -66,6 +69,8 @@ export const sseContextDefault: SSEContextType = {
   setHardwareInfo: () => {},
   systemStartupInfo: {} as SystemStartupInfo,
   setSystemStartupInfo: () => {},
+  installationStatus: {},
+  setInstallationStatus: () => {},
 };
 
 export const SSEContext = createContext<SSEContextType>(sseContextDefault);
@@ -143,6 +148,8 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] =
     useState<SystemStartupInfo | null>(null);
+  const [installationStatus, setInstallationStatus] =
+    useState<InstallationStatus>({});
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -167,6 +174,8 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
     setHardwareInfo,
     systemStartupInfo,
     setSystemStartupInfo,
+    installationStatus,
+    setInstallationStatus,
   };
 
   return (

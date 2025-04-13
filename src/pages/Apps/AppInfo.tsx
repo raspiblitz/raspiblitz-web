@@ -65,7 +65,7 @@ export const AppInfo: FC = () => {
 
   const uninstallHandler = useCallback(() => {
     instance
-      .post(`apps/uninstall/${appId}`, { keepData: true })
+      .post("apps/uninstall", { app_id: appId, keep_data: true })
       .catch((err) => {
         toast.error(checkError(err));
       });

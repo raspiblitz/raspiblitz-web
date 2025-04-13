@@ -86,6 +86,14 @@
       "uninstall_failure": "Uninstall of {{appName}} failed: {{details}}",
       "uninstall_success": "Successfully uninstalled {{appName}}",
       "uninstalling": "Uninstalling",
+      "active_installations": "Active Processes",
+      "recent_completions": "Recent Completions",
+      "installation_log": "Installation Log",
+      "view_full_log": "View Full Log",
+      "no_messages": "No messages yet",
+      "error": "Error",
+      "failed": "Failed",
+      "completed": "Completed",
       "data_age": "Data age",
       "age_just_now": "just now",
       "age_less_than_minute": "<1 minute",
@@ -403,6 +411,9 @@
       "unlocking": "Unlocking",
       "wallet_locked": "Lightning wallet locked",
       "wallet_unlock_info": "To prevent additional sync time for your Lightning node, please also unlock your Lightning wallet."
+    },
+    "common": {
+      "close": "Close"
     },
     "error": {
       "stack": "Stack trace",
