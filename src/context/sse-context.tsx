@@ -139,7 +139,7 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [appStatus, setAppStatus] = useState<AppStatusQueryResponse>({
     data: [],
     errors: [],
-    age: 0,
+    timestamp: 0,
   });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);

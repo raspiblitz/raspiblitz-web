@@ -1,6 +1,9 @@
 import { AppContext } from "@/context/app-context";
 import { SSEContext, SSE_URL } from "@/context/sse-context";
-import type { AppStatusQueryResponse } from "@/models/app-status";
+import type {
+  AppStateUpdateMessage,
+  AppStatusQueryResponse,
+} from "@/models/app-status";
 import type { App } from "@/models/app.model";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
@@ -81,73 +84,14 @@ function useSSE() {
         sseCtx.setAvailableApps((prev: App[]) => {
           if (prev.length === 0) {
             return apps;
-            // biome-ignore lint/style/noUselessElse: <explanation>
-          } else {
-            return prev.map(
-              (old: App) =>
-                apps.find((newApp: App) => old.id === newApp.id) || old,
-            );
           }
+          return prev.map(
+            (old: App) =>
+              apps.find((newApp: App) => old.id === newApp.id) || old,
+          );
         });
       } catch (error) {
         console.error("Error processing apps data:", error);
-      }
-    };
-
-    const setAppStatus = (event: MessageEvent<string>) => {
-      try {
-        sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
-          try {
-            const status = JSON.parse(event.data);
-
-            // Verify status has the expected properties
-            if (!status || typeof status !== "object") {
-              console.error("Invalid app status data format:", status);
-              return prev;
-            }
-
-            // Ensure status.data is an array
-            if (!Array.isArray(status.data)) {
-              status.data = [];
-            }
-
-            // Ensure status.errors is an array
-            if (!Array.isArray(status.errors)) {
-              status.errors = [];
-            }
-
-            // Set timestamp if not present
-            if (typeof status.timestamp !== "number") {
-              status.timestamp = Date.now();
-            }
-
-            // If previous state is empty, just return the new status
-            if (!prev || !prev.data || prev.data.length === 0) {
-              return status;
-              // biome-ignore lint/style/noUselessElse: <explanation>
-            } else {
-              // Get IDs from new data to update
-              const currentIds = status.data.map((item) => item.id);
-
-              // Get existing data that's not being updated
-              const existingData = prev.data.filter(
-                (item) => !currentIds.includes(item.id),
-              );
-
-              // Merge the arrays
-              return {
-                data: [...existingData, ...status.data],
-                errors: status.errors,
-                timestamp: status.timestamp,
-              };
-            }
-          } catch (parseError) {
-            console.error("Error processing app status data:", parseError);
-            return prev;
-          }
-        });
-      } catch (error) {
-        console.error("Error in setAppStatus handler:", error);
       }
     };
 
@@ -401,16 +345,69 @@ function useSSE() {
       }
     };
 
-    const appStateUpdating = (_event: MessageEvent<string>) => {
-      // Notify the UI that the app state is updating
-      const customEvent = new Event("app_state_updating");
-      window.dispatchEvent(customEvent);
-    };
+    const handleAppStateUpdateMessage = (event: MessageEvent<string>) => {
+      try {
+        const data = JSON.parse(event.data) as AppStateUpdateMessage;
+        const { state, message } = data;
 
-    const appStateUpdateSuccess = (_event: MessageEvent<string>) => {
-      // Notify the UI that the app state was updated successfully
-      const customEvent = new Event("app_state_updating_success");
-      window.dispatchEvent(customEvent);
+        if (!state) {
+          console.error("Invalid app_state_update_message format:", data);
+          return;
+        }
+
+        // Handle different states
+        if (state === "initiated") {
+          // Notify UI that app state updating has started
+          const customEvent = new Event("app_state_updating");
+          window.dispatchEvent(customEvent);
+        } else if (state === "success" && message) {
+          // message is already a parsed object, no need to JSON.parse it again
+          try {
+            // Update app status with the new data
+            sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
+              // Ensure data properties are arrays
+              const status = {
+                data: Array.isArray(message.data) ? message.data : [],
+                errors: Array.isArray(message.errors) ? message.errors : [],
+                timestamp:
+                  typeof message.timestamp === "number"
+                    ? message.timestamp
+                    : Date.now(),
+              };
+
+              // If previous state is empty, just return the new status
+              if (!prev || !prev.data || prev.data.length === 0) {
+                return status;
+              }
+              // Get IDs from new data to update
+              const currentIds = status.data.map((item) => item.id);
+
+              // Get existing data that's not being updated
+              const existingData = prev.data.filter(
+                (item) => !currentIds.includes(item.id),
+              );
+
+              // Merge the arrays
+              return {
+                data: [...existingData, ...status.data],
+                errors: status.errors,
+                timestamp: status.timestamp,
+              };
+            });
+          } catch (error) {
+            console.error(
+              "Error processing app state update message data:",
+              error,
+            );
+          }
+        } else if (state === "finished") {
+          // Notify UI that app state updating has completed
+          const customEvent = new Event("app_state_updating_success");
+          window.dispatchEvent(customEvent);
+        }
+      } catch (error) {
+        console.error("Error parsing app_state_update_message:", error);
+      }
     };
 
     const eventErrorHandler = (_event: Event) => {
@@ -424,16 +421,14 @@ function useSSE() {
       evtSource.addEventListener("ln_info", setLnInfo);
       evtSource.addEventListener("wallet_balance", setBalance);
       evtSource.addEventListener("transactions", setTx);
-      evtSource.addEventListener("installed_app_status", setAppStatus);
       evtSource.addEventListener("app_manage_message", handleManageAppMessage);
       evtSource.addEventListener("apps", setApps);
       evtSource.addEventListener("install", setInstall);
       evtSource.addEventListener("hardware_info", setHardwareInfo);
       evtSource.addEventListener("system_startup_info", setSystemStartupInfo);
-      evtSource.addEventListener("app_state_updating", appStateUpdating);
       evtSource.addEventListener(
-        "app_state_updating_success",
-        appStateUpdateSuccess,
+        "app_state_update_message",
+        handleAppStateUpdateMessage,
       );
     }
 
@@ -446,11 +441,10 @@ function useSSE() {
         evtSource.removeEventListener("ln_info", setLnInfo);
         evtSource.removeEventListener("wallet_balance", setBalance);
         evtSource.removeEventListener("transactions", setTx);
-        evtSource.removeEventListener("installed_app_status", setAppStatus);
         evtSource.removeEventListener(
           "app_manage_message",
           handleManageAppMessage,
-        ); // New event type
+        );
         evtSource.removeEventListener("apps", setApps);
         evtSource.removeEventListener("install", setInstall);
         evtSource.removeEventListener("hardware_info", setHardwareInfo);
@@ -458,10 +452,9 @@ function useSSE() {
           "system_startup_info",
           setSystemStartupInfo,
         );
-        evtSource.removeEventListener("app_state_updating", appStateUpdating);
         evtSource.removeEventListener(
-          "app_state_updating_success",
-          appStateUpdateSuccess,
+          "app_state_update_message",
+          handleAppStateUpdateMessage,
         );
       }
     };

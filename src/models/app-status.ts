@@ -7,6 +7,11 @@ export interface AppStatusQueryResponse {
   timestamp: number;
 }
 
+export interface AppStateUpdateMessage {
+  state: "initiated" | "success" | "finished";
+  message: AppStatusQueryResponse | null;
+}
+
 export interface AppStatus {
   id: AppId;
   installed: boolean;
