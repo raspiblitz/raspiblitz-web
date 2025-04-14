@@ -1,7 +1,8 @@
-import type { AppStatus } from "@/models/app-status";
+import type { AppStatus, AppStatusQueryResponse } from "@/models/app-status";
 import type { App } from "@/models/app.model";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
+import type { InstallationStatus } from "@/models/installation-status";
 import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
@@ -27,8 +28,8 @@ export interface SSEContextType {
   balance: WalletBalance;
   setBalance: Dispatch<SetStateAction<WalletBalance>>;
 
-  appStatus: AppStatus[];
-  setAppStatus: Dispatch<SetStateAction<AppStatus[]>>;
+  appStatus: AppStatusQueryResponse;
+  setAppStatus: Dispatch<SetStateAction<AppStatusQueryResponse>>;
   availableApps: App[];
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
@@ -41,6 +42,8 @@ export interface SSEContextType {
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
   systemStartupInfo: SystemStartupInfo | null;
   setSystemStartupInfo: Dispatch<SetStateAction<SystemStartupInfo | null>>;
+  installationStatus: InstallationStatus;
+  setInstallationStatus: Dispatch<SetStateAction<InstallationStatus>>;
 }
 
 export const sseContextDefault: SSEContextType = {
@@ -54,7 +57,7 @@ export const sseContextDefault: SSEContextType = {
   lnInfo: {} as LnInfo,
   setLnInfo: () => {},
   setBalance: () => {},
-  appStatus: [],
+  appStatus: { data: [], errors: [], timestamp: 0 } as AppStatusQueryResponse,
   setAppStatus: () => {},
   availableApps: [],
   setAvailableApps: () => {},
@@ -66,6 +69,8 @@ export const sseContextDefault: SSEContextType = {
   setHardwareInfo: () => {},
   systemStartupInfo: {} as SystemStartupInfo,
   setSystemStartupInfo: () => {},
+  installationStatus: {},
+  setInstallationStatus: () => {},
 };
 
 export const SSEContext = createContext<SSEContextType>(sseContextDefault);
@@ -131,7 +136,11 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
     channel_unsettled_local_balance: null,
     channel_unsettled_remote_balance: null,
   });
-  const [appStatus, setAppStatus] = useState<AppStatus[]>([]);
+  const [appStatus, setAppStatus] = useState<AppStatusQueryResponse>({
+    data: [],
+    errors: [],
+    timestamp: 0,
+  });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -139,6 +148,8 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] =
     useState<SystemStartupInfo | null>(null);
+  const [installationStatus, setInstallationStatus] =
+    useState<InstallationStatus>({});
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -163,6 +174,8 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
     setHardwareInfo,
     systemStartupInfo,
     setSystemStartupInfo,
+    installationStatus,
+    setInstallationStatus,
   };
 
   return (
