@@ -37,7 +37,6 @@ export interface SSEContextType {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   installingApp: any | null;
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  setInstallingApp: Dispatch<SetStateAction<any | null>>;
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
   systemStartupInfo: SystemStartupInfo | null;
@@ -64,7 +63,6 @@ export const sseContextDefault: SSEContextType = {
   transactions: [],
   setTransactions: () => {},
   installingApp: null,
-  setInstallingApp: () => {},
   hardwareInfo: {} as HardwareInfo,
   setHardwareInfo: () => {},
   systemStartupInfo: {} as SystemStartupInfo,
@@ -144,7 +142,7 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const [installingApp, setInstallingApp] = useState<any | null>(null);
+  const [installingApp] = useState<any | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] =
     useState<SystemStartupInfo | null>(null);
@@ -169,7 +167,6 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
     transactions,
     setTransactions,
     installingApp,
-    setInstallingApp,
     hardwareInfo,
     setHardwareInfo,
     systemStartupInfo,

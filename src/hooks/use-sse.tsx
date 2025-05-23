@@ -188,13 +188,11 @@ function useSSE() {
 
         if (installAppData.result === "fail") {
           appInstallErrorHandler(installAppData, appName);
-          sseCtx.setInstallingApp(null);
           return;
         }
 
         if (installAppData.result === "win") {
           appInstallSuccessHandler(installAppData, appName);
-          sseCtx.setInstallingApp(null);
           return;
         }
 
@@ -208,8 +206,6 @@ function useSSE() {
             autoClose: false,
           },
         );
-
-        sseCtx.setInstallingApp(installAppData);
       } catch (error) {
         console.error("Error processing install app data:", error);
       }
