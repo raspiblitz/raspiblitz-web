@@ -1,6 +1,9 @@
 import { AppContext } from "@/context/app-context";
 import { SSEContext, SSE_URL } from "@/context/sse-context";
-import type { AppStatus } from "@/models/app-status";
+import type {
+  AppStateUpdateMessage,
+  AppStatusQueryResponse,
+} from "@/models/app-status";
 import type { App } from "@/models/app.model";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
@@ -9,7 +12,7 @@ import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { WalletBalance } from "@/models/wallet-balance";
-import { setWindowAlias } from "@/utils";
+import { ACCESS_TOKEN, setWindowAlias } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
 import { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -69,138 +72,338 @@ function useSSE() {
     }
 
     const setApps = (event: MessageEvent<string>) => {
-      sseCtx.setAvailableApps((prev: App[]) => {
+      try {
         const apps = JSON.parse(event.data);
-        if (prev.length === 0) {
-          return apps;
-          // biome-ignore lint/style/noUselessElse: <explanation>
-        } else {
+
+        // Validate apps data
+        if (!Array.isArray(apps)) {
+          console.error("Invalid apps data format (not an array):", apps);
+          return;
+        }
+
+        sseCtx.setAvailableApps((prev: App[]) => {
+          if (prev.length === 0) {
+            return apps;
+          }
           return prev.map(
             (old: App) =>
               apps.find((newApp: App) => old.id === newApp.id) || old,
           );
-        }
-      });
+        });
+      } catch (error) {
+        console.error("Error processing apps data:", error);
+      }
     };
 
-    const setAppStatus = (event: MessageEvent<string>) => {
-      sseCtx.setAppStatus((prev: AppStatus[]) => {
-        const status: AppStatus[] = JSON.parse(event.data);
-        if (prev.length === 0) {
-          return status;
-          // biome-ignore lint/style/noUselessElse: <explanation>
-        } else {
-          const currentIds = status.map((item) => item.id);
+    const handleManageAppMessage = (event: MessageEvent<string>) => {
+      try {
+        // Parse the event data
+        const parsedData = JSON.parse(event.data);
 
-          // remove items which get updated and concat arrays
-          return prev
-            .filter((item) => !currentIds.includes(item.id))
-            .concat(status);
+        // Verify we have a valid object for installation status
+        if (!parsedData || typeof parsedData !== "object") {
+          console.error("Invalid app_manage_message data format:", parsedData);
+          return;
         }
-      });
+
+        // Extract required fields with fallbacks
+        const id = parsedData.id || "";
+        if (!id) {
+          console.error("Missing app ID in app_manage_message:", parsedData);
+          return;
+        }
+
+        const state = parsedData.state || "";
+        const error_id = parsedData.error_id || "none";
+        const mode = parsedData.mode || "";
+
+        // The message field replaces the details field in the new format
+        const details = parsedData.message || "";
+
+        // Add timestamp for sorting
+        const messageWithTimestamp = {
+          ...parsedData,
+          // Map message to details for consistency with our data model
+          details: details,
+          timestamp: Date.now(),
+        };
+
+        sseCtx.setInstallationStatus((prev) => {
+          const prevMessages = prev[id]?.messages || [];
+          const inProgress = state !== "finished";
+
+          return {
+            ...prev,
+            [id]: {
+              currentState: state,
+              messages: [...prevMessages, messageWithTimestamp],
+              inProgress,
+              errorId: error_id !== "none" ? error_id : null,
+            },
+          };
+        });
+      } catch (error) {
+        console.error("Error parsing app_manage_message data:", error);
+      }
     };
 
     const setTx = (event: MessageEvent<string>) => {
-      const t = JSON.parse(event.data);
-      sseCtx.setTransactions((prev) => {
-        // add the newest transaction to the beginning
-        return [t, ...prev];
-      });
+      try {
+        const transaction = JSON.parse(event.data);
+
+        // Validate transaction data
+        if (!transaction || typeof transaction !== "object") {
+          console.error("Invalid transaction data format:", transaction);
+          return;
+        }
+
+        sseCtx.setTransactions((prev) => {
+          // add the newest transaction to the beginning
+          return [transaction, ...prev];
+        });
+      } catch (error) {
+        console.error("Error processing transaction data:", error);
+      }
     };
 
     const setInstall = (event: MessageEvent<string>) => {
-      toast.dismiss();
-      const installAppData = JSON.parse(event.data) as InstallAppData;
-      const appName = availableApps[installAppData.id]?.name || "";
-      if (installAppData.result === "fail") {
-        appInstallErrorHandler(installAppData, appName);
-        sseCtx.setInstallingApp(null);
-        return;
+      try {
+        toast.dismiss();
+        const installAppData = JSON.parse(event.data);
+
+        // Validate installation data
+        if (!installAppData || typeof installAppData !== "object") {
+          console.error("Invalid install app data format:", installAppData);
+          return;
+        }
+
+        // Check for required ID
+        if (!installAppData.id) {
+          console.error("Missing app ID in install data:", installAppData);
+          return;
+        }
+
+        const appName =
+          availableApps[installAppData.id]?.name || installAppData.id;
+
+        if (installAppData.result === "fail") {
+          appInstallErrorHandler(installAppData, appName);
+          return;
+        }
+
+        if (installAppData.result === "win") {
+          appInstallSuccessHandler(installAppData, appName);
+          return;
+        }
+
+        const installing = installAppData.mode === "on";
+        toast(
+          installing
+            ? `${t("apps.installing")} ${appName}`
+            : `${t("apps.uninstalling")} ${appName}`,
+          {
+            isLoading: true,
+            autoClose: false,
+          },
+        );
+      } catch (error) {
+        console.error("Error processing install app data:", error);
       }
-      if (installAppData.result === "win") {
-        appInstallSuccessHandler(installAppData, appName);
-        sseCtx.setInstallingApp(null);
-        return;
-      }
-      const installing = installAppData.mode === "on";
-      toast(
-        installing
-          ? `${t("apps.installing")} ${appName}`
-          : `${t("apps.uninstalling")} ${appName}`,
-        {
-          isLoading: true,
-          autoClose: false,
-        },
-      );
-      sseCtx.setInstallingApp(installAppData);
     };
 
     const setSystemInfo = (event: MessageEvent<string>) => {
-      const message = JSON.parse(event.data);
-      if (message.alias) {
-        setWindowAlias(message.alias);
+      try {
+        const message = JSON.parse(event.data);
+
+        // Validate message data
+        if (!message || typeof message !== "object") {
+          console.error("Invalid system info data:", message);
+          return;
+        }
+
+        if (message.alias) {
+          setWindowAlias(message.alias);
+        }
+
+        sseCtx.setSystemInfo((prev: SystemInfo) => {
+          return {
+            ...prev,
+            ...message,
+          };
+        });
+      } catch (error) {
+        console.error("Error processing system info data:", error);
       }
-      sseCtx.setSystemInfo((prev: SystemInfo) => {
-        return {
-          ...prev,
-          ...message,
-        };
-      });
     };
 
     const setBtcInfo = (event: MessageEvent<string>) => {
-      sseCtx.setBtcInfo((prev: BtcInfo) => {
+      try {
         const message = JSON.parse(event.data);
 
-        return {
-          ...prev,
-          ...message,
-        };
-      });
+        // Validate message data
+        if (!message || typeof message !== "object") {
+          console.error("Invalid BTC info data:", message);
+          return;
+        }
+
+        sseCtx.setBtcInfo((prev: BtcInfo) => {
+          return {
+            ...prev,
+            ...message,
+          };
+        });
+      } catch (error) {
+        console.error("Error processing BTC info data:", error);
+      }
     };
 
     const setLnInfo = (event: MessageEvent<string>) => {
-      sseCtx.setLnInfo((prev: LnInfo) => {
+      try {
         const message = JSON.parse(event.data);
 
-        return {
-          ...prev,
-          ...message,
-        };
-      });
+        // Validate message data
+        if (!message || typeof message !== "object") {
+          console.error("Invalid LN info data:", message);
+          return;
+        }
+
+        sseCtx.setLnInfo((prev: LnInfo) => {
+          return {
+            ...prev,
+            ...message,
+          };
+        });
+      } catch (error) {
+        console.error("Error processing LN info data:", error);
+      }
     };
 
     const setBalance = (event: MessageEvent<string>) => {
-      sseCtx.setBalance((prev: WalletBalance) => {
+      try {
         const message = JSON.parse(event.data);
 
-        return {
-          ...prev,
-          ...message,
-        };
-      });
+        // Validate message data
+        if (!message || typeof message !== "object") {
+          console.error("Invalid balance data:", message);
+          return;
+        }
+
+        sseCtx.setBalance((prev: WalletBalance) => {
+          return {
+            ...prev,
+            ...message,
+          };
+        });
+      } catch (error) {
+        console.error("Error processing balance data:", error);
+      }
     };
 
     const setHardwareInfo = (event: MessageEvent<string>) => {
-      sseCtx.setHardwareInfo((prev: HardwareInfo | null) => {
+      try {
         const message = JSON.parse(event.data);
 
-        return {
-          ...prev,
-          ...message,
-        };
-      });
+        // Validate message data
+        if (!message || typeof message !== "object") {
+          console.error("Invalid hardware info data:", message);
+          return;
+        }
+
+        sseCtx.setHardwareInfo((prev: HardwareInfo | null) => {
+          return {
+            ...prev,
+            ...message,
+          };
+        });
+      } catch (error) {
+        console.error("Error processing hardware info data:", error);
+      }
     };
 
     const setSystemStartupInfo = (event: MessageEvent<string>) => {
-      sseCtx.setSystemStartupInfo((prev: SystemStartupInfo | null) => {
+      try {
         const message = JSON.parse(event.data);
 
-        return {
-          ...prev,
-          ...message,
-        };
-      });
+        // Validate message data
+        if (!message || typeof message !== "object") {
+          console.error("Invalid system startup info data:", message);
+          return;
+        }
+
+        sseCtx.setSystemStartupInfo((prev: SystemStartupInfo | null) => {
+          return {
+            ...prev,
+            ...message,
+          };
+        });
+      } catch (error) {
+        console.error("Error processing system startup info data:", error);
+      }
+    };
+
+    const handleAppStateUpdateMessage = (event: MessageEvent<string>) => {
+      try {
+        const data = JSON.parse(event.data) as AppStateUpdateMessage;
+        const { state, message } = data;
+
+        if (!state) {
+          console.error("Invalid app_state_update_message format:", data);
+          return;
+        }
+
+        // Handle different states
+        if (state === "initiated") {
+          // Notify UI that app state updating has started
+          const customEvent = new Event("app_state_updating");
+          window.dispatchEvent(customEvent);
+        } else if (state === "success" && message) {
+          // message is already a parsed object, no need to JSON.parse it again
+          try {
+            // Update app status with the new data
+            sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
+              // Ensure data properties are arrays
+              const status = {
+                data: Array.isArray(message.data) ? message.data : [],
+                errors: Array.isArray(message.errors) ? message.errors : [],
+                timestamp:
+                  typeof message.timestamp === "number"
+                    ? message.timestamp
+                    : Date.now(),
+              };
+
+              // If previous state is empty, just return the new status
+              if (!prev || !prev.data || prev.data.length === 0) {
+                return status;
+              }
+              // Get IDs from new data to update
+              const currentIds = status.data.map((item) => item.id);
+
+              // Get existing data that's not being updated
+              const existingData = prev.data.filter(
+                (item) => !currentIds.includes(item.id),
+              );
+
+              // Merge the arrays
+              return {
+                data: [...existingData, ...status.data],
+                errors: status.errors,
+                timestamp: status.timestamp,
+              };
+            });
+          } catch (error) {
+            console.error(
+              "Error processing app state update message data:",
+              error,
+            );
+          }
+        } else if (state === "finished") {
+          // Notify UI that app state updating has completed
+          const customEvent = new Event("app_state_updating_success");
+          window.dispatchEvent(customEvent);
+        }
+      } catch (error) {
+        console.error("Error parsing app_state_update_message:", error);
+      }
     };
 
     const eventErrorHandler = (_event: Event) => {
@@ -214,11 +417,15 @@ function useSSE() {
       evtSource.addEventListener("ln_info", setLnInfo);
       evtSource.addEventListener("wallet_balance", setBalance);
       evtSource.addEventListener("transactions", setTx);
-      evtSource.addEventListener("installed_app_status", setAppStatus);
+      evtSource.addEventListener("app_manage_message", handleManageAppMessage);
       evtSource.addEventListener("apps", setApps);
       evtSource.addEventListener("install", setInstall);
       evtSource.addEventListener("hardware_info", setHardwareInfo);
       evtSource.addEventListener("system_startup_info", setSystemStartupInfo);
+      evtSource.addEventListener(
+        "app_state_update_message",
+        handleAppStateUpdateMessage,
+      );
     }
 
     return () => {
@@ -230,13 +437,20 @@ function useSSE() {
         evtSource.removeEventListener("ln_info", setLnInfo);
         evtSource.removeEventListener("wallet_balance", setBalance);
         evtSource.removeEventListener("transactions", setTx);
-        evtSource.removeEventListener("installed_app_status", setAppStatus);
+        evtSource.removeEventListener(
+          "app_manage_message",
+          handleManageAppMessage,
+        );
         evtSource.removeEventListener("apps", setApps);
         evtSource.removeEventListener("install", setInstall);
         evtSource.removeEventListener("hardware_info", setHardwareInfo);
         evtSource.removeEventListener(
           "system_startup_info",
           setSystemStartupInfo,
+        );
+        evtSource.removeEventListener(
+          "app_state_update_message",
+          handleAppStateUpdateMessage,
         );
       }
     };
@@ -262,6 +476,7 @@ function useSSE() {
     installingApp: sseCtx.installingApp,
     hardwareInfo: sseCtx.hardwareInfo,
     systemStartupInfo: sseCtx.systemStartupInfo,
+    installationStatus: sseCtx.installationStatus,
   };
 }
 
