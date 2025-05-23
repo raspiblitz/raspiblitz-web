@@ -1,4 +1,5 @@
 import { SSEContext } from "@/context/sse-context";
+import ModalDialog from "@/layouts/ModalDialog";
 import { AppId } from "@/models/app-status";
 import { Button } from "@heroui/react";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -45,8 +46,8 @@ const InstallationLogModal = ({
   const displayAppId = getDisplayAppId(appId);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-800 rounded-lg w-full max-w-2xl max-h-[80vh] flex flex-col text-white">
+    <ModalDialog close={onClose}>
+      <div className="flex flex-col text-white h-full text-left">
         <div className="flex justify-between items-center p-4 border-b border-gray-700">
           <h2 className="text-xl font-bold">
             {displayAppId} {t("apps.installation_log")}
@@ -107,7 +108,7 @@ const InstallationLogModal = ({
           </Button>
         </div>
       </div>
-    </div>
+    </ModalDialog>
   );
 };
 
