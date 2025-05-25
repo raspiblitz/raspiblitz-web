@@ -71,7 +71,12 @@
       "uninstall": "Deinstallieren",
       "uninstall_failure": "Deinstallation von {{appName}} fehlgeschlagen: {{details}}",
       "uninstall_success": "{{appName}} erfolgreich deinstalliert",
-      "uninstalling": "Deinstalliere"
+      "uninstalling": "Deinstalliere",
+      "error_occurred": "Ein Fehler ist aufgetreten",
+      "error_details": "Fehlerdetails",
+      "view_error": "Fehler anzeigen",
+      "copy": "Kopieren",
+      "close": "Schließen"
     },
     "forms": {
       "hint": {

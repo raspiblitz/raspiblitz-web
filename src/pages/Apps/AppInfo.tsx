@@ -29,7 +29,7 @@ export const AppInfo: FC = () => {
   // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const { author, repository } = availableApps[appId!];
   const { installed, version } =
-    appStatus.find((app) => app.id === appId) || {};
+    appStatus.data.find((app) => app.id === appId) || {};
 
   useEffect(() => {
     setIsLoading(true);
@@ -65,7 +65,7 @@ export const AppInfo: FC = () => {
 
   const uninstallHandler = useCallback(() => {
     instance
-      .post(`apps/uninstall/${appId}`, { keepData: true })
+      .post("apps/uninstall", { app_id: appId, keep_data: true })
       .catch((err) => {
         toast.error(checkError(err));
       });

@@ -85,7 +85,33 @@
       "uninstall": "Uninstall",
       "uninstall_failure": "Uninstall of {{appName}} failed: {{details}}",
       "uninstall_success": "Successfully uninstalled {{appName}}",
-      "uninstalling": "Uninstalling"
+      "uninstalling": "Uninstalling",
+      "active_installations": "Active Processes",
+      "recent_completions": "Recent Completions",
+      "installation_log": "Installation Log",
+      "view_full_log": "View Full Log",
+      "no_messages": "No messages yet",
+      "error": "Error",
+      "failed": "Failed",
+      "completed": "Completed",
+      "data_age": "Data age",
+      "age_just_now": "just now",
+      "age_less_than_minute": "<1 minute",
+      "age_minute": "{{minutes}} minute",
+      "age_minutes": "{{minutes}} minutes",
+      "age_hour": "{{hours}} hour",
+      "age_hours": "{{hours}} hours",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing...",
+      "refresh_success": "App status refreshed successfully",
+      "refresh_error": "Failed to refresh app status",
+      "refresh_tooltip": "Shows how old the app data is",
+      "refresh_expensive_warning": "Use sparingly, its an expensive operation",
+      "error_occurred": "An error occurred",
+      "error_details": "Error Details",
+      "view_error": "View Error",
+      "copy": "Copy",
+      "close": "Close"
     },
     "forms": {
       "hint": {
@@ -385,6 +411,9 @@
       "unlocking": "Unlocking",
       "wallet_locked": "Lightning wallet locked",
       "wallet_unlock_info": "To prevent additional sync time for your Lightning node, please also unlock your Lightning wallet."
+    },
+    "common": {
+      "close": "Close"
     },
     "error": {
       "stack": "Stack trace",
