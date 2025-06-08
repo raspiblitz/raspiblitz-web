@@ -14,15 +14,20 @@ export interface AppStateUpdateMessage {
 
 export interface AppStatus {
   id: AppId;
+  version: string | null;
   installed: boolean;
-  address?: string;
-  httpsForced?: boolean;
-  httpsSelfsigned?: boolean;
-  hiddenService?: string;
-  authMethod?: AuthMethod;
-  details?: unknown;
-  error?: string;
-  version: string;
+  configured: boolean;
+  status: string;
+  local_ip?: string | null;
+  http_port?: string | null;
+  https_port?: string | null;
+  https_forced?: boolean | null;
+  https_self_signed?: boolean | null;
+  hidden_service?: string | null;
+  address?: string | null;
+  auth_method?: AuthMethod | string | null;
+  details?: object | null;
+  error?: string | null;
 }
 
 export interface AppQueryError {
@@ -39,6 +44,7 @@ export enum AppId {
   LNBITS = "lnbits",
   MEMPOOL = "mempool",
   RTL = "rtl",
+  SPECTER = "specter",
   THUNDERHUB = "thunderhub",
 }
 

@@ -1,4 +1,4 @@
-import { type AppStatus, AuthMethod } from "@/models/app-status";
+import { AppId, type AppStatus, AuthMethod } from "@/models/app-status";
 import type { App } from "@/models/app.model";
 import { render, screen } from "test-utils";
 import { AppCard, type Props } from "../AppCard";
@@ -11,15 +11,17 @@ const app: App = {
 };
 
 const appStatus: AppStatus = {
-  id: "123",
-  installed: false,
-  authMethod: AuthMethod.NONE,
-  details: "",
-  hiddenService: "",
-  httpsForced: "0",
-  httpsSelfsigned: "0",
-  error: "",
+  id: AppId.BTCPAYSERVER,
   version: "1.0.0",
+  installed: false,
+  configured: false,
+  status: "offline",
+  https_forced: false,
+  https_self_signed: false,
+  hidden_service: null,
+  auth_method: AuthMethod.NONE,
+  details: null,
+  error: null,
 };
 
 const basicProps: Props = {

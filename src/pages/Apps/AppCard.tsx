@@ -48,7 +48,9 @@ export const AppCard: FC<Props> = ({
     onInstall(id);
   };
 
-  const setAuthMethodText = (authMethod?: AuthMethod): string => {
+  const setAuthMethodText = (
+    authMethod?: AuthMethod | string | null,
+  ): string => {
     switch (authMethod) {
       case AuthMethod.NONE:
         return t("apps.login_no_pass");
@@ -59,7 +61,8 @@ export const AppCard: FC<Props> = ({
       case AuthMethod.USER_DEFINED:
         return t("apps.login_userdef");
       default:
-        return "";
+        // For custom auth methods (like URL paths), return as-is or empty
+        return typeof authMethod === "string" ? authMethod : "";
     }
   };
 
@@ -83,11 +86,11 @@ export const AppCard: FC<Props> = ({
             showArrow={true}
             content={
               <>
-                {appStatusInfo.httpsForced === "1" &&
-                  appStatusInfo.httpsSelfsigned === "1" && (
+                {appStatusInfo.https_forced === true &&
+                  appStatusInfo.https_self_signed === true && (
                     <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
                   )}
-                <h2>{setAuthMethodText(appStatusInfo.authMethod)}</h2>
+                <h2>{setAuthMethodText(appStatusInfo.auth_method)}</h2>
               </>
             }
           >

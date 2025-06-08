@@ -28,7 +28,8 @@ const AppList: FC<Props> = ({ title, apps, onInstall, errors = [] }) => {
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
         {apps.map((appStatus: AppStatus) => {
           // Check if there's an error for this app
-          const error = errorMap.get(appStatus.id) || appStatus.error;
+          const error =
+            errorMap.get(appStatus.id) || appStatus.error || undefined;
 
           // Get the app info from availableApps, or create a fallback if not available
           const appInfo = availableApps[appStatus.id] || {
