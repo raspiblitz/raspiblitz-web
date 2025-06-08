@@ -413,7 +413,8 @@
       "wallet_unlock_info": "To prevent additional sync time for your Lightning node, please also unlock your Lightning wallet."
     },
     "common": {
-      "close": "Close"
+      "close": "Close",
+      "download_log": "Download Log"
     },
     "error": {
       "stack": "Stack trace",
