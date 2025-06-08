@@ -1,6 +1,7 @@
 import { SSEContext } from "@/context/sse-context";
 import ModalDialog from "@/layouts/ModalDialog";
 import { AppId } from "@/models/app-status";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -88,22 +89,9 @@ const InstallationLogModal = ({
               size="sm"
               variant="flat"
               onPress={downloadLog}
+              startContent={<ArrowDownTrayIcon className="w-4 h-4" />}
               className="bg-gray-700/50 hover:bg-gray-600/70 text-gray-200 border border-gray-600/30 transition-all duration-200 hover:scale-105"
             >
-              <svg
-                className="w-4 h-4 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <title>download icon</title>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
               {t("common.download_log") || "Download"}
             </Button>
           </div>
