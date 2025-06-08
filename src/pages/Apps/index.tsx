@@ -76,8 +76,10 @@ export const Apps: FC = () => {
       if (!existingAppIds.has(errorEntry.id)) {
         errorOnlyApps.push({
           id: errorEntry.id,
-          installed: false, // Assume not installed since we can't determine
-          version: "unknown", // Version can't be determined
+          version: "unknown",
+          installed: false,
+          configured: false,
+          status: "offline",
           error: errorEntry.error,
         });
       }

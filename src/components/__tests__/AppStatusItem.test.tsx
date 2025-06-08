@@ -1,14 +1,16 @@
-import type { AppStatus } from "@/models/app-status";
+import { AppId, type AppStatus } from "@/models/app-status";
 import { render, screen } from "test-utils";
 import AppStatusItem from "../AppStatusItem";
 
 const testApp: AppStatus = {
-  id: "specter",
-  installed: true,
+  id: AppId.SPECTER,
   version: "1.0.0",
+  installed: true,
+  configured: true,
+  status: "online",
   address: "http://127.0.0.1",
-  hiddenService: "hiddenservice.onion",
-  error: "",
+  hidden_service: "hiddenservice.onion",
+  error: null,
 };
 
 describe("AppStatusItem", () => {
