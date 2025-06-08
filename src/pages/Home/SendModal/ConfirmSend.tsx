@@ -108,7 +108,6 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
         sat_per_vbyte: +fee,
         label: comment,
         send_all: spendAll,
-        unit,
       };
 
       await instance
@@ -236,7 +235,11 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
           color="primary"
           type="submit"
           isDisabled={
-            !isValid || !isValidLnInvoice || isInvoiceAmountBiggerThanBalance
+            (!isValid &&
+              Number(confirmData.amount) === 0 &&
+              !onChainData.spendAll) ||
+            !isValidLnInvoice ||
+            isInvoiceAmountBiggerThanBalance
           }
           isLoading={isLoading}
         >

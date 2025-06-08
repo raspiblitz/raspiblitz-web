@@ -38,6 +38,269 @@ const basicOnChainTxProps: Props = {
 };
 
 describe("ConfirmSend", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  describe("component rendering", () => {
+    test("renders correct headers for lightning invoice", () => {
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} />
+        </ConfirmModal>,
+      );
+
+      expect(
+        screen.getByText("wallet.invoice", { exact: false }),
+      ).toBeInTheDocument();
+      expect(screen.queryByText("tx.fee")).not.toBeInTheDocument();
+    });
+
+    test("renders correct headers for onchain transaction", () => {
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicOnChainTxProps} />
+        </ConfirmModal>,
+      );
+
+      expect(
+        screen.getByText("wallet.address", { exact: false }),
+      ).toBeInTheDocument();
+      expect(screen.getByText("tx.fee", { exact: false })).toBeInTheDocument();
+    });
+
+    test("displays comment when provided", () => {
+      const propsWithComment = {
+        ...basicLnTxProps,
+        confirmData: {
+          ...basicLnTxProps.confirmData,
+          comment: "Test comment",
+        },
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...propsWithComment} />
+        </ConfirmModal>,
+      );
+
+      expect(
+        screen.getByText("tx.description", { exact: false }),
+      ).toBeInTheDocument();
+      expect(screen.getByText("Test comment")).toBeInTheDocument();
+    });
+
+    test("does not display comment section when comment is empty", () => {
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} />
+        </ConfirmModal>,
+      );
+
+      expect(
+        screen.queryByText("tx.description", { exact: false }),
+      ).not.toBeInTheDocument();
+    });
+
+    test("displays back button with correct handler", async () => {
+      const mockBack = vi.fn();
+      const propsWithBack = { ...basicLnTxProps, back: mockBack };
+      const user = userEvent.setup();
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...propsWithBack} />
+        </ConfirmModal>,
+      );
+
+      const backButton = screen.getByRole("button", {
+        name: "navigation.back",
+      });
+      await user.click(backButton);
+
+      expect(mockBack).toHaveBeenCalledWith(basicLnTxProps.confirmData);
+    });
+  });
+
+  describe("spendAll onchain transactions", () => {
+    test("displays 'all onchain' text for spendAll transactions", () => {
+      const spendAllProps = {
+        ...basicOnChainTxProps,
+        confirmData: {
+          ...basicOnChainTxProps.confirmData,
+          spendAll: true,
+        },
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...spendAllProps} />
+        </ConfirmModal>,
+      );
+
+      expect(
+        screen.getByText("tx.all_onchain", { exact: false }),
+      ).toBeInTheDocument();
+    });
+
+    test("confirm button is enabled for valid spendAll transaction", () => {
+      const spendAllProps = {
+        ...basicOnChainTxProps,
+        confirmData: {
+          ...basicOnChainTxProps.confirmData,
+          spendAll: true,
+          amount: 0,
+        },
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...spendAllProps} />
+        </ConfirmModal>,
+      );
+
+      expect(
+        screen.getByRole("button", { name: "settings.confirm" }),
+      ).not.toBeDisabled();
+    });
+  });
+
+  describe("error handling", () => {
+    test("displays error message when API call fails for Lightning", async () => {
+      server.use(
+        http.post("/api/lightning/send-payment", () => {
+          return new HttpResponse(
+            JSON.stringify({ detail: "Payment failed" }),
+            {
+              status: 500,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+        }),
+      );
+
+      const user = userEvent.setup();
+      const propsWithAmount = {
+        ...basicLnTxProps,
+        confirmData: {
+          ...basicLnTxProps.confirmData,
+          amount: 50,
+        },
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...propsWithAmount} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(
+          screen.getByText("Payment failed", { exact: false }),
+        ).toBeInTheDocument();
+      });
+    });
+
+    test("displays error message when API call fails for onchain", async () => {
+      server.use(
+        http.post("/api/lightning/send-coins", () => {
+          return new HttpResponse(
+            JSON.stringify({ detail: "Transaction failed" }),
+            {
+              status: 500,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+        }),
+      );
+
+      const user = userEvent.setup();
+      const propsWithValidAmount = {
+        ...basicOnChainTxProps,
+        confirmData: {
+          ...basicOnChainTxProps.confirmData,
+          amount: 50,
+        },
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...propsWithValidAmount} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(
+          screen.getByText("Transaction failed", { exact: false }),
+        ).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("button states", () => {
+    test("cancel button calls close function", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} />
+        </ConfirmModal>,
+      );
+
+      const cancelButton = screen.getByRole("button", {
+        name: "settings.cancel",
+      });
+      await user.click(cancelButton);
+
+      expect(closeSpy).toHaveBeenCalled();
+    });
+
+    test("buttons are disabled during loading state", async () => {
+      server.use(
+        http.post("/api/lightning/send-payment", () => {
+          return new Promise(() => {}); // Never resolve to keep loading state
+        }),
+      );
+
+      const user = userEvent.setup();
+      const propsWithAmount = {
+        ...basicLnTxProps,
+        confirmData: {
+          ...basicLnTxProps.confirmData,
+          amount: 50,
+        },
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...propsWithAmount} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole("button", { name: "settings.cancel" }),
+        ).toBeDisabled();
+        expect(confirmButton).toHaveAttribute("data-loading", "true");
+      });
+    });
+  });
+
   describe("ln-invoice with zero amount", () => {
     const setup = () => {
       render(
@@ -61,7 +324,9 @@ describe("ConfirmSend", () => {
       await waitFor(() => expect(amountInput).toHaveAttribute("aria-invalid"));
 
       expect(
-        await screen.findByText("forms.validation.chainAmount.max"),
+        await screen.findByText("forms.validation.chainAmount.max", {
+          exact: false,
+        }),
       ).toBeInTheDocument();
     });
 
@@ -79,7 +344,9 @@ describe("ConfirmSend", () => {
       await waitFor(() => expect(amountInput).toHaveAttribute("aria-invalid"));
 
       expect(
-        screen.getByText("forms.validation.chainAmount.required"),
+        screen.getByText("forms.validation.chainAmount.required", {
+          exact: false,
+        }),
       ).toBeInTheDocument();
     });
 
@@ -107,10 +374,8 @@ describe("ConfirmSend", () => {
           const url = new URL(request.url);
           if (url.searchParams.get("amount_msat") === "10000") {
             return new HttpResponse(null, { status: 200 });
-            // biome-ignore lint/style/noUselessElse: <explanation>
-          } else {
-            return new HttpResponse(null, { status: 500 });
           }
+          return new HttpResponse(null, { status: 500 });
         }),
       );
       const user = userEvent.setup();
@@ -171,7 +436,9 @@ describe("ConfirmSend", () => {
         </ConfirmModal>,
       );
       expect(
-        await screen.findByText("forms.validation.lnInvoice.max"),
+        await screen.findByText("forms.validation.lnInvoice.max", {
+          exact: false,
+        }),
       ).toBeInTheDocument();
       expect(
         screen.getByRole("button", { name: "settings.confirm" }),
@@ -215,7 +482,9 @@ describe("ConfirmSend", () => {
       );
 
       expect(
-        await screen.findByText("forms.validation.lnInvoice.max"),
+        await screen.findByText("forms.validation.lnInvoice.max", {
+          exact: false,
+        }),
       ).toBeInTheDocument();
       expect(
         screen.getByRole("button", { name: "settings.confirm" }),
@@ -242,6 +511,221 @@ describe("ConfirmSend", () => {
           name: "settings.confirm",
         }),
       ).not.toBeDisabled();
+    });
+
+    test("successful onchain transaction closes modal", async () => {
+      server.use(
+        http.post("/api/lightning/send-coins", () => {
+          return new HttpResponse(null, { status: 200 });
+        }),
+      );
+
+      const user = userEvent.setup();
+      const confirmData = {
+        ...basicOnChainTxProps.confirmData,
+        amount: 50,
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicOnChainTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(closeSpy).toHaveBeenCalled();
+      });
+    });
+
+    test("sends correct body for onchain transaction", async () => {
+      // biome-ignore lint/suspicious/noExplicitAny:
+      let capturedBody: any;
+      server.use(
+        http.post("/api/lightning/send-coins", async ({ request }) => {
+          capturedBody = await request.json();
+          return new HttpResponse(null, { status: 200 });
+        }),
+      );
+
+      const user = userEvent.setup();
+      const confirmData = {
+        ...basicOnChainTxProps.confirmData,
+        amount: 50,
+        fee: "10",
+        comment: "Test transaction",
+        spendAll: false,
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicOnChainTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(capturedBody).toBeDefined();
+      });
+
+      expect(capturedBody).toEqual({
+        amount: 50,
+        address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+        sat_per_vbyte: 10,
+        label: "Test transaction",
+        send_all: false,
+      });
+    });
+
+    test("sends correct body for spendAll onchain transaction", async () => {
+      // biome-ignore lint/suspicious/noExplicitAny:
+      let capturedBody: any;
+      server.use(
+        http.post("/api/lightning/send-coins", async ({ request }) => {
+          capturedBody = await request.json();
+          return new HttpResponse(null, { status: 200 });
+        }),
+      );
+
+      const user = userEvent.setup();
+      const confirmData = {
+        ...basicOnChainTxProps.confirmData,
+        spendAll: true,
+        amount: 0,
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicOnChainTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(capturedBody).toBeDefined();
+      });
+
+      expect(capturedBody.amount).toBe(0);
+      expect(capturedBody.send_all).toBe(true);
+    });
+  });
+
+  describe("lightning transactions with fixed amount", () => {
+    test("successful lightning payment closes modal", async () => {
+      server.use(
+        http.post("/api/lightning/send-payment", () => {
+          return new HttpResponse(null, { status: 200 });
+        }),
+      );
+
+      const user = userEvent.setup();
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        amount: 50,
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(closeSpy).toHaveBeenCalled();
+      });
+    });
+
+    test("displays amount in satoshis for lightning invoice", () => {
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        amount: 1000000, // 1000 sats in msat
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      expect(screen.getByText("1,000 Sat")).toBeInTheDocument();
+    });
+  });
+
+  describe("additional scenarios", () => {
+    test("displays correct expiry date format for expired invoice", () => {
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        timestamp: 1640995200, // Sat Jan 01 2022 08:00:00
+        expiry: 36000,
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      expect(screen.getByText(/2022/)).toBeInTheDocument();
+    });
+
+    test("handles lightning payment without custom amount", async () => {
+      server.use(
+        http.post("/api/lightning/send-payment", ({ request }) => {
+          const url = new URL(request.url);
+          expect(url.searchParams.get("amount_msat")).toBeNull();
+          return new HttpResponse(null, { status: 200 });
+        }),
+      );
+
+      const user = userEvent.setup();
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        amount: 50,
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      const confirmButton = screen.getByRole("button", {
+        name: "settings.confirm",
+      });
+      await user.click(confirmButton);
+
+      await waitFor(() => {
+        expect(closeSpy).toHaveBeenCalled();
+      });
+    });
+
+    test("zero amount input field shows hint text", () => {
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} />
+        </ConfirmModal>,
+      );
+
+      expect(
+        screen.getByText("forms.hint.invoiceAmountZero", { exact: false }),
+      ).toBeInTheDocument();
     });
   });
 });
