@@ -176,48 +176,50 @@ export default function SyncScreen({ data, callback }: Props) {
               isStriped
             />
 
-            <div className="mt-6">
-              <Alert color="info" as="div">
-                {lnWalletUnlocked && (
-                  <>
-                    <p>
-                      <LockOpenIcon className="inline h-6 w-auto text-success" />{" "}
-                      {t("wallet.unlock_success")}
-                    </p>
-                    <div className="mt-2">
-                      {data.ln_default_ready === "1" ? (
-                        <>
-                          <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
-                          {t("home.lightning")} {t("setup.started")}
-                        </>
-                      ) : (
-                        <>
-                          <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
-                          {t("home.lightning")} {t("setup.not_started")}
-                        </>
-                      )}
+            {(lnWalletUnlocked || lnWalletLocked) && (
+              <div className="mt-6">
+                <Alert color="info" as="div">
+                  {lnWalletUnlocked && (
+                    <>
                       <p>
-                        ({t("setup.restarts")}:{" "}
-                        {data.system_count_start_lightning})
+                        <LockOpenIcon className="inline h-6 w-auto text-success" />{" "}
+                        {t("wallet.unlock_success")}
                       </p>
-                    </div>
-                  </>
-                )}
+                      <div className="mt-2">
+                        {data.ln_default_ready === "1" ? (
+                          <>
+                            <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
+                            {t("home.lightning")} {t("setup.started")}
+                          </>
+                        ) : (
+                          <>
+                            <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
+                            {t("home.lightning")} {t("setup.not_started")}
+                          </>
+                        )}
+                        <p>
+                          ({t("setup.restarts")}:{" "}
+                          {data.system_count_start_lightning})
+                        </p>
+                      </div>
+                    </>
+                  )}
 
-                {lnWalletLocked && (
-                  <div className="flex flex-col gap-4">
-                    <p>
-                      <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
-                      {t("wallet.wallet_locked")}
-                    </p>
-                    <Button onPress={onOpen} color="primary">
-                      {t("wallet.unlock_title")}
-                    </Button>
-                    <p>{t("wallet.wallet_unlock_info")}</p>
-                  </div>
-                )}
-              </Alert>
-            </div>
+                  {lnWalletLocked && (
+                    <div className="flex flex-col gap-4">
+                      <p>
+                        <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
+                        {t("wallet.wallet_locked")}
+                      </p>
+                      <Button onPress={onOpen} color="primary">
+                        {t("wallet.unlock_title")}
+                      </Button>
+                      <p>{t("wallet.wallet_unlock_info")}</p>
+                    </div>
+                  )}
+                </Alert>
+              </div>
+            )}
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
