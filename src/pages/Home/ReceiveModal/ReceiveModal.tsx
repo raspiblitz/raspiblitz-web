@@ -8,8 +8,7 @@ import { checkError } from "@/utils/checkError";
 import { convertBtcToSat } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
 import { Tab, Tabs } from "@heroui/react";
-import type { FC, Key } from "react";
-import { useContext, useState } from "react";
+import { type FC, type Key, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TxType } from "../SwitchTxType";
 import QRCode from "./QRCode";
@@ -21,7 +20,6 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
 
-  const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [invoice, setInvoice] = useState("");
@@ -76,7 +74,6 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   };
 
   const handleTabChange = async (key: Key) => {
-    setInvoiceType(key as TxType);
     setError("");
 
     // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
@@ -97,7 +94,6 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
             }}
             fullWidth
             aria-label={t("wallet.receive_aria_options")}
-            selectedKey={invoiceType}
             onSelectionChange={handleTabChange}
           >
             <Tab key={TxType.LIGHTNING} title={t("wallet.create_invoice_ln")}>

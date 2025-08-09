@@ -31,8 +31,6 @@ export interface SendLnForm {
 
 const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
   const { t } = useTranslation();
-
-  const [invoiceType, setInvoiceType] = useState<TxType>(TxType.LIGHTNING);
   const [confirmData, setConfirmData] = useState<
     SendOnChainForm | SendLnForm | null
   >(null);
@@ -40,8 +38,7 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleTabChange = (key: React.Key) => {
-    setInvoiceType(key as TxType);
+  const handleTabChange = () => {
     setConfirmData(null);
     setError("");
   };
@@ -94,7 +91,6 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
           <Tabs
             fullWidth
             aria-label={t("wallet.receive_aria_options")}
-            selectedKey={invoiceType}
             onSelectionChange={handleTabChange}
           >
             <Tab key={TxType.LIGHTNING} title={t("wallet.send_lightning")}>
