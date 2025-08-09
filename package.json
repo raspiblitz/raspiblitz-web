@@ -32,11 +32,11 @@
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@heroicons/react": "^2.2.0",
-    "@heroui/button": "^2.2.24",
-    "@heroui/checkbox": "^2.3.24",
-    "@heroui/image": "^2.2.15",
     "@heroui/react": "^2.8.2",
-    "@heroui/tabs": "^2.2.21",
+    "@heroui/system": "^2.4.20",
+    "@heroui/theme": "^2.4.20",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.9.0",
     "framer-motion": "^12.23.12",
     "i18next": "^25.1.1",
@@ -48,7 +48,7 @@
     "react-router": "^7.5.3",
     "react-toastify": "^11.0.5",
     "react-tooltip": "^5.28.1",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -70,7 +70,7 @@
     "lint-staged": "^15.5.1",
     "msw": "^2.7.6",
     "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vite-plugin-svgr": "^4.3.0",

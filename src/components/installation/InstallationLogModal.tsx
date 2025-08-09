@@ -76,8 +76,8 @@ const InstallationLogModal = ({
 
   return (
     <ModalDialog close={onClose}>
-      <div className="flex flex-col text-white max-h-[80vh] text-left bg-gradient-to-b from-gray-900 to-gray-950 rounded-lg overflow-hidden shadow-2xl">
-        <div className="px-6 py-4 border-b border-gray-600/50 sticky top-0 bg-gradient-to-r from-gray-800 to-gray-900 z-10 backdrop-blur-sm">
+      <div className="flex flex-col text-white max-h-[80vh] text-left bg-linear-to-b from-gray-900 to-gray-950 rounded-lg overflow-hidden shadow-2xl">
+        <div className="px-6 py-4 border-b border-gray-600/50 sticky top-0 bg-linear-to-r from-gray-800 to-gray-900 z-10 backdrop-blur-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse " />
@@ -105,15 +105,15 @@ const InstallationLogModal = ({
                   key={`${msg.id}-${msg.timestamp}-${idx}`}
                   className={`p-3 rounded-lg border-l-4 transition-all duration-300 ${
                     msg.state === "failure"
-                      ? "bg-gradient-to-r from-red-950/80 to-red-900/40 border-l-red-500 text-red-100 shadow-lg shadow-red-900/20"
+                      ? "bg-linear-to-r from-red-950/80 to-red-900/40 border-l-red-500 text-red-100 shadow-lg shadow-red-900/20"
                       : msg.state === "success"
-                        ? "bg-gradient-to-r from-green-950/80 to-green-900/40 border-l-green-500 text-green-100 shadow-lg shadow-green-900/20"
-                        : "bg-gradient-to-r from-gray-800/80 to-gray-700/40 border-l-blue-500 text-gray-100 shadow-lg shadow-gray-900/20"
+                        ? "bg-linear-to-r from-green-950/80 to-green-900/40 border-l-green-500 text-green-100 shadow-lg shadow-green-900/20"
+                        : "bg-linear-to-r from-gray-800/80 to-gray-700/40 border-l-blue-500 text-gray-100 shadow-lg shadow-gray-900/20"
                   } ${idx >= prevMessagesCount ? "animate-fadeIn" : ""} hover:scale-[1.01] hover:shadow-xl`}
                 >
                   <div className="flex items-start gap-2">
                     <div
-                      className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
+                      className={`w-2 h-2 rounded-full mt-2 shrink-0 ${
                         msg.state === "failure"
                           ? "bg-red-500"
                           : msg.state === "success"
@@ -138,7 +138,7 @@ const InstallationLogModal = ({
               </div>
             )}
             {errorId && (
-              <div className="p-4 bg-gradient-to-r from-red-900/80 to-red-800/60 border border-red-600/50 rounded-lg mt-6 shadow-xl shadow-red-900/30">
+              <div className="p-4 bg-linear-to-r from-red-900/80 to-red-800/60 border border-red-600/50 rounded-lg mt-6 shadow-xl shadow-red-900/30">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-3 h-3 bg-red-500 rounded-full" />
                   <div className="font-bold text-red-100 text-base">

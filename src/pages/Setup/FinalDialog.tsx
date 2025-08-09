@@ -48,7 +48,7 @@ export default function FinalDialog({
           {!!seedWords && <Alert as="h4">{t("setup.final_seedwords")}</Alert>}
 
           {!!seedWords && (
-            <ol className="flex h-[26rem] w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
+            <ol className="flex h-104 w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
               {seedWords.split(", ").map((word, index) => {
                 return (
                   // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
