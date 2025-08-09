@@ -1,10 +1,10 @@
+import { Spinner } from "@heroui/react";
+import { type FC, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
 import { checkPropsUndefined } from "@/utils";
 import { convertMSatToBtc, convertToString } from "@/utils/format";
-import { Spinner } from "@heroui/react";
-import { type FC, useContext } from "react";
-import { useTranslation } from "react-i18next";
 
 export const LightningCard: FC = () => {
   const { t } = useTranslation();

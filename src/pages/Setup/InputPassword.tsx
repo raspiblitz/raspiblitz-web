@@ -1,10 +1,10 @@
+import { Input, useDisclosure } from "@heroui/react";
+import { useForm } from "react-hook-form";
+import { Trans, useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Input, useDisclosure } from "@heroui/react";
-import { useForm } from "react-hook-form";
-import { Trans, useTranslation } from "react-i18next";
 
 type Props = {
   passwordType: PasswordColors;

@@ -1,9 +1,3 @@
-import { Headline } from "@/components/Headline";
-import { SSEContext } from "@/context/sse-context";
-import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import type { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import {
   Button,
@@ -18,6 +12,12 @@ import { QRCodeSVG } from "qrcode.react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { Headline } from "@/components/Headline";
+import { SSEContext } from "@/context/sse-context";
+import PageLoadingScreen from "@/layouts/PageLoadingScreen";
+import type { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 
 const Electrs = () => {
   const navigate = useNavigate();

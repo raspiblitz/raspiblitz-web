@@ -1,7 +1,7 @@
-import { SSEContext } from "@/context/sse-context";
 import { Spinner } from "@heroui/react";
 import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { SSEContext } from "@/context/sse-context";
 
 const PI_NUM_CORES = 4;
 

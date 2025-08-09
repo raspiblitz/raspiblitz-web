@@ -1,13 +1,13 @@
-import AmountInput from "@/components/AmountInput";
-import AvailableBalance from "@/components/AvailableBalance";
-import { Button } from "@/components/Button";
-import { ConfirmModal } from "@/components/ConfirmModal";
-import { stringToNumber } from "@/utils/format";
 import { Checkbox, Input } from "@heroui/react";
 import { type ChangeEvent, type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import AmountInput from "@/components/AmountInput";
+import AvailableBalance from "@/components/AvailableBalance";
+import { Button } from "@/components/Button";
+import { ConfirmModal } from "@/components/ConfirmModal";
+import { stringToNumber } from "@/utils/format";
 import { TxType } from "../SwitchTxType";
 import type { SendLnForm } from "./SendModal";
 

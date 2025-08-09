@@ -1,9 +1,9 @@
-import { Button } from "@/components/Button";
-import useClipboard from "@/hooks/use-clipboard";
 import { QRCodeSVG } from "qrcode.react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
+import { Button } from "@/components/Button";
+import useClipboard from "@/hooks/use-clipboard";
 
 type Props = {
   address: string;

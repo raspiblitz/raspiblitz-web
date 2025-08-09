@@ -1,6 +1,6 @@
+import type { FC } from "react";
 import type { AppQueryError, AppStatus } from "@/models/app-status";
 import { availableApps } from "@/utils/availableApps";
-import type { FC } from "react";
 import AppCard from "./AppCard";
 
 type Props = {

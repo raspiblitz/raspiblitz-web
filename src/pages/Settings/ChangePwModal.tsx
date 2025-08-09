@@ -1,14 +1,14 @@
+import { Input, useDisclosure } from "@heroui/react";
+import { type FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { Button } from "@/components/Button";
 import CapsLockWarning from "@/components/CapsLockWarning";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { Input, useDisclosure } from "@heroui/react";
-import { type FC, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import ActionBox from "./ActionBox";
 
 interface IFormInputs {

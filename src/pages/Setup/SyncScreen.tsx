@@ -1,9 +1,3 @@
-import { Alert } from "@/components/Alert";
-import { Button } from "@/components/Button";
-import { Headline } from "@/components/Headline";
-import SetupContainer from "@/layouts/SetupContainer";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
 import {
   CheckCircleIcon,
   LockClosedIcon,
@@ -26,6 +20,12 @@ import { type ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { Alert } from "@/components/Alert";
+import { Button } from "@/components/Button";
+import { Headline } from "@/components/Headline";
+import SetupContainer from "@/layouts/SetupContainer";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 
 type Props = {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>

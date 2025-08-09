@@ -1,7 +1,7 @@
-import { SSEContext } from "@/context/sse-context";
 import packageJson from "package.json";
 import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { SSEContext } from "@/context/sse-context";
 
 /**
  * Displays the versions of RaspiBlitz, the WebUI and the Blitz-API

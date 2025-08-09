@@ -1,9 +1,9 @@
+import { type FC, useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { getHrefFromApp } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
-import { type FC, useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
 
 export const AppInfo: FC = () => {
   const navigate = useNavigate();

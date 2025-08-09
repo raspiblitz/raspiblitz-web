@@ -1,9 +1,9 @@
+import type { FC } from "react";
+import { useNavigate } from "react-router";
 import AppIcon from "@/components/AppIcon";
 import type { AppStatus } from "@/models/app-status";
 import { getHrefFromApp } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
-import type { FC } from "react";
-import { useNavigate } from "react-router";
 
 type Props = {
   app: AppStatus;
@@ -19,8 +19,8 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
 
   if (customComponent) {
     return (
-      <span
-        // TODO: should be a button
+      <button
+        type="submit"
         onClick={() => navigate(`/apps/${id}`)}
         onKeyUp={(e) => {
           if (e.key === "Enter") navigate(`/apps/${id}`);
@@ -31,7 +31,7 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
         <AppIcon appId={id} className="h-10 inline w-10" />
         {/* Content */}
         <span className="mx-3 w-1/2 justify-center text-lg">{appName}</span>
-      </span>
+      </button>
     );
   }
 

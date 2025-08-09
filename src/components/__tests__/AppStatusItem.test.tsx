@@ -1,5 +1,5 @@
-import { AppId, type AppStatus } from "@/models/app-status";
 import { render, screen } from "test-utils";
+import { AppId, type AppStatus } from "@/models/app-status";
 import AppStatusItem from "../AppStatusItem";
 
 const testApp: AppStatus = {

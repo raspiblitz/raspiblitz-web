@@ -1,11 +1,11 @@
+import { Checkbox, useDisclosure } from "@heroui/react";
+import { type FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { Checkbox, useDisclosure } from "@heroui/react";
-import { type FormEvent, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 export type Props = {
   containsBlockchain: boolean;

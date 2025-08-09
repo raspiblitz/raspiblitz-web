@@ -1,10 +1,10 @@
+import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ConfirmModal,
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import type { Transaction } from "@/models/transaction.model";
-import type { FC } from "react";
-import { useTranslation } from "react-i18next";
 import LNDetails from "./LNDetails";
 import OnchainDetails from "./OnchainDetails";
 

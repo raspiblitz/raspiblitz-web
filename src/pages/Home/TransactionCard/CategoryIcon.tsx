@@ -1,8 +1,3 @@
-import type {
-  TransactionCategory,
-  TransactionStatus,
-  TransactionType,
-} from "@/models/transaction.model";
 import {
   Confirmations0Icon,
   Confirmations1Icon,
@@ -19,6 +14,11 @@ import {
   LinkIcon,
 } from "@heroicons/react/24/outline";
 import type { FC } from "react";
+import type {
+  TransactionCategory,
+  TransactionStatus,
+  TransactionType,
+} from "@/models/transaction.model";
 
 export type Props = {
   category: TransactionCategory;

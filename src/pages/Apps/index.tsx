@@ -1,3 +1,7 @@
+import type { FC } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import InstallationStatusCard from "@/components/installation/InstallationStatusCard";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
@@ -5,10 +9,6 @@ import type { AppStatus } from "@/models/app-status";
 import { enableGutter } from "@/utils";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import type { FC } from "react";
-import { useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import AppCardAlby from "./AppCardAlby";
 import AppList from "./AppList";
 import AppStatusRefresh from "./AppStatusRefresh";

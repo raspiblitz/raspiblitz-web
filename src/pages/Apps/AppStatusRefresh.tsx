@@ -1,11 +1,11 @@
-import { SSEContext } from "@/context/sse-context";
-import { instance } from "@/utils/interceptor";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { Button, Tooltip } from "@heroui/react";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { SSEContext } from "@/context/sse-context";
+import { instance } from "@/utils/interceptor";
 
 const AppStatusRefresh = () => {
   const { t } = useTranslation();

@@ -1,10 +1,10 @@
+import { type FC, useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { Button } from "@/components/Button";
 import { AppContext } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
-import { type FC, useContext } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 
 /**
  * Displays a button to generate a debug report which is downloaded as a file

@@ -1,3 +1,5 @@
+import { useDisclosure } from "@heroui/react";
+import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
@@ -7,8 +9,6 @@ import {
   SetupMigrationMode,
   type SetupMigrationOS,
 } from "@/models/setup.model";
-import { useDisclosure } from "@heroui/react";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   migrationOS: SetupMigrationOS;

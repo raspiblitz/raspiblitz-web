@@ -1,3 +1,6 @@
+import { RadioGroup } from "@heroui/react";
+import { type FormEvent, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import BitcoinLogo from "@/assets/bitcoin-logo.svg";
 import CLLogo from "@/assets/core_lightning_logo_only.png";
 import LNDLogo from "@/assets/lnd.png";
@@ -5,9 +8,6 @@ import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupLightning } from "@/models/setup.model";
-import { RadioGroup } from "@heroui/react";
-import { type FormEvent, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
 import CustomRadio from "./CustomRadio";
 
 type Props = {

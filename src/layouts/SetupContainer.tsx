@@ -1,9 +1,9 @@
-import { Button } from "@/components/Button";
-import I18nSelect from "@/components/I18nDropdown";
-import Stepper from "@/pages/Setup/Stepper";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import type { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/Button";
+import I18nSelect from "@/components/I18nDropdown";
+import Stepper from "@/pages/Setup/Stepper";
 
 type Props = {
   currentStep: number | null;

@@ -1,6 +1,6 @@
-import I18nSelect from "@/components/I18nDropdown";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
+import I18nSelect from "@/components/I18nDropdown";
 
 /**
  * Displays the current language and allows the user to change it.

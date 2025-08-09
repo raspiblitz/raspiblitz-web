@@ -1,10 +1,6 @@
-import AppIcon from "@/components/AppIcon";
-import AppStatusItem from "@/components/AppStatusItem";
-import { AppContext } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
-import { BookOpenIcon } from "@heroicons/react/24/outline";
 import {
   ArrowRightStartOnRectangleIcon,
+  BookOpenIcon,
   Cog6ToothIcon,
   HomeIcon,
   Squares2X2Icon,
@@ -13,6 +9,10 @@ import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";
+import AppIcon from "@/components/AppIcon";
+import AppStatusItem from "@/components/AppStatusItem";
+import { AppContext } from "@/context/app-context";
+import { SSEContext } from "@/context/sse-context";
 
 const navLinkClasses =
   "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full text-white opacity-80 hover:text-yellow-500";

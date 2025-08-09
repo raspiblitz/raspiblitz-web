@@ -1,8 +1,8 @@
-import { SSEContext } from "@/context/sse-context";
-import { AppId } from "@/models/app-status";
 import { Button } from "@heroui/react";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { SSEContext } from "@/context/sse-context";
+import { AppId } from "@/models/app-status";
 import InstallationLogModal from "./InstallationLogModal";
 
 interface InstallationStatusCardProps {
