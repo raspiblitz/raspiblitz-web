@@ -7,7 +7,7 @@ import { HttpResponse, http, server } from "./testServer";
 const mockedUsedNavigate = vi.fn();
 
 vi.mock("react-router", async () => {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: test
   const reactRouterDom: any = await vi.importActual("react-router");
 
   return { ...reactRouterDom, useNavigate: () => mockedUsedNavigate };
@@ -48,6 +48,7 @@ describe("App", () => {
             setupPhase: "done",
             state: "",
             message: "",
+            initialsync: "",
           },
           { status: 200 },
         );
@@ -59,6 +60,8 @@ describe("App", () => {
         <App />
       </I18nextProvider>,
     );
-    expect(await screen.findByText("login.login")).toBeInTheDocument();
+
+    expect(await screen.findByText("Enter password A")).toBeInTheDocument();
+    expect(await screen.findByText("Log in")).toBeInTheDocument();
   });
 });
