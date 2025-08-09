@@ -79,7 +79,7 @@ export const WalletCard: FC<Props> = ({
     <div className="h-full">
       <div className="bd-card h-full transition-colors">
         <section className="flex flex-col flex-wrap p-2 text-black lg:flex-row">
-          <div className="relative w-full overflow-hidden rounded-xl bg-yellow-600 bg-gradient-to-b from-yellow-500 p-4 text-white">
+          <div className="relative w-full overflow-hidden rounded-xl bg-yellow-600 bg-linear-to-b from-yellow-500 p-4 text-white">
             <article className="flex w-full flex-col">
               <Headline as="h6" align="left">
                 {t("wallet.balance")}
@@ -127,7 +127,7 @@ export const WalletCard: FC<Props> = ({
           <Button
             onPress={onReceive}
             startContent={<ArrowDownTrayIcon className="h-6 w-6" />}
-            className="flex-grow"
+            className="grow"
             color="primary"
             variant="ghost"
           >
@@ -136,7 +136,7 @@ export const WalletCard: FC<Props> = ({
           <Button
             onPress={onSend}
             startContent={<ShareIcon className="h-6 w-6" />}
-            className="flex-grow"
+            className="grow"
             color="primary"
             variant="ghost"
           >
@@ -145,7 +145,7 @@ export const WalletCard: FC<Props> = ({
           <Button
             onPress={onOpenChannel}
             startContent={<LightningIcon className="inline h-6 w-6" />}
-            className="flex-grow"
+            className="grow"
             color="primary"
             variant="ghost"
           >
@@ -154,7 +154,7 @@ export const WalletCard: FC<Props> = ({
           <Button
             onPress={onCloseChannel}
             startContent={<ListBulletIcon className="inline h-6 w-6" />}
-            className="flex-grow"
+            className="grow"
             color="primary"
             variant="ghost"
           >

@@ -84,7 +84,7 @@ export const ConnectionCard: FC = () => {
               <a
                 className={`${
                   showAddress
-                    ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
+                    ? "w-10/12 overflow-hidden text-ellipsis text-blue-400 underline"
                     : "text-blur w-10/12"
                 }`}
                 title={`${torAddress}`}
@@ -118,7 +118,7 @@ export const ConnectionCard: FC = () => {
             <a
               className={`${
                 showAddress
-                  ? "w-10/12 overflow-hidden overflow-ellipsis text-blue-400 underline"
+                  ? "w-10/12 overflow-hidden text-ellipsis text-blue-400 underline"
                   : "text-blur w-10/12"
               }`}
               title={`${sshAddress}`}
@@ -148,7 +148,7 @@ export const ConnectionCard: FC = () => {
               <a
                 className={`w-8/12 ${
                   showAddress
-                    ? "overflow-hidden overflow-ellipsis text-blue-400 underline"
+                    ? "overflow-hidden text-ellipsis text-blue-400 underline"
                     : "text-blur"
                 }`}
                 title={`${nodeId}`}

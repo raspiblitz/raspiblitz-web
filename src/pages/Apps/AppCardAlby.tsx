@@ -78,7 +78,7 @@ export const AppCardAlby: FC = () => {
         {/* Content */}
         <div className="mt-4 flex w-3/4 flex-col items-start justify-center text-xl">
           <h4>{name}</h4>
-          <p className="overflow-ellipsis text-base text-gray-200">
+          <p className="text-ellipsis text-base text-gray-200">
             {t(`appInfo.${id}.shortDescription`)}
           </p>
         </div>

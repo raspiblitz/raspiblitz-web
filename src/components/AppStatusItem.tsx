@@ -28,7 +28,7 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
         className="flex w-full cursor-pointer items-center justify-center py-4 text-white opacity-80 hover:text-yellow-500 md:flex-col lg:flex-row"
       >
         {/* Icon */}
-        <AppIcon appId={id} className="h-19 inline w-10" />
+        <AppIcon appId={id} className="h-10 inline w-10" />
         {/* Content */}
         <span className="mx-3 w-1/2 justify-center text-lg">{appName}</span>
       </span>
@@ -43,7 +43,7 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
       className="flex w-full cursor-pointer items-center justify-center py-4 text-white opacity-80 hover:text-yellow-500 md:flex-col lg:flex-row"
     >
       {/* Icon */}
-      <AppIcon appId={id} className="h-19 inline w-10" />
+      <AppIcon appId={id} className="h-10 inline w-10" />
       {/* Content */}
       <span className="mx-3 w-1/2 justify-center text-lg">{appName}</span>
     </a>

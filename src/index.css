@@ -3,9 +3,45 @@
   regarding the linting issues in this file
 */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin './hero.ts';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+
+  --color-tertiary: #253553;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 .scrollbar-stable {
   scrollbar-gutter: stable;
@@ -20,11 +56,11 @@
 }
 
 .input-underline {
-  @apply mt-0 block w-full border-0 border-b-2 border-gray-200 bg-transparent px-0.5 text-white outline-none focus:border-yellow-500 focus:ring-0;
+  @apply mt-0 block w-full border-0 border-b-2 border-gray-200 bg-transparent px-0.5 text-white outline-hidden focus:border-yellow-500 focus:ring-0;
 }
 
 .input-error {
-  @apply input-underline border-red-500 focus:border-red-500;
+  @apply mt-0 block w-full border-0 border-b-2 border-red-500 bg-transparent px-0.5 text-white outline-hidden focus:border-red-500 focus:ring-0;
 }
 
 .bd-card {
@@ -32,11 +68,11 @@
 }
 
 .bd-button {
-  @apply rounded bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-500;
+  @apply rounded-sm bg-yellow-500 text-white shadow-xl hover:bg-yellow-400 disabled:bg-gray-500;
 }
 
 .bd-button-red {
-  @apply rounded bg-red-500 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-500;
+  @apply rounded-sm bg-red-500 text-white shadow-xl hover:bg-red-400 disabled:bg-gray-500;
 }
 
 .switch-button {

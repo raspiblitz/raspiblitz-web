@@ -75,7 +75,7 @@ export const SingleTransaction: FC<Props> = ({ transaction, onClick }) => {
           {formattedAmount} {unit}
         </p>
       </div>
-      <div className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center italic">
+      <div className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center italic">
         {comment || "Transaction"}
       </div>
     </li>

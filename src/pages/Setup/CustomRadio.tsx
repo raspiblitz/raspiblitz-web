@@ -1,5 +1,4 @@
-import { Image } from "@heroui/image";
-import { Radio, cn } from "@heroui/react";
+import { Image, Radio, cn } from "@heroui/react";
 import type { ReactNode } from "react";
 
 type Props = {

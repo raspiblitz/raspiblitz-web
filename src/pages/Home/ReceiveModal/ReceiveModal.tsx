@@ -7,8 +7,8 @@ import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import { convertBtcToSat } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { Tab, Tabs } from "@heroui/tabs";
-import type { FC } from "react";
+import { Tab, Tabs } from "@heroui/react";
+import type { FC, Key } from "react";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TxType } from "../SwitchTxType";
@@ -75,13 +75,13 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
       });
   };
 
-  const handleTabChange = (key: React.Key) => {
+  const handleTabChange = async (key: Key) => {
     setInvoiceType(key as TxType);
     setError("");
 
     // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if (key == TxType.ONCHAIN && !address) {
-      generateOnChainAddressHandler();
+      await generateOnChainAddressHandler();
     }
   };
 
