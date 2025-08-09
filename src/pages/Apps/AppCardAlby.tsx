@@ -1,5 +1,3 @@
-import AppIcon from "@/components/AppIcon";
-import { instance } from "@/utils/interceptor";
 import {
   ArrowTopRightOnSquareIcon,
   LinkIcon,
@@ -8,6 +6,8 @@ import { Button, Link } from "@heroui/react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import AppIcon from "@/components/AppIcon";
+import { instance } from "@/utils/interceptor";
 
 export const AppCardAlby: FC = () => {
   const { id, name } = {

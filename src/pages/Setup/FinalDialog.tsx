@@ -1,12 +1,12 @@
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { Checkbox } from "@heroui/react";
+import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import type { SetupPhase } from "@/models/setup.model";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
-import { Checkbox } from "@heroui/react";
-import { Controller, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 
 export type Props = {
   setupPhase: SetupPhase;

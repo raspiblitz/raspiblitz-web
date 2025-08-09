@@ -1,6 +1,6 @@
-import { Alert } from "@/components/Alert";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
+import { Alert } from "@/components/Alert";
 
 const CapsLockWarning = () => {
   const { t } = useTranslation();

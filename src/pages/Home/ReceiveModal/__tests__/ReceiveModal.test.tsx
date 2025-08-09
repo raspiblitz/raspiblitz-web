@@ -1,6 +1,6 @@
-import { http, HttpResponse, server } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import { mockedDisclosure, render, screen } from "test-utils";
+import { HttpResponse, http, server } from "@/testServer";
 import ReceiveModal from "../ReceiveModal";
 
 beforeEach(() => {

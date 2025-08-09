@@ -1,15 +1,8 @@
-import {
-  ACCESS_TOKEN,
-  disableGutter,
-  parseJwt,
-  retrieveSettings,
-  setWindowAlias,
-} from "@/utils";
 import type { FC, PropsWithChildren } from "react";
 import {
+  createContext,
   type Dispatch,
   type SetStateAction,
-  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -18,6 +11,13 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import {
+  ACCESS_TOKEN,
+  disableGutter,
+  parseJwt,
+  retrieveSettings,
+  setWindowAlias,
+} from "@/utils";
 import { SSEContext } from "./sse-context";
 
 export interface AppContextType {

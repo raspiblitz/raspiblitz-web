@@ -1,5 +1,5 @@
-import { enableGutter } from "@/utils";
 import { type FC, useEffect } from "react";
+import { enableGutter } from "@/utils";
 import ChangePwModal from "./ChangePwModal";
 import DebugLogBox from "./DebugLogBox";
 import I18nBox from "./I18nBox";

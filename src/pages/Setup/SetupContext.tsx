@@ -1,3 +1,6 @@
+import type React from "react";
+import { createContext, useCallback, useContext } from "react";
+import type { NavigateFunction } from "react-router";
 import {
   Screen,
   SetupLightning,
@@ -9,9 +12,6 @@ import {
   setupShutdown,
   setupStart,
 } from "@/pages/Setup/setup-functions";
-import type React from "react";
-import { createContext, useCallback, useContext } from "react";
-import type { NavigateFunction } from "react-router";
 
 interface SetupContextType {
   state: SetupState;

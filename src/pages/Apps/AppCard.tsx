@@ -1,8 +1,3 @@
-import AppIcon from "@/components/AppIcon";
-import { ConfirmModal } from "@/components/ConfirmModal";
-import { type AppStatus, AuthMethod } from "@/models/app-status";
-import type { App } from "@/models/app.model";
-import { getHrefFromApp } from "@/utils";
 import {
   ArrowTopRightOnSquareIcon,
   ExclamationTriangleIcon,
@@ -14,6 +9,11 @@ import { Button, Link, Tooltip, useDisclosure } from "@heroui/react";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import AppIcon from "@/components/AppIcon";
+import { ConfirmModal } from "@/components/ConfirmModal";
+import type { App } from "@/models/app.model";
+import { type AppStatus, AuthMethod } from "@/models/app-status";
+import { getHrefFromApp } from "@/utils";
 
 export type Props = {
   appInfo: App;

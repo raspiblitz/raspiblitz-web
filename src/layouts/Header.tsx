@@ -1,14 +1,12 @@
-import RaspiBlitzMobileLogo from "@/assets/RaspiBlitz_Logo_Icon.svg?react";
-import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
-import { AppContext, Unit } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
 import {
   BitcoinCircleIcon,
   SatoshiV1Icon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { BookOpenIcon } from "@heroicons/react/24/outline";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightStartOnRectangleIcon,
+  Bars3Icon,
+  BookOpenIcon,
+} from "@heroicons/react/24/outline";
 import {
   Dropdown,
   DropdownItem,
@@ -18,6 +16,10 @@ import {
 import { type Key, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";
+import RaspiBlitzMobileLogo from "@/assets/RaspiBlitz_Logo_Icon.svg?react";
+import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
+import { AppContext, Unit } from "@/context/app-context";
+import { SSEContext } from "@/context/sse-context";
 
 export default function Header() {
   const { t } = useTranslation();

@@ -1,3 +1,4 @@
+import { type FC, useContext } from "react";
 import { AppContext, Unit } from "@/context/app-context";
 import type { Transaction } from "@/models/transaction.model";
 import {
@@ -6,7 +7,6 @@ import {
   convertSatToBtc,
   convertToString,
 } from "@/utils/format";
-import { type FC, useContext } from "react";
 import CategoryIcon from "./CategoryIcon";
 
 export type Props = {

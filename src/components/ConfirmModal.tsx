@@ -1,4 +1,3 @@
-import { Button } from "@/components/Button";
 import {
   Modal,
   ModalBody,
@@ -9,6 +8,7 @@ import {
 import type { UseDisclosureReturn } from "@heroui/use-disclosure";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/Button";
 
 export type Props = {
   disclosure: UseDisclosureReturn;

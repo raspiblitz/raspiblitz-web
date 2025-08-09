@@ -1,8 +1,8 @@
-import { resources } from "@/i18n/config";
-import { saveSettings } from "@/utils";
 import { Select, SelectItem } from "@heroui/react";
 import type { ChangeEvent, FC } from "react";
 import { useTranslation } from "react-i18next";
+import { resources } from "@/i18n/config";
+import { saveSettings } from "@/utils";
 
 const I18nSelect: FC = () => {
   const { t, i18n } = useTranslation();

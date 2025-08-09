@@ -1,5 +1,5 @@
-import type { HardwareInfo } from "@/models/hardware-info";
 import { render, screen } from "test-utils";
+import type { HardwareInfo } from "@/models/hardware-info";
 import HardwareCard from "../HardwareCard";
 
 const basicHardwareInfo: HardwareInfo = {

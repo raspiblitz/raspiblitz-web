@@ -1,3 +1,6 @@
+import { Tab, Tabs } from "@heroui/react";
+import { type FC, type Key, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import {
   ConfirmModal,
@@ -7,9 +10,6 @@ import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import { convertBtcToSat } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
-import { Tab, Tabs } from "@heroui/react";
-import { type FC, type Key, useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { TxType } from "../SwitchTxType";
 import QRCode from "./QRCode";
 import ReceiveLN, { type IFormInputs } from "./ReceiveLN";

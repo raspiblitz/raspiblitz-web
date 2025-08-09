@@ -1,7 +1,7 @@
-import { AppContext, type AppContextType, Unit } from "@/context/app-context";
-import i18n from "@/i18n/test_config";
 import { I18nextProvider } from "react-i18next";
 import { render, screen } from "test-utils";
+import { AppContext, type AppContextType, Unit } from "@/context/app-context";
+import i18n from "@/i18n/test_config";
 import AvailableBalance from "../AvailableBalance";
 
 const contextValues: AppContextType = {

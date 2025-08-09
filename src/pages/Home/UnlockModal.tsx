@@ -1,3 +1,9 @@
+import { Input } from "@heroui/react";
+import { useContext, useState } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import CapsLockWarning from "@/components/CapsLockWarning";
@@ -8,12 +14,6 @@ import {
 import { AppContext } from "@/context/app-context";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { instance } from "@/utils/interceptor";
-import { Input } from "@heroui/react";
-import { useContext, useState } from "react";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 
 interface IFormInputs {
   passwordInput: string;

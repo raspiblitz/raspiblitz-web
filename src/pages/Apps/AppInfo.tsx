@@ -1,10 +1,3 @@
-import { Alert } from "@/components/Alert";
-import AppIcon from "@/components/AppIcon";
-import { SSEContext } from "@/context/sse-context";
-import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { availableApps } from "@/utils/availableApps";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
 import {
   ChevronLeftIcon,
   PlusIcon,
@@ -15,6 +8,13 @@ import { type FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
+import { Alert } from "@/components/Alert";
+import AppIcon from "@/components/AppIcon";
+import { SSEContext } from "@/context/sse-context";
+import PageLoadingScreen from "@/layouts/PageLoadingScreen";
+import { availableApps } from "@/utils/availableApps";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
 import ImageCarousel from "./ImageCarousel";
 
 export const AppInfo: FC = () => {

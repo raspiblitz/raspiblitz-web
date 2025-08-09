@@ -1,10 +1,10 @@
+import { Button, Checkbox } from "@heroui/react";
+import { type FC, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { AppContext, Unit } from "@/context/app-context";
 import type { LightningChannel } from "@/models/lightning-channel";
 import { convertSatToBtc, convertToString } from "@/utils/format";
-import { Button, Checkbox } from "@heroui/react";
-import { type FC, useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   isLoading: boolean;

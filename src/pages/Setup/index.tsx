@@ -1,9 +1,9 @@
-import { type SetupState, initialState } from "@/models/setup.model";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { initialState, type SetupState } from "@/models/setup.model";
 import SetupProvider from "@/pages/Setup/SetupContext";
 import SetupScreenRenderer from "@/pages/Setup/SetupScreenRenderer";
 import { setupMonitoringLoop } from "@/pages/Setup/setup-functions";
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 
 export default function Setup() {
   const [state, setState] = useState<SetupState>(initialState);

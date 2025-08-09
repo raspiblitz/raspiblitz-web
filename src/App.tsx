@@ -3,22 +3,22 @@ import RequireAuth from "./components/RequireAuth";
 import RequireSetup from "./components/RequireSetup";
 import { AppContext } from "./context/app-context";
 import "./i18n/config";
-import AppPage from "@/pages/Apps/AppPage";
-import Login from "@/pages/Login";
 import {
   type FC,
-  Suspense,
   lazy,
+  Suspense,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
+import AppPage from "@/pages/Apps/AppPage";
+import Login from "@/pages/Login";
 import Layout from "./layouts/Layout";
 import LoadingScreen from "./layouts/LoadingScreen";
 import SkeletonLoadingScreen from "./layouts/SkeletonLoadingScreen";
 import { SetupPhase } from "./models/setup.model";
-import { ACCESS_TOKEN, REFRESH_TIME, parseJwt } from "./utils";
+import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./utils";
 import { instance } from "./utils/interceptor";
 import "react-toastify/dist/ReactToastify.css";
 

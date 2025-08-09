@@ -1,8 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
 import { SetupPhase } from "@/models/setup.model";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   setupPhase: SetupPhase;

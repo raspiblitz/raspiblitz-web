@@ -1,17 +1,17 @@
-import { Button } from "@/components/Button";
-import { Headline } from "@/components/Headline";
-import SetupContainer from "@/layouts/SetupContainer";
-import { SetupPhase } from "@/models/setup.model";
 import {
   ArrowDownTrayIcon,
+  ArrowsRightLeftIcon,
   ArrowUpCircleIcon,
   ArrowUturnLeftIcon,
-  ArrowsRightLeftIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
 import { RadioGroup } from "@heroui/react";
 import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/Button";
+import { Headline } from "@/components/Headline";
+import SetupContainer from "@/layouts/SetupContainer";
+import { SetupPhase } from "@/models/setup.model";
 import CustomRadio from "./CustomRadio";
 
 type Props = {

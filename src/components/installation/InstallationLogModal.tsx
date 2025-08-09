@@ -1,10 +1,10 @@
-import { SSEContext } from "@/context/sse-context";
-import ModalDialog from "@/layouts/ModalDialog";
-import { AppId } from "@/models/app-status";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { SSEContext } from "@/context/sse-context";
+import ModalDialog from "@/layouts/ModalDialog";
+import { AppId } from "@/models/app-status";
 
 interface InstallationLogModalProps {
   appId: string;
@@ -22,8 +22,6 @@ const InstallationLogModal = ({
 
   const appStatus = installationStatus[appId];
 
-  if (!appStatus) return null;
-
   const { messages, errorId } = appStatus;
 
   // Filter messages with non-empty details
@@ -36,6 +34,8 @@ const InstallationLogModal = ({
     logEndRef.current?.scrollIntoView({ behavior: "smooth" });
     setPrevMessagesCount(messagesWithDetails.length);
   }, [messagesWithDetails.length]);
+
+  if (!appStatus) return null;
 
   // Format error details if present
   const errorMsg = messages.find(

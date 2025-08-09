@@ -1,5 +1,12 @@
-import type { AppStatus, AppStatusQueryResponse } from "@/models/app-status";
+import type { FC, PropsWithChildren } from "react";
+import {
+  createContext,
+  type Dispatch,
+  type SetStateAction,
+  useState,
+} from "react";
 import type { App } from "@/models/app.model";
+import type { AppStatus, AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
 import type { InstallationStatus } from "@/models/installation-status";
@@ -8,13 +15,6 @@ import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { Transaction } from "@/models/transaction.model";
 import type { WalletBalance } from "@/models/wallet-balance";
-import type { FC, PropsWithChildren } from "react";
-import {
-  type Dispatch,
-  type SetStateAction,
-  createContext,
-  useState,
-} from "react";
 
 export interface SSEContextType {
   evtSource: EventSource | null;

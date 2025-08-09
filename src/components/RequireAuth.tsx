@@ -1,6 +1,6 @@
-import { AppContext } from "@/context/app-context";
 import { type FC, type PropsWithChildren, useContext } from "react";
 import { Navigate, useLocation } from "react-router";
+import { AppContext } from "@/context/app-context";
 
 // see https://reactrouter.com/docs/en/v6/examples/auth
 const RequireAuth: FC<PropsWithChildren> = ({ children }) => {

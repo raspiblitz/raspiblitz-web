@@ -1,5 +1,5 @@
-import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
 import { Spinner } from "@heroui/react";
+import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
 
 // Loading Screen for the initial loading of the app
 export default function LoadingScreen() {

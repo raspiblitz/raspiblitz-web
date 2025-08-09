@@ -1,6 +1,6 @@
-import type { LightningChannel } from "@/models/lightning-channel";
 import { Accordion, AccordionItem } from "@heroui/react";
 import type { FC } from "react";
+import type { LightningChannel } from "@/models/lightning-channel";
 import Channel from "./Channel";
 
 type Props = {

@@ -1,5 +1,5 @@
-import { Button } from "@/components/Button";
 import type { FC, PropsWithChildren, ReactElement } from "react";
+import { Button } from "@/components/Button";
 
 export type Props = {
   name: string | ReactElement;

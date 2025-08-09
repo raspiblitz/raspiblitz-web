@@ -1,7 +1,7 @@
-import { ConfirmModal } from "@/components/ConfirmModal";
-import { http, HttpResponse, server } from "@/testServer";
 import userEvent from "@testing-library/user-event";
 import { mockedDisclosure, render, screen, waitFor } from "test-utils";
+import { ConfirmModal } from "@/components/ConfirmModal";
+import { HttpResponse, http, server } from "@/testServer";
 import { TxType } from "../../SwitchTxType";
 import type { Props } from "../ConfirmSend";
 import ConfirmSend from "../ConfirmSend";
@@ -543,7 +543,7 @@ describe("ConfirmSend", () => {
     });
 
     test("sends correct body for onchain transaction", async () => {
-      // biome-ignore lint/suspicious/noExplicitAny:
+      // biome-ignore lint/suspicious/noExplicitAny: test
       let capturedBody: any;
       server.use(
         http.post("/api/lightning/send-coins", async ({ request }) => {
@@ -586,7 +586,7 @@ describe("ConfirmSend", () => {
     });
 
     test("sends correct body for spendAll onchain transaction", async () => {
-      // biome-ignore lint/suspicious/noExplicitAny:
+      // biome-ignore lint/suspicious/noExplicitAny: test
       let capturedBody: any;
       server.use(
         http.post("/api/lightning/send-coins", async ({ request }) => {

@@ -1,3 +1,5 @@
+import { HttpStatusCode } from "axios";
+import type { NavigateFunction } from "react-router";
 import {
   Screen,
   SetupPhase,
@@ -6,8 +8,6 @@ import {
 } from "@/models/setup.model";
 import { ACCESS_TOKEN } from "@/utils";
 import { instance } from "@/utils/interceptor";
-import { HttpStatusCode } from "axios";
-import type { NavigateFunction } from "react-router";
 
 type UpdateState = (newState: Partial<SetupState>) => void;
 
