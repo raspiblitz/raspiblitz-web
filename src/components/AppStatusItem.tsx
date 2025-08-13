@@ -30,7 +30,7 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
         {/* Icon */}
         <AppIcon appId={id} className="h-10 inline w-10" />
         {/* Content */}
-        <span className="mx-3 w-1/2 justify-center text-lg">{appName}</span>
+        <span className="mx-3 w-1/2 justify-start flex text-lg">{appName}</span>
       </button>
     );
   }
