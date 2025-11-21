@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error
 import { signToken } from '../../backend-mock/auth';
 import { dashboardStatus } from '../status';
 import { fulfillRoute } from '../utils';

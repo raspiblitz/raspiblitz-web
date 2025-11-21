@@ -24,9 +24,9 @@ export const AppInfo: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus, installingApp, hardwareInfo } = useContext(SSEContext);
   const [imgs, setImgs] = useState<string[]>([]);
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const { name } = availableApps[appId!];
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const { author, repository } = availableApps[appId!];
   const { installed, version } =
     appStatus.data.find((app) => app.id === appId) || {};
@@ -77,12 +77,12 @@ export const AppInfo: FC = () => {
 
   if (!appId) {
     navigate("/apps");
-    return <></>;
+    return null;
   }
 
   const video =
     appId === "mempool" ? (
-      // biome-ignore lint/a11y/useMediaCaption: <explanation>
+      // biome-ignore lint/a11y/useMediaCaption: value is expected to exist at this point
       <video width="2000" height="1000" controls>
         <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
       </video>

@@ -92,7 +92,7 @@ const TransactionCard: FC<Props> = ({
             {currentPageTxs.map((transaction: Transaction, index: number) => {
               return (
                 <SingleTransaction
-                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                  // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
                   key={index}
                   onClick={() => showDetails(transaction.index)}
                   transaction={transaction}
@@ -100,7 +100,7 @@ const TransactionCard: FC<Props> = ({
               );
             })}
             {[...Array(fillEmptyTxAmount)].map((_, index: number) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+              // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
               <SingleTransaction key={index} />
             ))}
           </ul>

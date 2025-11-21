@@ -31,7 +31,7 @@ const DebugLogBox: FC = () => {
       tmpLink.click();
       toast.dismiss(loadingToast);
       toast.info(t("settings.debug_report_done"));
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
     } catch (e: any) {
       toast.error(checkError(e));
     } finally {

@@ -10,7 +10,7 @@ export const AppInfo: FC = () => {
   const { appId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus } = useContext(SSEContext);
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const { customComponent } = availableApps[appId!];
 
   const app = appStatus.data.find((app) => app.id === appId);

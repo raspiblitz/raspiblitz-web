@@ -19,7 +19,7 @@ export default function Stepper({ currentStep }: Props) {
     >
       <ul className="relative z-10 hidden items-center justify-between lg:flex">
         {Array.from({ length: NUMBER_OF_STEPS }).map((_, index: number) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+          // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
           <li className="list-none bg-primary-900 px-4" key={index}>
             <span
               className={cn(

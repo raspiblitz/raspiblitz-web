@@ -29,14 +29,14 @@ export const BitcoinCard: FC = () => {
     size_on_disk,
   } = btcInfo;
 
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const syncPercentage = (verification_progress! * 100).toFixed(2);
 
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const shownVersion = subversion!.replace(/\//g, "").split(":")[1];
 
   // size_on_disk is in byte => convert to GB - 1024 ^ 2 = 1048576
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const diskSize = (size_on_disk! / 1024 / 1024 / 1024).toFixed(2);
 
   return (

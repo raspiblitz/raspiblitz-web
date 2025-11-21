@@ -20,7 +20,7 @@ export const TransactionDetailModal: FC<Props> = ({
 
   // prevent error when closing via 'Esc' key
   if (!transaction) {
-    return <></>;
+    return null;
   }
 
   const { category } = transaction;

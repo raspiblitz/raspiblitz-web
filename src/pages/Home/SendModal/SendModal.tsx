@@ -84,52 +84,50 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
 
   return (
     <ConfirmModal disclosure={disclosure} custom>
-      <>
-        <ConfirmModal.Header>{t("wallet.send")}</ConfirmModal.Header>
+      <ConfirmModal.Header>{t("wallet.send")}</ConfirmModal.Header>
 
-        <div className="mx-6">
-          <Tabs
-            fullWidth
-            aria-label={t("wallet.receive_aria_options")}
-            onSelectionChange={handleTabChange}
-          >
-            <Tab key={TxType.LIGHTNING} title={t("wallet.send_lightning")}>
-              {!isBack && confirmData ? (
-                <ConfirmSend
-                  confirmData={confirmData}
-                  back={backHandler}
-                  balance={lnBalance}
-                  close={disclosure.onClose}
-                />
-              ) : (
-                <SendLn
-                  isLoading={isLoading}
-                  onConfirm={confirmLnHandler}
-                  lnBalance={lnBalance}
-                  confirmData={confirmData}
-                  error={error}
-                />
-              )}
-            </Tab>
-            <Tab key={TxType.ONCHAIN} title={t("wallet.send_onchain")}>
-              {!isBack && confirmData ? (
-                <ConfirmSend
-                  confirmData={confirmData}
-                  back={backHandler}
-                  balance={lnBalance}
-                  close={disclosure.onClose}
-                />
-              ) : (
-                <SendOnChain
-                  balance={onchainBalance}
-                  confirmData={confirmData}
-                  onConfirm={confirmOnChainHandler}
-                />
-              )}
-            </Tab>
-          </Tabs>
-        </div>
-      </>
+      <div className="mx-6">
+        <Tabs
+          fullWidth
+          aria-label={t("wallet.receive_aria_options")}
+          onSelectionChange={handleTabChange}
+        >
+          <Tab key={TxType.LIGHTNING} title={t("wallet.send_lightning")}>
+            {!isBack && confirmData ? (
+              <ConfirmSend
+                confirmData={confirmData}
+                back={backHandler}
+                balance={lnBalance}
+                close={disclosure.onClose}
+              />
+            ) : (
+              <SendLn
+                isLoading={isLoading}
+                onConfirm={confirmLnHandler}
+                lnBalance={lnBalance}
+                confirmData={confirmData}
+                error={error}
+              />
+            )}
+          </Tab>
+          <Tab key={TxType.ONCHAIN} title={t("wallet.send_onchain")}>
+            {!isBack && confirmData ? (
+              <ConfirmSend
+                confirmData={confirmData}
+                back={backHandler}
+                balance={lnBalance}
+                close={disclosure.onClose}
+              />
+            ) : (
+              <SendOnChain
+                balance={onchainBalance}
+                confirmData={confirmData}
+                onConfirm={confirmOnChainHandler}
+              />
+            )}
+          </Tab>
+        </Tabs>
+      </div>
     </ConfirmModal>
   );
 };

@@ -53,7 +53,6 @@ export function retrieveSettings(): SavedSettings | null {
  */
 export function checkPropsUndefined(props: object): boolean {
   let someUndefined = false;
-  // biome-ignore lint/complexity/noForEach: <explanation>
   Object.values(props).forEach((prop) => {
     if (prop === null || prop === undefined) {
       someUndefined = true;

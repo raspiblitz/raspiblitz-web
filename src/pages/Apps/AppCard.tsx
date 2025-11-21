@@ -19,7 +19,7 @@ export type Props = {
   appInfo: App;
   appStatusInfo: AppStatus;
   installed: boolean;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   installingApp: any | null;
   onInstall: (id: string) => void;
   error?: string;

@@ -12,9 +12,9 @@ type Props = {
 export const AppStatusItem: FC<Props> = ({ app }) => {
   const { id } = app;
   const navigate = useNavigate();
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const appName = availableApps[id]!.name;
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const customComponent = availableApps[id]!.customComponent;
 
   if (customComponent) {
