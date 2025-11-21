@@ -9,7 +9,6 @@ import type { FC } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";
-import AppIcon from "@/components/AppIcon";
 import AppStatusItem from "@/components/AppStatusItem";
 import { AppContext } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";

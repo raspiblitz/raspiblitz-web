@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import type { App } from "@/models/app.model";
-import type { AppStatus, AppStatusQueryResponse } from "@/models/app-status";
+import type { AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
 import type { InstallationStatus } from "@/models/installation-status";
@@ -34,9 +34,8 @@ export interface SSEContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: legacy type definition
   installingApp: any | null;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
   systemStartupInfo: SystemStartupInfo | null;
@@ -141,7 +140,7 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   const [installingApp] = useState<any | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] =

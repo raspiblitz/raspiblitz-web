@@ -72,7 +72,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
       <form onSubmit={handleSubmit(openChannelHandler)}>
         <ConfirmModal.Header>{t("home.open_channel")}</ConfirmModal.Header>
         <ConfirmModal.Body>
-          {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
+          {/* biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point */}
           <AvailableBalance balance={convertedBalance!} />
 
           <fieldset className="flex w-full flex-col gap-4">

@@ -47,7 +47,7 @@ export default function LightningDialog({ callback }: Props) {
               i18nKey="setup.select_lightning_help"
               t={t}
               components={[
-                // biome-ignore lint/a11y/useAnchorContent: <explanation>
+                // biome-ignore lint/a11y/useAnchorContent: value is expected to exist at this point
                 <a
                   key="link"
                   href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"

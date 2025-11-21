@@ -28,9 +28,9 @@ import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 
 type Props = {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   data: SyncData | any;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   callback: (action: string, data: any) => void;
 };
 
@@ -120,42 +120,34 @@ export default function SyncScreen({ data, callback }: Props) {
             onSubmit={handleSubmit(unlockWallet)}
           >
             <ModalContent>
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                  {t("wallet.unlock_subtitle")}
-                </ModalHeader>
-                <ModalBody>
-                  <>
-                    <Input
-                      classNames={{
-                        inputWrapper:
-                          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                      }}
-                      type="password"
-                      label={t("setup.sync_wallet_info")}
-                      isDisabled={runningUnlock}
-                      isInvalid={!!errors.passwordInput}
-                      errorMessage={errors.passwordInput?.message}
-                      value={password}
-                      {...register("passwordInput", {
-                        required: t("setup.password_error_empty"),
-                        onChange: changePasswordHandler,
-                      })}
-                    />
+              <ModalHeader className="flex flex-col gap-1">
+                {t("wallet.unlock_subtitle")}
+              </ModalHeader>
+              <ModalBody>
+                <Input
+                  classNames={{
+                    inputWrapper:
+                      "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                  }}
+                  type="password"
+                  label={t("setup.sync_wallet_info")}
+                  isDisabled={runningUnlock}
+                  isInvalid={!!errors.passwordInput}
+                  errorMessage={errors.passwordInput?.message}
+                  value={password}
+                  {...register("passwordInput", {
+                    required: t("setup.password_error_empty"),
+                    onChange: changePasswordHandler,
+                  })}
+                />
 
-                    {error && <Alert color="danger">{error}</Alert>}
-                  </>
-                </ModalBody>
-                <ModalFooter>
-                  <Button
-                    type="submit"
-                    color="primary"
-                    isLoading={runningUnlock}
-                  >
-                    {t("setup.sync_wallet_unlock")}
-                  </Button>
-                </ModalFooter>
-              </>
+                {error && <Alert color="danger">{error}</Alert>}
+              </ModalBody>
+              <ModalFooter>
+                <Button type="submit" color="primary" isLoading={runningUnlock}>
+                  {t("setup.sync_wallet_unlock")}
+                </Button>
+              </ModalFooter>
             </ModalContent>
           </form>
         </Modal>

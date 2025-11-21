@@ -76,7 +76,7 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   const handleTabChange = async (key: Key) => {
     setError("");
 
-    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
+    // biome-ignore lint/suspicious/noDoubleEquals: value is expected to exist at this point
     if (key == TxType.ONCHAIN && !address) {
       await generateOnChainAddressHandler();
     }
@@ -84,46 +84,44 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
 
   return (
     <ConfirmModal disclosure={disclosure} custom>
-      <>
-        <ConfirmModal.Header>{t("wallet.receive")}</ConfirmModal.Header>
+      <ConfirmModal.Header>{t("wallet.receive")}</ConfirmModal.Header>
 
-        <div className="mx-6">
-          <Tabs
-            classNames={{
-              tabList: "flex-col md:flex-row",
-            }}
-            fullWidth
-            aria-label={t("wallet.receive_aria_options")}
-            onSelectionChange={handleTabChange}
-          >
-            <Tab key={TxType.LIGHTNING} title={t("wallet.create_invoice_ln")}>
-              {invoice ? (
-                <ConfirmModal.Body>
-                  <QRCode address={invoice} />
-                </ConfirmModal.Body>
-              ) : (
-                <ReceiveLN
-                  onSubmitHandler={generateInvoiceHandler}
-                  isLoading={isLoading}
-                  error={error}
+      <div className="mx-6">
+        <Tabs
+          classNames={{
+            tabList: "flex-col md:flex-row",
+          }}
+          fullWidth
+          aria-label={t("wallet.receive_aria_options")}
+          onSelectionChange={handleTabChange}
+        >
+          <Tab key={TxType.LIGHTNING} title={t("wallet.create_invoice_ln")}>
+            {invoice ? (
+              <ConfirmModal.Body>
+                <QRCode address={invoice} />
+              </ConfirmModal.Body>
+            ) : (
+              <ReceiveLN
+                onSubmitHandler={generateInvoiceHandler}
+                isLoading={isLoading}
+                error={error}
+              />
+            )}
+          </Tab>
+          <Tab key={TxType.ONCHAIN} title={t("wallet.fund")}>
+            <ConfirmModal.Body>
+              {!address && error && <Alert color="danger">{error}</Alert>}
+
+              {address && !error && (
+                <QRCode
+                  address={address}
+                  onRefreshHandler={generateOnChainAddressHandler}
                 />
               )}
-            </Tab>
-            <Tab key={TxType.ONCHAIN} title={t("wallet.fund")}>
-              <ConfirmModal.Body>
-                {!address && error && <Alert color="danger">{error}</Alert>}
-
-                {address && !error && (
-                  <QRCode
-                    address={address}
-                    onRefreshHandler={generateOnChainAddressHandler}
-                  />
-                )}
-              </ConfirmModal.Body>
-            </Tab>
-          </Tabs>
-        </div>
-      </>
+            </ConfirmModal.Body>
+          </Tab>
+        </Tabs>
+      </div>
     </ConfirmModal>
   );
 };

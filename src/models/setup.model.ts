@@ -58,7 +58,7 @@ export enum Screen {
 
 export interface SetupState {
   page: Screen;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   syncData: any | null;
   waitScreenStatus: SetupStatus;
   waitScreenMessage: string;

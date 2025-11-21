@@ -87,7 +87,6 @@ describe("SendModal", () => {
               },
               { status: 200 },
             );
-            // biome-ignore lint/style/noUselessElse: <explanation>
           } else {
             return new HttpResponse(null, { status: 500 });
           }

@@ -51,7 +51,7 @@ export default function FinalDialog({
             <ol className="flex h-104 w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
               {seedWords.split(", ").map((word, index) => {
                 return (
-                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                  // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
                   <li key={index} className="my-3 pl-2">
                     {word}
                   </li>

@@ -1,10 +1,10 @@
 .content-container {
-  /* biome-ignore lint/correctness/noUnknownFunction: <explanation> */
+  /* biome-ignore lint/correctness/noUnknownFunction: value is expected to exist at this point */
   min-height: calc(100vh - theme("spacing.16"));
 }
 
 .sidebar {
-  /* biome-ignore lint/correctness/noUnknownFunction: <explanation> */
+  /* biome-ignore lint/correctness/noUnknownFunction: value is expected to exist at this point */
   max-height: calc(100vh - theme("spacing.16"));
 }
 

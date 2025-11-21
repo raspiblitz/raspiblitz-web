@@ -55,7 +55,7 @@ const customRender = (
   },
 ) =>
   render(ui, {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
     wrapper: (props: any) => (
       <AllTheProviders {...props} {...options?.providerOptions} />
     ),

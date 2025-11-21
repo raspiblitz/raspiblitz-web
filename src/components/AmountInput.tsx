@@ -33,12 +33,12 @@ const AmountInput: FC<Props> = ({
       );
     } else {
       // remove separators
-      formattedValue = formattedValue.replace(/,|\./g, "");
+      formattedValue = formattedValue.replace(/[,.]/g, "");
       if (formattedValue) {
         formattedValue = new Intl.NumberFormat("en-US", {
           minimumFractionDigits: 8,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-        }).format(convertSatToBtc(Number.parseInt(formattedValue))!);
+          // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
+        }).format(convertSatToBtc(Number.parseInt(formattedValue, 10))!);
       }
     }
     setAmountInput(formattedValue);
