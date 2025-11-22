@@ -17,13 +17,13 @@ const AvailableBalance: FC<Props> = ({ balance }) => {
       : convertToString(unit, balance);
 
   return (
-    <p className="my-5">
-      <span className="font-bold">
-        {t("wallet.available_balance")}
-        :&nbsp;
-      </span>
-      {convertedBalance} {unit}
-    </p>
+    <div className="rounded-xl  px-4 py-3">
+      <p className="text-xs text-secondary">{t("wallet.available_balance")}</p>
+      <p className="text-lg font-bold">
+        {convertedBalance}{" "}
+        <span className="text-sm font-normal text-secondary">{unit}</span>
+      </p>
+    </div>
   );
 };
 
