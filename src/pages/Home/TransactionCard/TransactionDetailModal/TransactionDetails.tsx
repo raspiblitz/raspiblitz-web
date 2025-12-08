@@ -121,7 +121,9 @@ export const TransactionDetails: FC<Props> = ({ details }) => {
           <KeyValueCard
             name={t("tx.fee")}
             value={
-              isOnchain ? `${details.total_fees}` : `${details.total_fees} mSat`
+              isOnchain
+                ? `${unit === Unit.BTC ? convertToString(unit, convertSatToBtc(details.total_fees)) : convertToString(unit, details.total_fees)} ${unit}`
+                : `${details.total_fees} mSat`
             }
           />
         )}
