@@ -11,7 +11,7 @@ import { AppContext } from "@/context/app-context";
 import type { Implementation } from "@/models/ln-info";
 import type { Transaction } from "@/models/transaction.model";
 import CategoryIcon from "./CategoryIcon";
-import { formatTransaction } from "./SingleTransaction";
+import { formatTransaction } from "./transactionUtils";
 
 export type Props = {
   transactions: Transaction[];
@@ -107,7 +107,7 @@ const TransactionCard: FC<Props> = ({
               return (
                 <ListboxItem
                   key={transaction.id}
-                  textValue={`${formatted.comment}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
+                  textValue={`${formatted.comment ?? t("tx.default_comment")}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
                 >
                   <div className="flex flex-col gap-1">
                     {/* Row 1: Icon + Amount + Date */}
@@ -136,7 +136,7 @@ const TransactionCard: FC<Props> = ({
 
                     {/* Row 2: Comment */}
                     <span className="truncate text-sm italic text-default-400">
-                      {formatted.comment}
+                      {formatted.comment ?? t("tx.default_comment")}
                     </span>
                   </div>
                 </ListboxItem>
