@@ -95,11 +95,11 @@ const TransactionCard: FC<Props> = ({
               if (tx) showDetails(tx.index);
             }}
             classNames={{
-              base: "pt-5 p-0",
-              list: "gap-0",
+              base: "pt-4 p-0",
+              list: "gap-2",
             }}
             itemClasses={{
-              base: "h-24 cursor-pointer border-b border-gray-400 px-0 py-2 md:px-4 data-[hover=true]:bg-gray-700 rounded-none",
+              base: "rounded-lg bg-default-100/50 data-[hover=true]:bg-default-200/50 p-4 cursor-pointer transition-background",
             }}
           >
             {currentPageTxs.map((transaction: Transaction) => {
@@ -109,36 +109,35 @@ const TransactionCard: FC<Props> = ({
                   key={transaction.id}
                   textValue={`${formatted.comment}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
                 >
-                  <div className="flex w-full flex-col justify-center">
-                    <div className="flex w-full items-center justify-center">
-                      <div className="w-2/12">
+                  <div className="flex flex-col gap-1">
+                    {/* Row 1: Icon + Amount + Date */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
                         <CategoryIcon
                           category={transaction.category}
                           type={transaction.type}
                           status={transaction.status}
-                          confirmations={
-                            transaction.num_confs
-                              ? transaction.num_confs
-                              : undefined
-                          }
+                          confirmations={transaction.num_confs ?? undefined}
                         />
+                        <span
+                          className={`text-lg font-semibold ${formatted.color}`}
+                        >
+                          {formatted.sign}
+                          {formatted.formattedAmount} {unit}
+                        </span>
                       </div>
                       <time
-                        className="w-5/12 text-left text-sm"
+                        className="text-sm text-default-500"
                         dateTime={formatted.isoString}
                       >
                         {formatted.formattedDate}
                       </time>
-                      <p
-                        className={`inline-block w-8/12 text-right ${formatted.color}`}
-                      >
-                        {formatted.sign}
-                        {formatted.formattedAmount} {unit}
-                      </p>
                     </div>
-                    <div className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center italic">
+
+                    {/* Row 2: Comment */}
+                    <span className="truncate text-sm italic text-default-400">
                       {formatted.comment}
-                    </div>
+                    </span>
                   </div>
                 </ListboxItem>
               );
