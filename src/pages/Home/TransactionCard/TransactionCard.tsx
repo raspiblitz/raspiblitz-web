@@ -3,14 +3,15 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Spinner } from "@heroui/react";
+import { Button, Listbox, ListboxItem, Spinner } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { AppContext } from "@/context/app-context";
 import type { Implementation } from "@/models/ln-info";
 import type { Transaction } from "@/models/transaction.model";
-import SingleTransaction from "./SingleTransaction";
+import CategoryIcon from "./CategoryIcon";
+import { formatTransaction } from "./SingleTransaction";
 
 export type Props = {
   transactions: Transaction[];
@@ -30,7 +31,7 @@ const TransactionCard: FC<Props> = ({
   implementation,
 }) => {
   const { t } = useTranslation();
-  const { walletLocked } = useContext(AppContext);
+  const { walletLocked, unit } = useContext(AppContext);
   const [page, setPage] = useState(0);
 
   if (walletLocked) {
@@ -63,8 +64,6 @@ const TransactionCard: FC<Props> = ({
     );
   }
 
-  const fillEmptyTxAmount = MAX_ITEMS - currentPageTxs.length;
-
   return (
     <div className="h-full">
       <section className="bd-card flex flex-col transition-colors">
@@ -88,22 +87,63 @@ const TransactionCard: FC<Props> = ({
         )}
 
         {transactions.length > 0 && (
-          <ul className="pt-5">
-            {currentPageTxs.map((transaction: Transaction, index: number) => {
+          <Listbox
+            aria-label={t("tx.transactions")}
+            selectionMode="none"
+            onAction={(key) => {
+              const tx = currentPageTxs.find((t) => t.id === String(key));
+              if (tx) showDetails(tx.index);
+            }}
+            classNames={{
+              base: "pt-5 p-0",
+              list: "gap-0",
+            }}
+            itemClasses={{
+              base: "h-24 cursor-pointer border-b border-gray-400 px-0 py-2 md:px-4 data-[hover=true]:bg-gray-700 rounded-none",
+            }}
+          >
+            {currentPageTxs.map((transaction: Transaction) => {
+              const formatted = formatTransaction(transaction, unit);
               return (
-                <SingleTransaction
-                  // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
-                  key={index}
-                  onClick={() => showDetails(transaction.index)}
-                  transaction={transaction}
-                />
+                <ListboxItem
+                  key={transaction.id}
+                  textValue={`${formatted.comment}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
+                >
+                  <div className="flex w-full flex-col justify-center">
+                    <div className="flex w-full items-center justify-center">
+                      <div className="w-2/12">
+                        <CategoryIcon
+                          category={transaction.category}
+                          type={transaction.type}
+                          status={transaction.status}
+                          confirmations={
+                            transaction.num_confs
+                              ? transaction.num_confs
+                              : undefined
+                          }
+                        />
+                      </div>
+                      <time
+                        className="w-5/12 text-left text-sm"
+                        dateTime={formatted.isoString}
+                      >
+                        {formatted.formattedDate}
+                      </time>
+                      <p
+                        className={`inline-block w-8/12 text-right ${formatted.color}`}
+                      >
+                        {formatted.sign}
+                        {formatted.formattedAmount} {unit}
+                      </p>
+                    </div>
+                    <div className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center italic">
+                      {formatted.comment}
+                    </div>
+                  </div>
+                </ListboxItem>
               );
             })}
-            {[...Array(fillEmptyTxAmount)].map((_, index: number) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
-              <SingleTransaction key={index} />
-            ))}
-          </ul>
+          </Listbox>
         )}
 
         {transactions.length > 0 && (
