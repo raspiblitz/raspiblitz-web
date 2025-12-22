@@ -67,7 +67,7 @@ const TransactionCard: FC<Props> = ({
   return (
     <div className="h-full">
       <section className="bd-card flex flex-col transition-colors">
-        <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
+        <h2 className="mb-4 text-lg font-bold">{t("tx.transactions")}</h2>
 
         {isLoading && <Spinner size="lg" />}
 
