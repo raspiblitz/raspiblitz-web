@@ -34,27 +34,24 @@ export const ConfirmationsRing: FC<Props> = ({
         valueLabel={
           showLabel ? (
             <span
-              className="font-semibold text-[0.625rem]"
-              style={{ color: "#D1D5DB" }}
+              className="font-semibold text-[0.625rem] text-gray-300"
             >
               {t("tx.unconfirmed")}
             </span>
           ) : isFullyConfirmed ? (
             <span
-              className="font-bold text-[1.2rem]"
-              style={{ color: "#E5E7EB" }}
+              className="font-bold text-[1.2rem] text-gray-200"
             >
               {conf}
             </span>
           ) : (
             <div className="flex flex-col items-center">
               <span
-                className="font-bold text-[1.2rem]"
-                style={{ color: "#E5E7EB" }}
+                className="font-bold text-[1.2rem] text-gray-200"
               >
                 {conf}
               </span>
-              <span className="text-[0.8rem]" style={{ color: "#9CA3AF" }}>
+              <span className="text-[0.8rem] text-gray-400">
                 / {required}
               </span>
             </div>
