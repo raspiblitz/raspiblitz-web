@@ -52,6 +52,7 @@ const TransactionId: FC<Props> = ({ id, maxDisplay = 8 }) => {
             type="button"
             onClick={() => setExpanded(!expanded)}
             className="mt-1 w-full text-left font-mono text-sm text-gray-300 hover:text-gray-200"
+            aria-label={expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")}
           >
             <p className={expanded ? "break-all" : "truncate"}>{displayId}</p>
           </button>
