@@ -382,7 +382,8 @@
       "tx_details": "Transaction Details",
       "txid": "Transaction ID",
       "unconfirmed": "Unconfirmed",
-      "value": "Value"
+      "value": "Value",
+      "default_comment": "Transaction"
     },
     "wallet": {
       "address": "Address",
