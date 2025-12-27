@@ -5,8 +5,7 @@ import {
   type Props as ConfirmModalProps,
 } from "@/components/ConfirmModal";
 import type { Transaction } from "@/models/transaction.model";
-import LNDetails from "./LNDetails";
-import OnchainDetails from "./OnchainDetails";
+import TransactionDetails from "./TransactionDetails";
 
 interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   transaction: Transaction;
@@ -23,14 +22,11 @@ export const TransactionDetailModal: FC<Props> = ({
     return null;
   }
 
-  const { category } = transaction;
-
   return (
     <ConfirmModal disclosure={disclosure} custom>
       <ConfirmModal.Header>{t("tx.tx_details")}</ConfirmModal.Header>
       <ConfirmModal.Body>
-        {category === "onchain" && <OnchainDetails details={transaction} />}
-        {category === "ln" && <LNDetails details={transaction} />}
+        <TransactionDetails details={transaction} />
       </ConfirmModal.Body>
     </ConfirmModal>
   );
