@@ -52,17 +52,22 @@ const TransactionId: FC<Props> = ({ id, maxDisplay = 8 }) => {
             type="button"
             onClick={() => setExpanded(!expanded)}
             className="mt-1 w-full text-left font-mono text-sm text-gray-300 hover:text-gray-200"
-            aria-label={expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")}
+            aria-label={
+              expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")
+            }
           >
-            <span className={expanded ? "break-all" : "truncate"}>{displayId}</span>
+            <span className={expanded ? "break-all" : "truncate"}>
+              {displayId}
+            </span>
           </button>
         </Tooltip>
       </div>
       <button
         type="button"
         onClick={copyId}
-        className="flex-shrink-0 rounded-lg bg-gray-700 p-2 text-gray-400 transition-all duration-200 hover:bg-gray-600 hover:text-gray-300 active:bg-gray-600"
+        className="shrink-0 rounded-lg bg-gray-700 p-2 text-gray-400 transition-all duration-200 hover:bg-gray-600 hover:text-gray-300 active:bg-gray-600"
         title={isCopied ? t("wallet.copied") : t("wallet.copy_clipboard")}
+        aria-label={isCopied ? t("wallet.copied") : t("wallet.copy_clipboard")}
       >
         {showCheck ? (
           <CheckIcon className="h-5 w-5 text-green-400" />

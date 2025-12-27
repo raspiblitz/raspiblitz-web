@@ -36,6 +36,14 @@ export const TransactionDetails: FC<Props> = ({ details }) => {
       ? convertToString(unit, convertMSatToBtc(absAmount))
       : convertToString(unit, convertMSatToSat(absAmount));
 
+  const feeValue = isOnchain
+    ? `${
+        unit === Unit.BTC
+          ? convertToString(unit, convertSatToBtc(details.total_fees))
+          : convertToString(unit, details.total_fees)
+      } ${unit}`
+    : `${details.total_fees} mSat`;
+
   // Determine amount color based on transaction direction
   const amountColor = isIncoming ? "text-green-400" : "text-red-400";
 
@@ -118,14 +126,7 @@ export const TransactionDetails: FC<Props> = ({ details }) => {
         </div>
 
         {details.total_fees !== null && (
-          <KeyValueCard
-            name={t("tx.fee")}
-            value={
-              isOnchain
-                ? `${unit === Unit.BTC ? convertToString(unit, convertSatToBtc(details.total_fees)) : convertToString(unit, details.total_fees)} ${unit}`
-                : `${details.total_fees} mSat`
-            }
-          />
+          <KeyValueCard name={t("tx.fee")} value={feeValue} />
         )}
 
         {details.comment && (

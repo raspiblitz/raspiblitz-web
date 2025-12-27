@@ -3,10 +3,9 @@ import type { FC } from "react";
 interface Props {
   name: string;
   value: string;
-  label?: string;
 }
 
-const KeyValueCard: FC<Props> = ({ name, value, label }) => {
+const KeyValueCard: FC<Props> = ({ name, value }) => {
   return (
     <div className="rounded-lg bg-gray-800/50 px-4 py-3">
       <div className="flex items-start justify-between gap-4">
@@ -15,7 +14,6 @@ const KeyValueCard: FC<Props> = ({ name, value, label }) => {
         </div>
         <div className="flex-1 text-right">
           <p className="break-all text-sm text-gray-200">{value}</p>
-          {label && <p className="text-xs text-gray-500">{label}</p>}
         </div>
       </div>
     </div>
