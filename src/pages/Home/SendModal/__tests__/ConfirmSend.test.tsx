@@ -319,7 +319,6 @@ describe("ConfirmSend", () => {
       await user.type(amountInput, "999");
 
       amountInput = await screen.findByLabelText("wallet.amount");
-      screen.debug(amountInput);
 
       await waitFor(() => expect(amountInput).toHaveAttribute("aria-invalid"));
 

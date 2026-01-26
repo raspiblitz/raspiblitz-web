@@ -5,3 +5,6 @@
 // msw server
 import "./testServer";
 import "@testing-library/jest-dom";
+import ResizeObserver from "resize-observer-polyfill";
+
+vi.stubGlobal("ResizeObserver", ResizeObserver);
