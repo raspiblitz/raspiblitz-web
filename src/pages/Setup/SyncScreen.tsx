@@ -28,9 +28,9 @@ import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 
 type Props = {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   data: SyncData | any;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   callback: (action: string, data: any) => void;
 };
 
@@ -120,42 +120,34 @@ export default function SyncScreen({ data, callback }: Props) {
             onSubmit={handleSubmit(unlockWallet)}
           >
             <ModalContent>
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                  {t("wallet.unlock_subtitle")}
-                </ModalHeader>
-                <ModalBody>
-                  <>
-                    <Input
-                      classNames={{
-                        inputWrapper:
-                          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                      }}
-                      type="password"
-                      label={t("setup.sync_wallet_info")}
-                      isDisabled={runningUnlock}
-                      isInvalid={!!errors.passwordInput}
-                      errorMessage={errors.passwordInput?.message}
-                      value={password}
-                      {...register("passwordInput", {
-                        required: t("setup.password_error_empty"),
-                        onChange: changePasswordHandler,
-                      })}
-                    />
+              <ModalHeader className="flex flex-col gap-1">
+                {t("wallet.unlock_subtitle")}
+              </ModalHeader>
+              <ModalBody>
+                <Input
+                  classNames={{
+                    inputWrapper:
+                      "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
+                  }}
+                  type="password"
+                  label={t("setup.sync_wallet_info")}
+                  isDisabled={runningUnlock}
+                  isInvalid={!!errors.passwordInput}
+                  errorMessage={errors.passwordInput?.message}
+                  value={password}
+                  {...register("passwordInput", {
+                    required: t("setup.password_error_empty"),
+                    onChange: changePasswordHandler,
+                  })}
+                />
 
-                    {error && <Alert color="danger">{error}</Alert>}
-                  </>
-                </ModalBody>
-                <ModalFooter>
-                  <Button
-                    type="submit"
-                    color="primary"
-                    isLoading={runningUnlock}
-                  >
-                    {t("setup.sync_wallet_unlock")}
-                  </Button>
-                </ModalFooter>
-              </>
+                {error && <Alert color="danger">{error}</Alert>}
+              </ModalBody>
+              <ModalFooter>
+                <Button type="submit" color="primary" isLoading={runningUnlock}>
+                  {t("setup.sync_wallet_unlock")}
+                </Button>
+              </ModalFooter>
             </ModalContent>
           </form>
         </Modal>
@@ -176,48 +168,50 @@ export default function SyncScreen({ data, callback }: Props) {
               isStriped
             />
 
-            <div className="mt-6">
-              <Alert color="info" as="div">
-                {lnWalletUnlocked && (
-                  <>
-                    <p>
-                      <LockOpenIcon className="inline h-6 w-auto text-success" />{" "}
-                      {t("wallet.unlock_success")}
-                    </p>
-                    <div className="mt-2">
-                      {data.ln_default_ready === "1" ? (
-                        <>
-                          <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
-                          {t("home.lightning")} {t("setup.started")}
-                        </>
-                      ) : (
-                        <>
-                          <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
-                          {t("home.lightning")} {t("setup.not_started")}
-                        </>
-                      )}
+            {(lnWalletUnlocked || lnWalletLocked) && (
+              <div className="mt-6">
+                <Alert color="info" as="div">
+                  {lnWalletUnlocked && (
+                    <>
                       <p>
-                        ({t("setup.restarts")}:{" "}
-                        {data.system_count_start_lightning})
+                        <LockOpenIcon className="inline h-6 w-auto text-success" />{" "}
+                        {t("wallet.unlock_success")}
                       </p>
-                    </div>
-                  </>
-                )}
+                      <div className="mt-2">
+                        {data.ln_default_ready === "1" ? (
+                          <>
+                            <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
+                            {t("home.lightning")} {t("setup.started")}
+                          </>
+                        ) : (
+                          <>
+                            <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
+                            {t("home.lightning")} {t("setup.not_started")}
+                          </>
+                        )}
+                        <p>
+                          ({t("setup.restarts")}:{" "}
+                          {data.system_count_start_lightning})
+                        </p>
+                      </div>
+                    </>
+                  )}
 
-                {lnWalletLocked && (
-                  <div className="flex flex-col gap-4">
-                    <p>
-                      <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
-                      {t("wallet.wallet_locked")}
-                    </p>
-                    <Button onPress={onOpen} color="primary">
-                      {t("wallet.unlock_title")}
-                    </Button>
-                    <p>{t("wallet.wallet_unlock_info")}</p>
-                  </div>
-                )}
-              </Alert>
-            </div>
+                  {lnWalletLocked && (
+                    <div className="flex flex-col gap-4">
+                      <p>
+                        <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
+                        {t("wallet.wallet_locked")}
+                      </p>
+                      <Button onPress={onOpen} color="primary">
+                        {t("wallet.unlock_title")}
+                      </Button>
+                      <p>{t("wallet.wallet_unlock_info")}</p>
+                    </div>
+                  )}
+                </Alert>
+              </div>
+            )}
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">

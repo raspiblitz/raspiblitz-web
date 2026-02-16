@@ -26,8 +26,9 @@ describe("AvailableBalance", () => {
       </I18nextProvider>,
     );
 
-    expect(screen.getByText("wallet.available_balance:")).toBeInTheDocument();
-    expect(screen.getByText(`500,000,000 ${Unit.SAT}`)).toBeInTheDocument();
+    expect(screen.getByText("wallet.available_balance")).toBeInTheDocument();
+    expect(screen.getByText("500,000,000")).toBeInTheDocument();
+    expect(screen.getByText(Unit.SAT)).toBeInTheDocument();
   });
 
   it("renders with BTC unit", () => {
@@ -39,7 +40,8 @@ describe("AvailableBalance", () => {
       </I18nextProvider>,
     );
 
-    expect(screen.getByText("wallet.available_balance:")).toBeInTheDocument();
-    expect(screen.getByText(`5.00000000 ${Unit.BTC}`)).toBeInTheDocument();
+    expect(screen.getByText("wallet.available_balance")).toBeInTheDocument();
+    expect(screen.getByText("5.00000000")).toBeInTheDocument();
+    expect(screen.getByText(Unit.BTC)).toBeInTheDocument();
   });
 });

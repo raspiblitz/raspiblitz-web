@@ -47,25 +47,25 @@ export const LightningCard: FC = () => {
   const convertedLocalBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(localBalance || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
         localBalance! / 1000;
   const convertedRemoteBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(remoteBalance || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
         remoteBalance! / 1000;
 
   const convertedLocalPendingBalance =
     unit === Unit.BTC
-      ? // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      ? // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
         convertMSatToBtc(pendingLocalBalance! || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
         pendingLocalBalance! / 1000;
 
   const convertedRemotePendingBalance =
     unit === Unit.BTC
       ? convertMSatToBtc(pendingRemoteBalance || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
         pendingRemoteBalance! / 1000;
 
   const channelTotal = activeChannels + inactiveChannels + pendingChannels;

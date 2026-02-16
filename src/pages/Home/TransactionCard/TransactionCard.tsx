@@ -3,14 +3,15 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Spinner } from "@heroui/react";
+import { Button, Listbox, ListboxItem, Spinner } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { AppContext } from "@/context/app-context";
 import type { Implementation } from "@/models/ln-info";
 import type { Transaction } from "@/models/transaction.model";
-import SingleTransaction from "./SingleTransaction";
+import CategoryIcon from "./CategoryIcon";
+import { formatTransaction } from "./transactionUtils";
 
 export type Props = {
   transactions: Transaction[];
@@ -30,7 +31,7 @@ const TransactionCard: FC<Props> = ({
   implementation,
 }) => {
   const { t } = useTranslation();
-  const { walletLocked } = useContext(AppContext);
+  const { walletLocked, unit } = useContext(AppContext);
   const [page, setPage] = useState(0);
 
   if (walletLocked) {
@@ -63,12 +64,10 @@ const TransactionCard: FC<Props> = ({
     );
   }
 
-  const fillEmptyTxAmount = MAX_ITEMS - currentPageTxs.length;
-
   return (
     <div className="h-full">
       <section className="bd-card flex flex-col transition-colors">
-        <h2 className="text-lg font-bold">{t("tx.transactions")}</h2>
+        <h2 className="mb-4 text-lg font-bold">{t("tx.transactions")}</h2>
 
         {isLoading && <Spinner size="lg" />}
 
@@ -88,22 +87,62 @@ const TransactionCard: FC<Props> = ({
         )}
 
         {transactions.length > 0 && (
-          <ul className="pt-5">
-            {currentPageTxs.map((transaction: Transaction, index: number) => {
+          <Listbox
+            aria-label={t("tx.transactions")}
+            selectionMode="none"
+            onAction={(key) => {
+              const tx = currentPageTxs.find((t) => t.id === String(key));
+              if (tx) showDetails(tx.index);
+            }}
+            classNames={{
+              base: "pt-4 p-0",
+              list: "gap-2",
+            }}
+            itemClasses={{
+              base: "rounded-lg bg-default-100/50 data-[hover=true]:bg-default-200/50 p-4 cursor-pointer transition-background",
+            }}
+          >
+            {currentPageTxs.map((transaction: Transaction) => {
+              const formatted = formatTransaction(transaction, unit);
               return (
-                <SingleTransaction
-                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                  key={index}
-                  onClick={() => showDetails(transaction.index)}
-                  transaction={transaction}
-                />
+                <ListboxItem
+                  key={transaction.id}
+                  textValue={`${formatted.comment ?? t("tx.default_comment")}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
+                >
+                  <div className="flex flex-col gap-1">
+                    {/* Row 1: Icon + Amount + Date */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <CategoryIcon
+                          category={transaction.category}
+                          type={transaction.type}
+                          status={transaction.status}
+                          confirmations={transaction.num_confs ?? undefined}
+                        />
+                        <span
+                          className={`text-lg font-semibold ${formatted.color}`}
+                        >
+                          {formatted.sign}
+                          {formatted.formattedAmount} {unit}
+                        </span>
+                      </div>
+                      <time
+                        className="text-sm text-default-500"
+                        dateTime={formatted.isoString}
+                      >
+                        {formatted.formattedDate}
+                      </time>
+                    </div>
+
+                    {/* Row 2: Comment */}
+                    <span className="truncate text-sm italic text-default-400">
+                      {formatted.comment ?? t("tx.default_comment")}
+                    </span>
+                  </div>
+                </ListboxItem>
               );
             })}
-            {[...Array(fillEmptyTxAmount)].map((_, index: number) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-              <SingleTransaction key={index} />
-            ))}
-          </ul>
+          </Listbox>
         )}
 
         {transactions.length > 0 && (

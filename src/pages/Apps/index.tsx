@@ -16,7 +16,7 @@ import AppStatusRefresh from "./AppStatusRefresh";
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
   const { lnInfo, appStatus, installationStatus } = useContext(SSEContext);
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [_isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     enableGutter();
@@ -120,57 +120,55 @@ export const Apps: FC = () => {
 
   return (
     <main className="content-container page-container bg-gray-700 p-5 text-white transition-colors lg:pb-8 lg:pr-8 lg:pt-8">
-      <>
-        <AppStatusRefresh />
+      <AppStatusRefresh />
 
-        {/* Active Installations */}
-        {activeInstalls.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-4">
-              {t("apps.active_installations")}
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {activeInstalls.map((appId) => (
-                <InstallationStatusCard key={appId} appId={appId} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Recent Completions */}
-        {recentCompletions.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-4">
-              {t("apps.recent_completions")}
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {recentCompletions.map((appId) => (
-                <InstallationStatusCard key={appId} appId={appId} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        <AppList
-          apps={installedApps}
-          title={t("apps.installed")}
-          onInstall={installHandler}
-          errors={appStatus.errors}
-        />
-
-        <AppList
-          apps={allNotInstalledApps}
-          title={t("apps.available")}
-          onInstall={installHandler}
-          errors={appStatus.errors}
-        />
-
-        <section className="flex h-full flex-wrap pt-8">
-          <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
-            <AppCardAlby />
+      {/* Active Installations */}
+      {activeInstalls.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold mb-4">
+            {t("apps.active_installations")}
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {activeInstalls.map((appId) => (
+              <InstallationStatusCard key={appId} appId={appId} />
+            ))}
           </div>
         </section>
-      </>
+      )}
+
+      {/* Recent Completions */}
+      {recentCompletions.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold mb-4">
+            {t("apps.recent_completions")}
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {recentCompletions.map((appId) => (
+              <InstallationStatusCard key={appId} appId={appId} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <AppList
+        apps={installedApps}
+        title={t("apps.installed")}
+        onInstall={installHandler}
+        errors={appStatus.errors}
+      />
+
+      <AppList
+        apps={allNotInstalledApps}
+        title={t("apps.available")}
+        onInstall={installHandler}
+        errors={appStatus.errors}
+      />
+
+      <section className="flex h-full flex-wrap pt-8">
+        <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
+          <AppCardAlby />
+        </div>
+      </section>
     </main>
   );
 };

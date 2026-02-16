@@ -33,12 +33,12 @@ const AmountInput: FC<Props> = ({
       );
     } else {
       // remove separators
-      formattedValue = formattedValue.replace(/,|\./g, "");
+      formattedValue = formattedValue.replace(/[,.]/g, "");
       if (formattedValue) {
         formattedValue = new Intl.NumberFormat("en-US", {
           minimumFractionDigits: 8,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-        }).format(convertSatToBtc(Number.parseInt(formattedValue))!);
+          // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
+        }).format(convertSatToBtc(Number.parseInt(formattedValue, 10))!);
       }
     }
     setAmountInput(formattedValue);
@@ -79,12 +79,12 @@ const AmountInput: FC<Props> = ({
       errorMessage={errorMessage?.message}
       endContent={
         <button
-          className="focus:outline-none"
+          className="focus:outline-none h-full"
           type="button"
           onClick={toggleHandler}
           aria-label="toggle password visibility"
         >
-          <span className="whitespace-nowrap text-small text-default-400">
+          <span className="whitespace-nowrap text-small text-default-foreground">
             {unit}
             <ArrowsRightLeftIcon className="ml-1 inline-block h-5 w-5" />
           </span>

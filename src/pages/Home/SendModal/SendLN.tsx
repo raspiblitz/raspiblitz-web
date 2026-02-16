@@ -58,7 +58,7 @@ const SendLn: FC<Props> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <ConfirmModal.Body>
-        {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
+        {/* biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point */}
         <AvailableBalance balance={convertedBalance!} />
 
         <Input

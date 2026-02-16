@@ -162,8 +162,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
           {isLnTx && Number(confirmData.amount) !== 0 && (
             <span>
               {formatAmount(
-                // biome-ignore lint/style/noNonNullAssertion: <explanation>
-                convertMSatToSat(+confirmData.amount)?.toString()!,
+                convertMSatToSat(+confirmData.amount)?.toString() ?? "",
                 Unit.SAT,
               )}{" "}
               Sat

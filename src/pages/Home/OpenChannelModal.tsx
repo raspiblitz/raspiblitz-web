@@ -72,7 +72,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
       <form onSubmit={handleSubmit(openChannelHandler)}>
         <ConfirmModal.Header>{t("home.open_channel")}</ConfirmModal.Header>
         <ConfirmModal.Body>
-          {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
+          {/* biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point */}
           <AvailableBalance balance={convertedBalance!} />
 
           <fieldset className="flex w-full flex-col gap-4">
@@ -104,15 +104,15 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
                 onChange: changeAmountHandler,
               })}
             />
-            <div className="flex justify-around py-8 md:mx-auto md:w-1/2">
-              <label htmlFor="targetConf" className="font-bold">
+            <div className="flex items-center justify-between rounded-xl px-3 py-3">
+              <label htmlFor="targetConf" className="text-sm text-secondary">
                 {t("tx.fee_rate")}
               </label>
               <select
                 id="targetConf"
                 defaultValue={4}
                 {...register("feeRate")}
-                className="rounded bg-yellow-500 p-1 text-white"
+                className="rounded-lg bg-primary px-3 py-2 text-sm outline-none"
               >
                 <option value={1}>{t("home.urgent")}</option>
                 <option value={4}>{t("home.normal")}</option>

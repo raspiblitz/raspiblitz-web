@@ -364,12 +364,16 @@
       "yes_and_migrate": "Migrate to RaspiBlitz"
     },
     "tx": {
+      "click_to_collapse": "Click to collapse",
+      "click_to_expand": "Click to expand",
       "comment": "Comment",
       "comment_placeholder": "Optional comment",
       "confirm_info": "Please confirm the following transaction",
       "confirmations": "Confirmations",
+      "confirmed": "Confirmed",
       "date": "Date",
       "description": "Description",
+      "details": "Details",
       "fee": "Fee",
       "fee_rate": "Fee rate",
       "included_block": "Included in Block",
@@ -382,7 +386,8 @@
       "tx_details": "Transaction Details",
       "txid": "Transaction ID",
       "unconfirmed": "Unconfirmed",
-      "value": "Value"
+      "value": "Value",
+      "default_comment": "Transaction"
     },
     "wallet": {
       "address": "Address",
