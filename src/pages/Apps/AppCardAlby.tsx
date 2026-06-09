@@ -86,12 +86,11 @@ export const AppCardAlby: FC = () => {
 
       <div className="flex flex-row gap-2 py-4">
         {window.alby && (
-          <Button
-            onPress={addAlbyAccountHandler}
-            color="primary"
-            startContent={<LinkIcon className="inline h-6 w-6" />}
-          >
-            {t(`appInfo.${id}.action.addAccount`)}
+          <Button onPress={addAlbyAccountHandler} variant="primary">
+            <span className="flex items-center gap-2">
+              <LinkIcon className="inline h-6 w-6" />
+              {t(`appInfo.${id}.action.addAccount`)}
+            </span>
           </Button>
         )}
 
@@ -101,12 +100,12 @@ export const AppCardAlby: FC = () => {
             target="_blank"
             rel="noreferrer"
             href="https://getalby.com"
-            color="primary"
-            startContent={
-              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
-            }
+            variant="primary"
           >
-            {t(`appInfo.${id}.action.install`)}
+            <span className="flex items-center gap-2">
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+              {t(`appInfo.${id}.action.install`)}
+            </span>
           </Button>
         )}
       </div>

@@ -108,13 +108,15 @@ const AppStatusRefresh = () => {
         placement="left"
       >
         <Button
-          color="primary"
+          variant="primary"
           size="sm"
-          isLoading={isUpdating}
+          isPending={isUpdating}
           onPress={handleRefresh}
-          startContent={<ArrowPathIcon className="h-5 w-5" />}
         >
-          {isUpdating ? t("apps.refreshing") : t("apps.refresh")}
+          <span className="flex items-center gap-2">
+            <ArrowPathIcon className="h-5 w-5" />
+            {isUpdating ? t("apps.refreshing") : t("apps.refresh")}
+          </span>
         </Button>
       </Tooltip>
     </div>

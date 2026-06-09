@@ -65,12 +65,11 @@ const Electrs = () => {
     <main className="page-container content-container flex w-full flex-col items-center bg-gray-700 text-white">
       {/* Back Button */}
       <section className="w-full px-5 py-9 text-gray-200">
-        <Button
-          onPress={() => navigate("/apps")}
-          color="primary"
-          startContent={<ChevronLeftIcon className="inline-block h-5 w-5" />}
-        >
-          {t("navigation.back")}
+        <Button onPress={() => navigate("/apps")} variant="primary">
+          <span className="flex items-center gap-2">
+            <ChevronLeftIcon className="inline-block h-5 w-5" />
+            {t("navigation.back")}
+          </span>
         </Button>
       </section>
 

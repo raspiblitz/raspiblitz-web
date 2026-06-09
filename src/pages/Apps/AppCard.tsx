@@ -140,10 +140,8 @@ export const AppCard: FC<Props> = ({
           </ConfirmModal.Body>
           <ConfirmModal.Footer>
             <Button onPress={errorModal.onClose}>{t("apps.close")}</Button>
-            <Button
-              color="primary"
-              onPress={copyErrorToClipboard}
-              startContent={
+            <Button variant="primary" onPress={copyErrorToClipboard}>
+              <span className="flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -159,9 +157,8 @@ export const AppCard: FC<Props> = ({
                     d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"
                   />
                 </svg>
-              }
-            >
-              {t("apps.copy")}
+                {t("apps.copy")}
+              </span>
             </Button>
           </ConfirmModal.Footer>
         </ConfirmModal>
@@ -174,12 +171,12 @@ export const AppCard: FC<Props> = ({
             href={getHrefFromApp(appStatusInfo)}
             target="_blank"
             rel="noreferrer"
-            color="primary"
-            startContent={
-              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
-            }
+            variant="primary"
           >
-            {t("apps.open")}
+            <span className="flex items-center gap-2">
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+              {t("apps.open")}
+            </span>
           </Button>
         )}
 
@@ -190,25 +187,22 @@ export const AppCard: FC<Props> = ({
         {installed && appInfo.customComponent && (
           <Button
             onPress={() => navigate(`/apps/${appInfo.id}`)}
-            color="primary"
-            startContent={
-              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
-            }
+            variant="primary"
           >
-            {t("apps.open")}
+            <span className="flex items-center gap-2">
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+              {t("apps.open")}
+            </span>
           </Button>
         )}
 
         {/* Show View Error button instead of Install button when there's an error */}
         {hasError && !installed && (
-          <Button
-            onPress={errorModal.onOpen}
-            color="danger"
-            startContent={
+          <Button onPress={errorModal.onOpen} variant="danger">
+            <span className="flex items-center gap-2">
               <ExclamationTriangleIcon className="inline h-6 w-6" />
-            }
-          >
-            {t("apps.view_error")}
+              {t("apps.view_error")}
+            </span>
           </Button>
         )}
 
@@ -224,26 +218,28 @@ export const AppCard: FC<Props> = ({
                 (installingApp !== null && installingApp?.result !== "fail")
               }
               onPress={() => installButtonPressed(id)}
-              color="primary"
-              startContent={<PlusIcon className="inline h-6 w-6" />}
+              variant="primary"
             >
-              {t("apps.install")}
+              <span className="flex items-center gap-2">
+                <PlusIcon className="inline h-6 w-6" />
+                {t("apps.install")}
+              </span>
             </Button>
           )}
 
         {installingApp &&
           installingApp.id === id &&
           installingApp.result === "running" && (
-            <Button disabled isLoading={true}>
+            <Button disabled isPending={true}>
               {t("apps.installing")}
             </Button>
           )}
 
-        <Button
-          onPress={() => navigate(`/apps/${appInfo.id}/info`)}
-          startContent={<InformationCircleIcon className="inline h-6 w-6" />}
-        >
-          {t("apps.info")}
+        <Button onPress={() => navigate(`/apps/${appInfo.id}/info`)}>
+          <span className="flex items-center gap-2">
+            <InformationCircleIcon className="inline h-6 w-6" />
+            {t("apps.info")}
+          </span>
         </Button>
       </div>
     </article>
