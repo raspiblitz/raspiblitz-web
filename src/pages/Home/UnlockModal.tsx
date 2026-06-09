@@ -1,7 +1,12 @@
-import { Input } from "@heroui/react";
+import {
+  FieldError,
+  Input,
+  Label,
+  TextField,
+  useDisclosure,
+} from "@heroui/react";
 import { useContext, useState } from "react";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
@@ -29,9 +34,9 @@ export default function UnlockModal({
   const { isCapsLockEnabled, keyHandlers } = useCapsLock();
 
   const {
-    register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<IFormInputs>({ mode: "onChange" });
 
   const unlockHandler: SubmitHandler<IFormInputs> = (data: {
@@ -67,22 +72,33 @@ export default function UnlockModal({
           {isCapsLockEnabled && <CapsLockWarning />}
 
           <fieldset className="flex w-full flex-col gap-4">
-            <Input
-              autoFocus
-              classNames={{
-                inputWrapper:
-                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-              }}
-              isDisabled={isLoading}
-              type="password"
-              label={t("forms.validation.unlock.pass_c")}
-              placeholder={t("forms.validation.unlock.pass_c")}
-              isInvalid={!!errors.passwordInput}
-              errorMessage={errors.passwordInput?.message}
-              {...register("passwordInput", {
+            <Controller
+              name="passwordInput"
+              control={control}
+              rules={{
                 required: t("forms.validation.unlock.required"),
-              })}
-              {...keyHandlers}
+              }}
+              render={({ field, fieldState }) => (
+                <TextField
+                  className="w-full"
+                  isInvalid={fieldState.invalid}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                  isDisabled={isLoading}
+                >
+                  <Label>{t("forms.validation.unlock.pass_c")}</Label>
+                  <Input
+                    autoFocus
+                    type="password"
+                    placeholder={t("forms.validation.unlock.pass_c")}
+                    className="bg-tertiary"
+                    {...keyHandlers}
+                  />
+                  <FieldError>{fieldState.error?.message}</FieldError>
+                </TextField>
+              )}
             />
           </fieldset>
 
