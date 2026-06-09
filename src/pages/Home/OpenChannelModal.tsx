@@ -1,6 +1,6 @@
-import { Input } from "@heroui/react";
-import { type ChangeEvent, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldError, Input, Label, TextField } from "@heroui/react";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
@@ -33,8 +33,9 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
 
   const {
     register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -61,10 +62,6 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
       .finally(() => setIsLoading(false));
   };
 
-  const changeAmountHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
-  };
-
   const convertedBalance = balance ? convertMSatToSat(balance) : 0;
 
   return (
@@ -76,33 +73,52 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
           <AvailableBalance balance={convertedBalance!} />
 
           <fieldset className="flex w-full flex-col gap-4">
-            <Input
-              className="w-full"
-              classNames={{
-                inputWrapper:
-                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-              }}
-              type="text"
-              label={t("home.node_uri")}
-              isInvalid={!!errors.nodeUri}
-              errorMessage={errors.nodeUri?.message}
-              {...register("nodeUri", {
+            <Controller
+              name="nodeUri"
+              control={control}
+              rules={{
                 required: t("forms.validation.node_uri.required"),
-              })}
+              }}
+              render={({ field, fieldState }) => (
+                <TextField
+                  className="w-full"
+                  isInvalid={fieldState.invalid}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                >
+                  <Label>{t("home.node_uri")}</Label>
+                  <Input type="text" className="bg-tertiary" />
+                  <FieldError>{fieldState.error?.message}</FieldError>
+                </TextField>
+              )}
             />
 
-            <AmountInput
-              amount={amount}
-              errorMessage={errors.fundingAmount}
-              register={register("fundingAmount", {
+            <Controller
+              name="fundingAmount"
+              control={control}
+              rules={{
                 required: t("forms.validation.amount.required"),
                 validate: {
                   greaterThanZero: (val) =>
-                    stringToNumber(val) > 0 ||
+                    stringToNumber(`${val}`) > 0 ||
                     t("forms.validation.amount.required"),
                 },
-                onChange: changeAmountHandler,
-              })}
+              }}
+              render={({ field, fieldState }) => (
+                <AmountInput
+                  amount={amount}
+                  error={fieldState.error?.message}
+                  field={{
+                    ...field,
+                    onChange: (value) => {
+                      field.onChange(value);
+                      setAmount(+value);
+                    },
+                  }}
+                />
+              )}
             />
             <div className="flex items-center justify-between rounded-xl px-3 py-3">
               <label htmlFor="targetConf" className="text-sm text-secondary">
