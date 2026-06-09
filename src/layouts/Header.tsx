@@ -43,30 +43,27 @@ export default function Header() {
       <div className="text-xl font-bold">{systemInfo.alias}</div>
 
       <div className="flex items-center">
-        <Dropdown placement="bottom-end">
+        <Dropdown>
           <Dropdown.Trigger>
             <Bars3Icon className="h-8 w-8 cursor-pointer hover:text-yellow-400" />
           </Dropdown.Trigger>
 
-          <Dropdown.Popover>
+          <Dropdown.Popover placement="bottom end">
             <Dropdown.Menu
               aria-label="Header Actions"
-              variant="flat"
               onAction={(key) => handleDropDownAction(key)}
             >
-              <Dropdown.Item
-                id="toggle_sats"
-                startContent={
-                  unitActive ? (
+              <Dropdown.Item id="toggle_sats">
+                <span className="flex items-center gap-2">
+                  {unitActive ? (
                     <BitcoinCircleIcon className="inline h-4 w-4" />
                   ) : (
                     <SatoshiV1Icon className="inline h-4 w-4" />
-                  )
-                }
-              >
-                {unitActive
-                  ? t("navigation.display_btc")
-                  : t("navigation.display_sats")}
+                  )}
+                  {unitActive
+                    ? t("navigation.display_btc")
+                    : t("navigation.display_sats")}
+                </span>
               </Dropdown.Item>
 
               <Dropdown.Item
@@ -74,19 +71,18 @@ export default function Header() {
                 href="https://docs.raspiblitz.org/docs/intro"
                 target="_blank"
                 rel="noopener noreferrer"
-                startContent={<BookOpenIcon className="h-5 w-5" />}
               >
-                {t("navigation.documentation")}
+                <span className="flex items-center gap-2">
+                  <BookOpenIcon className="h-5 w-5" />
+                  {t("navigation.documentation")}
+                </span>
               </Dropdown.Item>
 
-              <Dropdown.Item
-                id="logout"
-                variant="danger"
-                startContent={
+              <Dropdown.Item id="logout" variant="danger">
+                <span className="flex items-center gap-2">
                   <ArrowRightStartOnRectangleIcon className="inline h-4 w-4" />
-                }
-              >
-                {t("navigation.logout")}
+                  {t("navigation.logout")}
+                </span>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown.Popover>
