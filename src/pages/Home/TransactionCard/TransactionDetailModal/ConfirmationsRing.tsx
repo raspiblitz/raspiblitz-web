@@ -1,4 +1,4 @@
-import { CircularProgress } from "@heroui/react";
+import { ProgressCircle } from "@heroui/react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +22,7 @@ export const ConfirmationsRing: FC<Props> = ({
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <CircularProgress
+      <ProgressCircle
         aria-label={`${conf} confirmations out of ${required}`}
         classNames={{
           svg: "w-[7.5rem] h-[7.5rem]",

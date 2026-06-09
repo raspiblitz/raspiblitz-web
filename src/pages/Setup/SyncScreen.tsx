@@ -12,7 +12,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Progress,
+  ProgressBar,
   useDisclosure,
 } from "@heroui/react";
 import { HttpStatusCode } from "axios";
@@ -158,7 +158,7 @@ export default function SyncScreen({ data, callback }: Props) {
           <Headline>{t("setup.sync_headline")}</Headline>
 
           <div className="w-full">
-            <Progress
+            <ProgressBar
               label={
                 btcDefaultReady
                   ? `${t("setup.sync_bitcoin_sync")}: ${btcDefaultSyncPercentage}%`
