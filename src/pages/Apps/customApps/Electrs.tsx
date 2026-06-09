@@ -1,23 +1,43 @@
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Snippet,
-  Tab,
-  Tabs,
-} from "@heroui/react";
+  ChevronLeftIcon,
+  ClipboardDocumentCheckIcon,
+  ClipboardDocumentIcon,
+} from "@heroicons/react/24/outline";
+import { Button, Card, Tab, Tabs } from "@heroui/react";
 import { QRCodeSVG } from "qrcode.react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Headline } from "@/components/Headline";
 import { SSEContext } from "@/context/sse-context";
+import useClipboard from "@/hooks/use-clipboard";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import type { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
+
+function CopySnippet({ text }: { text: string }) {
+  const [copy, copied] = useClipboard(text);
+  return (
+    <div className="flex max-w-[80%] items-center gap-2 rounded-lg bg-primary px-3 py-2 text-white">
+      <pre className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap font-mono text-sm">
+        {text}
+      </pre>
+      <button
+        type="button"
+        onClick={copy}
+        aria-label={copied ? "Copied" : "Copy to clipboard"}
+        className="shrink-0 rounded p-1 hover:bg-white/20 transition-colors"
+      >
+        {copied ? (
+          <ClipboardDocumentCheckIcon className="h-5 w-5" />
+        ) : (
+          <ClipboardDocumentIcon className="h-5 w-5" />
+        )}
+      </button>
+    </div>
+  );
+}
 
 const Electrs = () => {
   const navigate = useNavigate();
@@ -74,12 +94,12 @@ const Electrs = () => {
       </section>
 
       <Card className="bd-card w-full md:w-11/12">
-        <CardHeader>
+        <Card.Header>
           <Headline as="h3" size="xl">
             Electrs Version <span className="font-bold">{version}</span>
           </Headline>
-        </CardHeader>
-        <CardBody className="flex">
+        </Card.Header>
+        <Card.Content className="flex">
           {!initialSyncDone ? (
             <span>{t("appInfo.electrs.initialSync")}</span>
           ) : (
@@ -102,17 +122,7 @@ const Electrs = () => {
                         size={256}
                         className="border-2 border-white"
                       />
-                      <Snippet
-                        classNames={{
-                          base: "max-w-[80%] text-white",
-                          pre: "text-ellipsis",
-                        }}
-                        symbol=""
-                        color="primary"
-                        variant="solid"
-                      >
-                        {`${localIP}:${portSSL}:s`}
-                      </Snippet>
+                      <CopySnippet text={`${localIP}:${portSSL}:s`} />
                     </div>
                   ) : (
                     <span className="mt-4 text-center">
@@ -129,17 +139,7 @@ const Electrs = () => {
                         size={256}
                         className="border-2 border-white"
                       />
-                      <Snippet
-                        classNames={{
-                          base: "max-w-[80%] text-white",
-                          pre: "overflow-hidden text-ellipsis",
-                        }}
-                        symbol=""
-                        color="primary"
-                        variant="solid"
-                      >
-                        {`${TORaddress}:${portSSL}:s`}
-                      </Snippet>
+                      <CopySnippet text={`${TORaddress}:${portSSL}:s`} />
                     </div>
                   ) : (
                     <span className="mt-4 text-center">
@@ -150,7 +150,7 @@ const Electrs = () => {
               </Tabs>
             </>
           )}
-        </CardBody>
+        </Card.Content>
       </Card>
     </main>
   );
