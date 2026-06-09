@@ -5,10 +5,19 @@ import {
   PowerIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Input, Modal, ProgressBar, useOverlayState } from "@heroui/react";
+import {
+  FieldError,
+  Input,
+  Label,
+  Modal,
+  ProgressBar,
+  TextField,
+  Tooltip,
+  useOverlayState,
+} from "@heroui/react";
 import { HttpStatusCode } from "axios";
-import { type ChangeEvent, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Alert } from "@/components/Alert";
@@ -51,10 +60,6 @@ export default function SyncScreen({ data, callback }: Props) {
   const [runningUnlock, setRunningUnlock] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const changePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
   const unlockWallet = () => {
     setRunningUnlock(true);
     setError(null);
@@ -83,7 +88,7 @@ export default function SyncScreen({ data, callback }: Props) {
   };
 
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInputs>({
@@ -113,21 +118,32 @@ export default function SyncScreen({ data, callback }: Props) {
                     <Modal.Heading>{t("wallet.unlock_subtitle")}</Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
-                    <Input
-                      classNames={{
-                        inputWrapper:
-                          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                      }}
-                      type="password"
-                      label={t("setup.sync_wallet_info")}
-                      isDisabled={runningUnlock}
-                      isInvalid={!!errors.passwordInput}
-                      errorMessage={errors.passwordInput?.message}
-                      value={password}
-                      {...register("passwordInput", {
+                    <Controller
+                      name="passwordInput"
+                      control={control}
+                      rules={{
                         required: t("setup.password_error_empty"),
-                        onChange: changePasswordHandler,
-                      })}
+                      }}
+                      render={({ field, fieldState }) => (
+                        <TextField
+                          className="w-full"
+                          isDisabled={runningUnlock}
+                          isInvalid={fieldState.invalid}
+                          value={password}
+                          onChange={(value) => {
+                            setPassword(value);
+                            field.onChange(value);
+                          }}
+                          onBlur={field.onBlur}
+                          name={field.name}
+                        >
+                          <Label>{t("setup.sync_wallet_info")}</Label>
+                          <Input type="password" className="bg-tertiary" />
+                          <FieldError>
+                            {errors.passwordInput?.message}
+                          </FieldError>
+                        </TextField>
+                      )}
                     />
 
                     {error && <Alert color="danger">{error}</Alert>}
@@ -153,15 +169,16 @@ export default function SyncScreen({ data, callback }: Props) {
           <Headline>{t("setup.sync_headline")}</Headline>
 
           <div className="w-full">
-            <ProgressBar
-              label={
-                btcDefaultReady
+            <ProgressBar value={btcDefaultSyncPercentage}>
+              <ProgressBar.Output className="mb-2 block text-sm">
+                {btcDefaultReady
                   ? `${t("setup.sync_bitcoin_sync")}: ${btcDefaultSyncPercentage}%`
-                  : `${t("setup.sync_bitcoin_starting")}...`
-              }
-              value={btcDefaultSyncPercentage}
-              isStriped
-            />
+                  : `${t("setup.sync_bitcoin_starting")}...`}
+              </ProgressBar.Output>
+              <ProgressBar.Track className="h-2 w-full overflow-hidden rounded-full bg-tertiary">
+                <ProgressBar.Fill className="h-full rounded-full bg-accent" />
+              </ProgressBar.Track>
+            </ProgressBar>
 
             {(lnWalletUnlocked || lnWalletLocked) && (
               <div className="mt-6">
@@ -210,17 +227,21 @@ export default function SyncScreen({ data, callback }: Props) {
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
-            <Button
-              type="button"
-              onPress={() => callback("shutdown", null)}
-              variant="primary"
-              title={t("setup.sync_restartinfo")}
-            >
-              <span className="flex items-center gap-2">
-                <PowerIcon className="inline h-6 w-auto" />
-                {t("settings.shutdown")}
-              </span>
-            </Button>
+            <Tooltip>
+              <Tooltip.Trigger>
+                <Button
+                  type="button"
+                  onPress={() => callback("shutdown", null)}
+                  variant="primary"
+                >
+                  <span className="flex items-center gap-2">
+                    <PowerIcon className="inline h-6 w-auto" />
+                    {t("settings.shutdown")}
+                  </span>
+                </Button>
+              </Tooltip.Trigger>
+              <Tooltip.Content>{t("setup.sync_restartinfo")}</Tooltip.Content>
+            </Tooltip>
           </article>
         </section>
       </SetupContainer>
