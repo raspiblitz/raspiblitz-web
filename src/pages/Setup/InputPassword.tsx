@@ -1,5 +1,11 @@
-import { Input, useDisclosure } from "@heroui/react";
-import { useForm } from "react-hook-form";
+import {
+  FieldError,
+  Input,
+  Label,
+  TextField,
+  useDisclosure,
+} from "@heroui/react";
+import { Controller, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
@@ -28,11 +34,11 @@ export default function InputPassword({ passwordType, callback }: Props) {
   const { t } = useTranslation();
 
   const {
-    register,
+    control,
     handleSubmit,
     reset,
     watch,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -82,17 +88,10 @@ export default function InputPassword({ passwordType, callback }: Props) {
 
           <form onSubmit={handleSubmit(continueHandler)} className="w-full">
             <fieldset className="flex w-full flex-col gap-4">
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="password"
-                label={t(`setup.password_${passwordType}_name`)}
-                isInvalid={!!errors.passfirst}
-                errorMessage={errors.passfirst?.message}
-                {...register("passfirst", {
+              <Controller
+                name="passfirst"
+                control={control}
+                rules={{
                   required: t("setup.password_error_empty"),
                   pattern: {
                     value: /^[a-zA-Z0-9.-]*$/,
@@ -102,25 +101,46 @@ export default function InputPassword({ passwordType, callback }: Props) {
                     value: 8,
                     message: t("setup.password_error_length"),
                   },
-                })}
+                }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    className="w-full"
+                    isInvalid={fieldState.invalid}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                  >
+                    <Label>{t(`setup.password_${passwordType}_name`)}</Label>
+                    <Input type="password" className="bg-tertiary" />
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  </TextField>
+                )}
               />
 
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="password"
-                label={`${t("setup.password_repeat")} ${t(`setup.password_${passwordType}_name`)}`}
-                isInvalid={!!errors.passrepeat}
-                errorMessage={errors.passrepeat?.message}
-                {...register("passrepeat", {
+              <Controller
+                name="passrepeat"
+                control={control}
+                rules={{
                   required: t("setup.password_error_empty"),
                   validate: (value) =>
                     value === watch("passfirst") ||
                     t("setup.password_error_match"),
-                })}
+                }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    className="w-full"
+                    isInvalid={fieldState.invalid}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                  >
+                    <Label>{`${t("setup.password_repeat")} ${t(`setup.password_${passwordType}_name`)}`}</Label>
+                    <Input type="password" className="bg-tertiary" />
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  </TextField>
+                )}
               />
             </fieldset>
 
