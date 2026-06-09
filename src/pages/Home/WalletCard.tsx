@@ -124,25 +124,41 @@ export const WalletCard: FC<Props> = ({
           </div>
         </section>
         <section className="grid grid-cols-2 justify-around gap-4 p-2">
-          <Button onPress={onReceive} className="grow" variant="ghost">
+          <Button
+            onPress={onReceive}
+            className="grow border-gray-600"
+            variant="outline"
+          >
             <span className="flex items-center gap-2">
               <ArrowDownTrayIcon className="h-6 w-6" />
               {t("wallet.receive")}
             </span>
           </Button>
-          <Button onPress={onSend} className="grow" variant="ghost">
+          <Button
+            onPress={onSend}
+            className="grow border-gray-600"
+            variant="outline"
+          >
             <span className="flex items-center gap-2">
               <ShareIcon className="h-6 w-6" />
               {t("wallet.send")}
             </span>
           </Button>
-          <Button onPress={onOpenChannel} className="grow" variant="ghost">
+          <Button
+            onPress={onOpenChannel}
+            className="grow border-gray-600"
+            variant="outline"
+          >
             <span className="flex items-center gap-2">
               <LightningIcon className="inline h-6 w-6" />
               {t("home.open_channel")}
             </span>
           </Button>
-          <Button onPress={onCloseChannel} className="grow" variant="ghost">
+          <Button
+            onPress={onCloseChannel}
+            className="grow border-gray-600"
+            variant="outline"
+          >
             <span className="flex items-center gap-2">
               <ListBulletIcon className="inline h-6 w-6" />
               {t("home.list_open_channels")}

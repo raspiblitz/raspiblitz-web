@@ -102,7 +102,7 @@ const TransactionCard: FC<Props> = ({
                 <ListBox.Item
                   id={transaction.id}
                   key={transaction.id}
-                  className="cursor-pointer rounded-lg bg-default-100/50 p-4 transition-background data-[hovered=true]:bg-default-200/50"
+                  className="cursor-pointer rounded-lg bg-white/5 p-4 transition-colors data-[hovered=true]:bg-white/10"
                   textValue={`${formatted.comment ?? t("tx.default_comment")}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
                 >
                   <div className="flex flex-col gap-1">

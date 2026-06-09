@@ -91,11 +91,16 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
           aria-label={t("wallet.receive_aria_options")}
           onSelectionChange={handleTabChange}
         >
-          <Tabs.List>
-            <Tabs.Tab id={TxType.LIGHTNING}>
+          <Tabs.List className="flex-col md:flex-row">
+            <Tabs.Tab
+              id={TxType.LIGHTNING}
+              className="text-xs whitespace-nowrap"
+            >
               {t("wallet.send_lightning")}
             </Tabs.Tab>
-            <Tabs.Tab id={TxType.ONCHAIN}>{t("wallet.send_onchain")}</Tabs.Tab>
+            <Tabs.Tab id={TxType.ONCHAIN} className="text-xs whitespace-nowrap">
+              {t("wallet.send_onchain")}
+            </Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel id={TxType.LIGHTNING}>
             {!isBack && confirmData ? (

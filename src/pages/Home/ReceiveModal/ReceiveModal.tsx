@@ -92,10 +92,15 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
           onSelectionChange={handleTabChange}
         >
           <Tabs.List className="flex-col md:flex-row">
-            <Tabs.Tab id={TxType.LIGHTNING}>
+            <Tabs.Tab
+              id={TxType.LIGHTNING}
+              className="text-xs whitespace-nowrap"
+            >
               {t("wallet.create_invoice_ln")}
             </Tabs.Tab>
-            <Tabs.Tab id={TxType.ONCHAIN}>{t("wallet.fund")}</Tabs.Tab>
+            <Tabs.Tab id={TxType.ONCHAIN} className="text-xs whitespace-nowrap">
+              {t("wallet.fund")}
+            </Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel id={TxType.LIGHTNING}>
             {invoice ? (

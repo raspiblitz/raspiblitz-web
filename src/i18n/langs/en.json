@@ -399,7 +399,7 @@
       "copy_clipboard": "Copy to clipboard",
       "create_invoice": "Create invoice",
       "create_invoice_ln": "Create a Lightning invoice",
-      "fund": "Fund your on-chain wallet",
+      "fund": "Fund on-chain wallet",
       "invoice": "Invoice",
       "on_chain": "On-chain",
       "receive": "Receive",
