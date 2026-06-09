@@ -48,13 +48,12 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
           <div className="mt-4">
             <RadioGroup
               value={selected}
-              classNames={{ wrapper: "gap-6" }}
-              onValueChange={setSelected as SelectFn}
+              className="gap-6"
+              onChange={setSelected as SelectFn}
             >
               {setupPhase === SetupPhase.RECOVERY && (
                 <CustomRadio
                   id="recovery"
-                  radioGroup="setup"
                   value={SetupPhase.RECOVERY}
                   icon={<ArrowUturnLeftIcon />}
                   text={t("setup.recoverblitz")}
@@ -63,7 +62,6 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
               {setupPhase === SetupPhase.UPDATE && (
                 <CustomRadio
                   id="update"
-                  radioGroup="setup"
                   value={SetupPhase.UPDATE}
                   icon={<ArrowUpCircleIcon />}
                   text={t("setup.updateblitz")}
@@ -72,7 +70,6 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
               {setupPhase === SetupPhase.MIGRATION && (
                 <CustomRadio
                   id="migration"
-                  radioGroup="setup"
                   value={SetupPhase.MIGRATION}
                   icon={<ArrowsRightLeftIcon />}
                   text={t("setup.migrateblitz")}
@@ -80,14 +77,12 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
               )}
               <CustomRadio
                 id="setup"
-                radioGroup="setup"
                 value={SetupPhase.SETUP}
                 icon={<ArrowDownTrayIcon />}
                 text={t("setup.setupblitz")}
               />
               <CustomRadio
                 id="shutdown"
-                radioGroup="setup"
                 value={SetupPhase.NULL}
                 icon={<PowerIcon />}
                 iconColor="text-red-500"

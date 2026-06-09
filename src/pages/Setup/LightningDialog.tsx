@@ -67,8 +67,8 @@ export default function LightningDialog({ callback }: Props) {
           <div className="mt-4">
             <RadioGroup
               value={selected}
-              classNames={{ wrapper: "gap-6" }}
-              onValueChange={setSelected as SelectFn}
+              className="gap-6"
+              onChange={setSelected as SelectFn}
             >
               {[
                 SetupLightning.LND,
@@ -78,7 +78,6 @@ export default function LightningDialog({ callback }: Props) {
                 <CustomRadio
                   key={lightning}
                   id={lightning}
-                  radioGroup="setup"
                   value={lightning}
                   text={t(`setup.${lightning}`)}
                   description={t(`setup.${lightning}_description`)}
