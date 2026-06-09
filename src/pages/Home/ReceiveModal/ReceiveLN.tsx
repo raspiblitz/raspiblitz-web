@@ -1,8 +1,6 @@
-import { Input } from "@heroui/react";
-import type { ChangeEvent, FC } from "react";
-import { useState } from "react";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { FieldError, Input, Label, TextField } from "@heroui/react";
+import { type FC, useState } from "react";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
@@ -25,17 +23,13 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
   const { t } = useTranslation();
 
   const [amount, setAmount] = useState(0);
-  const [comment, setComment] = useState("");
 
-  const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setComment(event.target.value);
-  };
-
-  const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const amountChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);
   };
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors, isValid, submitCount },
@@ -65,21 +59,27 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
             />
 
             <div className="mt-2 flex flex-col justify-center">
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="text"
-                isInvalid={!!errors.commentInput}
-                errorMessage={errors.commentInput?.message}
-                {...register("commentInput", {
-                  onChange: commentChangeHandler,
-                })}
-                label={t("tx.comment")}
-                value={comment}
-                placeholder={t("tx.comment_placeholder")}
+              <Controller
+                name="commentInput"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    className="w-full"
+                    isInvalid={fieldState.invalid}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                  >
+                    <Label>{t("tx.comment")}</Label>
+                    <Input
+                      type="text"
+                      placeholder={t("tx.comment_placeholder")}
+                      className="bg-tertiary"
+                    />
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  </TextField>
+                )}
               />
             </div>
           </div>
