@@ -24,15 +24,10 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
 
   const [amount, setAmount] = useState(0);
 
-  const amountChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
-  };
-
   const {
     control,
-    register,
     handleSubmit,
-    formState: { errors, isValid, submitCount },
+    formState: { isValid, submitCount },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -44,18 +39,30 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
       <ConfirmModal.Body>
         <fieldset className="flex w-full flex-col gap-4">
           <div className="flex flex-col justify-center pb-5 text-center">
-            <AmountInput
-              amount={amount}
-              register={register("amountInput", {
+            <Controller
+              name="amountInput"
+              control={control}
+              rules={{
                 required: t("forms.validation.chainAmount.required"),
                 validate: {
                   greaterThanZero: (val) =>
-                    stringToNumber(val) > 0 ||
+                    stringToNumber(`${val}`) > 0 ||
                     t("forms.validation.chainAmount.required"),
                 },
-                onChange: amountChangeHandler,
-              })}
-              errorMessage={errors.amountInput}
+              }}
+              render={({ field, fieldState }) => (
+                <AmountInput
+                  amount={amount}
+                  error={fieldState.error?.message}
+                  field={{
+                    ...field,
+                    onChange: (value) => {
+                      field.onChange(value);
+                      setAmount(+value);
+                    },
+                  }}
+                />
+              )}
             />
 
             <div className="mt-2 flex flex-col justify-center">
