@@ -15,8 +15,9 @@ const I18nSelect: FC = () => {
       selectedKey={i18n.language}
       onSelectionChange={(key) => {
         if (key && key !== i18n.language) {
-          i18n.changeLanguage(String(key));
-          saveSettings({ lang: i18n.language });
+          const lang = String(key);
+          i18n.changeLanguage(lang);
+          saveSettings({ lang });
         }
       }}
     >

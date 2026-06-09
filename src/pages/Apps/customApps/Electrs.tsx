@@ -17,6 +17,7 @@ import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 
 function CopySnippet({ text }: { text: string }) {
+  const { t } = useTranslation();
   const [copy, copied] = useClipboard(text);
   return (
     <div className="flex max-w-[80%] items-center gap-2 rounded-lg bg-accent px-3 py-2 text-white">
@@ -26,7 +27,7 @@ function CopySnippet({ text }: { text: string }) {
       <button
         type="button"
         onClick={copy}
-        aria-label={copied ? "Copied" : "Copy to clipboard"}
+        aria-label={copied ? t("wallet.copied") : t("wallet.copy_clipboard")}
         className="shrink-0 rounded p-1 hover:bg-white/20 transition-colors"
       >
         {copied ? (
