@@ -1,4 +1,11 @@
-import { FieldError, Input, Label, TextField } from "@heroui/react";
+import {
+  FieldError,
+  Input,
+  Label,
+  ListBox,
+  Select,
+  TextField,
+} from "@heroui/react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -32,7 +39,6 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
   const [amount, setAmount] = useState<number | undefined>(undefined);
 
   const {
-    register,
     control,
     handleSubmit,
     formState: { isValid },
@@ -121,19 +127,37 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
               )}
             />
             <div className="flex items-center justify-between rounded-xl px-3 py-3">
-              <label htmlFor="targetConf" className="text-sm text-secondary">
-                {t("tx.fee_rate")}
-              </label>
-              <select
-                id="targetConf"
-                defaultValue={4}
-                {...register("feeRate")}
-                className="rounded-lg bg-accent px-3 py-2 text-sm outline-none"
-              >
-                <option value={1}>{t("home.urgent")}</option>
-                <option value={4}>{t("home.normal")}</option>
-                <option value={20}>{t("home.slow")}</option>
-              </select>
+              <span className="text-sm text-secondary">{t("tx.fee_rate")}</span>
+              <Controller
+                name="feeRate"
+                control={control}
+                defaultValue="4"
+                render={({ field }) => (
+                  <Select
+                    aria-label={t("tx.fee_rate")}
+                    selectedKey={field.value}
+                    onSelectionChange={(key) => field.onChange(String(key))}
+                  >
+                    <Select.Trigger className="bg-tertiary">
+                      <Select.Value />
+                      <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover>
+                      <ListBox>
+                        <ListBox.Item id="1" textValue={t("home.urgent")}>
+                          {t("home.urgent")}
+                        </ListBox.Item>
+                        <ListBox.Item id="4" textValue={t("home.normal")}>
+                          {t("home.normal")}
+                        </ListBox.Item>
+                        <ListBox.Item id="20" textValue={t("home.slow")}>
+                          {t("home.slow")}
+                        </ListBox.Item>
+                      </ListBox>
+                    </Select.Popover>
+                  </Select>
+                )}
+              />
             </div>
           </fieldset>
 
