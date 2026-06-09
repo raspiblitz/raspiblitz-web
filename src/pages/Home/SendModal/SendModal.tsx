@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "@heroui/react";
+import { Tabs } from "@heroui/react";
 import type { AxiosResponse } from "axios";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -88,11 +88,16 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
 
       <div className="mx-6">
         <Tabs
-          fullWidth
           aria-label={t("wallet.receive_aria_options")}
           onSelectionChange={handleTabChange}
         >
-          <Tab key={TxType.LIGHTNING} title={t("wallet.send_lightning")}>
+          <Tabs.List>
+            <Tabs.Tab id={TxType.LIGHTNING}>
+              {t("wallet.send_lightning")}
+            </Tabs.Tab>
+            <Tabs.Tab id={TxType.ONCHAIN}>{t("wallet.send_onchain")}</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel id={TxType.LIGHTNING}>
             {!isBack && confirmData ? (
               <ConfirmSend
                 confirmData={confirmData}
@@ -109,8 +114,8 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
                 error={error}
               />
             )}
-          </Tab>
-          <Tab key={TxType.ONCHAIN} title={t("wallet.send_onchain")}>
+          </Tabs.Panel>
+          <Tabs.Panel id={TxType.ONCHAIN}>
             {!isBack && confirmData ? (
               <ConfirmSend
                 confirmData={confirmData}
@@ -125,7 +130,7 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
                 onConfirm={confirmOnChainHandler}
               />
             )}
-          </Tab>
+          </Tabs.Panel>
         </Tabs>
       </div>
     </ConfirmModal>

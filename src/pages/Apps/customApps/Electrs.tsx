@@ -3,7 +3,7 @@ import {
   ClipboardDocumentCheckIcon,
   ClipboardDocumentIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Card, Tab, Tabs } from "@heroui/react";
+import { Button, Card, Tabs } from "@heroui/react";
 import { QRCodeSVG } from "qrcode.react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -107,13 +107,12 @@ const Electrs = () => {
               <span className="mb-4">
                 {t("appInfo.electrs.connectionInfo")}
               </span>
-              <Tabs
-                aria-label="Connection Options"
-                color="primary"
-                size="lg"
-                className="justify-center"
-              >
-                <Tab key="local" title="Local Connection">
+              <Tabs aria-label="Connection Options" className="justify-center">
+                <Tabs.List>
+                  <Tabs.Tab id="local">Local Connection</Tabs.Tab>
+                  <Tabs.Tab id="tor">Tor</Tabs.Tab>
+                </Tabs.List>
+                <Tabs.Panel id="local">
                   <span>{t("appInfo.electrs.connectLocal")}: </span>
                   {QRAddressLocal ? (
                     <div className="mt-4 flex flex-col items-center justify-center gap-4">
@@ -129,8 +128,8 @@ const Electrs = () => {
                       {t("appInfo.electrs.not_available")}
                     </span>
                   )}
-                </Tab>
-                <Tab key="tor" title="Tor">
+                </Tabs.Panel>
+                <Tabs.Panel id="tor">
                   <span>{t("appInfo.electrs.connectTor")}:</span>
                   {QRAddressTor ? (
                     <div className="mt-4 flex flex-col items-center justify-center gap-4">
@@ -146,7 +145,7 @@ const Electrs = () => {
                       {t("appInfo.electrs.not_available")}
                     </span>
                   )}
-                </Tab>
+                </Tabs.Panel>
               </Tabs>
             </>
           )}
