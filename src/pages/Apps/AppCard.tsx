@@ -91,13 +91,11 @@ export const AppCard: FC<Props> = ({
               />
             </Tooltip.Trigger>
             <Tooltip.Content showArrow>
-              <>
-                {appStatusInfo.https_forced === true &&
-                  appStatusInfo.https_self_signed === true && (
-                    <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
-                  )}
-                <h2>{setAuthMethodText(appStatusInfo.auth_method)}</h2>
-              </>
+              {appStatusInfo.https_forced === true &&
+                appStatusInfo.https_self_signed === true && (
+                  <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
+                )}
+              <h2>{setAuthMethodText(appStatusInfo.auth_method)}</h2>
             </Tooltip.Content>
           </Tooltip>
         )}
