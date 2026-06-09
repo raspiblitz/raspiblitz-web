@@ -19,7 +19,7 @@ import { instance } from "@/utils/interceptor";
 function CopySnippet({ text }: { text: string }) {
   const [copy, copied] = useClipboard(text);
   return (
-    <div className="flex max-w-[80%] items-center gap-2 rounded-lg bg-primary px-3 py-2 text-white">
+    <div className="flex max-w-[80%] items-center gap-2 rounded-lg bg-accent px-3 py-2 text-white">
       <pre className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap font-mono text-sm">
         {text}
       </pre>

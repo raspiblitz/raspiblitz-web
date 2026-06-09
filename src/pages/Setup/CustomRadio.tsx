@@ -32,9 +32,9 @@ export default function CustomRadio({
       className="remove-radio"
       classNames={{
         base: cn(
-          "inline-flex m-0 bg-blue-900 hover:bg-primary-800 justify-between items-center",
+          "inline-flex m-0 bg-blue-900 hover:bg-accent-800 justify-between items-center",
           "flex-row-reverse max-w-[800px] cursor-pointer rounded-lg gap-4 border-2 border-white/5 pr-4",
-          "data-[selected=true]:border-primary",
+          "data-[selected=true]:border-accent",
         ),
         labelWrapper: "m-0",
       }}

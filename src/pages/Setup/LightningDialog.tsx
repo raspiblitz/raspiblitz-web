@@ -51,7 +51,7 @@ export default function LightningDialog({ callback }: Props) {
                 <a
                   key="link"
                   href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
-                  className="text-primary underline"
+                  className="text-accent underline"
                   target="_blank"
                   rel="noreferrer"
                 />,

@@ -18,7 +18,7 @@ interface IFormInputs {
 
 const passwordColors = {
   a: "text-danger",
-  b: "text-primary",
+  b: "text-accent",
   c: "text-warning",
 };
 

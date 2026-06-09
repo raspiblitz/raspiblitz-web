@@ -112,7 +112,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
                 id="targetConf"
                 defaultValue={4}
                 {...register("feeRate")}
-                className="rounded-lg bg-primary px-3 py-2 text-sm outline-none"
+                className="rounded-lg bg-accent px-3 py-2 text-sm outline-none"
               >
                 <option value={1}>{t("home.urgent")}</option>
                 <option value={4}>{t("home.normal")}</option>

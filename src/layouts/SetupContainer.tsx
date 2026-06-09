@@ -16,7 +16,7 @@ export default function SetupContainer({
   const { t } = useTranslation();
 
   return (
-    <main className="flex h-full min-h-screen w-screen flex-col items-center justify-center bg-primary-900 text-white transition-colors">
+    <main className="flex h-full min-h-screen w-screen flex-col items-center justify-center bg-accent-900 text-white transition-colors">
       <div className="fixed top-16 flex h-8 w-48 flex-col-reverse items-center justify-center gap-6 md:right-16 md:top-6 md:w-96 md:flex-row md:gap-4">
         <Button
           as="a"
