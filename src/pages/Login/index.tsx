@@ -1,8 +1,15 @@
-import { Button, Input, Spinner } from "@heroui/react";
+import {
+  Button,
+  FieldError,
+  Input,
+  Label,
+  Spinner,
+  TextField,
+} from "@heroui/react";
 import type { AxiosError } from "axios";
 import { type FC, useContext, useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
@@ -31,9 +38,9 @@ const Login: FC = () => {
   const back = queryParams.get("back");
 
   const {
-    register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<IFormInputs>({ mode: "onChange" });
 
   useEffect(() => {
@@ -91,22 +98,32 @@ const Login: FC = () => {
             className="items-left flex flex-col justify-center py-5"
             onSubmit={handleSubmit(loginHandler)}
           >
-            <Input
-              autoFocus
-              className="w-8/12 md:w-96"
-              classNames={{
-                inputWrapper:
-                  "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-              }}
-              isDisabled={isLoading}
-              type="password"
-              label={t("login.enter_pass")}
-              placeholder={t("login.enter_pass_placeholder")}
-              isInvalid={!!errors.passwordInput}
-              errorMessage={errors.passwordInput?.message}
-              {...register("passwordInput", {
+            <Controller
+              name="passwordInput"
+              control={control}
+              rules={{
                 required: t("forms.validation.login.required"),
-              })}
+              }}
+              render={({ field, fieldState }) => (
+                <TextField
+                  className="w-8/12 md:w-96"
+                  isInvalid={fieldState.invalid}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                  isDisabled={isLoading}
+                >
+                  <Label>{t("login.enter_pass")}</Label>
+                  <Input
+                    autoFocus
+                    type="password"
+                    placeholder={t("login.enter_pass_placeholder")}
+                    className="bg-tertiary"
+                  />
+                  <FieldError>{fieldState.error?.message}</FieldError>
+                </TextField>
+              )}
             />
 
             <article className="flex flex-col items-center justify-center gap-10 pt-10">
