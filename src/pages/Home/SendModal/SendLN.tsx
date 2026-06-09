@@ -1,7 +1,6 @@
-import { Input } from "@heroui/react";
+import { FieldError, Input, Label, TextField } from "@heroui/react";
 import { type FC, useState } from "react";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import AvailableBalance from "@/components/AvailableBalance";
@@ -34,10 +33,10 @@ const SendLn: FC<Props> = ({
   const { t } = useTranslation();
 
   const {
-    register,
+    control,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<LnInvoiceForm>({
     mode: "onChange",
   });
@@ -61,25 +60,35 @@ const SendLn: FC<Props> = ({
         {/* biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point */}
         <AvailableBalance balance={convertedBalance!} />
 
-        <Input
-          className="w-full"
-          classNames={{
-            inputWrapper:
-              "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-          }}
-          type="text"
-          isInvalid={!!errors.invoice}
-          errorMessage={errors.invoice?.message}
-          label={t("wallet.invoice")}
-          placeholder="lnbc..."
-          isDisabled={isLoading}
-          {...register("invoice", {
+        <Controller
+          name="invoice"
+          control={control}
+          rules={{
             required: t("forms.validation.lnInvoice.required"),
             pattern: {
               value: /^(lnbc|lntb)\w+/i,
               message: t("forms.validation.lnInvoice.patternMismatch"),
             },
-          })}
+          }}
+          render={({ field, fieldState }) => (
+            <TextField
+              className="w-full"
+              isInvalid={fieldState.invalid}
+              value={field.value ?? ""}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              name={field.name}
+              isDisabled={isLoading}
+            >
+              <Label>{t("wallet.invoice")}</Label>
+              <Input
+                type="text"
+                placeholder="lnbc..."
+                className="bg-tertiary"
+              />
+              <FieldError>{fieldState.error?.message}</FieldError>
+            </TextField>
+          )}
         />
 
         {error && <Alert color="danger">{error}</Alert>}
