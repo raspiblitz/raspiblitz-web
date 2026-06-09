@@ -60,10 +60,10 @@ export const ConfirmModal: ConfirmModalComponent = ({
             {cancelText || t("settings.cancel")}
           </Button>
           <Button
-            color="primary"
+            variant="primary"
             onPress={onConfirm}
             isDisabled={isLoading || !onConfirm}
-            isLoading={isLoading}
+            isPending={isLoading}
           >
             {confirmText || t("settings.confirm")}
           </Button>

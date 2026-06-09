@@ -131,10 +131,10 @@ const ChangePwModal: FC = () => {
               {t("settings.cancel")}
             </Button>
             <Button
-              color="primary"
+              variant="primary"
               type="submit"
               isDisabled={isLoading || !isValid}
-              isLoading={isLoading}
+              isPending={isLoading}
             >
               {t("settings.confirm")}
             </Button>

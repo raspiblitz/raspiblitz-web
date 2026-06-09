@@ -23,12 +23,13 @@ export default function SetupContainer({
           href="https://docs.raspiblitz.org/"
           target="_blank"
           rel="noreferrer"
-          color="primary"
           variant="ghost"
           className="w-full p-4"
-          startContent={<BookOpenIcon className="h-5 w-5" />}
         >
-          {t("navigation.documentation")}
+          <span className="flex items-center gap-2">
+            <BookOpenIcon className="h-5 w-5" />
+            {t("navigation.documentation")}
+          </span>
         </Button>
         <I18nSelect />
       </div>
