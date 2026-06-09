@@ -1,6 +1,12 @@
-import { Input, useDisclosure } from "@heroui/react";
+import {
+  FieldError,
+  Input,
+  Label,
+  TextField,
+  useDisclosure,
+} from "@heroui/react";
 import { type FC, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Button } from "@/components/Button";
@@ -22,6 +28,15 @@ const ChangePwModal: FC = () => {
   const confirmModal = useDisclosure();
 
   const { isCapsLockEnabled, keyHandlers } = useCapsLock();
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isValid },
+  } = useForm<IFormInputs>({
+    mode: "onChange",
+  });
 
   const changePwHandler = (data: IFormInputs) => {
     setIsLoading(true);
@@ -47,15 +62,6 @@ const ChangePwModal: FC = () => {
       });
   };
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isValid },
-  } = useForm<IFormInputs>({
-    mode: "onChange",
-  });
-
   return (
     <>
       <ConfirmModal
@@ -70,17 +76,10 @@ const ChangePwModal: FC = () => {
             {isCapsLockEnabled && <CapsLockWarning />}
 
             <fieldset className="flex w-full flex-col gap-4">
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="password"
-                label={t("settings.old_pw")}
-                isInvalid={!!errors.oldPassword}
-                errorMessage={errors.oldPassword?.message}
-                {...register("oldPassword", {
+              <Controller
+                name="oldPassword"
+                control={control}
+                rules={{
                   required: t("setup.password_error_empty"),
                   pattern: {
                     value: /^[a-zA-Z0-9.-]*$/,
@@ -90,21 +89,31 @@ const ChangePwModal: FC = () => {
                     value: 8,
                     message: t("setup.password_error_length"),
                   },
-                })}
-                {...keyHandlers}
+                }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    className="w-full"
+                    isInvalid={fieldState.invalid}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                  >
+                    <Label>{t("settings.old_pw")}</Label>
+                    <Input
+                      type="password"
+                      className="bg-tertiary"
+                      {...keyHandlers}
+                    />
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  </TextField>
+                )}
               />
 
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="password"
-                label={t("settings.new_pw")}
-                isInvalid={!!errors.newPassword}
-                errorMessage={errors.newPassword?.message}
-                {...register("newPassword", {
+              <Controller
+                name="newPassword"
+                control={control}
+                rules={{
                   required: t("setup.password_error_empty"),
                   pattern: {
                     value: /^[a-zA-Z0-9.-]*$/,
@@ -114,8 +123,25 @@ const ChangePwModal: FC = () => {
                     value: 8,
                     message: t("setup.password_error_length"),
                   },
-                })}
-                {...keyHandlers}
+                }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    className="w-full"
+                    isInvalid={fieldState.invalid}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                  >
+                    <Label>{t("settings.new_pw")}</Label>
+                    <Input
+                      type="password"
+                      className="bg-tertiary"
+                      {...keyHandlers}
+                    />
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  </TextField>
+                )}
               />
             </fieldset>
           </ConfirmModal.Body>
