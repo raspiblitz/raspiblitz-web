@@ -90,10 +90,10 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
 
       <ConfirmModal.Footer>
         <Button
-          color="primary"
+          variant="primary"
           type="submit"
           isDisabled={isLoading || (!isValid && submitCount > 0)}
-          isLoading={isLoading}
+          isPending={isLoading}
         >
           {t("wallet.create_invoice")}
         </Button>

@@ -130,12 +130,11 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
   return (
     <form onSubmit={handleSubmit(sendTransactionHandler)}>
       <ConfirmModal.Header>
-        <Button
-          type="button"
-          onPress={() => back(confirmData)}
-          startContent={<ChevronLeftIcon className="inline-block h-4 w-4" />}
-        >
-          {t("navigation.back")}
+        <Button type="button" onPress={() => back(confirmData)}>
+          <span className="flex items-center gap-2">
+            <ChevronLeftIcon className="inline-block h-4 w-4" />
+            {t("navigation.back")}
+          </span>
         </Button>
       </ConfirmModal.Header>
 
@@ -231,7 +230,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
         </Button>
 
         <Button
-          color="primary"
+          variant="primary"
           type="submit"
           isDisabled={
             (!isValid &&
@@ -240,7 +239,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
             !isValidLnInvoice ||
             isInvoiceAmountBiggerThanBalance
           }
-          isLoading={isLoading}
+          isPending={isLoading}
         >
           {t("settings.confirm")}
         </Button>

@@ -130,10 +130,10 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
           </Button>
 
           <Button
-            color="primary"
+            variant="primary"
             type="submit"
             isDisabled={isLoading || !isValid}
-            isLoading={isLoading}
+            isPending={isLoading}
           >
             {t("home.open_channel")}
           </Button>

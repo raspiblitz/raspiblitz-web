@@ -124,41 +124,29 @@ export const WalletCard: FC<Props> = ({
           </div>
         </section>
         <section className="grid grid-cols-2 justify-around gap-4 p-2">
-          <Button
-            onPress={onReceive}
-            startContent={<ArrowDownTrayIcon className="h-6 w-6" />}
-            className="grow"
-            color="primary"
-            variant="ghost"
-          >
-            {t("wallet.receive")}
+          <Button onPress={onReceive} className="grow" variant="ghost">
+            <span className="flex items-center gap-2">
+              <ArrowDownTrayIcon className="h-6 w-6" />
+              {t("wallet.receive")}
+            </span>
           </Button>
-          <Button
-            onPress={onSend}
-            startContent={<ShareIcon className="h-6 w-6" />}
-            className="grow"
-            color="primary"
-            variant="ghost"
-          >
-            {t("wallet.send")}
+          <Button onPress={onSend} className="grow" variant="ghost">
+            <span className="flex items-center gap-2">
+              <ShareIcon className="h-6 w-6" />
+              {t("wallet.send")}
+            </span>
           </Button>
-          <Button
-            onPress={onOpenChannel}
-            startContent={<LightningIcon className="inline h-6 w-6" />}
-            className="grow"
-            color="primary"
-            variant="ghost"
-          >
-            {t("home.open_channel")}
+          <Button onPress={onOpenChannel} className="grow" variant="ghost">
+            <span className="flex items-center gap-2">
+              <LightningIcon className="inline h-6 w-6" />
+              {t("home.open_channel")}
+            </span>
           </Button>
-          <Button
-            onPress={onCloseChannel}
-            startContent={<ListBulletIcon className="inline h-6 w-6" />}
-            className="grow"
-            color="primary"
-            variant="ghost"
-          >
-            {t("home.list_open_channels")}
+          <Button onPress={onCloseChannel} className="grow" variant="ghost">
+            <span className="flex items-center gap-2">
+              <ListBulletIcon className="inline h-6 w-6" />
+              {t("home.list_open_channels")}
+            </span>
           </Button>
         </section>
       </div>

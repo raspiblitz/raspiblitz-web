@@ -111,10 +111,10 @@ const Login: FC = () => {
 
             <article className="flex flex-col items-center justify-center gap-10 pt-10">
               <Button
-                color="primary"
+                variant="primary"
                 type="submit"
                 isDisabled={isLoading || !isValid}
-                isLoading={isLoading}
+                isPending={isLoading}
               >
                 {t("login.login")}
               </Button>

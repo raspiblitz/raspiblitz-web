@@ -156,7 +156,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
       </ConfirmModal.Body>
 
       <ConfirmModal.Footer>
-        <Button color="primary" type="submit" isDisabled={!isValid}>
+        <Button variant="primary" type="submit" isDisabled={!isValid}>
           {t("wallet.confirm")}
         </Button>
       </ConfirmModal.Footer>

@@ -22,10 +22,12 @@ const MempoolBadge: FC<Props> = ({ txId }) => {
       href={mempoolUrl}
       target="_blank"
       rel="noreferrer"
-      startContent={<ArrowTopRightOnSquareIcon className="h-3.5 w-3.5" />}
       className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-4 py-2 text-sm text-white transition-all duration-200 hover:bg-gray-800"
     >
-      <span>{t("tx.mempool")}</span>
+      <span className="flex items-center gap-2">
+        <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5" />
+        {t("tx.mempool")}
+      </span>
     </Button>
   );
 };

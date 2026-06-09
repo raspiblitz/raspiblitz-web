@@ -93,10 +93,10 @@ export default function UnlockModal({
 
         <ConfirmModal.Footer>
           <Button
-            color="primary"
+            variant="primary"
             type="submit"
             isDisabled={isLoading || !isValid}
-            isLoading={isLoading}
+            isPending={isLoading}
           >
             {isLoading ? t("wallet.unlocking") : t("wallet.unlock")}
           </Button>

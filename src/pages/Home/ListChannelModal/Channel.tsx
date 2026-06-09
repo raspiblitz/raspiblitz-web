@@ -62,7 +62,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
 
       <article>
         <Button
-          color="primary"
+          variant="primary"
           isDisabled={confirm}
           onPress={() => setConfirm(true)}
         >
@@ -93,8 +93,8 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
                 </Button>
                 <Button
                   onPress={closeChannelHandler}
-                  color="primary"
-                  isLoading={isLoading}
+                  variant="primary"
+                  isPending={isLoading}
                 >
                   {t("setup.yes")}
                 </Button>

@@ -87,10 +87,10 @@ const SendLn: FC<Props> = ({
 
       <ConfirmModal.Footer>
         <Button
-          color="primary"
+          variant="primary"
           type="submit"
           isDisabled={isLoading || !isValid}
-          isLoading={isLoading}
+          isPending={isLoading}
         >
           {t("wallet.send")}
         </Button>
