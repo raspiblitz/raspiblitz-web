@@ -128,7 +128,7 @@ export const AppInfo: FC = () => {
         {installingApp &&
           installingApp.appId === appId &&
           installingApp.mode === "on" && (
-            <Button disabled isPending={true} variant="primary">
+            <Button isDisabled isPending variant="primary">
               {t("apps.installing")}
             </Button>
           )}
@@ -136,7 +136,7 @@ export const AppInfo: FC = () => {
         {installingApp &&
           installingApp.appId === appId &&
           installingApp.mode === "off" && (
-            <Button disabled isPending={true} variant="primary">
+            <Button isDisabled isPending variant="primary">
               {t("apps.uninstalling")}
             </Button>
           )}
@@ -184,7 +184,7 @@ export const AppInfo: FC = () => {
             href={repository}
             target="_blank"
             rel="noreferrer"
-            underline="always"
+            className="underline"
           >
             {repository}
           </Link>

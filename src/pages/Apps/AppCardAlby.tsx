@@ -3,6 +3,7 @@ import {
   LinkIcon,
 } from "@heroicons/react/24/outline";
 import { Button, Link } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -95,18 +96,17 @@ export const AppCardAlby: FC = () => {
         )}
 
         {!window.alby && (
-          <Button
-            as={Link}
+          <Link
             target="_blank"
             rel="noreferrer"
             href="https://getalby.com"
-            variant="primary"
+            className={buttonVariants({ variant: "primary" })}
           >
             <span className="flex items-center gap-2">
               <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
               {t(`appInfo.${id}.action.install`)}
             </span>
-          </Button>
+          </Link>
         )}
       </div>
     </article>

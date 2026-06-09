@@ -2,7 +2,6 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { Link } from "@heroui/react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/Button";
 
 interface Props {
   txId: string;
@@ -17,8 +16,7 @@ const MempoolBadge: FC<Props> = ({ txId }) => {
   const mempoolUrl = `https://mempool.space/tx/${txId}`;
 
   return (
-    <Button
-      as={Link}
+    <Link
       href={mempoolUrl}
       target="_blank"
       rel="noreferrer"
@@ -28,7 +26,7 @@ const MempoolBadge: FC<Props> = ({ txId }) => {
         <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5" />
         {t("tx.mempool")}
       </span>
-    </Button>
+    </Link>
   );
 };
 

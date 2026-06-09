@@ -6,6 +6,7 @@ import {
   PlusIcon,
 } from "@heroicons/react/24/outline";
 import { Button, Link, Tooltip, useOverlayState } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -166,22 +167,21 @@ export const AppCard: FC<Props> = ({
 
       <div className="flex flex-row gap-2 py-4">
         {installed && appStatusInfo.address && !appInfo.customComponent && (
-          <Button
-            as={Link}
+          <Link
             href={getHrefFromApp(appStatusInfo)}
             target="_blank"
             rel="noreferrer"
-            variant="primary"
+            className={buttonVariants({ variant: "primary" })}
           >
             <span className="flex items-center gap-2">
               <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
               {t("apps.open")}
             </span>
-          </Button>
+          </Link>
         )}
 
         {installed && !appStatusInfo.address && !appInfo.customComponent && (
-          <Button disabled>{t("apps.no_page")}</Button>
+          <Button isDisabled>{t("apps.no_page")}</Button>
         )}
 
         {installed && appInfo.customComponent && (
@@ -230,7 +230,7 @@ export const AppCard: FC<Props> = ({
         {installingApp &&
           installingApp.id === id &&
           installingApp.result === "running" && (
-            <Button disabled isPending={true}>
+            <Button isDisabled isPending>
               {t("apps.installing")}
             </Button>
           )}
