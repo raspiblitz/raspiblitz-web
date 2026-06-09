@@ -105,7 +105,7 @@ const AppStatusRefresh = () => {
           <Tooltip.Content>{t("apps.refresh_tooltip")}</Tooltip.Content>
         </Tooltip>
       </div>
-      <Tooltip placement="left">
+      <Tooltip>
         <Tooltip.Trigger>
           <Button
             variant="primary"
@@ -119,7 +119,7 @@ const AppStatusRefresh = () => {
             </span>
           </Button>
         </Tooltip.Trigger>
-        <Tooltip.Content showArrow>
+        <Tooltip.Content placement="left" showArrow>
           {t("apps.refresh_expensive_warning")}
         </Tooltip.Content>
       </Tooltip>

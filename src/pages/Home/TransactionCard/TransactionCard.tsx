@@ -94,13 +94,7 @@ const TransactionCard: FC<Props> = ({
               const tx = currentPageTxs.find((t) => t.id === String(key));
               if (tx) showDetails(tx.index);
             }}
-            classNames={{
-              base: "pt-4 p-0",
-              list: "gap-2",
-            }}
-            itemClasses={{
-              base: "rounded-lg bg-default-100/50 data-[hover=true]:bg-default-200/50 p-4 cursor-pointer transition-background",
-            }}
+            className="flex flex-col gap-2 p-0 pt-4"
           >
             {currentPageTxs.map((transaction: Transaction) => {
               const formatted = formatTransaction(transaction, unit);
@@ -108,6 +102,7 @@ const TransactionCard: FC<Props> = ({
                 <ListBox.Item
                   id={transaction.id}
                   key={transaction.id}
+                  className="cursor-pointer rounded-lg bg-default-100/50 p-4 transition-background data-[hovered=true]:bg-default-200/50"
                   textValue={`${formatted.comment ?? t("tx.default_comment")}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
                 >
                   <div className="flex flex-col gap-1">

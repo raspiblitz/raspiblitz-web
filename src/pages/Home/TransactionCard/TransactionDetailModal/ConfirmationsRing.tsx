@@ -22,17 +22,18 @@ export const ConfirmationsRing: FC<Props> = ({
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <ProgressCircle
-        aria-label={`${conf} confirmations out of ${required}`}
-        classNames={{
-          svg: "w-[7.5rem] h-[7.5rem]",
-          indicator: "stroke-green-500",
-          track: "stroke-gray-700",
-          value: "text-[1.2rem] font-bold",
-        }}
-        value={progressValue}
-        valueLabel={
-          showLabel ? (
+      <div className="relative h-[7.5rem] w-[7.5rem]">
+        <ProgressCircle
+          aria-label={`${conf} confirmations out of ${required}`}
+          value={progressValue}
+        >
+          <ProgressCircle.Track className="h-full w-full">
+            <ProgressCircle.TrackCircle className="stroke-gray-700" />
+            <ProgressCircle.FillCircle className="stroke-green-500" />
+          </ProgressCircle.Track>
+        </ProgressCircle>
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          {showLabel ? (
             <span className="font-semibold text-[0.625rem] text-gray-300">
               {t("tx.unconfirmed")}
             </span>
@@ -47,10 +48,9 @@ export const ConfirmationsRing: FC<Props> = ({
               </span>
               <span className="text-[0.8rem] text-gray-400">/ {required}</span>
             </div>
-          )
-        }
-        showValueLabel={true}
-      />
+          )}
+        </div>
+      </div>
       <div className="text-sm font-medium text-gray-300">
         {t("tx.confirmations")}
       </div>
