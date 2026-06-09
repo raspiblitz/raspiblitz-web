@@ -3,7 +3,7 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Listbox, ListboxItem, Spinner } from "@heroui/react";
+import { Button, ListBox, Spinner } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
@@ -87,7 +87,7 @@ const TransactionCard: FC<Props> = ({
         )}
 
         {transactions.length > 0 && (
-          <Listbox
+          <ListBox
             aria-label={t("tx.transactions")}
             selectionMode="none"
             onAction={(key) => {
@@ -105,7 +105,8 @@ const TransactionCard: FC<Props> = ({
             {currentPageTxs.map((transaction: Transaction) => {
               const formatted = formatTransaction(transaction, unit);
               return (
-                <ListboxItem
+                <ListBox.Item
+                  id={transaction.id}
                   key={transaction.id}
                   textValue={`${formatted.comment ?? t("tx.default_comment")}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
                 >
@@ -139,10 +140,10 @@ const TransactionCard: FC<Props> = ({
                       {formatted.comment ?? t("tx.default_comment")}
                     </span>
                   </div>
-                </ListboxItem>
+                </ListBox.Item>
               );
             })}
-          </Listbox>
+          </ListBox>
         )}
 
         {transactions.length > 0 && (
