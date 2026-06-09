@@ -164,20 +164,18 @@ const Home: FC = () => {
   const modalComponent = () => (
     <>
       {activeModal === "UNLOCK" && (
-        <UnlockModal
-          disclosure={{ ...disclosure, onClose: closeModalHandler }}
-        />
+        <UnlockModal disclosure={{ ...disclosure, close: closeModalHandler }} />
       )}
       {activeModal === "LIST_CHANNEL" && (
         <ListChannelModal
-          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+          disclosure={{ ...disclosure, close: closeModalHandler }}
         />
       )}
       {activeModal === "OPEN_CHANNEL" && (
         <OpenChannelModal
           // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
           balance={balance.channel_local_balance!}
-          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+          disclosure={{ ...disclosure, close: closeModalHandler }}
         />
       )}
       {activeModal === "SEND" && (
@@ -186,19 +184,19 @@ const Home: FC = () => {
           onchainBalance={balance.onchain_confirmed_balance!}
           // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
           lnBalance={balance.channel_local_balance!}
-          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+          disclosure={{ ...disclosure, close: closeModalHandler }}
         />
       )}
       {activeModal === "RECEIVE" && (
         <ReceiveModal
-          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+          disclosure={{ ...disclosure, close: closeModalHandler }}
         />
       )}
       {activeModal === "DETAIL" && (
         <TransactionDetailModal
           // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
           transaction={detailTx!}
-          disclosure={{ ...disclosure, onClose: closeModalHandler }}
+          disclosure={{ ...disclosure, close: closeModalHandler }}
         />
       )}
     </>
