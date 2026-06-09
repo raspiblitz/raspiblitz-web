@@ -3,7 +3,6 @@ import AppContextProvider from "./context/app-context";
 import SSEContextProvider from "./context/sse-context";
 import "./i18n/config";
 import "./index.css";
-import { HeroUIProvider } from "@heroui/react";
 import ErrorBoundary from "@/ErrorBoundary";
 import "i18next";
 import { StrictMode } from "react";
@@ -31,11 +30,9 @@ root.render(
       <BrowserRouter>
         <SSEContextProvider>
           <AppContextProvider>
-            <HeroUIProvider>
-              {/* For persistent toasts over all pages */}
-              <ToastContainer stacked closeOnClick />
-              <App />
-            </HeroUIProvider>
+            {/* For persistent toasts over all pages */}
+            <ToastContainer stacked closeOnClick />
+            <App />
           </AppContextProvider>
         </SSEContextProvider>
       </BrowserRouter>
