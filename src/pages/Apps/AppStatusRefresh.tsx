@@ -98,26 +98,30 @@ const AppStatusRefresh = () => {
         <span className="text-sm text-gray-400">
           {t("apps.data_age")}: {formattedAge}
         </span>
-        <Tooltip content={t("apps.refresh_tooltip")}>
-          <InformationCircleIcon className="h-4 w-4 text-gray-400" />
+        <Tooltip>
+          <Tooltip.Trigger>
+            <InformationCircleIcon className="h-4 w-4 text-gray-400" />
+          </Tooltip.Trigger>
+          <Tooltip.Content>{t("apps.refresh_tooltip")}</Tooltip.Content>
         </Tooltip>
       </div>
-      <Tooltip
-        content={t("apps.refresh_expensive_warning")}
-        showArrow
-        placement="left"
-      >
-        <Button
-          variant="primary"
-          size="sm"
-          isPending={isUpdating}
-          onPress={handleRefresh}
-        >
-          <span className="flex items-center gap-2">
-            <ArrowPathIcon className="h-5 w-5" />
-            {isUpdating ? t("apps.refreshing") : t("apps.refresh")}
-          </span>
-        </Button>
+      <Tooltip placement="left">
+        <Tooltip.Trigger>
+          <Button
+            variant="primary"
+            size="sm"
+            isPending={isUpdating}
+            onPress={handleRefresh}
+          >
+            <span className="flex items-center gap-2">
+              <ArrowPathIcon className="h-5 w-5" />
+              {isUpdating ? t("apps.refreshing") : t("apps.refresh")}
+            </span>
+          </Button>
+        </Tooltip.Trigger>
+        <Tooltip.Content showArrow>
+          {t("apps.refresh_expensive_warning")}
+        </Tooltip.Content>
       </Tooltip>
     </div>
   );

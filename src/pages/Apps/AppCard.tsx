@@ -82,9 +82,14 @@ export const AppCard: FC<Props> = ({
     >
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {installed && (
-          <Tooltip
-            showArrow={true}
-            content={
+          <Tooltip>
+            <Tooltip.Trigger>
+              <LockOpenIcon
+                className="absolute right-0 top-0 h-6 w-6"
+                data-tooltip-id={`login-tooltip-${id}`}
+              />
+            </Tooltip.Trigger>
+            <Tooltip.Content showArrow>
               <>
                 {appStatusInfo.https_forced === true &&
                   appStatusInfo.https_self_signed === true && (
@@ -92,12 +97,7 @@ export const AppCard: FC<Props> = ({
                   )}
                 <h2>{setAuthMethodText(appStatusInfo.auth_method)}</h2>
               </>
-            }
-          >
-            <LockOpenIcon
-              className="absolute right-0 top-0 h-6 w-6"
-              data-tooltip-id={`login-tooltip-${id}`}
-            />
+            </Tooltip.Content>
           </Tooltip>
         )}
 
