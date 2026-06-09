@@ -1,4 +1,4 @@
-import { cn, Image, Radio } from "@heroui/react";
+import { cn, Radio } from "@heroui/react";
 import type { ReactNode } from "react";
 
 type Props = {
@@ -48,12 +48,11 @@ export default function CustomRadio({
               imageBaseClasses,
             )}
           >
-            <Image
+            <img
               width={46}
               height={46}
-              alt={`${text} image`}
+              alt={text}
               src={image}
-              radius="none"
               className="max-h-auto max-w-10"
             />
           </div>
