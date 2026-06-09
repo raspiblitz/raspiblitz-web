@@ -76,11 +76,11 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
               <p>{t("home.confirm_channel_close")}</p>
 
               <div className="flex items-center justify-center gap-2">
-                <Checkbox
-                  isSelected={isForceClose}
-                  onValueChange={setIsForceClose}
-                >
-                  {t("home.force_close")}
+                <Checkbox isSelected={isForceClose} onChange={setIsForceClose}>
+                  <Checkbox.Control>
+                    <Checkbox.Indicator />
+                  </Checkbox.Control>
+                  <Checkbox.Content>{t("home.force_close")}</Checkbox.Content>
                 </Checkbox>
               </div>
 

@@ -40,7 +40,6 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
   const [amount, setAmount] = useState(0);
 
   const {
-    register,
     control,
     handleSubmit,
     watch,
@@ -140,9 +139,18 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
           )}
 
           <div className="flex w-full justify-start gap-2 pb-1">
-            <Checkbox {...register("spendAll", {})}>
-              {t("tx.spend_all")}
-            </Checkbox>
+            <Controller
+              name="spendAll"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Checkbox isSelected={!!value} onChange={onChange}>
+                  <Checkbox.Control>
+                    <Checkbox.Indicator />
+                  </Checkbox.Control>
+                  <Checkbox.Content>{t("tx.spend_all")}</Checkbox.Content>
+                </Checkbox>
+              )}
+            />
           </div>
 
           <div className="w-full py-1">

@@ -67,7 +67,12 @@ export default function FinalDialog({
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
                 <Checkbox onChange={onChange} isSelected={value}>
-                  {t("setup.final_info_reboot")}
+                  <Checkbox.Control>
+                    <Checkbox.Indicator />
+                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    {t("setup.final_info_reboot")}
+                  </Checkbox.Content>
                 </Checkbox>
               )}
             />

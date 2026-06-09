@@ -42,10 +42,15 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
           {containsBlockchain && (
             <Checkbox
               id="keepBlockchain"
-              onValueChange={setKeepBlockchain}
+              onChange={setKeepBlockchain}
               isSelected={keepBlockchain}
             >
-              {t("setup.format.keep_blockchain")}
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+              <Checkbox.Content>
+                {t("setup.format.keep_blockchain")}
+              </Checkbox.Content>
             </Checkbox>
           )}
 
