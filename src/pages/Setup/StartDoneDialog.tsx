@@ -48,7 +48,7 @@ export default function StartDoneDialog({ setupPhase, callback }: Props) {
         <Headline>{headline}</Headline>
 
         <article className="flex flex-col items-center justify-center gap-10 pt-10">
-          <Button onPress={() => callback(false)} color="primary">
+          <Button onPress={() => callback(false)} variant="primary">
             {buttonText}
           </Button>
           <Button onPress={() => confirmModal.onOpen()}>

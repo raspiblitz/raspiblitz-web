@@ -50,13 +50,13 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
           )}
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
-            <Button type="submit" color="primary">
+            <Button type="submit" variant="primary">
               {t("setup.format.delete_confirm")}
             </Button>
 
             <Button
               type="button"
-              color="danger"
+              variant="danger"
               onPress={() => confirmModal.onOpen()}
             >
               {t("setup.cancel")}

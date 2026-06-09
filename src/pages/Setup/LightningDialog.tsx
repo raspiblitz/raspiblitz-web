@@ -91,7 +91,7 @@ export default function LightningDialog({ callback }: Props) {
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button
               type="submit"
-              color="primary"
+              variant="primary"
               isDisabled={selected === undefined}
             >
               {t("setup.continue")}

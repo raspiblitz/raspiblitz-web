@@ -97,7 +97,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
-            <Button type="submit" color="primary">
+            <Button type="submit" variant="primary">
               {t("setup.continue")}
             </Button>
           </article>

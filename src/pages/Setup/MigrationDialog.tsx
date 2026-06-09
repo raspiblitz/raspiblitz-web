@@ -32,7 +32,11 @@ export default function MigrationDialog({
             {t("setup.lightningoutdated")}
           </Alert>
 
-          <Button type="button" onPress={() => callback(false)} color="primary">
+          <Button
+            type="button"
+            onPress={() => callback(false)}
+            variant="primary"
+          >
             {t("settings.shutdown")}
           </Button>
         </section>
@@ -66,13 +70,13 @@ export default function MigrationDialog({
             <Button
               type="button"
               onPress={() => confirmModal.onOpen()}
-              color="primary"
+              variant="primary"
             >
               {t("setup.no_and_shutdown")}
             </Button>
             <Button
               type="button"
-              color="secondary"
+              variant="secondary"
               onPress={() => callback(true)}
             >
               {t("setup.yes_and_migrate")}

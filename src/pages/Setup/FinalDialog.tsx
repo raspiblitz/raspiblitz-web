@@ -77,7 +77,7 @@ export default function FinalDialog({
             <Button
               type="submit"
               isDisabled={!isValid && !!seedWords}
-              color="primary"
+              variant="primary"
             >
               {t("setup.final_do_reboot")}
             </Button>

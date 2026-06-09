@@ -86,12 +86,12 @@ export default function InputNodeName({ callback }: Props) {
             </fieldset>
 
             <article className="flex flex-col items-center justify-center gap-10 pt-10">
-              <Button type="submit" isDisabled={!isValid} color="primary">
+              <Button type="submit" isDisabled={!isValid} variant="primary">
                 {t("setup.continue")}
               </Button>
               <Button
                 type="button"
-                color="danger"
+                variant="danger"
                 onPress={() => confirmModal.onOpen()}
               >
                 {t("setup.cancel")}

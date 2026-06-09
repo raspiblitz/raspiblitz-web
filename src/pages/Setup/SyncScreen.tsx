@@ -144,7 +144,11 @@ export default function SyncScreen({ data, callback }: Props) {
                 {error && <Alert color="danger">{error}</Alert>}
               </ModalBody>
               <ModalFooter>
-                <Button type="submit" color="primary" isLoading={runningUnlock}>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  isPending={runningUnlock}
+                >
                   {t("setup.sync_wallet_unlock")}
                 </Button>
               </ModalFooter>
@@ -203,7 +207,7 @@ export default function SyncScreen({ data, callback }: Props) {
                         <LockClosedIcon className="inline h-6 w-auto text-danger" />{" "}
                         {t("wallet.wallet_locked")}
                       </p>
-                      <Button onPress={onOpen} color="primary">
+                      <Button onPress={onOpen} variant="primary">
                         {t("wallet.unlock_title")}
                       </Button>
                       <p>{t("wallet.wallet_unlock_info")}</p>
@@ -218,11 +222,13 @@ export default function SyncScreen({ data, callback }: Props) {
             <Button
               type="button"
               onPress={() => callback("shutdown", null)}
-              color="primary"
+              variant="primary"
               title={t("setup.sync_restartinfo")}
-              startContent={<PowerIcon className="inline h-6 w-auto" />}
             >
-              {t("settings.shutdown")}
+              <span className="flex items-center gap-2">
+                <PowerIcon className="inline h-6 w-auto" />
+                {t("settings.shutdown")}
+              </span>
             </Button>
           </article>
         </section>
