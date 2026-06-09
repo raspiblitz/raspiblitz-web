@@ -32,9 +32,8 @@
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@heroicons/react": "^2.2.0",
-    "@heroui/react": "^2.8.2",
-    "@heroui/system": "^2.4.20",
-    "@heroui/theme": "^2.4.20",
+    "@heroui/react": "^3.1.0",
+    "@heroui/styles": "^3.1.0",
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.2",
     "framer-motion": "^12.23.12",
