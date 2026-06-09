@@ -16,4 +16,4 @@ beforeAll(() => server.listen());
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
-export { server, http, HttpResponse };
+export { HttpResponse, http, server };

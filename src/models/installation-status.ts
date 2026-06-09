@@ -7,6 +7,7 @@ export enum InstallState {
 }
 
 export interface InstallationMessage {
+  uid: string; // Stable unique key per message (assigned on ingestion)
   id: string;
   mode: string;
   state: string;

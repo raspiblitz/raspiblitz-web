@@ -102,7 +102,7 @@ const InstallationLogModal = ({
             {messagesWithDetails.length > 0 ? (
               messagesWithDetails.map((msg, idx) => (
                 <div
-                  key={`${msg.id}-${msg.timestamp}-${idx}`}
+                  key={msg.uid}
                   className={`p-3 rounded-lg border-l-4 transition-all duration-300 ${
                     msg.state === "failure"
                       ? "bg-linear-to-r from-red-950/80 to-red-900/40 border-l-red-500 text-red-100 shadow-lg shadow-red-900/20"

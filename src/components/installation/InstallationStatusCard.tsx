@@ -60,9 +60,9 @@ const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
 
       <div className="space-y-2 mb-3">
         {latestMessages.length > 0 ? (
-          latestMessages.map((msg, idx) => (
+          latestMessages.map((msg) => (
             <div
-              key={`${msg.id}-${msg.timestamp}-${idx}`}
+              key={msg.uid}
               className="text-sm border-l-2 border-gray-600 pl-3 py-1 text-gray-300"
             >
               {msg.message}
