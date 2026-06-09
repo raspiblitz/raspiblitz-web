@@ -2,8 +2,8 @@ name: Playwright Tests
 on:
   push:
     branches: [ master ]
+  # Run on PRs targeting ANY base branch (not just master).
   pull_request:
-    branches: [ master ]
 jobs:
   test:
     timeout-minutes: 60
