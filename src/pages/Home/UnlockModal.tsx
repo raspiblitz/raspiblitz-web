@@ -1,10 +1,4 @@
-import {
-  FieldError,
-  Input,
-  Label,
-  TextField,
-  useDisclosure,
-} from "@heroui/react";
+import { FieldError, Input, Label, TextField } from "@heroui/react";
 import { useContext, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -50,7 +44,7 @@ export default function UnlockModal({
         if (res.data) {
           setWalletLocked(false);
           toast.success(t("wallet.unlock_success"), { theme: "dark" });
-          disclosure.onClose();
+          disclosure.close();
         }
       })
       .catch((_) => {

@@ -5,7 +5,7 @@ import {
   LockOpenIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Link, Tooltip, useDisclosure } from "@heroui/react";
+import { Button, Link, Tooltip, useOverlayState } from "@heroui/react";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -37,7 +37,7 @@ export const AppCard: FC<Props> = ({
   const { t } = useTranslation();
   const [isInstallWaiting, setInstallWaiting] = useState(false);
   const navigate = useNavigate();
-  const errorModal = useDisclosure();
+  const errorModal = useOverlayState();
 
   useEffect(() => {
     setInstallWaiting(false);
@@ -139,7 +139,7 @@ export const AppCard: FC<Props> = ({
             </div>
           </ConfirmModal.Body>
           <ConfirmModal.Footer>
-            <Button onPress={errorModal.onClose}>{t("apps.close")}</Button>
+            <Button onPress={errorModal.close}>{t("apps.close")}</Button>
             <Button variant="primary" onPress={copyErrorToClipboard}>
               <span className="flex items-center gap-2">
                 <svg
@@ -198,7 +198,7 @@ export const AppCard: FC<Props> = ({
 
         {/* Show View Error button instead of Install button when there's an error */}
         {hasError && !installed && (
-          <Button onPress={errorModal.onOpen} variant="danger">
+          <Button onPress={errorModal.open} variant="danger">
             <span className="flex items-center gap-2">
               <ExclamationTriangleIcon className="inline h-6 w-6" />
               {t("apps.view_error")}

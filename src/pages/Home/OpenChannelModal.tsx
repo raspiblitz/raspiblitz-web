@@ -56,7 +56,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
       )
       .then(() => {
         toast.success(t("home.channel_opened"), { theme: "dark" });
-        disclosure.onClose();
+        disclosure.close();
       })
       .catch((err) => setError(checkError(err)))
       .finally(() => setIsLoading(false));
@@ -141,7 +141,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
         </ConfirmModal.Body>
 
         <ConfirmModal.Footer>
-          <Button onPress={disclosure.onClose} isDisabled={isLoading}>
+          <Button onPress={disclosure.close} isDisabled={isLoading}>
             {t("settings.cancel")}
           </Button>
 

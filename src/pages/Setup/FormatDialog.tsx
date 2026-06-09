@@ -1,4 +1,4 @@
-import { Checkbox, useDisclosure } from "@heroui/react";
+import { Checkbox, useOverlayState } from "@heroui/react";
 import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
@@ -21,7 +21,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
     callback(true, keepBlockchain);
   };
 
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
             <Button
               type="button"
               variant="danger"
-              onPress={() => confirmModal.onOpen()}
+              onPress={() => confirmModal.open()}
             >
               {t("setup.cancel")}
             </Button>

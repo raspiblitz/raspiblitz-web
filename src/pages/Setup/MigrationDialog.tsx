@@ -1,4 +1,4 @@
-import { useDisclosure } from "@heroui/react";
+import { useOverlayState } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
@@ -22,7 +22,7 @@ export default function MigrationDialog({
   callback,
 }: Props) {
   const { t } = useTranslation();
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   if (migrationMode === SetupMigrationMode.OUTDATED) {
     return (
@@ -69,7 +69,7 @@ export default function MigrationDialog({
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button
               type="button"
-              onPress={() => confirmModal.onOpen()}
+              onPress={() => confirmModal.open()}
               variant="primary"
             >
               {t("setup.no_and_shutdown")}

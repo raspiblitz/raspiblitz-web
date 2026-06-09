@@ -3,7 +3,7 @@ import {
   Input,
   Label,
   TextField,
-  useDisclosure,
+  useOverlayState,
 } from "@heroui/react";
 import { Controller, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -48,7 +48,7 @@ export default function InputPassword({ passwordType, callback }: Props) {
     reset();
   };
 
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   return (
     <>
@@ -151,7 +151,7 @@ export default function InputPassword({ passwordType, callback }: Props) {
               <Button
                 type="button"
                 variant="secondary"
-                onPress={() => confirmModal.onOpen()}
+                onPress={() => confirmModal.open()}
               >
                 {t("setup.cancel")}
               </Button>

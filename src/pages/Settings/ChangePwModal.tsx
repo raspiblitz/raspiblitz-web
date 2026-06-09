@@ -3,7 +3,7 @@ import {
   Input,
   Label,
   TextField,
-  useDisclosure,
+  useOverlayState,
 } from "@heroui/react";
 import { type FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -25,7 +25,7 @@ interface IFormInputs {
 const ChangePwModal: FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   const { isCapsLockEnabled, keyHandlers } = useCapsLock();
 
@@ -51,7 +51,7 @@ const ChangePwModal: FC = () => {
       .post("/system/change-password", {}, { params })
       .then(() => {
         toast.success(t("settings.pass_a_changed"), { theme: "dark" });
-        confirmModal.onClose();
+        confirmModal.close();
       })
       .catch((err) => {
         toast.error(checkError(err));
@@ -149,7 +149,7 @@ const ChangePwModal: FC = () => {
           <ConfirmModal.Footer>
             <Button
               onPress={() => {
-                confirmModal.onClose();
+                confirmModal.close();
                 reset();
               }}
               isDisabled={isLoading}
@@ -171,7 +171,7 @@ const ChangePwModal: FC = () => {
       <ActionBox
         name={t("settings.change_pw_a")}
         actionName={t("settings.change")}
-        action={() => confirmModal.onOpen()}
+        action={() => confirmModal.open()}
         showChild={false}
       />
     </>

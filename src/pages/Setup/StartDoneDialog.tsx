@@ -1,4 +1,4 @@
-import { useDisclosure } from "@heroui/react";
+import { useOverlayState } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
@@ -13,7 +13,7 @@ export type Props = {
 
 export default function StartDoneDialog({ setupPhase, callback }: Props) {
   const { t } = useTranslation();
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   let headline: string;
   let buttonText: string;
@@ -51,7 +51,7 @@ export default function StartDoneDialog({ setupPhase, callback }: Props) {
           <Button onPress={() => callback(false)} variant="primary">
             {buttonText}
           </Button>
-          <Button onPress={() => confirmModal.onOpen()}>
+          <Button onPress={() => confirmModal.open()}>
             {t("setup.cancel")}
           </Button>
         </article>

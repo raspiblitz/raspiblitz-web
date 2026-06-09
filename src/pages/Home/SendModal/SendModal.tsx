@@ -103,7 +103,7 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
                 confirmData={confirmData}
                 back={backHandler}
                 balance={lnBalance}
-                close={disclosure.onClose}
+                close={disclosure.close}
               />
             ) : (
               <SendLn
@@ -121,7 +121,7 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
                 confirmData={confirmData}
                 back={backHandler}
                 balance={lnBalance}
-                close={disclosure.onClose}
+                close={disclosure.close}
               />
             ) : (
               <SendOnChain
