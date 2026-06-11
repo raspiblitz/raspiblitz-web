@@ -18,6 +18,11 @@ import type { WalletBalance } from "@/models/wallet-balance";
 import { setWindowAlias } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
 
+// Monotonic counter for assigning a stable, unique key to each installation
+// message. Avoids relying on the array index (or a possibly-colliding
+// timestamp) as a React key.
+let installationMessageSeq = 0;
+
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners
  * to the single events to update the SSEContext
@@ -123,6 +128,8 @@ function useSSE() {
         // Add timestamp for sorting
         const messageWithTimestamp = {
           ...parsedData,
+          // Stable unique key for React lists (see installationMessageSeq)
+          uid: `msg-${installationMessageSeq++}`,
           // Map message to details for consistency with our data model
           details: details,
           timestamp: Date.now(),
@@ -369,7 +376,7 @@ function useSSE() {
               };
 
               // If previous state is empty, just return the new status
-              if (!prev || !prev.data || prev.data.length === 0) {
+              if (!prev?.data || prev.data.length === 0) {
                 return status;
               }
               // Get IDs from new data to update
