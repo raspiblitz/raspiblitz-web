@@ -72,8 +72,13 @@ function useSSE() {
   );
 
   useEffect(() => {
+    // Create (or reuse) the EventSource and attach listeners to THIS instance
+    // synchronously in the same effect run. Gating the listeners behind the
+    // `evtSource` state attached them a render later, so connect-time events
+    // (e.g. ln_info) that the backend sends immediately on connect were missed.
+    const es = evtSource ?? new EventSource(SSE_URL, { withCredentials: true });
     if (!evtSource) {
-      setEvtSource(new EventSource(SSE_URL, { withCredentials: true }));
+      setEvtSource(es);
     }
 
     const setApps = (event: MessageEvent<string>) => {
@@ -414,49 +419,39 @@ function useSSE() {
       appCtx.logout();
     };
 
-    if (evtSource) {
-      evtSource.addEventListener("error", eventErrorHandler);
-      evtSource.addEventListener("system_info", setSystemInfo);
-      evtSource.addEventListener("btc_info", setBtcInfo);
-      evtSource.addEventListener("ln_info", setLnInfo);
-      evtSource.addEventListener("wallet_balance", setBalance);
-      evtSource.addEventListener("transactions", setTx);
-      evtSource.addEventListener("app_manage_message", handleManageAppMessage);
-      evtSource.addEventListener("apps", setApps);
-      evtSource.addEventListener("install", setInstall);
-      evtSource.addEventListener("hardware_info", setHardwareInfo);
-      evtSource.addEventListener("system_startup_info", setSystemStartupInfo);
-      evtSource.addEventListener(
-        "app_state_update_message",
-        handleAppStateUpdateMessage,
-      );
-    }
+    es.addEventListener("error", eventErrorHandler);
+    es.addEventListener("system_info", setSystemInfo);
+    es.addEventListener("btc_info", setBtcInfo);
+    es.addEventListener("ln_info", setLnInfo);
+    es.addEventListener("wallet_balance", setBalance);
+    es.addEventListener("transactions", setTx);
+    es.addEventListener("app_manage_message", handleManageAppMessage);
+    es.addEventListener("apps", setApps);
+    es.addEventListener("install", setInstall);
+    es.addEventListener("hardware_info", setHardwareInfo);
+    es.addEventListener("system_startup_info", setSystemStartupInfo);
+    es.addEventListener(
+      "app_state_update_message",
+      handleAppStateUpdateMessage,
+    );
 
     return () => {
       // cleanup
-      if (evtSource) {
-        evtSource.removeEventListener("error", eventErrorHandler);
-        evtSource.removeEventListener("system_info", setSystemInfo);
-        evtSource.removeEventListener("btc_info", setBtcInfo);
-        evtSource.removeEventListener("ln_info", setLnInfo);
-        evtSource.removeEventListener("wallet_balance", setBalance);
-        evtSource.removeEventListener("transactions", setTx);
-        evtSource.removeEventListener(
-          "app_manage_message",
-          handleManageAppMessage,
-        );
-        evtSource.removeEventListener("apps", setApps);
-        evtSource.removeEventListener("install", setInstall);
-        evtSource.removeEventListener("hardware_info", setHardwareInfo);
-        evtSource.removeEventListener(
-          "system_startup_info",
-          setSystemStartupInfo,
-        );
-        evtSource.removeEventListener(
-          "app_state_update_message",
-          handleAppStateUpdateMessage,
-        );
-      }
+      es.removeEventListener("error", eventErrorHandler);
+      es.removeEventListener("system_info", setSystemInfo);
+      es.removeEventListener("btc_info", setBtcInfo);
+      es.removeEventListener("ln_info", setLnInfo);
+      es.removeEventListener("wallet_balance", setBalance);
+      es.removeEventListener("transactions", setTx);
+      es.removeEventListener("app_manage_message", handleManageAppMessage);
+      es.removeEventListener("apps", setApps);
+      es.removeEventListener("install", setInstall);
+      es.removeEventListener("hardware_info", setHardwareInfo);
+      es.removeEventListener("system_startup_info", setSystemStartupInfo);
+      es.removeEventListener(
+        "app_state_update_message",
+        handleAppStateUpdateMessage,
+      );
     };
   }, [
     t,

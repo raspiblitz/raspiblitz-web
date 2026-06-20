@@ -62,7 +62,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
 
       <article>
         <Button
-          color="primary"
+          variant="primary"
           isDisabled={confirm}
           onPress={() => setConfirm(true)}
         >
@@ -76,11 +76,11 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
               <p>{t("home.confirm_channel_close")}</p>
 
               <div className="flex items-center justify-center gap-2">
-                <Checkbox
-                  isSelected={isForceClose}
-                  onValueChange={setIsForceClose}
-                >
-                  {t("home.force_close")}
+                <Checkbox isSelected={isForceClose} onChange={setIsForceClose}>
+                  <Checkbox.Control>
+                    <Checkbox.Indicator />
+                  </Checkbox.Control>
+                  <Checkbox.Content>{t("home.force_close")}</Checkbox.Content>
                 </Checkbox>
               </div>
 
@@ -93,8 +93,8 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
                 </Button>
                 <Button
                   onPress={closeChannelHandler}
-                  color="primary"
-                  isLoading={isLoading}
+                  variant="primary"
+                  isPending={isLoading}
                 >
                   {t("setup.yes")}
                 </Button>

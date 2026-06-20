@@ -6,7 +6,7 @@ interface CustomButtonProps extends ButtonProps {
 }
 
 export const Button = ({ children, ...props }: CustomButtonProps) => (
-  <HeroUIButton radius="full" className="px-8 py-6 font-semibold" {...props}>
+  <HeroUIButton className="rounded-full px-8 py-6 font-semibold" {...props}>
     {children}
   </HeroUIButton>
 );

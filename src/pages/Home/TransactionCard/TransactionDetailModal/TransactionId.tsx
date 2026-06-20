@@ -43,23 +43,24 @@ const TransactionId: FC<Props> = ({ id, maxDisplay = 8 }) => {
     <section className="rounded-lg bg-gray-800/50 px-4 py-3 flex items-start justify-between gap-4">
       <div className="min-w-0 flex-1">
         <h6 className="text-sm font-medium text-gray-400">{t("tx.txid")}</h6>
-        <Tooltip
-          content={
-            expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")
-          }
-        >
-          <button
-            type="button"
-            onClick={() => setExpanded(!expanded)}
-            className="mt-1 w-full text-left font-mono text-sm text-gray-300 hover:text-gray-200"
-            aria-label={
-              expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")
-            }
-          >
-            <span className={expanded ? "break-all" : "truncate"}>
-              {displayId}
-            </span>
-          </button>
+        <Tooltip>
+          <Tooltip.Trigger>
+            <button
+              type="button"
+              onClick={() => setExpanded(!expanded)}
+              className="mt-1 w-full text-left font-mono text-sm text-gray-300 hover:text-gray-200"
+              aria-label={
+                expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")
+              }
+            >
+              <span className={expanded ? "break-all" : "truncate"}>
+                {displayId}
+              </span>
+            </button>
+          </Tooltip.Trigger>
+          <Tooltip.Content>
+            {expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")}
+          </Tooltip.Content>
         </Tooltip>
       </div>
       <button

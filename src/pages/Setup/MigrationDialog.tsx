@@ -1,4 +1,4 @@
-import { useDisclosure } from "@heroui/react";
+import { useOverlayState } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
@@ -22,7 +22,7 @@ export default function MigrationDialog({
   callback,
 }: Props) {
   const { t } = useTranslation();
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   if (migrationMode === SetupMigrationMode.OUTDATED) {
     return (
@@ -32,7 +32,11 @@ export default function MigrationDialog({
             {t("setup.lightningoutdated")}
           </Alert>
 
-          <Button type="button" onPress={() => callback(false)} color="primary">
+          <Button
+            type="button"
+            onPress={() => callback(false)}
+            variant="primary"
+          >
             {t("settings.shutdown")}
           </Button>
         </section>
@@ -65,14 +69,14 @@ export default function MigrationDialog({
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button
               type="button"
-              onPress={() => confirmModal.onOpen()}
-              color="primary"
+              onPress={() => confirmModal.open()}
+              variant="primary"
             >
               {t("setup.no_and_shutdown")}
             </Button>
             <Button
               type="button"
-              color="secondary"
+              variant="secondary"
               onPress={() => callback(true)}
             >
               {t("setup.yes_and_migrate")}

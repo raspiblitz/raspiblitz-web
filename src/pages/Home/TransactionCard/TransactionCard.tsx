@@ -3,7 +3,7 @@ import {
   InformationCircleIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Listbox, ListboxItem, Spinner } from "@heroui/react";
+import { Button, ListBox, Spinner } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
@@ -87,26 +87,22 @@ const TransactionCard: FC<Props> = ({
         )}
 
         {transactions.length > 0 && (
-          <Listbox
+          <ListBox
             aria-label={t("tx.transactions")}
             selectionMode="none"
             onAction={(key) => {
               const tx = currentPageTxs.find((t) => t.id === String(key));
               if (tx) showDetails(tx.index);
             }}
-            classNames={{
-              base: "pt-4 p-0",
-              list: "gap-2",
-            }}
-            itemClasses={{
-              base: "rounded-lg bg-default-100/50 data-[hover=true]:bg-default-200/50 p-4 cursor-pointer transition-background",
-            }}
+            className="flex flex-col gap-2 p-0 pt-4"
           >
             {currentPageTxs.map((transaction: Transaction) => {
               const formatted = formatTransaction(transaction, unit);
               return (
-                <ListboxItem
+                <ListBox.Item
+                  id={transaction.id}
                   key={transaction.id}
+                  className="cursor-pointer rounded-lg bg-white/5 p-4 transition-colors data-[hovered=true]:bg-white/10"
                   textValue={`${formatted.comment ?? t("tx.default_comment")}: ${formatted.sign}${formatted.formattedAmount} ${unit}`}
                 >
                   <div className="flex flex-col gap-1">
@@ -139,10 +135,10 @@ const TransactionCard: FC<Props> = ({
                       {formatted.comment ?? t("tx.default_comment")}
                     </span>
                   </div>
-                </ListboxItem>
+                </ListBox.Item>
               );
             })}
-          </Listbox>
+          </ListBox>
         )}
 
         {transactions.length > 0 && (

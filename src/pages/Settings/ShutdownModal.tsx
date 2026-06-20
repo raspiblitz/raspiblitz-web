@@ -1,4 +1,4 @@
-import { useDisclosure } from "@heroui/react";
+import { useOverlayState } from "@heroui/react";
 import { HttpStatusCode } from "axios";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ const ShutdownModal: FC = () => {
   const { t } = useTranslation();
   const { setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   const shutdownHandler = async () => {
     setIsLoading(true);
@@ -47,7 +47,7 @@ const ShutdownModal: FC = () => {
       <ActionBox
         name={t("settings.shutdown")}
         actionName={t("settings.shutdown")}
-        action={() => confirmModal.onOpen()}
+        action={() => confirmModal.open()}
         showChild={false}
       />
     </>

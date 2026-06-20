@@ -1,8 +1,6 @@
-import { Input } from "@heroui/react";
-import type { ChangeEvent, FC } from "react";
-import { useState } from "react";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { FieldError, Input, Label, TextField } from "@heroui/react";
+import { type FC, useState } from "react";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
@@ -25,20 +23,11 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
   const { t } = useTranslation();
 
   const [amount, setAmount] = useState(0);
-  const [comment, setComment] = useState("");
-
-  const commentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setComment(event.target.value);
-  };
-
-  const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(+event.target.value);
-  };
 
   const {
-    register,
+    control,
     handleSubmit,
-    formState: { errors, isValid, submitCount },
+    formState: { isValid, submitCount },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -50,36 +39,54 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
       <ConfirmModal.Body>
         <fieldset className="flex w-full flex-col gap-4">
           <div className="flex flex-col justify-center pb-5 text-center">
-            <AmountInput
-              amount={amount}
-              register={register("amountInput", {
+            <Controller
+              name="amountInput"
+              control={control}
+              rules={{
                 required: t("forms.validation.chainAmount.required"),
                 validate: {
                   greaterThanZero: (val) =>
-                    stringToNumber(val) > 0 ||
+                    stringToNumber(`${val}`) > 0 ||
                     t("forms.validation.chainAmount.required"),
                 },
-                onChange: amountChangeHandler,
-              })}
-              errorMessage={errors.amountInput}
+              }}
+              render={({ field, fieldState }) => (
+                <AmountInput
+                  amount={amount}
+                  error={fieldState.error?.message}
+                  field={{
+                    ...field,
+                    onChange: (value) => {
+                      field.onChange(value);
+                      setAmount(+value);
+                    },
+                  }}
+                />
+              )}
             />
 
             <div className="mt-2 flex flex-col justify-center">
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="text"
-                isInvalid={!!errors.commentInput}
-                errorMessage={errors.commentInput?.message}
-                {...register("commentInput", {
-                  onChange: commentChangeHandler,
-                })}
-                label={t("tx.comment")}
-                value={comment}
-                placeholder={t("tx.comment_placeholder")}
+              <Controller
+                name="commentInput"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    className="w-full"
+                    isInvalid={fieldState.invalid}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                  >
+                    <Label>{t("tx.comment")}</Label>
+                    <Input
+                      type="text"
+                      placeholder={t("tx.comment_placeholder")}
+                      className="bg-tertiary"
+                    />
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  </TextField>
+                )}
               />
             </div>
           </div>
@@ -90,10 +97,10 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
 
       <ConfirmModal.Footer>
         <Button
-          color="primary"
+          variant="primary"
           type="submit"
           isDisabled={isLoading || (!isValid && submitCount > 0)}
-          isLoading={isLoading}
+          isPending={isLoading}
         >
           {t("wallet.create_invoice")}
         </Button>

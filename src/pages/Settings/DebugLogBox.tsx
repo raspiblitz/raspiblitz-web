@@ -47,9 +47,9 @@ const DebugLogBox: FC = () => {
             {t("settings.generate_debug")}
           </h4>
           <Button
-            isLoading={isGeneratingReport}
+            isPending={isGeneratingReport}
             onPress={onClickHandler}
-            color="primary"
+            variant="primary"
           >
             {isGeneratingReport
               ? t("settings.generating")

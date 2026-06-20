@@ -1,9 +1,8 @@
-import { cn, Image, Radio } from "@heroui/react";
+import { cn, Radio } from "@heroui/react";
 import type { ReactNode } from "react";
 
 type Props = {
   id: string;
-  radioGroup: string;
   value: string;
   icon?: ReactNode;
   iconColor?: string;
@@ -16,7 +15,6 @@ const imageBaseClasses = "mr-3 flex rounded-lg bg-white bg-opacity-5 p-2";
 
 export default function CustomRadio({
   id,
-  radioGroup,
   value,
   icon,
   image,
@@ -27,59 +25,57 @@ export default function CustomRadio({
   return (
     <Radio
       id={id}
-      radioGroup={radioGroup}
       value={value}
-      className="remove-radio"
-      classNames={{
-        base: cn(
-          "inline-flex m-0 bg-blue-900 hover:bg-primary-800 justify-between items-center",
-          "flex-row-reverse max-w-[800px] cursor-pointer rounded-lg gap-4 border-2 border-white/5 pr-4",
-          "data-[selected=true]:border-primary",
-        ),
-        labelWrapper: "m-0",
-      }}
+      className={cn(
+        "inline-flex m-0 bg-blue-900 hover:bg-accent-800 justify-between items-center",
+        "flex-row-reverse max-w-[800px] cursor-pointer rounded-lg gap-4 border-2 border-white/5 pr-4",
+        "data-[selected]:border-accent",
+      )}
     >
-      <div className={cn("flex flex-row pr-2", !description && "items-center")}>
-        {!!image && (
-          <div
-            className={cn(
-              "flex items-center",
-              "h-16 w-16 shrink-0",
-              imageBaseClasses,
-            )}
-          >
-            <Image
-              width={46}
-              height={46}
-              alt={`${text} image`}
-              src={image}
-              radius="none"
-              className="max-h-auto max-w-10"
-            />
-          </div>
-        )}
-
-        {!!icon && (
-          <div
-            className={cn(
-              imageBaseClasses,
-              "[&_svg]:h-6 [&_svg]:w-auto",
-              iconColor ? iconColor : "text-white",
-            )}
-          >
-            {icon}
-          </div>
-        )}
-
-        <div>
-          <p className="text-xl font-semibold">{text}</p>
-          {!!description && (
-            <p className="mt-2 text-sm leading-6 text-secondary">
-              {description}
-            </p>
+      <Radio.Content>
+        <div
+          className={cn("flex flex-row pr-2", !description && "items-center")}
+        >
+          {!!image && (
+            <div
+              className={cn(
+                "flex items-center",
+                "h-16 w-16 shrink-0",
+                imageBaseClasses,
+              )}
+            >
+              <img
+                width={46}
+                height={46}
+                alt={text}
+                src={image}
+                className="max-h-auto max-w-10"
+              />
+            </div>
           )}
+
+          {!!icon && (
+            <div
+              className={cn(
+                imageBaseClasses,
+                "[&_svg]:h-6 [&_svg]:w-auto",
+                iconColor ? iconColor : "text-white",
+              )}
+            >
+              {icon}
+            </div>
+          )}
+
+          <div>
+            <p className="text-xl font-semibold">{text}</p>
+            {!!description && (
+              <p className="mt-2 text-sm leading-6 text-secondary">
+                {description}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
+      </Radio.Content>
     </Radio>
   );
 }
