@@ -5,7 +5,8 @@ import {
   LockOpenIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Link, Tooltip, useDisclosure } from "@heroui/react";
+import { Button, Link, Tooltip, useOverlayState } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -37,7 +38,7 @@ export const AppCard: FC<Props> = ({
   const { t } = useTranslation();
   const [isInstallWaiting, setInstallWaiting] = useState(false);
   const navigate = useNavigate();
-  const errorModal = useDisclosure();
+  const errorModal = useOverlayState();
 
   useEffect(() => {
     setInstallWaiting(false);
@@ -82,22 +83,20 @@ export const AppCard: FC<Props> = ({
     >
       <div className="relative mt-2 flex h-4/6 w-full flex-row items-center">
         {installed && (
-          <Tooltip
-            showArrow={true}
-            content={
-              <>
-                {appStatusInfo.https_forced === true &&
-                  appStatusInfo.https_self_signed === true && (
-                    <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
-                  )}
-                <h2>{setAuthMethodText(appStatusInfo.auth_method)}</h2>
-              </>
-            }
-          >
-            <LockOpenIcon
-              className="absolute right-0 top-0 h-6 w-6"
-              data-tooltip-id={`login-tooltip-${id}`}
-            />
+          <Tooltip>
+            <Tooltip.Trigger>
+              <LockOpenIcon
+                className="absolute right-0 top-0 h-6 w-6"
+                data-tooltip-id={`login-tooltip-${id}`}
+              />
+            </Tooltip.Trigger>
+            <Tooltip.Content showArrow>
+              {appStatusInfo.https_forced === true &&
+                appStatusInfo.https_self_signed === true && (
+                  <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
+                )}
+              <h2>{setAuthMethodText(appStatusInfo.auth_method)}</h2>
+            </Tooltip.Content>
           </Tooltip>
         )}
 
@@ -139,11 +138,9 @@ export const AppCard: FC<Props> = ({
             </div>
           </ConfirmModal.Body>
           <ConfirmModal.Footer>
-            <Button onPress={errorModal.onClose}>{t("apps.close")}</Button>
-            <Button
-              color="primary"
-              onPress={copyErrorToClipboard}
-              startContent={
+            <Button onPress={errorModal.close}>{t("apps.close")}</Button>
+            <Button variant="primary" onPress={copyErrorToClipboard}>
+              <span className="flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -159,9 +156,8 @@ export const AppCard: FC<Props> = ({
                     d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"
                   />
                 </svg>
-              }
-            >
-              {t("apps.copy")}
+                {t("apps.copy")}
+              </span>
             </Button>
           </ConfirmModal.Footer>
         </ConfirmModal>
@@ -169,46 +165,42 @@ export const AppCard: FC<Props> = ({
 
       <div className="flex flex-row gap-2 py-4">
         {installed && appStatusInfo.address && !appInfo.customComponent && (
-          <Button
-            as={Link}
+          <Link
             href={getHrefFromApp(appStatusInfo)}
             target="_blank"
             rel="noreferrer"
-            color="primary"
-            startContent={
-              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
-            }
+            className={buttonVariants({ variant: "primary" })}
           >
-            {t("apps.open")}
-          </Button>
+            <span className="flex items-center gap-2">
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+              {t("apps.open")}
+            </span>
+          </Link>
         )}
 
         {installed && !appStatusInfo.address && !appInfo.customComponent && (
-          <Button disabled>{t("apps.no_page")}</Button>
+          <Button isDisabled>{t("apps.no_page")}</Button>
         )}
 
         {installed && appInfo.customComponent && (
           <Button
             onPress={() => navigate(`/apps/${appInfo.id}`)}
-            color="primary"
-            startContent={
-              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
-            }
+            variant="primary"
           >
-            {t("apps.open")}
+            <span className="flex items-center gap-2">
+              <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
+              {t("apps.open")}
+            </span>
           </Button>
         )}
 
         {/* Show View Error button instead of Install button when there's an error */}
         {hasError && !installed && (
-          <Button
-            onPress={errorModal.onOpen}
-            color="danger"
-            startContent={
+          <Button onPress={errorModal.open} variant="danger">
+            <span className="flex items-center gap-2">
               <ExclamationTriangleIcon className="inline h-6 w-6" />
-            }
-          >
-            {t("apps.view_error")}
+              {t("apps.view_error")}
+            </span>
           </Button>
         )}
 
@@ -224,26 +216,28 @@ export const AppCard: FC<Props> = ({
                 (installingApp !== null && installingApp?.result !== "fail")
               }
               onPress={() => installButtonPressed(id)}
-              color="primary"
-              startContent={<PlusIcon className="inline h-6 w-6" />}
+              variant="primary"
             >
-              {t("apps.install")}
+              <span className="flex items-center gap-2">
+                <PlusIcon className="inline h-6 w-6" />
+                {t("apps.install")}
+              </span>
             </Button>
           )}
 
         {installingApp &&
           installingApp.id === id &&
           installingApp.result === "running" && (
-            <Button disabled isLoading={true}>
+            <Button isDisabled isPending>
               {t("apps.installing")}
             </Button>
           )}
 
-        <Button
-          onPress={() => navigate(`/apps/${appInfo.id}/info`)}
-          startContent={<InformationCircleIcon className="inline h-6 w-6" />}
-        >
-          {t("apps.info")}
+        <Button onPress={() => navigate(`/apps/${appInfo.id}/info`)}>
+          <span className="flex items-center gap-2">
+            <InformationCircleIcon className="inline h-6 w-6" />
+            {t("apps.info")}
+          </span>
         </Button>
       </div>
     </article>

@@ -1,7 +1,6 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import type { ChangeEvent } from "react";
 import { type FC, useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
@@ -40,10 +39,6 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
   const [error, setError] = useState<string | null>(null);
   const isLnTx = confirmData.invoiceType === TxType.LIGHTNING;
 
-  const amountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmountInput(+event.target.value);
-  };
-
   const lnData = confirmData as SendLnForm;
   const onChainData = confirmData as SendOnChainForm;
 
@@ -61,9 +56,9 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
     (isLnTx && !isInvoiceExpired && !isInvoiceAmountBiggerThanBalance);
 
   const {
-    register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
@@ -130,12 +125,11 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
   return (
     <form onSubmit={handleSubmit(sendTransactionHandler)}>
       <ConfirmModal.Header>
-        <Button
-          type="button"
-          onPress={() => back(confirmData)}
-          startContent={<ChevronLeftIcon className="inline-block h-4 w-4" />}
-        >
-          {t("navigation.back")}
+        <Button type="button" onPress={() => back(confirmData)}>
+          <span className="flex items-center gap-2">
+            <ChevronLeftIcon className="inline-block h-4 w-4" />
+            {t("navigation.back")}
+          </span>
         </Button>
       </ConfirmModal.Header>
 
@@ -187,10 +181,10 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
             <div>
               <p>{t("forms.hint.invoiceAmountZero")}</p>
 
-              <AmountInput
-                amount={amountInput}
-                errorMessage={errors.amountInput}
-                register={register("amountInput", {
+              <Controller
+                name="amountInput"
+                control={control}
+                rules={{
                   required: t("forms.validation.chainAmount.required"),
                   max: {
                     value: balance,
@@ -198,11 +192,23 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
                   },
                   validate: {
                     greaterThanZero: (val) =>
-                      stringToNumber(val) > 0 ||
+                      stringToNumber(`${val}`) > 0 ||
                       t("forms.validation.chainAmount.required"),
                   },
-                  onChange: amountChangeHandler,
-                })}
+                }}
+                render={({ field, fieldState }) => (
+                  <AmountInput
+                    amount={amountInput}
+                    error={fieldState.error?.message}
+                    field={{
+                      ...field,
+                      onChange: (value) => {
+                        field.onChange(value);
+                        setAmountInput(+value);
+                      },
+                    }}
+                  />
+                )}
               />
             </div>
           )}
@@ -231,7 +237,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
         </Button>
 
         <Button
-          color="primary"
+          variant="primary"
           type="submit"
           isDisabled={
             (!isValid &&
@@ -240,7 +246,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
             !isValidLnInvoice ||
             isInvoiceAmountBiggerThanBalance
           }
-          isLoading={isLoading}
+          isPending={isLoading}
         >
           {t("settings.confirm")}
         </Button>

@@ -1,4 +1,4 @@
-import { useDisclosure } from "@heroui/use-disclosure";
+import { useOverlayState } from "@heroui/react";
 import { useState } from "react";
 
 export type ModalType =
@@ -12,16 +12,16 @@ export type ModalType =
 
 export function useModalManager() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
-  const disclosure = useDisclosure();
+  const disclosure = useOverlayState();
 
   const openModal = (modalType: ModalType) => {
     setActiveModal(modalType);
-    disclosure.onOpen();
+    disclosure.open();
   };
 
   const closeModal = () => {
     setActiveModal(null);
-    disclosure.onClose();
+    disclosure.close();
   };
 
   return {

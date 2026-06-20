@@ -98,12 +98,11 @@ export const AppInfo: FC = () => {
     <main className="page-container content-container w-full bg-gray-700 text-white">
       {/* Back Button */}
       <section className="w-full px-5 py-9 text-gray-200">
-        <Button
-          onPress={() => navigate("/apps")}
-          color="primary"
-          startContent={<ChevronLeftIcon className="inline-block h-5 w-5" />}
-        >
-          {t("navigation.back")}
+        <Button onPress={() => navigate("/apps")} variant="primary">
+          <span className="flex items-center gap-2">
+            <ChevronLeftIcon className="inline-block h-5 w-5" />
+            {t("navigation.back")}
+          </span>
         </Button>
       </section>
 
@@ -116,18 +115,20 @@ export const AppInfo: FC = () => {
           !installed && (
             <Button
               isDisabled={!!installingApp}
-              color="primary"
+              variant="primary"
               onPress={installHandler}
-              startContent={<PlusIcon className="inline h-6 w-6" />}
             >
-              {t("apps.install")}
+              <span className="flex items-center gap-2">
+                <PlusIcon className="inline h-6 w-6" />
+                {t("apps.install")}
+              </span>
             </Button>
           )}
 
         {installingApp &&
           installingApp.appId === appId &&
           installingApp.mode === "on" && (
-            <Button disabled isLoading={true} color="primary">
+            <Button isDisabled isPending variant="primary">
               {t("apps.installing")}
             </Button>
           )}
@@ -135,7 +136,7 @@ export const AppInfo: FC = () => {
         {installingApp &&
           installingApp.appId === appId &&
           installingApp.mode === "off" && (
-            <Button disabled isLoading={true} color="primary">
+            <Button isDisabled isPending variant="primary">
               {t("apps.uninstalling")}
             </Button>
           )}
@@ -144,11 +145,13 @@ export const AppInfo: FC = () => {
           installed && (
             <Button
               isDisabled={!!installingApp}
-              color="danger"
+              variant="danger"
               onPress={uninstallHandler}
-              startContent={<TrashIcon className="inline h-6 w-6" />}
             >
-              {t("apps.uninstall")}
+              <span className="flex items-center gap-2">
+                <TrashIcon className="inline h-6 w-6" />
+                {t("apps.uninstall")}
+              </span>
             </Button>
           )}
       </section>
@@ -181,7 +184,7 @@ export const AppInfo: FC = () => {
             href={repository}
             target="_blank"
             rel="noreferrer"
-            underline="always"
+            className="underline"
           >
             {repository}
           </Link>

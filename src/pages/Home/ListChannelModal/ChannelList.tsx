@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem } from "@heroui/react";
+import { Accordion } from "@heroui/react";
 import type { FC } from "react";
 import type { LightningChannel } from "@/models/lightning-channel";
 import Channel from "./Channel";
@@ -13,13 +13,14 @@ const ChannelList: FC<Props> = ({ isLoading, channel, onDelete }) => {
   return (
     <Accordion>
       {channel.map((c) => (
-        <AccordionItem
-          key={c.channel_id}
-          aria-label={`Channel: ${c.peer_alias}`}
-          title={c.peer_alias}
-        >
-          <Channel channel={c} isLoading={isLoading} onDelete={onDelete} />
-        </AccordionItem>
+        <Accordion.Item key={c.channel_id} id={c.channel_id}>
+          <Accordion.Heading>
+            <Accordion.Trigger>{c.peer_alias}</Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Channel channel={c} isLoading={isLoading} onDelete={onDelete} />
+          </Accordion.Panel>
+        </Accordion.Item>
       ))}
     </Accordion>
   );

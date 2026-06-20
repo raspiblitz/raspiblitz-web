@@ -51,7 +51,7 @@ export default function LightningDialog({ callback }: Props) {
                 <a
                   key="link"
                   href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
-                  className="text-primary underline"
+                  className="text-accent underline"
                   target="_blank"
                   rel="noreferrer"
                 />,
@@ -67,8 +67,8 @@ export default function LightningDialog({ callback }: Props) {
           <div className="mt-4">
             <RadioGroup
               value={selected}
-              classNames={{ wrapper: "gap-6" }}
-              onValueChange={setSelected as SelectFn}
+              className="gap-6"
+              onChange={setSelected as SelectFn}
             >
               {[
                 SetupLightning.LND,
@@ -78,7 +78,6 @@ export default function LightningDialog({ callback }: Props) {
                 <CustomRadio
                   key={lightning}
                   id={lightning}
-                  radioGroup="setup"
                   value={lightning}
                   text={t(`setup.${lightning}`)}
                   description={t(`setup.${lightning}_description`)}
@@ -91,7 +90,7 @@ export default function LightningDialog({ callback }: Props) {
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Button
               type="submit"
-              color="primary"
+              variant="primary"
               isDisabled={selected === undefined}
             >
               {t("setup.continue")}

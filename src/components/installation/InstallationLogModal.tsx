@@ -87,12 +87,14 @@ const InstallationLogModal = ({
             </div>
             <Button
               size="sm"
-              variant="flat"
+              variant="tertiary"
               onPress={downloadLog}
-              startContent={<ArrowDownTrayIcon className="w-4 h-4" />}
               className="bg-gray-700/50 hover:bg-gray-600/70 text-gray-200 border border-gray-600/30 transition-all duration-200 hover:scale-105"
             >
-              {t("common.download_log") || "Download"}
+              <span className="flex items-center gap-2">
+                <ArrowDownTrayIcon className="w-4 h-4" />
+                {t("common.download_log") || "Download"}
+              </span>
             </Button>
           </div>
         </div>

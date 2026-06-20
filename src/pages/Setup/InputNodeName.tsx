@@ -1,6 +1,11 @@
-import { Input, useDisclosure } from "@heroui/react";
-import { type ChangeEvent, useState } from "react";
-import { useForm } from "react-hook-form";
+import {
+  FieldError,
+  Input,
+  Label,
+  TextField,
+  useOverlayState,
+} from "@heroui/react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
@@ -16,27 +21,21 @@ interface IFormInputs {
 }
 
 export default function InputNodeName({ callback }: Props) {
-  const [inputNodeName, setInputNodeName] = useState("");
-
   const { t } = useTranslation();
 
-  const changeNodenameHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputNodeName(event.target.value);
-  };
-
-  const continueHandler = () => {
-    callback(inputNodeName);
-  };
-
   const {
-    register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<IFormInputs>({
     mode: "onChange",
   });
 
-  const confirmModal = useDisclosure();
+  const continueHandler = (data: IFormInputs) => {
+    callback(data.inputNodeName);
+  };
+
+  const confirmModal = useOverlayState();
 
   return (
     <>
@@ -55,20 +54,11 @@ export default function InputNodeName({ callback }: Props) {
             className="mt-2 w-full"
           >
             <fieldset className="w-full">
-              <Input
-                className="w-full"
-                classNames={{
-                  inputWrapper:
-                    "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-                }}
-                type="text"
-                label={t("setup.input_node.label")}
-                placeholder="e.g. MyRaspiBlitz"
-                isInvalid={!!errors.inputNodeName}
-                errorMessage={errors.inputNodeName?.message}
-                {...register("inputNodeName", {
+              <Controller
+                name="inputNodeName"
+                control={control}
+                rules={{
                   required: t("setup.input_node.err_empty"),
-                  onChange: changeNodenameHandler,
                   pattern: {
                     value: /^[a-zA-Z0-9]*$/,
                     message: t("setup.input_node.err_only_chars"),
@@ -81,18 +71,36 @@ export default function InputNodeName({ callback }: Props) {
                     value: 32,
                     message: t("setup.input_node.err_max_length"),
                   },
-                })}
+                }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    className="w-full"
+                    isInvalid={fieldState.invalid}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                  >
+                    <Label>{t("setup.input_node.label")}</Label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. MyRaspiBlitz"
+                      className="bg-tertiary"
+                    />
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  </TextField>
+                )}
               />
             </fieldset>
 
             <article className="flex flex-col items-center justify-center gap-10 pt-10">
-              <Button type="submit" isDisabled={!isValid} color="primary">
+              <Button type="submit" isDisabled={!isValid} variant="primary">
                 {t("setup.continue")}
               </Button>
               <Button
                 type="button"
-                color="danger"
-                onPress={() => confirmModal.onOpen()}
+                variant="danger"
+                onPress={() => confirmModal.open()}
               >
                 {t("setup.cancel")}
               </Button>

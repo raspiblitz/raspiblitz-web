@@ -42,3 +42,6 @@ yarn-error.log*
 
 # Claude Code
 .claude/
+
+# Local docs (specs, plans, QA artifacts) — kept out of the repo
+/docs/

@@ -1,29 +1,26 @@
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
-import { Input } from "@heroui/react";
-import { type ChangeEvent, type FC, useContext, useState } from "react";
-import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { FieldError, InputGroup, Label, TextField } from "@heroui/react";
+import { type FC, useContext, useRef, useState } from "react";
+import type { ControllerRenderProps } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "@/context/app-context";
 import { convertBtcToSat, convertSatToBtc, formatAmount } from "@/utils/format";
 
 export type Props = {
   amount?: number;
-  register: UseFormRegisterReturn;
-  errorMessage?: FieldError;
+  // biome-ignore lint/suspicious/noExplicitAny: field is reused across forms with different value shapes
+  field: ControllerRenderProps<any, any>;
+  error?: string;
   disabled?: boolean;
 };
 
-const AmountInput: FC<Props> = ({
-  amount,
-  register,
-  errorMessage,
-  disabled = false,
-}) => {
+const AmountInput: FC<Props> = ({ amount, field, error, disabled = false }) => {
   const { t } = useTranslation();
   const [amountInput, setAmountInput] = useState<string>(
     amount ? `${amount}` : "",
   );
   const { unit, toggleUnit } = useContext(AppContext);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const toggleHandler = () => {
     let formattedValue = amountInput;
@@ -43,54 +40,63 @@ const AmountInput: FC<Props> = ({
     }
     setAmountInput(formattedValue);
     toggleUnit();
-    register.onChange({ target: { value: formattedValue } });
+    // store the cleaned value (without grouping separators) in the form state
+    field.onChange(formattedValue.replace(/,/g, ""));
   };
 
-  const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    let selectionStart = e.target.selectionStart;
-    let selectionEnd = e.target.selectionEnd;
-    value = formatAmount(value, unit);
-    // do not shift position of cursor if comma was added
-    if (value.length > e.target.value.length) {
-      selectionStart = selectionStart ? selectionStart + 1 : null;
-      selectionEnd = selectionEnd ? selectionEnd + 1 : null;
+  // v3's TextField.onChange only provides the string value, so we read the
+  // selection from the underlying input ref to preserve the caret position.
+  const onChangeHandler = (rawValue: string) => {
+    const input = inputRef.current;
+    let selectionStart = input?.selectionStart ?? null;
+    let selectionEnd = input?.selectionEnd ?? null;
+
+    const formatted = formatAmount(rawValue, unit);
+    // do not shift position of cursor if a separator was added
+    if (formatted.length > rawValue.length) {
+      selectionStart = selectionStart !== null ? selectionStart + 1 : null;
+      selectionEnd = selectionEnd !== null ? selectionEnd + 1 : null;
     }
-    setAmountInput(value);
-    e.target.value = value.replace(/,/g, "");
-    await register.onChange(e);
-    e.target.setSelectionRange(selectionStart, selectionEnd);
+
+    setAmountInput(formatted);
+    // store the cleaned value (without grouping separators) in the form state
+    field.onChange(formatted.replace(/,/g, ""));
+
+    // restore the caret position after React re-renders the controlled input
+    requestAnimationFrame(() => {
+      inputRef.current?.setSelectionRange(selectionStart, selectionEnd);
+    });
   };
 
   return (
-    <Input
-      {...register}
-      label={t("wallet.amount")}
-      id={register.name}
-      type="text"
-      classNames={{
-        inputWrapper:
-          "bg-tertiary group-data-[focus=true]:bg-tertiary group-data-[hover=true]:bg-tertiary",
-      }}
+    <TextField
+      className="w-full"
+      isInvalid={!!error}
+      isDisabled={disabled}
       value={amountInput}
       onChange={onChangeHandler}
-      isDisabled={disabled}
-      isInvalid={!!errorMessage}
-      errorMessage={errorMessage?.message}
-      endContent={
-        <button
-          className="focus:outline-none h-full"
-          type="button"
-          onClick={toggleHandler}
-          aria-label="toggle password visibility"
-        >
-          <span className="whitespace-nowrap text-small text-default-foreground">
-            {unit}
-            <ArrowsRightLeftIcon className="ml-1 inline-block h-5 w-5" />
-          </span>
-        </button>
-      }
-    />
+      onBlur={field.onBlur}
+      name={field.name}
+    >
+      <Label>{t("wallet.amount")}</Label>
+      <InputGroup className="bg-tertiary">
+        <InputGroup.Input ref={inputRef} type="text" />
+        <InputGroup.Suffix>
+          <button
+            className="focus:outline-none h-full"
+            type="button"
+            onClick={toggleHandler}
+            aria-label="toggle amount unit"
+          >
+            <span className="whitespace-nowrap text-small text-default-foreground">
+              {unit}
+              <ArrowsRightLeftIcon className="ml-1 inline-block h-5 w-5" />
+            </span>
+          </button>
+        </InputGroup.Suffix>
+      </InputGroup>
+      <FieldError>{error}</FieldError>
+    </TextField>
   );
 };
 

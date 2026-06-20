@@ -1,4 +1,4 @@
-import { useDisclosure } from "@heroui/react";
+import { useOverlayState } from "@heroui/react";
 import { HttpStatusCode } from "axios";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ const RebootModal: FC = () => {
   const { t } = useTranslation();
   const { setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   const rebootHandler = async () => {
     setIsLoading(true);
@@ -39,7 +39,7 @@ const RebootModal: FC = () => {
       <ActionBox
         name={t("settings.reboot")}
         actionName={t("settings.reboot")}
-        action={() => confirmModal.onOpen()}
+        action={() => confirmModal.open()}
         showChild={false}
       />
     </>

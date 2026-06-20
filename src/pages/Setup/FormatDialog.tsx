@@ -1,4 +1,4 @@
-import { Checkbox, useDisclosure } from "@heroui/react";
+import { Checkbox, useOverlayState } from "@heroui/react";
 import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
@@ -21,7 +21,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
     callback(true, keepBlockchain);
   };
 
-  const confirmModal = useDisclosure();
+  const confirmModal = useOverlayState();
 
   return (
     <>
@@ -42,22 +42,27 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
           {containsBlockchain && (
             <Checkbox
               id="keepBlockchain"
-              onValueChange={setKeepBlockchain}
+              onChange={setKeepBlockchain}
               isSelected={keepBlockchain}
             >
-              {t("setup.format.keep_blockchain")}
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+              <Checkbox.Content>
+                {t("setup.format.keep_blockchain")}
+              </Checkbox.Content>
             </Checkbox>
           )}
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
-            <Button type="submit" color="primary">
+            <Button type="submit" variant="primary">
               {t("setup.format.delete_confirm")}
             </Button>
 
             <Button
               type="button"
-              color="danger"
-              onPress={() => confirmModal.onOpen()}
+              variant="danger"
+              onPress={() => confirmModal.open()}
             >
               {t("setup.cancel")}
             </Button>

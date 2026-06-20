@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "@heroui/react";
+import { Tabs } from "@heroui/react";
 import { type FC, type Key, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
@@ -88,14 +88,21 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
 
       <div className="mx-6">
         <Tabs
-          classNames={{
-            tabList: "flex-col md:flex-row",
-          }}
-          fullWidth
           aria-label={t("wallet.receive_aria_options")}
           onSelectionChange={handleTabChange}
         >
-          <Tab key={TxType.LIGHTNING} title={t("wallet.create_invoice_ln")}>
+          <Tabs.List className="flex-col md:flex-row">
+            <Tabs.Tab
+              id={TxType.LIGHTNING}
+              className="text-xs whitespace-nowrap"
+            >
+              {t("wallet.create_invoice_ln")}
+            </Tabs.Tab>
+            <Tabs.Tab id={TxType.ONCHAIN} className="text-xs whitespace-nowrap">
+              {t("wallet.fund")}
+            </Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel id={TxType.LIGHTNING}>
             {invoice ? (
               <ConfirmModal.Body>
                 <QRCode address={invoice} />
@@ -107,8 +114,8 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
                 error={error}
               />
             )}
-          </Tab>
-          <Tab key={TxType.ONCHAIN} title={t("wallet.fund")}>
+          </Tabs.Panel>
+          <Tabs.Panel id={TxType.ONCHAIN}>
             <ConfirmModal.Body>
               {!address && error && <Alert color="danger">{error}</Alert>}
 
@@ -119,7 +126,7 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
                 />
               )}
             </ConfirmModal.Body>
-          </Tab>
+          </Tabs.Panel>
         </Tabs>
       </div>
     </ConfirmModal>

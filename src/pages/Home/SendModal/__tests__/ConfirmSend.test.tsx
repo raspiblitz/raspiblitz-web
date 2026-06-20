@@ -296,7 +296,7 @@ describe("ConfirmSend", () => {
         expect(
           screen.getByRole("button", { name: "settings.cancel" }),
         ).toBeDisabled();
-        expect(confirmButton).toHaveAttribute("data-loading", "true");
+        expect(confirmButton).toHaveAttribute("data-pending", "true");
       });
     });
   });
