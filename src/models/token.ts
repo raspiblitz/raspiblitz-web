@@ -1,5 +1,5 @@
 export interface TokenPayload {
   user_id: string;
-  iat: number; // issued at
-  expires: number; // unix time
+  iat: number; // issued at (unix time, seconds)
+  exp: number; // expiry (unix time, seconds)
 }

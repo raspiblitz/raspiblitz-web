@@ -95,7 +95,8 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
     if (token) {
       try {
         const payload = parseJwt(token);
-        if (payload.expires > Date.now()) {
+        // exp is a standard JWT claim in seconds; Date.now() is ms
+        if (payload.exp * 1000 > Date.now()) {
           setIsLoggedIn(true);
           if (
             window.location.pathname === "/" ||
@@ -105,7 +106,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
           }
         } else {
           localStorage.removeItem(ACCESS_TOKEN);
-          console.info(`Token expired at ${payload.expires}.`);
+          console.info(`Token expired at ${payload.exp * 1000}.`);
         }
       } catch {
         localStorage.removeItem(ACCESS_TOKEN);

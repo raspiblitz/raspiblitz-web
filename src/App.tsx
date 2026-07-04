@@ -81,7 +81,7 @@ const App: FC = () => {
           if (token) {
             localStorage.setItem(ACCESS_TOKEN, token);
             const payload = parseJwt(token);
-            refresh(REFRESH_TIME(payload.expires));
+            refresh(REFRESH_TIME(payload.exp));
           }
         })
         .catch((e) => {
@@ -92,7 +92,7 @@ const App: FC = () => {
     const token = localStorage.getItem(ACCESS_TOKEN);
     if (token) {
       const payload = parseJwt(token);
-      refresh(REFRESH_TIME(payload.expires));
+      refresh(REFRESH_TIME(payload.exp));
     }
   }, [isLoggedIn]);
 
