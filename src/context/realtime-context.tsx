@@ -17,8 +17,8 @@ import type { Transaction } from "@/models/transaction.model";
 import type { WalletBalance } from "@/models/wallet-balance";
 
 export interface RealtimeContextType {
-  evtSource: EventSource | null;
-  setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
+  socket: WebSocket | null;
+  setSocket: Dispatch<SetStateAction<WebSocket | null>>;
   systemInfo: SystemInfo;
   setSystemInfo: Dispatch<SetStateAction<SystemInfo>>;
   btcInfo: BtcInfo;
@@ -45,8 +45,8 @@ export interface RealtimeContextType {
 }
 
 export const realtimeContextDefault: RealtimeContextType = {
-  evtSource: null,
-  setEvtSource: () => {},
+  socket: null,
+  setSocket: () => {},
   systemInfo: {} as SystemInfo,
   setSystemInfo: () => {},
   btcInfo: {} as BtcInfo,
@@ -72,10 +72,12 @@ export const realtimeContextDefault: RealtimeContextType = {
 
 export const RealtimeContext = createContext<RealtimeContextType>(realtimeContextDefault);
 
-export const WS_URL = "/api/sse/subscribe";
+export const WS_URL = `${
+  window.location.protocol === "https:" ? "wss" : "ws"
+}://${window.location.host}/api/ws`;
 
 const RealtimeProvider: FC<PropsWithChildren> = (props) => {
-  const [evtSource, setEvtSource] = useState<EventSource | null>(null);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
     color: "",
@@ -149,8 +151,8 @@ const RealtimeProvider: FC<PropsWithChildren> = (props) => {
     useState<InstallationStatus>({});
 
   const contextValue: RealtimeContextType = {
-    evtSource,
-    setEvtSource,
+    socket,
+    setSocket,
     systemInfo,
     setSystemInfo,
     btcInfo,

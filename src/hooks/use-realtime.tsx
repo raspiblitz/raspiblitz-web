@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { AppContext } from "@/context/app-context";
@@ -15,7 +15,7 @@ import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { WalletBalance } from "@/models/wallet-balance";
-import { setWindowAlias } from "@/utils";
+import { ACCESS_TOKEN, setWindowAlias } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
 
 // Monotonic counter for assigning a stable, unique key to each installation
@@ -24,8 +24,9 @@ import { availableApps } from "@/utils/availableApps";
 let installationMessageSeq = 0;
 
 /**
- * Establishes a SSE connection if not available yet & attaches / removes event listeners
- * to the single events to update the RealtimeContext
+ * Establishes a WebSocket connection (authenticating via a first-message
+ * handshake) and dispatches incoming frames to update the RealtimeContext.
+ * Reconnects with exponential backoff; a 4401 close code logs the user out.
  * Use useContext(RealtimeContext) to get the data, is only used in Layout.tsx
  * @returns the infos from the RealtimeContext
  */
@@ -33,7 +34,18 @@ function useRealtime() {
   const { t } = useTranslation();
   const sseCtx = useContext(RealtimeContext);
   const appCtx = useContext(AppContext);
-  const { evtSource, setEvtSource } = sseCtx;
+  const { socket, setSocket } = sseCtx;
+
+  // `appCtx` is a fresh object identity on every AppContextProvider render
+  // (e.g. whenever its own state changes), and the same is true of `sseCtx`.
+  // Tracking `appCtx.logout` via a ref lets the connection effect below stay
+  // mounted for the component's lifetime (deps stable) instead of tearing
+  // down and reconnecting on every unrelated context update, while still
+  // calling the latest `logout` implementation when the socket closes.
+  const appCtxRef = useRef(appCtx);
+  useEffect(() => {
+    appCtxRef.current = appCtx;
+  }, [appCtx]);
 
   const appInstallSuccessHandler = useCallback(
     (installData: InstallAppData, appName: string) => {
@@ -72,15 +84,6 @@ function useRealtime() {
   );
 
   useEffect(() => {
-    // Create (or reuse) the EventSource and attach listeners to THIS instance
-    // synchronously in the same effect run. Gating the listeners behind the
-    // `evtSource` state attached them a render later, so connect-time events
-    // (e.g. ln_info) that the backend sends immediately on connect were missed.
-    const es = evtSource ?? new EventSource(WS_URL, { withCredentials: true });
-    if (!evtSource) {
-      setEvtSource(es);
-    }
-
     const setApps = (event: MessageEvent<string>) => {
       try {
         const apps = JSON.parse(event.data);
@@ -415,56 +418,73 @@ function useRealtime() {
       }
     };
 
-    const eventErrorHandler = (_event: Event) => {
-      appCtx.logout();
+    const DISPATCH: Record<string, (e: MessageEvent<string>) => void> = {
+      system_info: setSystemInfo,
+      btc_info: setBtcInfo,
+      ln_info: setLnInfo,
+      wallet_balance: setBalance,
+      transactions: setTx,
+      app_manage_message: handleManageAppMessage,
+      apps: setApps,
+      install: setInstall,
+      hardware_info: setHardwareInfo,
+      system_startup_info: setSystemStartupInfo,
+      app_state_update_message: handleAppStateUpdateMessage,
     };
 
-    es.addEventListener("error", eventErrorHandler);
-    es.addEventListener("system_info", setSystemInfo);
-    es.addEventListener("btc_info", setBtcInfo);
-    es.addEventListener("ln_info", setLnInfo);
-    es.addEventListener("wallet_balance", setBalance);
-    es.addEventListener("transactions", setTx);
-    es.addEventListener("app_manage_message", handleManageAppMessage);
-    es.addEventListener("apps", setApps);
-    es.addEventListener("install", setInstall);
-    es.addEventListener("hardware_info", setHardwareInfo);
-    es.addEventListener("system_startup_info", setSystemStartupInfo);
-    es.addEventListener(
-      "app_state_update_message",
-      handleAppStateUpdateMessage,
-    );
+    let ws: WebSocket | null = null;
+    let closedByUs = false;
+    let backoff = 1000;
+    let reconnectTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const connect = () => {
+      ws = new WebSocket(WS_URL);
+      setSocket(ws);
+      ws.onopen = () => {
+        backoff = 1000;
+        const token = localStorage.getItem(ACCESS_TOKEN);
+        ws?.send(JSON.stringify({ type: "auth", token }));
+      };
+      ws.onmessage = (evt) => {
+        try {
+          const { event, data } = JSON.parse(evt.data);
+          // reuse the existing handlers unchanged: they expect a
+          // MessageEvent whose .data is the JSON string of the payload
+          DISPATCH[event]?.({ data: JSON.stringify(data) } as MessageEvent<string>);
+        } catch (err) {
+          console.error("Error processing ws frame:", err);
+        }
+      };
+      ws.onclose = (evt) => {
+        if (closedByUs) return;
+        if (evt.code === 4401) {
+          appCtxRef.current.logout();
+          return;
+        }
+        reconnectTimer = setTimeout(connect, backoff);
+        backoff = Math.min(backoff * 2, 30000);
+      };
+      ws.onerror = () => ws?.close();
+    };
+
+    connect();
 
     return () => {
-      // cleanup
-      es.removeEventListener("error", eventErrorHandler);
-      es.removeEventListener("system_info", setSystemInfo);
-      es.removeEventListener("btc_info", setBtcInfo);
-      es.removeEventListener("ln_info", setLnInfo);
-      es.removeEventListener("wallet_balance", setBalance);
-      es.removeEventListener("transactions", setTx);
-      es.removeEventListener("app_manage_message", handleManageAppMessage);
-      es.removeEventListener("apps", setApps);
-      es.removeEventListener("install", setInstall);
-      es.removeEventListener("hardware_info", setHardwareInfo);
-      es.removeEventListener("system_startup_info", setSystemStartupInfo);
-      es.removeEventListener(
-        "app_state_update_message",
-        handleAppStateUpdateMessage,
-      );
+      closedByUs = true;
+      if (reconnectTimer) clearTimeout(reconnectTimer);
+      ws?.close();
     };
-  }, [
-    t,
-    evtSource,
-    appCtx,
-    sseCtx,
-    setEvtSource,
-    appInstallSuccessHandler,
-    appInstallErrorHandler,
-  ]);
+    // `sseCtx`/`appCtx` are intentionally omitted: they are new object
+    // identities on every render of their providers, and depending on them
+    // here would tear down and reopen the socket on every unrelated state
+    // change instead of once per mount. The setters read from `sseCtx`
+    // inside the handlers above are stable (React guarantees stable setState
+    // identities), and `appCtxRef` always points at the latest `logout`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t, setSocket, appInstallSuccessHandler, appInstallErrorHandler]);
 
   return {
-    evtSource: sseCtx.evtSource,
+    socket: sseCtx.socket,
     systemInfo: sseCtx.systemInfo,
     btcInfo: sseCtx.btcInfo,
     lnInfo: sseCtx.lnInfo,
