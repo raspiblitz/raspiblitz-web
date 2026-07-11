@@ -95,4 +95,31 @@ describe("useRealtime (WebSocket)", () => {
 
     expect(logout).toHaveBeenCalledTimes(1);
   });
+
+  it("reconnects with backoff when the socket closes abnormally (non-4401)", async () => {
+    renderProbe();
+
+    await waitFor(() => expect(MockWebSocket.instances.length).toBe(1));
+    const ws = MockWebSocket.instances[0];
+
+    vi.useFakeTimers();
+    try {
+      act(() => {
+        ws.onopen?.();
+      });
+
+      act(() => {
+        ws.onclose?.({ code: 1006 });
+      });
+
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+
+      expect(MockWebSocket.instances.length).toBe(2);
+      expect(logout).not.toHaveBeenCalled();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });

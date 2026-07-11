@@ -34,7 +34,7 @@ function useRealtime() {
   const { t } = useTranslation();
   const sseCtx = useContext(RealtimeContext);
   const appCtx = useContext(AppContext);
-  const { socket, setSocket } = sseCtx;
+  const { setSocket } = sseCtx;
 
   // `appCtx` is a fresh object identity on every AppContextProvider render
   // (e.g. whenever its own state changes), and the same is true of `sseCtx`.
