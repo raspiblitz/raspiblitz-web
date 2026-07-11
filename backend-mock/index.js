@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { WebSocketServer } = require("ws");
 const btcInfo = require("./sse/btc_info");
 const lnInfo = require("./sse/ln_info");
 const installedAppStatus = require("./sse/installed_app_status");
@@ -31,49 +32,45 @@ app.use("/api/lightning", lightning);
 
 const PORT = 8000;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.info(`Server listening on http://localhost:${PORT}`);
 });
 
 // app.use('/', express.static('../build'));
 
 /**
- * Main SSE Handler
+ * WebSocket server for realtime mock data
  */
-const eventsHandler = (request, response) => {
-  console.info("call to /api/sse/subscribe");
-  const headers = {
-    "Content-Type": "text/event-stream",
-    Connection: "keep-alive",
-    "Cache-Control": "no-cache",
-  };
-  response.writeHead(200, headers);
-
-  const data = `data: null\n\n`;
-
-  response.write(data);
-
-  const id = util.currClientId++;
-
-  util.clients.push({
-    id,
-    response,
+const wss = new WebSocketServer({ server, path: "/api/ws" });
+wss.on("connection", (ws) => {
+  console.info("ws connection to /api/ws");
+  let authed = false;
+  ws.on("message", (raw) => {
+    if (authed) return; // server-push only; ignore further client messages
+    let msg;
+    try {
+      msg = JSON.parse(raw.toString());
+    } catch {
+      ws.close(4401);
+      return;
+    }
+    if (msg && msg.type === "auth" && msg.token) {
+      authed = true;
+      util.clients.push(ws);
+      // send the initial snapshot of every event
+      systemStartupInfo.systemStartupInfo();
+      systemInfo.systemInfo();
+      hardwareInfo.hardwareInfo();
+      btcInfo.btcInfo();
+      lnInfo.lnInfo();
+      installedAppStatus.appStatus();
+      walletBalance.walletBalance();
+    } else {
+      ws.close(4401);
+    }
   });
-
-  systemStartupInfo.systemStartupInfo();
-  systemInfo.systemInfo();
-  hardwareInfo.hardwareInfo();
-  btcInfo.btcInfo();
-  lnInfo.lnInfo();
-  installedAppStatus.appStatus();
-  walletBalance.walletBalance();
-
-  request.on("close", () => {
-    // do nothing
+  ws.on("close", () => {
+    const i = util.clients.indexOf(ws);
+    if (i !== -1) util.clients.splice(i, 1);
   });
-};
-
-/**
- * SSE Handler call
- */
-app.get("/api/sse/subscribe", eventsHandler);
+});
