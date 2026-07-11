@@ -1,6 +1,6 @@
 import { type FC, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { getHrefFromApp } from "@/utils";
 import { availableApps } from "@/utils/availableApps";
@@ -9,7 +9,7 @@ export const AppInfo: FC = () => {
   const navigate = useNavigate();
   const { appId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(RealtimeContext);
   // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const { customComponent } = availableApps[appId!];
 

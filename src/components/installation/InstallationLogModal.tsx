@@ -2,7 +2,7 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import ModalDialog from "@/layouts/ModalDialog";
 import { AppId } from "@/models/app-status";
 
@@ -15,7 +15,7 @@ const InstallationLogModal = ({
   appId,
   onClose,
 }: InstallationLogModalProps) => {
-  const { installationStatus } = useContext(SSEContext);
+  const { installationStatus } = useContext(RealtimeContext);
   const logEndRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const [prevMessagesCount, setPrevMessagesCount] = useState(0);

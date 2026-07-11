@@ -18,7 +18,7 @@ import {
   retrieveSettings,
   setWindowAlias,
 } from "@/utils";
-import { SSEContext } from "./sse-context";
+import { RealtimeContext } from "./realtime-context";
 
 export interface AppContextType {
   isLoggedIn: boolean;
@@ -53,7 +53,7 @@ export const AppContext = createContext<AppContextType>(appContextDefault);
 
 const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const { i18n } = useTranslation();
-  const { evtSource, setEvtSource } = useContext(SSEContext);
+  const { evtSource, setEvtSource } = useContext(RealtimeContext);
 
   const [unit, setUnit] = useState<Unit>(Unit.SAT);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

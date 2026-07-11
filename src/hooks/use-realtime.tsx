@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { AppContext } from "@/context/app-context";
-import { SSE_URL, SSEContext } from "@/context/sse-context";
+import { WS_URL, RealtimeContext } from "@/context/realtime-context";
 import type { App } from "@/models/app.model";
 import type {
   AppStateUpdateMessage,
@@ -25,13 +25,13 @@ let installationMessageSeq = 0;
 
 /**
  * Establishes a SSE connection if not available yet & attaches / removes event listeners
- * to the single events to update the SSEContext
- * Use useContext(SSEContext) to get the data, is only used in Layout.tsx
- * @returns the infos from the SSEContext
+ * to the single events to update the RealtimeContext
+ * Use useContext(RealtimeContext) to get the data, is only used in Layout.tsx
+ * @returns the infos from the RealtimeContext
  */
-function useSSE() {
+function useRealtime() {
   const { t } = useTranslation();
-  const sseCtx = useContext(SSEContext);
+  const sseCtx = useContext(RealtimeContext);
   const appCtx = useContext(AppContext);
   const { evtSource, setEvtSource } = sseCtx;
 
@@ -76,7 +76,7 @@ function useSSE() {
     // synchronously in the same effect run. Gating the listeners behind the
     // `evtSource` state attached them a render later, so connect-time events
     // (e.g. ln_info) that the backend sends immediately on connect were missed.
-    const es = evtSource ?? new EventSource(SSE_URL, { withCredentials: true });
+    const es = evtSource ?? new EventSource(WS_URL, { withCredentials: true });
     if (!evtSource) {
       setEvtSource(es);
     }
@@ -479,4 +479,4 @@ function useSSE() {
   };
 }
 
-export default useSSE;
+export default useRealtime;

@@ -1,12 +1,12 @@
 import type { FC, PropsWithChildren } from "react";
-import useSSE from "@/hooks/use-sse";
+import useRealtime from "@/hooks/use-realtime";
 import BottomNav from "./BottomNav";
 import Header from "./Header";
 import SideDrawer from "./SideDrawer";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   // use SSE for all components after login
-  useSSE();
+  useRealtime();
   return (
     <>
       <Header />

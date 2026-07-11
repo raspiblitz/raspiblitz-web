@@ -8,14 +8,14 @@ import {
   appContextDefault,
 } from "@/context/app-context";
 import {
-  SSEContext,
-  type SSEContextType,
-  sseContextDefault,
-} from "@/context/sse-context";
+  RealtimeContext,
+  type RealtimeContextType,
+  realtimeContextDefault,
+} from "@/context/realtime-context";
 import i18n from "@/i18n/test_config";
 
 type Props = {
-  sseProps: SSEContextType;
+  sseProps: RealtimeContextType;
   appProps: AppContextType;
 };
 
@@ -26,9 +26,9 @@ const AllTheProviders: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <BrowserRouter>
-      <SSEContext.Provider
+      <RealtimeContext.Provider
         value={{
-          ...sseContextDefault,
+          ...realtimeContextDefault,
           ...sseProps,
         }}
       >
@@ -40,7 +40,7 @@ const AllTheProviders: FC<PropsWithChildren<Props>> = ({
         >
           <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
         </AppContext.Provider>
-      </SSEContext.Provider>
+      </RealtimeContext.Provider>
     </BrowserRouter>
   );
 };
@@ -49,7 +49,7 @@ const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, "wrapper"> & {
     providerOptions?: {
-      sseProps?: Partial<SSEContextType>;
+      sseProps?: Partial<RealtimeContextType>;
       appProps?: Partial<AppContextType>;
     };
   },

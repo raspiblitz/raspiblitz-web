@@ -1,7 +1,7 @@
 import { Button } from "@heroui/react";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import { AppId } from "@/models/app-status";
 import InstallationLogModal from "./InstallationLogModal";
 
@@ -10,7 +10,7 @@ interface InstallationStatusCardProps {
 }
 
 const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
-  const { installationStatus } = useContext(SSEContext);
+  const { installationStatus } = useContext(RealtimeContext);
   const [isModalOpen, setModalOpen] = useState(false);
   const { t } = useTranslation();
 

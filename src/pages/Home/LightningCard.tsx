@@ -2,14 +2,14 @@ import { Spinner } from "@heroui/react";
 import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext, Unit } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import { checkPropsUndefined } from "@/utils";
 import { convertMSatToBtc, convertToString } from "@/utils/format";
 
 export const LightningCard: FC = () => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
-  const { lnInfo, balance } = useContext(SSEContext);
+  const { lnInfo, balance } = useContext(RealtimeContext);
 
   const {
     num_active_channels: activeChannels,

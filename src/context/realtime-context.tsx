@@ -16,7 +16,7 @@ import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { Transaction } from "@/models/transaction.model";
 import type { WalletBalance } from "@/models/wallet-balance";
 
-export interface SSEContextType {
+export interface RealtimeContextType {
   evtSource: EventSource | null;
   setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
   systemInfo: SystemInfo;
@@ -44,7 +44,7 @@ export interface SSEContextType {
   setInstallationStatus: Dispatch<SetStateAction<InstallationStatus>>;
 }
 
-export const sseContextDefault: SSEContextType = {
+export const realtimeContextDefault: RealtimeContextType = {
   evtSource: null,
   setEvtSource: () => {},
   systemInfo: {} as SystemInfo,
@@ -70,11 +70,11 @@ export const sseContextDefault: SSEContextType = {
   setInstallationStatus: () => {},
 };
 
-export const SSEContext = createContext<SSEContextType>(sseContextDefault);
+export const RealtimeContext = createContext<RealtimeContextType>(realtimeContextDefault);
 
-export const SSE_URL = "/api/sse/subscribe";
+export const WS_URL = "/api/sse/subscribe";
 
-const SSEContextProvider: FC<PropsWithChildren> = (props) => {
+const RealtimeProvider: FC<PropsWithChildren> = (props) => {
   const [evtSource, setEvtSource] = useState<EventSource | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
@@ -148,7 +148,7 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [installationStatus, setInstallationStatus] =
     useState<InstallationStatus>({});
 
-  const contextValue: SSEContextType = {
+  const contextValue: RealtimeContextType = {
     evtSource,
     setEvtSource,
     systemInfo,
@@ -175,10 +175,10 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   };
 
   return (
-    <SSEContext.Provider value={contextValue}>
+    <RealtimeContext.Provider value={contextValue}>
       {props.children}
-    </SSEContext.Provider>
+    </RealtimeContext.Provider>
   );
 };
 
-export default SSEContextProvider;
+export default RealtimeProvider;
