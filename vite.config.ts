@@ -31,6 +31,7 @@ export default defineConfig({
         target: BACKEND_SERVER,
         changeOrigin: true,
         secure: false,
+        ws: true,
       },
     },
   },
