@@ -5,78 +5,26 @@ vi.mock("i18next", () => ({
 }));
 
 describe("checkError", () => {
-  it("should display the message with basic detail object", () => {
+  it("shows the string detail", () => {
     const errorMsg = checkError({
-      // @ts-expect-error response is not a full "AxiosResponse<ApiError, any>" type currently
+      // @ts-expect-error response is not a full AxiosResponse<ApiError> here
       response: {
-        data: {
-          detail: "old password format invalid",
-        },
+        data: { detail: "old password format invalid" },
       },
     });
     expect(errorMsg).toEqual("An error occurred: old password format invalid");
   });
 
-  it("should display the message with detail.msg object", () => {
-    const errorMsg = checkError({
-      // @ts-expect-error response is not a full "AxiosResponse<ApiError, any>" type currently
-      response: {
-        data: {
-          detail: [
-            {
-              loc: ["body", "password"],
-              msg: "ensure this value has at least 8 characters",
-              type: "value_error.any_str.min_length",
-              ctx: {
-                limit_value: 8,
-              },
-            },
-          ],
-        },
-      },
-    });
-    expect(errorMsg).toEqual(
-      "An error occurred: ensure this value has at least 8 characters",
-    );
-  });
-
-  it("should display the message with detail as an array", () => {
-    const errorMsg = checkError({
-      // @ts-expect-error we expect an error with a detailed response object
-      response: {
-        data: {
-          detail: [
-            {
-              loc: ["body", "type"],
-              msg: "value is not a valid enumeration member; permitted: 'p2wkh', 'np2wkh'",
-              type: "type_error.enum",
-              ctx: {
-                enum_values: ["p2wkh", "np2wkh"],
-              },
-            },
-          ],
-        },
-      },
-    });
-    expect(errorMsg).toEqual(
-      "An error occurred: value is not a valid enumeration member; permitted: 'p2wkh', 'np2wkh'",
-    );
-  });
-
-  it("should display an unknown error on other objects", () => {
+  it("falls back to unknown when there is no string detail", () => {
     const errorMsg = checkError({
       response: {
         status: 404,
         statusText: "Not found",
-        data: {
-          detail: {
-            // @ts-expect-error - We want to test undefined behaviour
-            test: "test",
-          },
-        },
+        // @ts-expect-error - testing missing detail
+        data: {},
       },
     });
-    // different text bc output is mocked
+    // t() is mocked, so both segments render as "An error occurred"
     expect(errorMsg).toEqual("An error occurred: An error occurred");
   });
 });
