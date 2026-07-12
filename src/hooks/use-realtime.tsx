@@ -23,6 +23,21 @@ import { availableApps } from "@/utils/availableApps";
 // timestamp) as a React key.
 let installationMessageSeq = 0;
 
+// Warmup emits an `{ error }` frame for a data event when the backend failed to
+// gather that source for a newly-connected client. Such a frame must never be
+// merged into the realtime data state (it would pollute it with a stray `error`
+// field); skip it instead.
+function isBackendErrorFrame(
+  message: Record<string, unknown>,
+  label: string,
+): boolean {
+  if ("error" in message) {
+    console.warn(`Skipping ${label} update; backend sent an error:`, message.error);
+    return true;
+  }
+  return false;
+}
+
 /**
  * Establishes a WebSocket connection (authenticating via a first-message
  * handshake) and dispatches incoming frames to update the RealtimeContext.
@@ -236,6 +251,8 @@ function useRealtime() {
           return;
         }
 
+        if (isBackendErrorFrame(message, "system info")) return;
+
         if (message.alias) {
           setWindowAlias(message.alias);
         }
@@ -261,6 +278,8 @@ function useRealtime() {
           return;
         }
 
+        if (isBackendErrorFrame(message, "BTC info")) return;
+
         sseCtx.setBtcInfo((prev: BtcInfo) => {
           return {
             ...prev,
@@ -281,6 +300,8 @@ function useRealtime() {
           console.error("Invalid LN info data:", message);
           return;
         }
+
+        if (isBackendErrorFrame(message, "LN info")) return;
 
         sseCtx.setLnInfo((prev: LnInfo) => {
           return {
@@ -303,6 +324,8 @@ function useRealtime() {
           return;
         }
 
+        if (isBackendErrorFrame(message, "balance")) return;
+
         sseCtx.setBalance((prev: WalletBalance) => {
           return {
             ...prev,
@@ -323,6 +346,8 @@ function useRealtime() {
           console.error("Invalid hardware info data:", message);
           return;
         }
+
+        if (isBackendErrorFrame(message, "hardware info")) return;
 
         sseCtx.setHardwareInfo((prev: HardwareInfo | null) => {
           return {

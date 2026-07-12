@@ -24,7 +24,14 @@ class MockWebSocket {
 
 function Probe() {
   const { btcInfo } = useRealtime();
-  return <div data-testid="blocks">{btcInfo.blocks}</div>;
+  return (
+    <>
+      <div data-testid="blocks">{btcInfo.blocks}</div>
+      <div data-testid="btc-error">
+        {String((btcInfo as { error?: unknown }).error ?? "")}
+      </div>
+    </>
+  );
 }
 
 describe("useRealtime (WebSocket)", () => {
@@ -81,6 +88,34 @@ describe("useRealtime (WebSocket)", () => {
     await waitFor(() => {
       expect(screen.getByTestId("blocks").textContent).toBe("42");
     });
+  });
+
+  it("ignores a backend error frame instead of merging it into the data state", async () => {
+    renderProbe();
+
+    await waitFor(() => expect(MockWebSocket.instances.length).toBe(1));
+    const ws = MockWebSocket.instances[0];
+
+    // a valid frame first
+    act(() => {
+      ws.onmessage?.({
+        data: JSON.stringify({ event: "btc_info", data: { blocks: 42 } }),
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId("blocks").textContent).toBe("42");
+    });
+
+    // then a warmup error frame for the same event
+    act(() => {
+      ws.onmessage?.({
+        data: JSON.stringify({ event: "btc_info", data: { error: "410: boom" } }),
+      });
+    });
+
+    // the error must NOT be merged into btcInfo, and prior data is preserved
+    expect(screen.getByTestId("btc-error").textContent).toBe("");
+    expect(screen.getByTestId("blocks").textContent).toBe("42");
   });
 
   it("logs the user out when the socket closes with code 4401", async () => {
