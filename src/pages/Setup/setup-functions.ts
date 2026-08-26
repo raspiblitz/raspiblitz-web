@@ -124,8 +124,8 @@ export async function initSetupStart(updateState: UpdateState): Promise<void> {
     updateState({
       gotBlockchain: setupInfo.hddGotBlockchain === "1",
       setupPhaseOnStart: setupInfo.setupPhase,
-      migrationOS: setupInfo.hddGotMigrationData,
-      migrationMode: setupInfo.migrationMode,
+      migrationOS: setupInfo.hddGotMigrationData ?? SetupMigrationOS.NULL,
+      migrationMode: setupInfo.migrationMode ?? SetupMigrationMode.NULL,
       page: getInitialPage(setupInfo.setupPhase, updateState),
     });
   } catch {
@@ -135,8 +135,8 @@ export async function initSetupStart(updateState: UpdateState): Promise<void> {
 
 interface SetupStartInfo {
   hddGotBlockchain: string;
-  hddGotMigrationData: SetupMigrationOS;
-  migrationMode: SetupMigrationMode;
+  hddGotMigrationData: SetupMigrationOS | null;
+  migrationMode: SetupMigrationMode | null;
   setupPhase: SetupPhase;
 }
 
@@ -151,11 +151,13 @@ function isSetupStartInfo(value: unknown): value is SetupStartInfo {
     value.setupPhase === SetupPhase.MIGRATION ||
     value.setupPhase === SetupPhase.SETUP;
   const validMigrationOS =
+    value.hddGotMigrationData === null ||
     value.hddGotMigrationData === SetupMigrationOS.NULL ||
     value.hddGotMigrationData === SetupMigrationOS.CITADEL ||
     value.hddGotMigrationData === SetupMigrationOS.MYNODE ||
     value.hddGotMigrationData === SetupMigrationOS.UMBREL;
   const validMigrationMode =
+    value.migrationMode === null ||
     value.migrationMode === SetupMigrationMode.NULL ||
     value.migrationMode === SetupMigrationMode.NORMAL ||
     value.migrationMode === SetupMigrationMode.OUTDATED;

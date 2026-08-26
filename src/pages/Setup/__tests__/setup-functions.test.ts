@@ -39,8 +39,8 @@ describe("initSetupStart", () => {
     vi.spyOn(instance, "get").mockResolvedValue({
       data: {
         hddGotBlockchain: "0",
-        hddGotMigrationData: SetupMigrationOS.NULL,
-        migrationMode: SetupMigrationMode.NULL,
+        hddGotMigrationData: null,
+        migrationMode: null,
         setupPhase: SetupPhase.SETUP,
       },
     });
@@ -50,6 +50,8 @@ describe("initSetupStart", () => {
 
     expect(updateState).toHaveBeenLastCalledWith(
       expect.objectContaining({
+        migrationMode: SetupMigrationMode.NULL,
+        migrationOS: SetupMigrationOS.NULL,
         page: Screen.SETUP,
         setupPhaseOnStart: SetupPhase.SETUP,
       }),
