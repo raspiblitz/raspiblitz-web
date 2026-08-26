@@ -1,19 +1,21 @@
 import { type FC, useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { getHrefFromApp } from "@/utils";
-import { availableApps } from "@/utils/availableApps";
+import { availableApps, isAppId } from "@/utils/availableApps";
 
 export const AppInfo: FC = () => {
   const navigate = useNavigate();
   const { appId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus } = useContext(SSEContext);
-  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-  const { customComponent } = availableApps[appId!];
+  const knownAppId = isAppId(appId) ? appId : null;
+  const customComponent = knownAppId
+    ? availableApps[knownAppId].customComponent
+    : undefined;
 
-  const app = appStatus.data.find((app) => app.id === appId);
+  const app = appStatus.data.find((item) => item.id === knownAppId);
 
   useEffect(() => {
     setIsLoading(true);
@@ -33,13 +35,12 @@ export const AppInfo: FC = () => {
     }
   }, [app, customComponent, navigate]);
 
-  if (isLoading || !app) {
-    return <PageLoadingScreen />;
+  if (!knownAppId) {
+    return <Navigate to="/apps" replace />;
   }
 
-  if (!appId) {
-    navigate("/apps");
-    return;
+  if (isLoading || !app) {
+    return <PageLoadingScreen />;
   }
 
   // needs to be PascalCase to be used as a component in JSX

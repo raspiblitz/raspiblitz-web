@@ -26,8 +26,12 @@
               name = "${name}";
               buildInputs = [pkgs.nodejs_22];
               src = ./.;
+              VITE_BUILD_COMMIT = self.rev or "unknown";
 
-              npmDepsHash = "sha256-DT5+1KH06cMLHgMMPIiL1LMfxoOM4i15Z1MQok/eLS8=";
+              npmDeps = pkgs.importNpmLock {
+                npmRoot = ./.;
+              };
+              npmConfigHook = pkgs.importNpmLock.npmConfigHook;
 
               preBuild = ''
                 sed -i "s(const BACKEND_SERVER = "http://localhost:8000";(const BACKEND_SERVER = "http://127.0.0.1";(" vite.config.ts

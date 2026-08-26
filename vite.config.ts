@@ -4,14 +4,20 @@ import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import tailwindcss from "@tailwindcss/vite"
+import packageJson from "./package.json";
 
 const BACKEND_SERVER = 'http://localhost:8000';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    __APP_VERSION__: JSON.stringify(packageJson.version),
+    __BUILD_COMMIT__: JSON.stringify(process.env.VITE_BUILD_COMMIT ?? "unknown"),
+  },
   plugins: [react(), viteTsconfigPaths(), svgr(), tailwindcss()],
   build: {
     outDir: 'build',
+    sourcemap: true,
     rollupOptions: {
       output: {
         // see https://github.com/vitejs/vite/issues/11804#issuecomment-2009619365

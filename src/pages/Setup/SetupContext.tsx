@@ -6,9 +6,11 @@ import {
   SetupLightning,
   SetupPhase,
   type SetupState,
+  SetupStatus,
 } from "@/models/setup.model";
 import {
   setupFinalReboot,
+  setupMonitoringLoop,
   setupShutdown,
   setupStart,
 } from "@/pages/Setup/setup-functions";
@@ -29,6 +31,7 @@ interface SetupContextType {
     onStartDoneDialog: (cancel: boolean) => Promise<void>;
     onSyncScreen: (action: string) => Promise<void>;
     onFinalReboot: () => Promise<void>;
+    onRetry: () => Promise<void>;
   };
 }
 
@@ -217,6 +220,15 @@ export default function SetupProvider({
     onFinalReboot: useCallback(async () => {
       await setupFinalReboot(updateState, navigate);
     }, [updateState, navigate]),
+
+    onRetry: useCallback(async () => {
+      updateState({
+        page: Screen.WAIT,
+        waitScreenStatus: SetupStatus.WAIT,
+        waitScreenMessage: "",
+      });
+      await setupMonitoringLoop(updateState, navigate);
+    }, [navigate, updateState]),
   };
 
   return (
