@@ -27,6 +27,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          VITE_BUILD_COMMIT: ${{ github.sha }}
       - name: Run Tests
         run: npm run test
       - name: Run Typecheck

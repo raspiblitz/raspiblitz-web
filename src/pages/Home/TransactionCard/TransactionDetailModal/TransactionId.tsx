@@ -58,7 +58,7 @@ const TransactionId: FC<Props> = ({ id, maxDisplay = 8 }) => {
               </span>
             </button>
           </Tooltip.Trigger>
-          <Tooltip.Content>
+          <Tooltip.Content arrowBoundaryOffset={0}>
             {expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")}
           </Tooltip.Content>
         </Tooltip>
