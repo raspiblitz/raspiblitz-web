@@ -1,8 +1,4 @@
-import {
-  ChevronLeftIcon,
-  PlusIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronLeftIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Button, Link } from "@heroui/react";
 import { type FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,12 +20,9 @@ export const AppInfo: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus, installingApp, hardwareInfo } = useContext(SSEContext);
   const [imgs, setImgs] = useState<string[]>([]);
-  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const { name } = availableApps[appId!];
-  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const { author, repository } = availableApps[appId!];
-  const { installed, version } =
-    appStatus.data.find((app) => app.id === appId) || {};
+  const { installed, version } = appStatus.data.find((app) => app.id === appId) || {};
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,11 +57,9 @@ export const AppInfo: FC = () => {
   }, [appId]);
 
   const uninstallHandler = useCallback(() => {
-    instance
-      .post("apps/uninstall", { app_id: appId, keep_data: true })
-      .catch((err) => {
-        toast.error(checkError(err));
-      });
+    instance.post("apps/uninstall", { app_id: appId, keep_data: true }).catch((err) => {
+      toast.error(checkError(err));
+    });
   }, [appId]);
 
   if (isLoading) {
@@ -82,7 +73,6 @@ export const AppInfo: FC = () => {
 
   const video =
     appId === "mempool" ? (
-      // biome-ignore lint/a11y/useMediaCaption: value is expected to exist at this point
       <video width="2000" height="1000" controls>
         <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
       </video>
@@ -90,9 +80,7 @@ export const AppInfo: FC = () => {
 
   // show warning if btcpay & ram below 8GB (in bytes); since the ram is always a bit less than 8gb, we use 7_000_000_000 (~7gb) instead
   const showBtcPayWarning =
-    appId === "btcpayserver" &&
-    hardwareInfo &&
-    hardwareInfo.vram_total_bytes < 7_000_000_000;
+    appId === "btcpayserver" && hardwareInfo && hardwareInfo.vram_total_bytes < 7_000_000_000;
 
   return (
     <main className="page-container content-container w-full bg-gray-700 text-white">
@@ -111,49 +99,35 @@ export const AppInfo: FC = () => {
         <AppIcon appId={appId} className="max-h-12" />
         <h1 className="px-5 text-2xl text-white">{name}</h1>
 
-        {(installingApp == null || installingApp.appId !== appId) &&
-          !installed && (
-            <Button
-              isDisabled={!!installingApp}
-              variant="primary"
-              onPress={installHandler}
-            >
-              <span className="flex items-center gap-2">
-                <PlusIcon className="inline h-6 w-6" />
-                {t("apps.install")}
-              </span>
-            </Button>
-          )}
+        {(installingApp == null || installingApp.appId !== appId) && !installed && (
+          <Button isDisabled={!!installingApp} variant="primary" onPress={installHandler}>
+            <span className="flex items-center gap-2">
+              <PlusIcon className="inline h-6 w-6" />
+              {t("apps.install")}
+            </span>
+          </Button>
+        )}
 
-        {installingApp &&
-          installingApp.appId === appId &&
-          installingApp.mode === "on" && (
-            <Button isDisabled isPending variant="primary">
-              {t("apps.installing")}
-            </Button>
-          )}
+        {installingApp && installingApp.appId === appId && installingApp.mode === "on" && (
+          <Button isDisabled isPending variant="primary">
+            {t("apps.installing")}
+          </Button>
+        )}
 
-        {installingApp &&
-          installingApp.appId === appId &&
-          installingApp.mode === "off" && (
-            <Button isDisabled isPending variant="primary">
-              {t("apps.uninstalling")}
-            </Button>
-          )}
+        {installingApp && installingApp.appId === appId && installingApp.mode === "off" && (
+          <Button isDisabled isPending variant="primary">
+            {t("apps.uninstalling")}
+          </Button>
+        )}
 
-        {(installingApp == null || installingApp.appId !== appId) &&
-          installed && (
-            <Button
-              isDisabled={!!installingApp}
-              variant="danger"
-              onPress={uninstallHandler}
-            >
-              <span className="flex items-center gap-2">
-                <TrashIcon className="inline h-6 w-6" />
-                {t("apps.uninstall")}
-              </span>
-            </Button>
-          )}
+        {(installingApp == null || installingApp.appId !== appId) && installed && (
+          <Button isDisabled={!!installingApp} variant="danger" onPress={uninstallHandler}>
+            <span className="flex items-center gap-2">
+              <TrashIcon className="inline h-6 w-6" />
+              {t("apps.uninstall")}
+            </span>
+          </Button>
+        )}
       </section>
 
       {showBtcPayWarning && (
@@ -180,12 +154,7 @@ export const AppInfo: FC = () => {
           <p>{author}</p>
           <h4 className="my-2 text-gray-300">{t("apps.source")}</h4>
 
-          <Link
-            href={repository}
-            target="_blank"
-            rel="noreferrer"
-            className="underline"
-          >
+          <Link href={repository} target="_blank" rel="noreferrer" className="underline">
             {repository}
           </Link>
         </article>

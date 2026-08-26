@@ -9,12 +9,7 @@ import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
-import {
-  convertBtcToSat,
-  convertMSatToSat,
-  formatAmount,
-  stringToNumber,
-} from "@/utils/format";
+import { convertBtcToSat, convertMSatToSat, formatAmount, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
 import { TxType } from "../SwitchTxType";
 import type { SendLnForm } from "./SendModal";
@@ -42,9 +37,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
   const lnData = confirmData as SendLnForm;
   const onChainData = confirmData as SendOnChainForm;
 
-  const invoiceExpiryDate = isLnTx
-    ? (lnData.timestamp + lnData.expiry) * 1000
-    : 0;
+  const invoiceExpiryDate = isLnTx ? (lnData.timestamp + lnData.expiry) * 1000 : 0;
   const invoiceExpiryDateDecorated = new Intl.DateTimeFormat("default", {
     dateStyle: "medium",
     timeStyle: "medium",
@@ -52,8 +45,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
   const isInvoiceExpired = isLnTx && invoiceExpiryDate < Date.now();
   const isInvoiceAmountBiggerThanBalance = confirmData.amount > balance;
   const isValidLnInvoice =
-    !isLnTx ||
-    (isLnTx && !isInvoiceExpired && !isInvoiceAmountBiggerThanBalance);
+    !isLnTx || (isLnTx && !isInvoiceExpired && !isInvoiceAmountBiggerThanBalance);
 
   const {
     control,
@@ -81,9 +73,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       }
 
       instance
-        .post(
-          `lightning/send-payment?pay_req=${confirmData?.address}${msatQuery}`,
-        )
+        .post(`lightning/send-payment?pay_req=${confirmData?.address}${msatQuery}`)
         .then(() => {
           setIsLoading(false);
           toast.success(t("tx.sent"), { theme: "dark" });
@@ -94,8 +84,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
           setIsLoading(false);
         });
     } else {
-      const { spendAll, fee, address, comment, amount } =
-        confirmData as SendOnChainForm;
+      const { spendAll, fee, address, comment, amount } = confirmData as SendOnChainForm;
       const amountBody = spendAll ? 0 : amount;
       const body = {
         amount: amountBody,
@@ -134,19 +123,14 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       </ConfirmModal.Header>
 
       <ConfirmModal.Body>
-        <h4 className="my-3 break-normal font-extrabold">
-          {t("tx.confirm_info")}:{" "}
-        </h4>
+        <h4 className="my-3 break-normal font-extrabold">{t("tx.confirm_info")}: </h4>
 
         <div className="my-2">
           <h4 className="font-bold">{addressTitle}: </h4>
-          <p className="w-full break-all text-gray-200">
-            {confirmData.address}
-          </p>
+          <p className="w-full break-all text-gray-200">{confirmData.address}</p>
           {isInvoiceExpired && (
             <p className="text-red-500">
-              {t("forms.validation.lnInvoice.expired")}:{" "}
-              {invoiceExpiryDateDecorated}
+              {t("forms.validation.lnInvoice.expired")}: {invoiceExpiryDateDecorated}
             </p>
           )}
         </div>
@@ -155,11 +139,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
           <h4 className="font-bold">{t("wallet.amount")}:</h4>
           {isLnTx && Number(confirmData.amount) !== 0 && (
             <span>
-              {formatAmount(
-                convertMSatToSat(+confirmData.amount)?.toString() ?? "",
-                Unit.SAT,
-              )}{" "}
-              Sat
+              {formatAmount(convertMSatToSat(+confirmData.amount)?.toString() ?? "", Unit.SAT)} Sat
             </span>
           )}
 
@@ -172,9 +152,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
           )}
 
           {isInvoiceAmountBiggerThanBalance && (
-            <p className="text-red-500">
-              {t("forms.validation.lnInvoice.max")}
-            </p>
+            <p className="text-red-500">{t("forms.validation.lnInvoice.max")}</p>
           )}
 
           {Number(confirmData.amount) === 0 && !onChainData.spendAll && (
@@ -192,8 +170,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
                   },
                   validate: {
                     greaterThanZero: (val) =>
-                      stringToNumber(`${val}`) > 0 ||
-                      t("forms.validation.chainAmount.required"),
+                      stringToNumber(`${val}`) > 0 || t("forms.validation.chainAmount.required"),
                   },
                 }}
                 render={({ field, fieldState }) => (
@@ -216,15 +193,13 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
 
         {!isLnTx && (
           <div className="my-2">
-            <h4 className="font-bold">{t("tx.fee")}:</h4> {confirmData.fee}{" "}
-            sat/vByte
+            <h4 className="font-bold">{t("tx.fee")}:</h4> {confirmData.fee} sat/vByte
           </div>
         )}
 
         {confirmData.comment && (
           <div className="my-2">
-            <h4 className="font-bold">{commentHeading}:</h4>{" "}
-            {confirmData.comment}
+            <h4 className="font-bold">{commentHeading}:</h4> {confirmData.comment}
           </div>
         )}
 
@@ -240,9 +215,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
           variant="primary"
           type="submit"
           isDisabled={
-            (!isValid &&
-              Number(confirmData.amount) === 0 &&
-              !onChainData.spendAll) ||
+            (!isValid && Number(confirmData.amount) === 0 && !onChainData.spendAll) ||
             !isValidLnInvoice ||
             isInvoiceAmountBiggerThanBalance
           }

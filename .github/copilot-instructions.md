@@ -8,7 +8,7 @@ This project uses AI-assisted development. Please refer to the main AI guidance 
 
 ### Development Commands
 - Use `npm run dev:local` for full development (frontend + mock backend)
-- Run `npm run lint` to check code quality with Biome
+- Run `npm run lint` to check code quality with Oxlint and Oxfmt
 - Use `npm run tsc` for TypeScript type checking
 
 ### Architecture Notes

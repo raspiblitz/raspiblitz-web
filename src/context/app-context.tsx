@@ -11,13 +11,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import {
-  ACCESS_TOKEN,
-  disableGutter,
-  parseJwt,
-  retrieveSettings,
-  setWindowAlias,
-} from "@/utils";
+import { ACCESS_TOKEN, disableGutter, parseJwt, retrieveSettings, setWindowAlias } from "@/utils";
 import { SSEContext } from "./sse-context";
 
 export interface AppContextType {
@@ -97,10 +91,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         const payload = parseJwt(token);
         if (payload.expires > Date.now()) {
           setIsLoggedIn(true);
-          if (
-            window.location.pathname === "/" ||
-            window.location.pathname === "/login"
-          ) {
+          if (window.location.pathname === "/" || window.location.pathname === "/login") {
             navigate("/home");
           }
         } else {
@@ -126,9 +117,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
     setIsGeneratingReport,
   };
 
-  return (
-    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
 };
 
 export default AppContextProvider;

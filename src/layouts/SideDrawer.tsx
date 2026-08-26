@@ -30,21 +30,15 @@ export const SideDrawer: FC = () => {
       <div className="flex flex-col items-center justify-center">
         <NavLink to="/home" className={(props) => createClassName(props)}>
           <HomeIcon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.home")}
-          </span>
+          <span className="mx-3 w-1/2 justify-center text-lg">{t("navigation.home")}</span>
         </NavLink>
         <NavLink to="/apps" className={(props) => createClassName(props)}>
           <Squares2X2Icon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.apps")}
-          </span>
+          <span className="mx-3 w-1/2 justify-center text-lg">{t("navigation.apps")}</span>
         </NavLink>
         <NavLink to="/settings" className={(props) => createClassName(props)}>
           <Cog6ToothIcon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.settings")}
-          </span>
+          <span className="mx-3 w-1/2 justify-center text-lg">{t("navigation.settings")}</span>
         </NavLink>
         <NavLink
           to="https://docs.raspiblitz.org/docs/intro"
@@ -53,9 +47,7 @@ export const SideDrawer: FC = () => {
           className={(props) => createClassName(props)}
         >
           <BookOpenIcon className={navIconClasses} />
-          <span className="mx-3 w-1/2 justify-center text-lg">
-            {t("navigation.documentation")}
-          </span>
+          <span className="mx-3 w-1/2 justify-center text-lg">{t("navigation.documentation")}</span>
         </NavLink>
 
         {appStatus?.data

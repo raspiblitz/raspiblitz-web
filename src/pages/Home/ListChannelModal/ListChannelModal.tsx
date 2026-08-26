@@ -3,19 +3,14 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
-import {
-  ConfirmModal,
-  type Props as ConfirmModalProps,
-} from "@/components/ConfirmModal";
+import { ConfirmModal, type Props as ConfirmModalProps } from "@/components/ConfirmModal";
 import type { LightningChannel } from "@/models/lightning-channel";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import ChannelList from "./ChannelList";
 
 const theme = "dark";
-export default function ListChannelModal({
-  disclosure,
-}: Pick<ConfirmModalProps, "disclosure">) {
+export default function ListChannelModal({ disclosure }: Pick<ConfirmModalProps, "disclosure">) {
   const { t } = useTranslation();
   const [openChannels, setOpenChannels] = useState<LightningChannel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,11 +59,7 @@ export default function ListChannelModal({
   };
 
   return (
-    <ConfirmModal
-      headline={t("home.current_open_channels")}
-      disclosure={disclosure}
-      custom
-    >
+    <ConfirmModal headline={t("home.current_open_channels")} disclosure={disclosure} custom>
       <ConfirmModal.Body>
         {isLoading && <Spinner size="lg" />}
 

@@ -10,10 +10,7 @@ type Props = {
   currentStep: number | null;
 };
 
-export default function SetupContainer({
-  currentStep,
-  children,
-}: PropsWithChildren<Props>) {
+export default function SetupContainer({ currentStep, children }: PropsWithChildren<Props>) {
   const { t } = useTranslation();
 
   return (

@@ -37,9 +37,7 @@ const AppStatusRefresh = () => {
         }
 
         const hours = Math.floor(seconds / 3600);
-        return hours === 1
-          ? t("apps.age_hour", { hours })
-          : t("apps.age_hours", { hours });
+        return hours === 1 ? t("apps.age_hour", { hours }) : t("apps.age_hours", { hours });
       };
 
       setFormattedAge(formatAgeText(ageInSeconds));
@@ -65,17 +63,11 @@ const AppStatusRefresh = () => {
     };
 
     window.addEventListener("app_state_updating", handleAppStateUpdating);
-    window.addEventListener(
-      "app_state_updating_success",
-      handleAppStateUpdateSuccess,
-    );
+    window.addEventListener("app_state_updating_success", handleAppStateUpdateSuccess);
 
     return () => {
       window.removeEventListener("app_state_updating", handleAppStateUpdating);
-      window.removeEventListener(
-        "app_state_updating_success",
-        handleAppStateUpdateSuccess,
-      );
+      window.removeEventListener("app_state_updating_success", handleAppStateUpdateSuccess);
     };
   }, [t]);
 
@@ -107,12 +99,7 @@ const AppStatusRefresh = () => {
       </div>
       <Tooltip>
         <Tooltip.Trigger>
-          <Button
-            variant="primary"
-            size="sm"
-            isPending={isUpdating}
-            onPress={handleRefresh}
-          >
+          <Button variant="primary" size="sm" isPending={isUpdating} onPress={handleRefresh}>
             <span className="flex items-center gap-2">
               <ArrowPathIcon className="h-5 w-5" />
               {isUpdating ? t("apps.refreshing") : t("apps.refresh")}

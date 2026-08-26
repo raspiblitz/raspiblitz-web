@@ -1,17 +1,8 @@
 import type React from "react";
 import { createContext, useCallback, useContext } from "react";
 import type { NavigateFunction } from "react-router";
-import {
-  Screen,
-  SetupLightning,
-  SetupPhase,
-  type SetupState,
-} from "@/models/setup.model";
-import {
-  setupFinalReboot,
-  setupShutdown,
-  setupStart,
-} from "@/pages/Setup/setup-functions";
+import { Screen, SetupLightning, SetupPhase, type SetupState } from "@/models/setup.model";
+import { setupFinalReboot, setupShutdown, setupStart } from "@/pages/Setup/setup-functions";
 
 interface SetupContextType {
   state: SetupState;
@@ -49,12 +40,7 @@ export const useSetup = () => {
   return context;
 };
 
-export default function SetupProvider({
-  children,
-  state,
-  updateState,
-  navigate,
-}: Props) {
+export default function SetupProvider({ children, state, updateState, navigate }: Props) {
   const callbacks = {
     onRecoveryDialog: useCallback(
       (startRecovery: boolean) => {

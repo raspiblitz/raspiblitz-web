@@ -4,10 +4,7 @@ import { toast } from "react-toastify";
 import { AppContext } from "@/context/app-context";
 import { SSE_URL, SSEContext } from "@/context/sse-context";
 import type { App } from "@/models/app.model";
-import type {
-  AppStateUpdateMessage,
-  AppStatusQueryResponse,
-} from "@/models/app-status";
+import type { AppStateUpdateMessage, AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
 import type { InstallAppData } from "@/models/install-app";
@@ -95,10 +92,7 @@ function useSSE() {
           if (prev.length === 0) {
             return apps;
           }
-          return prev.map(
-            (old: App) =>
-              apps.find((newApp: App) => old.id === newApp.id) || old,
-          );
+          return prev.map((old: App) => apps.find((newApp: App) => old.id === newApp.id) || old);
         });
       } catch (error) {
         console.error("Error processing apps data:", error);
@@ -195,8 +189,7 @@ function useSSE() {
           return;
         }
 
-        const appName =
-          availableApps[installAppData.id]?.name || installAppData.id;
+        const appName = availableApps[installAppData.id]?.name || installAppData.id;
 
         if (installAppData.result === "fail") {
           appInstallErrorHandler(installAppData, appName);
@@ -388,9 +381,7 @@ function useSSE() {
               const currentIds = status.data.map((item) => item.id);
 
               // Get existing data that's not being updated
-              const existingData = prev.data.filter(
-                (item) => !currentIds.includes(item.id),
-              );
+              const existingData = prev.data.filter((item) => !currentIds.includes(item.id));
 
               // Merge the arrays
               return {
@@ -400,10 +391,7 @@ function useSSE() {
               };
             });
           } catch (error) {
-            console.error(
-              "Error processing app state update message data:",
-              error,
-            );
+            console.error("Error processing app state update message data:", error);
           }
         } else if (state === "finished") {
           // Notify UI that app state updating has completed
@@ -430,10 +418,7 @@ function useSSE() {
     es.addEventListener("install", setInstall);
     es.addEventListener("hardware_info", setHardwareInfo);
     es.addEventListener("system_startup_info", setSystemStartupInfo);
-    es.addEventListener(
-      "app_state_update_message",
-      handleAppStateUpdateMessage,
-    );
+    es.addEventListener("app_state_update_message", handleAppStateUpdateMessage);
 
     return () => {
       // cleanup
@@ -448,10 +433,7 @@ function useSSE() {
       es.removeEventListener("install", setInstall);
       es.removeEventListener("hardware_info", setHardwareInfo);
       es.removeEventListener("system_startup_info", setSystemStartupInfo);
-      es.removeEventListener(
-        "app_state_update_message",
-        handleAppStateUpdateMessage,
-      );
+      es.removeEventListener("app_state_update_message", handleAppStateUpdateMessage);
     };
   }, [
     t,

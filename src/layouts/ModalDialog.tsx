@@ -12,11 +12,7 @@ type Props = {
   close: () => void;
 };
 
-const ModalDialog: FC<PropsWithChildren<Props>> = ({
-  closeable = true,
-  close,
-  children,
-}) => {
+const ModalDialog: FC<PropsWithChildren<Props>> = ({ closeable = true, close, children }) => {
   const closeModal = useCallback(() => {
     close();
     disableScroll.off();
@@ -48,16 +44,12 @@ const ModalDialog: FC<PropsWithChildren<Props>> = ({
           <button
             type="button"
             onClick={closeModal}
-            className={`ml-auto mt-1 flex h-7 w-7 items-end ${
-              closeable ? "" : "invisible"
-            }`}
+            className={`ml-auto mt-1 flex h-7 w-7 items-end ${closeable ? "" : "invisible"}`}
           >
             <XMarkIcon className="h-full w-full" />
           </button>
         </div>
-        <div className="flex h-full flex-col justify-center px-5">
-          {children}
-        </div>
+        <div className="flex h-full flex-col justify-center px-5">{children}</div>
       </div>
     </ModalBackground>
   );

@@ -16,10 +16,7 @@ export type FormattedTransaction = {
   comment: string | null;
 };
 
-export function formatTransaction(
-  transaction: Transaction,
-  unit: Unit,
-): FormattedTransaction {
+export function formatTransaction(transaction: Transaction, unit: Unit): FormattedTransaction {
   const { amount, category, time_stamp, type, comment } = transaction;
 
   const sendingTx = type === "send";

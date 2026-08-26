@@ -5,10 +5,7 @@ import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import {
-  SetupMigrationMode,
-  type SetupMigrationOS,
-} from "@/models/setup.model";
+import { SetupMigrationMode, type SetupMigrationOS } from "@/models/setup.model";
 
 type Props = {
   migrationOS: SetupMigrationOS;
@@ -16,11 +13,7 @@ type Props = {
   callback: (migrate: boolean) => void;
 };
 
-export default function MigrationDialog({
-  migrationOS,
-  migrationMode,
-  callback,
-}: Props) {
+export default function MigrationDialog({ migrationOS, migrationMode, callback }: Props) {
   const { t } = useTranslation();
   const confirmModal = useOverlayState();
 
@@ -32,11 +25,7 @@ export default function MigrationDialog({
             {t("setup.lightningoutdated")}
           </Alert>
 
-          <Button
-            type="button"
-            onPress={() => callback(false)}
-            variant="primary"
-          >
+          <Button type="button" onPress={() => callback(false)} variant="primary">
             {t("settings.shutdown")}
           </Button>
         </section>
@@ -61,24 +50,14 @@ export default function MigrationDialog({
               })}
             </Headline>
 
-            <p className="m-2 text-center text-secondary">
-              {t("setup.convertwarning")}
-            </p>
+            <p className="m-2 text-center text-secondary">{t("setup.convertwarning")}</p>
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
-            <Button
-              type="button"
-              onPress={() => confirmModal.open()}
-              variant="primary"
-            >
+            <Button type="button" onPress={() => confirmModal.open()} variant="primary">
               {t("setup.no_and_shutdown")}
             </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              onPress={() => callback(true)}
-            >
+            <Button type="button" variant="secondary" onPress={() => callback(true)}>
               {t("setup.yes_and_migrate")}
             </Button>
           </article>

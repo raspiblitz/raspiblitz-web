@@ -50,9 +50,7 @@ describe("ConfirmSend", () => {
         </ConfirmModal>,
       );
 
-      expect(
-        screen.getByText("wallet.invoice", { exact: false }),
-      ).toBeInTheDocument();
+      expect(screen.getByText("wallet.invoice", { exact: false })).toBeInTheDocument();
       expect(screen.queryByText("tx.fee")).not.toBeInTheDocument();
     });
 
@@ -63,9 +61,7 @@ describe("ConfirmSend", () => {
         </ConfirmModal>,
       );
 
-      expect(
-        screen.getByText("wallet.address", { exact: false }),
-      ).toBeInTheDocument();
+      expect(screen.getByText("wallet.address", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("tx.fee", { exact: false })).toBeInTheDocument();
     });
 
@@ -84,9 +80,7 @@ describe("ConfirmSend", () => {
         </ConfirmModal>,
       );
 
-      expect(
-        screen.getByText("tx.description", { exact: false }),
-      ).toBeInTheDocument();
+      expect(screen.getByText("tx.description", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Test comment")).toBeInTheDocument();
     });
 
@@ -97,9 +91,7 @@ describe("ConfirmSend", () => {
         </ConfirmModal>,
       );
 
-      expect(
-        screen.queryByText("tx.description", { exact: false }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText("tx.description", { exact: false })).not.toBeInTheDocument();
     });
 
     test("displays back button with correct handler", async () => {
@@ -138,9 +130,7 @@ describe("ConfirmSend", () => {
         </ConfirmModal>,
       );
 
-      expect(
-        screen.getByText("tx.all_onchain", { exact: false }),
-      ).toBeInTheDocument();
+      expect(screen.getByText("tx.all_onchain", { exact: false })).toBeInTheDocument();
     });
 
     test("confirm button is enabled for valid spendAll transaction", () => {
@@ -159,9 +149,7 @@ describe("ConfirmSend", () => {
         </ConfirmModal>,
       );
 
-      expect(
-        screen.getByRole("button", { name: "settings.confirm" }),
-      ).not.toBeDisabled();
+      expect(screen.getByRole("button", { name: "settings.confirm" })).not.toBeDisabled();
     });
   });
 
@@ -169,13 +157,10 @@ describe("ConfirmSend", () => {
     test("displays error message when API call fails for Lightning", async () => {
       server.use(
         http.post("/api/lightning/send-payment", () => {
-          return new HttpResponse(
-            JSON.stringify({ detail: "Payment failed" }),
-            {
-              status: 500,
-              headers: { "Content-Type": "application/json" },
-            },
-          );
+          return new HttpResponse(JSON.stringify({ detail: "Payment failed" }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          });
         }),
       );
 
@@ -200,22 +185,17 @@ describe("ConfirmSend", () => {
       await user.click(confirmButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByText("Payment failed", { exact: false }),
-        ).toBeInTheDocument();
+        expect(screen.getByText("Payment failed", { exact: false })).toBeInTheDocument();
       });
     });
 
     test("displays error message when API call fails for onchain", async () => {
       server.use(
         http.post("/api/lightning/send-coins", () => {
-          return new HttpResponse(
-            JSON.stringify({ detail: "Transaction failed" }),
-            {
-              status: 500,
-              headers: { "Content-Type": "application/json" },
-            },
-          );
+          return new HttpResponse(JSON.stringify({ detail: "Transaction failed" }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          });
         }),
       );
 
@@ -240,9 +220,7 @@ describe("ConfirmSend", () => {
       await user.click(confirmButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByText("Transaction failed", { exact: false }),
-        ).toBeInTheDocument();
+        expect(screen.getByText("Transaction failed", { exact: false })).toBeInTheDocument();
       });
     });
   });
@@ -293,9 +271,7 @@ describe("ConfirmSend", () => {
       await user.click(confirmButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByRole("button", { name: "settings.cancel" }),
-        ).toBeDisabled();
+        expect(screen.getByRole("button", { name: "settings.cancel" })).toBeDisabled();
         expect(confirmButton).toHaveAttribute("data-pending", "true");
       });
     });
@@ -353,18 +329,12 @@ describe("ConfirmSend", () => {
       const user = userEvent.setup();
       setup();
 
-      const amountInput = screen.getByLabelText(
-        "wallet.amount",
-      ) as HTMLInputElement;
+      const amountInput = screen.getByLabelText("wallet.amount") as HTMLInputElement;
 
       await user.type(amountInput, "100");
-      await waitFor(() =>
-        expect(amountInput).not.toHaveAttribute("aria-invalid"),
-      );
+      await waitFor(() => expect(amountInput).not.toHaveAttribute("aria-invalid"));
 
-      expect(
-        screen.getByRole("button", { name: "settings.confirm" }),
-      ).not.toBeDisabled();
+      expect(screen.getByRole("button", { name: "settings.confirm" })).not.toBeDisabled();
     });
 
     test("amountInput correctly sends mSat", async () => {
@@ -380,14 +350,10 @@ describe("ConfirmSend", () => {
       const user = userEvent.setup();
       setup();
 
-      const amountInput = screen.getByLabelText(
-        "wallet.amount",
-      ) as HTMLInputElement;
+      const amountInput = screen.getByLabelText("wallet.amount") as HTMLInputElement;
 
       await user.type(amountInput, "10");
-      await waitFor(() =>
-        expect(amountInput).not.toHaveAttribute("aria-invalid"),
-      );
+      await waitFor(() => expect(amountInput).not.toHaveAttribute("aria-invalid"));
 
       const confirmBtn = screen.getByRole("button", {
         name: "settings.confirm",
@@ -419,9 +385,7 @@ describe("ConfirmSend", () => {
           { exact: false } /* exclude displayed date */,
         ),
       ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: "settings.confirm" }),
-      ).toBeDisabled();
+      expect(screen.getByRole("button", { name: "settings.confirm" })).toBeDisabled();
     });
 
     test("show error if amount is bigger than balance", async () => {
@@ -439,9 +403,7 @@ describe("ConfirmSend", () => {
           exact: false,
         }),
       ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: "settings.confirm" }),
-      ).toBeDisabled();
+      expect(screen.getByRole("button", { name: "settings.confirm" })).toBeDisabled();
     });
 
     test("valid form passes", async () => {
@@ -485,9 +447,7 @@ describe("ConfirmSend", () => {
           exact: false,
         }),
       ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: "settings.confirm" }),
-      ).toBeDisabled();
+      expect(screen.getByRole("button", { name: "settings.confirm" })).toBeDisabled();
     });
 
     test("valid form passes", async () => {
@@ -542,7 +502,6 @@ describe("ConfirmSend", () => {
     });
 
     test("sends correct body for onchain transaction", async () => {
-      // biome-ignore lint/suspicious/noExplicitAny: test
       let capturedBody: any;
       server.use(
         http.post("/api/lightning/send-coins", async ({ request }) => {
@@ -585,7 +544,6 @@ describe("ConfirmSend", () => {
     });
 
     test("sends correct body for spendAll onchain transaction", async () => {
-      // biome-ignore lint/suspicious/noExplicitAny: test
       let capturedBody: any;
       server.use(
         http.post("/api/lightning/send-coins", async ({ request }) => {

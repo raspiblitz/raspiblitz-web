@@ -13,8 +13,7 @@ const createModalRoot = () => {
 };
 
 export const SETTINGS_KEY = "settings";
-export const MODAL_ROOT =
-  document.getElementById("modal-root") || createModalRoot();
+export const MODAL_ROOT = document.getElementById("modal-root") || createModalRoot();
 
 export interface SavedSettings {
   lang: string;

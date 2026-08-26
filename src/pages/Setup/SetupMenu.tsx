@@ -36,9 +36,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
         <div>
           <Headline>{t("setup.setupmenu.lets_setup")}</Headline>
 
-          <p className="m-2 text-center text-secondary">
-            {t("setup.setupmenu.setup_time")}
-          </p>
+          <p className="m-2 text-center text-secondary">{t("setup.setupmenu.setup_time")}</p>
         </div>
 
         <form
@@ -46,11 +44,7 @@ export default function SetupMenu({ setupPhase, callback }: Props) {
           onSubmit={submitHandler}
         >
           <div className="mt-4">
-            <RadioGroup
-              value={selected}
-              className="gap-6"
-              onChange={setSelected as SelectFn}
-            >
+            <RadioGroup value={selected} className="gap-6" onChange={setSelected as SelectFn}>
               {setupPhase === SetupPhase.RECOVERY && (
                 <CustomRadio
                   id="recovery"

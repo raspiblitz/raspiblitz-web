@@ -79,9 +79,7 @@ export const TransactionDetails: FC<Props> = ({ details }) => {
 
       {/* Status Section */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-300">
-          {t("tx.tx_details")}
-        </h3>
+        <h3 className="text-sm font-semibold text-gray-300">{t("tx.tx_details")}</h3>
 
         {isOnchain && (
           <div className="flex justify-center rounded-lg bg-gray-800/30 py-4">
@@ -90,22 +88,15 @@ export const TransactionDetails: FC<Props> = ({ details }) => {
         )}
 
         {isOnchain && details.block_height && (
-          <KeyValueCard
-            name={t("tx.included_block")}
-            value={`${details.block_height}`}
-          />
+          <KeyValueCard name={t("tx.included_block")} value={`${details.block_height}`} />
         )}
 
-        {!isOnchain && (
-          <KeyValueCard name={t("home.status")} value={details.status} />
-        )}
+        {!isOnchain && <KeyValueCard name={t("home.status")} value={details.status} />}
       </div>
 
       {/* Details Section */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-300">
-          {t("tx.details")}
-        </h3>
+        <h3 className="text-sm font-semibold text-gray-300">{t("tx.details")}</h3>
 
         <KeyValueCard name={t("tx.date")} value={date} />
 
@@ -125,13 +116,9 @@ export const TransactionDetails: FC<Props> = ({ details }) => {
           </div>
         </div>
 
-        {details.total_fees !== null && (
-          <KeyValueCard name={t("tx.fee")} value={feeValue} />
-        )}
+        {details.total_fees !== null && <KeyValueCard name={t("tx.fee")} value={feeValue} />}
 
-        {details.comment && (
-          <KeyValueCard name={t("tx.description")} value={details.comment} />
-        )}
+        {details.comment && <KeyValueCard name={t("tx.description")} value={details.comment} />}
       </div>
     </div>
   );

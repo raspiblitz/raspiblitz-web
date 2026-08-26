@@ -1,11 +1,6 @@
 import { HttpStatusCode } from "axios";
 import type { NavigateFunction } from "react-router";
-import {
-  Screen,
-  SetupPhase,
-  type SetupState,
-  SetupStatus,
-} from "@/models/setup.model";
+import { Screen, SetupPhase, type SetupState, SetupStatus } from "@/models/setup.model";
 import { ACCESS_TOKEN } from "@/utils";
 import { instance } from "@/utils/interceptor";
 
@@ -51,9 +46,7 @@ export async function setupMonitoringLoop(
       });
     }
   } catch (error) {
-    console.error(
-      `status request failed - device is off or in reboot?: ${error}`,
-    );
+    console.error(`status request failed - device is off or in reboot?: ${error}`);
   }
 
   setTimeout(() => setupMonitoringLoop(updateState, navigate), 4000);
@@ -88,16 +81,11 @@ export async function initSetupFinal(
     const error = err as { response: { status: number } };
     if (
       error.response &&
-      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(
-        error.response.status,
-      )
+      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(error.response.status)
     ) {
       navigate("/login?back=/setup");
     } else {
-      showError(
-        `request for setup start failed: ${error.response?.status}`,
-        updateState,
-      );
+      showError(`request for setup start failed: ${error.response?.status}`, updateState);
     }
   }
 }
@@ -141,16 +129,11 @@ export async function setupFinalReboot(
     const error = err as { response: { status: number } };
     if (
       error.response &&
-      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(
-        error.response.status,
-      )
+      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(error.response.status)
     ) {
       navigate("/login?back=/setup");
     } else {
-      showError(
-        `request for final setup done failed: ${error.response?.status}`,
-        updateState,
-      );
+      showError(`request for final setup done failed: ${error.response?.status}`, updateState);
     }
   }
 }
@@ -173,10 +156,7 @@ export async function setupShutdown(updateState: UpdateState): Promise<void> {
   }
 }
 
-function getInitialPage(
-  setupPhase: SetupPhase,
-  updateState: UpdateState,
-): Screen {
+function getInitialPage(setupPhase: SetupPhase, updateState: UpdateState): Screen {
   updateState({ setupPhase });
   switch (setupPhase) {
     case SetupPhase.RECOVERY:
@@ -192,10 +172,7 @@ function getInitialPage(
   }
 }
 
-async function showSyncScreen(
-  updateState: UpdateState,
-  navigate: NavigateFunction,
-): Promise<void> {
+async function showSyncScreen(updateState: UpdateState, navigate: NavigateFunction): Promise<void> {
   try {
     const resp = await instance.post("/setup/setup-sync-info", {});
     updateState({
@@ -204,11 +181,7 @@ async function showSyncScreen(
     });
   } catch (err) {
     const error = err as { response: { status: number } };
-    if (
-      [HttpStatusCode.Unauthorized, HttpStatusCode.Forbidden].includes(
-        error.response.status,
-      )
-    ) {
+    if ([HttpStatusCode.Unauthorized, HttpStatusCode.Forbidden].includes(error.response.status)) {
       navigate("/login?back=/setup");
     } else {
       console.error(`request for sync failed: ${error.response.status}`);

@@ -1,7 +1,4 @@
-import {
-  CheckIcon,
-  ClipboardDocumentCheckIcon,
-} from "@heroicons/react/24/outline";
+import { CheckIcon, ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
 import { Tooltip } from "@heroui/react";
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,9 +30,7 @@ const TransactionId: FC<Props> = ({ id, maxDisplay = 8 }) => {
   }, [isCopied]);
 
   const truncatedId =
-    id.length > maxDisplay * 2
-      ? `${id.slice(0, maxDisplay)}...${id.slice(-maxDisplay)}`
-      : id;
+    id.length > maxDisplay * 2 ? `${id.slice(0, maxDisplay)}...${id.slice(-maxDisplay)}` : id;
 
   const displayId = expanded ? id : truncatedId;
 
@@ -49,13 +44,9 @@ const TransactionId: FC<Props> = ({ id, maxDisplay = 8 }) => {
               type="button"
               onClick={() => setExpanded(!expanded)}
               className="mt-1 w-full text-left font-mono text-sm text-gray-300 hover:text-gray-200"
-              aria-label={
-                expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")
-              }
+              aria-label={expanded ? t("tx.click_to_collapse") : t("tx.click_to_expand")}
             >
-              <span className={expanded ? "break-all" : "truncate"}>
-                {displayId}
-              </span>
+              <span className={expanded ? "break-all" : "truncate"}>{displayId}</span>
             </button>
           </Tooltip.Trigger>
           <Tooltip.Content>

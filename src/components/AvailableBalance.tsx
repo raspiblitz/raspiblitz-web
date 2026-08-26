@@ -20,8 +20,7 @@ const AvailableBalance: FC<Props> = ({ balance }) => {
     <div className="rounded-xl  px-4 py-3">
       <p className="text-xs text-secondary">{t("wallet.available_balance")}</p>
       <p className="text-lg font-bold">
-        {convertedBalance}{" "}
-        <span className="text-sm font-normal text-secondary">{unit}</span>
+        {convertedBalance} <span className="text-sm font-normal text-secondary">{unit}</span>
       </p>
     </div>
   );

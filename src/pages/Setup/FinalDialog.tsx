@@ -18,11 +18,7 @@ interface IFormInputs {
   confirm: boolean;
 }
 
-export default function FinalDialog({
-  setupPhase,
-  seedWords,
-  callback,
-}: Props) {
+export default function FinalDialog({ setupPhase, seedWords, callback }: Props) {
   const { t } = useTranslation();
 
   const {
@@ -35,10 +31,7 @@ export default function FinalDialog({
 
   return (
     <SetupContainer currentStep={null}>
-      <form
-        onSubmit={handleSubmit(callback)}
-        className="flex flex-col items-center"
-      >
+      <form onSubmit={handleSubmit(callback)} className="flex flex-col items-center">
         <section className="flex h-full flex-col items-center justify-center gap-y-10 pt-8 lg:w-3/5 lg:p-8">
           <div className="text-center">
             <CheckCircleIcon className="inline-block h-24 w-auto stroke-1 text-success" />
@@ -51,7 +44,6 @@ export default function FinalDialog({
             <ol className="flex h-104 w-full list-decimal flex-col flex-wrap gap-x-8 rounded-3xl bg-tertiary pl-20 pt-3 font-bold lowercase">
               {seedWords.split(", ").map((word, index) => {
                 return (
-                  // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
                   <li key={index} className="my-3 pl-2">
                     {word}
                   </li>
@@ -70,20 +62,14 @@ export default function FinalDialog({
                   <Checkbox.Control>
                     <Checkbox.Indicator />
                   </Checkbox.Control>
-                  <Checkbox.Content>
-                    {t("setup.final_info_reboot")}
-                  </Checkbox.Content>
+                  <Checkbox.Content>{t("setup.final_info_reboot")}</Checkbox.Content>
                 </Checkbox>
               )}
             />
           )}
 
           <article className="flex flex-col items-center justify-center pb-4">
-            <Button
-              type="submit"
-              isDisabled={!isValid && !!seedWords}
-              variant="primary"
-            >
+            <Button type="submit" isDisabled={!isValid && !!seedWords} variant="primary">
               {t("setup.final_do_reboot")}
             </Button>
           </article>

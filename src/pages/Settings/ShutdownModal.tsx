@@ -35,9 +35,7 @@ const ShutdownModal: FC = () => {
         body={
           <>
             <p className="text-sm">{t("settings.shutdown_info")}</p>
-            <p className="text-sm">
-              {t("settings.shutdown_info_disconnect_power")}
-            </p>
+            <p className="text-sm">{t("settings.shutdown_info_disconnect_power")}</p>
           </>
         }
         onConfirm={shutdownHandler}

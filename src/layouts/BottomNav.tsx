@@ -1,8 +1,4 @@
-import {
-  Cog6ToothIcon,
-  HomeIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/24/outline";
+import { Cog6ToothIcon, HomeIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";

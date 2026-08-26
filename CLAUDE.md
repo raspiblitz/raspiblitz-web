@@ -19,8 +19,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npx playwright test --ui` - Run E2E tests with UI
 
 ### Code Quality
-- `npm run lint` - Lint and format with Biome
-- `biome check src --write` - Fix linting issues automatically
+- `npm run lint` - Check source files with Oxlint and Oxfmt
+- `npm run format` - Fix lint issues and format source files with Oxlint and Oxfmt
 
 ## Architecture Overview
 
