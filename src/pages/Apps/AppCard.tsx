@@ -90,7 +90,7 @@ export const AppCard: FC<Props> = ({
                 data-tooltip-id={`login-tooltip-${id}`}
               />
             </Tooltip.Trigger>
-            <Tooltip.Content showArrow arrowBoundaryOffset={0}>
+            <Tooltip.Content showArrow>
               {appStatusInfo.https_forced === true &&
                 appStatusInfo.https_self_signed === true && (
                   <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>

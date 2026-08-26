@@ -1,69 +1,66 @@
 import type { App } from "@/models/app.model";
-import { AppId, isAppId } from "@/models/app-status";
 import Electrs from "@/pages/Apps/customApps/Electrs";
 
-export const availableApps: Record<AppId, App> = {
-  [AppId.BTC_RPC_EXPLORER]: {
-    id: AppId.BTC_RPC_EXPLORER,
+export const availableApps: { [name: string]: App } = {
+  "btc-rpc-explorer": {
+    id: "btc-rpc-explorer",
     name: "BTC RPC Explorer",
     author: "janoside",
     repository: "https://github.com/janoside/btc-rpc-explorer",
   },
-  [AppId.RTL]: {
-    id: AppId.RTL,
+  rtl: {
+    id: "rtl",
     name: "Ride the Lightning",
     author: "Shahana Farooqui",
     repository: "https://github.com/Ride-The-Lightning/RTL",
   },
-  [AppId.SPECTER]: {
-    id: AppId.SPECTER,
+  specter: {
+    id: "specter",
     name: "Specter",
     author: "Specter Solutions",
     repository: "https://github.com/cryptoadvance/specter-desktop",
   },
-  [AppId.BTCPAYSERVER]: {
-    id: AppId.BTCPAYSERVER,
+  btcpayserver: {
+    id: "btcpayserver",
     name: "BTCPay Server",
     author: "BTCPay Server",
     repository: "https://github.com/btcpayserver/btcpayserver",
   },
-  [AppId.LNBITS]: {
-    id: AppId.LNBITS,
+  lnbits: {
+    id: "lnbits",
     name: "LNbits",
     author: "arcbtc",
     repository: "https://github.com/lnbits/lnbits",
   },
-  [AppId.MEMPOOL]: {
-    id: AppId.MEMPOOL,
+  mempool: {
+    id: "mempool",
     name: "Mempool.space",
     author: "The Mempool Open Source Project",
     repository: "https://github.com/mempool/mempool",
   },
-  [AppId.THUNDERHUB]: {
-    id: AppId.THUNDERHUB,
+  thunderhub: {
+    id: "thunderhub",
     name: "Thunderhub",
     author: "apotdevin",
     repository: "https://github.com/apotdevin/thunderhub",
   },
-  [AppId.JAM]: {
-    id: AppId.JAM,
+  jam: {
+    id: "jam",
     name: "Jam",
     author: "Jam Team",
     repository: "https://github.com/joinmarket-webui/jam",
   },
-  [AppId.ELECTRS]: {
-    id: AppId.ELECTRS,
+  electrs: {
+    id: "electrs",
     name: "ElectRs",
     author: "romanz",
     repository: "https://github.com/romanz/electrs",
     customComponent: Electrs,
   },
-  [AppId.ALBYHUB]: {
-    id: AppId.ALBYHUB,
+  albyhub: {
+    id: "albyhub",
     name: "Alby Hub",
     author: "Alby",
     repository: "https://github.com/getAlby/hub",
   },
 };
-
-export { isAppId };

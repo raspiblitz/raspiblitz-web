@@ -6,13 +6,13 @@ import {
 import { Button, Link } from "@heroui/react";
 import { type FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
 import AppIcon from "@/components/AppIcon";
 import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { availableApps, isAppId } from "@/utils/availableApps";
+import { availableApps } from "@/utils/availableApps";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import ImageCarousel from "./ImageCarousel";
@@ -24,8 +24,10 @@ export const AppInfo: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus, installingApp, hardwareInfo } = useContext(SSEContext);
   const [imgs, setImgs] = useState<string[]>([]);
-  const knownAppId = isAppId(appId) ? appId : null;
-  const appInfo = knownAppId ? availableApps[knownAppId] : null;
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
+  const { name } = availableApps[appId!];
+  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
+  const { author, repository } = availableApps[appId!];
   const { installed, version } =
     appStatus.data.find((app) => app.id === appId) || {};
 
@@ -34,17 +36,16 @@ export const AppInfo: FC = () => {
 
     async function loadAppImages() {
       const promises = await Promise.allSettled([
-        import(`../../assets/apps/preview/${knownAppId}/1.png`),
-        import(`../../assets/apps/preview/${knownAppId}/2.png`),
-        import(`../../assets/apps/preview/${knownAppId}/3.png`),
+        import(`../../assets/apps/preview/${appId}/1.png`),
+        import(`../../assets/apps/preview/${appId}/2.png`),
+        import(`../../assets/apps/preview/${appId}/3.png`),
       ]);
 
       promises.forEach((promise, i) => {
         if (promise.status === "fulfilled") {
           setImgs((prev) => {
-            const next = [...prev];
-            next[i] = promise.value.default;
-            return next;
+            prev[i] = promise.value.default;
+            return prev;
           });
         } else {
           // Ignore if image not available
@@ -53,34 +54,31 @@ export const AppInfo: FC = () => {
       setIsLoading(false);
     }
 
-    if (knownAppId) loadAppImages();
-  }, [knownAppId]);
+    loadAppImages();
+  }, [appId]);
 
   const installHandler = useCallback(() => {
-    if (!knownAppId) return;
-    instance.post(`apps/install/${knownAppId}`).catch((err) => {
+    instance.post(`apps/install/${appId}`).catch((err) => {
       toast.error(checkError(err));
     });
-  }, [knownAppId]);
+  }, [appId]);
 
   const uninstallHandler = useCallback(() => {
-    if (!knownAppId) return;
     instance
-      .post("apps/uninstall", { app_id: knownAppId, keep_data: true })
+      .post("apps/uninstall", { app_id: appId, keep_data: true })
       .catch((err) => {
         toast.error(checkError(err));
       });
-  }, [knownAppId]);
-
-  if (!knownAppId || !appInfo) {
-    return <Navigate to="/apps" replace />;
-  }
+  }, [appId]);
 
   if (isLoading) {
     return <PageLoadingScreen />;
   }
 
-  const { name, author, repository } = appInfo;
+  if (!appId) {
+    navigate("/apps");
+    return null;
+  }
 
   const video =
     appId === "mempool" ? (
@@ -110,7 +108,7 @@ export const AppInfo: FC = () => {
 
       {/* Image box with title */}
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
-        <AppIcon appId={knownAppId} className="max-h-12" />
+        <AppIcon appId={appId} className="max-h-12" />
         <h1 className="px-5 text-2xl text-white">{name}</h1>
 
         {(installingApp == null || installingApp.appId !== appId) &&

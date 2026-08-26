@@ -86,7 +86,6 @@ export default function SetupScreenRenderer() {
         <WaitScreen
           status={state.waitScreenStatus}
           message={state.waitScreenMessage}
-          onRetry={callbacks.onRetry}
         />
       );
   }

@@ -51,7 +51,7 @@ export default function Header() {
           <Dropdown.Popover placement="bottom end">
             <Dropdown.Menu
               aria-label="Header Actions"
-              onAction={(key: Key) => handleDropDownAction(key)}
+              onAction={(key) => handleDropDownAction(key)}
             >
               <Dropdown.Item id="toggle_sats">
                 <span className="flex items-center gap-2">

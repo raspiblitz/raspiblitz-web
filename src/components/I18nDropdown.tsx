@@ -1,5 +1,5 @@
 import { ListBox, Select } from "@heroui/react";
-import type { FC, Key } from "react";
+import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { resources } from "@/i18n/config";
 import { saveSettings } from "@/utils";
@@ -13,7 +13,7 @@ const I18nSelect: FC = () => {
     <Select
       aria-label="Select language"
       selectedKey={i18n.language}
-      onSelectionChange={(key: Key | null) => {
+      onSelectionChange={(key) => {
         if (key && key !== i18n.language) {
           const lang = String(key);
           i18n.changeLanguage(lang);

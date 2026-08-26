@@ -31,18 +31,11 @@ export const resources = {
   vi,
 };
 
-function syncDocumentLanguage(language: string): void {
-  document.documentElement.lang = language.replace("_", "-");
-}
-
 i18n.use(initReactI18next).init({
   lng: "en",
   fallbackLng: "en",
   resources,
   returnNull: false,
 });
-
-syncDocumentLanguage(i18n.resolvedLanguage ?? i18n.language);
-i18n.on("languageChanged", syncDocumentLanguage);
 
 export default i18n;

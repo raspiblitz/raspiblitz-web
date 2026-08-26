@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 export interface App {
   id: string;
   name: string;

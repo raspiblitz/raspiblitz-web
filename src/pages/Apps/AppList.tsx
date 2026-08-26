@@ -31,7 +31,13 @@ const AppList: FC<Props> = ({ title, apps, onInstall, errors = [] }) => {
           const error =
             errorMap.get(appStatus.id) || appStatus.error || undefined;
 
-          const appInfo = availableApps[appStatus.id];
+          // Get the app info from availableApps, or create a fallback if not available
+          const appInfo = availableApps[appStatus.id] || {
+            id: appStatus.id,
+            name: appStatus.id.charAt(0).toUpperCase() + appStatus.id.slice(1), // Capitalize first letter
+            repository: "",
+            category: "other",
+          };
 
           return (
             <AppCard

@@ -48,21 +48,6 @@ export enum AppId {
   THUNDERHUB = "thunderhub",
 }
 
-export function isAppId(value: unknown): value is AppId {
-  return (
-    value === AppId.ALBYHUB ||
-    value === AppId.BTCPAYSERVER ||
-    value === AppId.BTC_RPC_EXPLORER ||
-    value === AppId.ELECTRS ||
-    value === AppId.JAM ||
-    value === AppId.LNBITS ||
-    value === AppId.MEMPOOL ||
-    value === AppId.RTL ||
-    value === AppId.SPECTER ||
-    value === AppId.THUNDERHUB
-  );
-}
-
 export enum AuthMethod {
   NONE = "none",
   USER_DEFINED = "userdefined",
