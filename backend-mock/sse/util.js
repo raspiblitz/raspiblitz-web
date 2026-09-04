@@ -1,18 +1,20 @@
 /**
- * @type {{id: number, response: Response}[]}
+ * Connected WebSocket clients.
+ * @type {import("ws").WebSocket[]}
  */
 let clients = [];
-let currClientId = 0;
 
 /**
- * @param {string} event the event to send
- * @param {any} data data of the event
- * @returns void
+ * Send an event to all connected WebSocket clients.
+ * @param {string} event
+ * @param {any} data
  */
 const sendSSE = (event, data) => {
-  clients.forEach((client) =>
-    client.response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`),
-  );
+  const frame = JSON.stringify({ event, data });
+  clients.forEach((ws) => {
+    // 1 === WebSocket.OPEN
+    if (ws.readyState === 1) ws.send(frame);
+  });
 };
 
-module.exports = { clients, currClientId, sendSSE };
+module.exports = { clients, sendSSE };

@@ -18,7 +18,7 @@ import {
   retrieveSettings,
   setWindowAlias,
 } from "@/utils";
-import { SSEContext } from "./sse-context";
+import { RealtimeContext } from "./realtime-context";
 
 export interface AppContextType {
   isLoggedIn: boolean;
@@ -53,7 +53,7 @@ export const AppContext = createContext<AppContextType>(appContextDefault);
 
 const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const { i18n } = useTranslation();
-  const { evtSource, setEvtSource } = useContext(SSEContext);
+  const { socket, setSocket } = useContext(RealtimeContext);
 
   const [unit, setUnit] = useState<Unit>(Unit.SAT);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -68,17 +68,17 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const logoutHandler = useCallback(() => {
     localStorage.removeItem(ACCESS_TOKEN);
 
-    // close EventSource on logout
-    if (evtSource) {
-      evtSource.close();
-      setEvtSource(null);
+    // close WebSocket on logout
+    if (socket) {
+      socket.close();
+      setSocket(null);
     }
     setIsLoggedIn(false);
     disableGutter();
     setWindowAlias(null);
     toast.dismiss();
     navigate("/");
-  }, [evtSource, setEvtSource, navigate]);
+  }, [socket, setSocket, navigate]);
 
   useEffect(() => {
     const settings = retrieveSettings();

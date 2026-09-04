@@ -16,9 +16,9 @@ import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { Transaction } from "@/models/transaction.model";
 import type { WalletBalance } from "@/models/wallet-balance";
 
-export interface SSEContextType {
-  evtSource: EventSource | null;
-  setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
+export interface RealtimeContextType {
+  socket: WebSocket | null;
+  setSocket: Dispatch<SetStateAction<WebSocket | null>>;
   systemInfo: SystemInfo;
   setSystemInfo: Dispatch<SetStateAction<SystemInfo>>;
   btcInfo: BtcInfo;
@@ -44,9 +44,9 @@ export interface SSEContextType {
   setInstallationStatus: Dispatch<SetStateAction<InstallationStatus>>;
 }
 
-export const sseContextDefault: SSEContextType = {
-  evtSource: null,
-  setEvtSource: () => {},
+export const realtimeContextDefault: RealtimeContextType = {
+  socket: null,
+  setSocket: () => {},
   systemInfo: {} as SystemInfo,
   setSystemInfo: () => {},
   btcInfo: {} as BtcInfo,
@@ -70,12 +70,14 @@ export const sseContextDefault: SSEContextType = {
   setInstallationStatus: () => {},
 };
 
-export const SSEContext = createContext<SSEContextType>(sseContextDefault);
+export const RealtimeContext = createContext<RealtimeContextType>(realtimeContextDefault);
 
-export const SSE_URL = "/api/sse/subscribe";
+export const WS_URL = `${
+  window.location.protocol === "https:" ? "wss" : "ws"
+}://${window.location.host}/api/ws`;
 
-const SSEContextProvider: FC<PropsWithChildren> = (props) => {
-  const [evtSource, setEvtSource] = useState<EventSource | null>(null);
+const RealtimeProvider: FC<PropsWithChildren> = (props) => {
+  const [socket, setSocket] = useState<WebSocket | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
     color: "",
@@ -148,9 +150,9 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   const [installationStatus, setInstallationStatus] =
     useState<InstallationStatus>({});
 
-  const contextValue: SSEContextType = {
-    evtSource,
-    setEvtSource,
+  const contextValue: RealtimeContextType = {
+    socket,
+    setSocket,
     systemInfo,
     setSystemInfo,
     btcInfo,
@@ -175,10 +177,10 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   };
 
   return (
-    <SSEContext.Provider value={contextValue}>
+    <RealtimeContext.Provider value={contextValue}>
       {props.children}
-    </SSEContext.Provider>
+    </RealtimeContext.Provider>
   );
 };
 
-export default SSEContextProvider;
+export default RealtimeProvider;

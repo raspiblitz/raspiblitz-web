@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
 import AppIcon from "@/components/AppIcon";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { availableApps } from "@/utils/availableApps";
 import { checkError } from "@/utils/checkError";
@@ -22,7 +22,7 @@ export const AppInfo: FC = () => {
   const { appId } = useParams();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus, installingApp, hardwareInfo } = useContext(SSEContext);
+  const { appStatus, installingApp, hardwareInfo } = useContext(RealtimeContext);
   const [imgs, setImgs] = useState<string[]>([]);
   // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
   const { name } = availableApps[appId!];

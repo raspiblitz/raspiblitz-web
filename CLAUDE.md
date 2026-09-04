@@ -25,17 +25,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture Overview
 
 ### Real-time Data Architecture
-This application heavily relies on **Server-Sent Events (SSE)** for real-time updates. The `SSEContext` (`src/context/sse-context.tsx`) manages all real-time data including Bitcoin blockchain info, Lightning network status, wallet balances, and system information. When debugging data issues, check the SSE connection first.
+This application relies on a **WebSocket** channel for real-time updates. The `RealtimeContext` (`src/context/realtime-context.tsx`) holds all real-time data (Bitcoin blockchain info, Lightning status, wallet balances, system/hardware info); the `useRealtime` hook (`src/hooks/use-realtime.tsx`) owns the single `WebSocket` to `/api/ws`. On open it sends a `{type:"auth", token}` frame (JWT from `localStorage`), then dispatches incoming `{event, data}` frames by event name into the context. It reconnects with exponential backoff, and logs out on a `4401` close. When debugging data issues, check the WebSocket connection first.
 
 ### State Management Pattern
 Uses React Context API with a specific provider hierarchy:
 ```
-SSEContextProvider (real-time data)
+RealtimeProvider (real-time data over WebSocket)
   └── AppContextProvider (auth + global state)
       └── HeroUIProvider (UI components)
 ```
 
-The `AppContext` manages authentication state and global preferences, while `SSEContext` handles all real-time Bitcoin/Lightning data.
+The `AppContext` manages authentication state and global preferences, while `RealtimeContext` handles all real-time Bitcoin/Lightning data.
 
 ### Backend Communication
 - **Development**: Frontend proxies `/api` requests to mock backend at `http://localhost:8000`
@@ -45,17 +45,17 @@ The `AppContext` manages authentication state and global preferences, while `SSE
 ### Key Application Flow
 1. **Setup Check**: App checks if device needs initial setup via `/setup/status`
 2. **Authentication**: JWT login with automatic token refresh
-3. **Real-time Connection**: SSE connection established after login
+3. **Real-time Connection**: WebSocket connection established + authenticated after login
 4. **Route Protection**: All main routes require authentication via `RequireAuth` component
 
 ### Component Organization
 - **Pages**: Main route components in `src/pages/` (Home, Apps, Settings, Setup)
 - **Layouts**: Reusable layout components with navigation
 - **Components**: Shared UI components, many using [HeroUI](https://www.heroui.com/docs/guide/introduction) library and icons from the [HeroIcons](https://heroicons.com/) and the [BitcoinIcons](https://bitcoinicons.com/) library
-- **Hooks**: Custom hooks for SSE (`useSSE`), modals (`useModalManager`), and utilities
+- **Hooks**: Custom hooks for realtime data (`useRealtime`), modals (`useModalManager`), and utilities
 
 ### Development Workflow
-When working with real-time features, run `npm run dev:local` to have both frontend and mock backend. The mock backend provides realistic data streams via SSE. For backend changes, edit files in `backend-mock/` - the server restarts automatically.
+When working with real-time features, run `npm run dev:local` to have both frontend and mock backend. The mock backend streams realistic data over the same WebSocket protocol. For backend changes, edit files in `backend-mock/` - the server restarts automatically.
 
 ### Testing Strategy
 - **Unit Tests**: Located alongside components in `__tests__/` folders

@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import { AppContext, Unit } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import {
   convertMSatToBtc,
   convertSatToBtc,
@@ -36,7 +36,7 @@ export const WalletCard: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
-  const { balance } = useContext(SSEContext);
+  const { balance } = useContext(RealtimeContext);
 
   const {
     onchain_total_balance: onchainBalance,
