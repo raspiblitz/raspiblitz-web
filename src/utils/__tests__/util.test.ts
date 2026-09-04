@@ -2,11 +2,12 @@ import { retrieveSettings, SETTINGS_KEY, saveSettings } from "@/utils";
 
 describe("util", () => {
   beforeEach(() => {
-    vi.spyOn(window.localStorage.__proto__, "setItem");
-    window.localStorage.__proto__.setItem = vi.fn();
+    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => undefined);
+    vi.spyOn(Storage.prototype, "getItem").mockReturnValue(null);
+  });
 
-    vi.spyOn(window.localStorage.__proto__, "getItem");
-    window.localStorage.__proto__.getItem = vi.fn(() => null);
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   test("saveSettings should save settings", () => {
@@ -19,7 +20,7 @@ describe("util", () => {
   });
 
   test("saveSettings should save metge with existing settings", () => {
-    window.localStorage.__proto__.getItem = vi.fn(() =>
+    vi.mocked(localStorage.getItem).mockReturnValue(
       JSON.stringify({ lang: "en" }),
     );
 
@@ -32,7 +33,7 @@ describe("util", () => {
   });
 
   test("retrieveSettings should retrieve settings if available", () => {
-    window.localStorage.__proto__.getItem = vi.fn(() =>
+    vi.mocked(localStorage.getItem).mockReturnValue(
       JSON.stringify({ lang: "en" }),
     );
 
