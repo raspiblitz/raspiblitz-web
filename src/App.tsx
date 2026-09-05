@@ -25,7 +25,7 @@ const App: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [firstCall, setFirstCall] = useState(true);
   const [needsSetup, setNeedsSetup] = useState(false);
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn, logout } = useContext(AppContext);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -59,35 +59,57 @@ const App: FC = () => {
       return;
     }
 
-    function refresh(triggerTime: number) {
-      setTimeout(() => doRefresh(), triggerTime);
+    let timer: ReturnType<typeof setTimeout>;
+    const controller = new AbortController();
+
+    function schedule(token: unknown) {
+      const payload = parseJwt(token);
+      const delay = payload ? REFRESH_TIME(payload.exp) : null;
+      if (delay === null) {
+        logout();
+        return false;
+      }
+      timer = setTimeout(() => void doRefresh(), delay);
+      return true;
     }
 
-    function doRefresh() {
-      if (!localStorage.getItem(ACCESS_TOKEN)) {
+    async function doRefresh() {
+      const previousToken = localStorage.getItem(ACCESS_TOKEN);
+      if (!previousToken || controller.signal.aborted) return;
+      const payload = parseJwt(previousToken);
+      if (!payload || payload.exp * 1000 <= Date.now()) {
+        logout();
         return;
       }
-      instance
-        .post("system/refresh-token", {})
-        .then((resp) => {
-          const token = resp.data;
-          if (token) {
-            localStorage.setItem(ACCESS_TOKEN, token);
-            const payload = parseJwt(token);
-            refresh(REFRESH_TIME(payload.exp));
-          }
-        })
-        .catch((e) => {
-          console.error("Error: token refresh failed with: ", e);
-        });
+      try {
+        const resp = await instance.post<unknown>(
+          "system/refresh-token",
+          {},
+          {
+            signal: controller.signal,
+          },
+        );
+        if (controller.signal.aborted || localStorage.getItem(ACCESS_TOKEN) !== previousToken)
+          return;
+        const token = resp.data;
+        if (typeof token !== "string") {
+          logout();
+        } else if (schedule(token)) {
+          localStorage.setItem(ACCESS_TOKEN, token);
+        }
+      } catch {
+        if (!controller.signal.aborted && localStorage.getItem(ACCESS_TOKEN) === previousToken) {
+          logout();
+        }
+      }
     }
 
-    const token = localStorage.getItem(ACCESS_TOKEN);
-    if (token) {
-      const payload = parseJwt(token);
-      refresh(REFRESH_TIME(payload.exp));
-    }
-  }, [isLoggedIn]);
+    schedule(localStorage.getItem(ACCESS_TOKEN));
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [isLoggedIn, logout]);
 
   if (isLoading) {
     return <LoadingScreen />;
