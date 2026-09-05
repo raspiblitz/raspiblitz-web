@@ -35,9 +35,7 @@ describe("checkError", () => {
         },
       },
     });
-    expect(errorMsg).toEqual(
-      "An error occurred: ensure this value has at least 8 characters",
-    );
+    expect(errorMsg).toEqual("An error occurred: ensure this value has at least 8 characters");
   });
 
   it("should display the message with detail as an array", () => {

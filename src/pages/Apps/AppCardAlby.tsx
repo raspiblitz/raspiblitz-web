@@ -1,7 +1,4 @@
-import {
-  ArrowTopRightOnSquareIcon,
-  LinkIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowTopRightOnSquareIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { Button, Link } from "@heroui/react";
 import { buttonVariants } from "@heroui/styles";
 import type { FC } from "react";
@@ -21,11 +18,7 @@ export const AppCardAlby: FC = () => {
   const addAlbyAccountHandler = async () => {
     const resp = await instance.get("/system/connection-info");
 
-    if (
-      resp.status !== 200 ||
-      !resp.data.lnd_admin_macaroon ||
-      !resp.data.lnd_rest_onion
-    ) {
+    if (resp.status !== 200 || !resp.data.lnd_admin_macaroon || !resp.data.lnd_rest_onion) {
       toast.error(t(`appInfo.${id}.action.connection_info_error`));
       return;
     }

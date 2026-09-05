@@ -58,7 +58,6 @@ export enum Screen {
 
 export interface SetupState {
   page: Screen;
-  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   syncData: any | null;
   // RaspiBlitz also reports script-specific progress states such as hdd-format.
   waitScreenStatus: string;

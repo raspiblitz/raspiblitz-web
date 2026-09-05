@@ -1,10 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import {
-  createContext,
-  type Dispatch,
-  type SetStateAction,
-  useState,
-} from "react";
+import { createContext, type Dispatch, type SetStateAction, useState } from "react";
 import type { App } from "@/models/app.model";
 import type { AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
@@ -34,7 +29,6 @@ export interface SSEContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  // biome-ignore lint/suspicious/noExplicitAny: legacy type definition
   installingApp: any | null;
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
@@ -140,13 +134,10 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   const [installingApp] = useState<any | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
-  const [systemStartupInfo, setSystemStartupInfo] =
-    useState<SystemStartupInfo | null>(null);
-  const [installationStatus, setInstallationStatus] =
-    useState<InstallationStatus>({});
+  const [systemStartupInfo, setSystemStartupInfo] = useState<SystemStartupInfo | null>(null);
+  const [installationStatus, setInstallationStatus] = useState<InstallationStatus>({});
 
   const contextValue: SSEContextType = {
     evtSource,
@@ -174,11 +165,7 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
     setInstallationStatus,
   };
 
-  return (
-    <SSEContext.Provider value={contextValue}>
-      {props.children}
-    </SSEContext.Provider>
-  );
+  return <SSEContext.Provider value={contextValue}>{props.children}</SSEContext.Provider>;
 };
 
 export default SSEContextProvider;

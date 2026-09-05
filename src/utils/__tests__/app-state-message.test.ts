@@ -44,11 +44,7 @@ describe("parseAppStateUpdateMessage", () => {
             null,
             { ...validStatus, installed: "yes" },
           ],
-          errors: [
-            knownError,
-            { id: "future-app", error: "unavailable" },
-            null,
-          ],
+          errors: [knownError, { id: "future-app", error: "unavailable" }, null],
           timestamp: 123,
         },
       }),
@@ -102,15 +98,12 @@ describe("parseAppStateUpdateMessage", () => {
     ).toEqual({ data: [], errors: [], timestamp: 0 });
   });
 
-  it.each(["initiated", "finished"])(
-    "preserves the %s lifecycle event",
-    (state) => {
-      expect(parseAppStateUpdateMessage(JSON.stringify({ state }))).toEqual({
-        state,
-        message: null,
-      });
-    },
-  );
+  it.each(["initiated", "finished"])("preserves the %s lifecycle event", (state) => {
+    expect(parseAppStateUpdateMessage(JSON.stringify({ state }))).toEqual({
+      state,
+      message: null,
+    });
+  });
 });
 
 // blitz_api/app/apps/models.py and app/apps/impl/raspiblitz.py: shell values
@@ -146,8 +139,7 @@ describe("blitz-api app status contract", () => {
     };
     const message = { data: [status], errors: [], timestamp: 1788609600 };
     expect(
-      parseAppStateUpdateMessage(JSON.stringify({ state: "success", message }))
-        ?.message,
+      parseAppStateUpdateMessage(JSON.stringify({ state: "success", message }))?.message,
     ).toEqual(message);
   });
 
@@ -175,8 +167,7 @@ describe("blitz-api app status contract", () => {
       timestamp: 1788609600,
     };
     expect(
-      parseAppStateUpdateMessage(JSON.stringify({ state: "success", message }))
-        ?.message,
+      parseAppStateUpdateMessage(JSON.stringify({ state: "success", message }))?.message,
     ).toEqual(message);
   });
 });

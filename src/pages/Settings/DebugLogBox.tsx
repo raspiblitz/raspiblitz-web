@@ -31,7 +31,6 @@ const DebugLogBox: FC = () => {
       tmpLink.click();
       toast.dismiss(loadingToast);
       toast.info(t("settings.debug_report_done"));
-      // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
     } catch (e: any) {
       toast.error(checkError(e));
     } finally {
@@ -46,14 +45,8 @@ const DebugLogBox: FC = () => {
           <h4 className="flex w-1/2 items-center font-bold xl:w-2/3">
             {t("settings.generate_debug")}
           </h4>
-          <Button
-            isPending={isGeneratingReport}
-            onPress={onClickHandler}
-            variant="primary"
-          >
-            {isGeneratingReport
-              ? t("settings.generating")
-              : t("settings.generate")}
+          <Button isPending={isGeneratingReport} onPress={onClickHandler} variant="primary">
+            {isGeneratingReport ? t("settings.generating") : t("settings.generate")}
           </Button>
         </div>
       </article>

@@ -42,7 +42,7 @@ This project supports [devenv.sh](https://devenv.sh/), a developer environment t
 
 - Consistent development environment across all contributors
 - Automatically installs the correct version of Node.js and other dependencies
-- Includes development tools like TypeScript, ESLint, and Nix utilities
+- Includes development tools like TypeScript, Oxlint, Oxfmt, and Nix utilities
 - Works on any platform that supports Nix (Linux, macOS, WSL)
 
 ### Dev workflow

@@ -37,8 +37,7 @@ const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
 
   // Determine action text based on mode
   const firstMessage = messages.length > 0 ? messages[0] : null;
-  const actionText =
-    firstMessage?.mode === "on" ? t("apps.installing") : t("apps.uninstalling");
+  const actionText = firstMessage?.mode === "on" ? t("apps.installing") : t("apps.uninstalling");
 
   // Format app ID for display
   const displayAppId = getDisplayAppId(appId);
@@ -69,9 +68,7 @@ const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
             </div>
           ))
         ) : (
-          <div className="text-sm text-gray-500 italic">
-            {t("apps.no_messages")}
-          </div>
+          <div className="text-sm text-gray-500 italic">{t("apps.no_messages")}</div>
         )}
       </div>
 
@@ -84,12 +81,7 @@ const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
         </Button>
       )}
 
-      {isModalOpen && (
-        <InstallationLogModal
-          appId={appId}
-          onClose={() => setModalOpen(false)}
-        />
-      )}
+      {isModalOpen && <InstallationLogModal appId={appId} onClose={() => setModalOpen(false)} />}
     </div>
   );
 };
@@ -103,9 +95,7 @@ function getDisplayAppId(id: string): string {
       // e.g., BTC_RPC_EXPLORER -> BTC RPC Explorer
       return key
         .split("_")
-        .map(
-          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-        )
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
         .join(" ");
     }
   }

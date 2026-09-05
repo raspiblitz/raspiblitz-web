@@ -1,11 +1,4 @@
-import {
-  Checkbox,
-  FieldError,
-  Input,
-  InputGroup,
-  Label,
-  TextField,
-} from "@heroui/react";
+import { Checkbox, FieldError, Input, InputGroup, Label, TextField } from "@heroui/react";
 import { type FC, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { Controller, useForm } from "react-hook-form";
@@ -92,11 +85,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
                   name={field.name}
                 >
                   <Label>{t("wallet.address")}</Label>
-                  <Input
-                    type="text"
-                    placeholder="bc1..."
-                    className="bg-tertiary"
-                  />
+                  <Input type="text" placeholder="bc1..." className="bg-tertiary" />
                   <FieldError>{fieldState.error?.message}</FieldError>
                 </TextField>
               )}
@@ -116,8 +105,7 @@ const SendOnChain: FC<Props> = ({ balance, onConfirm, confirmData }) => {
                   },
                   validate: {
                     greaterThanZero: (val) =>
-                      stringToNumber(`${val}`) > 0 ||
-                      t("forms.validation.chainAmount.required"),
+                      stringToNumber(`${val}`) > 0 || t("forms.validation.chainAmount.required"),
                   },
                 }}
                 render={({ field, fieldState }) => (

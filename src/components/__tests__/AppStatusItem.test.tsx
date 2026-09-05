@@ -33,9 +33,7 @@ describe("AppStatusItem", () => {
     render(<AppStatusItem app={testApp} />);
 
     const appCard = screen.getAllByRole("link");
-    expect(appCard[0].getAttribute("href")).toEqual(
-      "https://hiddenservice.onion",
-    );
+    expect(appCard[0].getAttribute("href")).toEqual("https://hiddenservice.onion");
 
     // Restore original window.location
     Object.defineProperty(window, "location", {

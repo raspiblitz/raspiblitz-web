@@ -29,9 +29,7 @@ export default function QRCodeModal({ identityUri, closeModal }: Props) {
           {identityUri}
         </p>
         <Tooltip id="copy-tooltip">
-          <div>
-            {clippedNodeId ? t("wallet.copied") : t("wallet.copy_clipboard")}
-          </div>
+          <div>{clippedNodeId ? t("wallet.copied") : t("wallet.copy_clipboard")}</div>
         </Tooltip>
       </div>
     </ModalDialog>,

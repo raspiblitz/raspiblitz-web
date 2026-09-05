@@ -3,23 +3,14 @@ import {
   LightningIcon,
   ShareIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import {
-  ArrowDownTrayIcon,
-  BoltIcon,
-  LinkIcon,
-  ListBulletIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowDownTrayIcon, BoltIcon, LinkIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
 import { Headline } from "@/components/Headline";
 import { AppContext, Unit } from "@/context/app-context";
 import { SSEContext } from "@/context/sse-context";
-import {
-  convertMSatToBtc,
-  convertSatToBtc,
-  convertToString,
-} from "@/utils/format";
+import { convertMSatToBtc, convertSatToBtc, convertToString } from "@/utils/format";
 
 type Props = {
   onReceive: () => void;
@@ -28,12 +19,7 @@ type Props = {
   onCloseChannel: () => void;
 };
 
-export const WalletCard: FC<Props> = ({
-  onReceive,
-  onSend,
-  onOpenChannel,
-  onCloseChannel,
-}) => {
+export const WalletCard: FC<Props> = ({ onReceive, onSend, onOpenChannel, onCloseChannel }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
   const { balance } = useContext(SSEContext);
@@ -51,20 +37,16 @@ export const WalletCard: FC<Props> = ({
   let unconfirmedSign = "";
 
   if (onchainBalance !== null && lnBalance !== null) {
-    convertedOnchainBalance =
-      unit === Unit.BTC ? convertSatToBtc(onchainBalance) : onchainBalance;
+    convertedOnchainBalance = unit === Unit.BTC ? convertSatToBtc(onchainBalance) : onchainBalance;
 
     if (onChainUnconfirmed) {
       convertedOnchainBalanceUnconfirmed =
-        unit === Unit.BTC
-          ? convertSatToBtc(onChainUnconfirmed)
-          : onChainUnconfirmed;
+        unit === Unit.BTC ? convertSatToBtc(onChainUnconfirmed) : onChainUnconfirmed;
       unconfirmedSign = onChainUnconfirmed > 0 ? "+" : "";
     }
 
     if (lnBalance !== null) {
-      convertedLnBalance =
-        unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
+      convertedLnBalance = unit === Unit.BTC ? convertMSatToBtc(lnBalance) : lnBalance / 1000;
     }
 
     if (convertedOnchainBalance !== null && convertedLnBalance !== null) {
@@ -91,9 +73,7 @@ export const WalletCard: FC<Props> = ({
             <article className="flex w-full flex-col">
               <Headline as="h5" align="left">
                 <LinkIcon className="mr-1 inline h-5 w-5 rotate-45 transform align-bottom" />
-                <span className="inline align-bottom text-sm">
-                  {t("wallet.on_chain")}
-                </span>
+                <span className="inline align-bottom text-sm">{t("wallet.on_chain")}</span>
               </Headline>
               <p className="break-before-auto break-words text-lg font-bold">
                 <span>
@@ -112,9 +92,7 @@ export const WalletCard: FC<Props> = ({
             <article className="flex w-full flex-col">
               <Headline as="h5" align="left">
                 <BoltIcon className="mr-1 inline h-5 w-5 align-bottom" />
-                <span className="inline align-bottom text-sm">
-                  {t("home.lightning")}
-                </span>
+                <span className="inline align-bottom text-sm">{t("home.lightning")}</span>
               </Headline>
               <p className="text-lg font-bold">
                 {convertToString(unit, convertedLnBalance)} {unit}
@@ -124,41 +102,25 @@ export const WalletCard: FC<Props> = ({
           </div>
         </section>
         <section className="grid grid-cols-2 justify-around gap-4 p-2">
-          <Button
-            onPress={onReceive}
-            className="grow border-gray-600"
-            variant="outline"
-          >
+          <Button onPress={onReceive} className="grow border-gray-600" variant="outline">
             <span className="flex items-center gap-2">
               <ArrowDownTrayIcon className="h-6 w-6" />
               {t("wallet.receive")}
             </span>
           </Button>
-          <Button
-            onPress={onSend}
-            className="grow border-gray-600"
-            variant="outline"
-          >
+          <Button onPress={onSend} className="grow border-gray-600" variant="outline">
             <span className="flex items-center gap-2">
               <ShareIcon className="h-6 w-6" />
               {t("wallet.send")}
             </span>
           </Button>
-          <Button
-            onPress={onOpenChannel}
-            className="grow border-gray-600"
-            variant="outline"
-          >
+          <Button onPress={onOpenChannel} className="grow border-gray-600" variant="outline">
             <span className="flex items-center gap-2">
               <LightningIcon className="inline h-6 w-6" />
               {t("home.open_channel")}
             </span>
           </Button>
-          <Button
-            onPress={onCloseChannel}
-            className="grow border-gray-600"
-            variant="outline"
-          >
+          <Button onPress={onCloseChannel} className="grow border-gray-600" variant="outline">
             <span className="flex items-center gap-2">
               <ListBulletIcon className="inline h-6 w-6" />
               {t("home.list_open_channels")}

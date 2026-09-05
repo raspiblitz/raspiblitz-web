@@ -5,10 +5,7 @@ const server = setupServer(
   // Catch-all for unhandled requests
   http.get("*", ({ request }) => {
     console.error(`Add request handler for ${request.url.toString()}`);
-    return HttpResponse.json(
-      { error: "Missing request handler." },
-      { status: 500 },
-    );
+    return HttpResponse.json({ error: "Missing request handler." }, { status: 500 });
   }),
 );
 

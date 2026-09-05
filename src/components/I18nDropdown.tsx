@@ -28,11 +28,7 @@ const I18nSelect: FC = () => {
       <Select.Popover>
         <ListBox>
           {langs.map((lang) => (
-            <ListBox.Item
-              key={lang}
-              id={lang}
-              textValue={t(`language.${lang}`)}
-            >
+            <ListBox.Item key={lang} id={lang} textValue={t(`language.${lang}`)}>
               {t(`language.${lang}`)}
             </ListBox.Item>
           ))}

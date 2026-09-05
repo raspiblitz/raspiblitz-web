@@ -19,14 +19,8 @@ export default function Stepper({ currentStep }: Props) {
     >
       <ul className="relative z-10 hidden items-center justify-between lg:flex">
         {Array.from({ length: NUMBER_OF_STEPS }).map((_, index: number) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
           <li className="list-none bg-accent-900 px-4" key={index}>
-            <span
-              className={cn(
-                "flex flex-col text-center",
-                index >= currentStep && "opacity-30",
-              )}
-            >
+            <span className={cn("flex flex-col text-center", index >= currentStep && "opacity-30")}>
               <span className="whitespace-nowrap font-bold">
                 {t("setup.step.step")} {index + 1}
               </span>

@@ -52,12 +52,7 @@ export const useSetup = () => {
   return context;
 };
 
-export default function SetupProvider({
-  children,
-  state,
-  updateState,
-  navigate,
-}: Props) {
+export default function SetupProvider({ children, state, updateState, navigate }: Props) {
   const retryInFlight = useRef(false);
   const callbacks = {
     onRecoveryDialog: useCallback(

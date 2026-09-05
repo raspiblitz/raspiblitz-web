@@ -29,19 +29,11 @@ function isAppStatus(value: unknown): value is AppStatus {
 }
 
 function isAppQueryError(value: unknown): value is AppQueryError {
-  return (
-    isRecord(value) && isAppId(value.id) && typeof value.error === "string"
-  );
+  return isRecord(value) && isAppId(value.id) && typeof value.error === "string";
 }
 
-function parseAppStatusQueryResponse(
-  value: unknown,
-): AppStatusQueryResponse | null {
-  if (
-    !isRecord(value) ||
-    !Array.isArray(value.data) ||
-    !Array.isArray(value.errors)
-  ) {
+function parseAppStatusQueryResponse(value: unknown): AppStatusQueryResponse | null {
+  if (!isRecord(value) || !Array.isArray(value.data) || !Array.isArray(value.errors)) {
     return null;
   }
 
@@ -58,9 +50,7 @@ function parseAppStatusQueryResponse(
   };
 }
 
-export function parseAppStateUpdateMessage(
-  rawMessage: string,
-): AppStateUpdateMessage | null {
+export function parseAppStateUpdateMessage(rawMessage: string): AppStateUpdateMessage | null {
   let value: unknown;
 
   try {

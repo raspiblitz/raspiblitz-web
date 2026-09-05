@@ -111,7 +111,6 @@ const Home: FC = () => {
       if (tx.status === HttpStatusCode.Ok && walletLocked) {
         setWalletLocked(false);
       }
-      // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
     } catch (err: any) {
       if (err.response.status === HttpStatusCode.Locked) {
         setWalletLocked(true);
@@ -167,34 +166,26 @@ const Home: FC = () => {
         <UnlockModal disclosure={{ ...disclosure, close: closeModalHandler }} />
       )}
       {activeModal === "LIST_CHANNEL" && (
-        <ListChannelModal
-          disclosure={{ ...disclosure, close: closeModalHandler }}
-        />
+        <ListChannelModal disclosure={{ ...disclosure, close: closeModalHandler }} />
       )}
       {activeModal === "OPEN_CHANNEL" && (
         <OpenChannelModal
-          // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
           balance={balance.channel_local_balance!}
           disclosure={{ ...disclosure, close: closeModalHandler }}
         />
       )}
       {activeModal === "SEND" && (
         <SendModal
-          // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
           onchainBalance={balance.onchain_confirmed_balance!}
-          // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
           lnBalance={balance.channel_local_balance!}
           disclosure={{ ...disclosure, close: closeModalHandler }}
         />
       )}
       {activeModal === "RECEIVE" && (
-        <ReceiveModal
-          disclosure={{ ...disclosure, close: closeModalHandler }}
-        />
+        <ReceiveModal disclosure={{ ...disclosure, close: closeModalHandler }} />
       )}
       {activeModal === "DETAIL" && (
         <TransactionDetailModal
-          // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
           transaction={detailTx!}
           disclosure={{ ...disclosure, close: closeModalHandler }}
         />
@@ -247,9 +238,7 @@ const Home: FC = () => {
           </div>
         </article>
 
-        <article
-          className={`${height} col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2`}
-        >
+        <article className={`${height} col-span-2 row-span-2 w-full md:col-span-1 xl:col-span-2`}>
           <BitcoinCard />
         </article>
 

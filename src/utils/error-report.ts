@@ -29,18 +29,9 @@ export function createErrorReport(
   errorInfo: ErrorInfo | undefined,
   environment: ErrorReportEnvironment = currentEnvironment(),
 ): string {
-  const errorStack = sanitize(
-    error?.stack ?? "Not available",
-    environment.origin,
-  );
-  const componentStack = sanitize(
-    errorInfo?.componentStack ?? "Not available",
-    environment.origin,
-  );
-  const errorMessage = sanitize(
-    error?.message ?? "Unknown error",
-    environment.origin,
-  );
+  const errorStack = sanitize(error?.stack ?? "Not available", environment.origin);
+  const componentStack = sanitize(errorInfo?.componentStack ?? "Not available", environment.origin);
+  const errorMessage = sanitize(error?.message ?? "Unknown error", environment.origin);
 
   return [
     "RaspiBlitz Web error report",

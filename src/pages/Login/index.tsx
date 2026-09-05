@@ -1,11 +1,4 @@
-import {
-  Button,
-  FieldError,
-  Input,
-  Label,
-  Spinner,
-  TextField,
-} from "@heroui/react";
+import { Button, FieldError, Input, Label, Spinner, TextField } from "@heroui/react";
 import type { AxiosError } from "axios";
 import { type FC, useContext, useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
@@ -32,8 +25,7 @@ const Login: FC = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const from =
-    (location.state as { from?: Location })?.from?.pathname || "/home";
+  const from = (location.state as { from?: Location })?.from?.pathname || "/home";
   const queryParams = new URLSearchParams(window.location.search);
   const back = queryParams.get("back");
 
@@ -55,9 +47,7 @@ const Login: FC = () => {
     }
   }, [navigate, from, isLoggedIn, back]);
 
-  const loginHandler: SubmitHandler<IFormInputs> = async (data: {
-    passwordInput: string;
-  }) => {
+  const loginHandler: SubmitHandler<IFormInputs> = async (data: { passwordInput: string }) => {
     setError("");
     setIsLoading(true);
 

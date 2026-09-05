@@ -45,9 +45,7 @@ const Electrs = () => {
   const { t } = useTranslation();
   const { appStatus } = useContext(SSEContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(
-    null,
-  );
+  const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(null);
   const [QRAddressLocal, setQRAddressLocal] = useState<string | null>(null);
   const [QRAddressTor, setQRAddressTor] = useState<string | null>(null);
 
@@ -105,9 +103,7 @@ const Electrs = () => {
             <span>{t("appInfo.electrs.initialSync")}</span>
           ) : (
             <>
-              <span className="mb-4">
-                {t("appInfo.electrs.connectionInfo")}
-              </span>
+              <span className="mb-4">{t("appInfo.electrs.connectionInfo")}</span>
               <Tabs aria-label="Connection Options" className="justify-center">
                 <Tabs.List>
                   <Tabs.Tab id="local">Local Connection</Tabs.Tab>
@@ -125,9 +121,7 @@ const Electrs = () => {
                       <CopySnippet text={`${localIP}:${portSSL}:s`} />
                     </div>
                   ) : (
-                    <span className="mt-4 text-center">
-                      {t("appInfo.electrs.not_available")}
-                    </span>
+                    <span className="mt-4 text-center">{t("appInfo.electrs.not_available")}</span>
                   )}
                 </Tabs.Panel>
                 <Tabs.Panel id="tor">
@@ -142,9 +136,7 @@ const Electrs = () => {
                       <CopySnippet text={`${TORaddress}:${portSSL}:s`} />
                     </div>
                   ) : (
-                    <span className="mt-4 text-center">
-                      {t("appInfo.electrs.not_available")}
-                    </span>
+                    <span className="mt-4 text-center">{t("appInfo.electrs.not_available")}</span>
                   )}
                 </Tabs.Panel>
               </Tabs>

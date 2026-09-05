@@ -20,7 +20,6 @@ export type Props = {
   appInfo: App;
   appStatusInfo: AppStatus;
   installed: boolean;
-  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   installingApp: any | null;
   onInstall: (id: string) => void;
   error?: string;
@@ -49,9 +48,7 @@ export const AppCard: FC<Props> = ({
     onInstall(id);
   };
 
-  const setAuthMethodText = (
-    authMethod?: AuthMethod | string | null,
-  ): string => {
+  const setAuthMethodText = (authMethod?: AuthMethod | string | null): string => {
     switch (authMethod) {
       case AuthMethod.NONE:
         return t("apps.login_no_pass");
@@ -91,10 +88,9 @@ export const AppCard: FC<Props> = ({
               />
             </Tooltip.Trigger>
             <Tooltip.Content showArrow arrowBoundaryOffset={0}>
-              {appStatusInfo.https_forced === true &&
-                appStatusInfo.https_self_signed === true && (
-                  <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
-                )}
+              {appStatusInfo.https_forced === true && appStatusInfo.https_self_signed === true && (
+                <h2 className="pb-5">{t("apps.selfsigned_cert")}</h2>
+              )}
               <h2>{setAuthMethodText(appStatusInfo.auth_method)}</h2>
             </Tooltip.Content>
           </Tooltip>
@@ -126,11 +122,7 @@ export const AppCard: FC<Props> = ({
 
       {/* Error Modal */}
       {hasError && (
-        <ConfirmModal
-          disclosure={errorModal}
-          headline={t("apps.error_details")}
-          custom
-        >
+        <ConfirmModal disclosure={errorModal} headline={t("apps.error_details")} custom>
           <ConfirmModal.Header>{t("apps.error_details")}</ConfirmModal.Header>
           <ConfirmModal.Body>
             <div className="max-h-[60vh] overflow-y-auto p-2 bg-gray-900 rounded-md font-mono text-sm">
@@ -183,10 +175,7 @@ export const AppCard: FC<Props> = ({
         )}
 
         {installed && appInfo.customComponent && (
-          <Button
-            onPress={() => navigate(`/apps/${appInfo.id}`)}
-            variant="primary"
-          >
+          <Button onPress={() => navigate(`/apps/${appInfo.id}`)} variant="primary">
             <span className="flex items-center gap-2">
               <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
               {t("apps.open")}
@@ -206,14 +195,11 @@ export const AppCard: FC<Props> = ({
 
         {/* Only show Install button when there's no error */}
         {!hasError &&
-          (installingApp === null ||
-            installingApp.id !== id ||
-            installingApp.result === "fail") &&
+          (installingApp === null || installingApp.id !== id || installingApp.result === "fail") &&
           !installed && (
             <Button
               isDisabled={
-                isInstallWaiting ||
-                (installingApp !== null && installingApp?.result !== "fail")
+                isInstallWaiting || (installingApp !== null && installingApp?.result !== "fail")
               }
               onPress={() => installButtonPressed(id)}
               variant="primary"
@@ -225,13 +211,11 @@ export const AppCard: FC<Props> = ({
             </Button>
           )}
 
-        {installingApp &&
-          installingApp.id === id &&
-          installingApp.result === "running" && (
-            <Button isDisabled isPending>
-              {t("apps.installing")}
-            </Button>
-          )}
+        {installingApp && installingApp.id === id && installingApp.result === "running" && (
+          <Button isDisabled isPending>
+            {t("apps.installing")}
+          </Button>
+        )}
 
         <Button onPress={() => navigate(`/apps/${appInfo.id}/info`)}>
           <span className="flex items-center gap-2">

@@ -1,8 +1,4 @@
-import {
-  ArrowDownIcon,
-  InformationCircleIcon,
-  LockClosedIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowDownIcon, InformationCircleIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import { Button, ListBox, Spinner } from "@heroui/react";
 import { type FC, type Key, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -58,10 +54,7 @@ const TransactionCard: FC<Props> = ({
   let currentPageTxs = transactions;
 
   if (transactions.length > MAX_ITEMS) {
-    currentPageTxs = transactions.slice(
-      page * MAX_ITEMS,
-      page * MAX_ITEMS + MAX_ITEMS,
-    );
+    currentPageTxs = transactions.slice(page * MAX_ITEMS, page * MAX_ITEMS + MAX_ITEMS);
   }
 
   return (
@@ -115,17 +108,12 @@ const TransactionCard: FC<Props> = ({
                           status={transaction.status}
                           confirmations={transaction.num_confs ?? undefined}
                         />
-                        <span
-                          className={`text-lg font-semibold ${formatted.color}`}
-                        >
+                        <span className={`text-lg font-semibold ${formatted.color}`}>
                           {formatted.sign}
                           {formatted.formattedAmount} {unit}
                         </span>
                       </div>
-                      <time
-                        className="text-sm text-default-500"
-                        dateTime={formatted.isoString}
-                      >
+                      <time className="text-sm text-default-500" dateTime={formatted.isoString}>
                         {formatted.formattedDate}
                       </time>
                     </div>

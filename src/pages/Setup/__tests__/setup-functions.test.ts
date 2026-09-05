@@ -6,10 +6,7 @@ import {
   type SetupState,
   SetupStatus,
 } from "@/models/setup.model";
-import {
-  initSetupStart,
-  setupMonitoringLoop,
-} from "@/pages/Setup/setup-functions";
+import { initSetupStart, setupMonitoringLoop } from "@/pages/Setup/setup-functions";
 import { instance } from "@/utils/interceptor";
 
 describe("initSetupStart", () => {
@@ -42,8 +39,7 @@ describe("initSetupStart", () => {
         expect.objectContaining({
           page: Screen.WAIT,
           waitScreenStatus: SetupStatus.ERROR,
-          waitScreenMessage:
-            "Migration data is incomplete. Retry after checking the source disk.",
+          waitScreenMessage: "Migration data is incomplete. Retry after checking the source disk.",
         }),
       );
       expect(updateState).toHaveBeenCalledTimes(1);
@@ -147,20 +143,17 @@ describe("RaspiBlitz setup status contract", () => {
     expect(vi.getTimerCount()).toBe(0);
   });
 
-  it.each([null, 1, [], {}, undefined])(
-    "rejects a non-string status %s",
-    async (state) => {
-      vi.useFakeTimers();
-      vi.spyOn(instance, "get").mockResolvedValue({ data: { state } });
-      const updateState = vi.fn();
-      await setupMonitoringLoop(updateState, vi.fn());
-      expect(updateState).toHaveBeenCalledWith(
-        expect.objectContaining({
-          page: Screen.WAIT,
-          waitScreenStatus: SetupStatus.ERROR,
-        }),
-      );
-      expect(vi.getTimerCount()).toBe(0);
-    },
-  );
+  it.each([null, 1, [], {}, undefined])("rejects a non-string status %s", async (state) => {
+    vi.useFakeTimers();
+    vi.spyOn(instance, "get").mockResolvedValue({ data: { state } });
+    const updateState = vi.fn();
+    await setupMonitoringLoop(updateState, vi.fn());
+    expect(updateState).toHaveBeenCalledWith(
+      expect.objectContaining({
+        page: Screen.WAIT,
+        waitScreenStatus: SetupStatus.ERROR,
+      }),
+    );
+    expect(vi.getTimerCount()).toBe(0);
+  });
 });

@@ -67,10 +67,8 @@ describe("SendModal", () => {
           if (url.searchParams.get("pay_req")) {
             return HttpResponse.json(
               {
-                destination:
-                  "0323dbd695d801553837f9907100f304abd153932bb000a3a7ea9132ff3e7437a1",
-                payment_hash:
-                  "dc171b0d9a6c33d40ba2d9ed95819b29af40d83132b15072ab4e8b60feb08b90",
+                destination: "0323dbd695d801553837f9907100f304abd153932bb000a3a7ea9132ff3e7437a1",
+                payment_hash: "dc171b0d9a6c33d40ba2d9ed95819b29af40d83132b15072ab4e8b60feb08b90",
                 num_satoshis: 20,
                 timestamp: 1893456000000,
                 expiry: 36000,
@@ -79,8 +77,7 @@ describe("SendModal", () => {
                 fallback_addr: "",
                 cltv_expiry: 40,
                 route_hints: [],
-                payment_addr:
-                  "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
+                payment_addr: "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
                 num_msat: 20000,
                 features: [],
               },

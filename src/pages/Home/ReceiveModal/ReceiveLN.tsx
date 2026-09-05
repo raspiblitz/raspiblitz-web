@@ -46,8 +46,7 @@ const ReceiveLN: FC<Props> = ({ isLoading, error, onSubmitHandler }) => {
                 required: t("forms.validation.chainAmount.required"),
                 validate: {
                   greaterThanZero: (val) =>
-                    stringToNumber(`${val}`) > 0 ||
-                    t("forms.validation.chainAmount.required"),
+                    stringToNumber(`${val}`) > 0 || t("forms.validation.chainAmount.required"),
                 },
               }}
               render={({ field, fieldState }) => (

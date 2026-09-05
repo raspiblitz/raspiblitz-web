@@ -6,11 +6,7 @@ import { instance } from "@/utils/interceptor";
 
 function wrapper({ children }: PropsWithChildren) {
   return (
-    <SetupProvider
-      state={initialState}
-      updateState={() => {}}
-      navigate={() => {}}
-    >
+    <SetupProvider state={initialState} updateState={() => {}} navigate={() => {}}>
       {children}
     </SetupProvider>
   );
@@ -52,10 +48,7 @@ describe("setup retry", () => {
       .mockResolvedValue({ data: { state: "error" } });
     const { result } = renderHook(useSetup, { wrapper });
     await act(async () => {
-      await Promise.all([
-        result.current.callbacks.onRetry(),
-        result.current.callbacks.onRetry(),
-      ]);
+      await Promise.all([result.current.callbacks.onRetry(), result.current.callbacks.onRetry()]);
     });
     expect(request).toHaveBeenCalledTimes(1);
     await act(() => vi.advanceTimersByTimeAsync(4000));

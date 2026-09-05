@@ -8,14 +8,8 @@ function BrokenChild(): never {
   throw failure;
 }
 
-const clipboardDescriptor = Object.getOwnPropertyDescriptor(
-  navigator,
-  "clipboard",
-);
-const commandDescriptor = Object.getOwnPropertyDescriptor(
-  document,
-  "execCommand",
-);
+const clipboardDescriptor = Object.getOwnPropertyDescriptor(navigator, "clipboard");
+const commandDescriptor = Object.getOwnPropertyDescriptor(document, "execCommand");
 
 describe("ErrorBoundary diagnostics", () => {
   beforeEach(() => {
@@ -24,11 +18,9 @@ describe("ErrorBoundary diagnostics", () => {
 
   afterEach(() => {
     vi.restoreAllMocks();
-    if (clipboardDescriptor)
-      Object.defineProperty(navigator, "clipboard", clipboardDescriptor);
+    if (clipboardDescriptor) Object.defineProperty(navigator, "clipboard", clipboardDescriptor);
     else Reflect.deleteProperty(navigator, "clipboard");
-    if (commandDescriptor)
-      Object.defineProperty(document, "execCommand", commandDescriptor);
+    if (commandDescriptor) Object.defineProperty(document, "execCommand", commandDescriptor);
     else Reflect.deleteProperty(document, "execCommand");
   });
 
@@ -46,9 +38,7 @@ describe("ErrorBoundary diagnostics", () => {
     );
     const report = document.querySelector("pre")?.textContent;
     expect(report).toContain("Test render failure");
-    fireEvent.click(
-      screen.getByRole("button", { name: "Copy diagnostic report" }),
-    );
+    fireEvent.click(screen.getByRole("button", { name: "Copy diagnostic report" }));
     await screen.findByRole("button", { name: "Copied" });
     expect(writeText).toHaveBeenCalledWith(report);
     expect(createReport).toHaveBeenCalledTimes(1);
@@ -75,14 +65,10 @@ describe("ErrorBoundary diagnostics", () => {
           <BrokenChild />
         </ErrorBoundary>,
       );
-      fireEvent.click(
-        screen.getByRole("button", { name: "Copy diagnostic report" }),
-      );
+      fireEvent.click(screen.getByRole("button", { name: "Copy diagnostic report" }));
       await waitFor(() => expect(copy).toHaveBeenCalledWith("copy"));
       expect(document.querySelector("textarea")).toBeNull();
-      expect(
-        screen.queryByRole("button", { name: "Copied" }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: "Copied" })).not.toBeInTheDocument();
     },
   );
 });

@@ -1,10 +1,4 @@
-import {
-  FieldError,
-  Input,
-  Label,
-  TextField,
-  useOverlayState,
-} from "@heroui/react";
+import { FieldError, Input, Label, TextField, useOverlayState } from "@heroui/react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
@@ -49,10 +43,7 @@ export default function InputNodeName({ callback }: Props) {
         <section className="flex h-full flex-col items-center justify-center p-8">
           <Headline>{t("setup.input_node.header")}</Headline>
 
-          <form
-            onSubmit={handleSubmit(continueHandler)}
-            className="mt-2 w-full"
-          >
+          <form onSubmit={handleSubmit(continueHandler)} className="mt-2 w-full">
             <fieldset className="w-full">
               <Controller
                 name="inputNodeName"
@@ -82,11 +73,7 @@ export default function InputNodeName({ callback }: Props) {
                     name={field.name}
                   >
                     <Label>{t("setup.input_node.label")}</Label>
-                    <Input
-                      type="text"
-                      placeholder="e.g. MyRaspiBlitz"
-                      className="bg-tertiary"
-                    />
+                    <Input type="text" placeholder="e.g. MyRaspiBlitz" className="bg-tertiary" />
                     <FieldError>{fieldState.error?.message}</FieldError>
                   </TextField>
                 )}
@@ -97,11 +84,7 @@ export default function InputNodeName({ callback }: Props) {
               <Button type="submit" isDisabled={!isValid} variant="primary">
                 {t("setup.continue")}
               </Button>
-              <Button
-                type="button"
-                variant="danger"
-                onPress={() => confirmModal.open()}
-              >
+              <Button type="button" variant="danger" onPress={() => confirmModal.open()}>
                 {t("setup.cancel")}
               </Button>
             </article>

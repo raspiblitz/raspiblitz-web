@@ -11,9 +11,7 @@ export const AppInfo: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus } = useContext(SSEContext);
   const knownAppId = isAppId(appId) ? appId : null;
-  const customComponent = knownAppId
-    ? availableApps[knownAppId].customComponent
-    : undefined;
+  const customComponent = knownAppId ? availableApps[knownAppId].customComponent : undefined;
 
   const app = appStatus.data.find((item) => item.id === knownAppId);
 

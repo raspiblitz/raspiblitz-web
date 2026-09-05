@@ -21,9 +21,7 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
     report: "",
   };
 
-  public static getDerivedStateFromError(
-    _error: Error,
-  ): Pick<State, "hasError"> {
+  public static getDerivedStateFromError(_error: Error): Pick<State, "hasError"> {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }

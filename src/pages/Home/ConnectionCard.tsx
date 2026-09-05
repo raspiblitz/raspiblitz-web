@@ -49,9 +49,7 @@ export const ConnectionCard: FC = () => {
 
   return (
     <>
-      {showModal && (
-        <QRCodeModal closeModal={closeModalHandler} identityUri={nodeId} />
-      )}
+      {showModal && <QRCodeModal closeModal={closeModalHandler} identityUri={nodeId} />}
 
       <div className="bd-card w-full transition-colors lg:mr-2 lg:w-1/2">
         <div className="flex items-center text-lg font-bold">
@@ -76,9 +74,7 @@ export const ConnectionCard: FC = () => {
         </div>
 
         <article className="flex flex-col overflow-hidden py-4">
-          <h6 className="text-sm text-gray-200">
-            {`${t("home.webui")} (${t("home.tor")})`}
-          </h6>
+          <h6 className="text-sm text-gray-200">{`${t("home.webui")} (${t("home.tor")})`}</h6>
           {torAddress && (
             <div className="flex">
               <a
@@ -100,9 +96,7 @@ export const ConnectionCard: FC = () => {
                 data-tooltip-id="tor-tooltip"
               />
               <Tooltip id="tor-tooltip">
-                <div>
-                  {clippedTor ? t("wallet.copied") : t("wallet.copy_clipboard")}
-                </div>
+                <div>{clippedTor ? t("wallet.copied") : t("wallet.copy_clipboard")}</div>
               </Tooltip>
             </div>
           )}
@@ -111,9 +105,7 @@ export const ConnectionCard: FC = () => {
         </article>
 
         <article className="flex flex-col overflow-hidden py-4">
-          <h6 className="text-sm text-gray-200">
-            {`${t("home.webui")} (${t("home.ssh")})`}
-          </h6>
+          <h6 className="text-sm text-gray-200">{`${t("home.webui")} (${t("home.ssh")})`}</h6>
           <div className="flex">
             <a
               className={`${
@@ -134,9 +126,7 @@ export const ConnectionCard: FC = () => {
               data-tooltip-id="ssh-tooltip"
             />
             <Tooltip id="ssh-tooltip">
-              <div>
-                {clippedSsh ? t("wallet.copied") : t("wallet.copy_clipboard")}
-              </div>
+              <div>{clippedSsh ? t("wallet.copied") : t("wallet.copy_clipboard")}</div>
             </Tooltip>
           </div>
         </article>
@@ -172,11 +162,7 @@ export const ConnectionCard: FC = () => {
                 data-tooltip-id="node-tooltip"
               />
               <Tooltip id="node-tooltip">
-                <div>
-                  {clippedNodeId
-                    ? t("wallet.copied")
-                    : t("wallet.copy_clipboard")}
-                </div>
+                <div>{clippedNodeId ? t("wallet.copied") : t("wallet.copy_clipboard")}</div>
               </Tooltip>
             </div>
           </article>

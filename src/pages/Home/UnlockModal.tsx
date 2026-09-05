@@ -6,10 +6,7 @@ import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
 import { Button } from "@/components/Button";
 import CapsLockWarning from "@/components/CapsLockWarning";
-import {
-  ConfirmModal,
-  type Props as ConfirmModalProps,
-} from "@/components/ConfirmModal";
+import { ConfirmModal, type Props as ConfirmModalProps } from "@/components/ConfirmModal";
 import { AppContext } from "@/context/app-context";
 import useCapsLock from "@/hooks/use-caps-lock";
 import { instance } from "@/utils/interceptor";
@@ -18,9 +15,7 @@ interface IFormInputs {
   passwordInput: string;
 }
 
-export default function UnlockModal({
-  disclosure,
-}: Pick<ConfirmModalProps, "disclosure">) {
+export default function UnlockModal({ disclosure }: Pick<ConfirmModalProps, "disclosure">) {
   const { t } = useTranslation();
   const { setWalletLocked } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,9 +28,7 @@ export default function UnlockModal({
     formState: { isValid },
   } = useForm<IFormInputs>({ mode: "onChange" });
 
-  const unlockHandler: SubmitHandler<IFormInputs> = (data: {
-    passwordInput: string;
-  }) => {
+  const unlockHandler: SubmitHandler<IFormInputs> = (data: { passwordInput: string }) => {
     setIsLoading(true);
     setIsServerError(false);
     instance
@@ -47,18 +40,14 @@ export default function UnlockModal({
           disclosure.close();
         }
       })
-      .catch((_) => {
+      .catch(() => {
         setIsLoading(false);
         setIsServerError(true);
       });
   };
 
   return (
-    <ConfirmModal
-      headline={t("wallet.unlock_title")}
-      disclosure={disclosure}
-      custom
-    >
+    <ConfirmModal headline={t("wallet.unlock_title")} disclosure={disclosure} custom>
       <form onSubmit={handleSubmit(unlockHandler)}>
         <ConfirmModal.Body>
           <p>{t("wallet.unlock_subtitle")}</p>
@@ -96,9 +85,7 @@ export default function UnlockModal({
             />
           </fieldset>
 
-          {isServerError && (
-            <Alert color="danger">{t("login.invalid_pass")}</Alert>
-          )}
+          {isServerError && <Alert color="danger">{t("login.invalid_pass")}</Alert>}
         </ConfirmModal.Body>
 
         <ConfirmModal.Footer>

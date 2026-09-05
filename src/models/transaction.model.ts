@@ -14,10 +14,6 @@ export interface Transaction {
 
 export type TransactionCategory = "ln" | "onchain";
 
-export type TransactionStatus =
-  | "succeeded"
-  | "failed"
-  | "in_flight"
-  | "unknown";
+export type TransactionStatus = "succeeded" | "failed" | "in_flight" | "unknown";
 
 export type TransactionType = "send" | "receive" | "unknown";

@@ -7,12 +7,7 @@ import {
   Confirmations5Icon,
   Confirmations6Icon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import {
-  BoltIcon,
-  ClockIcon,
-  EllipsisHorizontalIcon,
-  LinkIcon,
-} from "@heroicons/react/24/outline";
+import { BoltIcon, ClockIcon, EllipsisHorizontalIcon, LinkIcon } from "@heroicons/react/24/outline";
 import type { FC } from "react";
 import type {
   TransactionCategory,
@@ -38,9 +33,7 @@ const CategoryIcon: FC<Props> = ({ category, type, status, confirmations }) => {
           <EllipsisHorizontalIcon className="h-7 w-7 rounded-full bg-gray-500 p-1 text-white" />
         );
       case "failed":
-        return (
-          <ClockIcon className="h-7 w-7 rounded-full bg-gray-500 p-1 text-white" />
-        );
+        return <ClockIcon className="h-7 w-7 rounded-full bg-gray-500 p-1 text-white" />;
       case "succeeded":
         return <BoltIcon className={`h-7 w-7 rounded-full p-1 ${color}`} />;
     }
@@ -49,52 +42,34 @@ const CategoryIcon: FC<Props> = ({ category, type, status, confirmations }) => {
   switch (confirmations) {
     case 0:
       return (
-        <Confirmations0Icon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
+        <Confirmations0Icon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />
       );
     case 1:
       return (
-        <Confirmations1Icon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
+        <Confirmations1Icon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />
       );
     case 2:
       return (
-        <Confirmations2Icon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
+        <Confirmations2Icon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />
       );
     case 3:
       return (
-        <Confirmations3Icon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
+        <Confirmations3Icon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />
       );
     case 4:
       return (
-        <Confirmations4Icon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
+        <Confirmations4Icon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />
       );
     case 5:
       return (
-        <Confirmations5Icon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
+        <Confirmations5Icon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />
       );
     case 6:
       return (
-        <Confirmations6Icon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
+        <Confirmations6Icon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />
       );
     default:
-      return (
-        <LinkIcon
-          className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`}
-        />
-      );
+      return <LinkIcon className={`h-7 w-7 rotate-45 transform rounded-full p-1 ${color}`} />;
   }
 };
 

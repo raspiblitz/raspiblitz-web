@@ -93,10 +93,7 @@ function useSSE() {
           if (prev.length === 0) {
             return apps;
           }
-          return prev.map(
-            (old: App) =>
-              apps.find((newApp: App) => old.id === newApp.id) || old,
-          );
+          return prev.map((old: App) => apps.find((newApp: App) => old.id === newApp.id) || old);
         });
       } catch (error) {
         console.error("Error processing apps data:", error);
@@ -369,9 +366,7 @@ function useSSE() {
           if (prev.data.length === 0) return message;
 
           const currentIds = new Set(message.data.map((item) => item.id));
-          const existingData = prev.data.filter(
-            (item) => !currentIds.has(item.id),
-          );
+          const existingData = prev.data.filter((item) => !currentIds.has(item.id));
 
           return {
             data: [...existingData, ...message.data],
@@ -399,10 +394,7 @@ function useSSE() {
     es.addEventListener("install", setInstall);
     es.addEventListener("hardware_info", setHardwareInfo);
     es.addEventListener("system_startup_info", setSystemStartupInfo);
-    es.addEventListener(
-      "app_state_update_message",
-      handleAppStateUpdateMessage,
-    );
+    es.addEventListener("app_state_update_message", handleAppStateUpdateMessage);
 
     return () => {
       // cleanup
@@ -417,10 +409,7 @@ function useSSE() {
       es.removeEventListener("install", setInstall);
       es.removeEventListener("hardware_info", setHardwareInfo);
       es.removeEventListener("system_startup_info", setSystemStartupInfo);
-      es.removeEventListener(
-        "app_state_update_message",
-        handleAppStateUpdateMessage,
-      );
+      es.removeEventListener("app_state_update_message", handleAppStateUpdateMessage);
     };
   }, [
     t,
