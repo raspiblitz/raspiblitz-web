@@ -4,6 +4,7 @@ import type { App } from "@/models/app.model";
 import type { AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
+import type { InstallAppData } from "@/models/install-app";
 import type { InstallationStatus } from "@/models/installation-status";
 import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
@@ -29,7 +30,7 @@ export interface RealtimeContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  installingApp: any | null;
+  installingApp: InstallAppData | null;
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
   systemStartupInfo: SystemStartupInfo | null;
@@ -49,16 +50,16 @@ export const realtimeContextDefault: RealtimeContextType = {
   lnInfo: {} as LnInfo,
   setLnInfo: () => {},
   setBalance: () => {},
-  appStatus: { data: [], errors: [], timestamp: 0 } as AppStatusQueryResponse,
+  appStatus: { data: [], errors: [], timestamp: 0 },
   setAppStatus: () => {},
   availableApps: [],
   setAvailableApps: () => {},
   transactions: [],
   setTransactions: () => {},
   installingApp: null,
-  hardwareInfo: {} as HardwareInfo,
+  hardwareInfo: null,
   setHardwareInfo: () => {},
-  systemStartupInfo: {} as SystemStartupInfo,
+  systemStartupInfo: null,
   setSystemStartupInfo: () => {},
   installationStatus: {},
   setInstallationStatus: () => {},
@@ -136,7 +137,7 @@ const RealtimeProvider: FC<PropsWithChildren> = (props) => {
   });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [installingApp] = useState<any | null>(null);
+  const [installingApp] = useState<InstallAppData | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] = useState<SystemStartupInfo | null>(null);
   const [installationStatus, setInstallationStatus] = useState<InstallationStatus>({});

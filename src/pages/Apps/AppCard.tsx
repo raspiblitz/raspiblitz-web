@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import AppIcon from "@/components/AppIcon";
 import { ConfirmModal } from "@/components/ConfirmModal";
+import type { InstallAppData } from "@/models/install-app";
 import type { App } from "@/models/app.model";
 import { type AppStatus, AuthMethod } from "@/models/app-status";
 import { getHrefFromApp } from "@/utils";
@@ -20,7 +21,7 @@ export type Props = {
   appInfo: App;
   appStatusInfo: AppStatus;
   installed: boolean;
-  installingApp: any | null;
+  installingApp: InstallAppData | null;
   onInstall: (id: string) => void;
   error?: string;
 };

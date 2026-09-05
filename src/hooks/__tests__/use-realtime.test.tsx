@@ -1,9 +1,11 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { StrictMode, useContext } from "react";
+import { toast } from "react-toastify";
 import { I18nextProvider } from "react-i18next";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import AppContextProvider, { AppContext, appContextDefault } from "@/context/app-context";
-import RealtimeProvider from "@/context/realtime-context";
+import RealtimeProvider, { realtimeContextDefault } from "@/context/realtime-context";
+import type { Transaction } from "@/models/transaction.model";
 import useRealtime from "@/hooks/use-realtime";
 import i18n from "@/i18n/test_config";
 import { render as renderWithProviders } from "@/utils/test-utils";
@@ -25,9 +27,22 @@ class MockWebSocket {
 }
 
 function Probe() {
-  const { btcInfo, systemStartupInfo } = useRealtime();
+  const {
+    btcInfo,
+    systemStartupInfo,
+    transactions,
+    hardwareInfo,
+    appStatus,
+    availableApps,
+    installationStatus,
+  } = useRealtime();
   return (
     <>
+      <div data-testid="transactions">{JSON.stringify(transactions)}</div>
+      <div data-testid="hardware">{JSON.stringify(hardwareInfo)}</div>
+      <div data-testid="apps">{JSON.stringify(availableApps)}</div>
+      <div data-testid="app-status">{JSON.stringify(appStatus)}</div>
+      <div data-testid="installation">{JSON.stringify(installationStatus)}</div>
       <div data-testid="startup">{JSON.stringify(systemStartupInfo)}</div>
       <div data-testid="blocks">{btcInfo.blocks}</div>
       <div data-testid="btc-error">{String((btcInfo as { error?: unknown }).error ?? "")}</div>
@@ -43,18 +58,20 @@ describe("useRealtime (WebSocket)", () => {
     MockWebSocket.instances = [];
     logout.mockClear();
     vi.stubGlobal("WebSocket", MockWebSocket);
+    vi.spyOn(Math, "random").mockReturnValue(0);
   });
 
   afterEach(() => {
     localStorage.clear();
     vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
-  const renderProbe = () =>
+  const renderProbe = (translations = i18n) =>
     render(
       <RealtimeProvider>
         <AppContext.Provider value={{ ...appContextDefault, logout }}>
-          <I18nextProvider i18n={i18n}>
+          <I18nextProvider i18n={translations}>
             <Probe />
           </I18nextProvider>
         </AppContext.Provider>
@@ -149,7 +166,7 @@ describe("useRealtime (WebSocket)", () => {
       });
 
       act(() => {
-        vi.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(500);
       });
 
       expect(MockWebSocket.instances.length).toBe(2);
@@ -231,10 +248,10 @@ describe("useRealtime (WebSocket)", () => {
       renderProbe();
       act(() => MockWebSocket.instances[0].onclose?.({ code: 1006 }));
       localStorage.setItem("access_token", "refreshed-token");
-      act(() => vi.advanceTimersByTime(1000));
+      act(() => vi.advanceTimersByTime(500));
       const retry = MockWebSocket.instances[1];
       act(() => retry.onclose?.({ code: 1006 }));
-      act(() => vi.advanceTimersByTime(1999));
+      act(() => vi.advanceTimersByTime(999));
       expect(MockWebSocket.instances).toHaveLength(2);
       act(() => vi.advanceTimersByTime(1));
       const connected = MockWebSocket.instances[2];
@@ -264,7 +281,7 @@ describe("useRealtime (WebSocket)", () => {
     vi.useFakeTimers();
     try {
       renderProbe();
-      for (const delay of [1000, 2000, 4000, 8000, 16000, 30000, 30000]) {
+      for (const delay of [500, 1000, 2000, 4000, 8000, 15000, 15000]) {
         const count = MockWebSocket.instances.length;
         act(() => MockWebSocket.instances[count - 1].onclose?.({ code: 1006 }));
         act(() => vi.advanceTimersByTime(delay - 1));
@@ -276,7 +293,7 @@ describe("useRealtime (WebSocket)", () => {
       act(() => connected.onopen?.());
       const count = MockWebSocket.instances.length;
       act(() => connected.onclose?.({ code: 1006 }));
-      act(() => vi.advanceTimersByTime(999));
+      act(() => vi.advanceTimersByTime(499));
       expect(MockWebSocket.instances).toHaveLength(count);
       act(() => vi.advanceTimersByTime(1));
       expect(MockWebSocket.instances).toHaveLength(count + 1);
@@ -361,5 +378,196 @@ describe("useRealtime (WebSocket)", () => {
       vi.useRealTimers();
       window.history.replaceState({}, "", "/");
     }
+  });
+
+  it("rejects array and malformed transaction payloads, preserving valid transactions", () => {
+    renderProbe();
+    const ws = MockWebSocket.instances[0];
+    const transaction = {
+      index: 1,
+      id: "tx-1",
+      category: "onchain",
+      type: "receive",
+      amount: 1000,
+      time_stamp: 1700000000,
+      comment: "",
+      status: "succeeded",
+      block_height: 100,
+      num_confs: 1,
+      total_fees: null,
+    } satisfies Transaction;
+    const send = (data: unknown) =>
+      act(() =>
+        ws.onmessage?.({
+          data: JSON.stringify({ event: "transactions", data }),
+        }),
+      );
+    send(transaction);
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    for (const invalid of [
+      [],
+      [transaction],
+      null,
+      "bad",
+      {},
+      { ...transaction, amount: "1000" },
+    ]) {
+      send(invalid);
+    }
+    const next = { ...transaction, id: "tx-2", category: "ln", block_height: null };
+    send(next);
+    expect(screen.getByTestId("transactions")).toHaveTextContent(
+      JSON.stringify([next, transaction]),
+    );
+    expect(error).toHaveBeenCalledTimes(6);
+  });
+
+  it("uses the new language for notifications without reconnecting", async () => {
+    const translations = i18n.cloneInstance({
+      lng: "en",
+      fallbackLng: "en",
+      defaultNS: "translation",
+      forkResourceStore: true,
+    });
+    translations.addResourceBundle("en", "translation", {
+      apps: { install_success: "Installed {{appName}}" },
+    });
+    translations.addResourceBundle("de", "translation", {
+      apps: {
+        install_success: "Installiert: {{appName}}",
+        uninstall_failure: "Fehler: {{appName}} / {{details}}",
+      },
+    });
+    const success = vi.spyOn(toast, "success").mockImplementation(() => "toast");
+    const error = vi.spyOn(toast, "error").mockImplementation(() => "toast");
+    renderProbe(translations);
+    const ws = MockWebSocket.instances[0];
+    const send = (data: unknown) =>
+      act(() => ws.onmessage?.({ data: JSON.stringify({ event: "install", data }) }));
+    send({ id: "lnbits", mode: "on", result: "win" });
+    expect(success).toHaveBeenLastCalledWith("Installed LNbits", { theme: "dark" });
+    await act(async () => {
+      await translations.changeLanguage("de");
+    });
+    expect(MockWebSocket.instances).toHaveLength(1);
+    expect(ws.close).not.toHaveBeenCalled();
+    send({ id: "lnbits", mode: "on", result: "win" });
+    expect(success).toHaveBeenLastCalledWith("Installiert: LNbits", { theme: "dark" });
+    send({ id: "lnbits", mode: "off", result: "fail", details: "busy" });
+    expect(error).toHaveBeenLastCalledWith("Fehler: LNbits / busy");
+  });
+
+  it.each([0, 0.5, 0.999])(
+    "jitters each exponential retry and respects the cap (random=%s)",
+    (random) => {
+      vi.mocked(Math.random).mockReturnValue(random);
+      vi.useFakeTimers();
+      try {
+        renderProbe();
+        for (const interval of [1000, 2000, 4000, 8000, 16000, 30000, 30000]) {
+          const count = MockWebSocket.instances.length;
+          act(() => MockWebSocket.instances[count - 1].onclose?.({ code: 1006 }));
+          const delay = Math.floor(interval / 2 + (random * interval) / 2);
+          act(() => vi.advanceTimersByTime(delay - 1));
+          expect(MockWebSocket.instances).toHaveLength(count);
+          act(() => vi.advanceTimersByTime(1));
+          expect(MockWebSocket.instances).toHaveLength(count + 1);
+          expect(delay).toBeGreaterThanOrEqual(interval / 2);
+          expect(delay).toBeLessThanOrEqual(30000);
+        }
+      } finally {
+        vi.useRealTimers();
+      }
+    },
+  );
+
+  it("closes only the socket that emitted an error", () => {
+    vi.useFakeTimers();
+    try {
+      renderProbe();
+      const first = MockWebSocket.instances[0];
+      act(() => first.onerror?.());
+      expect(first.close).toHaveBeenCalledOnce();
+      act(() => first.onclose?.({ code: 1006 }));
+      act(() => vi.advanceTimersByTime(500));
+      const second = MockWebSocket.instances[1];
+      // A late callback from the old socket must not close the current connection.
+      act(() => first.onerror?.());
+      expect(second.close).not.toHaveBeenCalled();
+      act(() => second.onerror?.());
+      expect(second.close).toHaveBeenCalledOnce();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("keeps hardware state null until valid data arrives, then preserves it on malformed updates", () => {
+    expect(realtimeContextDefault.hardwareInfo).toBeNull();
+    expect(realtimeContextDefault.systemStartupInfo).toBeNull();
+    renderProbe();
+    expect(screen.getByTestId("hardware")).toHaveTextContent("null");
+    const ws = MockWebSocket.instances[0];
+    const send = (data: unknown) =>
+      act(() => ws.onmessage?.({ data: JSON.stringify({ event: "hardware_info", data }) }));
+    send({ vram_total_bytes: 4000 });
+    expect(screen.getByTestId("hardware")).toHaveTextContent("null");
+    const hardware = {
+      cpu_overall_percent: 1,
+      cpu_per_cpu_percent: [1],
+      vram_total_bytes: 4000,
+      vram_available_bytes: 3000,
+      vram_used_bytes: 1000,
+      vram_usage_percent: 25,
+      temperatures_celsius: { system_temp: 50, coretemp: [] },
+      boot_time_timestamp: 1700000000,
+      disks: [],
+      networks: {
+        internet_online: "1",
+        tor_web_addr: "",
+        internet_localip: "127.0.0.1",
+        internet_localiprange: "127.0.0.1/24",
+      },
+    };
+    send(hardware);
+    send({ disks: "invalid" });
+    send({ vram_usage_percent: 30 });
+    expect(screen.getByTestId("hardware")).toHaveTextContent(
+      JSON.stringify({ ...hardware, vram_usage_percent: 30 }),
+    );
+  });
+
+  it("dispatches parsed app status and installation messages, ignoring unknown app IDs", () => {
+    renderProbe();
+    const ws = MockWebSocket.instances[0];
+    const send = (event: string, data: unknown) =>
+      act(() => ws.onmessage?.({ data: JSON.stringify({ event, data }) }));
+    const app = {
+      id: "lnbits",
+      name: "LNbits",
+      author: "LNbits",
+      repository: "https://github.com/lnbits/lnbits",
+    };
+    send("apps", [app, null, { ...app, id: "future-app" }]);
+    expect(screen.getByTestId("apps")).toHaveTextContent(JSON.stringify([app]));
+    const status = { id: "lnbits", installed: true, configured: true, status: "online" };
+    send("app_state_update_message", {
+      state: "success",
+      message: { data: [status], errors: [], timestamp: 123 },
+    });
+    expect(screen.getByTestId("app-status")).toHaveTextContent(
+      JSON.stringify({ data: [status], errors: [], timestamp: 123 }),
+    );
+    send("app_manage_message", {
+      id: "lnbits",
+      mode: "on",
+      state: "running",
+      error_id: "none",
+      message: "Installing",
+    });
+    expect(screen.getByTestId("installation")).toHaveTextContent('"currentState":"running"');
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    send("app_manage_message", { id: "future-app", state: "running" });
+    expect(screen.getByTestId("installation")).not.toHaveTextContent("future-app");
+    expect(error).toHaveBeenCalledOnce();
   });
 });

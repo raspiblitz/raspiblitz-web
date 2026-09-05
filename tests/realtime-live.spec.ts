@@ -50,6 +50,7 @@ test.describe('live Blitz API', () => {
       timeout: 30000,
     }).toBe(true);
     await expect(page.getByRole('heading', { name: 'Bitcoin', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'RAM Usage', exact: true })).toBeVisible();
 
     const beforeReload = connections.length;
     await page.reload();
@@ -59,6 +60,7 @@ test.describe('live Blitz API', () => {
       timeout: 30000,
     }).toBe(true);
     await expect(page.getByRole('heading', { name: 'Bitcoin', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'RAM Usage', exact: true })).toBeVisible();
     expect(await page.evaluate(() => localStorage.getItem('access_token') !== null)).toBe(true);
     expect(loginRequests).toBe(1);
 
@@ -73,6 +75,7 @@ test.describe('live Blitz API', () => {
       timeout: 30000,
     }).toBe(true);
     await expect(page.getByRole('heading', { name: 'Bitcoin', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'RAM Usage', exact: true })).toBeVisible();
 
     // The API, rather than a mock, must reject the next handshake with 4401.
     invalidateNextAuth = true;

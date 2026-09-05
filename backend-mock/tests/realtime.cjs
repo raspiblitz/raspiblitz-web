@@ -20,7 +20,6 @@ async function fixture(t) {
     for (const socket of wss.clients) socket.terminate();
     await new Promise(resolve => wss.close(resolve));
     await new Promise(resolve => server.close(resolve));
-    assert.equal(clients.length, 0);
   });
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
@@ -68,6 +67,12 @@ test("only the new client receives warmup; subsequent updates reach both clients
   assert.equal(clients.length, 1);
   sendEvent("btc_info", { blocks: 100 });
   await receiveUntil(second, () => second.frames.at(-1).data.blocks === 100);
+
+  const lastServerClosed = once(clients[0], "close");
+  const lastClientClosed = once(second.ws, "close");
+  second.ws.close();
+  await Promise.all([lastClientClosed, lastServerClosed]);
+  assert.equal(clients.length, 0);
 });
 
 test("rejects malformed authentication without sending snapshots", { timeout: 10000 }, async t => {

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { AppContext } from "@/context/app-context";
@@ -7,15 +7,15 @@ import type { App } from "@/models/app.model";
 import type { AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
-import type { InstallAppData } from "@/models/install-app";
 import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { WalletBalance } from "@/models/wallet-balance";
 import { ACCESS_TOKEN, setWindowAlias } from "@/utils";
-import { parseAppStateUpdateMessage } from "@/utils/app-state-message";
+import { parseAppStateUpdateValue } from "@/utils/app-state-message";
 import { availableApps, isAppId } from "@/utils/availableApps";
 import { isRecord } from "@/utils/guards";
+import { isApp, isHardwareInfo, isSystemStartupInfo, isTransaction } from "@/utils/realtime-guards";
 
 // Monotonic counter for assigning a stable, unique key to each installation
 // message. Avoids relying on the array index (or a possibly-colliding
@@ -37,7 +37,7 @@ function isBackendErrorFrame(message: Record<string, unknown>, label: string): b
 /**
  * Establishes a WebSocket connection (authenticating via a first-message
  * handshake) and dispatches incoming frames to update the RealtimeContext.
- * Reconnects with exponential backoff; a 4401 close code logs the user out.
+ * Reconnects with exponential backoff and jitter; a 4401 close code logs the user out.
  * Use useContext(RealtimeContext) to get the data, is only used in Layout.tsx
  * @returns the infos from the RealtimeContext
  */
@@ -70,92 +70,64 @@ function useRealtime() {
     appCtxRef.current = appCtx;
   }, [appCtx]);
 
-  const appInstallSuccessHandler = useCallback(
-    (installData: InstallAppData, appName: string) => {
-      if (installData.mode === "on") {
-        toast.success(t("apps.install_success", { appName }), {
-          theme: "dark",
-        });
-      } else {
-        toast.success(t("apps.uninstall_success", { appName }), {
-          theme: "dark",
-        });
-      }
-    },
-    [t],
-  );
-
-  const appInstallErrorHandler = useCallback(
-    (installData: InstallAppData, appName: string) => {
-      if (installData.mode === "on") {
-        toast.error(
-          t("apps.install_failure", {
-            appName,
-            details: installData.details,
-          }),
-        );
-      } else {
-        toast.error(
-          t("apps.uninstall_failure", {
-            appName,
-            details: installData.details,
-          }),
-        );
-      }
-    },
-    [t],
-  );
+  // Translations must stay current without restarting the authenticated stream.
+  const translationRef = useRef(t);
+  useEffect(() => {
+    translationRef.current = t;
+  }, [t]);
 
   useEffect(() => {
-    const setApps = (event: MessageEvent<string>) => {
+    const setApps = (apps: unknown) => {
       try {
-        const apps = JSON.parse(event.data);
-
         // Validate apps data
         if (!Array.isArray(apps)) {
           console.error("Invalid apps data format (not an array):", apps);
           return;
         }
 
+        const validApps = apps.filter(isApp);
         updateAvailableApps((prev: App[]) => {
           if (prev.length === 0) {
-            return apps;
+            return validApps;
           }
-          return prev.map((old: App) => apps.find((newApp: App) => old.id === newApp.id) || old);
+          return prev.map(
+            (old: App) => validApps.find((newApp: App) => old.id === newApp.id) || old,
+          );
         });
       } catch (error) {
         console.error("Error processing apps data:", error);
       }
     };
 
-    const handleManageAppMessage = (event: MessageEvent<string>) => {
+    const handleManageAppMessage = (parsedData: unknown) => {
       try {
-        // Parse the event data
-        const parsedData = JSON.parse(event.data);
-
         // Verify we have a valid object for installation status
-        if (!parsedData || typeof parsedData !== "object") {
+        if (!isRecord(parsedData)) {
           console.error("Invalid app_manage_message data format:", parsedData);
           return;
         }
 
         // Extract required fields with fallbacks
-        const id = parsedData.id || "";
-        if (!id) {
+        const id = parsedData.id;
+        if (!isAppId(id)) {
           console.error("Missing app ID in app_manage_message:", parsedData);
           return;
         }
 
-        const state = parsedData.state || "";
-        const error_id = parsedData.error_id || "none";
-        const _mode = parsedData.mode || "";
+        const state = typeof parsedData.state === "string" ? parsedData.state : "";
+        const error_id = typeof parsedData.error_id === "string" ? parsedData.error_id : "none";
+        const mode = typeof parsedData.mode === "string" ? parsedData.mode : "";
 
         // The message field replaces the details field in the new format
-        const details = parsedData.message || "";
+        const details = typeof parsedData.message === "string" ? parsedData.message : "";
 
         // Add timestamp for sorting
         const messageWithTimestamp = {
-          ...parsedData,
+          id,
+          state,
+          mode,
+          error_id,
+          message: details,
           // Stable unique key for React lists (see installationMessageSeq)
           uid: `msg-${installationMessageSeq++}`,
           // Map message to details for consistency with our data model
@@ -178,16 +150,14 @@ function useRealtime() {
           };
         });
       } catch (error) {
-        console.error("Error parsing app_manage_message data:", error);
+        console.error("Error processing app_manage_message data:", error);
       }
     };
 
-    const setTx = (event: MessageEvent<string>) => {
+    const setTx = (transaction: unknown) => {
       try {
-        const transaction = JSON.parse(event.data);
-
         // Validate transaction data
-        if (!transaction || typeof transaction !== "object") {
+        if (!isTransaction(transaction)) {
           console.error("Invalid transaction data format:", transaction);
           return;
         }
@@ -201,43 +171,45 @@ function useRealtime() {
       }
     };
 
-    const setInstall = (event: MessageEvent<string>) => {
+    const setInstall = (installAppData: unknown) => {
       try {
+        if (
+          !isRecord(installAppData) ||
+          !isAppId(installAppData.id) ||
+          (installAppData.mode !== "on" && installAppData.mode !== "off")
+        ) {
+          console.error("Invalid install app data:", installAppData);
+          return;
+        }
+        const appName = availableApps[installAppData.id].name;
+        const translate = translationRef.current;
+        const details = typeof installAppData.details === "string" ? installAppData.details : "";
         toast.dismiss();
-        const installAppData = JSON.parse(event.data);
-
-        // Validate installation data
-        if (!installAppData || typeof installAppData !== "object") {
-          console.error("Invalid install app data format:", installAppData);
-          return;
-        }
-
-        // Check for required ID
-        if (!installAppData.id) {
-          console.error("Missing app ID in install data:", installAppData);
-          return;
-        }
-
-        const installAppId: unknown = installAppData.id;
-        const appName = isAppId(installAppId)
-          ? availableApps[installAppId].name
-          : String(installAppId);
-
         if (installAppData.result === "fail") {
-          appInstallErrorHandler(installAppData, appName);
+          toast.error(
+            translate(
+              installAppData.mode === "on" ? "apps.install_failure" : "apps.uninstall_failure",
+              { appName, details },
+            ),
+          );
           return;
         }
-
         if (installAppData.result === "win") {
-          appInstallSuccessHandler(installAppData, appName);
+          toast.success(
+            translate(
+              installAppData.mode === "on" ? "apps.install_success" : "apps.uninstall_success",
+              { appName },
+            ),
+            { theme: "dark" },
+          );
           return;
         }
 
         const installing = installAppData.mode === "on";
         toast(
           installing
-            ? `${t("apps.installing")} ${appName}`
-            : `${t("apps.uninstalling")} ${appName}`,
+            ? `${translate("apps.installing")} ${appName}`
+            : `${translate("apps.uninstalling")} ${appName}`,
           {
             isLoading: true,
             autoClose: false,
@@ -248,12 +220,10 @@ function useRealtime() {
       }
     };
 
-    const setSystemInfo = (event: MessageEvent<string>) => {
+    const setSystemInfo = (message: unknown) => {
       try {
-        const message = JSON.parse(event.data);
-
         // Validate message data
-        if (!message || typeof message !== "object" || Array.isArray(message)) {
+        if (!isRecord(message)) {
           console.error("Invalid system info data:", message);
           return;
         }
@@ -275,12 +245,10 @@ function useRealtime() {
       }
     };
 
-    const setBtcInfo = (event: MessageEvent<string>) => {
+    const setBtcInfo = (message: unknown) => {
       try {
-        const message = JSON.parse(event.data);
-
         // Validate message data
-        if (!message || typeof message !== "object" || Array.isArray(message)) {
+        if (!isRecord(message)) {
           console.error("Invalid BTC info data:", message);
           return;
         }
@@ -298,12 +266,10 @@ function useRealtime() {
       }
     };
 
-    const setLnInfo = (event: MessageEvent<string>) => {
+    const setLnInfo = (message: unknown) => {
       try {
-        const message = JSON.parse(event.data);
-
         // Validate message data
-        if (!message || typeof message !== "object" || Array.isArray(message)) {
+        if (!isRecord(message)) {
           console.error("Invalid LN info data:", message);
           return;
         }
@@ -321,12 +287,10 @@ function useRealtime() {
       }
     };
 
-    const setBalance = (event: MessageEvent<string>) => {
+    const setBalance = (message: unknown) => {
       try {
-        const message = JSON.parse(event.data);
-
         // Validate message data
-        if (!message || typeof message !== "object" || Array.isArray(message)) {
+        if (!isRecord(message)) {
           console.error("Invalid balance data:", message);
           return;
         }
@@ -344,12 +308,10 @@ function useRealtime() {
       }
     };
 
-    const setHardwareInfo = (event: MessageEvent<string>) => {
+    const setHardwareInfo = (message: unknown) => {
       try {
-        const message = JSON.parse(event.data);
-
         // Validate message data
-        if (!message || typeof message !== "object" || Array.isArray(message)) {
+        if (!isRecord(message)) {
           console.error("Invalid hardware info data:", message);
           return;
         }
@@ -357,22 +319,18 @@ function useRealtime() {
         if (isBackendErrorFrame(message, "hardware info")) return;
 
         updateHardwareInfo((prev: HardwareInfo | null) => {
-          return {
-            ...prev,
-            ...message,
-          };
+          const next = { ...prev, ...message };
+          return isHardwareInfo(next) ? next : prev;
         });
       } catch (error) {
         console.error("Error processing hardware info data:", error);
       }
     };
 
-    const setSystemStartupInfo = (event: MessageEvent<string>) => {
+    const setSystemStartupInfo = (message: unknown) => {
       try {
-        const message = JSON.parse(event.data);
-
         // Validate message data
-        if (!message || typeof message !== "object" || Array.isArray(message)) {
+        if (!isRecord(message)) {
           console.error("Invalid system startup info data:", message);
           return;
         }
@@ -380,18 +338,16 @@ function useRealtime() {
         if (isBackendErrorFrame(message, "system startup info")) return;
 
         updateSystemStartupInfo((prev: SystemStartupInfo | null) => {
-          return {
-            ...prev,
-            ...message,
-          };
+          const next = { ...prev, ...message };
+          return isSystemStartupInfo(next) ? next : prev;
         });
       } catch (error) {
         console.error("Error processing system startup info data:", error);
       }
     };
 
-    const handleAppStateUpdateMessage = (event: MessageEvent<string>) => {
-      const data = parseAppStateUpdateMessage(event.data);
+    const handleAppStateUpdateMessage = (value: unknown) => {
+      const data = parseAppStateUpdateValue(value);
       if (!data) {
         console.warn("Ignored invalid app state update message");
         return;
@@ -419,7 +375,7 @@ function useRealtime() {
       }
     };
 
-    const DISPATCH: Record<string, (e: MessageEvent<string>) => void> = {
+    const DISPATCH: Record<string, (data: unknown) => void> = {
       system_info: setSystemInfo,
       btc_info: setBtcInfo,
       ln_info: setLnInfo,
@@ -439,38 +395,39 @@ function useRealtime() {
     let reconnectTimer: ReturnType<typeof setTimeout> | undefined;
 
     const connect = () => {
-      ws = new WebSocket(WS_URL);
-      setSocket(ws);
-      ws.onopen = () => {
+      const socket = new WebSocket(WS_URL);
+      ws = socket;
+      setSocket(socket);
+      socket.onopen = () => {
         backoff = 1000;
         const token = localStorage.getItem(ACCESS_TOKEN);
-        ws?.send(JSON.stringify({ type: "auth", token }));
+        socket.send(JSON.stringify({ type: "auth", token }));
       };
-      ws.onmessage = (evt) => {
+      socket.onmessage = (evt) => {
         try {
           const frame: unknown = JSON.parse(evt.data);
           if (!isRecord(frame) || typeof frame.event !== "string" || !("data" in frame)) {
             return;
           }
           if (Object.hasOwn(DISPATCH, frame.event)) {
-            DISPATCH[frame.event](
-              new MessageEvent("message", { data: JSON.stringify(frame.data) }),
-            );
+            DISPATCH[frame.event](frame.data);
           }
         } catch (err) {
           console.error("Error processing ws frame:", err);
         }
       };
-      ws.onclose = (evt) => {
+      socket.onclose = (evt) => {
         if (closedByUs) return;
         if (evt.code === 4401) {
           appCtxRef.current.logout();
           return;
         }
-        reconnectTimer = setTimeout(connect, backoff);
+        // Equal jitter spreads reconnects across half the exponential interval.
+        const delay = Math.floor(backoff / 2 + (Math.random() * backoff) / 2);
+        reconnectTimer = setTimeout(connect, delay);
         backoff = Math.min(backoff * 2, 30000);
       };
-      ws.onerror = () => ws?.close();
+      socket.onerror = () => socket.close();
     };
 
     connect();
@@ -481,7 +438,6 @@ function useRealtime() {
       ws?.close();
     };
   }, [
-    t,
     setSocket,
     updateAvailableApps,
     updateInstallationStatus,
@@ -493,8 +449,6 @@ function useRealtime() {
     updateHardwareInfo,
     updateSystemStartupInfo,
     updateAppStatus,
-    appInstallSuccessHandler,
-    appInstallErrorHandler,
   ]);
 
   return {

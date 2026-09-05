@@ -35,6 +35,7 @@ test('renders mock snapshots and wallet state updates over a native WebSocket', 
   await expect.poll(() => lightningStates).toEqual(['locked', 'bootstrapping_after_unlock', 'done']);
 
   await expect(page.getByRole('heading', { name: 'Bitcoin', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'RAM Usage', exact: true })).toBeVisible();
   await expect(page.locator('header')).toContainText('myBlitz');
   await expect(page.getByText('regtest', { exact: true })).toBeVisible();
   await expect(page.getByText('0.21.1', { exact: true })).toBeVisible();
