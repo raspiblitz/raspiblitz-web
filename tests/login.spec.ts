@@ -1,3 +1,5 @@
+// @ts-expect-error The mock backend is a CommonJS JavaScript module.
+import { signToken } from '../backend-mock/auth';
 import { dashboardStatus } from './status';
 import { fulfillRoute } from './utils';
 import { expect, test } from '@playwright/test';
@@ -11,7 +13,7 @@ test.describe('login', () => {
 
   test('login with correct password', async ({ page }) => {
     await page.route('**/api/system/login', route =>
-      route.fulfill({ body: 'someToken' }),
+      route.fulfill({ body: signToken() }),
     );
     await page.goto('/');
 
@@ -20,6 +22,20 @@ test.describe('login', () => {
 
     await page.waitForURL('/home');
     await expect(page).toHaveURL('/home');
+  });
+
+  test('rejects an invalid token returned by login', async ({ page }) => {
+    await page.route('**/api/system/login', route =>
+      route.fulfill({ body: 'someToken' }),
+    );
+    await page.goto('/');
+
+    await page.getByPlaceholder('Password A').fill('password');
+    await page.getByRole('button', { name: 'Log in' }).click();
+
+    await expect(page.getByRole('button', { name: 'Log in' })).toBeVisible();
+    await expect(page).toHaveURL('/');
+    expect(await page.evaluate(() => localStorage.getItem('access_token'))).toBeNull();
   });
 
   test('login with wrong password', async ({ page }) => {
