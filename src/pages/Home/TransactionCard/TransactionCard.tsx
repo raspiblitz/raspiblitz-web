@@ -1,6 +1,6 @@
 import { ArrowDownIcon, InformationCircleIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import { Button, ListBox, Spinner } from "@heroui/react";
-import { type FC, useContext, useState } from "react";
+import { type FC, type Key, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
 import { AppContext } from "@/context/app-context";
@@ -83,7 +83,7 @@ const TransactionCard: FC<Props> = ({
           <ListBox
             aria-label={t("tx.transactions")}
             selectionMode="none"
-            onAction={(key) => {
+            onAction={(key: Key) => {
               const tx = currentPageTxs.find((t) => t.id === String(key));
               if (tx) showDetails(tx.index);
             }}

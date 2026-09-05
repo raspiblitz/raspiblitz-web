@@ -128,7 +128,7 @@ export default function SyncScreen({ data, callback }: Props) {
                           isDisabled={runningUnlock}
                           isInvalid={fieldState.invalid}
                           value={password}
-                          onChange={(value) => {
+                          onChange={(value: string) => {
                             setPassword(value);
                             field.onChange(value);
                           }}
@@ -227,7 +227,9 @@ export default function SyncScreen({ data, callback }: Props) {
                   </span>
                 </Button>
               </Tooltip.Trigger>
-              <Tooltip.Content>{t("setup.sync_restartinfo")}</Tooltip.Content>
+              <Tooltip.Content arrowBoundaryOffset={0}>
+                {t("setup.sync_restartinfo")}
+              </Tooltip.Content>
             </Tooltip>
           </article>
         </section>

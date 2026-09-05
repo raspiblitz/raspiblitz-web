@@ -1,5 +1,5 @@
 import { FieldError, Input, Label, ListBox, Select, TextField } from "@heroui/react";
-import { useState } from "react";
+import { type Key, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -124,7 +124,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
                   <Select
                     aria-label={t("tx.fee_rate")}
                     selectedKey={field.value}
-                    onSelectionChange={(key) => field.onChange(String(key))}
+                    onSelectionChange={(key: Key | null) => field.onChange(String(key))}
                   >
                     <Select.Trigger className="bg-tertiary">
                       <Select.Value />

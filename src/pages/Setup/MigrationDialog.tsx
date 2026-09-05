@@ -5,7 +5,7 @@ import { Button } from "@/components/Button";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Headline } from "@/components/Headline";
 import SetupContainer from "@/layouts/SetupContainer";
-import { SetupMigrationMode, type SetupMigrationOS } from "@/models/setup.model";
+import { SetupMigrationMode, SetupMigrationOS } from "@/models/setup.model";
 
 type Props = {
   migrationOS: SetupMigrationOS;
@@ -16,6 +16,28 @@ type Props = {
 export default function MigrationDialog({ migrationOS, migrationMode, callback }: Props) {
   const { t } = useTranslation();
   const confirmModal = useOverlayState();
+  const migrationOSLabel: Record<SetupMigrationOS, string> = {
+    [SetupMigrationOS.NULL]: "",
+    [SetupMigrationOS.CITADEL]: "Citadel",
+    [SetupMigrationOS.MYNODE]: "myNode",
+    [SetupMigrationOS.UMBREL]: "Umbrel",
+  };
+  const os = migrationOSLabel[migrationOS];
+
+  if (!os) {
+    return (
+      <SetupContainer currentStep={1}>
+        <section className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-y-8">
+          <Alert color="danger" as="h4">
+            Migration data is incomplete. Please go back and retry.
+          </Alert>
+          <Button type="button" onPress={() => callback(false)} variant="primary">
+            {t("settings.shutdown")}
+          </Button>
+        </section>
+      </SetupContainer>
+    );
+  }
 
   if (migrationMode === SetupMigrationMode.OUTDATED) {
     return (
@@ -46,7 +68,7 @@ export default function MigrationDialog({ migrationOS, migrationMode, callback }
           <div>
             <Headline>
               {t("setup.migrate_to_os", {
-                os: `${migrationOS[0].toUpperCase()}${migrationOS.slice(1)}`,
+                os,
               })}
             </Headline>
 

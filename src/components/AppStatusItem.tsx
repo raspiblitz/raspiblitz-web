@@ -12,8 +12,7 @@ type Props = {
 export const AppStatusItem: FC<Props> = ({ app }) => {
   const { id } = app;
   const navigate = useNavigate();
-  const appName = availableApps[id]!.name;
-  const customComponent = availableApps[id]!.customComponent;
+  const { name: appName, customComponent } = availableApps[id];
 
   if (customComponent) {
     return (

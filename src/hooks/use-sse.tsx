@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { AppContext } from "@/context/app-context";
 import { SSE_URL, SSEContext } from "@/context/sse-context";
 import type { App } from "@/models/app.model";
-import type { AppStateUpdateMessage, AppStatusQueryResponse } from "@/models/app-status";
+import type { AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
 import type { InstallAppData } from "@/models/install-app";
@@ -13,7 +13,8 @@ import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { WalletBalance } from "@/models/wallet-balance";
 import { setWindowAlias } from "@/utils";
-import { availableApps } from "@/utils/availableApps";
+import { parseAppStateUpdateMessage } from "@/utils/app-state-message";
+import { availableApps, isAppId } from "@/utils/availableApps";
 
 // Monotonic counter for assigning a stable, unique key to each installation
 // message. Avoids relying on the array index (or a possibly-colliding
@@ -189,7 +190,10 @@ function useSSE() {
           return;
         }
 
-        const appName = availableApps[installAppData.id]?.name || installAppData.id;
+        const installAppId: unknown = installAppData.id;
+        const appName = isAppId(installAppId)
+          ? availableApps[installAppId].name
+          : String(installAppId);
 
         if (installAppData.result === "fail") {
           appInstallErrorHandler(installAppData, appName);
@@ -347,59 +351,31 @@ function useSSE() {
     };
 
     const handleAppStateUpdateMessage = (event: MessageEvent<string>) => {
-      try {
-        const data = JSON.parse(event.data) as AppStateUpdateMessage;
-        const { state, message } = data;
+      const data = parseAppStateUpdateMessage(event.data);
+      if (!data) {
+        console.warn("Ignored invalid app state update message");
+        return;
+      }
 
-        if (!state) {
-          console.error("Invalid app_state_update_message format:", data);
-          return;
-        }
+      const { state, message } = data;
 
-        // Handle different states
-        if (state === "initiated") {
-          // Notify UI that app state updating has started
-          const customEvent = new Event("app_state_updating");
-          window.dispatchEvent(customEvent);
-        } else if (state === "success" && message) {
-          // message is already a parsed object, no need to JSON.parse it again
-          try {
-            // Update app status with the new data
-            sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
-              // Ensure data properties are arrays
-              const status = {
-                data: Array.isArray(message.data) ? message.data : [],
-                errors: Array.isArray(message.errors) ? message.errors : [],
-                timestamp: message.timestamp || Date.now(),
-              };
+      if (state === "initiated") {
+        window.dispatchEvent(new Event("app_state_updating"));
+      } else if (state === "success" && message) {
+        sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
+          if (prev.data.length === 0) return message;
 
-              // If previous state is empty, just return the new status
-              if (!prev?.data || prev.data.length === 0) {
-                return status;
-              }
-              // Get IDs from new data to update
-              const currentIds = status.data.map((item) => item.id);
+          const currentIds = new Set(message.data.map((item) => item.id));
+          const existingData = prev.data.filter((item) => !currentIds.has(item.id));
 
-              // Get existing data that's not being updated
-              const existingData = prev.data.filter((item) => !currentIds.includes(item.id));
-
-              // Merge the arrays
-              return {
-                data: [...existingData, ...status.data],
-                errors: status.errors,
-                timestamp: status.timestamp,
-              };
-            });
-          } catch (error) {
-            console.error("Error processing app state update message data:", error);
-          }
-        } else if (state === "finished") {
-          // Notify UI that app state updating has completed
-          const customEvent = new Event("app_state_updating_success");
-          window.dispatchEvent(customEvent);
-        }
-      } catch (error) {
-        console.error("Error parsing app_state_update_message:", error);
+          return {
+            data: [...existingData, ...message.data],
+            errors: message.errors,
+            timestamp: message.timestamp,
+          };
+        });
+      } else if (state === "finished") {
+        window.dispatchEvent(new Event("app_state_updating_success"));
       }
     };
 

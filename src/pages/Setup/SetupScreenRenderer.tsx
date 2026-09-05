@@ -66,6 +66,12 @@ export default function SetupScreenRenderer() {
       return <SyncScreen data={state.syncData} callback={callbacks.onSyncScreen} />;
     // case Screen.WAIT: UNUSED
     default:
-      return <WaitScreen status={state.waitScreenStatus} message={state.waitScreenMessage} />;
+      return (
+        <WaitScreen
+          status={state.waitScreenStatus}
+          message={state.waitScreenMessage}
+          onRetry={callbacks.onRetry}
+        />
+      );
   }
 }

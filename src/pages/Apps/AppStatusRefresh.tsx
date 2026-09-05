@@ -94,7 +94,7 @@ const AppStatusRefresh = () => {
           <Tooltip.Trigger>
             <InformationCircleIcon className="h-4 w-4 text-gray-400" />
           </Tooltip.Trigger>
-          <Tooltip.Content>{t("apps.refresh_tooltip")}</Tooltip.Content>
+          <Tooltip.Content arrowBoundaryOffset={0}>{t("apps.refresh_tooltip")}</Tooltip.Content>
         </Tooltip>
       </div>
       <Tooltip>
@@ -106,7 +106,7 @@ const AppStatusRefresh = () => {
             </span>
           </Button>
         </Tooltip.Trigger>
-        <Tooltip.Content placement="left" showArrow>
+        <Tooltip.Content placement="left" showArrow arrowBoundaryOffset={0}>
           {t("apps.refresh_expensive_warning")}
         </Tooltip.Content>
       </Tooltip>

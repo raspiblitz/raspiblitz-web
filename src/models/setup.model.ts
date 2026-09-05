@@ -59,7 +59,8 @@ export enum Screen {
 export interface SetupState {
   page: Screen;
   syncData: any | null;
-  waitScreenStatus: SetupStatus;
+  // RaspiBlitz also reports script-specific progress states such as hdd-format.
+  waitScreenStatus: string;
   waitScreenMessage: string;
   setupPhaseOnStart: SetupPhase;
   setupPhase: SetupPhase;
