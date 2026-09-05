@@ -17,12 +17,7 @@ const colors = {
 
 type Colors = keyof typeof colors;
 
-export const Alert = ({
-  as = "p",
-  color = "success",
-  className,
-  children,
-}: Props) => {
+export const Alert = ({ as = "p", color = "success", className, children }: Props) => {
   const Component = as;
 
   return (

@@ -3,8 +3,7 @@ import type { TokenPayload } from "@/models/token";
 
 export const ACCESS_TOKEN = "access_token";
 // refresh 10min before expiry; `exp` is a standard JWT claim in seconds
-export const REFRESH_TIME = (expSeconds: number) =>
-  expSeconds * 1000 - Date.now() - 600_000;
+export const REFRESH_TIME = (expSeconds: number) => expSeconds * 1000 - Date.now() - 600_000;
 
 const createModalRoot = () => {
   const modalRoot = document.createElement("div");
@@ -14,8 +13,7 @@ const createModalRoot = () => {
 };
 
 export const SETTINGS_KEY = "settings";
-export const MODAL_ROOT =
-  document.getElementById("modal-root") || createModalRoot();
+export const MODAL_ROOT = document.getElementById("modal-root") || createModalRoot();
 
 export interface SavedSettings {
   lang: string;

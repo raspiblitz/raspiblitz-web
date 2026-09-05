@@ -40,9 +40,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
         </div>
         <div className="mb-1 flex w-full flex-col justify-center md:w-1/2 md:justify-around">
           <h4 className="mb-1 font-bold">{t("home.active")}</h4>
-          <p className="mx-2 overflow-x-auto">
-            {channel.active ? t("setup.yes") : t("home.no")}
-          </p>
+          <p className="mx-2 overflow-x-auto">{channel.active ? t("setup.yes") : t("home.no")}</p>
         </div>
       </article>
       <article className="flex flex-col items-center justify-center md:flex-row md:justify-around">
@@ -61,11 +59,7 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
       </article>
 
       <article>
-        <Button
-          variant="primary"
-          isDisabled={confirm}
-          onPress={() => setConfirm(true)}
-        >
+        <Button variant="primary" isDisabled={confirm} onPress={() => setConfirm(true)}>
           {t("home.close_channel")}
         </Button>
 
@@ -85,17 +79,10 @@ const Channel: FC<Props> = ({ isLoading, channel, onDelete }) => {
               </div>
 
               <div className="flex justify-center gap-4">
-                <Button
-                  onPress={() => setConfirm(false)}
-                  isDisabled={isLoading}
-                >
+                <Button onPress={() => setConfirm(false)} isDisabled={isLoading}>
                   {t("setup.cancel")}
                 </Button>
-                <Button
-                  onPress={closeChannelHandler}
-                  variant="primary"
-                  isPending={isLoading}
-                >
+                <Button onPress={closeChannelHandler} variant="primary" isPending={isLoading}>
                   {t("setup.yes")}
                 </Button>
               </div>

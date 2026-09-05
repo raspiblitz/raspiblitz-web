@@ -2,16 +2,8 @@ import { type RenderOptions, render } from "@testing-library/react";
 import type { FC, PropsWithChildren, ReactElement } from "react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router";
-import {
-  AppContext,
-  type AppContextType,
-  appContextDefault,
-} from "@/context/app-context";
-import {
-  SSEContext,
-  type SSEContextType,
-  sseContextDefault,
-} from "@/context/sse-context";
+import { AppContext, type AppContextType, appContextDefault } from "@/context/app-context";
+import { SSEContext, type SSEContextType, sseContextDefault } from "@/context/sse-context";
 import i18n from "@/i18n/test_config";
 
 type Props = {
@@ -19,11 +11,7 @@ type Props = {
   appProps: AppContextType;
 };
 
-const AllTheProviders: FC<PropsWithChildren<Props>> = ({
-  children,
-  appProps,
-  sseProps,
-}) => {
+const AllTheProviders: FC<PropsWithChildren<Props>> = ({ children, appProps, sseProps }) => {
   return (
     <BrowserRouter>
       <SSEContext.Provider
@@ -55,10 +43,7 @@ const customRender = (
   },
 ) =>
   render(ui, {
-    // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
-    wrapper: (props: any) => (
-      <AllTheProviders {...props} {...options?.providerOptions} />
-    ),
+    wrapper: (props: any) => <AllTheProviders {...props} {...options?.providerOptions} />,
     ...options,
   });
 

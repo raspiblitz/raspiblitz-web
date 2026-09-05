@@ -22,22 +22,13 @@ const AppList: FC<Props> = ({ title, apps, onInstall, errors = [] }) => {
 
   return (
     <section className="flex h-full flex-wrap">
-      <h2 className="w-full pb-5 pt-8 text-xl font-bold text-gray-200">
-        {title}
-      </h2>
+      <h2 className="w-full pb-5 pt-8 text-xl font-bold text-gray-200">{title}</h2>
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
         {apps.map((appStatus: AppStatus) => {
           // Check if there's an error for this app
-          const error =
-            errorMap.get(appStatus.id) || appStatus.error || undefined;
+          const error = errorMap.get(appStatus.id) || appStatus.error || undefined;
 
-          // Get the app info from availableApps, or create a fallback if not available
-          const appInfo = availableApps[appStatus.id] || {
-            id: appStatus.id,
-            name: appStatus.id.charAt(0).toUpperCase() + appStatus.id.slice(1), // Capitalize first letter
-            repository: "",
-            category: "other",
-          };
+          const appInfo = availableApps[appStatus.id];
 
           return (
             <AppCard

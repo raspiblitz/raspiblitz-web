@@ -17,18 +17,10 @@ export default function SetupScreenRenderer() {
 
   switch (state.page) {
     case Screen.SETUP:
-      return (
-        <SetupMenu
-          setupPhase={state.setupPhaseOnStart}
-          callback={callbacks.onSetupMenu}
-        />
-      );
+      return <SetupMenu setupPhase={state.setupPhaseOnStart} callback={callbacks.onSetupMenu} />;
     case Screen.START_DONE:
       return (
-        <StartDoneDialog
-          setupPhase={state.setupPhase}
-          callback={callbacks.onStartDoneDialog}
-        />
+        <StartDoneDialog setupPhase={state.setupPhase} callback={callbacks.onStartDoneDialog} />
       );
     case Screen.FORMAT:
       return (
@@ -55,17 +47,11 @@ export default function SetupScreenRenderer() {
     case Screen.LIGHTNING:
       return <LightningDialog callback={callbacks.onLightning} />;
     case Screen.INPUT_A:
-      return (
-        <InputPassword passwordType="a" callback={callbacks.onInputPasswordA} />
-      );
+      return <InputPassword passwordType="a" callback={callbacks.onInputPasswordA} />;
     case Screen.INPUT_B:
-      return (
-        <InputPassword passwordType="b" callback={callbacks.onInputPasswordB} />
-      );
+      return <InputPassword passwordType="b" callback={callbacks.onInputPasswordB} />;
     case Screen.INPUT_C:
-      return (
-        <InputPassword passwordType="c" callback={callbacks.onInputPasswordC} />
-      );
+      return <InputPassword passwordType="c" callback={callbacks.onInputPasswordC} />;
     case Screen.INPUT_NODENAME:
       return <InputNodeName callback={callbacks.onInputNodename} />;
     case Screen.FINAL:
@@ -77,15 +63,14 @@ export default function SetupScreenRenderer() {
         />
       );
     case Screen.SYNC:
-      return (
-        <SyncScreen data={state.syncData} callback={callbacks.onSyncScreen} />
-      );
+      return <SyncScreen data={state.syncData} callback={callbacks.onSyncScreen} />;
     // case Screen.WAIT: UNUSED
     default:
       return (
         <WaitScreen
           status={state.waitScreenStatus}
           message={state.waitScreenMessage}
+          onRetry={callbacks.onRetry}
         />
       );
   }

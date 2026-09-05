@@ -188,7 +188,9 @@
       "invalid_pass": "Ungültiges Passwort",
       "login": "Anmelden",
       "caps_lock": "Die Feststelltaste ist AKTIVIERT",
-      "unknown_error": "Unbekannter Fehler. Die Antwort war: {{code}} {{statusText}}."
+      "unknown_error": "Unbekannter Fehler. Die Antwort war: {{code}} {{statusText}}.",
+      "node_unreachable": "Node nicht erreichbar. Prüfe deine Verbindung und versuche es erneut.",
+      "unexpected_error": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut."
     },
     "navigation": {
       "apps": "Anwendungen",

@@ -1,10 +1,4 @@
-import {
-  FieldError,
-  Input,
-  Label,
-  TextField,
-  useOverlayState,
-} from "@heroui/react";
+import { FieldError, Input, Label, TextField, useOverlayState } from "@heroui/react";
 import { Controller, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Button } from "@/components/Button";
@@ -124,8 +118,7 @@ export default function InputPassword({ passwordType, callback }: Props) {
                 rules={{
                   required: t("setup.password_error_empty"),
                   validate: (value) =>
-                    value === watch("passfirst") ||
-                    t("setup.password_error_match"),
+                    value === watch("passfirst") || t("setup.password_error_match"),
                 }}
                 render={({ field, fieldState }) => (
                   <TextField
@@ -148,11 +141,7 @@ export default function InputPassword({ passwordType, callback }: Props) {
               <Button type="submit" isDisabled={!isValid} variant="primary">
                 {t("setup.continue")}
               </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                onPress={() => confirmModal.open()}
-              >
+              <Button type="button" variant="secondary" onPress={() => confirmModal.open()}>
                 {t("setup.cancel")}
               </Button>
             </article>

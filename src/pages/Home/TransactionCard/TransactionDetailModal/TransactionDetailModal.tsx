@@ -1,9 +1,6 @@
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  ConfirmModal,
-  type Props as ConfirmModalProps,
-} from "@/components/ConfirmModal";
+import { ConfirmModal, type Props as ConfirmModalProps } from "@/components/ConfirmModal";
 import type { Transaction } from "@/models/transaction.model";
 import TransactionDetails from "./TransactionDetails";
 
@@ -11,10 +8,7 @@ interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   transaction: Transaction;
 }
 
-export const TransactionDetailModal: FC<Props> = ({
-  transaction,
-  disclosure,
-}) => {
+export const TransactionDetailModal: FC<Props> = ({ transaction, disclosure }) => {
   const { t } = useTranslation();
 
   // prevent error when closing via 'Esc' key

@@ -36,7 +36,6 @@ const ImageCarousel: FC<Props> = ({ imgs, video }) => {
             if (idx === index) {
               return (
                 <button
-                  // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
                   key={index}
                   type="button"
                   className="z-10 h-3 w-10 border border-black bg-white"
@@ -47,7 +46,6 @@ const ImageCarousel: FC<Props> = ({ imgs, video }) => {
 
             return (
               <button
-                // biome-ignore lint/suspicious/noArrayIndexKey: value is expected to exist at this point
                 key={index}
                 type="button"
                 className="z-10 h-3 w-10 border border-black bg-white opacity-30 hover:opacity-75"

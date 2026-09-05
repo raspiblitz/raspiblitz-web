@@ -42,7 +42,7 @@ This project supports [devenv.sh](https://devenv.sh/), a developer environment t
 
 - Consistent development environment across all contributors
 - Automatically installs the correct version of Node.js and other dependencies
-- Includes development tools like TypeScript, ESLint, and Nix utilities
+- Includes development tools like TypeScript, Oxlint, Oxfmt, and Nix utilities
 - Works on any platform that supports Nix (Linux, macOS, WSL)
 
 ### Dev workflow
@@ -93,6 +93,14 @@ npm run start
 ```
 
 Then go to `http://localhost:3000` and use the password `password`.
+
+### Diagnostic builds
+
+Production builds omit source maps by default. To include source maps for
+investigating a diagnostic report, run `BUILD_SOURCEMAP=true npm run build`.
+Keep the generated maps with the matching build; deploying them also makes
+the original source code available to browsers. Diagnostic reports still
+include JavaScript and component stacks without source maps.
 
 ### Testing
 

@@ -36,11 +36,7 @@ export const Headline = ({
 }: HeadlineProps) => {
   return (
     <Component
-      className={twMerge(
-        fontSizes[size],
-        alignment[align],
-        "whitespace-pre-line font-semibold",
-      )}
+      className={twMerge(fontSizes[size], alignment[align], "whitespace-pre-line font-semibold")}
     >
       {children}
     </Component>

@@ -3,14 +3,7 @@ import RequireAuth from "./components/RequireAuth";
 import RequireSetup from "./components/RequireSetup";
 import { AppContext } from "./context/app-context";
 import "./i18n/config";
-import {
-  type FC,
-  lazy,
-  Suspense,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { type FC, lazy, Suspense, useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
 import AppPage from "@/pages/Apps/AppPage";
 import Login from "@/pages/Login";

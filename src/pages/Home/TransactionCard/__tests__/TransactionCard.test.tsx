@@ -48,9 +48,7 @@ describe("TransactionCard", () => {
 
   test("calls showDetails when transaction is clicked", async () => {
     const showDetails = vi.fn();
-    render(
-      <TransactionCard {...propsWithTransactions} showDetails={showDetails} />,
-    );
+    render(<TransactionCard {...propsWithTransactions} showDetails={showDetails} />);
 
     const listItem = screen.getByRole("option");
     fireEvent.click(listItem);

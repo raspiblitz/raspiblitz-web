@@ -23,13 +23,7 @@ export interface LnInvoiceForm {
   invoice: string;
 }
 
-const SendLn: FC<Props> = ({
-  isLoading,
-  lnBalance,
-  onConfirm,
-  error,
-  confirmData,
-}) => {
+const SendLn: FC<Props> = ({ isLoading, lnBalance, onConfirm, error, confirmData }) => {
   const { t } = useTranslation();
 
   const {
@@ -57,7 +51,6 @@ const SendLn: FC<Props> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <ConfirmModal.Body>
-        {/* biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point */}
         <AvailableBalance balance={convertedBalance!} />
 
         <Controller
@@ -81,11 +74,7 @@ const SendLn: FC<Props> = ({
               isDisabled={isLoading}
             >
               <Label>{t("wallet.invoice")}</Label>
-              <Input
-                type="text"
-                placeholder="lnbc..."
-                className="bg-tertiary"
-              />
+              <Input type="text" placeholder="lnbc..." className="bg-tertiary" />
               <FieldError>{fieldState.error?.message}</FieldError>
             </TextField>
           )}

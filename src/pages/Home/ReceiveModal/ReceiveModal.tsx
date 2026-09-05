@@ -2,10 +2,7 @@ import { Tabs } from "@heroui/react";
 import { type FC, type Key, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "@/components/Alert";
-import {
-  ConfirmModal,
-  type Props as ConfirmModalProps,
-} from "@/components/ConfirmModal";
+import { ConfirmModal, type Props as ConfirmModalProps } from "@/components/ConfirmModal";
 import { AppContext, Unit } from "@/context/app-context";
 import { checkError } from "@/utils/checkError";
 import { convertBtcToSat } from "@/utils/format";
@@ -14,9 +11,7 @@ import { TxType } from "../SwitchTxType";
 import QRCode from "./QRCode";
 import ReceiveLN, { type IFormInputs } from "./ReceiveLN";
 
-const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
-  disclosure,
-}) => {
+const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({ disclosure }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
 
@@ -34,15 +29,10 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
     setInvoice("");
     setIsLoading(true);
 
-    const mSatAmount =
-      unit === Unit.BTC
-        ? convertBtcToSat(amountInput) * 1000
-        : amountInput * 1000;
+    const mSatAmount = unit === Unit.BTC ? convertBtcToSat(amountInput) * 1000 : amountInput * 1000;
 
     instance
-      .post(
-        `lightning/add-invoice?value_msat=${mSatAmount}&memo=${commentInput}`,
-      )
+      .post(`lightning/add-invoice?value_msat=${mSatAmount}&memo=${commentInput}`)
       .then((resp) => {
         setInvoice(resp.data.payment_request);
       })
@@ -76,7 +66,6 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
   const handleTabChange = async (key: Key) => {
     setError("");
 
-    // biome-ignore lint/suspicious/noDoubleEquals: value is expected to exist at this point
     if (key == TxType.ONCHAIN && !address) {
       await generateOnChainAddressHandler();
     }
@@ -87,15 +76,9 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
       <ConfirmModal.Header>{t("wallet.receive")}</ConfirmModal.Header>
 
       <div className="mx-6">
-        <Tabs
-          aria-label={t("wallet.receive_aria_options")}
-          onSelectionChange={handleTabChange}
-        >
+        <Tabs aria-label={t("wallet.receive_aria_options")} onSelectionChange={handleTabChange}>
           <Tabs.List className="flex-col md:flex-row">
-            <Tabs.Tab
-              id={TxType.LIGHTNING}
-              className="text-xs whitespace-nowrap"
-            >
+            <Tabs.Tab id={TxType.LIGHTNING} className="text-xs whitespace-nowrap">
               {t("wallet.create_invoice_ln")}
             </Tabs.Tab>
             <Tabs.Tab id={TxType.ONCHAIN} className="text-xs whitespace-nowrap">
@@ -120,10 +103,7 @@ const ReceiveModal: FC<Pick<ConfirmModalProps, "disclosure">> = ({
               {!address && error && <Alert color="danger">{error}</Alert>}
 
               {address && !error && (
-                <QRCode
-                  address={address}
-                  onRefreshHandler={generateOnChainAddressHandler}
-                />
+                <QRCode address={address} onRefreshHandler={generateOnChainAddressHandler} />
               )}
             </ConfirmModal.Body>
           </Tabs.Panel>

@@ -5,12 +5,7 @@ describe("SwitchTxType", () => {
   test("txType: lightning", async () => {
     const handeTxTypeChangeMock = vi.fn();
 
-    render(
-      <SwitchTxType
-        invoiceType={TxType.LIGHTNING}
-        onTxTypeChange={handeTxTypeChangeMock}
-      />,
-    );
+    render(<SwitchTxType invoiceType={TxType.LIGHTNING} onTxTypeChange={handeTxTypeChangeMock} />);
 
     const buttonLn = screen.getByText("home.lightning");
     const buttonOnChain = screen.getByText("wallet.on_chain");
@@ -26,12 +21,7 @@ describe("SwitchTxType", () => {
   test("txType: onchain", async () => {
     const handeTxTypeChangeMock = vi.fn();
 
-    render(
-      <SwitchTxType
-        invoiceType={TxType.ONCHAIN}
-        onTxTypeChange={handeTxTypeChangeMock}
-      />,
-    );
+    render(<SwitchTxType invoiceType={TxType.ONCHAIN} onTxTypeChange={handeTxTypeChangeMock} />);
 
     const buttonLn = screen.getByText("home.lightning");
     const buttonOnChain = screen.getByText("wallet.on_chain");

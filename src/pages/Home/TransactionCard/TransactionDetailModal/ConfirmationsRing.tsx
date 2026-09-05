@@ -10,10 +10,7 @@ interface Props {
 /**
  * Displays confirmation status as a circular progress indicator.
  */
-export const ConfirmationsRing: FC<Props> = ({
-  confirmations = 0,
-  required = 6,
-}) => {
+export const ConfirmationsRing: FC<Props> = ({ confirmations = 0, required = 6 }) => {
   const { t } = useTranslation();
   const conf = confirmations || 0;
   const isFullyConfirmed = conf >= required;
@@ -38,22 +35,16 @@ export const ConfirmationsRing: FC<Props> = ({
               {t("tx.unconfirmed")}
             </span>
           ) : isFullyConfirmed ? (
-            <span className="font-bold text-[1.2rem] text-gray-200">
-              {conf}
-            </span>
+            <span className="font-bold text-[1.2rem] text-gray-200">{conf}</span>
           ) : (
             <div className="flex flex-col items-center">
-              <span className="font-bold text-[1.2rem] text-gray-200">
-                {conf}
-              </span>
+              <span className="font-bold text-[1.2rem] text-gray-200">{conf}</span>
               <span className="text-[0.8rem] text-gray-400">/ {required}</span>
             </div>
           )}
         </div>
       </div>
-      <div className="text-sm font-medium text-gray-300">
-        {t("tx.confirmations")}
-      </div>
+      <div className="text-sm font-medium text-gray-300">{t("tx.confirmations")}</div>
     </div>
   );
 };

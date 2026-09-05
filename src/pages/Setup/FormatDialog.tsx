@@ -40,17 +40,11 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
           <Alert color="warning">{t("setup.format.warn")}</Alert>
 
           {containsBlockchain && (
-            <Checkbox
-              id="keepBlockchain"
-              onChange={setKeepBlockchain}
-              isSelected={keepBlockchain}
-            >
+            <Checkbox id="keepBlockchain" onChange={setKeepBlockchain} isSelected={keepBlockchain}>
               <Checkbox.Control>
                 <Checkbox.Indicator />
               </Checkbox.Control>
-              <Checkbox.Content>
-                {t("setup.format.keep_blockchain")}
-              </Checkbox.Content>
+              <Checkbox.Content>{t("setup.format.keep_blockchain")}</Checkbox.Content>
             </Checkbox>
           )}
 
@@ -59,11 +53,7 @@ export default function FormatDialog({ containsBlockchain, callback }: Props) {
               {t("setup.format.delete_confirm")}
             </Button>
 
-            <Button
-              type="button"
-              variant="danger"
-              onPress={() => confirmModal.open()}
-            >
+            <Button type="button" variant="danger" onPress={() => confirmModal.open()}>
               {t("setup.cancel")}
             </Button>
           </article>

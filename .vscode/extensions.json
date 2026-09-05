@@ -2,6 +2,6 @@
   "recommendations": [
     "ecmel.vscode-html-css",
     "bradlc.vscode-tailwindcss",
-    "biomejs.biome"
+    "oxc.oxc-vscode"
   ]
 }

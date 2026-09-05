@@ -25,9 +25,7 @@ const images = {
 
 export default function LightningDialog({ callback }: Props) {
   const { t } = useTranslation();
-  const [selected, setSelected] = useState<SetupLightning | undefined>(
-    undefined,
-  );
+  const [selected, setSelected] = useState<SetupLightning | undefined>(undefined);
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -47,7 +45,6 @@ export default function LightningDialog({ callback }: Props) {
               i18nKey="setup.select_lightning_help"
               t={t}
               components={[
-                // biome-ignore lint/a11y/useAnchorContent: value is expected to exist at this point
                 <a
                   key="link"
                   href="https://docs.raspiblitz.org/docs/setup/software-setup/basic"
@@ -65,34 +62,24 @@ export default function LightningDialog({ callback }: Props) {
           onSubmit={submitHandler}
         >
           <div className="mt-4">
-            <RadioGroup
-              value={selected}
-              className="gap-6"
-              onChange={setSelected as SelectFn}
-            >
-              {[
-                SetupLightning.LND,
-                SetupLightning.CLIGHTNING,
-                SetupLightning.NONE,
-              ].map((lightning) => (
-                <CustomRadio
-                  key={lightning}
-                  id={lightning}
-                  value={lightning}
-                  text={t(`setup.${lightning}`)}
-                  description={t(`setup.${lightning}_description`)}
-                  image={images[lightning]}
-                />
-              ))}
+            <RadioGroup value={selected} className="gap-6" onChange={setSelected as SelectFn}>
+              {[SetupLightning.LND, SetupLightning.CLIGHTNING, SetupLightning.NONE].map(
+                (lightning) => (
+                  <CustomRadio
+                    key={lightning}
+                    id={lightning}
+                    value={lightning}
+                    text={t(`setup.${lightning}`)}
+                    description={t(`setup.${lightning}_description`)}
+                    image={images[lightning]}
+                  />
+                ),
+              )}
             </RadioGroup>
           </div>
 
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
-            <Button
-              type="submit"
-              variant="primary"
-              isDisabled={selected === undefined}
-            >
+            <Button type="submit" variant="primary" isDisabled={selected === undefined}>
               {t("setup.continue")}
             </Button>
           </article>

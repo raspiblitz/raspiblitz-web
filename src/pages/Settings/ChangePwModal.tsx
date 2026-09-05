@@ -1,10 +1,4 @@
-import {
-  FieldError,
-  Input,
-  Label,
-  TextField,
-  useOverlayState,
-} from "@heroui/react";
+import { FieldError, Input, Label, TextField, useOverlayState } from "@heroui/react";
 import { type FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -100,11 +94,7 @@ const ChangePwModal: FC = () => {
                     name={field.name}
                   >
                     <Label>{t("settings.old_pw")}</Label>
-                    <Input
-                      type="password"
-                      className="bg-tertiary"
-                      {...keyHandlers}
-                    />
+                    <Input type="password" className="bg-tertiary" {...keyHandlers} />
                     <FieldError>{fieldState.error?.message}</FieldError>
                   </TextField>
                 )}
@@ -134,11 +124,7 @@ const ChangePwModal: FC = () => {
                     name={field.name}
                   >
                     <Label>{t("settings.new_pw")}</Label>
-                    <Input
-                      type="password"
-                      className="bg-tertiary"
-                      {...keyHandlers}
-                    />
+                    <Input type="password" className="bg-tertiary" {...keyHandlers} />
                     <FieldError>{fieldState.error?.message}</FieldError>
                   </TextField>
                 )}

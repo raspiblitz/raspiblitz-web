@@ -51,9 +51,7 @@ export default function StartDoneDialog({ setupPhase, callback }: Props) {
           <Button onPress={() => callback(false)} variant="primary">
             {buttonText}
           </Button>
-          <Button onPress={() => confirmModal.open()}>
-            {t("setup.cancel")}
-          </Button>
+          <Button onPress={() => confirmModal.open()}>{t("setup.cancel")}</Button>
         </article>
       </SetupContainer>
     </>

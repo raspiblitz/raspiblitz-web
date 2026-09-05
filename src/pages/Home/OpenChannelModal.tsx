@@ -1,12 +1,5 @@
-import {
-  FieldError,
-  Input,
-  Label,
-  ListBox,
-  Select,
-  TextField,
-} from "@heroui/react";
-import { useState } from "react";
+import { FieldError, Input, Label, ListBox, Select, TextField } from "@heroui/react";
+import { type Key, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -14,10 +7,7 @@ import { Alert } from "@/components/Alert";
 import AmountInput from "@/components/AmountInput";
 import AvailableBalance from "@/components/AvailableBalance";
 import { Button } from "@/components/Button";
-import {
-  ConfirmModal,
-  type Props as ConfirmModalProps,
-} from "@/components/ConfirmModal";
+import { ConfirmModal, type Props as ConfirmModalProps } from "@/components/ConfirmModal";
 import { checkError } from "@/utils/checkError";
 import { convertMSatToSat, stringToNumber } from "@/utils/format";
 import { instance } from "@/utils/interceptor";
@@ -75,7 +65,6 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
       <form onSubmit={handleSubmit(openChannelHandler)}>
         <ConfirmModal.Header>{t("home.open_channel")}</ConfirmModal.Header>
         <ConfirmModal.Body>
-          {/* biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point */}
           <AvailableBalance balance={convertedBalance!} />
 
           <fieldset className="flex w-full flex-col gap-4">
@@ -108,8 +97,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
                 required: t("forms.validation.amount.required"),
                 validate: {
                   greaterThanZero: (val) =>
-                    stringToNumber(`${val}`) > 0 ||
-                    t("forms.validation.amount.required"),
+                    stringToNumber(`${val}`) > 0 || t("forms.validation.amount.required"),
                 },
               }}
               render={({ field, fieldState }) => (
@@ -136,7 +124,7 @@ export default function OpenChannelModal({ balance, disclosure }: Props) {
                   <Select
                     aria-label={t("tx.fee_rate")}
                     selectedKey={field.value}
-                    onSelectionChange={(key) => field.onChange(String(key))}
+                    onSelectionChange={(key: Key | null) => field.onChange(String(key))}
                   >
                     <Select.Trigger className="bg-tertiary">
                       <Select.Value />

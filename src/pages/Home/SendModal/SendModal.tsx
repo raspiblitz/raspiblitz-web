@@ -2,10 +2,7 @@ import { Tabs } from "@heroui/react";
 import type { AxiosResponse } from "axios";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  ConfirmModal,
-  type Props as ConfirmModalProps,
-} from "@/components/ConfirmModal";
+import { ConfirmModal, type Props as ConfirmModalProps } from "@/components/ConfirmModal";
 import type { DecodePayRequest } from "@/models/decode-pay-req";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
@@ -31,9 +28,7 @@ export interface SendLnForm {
 
 const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
   const { t } = useTranslation();
-  const [confirmData, setConfirmData] = useState<
-    SendOnChainForm | SendLnForm | null
-  >(null);
+  const [confirmData, setConfirmData] = useState<SendOnChainForm | SendLnForm | null>(null);
   const [isBack, setIsBack] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -87,15 +82,9 @@ const SendModal: FC<Props> = ({ lnBalance, disclosure, onchainBalance }) => {
       <ConfirmModal.Header>{t("wallet.send")}</ConfirmModal.Header>
 
       <div className="mx-6">
-        <Tabs
-          aria-label={t("wallet.receive_aria_options")}
-          onSelectionChange={handleTabChange}
-        >
+        <Tabs aria-label={t("wallet.receive_aria_options")} onSelectionChange={handleTabChange}>
           <Tabs.List className="flex-col md:flex-row">
-            <Tabs.Tab
-              id={TxType.LIGHTNING}
-              className="text-xs whitespace-nowrap"
-            >
+            <Tabs.Tab id={TxType.LIGHTNING} className="text-xs whitespace-nowrap">
               {t("wallet.send_lightning")}
             </Tabs.Tab>
             <Tabs.Tab id={TxType.ONCHAIN} className="text-xs whitespace-nowrap">
