@@ -10,7 +10,7 @@ interface Props {
 interface State {
   hasError: boolean;
   error?: Error;
-  errorInfo?: ErrorInfo;
+  report: string;
   copied: boolean;
 }
 
@@ -18,6 +18,7 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
   public state: State = {
     hasError: false,
     copied: false,
+    report: "",
   };
 
   public static getDerivedStateFromError(
@@ -28,12 +29,16 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    this.setState({ errorInfo, error });
+    this.setState({
+      error,
+      report: createErrorReport(error, errorInfo),
+      copied: false,
+    });
     console.error("Uncaught error:", error, errorInfo);
   }
 
   private copyReport = async () => {
-    const report = createErrorReport(this.state.error, this.state.errorInfo);
+    const { report } = this.state;
 
     try {
       if (navigator.clipboard) {
@@ -44,9 +49,14 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
         textarea.style.position = "fixed";
         textarea.style.opacity = "0";
         document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        textarea.remove();
+        try {
+          textarea.select();
+          if (!document.execCommand("copy")) {
+            throw new Error("Copy command failed");
+          }
+        } finally {
+          textarea.remove();
+        }
       }
       this.setState({ copied: true });
     } catch {
@@ -57,7 +67,7 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
   public render() {
     if (this.state.hasError) {
       const { t } = this.props;
-      const report = createErrorReport(this.state.error, this.state.errorInfo);
+      const { report } = this.state;
       return (
         <main className="flex min-h-screen w-screen flex-col items-center justify-center gap-5 bg-gray-700 p-6 text-white transition-colors">
           <h1 className="text-xl font-bold">{t("login.error")} 😓</h1>

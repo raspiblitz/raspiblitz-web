@@ -34,18 +34,28 @@ function isAppQueryError(value: unknown): value is AppQueryError {
   );
 }
 
-function isAppStatusQueryResponse(
+function parseAppStatusQueryResponse(
   value: unknown,
-): value is AppStatusQueryResponse {
-  return (
-    isRecord(value) &&
-    Array.isArray(value.data) &&
-    value.data.every(isAppStatus) &&
-    Array.isArray(value.errors) &&
-    value.errors.every(isAppQueryError) &&
-    typeof value.timestamp === "number" &&
-    Number.isFinite(value.timestamp)
-  );
+): AppStatusQueryResponse | null {
+  if (
+    !isRecord(value) ||
+    !Array.isArray(value.data) ||
+    !Array.isArray(value.errors)
+  ) {
+    return null;
+  }
+
+  // A newer backend may know apps this WebUI cannot render yet. Keep valid
+  // entries so one unsupported app does not prevent all status updates.
+  return {
+    data: value.data.filter(isAppStatus),
+    errors: value.errors.filter(isAppQueryError),
+    // AppStatusRefresh expects Unix seconds, not Date.now() milliseconds.
+    timestamp:
+      typeof value.timestamp === "number" && Number.isFinite(value.timestamp)
+        ? value.timestamp
+        : Math.floor(Date.now() / 1000),
+  };
 }
 
 export function parseAppStateUpdateMessage(
@@ -65,8 +75,9 @@ export function parseAppStateUpdateMessage(
     return { state: value.state, message: null };
   }
 
-  if (value.state === "success" && isAppStatusQueryResponse(value.message)) {
-    return { state: value.state, message: value.message };
+  if (value.state === "success") {
+    const message = parseAppStatusQueryResponse(value.message);
+    if (message) return { state: value.state, message };
   }
 
   return null;

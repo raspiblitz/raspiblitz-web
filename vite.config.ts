@@ -17,7 +17,8 @@ export default defineConfig({
   plugins: [react(), viteTsconfigPaths(), svgr(), tailwindcss()],
   build: {
     outDir: 'build',
-    sourcemap: true,
+    // Opt in for diagnostic builds; normal releases omit the source maps.
+    sourcemap: process.env.BUILD_SOURCEMAP === "true",
     rollupOptions: {
       output: {
         // see https://github.com/vitejs/vite/issues/11804#issuecomment-2009619365

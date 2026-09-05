@@ -72,7 +72,7 @@ export async function setupMonitoringLoop(
 }
 
 interface SetupStatusResponse {
-  state: SetupStatus;
+  state: string;
   message?: string;
   initialsync?: string;
 }
@@ -80,20 +80,11 @@ interface SetupStatusResponse {
 function isSetupStatusResponse(value: unknown): value is SetupStatusResponse {
   if (!isRecord(value)) return false;
 
-  const validState =
-    value.state === SetupStatus.NULL ||
-    value.state === SetupStatus.ERROR ||
-    value.state === SetupStatus.PROVISION ||
-    value.state === SetupStatus.READY ||
-    value.state === SetupStatus.REBOOT ||
-    value.state === SetupStatus.SHUTDOWN ||
-    value.state === SetupStatus.WAIT ||
-    value.state === SetupStatus.WAITFINAL ||
-    value.state === SetupStatus.WAITPROVISION ||
-    value.state === SetupStatus.WAITSETUP;
-
+  // /setup/status forwards the Redis state written by RaspiBlitz scripts.
+  // The known SetupStatus values control navigation, but are not an exhaustive
+  // protocol enum: progress states like starting/systemcopy must keep polling.
   return (
-    validState &&
+    typeof value.state === "string" &&
     (value.message === undefined || typeof value.message === "string") &&
     (value.initialsync === undefined || typeof value.initialsync === "string")
   );
@@ -109,10 +100,13 @@ export async function initSetupStart(updateState: UpdateState): Promise<void> {
       return;
     }
 
+    const migrationOS = setupInfo.hddGotMigrationData ?? SetupMigrationOS.NULL;
+    const migrationMode = setupInfo.migrationMode ?? SetupMigrationMode.NULL;
+
     if (
       setupInfo.setupPhase === SetupPhase.MIGRATION &&
-      (setupInfo.hddGotMigrationData === SetupMigrationOS.NULL ||
-        setupInfo.migrationMode === SetupMigrationMode.NULL)
+      (migrationOS === SetupMigrationOS.NULL ||
+        migrationMode === SetupMigrationMode.NULL)
     ) {
       showError(
         "Migration data is incomplete. Retry after checking the source disk.",
@@ -124,8 +118,8 @@ export async function initSetupStart(updateState: UpdateState): Promise<void> {
     updateState({
       gotBlockchain: setupInfo.hddGotBlockchain === "1",
       setupPhaseOnStart: setupInfo.setupPhase,
-      migrationOS: setupInfo.hddGotMigrationData ?? SetupMigrationOS.NULL,
-      migrationMode: setupInfo.migrationMode ?? SetupMigrationMode.NULL,
+      migrationOS,
+      migrationMode,
       page: getInitialPage(setupInfo.setupPhase, updateState),
     });
   } catch {

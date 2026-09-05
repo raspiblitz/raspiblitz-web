@@ -1,5 +1,5 @@
 import type React from "react";
-import { createContext, useCallback, useContext } from "react";
+import { createContext, useCallback, useContext, useRef } from "react";
 import type { NavigateFunction } from "react-router";
 import {
   Screen,
@@ -58,6 +58,7 @@ export default function SetupProvider({
   updateState,
   navigate,
 }: Props) {
+  const retryInFlight = useRef(false);
   const callbacks = {
     onRecoveryDialog: useCallback(
       (startRecovery: boolean) => {
@@ -222,12 +223,18 @@ export default function SetupProvider({
     }, [updateState, navigate]),
 
     onRetry: useCallback(async () => {
-      updateState({
-        page: Screen.WAIT,
-        waitScreenStatus: SetupStatus.WAIT,
-        waitScreenMessage: "",
-      });
-      await setupMonitoringLoop(updateState, navigate);
+      if (retryInFlight.current) return;
+      retryInFlight.current = true;
+      try {
+        updateState({
+          page: Screen.WAIT,
+          waitScreenStatus: SetupStatus.WAIT,
+          waitScreenMessage: "",
+        });
+        await setupMonitoringLoop(updateState, navigate);
+      } finally {
+        retryInFlight.current = false;
+      }
     }, [navigate, updateState]),
   };
 

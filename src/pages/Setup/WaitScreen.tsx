@@ -5,7 +5,7 @@ import SetupContainer from "@/layouts/SetupContainer";
 import { SetupStatus } from "@/models/setup.model";
 
 type Props = {
-  status: SetupStatus;
+  status: string;
   message: string;
   onRetry: () => void;
 };
@@ -44,7 +44,7 @@ export default function WaitScreen({ status, message, onRetry }: Props) {
   return (
     <SetupContainer currentStep={null}>
       <section className="flex h-full max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
-        <Spinner size="lg" />
+        {status !== SetupStatus.ERROR && <Spinner size="lg" />}
 
         <div>
           <Headline>{headline}</Headline>
