@@ -10,7 +10,7 @@ describe("JWT expiry", () => {
 
   test("decodes the API claims and schedules ten minutes before expiry", () => {
     const payload = { user_id: "admin", iat: now, exp: now + 3600 };
-    expect(parseJwt(token(payload))).toEqual(payload);
+    expect(parseJwt(token(payload))).toEqual({ user_id: payload.user_id, exp: payload.exp });
     expect(REFRESH_TIME(payload.exp)).toBe(3_000_000);
   });
 
@@ -20,7 +20,17 @@ describe("JWT expiry", () => {
       .replace(/\+/g, "-")
       .replace(/\//g, "_")
       .replace(/=+$/, "");
-    expect(parseJwt(`header.${encoded}.signature`)).toEqual(payload);
+    expect(parseJwt(`header.${encoded}.signature`)).toEqual({
+      user_id: payload.user_id,
+      exp: payload.exp,
+    });
+  });
+
+  test.each([undefined, null, "unused", 123])("does not require or consume iat %j", (iat) => {
+    expect(parseJwt(token({ user_id: "admin", exp: now + 3600, iat }))).toEqual({
+      user_id: "admin",
+      exp: now + 3600,
+    });
   });
 
   test.each([null, 12, "broken", "a.%%.c", "a.bnVsbA.c", "a.e30.c"])(

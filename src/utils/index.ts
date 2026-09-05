@@ -84,15 +84,13 @@ export function parseJwt(token: unknown): TokenPayload | null {
     if (
       !isRecord(payload) ||
       typeof payload.user_id !== "string" ||
-      typeof payload.iat !== "number" ||
-      !Number.isFinite(payload.iat) ||
       typeof payload.exp !== "number" ||
       !Number.isFinite(payload.exp) ||
       !Number.isFinite(payload.exp * 1000) ||
       payload.exp <= 0
     )
       return null;
-    return { user_id: payload.user_id, iat: payload.iat, exp: payload.exp };
+    return { user_id: payload.user_id, exp: payload.exp };
   } catch {
     return null;
   }

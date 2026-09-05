@@ -1,5 +1,6 @@
 import { act, render, waitFor } from "test-utils";
 import App from "@/App";
+import { AppContext, appContextDefault } from "@/context/app-context";
 import { HttpResponse, http, server } from "@/testServer";
 import { ACCESS_TOKEN } from "@/utils";
 
@@ -9,6 +10,23 @@ const token = (seconds: number) =>
 
 // Keep these tests focused on the authentication lifecycle, without route UI timers.
 vi.mock("@/pages/Login", () => ({ default: () => null }));
+
+const realSetTimeout = globalThis.setTimeout;
+
+// Let MSW/Axios settle without advancing the fake clock used for retry deadlines.
+async function settleRefresh(assertion: () => void) {
+  await act(async () => {
+    for (let attempt = 0; attempt < 100; attempt++) {
+      await new Promise((resolve) => realSetTimeout(resolve, 5));
+      try {
+        assertion();
+        return;
+      } catch {
+        if (attempt === 99) assertion();
+      }
+    }
+  });
+}
 
 describe("token refresh lifecycle", () => {
   const logout = vi.fn(() => localStorage.removeItem(ACCESS_TOKEN));
@@ -76,6 +94,97 @@ describe("token refresh lifecycle", () => {
     await act(() => vi.advanceTimersByTimeAsync(30_000));
     vi.useRealTimers();
     await waitFor(() => expect(logout).toHaveBeenCalledOnce());
+  });
+
+  test("logs out if the stored token disappears before refresh", async () => {
+    localStorage.setItem(ACCESS_TOKEN, token(60));
+    render(<App />, options);
+    localStorage.removeItem(ACCESS_TOKEN);
+    await act(() => vi.advanceTimersByTimeAsync(30_000));
+    expect(logout).toHaveBeenCalledOnce();
+  });
+
+  test.each([200, 503])(
+    "resumes scheduling after another tab changes the token during a %i response",
+    async (status) => {
+      const refresh = vi.fn(() => {
+        if (refresh.mock.calls.length === 1) {
+          localStorage.setItem(ACCESS_TOKEN, token(120));
+          return status === 200
+            ? HttpResponse.json(token(3600))
+            : new HttpResponse(null, { status });
+        }
+        return HttpResponse.json(token(3600));
+      });
+      server.use(http.post("/api/system/refresh-token", refresh));
+      localStorage.setItem(ACCESS_TOKEN, token(60));
+      render(<App />, options);
+      await act(() => vi.advanceTimersByTimeAsync(30_000));
+      await settleRefresh(() => expect(refresh).toHaveBeenCalledOnce());
+      await act(() => vi.advanceTimersByTimeAsync(44_999));
+      expect(refresh).toHaveBeenCalledOnce();
+      expect(localStorage.getItem(ACCESS_TOKEN)).toBe(token(120));
+      await act(() => vi.advanceTimersByTimeAsync(1));
+      await settleRefresh(() => expect(localStorage.getItem(ACCESS_TOKEN)).toBe(token(3600)));
+      expect(refresh).toHaveBeenCalledTimes(2);
+      expect(logout).not.toHaveBeenCalled();
+    },
+  );
+
+  test.each([503, "network"])("retries a temporary %s error and recovers", async (failure) => {
+    const refresh = vi.fn(() =>
+      refresh.mock.calls.length === 1
+        ? failure === "network"
+          ? HttpResponse.error()
+          : new HttpResponse(null, { status: 503 })
+        : HttpResponse.json(token(3600)),
+    );
+    server.use(http.post("/api/system/refresh-token", refresh));
+    localStorage.setItem(ACCESS_TOKEN, token(60));
+    render(<App />, options);
+    await act(() => vi.advanceTimersByTimeAsync(30_000));
+    await settleRefresh(() => expect(refresh).toHaveBeenCalledOnce());
+    await act(() => vi.advanceTimersByTimeAsync(4_999));
+    expect(refresh).toHaveBeenCalledOnce();
+    expect(logout).not.toHaveBeenCalled();
+    await act(() => vi.advanceTimersByTimeAsync(1));
+    await settleRefresh(() => expect(localStorage.getItem(ACCESS_TOKEN)).toBe(token(3600)));
+    expect(refresh).toHaveBeenCalledTimes(2);
+    expect(logout).not.toHaveBeenCalled();
+  });
+
+  test("backs off repeated failures and logs out at expiry", async () => {
+    const refresh = vi.fn(() => new HttpResponse(null, { status: 503 }));
+    server.use(http.post("/api/system/refresh-token", refresh));
+    localStorage.setItem(ACCESS_TOKEN, token(60));
+    render(<App />, options);
+    await act(() => vi.advanceTimersByTimeAsync(30_000));
+    await settleRefresh(() => expect(refresh).toHaveBeenCalledTimes(1));
+    await act(() => vi.advanceTimersByTimeAsync(5_000));
+    await settleRefresh(() => expect(refresh).toHaveBeenCalledTimes(2));
+    await act(() => vi.advanceTimersByTimeAsync(10_000));
+    await settleRefresh(() => expect(refresh).toHaveBeenCalledTimes(3));
+    expect(logout).not.toHaveBeenCalled();
+    await act(() => vi.advanceTimersByTimeAsync(15_000));
+    expect(logout).toHaveBeenCalledOnce();
+    expect(refresh).toHaveBeenCalledTimes(3);
+  });
+
+  test("keeps the timer when logout changes and calls the latest handler", async () => {
+    const latestLogout = vi.fn();
+    const session = (handler: () => void) => (
+      <AppContext value={{ ...appContextDefault, isLoggedIn: true, logout: handler }}>
+        <App />
+      </AppContext>
+    );
+    localStorage.setItem(ACCESS_TOKEN, token(60));
+    const view = render(session(logout));
+    await act(() => vi.advanceTimersByTimeAsync(20_000));
+    view.rerender(session(latestLogout));
+    localStorage.removeItem(ACCESS_TOKEN);
+    await act(() => vi.advanceTimersByTimeAsync(10_000));
+    expect(latestLogout).toHaveBeenCalledOnce();
+    expect(logout).not.toHaveBeenCalled();
   });
 
   test("cancels the scheduled refresh on unmount", async () => {
