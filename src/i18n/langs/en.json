@@ -225,6 +225,8 @@
       "enter_pass_placeholder": "Password A",
       "error": "An error occurred",
       "unknown_error": "Unknown error. The response was: {{code}} {{statusText}}.",
+      "node_unreachable": "Node unreachable. Check your connection and try again.",
+      "unexpected_error": "An unexpected error occurred. Please try again.",
       "invalid_pass": "Invalid password",
       "login": "Log in",
       "caps_lock": "Caps Lock is ON"

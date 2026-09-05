@@ -51,6 +51,17 @@ describe("checkError", () => {
 
   it("falls back when a network error has no response", () => {
     const error = new AxiosError("Network Error", "ERR_NETWORK");
-    expect(checkError(error)).toBe("An error occurred: Unknown error. The response was:  .");
+    expect(checkError(error)).toBe(
+      "An error occurred: Node unreachable. Check your connection and try again.",
+    );
   });
+
+  it.each([new Error("Unexpected failure"), null, undefined, "failure"])(
+    "handles non-Axios errors without reporting a connection problem: %j",
+    (error) => {
+      expect(checkError(error)).toBe(
+        "An error occurred: An unexpected error occurred. Please try again.",
+      );
+    },
+  );
 });
