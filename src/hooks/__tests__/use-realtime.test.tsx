@@ -1,10 +1,12 @@
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { StrictMode, useContext } from "react";
 import { I18nextProvider } from "react-i18next";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { AppContext, appContextDefault } from "@/context/app-context";
+import AppContextProvider, { AppContext, appContextDefault } from "@/context/app-context";
 import RealtimeProvider from "@/context/realtime-context";
 import useRealtime from "@/hooks/use-realtime";
 import i18n from "@/i18n/test_config";
+import { render as renderWithProviders } from "@/utils/test-utils";
 
 class MockWebSocket {
   static instances: MockWebSocket[] = [];
@@ -117,17 +119,17 @@ describe("useRealtime (WebSocket)", () => {
     expect(screen.getByTestId("blocks").textContent).toBe("42");
   });
 
-  it("logs the user out when the socket closes with code 4401", async () => {
-    renderProbe();
-
-    await waitFor(() => expect(MockWebSocket.instances.length).toBe(1));
-    const ws = MockWebSocket.instances[0];
-
-    act(() => {
-      ws.onclose?.({ code: 4401 });
-    });
-
-    expect(logout).toHaveBeenCalledTimes(1);
+  it("logs out without reconnecting when the API rejects authentication with 4401", () => {
+    vi.useFakeTimers();
+    try {
+      renderProbe();
+      act(() => MockWebSocket.instances[0].onclose?.({ code: 4401 }));
+      expect(logout).toHaveBeenCalledOnce();
+      act(() => vi.advanceTimersByTime(60000));
+      expect(MockWebSocket.instances).toHaveLength(1);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("reconnects with backoff when the socket closes abnormally (non-4401)", async () => {
@@ -255,6 +257,109 @@ describe("useRealtime (WebSocket)", () => {
       expect(MockWebSocket.instances).toHaveLength(1);
     } finally {
       vi.useRealTimers();
+    }
+  });
+
+  it("caps retries at 30 seconds and resets the delay after a successful connection", () => {
+    vi.useFakeTimers();
+    try {
+      renderProbe();
+      for (const delay of [1000, 2000, 4000, 8000, 16000, 30000, 30000]) {
+        const count = MockWebSocket.instances.length;
+        act(() => MockWebSocket.instances[count - 1].onclose?.({ code: 1006 }));
+        act(() => vi.advanceTimersByTime(delay - 1));
+        expect(MockWebSocket.instances).toHaveLength(count);
+        act(() => vi.advanceTimersByTime(1));
+        expect(MockWebSocket.instances).toHaveLength(count + 1);
+      }
+      const connected = MockWebSocket.instances[MockWebSocket.instances.length - 1];
+      act(() => connected.onopen?.());
+      const count = MockWebSocket.instances.length;
+      act(() => connected.onclose?.({ code: 1006 }));
+      act(() => vi.advanceTimersByTime(999));
+      expect(MockWebSocket.instances).toHaveLength(count);
+      act(() => vi.advanceTimersByTime(1));
+      expect(MockWebSocket.instances).toHaveLength(count + 1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("cleans up the StrictMode trial connection without scheduling an extra retry", () => {
+    vi.useFakeTimers();
+    try {
+      const { unmount } = render(
+        <StrictMode>
+          <RealtimeProvider>
+            <AppContext.Provider value={{ ...appContextDefault, logout }}>
+              <I18nextProvider i18n={i18n}>
+                <Probe />
+              </I18nextProvider>
+            </AppContext.Provider>
+          </RealtimeProvider>
+        </StrictMode>,
+      );
+      expect(MockWebSocket.instances).toHaveLength(2);
+      const [discarded, active] = MockWebSocket.instances;
+      expect(discarded.close).toHaveBeenCalledOnce();
+      expect(active.close).not.toHaveBeenCalled();
+      // Native close events arrive asynchronously, after effect cleanup.
+      act(() => discarded.onclose?.({ code: 1006 }));
+      act(() => vi.advanceTimersByTime(60000));
+      expect(MockWebSocket.instances).toHaveLength(2);
+      act(() =>
+        active.onmessage?.({
+          data: JSON.stringify({ event: "btc_info", data: { blocks: 45 } }),
+        }),
+      );
+      expect(screen.getByTestId("blocks")).toHaveTextContent("45");
+      unmount();
+      expect(active.close).toHaveBeenCalledOnce();
+      act(() => active.onclose?.({ code: 1000 }));
+      act(() => vi.advanceTimersByTime(60000));
+      expect(MockWebSocket.instances).toHaveLength(2);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("clears the session and never reconnects after the user logs out", () => {
+    function AuthenticatedProbe() {
+      const context = useContext(AppContext);
+      return context.isLoggedIn ? (
+        <>
+          <button onClick={context.logout}>Log out</button>
+          <Probe />
+        </>
+      ) : (
+        <div>Signed out</div>
+      );
+    }
+    vi.useFakeTimers();
+    try {
+      const payload = btoa(
+        JSON.stringify({ user_id: "admin", exp: Math.floor(Date.now() / 1000) + 3600 }),
+      );
+      localStorage.setItem("access_token", `header.${payload}.signature`);
+      renderWithProviders(
+        <RealtimeProvider>
+          <AppContextProvider>
+            <AuthenticatedProbe />
+          </AppContextProvider>
+        </RealtimeProvider>,
+      );
+      expect(MockWebSocket.instances).toHaveLength(1);
+      const ws = MockWebSocket.instances[0];
+      fireEvent.click(screen.getByRole("button", { name: "Log out" }));
+      expect(screen.getByText("Signed out")).toBeVisible();
+      expect(localStorage.getItem("access_token")).toBeNull();
+      expect(ws.close).toHaveBeenCalled();
+      act(() => ws.onclose?.({ code: 1000 }));
+      act(() => vi.advanceTimersByTime(60000));
+      expect(MockWebSocket.instances).toHaveLength(1);
+    } finally {
+      vi.useRealTimers();
+      window.history.replaceState({}, "", "/");
     }
   });
 });

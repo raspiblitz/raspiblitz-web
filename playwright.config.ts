@@ -12,6 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  testIgnore: '**/realtime-live.spec.ts',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -25,7 +26,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3100',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -72,10 +73,19 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: [
     {
-      command: 'npm run start',
-      url: 'http://localhost:3000',
+      name: 'Mock API',
+      command: 'node backend-mock/index.js',
+      url: 'http://127.0.0.1:8100/index.html',
+      env: { PORT: '8100', WALLET_PASSWORD: 'password', JWT_SECRET: 'playwright-mock-secret' },
+      reuseExistingServer: false,
+    },
+    {
+      name: 'WebUI',
+      command: 'npm run start -- --port 3100 --strictPort',
+      url: 'http://localhost:3100',
+      env: { BACKEND_SERVER: 'http://127.0.0.1:8100/api' },
       timeout: 120 * 1000,
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: false,
     },
   ],
 });

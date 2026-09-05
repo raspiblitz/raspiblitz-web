@@ -110,8 +110,22 @@ include JavaScript and component stacks without source maps.
 
 #### E2E tests
 
-Run tests headless:\
-`npx playwright test`
+Install both sets of locked dependencies with `npm ci` and
+`npm ci --prefix backend-mock`, then install Chromium with
+`npx playwright install chromium`.
+
+Run the mock's WebSocket protocol tests with `npm run test:mock`.
+
+Run browser tests headless with `npm run test:e2e`. Playwright starts a dedicated
+mock API on port 8100 and Vite on port 3100, including a test that uses native
+WebSockets to verify dashboard snapshots and wallet state updates. These tests
+always use the mock, regardless of `BACKEND_SERVER`, and refuse to reuse servers
+already occupying their ports. Normal development servers on ports 3000 and 8000
+can keep running.
+
+CI runs lint, types, unit tests, mock tests, and builds on Node.js 22 and 24. A
+separate Node.js 24 job runs Chromium E2E tests and retains the HTML report for
+seven days.
 
 Run test with UI:\
 `npx playwright test --ui`
@@ -152,18 +166,21 @@ example `BACKEND_SERVER=http://raspiblitz.local:11111`.
 #### Live WebSocket integration test
 
 The optional live test verifies login, initial snapshots, dashboard rendering,
-reconnection, and logout after the real API rejects an invalid token. It does not
-change node settings or initiate wallet operations. With no credentials configured,
-the regular E2E suite skips it.
+session restoration after reload, reconnection, and logout after the real API
+rejects an invalid token. It does not change node settings or initiate wallet
+operations. The regular E2E suite always
+excludes it; the separate live command requires both environment variables below.
+Live tests disable traces, screenshots, and video to avoid retaining credentials.
 
-Stop any existing frontend dev server first so Playwright starts Vite with the selected
-backend. In Bash, read the password without putting it in shell history:
+Playwright starts its own frontend on port 3100 with the selected backend and
+refuses to reuse an existing server on that port. In Bash, read the password
+without putting it in shell history:
 
 ```bash
 export BACKEND_SERVER=https://raspiblitz.local/api
 read -r -s -p 'Password A: ' BLITZ_API_PASSWORD
 export BLITZ_API_PASSWORD
-npx playwright test tests/realtime-live.spec.ts --reporter=line
+npm run test:e2e:live
 unset BLITZ_API_PASSWORD
 ```
 

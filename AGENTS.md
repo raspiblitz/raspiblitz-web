@@ -21,7 +21,9 @@ This file provides guidance to coding agents when working with code in this repo
 - `npm test` - Run unit tests with Vitest
 - `npm run test:watch` - Run tests in watch mode
 - `npm run coverage` - Generate test coverage report
-- `npx playwright test` - Run E2E tests headless
+- `npm run test:mock` - Run backend mock WebSocket protocol tests
+- `npm run test:e2e` - Run E2E tests with an isolated mock API and frontend
+- `npm run test:e2e:live` - Run opt-in live API tests; requires `BACKEND_SERVER` and `BLITZ_API_PASSWORD`
 - `npx playwright test --ui` - Run E2E tests with UI
 
 ### Code Quality

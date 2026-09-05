@@ -22,7 +22,7 @@ app.use("/api/setup", setup);
 app.use("/api/apps", apps);
 app.use("/api/lightning", lightning);
 
-const PORT = 8000;
+const PORT = Number(process.env.PORT || 8000);
 
 const server = app.listen(PORT, () => {
   console.info(`Server listening on http://localhost:${PORT}`);

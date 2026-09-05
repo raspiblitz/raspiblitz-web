@@ -8,9 +8,13 @@ test.use({ trace: 'off', screenshot: 'off', video: 'off' });
 test.describe('live Blitz API', () => {
   test.skip(!process.env.BACKEND_SERVER || !password, 'Set BACKEND_SERVER and BLITZ_API_PASSWORD');
 
-  test('authenticates, renders snapshots, reconnects, and logs out on invalid auth', async ({ page }) => {
+  test('authenticates, restores the session, reconnects, and logs out on invalid auth', async ({ page }) => {
     test.setTimeout(90000);
     if (!password) throw new Error('Missing BLITZ_API_PASSWORD');
+    let loginRequests = 0;
+    page.on('request', request => {
+      if (new URL(request.url()).pathname === '/api/system/login') loginRequests++;
+    });
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
     const connections: { page: WebSocketRoute; server: WebSocketRoute; events: Set<string> }[] = [];
@@ -46,6 +50,17 @@ test.describe('live Blitz API', () => {
       timeout: 30000,
     }).toBe(true);
     await expect(page.getByRole('heading', { name: 'Bitcoin', exact: true })).toBeVisible();
+
+    const beforeReload = connections.length;
+    await page.reload();
+    await expect(page).toHaveURL(/\/home$/);
+    await expect.poll(() => connections.length).toBeGreaterThan(beforeReload);
+    await expect.poll(() => requiredEvents.every(event => connections.at(-1)?.events.has(event)), {
+      timeout: 30000,
+    }).toBe(true);
+    await expect(page.getByRole('heading', { name: 'Bitcoin', exact: true })).toBeVisible();
+    expect(await page.evaluate(() => localStorage.getItem('access_token') !== null)).toBe(true);
+    expect(loginRequests).toBe(1);
 
     // Force a dropped connection without interrupting the node or changing its data.
     const active = connections.at(-1);
