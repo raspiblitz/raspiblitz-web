@@ -1,9 +1,9 @@
 const util = require("./util");
 
-const systemStartupInfo = () => {
+const systemStartupInfo = (send = util.sendEvent) => {
   console.info("sending system_startup_info");
 
-  util.sendSSE("system_startup_info", {
+  send("system_startup_info", {
     bitcoin: "done",
     bitcoin_msg: "",
     lightning: "locked",

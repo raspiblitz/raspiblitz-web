@@ -1,8 +1,8 @@
 const util = require("./util");
 
-const appStatus = () => {
+const appStatus = (send = util.sendEvent) => {
   console.info("sending app_state_update_message");
-  util.sendSSE("app_state_update_message", {
+  send("app_state_update_message", {
     state: "success",
     message: {
       data: [

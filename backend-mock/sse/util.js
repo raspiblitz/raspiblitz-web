@@ -1,20 +1,18 @@
-/**
- * Connected WebSocket clients.
- * @type {import("ws").WebSocket[]}
- */
-let clients = [];
+const { WebSocket } = require("ws");
 
-/**
- * Send an event to all connected WebSocket clients.
- * @param {string} event
- * @param {any} data
- */
-const sendSSE = (event, data) => {
-  const frame = JSON.stringify({ event, data });
-  clients.forEach((ws) => {
-    // 1 === WebSocket.OPEN
-    if (ws.readyState === 1) ws.send(frame);
-  });
+/** @type {import("ws").WebSocket[]} */
+const clients = [];
+
+/** Send a warmup event to one authenticated client. */
+const sendToClient = (ws, event, data) => {
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ event, data }));
+  }
 };
 
-module.exports = { clients, sendSSE };
+/** Broadcast subsequent updates to all authenticated clients. */
+const sendEvent = (event, data) => {
+  for (const ws of clients) sendToClient(ws, event, data);
+};
+
+module.exports = { clients, sendToClient, sendEvent };
