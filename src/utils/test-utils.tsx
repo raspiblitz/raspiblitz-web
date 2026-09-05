@@ -2,11 +2,7 @@ import { type RenderOptions, render } from "@testing-library/react";
 import type { FC, PropsWithChildren, ReactElement } from "react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router";
-import {
-  AppContext,
-  type AppContextType,
-  appContextDefault,
-} from "@/context/app-context";
+import { AppContext, type AppContextType, appContextDefault } from "@/context/app-context";
 import {
   RealtimeContext,
   type RealtimeContextType,
@@ -19,11 +15,7 @@ type Props = {
   appProps: AppContextType;
 };
 
-const AllTheProviders: FC<PropsWithChildren<Props>> = ({
-  children,
-  appProps,
-  sseProps,
-}) => {
+const AllTheProviders: FC<PropsWithChildren<Props>> = ({ children, appProps, sseProps }) => {
   return (
     <BrowserRouter>
       <RealtimeContext.Provider
@@ -55,10 +47,7 @@ const customRender = (
   },
 ) =>
   render(ui, {
-    // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
-    wrapper: (props: any) => (
-      <AllTheProviders {...props} {...options?.providerOptions} />
-    ),
+    wrapper: (props: any) => <AllTheProviders {...props} {...options?.providerOptions} />,
     ...options,
   });
 

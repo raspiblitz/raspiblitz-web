@@ -1,10 +1,5 @@
 import { Unit } from "@/context/app-context";
-import {
-  convertBtcToSat,
-  convertMSatToBtc,
-  convertSatToBtc,
-  convertToString,
-} from "../format";
+import { convertBtcToSat, convertMSatToBtc, convertSatToBtc, convertToString } from "../format";
 
 describe("format", () => {
   test("format sat to btc", () => {

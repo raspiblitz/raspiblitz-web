@@ -1,18 +1,14 @@
-import {
-  ChevronLeftIcon,
-  PlusIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronLeftIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Button, Link } from "@heroui/react";
 import { type FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
 import AppIcon from "@/components/AppIcon";
 import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
-import { availableApps } from "@/utils/availableApps";
+import { availableApps, isAppId } from "@/utils/availableApps";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import ImageCarousel from "./ImageCarousel";
@@ -24,28 +20,26 @@ export const AppInfo: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { appStatus, installingApp, hardwareInfo } = useContext(RealtimeContext);
   const [imgs, setImgs] = useState<string[]>([]);
-  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-  const { name } = availableApps[appId!];
-  // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-  const { author, repository } = availableApps[appId!];
-  const { installed, version } =
-    appStatus.data.find((app) => app.id === appId) || {};
+  const knownAppId = isAppId(appId) ? appId : null;
+  const appInfo = knownAppId ? availableApps[knownAppId] : null;
+  const { installed, version } = appStatus.data.find((app) => app.id === appId) || {};
 
   useEffect(() => {
     setIsLoading(true);
 
     async function loadAppImages() {
       const promises = await Promise.allSettled([
-        import(`../../assets/apps/preview/${appId}/1.png`),
-        import(`../../assets/apps/preview/${appId}/2.png`),
-        import(`../../assets/apps/preview/${appId}/3.png`),
+        import(`../../assets/apps/preview/${knownAppId}/1.png`),
+        import(`../../assets/apps/preview/${knownAppId}/2.png`),
+        import(`../../assets/apps/preview/${knownAppId}/3.png`),
       ]);
 
       promises.forEach((promise, i) => {
         if (promise.status === "fulfilled") {
           setImgs((prev) => {
-            prev[i] = promise.value.default;
-            return prev;
+            const next = [...prev];
+            next[i] = promise.value.default;
+            return next;
           });
         } else {
           // Ignore if image not available
@@ -54,35 +48,35 @@ export const AppInfo: FC = () => {
       setIsLoading(false);
     }
 
-    loadAppImages();
-  }, [appId]);
+    if (knownAppId) loadAppImages();
+  }, [knownAppId]);
 
   const installHandler = useCallback(() => {
-    instance.post(`apps/install/${appId}`).catch((err) => {
+    if (!knownAppId) return;
+    instance.post(`apps/install/${knownAppId}`).catch((err) => {
       toast.error(checkError(err));
     });
-  }, [appId]);
+  }, [knownAppId]);
 
   const uninstallHandler = useCallback(() => {
-    instance
-      .post("apps/uninstall", { app_id: appId, keep_data: true })
-      .catch((err) => {
-        toast.error(checkError(err));
-      });
-  }, [appId]);
+    if (!knownAppId) return;
+    instance.post("apps/uninstall", { app_id: knownAppId, keep_data: true }).catch((err) => {
+      toast.error(checkError(err));
+    });
+  }, [knownAppId]);
+
+  if (!knownAppId || !appInfo) {
+    return <Navigate to="/apps" replace />;
+  }
 
   if (isLoading) {
     return <PageLoadingScreen />;
   }
 
-  if (!appId) {
-    navigate("/apps");
-    return null;
-  }
+  const { name, author, repository } = appInfo;
 
   const video =
     appId === "mempool" ? (
-      // biome-ignore lint/a11y/useMediaCaption: value is expected to exist at this point
       <video width="2000" height="1000" controls>
         <source src="/assets/apps/videos/mempool.mp4" type="video/mp4" />
       </video>
@@ -90,9 +84,7 @@ export const AppInfo: FC = () => {
 
   // show warning if btcpay & ram below 8GB (in bytes); since the ram is always a bit less than 8gb, we use 7_000_000_000 (~7gb) instead
   const showBtcPayWarning =
-    appId === "btcpayserver" &&
-    hardwareInfo &&
-    hardwareInfo.vram_total_bytes < 7_000_000_000;
+    appId === "btcpayserver" && hardwareInfo && hardwareInfo.vram_total_bytes < 7_000_000_000;
 
   return (
     <main className="page-container content-container w-full bg-gray-700 text-white">
@@ -108,52 +100,38 @@ export const AppInfo: FC = () => {
 
       {/* Image box with title */}
       <section className="mb-5 flex w-full flex-wrap items-center justify-center">
-        <AppIcon appId={appId} className="max-h-12" />
+        <AppIcon appId={knownAppId} className="max-h-12" />
         <h1 className="px-5 text-2xl text-white">{name}</h1>
 
-        {(installingApp == null || installingApp.appId !== appId) &&
-          !installed && (
-            <Button
-              isDisabled={!!installingApp}
-              variant="primary"
-              onPress={installHandler}
-            >
-              <span className="flex items-center gap-2">
-                <PlusIcon className="inline h-6 w-6" />
-                {t("apps.install")}
-              </span>
-            </Button>
-          )}
+        {(installingApp == null || installingApp.appId !== appId) && !installed && (
+          <Button isDisabled={!!installingApp} variant="primary" onPress={installHandler}>
+            <span className="flex items-center gap-2">
+              <PlusIcon className="inline h-6 w-6" />
+              {t("apps.install")}
+            </span>
+          </Button>
+        )}
 
-        {installingApp &&
-          installingApp.appId === appId &&
-          installingApp.mode === "on" && (
-            <Button isDisabled isPending variant="primary">
-              {t("apps.installing")}
-            </Button>
-          )}
+        {installingApp && installingApp.appId === appId && installingApp.mode === "on" && (
+          <Button isDisabled isPending variant="primary">
+            {t("apps.installing")}
+          </Button>
+        )}
 
-        {installingApp &&
-          installingApp.appId === appId &&
-          installingApp.mode === "off" && (
-            <Button isDisabled isPending variant="primary">
-              {t("apps.uninstalling")}
-            </Button>
-          )}
+        {installingApp && installingApp.appId === appId && installingApp.mode === "off" && (
+          <Button isDisabled isPending variant="primary">
+            {t("apps.uninstalling")}
+          </Button>
+        )}
 
-        {(installingApp == null || installingApp.appId !== appId) &&
-          installed && (
-            <Button
-              isDisabled={!!installingApp}
-              variant="danger"
-              onPress={uninstallHandler}
-            >
-              <span className="flex items-center gap-2">
-                <TrashIcon className="inline h-6 w-6" />
-                {t("apps.uninstall")}
-              </span>
-            </Button>
-          )}
+        {(installingApp == null || installingApp.appId !== appId) && installed && (
+          <Button isDisabled={!!installingApp} variant="danger" onPress={uninstallHandler}>
+            <span className="flex items-center gap-2">
+              <TrashIcon className="inline h-6 w-6" />
+              {t("apps.uninstall")}
+            </span>
+          </Button>
+        )}
       </section>
 
       {showBtcPayWarning && (
@@ -180,12 +158,7 @@ export const AppInfo: FC = () => {
           <p>{author}</p>
           <h4 className="my-2 text-gray-300">{t("apps.source")}</h4>
 
-          <Link
-            href={repository}
-            target="_blank"
-            rel="noreferrer"
-            className="underline"
-          >
+          <Link href={repository} target="_blank" rel="noreferrer" className="underline">
             {repository}
           </Link>
         </article>

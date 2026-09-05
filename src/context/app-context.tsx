@@ -11,13 +11,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import {
-  ACCESS_TOKEN,
-  disableGutter,
-  parseJwt,
-  retrieveSettings,
-  setWindowAlias,
-} from "@/utils";
+import { ACCESS_TOKEN, disableGutter, parseJwt, retrieveSettings, setWindowAlias } from "@/utils";
 import { RealtimeContext } from "./realtime-context";
 
 export interface AppContextType {
@@ -93,23 +87,16 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
     // if authenticated log in automatically
     const token = localStorage.getItem(ACCESS_TOKEN);
     if (token) {
-      try {
-        const payload = parseJwt(token);
-        if (payload.expires > Date.now()) {
-          setIsLoggedIn(true);
-          if (
-            window.location.pathname === "/" ||
-            window.location.pathname === "/login"
-          ) {
-            navigate("/home");
-          }
-        } else {
-          localStorage.removeItem(ACCESS_TOKEN);
-          console.info(`Token expired at ${payload.expires}.`);
+      const payload = parseJwt(token);
+      // exp is a standard JWT claim in seconds; Date.now() is ms
+      if (payload && payload.exp * 1000 > Date.now()) {
+        setIsLoggedIn(true);
+        if (window.location.pathname === "/" || window.location.pathname === "/login") {
+          navigate("/home");
         }
-      } catch {
+      } else {
         localStorage.removeItem(ACCESS_TOKEN);
-        console.info("Token invalid - removed");
+        console.info("Token invalid or expired - removed");
       }
     }
   }, [i18n, navigate]);
@@ -126,9 +113,7 @@ const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
     setIsGeneratingReport,
   };
 
-  return (
-    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
 };
 
 export default AppContextProvider;

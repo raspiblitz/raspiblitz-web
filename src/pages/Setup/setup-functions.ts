@@ -2,11 +2,14 @@ import { HttpStatusCode } from "axios";
 import type { NavigateFunction } from "react-router";
 import {
   Screen,
+  SetupMigrationMode,
+  SetupMigrationOS,
   SetupPhase,
   type SetupState,
   SetupStatus,
 } from "@/models/setup.model";
 import { ACCESS_TOKEN } from "@/utils";
+import { isRecord } from "@/utils/guards";
 import { instance } from "@/utils/interceptor";
 
 type UpdateState = (newState: Partial<SetupState>) => void;
@@ -25,53 +28,129 @@ export async function setupMonitoringLoop(
 ): Promise<void> {
   try {
     const resp = await instance.get("/setup/status");
+    const setupStatus: unknown = resp.data;
 
-    if (resp.data.state === SetupStatus.WAITSETUP) {
+    if (!isSetupStatusResponse(setupStatus)) {
+      showError("The setup service returned an invalid status.", updateState);
+      return;
+    }
+
+    if (setupStatus.state === SetupStatus.WAITSETUP) {
       await initSetupStart(updateState);
       return;
     }
 
-    if (resp.data.state === SetupStatus.WAITFINAL) {
+    if (setupStatus.state === SetupStatus.WAITFINAL) {
       await initSetupFinal(updateState, navigate);
       return;
     }
 
-    if (resp.data.state === SetupStatus.READY) {
-      if (resp.data.initialsync === "running") {
+    if (setupStatus.state === SetupStatus.READY) {
+      if (setupStatus.initialsync === "running") {
         await showSyncScreen(updateState, navigate);
       } else {
         navigate("/");
         return;
       }
+    } else if (setupStatus.state === SetupStatus.ERROR) {
+      showError(setupStatus.message ?? "Setup failed.", updateState);
+      return;
     } else {
       updateState({
-        waitScreenStatus: resp.data.state,
-        waitScreenMessage: resp.data.message,
+        waitScreenStatus: setupStatus.state,
+        waitScreenMessage: setupStatus.message ?? "",
         page: Screen.WAIT,
       });
     }
   } catch (error) {
-    console.error(
-      `status request failed - device is off or in reboot?: ${error}`,
-    );
+    console.error(`status request failed - device is off or in reboot?: ${error}`);
   }
 
   setTimeout(() => setupMonitoringLoop(updateState, navigate), 4000);
 }
 
+interface SetupStatusResponse {
+  state: string;
+  message?: string;
+  initialsync?: string;
+}
+
+function isSetupStatusResponse(value: unknown): value is SetupStatusResponse {
+  if (!isRecord(value)) return false;
+
+  // /setup/status forwards the Redis state written by RaspiBlitz scripts.
+  // The known SetupStatus values control navigation, but are not an exhaustive
+  // protocol enum: progress states like starting/systemcopy must keep polling.
+  return (
+    typeof value.state === "string" &&
+    (value.message === undefined || typeof value.message === "string") &&
+    (value.initialsync === undefined || typeof value.initialsync === "string")
+  );
+}
+
 export async function initSetupStart(updateState: UpdateState): Promise<void> {
   try {
     const resp = await instance.get("/setup/setup-start-info");
+    const setupInfo: unknown = resp.data;
+
+    if (!isSetupStartInfo(setupInfo)) {
+      showError("The setup service returned invalid setup data.", updateState);
+      return;
+    }
+
+    const migrationOS = setupInfo.hddGotMigrationData ?? SetupMigrationOS.NULL;
+    const migrationMode = setupInfo.migrationMode ?? SetupMigrationMode.NULL;
+
+    if (
+      setupInfo.setupPhase === SetupPhase.MIGRATION &&
+      (migrationOS === SetupMigrationOS.NULL || migrationMode === SetupMigrationMode.NULL)
+    ) {
+      showError("Migration data is incomplete. Retry after checking the source disk.", updateState);
+      return;
+    }
+
     updateState({
-      gotBlockchain: resp.data.hddGotBlockchain === "1",
-      setupPhaseOnStart: resp.data.setupPhase,
-      migrationOS: resp.data.hddGotMigrationData,
-      migrationMode: resp.data.migrationMode,
-      page: getInitialPage(resp.data.setupPhase, updateState),
+      gotBlockchain: setupInfo.hddGotBlockchain === "1",
+      setupPhaseOnStart: setupInfo.setupPhase,
+      migrationOS,
+      migrationMode,
+      page: getInitialPage(setupInfo.setupPhase, updateState),
     });
-  } catch (error) {
-    showError(`request for init setup data failed: ${error}`, updateState);
+  } catch {
+    showError("Request for initial setup data failed.", updateState);
   }
+}
+
+interface SetupStartInfo {
+  hddGotBlockchain: string;
+  hddGotMigrationData: SetupMigrationOS | null;
+  migrationMode: SetupMigrationMode | null;
+  setupPhase: SetupPhase;
+}
+
+function isSetupStartInfo(value: unknown): value is SetupStartInfo {
+  if (!isRecord(value) || typeof value.hddGotBlockchain !== "string") {
+    return false;
+  }
+
+  const validSetupPhase =
+    value.setupPhase === SetupPhase.RECOVERY ||
+    value.setupPhase === SetupPhase.UPDATE ||
+    value.setupPhase === SetupPhase.MIGRATION ||
+    value.setupPhase === SetupPhase.SETUP;
+  const validMigrationOS =
+    value.hddGotMigrationData === null ||
+    value.hddGotMigrationData === SetupMigrationOS.NULL ||
+    value.hddGotMigrationData === SetupMigrationOS.CITADEL ||
+    value.hddGotMigrationData === SetupMigrationOS.MYNODE ||
+    value.hddGotMigrationData === SetupMigrationOS.UMBREL;
+  const validMigrationMode =
+    value.migrationMode === null ||
+    value.migrationMode === SetupMigrationMode.NULL ||
+    value.migrationMode === SetupMigrationMode.NORMAL ||
+    value.migrationMode === SetupMigrationMode.OUTDATED;
+
+  return validSetupPhase && validMigrationOS && validMigrationMode;
 }
 
 export async function initSetupFinal(
@@ -88,16 +167,11 @@ export async function initSetupFinal(
     const error = err as { response: { status: number } };
     if (
       error.response &&
-      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(
-        error.response.status,
-      )
+      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(error.response.status)
     ) {
       navigate("/login?back=/setup");
     } else {
-      showError(
-        `request for setup start failed: ${error.response?.status}`,
-        updateState,
-      );
+      showError(`request for setup start failed: ${error.response?.status}`, updateState);
     }
   }
 }
@@ -141,16 +215,11 @@ export async function setupFinalReboot(
     const error = err as { response: { status: number } };
     if (
       error.response &&
-      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(
-        error.response.status,
-      )
+      [HttpStatusCode.Forbidden, HttpStatusCode.Unauthorized].includes(error.response.status)
     ) {
       navigate("/login?back=/setup");
     } else {
-      showError(
-        `request for final setup done failed: ${error.response?.status}`,
-        updateState,
-      );
+      showError(`request for final setup done failed: ${error.response?.status}`, updateState);
     }
   }
 }
@@ -173,10 +242,7 @@ export async function setupShutdown(updateState: UpdateState): Promise<void> {
   }
 }
 
-function getInitialPage(
-  setupPhase: SetupPhase,
-  updateState: UpdateState,
-): Screen {
+function getInitialPage(setupPhase: SetupPhase, updateState: UpdateState): Screen {
   updateState({ setupPhase });
   switch (setupPhase) {
     case SetupPhase.RECOVERY:
@@ -192,10 +258,7 @@ function getInitialPage(
   }
 }
 
-async function showSyncScreen(
-  updateState: UpdateState,
-  navigate: NavigateFunction,
-): Promise<void> {
+async function showSyncScreen(updateState: UpdateState, navigate: NavigateFunction): Promise<void> {
   try {
     const resp = await instance.post("/setup/setup-sync-info", {});
     updateState({
@@ -204,11 +267,7 @@ async function showSyncScreen(
     });
   } catch (err) {
     const error = err as { response: { status: number } };
-    if (
-      [HttpStatusCode.Unauthorized, HttpStatusCode.Forbidden].includes(
-        error.response.status,
-      )
-    ) {
+    if ([HttpStatusCode.Unauthorized, HttpStatusCode.Forbidden].includes(error.response.status)) {
       navigate("/login?back=/setup");
     } else {
       console.error(`request for sync failed: ${error.response.status}`);

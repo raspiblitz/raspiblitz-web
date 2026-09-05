@@ -8,7 +8,6 @@ import { convertBtcToSat, convertSatToBtc, formatAmount } from "@/utils/format";
 
 export type Props = {
   amount?: number;
-  // biome-ignore lint/suspicious/noExplicitAny: field is reused across forms with different value shapes
   field: ControllerRenderProps<any, any>;
   error?: string;
   disabled?: boolean;
@@ -16,25 +15,20 @@ export type Props = {
 
 const AmountInput: FC<Props> = ({ amount, field, error, disabled = false }) => {
   const { t } = useTranslation();
-  const [amountInput, setAmountInput] = useState<string>(
-    amount ? `${amount}` : "",
-  );
+  const [amountInput, setAmountInput] = useState<string>(amount ? `${amount}` : "");
   const { unit, toggleUnit } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const toggleHandler = () => {
     let formattedValue = amountInput;
     if (unit === Unit.BTC && formattedValue) {
-      formattedValue = new Intl.NumberFormat("en-US").format(
-        convertBtcToSat(+formattedValue),
-      );
+      formattedValue = new Intl.NumberFormat("en-US").format(convertBtcToSat(+formattedValue));
     } else {
       // remove separators
       formattedValue = formattedValue.replace(/[,.]/g, "");
       if (formattedValue) {
         formattedValue = new Intl.NumberFormat("en-US", {
           minimumFractionDigits: 8,
-          // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
         }).format(convertSatToBtc(Number.parseInt(formattedValue, 10))!);
       }
     }

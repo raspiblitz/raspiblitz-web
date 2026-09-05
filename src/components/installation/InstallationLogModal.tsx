@@ -11,10 +11,7 @@ interface InstallationLogModalProps {
   onClose: () => void;
 }
 
-const InstallationLogModal = ({
-  appId,
-  onClose,
-}: InstallationLogModalProps) => {
+const InstallationLogModal = ({ appId, onClose }: InstallationLogModalProps) => {
   const { installationStatus } = useContext(RealtimeContext);
   const logEndRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
@@ -38,9 +35,7 @@ const InstallationLogModal = ({
   if (!appStatus) return null;
 
   // Format error details if present
-  const errorMsg = messages.find(
-    (msg) => msg.error_id && msg.error_id !== "none",
-  );
+  const errorMsg = messages.find((msg) => msg.error_id && msg.error_id !== "none");
   const errorDetails = errorMsg?.message || "";
 
   // Format app ID for display
@@ -58,9 +53,7 @@ const InstallationLogModal = ({
       })
       .join("\n");
 
-    const errorContent = errorId
-      ? `\n\nERROR: ${errorId}\n${errorDetails}`
-      : "";
+    const errorContent = errorId ? `\n\nERROR: ${errorId}\n${errorDetails}` : "";
     const fullContent = `Installation Log for ${displayAppId}\n${"=".repeat(50)}\n\n${logContent}${errorContent}`;
 
     const blob = new Blob([fullContent], { type: "text/plain" });
@@ -123,9 +116,7 @@ const InstallationLogModal = ({
                             : "bg-blue-500"
                       }`}
                     />
-                    <div className="break-words flex-1 leading-relaxed">
-                      {msg.message}
-                    </div>
+                    <div className="break-words flex-1 leading-relaxed">{msg.message}</div>
                   </div>
                 </div>
               ))
@@ -134,9 +125,7 @@ const InstallationLogModal = ({
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-800 flex items-center justify-center">
                   <div className="w-8 h-8 border-2 border-gray-600 border-t-blue-500 rounded-full animate-spin" />
                 </div>
-                <div className="text-gray-400 italic text-lg">
-                  {t("apps.no_messages")}
-                </div>
+                <div className="text-gray-400 italic text-lg">{t("apps.no_messages")}</div>
               </div>
             )}
             {errorId && (
@@ -173,9 +162,7 @@ function getDisplayAppId(id: string): string {
       // e.g., BTC_RPC_EXPLORER -> BTC RPC Explorer
       return key
         .split("_")
-        .map(
-          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-        )
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
         .join(" ");
     }
   }

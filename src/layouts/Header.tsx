@@ -1,7 +1,4 @@
-import {
-  BitcoinCircleIcon,
-  SatoshiV1Icon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { BitcoinCircleIcon, SatoshiV1Icon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import {
   ArrowRightStartOnRectangleIcon,
   Bars3Icon,
@@ -51,7 +48,7 @@ export default function Header() {
           <Dropdown.Popover placement="bottom end">
             <Dropdown.Menu
               aria-label="Header Actions"
-              onAction={(key) => handleDropDownAction(key)}
+              onAction={(key: Key) => handleDropDownAction(key)}
             >
               <Dropdown.Item id="toggle_sats">
                 <span className="flex items-center gap-2">
@@ -60,9 +57,7 @@ export default function Header() {
                   ) : (
                     <SatoshiV1Icon className="inline h-4 w-4" />
                   )}
-                  {unitActive
-                    ? t("navigation.display_btc")
-                    : t("navigation.display_sats")}
+                  {unitActive ? t("navigation.display_btc") : t("navigation.display_sats")}
                 </span>
               </Dropdown.Item>
 

@@ -45,9 +45,7 @@ export function formatAmount(value: string, unit: Unit): string {
     // remove all separators to format correctly
     formattedValue = formattedValue.replace(/,|\./g, "");
     if (formattedValue) {
-      formattedValue = new Intl.NumberFormat(NUM_LOCALE).format(
-        +formattedValue,
-      );
+      formattedValue = new Intl.NumberFormat(NUM_LOCALE).format(+formattedValue);
     }
   } else {
     // remove commas
@@ -61,8 +59,7 @@ export function formatAmount(value: string, unit: Unit): string {
     }
     // formatting which respects separator
     // makes either "x.y" or "y"
-    formattedValue =
-      output.shift() + (output.length ? `.${output.join("")}` : "");
+    formattedValue = output.shift() + (output.length ? `.${output.join("")}` : "");
   }
   return formattedValue;
 }

@@ -6,10 +6,7 @@ type Props = {
 };
 
 // see https://reactrouter.com/docs/en/v6/examples/auth
-const RequireSetup: FC<PropsWithChildren<Props>> = ({
-  needsSetup,
-  children,
-}) => {
+const RequireSetup: FC<PropsWithChildren<Props>> = ({ needsSetup, children }) => {
   if (!needsSetup) {
     return <Navigate to="/home" replace />;
   }

@@ -39,34 +39,18 @@ export const LightningCard: FC = () => {
 
   // remove 'commit=...' from version string if exists
   const indexCommit = version.indexOf("commit");
-  const versionString = version?.slice(
-    0,
-    indexCommit === -1 ? version.length : indexCommit,
-  );
+  const versionString = version?.slice(0, indexCommit === -1 ? version.length : indexCommit);
 
   const convertedLocalBalance =
-    unit === Unit.BTC
-      ? convertMSatToBtc(localBalance || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-        localBalance! / 1000;
+    unit === Unit.BTC ? convertMSatToBtc(localBalance || 0) : localBalance! / 1000;
   const convertedRemoteBalance =
-    unit === Unit.BTC
-      ? convertMSatToBtc(remoteBalance || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-        remoteBalance! / 1000;
+    unit === Unit.BTC ? convertMSatToBtc(remoteBalance || 0) : remoteBalance! / 1000;
 
   const convertedLocalPendingBalance =
-    unit === Unit.BTC
-      ? // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-        convertMSatToBtc(pendingLocalBalance! || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-        pendingLocalBalance! / 1000;
+    unit === Unit.BTC ? convertMSatToBtc(pendingLocalBalance! || 0) : pendingLocalBalance! / 1000;
 
   const convertedRemotePendingBalance =
-    unit === Unit.BTC
-      ? convertMSatToBtc(pendingRemoteBalance || 0)
-      : // biome-ignore lint/style/noNonNullAssertion: value is expected to exist at this point
-        pendingRemoteBalance! / 1000;
+    unit === Unit.BTC ? convertMSatToBtc(pendingRemoteBalance || 0) : pendingRemoteBalance! / 1000;
 
   const channelTotal = activeChannels + inactiveChannels + pendingChannels;
 
@@ -92,9 +76,7 @@ export const LightningCard: FC = () => {
             </p>
           </article>
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-200">
-              {t("home.remote_balance")}
-            </h6>
+            <h6 className="text-sm text-gray-200">{t("home.remote_balance")}</h6>
             <p>
               {convertToString(unit, convertedRemoteBalance)} {unit}
             </p>
@@ -102,17 +84,13 @@ export const LightningCard: FC = () => {
         </div>
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-200">
-              {t("home.pending_balance_local")}
-            </h6>
+            <h6 className="text-sm text-gray-200">{t("home.pending_balance_local")}</h6>
             <p>
               {convertToString(unit, convertedLocalPendingBalance)} {unit}
             </p>
           </article>
           <article className="w-1/2">
-            <h6 className="text-sm text-gray-200">
-              {t("home.pending_balance_remote")}
-            </h6>
+            <h6 className="text-sm text-gray-200">{t("home.pending_balance_remote")}</h6>
             <p>
               {convertToString(unit, convertedRemotePendingBalance)} {unit}
             </p>

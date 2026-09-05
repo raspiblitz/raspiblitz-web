@@ -1,14 +1,16 @@
 import type React from "react";
-import { createContext, useCallback, useContext } from "react";
+import { createContext, useCallback, useContext, useRef } from "react";
 import type { NavigateFunction } from "react-router";
 import {
   Screen,
   SetupLightning,
   SetupPhase,
   type SetupState,
+  SetupStatus,
 } from "@/models/setup.model";
 import {
   setupFinalReboot,
+  setupMonitoringLoop,
   setupShutdown,
   setupStart,
 } from "@/pages/Setup/setup-functions";
@@ -29,6 +31,7 @@ interface SetupContextType {
     onStartDoneDialog: (cancel: boolean) => Promise<void>;
     onSyncScreen: (action: string) => Promise<void>;
     onFinalReboot: () => Promise<void>;
+    onRetry: () => Promise<void>;
   };
 }
 
@@ -49,12 +52,8 @@ export const useSetup = () => {
   return context;
 };
 
-export default function SetupProvider({
-  children,
-  state,
-  updateState,
-  navigate,
-}: Props) {
+export default function SetupProvider({ children, state, updateState, navigate }: Props) {
+  const retryInFlight = useRef(false);
   const callbacks = {
     onRecoveryDialog: useCallback(
       (startRecovery: boolean) => {
@@ -217,6 +216,21 @@ export default function SetupProvider({
     onFinalReboot: useCallback(async () => {
       await setupFinalReboot(updateState, navigate);
     }, [updateState, navigate]),
+
+    onRetry: useCallback(async () => {
+      if (retryInFlight.current) return;
+      retryInFlight.current = true;
+      try {
+        updateState({
+          page: Screen.WAIT,
+          waitScreenStatus: SetupStatus.WAIT,
+          waitScreenMessage: "",
+        });
+        await setupMonitoringLoop(updateState, navigate);
+      } finally {
+        retryInFlight.current = false;
+      }
+    }, [navigate, updateState]),
   };
 
   return (

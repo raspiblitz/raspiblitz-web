@@ -27,9 +27,7 @@ function Probe() {
   return (
     <>
       <div data-testid="blocks">{btcInfo.blocks}</div>
-      <div data-testid="btc-error">
-        {String((btcInfo as { error?: unknown }).error ?? "")}
-      </div>
+      <div data-testid="btc-error">{String((btcInfo as { error?: unknown }).error ?? "")}</div>
     </>
   );
 }

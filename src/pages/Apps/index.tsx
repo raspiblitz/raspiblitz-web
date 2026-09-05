@@ -34,18 +34,12 @@ export const Apps: FC = () => {
 
     // Add event listeners
     window.addEventListener("app_state_updating", handleAppStateUpdating);
-    window.addEventListener(
-      "app_state_updating_success",
-      handleAppStateUpdateSuccess,
-    );
+    window.addEventListener("app_state_updating_success", handleAppStateUpdateSuccess);
 
     // Clean up event listeners
     return () => {
       window.removeEventListener("app_state_updating", handleAppStateUpdating);
-      window.removeEventListener(
-        "app_state_updating_success",
-        handleAppStateUpdateSuccess,
-      );
+      window.removeEventListener("app_state_updating_success", handleAppStateUpdateSuccess);
     };
   }, []);
 
@@ -97,12 +91,12 @@ export const Apps: FC = () => {
 
   // Get active installations
   const activeInstalls = Object.entries(installationStatus)
-    .filter(([_, status]) => status.inProgress)
-    .map(([id, _]) => id);
+    .filter(([, status]) => status.inProgress)
+    .map(([id]) => id);
 
   // Get recent completed installations (last 10 minutes)
   const recentCompletions = Object.entries(installationStatus)
-    .filter(([_, status]) => {
+    .filter(([, status]) => {
       if (status.inProgress) return false;
 
       const latestMessage = status.messages[status.messages.length - 1];
@@ -111,7 +105,7 @@ export const Apps: FC = () => {
 
       return timestamp > tenMinutesAgo;
     })
-    .map(([id, _]) => id);
+    .map(([id]) => id);
 
   // in case no App data received yet => show loading screen
   if (appStatus.data.length === 0) {
@@ -125,9 +119,7 @@ export const Apps: FC = () => {
       {/* Active Installations */}
       {activeInstalls.length > 0 && (
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">
-            {t("apps.active_installations")}
-          </h2>
+          <h2 className="text-xl font-semibold mb-4">{t("apps.active_installations")}</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {activeInstalls.map((appId) => (
               <InstallationStatusCard key={appId} appId={appId} />
@@ -139,9 +131,7 @@ export const Apps: FC = () => {
       {/* Recent Completions */}
       {recentCompletions.length > 0 && (
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">
-            {t("apps.recent_completions")}
-          </h2>
+          <h2 className="text-xl font-semibold mb-4">{t("apps.recent_completions")}</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {recentCompletions.map((appId) => (
               <InstallationStatusCard key={appId} appId={appId} />

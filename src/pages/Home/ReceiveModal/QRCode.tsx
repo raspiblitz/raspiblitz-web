@@ -32,9 +32,7 @@ const ReceiveOnChain: FC<Props> = ({ address, onRefreshHandler }) => {
           {address}
         </p>
         <Tooltip id="copy-tooltip">
-          <div>
-            {addressCopied ? t("wallet.copied") : t("wallet.copy_clipboard")}
-          </div>
+          <div>{addressCopied ? t("wallet.copied") : t("wallet.copy_clipboard")}</div>
         </Tooltip>
       </article>
 

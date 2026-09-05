@@ -16,9 +16,7 @@ export const HardwareCard: FC = () => {
   if (!hardwareInfo) {
     return (
       <div className="bd-card mt-8 w-full transition-colors lg:ml-2 lg:mt-0 lg:w-1/2">
-        <h5 className="flex items-center text-lg font-bold">
-          {t("hardware.header")}
-        </h5>
+        <h5 className="flex items-center text-lg font-bold">{t("hardware.header")}</h5>
         <article className="flex flex-row overflow-hidden py-4">
           <Spinner size="lg" />
         </article>
@@ -43,15 +41,11 @@ export const HardwareCard: FC = () => {
 
   const hddUsedGB = bytesToGB(mainDisk?.partition_used_bytes);
   const hddTotalGB = bytesToGB(mainDisk?.partition_total_bytes);
-  const hddPercentUsed = mainDisk?.partition_percent
-    ? 100.0 - mainDisk.partition_percent
-    : "-";
+  const hddPercentUsed = mainDisk?.partition_percent ? 100.0 - mainDisk.partition_percent : "-";
 
   return (
     <div className="bd-card mt-8 w-full transition-colors lg:ml-2 lg:mt-0 lg:w-1/2">
-      <h5 className="flex items-center text-lg font-bold">
-        {t("hardware.header")}
-      </h5>
+      <h5 className="flex items-center text-lg font-bold">{t("hardware.header")}</h5>
       <article className="flex flex-row overflow-hidden py-4">
         <div className="flex w-1/2 flex-col">
           <h6 className="text-sm text-gray-200">{t("hardware.cpu_load")}</h6>

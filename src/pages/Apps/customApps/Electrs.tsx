@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Headline } from "@/components/Headline";
+import { Alert } from "@/components/Alert";
 import { RealtimeContext } from "@/context/realtime-context";
 import useClipboard from "@/hooks/use-clipboard";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
@@ -45,9 +46,8 @@ const Electrs = () => {
   const { t } = useTranslation();
   const { appStatus } = useContext(RealtimeContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(
-    null,
-  );
+  const [electrsError, setElectrsError] = useState("");
+  const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(null);
   const [QRAddressLocal, setQRAddressLocal] = useState<string | null>(null);
   const [QRAddressTor, setQRAddressTor] = useState<string | null>(null);
 
@@ -66,10 +66,24 @@ const Electrs = () => {
           setIsLoading(false);
         })
         .catch((error) => {
-          checkError(error);
+          setElectrsError(checkError(error));
+          setIsLoading(false);
         });
     }
   }, [appData]);
+
+  if (electrsError) {
+    return (
+      <main className="page-container content-container flex flex-col gap-5 p-5">
+        <Button onPress={() => navigate("/apps")} variant="primary">
+          {t("navigation.back")}
+        </Button>
+        <div role="alert">
+          <Alert color="danger">{electrsError}</Alert>
+        </div>
+      </main>
+    );
+  }
 
   if (isLoading || !appData || !appStatus) {
     return <PageLoadingScreen />;
@@ -105,9 +119,7 @@ const Electrs = () => {
             <span>{t("appInfo.electrs.initialSync")}</span>
           ) : (
             <>
-              <span className="mb-4">
-                {t("appInfo.electrs.connectionInfo")}
-              </span>
+              <span className="mb-4">{t("appInfo.electrs.connectionInfo")}</span>
               <Tabs aria-label="Connection Options" className="justify-center">
                 <Tabs.List>
                   <Tabs.Tab id="local">Local Connection</Tabs.Tab>
@@ -125,9 +137,7 @@ const Electrs = () => {
                       <CopySnippet text={`${localIP}:${portSSL}:s`} />
                     </div>
                   ) : (
-                    <span className="mt-4 text-center">
-                      {t("appInfo.electrs.not_available")}
-                    </span>
+                    <span className="mt-4 text-center">{t("appInfo.electrs.not_available")}</span>
                   )}
                 </Tabs.Panel>
                 <Tabs.Panel id="tor">
@@ -142,9 +152,7 @@ const Electrs = () => {
                       <CopySnippet text={`${TORaddress}:${portSSL}:s`} />
                     </div>
                   ) : (
-                    <span className="mt-4 text-center">
-                      {t("appInfo.electrs.not_available")}
-                    </span>
+                    <span className="mt-4 text-center">{t("appInfo.electrs.not_available")}</span>
                   )}
                 </Tabs.Panel>
               </Tabs>

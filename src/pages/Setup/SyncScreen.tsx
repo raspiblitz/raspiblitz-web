@@ -28,9 +28,7 @@ import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 
 type Props = {
-  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   data: SyncData | any;
-  // biome-ignore lint/suspicious/noExplicitAny: value is expected to exist at this point
   callback: (action: string, data: any) => void;
 };
 
@@ -130,7 +128,7 @@ export default function SyncScreen({ data, callback }: Props) {
                           isDisabled={runningUnlock}
                           isInvalid={fieldState.invalid}
                           value={password}
-                          onChange={(value) => {
+                          onChange={(value: string) => {
                             setPassword(value);
                             field.onChange(value);
                           }}
@@ -139,9 +137,7 @@ export default function SyncScreen({ data, callback }: Props) {
                         >
                           <Label>{t("setup.sync_wallet_info")}</Label>
                           <Input type="password" className="bg-tertiary" />
-                          <FieldError>
-                            {errors.passwordInput?.message}
-                          </FieldError>
+                          <FieldError>{errors.passwordInput?.message}</FieldError>
                         </TextField>
                       )}
                     />
@@ -149,11 +145,7 @@ export default function SyncScreen({ data, callback }: Props) {
                     {error && <Alert color="danger">{error}</Alert>}
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      isPending={runningUnlock}
-                    >
+                    <Button type="submit" variant="primary" isPending={runningUnlock}>
                       {t("setup.sync_wallet_unlock")}
                     </Button>
                   </Modal.Footer>
@@ -202,8 +194,7 @@ export default function SyncScreen({ data, callback }: Props) {
                           </>
                         )}
                         <p>
-                          ({t("setup.restarts")}:{" "}
-                          {data.system_count_start_lightning})
+                          ({t("setup.restarts")}: {data.system_count_start_lightning})
                         </p>
                       </div>
                     </>
@@ -229,18 +220,16 @@ export default function SyncScreen({ data, callback }: Props) {
           <article className="flex flex-col items-center justify-center gap-10 pt-10">
             <Tooltip>
               <Tooltip.Trigger>
-                <Button
-                  type="button"
-                  onPress={() => callback("shutdown", null)}
-                  variant="primary"
-                >
+                <Button type="button" onPress={() => callback("shutdown", null)} variant="primary">
                   <span className="flex items-center gap-2">
                     <PowerIcon className="inline h-6 w-auto" />
                     {t("settings.shutdown")}
                   </span>
                 </Button>
               </Tooltip.Trigger>
-              <Tooltip.Content>{t("setup.sync_restartinfo")}</Tooltip.Content>
+              <Tooltip.Content arrowBoundaryOffset={0}>
+                {t("setup.sync_restartinfo")}
+              </Tooltip.Content>
             </Tooltip>
           </article>
         </section>
