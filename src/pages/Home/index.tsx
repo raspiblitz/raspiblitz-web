@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "axios";
+import { HttpStatusCode, isAxiosError } from "axios";
 import { type FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -111,8 +111,8 @@ const Home: FC = () => {
       if (tx.status === HttpStatusCode.Ok && walletLocked) {
         setWalletLocked(false);
       }
-    } catch (err: any) {
-      if (err.response.status === HttpStatusCode.Locked) {
+    } catch (err: unknown) {
+      if (isAxiosError(err) && err.response?.status === HttpStatusCode.Locked) {
         setWalletLocked(true);
       } else {
         setTxError(checkError(err));

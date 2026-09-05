@@ -1,4 +1,4 @@
-import type { AxiosError } from "axios";
+import { isAxiosError } from "axios";
 import { t } from "i18next";
 import { isRecord } from "./guards";
 
@@ -10,11 +10,19 @@ export interface ApiError {
 }
 
 /**
- * Returns the error's `detail` string with a translated prefix, or a generic
- * "unknown error" fallback when the response has no string detail.
+ * Returns a translated error message for API responses, unreachable nodes,
+ * and unexpected failures. API details are displayed only when they are strings.
  */
-export function checkError(err: AxiosError<unknown>): string {
-  const data = err.response?.data;
+export function checkError(err: unknown): string {
+  if (!isAxiosError<unknown>(err)) {
+    return `${t("login.error")}: ${t("login.unexpected_error")}`;
+  }
+
+  if (!err.response) {
+    return `${t("login.error")}: ${t("login.node_unreachable")}`;
+  }
+
+  const data = err.response.data;
   const detail = isRecord(data) ? data.detail : undefined;
 
   if (typeof detail === "string") {
@@ -22,7 +30,7 @@ export function checkError(err: AxiosError<unknown>): string {
   }
 
   return `${t("login.error")}: ${t("login.unknown_error", {
-    code: err.response?.status,
-    statusText: err.response?.statusText,
+    code: err.response.status,
+    statusText: err.response.statusText,
   })}`;
 }

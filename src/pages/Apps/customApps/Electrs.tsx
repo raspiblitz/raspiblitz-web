@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Headline } from "@/components/Headline";
+import { Alert } from "@/components/Alert";
 import { SSEContext } from "@/context/sse-context";
 import useClipboard from "@/hooks/use-clipboard";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
@@ -45,6 +46,7 @@ const Electrs = () => {
   const { t } = useTranslation();
   const { appStatus } = useContext(SSEContext);
   const [isLoading, setIsLoading] = useState(true);
+  const [electrsError, setElectrsError] = useState("");
   const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(null);
   const [QRAddressLocal, setQRAddressLocal] = useState<string | null>(null);
   const [QRAddressTor, setQRAddressTor] = useState<string | null>(null);
@@ -64,10 +66,24 @@ const Electrs = () => {
           setIsLoading(false);
         })
         .catch((error) => {
-          checkError(error);
+          setElectrsError(checkError(error));
+          setIsLoading(false);
         });
     }
   }, [appData]);
+
+  if (electrsError) {
+    return (
+      <main className="page-container content-container flex flex-col gap-5 p-5">
+        <Button onPress={() => navigate("/apps")} variant="primary">
+          {t("navigation.back")}
+        </Button>
+        <div role="alert">
+          <Alert color="danger">{electrsError}</Alert>
+        </div>
+      </main>
+    );
+  }
 
   if (isLoading || !appData || !appStatus) {
     return <PageLoadingScreen />;
