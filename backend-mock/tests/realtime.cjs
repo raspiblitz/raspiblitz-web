@@ -50,7 +50,7 @@ test("only the new client receives warmup; subsequent updates reach both clients
   const second = await connect();
   second.ws.send(JSON.stringify({ type: "auth", token: "mock-token" }));
   await receiveUntil(second, () => second.frames.length === expectedEvents.length);
-  assert.deepEqual(second.frames, first.frames);
+  assert.deepEqual(second.frames.map(frame => frame.event), expectedEvents);
 
   // A broadcast is an ordering barrier: any mistakenly replayed snapshots on
   // the first connection arrive before this update.

@@ -54,7 +54,7 @@ The `AppContext` manages authentication state and global preferences, while `Rea
 
 ### Backend Communication
 - **API client**: Use the shared Axios `instance` from `src/utils/interceptor.ts`, which uses `/api` as its base URL and attaches the authentication token.
-- **Development**: Vite proxies `/api` requests to the backend at `http://localhost:8000`. `BACKEND_SERVER` in `vite.config.ts` controls this development proxy.
+- **Development**: Vite proxies `/api` requests (including WebSocket upgrades) to the API base URL in the `BACKEND_SERVER` environment variable. It defaults to `http://localhost:8000/api` for the mock; use a URL ending in `/api` for a node behind nginx, or the root URL for a directly reachable Blitz API.
 - **Production**: The client still requests `/api` on the current origin; deployment routing must make the backend available there.
 - **Authentication**: JWT tokens with automatic refresh mechanism in `src/App.tsx`
 
