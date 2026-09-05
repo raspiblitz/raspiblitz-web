@@ -4,8 +4,9 @@ require("dotenv").config();
 const signToken = () => {
   console.info("call to signToken");
   return jwt.sign(
-    { user_id: "admin", expires: Date.now() + 630_000 },
+    { user_id: "admin" },
     process.env.JWT_SECRET || "secret",
+    { expiresIn: 630 },
   );
 };
 

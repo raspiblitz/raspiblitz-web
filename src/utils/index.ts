@@ -1,9 +1,17 @@
 import type { AppStatus } from "@/models/app-status";
 import type { TokenPayload } from "@/models/token";
+import { isRecord } from "./guards";
 
 export const ACCESS_TOKEN = "access_token";
-// refresh 10min before expiry
-export const REFRESH_TIME = (expiry: number) => expiry - Date.now() - 600_000;
+// Refresh ten minutes early, or halfway through a shorter remaining lifetime.
+// Reject unusable expiries and stay within the browser's signed 32-bit timer limit.
+export function REFRESH_TIME(expSeconds: number): number | null {
+  const remaining = expSeconds * 1000 - Date.now();
+  if (!Number.isFinite(remaining) || remaining < 1000) {
+    return null;
+  }
+  return Math.min(Math.max(remaining - 600_000, remaining / 2), 2_147_483_647);
+}
 
 const createModalRoot = () => {
   const modalRoot = document.createElement("div");
@@ -60,10 +68,32 @@ export function checkPropsUndefined(props: object): boolean {
   return someUndefined;
 }
 
-export function parseJwt(token: string): TokenPayload {
-  // 1st part is header, 2nd part is payload, 3rd is signature
-  const payload = token.split(".")[1];
-  return JSON.parse(atob(payload));
+/** Decode claims for client scheduling; signature verification belongs to the API. */
+export function parseJwt(token: unknown): TokenPayload | null {
+  if (typeof token !== "string") return null;
+  const parts = token.split(".");
+  if (parts.length !== 3 || parts.some((part) => !part)) return null;
+
+  try {
+    const decoded = atob(parts[1].replace(/-/g, "+").replace(/_/g, "/"));
+    const payload: unknown = JSON.parse(
+      new TextDecoder("utf-8", { fatal: true }).decode(
+        Uint8Array.from(decoded, (char) => char.charCodeAt(0)),
+      ),
+    );
+    if (
+      !isRecord(payload) ||
+      typeof payload.user_id !== "string" ||
+      typeof payload.exp !== "number" ||
+      !Number.isFinite(payload.exp) ||
+      !Number.isFinite(payload.exp * 1000) ||
+      payload.exp <= 0
+    )
+      return null;
+    return { user_id: payload.user_id, exp: payload.exp };
+  } catch {
+    return null;
+  }
 }
 
 export function enableGutter(): void {

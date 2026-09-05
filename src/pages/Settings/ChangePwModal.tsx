@@ -35,14 +35,14 @@ const ChangePwModal: FC = () => {
   const changePwHandler = (data: IFormInputs) => {
     setIsLoading(true);
 
-    const params = {
+    const body = {
       type: "a",
       old_password: data.oldPassword,
       new_password: data.newPassword,
     };
 
     instance
-      .post("/system/change-password", {}, { params })
+      .post("/system/change-password", body)
       .then(() => {
         toast.success(t("settings.pass_a_changed"), { theme: "dark" });
         confirmModal.close();

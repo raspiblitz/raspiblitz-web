@@ -3,7 +3,7 @@ import RequireAuth from "./components/RequireAuth";
 import RequireSetup from "./components/RequireSetup";
 import { AppContext } from "./context/app-context";
 import "./i18n/config";
-import { type FC, lazy, Suspense, useContext, useEffect, useState } from "react";
+import { type FC, lazy, Suspense, useContext, useEffect, useEffectEvent, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
 import AppPage from "@/pages/Apps/AppPage";
 import Login from "@/pages/Login";
@@ -14,6 +14,7 @@ import { SetupPhase } from "./models/setup.model";
 import { ACCESS_TOKEN, parseJwt, REFRESH_TIME } from "./utils";
 import { instance } from "./utils/interceptor";
 import "react-toastify/dist/ReactToastify.css";
+import { isAxiosError } from "axios";
 
 const LazySetup = lazy(() => import("./pages/Setup"));
 const LazyHome = lazy(() => import("./pages/Home"));
@@ -25,7 +26,7 @@ const App: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [firstCall, setFirstCall] = useState(true);
   const [needsSetup, setNeedsSetup] = useState(false);
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn, logout } = useContext(AppContext);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -54,39 +55,83 @@ const App: FC = () => {
     }
   }, [firstCall, navigate, pathname]);
 
+  const endSession = useEffectEvent(() => logout());
+
   useEffect(() => {
     if (!isLoggedIn) {
       return;
     }
 
-    function refresh(triggerTime: number) {
-      setTimeout(() => doRefresh(), triggerTime);
+    let timer: ReturnType<typeof setTimeout>;
+    const controller = new AbortController();
+    let retryDelay = 5_000;
+
+    function schedule(token: unknown) {
+      const payload = parseJwt(token);
+      const delay = payload ? REFRESH_TIME(payload.exp) : null;
+      if (delay === null) {
+        endSession();
+        return false;
+      }
+      retryDelay = 5_000;
+      timer = setTimeout(() => void doRefresh(), delay);
+      return true;
     }
 
-    function doRefresh() {
-      if (!localStorage.getItem(ACCESS_TOKEN)) {
+    async function doRefresh() {
+      const previousToken = localStorage.getItem(ACCESS_TOKEN);
+      if (controller.signal.aborted) return;
+      const payload = parseJwt(previousToken);
+      if (!payload || payload.exp * 1000 <= Date.now()) {
+        endSession();
         return;
       }
-      instance
-        .post("system/refresh-token", {})
-        .then((resp) => {
-          const token = resp.data;
-          if (token) {
-            localStorage.setItem(ACCESS_TOKEN, token);
-            const payload = parseJwt(token);
-            refresh(REFRESH_TIME(payload.expires));
-          }
-        })
-        .catch((e) => {
-          console.error("Error: token refresh failed with: ", e);
-        });
+      try {
+        const resp = await instance.post<unknown>(
+          "system/refresh-token",
+          {},
+          {
+            signal: controller.signal,
+            timeout: Math.min(15_000, payload.exp * 1000 - Date.now()),
+          },
+        );
+        if (controller.signal.aborted) return;
+        const currentToken = localStorage.getItem(ACCESS_TOKEN);
+        if (currentToken !== previousToken) {
+          schedule(currentToken);
+          return;
+        }
+        const token = resp.data;
+        if (typeof token !== "string") {
+          endSession();
+        } else if (schedule(token)) {
+          localStorage.setItem(ACCESS_TOKEN, token);
+        }
+      } catch (error) {
+        if (controller.signal.aborted) return;
+        const currentToken = localStorage.getItem(ACCESS_TOKEN);
+        if (currentToken !== previousToken) {
+          schedule(currentToken);
+          return;
+        }
+        const remaining = payload.exp * 1000 - Date.now();
+        const status = isAxiosError(error) ? error.response?.status : undefined;
+        if (status === 401 || status === 403 || remaining <= 0) {
+          endSession();
+          return;
+        }
+        // Keep the valid session through temporary outages. Retry with capped
+        // backoff, waking no later than expiry to end an unrecoverable session.
+        timer = setTimeout(() => void doRefresh(), Math.min(retryDelay, remaining));
+        retryDelay = Math.min(retryDelay * 2, 60_000);
+      }
     }
 
-    const token = localStorage.getItem(ACCESS_TOKEN);
-    if (token) {
-      const payload = parseJwt(token);
-      refresh(REFRESH_TIME(payload.expires));
-    }
+    schedule(localStorage.getItem(ACCESS_TOKEN));
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [isLoggedIn]);
 
   if (isLoading) {
