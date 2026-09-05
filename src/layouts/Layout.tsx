@@ -5,7 +5,7 @@ import Header from "./Header";
 import SideDrawer from "./SideDrawer";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
-  // use SSE for all components after login
+  // Connect realtime updates for all components after login
   useRealtime();
   return (
     <>

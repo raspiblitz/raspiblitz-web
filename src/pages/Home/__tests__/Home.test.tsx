@@ -3,7 +3,7 @@ import { http, HttpResponse, server } from "@/testServer";
 import Home from "../index";
 import { type RealtimeContextType, realtimeContextDefault } from "@/context/realtime-context";
 
-const sseProps: Partial<RealtimeContextType> = {
+const realtimeProps: Partial<RealtimeContextType> = {
   btcInfo: { ...realtimeContextDefault.btcInfo, subversion: "/Satoshi:30.0.0/" },
   lnInfo: { ...realtimeContextDefault.lnInfo, version: "", implementation: "LND_GRPC" },
   balance: {
@@ -24,7 +24,7 @@ describe("Home transaction errors", () => {
     server.use(http.get("/api/lightning/list-all-tx", () => HttpResponse.error()));
     const setWalletLocked = vi.fn();
 
-    render(<Home />, { providerOptions: { sseProps, appProps: { setWalletLocked } } });
+    render(<Home />, { providerOptions: { realtimeProps, appProps: { setWalletLocked } } });
 
     expect(await screen.findByText("login.error: login.node_unreachable")).toBeInTheDocument();
     expect(setWalletLocked).not.toHaveBeenCalled();
@@ -38,7 +38,7 @@ describe("Home transaction errors", () => {
     );
     const setWalletLocked = vi.fn();
 
-    render(<Home />, { providerOptions: { sseProps, appProps: { setWalletLocked } } });
+    render(<Home />, { providerOptions: { realtimeProps, appProps: { setWalletLocked } } });
 
     await waitFor(() => expect(setWalletLocked).toHaveBeenCalledWith(true));
     expect(screen.queryByText("login.error: login.node_unreachable")).not.toBeInTheDocument();

@@ -36,14 +36,14 @@ describe("HardwareCard", () => {
   const setup = () => {
     render(<HardwareCard />, {
       providerOptions: {
-        sseProps: {
+        realtimeProps: {
           hardwareInfo: basicHardwareInfo,
         },
       },
     });
   };
 
-  test("renders without props from SSE", () => {
+  test("renders without realtime props", () => {
     render(<HardwareCard />);
 
     const hardwareHeader = screen.getByText(/hardware.header/i);

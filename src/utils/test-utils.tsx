@@ -11,17 +11,17 @@ import {
 import i18n from "@/i18n/test_config";
 
 type Props = {
-  sseProps: RealtimeContextType;
+  realtimeProps: RealtimeContextType;
   appProps: AppContextType;
 };
 
-const AllTheProviders: FC<PropsWithChildren<Props>> = ({ children, appProps, sseProps }) => {
+const AllTheProviders: FC<PropsWithChildren<Props>> = ({ children, appProps, realtimeProps }) => {
   return (
     <BrowserRouter>
       <RealtimeContext.Provider
         value={{
           ...realtimeContextDefault,
-          ...sseProps,
+          ...realtimeProps,
         }}
       >
         <AppContext.Provider
@@ -41,7 +41,7 @@ const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, "wrapper"> & {
     providerOptions?: {
-      sseProps?: Partial<RealtimeContextType>;
+      realtimeProps?: Partial<RealtimeContextType>;
       appProps?: Partial<AppContextType>;
     };
   },

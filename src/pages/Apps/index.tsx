@@ -22,7 +22,7 @@ export const Apps: FC = () => {
     enableGutter();
   }, []);
 
-  // Listen to SSE events for app state updating
+  // Listen to realtime events for app state updating
   useEffect(() => {
     const handleAppStateUpdating = () => {
       setIsUpdating(true);

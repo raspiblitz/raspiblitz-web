@@ -40,17 +40,17 @@ This file provides guidance to coding agents when working with code in this repo
 ## Architecture Overview
 
 ### Real-time Data Architecture
-This application heavily relies on **Server-Sent Events (SSE)** for real-time updates. The `SSEContext` (`src/context/sse-context.tsx`) manages all real-time data including Bitcoin blockchain info, Lightning network status, wallet balances, and system information. When debugging data issues, check the SSE connection first.
+This application uses an authenticated **WebSocket** at `/api/ws` for real-time updates. The `RealtimeContext` (`src/context/realtime-context.tsx`) holds Bitcoin blockchain info, Lightning status, wallet balances, and system information. The `useRealtime` hook (`src/hooks/use-realtime.tsx`) opens the connection, sends `{type: "auth", token}` using the current JWT, and dispatches `{event, data}` frames. It reconnects with exponential backoff and logs out on close code `4401`. Backend warmup error frames must not overwrite valid data. When debugging data issues, check the WebSocket connection first.
 
 ### State Management Pattern
 Uses React Context API with a specific provider hierarchy:
 ```
-SSEContextProvider (real-time data)
+RealtimeProvider (real-time data)
   └── AppContextProvider (auth + global state)
       └── App
 ```
 
-The `AppContext` manages authentication state and global preferences, while `SSEContext` handles all real-time Bitcoin/Lightning data.
+The `AppContext` manages authentication state and global preferences, while `RealtimeContext` handles all real-time Bitcoin/Lightning data.
 
 ### Backend Communication
 - **API client**: Use the shared Axios `instance` from `src/utils/interceptor.ts`, which uses `/api` as its base URL and attaches the authentication token.
@@ -58,7 +58,7 @@ The `AppContext` manages authentication state and global preferences, while `SSE
 - **Production**: The client still requests `/api` on the current origin; deployment routing must make the backend available there.
 - **Authentication**: JWT tokens with automatic refresh mechanism in `src/App.tsx`
 
-### API and SSE Contracts
+### API and Realtime Contracts
 
 - Validate incoming data before using it. Reuse `src/utils/guards.ts`, `isAppId`, and the parsers in `src/utils/app-state-message.ts` where applicable instead of relying on type assertions.
 - Handle malformed events and unknown app IDs without breaking valid updates or rendering unsupported apps.
@@ -67,17 +67,17 @@ The `AppContext` manages authentication state and global preferences, while `SSE
 ### Key Application Flow
 1. **Setup Check**: App checks if device needs initial setup via `/setup/status`
 2. **Authentication**: JWT login with automatic token refresh
-3. **Real-time Connection**: SSE connection established after login
+3. **Real-time Connection**: WebSocket connection established and authenticated after login
 4. **Route Protection**: All main routes require authentication via `RequireAuth` component
 
 ### Component Organization
 - **Pages**: Main route components in `src/pages/` (Home, Apps, Settings, Setup)
 - **Layouts**: Reusable layout components with navigation
 - **Components**: Shared UI components, many using [HeroUI](https://www.heroui.com/docs/guide/introduction) library and icons from the [HeroIcons](https://heroicons.com/) and the [BitcoinIcons](https://bitcoinicons.com/) library
-- **Hooks**: Custom hooks for SSE (`useSSE`), modals (`useModalManager`), and utilities
+- **Hooks**: Custom hooks for realtime data (`useRealtime`), modals (`useModalManager`), and utilities
 
 ### Development Workflow
-When working with real-time features, run `npm run dev:local` to have both frontend and mock backend. The mock backend provides realistic data streams via SSE. For backend changes, edit files in `backend-mock/` - the server restarts automatically.
+When working with real-time features, run `npm run dev:local` to have both frontend and mock backend. The mock backend provides realistic data streams over WebSocket. For backend changes, edit files in `backend-mock/` - the server restarts automatically.
 
 ### Testing Strategy
 - **Unit Tests**: Located alongside components in `__tests__/` folders
