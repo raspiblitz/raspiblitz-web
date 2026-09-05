@@ -15,6 +15,7 @@ import type { WalletBalance } from "@/models/wallet-balance";
 import { ACCESS_TOKEN, setWindowAlias } from "@/utils";
 import { parseAppStateUpdateMessage } from "@/utils/app-state-message";
 import { availableApps, isAppId } from "@/utils/availableApps";
+import { isRecord } from "@/utils/guards";
 
 // Monotonic counter for assigning a stable, unique key to each installation
 // message. Avoids relying on the array index (or a possibly-colliding
@@ -42,12 +43,24 @@ function isBackendErrorFrame(message: Record<string, unknown>, label: string): b
  */
 function useRealtime() {
   const { t } = useTranslation();
-  const sseCtx = useContext(RealtimeContext);
+  const realtimeCtx = useContext(RealtimeContext);
   const appCtx = useContext(AppContext);
-  const { setSocket } = sseCtx;
+  const {
+    setSocket,
+    setAvailableApps: updateAvailableApps,
+    setInstallationStatus: updateInstallationStatus,
+    setTransactions: updateTransactions,
+    setSystemInfo: updateSystemInfo,
+    setBtcInfo: updateBtcInfo,
+    setLnInfo: updateLnInfo,
+    setBalance: updateBalance,
+    setHardwareInfo: updateHardwareInfo,
+    setSystemStartupInfo: updateSystemStartupInfo,
+    setAppStatus: updateAppStatus,
+  } = realtimeCtx;
 
   // `appCtx` is a fresh object identity on every AppContextProvider render
-  // (e.g. whenever its own state changes), and the same is true of `sseCtx`.
+  // (e.g. whenever its own state changes), and the same is true of `realtimeCtx`.
   // Tracking `appCtx.logout` via a ref lets the connection effect below stay
   // mounted for the component's lifetime (deps stable) instead of tearing
   // down and reconnecting on every unrelated context update, while still
@@ -104,7 +117,7 @@ function useRealtime() {
           return;
         }
 
-        sseCtx.setAvailableApps((prev: App[]) => {
+        updateAvailableApps((prev: App[]) => {
           if (prev.length === 0) {
             return apps;
           }
@@ -150,7 +163,7 @@ function useRealtime() {
           timestamp: Date.now(),
         };
 
-        sseCtx.setInstallationStatus((prev) => {
+        updateInstallationStatus((prev) => {
           const prevMessages = prev[id]?.messages || [];
           const inProgress = state !== "finished";
 
@@ -179,7 +192,7 @@ function useRealtime() {
           return;
         }
 
-        sseCtx.setTransactions((prev) => {
+        updateTransactions((prev) => {
           // add the newest transaction to the beginning
           return [transaction, ...prev];
         });
@@ -240,18 +253,18 @@ function useRealtime() {
         const message = JSON.parse(event.data);
 
         // Validate message data
-        if (!message || typeof message !== "object") {
+        if (!message || typeof message !== "object" || Array.isArray(message)) {
           console.error("Invalid system info data:", message);
           return;
         }
 
         if (isBackendErrorFrame(message, "system info")) return;
 
-        if (message.alias) {
+        if (typeof message.alias === "string" && message.alias) {
           setWindowAlias(message.alias);
         }
 
-        sseCtx.setSystemInfo((prev: SystemInfo) => {
+        updateSystemInfo((prev: SystemInfo) => {
           return {
             ...prev,
             ...message,
@@ -267,14 +280,14 @@ function useRealtime() {
         const message = JSON.parse(event.data);
 
         // Validate message data
-        if (!message || typeof message !== "object") {
+        if (!message || typeof message !== "object" || Array.isArray(message)) {
           console.error("Invalid BTC info data:", message);
           return;
         }
 
         if (isBackendErrorFrame(message, "BTC info")) return;
 
-        sseCtx.setBtcInfo((prev: BtcInfo) => {
+        updateBtcInfo((prev: BtcInfo) => {
           return {
             ...prev,
             ...message,
@@ -290,14 +303,14 @@ function useRealtime() {
         const message = JSON.parse(event.data);
 
         // Validate message data
-        if (!message || typeof message !== "object") {
+        if (!message || typeof message !== "object" || Array.isArray(message)) {
           console.error("Invalid LN info data:", message);
           return;
         }
 
         if (isBackendErrorFrame(message, "LN info")) return;
 
-        sseCtx.setLnInfo((prev: LnInfo) => {
+        updateLnInfo((prev: LnInfo) => {
           return {
             ...prev,
             ...message,
@@ -313,14 +326,14 @@ function useRealtime() {
         const message = JSON.parse(event.data);
 
         // Validate message data
-        if (!message || typeof message !== "object") {
+        if (!message || typeof message !== "object" || Array.isArray(message)) {
           console.error("Invalid balance data:", message);
           return;
         }
 
         if (isBackendErrorFrame(message, "balance")) return;
 
-        sseCtx.setBalance((prev: WalletBalance) => {
+        updateBalance((prev: WalletBalance) => {
           return {
             ...prev,
             ...message,
@@ -336,14 +349,14 @@ function useRealtime() {
         const message = JSON.parse(event.data);
 
         // Validate message data
-        if (!message || typeof message !== "object") {
+        if (!message || typeof message !== "object" || Array.isArray(message)) {
           console.error("Invalid hardware info data:", message);
           return;
         }
 
         if (isBackendErrorFrame(message, "hardware info")) return;
 
-        sseCtx.setHardwareInfo((prev: HardwareInfo | null) => {
+        updateHardwareInfo((prev: HardwareInfo | null) => {
           return {
             ...prev,
             ...message,
@@ -359,12 +372,14 @@ function useRealtime() {
         const message = JSON.parse(event.data);
 
         // Validate message data
-        if (!message || typeof message !== "object") {
+        if (!message || typeof message !== "object" || Array.isArray(message)) {
           console.error("Invalid system startup info data:", message);
           return;
         }
 
-        sseCtx.setSystemStartupInfo((prev: SystemStartupInfo | null) => {
+        if (isBackendErrorFrame(message, "system startup info")) return;
+
+        updateSystemStartupInfo((prev: SystemStartupInfo | null) => {
           return {
             ...prev,
             ...message,
@@ -387,7 +402,7 @@ function useRealtime() {
       if (state === "initiated") {
         window.dispatchEvent(new Event("app_state_updating"));
       } else if (state === "success" && message) {
-        sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
+        updateAppStatus((prev: AppStatusQueryResponse) => {
           if (prev.data.length === 0) return message;
 
           const currentIds = new Set(message.data.map((item) => item.id));
@@ -433,10 +448,15 @@ function useRealtime() {
       };
       ws.onmessage = (evt) => {
         try {
-          const { event, data } = JSON.parse(evt.data);
-          // reuse the existing handlers unchanged: they expect a
-          // MessageEvent whose .data is the JSON string of the payload
-          DISPATCH[event]?.({ data: JSON.stringify(data) } as MessageEvent<string>);
+          const frame: unknown = JSON.parse(evt.data);
+          if (!isRecord(frame) || typeof frame.event !== "string" || !("data" in frame)) {
+            return;
+          }
+          if (Object.hasOwn(DISPATCH, frame.event)) {
+            DISPATCH[frame.event](
+              new MessageEvent("message", { data: JSON.stringify(frame.data) }),
+            );
+          }
         } catch (err) {
           console.error("Error processing ws frame:", err);
         }
@@ -460,28 +480,36 @@ function useRealtime() {
       if (reconnectTimer) clearTimeout(reconnectTimer);
       ws?.close();
     };
-    // `sseCtx`/`appCtx` are intentionally omitted: they are new object
-    // identities on every render of their providers, and depending on them
-    // here would tear down and reopen the socket on every unrelated state
-    // change instead of once per mount. The setters read from `sseCtx`
-    // inside the handlers above are stable (React guarantees stable setState
-    // identities), and `appCtxRef` always points at the latest `logout`.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [t, setSocket, appInstallSuccessHandler, appInstallErrorHandler]);
+  }, [
+    t,
+    setSocket,
+    updateAvailableApps,
+    updateInstallationStatus,
+    updateTransactions,
+    updateSystemInfo,
+    updateBtcInfo,
+    updateLnInfo,
+    updateBalance,
+    updateHardwareInfo,
+    updateSystemStartupInfo,
+    updateAppStatus,
+    appInstallSuccessHandler,
+    appInstallErrorHandler,
+  ]);
 
   return {
-    socket: sseCtx.socket,
-    systemInfo: sseCtx.systemInfo,
-    btcInfo: sseCtx.btcInfo,
-    lnInfo: sseCtx.lnInfo,
-    balance: sseCtx.balance,
-    appStatus: sseCtx.appStatus,
-    transactions: sseCtx.transactions,
-    availableApps: sseCtx.availableApps,
-    installingApp: sseCtx.installingApp,
-    hardwareInfo: sseCtx.hardwareInfo,
-    systemStartupInfo: sseCtx.systemStartupInfo,
-    installationStatus: sseCtx.installationStatus,
+    socket: realtimeCtx.socket,
+    systemInfo: realtimeCtx.systemInfo,
+    btcInfo: realtimeCtx.btcInfo,
+    lnInfo: realtimeCtx.lnInfo,
+    balance: realtimeCtx.balance,
+    appStatus: realtimeCtx.appStatus,
+    transactions: realtimeCtx.transactions,
+    availableApps: realtimeCtx.availableApps,
+    installingApp: realtimeCtx.installingApp,
+    hardwareInfo: realtimeCtx.hardwareInfo,
+    systemStartupInfo: realtimeCtx.systemStartupInfo,
+    installationStatus: realtimeCtx.installationStatus,
   };
 }
 

@@ -19,13 +19,14 @@ class MockWebSocket {
   send(d: string) {
     this.sent.push(d);
   }
-  close() {}
+  close = vi.fn();
 }
 
 function Probe() {
-  const { btcInfo } = useRealtime();
+  const { btcInfo, systemStartupInfo } = useRealtime();
   return (
     <>
+      <div data-testid="startup">{JSON.stringify(systemStartupInfo)}</div>
       <div data-testid="blocks">{btcInfo.blocks}</div>
       <div data-testid="btc-error">{String((btcInfo as { error?: unknown }).error ?? "")}</div>
     </>
@@ -151,6 +152,107 @@ describe("useRealtime (WebSocket)", () => {
 
       expect(MockWebSocket.instances.length).toBe(2);
       expect(logout).not.toHaveBeenCalled();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+  it("keeps the socket open across realtime updates and calls the latest logout", () => {
+    const latestLogout = vi.fn();
+    const tree = (logoutHandler: () => void) => (
+      <RealtimeProvider>
+        <AppContext.Provider value={{ ...appContextDefault, logout: logoutHandler }}>
+          <I18nextProvider i18n={i18n}>
+            <Probe />
+          </I18nextProvider>
+        </AppContext.Provider>
+      </RealtimeProvider>
+    );
+    const { rerender } = render(tree(logout));
+    const ws = MockWebSocket.instances[0];
+    act(() =>
+      ws.onmessage?.({ data: JSON.stringify({ event: "btc_info", data: { blocks: 43 } }) }),
+    );
+    rerender(tree(latestLogout));
+    expect(MockWebSocket.instances).toHaveLength(1);
+    expect(ws.close).not.toHaveBeenCalled();
+    expect(screen.getByTestId("blocks")).toHaveTextContent("43");
+    act(() => ws.onclose?.({ code: 4401 }));
+    expect(latestLogout).toHaveBeenCalledOnce();
+    expect(logout).not.toHaveBeenCalled();
+  });
+
+  it("ignores malformed and unknown frames and still processes the next valid update", () => {
+    renderProbe();
+    const ws = MockWebSocket.instances[0];
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      for (const frame of [
+        "invalid json",
+        "null",
+        "[]",
+        "{}",
+        JSON.stringify({ event: "btc_info" }),
+        JSON.stringify({ event: "unknown", data: {} }),
+        JSON.stringify({ event: "__proto__", data: {} }),
+        JSON.stringify({ event: "btc_info", data: [] }),
+      ]) {
+        act(() => ws.onmessage?.({ data: frame }));
+      }
+      act(() =>
+        ws.onmessage?.({ data: JSON.stringify({ event: "btc_info", data: { blocks: 44 } }) }),
+      );
+      expect(screen.getByTestId("blocks")).toHaveTextContent("44");
+      expect(MockWebSocket.instances).toHaveLength(1);
+    } finally {
+      error.mockRestore();
+    }
+  });
+
+  it("preserves startup state when a warmup error arrives", () => {
+    renderProbe();
+    const ws = MockWebSocket.instances[0];
+    const startup = { bitcoin: "done", bitcoin_msg: "", lightning: "disabled", lightning_msg: "" };
+    act(() =>
+      ws.onmessage?.({ data: JSON.stringify({ event: "system_startup_info", data: startup }) }),
+    );
+    act(() =>
+      ws.onmessage?.({
+        data: JSON.stringify({ event: "system_startup_info", data: { error: "warming up" } }),
+      }),
+    );
+    expect(screen.getByTestId("startup")).toHaveTextContent(JSON.stringify(startup));
+  });
+
+  it("uses the refreshed token when reconnecting and increases the retry delay", () => {
+    vi.useFakeTimers();
+    try {
+      renderProbe();
+      act(() => MockWebSocket.instances[0].onclose?.({ code: 1006 }));
+      localStorage.setItem("access_token", "refreshed-token");
+      act(() => vi.advanceTimersByTime(1000));
+      const retry = MockWebSocket.instances[1];
+      act(() => retry.onclose?.({ code: 1006 }));
+      act(() => vi.advanceTimersByTime(1999));
+      expect(MockWebSocket.instances).toHaveLength(2);
+      act(() => vi.advanceTimersByTime(1));
+      const connected = MockWebSocket.instances[2];
+      act(() => connected.onopen?.());
+      expect(connected.sent).toEqual([JSON.stringify({ type: "auth", token: "refreshed-token" })]);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("closes the socket and cancels retries on unmount", () => {
+    vi.useFakeTimers();
+    try {
+      const { unmount } = renderProbe();
+      const ws = MockWebSocket.instances[0];
+      act(() => ws.onclose?.({ code: 1006 }));
+      unmount();
+      expect(ws.close).toHaveBeenCalledOnce();
+      act(() => vi.advanceTimersByTime(30000));
+      expect(MockWebSocket.instances).toHaveLength(1);
     } finally {
       vi.useRealTimers();
     }
