@@ -8,7 +8,7 @@ export interface HardwareInfo {
   temperatures_celsius: TemperatureInfo;
   boot_time_timestamp: number;
   disks: DiskInfo[];
-  networks: NetworkInfo[];
+  networks: NetworkInfo | NetworkInfo[];
 }
 
 export interface TemperatureInfo {

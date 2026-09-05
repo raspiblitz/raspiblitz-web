@@ -11,11 +11,11 @@ import { NavLink } from "react-router";
 import RaspiBlitzMobileLogo from "@/assets/RaspiBlitz_Logo_Icon.svg?react";
 import RaspiBlitzLogoDark from "@/assets/RaspiBlitz_Logo_Main_Negative.svg?react";
 import { AppContext, Unit } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 
 export default function Header() {
   const { t } = useTranslation();
-  const { systemInfo } = useContext(SSEContext);
+  const { systemInfo } = useContext(RealtimeContext);
   const { unit, logout, toggleUnit } = useContext(AppContext);
 
   const unitActive = unit === Unit.SAT;

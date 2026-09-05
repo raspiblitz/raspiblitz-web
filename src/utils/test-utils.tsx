@@ -3,21 +3,25 @@ import type { FC, PropsWithChildren, ReactElement } from "react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router";
 import { AppContext, type AppContextType, appContextDefault } from "@/context/app-context";
-import { SSEContext, type SSEContextType, sseContextDefault } from "@/context/sse-context";
+import {
+  RealtimeContext,
+  type RealtimeContextType,
+  realtimeContextDefault,
+} from "@/context/realtime-context";
 import i18n from "@/i18n/test_config";
 
 type Props = {
-  sseProps: SSEContextType;
+  realtimeProps: RealtimeContextType;
   appProps: AppContextType;
 };
 
-const AllTheProviders: FC<PropsWithChildren<Props>> = ({ children, appProps, sseProps }) => {
+const AllTheProviders: FC<PropsWithChildren<Props>> = ({ children, appProps, realtimeProps }) => {
   return (
     <BrowserRouter>
-      <SSEContext.Provider
+      <RealtimeContext.Provider
         value={{
-          ...sseContextDefault,
-          ...sseProps,
+          ...realtimeContextDefault,
+          ...realtimeProps,
         }}
       >
         <AppContext.Provider
@@ -28,7 +32,7 @@ const AllTheProviders: FC<PropsWithChildren<Props>> = ({ children, appProps, sse
         >
           <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
         </AppContext.Provider>
-      </SSEContext.Provider>
+      </RealtimeContext.Provider>
     </BrowserRouter>
   );
 };
@@ -37,7 +41,7 @@ const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, "wrapper"> & {
     providerOptions?: {
-      sseProps?: Partial<SSEContextType>;
+      realtimeProps?: Partial<RealtimeContextType>;
       appProps?: Partial<AppContextType>;
     };
   },

@@ -6,7 +6,8 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 import tailwindcss from "@tailwindcss/vite"
 import packageJson from "./package.json";
 
-const BACKEND_SERVER = 'http://localhost:8000';
+// API base URL, including /api when using the mock or a node's reverse proxy.
+const BACKEND_SERVER = process.env.BACKEND_SERVER || 'http://localhost:8000/api';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,8 +37,10 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: BACKEND_SERVER,
+        rewrite: path => path.replace(/^\/api/, ''),
         changeOrigin: true,
         secure: false,
+        ws: true,
       },
     },
   },

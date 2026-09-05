@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node --watch index.js",
-    "dev": "npm run start"
+    "dev": "npm run start",
+    "test": "node --test tests/*.cjs"
   },
   "author": {
     "name": "Christoph Stenglein",
@@ -17,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.1"
+    "jsonwebtoken": "^9.0.1",
+    "ws": "^8.21.0"
   }
 }

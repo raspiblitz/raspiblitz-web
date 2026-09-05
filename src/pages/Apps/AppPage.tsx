@@ -1,6 +1,6 @@
 import { type FC, useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { getHrefFromApp } from "@/utils";
 import { availableApps, isAppId } from "@/utils/availableApps";
@@ -9,7 +9,7 @@ export const AppInfo: FC = () => {
   const navigate = useNavigate();
   const { appId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(RealtimeContext);
   const knownAppId = isAppId(appId) ? appId : null;
   const customComponent = knownAppId ? availableApps[knownAppId].customComponent : undefined;
 

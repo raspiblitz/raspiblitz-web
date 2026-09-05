@@ -110,8 +110,22 @@ include JavaScript and component stacks without source maps.
 
 #### E2E tests
 
-Run tests headless:\
-`npx playwright test`
+Install both sets of locked dependencies with `npm ci` and
+`npm ci --prefix backend-mock`, then install Chromium with
+`npx playwright install chromium`.
+
+Run the mock's WebSocket protocol tests with `npm run test:mock`.
+
+Run browser tests headless with `npm run test:e2e`. Playwright starts a dedicated
+mock API on port 8100 and Vite on port 3100, including a test that uses native
+WebSockets to verify dashboard snapshots and wallet state updates. These tests
+always use the mock, regardless of `BACKEND_SERVER`, and refuse to reuse servers
+already occupying their ports. Normal development servers on ports 3000 and 8000
+can keep running.
+
+CI runs lint, types, unit tests, mock tests, and builds on Node.js 22 and 24. A
+separate Node.js 24 job runs Chromium E2E tests and retains the HTML report for
+seven days.
 
 Run test with UI:\
 `npx playwright test --ui`
@@ -126,21 +140,64 @@ This guide uses Polar for easier development, but you can also use a real lightn
   - In addition, you will need [redis](https://redis.io/) installed for `blitz_api` to work.
 - Create a `.env` file (see [.env_sample in blitz_api](https://github.com/fusion44/blitz_api/blob/main/.env_sample)) and copy the bitcoin and ln info into it.
   - Important: When definining `shell_script_path` you need to define a directory where a folder called `config.scripts` and a file called `blitz.debug.sh` reside in. Otherwise `blitz_api` may not work (used on the RaspiBlitz for logging)
-- Make the following change in `blitz_api`:
-  - In [main/app/main.py](https://github.com/fusion44/blitz_api/blob/main/app/main.py#L48), change the `prefix_format` from `/v{major}` to `/api/v{major}`.
-- Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local `blitz_api` installation.
+- Use a Blitz API version that provides the authenticated `/ws` endpoint.
+- Set `BACKEND_SERVER` to the API base URL. For a directly running API, for example:
 
-Now you can start the `blitz_api` and run `npm run start` in raspiblitz-web.
+```sh
+BACKEND_SERVER=http://localhost:8000 npm run start
+```
 
-Please do not commit the above changes.
+The frontend always requests `/api`; Vite replaces this prefix with the path in
+`BACKEND_SERVER`. The default is `http://localhost:8000/api` for the mock backend.
+This setting applies to development only; production uses `/api` on the current origin.
 
-### Use a external RaspiBlitz as Backend
+### Use an external RaspiBlitz as backend
 
-- (Optional): Make sure [asdf](https://asdf-vm.com/) is installed
-- (Optional): Run `asdf install nodejs latest:20`
-- Install the dependencies with `npm install`
-- Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local RaspiBlitz - for example if your RaspiBlitz is running on local IP `192.168.1.123` then change the value to `http://192.168.1.123:80`
-- with `npm run start` it should now connect to your external RaspiBlitz
+Install dependencies with `npm ci`, then point the development proxy to the node's
+API base URL, including `/api` when connecting through nginx:
+
+```sh
+BACKEND_SERVER=https://raspiblitz.local/api npm run start
+```
+
+For a directly reachable API without nginx, use its base URL without `/api`, for
+example `BACKEND_SERVER=http://raspiblitz.local:11111`.
+
+#### Live WebSocket integration test
+
+The optional live test verifies login, initial snapshots, dashboard rendering,
+session restoration after reload, reconnection, and logout after the real API
+rejects an invalid token. It does not change node settings or initiate wallet
+operations. The regular E2E suite always
+excludes it; the separate live command requires both environment variables below.
+Live tests disable traces, screenshots, and video to avoid retaining credentials.
+
+Playwright starts its own frontend on port 3100 with the selected backend and
+refuses to reuse an existing server on that port. In Bash, read the password
+without putting it in shell history:
+
+```bash
+export BACKEND_SERVER=https://raspiblitz.local/api
+read -r -s -p 'Password A: ' BLITZ_API_PASSWORD
+export BLITZ_API_PASSWORD
+npm run test:e2e:live
+unset BLITZ_API_PASSWORD
+```
+
+#### Production WebSocket proxy
+
+The reverse proxy must forward WebSocket upgrades for `/api/ws`. A login can succeed
+while WebSocket requests return HTTP 404 if nginx strips the upgrade headers. Add
+these directives to the existing `/api/` location in the deployment's nginx config:
+
+```nginx
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
+```
+
+Keep the existing API upstream and timeouts. Validate the config with `nginx -t`
+before reloading nginx. See [nginx WebSocket proxying](https://nginx.org/en/docs/http/websocket.html).
 
 ## Credits & Licenses
 

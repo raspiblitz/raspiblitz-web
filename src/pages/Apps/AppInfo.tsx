@@ -6,7 +6,7 @@ import { Navigate, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
 import AppIcon from "@/components/AppIcon";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { availableApps, isAppId } from "@/utils/availableApps";
 import { checkError } from "@/utils/checkError";
@@ -18,7 +18,7 @@ export const AppInfo: FC = () => {
   const { appId } = useParams();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus, installingApp, hardwareInfo } = useContext(SSEContext);
+  const { appStatus, installingApp, hardwareInfo } = useContext(RealtimeContext);
   const [imgs, setImgs] = useState<string[]>([]);
   const knownAppId = isAppId(appId) ? appId : null;
   const appInfo = knownAppId ? availableApps[knownAppId] : null;
@@ -103,7 +103,7 @@ export const AppInfo: FC = () => {
         <AppIcon appId={knownAppId} className="max-h-12" />
         <h1 className="px-5 text-2xl text-white">{name}</h1>
 
-        {(installingApp == null || installingApp.appId !== appId) && !installed && (
+        {(installingApp == null || installingApp.id !== appId) && !installed && (
           <Button isDisabled={!!installingApp} variant="primary" onPress={installHandler}>
             <span className="flex items-center gap-2">
               <PlusIcon className="inline h-6 w-6" />
@@ -112,19 +112,19 @@ export const AppInfo: FC = () => {
           </Button>
         )}
 
-        {installingApp && installingApp.appId === appId && installingApp.mode === "on" && (
+        {installingApp && installingApp.id === appId && installingApp.mode === "on" && (
           <Button isDisabled isPending variant="primary">
             {t("apps.installing")}
           </Button>
         )}
 
-        {installingApp && installingApp.appId === appId && installingApp.mode === "off" && (
+        {installingApp && installingApp.id === appId && installingApp.mode === "off" && (
           <Button isDisabled isPending variant="primary">
             {t("apps.uninstalling")}
           </Button>
         )}
 
-        {(installingApp == null || installingApp.appId !== appId) && installed && (
+        {(installingApp == null || installingApp.id !== appId) && installed && (
           <Button isDisabled={!!installingApp} variant="danger" onPress={uninstallHandler}>
             <span className="flex items-center gap-2">
               <TrashIcon className="inline h-6 w-6" />

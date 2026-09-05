@@ -1,7 +1,7 @@
 import { Spinner } from "@heroui/react";
 import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 
 const PI_NUM_CORES = 4;
 
@@ -11,7 +11,7 @@ const bytesToGB = (bytes: number | undefined): string => {
 
 export const HardwareCard: FC = () => {
   const { t } = useTranslation();
-  const { hardwareInfo } = useContext(SSEContext);
+  const { hardwareInfo } = useContext(RealtimeContext);
 
   if (!hardwareInfo) {
     return (

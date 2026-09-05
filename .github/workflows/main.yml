@@ -7,6 +7,13 @@ on:
   # stacked/feature-branch PRs too.
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,21 +24,28 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            backend-mock/package-lock.json
       - name: Install dependencies
         run: npm ci
+      - name: Install mock dependencies
+        run: npm ci --prefix backend-mock
+      - name: Run Linting and formatting
+        run: npm run lint
+      - name: Run Typecheck
+        run: npm run tsc
+      - name: Run Tests
+        run: npm test
+      - name: Run mock WebSocket tests
+        run: npm run test:mock
       - name: Build
         run: npm run build
         env:
           VITE_BUILD_COMMIT: ${{ github.sha }}
-      - name: Run Tests
-        run: npm run test
-      - name: Run Typecheck
-        run: npm run tsc
-      - name: Run Linting and formatting
-        run: npm run lint

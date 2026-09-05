@@ -1,12 +1,12 @@
 import { Spinner } from "@heroui/react";
 import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import { checkPropsUndefined } from "@/utils";
 
 export const BitcoinCard: FC = () => {
   const { t } = useTranslation();
-  const { btcInfo, systemInfo } = useContext(SSEContext);
+  const { btcInfo, systemInfo } = useContext(RealtimeContext);
 
   if (checkPropsUndefined({ btcInfo, systemInfo })) {
     return (

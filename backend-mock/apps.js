@@ -6,7 +6,7 @@ const { baseAppStatusData, createAppStateUpdateMessage } = require("./shared-dat
 router.post("/install/:id", (req, res) => {
   console.info("call to /api/apps/install for app", req.params.id);
   // send information that btc-pay is currently installing
-  util.sendSSE("install", {
+  util.sendEvent("install", {
     id: "rtl",
     mode: "on",
     result: "running",
@@ -51,7 +51,7 @@ const installApp = () => {
   console.info("call to installApp");
 
   // inform Frontend that app finished installing
-  util.sendSSE("install", {
+  util.sendEvent("install", {
     id: "rtl",
     mode: "on",
     result: "win",
@@ -60,7 +60,7 @@ const installApp = () => {
     details: "OK",
   });
 
-  util.sendSSE("app_state_update_message", {
+  util.sendEvent("app_state_update_message", {
     state: "success", 
     message: {
       data: [

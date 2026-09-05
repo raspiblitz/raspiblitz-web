@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";
 import AppStatusItem from "@/components/AppStatusItem";
 import { AppContext } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 
 const navLinkClasses =
   "flex md:flex-col lg:flex-row items-center justify-center py-4 w-full text-white opacity-80 hover:text-yellow-500";
@@ -22,7 +22,7 @@ const navIconClasses = "inline w-10 h-10";
 
 export const SideDrawer: FC = () => {
   const { logout } = useContext(AppContext);
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(RealtimeContext);
   const { t } = useTranslation();
 
   return (

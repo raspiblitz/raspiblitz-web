@@ -4,12 +4,12 @@ import { Button, Tooltip } from "@heroui/react";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import { instance } from "@/utils/interceptor";
 
 const AppStatusRefresh = () => {
   const { t } = useTranslation();
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(RealtimeContext);
   const [isUpdating, setIsUpdating] = useState(false);
   const [formattedAge, setFormattedAge] = useState("");
 

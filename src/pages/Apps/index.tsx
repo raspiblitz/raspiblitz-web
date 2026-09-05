@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import InstallationStatusCard from "@/components/installation/InstallationStatusCard";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import type { AppStatus } from "@/models/app-status";
 import { enableGutter } from "@/utils";
@@ -15,14 +15,14 @@ import AppStatusRefresh from "./AppStatusRefresh";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { lnInfo, appStatus, installationStatus } = useContext(SSEContext);
+  const { lnInfo, appStatus, installationStatus } = useContext(RealtimeContext);
   const [_isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     enableGutter();
   }, []);
 
-  // Listen to SSE events for app state updating
+  // Listen to realtime events for app state updating
   useEffect(() => {
     const handleAppStateUpdating = () => {
       setIsUpdating(true);

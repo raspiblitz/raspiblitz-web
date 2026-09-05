@@ -8,7 +8,7 @@ import { Spinner } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import useClipboard from "@/hooks/use-clipboard";
 import QRCodeModal from "./QRCodeModal";
 
@@ -16,7 +16,7 @@ const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
 export const ConnectionCard: FC = () => {
   const { t } = useTranslation();
-  const { systemInfo, lnInfo } = useContext(SSEContext);
+  const { systemInfo, lnInfo } = useContext(RealtimeContext);
   const [showAddress, setShowAddress] = useState(true);
   const [showModal, setShowModal] = useState(false);
 

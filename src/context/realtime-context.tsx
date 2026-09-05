@@ -4,6 +4,7 @@ import type { App } from "@/models/app.model";
 import type { AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
+import type { InstallAppData } from "@/models/install-app";
 import type { InstallationStatus } from "@/models/installation-status";
 import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
@@ -11,9 +12,9 @@ import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { Transaction } from "@/models/transaction.model";
 import type { WalletBalance } from "@/models/wallet-balance";
 
-export interface SSEContextType {
-  evtSource: EventSource | null;
-  setEvtSource: Dispatch<SetStateAction<EventSource | null>>;
+export interface RealtimeContextType {
+  socket: WebSocket | null;
+  setSocket: Dispatch<SetStateAction<WebSocket | null>>;
   systemInfo: SystemInfo;
   setSystemInfo: Dispatch<SetStateAction<SystemInfo>>;
   btcInfo: BtcInfo;
@@ -29,7 +30,7 @@ export interface SSEContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  installingApp: any | null;
+  installingApp: InstallAppData | null;
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
   systemStartupInfo: SystemStartupInfo | null;
@@ -38,9 +39,9 @@ export interface SSEContextType {
   setInstallationStatus: Dispatch<SetStateAction<InstallationStatus>>;
 }
 
-export const sseContextDefault: SSEContextType = {
-  evtSource: null,
-  setEvtSource: () => {},
+export const realtimeContextDefault: RealtimeContextType = {
+  socket: null,
+  setSocket: () => {},
   systemInfo: {} as SystemInfo,
   setSystemInfo: () => {},
   btcInfo: {} as BtcInfo,
@@ -49,27 +50,29 @@ export const sseContextDefault: SSEContextType = {
   lnInfo: {} as LnInfo,
   setLnInfo: () => {},
   setBalance: () => {},
-  appStatus: { data: [], errors: [], timestamp: 0 } as AppStatusQueryResponse,
+  appStatus: { data: [], errors: [], timestamp: 0 },
   setAppStatus: () => {},
   availableApps: [],
   setAvailableApps: () => {},
   transactions: [],
   setTransactions: () => {},
   installingApp: null,
-  hardwareInfo: {} as HardwareInfo,
+  hardwareInfo: null,
   setHardwareInfo: () => {},
-  systemStartupInfo: {} as SystemStartupInfo,
+  systemStartupInfo: null,
   setSystemStartupInfo: () => {},
   installationStatus: {},
   setInstallationStatus: () => {},
 };
 
-export const SSEContext = createContext<SSEContextType>(sseContextDefault);
+export const RealtimeContext = createContext<RealtimeContextType>(realtimeContextDefault);
 
-export const SSE_URL = "/api/sse/subscribe";
+export const WS_URL = `${
+  window.location.protocol === "https:" ? "wss" : "ws"
+}://${window.location.host}/api/ws`;
 
-const SSEContextProvider: FC<PropsWithChildren> = (props) => {
-  const [evtSource, setEvtSource] = useState<EventSource | null>(null);
+const RealtimeProvider: FC<PropsWithChildren> = (props) => {
+  const [socket, setSocket] = useState<WebSocket | null>(null);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     alias: "",
     color: "",
@@ -134,14 +137,14 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
   });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [installingApp] = useState<any | null>(null);
+  const [installingApp] = useState<InstallAppData | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] = useState<SystemStartupInfo | null>(null);
   const [installationStatus, setInstallationStatus] = useState<InstallationStatus>({});
 
-  const contextValue: SSEContextType = {
-    evtSource,
-    setEvtSource,
+  const contextValue: RealtimeContextType = {
+    socket,
+    setSocket,
     systemInfo,
     setSystemInfo,
     btcInfo,
@@ -165,7 +168,7 @@ const SSEContextProvider: FC<PropsWithChildren> = (props) => {
     setInstallationStatus,
   };
 
-  return <SSEContext.Provider value={contextValue}>{props.children}</SSEContext.Provider>;
+  return <RealtimeContext.Provider value={contextValue}>{props.children}</RealtimeContext.Provider>;
 };
 
-export default SSEContextProvider;
+export default RealtimeProvider;
