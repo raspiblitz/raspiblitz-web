@@ -36,7 +36,6 @@ const AppList: FC<Props> = ({ title, apps, onInstall, errors = [] }) => {
               appInfo={appInfo}
               appStatusInfo={appStatus}
               installed={appStatus.installed}
-              installingApp={null}
               onInstall={onInstall}
               error={error}
             />

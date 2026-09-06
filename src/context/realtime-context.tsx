@@ -1,16 +1,21 @@
 import type { FC, PropsWithChildren } from "react";
-import { createContext, type Dispatch, type SetStateAction, useState } from "react";
+import { createContext, type Dispatch, type SetStateAction, useRef, useState } from "react";
 import type { App } from "@/models/app.model";
 import type { AppStatusQueryResponse } from "@/models/app-status";
 import type { BtcInfo } from "@/models/btc-info";
 import type { HardwareInfo } from "@/models/hardware-info";
-import type { InstallAppData } from "@/models/install-app";
-import type { InstallationStatus } from "@/models/installation-status";
+import type { InstallMode, InstallationStatus } from "@/models/installation-status";
 import type { LnInfo } from "@/models/ln-info";
 import type { SystemInfo } from "@/models/system-info";
 import type { SystemStartupInfo } from "@/models/system-startup-info";
 import type { Transaction } from "@/models/transaction.model";
 import type { WalletBalance } from "@/models/wallet-balance";
+
+import { toast } from "react-toastify";
+import { isAppId } from "@/utils/availableApps";
+import { checkError } from "@/utils/checkError";
+import { instance } from "@/utils/interceptor";
+import { applyInstallationMessage, parseInstallationMessage } from "@/utils/installation-state";
 
 export interface RealtimeContextType {
   socket: WebSocket | null;
@@ -30,7 +35,7 @@ export interface RealtimeContextType {
   setAvailableApps: Dispatch<SetStateAction<App[]>>;
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  installingApp: InstallAppData | null;
+  manageApp: (id: string, mode: InstallMode) => Promise<void>;
   hardwareInfo: HardwareInfo | null;
   setHardwareInfo: Dispatch<SetStateAction<HardwareInfo | null>>;
   systemStartupInfo: SystemStartupInfo | null;
@@ -56,7 +61,7 @@ export const realtimeContextDefault: RealtimeContextType = {
   setAvailableApps: () => {},
   transactions: [],
   setTransactions: () => {},
-  installingApp: null,
+  manageApp: async () => {},
   hardwareInfo: null,
   setHardwareInfo: () => {},
   systemStartupInfo: null,
@@ -137,10 +142,48 @@ const RealtimeProvider: FC<PropsWithChildren> = (props) => {
   });
   const [availableApps, setAvailableApps] = useState<App[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [installingApp] = useState<InstallAppData | null>(null);
   const [hardwareInfo, setHardwareInfo] = useState<HardwareInfo | null>(null);
   const [systemStartupInfo, setSystemStartupInfo] = useState<SystemStartupInfo | null>(null);
   const [installationStatus, setInstallationStatus] = useState<InstallationStatus>({});
+
+  const requestPending = useRef(false);
+
+  const manageApp = async (id: string, mode: InstallMode): Promise<void> => {
+    if (
+      !isAppId(id) ||
+      requestPending.current ||
+      Object.values(installationStatus).some((status) => status.inProgress)
+    )
+      return;
+    requestPending.current = true;
+    setInstallationStatus((previous) => ({
+      ...previous,
+      [id]: {
+        mode,
+        currentState: "requested",
+        messages: [],
+        inProgress: true,
+        outcome: "pending",
+        errorId: null,
+      },
+    }));
+    try {
+      if (mode === "on") await instance.post(`apps/install/${id}`);
+      else await instance.post("apps/uninstall", { app_id: id, keep_data: true });
+    } catch (error) {
+      const details = checkError(error);
+      const failure = parseInstallationMessage({ id, mode, state: "failure", message: details });
+      const finished = parseInstallationMessage({ id, mode, state: "finished" });
+      setInstallationStatus((previous) => {
+        // A delayed HTTP failure must not overwrite progress already received over WS.
+        if (previous[id]?.currentState !== "requested" || !failure || !finished) return previous;
+        return applyInstallationMessage(applyInstallationMessage(previous, failure), finished);
+      });
+      toast.error(details);
+    } finally {
+      requestPending.current = false;
+    }
+  };
 
   const contextValue: RealtimeContextType = {
     socket,
@@ -159,7 +202,7 @@ const RealtimeProvider: FC<PropsWithChildren> = (props) => {
     setAvailableApps,
     transactions,
     setTransactions,
-    installingApp,
+    manageApp,
     hardwareInfo,
     setHardwareInfo,
     systemStartupInfo,

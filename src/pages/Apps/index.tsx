@@ -1,21 +1,18 @@
 import type { FC } from "react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import InstallationStatusCard from "@/components/installation/InstallationStatusCard";
 import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import type { AppStatus } from "@/models/app-status";
 import { enableGutter } from "@/utils";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
 import AppCardAlby from "./AppCardAlby";
 import AppList from "./AppList";
 import AppStatusRefresh from "./AppStatusRefresh";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { lnInfo, appStatus, installationStatus } = useContext(RealtimeContext);
+  const { lnInfo, appStatus, installationStatus, manageApp } = useContext(RealtimeContext);
   const [_isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
@@ -84,9 +81,7 @@ export const Apps: FC = () => {
   const allNotInstalledApps = [...notInstalledApps, ...errorOnlyApps];
 
   const installHandler = (id: string) => {
-    instance.post(`apps/install/${id}`).catch((err) => {
-      toast.error(checkError(err));
-    });
+    void manageApp(id, "on");
   };
 
   // Get active installations
@@ -101,7 +96,7 @@ export const Apps: FC = () => {
 
       const latestMessage = status.messages[status.messages.length - 1];
       const timestamp = latestMessage?.timestamp || 0;
-      const tenMinutesAgo = Date.now() - 10 * 60 * 1000;
+      const tenMinutesAgo = Date.now() / 1000 - 10 * 60;
 
       return timestamp > tenMinutesAgo;
     })

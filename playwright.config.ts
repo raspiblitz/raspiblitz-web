@@ -76,7 +76,7 @@ export default defineConfig({
       name: 'Mock API',
       command: 'node backend-mock/index.js',
       url: 'http://127.0.0.1:8100/index.html',
-      env: { PORT: '8100', WALLET_PASSWORD: 'password', JWT_SECRET: 'playwright-mock-secret' },
+      env: { PORT: '8100', WALLET_PASSWORD: 'password', JWT_SECRET: 'playwright-mock-secret', MOCK_APP_FAILURE_ONCE: 'mempool' },
       reuseExistingServer: false,
     },
     {

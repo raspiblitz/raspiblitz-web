@@ -1,26 +1,25 @@
-export enum InstallState {
-  INITIATED = "initiated", // start message
-  RUNNING = "running", // message during installation
-  SUCCESS = "success", // message with OK result
-  FAILURE = "failure", // message with error result
-  FINISHED = "finished", // end message when installation has concluded
-}
+import type { AppId } from "./app-status";
+
+export type InstallMode = "on" | "off";
+export type InstallState = "initiated" | "running" | "success" | "failure" | "finished";
 
 export interface InstallationMessage {
-  uid: string; // Stable unique key per message (assigned on ingestion)
-  id: string;
-  mode: string;
-  state: string;
+  uid: string;
+  id: AppId;
+  mode: InstallMode;
+  state: InstallState;
   error_id: string;
-  message?: string;
-  timestamp?: number; // Added for sorting/display
+  message: string;
+  timestamp: number; // Unix seconds (UTC), including fractional seconds for log ordering.
 }
 
 export interface InstallationStatus {
   [appId: string]: {
-    currentState: string;
+    mode: InstallMode;
+    currentState: InstallState | "requested";
     messages: InstallationMessage[];
     inProgress: boolean;
+    outcome: "pending" | "success" | "failure";
     errorId: string | null;
   };
 }

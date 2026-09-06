@@ -25,7 +25,6 @@ const appStatus: AppStatus = {
 };
 
 const basicProps: Props = {
-  installingApp: null,
   appInfo: app,
   appStatusInfo: appStatus,
   installed: false,

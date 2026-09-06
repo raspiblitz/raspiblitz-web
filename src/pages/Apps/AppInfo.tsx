@@ -1,16 +1,13 @@
 import { ChevronLeftIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Button, Link } from "@heroui/react";
-import { type FC, useCallback, useContext, useEffect, useState } from "react";
+import { type FC, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useParams } from "react-router";
-import { toast } from "react-toastify";
 import { Alert } from "@/components/Alert";
 import AppIcon from "@/components/AppIcon";
 import { RealtimeContext } from "@/context/realtime-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { availableApps, isAppId } from "@/utils/availableApps";
-import { checkError } from "@/utils/checkError";
-import { instance } from "@/utils/interceptor";
 import ImageCarousel from "./ImageCarousel";
 
 export const AppInfo: FC = () => {
@@ -18,7 +15,7 @@ export const AppInfo: FC = () => {
   const { appId } = useParams();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const { appStatus, installingApp, hardwareInfo } = useContext(RealtimeContext);
+  const { appStatus, installationStatus, manageApp, hardwareInfo } = useContext(RealtimeContext);
   const [imgs, setImgs] = useState<string[]>([]);
   const knownAppId = isAppId(appId) ? appId : null;
   const appInfo = knownAppId ? availableApps[knownAppId] : null;
@@ -51,20 +48,6 @@ export const AppInfo: FC = () => {
     if (knownAppId) loadAppImages();
   }, [knownAppId]);
 
-  const installHandler = useCallback(() => {
-    if (!knownAppId) return;
-    instance.post(`apps/install/${knownAppId}`).catch((err) => {
-      toast.error(checkError(err));
-    });
-  }, [knownAppId]);
-
-  const uninstallHandler = useCallback(() => {
-    if (!knownAppId) return;
-    instance.post("apps/uninstall", { app_id: knownAppId, keep_data: true }).catch((err) => {
-      toast.error(checkError(err));
-    });
-  }, [knownAppId]);
-
   if (!knownAppId || !appInfo) {
     return <Navigate to="/apps" replace />;
   }
@@ -74,6 +57,9 @@ export const AppInfo: FC = () => {
   }
 
   const { name, author, repository } = appInfo;
+  const operation = installationStatus[knownAppId];
+  const inProgress = operation?.inProgress ?? false;
+  const busy = Object.values(installationStatus).some((status) => status.inProgress);
 
   const video =
     appId === "mempool" ? (
@@ -103,8 +89,14 @@ export const AppInfo: FC = () => {
         <AppIcon appId={knownAppId} className="max-h-12" />
         <h1 className="px-5 text-2xl text-white">{name}</h1>
 
-        {(installingApp == null || installingApp.id !== appId) && !installed && (
-          <Button isDisabled={!!installingApp} variant="primary" onPress={installHandler}>
+        {!inProgress && !installed && (
+          <Button
+            isDisabled={busy}
+            variant="primary"
+            onPress={() => {
+              void manageApp(knownAppId, "on");
+            }}
+          >
             <span className="flex items-center gap-2">
               <PlusIcon className="inline h-6 w-6" />
               {t("apps.install")}
@@ -112,20 +104,26 @@ export const AppInfo: FC = () => {
           </Button>
         )}
 
-        {installingApp && installingApp.id === appId && installingApp.mode === "on" && (
+        {inProgress && operation.mode === "on" && (
           <Button isDisabled isPending variant="primary">
             {t("apps.installing")}
           </Button>
         )}
 
-        {installingApp && installingApp.id === appId && installingApp.mode === "off" && (
+        {inProgress && operation.mode === "off" && (
           <Button isDisabled isPending variant="primary">
             {t("apps.uninstalling")}
           </Button>
         )}
 
-        {(installingApp == null || installingApp.id !== appId) && installed && (
-          <Button isDisabled={!!installingApp} variant="danger" onPress={uninstallHandler}>
+        {!inProgress && installed && (
+          <Button
+            isDisabled={busy}
+            variant="danger"
+            onPress={() => {
+              void manageApp(knownAppId, "off");
+            }}
+          >
             <span className="flex items-center gap-2">
               <TrashIcon className="inline h-6 w-6" />
               {t("apps.uninstall")}

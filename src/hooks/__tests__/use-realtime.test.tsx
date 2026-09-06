@@ -277,7 +277,7 @@ describe("useRealtime (WebSocket)", () => {
     }
   });
 
-  it("caps retries at 30 seconds and resets the delay after a successful connection", () => {
+  it("caps retries at 30 seconds and resets only after a stable authenticated stream", () => {
     vi.useFakeTimers();
     try {
       renderProbe();
@@ -291,12 +291,72 @@ describe("useRealtime (WebSocket)", () => {
       }
       const connected = MockWebSocket.instances[MockWebSocket.instances.length - 1];
       act(() => connected.onopen?.());
+      act(() =>
+        connected.onmessage?.({
+          data: JSON.stringify({ event: "btc_info", data: { blocks: 42 } }),
+        }),
+      );
+      act(() => vi.advanceTimersByTime(10000));
       const count = MockWebSocket.instances.length;
       act(() => connected.onclose?.({ code: 1006 }));
       act(() => vi.advanceTimersByTime(499));
       expect(MockWebSocket.instances).toHaveLength(count);
       act(() => vi.advanceTimersByTime(1));
       expect(MockWebSocket.instances).toHaveLength(count + 1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it.each([false, true])(
+    "keeps backing off after brief upgrades, even with a snapshot (%s)",
+    (snapshot) => {
+      vi.useFakeTimers();
+      try {
+        renderProbe();
+        for (const delay of [500, 1000, 2000, 4000, 8000, 15000, 15000]) {
+          const count = MockWebSocket.instances.length;
+          const socket = MockWebSocket.instances[count - 1];
+          act(() => socket.onopen?.());
+          if (snapshot)
+            act(() =>
+              socket.onmessage?.({
+                data: JSON.stringify({ event: "btc_info", data: { blocks: 42 } }),
+              }),
+            );
+          act(() => vi.advanceTimersByTime(1000));
+          act(() => socket.onclose?.({ code: 1011 }));
+          act(() => vi.advanceTimersByTime(delay - 1));
+          expect(MockWebSocket.instances).toHaveLength(count);
+          act(() => vi.advanceTimersByTime(1));
+          expect(MockWebSocket.instances).toHaveLength(count + 1);
+        }
+      } finally {
+        vi.useRealTimers();
+      }
+    },
+  );
+
+  it("does not count malformed or unknown frames as a healthy stream", () => {
+    vi.useFakeTimers();
+    try {
+      renderProbe();
+      act(() => MockWebSocket.instances[0].onclose?.({ code: 1006 }));
+      act(() => vi.advanceTimersByTime(500));
+      const socket = MockWebSocket.instances[1];
+      act(() => socket.onopen?.());
+      for (const frame of [
+        { event: "unknown", data: { blocks: 42 } },
+        { event: "btc_info", data: { error: "warming up" } },
+        { event: "btc_info", data: { blocks: "invalid" } },
+      ])
+        act(() => socket.onmessage?.({ data: JSON.stringify(frame) }));
+      act(() => vi.advanceTimersByTime(10000));
+      act(() => socket.onclose?.({ code: 4408 }));
+      act(() => vi.advanceTimersByTime(999));
+      expect(MockWebSocket.instances).toHaveLength(2);
+      act(() => vi.advanceTimersByTime(1));
+      expect(MockWebSocket.instances).toHaveLength(3);
     } finally {
       vi.useRealTimers();
     }
@@ -534,6 +594,87 @@ describe("useRealtime (WebSocket)", () => {
     expect(screen.getByTestId("hardware")).toHaveTextContent(
       JSON.stringify({ ...hardware, vram_usage_percent: 30 }),
     );
+  });
+
+  it("preserves structured installation failures through finished and resets on a new attempt", () => {
+    renderProbe();
+    const socket = MockWebSocket.instances[0];
+    const send = (state: string, message: unknown = null) =>
+      act(() =>
+        socket.onmessage?.({
+          data: JSON.stringify({
+            event: "app_manage_message",
+            data: { id: "lnbits", mode: "off", state, message },
+          }),
+        }),
+      );
+    send("initiated");
+    send("failure", {
+      detail: "Cannot uninstall",
+      error_code: "busy",
+      report: { reason: "locked" },
+    });
+    send("finished");
+    expect(screen.getByTestId("installation")).toHaveTextContent('"outcome":"failure"');
+    expect(screen.getByTestId("installation")).toHaveTextContent('"inProgress":false');
+    expect(screen.getByTestId("installation")).toHaveTextContent('"errorId":"busy"');
+    expect(screen.getByTestId("installation")).toHaveTextContent("Cannot uninstall");
+    expect(screen.getByTestId("installation")).toHaveTextContent("locked");
+    send("initiated");
+    expect(screen.getByTestId("installation")).not.toHaveTextContent("Cannot uninstall");
+    expect(screen.getByTestId("installation")).toHaveTextContent('"outcome":"pending"');
+    send("success", "Installed");
+    send("finished");
+    expect(screen.getByTestId("installation")).toHaveTextContent('"outcome":"success"');
+  });
+
+  it("ignores malformed installation updates without corrupting a running operation", () => {
+    renderProbe();
+    const socket = MockWebSocket.instances[0];
+    const send = (data: unknown) =>
+      act(() =>
+        socket.onmessage?.({ data: JSON.stringify({ event: "app_manage_message", data }) }),
+      );
+    const valid = { id: "lnbits", mode: "on", state: "running", message: "Working" };
+    send(valid);
+    const previous = screen.getByTestId("installation").textContent;
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    for (const invalid of [
+      null,
+      [],
+      { ...valid, mode: "invalid" },
+      { ...valid, state: "unknown" },
+      { ...valid, message: { detail: [] } },
+    ])
+      send(invalid);
+    expect(error).toHaveBeenCalledTimes(5);
+    expect(screen.getByTestId("installation").textContent).toBe(previous);
+    send({ ...valid, state: "finished" });
+    expect(screen.getByTestId("installation")).toHaveTextContent('"inProgress":false');
+  });
+
+  it("normalizes legacy install events and ignores invalid results", () => {
+    renderProbe();
+    const socket = MockWebSocket.instances[0];
+    const send = (result: unknown) =>
+      act(() =>
+        socket.onmessage?.({
+          data: JSON.stringify({
+            event: "install",
+            data: { id: "lnbits", mode: "on", result, details: "details" },
+          }),
+        }),
+      );
+    send("running");
+    expect(screen.getByTestId("installation")).toHaveTextContent('"inProgress":true');
+    send("fail");
+    expect(screen.getByTestId("installation")).toHaveTextContent('"inProgress":false');
+    expect(screen.getByTestId("installation")).toHaveTextContent('"outcome":"failure"');
+    const previous = screen.getByTestId("installation").textContent;
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    send("unknown");
+    expect(error).toHaveBeenCalledOnce();
+    expect(screen.getByTestId("installation").textContent).toBe(previous);
   });
 
   it("dispatches parsed app status and installation messages, ignoring unknown app IDs", () => {

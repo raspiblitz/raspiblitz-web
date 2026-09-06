@@ -19,7 +19,8 @@ const InstallationLogModal = ({ appId, onClose }: InstallationLogModalProps) => 
 
   const appStatus = installationStatus[appId];
 
-  const { messages, errorId } = appStatus;
+  const messages = appStatus?.messages ?? [];
+  const errorId = appStatus?.errorId;
 
   // Filter messages with non-empty details
   const messagesWithDetails = messages

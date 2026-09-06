@@ -115,6 +115,11 @@ Install both sets of locked dependencies with `npm ci` and
 `npx playwright install chromium`.
 
 Run the mock's WebSocket protocol tests with `npm run test:mock`.
+These also exercise app installation, failure, retry, and uninstall over HTTP and
+WebSocket. The mock emits `app_manage_message` events for the requested app and
+retains installed state for reconnect warmup. Set `MOCK_APP_FAILURE_ONCE=mempool`
+to make its first operation fail with a structured error; later attempts succeed.
+The Playwright mock config enables this scenario for the installation browser test.
 
 Run browser tests headless with `npm run test:e2e`. Playwright starts a dedicated
 mock API on port 8100 and Vite on port 3100, including a test that uses native

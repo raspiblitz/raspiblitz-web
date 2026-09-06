@@ -15,12 +15,8 @@ import { ACCESS_TOKEN, setWindowAlias } from "@/utils";
 import { parseAppStateUpdateValue } from "@/utils/app-state-message";
 import { availableApps, isAppId } from "@/utils/availableApps";
 import { isRecord } from "@/utils/guards";
+import { applyInstallationMessage, parseInstallationMessage } from "@/utils/installation-state";
 import { isApp, isHardwareInfo, isSystemStartupInfo, isTransaction } from "@/utils/realtime-guards";
-
-// Monotonic counter for assigning a stable, unique key to each installation
-// message. Avoids relying on the array index (or a possibly-colliding
-// timestamp) as a React key.
-let installationMessageSeq = 0;
 
 // Warmup emits an `{ error }` frame for a data event when the backend failed to
 // gather that source for a newly-connected client. Such a frame must never be
@@ -99,59 +95,13 @@ function useRealtime() {
       }
     };
 
-    const handleManageAppMessage = (parsedData: unknown) => {
-      try {
-        // Verify we have a valid object for installation status
-        if (!isRecord(parsedData)) {
-          console.error("Invalid app_manage_message data format:", parsedData);
-          return;
-        }
-
-        // Extract required fields with fallbacks
-        const id = parsedData.id;
-        if (!isAppId(id)) {
-          console.error("Missing app ID in app_manage_message:", parsedData);
-          return;
-        }
-
-        const state = typeof parsedData.state === "string" ? parsedData.state : "";
-        const error_id = typeof parsedData.error_id === "string" ? parsedData.error_id : "none";
-        const mode = typeof parsedData.mode === "string" ? parsedData.mode : "";
-
-        // The message field replaces the details field in the new format
-        const details = typeof parsedData.message === "string" ? parsedData.message : "";
-
-        // Add timestamp for sorting
-        const messageWithTimestamp = {
-          id,
-          state,
-          mode,
-          error_id,
-          message: details,
-          // Stable unique key for React lists (see installationMessageSeq)
-          uid: `msg-${installationMessageSeq++}`,
-          // Map message to details for consistency with our data model
-          details: details,
-          timestamp: Date.now(),
-        };
-
-        updateInstallationStatus((prev) => {
-          const prevMessages = prev[id]?.messages || [];
-          const inProgress = state !== "finished";
-
-          return {
-            ...prev,
-            [id]: {
-              currentState: state,
-              messages: [...prevMessages, messageWithTimestamp],
-              inProgress,
-              errorId: error_id !== "none" ? error_id : null,
-            },
-          };
-        });
-      } catch (error) {
-        console.error("Error processing app_manage_message data:", error);
+    const handleManageAppMessage = (value: unknown) => {
+      const message = parseInstallationMessage(value);
+      if (!message) {
+        console.error("Invalid app_manage_message data:", value);
+        return;
       }
+      updateInstallationStatus((previous) => applyInstallationMessage(previous, message));
     };
 
     const setTx = (transaction: unknown) => {
@@ -176,7 +126,11 @@ function useRealtime() {
         if (
           !isRecord(installAppData) ||
           !isAppId(installAppData.id) ||
-          (installAppData.mode !== "on" && installAppData.mode !== "off")
+          (installAppData.mode !== "on" && installAppData.mode !== "off") ||
+          (installAppData.result !== "fail" &&
+            installAppData.result !== "win" &&
+            installAppData.result !== "running" &&
+            installAppData.result !== "")
         ) {
           console.error("Invalid install app data:", installAppData);
           return;
@@ -184,6 +138,22 @@ function useRealtime() {
         const appName = availableApps[installAppData.id].name;
         const translate = translationRef.current;
         const details = typeof installAppData.details === "string" ? installAppData.details : "";
+        // Normalize legacy install events into the same state used by modern app management.
+        const state =
+          installAppData.result === "fail"
+            ? "failure"
+            : installAppData.result === "win"
+              ? "success"
+              : "running";
+        const message = parseInstallationMessage({ ...installAppData, state, message: details });
+        const finished = parseInstallationMessage({ ...installAppData, state: "finished" });
+        if (message)
+          updateInstallationStatus((previous) => {
+            const next = applyInstallationMessage(previous, message);
+            return state !== "running" && finished
+              ? applyInstallationMessage(next, finished)
+              : next;
+          });
         toast.dismiss();
         if (installAppData.result === "fail") {
           toast.error(
@@ -392,18 +362,21 @@ function useRealtime() {
     let ws: WebSocket | null = null;
     let closedByUs = false;
     let backoff = 1000;
+    let stableTimer: ReturnType<typeof setTimeout> | undefined;
     let reconnectTimer: ReturnType<typeof setTimeout> | undefined;
 
     const connect = () => {
       const socket = new WebSocket(WS_URL);
+      let disconnected = false;
       ws = socket;
       setSocket(socket);
       socket.onopen = () => {
-        backoff = 1000;
+        if (closedByUs || disconnected || ws !== socket) return;
         const token = localStorage.getItem(ACCESS_TOKEN);
         socket.send(JSON.stringify({ type: "auth", token }));
       };
       socket.onmessage = (evt) => {
+        if (closedByUs || disconnected || ws !== socket) return;
         try {
           const frame: unknown = JSON.parse(evt.data);
           if (!isRecord(frame) || typeof frame.event !== "string" || !("data" in frame)) {
@@ -411,13 +384,31 @@ function useRealtime() {
           }
           if (Object.hasOwn(DISPATCH, frame.event)) {
             DISPATCH[frame.event](frame.data);
+            // Upgrade alone is not success. Require a usable startup/BTC snapshot
+            // (sent during warmup) and ten seconds without a disconnect.
+            if (
+              stableTimer === undefined &&
+              ((frame.event === "system_startup_info" && isSystemStartupInfo(frame.data)) ||
+                (frame.event === "btc_info" &&
+                  isRecord(frame.data) &&
+                  !("error" in frame.data) &&
+                  typeof frame.data.blocks === "number" &&
+                  Number.isFinite(frame.data.blocks)))
+            ) {
+              stableTimer = setTimeout(() => {
+                backoff = 1000;
+              }, 10000);
+            }
           }
         } catch (err) {
           console.error("Error processing ws frame:", err);
         }
       };
       socket.onclose = (evt) => {
-        if (closedByUs) return;
+        if (closedByUs || disconnected || ws !== socket) return;
+        clearTimeout(stableTimer);
+        stableTimer = undefined;
+        disconnected = true;
         if (evt.code === 4401) {
           appCtxRef.current.logout();
           return;
@@ -435,6 +426,7 @@ function useRealtime() {
     return () => {
       closedByUs = true;
       if (reconnectTimer) clearTimeout(reconnectTimer);
+      clearTimeout(stableTimer);
       ws?.close();
     };
   }, [
@@ -460,7 +452,6 @@ function useRealtime() {
     appStatus: realtimeCtx.appStatus,
     transactions: realtimeCtx.transactions,
     availableApps: realtimeCtx.availableApps,
-    installingApp: realtimeCtx.installingApp,
     hardwareInfo: realtimeCtx.hardwareInfo,
     systemStartupInfo: realtimeCtx.systemStartupInfo,
     installationStatus: realtimeCtx.installationStatus,

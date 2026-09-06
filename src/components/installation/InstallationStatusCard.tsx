@@ -18,7 +18,7 @@ const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
 
   if (!appStatus) return null;
 
-  const { messages, currentState, inProgress, errorId } = appStatus;
+  const { messages, currentState, inProgress, outcome, mode } = appStatus;
 
   // Get the latest 3 messages with non-empty details
   const latestMessages = messages
@@ -29,15 +29,14 @@ const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
   // Determine status color
   let statusColor = "bg-blue-100 text-blue-800"; // In progress
 
-  if (currentState === "failure" || errorId) {
+  if (outcome === "failure") {
     statusColor = "bg-red-100 text-red-800"; // Error
-  } else if (currentState === "finished" && !errorId) {
+  } else if (currentState === "finished" && outcome === "success") {
     statusColor = "bg-green-100 text-green-800"; // Success
   }
 
   // Determine action text based on mode
-  const firstMessage = messages.length > 0 ? messages[0] : null;
-  const actionText = firstMessage?.mode === "on" ? t("apps.installing") : t("apps.uninstalling");
+  const actionText = mode === "on" ? t("apps.installing") : t("apps.uninstalling");
 
   // Format app ID for display
   const displayAppId = getDisplayAppId(appId);
@@ -51,7 +50,7 @@ const InstallationStatusCard = ({ appId }: InstallationStatusCardProps) => {
         <span className={`px-2 py-1 rounded-full text-xs ${statusColor}`}>
           {inProgress
             ? `${actionText}...`
-            : currentState === "failure"
+            : outcome === "failure"
               ? t("apps.failed")
               : t("apps.completed")}
         </span>
