@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/tests/integration/__pycache__/
 
 # production
 /build
@@ -45,3 +46,6 @@ yarn-error.log*
 
 # Local docs (specs, plans, QA artifacts) — kept out of the repo
 /docs/
+
+# subagent scratch reports
+.superpowers-*

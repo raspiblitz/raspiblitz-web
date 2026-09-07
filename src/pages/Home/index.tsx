@@ -3,7 +3,7 @@ import { type FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { AppContext } from "@/context/app-context";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import { useInterval } from "@/hooks/use-interval";
 import { useModalManager } from "@/hooks/use-modalmanager";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
@@ -31,7 +31,7 @@ const Home: FC = () => {
 
   const { t } = useTranslation();
   const { walletLocked, setWalletLocked } = useContext(AppContext);
-  const { balance, lnInfo, systemStartupInfo } = useContext(SSEContext);
+  const { balance, lnInfo, systemStartupInfo } = useContext(RealtimeContext);
   const [detailTx, setDetailTx] = useState<Transaction | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);

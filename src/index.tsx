@@ -1,6 +1,6 @@
 import App from "./App";
 import AppContextProvider from "./context/app-context";
-import SSEContextProvider from "./context/sse-context";
+import RealtimeProvider from "./context/realtime-context";
 import "./i18n/config";
 import "./index.css";
 import ErrorBoundary from "@/ErrorBoundary";
@@ -28,13 +28,13 @@ root.render(
   <StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
-        <SSEContextProvider>
+        <RealtimeProvider>
           <AppContextProvider>
             {/* For persistent toasts over all pages */}
             <ToastContainer stacked closeOnClick />
             <App />
           </AppContextProvider>
-        </SSEContextProvider>
+        </RealtimeProvider>
       </BrowserRouter>
     </ErrorBoundary>
   </StrictMode>,

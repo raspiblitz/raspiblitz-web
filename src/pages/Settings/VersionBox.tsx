@@ -1,14 +1,14 @@
 import packageJson from "package.json";
 import { type FC, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 
 /**
  * Displays the versions of RaspiBlitz, the WebUI and the Blitz-API
  */
 const VersionBox: FC = () => {
   const { t } = useTranslation();
-  const { systemInfo } = useContext(SSEContext);
+  const { systemInfo } = useContext(RealtimeContext);
 
   const { platform_version, api_version } = systemInfo;
 

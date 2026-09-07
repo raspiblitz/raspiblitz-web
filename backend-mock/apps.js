@@ -3,25 +3,48 @@ const router = express.Router();
 const util = require("./sse/util");
 const { baseAppStatusData, createAppStateUpdateMessage } = require("./shared-data");
 
-router.post("/install/:id", (req, res) => {
-  console.info("call to /api/apps/install for app", req.params.id);
-  // send information that btc-pay is currently installing
-  util.sendSSE("install", {
-    id: "rtl",
-    mode: "on",
-    result: "running",
-    details: "",
-  });
-  setTimeout(() => {
-    installApp();
-  }, 5000);
-  res.status(200).send();
-});
+// Optional deterministic failure for browser tests; normal mock installs succeed.
+const failOnceFor = process.env.MOCK_APP_FAILURE_ONCE;
+let failureConsumed = false;
+let managingApp = false;
 
-router.post("/uninstall/:id", (req, res) => {
-  console.info("call to /api/apps/uninstall for app", req.params.id);
-  // TODO: Create the same example as install but with uninstall
+function manageApp(res, id, mode) {
+  const app = baseAppStatusData.find((item) => item.id === id);
+  if (!app) return res.status(404).json({ detail: "Unknown app" });
+  if (managingApp) return res.status(423).json({ detail: "An app operation is already running" });
+  if (app.installed === (mode === "on")) {
+    return res.status(400).json({ detail: mode === "on" ? "App already installed" : "App not installed" });
+  }
+  managingApp = true;
+  const fail = id === failOnceFor && !failureConsumed;
+  if (fail) failureConsumed = true;
+  const send = (state, message = null) => util.sendEvent("app_manage_message", { id, mode, state, message });
+  send("initiated");
+  setTimeout(() => send("running", mode === "on" ? "Installing app" : "Uninstalling app"), 100);
+  setTimeout(() => {
+    if (fail) {
+      send("failure", {
+        detail: "Mock disk full",
+        error_code: "mock_disk_full",
+        report: { reason: "Not enough space for installation" },
+      });
+    } else {
+      app.installed = mode === "on";
+      app.configured = app.installed;
+      app.status = app.installed ? "online" : "offline";
+      send("success", mode === "on" ? "App installed" : "App uninstalled");
+      util.sendEvent("app_state_update_message", createAppStateUpdateMessage());
+    }
+    managingApp = false;
+    send("finished");
+  }, 1500);
   res.status(200).send();
+}
+
+router.post("/install/:id", (req, res) => manageApp(res, req.params.id, "on"));
+router.post("/uninstall", (req, res) => {
+  if (typeof req.body?.keep_data !== "boolean") return res.status(422).json({ detail: "keep_data must be a boolean" });
+  return manageApp(res, req.body.app_id, "off");
 });
 
 router.get("/status", (req, res) => {
@@ -47,180 +70,4 @@ router.get("/status_advanced/electrs", (req, res) => {
   );
 });
 
-const installApp = () => {
-  console.info("call to installApp");
-
-  // inform Frontend that app finished installing
-  util.sendSSE("install", {
-    id: "rtl",
-    mode: "on",
-    result: "win",
-    httpsForced: "0",
-    httpsSelfsigned: "1",
-    details: "OK",
-  });
-
-  util.sendSSE("app_state_update_message", {
-    state: "success", 
-    message: {
-      data: [
-        {
-          id: "albyhub",
-          version: "1.17.0",
-          installed: false,
-          configured: false,
-          status: "offline",
-          local_ip: null,
-          http_port: null,
-          https_port: null,
-          https_forced: null,
-          https_self_signed: null,
-          hidden_service: null,
-          address: null,
-          auth_method: null,
-          details: null,
-          error: null
-        },
-        {
-          id: "btcpayserver",
-          version: "v2.2.1",
-          installed: false,
-          configured: false,
-          status: "offline",
-          local_ip: null,
-          http_port: null,
-          https_port: null,
-          https_forced: null,
-          https_self_signed: null,
-          hidden_service: null,
-          address: null,
-          auth_method: null,
-          details: null,
-          error: null
-        },
-        {
-          id: "btc-rpc-explorer",
-          version: "",
-          installed: false,
-          configured: false,
-          status: "offline",
-          local_ip: null,
-          http_port: null,
-          https_port: null,
-          https_forced: null,
-          https_self_signed: null,
-          hidden_service: null,
-          address: null,
-          auth_method: null,
-          details: null,
-          error: null
-        },
-        {
-          id: "electrs",
-          version: "v0.10.6",
-          installed: true,
-          configured: true,
-          status: "online",
-          local_ip: "192.168.178.104",
-          http_port: null,
-          https_port: null,
-          https_forced: false,
-          https_self_signed: false,
-          hidden_service: null,
-          address: "http://192.168.178.104:None",
-          auth_method: "none",
-          details: null,
-          error: null
-        },
-        {
-          id: "jam",
-          version: "0.3.0",
-          installed: false,
-          configured: false,
-          status: "offline",
-          local_ip: null,
-          http_port: null,
-          https_port: null,
-          https_forced: null,
-          https_self_signed: null,
-          hidden_service: null,
-          address: null,
-          auth_method: null,
-          details: null,
-          error: null
-        },
-        {
-          id: "lnbits",
-          version: "v1.0.0",
-          installed: true,
-          configured: false,
-          status: "online",
-          local_ip: "127.0.0.1",
-          http_port: "5000",
-          https_port: "5001",
-          https_forced: true,
-          https_self_signed: true,
-          hidden_service: "abc.onion",
-          address: "https://127.0.0.1:5001",
-          auth_method: "/wallet?usr=abcde",
-          details: null,
-          error: null
-        },
-        {
-          id: "mempool",
-          version: "v3.2.1",
-          installed: false,
-          configured: false,
-          status: "offline",
-          local_ip: null,
-          http_port: null,
-          https_port: null,
-          https_forced: null,
-          https_self_signed: null,
-          hidden_service: null,
-          address: null,
-          auth_method: null,
-          details: null,
-          error: null
-        },
-        {
-          id: "rtl",
-          version: "v0.15.2",
-          installed: true,
-          configured: true,
-          status: "online",
-          local_ip: "127.0.0.1",
-          http_port: "3000",
-          https_port: null,
-          https_forced: false,
-          https_self_signed: true,
-          hidden_service: "abc.onion",
-          address: "http://127.0.0.1:3000",
-          auth_method: "password_b",
-          details: null,
-          error: null
-        },
-        {
-          id: "thunderhub",
-          version: "v0.13.31",
-          installed: false,
-          configured: false,
-          status: "offline",
-          local_ip: null,
-          http_port: null,
-          https_port: null,
-          https_forced: null,
-          https_self_signed: null,
-          hidden_service: null,
-          address: null,
-          auth_method: null,
-          details: null,
-          error: null
-        }
-      ],
-      errors: [],
-      timestamp: Math.floor(Date.now() / 1000)
-    }
-  });
-};
 module.exports = router;

@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Headline } from "@/components/Headline";
 import { Alert } from "@/components/Alert";
-import { SSEContext } from "@/context/sse-context";
+import { RealtimeContext } from "@/context/realtime-context";
 import useClipboard from "@/hooks/use-clipboard";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import type { AdvancedAppStatusElectron } from "@/models/advanced-app-status";
@@ -44,7 +44,7 @@ function CopySnippet({ text }: { text: string }) {
 const Electrs = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { appStatus } = useContext(SSEContext);
+  const { appStatus } = useContext(RealtimeContext);
   const [isLoading, setIsLoading] = useState(true);
   const [electrsError, setElectrsError] = useState("");
   const [appData, setAppData] = useState<AdvancedAppStatusElectron | null>(null);

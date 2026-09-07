@@ -7,7 +7,7 @@ export interface Transaction {
   time_stamp: number;
   comment: string;
   status: TransactionStatus;
-  block_height: null;
+  block_height: number | null;
   num_confs: number | null;
   total_fees: number | null;
 }

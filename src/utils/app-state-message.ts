@@ -59,6 +59,10 @@ export function parseAppStateUpdateMessage(rawMessage: string): AppStateUpdateMe
     return null;
   }
 
+  return parseAppStateUpdateValue(value);
+}
+
+export function parseAppStateUpdateValue(value: unknown): AppStateUpdateMessage | null {
   if (!isRecord(value)) return null;
 
   if (value.state === "initiated" || value.state === "finished") {

@@ -12,7 +12,7 @@ This project uses AI-assisted development. Please refer to the main AI guidance 
 - Use `npm run tsc` for TypeScript type checking
 
 ### Architecture Notes
-- Real-time data via Server-Sent Events (SSE) in `SSEContext`
+- Real-time data via authenticated WebSocket (`/api/ws`) in `RealtimeContext`, connected by `useRealtime`
 - State management with React Context API pattern
 - HeroUI components library for UI elements
 - Authentication with JWT tokens and auto-refresh

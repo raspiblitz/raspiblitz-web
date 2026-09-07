@@ -235,7 +235,7 @@ router.post("/unlock-wallet", (req, res) => {
     if (req.body.password === "password") {
       WALLET_LOCKED = false;
 
-      util.sendSSE("system_startup_info", {
+      util.sendEvent("system_startup_info", {
         bitcoin: "done",
         bitcoin_msg: "",
         lightning: "bootstrapping_after_unlock",
@@ -243,7 +243,7 @@ router.post("/unlock-wallet", (req, res) => {
       });
 
       setTimeout(() => {
-        util.sendSSE("system_startup_info", {
+        util.sendEvent("system_startup_info", {
           bitcoin: "done",
           bitcoin_msg: "",
           lightning: "done",

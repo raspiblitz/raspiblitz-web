@@ -1,18 +1,18 @@
-/**
- * @type {{id: number, response: Response}[]}
- */
-let clients = [];
-let currClientId = 0;
+const { WebSocket } = require("ws");
 
-/**
- * @param {string} event the event to send
- * @param {any} data data of the event
- * @returns void
- */
-const sendSSE = (event, data) => {
-  clients.forEach((client) =>
-    client.response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`),
-  );
+/** @type {import("ws").WebSocket[]} */
+const clients = [];
+
+/** Send a warmup event to one authenticated client. */
+const sendToClient = (ws, event, data) => {
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ event, data }));
+  }
 };
 
-module.exports = { clients, currClientId, sendSSE };
+/** Broadcast subsequent updates to all authenticated clients. */
+const sendEvent = (event, data) => {
+  for (const ws of clients) sendToClient(ws, event, data);
+};
+
+module.exports = { clients, sendToClient, sendEvent };

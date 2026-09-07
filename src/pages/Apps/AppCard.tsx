@@ -7,11 +7,12 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button, Link, Tooltip, useOverlayState } from "@heroui/react";
 import { buttonVariants } from "@heroui/styles";
-import { type FC, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import AppIcon from "@/components/AppIcon";
 import { ConfirmModal } from "@/components/ConfirmModal";
+import { RealtimeContext } from "@/context/realtime-context";
 import type { App } from "@/models/app.model";
 import { type AppStatus, AuthMethod } from "@/models/app-status";
 import { getHrefFromApp } from "@/utils";
@@ -20,33 +21,19 @@ export type Props = {
   appInfo: App;
   appStatusInfo: AppStatus;
   installed: boolean;
-  installingApp: any | null;
   onInstall: (id: string) => void;
   error?: string;
 };
 
-export const AppCard: FC<Props> = ({
-  appInfo,
-  appStatusInfo,
-  installed,
-  installingApp,
-  onInstall,
-  error,
-}) => {
+export const AppCard = ({ appInfo, appStatusInfo, installed, onInstall, error }: Props) => {
   const { id, name } = appInfo;
   const { t } = useTranslation();
-  const [isInstallWaiting, setInstallWaiting] = useState(false);
+  const { installationStatus } = useContext(RealtimeContext);
+  const operation = installationStatus[id];
+  const inProgress = operation?.inProgress ?? false;
+  const busy = Object.values(installationStatus).some((status) => status.inProgress);
   const navigate = useNavigate();
   const errorModal = useOverlayState();
-
-  useEffect(() => {
-    setInstallWaiting(false);
-  }, []);
-
-  const installButtonPressed = (id: string) => {
-    setInstallWaiting(true);
-    onInstall(id);
-  };
 
   const setAuthMethodText = (authMethod?: AuthMethod | string | null): string => {
     switch (authMethod) {
@@ -193,27 +180,18 @@ export const AppCard: FC<Props> = ({
           </Button>
         )}
 
-        {/* Only show Install button when there's no error */}
-        {!hasError &&
-          (installingApp === null || installingApp.id !== id || installingApp.result === "fail") &&
-          !installed && (
-            <Button
-              isDisabled={
-                isInstallWaiting || (installingApp !== null && installingApp?.result !== "fail")
-              }
-              onPress={() => installButtonPressed(id)}
-              variant="primary"
-            >
-              <span className="flex items-center gap-2">
-                <PlusIcon className="inline h-6 w-6" />
-                {t("apps.install")}
-              </span>
-            </Button>
-          )}
+        {!hasError && !inProgress && !installed && (
+          <Button isDisabled={busy} onPress={() => onInstall(id)} variant="primary">
+            <span className="flex items-center gap-2">
+              <PlusIcon className="inline h-6 w-6" />
+              {t("apps.install")}
+            </span>
+          </Button>
+        )}
 
-        {installingApp && installingApp.id === id && installingApp.result === "running" && (
+        {inProgress && (
           <Button isDisabled isPending>
-            {t("apps.installing")}
+            {t(operation.mode === "on" ? "apps.installing" : "apps.uninstalling")}
           </Button>
         )}
 
