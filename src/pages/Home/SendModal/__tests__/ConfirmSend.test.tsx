@@ -609,6 +609,40 @@ describe("ConfirmSend", () => {
       });
     });
 
+    test("sends the BOLT11 invoice, not the decoded payment address, as pay_req", async () => {
+      const invoice = basicLnTxProps.confirmData.address;
+      const paymentAddr = "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e";
+      let capturedPayReq: string | null = null;
+      server.use(
+        http.post("/api/lightning/send-payment", ({ request }) => {
+          capturedPayReq = new URL(request.url).searchParams.get("pay_req");
+          return new HttpResponse(null, { status: 200 });
+        }),
+      );
+
+      const user = userEvent.setup();
+      const confirmData = {
+        ...basicLnTxProps.confirmData,
+        invoice,
+        address: paymentAddr,
+        amount: 50,
+      };
+
+      render(
+        <ConfirmModal disclosure={mockedDisclosure} custom>
+          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
+        </ConfirmModal>,
+      );
+
+      await user.click(screen.getByRole("button", { name: "settings.confirm" }));
+
+      await waitFor(() => {
+        expect(closeSpy).toHaveBeenCalled();
+      });
+
+      expect(capturedPayReq).toBe(invoice);
+    });
+
     test("displays amount in satoshis for lightning invoice", () => {
       const confirmData = {
         ...basicLnTxProps.confirmData,

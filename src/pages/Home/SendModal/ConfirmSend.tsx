@@ -73,7 +73,7 @@ const ConfirmSend: FC<Props> = ({ confirmData, back, balance, close }) => {
       }
 
       instance
-        .post(`lightning/send-payment?pay_req=${confirmData?.address}${msatQuery}`)
+        .post(`lightning/send-payment?pay_req=${lnData.invoice}${msatQuery}`)
         .then(() => {
           setIsLoading(false);
           toast.success(t("tx.sent"), { theme: "dark" });
