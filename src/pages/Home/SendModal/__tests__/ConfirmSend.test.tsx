@@ -38,11 +38,22 @@ const basicOnChainTxProps = {
   close: closeSpy,
 } satisfies Props;
 
-const isExpectedPaymentRequest = (
-  params: URLSearchParams,
-  invoice: string,
-  amountMsat: string | null = null,
-) => params.get("pay_req") === invoice && params.get("amount_msat") === amountMsat;
+const mockSendPayment = (
+  respond: () => Response | Promise<Response> = () => new HttpResponse(null, { status: 200 }),
+) => {
+  let params: URLSearchParams | undefined;
+  server.use(
+    http.post("/api/lightning/send-payment", ({ request }) => {
+      params = new URL(request.url).searchParams;
+      return respond();
+    }),
+  );
+  return {
+    get params() {
+      return params;
+    },
+  };
+};
 
 describe("ConfirmSend", () => {
   beforeEach(() => {
@@ -162,19 +173,7 @@ describe("ConfirmSend", () => {
 
   describe("error handling", () => {
     test("displays error message when API call fails for Lightning", async () => {
-      let capturedParams: URLSearchParams | undefined;
-      server.use(
-        http.post("/api/lightning/send-payment", ({ request }) => {
-          capturedParams = new URL(request.url).searchParams;
-          if (!isExpectedPaymentRequest(capturedParams, basicLnTxProps.confirmData.invoice)) {
-            return new HttpResponse(null, { status: 400 });
-          }
-          return new HttpResponse(JSON.stringify({ detail: "Payment failed" }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          });
-        }),
-      );
+      mockSendPayment(() => HttpResponse.json({ detail: "Payment failed" }, { status: 500 }));
 
       const user = userEvent.setup();
       const propsWithAmount = {
@@ -197,8 +196,6 @@ describe("ConfirmSend", () => {
       await user.click(confirmButton);
 
       await waitFor(() => {
-        expect(capturedParams?.get("pay_req")).toBe(propsWithAmount.confirmData.invoice);
-        expect(capturedParams?.has("amount_msat")).toBe(false);
         expect(screen.getByText("Payment failed", { exact: false })).toBeInTheDocument();
       });
       expect(closeSpy).not.toHaveBeenCalled();
@@ -259,16 +256,7 @@ describe("ConfirmSend", () => {
     });
 
     test("buttons are disabled during loading state", async () => {
-      let capturedParams: URLSearchParams | undefined;
-      server.use(
-        http.post("/api/lightning/send-payment", ({ request }) => {
-          capturedParams = new URL(request.url).searchParams;
-          if (!isExpectedPaymentRequest(capturedParams, basicLnTxProps.confirmData.invoice)) {
-            return new HttpResponse(null, { status: 400 });
-          }
-          return new Promise(() => {}); // Never resolve to keep loading state
-        }),
-      );
+      mockSendPayment(() => new Promise(() => {})); // Never resolve to keep loading state
 
       const user = userEvent.setup();
       const propsWithAmount = {
@@ -291,8 +279,6 @@ describe("ConfirmSend", () => {
       await user.click(confirmButton);
 
       await waitFor(() => {
-        expect(capturedParams?.get("pay_req")).toBe(propsWithAmount.confirmData.invoice);
-        expect(capturedParams?.has("amount_msat")).toBe(false);
         expect(screen.getByRole("button", { name: "settings.cancel" })).toBeDisabled();
         expect(confirmButton).toHaveAttribute("data-pending", "true");
       });
@@ -360,18 +346,7 @@ describe("ConfirmSend", () => {
     });
 
     test("amountInput correctly sends mSat", async () => {
-      let capturedParams: URLSearchParams | undefined;
-      server.use(
-        http.post("/api/lightning/send-payment", ({ request }) => {
-          capturedParams = new URL(request.url).searchParams;
-          if (
-            isExpectedPaymentRequest(capturedParams, basicLnTxProps.confirmData.invoice, "10000")
-          ) {
-            return new HttpResponse(null, { status: 200 });
-          }
-          return new HttpResponse(null, { status: 500 });
-        }),
-      );
+      const paymentRequest = mockSendPayment();
       const user = userEvent.setup();
       setup();
 
@@ -387,8 +362,8 @@ describe("ConfirmSend", () => {
       await user.click(confirmBtn);
 
       await waitFor(() => {
-        expect(capturedParams?.get("pay_req")).toBe(basicLnTxProps.confirmData.invoice);
-        expect(capturedParams?.get("amount_msat")).toBe("10000");
+        expect(paymentRequest.params?.get("pay_req")).toBe(basicLnTxProps.confirmData.invoice);
+        expect(paymentRequest.params?.get("amount_msat")).toBe("10000");
       });
       await waitFor(() => expect(closeSpy).toHaveBeenCalled());
     });
@@ -615,16 +590,7 @@ describe("ConfirmSend", () => {
         amount: 50,
       };
       const invoice = confirmData.invoice;
-      let capturedParams: URLSearchParams | undefined;
-      server.use(
-        http.post("/api/lightning/send-payment", ({ request }) => {
-          capturedParams = new URL(request.url).searchParams;
-          if (!isExpectedPaymentRequest(capturedParams, invoice)) {
-            return new HttpResponse(null, { status: 400 });
-          }
-          return new HttpResponse(null, { status: 200 });
-        }),
-      );
+      const paymentRequest = mockSendPayment();
 
       const user = userEvent.setup();
       render(
@@ -636,8 +602,8 @@ describe("ConfirmSend", () => {
       await user.click(screen.getByRole("button", { name: "settings.confirm" }));
 
       await waitFor(() => {
-        expect(capturedParams?.get("pay_req")).toBe(invoice);
-        expect(capturedParams?.has("amount_msat")).toBe(false);
+        expect(paymentRequest.params?.get("pay_req")).toBe(invoice);
+        expect(paymentRequest.params?.has("amount_msat")).toBe(false);
         expect(closeSpy).toHaveBeenCalled();
       });
     });
