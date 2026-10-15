@@ -5,36 +5,54 @@ import { HttpResponse, http, server } from "@/testServer";
 import { TxType } from "../../SwitchTxType";
 import type { Props } from "../ConfirmSend";
 import ConfirmSend from "../ConfirmSend";
-import type { SendLnForm } from "../SendModal";
-import type { SendOnChainForm } from "../SendOnChain";
 
 const closeSpy = vi.fn();
 
-const basicLnTxProps: Props = {
+const basicLnTxProps = {
   confirmData: {
-    address:
+    invoice:
       "lnbcrt10u1pscxuktpp5k4hp6wxafdaqfhk84krlt26q80dfdg5df3cdagwjpr5v8xc7s5qqdpz2phkcctjypykuan0d93k2grxdaezqcn0vgxqyjw5qcqp2sp5ndav50eqfh32xxpwd4wa645hevumj7ze5meuajjs40vtgkucdams9qy9qsqc34r4wlyytf68xvt540gz7yq80wsdhyy93dgetv2d2x44dhtg4fysu9k8v0aec8r649tcgtu5s9xths93nuxklvf93px6gnlw2h7u0gq602rww",
+    address: "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e",
     invoiceType: TxType.LIGHTNING,
     comment: "",
     expiry: 36000,
     amount: 0,
     timestamp: 1893456000, // 01 Jan 2030 00:00:00 GMT
-  } as SendLnForm,
+  },
   back: () => {},
   balance: 100,
   close: closeSpy,
-};
+} satisfies Props;
 
-const basicOnChainTxProps: Props = {
+const basicOnChainTxProps = {
   confirmData: {
     address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
     fee: "1",
     amount: 50000,
     invoiceType: TxType.ONCHAIN,
-  } as SendOnChainForm,
+    comment: "",
+    spendAll: false,
+  },
   back: () => {},
   balance: 100,
   close: closeSpy,
+} satisfies Props;
+
+const mockSendPayment = (
+  respond: () => Response | Promise<Response> = () => new HttpResponse(null, { status: 200 }),
+) => {
+  let params: URLSearchParams | undefined;
+  server.use(
+    http.post("/api/lightning/send-payment", ({ request }) => {
+      params = new URL(request.url).searchParams;
+      return respond();
+    }),
+  );
+  return {
+    get params() {
+      return params;
+    },
+  };
 };
 
 describe("ConfirmSend", () => {
@@ -155,14 +173,7 @@ describe("ConfirmSend", () => {
 
   describe("error handling", () => {
     test("displays error message when API call fails for Lightning", async () => {
-      server.use(
-        http.post("/api/lightning/send-payment", () => {
-          return new HttpResponse(JSON.stringify({ detail: "Payment failed" }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          });
-        }),
-      );
+      mockSendPayment(() => HttpResponse.json({ detail: "Payment failed" }, { status: 500 }));
 
       const user = userEvent.setup();
       const propsWithAmount = {
@@ -187,6 +198,7 @@ describe("ConfirmSend", () => {
       await waitFor(() => {
         expect(screen.getByText("Payment failed", { exact: false })).toBeInTheDocument();
       });
+      expect(closeSpy).not.toHaveBeenCalled();
     });
 
     test("displays error message when API call fails for onchain", async () => {
@@ -244,11 +256,7 @@ describe("ConfirmSend", () => {
     });
 
     test("buttons are disabled during loading state", async () => {
-      server.use(
-        http.post("/api/lightning/send-payment", () => {
-          return new Promise(() => {}); // Never resolve to keep loading state
-        }),
-      );
+      mockSendPayment(() => new Promise(() => {})); // Never resolve to keep loading state
 
       const user = userEvent.setup();
       const propsWithAmount = {
@@ -338,15 +346,7 @@ describe("ConfirmSend", () => {
     });
 
     test("amountInput correctly sends mSat", async () => {
-      server.use(
-        http.post("/api/lightning/send-payment", ({ request }) => {
-          const url = new URL(request.url);
-          if (url.searchParams.get("amount_msat") === "10000") {
-            return new HttpResponse(null, { status: 200 });
-          }
-          return new HttpResponse(null, { status: 500 });
-        }),
-      );
+      const paymentRequest = mockSendPayment();
       const user = userEvent.setup();
       setup();
 
@@ -361,7 +361,11 @@ describe("ConfirmSend", () => {
 
       await user.click(confirmBtn);
 
-      expect(closeSpy).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(paymentRequest.params?.get("pay_req")).toBe(basicLnTxProps.confirmData.invoice);
+        expect(paymentRequest.params?.get("amount_msat")).toBe("10000");
+      });
+      await waitFor(() => expect(closeSpy).toHaveBeenCalled());
     });
   });
 
@@ -580,54 +584,15 @@ describe("ConfirmSend", () => {
   });
 
   describe("lightning transactions with fixed amount", () => {
-    test("successful lightning payment closes modal", async () => {
-      server.use(
-        http.post("/api/lightning/send-payment", () => {
-          return new HttpResponse(null, { status: 200 });
-        }),
-      );
-
-      const user = userEvent.setup();
-      const confirmData = {
-        ...basicLnTxProps.confirmData,
-        amount: 50,
-      };
-
-      render(
-        <ConfirmModal disclosure={mockedDisclosure} custom>
-          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
-        </ConfirmModal>,
-      );
-
-      const confirmButton = screen.getByRole("button", {
-        name: "settings.confirm",
-      });
-      await user.click(confirmButton);
-
-      await waitFor(() => {
-        expect(closeSpy).toHaveBeenCalled();
-      });
-    });
-
     test("sends the BOLT11 invoice, not the decoded payment address, as pay_req", async () => {
-      const invoice = basicLnTxProps.confirmData.address;
-      const paymentAddr = "24efc95be534b44b801ea5603b9aa1ad5424196972c7a3357b478e773b55f22e";
-      let capturedPayReq: string | null = null;
-      server.use(
-        http.post("/api/lightning/send-payment", ({ request }) => {
-          capturedPayReq = new URL(request.url).searchParams.get("pay_req");
-          return new HttpResponse(null, { status: 200 });
-        }),
-      );
-
-      const user = userEvent.setup();
       const confirmData = {
         ...basicLnTxProps.confirmData,
-        invoice,
-        address: paymentAddr,
         amount: 50,
       };
+      const invoice = confirmData.invoice;
+      const paymentRequest = mockSendPayment();
 
+      const user = userEvent.setup();
       render(
         <ConfirmModal disclosure={mockedDisclosure} custom>
           <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
@@ -637,10 +602,10 @@ describe("ConfirmSend", () => {
       await user.click(screen.getByRole("button", { name: "settings.confirm" }));
 
       await waitFor(() => {
+        expect(paymentRequest.params?.get("pay_req")).toBe(invoice);
+        expect(paymentRequest.params?.has("amount_msat")).toBe(false);
         expect(closeSpy).toHaveBeenCalled();
       });
-
-      expect(capturedPayReq).toBe(invoice);
     });
 
     test("displays amount in satoshis for lightning invoice", () => {
@@ -674,37 +639,6 @@ describe("ConfirmSend", () => {
       );
 
       expect(screen.getByText(/2022/)).toBeInTheDocument();
-    });
-
-    test("handles lightning payment without custom amount", async () => {
-      server.use(
-        http.post("/api/lightning/send-payment", ({ request }) => {
-          const url = new URL(request.url);
-          expect(url.searchParams.get("amount_msat")).toBeNull();
-          return new HttpResponse(null, { status: 200 });
-        }),
-      );
-
-      const user = userEvent.setup();
-      const confirmData = {
-        ...basicLnTxProps.confirmData,
-        amount: 50,
-      };
-
-      render(
-        <ConfirmModal disclosure={mockedDisclosure} custom>
-          <ConfirmSend {...basicLnTxProps} confirmData={confirmData} />
-        </ConfirmModal>,
-      );
-
-      const confirmButton = screen.getByRole("button", {
-        name: "settings.confirm",
-      });
-      await user.click(confirmButton);
-
-      await waitFor(() => {
-        expect(closeSpy).toHaveBeenCalled();
-      });
     });
 
     test("zero amount input field shows hint text", () => {
