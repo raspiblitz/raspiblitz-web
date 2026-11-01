@@ -30,13 +30,29 @@ export const WalletCard: FC<Props> = ({ onReceive, onSend, onOpenChannel, onClos
     channel_local_balance: lnBalance,
   } = balance;
 
+  // Compare source balances in sats, independently of the selected display unit.
+  // Only local channel funds belong to this wallet; remote/pending balances are excluded.
+  const lightningSats = typeof lnBalance === "number" ? lnBalance / 1000 : 0;
+  const totalSats = typeof onchainBalance === "number" ? onchainBalance + lightningSats : 0;
+  const hasDistribution =
+    typeof onchainBalance === "number" &&
+    typeof lnBalance === "number" &&
+    Number.isFinite(onchainBalance) &&
+    Number.isFinite(lnBalance) &&
+    onchainBalance >= 0 &&
+    lnBalance >= 0 &&
+    onchainBalance <= Number.MAX_SAFE_INTEGER &&
+    lnBalance <= Number.MAX_SAFE_INTEGER &&
+    totalSats > 0;
+  const onchainPercent = hasDistribution ? Math.round((onchainBalance / totalSats) * 100) : null;
+
   let convertedOnchainBalance = null;
   let convertedOnchainBalanceUnconfirmed = null;
   let convertedLnBalance = null;
   let totalBalance = null;
   let unconfirmedSign = "";
 
-  if (onchainBalance !== null && lnBalance !== null) {
+  if (onchainBalance != null && lnBalance != null) {
     convertedOnchainBalance = unit === Unit.BTC ? convertSatToBtc(onchainBalance) : onchainBalance;
 
     if (onChainUnconfirmed) {
@@ -69,6 +85,14 @@ export const WalletCard: FC<Props> = ({ onReceive, onSend, onOpenChannel, onClos
               <p className="text-2xl font-bold">
                 {convertToString(unit, totalBalance)} {unit}
               </p>
+              {onchainPercent !== null && (
+                <p className="text-sm">
+                  {t("wallet.balance_distribution", {
+                    onchain: onchainPercent,
+                    lightning: 100 - onchainPercent,
+                  })}
+                </p>
+              )}
             </article>
             <article className="flex w-full flex-col">
               <Headline as="h5" align="left">
