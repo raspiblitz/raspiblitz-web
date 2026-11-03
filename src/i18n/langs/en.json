@@ -395,6 +395,7 @@
       "address": "Address",
       "amount": "Amount",
       "balance": "Balance",
+      "balance_distribution": "{{onchain}}% on-chain / {{lightning}}% Lightning",
       "available_balance": "Available balance",
       "confirm": "Confirm",
       "copied": "Copied!",
