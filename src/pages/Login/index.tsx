@@ -73,19 +73,19 @@ const Login: FC = () => {
   };
 
   return (
-    <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-700 transition-colors">
-      <div className="fixed right-16 top-4 flex h-8 w-48 items-center justify-around">
+    <main className="flex min-h-dvh w-full flex-col items-center justify-center bg-gray-700 px-6 py-24 transition-colors md:h-screen md:py-0">
+      <div className="fixed right-6 top-4 flex min-h-11 w-48 items-center justify-around [&_button]:min-h-11 md:right-16 md:h-8 md:min-h-0 md:[&_button]:min-h-0 md:pointer-coarse:[&_button]:min-h-11">
         <I18nSelect />
       </div>
 
-      <RaspiBlitzLogoDark className="my-2 block h-10" />
+      <RaspiBlitzLogoDark className="my-2 block h-10 max-w-full shrink-0" />
 
       {isLoading && <Spinner size="lg" />}
 
       {!isLoading && (
         <>
           <form
-            className="items-left flex flex-col justify-center py-5"
+            className="flex w-full max-w-96 flex-col items-center justify-center py-5"
             onSubmit={handleSubmit(loginHandler)}
           >
             <Controller
@@ -96,7 +96,7 @@ const Login: FC = () => {
               }}
               render={({ field, fieldState }) => (
                 <TextField
-                  className="w-8/12 md:w-96"
+                  className="w-full"
                   isInvalid={fieldState.invalid}
                   value={field.value ?? ""}
                   onChange={field.onChange}
@@ -107,17 +107,19 @@ const Login: FC = () => {
                   <Label>{t("login.enter_pass")}</Label>
                   <Input
                     autoFocus
+                    autoComplete="current-password"
                     type="password"
                     placeholder={t("login.enter_pass_placeholder")}
-                    className="bg-tertiary"
+                    className="min-h-11 bg-tertiary text-base md:min-h-0 md:text-sm md:pointer-coarse:min-h-11 md:pointer-coarse:text-base"
                   />
                   <FieldError>{fieldState.error?.message}</FieldError>
                 </TextField>
               )}
             />
 
-            <article className="flex flex-col items-center justify-center gap-10 pt-10">
+            <article className="flex w-full flex-col items-center justify-center gap-10 pt-10">
               <Button
+                className="min-h-11 md:min-h-0 md:pointer-coarse:min-h-11"
                 variant="primary"
                 type="submit"
                 isDisabled={isLoading || !isValid}
