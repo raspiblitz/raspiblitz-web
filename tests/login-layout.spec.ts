@@ -35,9 +35,11 @@ test.describe('responsive login layout', () => {
       for (const box of [logoBox, inputBox, submitBox]) {
         expect(Math.abs(box.x + box.width / 2 - width / 2)).toBeLessThan(1);
       }
-      if (width < 768) {
-        expect(Math.abs(inputBox.width - submitBox.width)).toBeLessThan(1);
-      }
+      expect(inputBox.width).toBeCloseTo(Math.min(width - 48, 384), 0);
+      expect(submitBox.width).toBeGreaterThanOrEqual(44);
+      expect(submitBox.width).toBeLessThanOrEqual(128);
+      expect(submitBox.width).toBeLessThan(inputBox.width);
+      expect(inputBox.x).toBeGreaterThanOrEqual(24);
       expect(logoBox.y + logoBox.height).toBeLessThan(inputBox.y);
       expect(inputBox.y + inputBox.height).toBeLessThan(submitBox.y);
       expect(languageBox.y + languageBox.height).toBeLessThan(logoBox.y);

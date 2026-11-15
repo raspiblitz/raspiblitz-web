@@ -119,7 +119,7 @@ const Login: FC = () => {
 
             <article className="flex w-full flex-col items-center justify-center gap-10 pt-10">
               <Button
-                className="min-h-11 w-full md:min-h-0 md:w-auto md:pointer-coarse:min-h-11"
+                className="min-h-11 md:min-h-0 md:pointer-coarse:min-h-11"
                 variant="primary"
                 type="submit"
                 isDisabled={isLoading || !isValid}
