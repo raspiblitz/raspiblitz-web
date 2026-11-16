@@ -82,6 +82,16 @@ test('installation failure, log export, retry and uninstall use the backend life
   expect(states).toEqual(['initiated', 'running', 'failure', 'finished']);
 
   await page.getByRole('button', { name: 'View Full Log' }).click();
+  const logDialog = page.getByRole('dialog', { name: 'Mempool Installation Log', exact: true });
+  await expect(logDialog).toBeVisible();
+  for (const width of [390, 1280]) {
+    await page.setViewportSize({ width, height: 844 });
+    await expect(logDialog.getByRole('heading', { name: 'Mempool Installation Log' })).toBeVisible();
+    expect(await logDialog.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+    // Modal.Body owns scrolling, not a second framed log viewport.
+    expect(await logDialog.locator('[data-slot="modal-body"] [class*="overflow-y-auto"]').count()).toBe(0);
+    await page.screenshot({ path: test.info().outputPath(`installation-log-${width}.png`), animations: 'disabled' });
+  }
   const downloadEvent = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download Log' }).click();
   const download = await downloadEvent;

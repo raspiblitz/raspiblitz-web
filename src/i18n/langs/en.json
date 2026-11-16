@@ -98,6 +98,7 @@
       "active_installations": "Active Processes",
       "recent_completions": "Recent Completions",
       "installation_log": "Installation Log",
+      "installation_log_title": "{{app}} Installation Log",
       "view_full_log": "View Full Log",
       "no_messages": "No messages yet",
       "error": "Error",

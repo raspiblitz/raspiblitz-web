@@ -1,4 +1,5 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { Button } from "@heroui/react";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -29,18 +30,20 @@ const ImageCarousel: FC<Props> = ({ imgs, video, appName }) => {
       </div>
       {count > 1 && (
         <div className="flex flex-wrap items-center justify-center gap-2 p-3">
-          <button
-            type="button"
+          <Button
+            isIconOnly
+            variant="tertiary"
             aria-label={t("carousel.previous")}
             className={controlClass}
-            onClick={() => setActiveIndex((current - 1 + count) % count)}
+            onPress={() => setActiveIndex((current - 1 + count) % count)}
           >
             <ChevronLeftIcon className="h-6 w-6" />
-          </button>
+          </Button>
           {Array.from({ length: count }, (_, index) => (
-            <button
+            <Button
               key={index}
-              type="button"
+              isIconOnly
+              variant="tertiary"
               aria-label={
                 video && index === 0
                   ? t("carousel.show_video")
@@ -48,21 +51,22 @@ const ImageCarousel: FC<Props> = ({ imgs, video, appName }) => {
               }
               aria-current={current === index ? "true" : undefined}
               className={controlClass}
-              onClick={() => setActiveIndex(index)}
+              onPress={() => setActiveIndex(index)}
             >
               <span
                 className={`h-2 w-6 border border-white ${current === index ? "bg-white" : "bg-transparent"}`}
               />
-            </button>
+            </Button>
           ))}
-          <button
-            type="button"
+          <Button
+            isIconOnly
+            variant="tertiary"
             aria-label={t("carousel.next")}
             className={controlClass}
-            onClick={() => setActiveIndex((current + 1) % count)}
+            onPress={() => setActiveIndex((current + 1) % count)}
           >
             <ChevronLeftIcon className="h-6 w-6 rotate-180" />
-          </button>
+          </Button>
         </div>
       )}
       <p className="sr-only" aria-live="polite" aria-atomic="true">

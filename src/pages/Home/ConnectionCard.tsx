@@ -4,7 +4,7 @@ import {
   EyeSlashIcon,
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
-import { Spinner } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { type FC, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
@@ -148,15 +148,16 @@ export const ConnectionCard: FC = () => {
               >
                 {showAddress ? nodeId : HIDDEN_TEXT}
               </a>
-              <button
-                type="button"
+              <Button
+                isIconOnly
+                variant="tertiary"
                 aria-label={t("home.show_qr")}
                 className="inline-flex min-h-11 min-w-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                onClick={showModalHandler}
+                onPress={showModalHandler}
                 data-tooltip-id="qr-tooltip"
               >
                 <QrCodeIcon className="h-6 w-6" />
-              </button>
+              </Button>
               <Tooltip id="qr-tooltip">
                 <div>{t("home.show_qr")}</div>
               </Tooltip>

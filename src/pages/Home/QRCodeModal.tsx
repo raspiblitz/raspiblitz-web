@@ -1,4 +1,5 @@
 import { QRCodeSVG } from "qrcode.react";
+import { useId } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "react-tooltip";
@@ -14,6 +15,7 @@ type Props = {
 export default function QRCodeModal({ identityUri, closeModal }: Props) {
   const { t } = useTranslation();
   const [copyNodeId, clippedNodeId] = useClipboard(identityUri);
+  const copyHintId = useId();
 
   return createPortal(
     <ModalDialog close={closeModal} label={t("home.node_id")}>
@@ -23,12 +25,15 @@ export default function QRCodeModal({ identityUri, closeModal }: Props) {
         <button
           type="button"
           onClick={copyNodeId}
-          aria-label={t("wallet.copy_clipboard")}
+          aria-describedby={copyHintId}
           data-tooltip-id="copy-tooltip"
           className="min-h-11 w-full break-all text-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           {identityUri}
         </button>
+        <span id={copyHintId} className="sr-only">
+          {t("wallet.copy_clipboard")}
+        </span>
         <Tooltip id="copy-tooltip">
           <div>{clippedNodeId ? t("wallet.copied") : t("wallet.copy_clipboard")}</div>
         </Tooltip>

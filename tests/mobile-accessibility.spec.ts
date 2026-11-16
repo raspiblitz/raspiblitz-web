@@ -49,6 +49,12 @@ test('QR dialog contains keyboard focus, dismisses and restores the opener', asy
   await page.keyboard.press('Enter');
   const dialog = page.getByRole('dialog', { name: 'NodeID', exact: true });
   await expect(dialog).toBeVisible();
+  const copy = dialog.getByRole('button', { name: /@/ });
+  await expect(copy).toHaveAccessibleDescription('Copy to clipboard');
+  // The page reserves a stable scrollbar gutter, even while the overlay is open.
+  const viewportWidth = await page.evaluate(() => Math.round(document.documentElement.getBoundingClientRect().width));
+  await expect.poll(async () => Math.round((await dialog.boundingBox())!.width)).toBe(viewportWidth);
+  await expect.poll(async () => Math.round((await dialog.boundingBox())!.height)).toBe(844);
   await expect.poll(() => dialog.evaluate(el => el.contains(document.activeElement))).toBe(true);
   for (let i = 0; i < 6; i++) {
     await page.keyboard.press(i % 2 ? 'Shift+Tab' : 'Tab');

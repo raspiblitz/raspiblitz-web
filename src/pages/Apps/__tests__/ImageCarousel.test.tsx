@@ -2,25 +2,23 @@ import { render, screen } from "test-utils";
 import userEvent from "@testing-library/user-event";
 import ImageCarousel from "../ImageCarousel";
 import i18n from "@/i18n/test_config";
+import en from "@/i18n/langs/en.json";
 
 beforeAll(() => {
-  i18n.addResourceBundle("en", "translation", {
-    carousel: {
-      label: "App previews",
-      previous: "Previous preview",
-      next: "Next preview",
-      show_screenshot: "Show screenshot {{index}}",
-      show_video: "Show video",
-      screenshot: "Screenshot {{index}} of {{total}}",
-      slide: "Preview {{index}} of {{total}}",
-    },
-  });
+  i18n.addResourceBundle("en", "translation", en.translation);
 });
 
 describe("ImageCarousel", () => {
   test("selects the requested screenshot after a video and wraps both directions", async () => {
     const user = userEvent.setup();
-    render(<ImageCarousel imgs={["one.png", "two.png"]} video={<video data-testid="video" />} />);
+    render(
+      <ImageCarousel
+        appName="Mempool.space"
+        imgs={["one.png", "two.png"]}
+        video={<video data-testid="video" />}
+      />,
+    );
+    expect(screen.getByRole("region", { name: "Mempool.space app previews" })).toBeInTheDocument();
     expect(screen.getByTestId("video")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Show screenshot 2" }));
     expect(screen.getByRole("img")).toHaveAttribute("src", "two.png");
@@ -31,7 +29,7 @@ describe("ImageCarousel", () => {
     await user.click(screen.getByRole("button", { name: "Next preview" }));
     expect(screen.getByTestId("video")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Previous preview" }));
-    expect(screen.getByRole("img")).toHaveAccessibleName("Screenshot 2 of 2");
+    expect(screen.getByRole("img")).toHaveAccessibleName("Mempool.space screenshot 2 of 2");
   });
 
   test("allows keyboard activation without a video", async () => {
