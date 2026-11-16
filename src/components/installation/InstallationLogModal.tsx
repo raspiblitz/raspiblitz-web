@@ -69,7 +69,7 @@ const InstallationLogModal = ({ appId, onClose }: InstallationLogModalProps) => 
   };
 
   return (
-    <ModalDialog close={onClose}>
+    <ModalDialog close={onClose} label={`${displayAppId} ${t("apps.installation_log")}`}>
       <div className="flex flex-col text-white max-h-[80vh] text-left bg-linear-to-b from-gray-900 to-gray-950 rounded-lg overflow-hidden shadow-2xl">
         <div className="px-6 py-4 border-b border-gray-600/50 sticky top-0 bg-linear-to-r from-gray-800 to-gray-900 z-10 backdrop-blur-sm">
           <div className="flex items-center justify-between">

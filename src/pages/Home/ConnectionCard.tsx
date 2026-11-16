@@ -148,11 +148,15 @@ export const ConnectionCard: FC = () => {
               >
                 {showAddress ? nodeId : HIDDEN_TEXT}
               </a>
-              <QrCodeIcon
-                className="inline-flex h-6 w-2/12 cursor-pointer justify-self-end"
+              <button
+                type="button"
+                aria-label={t("home.show_qr")}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 onClick={showModalHandler}
                 data-tooltip-id="qr-tooltip"
-              />
+              >
+                <QrCodeIcon className="h-6 w-6" />
+              </button>
               <Tooltip id="qr-tooltip">
                 <div>{t("home.show_qr")}</div>
               </Tooltip>

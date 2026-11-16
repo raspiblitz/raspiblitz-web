@@ -1,58 +1,45 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { type FC, type PropsWithChildren, useCallback, useEffect } from "react";
-import ModalBackground from "./ModalBackground";
+import { Modal, useOverlayState } from "@heroui/react";
+import { type FC, type PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 
-export const disableScroll = {
-  on: () => document.body.classList.add("overflow-y-hidden"),
-  off: () => document.body.classList.remove("overflow-y-hidden"),
-};
+type Props = { closeable?: boolean; close: () => void; label: string };
 
-type Props = {
-  closeable?: boolean;
-  close: () => void;
-};
-
-const ModalDialog: FC<PropsWithChildren<Props>> = ({ closeable = true, close, children }) => {
-  const closeModal = useCallback(() => {
-    close();
-    disableScroll.off();
-  }, [close]);
-
-  // close Modal on Esc
-  const closeOnEsc = useCallback(
-    (event: KeyboardEvent) => {
-      if (closeable && event.key === "Escape") {
-        closeModal();
-      }
+const ModalDialog: FC<PropsWithChildren<Props>> = ({
+  closeable = true,
+  close,
+  label,
+  children,
+}) => {
+  const { t } = useTranslation();
+  const state = useOverlayState({
+    isOpen: true,
+    onOpenChange: (open) => {
+      if (!open && closeable) close();
     },
-    [closeModal, closeable],
-  );
-
-  useEffect(() => {
-    disableScroll.on();
-    window.addEventListener("keydown", closeOnEsc);
-    return () => {
-      window.removeEventListener("keydown", closeOnEsc);
-      disableScroll.off();
-    };
-  }, [closeOnEsc]);
-
+  });
   return (
-    <ModalBackground>
-      <div className="flex h-screen max-h-full w-screen flex-col overflow-y-auto rounded-lg bg-gray-800 pb-8 text-center text-white shadow-xl md:h-auto md:w-4/5 lg:w-1/2 xl:mx-5 xl:w-2/5 xl:max-w-(--breakpoint-sm)">
-        <div className="flex pr-2 pt-1">
-          <button
-            type="button"
-            onClick={closeModal}
-            className={`ml-auto mt-1 flex h-7 w-7 items-end ${closeable ? "" : "invisible"}`}
-          >
-            <XMarkIcon className="h-full w-full" />
-          </button>
-        </div>
-        <div className="flex h-full flex-col justify-center px-5">{children}</div>
-      </div>
-    </ModalBackground>
+    <Modal state={state}>
+      <Modal.Backdrop isDismissable={false} isKeyboardDismissDisabled={!closeable}>
+        <Modal.Container size="lg" scroll="inside">
+          <Modal.Dialog aria-label={label} className="max-h-[90dvh] bg-gray-800 text-white">
+            {closeable && (
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  aria-label={t("common.close")}
+                  onClick={close}
+                  className="flex min-h-11 min-w-11 items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  <XMarkIcon className="h-6 w-6" />
+                </button>
+              </div>
+            )}
+            <Modal.Body>{children}</Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
   );
 };
-
 export default ModalDialog;

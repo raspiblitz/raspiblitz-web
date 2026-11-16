@@ -32,8 +32,8 @@ jobs:
         run: npm ci
       - name: Install mock dependencies
         run: npm ci --prefix backend-mock
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Install browser engines
+        run: npx playwright install --with-deps chromium firefox webkit
       - name: Run browser tests against mock API
         run: npm run test:e2e
       - name: Upload browser test report

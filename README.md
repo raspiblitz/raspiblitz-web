@@ -14,11 +14,25 @@ If you want to bring the Raspiblitz WebUI to other languages, please help us tra
 
 Big thanks to our translators, which you can find in this [README](src/i18n/README.md).
 
+## Browser compatibility
+
+Prefer Baseline Widely Available features, with usable defaults for progressive
+enhancements. Hardware-card container queries fall back to stacked metrics.
+Playwright covers current Chromium, Firefox, and WebKit, including narrow viewport
+checks for app previews, dialog keyboard behavior, and hardware-card reflow:
+
+```sh
+npx playwright install chromium firefox webkit
+npx playwright test tests/mobile-accessibility.spec.ts --workers=1
+```
+
+These are browser-engine checks, not physical-device or screen-reader testing.
+
 ## Development
 
 ### Dependencies
 
-- [Node.js](https://nodejs.org/en/download/)
+- [Node.js](https://nodejs.org/en/download/) 22 or 24, matching CI (24 for browser tests)
 - [asdf](https://asdf-vm.com/) is supported but not required.
 - [Nix](https://nixos.org/download.html) with [Flakes](https://nixos.wiki/wiki/Flakes) enabled (optional, for devenv.sh or NixOS builds)
 
