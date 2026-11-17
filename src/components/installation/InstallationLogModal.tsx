@@ -71,7 +71,7 @@ const InstallationLogModal = ({ appId, onClose }: InstallationLogModalProps) => 
   return (
     <ModalDialog close={onClose} label={t("apps.installation_log_title", { app: displayAppId })}>
       <div className="flex flex-col text-white text-left">
-        <div className="py-4 border-b border-gray-600/50">
+        <div className="sticky top-0 z-10 bg-gray-800 py-4 border-b border-gray-600/50">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse " />

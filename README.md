@@ -19,11 +19,17 @@ Big thanks to our translators, which you can find in this [README](src/i18n/READ
 Prefer Baseline Widely Available features, with usable defaults for progressive
 enhancements. Hardware-card container queries fall back to stacked metrics.
 Playwright covers current Chromium, Firefox, and WebKit, including narrow viewport
-checks for app previews, dialog keyboard behavior, and hardware-card reflow:
+checks for app previews, dialog keyboard behavior, and hardware-card reflow. Each
+run selects one browser and starts a fresh mock API, since its one-shot installation
+failure is shared by all tests in that process. Chromium is the local default:
 
 ```sh
-npx playwright install chromium firefox webkit
-npx playwright test tests/mobile-accessibility.spec.ts --workers=1
+npx playwright install chromium
+npm run test:e2e
+
+npx playwright install firefox webkit
+PW_BROWSER=firefox npm run test:e2e
+PW_BROWSER=webkit npm run test:e2e
 ```
 
 These are browser-engine checks, not physical-device or screen-reader testing.
@@ -143,8 +149,8 @@ already occupying their ports. Normal development servers on ports 3000 and 8000
 can keep running.
 
 CI runs lint, types, unit tests, mock tests, and builds on Node.js 22 and 24. A
-separate Node.js 24 job runs Chromium E2E tests and retains the HTML report for
-seven days.
+separate Node.js 24 matrix runs the full E2E suite in Chromium, Firefox, and WebKit,
+with a fresh mock API per browser, and retains each HTML report for seven days.
 
 Run test with UI:\
 `npx playwright test --ui`

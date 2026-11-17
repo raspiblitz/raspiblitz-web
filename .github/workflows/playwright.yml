@@ -40,7 +40,9 @@ jobs:
       - name: Install browser engine
         run: npx playwright install --with-deps ${{ matrix.browser }}
       - name: Run browser tests against mock API
-        run: npm run test:e2e -- --project=${{ matrix.browser }}
+        run: npm run test:e2e
+        env:
+          PW_BROWSER: ${{ matrix.browser }}
       - name: Upload browser test report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7

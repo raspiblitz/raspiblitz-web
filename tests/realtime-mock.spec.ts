@@ -84,14 +84,22 @@ test('installation failure, log export, retry and uninstall use the backend life
   await page.getByRole('button', { name: 'View Full Log' }).click();
   const logDialog = page.getByRole('dialog', { name: 'Mempool Installation Log', exact: true });
   await expect(logDialog).toBeVisible();
-  for (const width of [390, 1280]) {
-    await page.setViewportSize({ width, height: 844 });
+  for (const [width, height] of [[390, 844], [1280, 844], [390, 300]]) {
+    await page.setViewportSize({ width, height });
     await expect(logDialog.getByRole('heading', { name: 'Mempool Installation Log' })).toBeVisible();
     expect(await logDialog.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
     // Modal.Body owns scrolling, not a second framed log viewport.
     expect(await logDialog.locator('[data-slot="modal-body"] [class*="overflow-y-auto"]').count()).toBe(0);
     await page.screenshot({ path: test.info().outputPath(`installation-log-${width}.png`), animations: 'disabled' });
   }
+  // A long log must not scroll its title or export control out of view.
+  const body = logDialog.locator('[data-slot="modal-body"]');
+  await body.evaluate(el => { el.scrollTop = el.scrollHeight; });
+  await expect.poll(() => body.evaluate(el => el.scrollTop)).toBeGreaterThan(0);
+  const header = logDialog.getByRole('heading', { name: 'Mempool Installation Log' });
+  await expect(header).toBeInViewport();
+  await expect(logDialog.getByRole('button', { name: 'Download Log' })).toBeInViewport();
+  await page.setViewportSize({ width: 1280, height: 844 });
   const downloadEvent = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download Log' }).click();
   const download = await downloadEvent;
