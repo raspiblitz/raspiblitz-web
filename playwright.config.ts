@@ -10,6 +10,12 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+// One browser per run: the mock's one-shot install failure is per process.
+const browser = process.env.PW_BROWSER ?? 'chromium';
+if (!['chromium', 'firefox', 'webkit'].includes(browser)) {
+  throw new Error(`Invalid PW_BROWSER: ${browser}. Expected chromium, firefox, or webkit.`);
+}
+
 export default defineConfig({
   testDir: './tests',
   testIgnore: '**/realtime-live.spec.ts',
@@ -19,8 +25,8 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  /* The mock's wallet state and broadcasts are shared across test files. */
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -39,15 +45,15 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {
@@ -68,7 +74,7 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+  ].filter(project => project.name === browser),
 
   /* Run your local dev server before starting the tests */
   webServer: [

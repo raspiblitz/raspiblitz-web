@@ -17,6 +17,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # Each browser needs a fresh mock process: installation failure is consumed once.
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
@@ -32,14 +37,16 @@ jobs:
         run: npm ci
       - name: Install mock dependencies
         run: npm ci --prefix backend-mock
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Install browser engine
+        run: npx playwright install --with-deps ${{ matrix.browser }}
       - name: Run browser tests against mock API
         run: npm run test:e2e
+        env:
+          PW_BROWSER: ${{ matrix.browser }}
       - name: Upload browser test report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.browser }}
           path: playwright-report/
           retention-days: 7

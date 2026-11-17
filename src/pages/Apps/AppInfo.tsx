@@ -139,7 +139,7 @@ export const AppInfo: FC = () => {
       )}
 
       <section className="text-center">
-        {!isLoading && <ImageCarousel imgs={imgs} video={video} />}
+        {!isLoading && <ImageCarousel key={knownAppId} imgs={imgs} video={video} appName={name} />}
       </section>
 
       {/* App Description */}

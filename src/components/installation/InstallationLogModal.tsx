@@ -69,14 +69,14 @@ const InstallationLogModal = ({ appId, onClose }: InstallationLogModalProps) => 
   };
 
   return (
-    <ModalDialog close={onClose}>
-      <div className="flex flex-col text-white max-h-[80vh] text-left bg-linear-to-b from-gray-900 to-gray-950 rounded-lg overflow-hidden shadow-2xl">
-        <div className="px-6 py-4 border-b border-gray-600/50 sticky top-0 bg-linear-to-r from-gray-800 to-gray-900 z-10 backdrop-blur-sm">
-          <div className="flex items-center justify-between">
+    <ModalDialog close={onClose} label={t("apps.installation_log_title", { app: displayAppId })}>
+      <div className="flex flex-col text-white text-left">
+        <div className="sticky top-0 z-10 bg-gray-800 py-4 border-b border-gray-600/50">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse " />
               <h2 className="text-xl font-semibold text-white">
-                {displayAppId} {t("apps.installation_log")}
+                {t("apps.installation_log_title", { app: displayAppId })}
               </h2>
             </div>
             <Button
@@ -93,7 +93,7 @@ const InstallationLogModal = ({ appId, onClose }: InstallationLogModalProps) => 
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 bg-gray-950/50">
+        <div className="py-6">
           <div className="space-y-3 font-mono text-sm">
             {messagesWithDetails.length > 0 ? (
               messagesWithDetails.map((msg, idx) => (

@@ -15,7 +15,7 @@ export const HardwareCard: FC = () => {
 
   if (!hardwareInfo) {
     return (
-      <div className="bd-card mt-8 w-full transition-colors lg:ml-2 lg:mt-0 lg:w-1/2">
+      <div className="bd-card @container/hardware mt-8 min-w-0 w-full transition-colors lg:ml-2 lg:mt-0 lg:w-1/2">
         <h5 className="flex items-center text-lg font-bold">{t("hardware.header")}</h5>
         <article className="flex flex-row overflow-hidden py-4">
           <Spinner size="lg" />
@@ -44,26 +44,26 @@ export const HardwareCard: FC = () => {
   const hddPercentUsed = mainDisk?.partition_percent ? 100.0 - mainDisk.partition_percent : "-";
 
   return (
-    <div className="bd-card mt-8 w-full transition-colors lg:ml-2 lg:mt-0 lg:w-1/2">
+    <div className="bd-card @container/hardware mt-8 min-w-0 w-full transition-colors lg:ml-2 lg:mt-0 lg:w-1/2">
       <h5 className="flex items-center text-lg font-bold">{t("hardware.header")}</h5>
-      <article className="flex flex-row overflow-hidden py-4">
-        <div className="flex w-1/2 flex-col">
+      <article className="grid grid-cols-1 gap-4 py-4 @min-[22rem]/hardware:grid-cols-2">
+        <div className="min-w-0">
           <h6 className="text-sm text-gray-200">{t("hardware.cpu_load")}</h6>
           <p className="flex">{cpuPercent} %</p>
         </div>
-        <div className="flex w-1/2 flex-col">
+        <div className="min-w-0">
           <h6 className="text-sm text-gray-200">{t("hardware.temp")}</h6>
           <p className="flex">{systemTemp} °C</p>
         </div>
       </article>
-      <article className="flex flex-row overflow-hidden py-4">
-        <div className="flex w-1/2 flex-col">
+      <article className="grid grid-cols-1 gap-4 py-4 @min-[22rem]/hardware:grid-cols-2">
+        <div className="min-w-0">
           <h6 className="text-sm text-gray-200">{t("hardware.ram_usage")}</h6>
           <p className="flex">{vramUsagePercent} %</p>
         </div>
-        <div className="flex w-1/2 flex-col">
+        <div className="min-w-0">
           <h6 className="text-sm text-gray-200">{t("hardware.disk_usage")}</h6>
-          <p className="flex">
+          <p className="break-words">
             {hddUsedGB} / {hddTotalGB} GB ({hddPercentUsed} %)
           </p>
         </div>

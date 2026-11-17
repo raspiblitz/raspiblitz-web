@@ -1,88 +1,78 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { Button } from "@heroui/react";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-type Props = {
-  imgs: string[];
-  video?: React.JSX.Element;
-};
+type Props = { imgs: string[]; video?: React.JSX.Element; appName?: string };
 
-const ImageCarousel: FC<Props> = ({ imgs, video }) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  const back = () => {
-    const length = video ? imgs.length : imgs.length - 1;
-    setActiveIndex((prev) => (prev - 1 < 0 ? length : prev - 1));
-  };
-
-  const next = () => {
-    const length = video ? imgs.length + 1 : imgs.length;
-    setActiveIndex((prev) => (prev + 1 >= length ? 0 : prev + 1));
-  };
-
-  const switchImgHandler = (index: number) => {
-    setActiveIndex(index);
-  };
-
-  if (!imgs.length) {
-    return null;
-  }
-
+const ImageCarousel: FC<Props> = ({ imgs, video, appName }) => {
+  const { t } = useTranslation();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const videoOffset = video ? 1 : 0;
+  const count = imgs.length + videoOffset;
+  const current = Math.min(activeIndex, Math.max(0, count - 1));
+  const imageIndex = current - videoOffset;
+  if (!count) return null;
+  const controlClass =
+    "flex min-h-11 min-w-11 items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
   return (
-    <div className="relative inline-block">
-      <div className="absolute bottom-0 left-0 right-0 z-20 mb-5 flex justify-center gap-5 p-0">
-        {((video && activeIndex !== 0) || !video) &&
-          imgs.map((_, index) => {
-            const idx = video ? activeIndex - 1 : activeIndex;
-            if (idx === index) {
-              return (
-                <button
-                  key={index}
-                  type="button"
-                  className="z-10 h-3 w-10 border border-black bg-white"
-                  onClick={() => switchImgHandler(index)}
-                />
-              );
-            }
-
-            return (
-              <button
-                key={index}
-                type="button"
-                className="z-10 h-3 w-10 border border-black bg-white opacity-30 hover:opacity-75"
-                onClick={() => switchImgHandler(index)}
-              />
-            );
-          })}
-      </div>
-      <div className="relative z-10 overflow-hidden px-5">
-        {video && activeIndex === 0 ? (
+    <div role="region" aria-label={t("carousel.label", { appName })} className="w-full">
+      <div className="flex justify-center overflow-hidden px-5">
+        {video && current === 0 ? (
           video
         ) : (
           <img
-            src={imgs[video ? activeIndex - 1 : activeIndex]}
-            alt={`${activeIndex}`}
-            className="block"
+            src={imgs[imageIndex]}
+            alt={t("carousel.screenshot", { appName, index: imageIndex + 1, total: imgs.length })}
+            className="block h-auto max-w-full object-contain"
           />
         )}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 mx-5 flex h-full justify-between">
-        <button
-          type="button"
-          onClick={back}
-          className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
-        >
-          <ChevronLeftIcon className="h-8 w-8 text-gray-700" />
-        </button>
-        <button
-          type="button"
-          onClick={next}
-          className="z-10 flex w-20 items-center justify-center opacity-70 hover:opacity-100"
-        >
-          <ChevronLeftIcon className="h-8 w-8 rotate-180 text-gray-700" />
-        </button>
-      </div>
+      {count > 1 && (
+        <div className="flex flex-wrap items-center justify-center gap-2 p-3">
+          <Button
+            isIconOnly
+            variant="tertiary"
+            aria-label={t("carousel.previous")}
+            className={controlClass}
+            onPress={() => setActiveIndex((current - 1 + count) % count)}
+          >
+            <ChevronLeftIcon className="h-6 w-6" />
+          </Button>
+          {Array.from({ length: count }, (_, index) => (
+            <Button
+              key={index}
+              isIconOnly
+              variant="tertiary"
+              aria-label={
+                video && index === 0
+                  ? t("carousel.show_video")
+                  : t("carousel.show_screenshot", { index: index - videoOffset + 1 })
+              }
+              aria-current={current === index ? "true" : undefined}
+              className={controlClass}
+              onPress={() => setActiveIndex(index)}
+            >
+              <span
+                className={`h-2 w-6 border border-white ${current === index ? "bg-white" : "bg-transparent"}`}
+              />
+            </Button>
+          ))}
+          <Button
+            isIconOnly
+            variant="tertiary"
+            aria-label={t("carousel.next")}
+            className={controlClass}
+            onPress={() => setActiveIndex((current + 1) % count)}
+          >
+            <ChevronLeftIcon className="h-6 w-6 rotate-180" />
+          </Button>
+        </div>
+      )}
+      <p className="sr-only" aria-live="polite" aria-atomic="true">
+        {t("carousel.slide", { index: current + 1, total: count })}
+      </p>
     </div>
   );
 };
-
 export default ImageCarousel;

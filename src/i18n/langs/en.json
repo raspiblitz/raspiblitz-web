@@ -1,5 +1,14 @@
 {
   "translation": {
+    "carousel": {
+      "label": "{{appName}} app previews",
+      "previous": "Previous preview",
+      "next": "Next preview",
+      "show_screenshot": "Show screenshot {{index}}",
+      "show_video": "Show video",
+      "screenshot": "{{appName}} screenshot {{index}} of {{total}}",
+      "slide": "Preview {{index}} of {{total}}"
+    },
     "appInfo": {
       "btc-rpc-explorer": {
         "about": "This is a self-hosted explorer for the Bitcoin blockchain, driven by RPC calls to your own Bitcoin node. It is easy to run and can be connected to other tools (like Electrum servers) to achieve a full-featured explorer.",
@@ -88,7 +97,7 @@
       "uninstalling": "Uninstalling",
       "active_installations": "Active Processes",
       "recent_completions": "Recent Completions",
-      "installation_log": "Installation Log",
+      "installation_log_title": "{{app}} Installation Log",
       "view_full_log": "View Full Log",
       "no_messages": "No messages yet",
       "error": "Error",
