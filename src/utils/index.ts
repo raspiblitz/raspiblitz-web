@@ -83,9 +83,39 @@ export function setWindowAlias(nodeAlias: string | null): void {
   }
 }
 
-export function getHrefFromApp(app: AppStatus) {
+export function getHrefFromApp(
+  app: AppStatus,
+  location: Pick<Location, "hostname" | "protocol"> = window.location,
+) {
   const authUrl = app.auth_method?.startsWith("/") ? app.auth_method : "";
-  return window.location.hostname.endsWith(".onion")
-    ? `https://${app.hidden_service}${authUrl}` // add https prefix to hidden service to use HTTP/2 and make it a absolute link instead of relative
-    : `${app.address}${authUrl}`; // address always has the "http(s)" prefix included
+  const onion = location.hostname.endsWith(".onion");
+  const address = onion
+    ? app.hidden_service && `https://${app.hidden_service}`
+    : app.address;
+  if (!address) return undefined;
+  let url: URL;
+  try {
+    url = new URL(address + authUrl);
+  } catch {
+    return undefined;
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") return undefined;
+  if (
+    url.username ||
+    url.password ||
+    (onion && !url.hostname.endsWith(".onion"))
+  )
+    return undefined;
+  if (
+    url.protocol === "http:" &&
+    (app.https_forced || (location.protocol === "https:" && app.https_port))
+  ) {
+    if (!app.https_port) return undefined;
+    const port = Number(app.https_port);
+    if (!/^\d+$/.test(app.https_port) || port < 1 || port > 65535)
+      return undefined;
+    url.protocol = "https:";
+    url.port = app.https_port;
+  }
+  return url.href;
 }
