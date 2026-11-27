@@ -116,7 +116,6 @@ export function getHrefFromApp(
       return undefined;
     url.protocol = "https:";
     url.port = app.https_port;
-    return url.href;
   }
-  return address + authUrl;
+  return url.href;
 }

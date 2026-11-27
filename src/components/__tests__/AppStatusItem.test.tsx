@@ -18,7 +18,7 @@ describe("AppStatusItem", () => {
     render(<AppStatusItem app={testApp} />);
 
     const appCard = screen.getAllByRole("link");
-    expect(appCard[0].getAttribute("href")).toEqual("http://127.0.0.1");
+    expect(appCard[0].getAttribute("href")).toEqual("http://127.0.0.1/");
   });
 
   it("should link to 'hiddenService' if window.location is an onion address", () => {
@@ -34,7 +34,7 @@ describe("AppStatusItem", () => {
 
     const appCard = screen.getAllByRole("link");
     expect(appCard[0].getAttribute("href")).toEqual(
-      "https://hiddenservice.onion",
+      "https://hiddenservice.onion/",
     );
 
     // Restore original window.location

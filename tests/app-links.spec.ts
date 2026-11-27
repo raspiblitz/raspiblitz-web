@@ -9,6 +9,7 @@ test("the dashboard opens installed apps on their advertised ports", async ({
   const apps = [
     { id: "rtl", name: "Ride the Lightning", http: "3000", https: "3001" },
     { id: "thunderhub", name: "ThunderHub", http: "3010", https: "3011" },
+    { id: "specter", name: "Specter", http: "25441", https: null },
   ];
   // Keep the event stream open throughout the user journey. The release UI
   // logs out when EventSource closes, as a finite route.fulfill body would.
@@ -64,15 +65,31 @@ test("the dashboard opens installed apps on their advertised ports", async ({
   await page.getByRole("button", { name: "Log in" }).click();
   await expect(page).toHaveURL(/\/home$/);
   for (const app of apps) {
-    const url = `${secure ? "https" : "http"}://node.test:${secure ? app.https : app.http}/`;
+    const tls = secure && app.https;
+    const url = `${tls ? "https" : "http"}://node.test:${tls || app.http}/`;
     const link = page
       .getByRole("navigation")
       .getByRole("link", { name: app.name });
     await expect(link).toBeVisible();
+    if (secure && !app.https) await expect(link).toContainText("(HTTP)");
     const opened = page.waitForEvent("popup");
     await link.click();
     const tab = await opened;
     await expect(tab).toHaveURL(url);
+    expect(await tab.evaluate(() => window.opener === null)).toBe(true);
+    await tab.close();
+  }
+  if (secure) {
+    await page.goto("/login?back=/apps/specter");
+    await page.getByPlaceholder("Password A").fill("test-password");
+    await page.getByRole("button", { name: "Log in" }).click();
+    const fallback = page.getByRole("link", { name: /open specter \(HTTP\)/i });
+    await expect(fallback).toBeVisible();
+    expect(page.context().pages()).toHaveLength(1);
+    const opened = page.waitForEvent("popup");
+    await fallback.click();
+    const tab = await opened;
+    await expect(tab).toHaveURL("http://node.test:25441/");
     expect(await tab.evaluate(() => window.opener === null)).toBe(true);
     await tab.close();
   }
