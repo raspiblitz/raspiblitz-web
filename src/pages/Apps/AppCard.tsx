@@ -35,7 +35,8 @@ export const AppCard: FC<Props> = ({
   error,
 }) => {
   const { id, name } = appInfo;
-  const href = getHrefFromApp(appStatusInfo);
+  const offline = appStatusInfo.status === "offline";
+  const href = offline ? undefined : getHrefFromApp(appStatusInfo);
   const { t } = useTranslation();
   const [isInstallWaiting, setInstallWaiting] = useState(false);
   const navigate = useNavigate();
@@ -183,7 +184,7 @@ export const AppCard: FC<Props> = ({
         )}
 
         {installed && !href && !appInfo.customComponent && (
-          <Button isDisabled>{t("apps.no_page")}</Button>
+          <Button isDisabled>{t(offline ? "apps.offline" : "apps.no_page")}</Button>
         )}
 
         {installed && appInfo.customComponent && (

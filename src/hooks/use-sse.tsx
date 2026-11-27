@@ -366,6 +366,7 @@ function useSSE() {
         window.dispatchEvent(new Event("app_state_updating"));
       } else if (state === "success" && message) {
         sseCtx.setAppStatus((prev: AppStatusQueryResponse) => {
+          if (message.timestamp > 0 && prev.timestamp > message.timestamp) return prev;
           if (prev.data.length === 0) return message;
 
           const currentIds = new Set(message.data.map((item) => item.id));

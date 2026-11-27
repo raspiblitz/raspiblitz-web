@@ -14,7 +14,7 @@ const AppStatusRefresh = () => {
   const [formattedAge, setFormattedAge] = useState("");
 
   useEffect(() => {
-    if (appStatus?.timestamp !== undefined) {
+    if (appStatus.timestamp > 0) {
       const updateTimestamp = appStatus.timestamp;
       const currentTimestamp = Math.floor(Date.now() / 1000); // Current time in seconds
       const ageInSeconds = currentTimestamp - updateTimestamp;
@@ -95,9 +95,11 @@ const AppStatusRefresh = () => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-2">
-        <span className="text-sm text-gray-400">
-          {t("apps.data_age")}: {formattedAge}
-        </span>
+        {appStatus.timestamp > 0 && (
+          <span className="text-sm text-gray-400">
+            {t("apps.data_age")}: {formattedAge}
+          </span>
+        )}
         <Tooltip>
           <Tooltip.Trigger>
             <InformationCircleIcon className="h-4 w-4 text-gray-400" />
