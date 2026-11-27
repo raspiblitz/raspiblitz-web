@@ -24,8 +24,9 @@ export const AppInfo: FC = () => {
       setIsLoading(false);
 
       if (!customComponent) {
-        if (app.installed) {
-          const win = window.open(getHrefFromApp(app), "_blank");
+        const href = getHrefFromApp(app);
+        if (app.installed && href) {
+          const win = window.open(href, "_blank", "noopener,noreferrer");
           if (win != null) {
             win.focus();
           }
