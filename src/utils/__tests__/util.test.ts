@@ -42,6 +42,12 @@ describe("installed app links", () => {
         http,
       ),
     ).toBe("https://node.test:5001/rtl");
+    expect(getHrefFromApp({ ...rtl, https_forced: true }, http)).toBe(
+      "https://node.test:3001/rtl",
+    );
+    expect(
+      getHrefFromApp({ ...rtl, https_forced: true, https_port: null }, http),
+    ).toBeUndefined();
     expect(getHrefFromApp({ ...rtl, https_port: null }, https)).toBe(
       "http://node.test:3000/rtl",
     );
@@ -52,9 +58,17 @@ describe("installed app links", () => {
       "https://app.onion/rtl",
     );
     expect(getHrefFromApp(rtl, tor)).toBeUndefined();
+    expect(
+      getHrefFromApp({ ...rtl, hidden_service: "node.test" }, tor),
+    ).toBeUndefined();
   });
   it("ignores missing, malformed and unsupported endpoints", () => {
-    for (const address of [null, "invalid", "file:///tmp/rtl"]) {
+    for (const address of [
+      null,
+      "invalid",
+      "file:///tmp/rtl",
+      "https://user@node.test",
+    ]) {
       expect(getHrefFromApp({ ...rtl, address }, https)).toBeUndefined();
     }
     expect(

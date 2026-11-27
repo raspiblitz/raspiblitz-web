@@ -88,24 +88,29 @@ export function getHrefFromApp(
   location: Pick<Location, "hostname" | "protocol"> = window.location,
 ) {
   const authUrl = app.auth_method?.startsWith("/") ? app.auth_method : "";
-  if (location.hostname.endsWith(".onion")) {
-    return app.hidden_service
-      ? `https://${app.hidden_service}${authUrl}`
-      : undefined;
-  }
-  if (!app.address) return undefined;
+  const onion = location.hostname.endsWith(".onion");
+  const address = onion
+    ? app.hidden_service && `https://${app.hidden_service}`
+    : app.address;
+  if (!address) return undefined;
   let url: URL;
   try {
-    url = new URL(app.address + authUrl);
+    url = new URL(address + authUrl);
   } catch {
     return undefined;
   }
   if (url.protocol !== "http:" && url.protocol !== "https:") return undefined;
   if (
+    url.username ||
+    url.password ||
+    (onion && !url.hostname.endsWith(".onion"))
+  )
+    return undefined;
+  if (
     url.protocol === "http:" &&
-    location.protocol === "https:" &&
-    app.https_port
+    (app.https_forced || (location.protocol === "https:" && app.https_port))
   ) {
+    if (!app.https_port) return undefined;
     const port = Number(app.https_port);
     if (!/^\d+$/.test(app.https_port) || port < 1 || port > 65535)
       return undefined;
@@ -113,5 +118,5 @@ export function getHrefFromApp(
     url.port = app.https_port;
     return url.href;
   }
-  return app.address + authUrl;
+  return address + authUrl;
 }
