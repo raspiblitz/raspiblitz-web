@@ -3,7 +3,6 @@ import {
   LockClosedIcon,
   LockOpenIcon,
   PowerIcon,
-  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import {
   FieldError,
@@ -98,7 +97,10 @@ export default function SyncScreen({ data, callback }: Props) {
   const lnEnabled = data.ln_default && data.ln_default !== "none";
 
   const lnWalletLocked = lnEnabled && data.ln_default_locked === "1";
-  const lnWalletUnlocked = lnEnabled && data.ln_default_locked === "0";
+  const lnWalletReady =
+    lnEnabled &&
+    data.ln_default_locked === "0" &&
+    data.ln_default_ready === "1";
 
   const btcDefaultReady = data.btc_default_ready === "1";
   const btcDefaultSyncPercentage = +data.btc_default_sync_percentage;
@@ -166,41 +168,32 @@ export default function SyncScreen({ data, callback }: Props) {
 
       <SetupContainer currentStep={null}>
         <section className="flex h-full w-96 max-w-3xl flex-col items-center justify-center gap-y-8 lg:p-8">
-          <Headline>{t("setup.sync_headline")}</Headline>
+          <Headline>{t("setup.startup_and_sync")}</Headline>
 
           <div className="w-full">
             <ProgressBar value={btcDefaultSyncPercentage}>
               <ProgressBar.Output className="mb-2 block text-sm">
                 {btcDefaultReady
                   ? `${t("setup.sync_bitcoin_sync")}: ${btcDefaultSyncPercentage}%`
-                  : `${t("setup.sync_bitcoin_starting")}...`}
+                  : t("setup.waiting_for_bitcoin")}
               </ProgressBar.Output>
               <ProgressBar.Track className="h-2 w-full overflow-hidden rounded-full bg-tertiary">
                 <ProgressBar.Fill className="h-full rounded-full bg-accent" />
               </ProgressBar.Track>
             </ProgressBar>
 
-            {(lnWalletUnlocked || lnWalletLocked) && (
+            {lnEnabled && (
               <div className="mt-6">
                 <Alert color="info" as="div">
-                  {lnWalletUnlocked && (
+                  {lnWalletReady && (
                     <>
                       <p>
                         <LockOpenIcon className="inline h-6 w-auto text-success" />{" "}
                         {t("wallet.unlock_success")}
                       </p>
                       <div className="mt-2">
-                        {data.ln_default_ready === "1" ? (
-                          <>
-                            <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
-                            {t("home.lightning")} {t("setup.started")}
-                          </>
-                        ) : (
-                          <>
-                            <XCircleIcon className="inline h-6 w-auto text-danger" />{" "}
-                            {t("home.lightning")} {t("setup.not_started")}
-                          </>
-                        )}
+                        <CheckCircleIcon className="inline h-6 w-auto text-success" />{" "}
+                        {t("home.lightning")} {t("setup.started")}
                         <p>
                           ({t("setup.restarts")}:{" "}
                           {data.system_count_start_lightning})
@@ -209,6 +202,9 @@ export default function SyncScreen({ data, callback }: Props) {
                     </>
                   )}
 
+                  {!lnWalletLocked && !lnWalletReady && (
+                    <p>{t("setup.waiting_for_lightning")}</p>
+                  )}
                   {lnWalletLocked && (
                     <div className="flex flex-col gap-4">
                       <p>

@@ -1,14 +1,33 @@
 import { Spinner } from "@heroui/react";
-import { type FC, useContext } from "react";
+import { type FC, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SSEContext } from "@/context/sse-context";
+import type { BtcInfo } from "@/models/btc-info";
 import { checkPropsUndefined } from "@/utils";
+import { instance } from "@/utils/interceptor";
 
 export const BitcoinCard: FC = () => {
   const { t } = useTranslation();
-  const { btcInfo, systemInfo } = useContext(SSEContext);
+  const { btcInfo, systemInfo, setBtcInfo } = useContext(SSEContext);
 
-  if (checkPropsUndefined({ btcInfo, systemInfo })) {
+  useEffect(() => {
+    if (btcInfo.version) return;
+    const controller = new AbortController();
+    // A failed warm-up for another service can leave out the initial BTC event.
+    instance
+      .get<BtcInfo>("/bitcoin/btc-info", { signal: controller.signal })
+      .then(({ data }) => {
+        if (data?.version > 0 && typeof data.subversion === "string") {
+          setBtcInfo((current) => (current.version ? current : data));
+        }
+      })
+      .catch(() => {
+        // Core may still be starting. The live stream continues to supply updates.
+      });
+    return () => controller.abort();
+  }, [btcInfo.version, setBtcInfo]);
+
+  if (checkPropsUndefined({ btcInfo, systemInfo }) || !btcInfo.version) {
     return (
       <div className="h-full">
         <section className="bd-card">
@@ -67,7 +86,7 @@ export const BitcoinCard: FC = () => {
           <article className="w-1/2">
             <h6 className="text-sm text-gray-200">{t("home.blocks_synced")}</h6>
             <p>
-              {`${blocks || "-"} / ${headers || "-"}`}{" "}
+              {`${blocks} / ${headers}`}{" "}
               <span className="inline-block">({syncPercentage} %)</span>
             </p>
           </article>
@@ -75,7 +94,7 @@ export const BitcoinCard: FC = () => {
         <div className="flex overflow-hidden py-4">
           <article className="w-1/2">
             <h6 className="text-sm text-gray-200">{t("home.blocktime")}</h6>
-            <p>{blocks || "-"}</p>
+            <p>{blocks}</p>
           </article>
           <article className="w-1/2">
             <h6 className="text-sm text-gray-200">

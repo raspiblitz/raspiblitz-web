@@ -2,6 +2,35 @@ import { setupStartInfo, setupStatus } from './status';
 import { fulfillRoute } from './utils';
 import { expect, test } from '@playwright/test';
 
+test('recovery startup waits for a confirmed wallet state before offering unlock', async ({ page }) => {
+  const sync = {
+    btc_default_ready: '0',
+    btc_default_sync_percentage: '0',
+    ln_default: 'lnd',
+    ln_default_ready: '0',
+    ln_default_locked: '0',
+    system_count_start_lightning: '1',
+  };
+  await page.route('**/api/setup/status', route => fulfillRoute(route, {
+    ...setupStatus, state: 'ready', setupPhase: 'done', initialsync: 'running',
+  }));
+  await page.route('**/api/setup/setup-sync-info', route => fulfillRoute(route, sync));
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'Node startup and synchronization' })).toBeVisible();
+  await expect(page.getByText('Waiting for Bitcoin', { exact: true })).toBeVisible();
+  await expect(page.getByText('Waiting for Lightning wallet status')).toBeVisible();
+  await expect(page.getByText('Lightning wallet unlocked', { exact: true })).toHaveCount(0);
+
+  Object.assign(sync, { btc_default_ready: '1', btc_default_sync_percentage: '100.00', ln_default_locked: '1' });
+  const unlock = page.getByRole('button', { name: 'Unlock Wallet' });
+  await expect(unlock).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText('Sync Progress: 100%')).toBeVisible();
+  await unlock.click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  Object.assign(sync, { ln_default_locked: '0', ln_default_ready: '1' });
+  await expect(page.getByText('Lightning wallet unlocked', { exact: true })).toBeVisible({ timeout: 10000 });
+});
+
 test('keeps monitoring RaspiBlitz script progress states', async ({ page }) => {
   let readyForSetup = false;
   await page.route('**/api/setup/status', route => fulfillRoute(route, {
