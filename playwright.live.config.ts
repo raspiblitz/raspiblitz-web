@@ -1,13 +1,12 @@
 import { defineConfig } from '@playwright/test';
 import config from './playwright.config';
 
-const backend = process.env.BACKEND_SERVER;
-if (!backend || !process.env.BLITZ_API_PASSWORD) {
-  throw new Error('Live tests require BACKEND_SERVER and BLITZ_API_PASSWORD');
-}
+// Required env vars are checked in globalSetup so the config loads without them.
+const backend = process.env.BACKEND_SERVER ?? '';
 
 export default defineConfig({
   ...config,
+  globalSetup: './tests/live-global-setup.ts',
   testMatch: '**/realtime-live.spec.ts',
   testIgnore: [],
   retries: 0,

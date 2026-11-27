@@ -5,7 +5,7 @@ import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { getHrefFromApp } from "@/utils";
 import { availableApps, isAppId } from "@/utils/availableApps";
 
-export const AppInfo: FC = () => {
+const AppPage: FC = () => {
   const navigate = useNavigate();
   const { appId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -47,4 +47,4 @@ export const AppInfo: FC = () => {
   return <>{CustomComponent && <CustomComponent />}</>;
 };
 
-export default AppInfo;
+export default AppPage;

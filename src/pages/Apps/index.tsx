@@ -10,7 +10,7 @@ import AppCardAlby from "./AppCardAlby";
 import AppList from "./AppList";
 import AppStatusRefresh from "./AppStatusRefresh";
 
-export const Apps: FC = () => {
+const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
   const { lnInfo, appStatus, installationStatus, manageApp } = useContext(RealtimeContext);
   const [_isUpdating, setIsUpdating] = useState(false);

@@ -9,7 +9,6 @@ export enum SetupPhase {
 
 export enum SetupStatus {
   ERROR = "error",
-  NULL = "",
   PROVISION = "provision",
   READY = "ready",
   REBOOT = "reboot",

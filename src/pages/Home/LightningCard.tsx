@@ -6,7 +6,7 @@ import { RealtimeContext } from "@/context/realtime-context";
 import { checkPropsUndefined } from "@/utils";
 import { convertMSatToBtc, convertToString } from "@/utils/format";
 
-export const LightningCard: FC = () => {
+const LightningCard: FC = () => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
   const { lnInfo, balance } = useContext(RealtimeContext);

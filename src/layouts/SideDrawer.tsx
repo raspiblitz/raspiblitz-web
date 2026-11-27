@@ -20,7 +20,7 @@ const createClassName = ({ isActive }: { isActive: boolean }) =>
   `${navLinkClasses} ${isActive ? navLinkActiveClasses : ""}`;
 const navIconClasses = "inline w-10 h-10";
 
-export const SideDrawer: FC = () => {
+const SideDrawer: FC = () => {
   const { logout } = useContext(AppContext);
   const { appStatus } = useContext(RealtimeContext);
   const { t } = useTranslation();

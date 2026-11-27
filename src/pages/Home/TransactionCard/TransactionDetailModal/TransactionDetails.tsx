@@ -18,7 +18,7 @@ export type Props = {
   details: Transaction;
 };
 
-export const TransactionDetails: FC<Props> = ({ details }) => {
+const TransactionDetails: FC<Props> = ({ details }) => {
   const { unit } = useContext(AppContext);
   const { t } = useTranslation();
 
