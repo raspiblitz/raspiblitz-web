@@ -25,7 +25,7 @@ export type Props = {
   error?: string;
 };
 
-export const AppCard = ({ appInfo, appStatusInfo, installed, onInstall, error }: Props) => {
+const AppCard = ({ appInfo, appStatusInfo, installed, onInstall, error }: Props) => {
   const { id, name } = appInfo;
   const { t } = useTranslation();
   const { installationStatus } = useContext(RealtimeContext);

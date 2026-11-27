@@ -44,5 +44,3 @@ i18n.use(initReactI18next).init({
 
 syncDocumentLanguage(i18n.resolvedLanguage ?? i18n.language);
 i18n.on("languageChanged", syncDocumentLanguage);
-
-export default i18n;

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import AppIcon from "@/components/AppIcon";
 import { instance } from "@/utils/interceptor";
 
-export const AppCardAlby: FC = () => {
+const AppCardAlby: FC = () => {
   const { id, name } = {
     id: "alby",
     name: "Alby",

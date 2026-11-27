@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { RealtimeContext } from "@/context/realtime-context";
 import { checkPropsUndefined } from "@/utils";
 
-export const BitcoinCard: FC = () => {
+const BitcoinCard: FC = () => {
   const { t } = useTranslation();
   const { btcInfo, systemInfo } = useContext(RealtimeContext);
 

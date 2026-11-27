@@ -14,7 +14,7 @@ import QRCodeModal from "./QRCodeModal";
 
 const HIDDEN_TEXT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
-export const ConnectionCard: FC = () => {
+const ConnectionCard: FC = () => {
   const { t } = useTranslation();
   const { systemInfo, lnInfo } = useContext(RealtimeContext);
   const [showAddress, setShowAddress] = useState(true);

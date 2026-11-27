@@ -9,7 +9,7 @@ const bytesToGB = (bytes: number | undefined): string => {
   return bytes ? (bytes / 1024 / 1024 / 1024).toFixed(2) : "-";
 };
 
-export const HardwareCard: FC = () => {
+const HardwareCard: FC = () => {
   const { t } = useTranslation();
   const { hardwareInfo } = useContext(RealtimeContext);
 

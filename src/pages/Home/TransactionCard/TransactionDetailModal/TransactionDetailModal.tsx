@@ -8,7 +8,7 @@ interface Props extends Pick<ConfirmModalProps, "disclosure"> {
   transaction: Transaction;
 }
 
-export const TransactionDetailModal: FC<Props> = ({ transaction, disclosure }) => {
+const TransactionDetailModal: FC<Props> = ({ transaction, disclosure }) => {
   const { t } = useTranslation();
 
   // prevent error when closing via 'Esc' key

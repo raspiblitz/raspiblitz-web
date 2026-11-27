@@ -19,7 +19,7 @@ type Props = {
   onCloseChannel: () => void;
 };
 
-export const WalletCard: FC<Props> = ({ onReceive, onSend, onOpenChannel, onCloseChannel }) => {
+const WalletCard: FC<Props> = ({ onReceive, onSend, onOpenChannel, onCloseChannel }) => {
   const { t } = useTranslation();
   const { unit } = useContext(AppContext);
   const { balance } = useContext(RealtimeContext);

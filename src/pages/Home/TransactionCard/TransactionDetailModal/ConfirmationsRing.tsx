@@ -10,7 +10,7 @@ interface Props {
 /**
  * Displays confirmation status as a circular progress indicator.
  */
-export const ConfirmationsRing: FC<Props> = ({ confirmations = 0, required = 6 }) => {
+const ConfirmationsRing: FC<Props> = ({ confirmations = 0, required = 6 }) => {
   const { t } = useTranslation();
   const conf = confirmations || 0;
   const isFullyConfirmed = conf >= required;

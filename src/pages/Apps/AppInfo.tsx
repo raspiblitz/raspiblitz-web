@@ -10,7 +10,7 @@ import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import { availableApps, isAppId } from "@/utils/availableApps";
 import ImageCarousel from "./ImageCarousel";
 
-export const AppInfo: FC = () => {
+const AppInfo: FC = () => {
   const navigate = useNavigate();
   const { appId } = useParams();
   const { t } = useTranslation();

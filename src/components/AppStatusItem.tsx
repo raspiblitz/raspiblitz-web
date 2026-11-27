@@ -9,7 +9,7 @@ type Props = {
   app: AppStatus;
 };
 
-export const AppStatusItem: FC<Props> = ({ app }) => {
+const AppStatusItem: FC<Props> = ({ app }) => {
   const { id } = app;
   const navigate = useNavigate();
   const { name: appName, customComponent } = availableApps[id];
