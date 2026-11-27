@@ -47,14 +47,18 @@ export const AppInfo: FC = () => {
 
   if (!customComponent && confirmHttp) {
     return (
-      <a
-        className="underline"
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {t("apps.open")} {availableApps[knownAppId].name} (HTTP)
-      </a>
+      <main className="page-container content-container w-full bg-gray-700 text-white">
+        <section className="w-full px-5 py-9">
+          <a
+            className="underline"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("apps.open")} {availableApps[knownAppId].name} (HTTP)
+          </a>
+        </section>
+      </main>
     );
   }
 

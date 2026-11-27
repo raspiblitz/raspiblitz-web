@@ -80,9 +80,7 @@ test("the dashboard opens installed apps on their advertised ports", async ({
     await tab.close();
   }
   if (secure) {
-    await page.goto("/login?back=/apps/specter");
-    await page.getByPlaceholder("Password A").fill("test-password");
-    await page.getByRole("button", { name: "Log in" }).click();
+    await page.goto("/apps/specter");
     const fallback = page.getByRole("link", { name: /open specter \(HTTP\)/i });
     await expect(fallback).toBeVisible();
     expect(page.context().pages()).toHaveLength(1);
