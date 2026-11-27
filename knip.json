@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreExportsUsedInFile": true,
+  "workspaces": {
+    ".": {},
+    "backend-mock": {
+      "entry": ["index.js", "tests/*.cjs"]
+    }
+  }
+}
