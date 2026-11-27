@@ -29,11 +29,12 @@ This file provides guidance to coding agents when working with code in this repo
 ### Code Quality
 - `npm run lint` - Check source files with Oxlint and Oxfmt
 - `npm run format` - Fix lint issues and format source files with Oxlint and Oxfmt
+- `npm run knip` - Report unused files, exports, and dependencies in the app, E2E tests, and `backend-mock`. Resolve findings by deleting the unused code; add `knip.json` entries only for entry points knip cannot detect.
 
 ## Validation and Git Workflow
 
 - Before editing, inspect `git status` for existing changes and any merge or rebase in progress. Preserve unrelated changes.
-- After code changes, run `npm run lint`, `npm run tsc`, and the relevant tests. Run the full unit suite for changes shared across multiple features.
+- After code changes, run `npm run lint`, `npm run knip`, `npm run tsc`, and the relevant tests. Run the full unit suite for changes shared across multiple features.
 - After changes to dependencies or build configuration, also run `npm run build`.
 - For documentation-only changes, review the diff and run `git diff --check`; application tests are unnecessary.
 - When resolving conflicts, preserve the intent of both branches, check for remaining conflict markers, and complete the active merge or rebase after validation.

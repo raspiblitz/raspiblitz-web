@@ -39,6 +39,8 @@ jobs:
         run: npm ci --prefix backend-mock
       - name: Run Linting and formatting
         run: npm run lint
+      - name: Run knip
+        run: npm run knip
       - name: Run Typecheck
         run: npm run tsc
       - name: Run Tests
