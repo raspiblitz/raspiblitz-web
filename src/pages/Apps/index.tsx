@@ -17,23 +17,31 @@ import AppStatusRefresh from "./AppStatusRefresh";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { lnInfo, appStatus, setAppStatus, installationStatus } = useContext(SSEContext);
+  const { lnInfo, appStatus, setAppStatus, installationStatus } =
+    useContext(SSEContext);
   const [attempt, setAttempt] = useState(0);
   const [loadFailed, setLoadFailed] = useState(false);
   const [receivedSnapshot, setReceivedSnapshot] = useState(false);
-  const waiting = !receivedSnapshot && !appStatus.timestamp &&
-    !appStatus.data.length && !appStatus.errors.length;
+  const waiting =
+    !receivedSnapshot &&
+    !appStatus.timestamp &&
+    !appStatus.data.length &&
+    !appStatus.errors.length;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Changing attempt retries the request while the page is still waiting.
   useEffect(() => {
     if (!waiting) return;
     const controller = new AbortController();
     setLoadFailed(false);
-    instance.get("apps/status", { signal: controller.signal, timeout: 10000 })
+    instance
+      .get("apps/status", { signal: controller.signal, timeout: 10000 })
       .then(({ data }) => {
         const status = parseAppStatusQueryResponse(data);
         if (!status) throw new Error("Invalid app status");
         if (!controller.signal.aborted) {
           setAppStatus((current) =>
-            current.timestamp || current.data.length || current.errors.length ? current : status,
+            current.timestamp || current.data.length || current.errors.length
+              ? current
+              : status,
           );
           setReceivedSnapshot(true);
         }

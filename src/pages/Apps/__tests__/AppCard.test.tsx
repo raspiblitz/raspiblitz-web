@@ -55,7 +55,11 @@ describe("AppCard", () => {
       <AppCard
         {...basicProps}
         installed={true}
-        appStatusInfo={{ ...appStatus, status: "offline", address: "http://localhost" }}
+        appStatusInfo={{
+          ...appStatus,
+          status: "offline",
+          address: "http://localhost",
+        }}
       />,
     );
     expect(screen.getByText("apps.offline")).toBeDefined();

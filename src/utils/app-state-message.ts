@@ -52,7 +52,9 @@ export function parseAppStatusQueryResponse(
     errors: value.errors.filter(isAppQueryError),
     // Only values from the server can be ordered against later SSE snapshots.
     timestamp:
-      typeof value.timestamp === "number" && Number.isFinite(value.timestamp) && value.timestamp > 0
+      typeof value.timestamp === "number" &&
+      Number.isFinite(value.timestamp) &&
+      value.timestamp > 0
         ? value.timestamp
         : 0,
   };

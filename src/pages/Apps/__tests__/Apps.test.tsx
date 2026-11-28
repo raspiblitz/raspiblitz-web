@@ -5,9 +5,12 @@ import Apps from "..";
 
 describe("Apps status results", () => {
   test("offers an authenticated retry when there is no initial event or available cache", async () => {
-    const get = vi.spyOn(instance, "get")
+    const get = vi
+      .spyOn(instance, "get")
       .mockRejectedValueOnce(new Error("Unavailable"))
-      .mockResolvedValueOnce({ data: { data: [], errors: [], timestamp: 123 } });
+      .mockResolvedValueOnce({
+        data: { data: [], errors: [], timestamp: 123 },
+      });
     const setAppStatus = vi.fn();
     try {
       render(<Apps />, { providerOptions: { sseProps: { setAppStatus } } });

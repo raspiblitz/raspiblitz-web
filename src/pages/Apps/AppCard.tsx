@@ -184,7 +184,9 @@ export const AppCard: FC<Props> = ({
         )}
 
         {installed && !href && !appInfo.customComponent && (
-          <Button isDisabled>{t(offline ? "apps.offline" : "apps.no_page")}</Button>
+          <Button isDisabled>
+            {t(offline ? "apps.offline" : "apps.no_page")}
+          </Button>
         )}
 
         {installed && appInfo.customComponent && (
