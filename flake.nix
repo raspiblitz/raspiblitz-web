@@ -24,7 +24,7 @@
             pkgs.buildNpmPackage
             {
               name = "${name}";
-              buildInputs = [pkgs.nodejs_22];
+              buildInputs = [pkgs.nodejs_24];
               src = ./.;
               VITE_BUILD_COMMIT = self.rev or "unknown";
 
@@ -47,7 +47,7 @@
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [self.packages.${system}.${name}];
-          packages = with pkgs; [nodejs_22 alejandra];
+          packages = with pkgs; [nodejs_24 alejandra];
         };
       });
 
