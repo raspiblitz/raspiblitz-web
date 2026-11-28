@@ -137,7 +137,7 @@ Please do not commit the above changes.
 ### Use a external RaspiBlitz as Backend
 
 - (Optional): Make sure [asdf](https://asdf-vm.com/) is installed
-- (Optional): Run `asdf install nodejs latest:20`
+- (Optional): Run `asdf install` to install the Node.js version from [.tool-versions](.tool-versions)
 - Install the dependencies with `npm install`
 - Change the `BACKEND_SERVER` value in [vite.config.ts](vite.config.ts) to your local RaspiBlitz - for example if your RaspiBlitz is running on local IP `192.168.1.123` then change the value to `http://192.168.1.123:80`
 - with `npm run start` it should now connect to your external RaspiBlitz
