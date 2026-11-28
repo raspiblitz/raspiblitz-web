@@ -15,7 +15,7 @@ const appStatus: AppStatus = {
   version: "1.0.0",
   installed: false,
   configured: false,
-  status: "offline",
+  status: "online",
   https_forced: false,
   https_self_signed: false,
   hidden_service: null,
@@ -48,6 +48,22 @@ describe("AppCard", () => {
     };
     render(<AppCard {...props} installed={true} />);
     expect(await screen.findByText("apps.open")).toBeDefined();
+  });
+
+  test("an installed offline service does not offer a dead open link", () => {
+    render(
+      <AppCard
+        {...basicProps}
+        installed={true}
+        appStatusInfo={{
+          ...appStatus,
+          status: "offline",
+          address: "http://localhost",
+        }}
+      />,
+    );
+    expect(screen.getByText("apps.offline")).toBeDefined();
+    expect(screen.queryByText("apps.open")).toBeNull();
   });
 
   test("display no_page button if installed & address is not available", async () => {

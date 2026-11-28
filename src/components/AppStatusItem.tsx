@@ -32,9 +32,10 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
     );
   }
 
+  const href = getHrefFromApp(app);
   return (
     <a
-      href={getHrefFromApp(app)}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="flex w-full cursor-pointer items-center justify-center py-4 text-white opacity-80 hover:text-yellow-500 md:flex-col lg:flex-row"
@@ -42,7 +43,12 @@ export const AppStatusItem: FC<Props> = ({ app }) => {
       {/* Icon */}
       <AppIcon appId={id} className="h-10 inline w-10" />
       {/* Content */}
-      <span className="mx-3 w-1/2 justify-center text-lg">{appName}</span>
+      <span className="mx-3 w-1/2 justify-center text-lg">
+        {appName}
+        {window.location.protocol === "https:" &&
+          href?.startsWith("http:") &&
+          " (HTTP)"}
+      </span>
     </a>
   );
 };

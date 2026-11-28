@@ -35,6 +35,8 @@ export const AppCard: FC<Props> = ({
   error,
 }) => {
   const { id, name } = appInfo;
+  const offline = appStatusInfo.status === "offline";
+  const href = offline ? undefined : getHrefFromApp(appStatusInfo);
   const { t } = useTranslation();
   const [isInstallWaiting, setInstallWaiting] = useState(false);
   const navigate = useNavigate();
@@ -164,9 +166,9 @@ export const AppCard: FC<Props> = ({
       )}
 
       <div className="flex flex-row gap-2 py-4">
-        {installed && appStatusInfo.address && !appInfo.customComponent && (
+        {installed && href && !appInfo.customComponent && (
           <Link
-            href={getHrefFromApp(appStatusInfo)}
+            href={href}
             target="_blank"
             rel="noreferrer"
             className={buttonVariants({ variant: "primary" })}
@@ -174,12 +176,17 @@ export const AppCard: FC<Props> = ({
             <span className="flex items-center gap-2">
               <ArrowTopRightOnSquareIcon className="inline h-6 w-6" />
               {t("apps.open")}
+              {window.location.protocol === "https:" &&
+                href.startsWith("http:") &&
+                " (HTTP)"}
             </span>
           </Link>
         )}
 
-        {installed && !appStatusInfo.address && !appInfo.customComponent && (
-          <Button isDisabled>{t("apps.no_page")}</Button>
+        {installed && !href && !appInfo.customComponent && (
+          <Button isDisabled>
+            {t(offline ? "apps.offline" : "apps.no_page")}
+          </Button>
         )}
 
         {installed && appInfo.customComponent && (

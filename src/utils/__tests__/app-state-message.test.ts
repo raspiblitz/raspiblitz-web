@@ -61,8 +61,8 @@ describe("parseAppStateUpdateMessage", () => {
     });
   });
 
-  it.each([undefined, null, "invalid", "123"])(
-    "uses Unix seconds when timestamp is %s",
+  it.each([undefined, null, "invalid", "123", 0])(
+    "keeps an unknown server timestamp at zero when it is %s",
     (timestamp) => {
       vi.useFakeTimers();
       vi.setSystemTime(new Date("2026-09-05T12:00:00.999Z"));
@@ -72,19 +72,19 @@ describe("parseAppStateUpdateMessage", () => {
           message: { data: [validStatus], errors: [], timestamp },
         }),
       );
-      expect(result?.message?.timestamp).toBe(1788609600);
+      expect(result?.message?.timestamp).toBe(0);
       expect(result?.message?.data).toEqual([validStatus]);
     },
   );
 
-  it("falls back for a non-finite timestamp from JSON numeric overflow", () => {
+  it("rejects a non-finite timestamp from JSON numeric overflow", () => {
     vi.useFakeTimers();
     vi.setSystemTime(123456);
     expect(
       parseAppStateUpdateMessage(
         '{"state":"success","message":{"data":[],"errors":[],"timestamp":1e400}}',
       )?.message?.timestamp,
-    ).toBe(123);
+    ).toBe(0);
   });
 
   it("accepts an update containing only unknown apps as an empty supported list", () => {

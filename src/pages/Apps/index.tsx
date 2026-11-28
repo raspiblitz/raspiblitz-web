@@ -1,3 +1,4 @@
+import { Button } from "@heroui/react";
 import type { FC } from "react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,6 +8,7 @@ import { SSEContext } from "@/context/sse-context";
 import PageLoadingScreen from "@/layouts/PageLoadingScreen";
 import type { AppStatus } from "@/models/app-status";
 import { enableGutter } from "@/utils";
+import { parseAppStatusQueryResponse } from "@/utils/app-state-message";
 import { checkError } from "@/utils/checkError";
 import { instance } from "@/utils/interceptor";
 import AppCardAlby from "./AppCardAlby";
@@ -15,7 +17,40 @@ import AppStatusRefresh from "./AppStatusRefresh";
 
 export const Apps: FC = () => {
   const { t } = useTranslation(["translation", "apps"]);
-  const { lnInfo, appStatus, installationStatus } = useContext(SSEContext);
+  const { lnInfo, appStatus, setAppStatus, installationStatus } =
+    useContext(SSEContext);
+  const [attempt, setAttempt] = useState(0);
+  const [loadFailed, setLoadFailed] = useState(false);
+  const [receivedSnapshot, setReceivedSnapshot] = useState(false);
+  const waiting =
+    !receivedSnapshot &&
+    !appStatus.timestamp &&
+    !appStatus.data.length &&
+    !appStatus.errors.length;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Changing attempt retries the request while the page is still waiting.
+  useEffect(() => {
+    if (!waiting) return;
+    const controller = new AbortController();
+    setLoadFailed(false);
+    instance
+      .get("apps/status", { signal: controller.signal, timeout: 10000 })
+      .then(({ data }) => {
+        const status = parseAppStatusQueryResponse(data);
+        if (!status) throw new Error("Invalid app status");
+        if (!controller.signal.aborted) {
+          setAppStatus((current) =>
+            current.timestamp || current.data.length || current.errors.length
+              ? current
+              : status,
+          );
+          setReceivedSnapshot(true);
+        }
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setLoadFailed(true);
+      });
+    return () => controller.abort();
+  }, [waiting, attempt, setAppStatus]);
   const [_isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
@@ -114,8 +149,16 @@ export const Apps: FC = () => {
     .map(([id, _]) => id);
 
   // in case no App data received yet => show loading screen
-  if (appStatus.data.length === 0) {
-    return <PageLoadingScreen />;
+  if (waiting) {
+    if (!loadFailed) return <PageLoadingScreen />;
+    return (
+      <main className="content-container page-container bg-gray-700 p-5 text-white">
+        <p role="alert">{t("apps.refresh_error")}</p>
+        <Button onPress={() => setAttempt((value) => value + 1)}>
+          {t("apps.refresh")}
+        </Button>
+      </main>
+    );
   }
 
   return (

@@ -34,7 +34,7 @@ function isAppQueryError(value: unknown): value is AppQueryError {
   );
 }
 
-function parseAppStatusQueryResponse(
+export function parseAppStatusQueryResponse(
   value: unknown,
 ): AppStatusQueryResponse | null {
   if (
@@ -50,11 +50,13 @@ function parseAppStatusQueryResponse(
   return {
     data: value.data.filter(isAppStatus),
     errors: value.errors.filter(isAppQueryError),
-    // AppStatusRefresh expects Unix seconds, not Date.now() milliseconds.
+    // Only values from the server can be ordered against later SSE snapshots.
     timestamp:
-      typeof value.timestamp === "number" && Number.isFinite(value.timestamp)
+      typeof value.timestamp === "number" &&
+      Number.isFinite(value.timestamp) &&
+      value.timestamp > 0
         ? value.timestamp
-        : Math.floor(Date.now() / 1000),
+        : 0,
   };
 }
 
